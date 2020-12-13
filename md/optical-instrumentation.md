@@ -1,0 +1,51 @@
+---
+layout: post
+title: "Optical instrumentation"
+date: 2020-11-17
+categories: [physics, optics]
+---
+
+# Optical Instrumentation
+
+This post is dedicated to the explanation of the core physical properties of commonly used optical devices such as the camera, microscope, and telescope. Each device is specially designed to achieve a particular purpose and we will show how that is achieved using ray optics.
+
+# The Camera
+
+Modern DSLR cameras come with a wide selection of lenses of varying focal lengths, each having a specific purpose. Typically, lenses with larger focal lengths are used for imaging objects far way and shorter focal lengths are used for close-ups. But why does the focal length determine the "range" of the camera and what happens if you use an inappropriate lens for given imaging scenario? The answer to this question lies in what, in optics, is called *depth of field*. In simple terms, the depth of field is the range in object space that can be imaged with high fidelity.
+
+Now, if we consider an imaging setup where a lens rests a distance $s_{0}'$ from the camera sensor, an object that focuses perfectly at the sensor would lie at
+
+
+\begin{equation*}
+s_{0} = \frac{s_{0}'f}{s_{0}'-f}
+\end{equation*}
+
+In optics terms, we have found the conjugate point to the sensor in object space. Now, notice that objects nearer to the the lens than $s_{0}$ will focus beyond the sensor and objects outside of $s_{0}$ will focus before the sensor. Indeed, this is why the camera has a depth of field in the first place. To determine the depth of field we need to define a threshold distance from the sensor, such that if an object focuses at a distance exceeding this threshold that object is considered 'out of focus'. Let's call that threshold distance is $x$ which means that objects must focus in the region $s_{0}' - x$ to $s_{0}' + x$ to be considered in focus. Often times this parameter $x$ is called the *depth of focus* and if you find the conjugate points to $s_{0}' - x$ to $s_{0}' + x$ in object space, you have the depth of field. We do this by again plugging the variables into the thin-lens equation:
+
+\begin{equation*}
+s_{1} = \frac{(s_{0}' + x)f}{s_{0}' + x - f} = \frac{s_{0}f(f + \frac{fd}{D})}{f^{2} + \frac{fds_{0}}{D}}
+\end{equation*}
+
+\begin{equation*}
+s_{2} = \frac{(s_{0}' - x)f}{s_{0}' - x - f} = \frac{s_{0}f(f - \frac{fd}{D})}{f^{2} - \frac{fds_{0}}{D}}
+\end{equation*}
+
+where we have named the conjugate points $s_{1}$ and $s_{2}$. Armed with these two equations, we need to use additional properties of the system to find the depth of focus $x$. Consider the angle $\alpha$ between the optical axis and the ray passing through an extreme end of the lens and object point $s_{0}'$. If the lens has a diameter $D$ and the parameter $d$ is defined to be the leg of a triangle opposite to $\alpha$ and $x$ is the base of that same triangle, we have that:
+
+\begin{equation*}
+\tan(\alpha) = \frac{D}{s_{0}} = \frac{d}{x}
+\end{equation*}
+
+so we see that $x = \frac{ds_{0}}{D}$. We have only exchanged one unknown for another but we now have all the relevant parameters involved now. The value of $d$ is often called the *blurring parameter* and is simply a number that can be picked based on the desired image quality. Now, let's subsitute $x$ into the equation above and do some algebra to find the depth of field:
+
+\begin{equation*}
+\Delta s = \frac{2f^{3}ds_{0}}{D(f^{4}-f^{2}(d/D)^{2}s_{0}^{2}}
+\end{equation*}
+
+Some important practical takeaways from this are that the depth of field increases for decreasing focal length and longer shooting distances. Of course, you can't (or shouldn't) tweak object distances in photography; you change the distance between the lens and sensor $s_{0}'$. However, in this form, the equation tells you what the depth of field is when a particular object of interest is in focus. Furthermore, as the ratio $\frac{f}{D}$ which is often called the *relative aperture* or *f-stop* number is increased, the depth of field increases. In turn, smaller lens diameters give you increased depth of field but at the same time the field of view and total intensity is decreased. In summary, the depth of field is determined by two main parameters: the distance to an object of interest and the relative aperture $\frac{f}{D}$.
+
+
+
+```code
+
+```
