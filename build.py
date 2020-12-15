@@ -36,7 +36,7 @@ for file in md_files:
     this_post.write(f'posts/{rootname}/index.html')
 
     var = f"""
-                <a href="{rootname}/index.html">{rootname}</a>
+                <a href="{rootname}/">{rootname}</a>
             """
 
     posts.add_content(var)
