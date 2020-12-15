@@ -6,10 +6,10 @@ def md_to_post(file):
 
 
 
-    html = f"""<div style="margin: 0 auto; width: 40%;
+    html = f"""<div style="margin: 0 auto; width: 45%;
                 border: 1px solid black; padding: 50px;
-                margin-top: 50px; text-align: left;
-                font-size: 12px">
+                margin-top: 100px; text-align: left;
+                font-size: 14px">
                 {html}
                 </div>
                  """

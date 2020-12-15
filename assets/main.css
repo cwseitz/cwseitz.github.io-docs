@@ -546,7 +546,7 @@ button, .button, a.button {
 .header {
   top: 0;
   background: #A9A9A9;
-  height: 50px;
+  height: 75px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -598,7 +598,7 @@ button, .button, a.button {
   .logo__mark {
     margin-right: 5px; }
   .logo__text {
-    font-size: 14px; }
+    font-size: 18px; }
   .logo__cursor {
     display: inline-block;
     width: 10px;
@@ -640,7 +640,7 @@ button, .button, a.button {
     max-width: 100%;
     margin: 0 auto;
     padding: 0 15px;
-    font-size: 12px;
+    font-size: 16px;
     list-style: none; }
     .menu__inner li {
       margin: 0 12px; }
@@ -804,7 +804,7 @@ pre {
   border:2px solid #e8e8e8;
   padding: 10px 10px 10px 20px;
   text-align: left;
-  font-size: 12px;
+  font-size: 14px;
   overflow: auto; }
   @media (max-width: 684px) {
     pre {
