@@ -1,5 +1,3 @@
-
-
 class HTMLDocument:
     """HTML Document class."""
 
@@ -9,6 +7,7 @@ class HTMLDocument:
         self.head = ''
         self.body = ''
         self.title = self.__class__.__name__
+
 
     def __str__(self):
         return (
@@ -29,26 +28,7 @@ class HTMLDocument:
         )
 
     def add_mathjax(self):
-
-        self.body += """<script>
-                  MathJax = {
-                    tex: {
-                      inlineMath: [['$', '$'], ['\\(', '\\)']],
-                      displayMath: [['$$','$$'], ['\\[', '\\]']],
-                      processEscapes: true,
-                      processEnvironments: true
-                    },
-                    options: {
-                      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-                    }
-                  };
-
-                  window.addEventListener('load', (event) => {
-                      document.querySelectorAll("mjx-container").forEach(function(x){
-                        x.parentElement.classList += 'has-jax'})
-                    });
-
-                </script>"""
+        self.body += '<script src="assets/mathjax.js"></script>'
 
     def add_scripts(self):
         self.body += """<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -57,15 +37,20 @@ class HTMLDocument:
                         <script type="text/javascript" src="assets/main.js"></script>"""
 
 
-
-    def add_header(self, header, level='h2', align='left'):
-
-        self.body += (
-            f'{header}'
-        )
-
     def add_content(self, content):
         self.body += content
+
+    def add_header(self, logo, navi):
+
+        self.header = f"""
+                        <span class="header__inner">
+                                {logo}
+                                    <span class="header__right">
+                                        {navi}
+                                    </span>
+                        </span>
+                        """
+        self.body += f'<header class="header">{self.header}</header>'
 
     def add_text(self,
         text,
