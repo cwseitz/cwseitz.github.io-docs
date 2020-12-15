@@ -2,50 +2,52 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>HTMLDocument</title>
+<title></title>
 <link rel="stylesheet" href="../../assets/main.css">
 </head>
 <body>
 <div class="container"><header class="header">
                         <span class="header__inner">
-                                
-            <div class="logo">
-                    <span class="logo__mark">></span>
-                    <span class="logo__text">cd ~</span>
-                    <span class="logo__cursor"
-                    style="background-color:#008080;animation-duration:0.75s;">
-                    </span>
-            </div>
+                                <div class="logo">
+  <span class="logo__mark">></span>
+  <span class="logo__text">cd ~</span>
+  <span class="logo__cursor"
+  style="background-color:#ccf9f4;animation-duration:0.75s;">
+  </span>
+</div>
+
                                     <span class="header__right">
-                                          <nav class="menu">
-                <ul class="menu__inner">
-                  <li><a href="posts">Drafts</a></li>
-                  <li><a href="mirage">Mirage</a></li>
-                  <li><a href="photos">Photography</a></li>
-                </ul>
-            </nav>
+                                        <nav class="menu">
+  <ul class="menu__inner">
+    <li><a href="./posts/">Drafts</a></li>
+  </ul>
+</nav>
+
                                     </span>
                         </span>
-                        </header>
-                    <div style="margin: 0 auto; width: 50%;">
-                    <hr />
+                        </header><div style="margin: 0 auto; width: 40%;
+                border: 1px solid black; padding: 50px;
+                margin-top: 50px; text-align: left;
+                font-size: 12px">
+                <hr />
 <p>layout: post
 title: "Intro to FFT"
 date: 2020-11-17
 categories: [dsp]</p>
 <hr />
-<p>```code
-import sys
+<pre><code class="code">import sys
 import numpy as np
 import matplotlib
 import scipy
 from IPython.display import Image
-from IPython.core.display import HTML</p>
-<p>print('Python version:\n{}\n'.format(sys.version))
-print('Numpy version:\t\t{}'.format(np.<strong>version</strong>))
-print('matplotlib version:\t{}'.format(matplotlib.<strong>version</strong>))
-print('Scipy version:\t\t{}'.format(scipy.<strong>version</strong>))
-```</p>
+from IPython.core.display import HTML
+
+print('Python version:\n{}\n'.format(sys.version))
+print('Numpy version:\t\t{}'.format(np.__version__))
+print('matplotlib version:\t{}'.format(matplotlib.__version__))
+print('Scipy version:\t\t{}'.format(scipy.__version__))
+</code></pre>
+
 <pre><code>Python version:
 3.7.3 (default, Mar 27 2019, 22:11:17)
 [GCC 7.3.0]
@@ -77,64 +79,68 @@ X(k) = FFT[x_{n}] = \sum_{n=0}^{N-1} x_{n}\exp{-\frac{j2\pi kn}{N}}, k=0,1,...,N
 <p>Notice that we set the number of samples for $k$ to be equal to that of $x_{n}$. Also, the frequencies start at 0Hz and increment by $k\frac{f_{s}}{{N}}$ up to $\frac{N}{N-1}f_{s}$ Hz. For example if we have a 16-point CD quality audio sample ($f_{s}$=44.1kHz), we will have a frequency spectrum from 0 to 41.3 kHz. Recall, we said that the max frequency that can be reliably detected for a given sampling rate is $f_{s} &gt; 2f_{m}$ but the FFT produces frequencies all the way up to $\frac{N}{N-1}f_{s}$ Hz. This is why the max frequency is sometimes called the folding frequency: at the point $f_{s} = 2f_{m}$, the magnitude spectrum <em>folds</em> or repeats itself. Let's see this in an example.</p>
 <h1>FFT Example 1</h1>
 <p>In this example, we are going to define a function simple_fft() that takes in four parameters: freq, fft_size, nsamples, and period. The parameter fft_size determines the frequency resolution of the frequency domain. In general, the frequency resolution is inversely proportional to the sampling rate and directly proportional to the fft_size. Therefore, at high sampling rates, you need larger FFT sizes to accurately resolve frequency components. Let's use simple_fft() to generate a 100 Hz sine wave sampled at 1 kHz over 100ms and take a 2048 point FFT.</p>
-<p>```code
-import matplotlib.pyplot as plt
+<pre><code class="code">import matplotlib.pyplot as plt
 import numpy as np
 from numpy.fft import fft
-from scipy.signal import find_peaks</p>
-<p>def simple_fft(freq=20,
+from scipy.signal import find_peaks
+
+def simple_fft(freq=20,
                fft_size=2048,
                nsamples=50,
-               period=1):</p>
-<pre><code>sample_rate = nsamples/period
-tres = 1/sample_rate #time resolution
-fres = sample_rate/fft_size #frequency resolution
+               period=1):
 
-# """
-# ~~~~~~Generate signal, do FFT~~~~~
-# """
+    sample_rate = nsamples/period
+    tres = 1/sample_rate #time resolution
+    fres = sample_rate/fft_size #frequency resolution
 
-t = np.linspace(0, period, nsamples)
-x = np.sin(2*np.pi*freq*t)
-f = np.arange(fft_size)*fres
-mag = np.abs(fft(x,n=fft_size))
-peaks, props = find_peaks(mag, height=.5*mag.max())
-peaks = fres*peaks
+    # &quot;&quot;&quot;
+    # ~~~~~~Generate signal, do FFT~~~~~
+    # &quot;&quot;&quot;
 
-# """
-# ~~~~~~Plot results~~~~~
-# """
+    t = np.linspace(0, period, nsamples)
+    x = np.sin(2*np.pi*freq*t)
+    f = np.arange(fft_size)*fres
+    mag = np.abs(fft(x,n=fft_size))
+    peaks, props = find_peaks(mag, height=.5*mag.max())
+    peaks = fres*peaks
 
-fig, ax = plt.subplots(1, 2, figsize=(12,5))
-ax[0].plot(t, x)
-ax[0].set_xlabel('Time', fontsize=14)
-ax[0].set_ylabel('Amplitude', fontsize=14)
-ax[1].plot(f, mag)
-ax[1].set_xlabel('Frequency (Hz)', fontsize=14)
-ax[1].set_ylabel('a.u.', fontsize=14)
-plt.show()
+    # &quot;&quot;&quot;
+    # ~~~~~~Plot results~~~~~
+    # &quot;&quot;&quot;
 
-# """
-# ~~~~~~Print results~~~~~
-# """
+    fig, ax = plt.subplots(1, 2, figsize=(12,5))
+    ax[0].plot(t, x)
+    ax[0].set_xlabel('Time', fontsize=14)
+    ax[0].set_ylabel('Amplitude', fontsize=14)
+    ax[1].plot(f, mag)
+    ax[1].set_xlabel('Frequency (Hz)', fontsize=14)
+    ax[1].set_ylabel('a.u.', fontsize=14)
+    plt.show()
 
-tres = tres*1e4
-mag[fft_size//2:] = 0
+    # &quot;&quot;&quot;
+    # ~~~~~~Print results~~~~~
+    # &quot;&quot;&quot;
 
-print('#'*50)
-print('Time Resolution: %s ms/step' % tres)
-print('Frequency Resolution: %s Hz/step' % fres)
-print('Set Frequency: %s Hz' % freq)
-print('Measured Frequency: %s Hz' % peaks[0])
-</code></pre>
-<p>sample_rate = 1000 #Hz
+    tres = tres*1e4
+    mag[fft_size//2:] = 0
+
+    print('#'*50)
+    print('Time Resolution: %s ms/step' % tres)
+    print('Frequency Resolution: %s Hz/step' % fres)
+    print('Set Frequency: %s Hz' % freq)
+    print('Measured Frequency: %s Hz' % peaks[0])
+
+
+sample_rate = 1000 #Hz
 period = .1 #sec
-nsamples = sample_rate*period</p>
-<p>simple_fft(freq=100,
+nsamples = sample_rate*period
+
+simple_fft(freq=100,
            fft_size=2048,
            nsamples=nsamples,
            period=period)
-```</p>
+</code></pre>
+
 <pre><code>/home/cwseitz/anaconda3/lib/python3.7/site-packages/ipykernel_launcher.py:19: DeprecationWarning: object of type &lt;class 'float'&gt; cannot be safely interpreted as an integer.
 </code></pre>
 <p><img alt="png" src="introduction-to-fast-fourier-transforms-fft_files/introduction-to-fast-fourier-transforms-fft_3_1.png" /></p>
@@ -146,63 +152,67 @@ Measured Frequency: 101.07421875 Hz
 </code></pre>
 <h1>FFT Example 2</h1>
 <p>This time we will use modify simple_fft() to superimpose 3 frequencies and try and resolve them in the frequency domain. Consider what happens when you play a C major triad consisting of notes C, E, and G on a piano. If we start at middle C, we are superimposing three sinusoids with fourth-order frequencies 261, 329, and 392 Hz. Let's take a look at these waveforms and their sum over a 10ms time window with a 44.1kHz sample rate:</p>
-<p>```code
-import matplotlib.pyplot as plt
+<pre><code class="code">import matplotlib.pyplot as plt
 import numpy as np
-from numpy.fft import fft</p>
-<p>def simple_fft(freq=[10, 20, 30],
+from numpy.fft import fft
+
+def simple_fft(freq=[10, 20, 30],
                fft_size=2048,
                nsamples=50,
-               period=1):</p>
-<pre><code>sample_rate = nsamples/period
-tres = 1/sample_rate #time resolution
-fres = sample_rate/fft_size #frequency resolution
+               period=1):
 
-# """
-# ~~~~~~Generate signal, do FFT~~~~~
-# """
+    sample_rate = nsamples/period
+    tres = 1/sample_rate #time resolution
+    fres = sample_rate/fft_size #frequency resolution
 
-t = np.linspace(0, period, nsamples)
-x = np.sin(2*np.pi*freq[0]*t) + np.sin(2*np.pi*freq[1]*t) + np.sin(2*np.pi*freq[2]*t)
-f = np.arange(fft_size)*fres
-mag = np.abs(fft(x,n=fft_size))/fft_size
-peaks, props = find_peaks(mag, height=.5*mag.max())
-peaks = fres*peaks
+    # &quot;&quot;&quot;
+    # ~~~~~~Generate signal, do FFT~~~~~
+    # &quot;&quot;&quot;
 
-# """
-# ~~~~~~Plot results~~~~~
-# """
+    t = np.linspace(0, period, nsamples)
+    x = np.sin(2*np.pi*freq[0]*t) + np.sin(2*np.pi*freq[1]*t) + np.sin(2*np.pi*freq[2]*t)
+    f = np.arange(fft_size)*fres
+    mag = np.abs(fft(x,n=fft_size))/fft_size
+    peaks, props = find_peaks(mag, height=.5*mag.max())
+    peaks = fres*peaks
 
-fig, ax = plt.subplots(1, 2, figsize=(12,5))
-ax[0].plot(t, x)
-ax[0].set_xlabel('Time', fontsize=14)
-ax[0].set_ylabel('Amplitude', fontsize=14)
-ax[1].plot(f, mag)
-ax[1].set_xlabel('Frequency (Hz)', fontsize=14)
-ax[1].set_ylabel('a.u.', fontsize=14)
-plt.show()
+    # &quot;&quot;&quot;
+    # ~~~~~~Plot results~~~~~
+    # &quot;&quot;&quot;
 
-# """
-# ~~~~~~Print results~~~~~
-# """
+    fig, ax = plt.subplots(1, 2, figsize=(12,5))
+    ax[0].plot(t, x)
+    ax[0].set_xlabel('Time', fontsize=14)
+    ax[0].set_ylabel('Amplitude', fontsize=14)
+    ax[1].plot(f, mag)
+    ax[1].set_xlabel('Frequency (Hz)', fontsize=14)
+    ax[1].set_ylabel('a.u.', fontsize=14)
+    plt.show()
 
-tres = tres*1e4
-mag[fft_size//2:] = 0
+    # &quot;&quot;&quot;
+    # ~~~~~~Print results~~~~~
+    # &quot;&quot;&quot;
 
-print('#'*50)
-print('Time Resolution: %s ms/step' % tres)
-print('Frequency Resolution: %s Hz/step' % fres)
-print('Set Frequencies: %s Hz' % freq)
-print('Measured Frequencies: %s Hz' % peaks)
-</code></pre>
-<p>sample_rate = 1000 #Hz
+    tres = tres*1e4
+    mag[fft_size//2:] = 0
+
+    print('#'*50)
+    print('Time Resolution: %s ms/step' % tres)
+    print('Frequency Resolution: %s Hz/step' % fres)
+    print('Set Frequencies: %s Hz' % freq)
+    print('Measured Frequencies: %s Hz' % peaks)
+
+
+sample_rate = 1000 #Hz
 period = .1 #sec
-nsamples = sample_rate*period</p>
-<p>simple_fft(freq=[261,329,392],
+nsamples = sample_rate*period
+
+simple_fft(freq=[261,329,392],
            fft_size=2048,
            nsamples=nsamples,
            period=period)
-```</p>
+</code></pre>
+
 <pre><code>/home/cwseitz/anaconda3/lib/python3.7/site-packages/ipykernel_launcher.py:19: DeprecationWarning: object of type &lt;class 'float'&gt; cannot be safely interpreted as an integer.
 </code></pre>
 <p><img alt="png" src="introduction-to-fast-fourier-transforms-fft_files/introduction-to-fast-fourier-transforms-fft_5_1.png" /></p>
@@ -213,24 +223,9 @@ Set Frequencies: [261, 329, 392] Hz
 Measured Frequencies: [263.18359375 332.51953125 396.484375   603.515625   667.48046875
  736.81640625] Hz
 </code></pre>
-                    </div>
-                 <script>
-                  MathJax = {
-                    tex: {
-                      inlineMath: [['$', '$'], ['\(', '\)']],
-                      displayMath: [['$$','$$'], ['\[', '\]']],
-                      processEscapes: true,
-                      processEnvironments: true
-                    },
-                    options: {
-                      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-                    }
-                  };
-
-                  window.addEventListener('load', (event) => {
-                      document.querySelectorAll("mjx-container").forEach(function(x){
-                        x.parentElement.classList += 'has-jax'})
-                    });
-
-                </script></div></body>
+                </div>
+                 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+                        <script type="text/javascript" id="MathJax-script" async
+                        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+                        <script type="text/javascript" src="assets/main.js"></script></div></body>
 </html>

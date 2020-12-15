@@ -1,9 +1,3 @@
----
-title: "Analog impulse response"
-date: 2020-11-17
-categories: [electronics]
----
-
 When designing electrical circuits that process input signals, we are always concerned with obtaining an output that suits the purpose of the circuit. In the time domain, we are usually interested in voltage at the output as a function of time. In the frequency domain, we are concerned with the frequency response or transfer function of the circuit.
 
 <img src="../../images/lpf-hpf.png" width="600"/>

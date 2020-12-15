@@ -1,19 +1,12 @@
----
-title: "Bubble sort in C"
-date: 2020-11-17
-categories: [c-programming, algorithms]
----
 
-
-# C vs Python Bubble Sort
+### C vs Python Bubble Sort
 
 In this post I will implement the bubble sort algorithm in both C and Python languages. The purpose of this is to illustrate the performance differences between a compiled language like C and an interpreted language like Python. Importantly, running these two programs will require the C kernel for jupyter which can be installed by following the instructions [here](https://cwseitz.github.io/output/posts/how-to-install-c-kernel-in-jupyter/). Be sure to change to the appropriate kernel depending on which program you run.
 
 
-# The C Implementation
+###C Implementation
 
-
-```code
+```
 #include <stdio.h>
 #include <time.h>
 
@@ -67,10 +60,10 @@ int main()
     Execution Time = 0.002000 ms
 
 
-# The Python Implementation
+###Python Implementation
 
 
-```code
+```
 import time
 
 def bubble_sort(arr):
@@ -97,10 +90,10 @@ print('Execution time: %s ms' % str(1000*(end - start)))
 
 After running these two implementations of the bubble sort algorithm, we see that the C code runs much faster than Python. At the same time, however, the Python code is much shorter and more readable than C. If we want to be really fancy, we can have the best of both worlds by using the Python/C API. A bare-bones tutorial on this API can be found [here](https://cwseitz.github.io/output/posts/optimizing-python-execution-with-the-pythonc-api/).
 
-# C Extension Module for Python
+###C Extension Module
 
 
-```code
+```
 #include <Python.h>
 
 /* Swap variables via their pointers */
@@ -192,7 +185,7 @@ First, save the above script as the C module bubbles.c. Then create a setup.py m
 
 
 
-```code
+```
 from distutils.core import setup, Extension
 
 def main():
@@ -211,7 +204,7 @@ After successful compilation and installation of the module, you can invoke the
 C implementation of the bubble sort as follows:
 
 
-```code
+```
 import bubbles
 import time
 
@@ -224,4 +217,4 @@ print(arr)
 print('Execution time: %s ms' % str(1000*(end - start)))
 ```
 
-In the end you will find that you get comparable performance to the pure C implementation. After all, the bulk of the computation is executed by compiled C code. In addition to that, users of the bubbles.sort() function will appreciate the simplicity and ability to integrate the module into existing python packages. Hooray!
+In the end you will find that you get comparable performance to the pure C implementation. After all, the bulk of the computation is executed by compiled C code. In addition to that, users of the bubbles.sort() function will appreciate the simplicity and ability to integrate the module into existing python packages

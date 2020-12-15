@@ -2,33 +2,34 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>HTMLDocument</title>
+<title></title>
 <link rel="stylesheet" href="../../assets/main.css">
 </head>
 <body>
 <div class="container"><header class="header">
                         <span class="header__inner">
-                                
-            <div class="logo">
-                    <span class="logo__mark">></span>
-                    <span class="logo__text">cd ~</span>
-                    <span class="logo__cursor"
-                    style="background-color:#008080;animation-duration:0.75s;">
-                    </span>
-            </div>
+                                <div class="logo">
+  <span class="logo__mark">></span>
+  <span class="logo__text">cd ~</span>
+  <span class="logo__cursor"
+  style="background-color:#ccf9f4;animation-duration:0.75s;">
+  </span>
+</div>
+
                                     <span class="header__right">
-                                          <nav class="menu">
-                <ul class="menu__inner">
-                  <li><a href="posts">Drafts</a></li>
-                  <li><a href="mirage">Mirage</a></li>
-                  <li><a href="photos">Photography</a></li>
-                </ul>
-            </nav>
+                                        <nav class="menu">
+  <ul class="menu__inner">
+    <li><a href="./posts/">Drafts</a></li>
+  </ul>
+</nav>
+
                                     </span>
                         </span>
-                        </header>
-                    <div style="margin: 0 auto; width: 50%;">
-                    <hr />
+                        </header><div style="margin: 0 auto; width: 40%;
+                border: 1px solid black; padding: 50px;
+                margin-top: 50px; text-align: left;
+                font-size: 12px">
+                <hr />
 <p>layout: post
 title: "Backpropagation"
 date: 2020-11-17
@@ -86,24 +87,9 @@ Moving forward, let's continue the chain and calculate $\partial_{W}\mathcal{L}$
 \frac{\partial\mathcal{L}}{\partial h_{j}} = \frac{\partial\mathcal{L}}{\partial \hat{s}<em>{j}}\frac{\partial\hat{s}</em>{j}}{\partial h_{j}} = \frac{\partial\mathcal{L}}{\partial \hat{s}<em>{j}}W</em>{i,j}
 \end{equation</em>}</p>
 <p>Again, we can't actually calculate this on a vector or a matrix. The actual calculations are made by looping over the vector and matrices according to standard matrix multiplication.</p>
-                    </div>
-                 <script>
-                  MathJax = {
-                    tex: {
-                      inlineMath: [['$', '$'], ['\(', '\)']],
-                      displayMath: [['$$','$$'], ['\[', '\]']],
-                      processEscapes: true,
-                      processEnvironments: true
-                    },
-                    options: {
-                      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-                    }
-                  };
-
-                  window.addEventListener('load', (event) => {
-                      document.querySelectorAll("mjx-container").forEach(function(x){
-                        x.parentElement.classList += 'has-jax'})
-                    });
-
-                </script></div></body>
+                </div>
+                 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+                        <script type="text/javascript" id="MathJax-script" async
+                        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+                        <script type="text/javascript" src="assets/main.js"></script></div></body>
 </html>

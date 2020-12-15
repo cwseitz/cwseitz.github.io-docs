@@ -2,33 +2,34 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>HTMLDocument</title>
+<title></title>
 <link rel="stylesheet" href="../../assets/main.css">
 </head>
 <body>
 <div class="container"><header class="header">
                         <span class="header__inner">
-                                
-            <div class="logo">
-                    <span class="logo__mark">></span>
-                    <span class="logo__text">cd ~</span>
-                    <span class="logo__cursor"
-                    style="background-color:#008080;animation-duration:0.75s;">
-                    </span>
-            </div>
+                                <div class="logo">
+  <span class="logo__mark">></span>
+  <span class="logo__text">cd ~</span>
+  <span class="logo__cursor"
+  style="background-color:#ccf9f4;animation-duration:0.75s;">
+  </span>
+</div>
+
                                     <span class="header__right">
-                                          <nav class="menu">
-                <ul class="menu__inner">
-                  <li><a href="posts">Drafts</a></li>
-                  <li><a href="mirage">Mirage</a></li>
-                  <li><a href="photos">Photography</a></li>
-                </ul>
-            </nav>
+                                        <nav class="menu">
+  <ul class="menu__inner">
+    <li><a href="./posts/">Drafts</a></li>
+  </ul>
+</nav>
+
                                     </span>
                         </span>
-                        </header>
-                    <div style="margin: 0 auto; width: 50%;">
-                    <hr />
+                        </header><div style="margin: 0 auto; width: 40%;
+                border: 1px solid black; padding: 50px;
+                margin-top: 50px; text-align: left;
+                font-size: 12px">
+                <hr />
 <p>layout: post
 title: "Matplotlib colormaps"
 date: 2020-11-17
@@ -50,148 +51,148 @@ categories: [python, matplotlib]</p>
 </li>
 </ol>
 <p>**Note: The above paragraph and code snippets below were derived from <a href="https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html">here</a></p>
-<p>```code
-import numpy as np
+<pre><code class="code">import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib import cm
-from collections import OrderedDict</p>
-<p>cmaps = OrderedDict()
+from collections import OrderedDict
+
+cmaps = OrderedDict()
 def plot_color_gradients(cmap_category, cmap_list, nrows):
     fig, axes = plt.subplots(nrows=nrows)
     fig.subplots_adjust(top=0.95, bottom=0.01, left=0.2, right=0.99)
-    axes[0].set_title(cmap_category + ' colormaps', fontsize=14)</p>
-<pre><code>for ax, name in zip(axes, cmap_list):
-    ax.imshow(gradient, aspect='auto', cmap=plt.get_cmap(name))
-    pos = list(ax.get_position().bounds)
-    x_text = pos[0] - 0.01
-    y_text = pos[1] + pos[3]/2.
-    fig.text(x_text, y_text, name, va='center', ha='right', fontsize=10)
+    axes[0].set_title(cmap_category + ' colormaps', fontsize=14)
 
-# Turn off *all* ticks &amp; spines, not just the ones with colormaps.
-for ax in axes:
-    ax.set_axis_off()
+    for ax, name in zip(axes, cmap_list):
+        ax.imshow(gradient, aspect='auto', cmap=plt.get_cmap(name))
+        pos = list(ax.get_position().bounds)
+        x_text = pos[0] - 0.01
+        y_text = pos[1] + pos[3]/2.
+        fig.text(x_text, y_text, name, va='center', ha='right', fontsize=10)
+
+    # Turn off *all* ticks &amp; spines, not just the ones with colormaps.
+    for ax in axes:
+        ax.set_axis_off()
+
 </code></pre>
-<p>```</p>
+
 <h1>Sequential Colormaps</h1>
-<p><code>code
-cmaps['Sequential'] = [
+<pre><code class="code">cmaps['Sequential'] = [
                         'Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds',
                         'YlOrBr', 'YlOrRd', 'OrRd', 'PuRd', 'RdPu', 'BuPu',
                         'GnBu', 'PuBu', 'YlGnBu', 'PuBuGn', 'BuGn', 'YlGn'
-                      ]</code></p>
-<p>```code
-nrows = max(len(cmap_list) for cmap_category, cmap_list in cmaps.items())
+                      ]
+</code></pre>
+
+<pre><code class="code">nrows = max(len(cmap_list) for cmap_category, cmap_list in cmaps.items())
 gradient = np.linspace(0, 1, 256)
-gradient = np.vstack((gradient, gradient))</p>
-<p>for cmap_category, cmap_list in cmaps.items():
+gradient = np.vstack((gradient, gradient))
+
+for cmap_category, cmap_list in cmaps.items():
     plot_color_gradients(cmap_category, cmap_list, nrows)
-```</p>
+</code></pre>
+
 <p><img alt="png" src="matplotlib-colormaps_files/matplotlib-colormaps_4_0.png" /></p>
 <h1>More Sequential Colormaps</h1>
-<p>```code
-cmaps = OrderedDict()
+<pre><code class="code">cmaps = OrderedDict()
 cmaps['Sequential (2)'] = [
                         'binary', 'gist_yarg', 'gist_gray', 'gray', 'bone', 'pink',
                         'spring', 'summer', 'autumn', 'winter', 'cool', 'Wistia',
                         'hot', 'afmhot', 'gist_heat', 'copper'
-                          ]</p>
-<p>nrows = max(len(cmap_list) for cmap_category, cmap_list in cmaps.items())
+                          ]
+
+nrows = max(len(cmap_list) for cmap_category, cmap_list in cmaps.items())
 gradient = np.linspace(0, 1, 256)
-gradient = np.vstack((gradient, gradient))</p>
-<p>for cmap_category, cmap_list in cmaps.items():
+gradient = np.vstack((gradient, gradient))
+
+for cmap_category, cmap_list in cmaps.items():
     plot_color_gradients(cmap_category, cmap_list, nrows)
-```</p>
+</code></pre>
+
 <p><img alt="png" src="matplotlib-colormaps_files/matplotlib-colormaps_6_0.png" /></p>
 <h1>Diverging Colormaps</h1>
-<p>```code
-cmaps = OrderedDict()
+<pre><code class="code">cmaps = OrderedDict()
 cmaps['Diverging'] = [
                         'PiYG', 'PRGn', 'BrBG', 'PuOr', 'RdGy', 'RdBu',
                         'RdYlBu', 'RdYlGn', 'Spectral', 'coolwarm', 'bwr', 'seismic'
-                     ]</p>
-<p>nrows = max(len(cmap_list) for cmap_category, cmap_list in cmaps.items())
+                     ]
+
+nrows = max(len(cmap_list) for cmap_category, cmap_list in cmaps.items())
 gradient = np.linspace(0, 1, 256)
-gradient = np.vstack((gradient, gradient))</p>
-<p>for cmap_category, cmap_list in cmaps.items():
+gradient = np.vstack((gradient, gradient))
+
+for cmap_category, cmap_list in cmaps.items():
     plot_color_gradients(cmap_category, cmap_list, nrows)
-```</p>
+</code></pre>
+
 <p><img alt="png" src="matplotlib-colormaps_files/matplotlib-colormaps_8_0.png" /></p>
 <h1>Cyclic Colormaps</h1>
-<p>```code
-cmaps = OrderedDict()
-cmaps['Cyclic'] = ['twilight', 'twilight_shifted', 'hsv']</p>
-<p>nrows = max(len(cmap_list) for cmap_category, cmap_list in cmaps.items())
+<pre><code class="code">cmaps = OrderedDict()
+cmaps['Cyclic'] = ['twilight', 'twilight_shifted', 'hsv']
+
+nrows = max(len(cmap_list) for cmap_category, cmap_list in cmaps.items())
 gradient = np.linspace(0, 1, 256)
-gradient = np.vstack((gradient, gradient))</p>
-<p>for cmap_category, cmap_list in cmaps.items():
+gradient = np.vstack((gradient, gradient))
+
+for cmap_category, cmap_list in cmaps.items():
     plot_color_gradients(cmap_category, cmap_list, nrows)
-```</p>
+</code></pre>
+
 <p><img alt="png" src="matplotlib-colormaps_files/matplotlib-colormaps_10_0.png" /></p>
 <h1>Qualitative Colormaps</h1>
-<p>```code
-cmaps = OrderedDict()
+<pre><code class="code">cmaps = OrderedDict()
 cmaps['Qualitative'] = [
                         'Pastel1', 'Pastel2', 'Paired', 'Accent',
                         'Dark2', 'Set1', 'Set2', 'Set3',
                         'tab10', 'tab20', 'tab20b', 'tab20c'
-                       ]</p>
-<p>nrows = max(len(cmap_list) for cmap_category, cmap_list in cmaps.items())
+                       ]
+
+nrows = max(len(cmap_list) for cmap_category, cmap_list in cmaps.items())
 gradient = np.linspace(0, 1, 256)
-gradient = np.vstack((gradient, gradient))</p>
-<p>for cmap_category, cmap_list in cmaps.items():
+gradient = np.vstack((gradient, gradient))
+
+for cmap_category, cmap_list in cmaps.items():
     plot_color_gradients(cmap_category, cmap_list, nrows)
-```</p>
+</code></pre>
+
 <p><img alt="png" src="matplotlib-colormaps_files/matplotlib-colormaps_12_0.png" /></p>
 <h1>Miscellaneous Colormaps</h1>
-<p>```code
-cmaps = OrderedDict()
+<pre><code class="code">cmaps = OrderedDict()
 cmaps['Miscellaneous'] = [
                         'flag', 'prism', 'ocean', 'gist_earth', 'terrain', 'gist_stern',
                         'gnuplot', 'gnuplot2', 'CMRmap', 'cubehelix', 'brg',
                         'gist_rainbow', 'rainbow', 'jet', 'nipy_spectral', 'gist_ncar'
-                         ]</p>
-<p>nrows = max(len(cmap_list) for cmap_category, cmap_list in cmaps.items())
+                         ]
+
+nrows = max(len(cmap_list) for cmap_category, cmap_list in cmaps.items())
 gradient = np.linspace(0, 1, 256)
-gradient = np.vstack((gradient, gradient))</p>
-<p>for cmap_category, cmap_list in cmaps.items():
+gradient = np.vstack((gradient, gradient))
+
+for cmap_category, cmap_list in cmaps.items():
     plot_color_gradients(cmap_category, cmap_list, nrows)
-```</p>
+</code></pre>
+
 <p><img alt="png" src="matplotlib-colormaps_files/matplotlib-colormaps_14_0.png" /></p>
 <p>To make use of one of the above colormaps, we can create a numpy linspace object with min_color, max_color and num_color parameters. This allows to slice the colormap and choose how many colors to choose in the slice.</p>
-<p>```code
-fig, ax = plt.subplots()
+<pre><code class="code">fig, ax = plt.subplots()
 viridis = cm.get_cmap('rainbow', 12)
 color_ind = np.linspace(0, 0.5, 3)
 min_color = 0; max_color = 1; num_color = 5
 x = np.linspace(min_color, max_color, num_color)
-y = [x, 2<em>x, 3</em>x]</p>
-<p>viridis = viridis(color_ind)
+y = [x, 2*x, 3*x]
+
+viridis = viridis(color_ind)
 for i,j in enumerate(y):
     ax.plot(x,j, color=viridis[i])
 plt.show()
-```</p>
+</code></pre>
+
 <p><img alt="png" src="matplotlib-colormaps_files/matplotlib-colormaps_16_0.png" /></p>
-<p>```code</p>
-<p>```</p>
-                    </div>
-                 <script>
-                  MathJax = {
-                    tex: {
-                      inlineMath: [['$', '$'], ['\(', '\)']],
-                      displayMath: [['$$','$$'], ['\[', '\]']],
-                      processEscapes: true,
-                      processEnvironments: true
-                    },
-                    options: {
-                      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-                    }
-                  };
-
-                  window.addEventListener('load', (event) => {
-                      document.querySelectorAll("mjx-container").forEach(function(x){
-                        x.parentElement.classList += 'has-jax'})
-                    });
-
-                </script></div></body>
+<pre><code class="code">
+</code></pre>
+                </div>
+                 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+                        <script type="text/javascript" id="MathJax-script" async
+                        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+                        <script type="text/javascript" src="assets/main.js"></script></div></body>
 </html>

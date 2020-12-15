@@ -6,7 +6,7 @@ class HTMLDocument:
         self.style = ''
         self.head = ''
         self.body = ''
-        self.title = self.__class__.__name__
+        self.title = ''
 
 
     def __str__(self):
@@ -26,9 +26,6 @@ class HTMLDocument:
             '</body>\n'
             '</html>\n'
         )
-
-    def add_mathjax(self):
-        self.body += '<script src="assets/mathjax.js"></script>'
 
     def add_scripts(self):
         self.body += """<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>

@@ -2,33 +2,34 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>HTMLDocument</title>
+<title></title>
 <link rel="stylesheet" href="../../assets/main.css">
 </head>
 <body>
 <div class="container"><header class="header">
                         <span class="header__inner">
-                                
-            <div class="logo">
-                    <span class="logo__mark">></span>
-                    <span class="logo__text">cd ~</span>
-                    <span class="logo__cursor"
-                    style="background-color:#008080;animation-duration:0.75s;">
-                    </span>
-            </div>
+                                <div class="logo">
+  <span class="logo__mark">></span>
+  <span class="logo__text">cd ~</span>
+  <span class="logo__cursor"
+  style="background-color:#ccf9f4;animation-duration:0.75s;">
+  </span>
+</div>
+
                                     <span class="header__right">
-                                          <nav class="menu">
-                <ul class="menu__inner">
-                  <li><a href="posts">Drafts</a></li>
-                  <li><a href="mirage">Mirage</a></li>
-                  <li><a href="photos">Photography</a></li>
-                </ul>
-            </nav>
+                                        <nav class="menu">
+  <ul class="menu__inner">
+    <li><a href="./posts/">Drafts</a></li>
+  </ul>
+</nav>
+
                                     </span>
                         </span>
-                        </header>
-                    <div style="margin: 0 auto; width: 50%;">
-                    <hr />
+                        </header><div style="margin: 0 auto; width: 40%;
+                border: 1px solid black; padding: 50px;
+                margin-top: 50px; text-align: left;
+                font-size: 12px">
+                <hr />
 <p>layout: post
 title: "Basic information theory"
 date: 2020-11-17
@@ -42,24 +43,28 @@ categories: [deep-learning, information-theory]</p>
 \textbf{H} = -\sum_{x\in \chi} P(x)\log_{2} P(x)
 \end{equation</em>}</p>
 <p>Note that you can use a $\log$ with whatever base you like as long as the units are noted. I use units of bits because this is intuitive but you can equivalently use a natural logarithm and units of 'nats'.</p>
-<p>```code
-import numpy as np
+<pre><code class="code">import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches</p>
-<p>p = np.linspace(1e-3, 1, 100)
+import matplotlib.patches as mpatches
+
+p = np.linspace(1e-3, 1, 100)
 y1 = -np.log2(p)
-y2 = p*y1</p>
-<p>fig, ax1 = plt.subplots()
+y2 = p*y1
+
+fig, ax1 = plt.subplots()
 ax1.set_xlabel('p')
 ax1.set_ylabel('log2 p [bits]', color='red')
-ax1.plot(p, y1, color='red')</p>
-<p>ax2 = ax1.twinx()
+ax1.plot(p, y1, color='red')
+
+ax2 = ax1.twinx()
 color = 'tab:blue'
 ax2.set_ylabel('plog2p [bits]', color='blue')
-ax2.plot(p, y2, color='blue')</p>
-<p>fig.tight_layout()
+ax2.plot(p, y2, color='blue')
+
+fig.tight_layout()
 plt.show()
-```</p>
+</code></pre>
+
 <p><img alt="png" src="information-theory-basics_files/information-theory-basics_2_0.png" /></p>
 <p>The plot in blue shows the contribution to the entropy in bits for a particular value of $p$. The total entropy is then found by sampling the blue curve according to the particular distribution $p(x)$ and adding up the samples.</p>
 <h3>An example</h3>
@@ -150,26 +155,11 @@ H(x,y) &amp;=&amp; H(x) + H(y|x)\
 \end{eqnarray}</p>
 <p>If we can show that $H(y|x) = 0$ then the data-processing inequality holds. This is more obvious if you notice that if $y = f(x)$ then the distribution $P(x,y) = P(x)$ or $P(y|x) = 0$.</p>
 <p>In terms of our venn diagram above, $H(y)$ is a <em>subset</em> of $H(x)$ which also implies the following for the mutual information: $I(x,y) = H(y)$.</p>
-<p>```code</p>
-<p>```</p>
-                    </div>
-                 <script>
-                  MathJax = {
-                    tex: {
-                      inlineMath: [['$', '$'], ['\(', '\)']],
-                      displayMath: [['$$','$$'], ['\[', '\]']],
-                      processEscapes: true,
-                      processEnvironments: true
-                    },
-                    options: {
-                      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-                    }
-                  };
-
-                  window.addEventListener('load', (event) => {
-                      document.querySelectorAll("mjx-container").forEach(function(x){
-                        x.parentElement.classList += 'has-jax'})
-                    });
-
-                </script></div></body>
+<pre><code class="code">
+</code></pre>
+                </div>
+                 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+                        <script type="text/javascript" id="MathJax-script" async
+                        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+                        <script type="text/javascript" src="assets/main.js"></script></div></body>
 </html>

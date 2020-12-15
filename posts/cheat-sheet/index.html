@@ -2,86 +2,71 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>HTMLDocument</title>
+<title></title>
 <link rel="stylesheet" href="../../assets/main.css">
 </head>
 <body>
 <div class="container"><header class="header">
                         <span class="header__inner">
-                                
-            <div class="logo">
-                    <span class="logo__mark">></span>
-                    <span class="logo__text">cd ~</span>
-                    <span class="logo__cursor"
-                    style="background-color:#008080;animation-duration:0.75s;">
-                    </span>
-            </div>
+                                <div class="logo">
+  <span class="logo__mark">></span>
+  <span class="logo__text">cd ~</span>
+  <span class="logo__cursor"
+  style="background-color:#ccf9f4;animation-duration:0.75s;">
+  </span>
+</div>
+
                                     <span class="header__right">
-                                          <nav class="menu">
-                <ul class="menu__inner">
-                  <li><a href="posts">Drafts</a></li>
-                  <li><a href="mirage">Mirage</a></li>
-                  <li><a href="photos">Photography</a></li>
-                </ul>
-            </nav>
+                                        <nav class="menu">
+  <ul class="menu__inner">
+    <li><a href="./posts/">Drafts</a></li>
+  </ul>
+</nav>
+
                                     </span>
                         </span>
-                        </header>
-                    <div style="margin: 0 auto; width: 50%;">
-                    <hr />
+                        </header><div style="margin: 0 auto; width: 40%;
+                border: 1px solid black; padding: 50px;
+                margin-top: 50px; text-align: left;
+                font-size: 12px">
+                <hr />
 <p>layout: post
 title: "Cheat sheet"
 date: 2020-11-17
 categories: [cheat-sheet]</p>
 <hr />
 <h1>RClone</h1>
-<p>```code</p>
-<h1>Mounting a remote as a local directory</h1>
-<p>!sudo mkdir /mnt/tmp
+<pre><code class="code">#Mounting a remote as a local directory
+!sudo mkdir /mnt/tmp
 !rclone mount remote:/path/to/files /mnt/tmp
 !fusermount -u /mnt/tmp
-```</p>
-<p>```code</p>
-<h1>Syncing a remote with a local directory</h1>
-<p>!rclone sync source:path dest:path [flags]</p>
-<h1>Example</h1>
-<p>!rclone sync /path/to/files ucbox:/ --create-empty-src-dirs
-```</p>
+</code></pre>
+
+<pre><code class="code">#Syncing a remote with a local directory
+!rclone sync source:path dest:path [flags]
+#Example
+!rclone sync /path/to/files ucbox:/ --create-empty-src-dirs
+</code></pre>
+
 <h1>Docker</h1>
-<p>```code</p>
-<h1>Listing docker images</h1>
-<p>!docker images</p>
-<h1>List docker containers</h1>
-<p>!docker ps -a</p>
-<h1>Removing all docker images</h1>
-<p>!docker rmi $(docker images)</p>
-<h1>Removing all docker containers</h1>
-<p>!docker rm $(docker ps -a)</p>
-<h1>Running a docker container</h1>
-<p>!docker run -i -t NAME /bin/bash</p>
-<h1>Exporting a docker container to .tar archive</h1>
-<p>!docker export -o ~/Desktop/test.tar test</p>
-<h1>Import an archived docker container as an image (an imported container == image)</h1>
-<p>!docker import ~/Desktop/test.tar
-```</p>
-                    </div>
-                 <script>
-                  MathJax = {
-                    tex: {
-                      inlineMath: [['$', '$'], ['\(', '\)']],
-                      displayMath: [['$$','$$'], ['\[', '\]']],
-                      processEscapes: true,
-                      processEnvironments: true
-                    },
-                    options: {
-                      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-                    }
-                  };
-
-                  window.addEventListener('load', (event) => {
-                      document.querySelectorAll("mjx-container").forEach(function(x){
-                        x.parentElement.classList += 'has-jax'})
-                    });
-
-                </script></div></body>
+<pre><code class="code">#Listing docker images
+!docker images
+#List docker containers
+!docker ps -a
+#Removing all docker images
+!docker rmi $(docker images)
+#Removing all docker containers
+!docker rm $(docker ps -a)
+#Running a docker container
+!docker run -i -t NAME /bin/bash
+#Exporting a docker container to .tar archive
+!docker export -o ~/Desktop/test.tar test
+#Import an archived docker container as an image (an imported container == image)
+!docker import ~/Desktop/test.tar
+</code></pre>
+                </div>
+                 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+                        <script type="text/javascript" id="MathJax-script" async
+                        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+                        <script type="text/javascript" src="assets/main.js"></script></div></body>
 </html>

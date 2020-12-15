@@ -2,46 +2,48 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>HTMLDocument</title>
+<title></title>
 <link rel="stylesheet" href="../../assets/main.css">
 </head>
 <body>
 <div class="container"><header class="header">
                         <span class="header__inner">
-                                
-            <div class="logo">
-                    <span class="logo__mark">></span>
-                    <span class="logo__text">cd ~</span>
-                    <span class="logo__cursor"
-                    style="background-color:#008080;animation-duration:0.75s;">
-                    </span>
-            </div>
+                                <div class="logo">
+  <span class="logo__mark">></span>
+  <span class="logo__text">cd ~</span>
+  <span class="logo__cursor"
+  style="background-color:#ccf9f4;animation-duration:0.75s;">
+  </span>
+</div>
+
                                     <span class="header__right">
-                                          <nav class="menu">
-                <ul class="menu__inner">
-                  <li><a href="posts">Drafts</a></li>
-                  <li><a href="mirage">Mirage</a></li>
-                  <li><a href="photos">Photography</a></li>
-                </ul>
-            </nav>
+                                        <nav class="menu">
+  <ul class="menu__inner">
+    <li><a href="./posts/">Drafts</a></li>
+  </ul>
+</nav>
+
                                     </span>
                         </span>
-                        </header>
-                    <div style="margin: 0 auto; width: 50%;">
-                    <hr />
+                        </header><div style="margin: 0 auto; width: 40%;
+                border: 1px solid black; padding: 50px;
+                margin-top: 50px; text-align: left;
+                font-size: 12px">
+                <hr />
 <p>layout: post
 title: "Fourier image analysis"
 date: 2020-11-17
 categories: [dsp, optics]</p>
 <hr />
-<p><code>code
-import matplotlib.pyplot as plt
+<pre><code class="code">import matplotlib.pyplot as plt
 import numpy as np
 from skimage.data import camera
 from skimage.draw import circle
 from skimage.filters import gaussian
 from dig.fft import *
-raw = camera()</code></p>
+raw = camera()
+</code></pre>
+
 <h1>Introduction</h1>
 <p>In this post, we will show how you can analyze digital images using Fourier analysis. I've previously covered how to use fourier analysis with functions of time so we will be extending those ideas to higher dimensions. Anyway, the central idea of fourier analysis is that you can expression any function as a sum of infinitely many sinusoidal basis functions. The main difference between 1D and 2D is not only that the basis functions are two-dimensional but that those functions can have an arbitrary orientation.</p>
 <h1>2D Fourier Basis Functions</h1>
@@ -50,13 +52,14 @@ raw = camera()</code></p>
 f(x,y) = \sin(\vec{r} \cdot \vec{r_{0}})
 \end{equation</em>}</p>
 <p>where $\vec{r_{0}} = r\hat{r} + \phi\hat{\phi}$ specifies the frequency and direction of the basis function.</p>
-<p><code>code
-fig, ax = plt.subplots(1, 3, figsize=(10,5))
+<pre><code class="code">fig, ax = plt.subplots(1, 3, figsize=(10,5))
 f1 = basis(raw.shape, mag=0.1, phase=0)
 f2 = basis(raw.shape, mag=0.25, phase=np.pi/4)
 f3 = basis(raw.shape, mag=0.5, phase=np.pi/2)
 ax[0].imshow(f1); ax[1].imshow(f2); ax[2].imshow(f3)
-plt.show()</code></p>
+plt.show()
+</code></pre>
+
 <p><img alt="png" src="fourier-analysis-of-digital-images_files/fourier-analysis-of-digital-images_2_0.png" /></p>
 <h1>The 2D Fourier Transform Pair</h1>
 <p>To make the continuous function $h(x,y)$ discrete, we make the change of variables $x,y \rightarrow m,n$:</p>
@@ -75,12 +78,13 @@ plt.show()</code></p>
 \phi(u,v) = \arctan\frac{\Im[H(u,v)]}{\Re[H(u,v)]}
 \end{equation</em>}</p>
 <p>This phase is not to be confused with the phase angle in the representation of $u$ and $v$ in polar coordinates. At this point, let's take a look at an example</p>
-<p><code>code
-fig, ax = plt.subplots(1, 2, figsize=(7,5))
+<pre><code class="code">fig, ax = plt.subplots(1, 2, figsize=(7,5))
 transform, mag = fft_2d(raw)
 ax[0].imshow(raw, cmap='gray')
 ax[1].imshow(mag, cmap='coolwarm')
-plt.show()</code></p>
+plt.show()
+</code></pre>
+
 <p><img alt="png" src="fourier-analysis-of-digital-images_files/fourier-analysis-of-digital-images_4_0.png" /></p>
 <p>The center of the spectrum represents the DC component (coming from DC current in an electrical circuit) where the frequency is zero. The frequency increases radially, the angle represents the direction of that particular basis function, and the brightness is the prominence of that function.</p>
 <h1>The Convolution Theorem</h1>
@@ -121,56 +125,47 @@ h(r) = e^{-ar^{2}}
 \xi = \frac{1}{2\pi\sigma}
 \end{equation</em>}</p>
 <p>where $\xi$ is the standard deviation of the gaussian in the frequency domain. Let's initialize our gaussian kernel and it's fourier transform.</p>
-<p>```code
-fig, ax = plt.subplots(1, 2, figsize=(10,5))</p>
-<p>sigma = 5
+<pre><code class="code">fig, ax = plt.subplots(1, 2, figsize=(10,5))
+
+sigma = 5
 kernel = gaussian_filter((100,100), sigma=sigma)
-kernel_ft, kernel_mag = fft_2d(kernel, shape=raw.shape)</p>
-<p>ax[0].imshow(kernel, cmap='coolwarm')
+kernel_ft, kernel_mag = fft_2d(kernel, shape=raw.shape)
+
+ax[0].imshow(kernel, cmap='coolwarm')
 ax[1].imshow(kernel_mag, cmap='coolwarm')
-plt.show()</p>
-<p>```</p>
+plt.show()
+
+</code></pre>
+
 <p><img alt="png" src="fourier-analysis-of-digital-images_files/fourier-analysis-of-digital-images_6_0.png" /></p>
 <h1>Applying the Convolution Theorem</h1>
 <p>In order to show that the convolution theorem works, we will both convolve the image with the unmodified gaussian kernel and also multiply its fourier transform by the fourier transform of the kernel. The functions convolve2d() and fftconvolve() implement these operations, respectively. Notice we have to set the mode parameter to 'same' to get the correct result.</p>
-<p>```code
-from scipy.signal import fftconvolve, convolve2d</p>
-<p>transform, mag = fft_2d(raw)
+<pre><code class="code">from scipy.signal import fftconvolve, convolve2d
+
+transform, mag = fft_2d(raw)
 convolved = convolve2d(raw, kernel, mode='same')
-filtered = fftconvolve(raw, kernel, mode='same')</p>
-<p>fig, ax = plt.subplots(2, 2, figsize=(7, 7))
+filtered = fftconvolve(raw, kernel, mode='same')
+
+fig, ax = plt.subplots(2, 2, figsize=(7, 7))
 ax[0,0].imshow(raw, cmap='gray')
 ax[0,1].imshow(mag*kernel_mag, cmap='coolwarm')
 ax[1,0].imshow(convolved, cmap='gray')
 ax[1,1].imshow(filtered, cmap='gray')
 plt.show()
-```</p>
+</code></pre>
+
 <p><img alt="png" src="fourier-analysis-of-digital-images_files/fourier-analysis-of-digital-images_8_0.png" /></p>
 <h1>Comparing the Results</h1>
 <p>Finally, we compute the RMSE of the two images</p>
-<p><code>code
-res = (convolved-filtered)**2
-print(res.mean())</code></p>
+<pre><code class="code">res = (convolved-filtered)**2
+print(res.mean())
+</code></pre>
+
 <pre><code>1.074322163530162e-21
 </code></pre>
-                    </div>
-                 <script>
-                  MathJax = {
-                    tex: {
-                      inlineMath: [['$', '$'], ['\(', '\)']],
-                      displayMath: [['$$','$$'], ['\[', '\]']],
-                      processEscapes: true,
-                      processEnvironments: true
-                    },
-                    options: {
-                      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-                    }
-                  };
-
-                  window.addEventListener('load', (event) => {
-                      document.querySelectorAll("mjx-container").forEach(function(x){
-                        x.parentElement.classList += 'has-jax'})
-                    });
-
-                </script></div></body>
+                </div>
+                 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+                        <script type="text/javascript" id="MathJax-script" async
+                        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+                        <script type="text/javascript" src="assets/main.js"></script></div></body>
 </html>

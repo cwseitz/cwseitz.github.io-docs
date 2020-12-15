@@ -2,51 +2,48 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>HTMLDocument</title>
+<title></title>
 <link rel="stylesheet" href="../../assets/main.css">
 </head>
 <body>
 <div class="container"><header class="header">
                         <span class="header__inner">
-                                
-            <div class="logo">
-                    <span class="logo__mark">></span>
-                    <span class="logo__text">cd ~</span>
-                    <span class="logo__cursor"
-                    style="background-color:#008080;animation-duration:0.75s;">
-                    </span>
-            </div>
+                                <div class="logo">
+  <span class="logo__mark">></span>
+  <span class="logo__text">cd ~</span>
+  <span class="logo__cursor"
+  style="background-color:#ccf9f4;animation-duration:0.75s;">
+  </span>
+</div>
+
                                     <span class="header__right">
-                                          <nav class="menu">
-                <ul class="menu__inner">
-                  <li><a href="posts">Drafts</a></li>
-                  <li><a href="mirage">Mirage</a></li>
-                  <li><a href="photos">Photography</a></li>
-                </ul>
-            </nav>
+                                        <nav class="menu">
+  <ul class="menu__inner">
+    <li><a href="./posts/">Drafts</a></li>
+  </ul>
+</nav>
+
                                     </span>
                         </span>
-                        </header>
-                    <div style="margin: 0 auto; width: 50%;">
-                    <hr />
-<p>title: "Bubble sort in C"
-date: 2020-11-17
-categories: [c-programming, algorithms]</p>
-<hr />
-<h1>C vs Python Bubble Sort</h1>
+                        </header><div style="margin: 0 auto; width: 40%;
+                border: 1px solid black; padding: 50px;
+                margin-top: 50px; text-align: left;
+                font-size: 12px">
+                <h3>C vs Python Bubble Sort</h3>
 <p>In this post I will implement the bubble sort algorithm in both C and Python languages. The purpose of this is to illustrate the performance differences between a compiled language like C and an interpreted language like Python. Importantly, running these two programs will require the C kernel for jupyter which can be installed by following the instructions <a href="https://cwseitz.github.io/output/posts/how-to-install-c-kernel-in-jupyter/">here</a>. Be sure to change to the appropriate kernel depending on which program you run.</p>
-<h1>The C Implementation</h1>
-<p>```code</p>
-<h1>include <stdio.h></h1>
-<h1>include <time.h></h1>
-<p>void swap(int <em>px, int </em>py)
+<h3>C Implementation</h3>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+void swap(int *px, int *py)
 {
     int temp;
-    temp = <em>px;
-    </em>px = <em>py;
-    </em>py = temp;
-}</p>
-<p>/<em> Bubble sort </em>/
+    temp = *px;
+    *px = *py;
+    *py = temp;
+}
+
+/* Bubble sort */
 void bubble_sort(int *arr, int size)
 {
     int i,j;
@@ -57,16 +54,18 @@ void bubble_sort(int *arr, int size)
             }
         }
     }
-}</p>
-<p>/<em> Function to print an array </em>/
+}
+
+/* Function to print an array */
 void print_array(int *arr, int size)
 {
     int i;
     for (i=0; i &lt; size; i++)
-        printf("%d ", arr[i]);
-    printf("\n");
-}</p>
-<p>int main()
+        printf(&quot;%d &quot;, arr[i]);
+    printf(&quot;\n&quot;);
+}
+
+int main()
 {
     int arr[] = {19, 13, 6, 2, 18, 8};
     size_t size = sizeof(arr)/sizeof(arr[0]);
@@ -76,49 +75,53 @@ void print_array(int *arr, int size)
     clock_t end = clock();
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     print_array(arr, size);
-    printf("Execution Time = %f ms\n",1000*time_spent);
+    printf(&quot;Execution Time = %f ms\n&quot;,1000*time_spent);
     return 0;
 }
-```</p>
+</code></pre>
+
 <pre><code>19 13 6 2 18 8
 2 6 8 13 18 19
 Execution Time = 0.002000 ms
 </code></pre>
-<h1>The Python Implementation</h1>
-<p>```code
-import time</p>
-<p>def bubble_sort(arr):
+<h3>Python Implementation</h3>
+<pre><code>import time
+
+def bubble_sort(arr):
     for i in range(len(arr)):
         for j in range(len(arr) - 1):
             if arr[j] &gt; arr[j+1]:
-                arr[j], arr[j+1] = arr[j+1], arr[j]</p>
-<pre><code>return arr
-</code></pre>
-<p>arr = [19, 13, 6, 2, 18, 8]
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+
+    return arr
+
+arr = [19, 13, 6, 2, 18, 8]
 print(arr)
 start = time.time()
 sorted_arr = bubble_sort(arr)
 end = time.time()
 print(sorted_arr)
 print('Execution time: %s ms' % str(1000*(end - start)))
-```</p>
+</code></pre>
+
 <pre><code>[19, 13, 6, 2, 18, 8]
 [2, 6, 8, 13, 18, 19]
 Execution time: 0.1838207244873047 ms
 </code></pre>
 <p>After running these two implementations of the bubble sort algorithm, we see that the C code runs much faster than Python. At the same time, however, the Python code is much shorter and more readable than C. If we want to be really fancy, we can have the best of both worlds by using the Python/C API. A bare-bones tutorial on this API can be found <a href="https://cwseitz.github.io/output/posts/optimizing-python-execution-with-the-pythonc-api/">here</a>.</p>
-<h1>C Extension Module for Python</h1>
-<p>```code</p>
-<h1>include <Python.h></h1>
-<p>/<em> Swap variables via their pointers </em>/
-void swap(int <em>px, int </em>py)
+<h3>C Extension Module</h3>
+<pre><code>#include &lt;Python.h&gt;
+
+/* Swap variables via their pointers */
+void swap(int *px, int *py)
 {
     int temp;
-    temp = <em>px;
-    </em>px = <em>py;
-    </em>py = temp;
-}</p>
-<p>/<em> Bubble sort </em>/
+    temp = *px;
+    *px = *py;
+    *py = temp;
+}
+
+/* Bubble sort */
 int bubble_sort(float *arr, int size)
 {
     int i,j;
@@ -130,107 +133,103 @@ int bubble_sort(float *arr, int size)
         }
     }
     return 0;
-}</p>
-<p>/<em> Function to print an array </em>/
+}
+
+/* Function to print an array */
 int print_array(float *arr, int size)
 {
     for (int i = 0; i &lt; size; i++)
-            printf("%f ", i, arr[i]);
-  printf("\n");
+            printf(&quot;%f &quot;, i, arr[i]);
+  printf(&quot;\n&quot;);
     return 0;
-}</p>
-<p>static PyObject <em>bubbles_sort(PyObject </em>self, PyObject *args) {</p>
-<pre><code>PyObject *float_list;
-int pr_length;
-float *pr;
-
-if (!PyArg_ParseTuple(args, "O", &amp;float_list))
-        return NULL;
-
-pr_length = PyObject_Length(float_list);
-if (pr_length &lt; 0)
-        return NULL;
-pr = (float *) malloc(sizeof(float *) * pr_length);
-if (pr == NULL)
-        return NULL;
-for (int i = 0; i &lt; pr_length; i++) {
-        PyObject *item;
-        item = PyList_GetItem(float_list, i);
-        if (!PyFloat_Check(item))
-                pr[i] = 0.0;
-        pr[i] = PyFloat_AsDouble(item);
 }
 
+static PyObject *bubbles_sort(PyObject *self, PyObject *args) {
 
-/* Build python list from C array */
-bubble_sort(pr, pr_length);
-for (int i = 0; i &lt; pr_length; i++) {
-    PyObject *py_val = Py_BuildValue("f", pr[i]);
-    PyList_SetItem(float_list, i, py_val);
+    PyObject *float_list;
+    int pr_length;
+    float *pr;
+
+    if (!PyArg_ParseTuple(args, &quot;O&quot;, &amp;float_list))
+            return NULL;
+
+    pr_length = PyObject_Length(float_list);
+    if (pr_length &lt; 0)
+            return NULL;
+    pr = (float *) malloc(sizeof(float *) * pr_length);
+    if (pr == NULL)
+            return NULL;
+    for (int i = 0; i &lt; pr_length; i++) {
+            PyObject *item;
+            item = PyList_GetItem(float_list, i);
+            if (!PyFloat_Check(item))
+                    pr[i] = 0.0;
+            pr[i] = PyFloat_AsDouble(item);
+    }
+
+
+    /* Build python list from C array */
+    bubble_sort(pr, pr_length);
+    for (int i = 0; i &lt; pr_length; i++) {
+        PyObject *py_val = Py_BuildValue(&quot;f&quot;, pr[i]);
+        PyList_SetItem(float_list, i, py_val);
+    }
+    Py_RETURN_NONE;
 }
-Py_RETURN_NONE;
-</code></pre>
-<p>}</p>
-<p>static PyMethodDef BubblesMethods[] = {
-    {"sort", bubbles_sort, METH_VARARGS, "Python interface for fputs C library function"},
+
+static PyMethodDef BubblesMethods[] = {
+    {&quot;sort&quot;, bubbles_sort, METH_VARARGS, &quot;Python interface for fputs C library function&quot;},
     {NULL, NULL, 0, NULL}
-};</p>
-<p>static struct PyModuleDef bubblesmodule = {
+};
+
+
+static struct PyModuleDef bubblesmodule = {
     PyModuleDef_HEAD_INIT,
-    "bubbles",
-    "Python interface for the fputs C library function",
+    &quot;bubbles&quot;,
+    &quot;Python interface for the fputs C library function&quot;,
     -1,
     BubblesMethods
-};</p>
-<p>PyMODINIT_FUNC PyInit_bubbles(void) {
+};
+
+PyMODINIT_FUNC PyInit_bubbles(void) {
     return PyModule_Create(&amp;bubblesmodule);
-}</p>
-<p>```</p>
+}
+
+</code></pre>
+
 <p>First, save the above script as the C module bubbles.c. Then create a setup.py module as in the Python/C API tutorial mentioned above:</p>
-<p>```code
-from distutils.core import setup, Extension</p>
-<p>def main():
-    setup(name="bubbles",
-          version="1.0.0",
-          description="Bubble sort algorithm in C",
-          author="Clayton Seitz",
-          author_email="cwseitz@uchicago.edu",
-          ext_modules=[Extension("bubbles", ["bubbles.c"])])</p>
-<p>if <strong>name</strong> == "<strong>main</strong>":
+<pre><code>from distutils.core import setup, Extension
+
+def main():
+    setup(name=&quot;bubbles&quot;,
+          version=&quot;1.0.0&quot;,
+          description=&quot;Bubble sort algorithm in C&quot;,
+          author=&quot;Clayton Seitz&quot;,
+          author_email=&quot;cwseitz@uchicago.edu&quot;,
+          ext_modules=[Extension(&quot;bubbles&quot;, [&quot;bubbles.c&quot;])])
+
+if __name__ == &quot;__main__&quot;:
     main()
-```</p>
+</code></pre>
+
 <p>After successful compilation and installation of the module, you can invoke the
 C implementation of the bubble sort as follows:</p>
-<p>```code
-import bubbles
-import time</p>
-<p>arr = [19, 13, 6, 2, 18, 8]
+<pre><code>import bubbles
+import time
+
+arr = [19, 13, 6, 2, 18, 8]
 print(arr)
 start = time.time()
 bubbles.sort(arr)
 end = time.time()
 print(arr)
 print('Execution time: %s ms' % str(1000*(end - start)))
-```</p>
-<p>In the end you will find that you get comparable performance to the pure C implementation. After all, the bulk of the computation is executed by compiled C code. In addition to that, users of the bubbles.sort() function will appreciate the simplicity and ability to integrate the module into existing python packages. Hooray!</p>
-                    </div>
-                 <script>
-                  MathJax = {
-                    tex: {
-                      inlineMath: [['$', '$'], ['\(', '\)']],
-                      displayMath: [['$$','$$'], ['\[', '\]']],
-                      processEscapes: true,
-                      processEnvironments: true
-                    },
-                    options: {
-                      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-                    }
-                  };
+</code></pre>
 
-                  window.addEventListener('load', (event) => {
-                      document.querySelectorAll("mjx-container").forEach(function(x){
-                        x.parentElement.classList += 'has-jax'})
-                    });
-
-                </script></div></body>
+<p>In the end you will find that you get comparable performance to the pure C implementation. After all, the bulk of the computation is executed by compiled C code. In addition to that, users of the bubbles.sort() function will appreciate the simplicity and ability to integrate the module into existing python packages</p>
+                </div>
+                 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+                        <script type="text/javascript" id="MathJax-script" async
+                        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+                        <script type="text/javascript" src="assets/main.js"></script></div></body>
 </html>
