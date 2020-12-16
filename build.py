@@ -1,4 +1,5 @@
 import os
+from glob import glob
 from document import HTMLDocument
 from util import md_to_post
 
@@ -20,8 +21,9 @@ posts.add_header(logo, navi)
 
 
 #Build posts
-md_files = os.listdir('md')
-for file in md_files:
+files = glob('raw/*.md')
+for file in files:
+    file = os.path.basename(file)
     rootname = file.split('.')[0]
     dir = f'posts/{rootname}'
     if not os.path.exists(dir):

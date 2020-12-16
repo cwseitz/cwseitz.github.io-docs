@@ -30,13 +30,7 @@
                 border: 1px solid black; padding: 50px;
                 margin-top: 100px; text-align: left;
                 font-size: 14px">
-                <hr />
-<p>layout: post
-title: "CCD and CMOS camera sensors"
-date: 2020-11-17
-categories: [electronics, optics]</p>
-<hr />
-<h1>Introduction</h1>
+                <h1>Introduction</h1>
 <p>This post is dedicated to covering the theoretical characterization of digital light sensors and their impact on scientific experiments. Sensors operate by exposing a pixel array to an incoming light signal during the <em>exposure time</em> and accumulating charge units at each pixel proportional to the total photo irradiance during exposure. Charge units are then converted into a voltage, amplified, and ultimately converted to a digital signal by an analog to digital converter (ADC).</p>
 <p>Three factors limit the accuracy of any imaging experiment: pixel size (spatial resolution), exposure time (temporal resolution), and the signal-to-noise ratio (SNR). Here, we will discuss how a pixel array spatially downsamples the incoming light signal as well as the relation between time resolution and the signal-to-noise ratio (SNR). Ultimately, we will be left with the language necessary to characterize the accuracy of a given measurement by a particular sensor.</p>
 <h1>Spatial Resolution</h1>
@@ -46,17 +40,17 @@ W = \mu_{p}\frac{\hbar\omega}{At_{exp}}
 \end{equation</em>}</p>
 <p>where $\mu_{p}$ is the number of photons which have arrived at the pixel, $A$ is the area of the pixel and $t_{exp}$ is the exposure time. If we write down $W$ for all space then we exactly reproduced the incoming light signal. However, we know it's impossible to build this kind of sensor and real sensors have a relatively large finite pixel area $A$. This means that the intensity profile is not constant over the pixel and $W$ is the calculated via the integral:</p>
 <p>\begin{equation<em>}
-W = \int I(x,y)dA
+W = \int I(x,y)dA 
 \end{equation</em>}</p>
 <p>Now we must replace $W$ in our first equation with the integral</p>
 <p>\begin{equation<em>}
-\mu_{p} = W\frac{At_{exp}}{\hbar\omega} \rightarrow \mu_{p} = \frac{t_{exp}}{\hbar\omega}\int I(x,y)dA
+\mu_{p} = W\frac{At_{exp}}{\hbar\omega} \rightarrow \mu_{p} = \frac{t_{exp}}{\hbar\omega}\int I(x,y)dA 
 \end{equation</em>}</p>
 <p>This mean number of photons would then produce a number of charge units which would be converted to a voltage and quantized by the ADC. The need for this integral over the pixel is exactly why spatial information is lost in the imaging process. Intensity gradients over the pixel area are not captured: only the <em>sum</em> of the intensity is captured. For example, a particle displacing a distance $\epsilon &lt;&lt; a$ where $a$ is the pixel dimension, would result in little to no change in the intensity profile of the image. Also, low spatial resolution results in the inability to distinguish objects smaller than the pixel size; however, that topic is covered in more detail in <strong>this</strong> post on diffraction limited optics.</p>
 <h1>Temporal Resolution and the SNR</h1>
 <p>In the above paragraphs the exposure time was used to calculate the intensity a light signal at a particular pixel. As a rule of thumb, low exposure times allow increased frame rates so faster processes can be captured but also decrease the amount of light that can be captured during exposure. This is clear from the last expression: the number of photons is proportional to the exposure time. At first, it might seem like this just results is dimmer images; however, the real reason short exposure times are a problem stem from the resulting signal-to-noise ratio (SNR). To see why that is so, we need to discuss the presence of noise in a digital CCD/CMOS sensor.</p>
 <h1>Noise Model</h1>
-<p>We have already mentioned that the charge units accumulated by the photo irradiance are converted into a voltage, amplified, and lastly converted to a digital signal. What we have not addressed, however, is how noise enters into the picture during this process (pun intended). There are three types of noise to consider: dark noise, shot noise, and quantization noise. Shot noise is nothing more than photon statistics - the number of photons detected will be poisson distributed. Quantization noise can be modeled via a normal distribution with zero mean. In the presence of noise, the mean number of photons at a pixel is modified to:</p>
+<p>We have already mentioned that the charge units accumulated by the photo irradiance are converted into a voltage, amplified, and lastly converted to a digital signal. What we have not addressed, however, is how noise enters into the picture during this process (pun intended). There are three types of noise to consider: dark noise, shot noise, and quantization noise. Shot noise is nothing more than photon statistics - the number of photons detected will be poisson distributed. Quantization noise can be modeled via a normal distribution with zero mean. In the presence of noise, the mean number of photons at a pixel is modified to: </p>
 <p>\begin{equation<em>}
 \mu = K(\mu_{dark} + \eta \mu_{p})
 \end{equation</em>}</p>
@@ -64,7 +58,7 @@ W = \int I(x,y)dA
 <p>\begin{equation<em>}
 \sigma^{2} = K^{2}(\sigma_{d}^{2} + \sigma_{s}^{2}) + \sigma_{q}^{2}
 \end{equation</em>}</p>
-<p>The SNR is commonly defined as the ratio of the mean signal to its standard deviation. Therefore, after subtracting the shift in the mean due to dark noise we have:</p>
+<p>The SNR is commonly defined as the ratio of the mean signal to its standard deviation. Therefore, after subtracting the shift in the mean due to dark noise we have: </p>
 <p>\begin{equation<em>}
 SNR = \frac{\mu - K\mu_{dark}}{\sigma} = \frac{\eta\mu_{p}}{\sigma_{d}^{2} + \sigma_{q}^{2}/K^{2} + \eta\mu_{p}}
 \end{equation</em>}</p>
@@ -76,7 +70,7 @@ SNR = \begin{cases}
 \end{cases}
 \end{equation</em>}</p>
 <p>We see that at low photon numbers the SNR increases linearly with mean photon number and at high photon numbers it increases as the square root of mean photon number. Since, $\mu_{p}$ is linearly dependent on $t_{exp}$, the same can be said of the exposure time.</p>
-<pre><code class="code">
+<pre><code class="python">
 </code></pre>
                 </div>
                  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>

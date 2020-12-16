@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="../../assets/main.css">
+</head>
+<body>
+<div class="container"><header class="header">
+                        <span class="header__inner">
+                                <div class="logo">
+  <span class="logo__mark">></span>
+  <span class="logo__text">cd ~</span>
+  <span class="logo__cursor"
+  style="background-color:#ccf9f4;animation-duration:0.75s;">
+  </span>
+</div>
+
+                                    <span class="header__right">
+                                        <nav class="menu">
+  <ul class="menu__inner">
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts/">Drafts</a></li>
+  </ul>
+</nav>
+
+                                    </span>
+                        </span>
+                        </header><div style="margin: 0 auto; width: 850px;
+                border: 1px solid black; padding: 50px;
+                margin-top: 100px; text-align: left;
+                font-size: 14px">
+                <h1>Digital Signal Processing (DSP)</h1>
+<p>Digital Signal processing or DSP is difficult to define precisely but a working definition might read: DSP is the use of discrete algorithms to modify the information contained within digital signals or to extract valuable features of a digital signal. A digital signal in itself is just a variable that can take on a discrete set of values and can be displayed or manipulated. Digital signals are very common in the modern age and play a central role in telecommunications, biomedical signals, music, video/image, and so on. </p>
+<h1>Key DSP Operations</h1>
+<p>Most DSP algorithms are based off of four fundamental operations: </p>
+<ol>
+<li>Convolution</li>
+<li>Correlation</li>
+<li>Filtering</li>
+<li>Discrete Transformations</li>
+</ol>
+<p>The next four sections are dedicated to the demonstration of these four operations so that they can be used as building blocks for more complex operations. </p>
+<h1>Convolution and Filtering</h1>
+<p>For a discrete time sequence $x(t)$, its convolution with another discrete time sequence $h(t)$ is defined as:</p>
+<p>\begin{equation<em>}
+y(t) = x(t)</em>h(t) = \sum_{k=-\infty}^{\infty}x(k)\cdot h(t-k)
+\end{equation*}</p>
+<p>At first glance, this seems like an arbitrary mathematical operation, but it is very useful in signal processing applications provided we carefully choose the function $h(t)$. Indeed, the function $h(t)$ can be designed so that it acts as a <em>filter</em>, eliminating undesirable signal components. There is an interesting theorem in mathematics called the <em>convolution theorem</em> that states that the convolution in the time domain is equivalent to multiplication in the frequency domain. In fact, this relationship between the convolution and frequency domain is why I have merged two seemingly distinct sections on convolution and filtering. We will see that we can filter a digital signal in the time domain by convolution or we can transform to the frequency domain, perform multiplication and transform back to the time domain. </p>
+<h1>Correlation</h1>
+<p>There are two main types of correlations: autocorrelations and cross-correlations. The former describes the correlation of a digital signal with itself while the latter describes the correlation of two independent signals. </p>
+                </div>
+                 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+                        <script type="text/javascript" id="MathJax-script" async
+                        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+                        <script type="text/javascript" src="assets/main.js"></script></div></body>
+</html>

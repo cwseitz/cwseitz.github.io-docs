@@ -30,34 +30,34 @@
                 border: 1px solid black; padding: 50px;
                 margin-top: 100px; text-align: left;
                 font-size: 14px">
-                <hr />
-<p>layout: post
-title: "Attention is all you need"
-date: 2020-11-17
-categories: [deep-learning, neuroscience]</p>
-<hr />
+                <pre><code class="python">from IPython.core.display import display, HTML
+display(HTML(&quot;&lt;style&gt;.container { width:50% !important; }&lt;/style&gt;&quot;))
+</code></pre>
+
+<style>.container { width:50% !important; }</style>
+
 <h3>Sequence to sequence learning</h3>
 <p>One method developed by Sutskever et al in 2015 is a sequence to sequence (seq2seq) method for machine translation. As will all seq2seq translation tasks, we want to estimate distribution over the output sequence given the input sequence</p>
 <p>\begin{eqnarray}
 P_{\Phi}(w_{1},..,w_{T_{in}}|w_{1},..,w_{T_{in}})
 \end{eqnarray}</p>
-<p>We usually estimate this probability distribution by using autoregression which is realized with a RNN</p>
+<p>We usually estimate this probability distribution by using autoregression which is realized with a RNN </p>
 <p>\begin{eqnarray}
 P_{\Phi}(w_{1},..,w_{T_{in}}|w_{1},..,w_{T_{in}}) = \Pi_{t=0}^{T} P_{\Phi}(w_{t}|\overset\leftarrow{h_{in}}[1,J],w_{0}...w_{t-1})
 \end{eqnarray}</p>
 <p>Notice there is an unfamiliar term $\overset\leftarrow{h_{in}}[1,J]$ we are conditioning on. This brings us to the <strong>encoder</strong>.</p>
 <h4>The encoder</h4>
-<p>Before we can compute the distribution above via autoregression, we encode the sentence into a <strong>thought-vector</strong>. The thought-vector is a vector of numbers meant to represent the meaning of a sequence of words. We assume that it is possible to encode the essence of a sentence - something that is invariant from language to language.</p>
+<p>Before we can compute the distribution above via autoregression, we encode the sentence into a <strong>thought-vector</strong>. The thought-vector is a vector of numbers meant to represent the meaning of a sequence of words. We assume that it is possible to encode the essence of a sentence - something that is invariant from language to language. </p>
 <p>For this architecture, the thought vector representation is computed right-to-left or the last word comes first in the thought vector. As you can see in the equation above we typically represent such a thought vector as $\overset\leftarrow{h_{in}}[1,J]$ and it is the final hidden state in our encoding network.</p>
 <h4>Computing probabilties</h4>
 <p>Now that we have established what the thought-vector is and its role, we can move on to actually doing the autoregression. As mentioned above, the autoregression is implemented as an RNN from which we read out probabilities $ P_{\Phi}(w_{t}|\overset\leftarrow{h_{in}}[1,J],w_{0}...w_{t-1})$ according to</p>
 <p>\begin{equation<em>}
 \DeclareMathOperator</em>{\softmax}{softmax}
-P(w_{t_{out}}|\overset\leftarrow{h_{in}}[1,J], w_{1},..,w_{t_{out}-1}) = \underset{w_{t_{out}}}{\softmax} e[w_{t_{out}},J]h_{out}[t_{out}-1,J]
+P(w_{t_{out}}|\overset\leftarrow{h_{in}}[1,J], w_{1},..,w_{t_{out}-1}) = \underset{w_{t_{out}}}{\softmax} e[w_{t_{out}},J]h_{out}[t_{out}-1,J] 
 \end{equation*}</p>
-<p>where $e$ is the encoding for a particular word and $h$ is the hidden state at that point in the network.</p>
+<p>where $e$ is the encoding for a particular word and $h$ is the hidden state at that point in the network. </p>
 <h4>The decoder</h4>
-<p>For each element of the sequence, we now have a probability distribution over the possible output words. The output sequence we get depends on how we utilize these probabilities for decoding. One way is called the <strong>greedy-decoder</strong> which is an autoregression conditioned on the thought-vector that selects each word $w_{t}$ in the translation that has the maximum probability.</p>
+<p>For each element of the sequence, we now have a probability distribution over the possible output words. The output sequence we get depends on how we utilize these probabilities for decoding. One way is called the <strong>greedy-decoder</strong> which is an autoregression conditioned on the thought-vector that selects each word $w_{t}$ in the translation that has the maximum probability. </p>
 <p>\begin{eqnarray}
 \DeclareMathOperator*{\argmax}{argmax}
 w_{t} = \underset{w_{t}}{\argmax}P(w_{t}|\overset\leftarrow{h_{in}}[1,J], w_{1},..,w_{t-1})
@@ -66,7 +66,7 @@ w_{t} = \underset{w_{t}}{\argmax}P(w_{t}|\overset\leftarrow{h_{in}}[1,J], w_{1},
 <h3>Learning to align and translate</h3>
 <p>In another method, the model above is modified such that the output sequences are <em>aligned</em> with input sequences by a form of <strong>attention</strong>. In the context of alignment, the attention computes the strength of the connection between a word in the output $w_{t_{out}}$ and a word in the input $w_{t_{in}}$. This is especially useful because order is not always preserved from language to language.</p>
 <h4>The encoder</h4>
-<p>The model bares similarity in its structure to the one presented above except that the encoder is changed to a bi-directional RNN. In a bi-directional RNN, we run the network left-to-right and right-to-left and concatenate the hidden vectors produced at every $t$ to produce $\overset\leftrightarrow{h_{in}}[t_{in},J]$.</p>
+<p>The model bares similarity in its structure to the one presented above except that the encoder is changed to a bi-directional RNN. In a bi-directional RNN, we run the network left-to-right and right-to-left and concatenate the hidden vectors produced at every $t$ to produce $\overset\leftrightarrow{h_{in}}[t_{in},J]$. </p>
 <p>Then, we begin the autoregression by concatenating $\overset\rightarrow{h_{in}}[T_{in},J/2]$ and $\overset\leftarrow{h_{in}}[0,J/2]$ to produce $\overset\rightarrow{h_{in}}[t_{in},J]$ which is fed into the left-to-right RNN similar to the previous model</p>
 <h4>The decoder</h4>
 <p>The decoder is where the main differences are because we need a way to implement an attention mechanism that facilitates alignment of the input and output sequence. But first, I will write the general procedure executed by the decoding RNN</p>
@@ -80,7 +80,7 @@ w_{t} = \underset{w_{t}}{\argmax}P(w_{t}|\overset\leftarrow{h_{in}}[1,J], w_{1},
 \alpha[t_{in},t_{out}] = \underset{w_{t_{in}}}{\softmax} e[w_{t_{out}},J]\overset\leftrightarrow{h_{in}}[t_{in},J]
 \end{eqnarray}</p>
 <p>In words, we compute the softmax of the inner product of the embedding of the word we most recently produced $w_{t_{out}}$ and the encoding at all input positions. In effect, this gives us a probability distribution over input positions for each word that we produce at $t_{out}$. Basically that tells us where to look in the input when generating $w_{t_{out}}$.</p>
-<p>We then multiply each slice $t_{out}$ of the association matrix with the entire matrix $\overset\leftrightarrow{h_{in}}[T_{in},J]$ from the encoder step to give us a new matrix $\hat{h}<em>{in}[T</em>{out},J]$. This is done for every $t_{out}$ giving us the relevant parts of the encoder to produce  $w_{t_{out}}$.</p>
+<p>We then multiply each slice $t_{out}$ of the association matrix with the entire matrix $\overset\leftrightarrow{h_{in}}[T_{in},J]$ from the encoder step to give us a new matrix $\hat{h}<em>{in}[T</em>{out},J]$. This is done for every $t_{out}$ giving us the relevant parts of the encoder to produce  $w_{t_{out}}$. </p>
 <p>\begin{eqnarray}
 \color{red}{\hat{h}<em>{in}[t</em>{out},J]} = \alpha[t_{out},T_{in}]\overset\leftrightarrow{h_{in}}[T_{in},J]
 \end{eqnarray}</p>
@@ -100,6 +100,8 @@ w_{t} = \underset{w_{t}}{\argmax}P(w_{t}|\overset\leftarrow{h_{in}}[1,J], w_{1},
 \Query_{l+1}[k,t,i] &amp;=&amp; W_{\mathcal{l}+1}^{Q}[k,i,J]L_{l}[t,J] \
 \Key_{l+1}[k,t,i] &amp;=&amp; W_{l+1}^{K}[k,i,J]L_{l}[t,J] \
 \end{eqnarray}</p>
+<pre><code class="python">
+</code></pre>
                 </div>
                  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
                         <script type="text/javascript" id="MathJax-script" async

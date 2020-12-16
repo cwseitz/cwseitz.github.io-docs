@@ -30,20 +30,14 @@
                 border: 1px solid black; padding: 50px;
                 margin-top: 100px; text-align: left;
                 font-size: 14px">
-                <hr />
-<p>layout: post
-title: "RC frequency response"
-date: 2020-11-17
-categories: [electronics]</p>
-<hr />
-<h1>Frequency response of an RC circuit</h1>
+                <h1>Frequency response of an RC circuit</h1>
 <p>The RC circuit can behave in different ways, depending on how we probe it. To achieve a low-pass configuration, we can probe the voltage across the capacitor. In that configuration, high frequencies are bled to ground through the cap. If we decide to swap the components like the figure the right, we have a high-pass filter, where low frequencies are bled to ground instead.</p>
 <p><img src="../../images/lpf-hpf.png" width="600"/></p>
 <p>Left on its own, the current through the circuit is exactly the same for both scenarios and can be found in another post on LRC analysis:</p>
 <p>\begin{align}
 I = \frac{V_{in}}{R + \frac{1}{j\omega C}}
 \end{align}</p>
-<p>We use this expression when examining both the low-pass and high-pass cases even though the wiring appears different. It it is interesting to note that you can wire the two devices in series with the source and whether you measure the voltage over the resistor or the capacitor determines whether it is a high-pass or low-pass circuit, respectively.</p>
+<p>We use this expression when examining both the low-pass and high-pass cases even though the wiring appears different. It it is interesting to note that you can wire the two devices in series with the source and whether you measure the voltage over the resistor or the capacitor determines whether it is a high-pass or low-pass circuit, respectively. </p>
 <h1>RC Low-Pass Filter (LPF)</h1>
 <p>Ultimately we want to come up with the <em>transfer function</em> for an RC low-pass circuit. The transfer function $H(\omega)$ is simply the ratio of the output and input voltages as a function of frequency. Determining what that function is requires that we utilize the <em>impedance</em> for the RC device.</p>
 <p>\begin{align}
@@ -62,10 +56,10 @@ H(\omega) = \frac{1}{1 + j\omega RC}
 |H(\omega)| = \frac{1}{\sqrt{1 + (\omega RC)^{2}}}
 \end{align}</p>
 <p>Now, we can plot the gain as a function of frequency.</p>
-<pre><code class="code">import numpy as np
+<pre><code class="python">import numpy as np
 import matplotlib.pyplot as plt
 
-def rc_transfer(w, R=0.1, C=0.1):
+def rc_transfer(w, R=0.1, C=0.1): 
     h = 1/np.sqrt(1+(w*R*C)**2)
     return h
 
@@ -92,10 +86,10 @@ H(\omega) = \frac{R}{R + \frac{1}{j\omega C}} = \frac{j\omega RC}{1 + j\omega RC
 |H(\omega)| = \frac{\omega RC}{\sqrt{1 + (\omega RC)^{2}}}
 \end{align}</p>
 <p>Now, we can plot the gain as a function of frequency.</p>
-<pre><code class="code">import numpy as np
+<pre><code class="python">import numpy as np
 import matplotlib.pyplot as plt
 
-def rc_transfer(w, R=0.1, C=0.1):
+def rc_transfer(w, R=0.1, C=0.1): 
     h = w*R*C/np.sqrt(1+(w*R*C)**2)
     return h
 
@@ -109,7 +103,7 @@ plt.show()
 </code></pre>
 
 <p><img alt="png" src="frequency-response-of-an-rc-circuit_files/frequency-response-of-an-rc-circuit_3_0.png" /></p>
-<pre><code class="code">
+<pre><code class="python">
 </code></pre>
                 </div>
                  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>

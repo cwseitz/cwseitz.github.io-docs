@@ -1,0 +1,61 @@
+```python
+from IPython.core.display import display, HTML
+display(HTML("<style>.container { width:50% !important; }</style>"))
+```
+
+
+<style>.container { width:50% !important; }</style>
+
+
+### Time as Depth
+
+Recurrent neural networks differ from typical feedforward networks (like CNNs) in that a single set of parameters $A$ is used repeatedly rather than multiple sets of parameters stacked in space as in a MLP. This particularly useful for applications like language modeling where each word in a sentence comes at a particular time.
+
+Below it can be seen that the same transformation $A$ is used in sequence and that transformation can be itself an MLP or whatever architecture is necessary. At each time-step, $A$ takes in an input $x_{t}$ and the output of the previous transformation $h_{t-1}$ which is referred to as the *hidden state*.
+
+<img src="../../images/rnn-model.png" width="300"/>
+
+This sort of architecture has proven to be useful in for data that has temporal order like language modeling. Each hidden state $h_{t}$ is a function of all of the previous states which is precisely what you want when building an **autoregressive model**. 
+
+\begin{eqnarray}
+P_{\Phi}(w_{t}|w_{0},..,w_{t-1}) = \Pi_{t=0}^{T} P_{\Phi}(w_{t}|w_{0}...w_{t-1})
+\end{eqnarray}
+
+Although I haven't defined exactly how we compute $h$, I would like to motivate the use of RNNs by writing down how the realize the equation above in a model we can actually build
+
+\begin{equation*}
+\DeclareMathOperator*{\softmax}{softmax}
+P_{\Phi}(w_{t}|w_{0},..,w_{t-1}) = \underset{w_{t}}{\softmax} e[w_{t},I]h[t-1,I] 
+\end{equation*}
+
+where the vector $e[w_{t},I]$  is the *embedding* of the word $w$ and the hidden state of the previous operation $h[t-1,I]$ to predict a probability distribution for the word $w_{t}$. In practice, the transformation $A$ is composed of two-input linear threshold units where the hidden state $h$ at a time $t$ is computed as 
+
+\begin{equation*}
+h[b,t,j] = \sigma(W^{h,h}[j,I]h[b,t-1, j] + W^{x,h}[j,K]x[b,t,K] - B[j])
+\end{equation*}
+
+You can see that it is a sum of linear transformations of $h$ and $x$ each with their own distinct matrices $W$ compared to a threshold. 
+
+### The Gated RNN
+
+One very useful feature of RNNs is that they can pass information across time and have a somewhat primitive form of **memory**. The kind of memory an RNN has might be described as a data-dependent data flow. By this we mean that architecture retains the important parts of the data and can filter the rest. One implementation of that if the gated RNN (GRNN).
+
+\begin{equation*}
+h[b,t,j] = G[b,t,j]\odot h[b,t-1, j] + (1-G[b,t,j])\odot R[b,t,j]
+\end{equation*}
+
+This gate determines whether to remember a value or to replace it in a data-dependent way. $R[b,t,j]$ is the replacement value while $G[b,t,j]$ is the gate which are both computed using a two-input linear threshold unit 
+
+\begin{eqnarray}
+R[b,t,j] &=& \tanh(W^{h,R}[j,I]h[b,t-1, j] + W^{x,R}[j,K]x[b,t,K] - B^{R}[j]) \\
+G[b,t,j] &=& \sigma(W^{h,G}[j,I]h[b,t-1, j] + W^{x,G}[j,K]x[b,t,K] - B^{G}[j]) \\
+\end{eqnarray}
+
+### Bidirectional RNNs
+
+Another useful architecture especially for machine translation is the bidirectional RNN. In this setup, you compute the hidden states in both directions and concatenate the results to make predictions
+
+
+```python
+
+```

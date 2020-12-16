@@ -30,18 +30,12 @@
                 border: 1px solid black; padding: 50px;
                 margin-top: 100px; text-align: left;
                 font-size: 14px">
-                <hr />
-<p>layout: post
-title: "Intro to FFT"
-date: 2020-11-17
-categories: [dsp]</p>
-<hr />
-<pre><code class="code">import sys
+                <pre><code class="python">import sys
 import numpy as np
 import matplotlib
 import scipy
 from IPython.display import Image
-from IPython.core.display import HTML
+from IPython.core.display import HTML 
 
 print('Python version:\n{}\n'.format(sys.version))
 print('Numpy version:\t\t{}'.format(np.__version__))
@@ -50,7 +44,7 @@ print('Scipy version:\t\t{}'.format(scipy.__version__))
 </code></pre>
 
 <pre><code>Python version:
-3.7.3 (default, Mar 27 2019, 22:11:17)
+3.7.3 (default, Mar 27 2019, 22:11:17) 
 [GCC 7.3.0]
 
 Numpy version:      1.16.2
@@ -58,7 +52,7 @@ matplotlib version: 3.0.3
 Scipy version:      1.2.1
 </code></pre>
 <h1>Digital Signals</h1>
-<p>Before we dive into the details of Fourier transformations, we need to review some fundamental concepts in signal processing. Recall that when we measure an analog signal e.g. intensity, voltage, pressure, etc., our measurement device makes use of an Analog to Digital Converter (ADC). The ADC converts the continous time  continuous amplitude signal to a discrete time and discrete amplitude by sampling the analog signal at a frequency referred to as the <em>sampling rate</em> and quantizing the measured amplitudes.</p>
+<p>Before we dive into the details of Fourier transformations, we need to review some fundamental concepts in signal processing. Recall that when we measure an analog signal e.g. intensity, voltage, pressure, etc., our measurement device makes use of an Analog to Digital Converter (ADC). The ADC converts the continous time  continuous amplitude signal to a discrete time and discrete amplitude by sampling the analog signal at a frequency referred to as the <em>sampling rate</em> and quantizing the measured amplitudes. </p>
 <p>If the sampling rate $f_{s}$ is not sufficiently large, we end up with a poor approximation to the original signal: high frequency components within the signal will be missed at low sampling rates. This can be made more precise by the sampling theorem which states:</p>
 <p>\begin{equation<em>}
 f_{s} &gt; 2f_{m}
@@ -80,7 +74,7 @@ X(k) = FFT[x_{n}] = \sum_{n=0}^{N-1} x_{n}\exp{-\frac{j2\pi kn}{N}}, k=0,1,...,N
 <p>Notice that we set the number of samples for $k$ to be equal to that of $x_{n}$. Also, the frequencies start at 0Hz and increment by $k\frac{f_{s}}{{N}}$ up to $\frac{N}{N-1}f_{s}$ Hz. For example if we have a 16-point CD quality audio sample ($f_{s}$=44.1kHz), we will have a frequency spectrum from 0 to 41.3 kHz. Recall, we said that the max frequency that can be reliably detected for a given sampling rate is $f_{s} &gt; 2f_{m}$ but the FFT produces frequencies all the way up to $\frac{N}{N-1}f_{s}$ Hz. This is why the max frequency is sometimes called the folding frequency: at the point $f_{s} = 2f_{m}$, the magnitude spectrum <em>folds</em> or repeats itself. Let's see this in an example.</p>
 <h1>FFT Example 1</h1>
 <p>In this example, we are going to define a function simple_fft() that takes in four parameters: freq, fft_size, nsamples, and period. The parameter fft_size determines the frequency resolution of the frequency domain. In general, the frequency resolution is inversely proportional to the sampling rate and directly proportional to the fft_size. Therefore, at high sampling rates, you need larger FFT sizes to accurately resolve frequency components. Let's use simple_fft() to generate a 100 Hz sine wave sampled at 1 kHz over 100ms and take a 2048 point FFT.</p>
-<pre><code class="code">import matplotlib.pyplot as plt
+<pre><code class="python">import matplotlib.pyplot as plt
 import numpy as np
 from numpy.fft import fft
 from scipy.signal import find_peaks
@@ -153,7 +147,7 @@ Measured Frequency: 101.07421875 Hz
 </code></pre>
 <h1>FFT Example 2</h1>
 <p>This time we will use modify simple_fft() to superimpose 3 frequencies and try and resolve them in the frequency domain. Consider what happens when you play a C major triad consisting of notes C, E, and G on a piano. If we start at middle C, we are superimposing three sinusoids with fourth-order frequencies 261, 329, and 392 Hz. Let's take a look at these waveforms and their sum over a 10ms time window with a 44.1kHz sample rate:</p>
-<pre><code class="code">import matplotlib.pyplot as plt
+<pre><code class="python">import matplotlib.pyplot as plt
 import numpy as np
 from numpy.fft import fft
 

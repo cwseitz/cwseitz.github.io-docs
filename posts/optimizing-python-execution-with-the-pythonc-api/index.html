@@ -30,14 +30,8 @@
                 border: 1px solid black; padding: 50px;
                 margin-top: 100px; text-align: left;
                 font-size: 14px">
-                <hr />
-<p>layout: post
-title: "Python/C API"
-date: 2020-11-17
-categories: [python, c-programming]</p>
-<hr />
-<h1>The Python/C API</h1>
-<p>This post will cover one method for improving the performance of native Python code. Python is an interpreted language and is therefore not compiled directly. Naturally, the solution is to make use of direclty compiled code rather than interpreted code to achieve performance gains. In the python world, that is commonly achieved by making use of the Python/C API.</p>
+                <h1>The Python/C API</h1>
+<p>This post will cover one method for improving the performance of native Python code. Python is an interpreted language and is therefore not compiled directly. Naturally, the solution is to make use of direclty compiled code rather than interpreted code to achieve performance gains. In the python world, that is commonly achieved by making use of the Python/C API. </p>
 <p>The Python/C API provides an interface between the Python interpreter and the C standard libarary as well as custom modules. The most common use of this API is to write extension C modules than can extend the python interpreter. This is particularly useful when execution speed is critical or an existing module(s) is written in C and needs to be invoked from Python.</p>
 <p>We can get started by writing a module in C that provides an interface to the C library function fputs(). The declaration of fputs looks like this:</p>
 <pre><code class="c">int fputs(const char *str, FILE *stream)
@@ -94,7 +88,7 @@ if(!PyArg_ParseTuple(args, &quot;ss&quot;, &amp;str, &amp;filename)) {
 }
 </code></pre>
 
-<p>After that, fputs() is invoked and we return the number of bytes written with <em>PyLong_FromLong</em> which of course is a Python object.</p>
+<p>After that, fputs() is invoked and we return the number of bytes written with <em>PyLong_FromLong</em> which of course is a Python object. </p>
 <p>The second function is called the method mapping table:</p>
 <pre><code class="c">static PyMethodDef MagicpantsMethods[] = {
     {&quot;fputs&quot;, magicpants_fputs, METH_VARARGS, &quot;Python interface for fputs C library function&quot;},
@@ -107,7 +101,7 @@ if(!PyArg_ParseTuple(args, &quot;ss&quot;, &amp;str, &amp;filename)) {
 <p><strong>ml_meth</strong> − This must be the address to a function that has any one of the signatures described in previous section.</p>
 <p><strong>ml_flags</strong> − This tells the interpreter which of the three signatures ml_meth is using.</p>
 <p><strong>ml_doc</strong> − This is the docstring for the function, which could be NULL if you do not feel like writing one.</p>
-<p>The third function defines the module itself:</p>
+<p>The third function defines the module itself: </p>
 <pre><code class="c">static struct PyModuleDef magicpantsmodule = {
     PyModuleDef_HEAD_INIT,
     &quot;magicpants&quot;,
@@ -126,7 +120,7 @@ if(!PyArg_ParseTuple(args, &quot;ss&quot;, &amp;str, &amp;filename)) {
 
 </code></pre>
 
-<p>Finally, to call our C functions, we can install our module to our current environment by creating the following setup.py file in the same directory as magicpants.c</p>
+<p>Finally, to call our C functions, we can install our module to our current environment by creating the following setup.py file in the same directory as magicpants.c </p>
 <pre><code class="c">from distutils.core import setup, Extension
 
 def main():

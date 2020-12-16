@@ -30,18 +30,12 @@
                 border: 1px solid black; padding: 50px;
                 margin-top: 100px; text-align: left;
                 font-size: 14px">
-                <hr />
-<p>layout: post
-title: "Photon statistics"
-date: 2020-11-17
-categories: [physics, optics]</p>
-<hr />
-<pre><code class="code">import sys
+                <pre><code class="python">import sys
 import numpy as np
 import matplotlib
 import scipy
 from IPython.display import Image
-from IPython.core.display import HTML
+from IPython.core.display import HTML 
 
 print('Python version:\n{}\n'.format(sys.version))
 print('Numpy version:\t\t{}'.format(np.__version__))
@@ -50,7 +44,7 @@ print('Scipy version:\t\t{}'.format(scipy.__version__))
 </code></pre>
 
 <pre><code>Python version:
-3.7.3 (default, Mar 27 2019, 22:11:17)
+3.7.3 (default, Mar 27 2019, 22:11:17) 
 [GCC 7.3.0]
 
 Numpy version:      1.16.2
@@ -65,7 +59,7 @@ Scipy version:      1.2.1
 P(n,\mu_{p}) = \frac{\mu_{p}^{n}e^{-\mu_{p}}}{n!}
 \end{equation</em>}</p>
 <p>where \( n \) is the number of photons observed and \( \mu_{p} \) is the expected number of photons to be observed. One important feature of the Poisson distribution is that  \( \mu_{p}\) can be written as the product \( \mu_{p} = \lambda t_{exp} \) where \( \lambda \) is the probability of observing a photon per unit time and \(t_{exp} \) is how long you take your measurement. One important feature of the Poisson distribution is that the variance is equal to the mean or \( \mu_{p} = \sigma_{p}^{2} \) where \( \sigma_{p} = \delta n \) , which is characteristic of all Poisson processes. So, we should expect to see higher variability in the number of detected photons for higher intensities and for longer exposure times. Let's take a look at the form of the Poisson distribution for different values of \( \lambda \) keeping \(t_{exp} \) fixed at 1.</p>
-<pre><code class="code">import matplotlib.pyplot as plt
+<pre><code class="python">import matplotlib.pyplot as plt
 import numpy as np
 import math
 from scipy.special import factorial
@@ -87,7 +81,7 @@ plt.show()
 </code></pre>
 
 <p><img alt="png" src="photon-statistics_files/photon-statistics_2_0.png" /></p>
-<pre><code class="code">import matplotlib.pyplot as plt
+<pre><code class="python">import matplotlib.pyplot as plt
 import numpy as np
 import math
 from scipy.special import factorial

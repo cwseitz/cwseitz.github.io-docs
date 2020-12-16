@@ -30,35 +30,29 @@
                 border: 1px solid black; padding: 50px;
                 margin-top: 100px; text-align: left;
                 font-size: 14px">
-                <hr />
-<p>layout: post
-title: "Cheat sheet"
-date: 2020-11-17
-categories: [cheat-sheet]</p>
-<hr />
-<h1>RClone</h1>
-<pre><code class="code">#Mounting a remote as a local directory
+                <h1>RClone</h1>
+<pre><code class="python">#Mounting a remote as a local directory
 !sudo mkdir /mnt/tmp
 !rclone mount remote:/path/to/files /mnt/tmp
 !fusermount -u /mnt/tmp
 </code></pre>
 
-<pre><code class="code">#Syncing a remote with a local directory
+<pre><code class="python">#Syncing a remote with a local directory
 !rclone sync source:path dest:path [flags]
 #Example
 !rclone sync /path/to/files ucbox:/ --create-empty-src-dirs
 </code></pre>
 
 <h1>Docker</h1>
-<pre><code class="code">#Listing docker images
-!docker images
+<pre><code class="python">#Listing docker images
+!docker images 
 #List docker containers
 !docker ps -a
 #Removing all docker images
 !docker rmi $(docker images)
-#Removing all docker containers
+#Removing all docker containers 
 !docker rm $(docker ps -a)
-#Running a docker container
+#Running a docker container 
 !docker run -i -t NAME /bin/bash
 #Exporting a docker container to .tar archive
 !docker export -o ~/Desktop/test.tar test

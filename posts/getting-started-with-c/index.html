@@ -30,16 +30,10 @@
                 border: 1px solid black; padding: 50px;
                 margin-top: 100px; text-align: left;
                 font-size: 14px">
-                <hr />
-<p>layout: post
-title: "Intro to C programming"
-date: 2020-11-17
-categories: [c-programming]</p>
-<hr />
-<h1>Introduction</h1>
+                <h1>Introduction</h1>
 <p>The C programming language was first developed in the 1970s by Dennis Ritchie a Bell Labs. The language was inspired by its predecessor B and eventually would be standardized by the American National Standards Institute (ANSI) in the 1980s. The C programming language is a relatively low-level programming language which means that, as the programmer, you are required to do most of the leg work that is done automatically by higher level languages like Python. Practically speaking, we have to take memory management into our own hands when programming in C. This makes it very easy to shoot yourself in the foot as the programmer, but it also allows you program just about anything. This is by no means a comprehensive guide; it is only meant to be a rough overview of the language. The C Programming Language textbook is a great resources if you want to learn the ins and outs of the language.</p>
 <h1>Hello World</h1>
-<p>Let's start with the hello world program in C. First, we must import the header file stdio.h, which handles basic input and output from the keyboard and display, respectively. Then we define the function main() which is required in every C program. In C, we are given the option of including the return type of the program before the function name but if our function does not return anything we can omit this. Lastly, we make a function call to <em>printf()</em>, where the f stands for format. This is the standard function used for printing to the console and we will see of an example of formatting in the next section.</p>
+<p>Let's start with the hello world program in C. First, we must import the header file stdio.h, which handles basic input and output from the keyboard and display, respectively. Then we define the function main() which is required in every C program. In C, we are given the option of including the return type of the program before the function name but if our function does not return anything we can omit this. Lastly, we make a function call to <em>printf()</em>, where the f stands for format. This is the standard function used for printing to the console and we will see of an example of formatting in the next section. </p>
 <pre><code class="c">#include &lt;stdio.h&gt;
 
 main() {
@@ -73,7 +67,7 @@ main() {
 280 137
 300 148
 </code></pre>
-<p>In the code above you can see that we defined five different variables: fahr, celsius, lower, upper, and step. Each of these is an integer so is preceded by <em>int</em>. The rest is just a standard while loop for incrementing the temperature in fahrenheit.</p>
+<p>In the code above you can see that we defined five different variables: fahr, celsius, lower, upper, and step. Each of these is an integer so is preceded by <em>int</em>. The rest is just a standard while loop for incrementing the temperature in fahrenheit. </p>
 <h1>Data types in C</h1>
 <p>Of course, there are other data types available for use in C. You can even define your own custom data types but we won't discuss that here. Anyway, we can arrange some of the commonly used data types in a table:</p>
 <p>| Type  | Storage | Value Range |
@@ -94,10 +88,10 @@ main() {
 
 int main() {
 
-    char a_char;
+    char a_char; 
     unsigned char a_uchar;
     signed char a_schar;
-    int a_int;
+    int a_int; 
     unsigned int a_uint;
     float a_float;
     double a_double;
@@ -136,7 +130,7 @@ The size of long is 8 byte(s)
 The size of unsigned long is 8 byte(s)
 </code></pre>
 <h1>Looping</h1>
-<p>To learn the syntax for looping in C, we will write a Fahrenheit-Celsius conversion program which can also be found in the standard  C Programming Language textbook.</p>
+<p>To learn the syntax for looping in C, we will write a Fahrenheit-Celsius conversion program which can also be found in the standard  C Programming Language textbook. </p>
 <h2>While-Loops</h2>
 <p>The standard syntax for a while loop is while(condition){do something}. We can utilize our newfound knowledge of variable definitions to set some bounds on the while-loop.</p>
 <pre><code class="c">#include &lt;stdio.h&gt;
@@ -236,7 +230,7 @@ int main() {
 <pre><code>The size of 'bananas' is 7 byte(s)
 </code></pre>
 <h2>Integer Arrays</h2>
-<p>Arrays of integers are defined in a similar way; however, you cannot print the entire array as we did with the character array above. You have to iterate through the array and call printf() for each element.</p>
+<p>Arrays of integers are defined in a similar way; however, you cannot print the entire array as we did with the character array above. You have to iterate through the array and call printf() for each element. </p>
 <pre><code class="c">#include &lt;stdio.h&gt;
 
 int main() {
@@ -262,7 +256,7 @@ int main() {
 5
 </code></pre>
 <h1>Control Flow</h1>
-<p>Another indispensible tool in C programming is the use of control-flow that will determine the behavior of the program given certain inputs. One useful example of this involves using control flow to determine whether a variable is an integer or alphabetical character. This kind of control flow could be very useful when reading raw data from files and parsing the content.</p>
+<p>Another indispensible tool in C programming is the use of control-flow that will determine the behavior of the program given certain inputs. One useful example of this involves using control flow to determine whether a variable is an integer or alphabetical character. This kind of control flow could be very useful when reading raw data from files and parsing the content. </p>
 <pre><code class="c">#include &lt;stdio.h&gt;
 #include &lt;ctype.h&gt;
 
@@ -300,7 +294,7 @@ float mult(float m, float n);
 int main(){
 
     float m, n, p;
-    m = 5;
+    m = 5; 
     n = 2;
     p = mult(m,n);
     printf(&quot;The product is: %f&quot;, p);
@@ -309,7 +303,7 @@ int main(){
 
 float mult(float m, float n){
 
-    float p;
+    float p; 
     p = m*n;
     return(p);
 
@@ -331,9 +325,9 @@ int main(){
     int a, c, *b;
 
     a = 5;
-    b = &amp;a;
+    b = &amp;a; 
 
-    printf(&quot;The variable a is located at: %p\n&quot;, b);
+    printf(&quot;The variable a is located at: %p\n&quot;, b); 
     printf(&quot;The contents of a is: %d\n&quot;, *b);
 
     c = *b;
@@ -352,14 +346,14 @@ The contents of a is: 5
 The contents of a is: 11
 The contents of c is: 5
 </code></pre>
-<p>As you can see, we can assign the address of a to the pointer b. Then, we can copy what is contained in a to another variable c by using the indirection operator. After that, we modify a using the same operator, keeping c intact. Moving on, pointers become especially important when passing variables to a function you want to modify the original variables. In C, arguments are passed to functions <em>by value</em> meaning that when you pass, say, an integer to a function you pass only a <em>copy</em> of that integer to the function. Therefore, the function has no way of modifying the variable itself. There is a good example of how to reconcile this issue with pointers in the C Programming Language textbook. We will define a function swap(), which will take to variables and swap their values. First, we will try it the wrong way and then we will show how pointers make it work correctly.</p>
+<p>As you can see, we can assign the address of a to the pointer b. Then, we can copy what is contained in a to another variable c by using the indirection operator. After that, we modify a using the same operator, keeping c intact. Moving on, pointers become especially important when passing variables to a function you want to modify the original variables. In C, arguments are passed to functions <em>by value</em> meaning that when you pass, say, an integer to a function you pass only a <em>copy</em> of that integer to the function. Therefore, the function has no way of modifying the variable itself. There is a good example of how to reconcile this issue with pointers in the C Programming Language textbook. We will define a function swap(), which will take to variables and swap their values. First, we will try it the wrong way and then we will show how pointers make it work correctly. </p>
 <pre><code class="c">#include &lt;stdio.h&gt;
 
 void swap(int x, int y){
 
-    int temp;
+    int temp; 
     temp = x;
-    x = y;
+    x = y; 
     y = temp;
 
 }
@@ -367,13 +361,13 @@ void swap(int x, int y){
 
 int main(){
 
-    int x,y;
-    x = 1;
+    int x,y; 
+    x = 1; 
     y = 2;
 
     swap(x, y);
-    printf(&quot;The variable x contains: %d\n&quot;, x);
-    printf(&quot;The variable y contains: %d\n&quot;, y);
+    printf(&quot;The variable x contains: %d\n&quot;, x); 
+    printf(&quot;The variable y contains: %d\n&quot;, y); 
 
 }
 </code></pre>
@@ -388,9 +382,9 @@ The variable y contains: 2
 
 void swap(int *px, int *py){
 
-    int temp;
+    int temp; 
     temp = *px;
-    *px = *py;
+    *px = *py; 
     *py = temp;
 
 }
@@ -398,13 +392,13 @@ void swap(int *px, int *py){
 
 int main(){
 
-    int x,y;
-    x = 1;
+    int x,y; 
+    x = 1; 
     y = 2;
 
     swap(&amp;x, &amp;y);
-    printf(&quot;The variable x contains: %d\n&quot;, x);
-    printf(&quot;The variable y contains: %d\n&quot;, y);
+    printf(&quot;The variable x contains: %d\n&quot;, x); 
+    printf(&quot;The variable y contains: %d\n&quot;, y); 
 
 }
 </code></pre>
@@ -423,7 +417,7 @@ char *alloc(int n){
 
     if(allocbuf + ALLOCSIZE - allocp &gt;= n){ /* check if n chars will fit */
         allocp += n;
-        return allocp - n;
+        return allocp - n; 
 
     } else {
 

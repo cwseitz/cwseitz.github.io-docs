@@ -2,7 +2,7 @@ import markdown
 
 def md_to_post(file):
 
-    html = markdown.markdown(open('md/' + file).read(), extensions=['fenced_code'])
+    html = markdown.markdown(open('raw/' + file).read(), extensions=['fenced_code'])
 
 
 

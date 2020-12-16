@@ -30,12 +30,12 @@
                 border: 1px solid black; padding: 50px;
                 margin-top: 100px; text-align: left;
                 font-size: 14px">
-                <hr />
-<p>layout: post
-title: "Langevin dynamics"
-date: 2020-11-17
-categories: [neuroscience]</p>
-<hr />
+                <pre><code class="python">from IPython.core.display import display, HTML
+display(HTML(&quot;&lt;style&gt;.container { width:50% !important; }&lt;/style&gt;&quot;))
+</code></pre>
+
+<style>.container { width:50% !important; }</style>
+
 <h1>Introduction</h1>
 <p>In this post I would like to model the interaction of a particle with its environment. In principle, if we could specify all the forces on a particle by its environment in a deterministic way, we could just add up all the components of the forces and write Newton's law of motion and solve. In the real world, we have no way of predicted those forces and have to use a stochastic variant of Newton's law of motion called the <strong>Langevin equation</strong>.</p>
 <h1>The Langevin Equation</h1>
@@ -43,7 +43,7 @@ categories: [neuroscience]</p>
 <p>\begin{align}
 m\frac{dv}{dt} = \xi (t) - \gamma v(t)
 \end{align}</p>
-<p>The first term in the Langevin equation $\xi(t)$ is a stochastic force (which will be shown to be normally distributed) and the second term $\gamma v(t)$ is a damping force proportional to the velocity of the particle. To better understand it, let's subject it to different conditions and take a look at its solution.</p>
+<p>The first term in the Langevin equation $\xi(t)$ is a stochastic force (which will be shown to be normally distributed) and the second term $\gamma v(t)$ is a damping force proportional to the velocity of the particle. To better understand it, let's subject it to different conditions and take a look at its solution. </p>
 <h1>The Damped Solution</h1>
 <p>First, we consider the the simplest possible case by setting $\xi (t) = 0$ for all $t$. This reduces the Langevin equation to a form for which the solution is already known:</p>
 <p>\begin{equation<em>}
@@ -51,7 +51,7 @@ m\frac{dv}{dt} = \xi (t) - \gamma v(t)
 \end{equation</em>}</p>
 <p>It is common to refer the ratio $\frac{m}{\gamma}$ as the Brownian timescale for relaxation, $\tau_{B}$. From our solution, we see that, in the presence of damping, $v \rightarrow 0$ as $t \rightarrow \infty$. Short and sweet!</p>
 <h1>The Damped/Driven Solution</h1>
-<p>Our satisfaction from the damped solution may be premature if we want to consider a realistic scenario. If our particle is in thermal equilibium with some kind of bath at non-zero temperature, it should be occasionally be kicked around by other particles. From thermodynamics, we know that the average velocity of a particle as a function of temperature is given by the equipartition theorem:</p>
+<p>Our satisfaction from the damped solution may be premature if we want to consider a realistic scenario. If our particle is in thermal equilibium with some kind of bath at non-zero temperature, it should be occasionally be kicked around by other particles. From thermodynamics, we know that the average velocity of a particle as a function of temperature is given by the equipartition theorem: </p>
 <p>\begin{equation<em>}
 \langle v^{2}(t) \rangle \propto \frac{k_{B}T}{m}
 \end{equation</em>}</p>
@@ -59,7 +59,7 @@ m\frac{dv}{dt} = \xi (t) - \gamma v(t)
 <p>\begin{equation<em>}
 \langle v^{2}(t) \rangle = \frac{1}{t} \int_{0}^{t} v^{2}(0)  e^{-2\frac{t}{\tau_{B}}}dt = \frac{\tau_{B}v_{0}^{2}}{2t}(1 - e^{-2\frac{t}{\tau_{B}}})
 \end{equation</em>}</p>
-<p>which goes to zero at long times. We can speculate that $\xi (t)$, which we have ignored in this case, is what reconciles this conflict by representing the interaction of the particle with a thermal bath. So, we proceed by lifting our constraint that $\xi(t) = 0$ but we still need more information about it. We can usually make the following assumptions:</p>
+<p>which goes to zero at long times. We can speculate that $\xi (t)$, which we have ignored in this case, is what reconciles this conflict by representing the interaction of the particle with a thermal bath. So, we proceed by lifting our constraint that $\xi(t) = 0$ but we still need more information about it. We can usually make the following assumptions: </p>
 <ol>
 <li>$\langle \xi(t) \rangle = 0$</li>
 <li>It is independent of position - the iteraction with its environment is the same everywhere</li>
@@ -69,7 +69,7 @@ m\frac{dv}{dt} = \xi (t) - \gamma v(t)
 <p>\begin{equation<em>}
 v(t) = v(0)  e^{-\frac{t}{\tau_{B}}} + \frac{1}{m}\int_{0}^{t} \xi(s)e^{-(t-s)/\tau_{B}}ds
 \end{equation</em>}</p>
-<p>As before, we can use the equipartition theorem but we first need $\langle v^{2}(t) \rangle$:</p>
+<p>As before, we can use the equipartition theorem but we first need $\langle v^{2}(t) \rangle$: </p>
 <p>\begin{equation<em>}
 \langle v^{2}(t) \rangle = \frac{1}{m}\int_{0}^{t} \xi(s)e^{-(t-s)/\tau_{B}}ds
 \end{equation</em>}</p>
@@ -86,7 +86,7 @@ lim_{t \to \infty} \langle v^2(t) \rangle &amp;=&amp; \frac{1}{m^2} \int_{r=0}^{
 2 \gamma kT = \int_{-\infty}^{\infty} \langle R(0)R(s) \rangle ds
 \end{equation</em>}</p>
 <p>This result is called the <em>fluctuation-dissipation theorem</em> which relates $T, \gamma, and \xi$. Any system in contact with a heat bath will experience both a stochastic force and friction - you cannot have one without the other.</p>
-<pre><code class="code">
+<pre><code class="python">
 </code></pre>
                 </div>
                  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>

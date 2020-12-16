@@ -1,0 +1,95 @@
+```python
+from IPython.core.display import display, HTML
+display(HTML("<style>.container { width:50% !important; }</style>"))
+```
+
+
+<style>.container { width:50% !important; }</style>
+
+
+# Deep learning frameworks
+ 
+ A deep learning framework is a high-level interface that allows the user to define a model $\Phi$. That model produces an output for a given input according to it's mathematical definition. It is the job of the framework to to optimize the model by minimizing a particular loss function $\mathcal{L}$.
+ 
+\begin{equation*}
+\DeclareMathOperator*{\argmin}{argmin}
+\Phi^{*} = \underset{\Phi}{\argmin} E_{(x,y)}\mathcal{L(x,y)}
+\end{equation*}
+
+The are many deep learning frameworks in use today such as Tensorflow (Google), PyTorch (Facebook, Academics), Microsoft Cognitive Toolkit, Chainer, etc. Rather than jump straight into using one of these frameworks, we can learn a lot about how they work by building a stripped down version ourselves. In the end, we want to use that framework to make predictions on the classic MNIST dataset of handwritten digits. We will build a multi-layer perceptron (MLP) to do that. 
+
+# Multi-layer perceptron
+
+The MLP is defined by the following equations
+
+\begin{equation*}
+\DeclareMathOperator*{\softmax}{softmax}
+h = \sigma(W^{0}x - b^{0}) \\
+s = \sigma(W^{1}h - b^{1}) \\
+P_{\Phi}[\hat{y}] = \underset{\hat{y}}{\softmax s[\hat{y}]}
+\end{equation*}
+
+This is a MLP with two layers. The first layer takes an input vector $x$ and multiples it by a matrix $W^{0}$ and subtracts a *threshold* vector $b^{0}$. The result is the argument of our activation function $\sigma$ which, in this case, is a sigmoid function. The sigmoid acts on each of the vector individually. The same operation happens at the second layer except that the input is the output of the first layer and we use a different matrix and bias vector. Sometimes this sequence is referred to as a **computational graph**. Anyway, the softmax function then maps the output scores to probabilities.
+
+If our framework is any good, it will minimize the loss $\mathcal{L}$ by gradient descent. This entails computing $\nabla\mathcal{L}$ with respect to the model $\Phi = (W^{0},b^{0},W^{1},b^{1})$. To be specific, deep learning frameworks use stochastic gradient descent to minimize the loss function. However, I am going to ignore those deatils and focus mainly on the algorithm that actually finds $\Phi^{*}$: backpropagation.
+
+# Backpropagation
+
+Backpropagation is the process that frameworks use to minimize loss, that is approximate $\nabla\mathcal{L} = 0$. We will see the backpropagation is actually pretty simple and is ultimately just a exercise in using the chain rule.
+
+## Scalar loss
+
+Typically our inputs and outputs in a network are vectors but backpropagation is easier to understand if we start by using scalar functions. Since they are only scalars, the computational graph is nothing but a sequence of multiplications and additions. But first, let's address how we calculate the loss. In general, our loss function is some arbitrary composite function of the input and output pair $(x,y)$.
+
+\begin{eqnarray}
+y &=& f(x) \\
+z &=& g(x,y) \\
+u &=& h(z) \\
+\mathcal{L} &=& u
+\end{eqnarray}
+
+but notice the first line where $y = f(x)$. When computing the loss we have to remember that the output is some function of the input. If you wanted to use the chain rule to calculate the gradient of $\mathcal{L}$, you would use
+
+
+\begin{equation*}
+\frac{\partial \mathcal{L}}{\partial x} = \frac{\partial \mathcal{L}}{\partial u}\frac{\partial u}{\partial z}(\frac{\partial z}{\partial x} +\frac{\partial z}{\partial y}\frac{\partial y}{\partial x})
+\end{equation*}
+
+The backprop algorithm just computes this value.
+
+## Tensor inputs
+
+Returning to the definition of our MLP
+
+\begin{equation*}
+s = \sigma(Wh - B)
+\end{equation*}
+
+we want to now consider the case where the $h$ and threshold $b$ are vectors. Of course, this requires that $W$ be a matrix and we need to determine how to perform backpropagation on that matrix. That is to say we need to figure how to compute gradient $\nabla_{W}\mathcal{L}$. To see how this is done, we first define $\hat{s} = Wh$ so we are just considering subtraction of two vectors before piping it through the non-linearity $s = \sigma(\hat{s} - B)$. As in the scalar case, we can compute the gradient of the loss w.r.t a function of the input and use the chain rule to determine the gradient w.r.t the input itself. We can easily measure $\partial_{s}\mathcal{L}$ and it's then straightforward to calculate $\partial_{\hat{s}}\mathcal{L}$ and $\partial_{B}\mathcal{L}$.
+
+
+\begin{equation*}
+\frac{\partial\mathcal{L}}{\partial \hat{s}_{j}} = \frac{\partial\mathcal{L}}{\partial s_{j}}\frac{\partial s_{j}}{\partial \hat{s}_{j}} = \frac{\partial\mathcal{L}}{\partial s_{j}}\frac{\partial}{\partial \hat{s}_{j}} \sigma(\hat{s}_{j} - B_{j})
+\end{equation*}
+
+\begin{equation*}
+\frac{\partial\mathcal{L}}{\partial B_{j}} = \frac{\partial\mathcal{L}}{\partial s_{j}}\frac{\partial s_{j}}{\partial B_{j}} = \frac{\partial\mathcal{L}}{\partial s_{j}}\frac{\partial}{\partial B_{j}} \sigma(\hat{s}_{j} - B_{j})
+\end{equation*}
+
+Notice that we have indexed these vectors indicating that we are backpropagating on elements of the vectors (scalar values).
+Moving forward, let's continue the chain and calculate $\partial_{W}\mathcal{L}$ and $\partial_{h}\mathcal{L}$. 
+
+\begin{equation*}
+\frac{\partial\mathcal{L}}{\partial W_{i,j}} = \frac{\partial\mathcal{L}}{\partial \hat{s}_{j}}\frac{\partial\hat{s}_{j}}{\partial W_{i,j}} = \frac{\partial\mathcal{L}}{\partial \hat{s}_{j}}h_{j}
+\end{equation*}
+
+\begin{equation*}
+\frac{\partial\mathcal{L}}{\partial h_{j}} = \frac{\partial\mathcal{L}}{\partial \hat{s}_{j}}\frac{\partial\hat{s}_{j}}{\partial h_{j}} = \frac{\partial\mathcal{L}}{\partial \hat{s}_{j}}W_{i,j}
+\end{equation*}
+
+Again, we can't actually calculate this on a vector or a matrix. The actual calculations are made by looping over the vector and matrices according to standard matrix multiplication.
+
+
+```python
+
+```
