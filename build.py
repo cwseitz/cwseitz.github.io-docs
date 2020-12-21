@@ -1,11 +1,30 @@
 import os
+import pandas as pd
 from glob import glob
 from document import HTMLDocument
 from util import md_to_post
 
+def build_posts_html():
+	
+	posts = pd.read_csv('posts.csv')
+	posts = posts.fillna('')
+	cols = posts.columns
+
+	for col in cols:
+		posts[col] = posts[col].apply(lambda x: '<a href="{0}/index.html">{0}</a>'.format(x))
+	
+	html = posts.to_html(justify='left', index=False, escape=False)
+	html = html.replace('border="1"','border="0"')
+
+
+	return html
+
+
+
 navi = open('partials/navi.html').read()
 logo = open('partials/logo.html').read()
 body = open('partials/body.html').read()
+post_style = open('partials/post_style.html').read()
 
 #Build index page
 index = HTMLDocument()
@@ -18,7 +37,6 @@ index.write('index.html')
 posts = HTMLDocument()
 posts.set_style('../assets/main.css')
 posts.add_header(logo, navi)
-
 
 #Build posts
 files = glob('raw/*.md')
@@ -37,11 +55,7 @@ for file in files:
     this_post.add_scripts()
     this_post.write(f'posts/{rootname}/index.html')
 
-    var = f"""
-                <a href="{rootname}/">{rootname}</a>
-            """
 
-    posts.add_content(var)
-
-
+posts.head = post_style
+posts.add_content(build_posts_html())
 posts.write('posts/index.html')
