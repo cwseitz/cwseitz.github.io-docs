@@ -1,4 +1,4 @@
-# The Paraxial Approximation
+### The Paraxial Approximation
 
 A paraxial beam is one in which the direction of propagation is limited to directions within a small angle to a cartesian axis. If we assume the beam is propagating along the z-direction and is polarized along the x-direction, we can write
 

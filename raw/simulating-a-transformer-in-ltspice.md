@@ -1,4 +1,4 @@
-# Simulating a transformer in LTSpice
+### Simulating a transformer in LTSpice
 
 In LTSpice, there is no transformer component per say; however, a transformer is really just a pair of inductors. This means that we can simulate a transformer in spice by creating two or more inductors and specifying their mutual inductance via a spice directive. Before we do that, recall that the voltage ratio of the primary and secondary windings of a transformer is given by:
 
@@ -37,17 +37,3 @@ I = \frac{V}{|Z|} = 1A
 \end{align}
 
 so the voltage across the inductor is $375mV$ which is roughly what we observe in the plot below. Now, since we have chosen inductances for a voltage ratio of 100, we should have an output voltage of 3.75V, which is the case. The last thing to note is the half-cycle phase shift between the input and output voltages - food for thought.
-
-
- <img src="../../images/transformer-ex.png" width="600"/>
-
-
-<img src="../../images/transformer-ex-plt.png" width="600"/>
-
-
-
-
-
-```python
-
-```

@@ -31,7 +31,7 @@
                 border: 1px solid black; padding: 50px;
                 margin-top: 100px; text-align: left;
                 font-size: 14px">
-                <h1>Frequency response of an RC circuit</h1>
+                <h3>Frequency response of an RC circuit</h3>
 <p>The RC circuit can behave in different ways, depending on how we probe it. To achieve a low-pass configuration, we can probe the voltage across the capacitor. In that configuration, high frequencies are bled to ground through the cap. If we decide to swap the components like the figure the right, we have a high-pass filter, where low frequencies are bled to ground instead.</p>
 <p><img src="../../images/lpf-hpf.png" width="600"/></p>
 <p>Left on its own, the current through the circuit is exactly the same for both scenarios and can be found in another post on LRC analysis:</p>
@@ -39,7 +39,7 @@
 I = \frac{V_{in}}{R + \frac{1}{j\omega C}}
 \end{align}</p>
 <p>We use this expression when examining both the low-pass and high-pass cases even though the wiring appears different. It it is interesting to note that you can wire the two devices in series with the source and whether you measure the voltage over the resistor or the capacitor determines whether it is a high-pass or low-pass circuit, respectively. </p>
-<h1>RC Low-Pass Filter (LPF)</h1>
+<h3>RC Low-Pass Filter (LPF)</h3>
 <p>Ultimately we want to come up with the <em>transfer function</em> for an RC low-pass circuit. The transfer function $H(\omega)$ is simply the ratio of the output and input voltages as a function of frequency. Determining what that function is requires that we utilize the <em>impedance</em> for the RC device.</p>
 <p>\begin{align}
 H(\omega) = \frac{V_{out}}{V_{in}}
@@ -74,7 +74,7 @@ plt.show()
 </code></pre>
 
 <p><img alt="png" src="frequency-response-of-an-rc-circuit_files/frequency-response-of-an-rc-circuit_1_0.png" /></p>
-<h1>RC High-Pass Filter (HPF)</h1>
+<h3>RC High-Pass Filter (HPF)</h3>
 <p>Again, we want to come up with the transfer function this time for a RC high-pass circuit. The only difference is that the output voltage is measured accross the resistor this time:</p>
 <p>\begin{align}
 V_{out} = \frac{V_{in}R}{R + \frac{1}{j\omega C}}
@@ -104,8 +104,6 @@ plt.show()
 </code></pre>
 
 <p><img alt="png" src="frequency-response-of-an-rc-circuit_files/frequency-response-of-an-rc-circuit_3_0.png" /></p>
-<pre><code class="python">
-</code></pre>
                 </div>
                  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
                         <script type="text/javascript" id="MathJax-script" async

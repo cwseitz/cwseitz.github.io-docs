@@ -1,4 +1,4 @@
-# The LRC Circuit
+### The LRC Circuit
 
 Kirchoff's voltage rule written for an LRC circuit driven at angular frequency $\omega$: 
 
@@ -38,8 +38,6 @@ Z = {R + j(\omega L - \frac{1}{\omega C})}
 \phi = \arctan{\frac{\omega L - \frac{1}{\omega C}}{R}}
 \end{align}
 
-
-
 Given the magnitude of the impedance, we can find the current through our LRC circuit:
 
 \begin{align}
@@ -58,8 +56,3 @@ V_{C} = \frac{\int Idt}{C} = \frac{ -iVe^{i\omega t + \phi}}{\omega C\sqrt{R^{2}
 
 
 Notice the phase of these complex voltages. The voltage across the inductor leads the voltage on the resistor by 90 degrees since it is a purely real resistance. The voltage across the resistor then leads the capacitor by 90 degrees. Each of these voltages oscillates with an angular frequency $\omega$ with a phase shift $\phi$ relative to the source voltage. 
-
-
-```python
-
-```

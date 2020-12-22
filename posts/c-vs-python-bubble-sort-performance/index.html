@@ -31,9 +31,9 @@
                 border: 1px solid black; padding: 50px;
                 margin-top: 100px; text-align: left;
                 font-size: 14px">
-                <h1>C vs Python Bubble Sort</h1>
+                <h3>C vs Python Bubble Sort</h3>
 <p>In this post I will implement the bubble sort algorithm in both C and Python languages. The purpose of this is to illustrate the performance differences between a compiled language like C and an interpreted language like Python. Importantly, running these two programs will require the C kernel for jupyter which can be installed by following the instructions <a href="https://cwseitz.github.io/output/posts/how-to-install-c-kernel-in-jupyter/">here</a>. Be sure to change to the appropriate kernel depending on which program you run. </p>
-<h1>The C Implementation</h1>
+<h3>The C Implementation</h3>
 <pre><code class="python">#include &lt;stdio.h&gt;
 #include &lt;time.h&gt;
 
@@ -86,7 +86,7 @@ int main()
 2 6 8 13 18 19 
 Execution Time = 0.002000 ms
 </code></pre>
-<h1>The Python Implementation</h1>
+<h3>The Python Implementation</h3>
 <pre><code class="python">import time
 
 def bubble_sort(arr):
@@ -111,7 +111,7 @@ print('Execution time: %s ms' % str(1000*(end - start)))
 Execution time: 0.1838207244873047 ms
 </code></pre>
 <p>After running these two implementations of the bubble sort algorithm, we see that the C code runs much faster than Python. At the same time, however, the Python code is much shorter and more readable than C. If we want to be really fancy, we can have the best of both worlds by using the Python/C API. A bare-bones tutorial on this API can be found <a href="https://cwseitz.github.io/output/posts/optimizing-python-execution-with-the-pythonc-api/">here</a>. </p>
-<h1>C Extension Module for Python</h1>
+<h3>C Extension Module for Python</h3>
 <pre><code class="python">#include &lt;Python.h&gt;
 
 /* Swap variables via their pointers */

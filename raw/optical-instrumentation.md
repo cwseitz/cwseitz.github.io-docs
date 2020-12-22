@@ -1,8 +1,8 @@
-# Optical Instrumentation
+### Optical Instrumentation
 
 This post is dedicated to the explanation of the core physical properties of commonly used optical devices such as the camera, microscope, and telescope. Each device is specially designed to achieve a particular purpose and we will show how that is achieved using ray optics. 
 
-# The Camera
+### The Camera
 
 Modern DSLR cameras come with a wide selection of lenses of varying focal lengths, each having a specific purpose. Typically, lenses with larger focal lengths are used for imaging objects far way and shorter focal lengths are used for close-ups. But why does the focal length determine the "range" of the camera and what happens if you use an inappropriate lens for given imaging scenario? The answer to this question lies in what, in optics, is called *depth of field*. In simple terms, the depth of field is the range in object space that can be imaged with high fidelity.
 
@@ -37,8 +37,3 @@ so we see that $x = \frac{ds_{0}}{D}$. We have only exchanged one unknown for an
 
 Some important practical takeaways from this are that the depth of field increases for decreasing focal length and longer shooting distances. Of course, you can't (or shouldn't) tweak object distances in photography; you change the distance between the lens and sensor $s_{0}'$. However, in this form, the equation tells you what the depth of field is when a particular object of interest is in focus. Furthermore, as the ratio $\frac{f}{D}$ which is often called the *relative aperture* or *f-stop* number is increased, the depth of field increases. In turn, smaller lens diameters give you increased depth of field but at the same time the field of view and total intensity is decreased. In summary, the depth of field is determined by two main parameters: the distance to an object of interest and the relative aperture $\frac{f}{D}$.
 
-
-
-```python
-
-```

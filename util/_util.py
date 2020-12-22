@@ -1,5 +1,11 @@
 import markdown
 import pandas as pd
+import os
+import shutil 
+
+def clean_dir(dir):
+	shutil.rmtree(dir)
+	os.mkdir(dir)
 
 def csv_to_html(csv):
 

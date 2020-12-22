@@ -8,12 +8,12 @@ from dig.fft import *
 raw = camera()
 ```
 
-# Introduction
+### Introduction
 
 In this post, we will show how you can analyze digital images using Fourier analysis. I've previously covered how to use fourier analysis with functions of time so we will be extending those ideas to higher dimensions. Anyway, the central idea of fourier analysis is that you can expression any function as a sum of infinitely many sinusoidal basis functions. The main difference between 1D and 2D is not only that the basis functions are two-dimensional but that those functions can have an arbitrary orientation. 
 
 
-# 2D Fourier Basis Functions
+### 2D Fourier Basis Functions
 
 Each basis function in 2D has a magnitude and phase. The magnitude represents the spatial frequency of the sinusoid and the phase represents its direction. 
 
@@ -79,7 +79,7 @@ plt.show()
 The center of the spectrum represents the DC component (coming from DC current in an electrical circuit) where the frequency is zero. The frequency increases radially, the angle represents the direction of that particular basis function, and the brightness is the prominence of that function.
 
 
-# The Convolution Theorem
+### The Convolution Theorem
 
 Once we have decomposed an image into its spatial components, we can analyze those components or even filter some of those components out to modify the original image. In this section, we will cover the latter. This requires we cover an important concept: the *convolution theorem*. Briefly, convolving an image is a transformation where each pixel takes on some kind of weighted sum of its neighboring pixels. As it turns out each weighted sum operation we can perform in the spatial domain has a counterpart in the frequency domain. Mathematically, we convolve a function $I$ with a kernel $h$ as follows: 
 
@@ -106,7 +106,7 @@ The first and third equations tell us that we have two options when we wish to a
 
 This is useful because, in general, filtering in the frequency domain is more difficult to implement. In addition, may know that we want a low-pass filter, high-pass filter, band-pass filter, etc. but not what kernel would implement those filters.
 
-# The Gaussian Filter
+### The Gaussian Filter
 
 We can illustrate that the convolution theorem works by setting our kernel $h(x,y)$ to a symmetric 2D gaussian. Since it is symmetric we can reduce it to a function of one variable:
 
@@ -151,7 +151,7 @@ plt.show()
 ![png](fourier-analysis-of-digital-images_files/fourier-analysis-of-digital-images_6_0.png)
 
 
-# Applying the Convolution Theorem
+### Applying the Convolution Theorem
 
 In order to show that the convolution theorem works, we will both convolve the image with the unmodified gaussian kernel and also multiply its fourier transform by the fourier transform of the kernel. The functions convolve2d() and fftconvolve() implement these operations, respectively. Notice we have to set the mode parameter to 'same' to get the correct result.
 
@@ -175,7 +175,7 @@ plt.show()
 ![png](fourier-analysis-of-digital-images_files/fourier-analysis-of-digital-images_8_0.png)
 
 
-# Comparing the Results
+### Comparing the Results
 
 Finally, we compute the RMSE of the two images 
 

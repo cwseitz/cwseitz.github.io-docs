@@ -1,12 +1,3 @@
-```python
-from IPython.core.display import display, HTML
-display(HTML("<style>.container { width:50% !important; }</style>"))
-```
-
-
-<style>.container { width:50% !important; }</style>
-
-
 ### Free lunch
 
 A prominent question in deep learning is whether or not a universal learning algorithm exists. Many have argued for the no free lunch theorem which argues that there must be some innate system in biological brains that facilitates interpretation of natural language. In other words there must be some constraint on the space of functions of the input. 
@@ -69,17 +60,4 @@ and we ultimately want to modify the prior distribution to approximate the poste
 
 $$L(q) \leq \frac{1}{1-\frac{1}{2\lambda}}({\hat{L}(q) + \frac{\lambda L_{max}}{N_\mathrm{Train}}){KL(q,p) + \ln \frac{1}{\delta}}}$$
 
-This is the bound that is compatible with deep learning because we are always learning continuous parameters. 
-
-### Example
-
-Let us take the case where the prior is a Gaussian centered around the initialization point $\Phi_{init}$ and the posterior is also a Gaussian centered around some other point in the space of models.
-
-### Implicit regularization
-
-### Double descent
-
-
-```python
-
-```
+This is the bound that is compatible with deep learning because we are always learning continuous parameters.

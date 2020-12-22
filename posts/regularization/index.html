@@ -31,13 +31,7 @@
                 border: 1px solid black; padding: 50px;
                 margin-top: 100px; text-align: left;
                 font-size: 14px">
-                <pre><code class="python">from IPython.core.display import display, HTML
-display(HTML(&quot;&lt;style&gt;.container { width:50% !important; }&lt;/style&gt;&quot;))
-</code></pre>
-
-<style>.container { width:50% !important; }</style>
-
-<h3>Error rate vs. Loss</h3>
+                <h3>Error rate vs. Loss</h3>
 <p>I need to make an important distinct before proceeding. The loss function, which we typically take to be the cross-entropy loss, is fundamentally distinct from the error-rate. The error-rate is the fraction of testing, validation, or testing samples that we correctly predict. This is an important metric for assessing the performance of a model and also things such as overfitting.</p>
 <h3>Regularization</h3>
 <p>A major downfall of deep networks is that they often fail to generalize. Models can be trained to perform quite well on a batch of test data but their performance dwindles when using the same model to predict a validation or test sample. This is often called overfitting. We would like a better way to train our models so that we can bring the validation error rate closer to the testing error rate i.e. to prevent overfitting. One way to achieve this is through <em>regularization</em> which defines the search for an optimum model $\Phi^{*}$ such that not all models have equal probability. This is made possible by first making the following observations</p>
@@ -83,8 +77,6 @@ p(\Phi) &amp; \propto &amp; e^{-\lambda ||\Phi||_1} \;\;\;\;\;\;\;\;||\Phi||_1 =
 <p>$$\Phi_{i+1} = \Phi_i - \eta\hat{g}_i  - \frac{\eta}{N\sigma^2}\Phi$$</p>
 <p>Now we can see why this is called shrinkage</p>
 <p>$${ \Phi_{i+1}} = \Phi_i - \eta\hat{g} - \frac{\eta}{N\sigma^2}\Phi_i\;\;\;\; = {\Phi_i - \eta\hat{g} - \gamma\Phi_i}$$</p>
-<pre><code class="python">
-</code></pre>
                 </div>
                  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
                         <script type="text/javascript" id="MathJax-script" async

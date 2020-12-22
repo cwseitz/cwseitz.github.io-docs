@@ -31,7 +31,7 @@
                 border: 1px solid black; padding: 50px;
                 margin-top: 100px; text-align: left;
                 font-size: 14px">
-                <h1>The LRC Circuit</h1>
+                <h3>The LRC Circuit</h3>
 <p>Kirchoff's voltage rule written for an LRC circuit driven at angular frequency $\omega$: </p>
 <p>\begin{align}
 L\frac{dI}{dt} + IR + \frac{1}{C}\int I dt = Ve^{i\omega t}
@@ -70,8 +70,6 @@ V_{L} = L\frac{dI}{dt} = \frac{ i\omega VLe^{i\omega t + \phi}}{\sqrt{R^{2} + (\
 V_{C} = \frac{\int Idt}{C} = \frac{ -iVe^{i\omega t + \phi}}{\omega C\sqrt{R^{2} + (\omega L - \frac{1}{\omega C})^{2}}}
 \end{align}</p>
 <p>Notice the phase of these complex voltages. The voltage across the inductor leads the voltage on the resistor by 90 degrees since it is a purely real resistance. The voltage across the resistor then leads the capacitor by 90 degrees. Each of these voltages oscillates with an angular frequency $\omega$ with a phase shift $\phi$ relative to the source voltage. </p>
-<pre><code class="python">
-</code></pre>
                 </div>
                  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
                         <script type="text/javascript" id="MathJax-script" async

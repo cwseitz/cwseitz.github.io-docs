@@ -1,12 +1,3 @@
-```python
-from IPython.core.display import display, HTML
-display(HTML("<style>.container { width:50% !important; }</style>"))
-```
-
-
-<style>.container { width:50% !important; }</style>
-
-
 ### Neuroelectronics 
 
 In the resting state, the cytosol of a neuron is negatively charged relative to the extracellular fluid with a potential of about -70$\mathrm{mV}$ which is maintained by ion pumps. There is a nonzero potential because 3-4 nm thick lipid bilayer blocks ions. Clearly the membrane is behaving like a capacitor.
@@ -174,7 +165,7 @@ plt.show()
 ```
 
 
-![png](neuroelectronics_files/neuroelectronics_7_0.png)
+![png](neuroelectronics_files/neuroelectronics_6_0.png)
 
 
 Now lets add 10,000 "leaky" Channels to Compartment and again inject 50ms current at 5nA
@@ -220,7 +211,7 @@ plt.show()
 ```
 
 
-![png](neuroelectronics_files/neuroelectronics_10_0.png)
+![png](neuroelectronics_files/neuroelectronics_9_0.png)
 
 
 ### Simulating channels
@@ -315,5 +306,5 @@ plt.show()
 ```
 
 
-![png](neuroelectronics_files/neuroelectronics_14_0.png)
+![png](neuroelectronics_files/neuroelectronics_13_0.png)
 

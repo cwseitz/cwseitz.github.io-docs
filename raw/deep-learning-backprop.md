@@ -1,13 +1,4 @@
-```python
-from IPython.core.display import display, HTML
-display(HTML("<style>.container { width:50% !important; }</style>"))
-```
-
-
-<style>.container { width:50% !important; }</style>
-
-
-# Deep learning frameworks
+### Deep learning frameworks
  
  A deep learning framework is a high-level interface that allows the user to define a model $\Phi$. That model produces an output for a given input according to it's mathematical definition. It is the job of the framework to to optimize the model by minimizing a particular loss function $\mathcal{L}$.
  
@@ -18,7 +9,7 @@ display(HTML("<style>.container { width:50% !important; }</style>"))
 
 The are many deep learning frameworks in use today such as Tensorflow (Google), PyTorch (Facebook, Academics), Microsoft Cognitive Toolkit, Chainer, etc. Rather than jump straight into using one of these frameworks, we can learn a lot about how they work by building a stripped down version ourselves. In the end, we want to use that framework to make predictions on the classic MNIST dataset of handwritten digits. We will build a multi-layer perceptron (MLP) to do that. 
 
-# Multi-layer perceptron
+### Multi-layer perceptron
 
 The MLP is defined by the following equations
 
@@ -33,11 +24,11 @@ This is a MLP with two layers. The first layer takes an input vector $x$ and mul
 
 If our framework is any good, it will minimize the loss $\mathcal{L}$ by gradient descent. This entails computing $\nabla\mathcal{L}$ with respect to the model $\Phi = (W^{0},b^{0},W^{1},b^{1})$. To be specific, deep learning frameworks use stochastic gradient descent to minimize the loss function. However, I am going to ignore those deatils and focus mainly on the algorithm that actually finds $\Phi^{*}$: backpropagation.
 
-# Backpropagation
+### Backpropagation
 
 Backpropagation is the process that frameworks use to minimize loss, that is approximate $\nabla\mathcal{L} = 0$. We will see the backpropagation is actually pretty simple and is ultimately just a exercise in using the chain rule.
 
-## Scalar loss
+### Scalar loss
 
 Typically our inputs and outputs in a network are vectors but backpropagation is easier to understand if we start by using scalar functions. Since they are only scalars, the computational graph is nothing but a sequence of multiplications and additions. But first, let's address how we calculate the loss. In general, our loss function is some arbitrary composite function of the input and output pair $(x,y)$.
 
@@ -57,7 +48,7 @@ but notice the first line where $y = f(x)$. When computing the loss we have to r
 
 The backprop algorithm just computes this value.
 
-## Tensor inputs
+### Tensor inputs
 
 Returning to the definition of our MLP
 
@@ -88,8 +79,3 @@ Moving forward, let's continue the chain and calculate $\partial_{W}\mathcal{L}$
 \end{equation*}
 
 Again, we can't actually calculate this on a vector or a matrix. The actual calculations are made by looping over the vector and matrices according to standard matrix multiplication.
-
-
-```python
-
-```

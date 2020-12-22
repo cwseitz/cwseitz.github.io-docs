@@ -31,7 +31,7 @@
                 border: 1px solid black; padding: 50px;
                 margin-top: 100px; text-align: left;
                 font-size: 14px">
-                <h1>Simulating a transformer in LTSpice</h1>
+                <h3>Simulating a transformer in LTSpice</h3>
 <p>In LTSpice, there is no transformer component per say; however, a transformer is really just a pair of inductors. This means that we can simulate a transformer in spice by creating two or more inductors and specifying their mutual inductance via a spice directive. Before we do that, recall that the voltage ratio of the primary and secondary windings of a transformer is given by:</p>
 <p>\begin{align}
 \frac{V_{2}}{V_{1}} = \frac{N_{2}}{N_{1}}
@@ -57,10 +57,6 @@ X_{L} = \omega L = 3.75 \Omega
 I = \frac{V}{|Z|} = 1A
 \end{align}</p>
 <p>so the voltage across the inductor is $375mV$ which is roughly what we observe in the plot below. Now, since we have chosen inductances for a voltage ratio of 100, we should have an output voltage of 3.75V, which is the case. The last thing to note is the half-cycle phase shift between the input and output voltages - food for thought.</p>
-<p><img src="../../images/transformer-ex.png" width="600"/></p>
-<p><img src="../../images/transformer-ex-plt.png" width="600"/></p>
-<pre><code class="python">
-</code></pre>
                 </div>
                  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
                         <script type="text/javascript" id="MathJax-script" async

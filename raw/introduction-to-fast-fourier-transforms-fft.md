@@ -1,27 +1,4 @@
-```python
-import sys
-import numpy as np
-import matplotlib
-import scipy
-from IPython.display import Image
-from IPython.core.display import HTML 
-
-print('Python version:\n{}\n'.format(sys.version))
-print('Numpy version:\t\t{}'.format(np.__version__))
-print('matplotlib version:\t{}'.format(matplotlib.__version__))
-print('Scipy version:\t\t{}'.format(scipy.__version__))
-```
-
-    Python version:
-    3.7.3 (default, Mar 27 2019, 22:11:17) 
-    [GCC 7.3.0]
-    
-    Numpy version:		1.16.2
-    matplotlib version:	3.0.3
-    Scipy version:		1.2.1
-
-
-# Digital Signals
+### Digital Signals
 
 Before we dive into the details of Fourier transformations, we need to review some fundamental concepts in signal processing. Recall that when we measure an analog signal e.g. intensity, voltage, pressure, etc., our measurement device makes use of an Analog to Digital Converter (ADC). The ADC converts the continous time  continuous amplitude signal to a discrete time and discrete amplitude by sampling the analog signal at a frequency referred to as the *sampling rate* and quantizing the measured amplitudes. 
 
@@ -33,7 +10,7 @@ f_{s} > 2f_{m}
 
 where $f_{m}$ is the maximum frequency or that can be reliably recorded and is sometimes called the *nyquist frequency* or *folding frequency*.
 
-# Frequency Resolution and the FFT
+### Frequency Resolution and the FFT
 
 The Fast Fourier Transform (FFT) is an indispensible tool in signal processing as it allows you to decompose a signal into its frequency components. In other words, if we have a digital signal in the time domain, the FFT can convert that signal into the frequency domain. For example, in the acoustic case, the FFT could allow you to extract the frequencies of notes making up a musical chord played into a microphone. In general, for a quantized digital signal $x_{n}$ with $N$ samples the FFT is defined as:
 
@@ -55,7 +32,7 @@ and phase:
 
 Notice that we set the number of samples for $k$ to be equal to that of $x_{n}$. Also, the frequencies start at 0Hz and increment by $k\frac{f_{s}}{{N}}$ up to $\frac{N}{N-1}f_{s}$ Hz. For example if we have a 16-point CD quality audio sample ($f_{s}$=44.1kHz), we will have a frequency spectrum from 0 to 41.3 kHz. Recall, we said that the max frequency that can be reliably detected for a given sampling rate is $f_{s} > 2f_{m}$ but the FFT produces frequencies all the way up to $\frac{N}{N-1}f_{s}$ Hz. This is why the max frequency is sometimes called the folding frequency: at the point $f_{s} = 2f_{m}$, the magnitude spectrum *folds* or repeats itself. Let's see this in an example.
 
-# FFT Example 1
+### FFT Example 1
 
 In this example, we are going to define a function simple_fft() that takes in four parameters: freq, fft_size, nsamples, and period. The parameter fft_size determines the frequency resolution of the frequency domain. In general, the frequency resolution is inversely proportional to the sampling rate and directly proportional to the fft_size. Therefore, at high sampling rates, you need larger FFT sizes to accurately resolve frequency components. Let's use simple_fft() to generate a 100 Hz sine wave sampled at 1 kHz over 100ms and take a 2048 point FFT.
 
@@ -127,7 +104,7 @@ simple_fft(freq=100,
 
 
 
-![png](introduction-to-fast-fourier-transforms-fft_files/introduction-to-fast-fourier-transforms-fft_3_1.png)
+![png](introduction-to-fast-fourier-transforms-fft_files/introduction-to-fast-fourier-transforms-fft_2_1.png)
 
 
     ##################################################
@@ -137,7 +114,7 @@ simple_fft(freq=100,
     Measured Frequency: 101.07421875 Hz
 
 
-# FFT Example 2
+### FFT Example 2
 
 This time we will use modify simple_fft() to superimpose 3 frequencies and try and resolve them in the frequency domain. Consider what happens when you play a C major triad consisting of notes C, E, and G on a piano. If we start at middle C, we are superimposing three sinusoids with fourth-order frequencies 261, 329, and 392 Hz. Let's take a look at these waveforms and their sum over a 10ms time window with a 44.1kHz sample rate:
 
@@ -208,7 +185,7 @@ simple_fft(freq=[261,329,392],
 
 
 
-![png](introduction-to-fast-fourier-transforms-fft_files/introduction-to-fast-fourier-transforms-fft_5_1.png)
+![png](introduction-to-fast-fourier-transforms-fft_files/introduction-to-fast-fourier-transforms-fft_4_1.png)
 
 
     ##################################################

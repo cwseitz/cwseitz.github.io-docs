@@ -31,13 +31,7 @@
                 border: 1px solid black; padding: 50px;
                 margin-top: 100px; text-align: left;
                 font-size: 14px">
-                <pre><code class="python">from IPython.core.display import display, HTML
-display(HTML(&quot;&lt;style&gt;.container { width:50% !important; }&lt;/style&gt;&quot;))
-</code></pre>
-
-<style>.container { width:50% !important; }</style>
-
-<h3>Free lunch</h3>
+                <h3>Free lunch</h3>
 <p>A prominent question in deep learning is whether or not a universal learning algorithm exists. Many have argued for the no free lunch theorem which argues that there must be some innate system in biological brains that facilitates interpretation of natural language. In other words there must be some constraint on the space of functions of the input. </p>
 <p>On the other hand, the free lunch theorem says that there need not be such a bias or constraint on the space of possible functions. Rather, the function is completely random</p>
 <h3>Frequentist vs. Bayesian</h3>
@@ -74,13 +68,7 @@ f^</em> &amp; = &amp; {\argmin_f \hat{\cal L}(f) + \frac{5 L_\mathrm{max}}{N_\ma
 \end{eqnarray</em>}</p>
 <p>and we ultimately want to modify the prior distribution to approximate the posterior with our training data. The PAC-Bayes guarantee tells us that</p>
 <p>$$L(q) \leq \frac{1}{1-\frac{1}{2\lambda}}({\hat{L}(q) + \frac{\lambda L_{max}}{N_\mathrm{Train}}){KL(q,p) + \ln \frac{1}{\delta}}}$$</p>
-<p>This is the bound that is compatible with deep learning because we are always learning continuous parameters. </p>
-<h3>Example</h3>
-<p>Let us take the case where the prior is a Gaussian centered around the initialization point $\Phi_{init}$ and the posterior is also a Gaussian centered around some other point in the space of models.</p>
-<h3>Implicit regularization</h3>
-<h3>Double descent</h3>
-<pre><code class="python">
-</code></pre>
+<p>This is the bound that is compatible with deep learning because we are always learning continuous parameters.</p>
                 </div>
                  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
                         <script type="text/javascript" id="MathJax-script" async

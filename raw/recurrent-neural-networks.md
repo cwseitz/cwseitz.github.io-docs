@@ -1,12 +1,3 @@
-```python
-from IPython.core.display import display, HTML
-display(HTML("<style>.container { width:50% !important; }</style>"))
-```
-
-
-<style>.container { width:50% !important; }</style>
-
-
 ### Time as Depth
 
 Recurrent neural networks differ from typical feedforward networks (like CNNs) in that a single set of parameters $A$ is used repeatedly rather than multiple sets of parameters stacked in space as in a MLP. This particularly useful for applications like language modeling where each word in a sentence comes at a particular time.
@@ -54,8 +45,3 @@ G[b,t,j] &=& \sigma(W^{h,G}[j,I]h[b,t-1, j] + W^{x,G}[j,K]x[b,t,K] - B^{G}[j]) \
 ### Bidirectional RNNs
 
 Another useful architecture especially for machine translation is the bidirectional RNN. In this setup, you compute the hidden states in both directions and concatenate the results to make predictions
-
-
-```python
-
-```

@@ -1,31 +1,8 @@
-```python
-import sys
-import numpy as np
-import matplotlib
-import scipy
-from IPython.display import Image
-from IPython.core.display import HTML 
-
-print('Python version:\n{}\n'.format(sys.version))
-print('Numpy version:\t\t{}'.format(np.__version__))
-print('matplotlib version:\t{}'.format(matplotlib.__version__))
-print('Scipy version:\t\t{}'.format(scipy.__version__))
-```
-
-    Python version:
-    3.7.3 (default, Mar 27 2019, 22:11:17) 
-    [GCC 7.3.0]
-    
-    Numpy version:		1.16.2
-    matplotlib version:	3.0.3
-    Scipy version:		1.2.1
-
-
-# Quantum nature of light
+### Quantum nature of light
 
 Perhaps the most interesting of the three noise sources mentioned above is *shot noise* as it is not really noise at all. Rather, shot noise arises because light is made up of particles and the number of those particles arriving at the detector fluctuates according to a statistical distribution. This ultimately stems from the fact that, in quantum mechanics, we cannot explicitly specify the lifetime of the excited state of an electron and therefore cannot predict the arrival time of a fluorescent photon. Instead, we can only specify the probability distribution over all the possible lifetimes or the probability of observing some number of photons at a given time.
 
-# Poisson and Exponential Distributions
+### Poisson and Exponential Distributions
 
 Two key probability distributions in photonics are the **Poisson distribution** and the **exponential distribution**. Both of these distrubutions fall under the umbrella of Poisson processes and are just two different ways of the describing the same Poisson process. The Poisson distribution is discrete and provides the probability of observing N events in a fixed time interval. On the other hand, the exponential distribution is continuous and provides the probability of a given time interval between events in a Poisson process. In photonics, the Poisson distribution gives us the probability of observing N photons during the exposure time. The exponential distribution tells us the probability a photon will be emitted as a function of time. Let's look at the Poisson distribution first:
 
@@ -59,7 +36,7 @@ plt.show()
 ```
 
 
-![png](photon-statistics_files/photon-statistics_2_0.png)
+![png](photon-statistics_files/photon-statistics_1_0.png)
 
 
 
@@ -85,5 +62,5 @@ plt.show()
 ```
 
 
-![png](photon-statistics_files/photon-statistics_3_0.png)
+![png](photon-statistics_files/photon-statistics_2_0.png)
 

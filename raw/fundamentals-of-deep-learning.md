@@ -7,16 +7,16 @@ display(HTML("<style>.container { width:50% !important; }</style>"))
 <style>.container { width:50% !important; }</style>
 
 
-## What is a deep network?
+### What is a deep network?
 
 The human brain contains (~$10^{11}$) neurons that form an intricate network to form an interface between our bodies and the world around us. The job of neuroscientists is to determine the nature of that network and how it allows for interactions with the external world such as perception, prediction, and action. The ultimate goal of deep learning is to be able to harness what biological neural networks can do in artificial models. However, most deep learning models share few similarities with their biological counterparts due to a lack of understanding of how the biological networks learn and operate. That being said, drastically simplified models of these networks have been developed in recent years such as feed-forward networks, recurrent neural networks, and the like. At the same time learning-rules such as backpropagation have been developed to train networks for a specific purpose. Unlike the general intelligence seen in biological brains, these networks are typically developed to perform very specific tasks, such as the classification of hand-written digits. The search for artificial general intelligence remains.
 
-## Artificial neural networks (ANNs)
+### Artificial neural networks (ANNs)
 
 In its most abstract form, an artificial neural network is a composite function which takes an input and produces an output. All of the details of the network structure are summarized by a single symbol $\Phi$. That output is a *probability* on the character of the input. That is, given an input $x$ we predict the probability that input belongs to class $y$ by computing $P_{\Phi}(y|x)$. There are a number of steps between the input $x$ and having an estimate of $P_{\Phi}(y|x)$. To begin, we need to adopt some fundmental concepts in information theory.
 
 
-## Information theory
+### Information theory
 
 Information entropy is an information theoretic concept introduced by Claude Shannon in a paper titled *A mathematical theory of communication* published in 1948. At it's core, information entropy tells us how much information is contained in the distribution of a variable. Bits are chosen as the unit of measure because information theory was originally devised to describe the novel communication systems of the mid 20th century: digital systems. 
 
@@ -60,7 +60,7 @@ Notice that if the distributions are the same, then the cross-entropy is equival
 The KL-Divergence is simply the difference between the cross-entropy and the entropy. As our predicted distribution gets closer to the actual distribution, the KL-Divergence tends to zero. Eventually, we will use these tools to understand a very common loss function in deep learning: cross-entropy loss.
 
 
-## Cross-Entropy Loss
+### Cross-Entropy Loss
 
 In the context of machine learning, minimizing KL-Divergence can be thought of as the training process. As stated above, a neural network is basically just a composite function $\Phi$, that eventually outputs a probability distribution $Q$ (see softmax section).
 
@@ -73,7 +73,7 @@ Ultimately, we want to find the composite function $\Phi$ that maps an input $x$
 \Phi^{*} = \underset{\Phi}{\argmin} -\sum_{x\in \chi} P(x)\ln Q_{\Phi}(x)
 \end{equation*}
 
-## Softmax
+### Softmax
 
 Typically the last layer of an ANN is a softmax layer. The purpose of that layer is to map the output of the most recent transformation to the probability distribution $Q_{\Phi}$ for use in computing loss or making a prediction.
 
@@ -87,10 +87,3 @@ where the function $s_{\Phi}(x)$ is most recent transformation in our network. T
 \begin{equation*}
 Z = \sum_{x} e^{s_{\Phi}(x)}
 \end{equation*}
-
-
-
-
-```python
-
-```

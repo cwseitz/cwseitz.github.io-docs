@@ -31,30 +31,9 @@
                 border: 1px solid black; padding: 50px;
                 margin-top: 100px; text-align: left;
                 font-size: 14px">
-                <pre><code class="python">import sys
-import numpy as np
-import matplotlib
-import scipy
-from IPython.display import Image
-from IPython.core.display import HTML 
-
-print('Python version:\n{}\n'.format(sys.version))
-print('Numpy version:\t\t{}'.format(np.__version__))
-print('matplotlib version:\t{}'.format(matplotlib.__version__))
-print('Scipy version:\t\t{}'.format(scipy.__version__))
-</code></pre>
-
-<pre><code>Python version:
-3.7.3 (default, Mar 27 2019, 22:11:17) 
-[GCC 7.3.0]
-
-Numpy version:      1.16.2
-matplotlib version: 3.0.3
-Scipy version:      1.2.1
-</code></pre>
-<h1>Quantum nature of light</h1>
+                <h3>Quantum nature of light</h3>
 <p>Perhaps the most interesting of the three noise sources mentioned above is <em>shot noise</em> as it is not really noise at all. Rather, shot noise arises because light is made up of particles and the number of those particles arriving at the detector fluctuates according to a statistical distribution. This ultimately stems from the fact that, in quantum mechanics, we cannot explicitly specify the lifetime of the excited state of an electron and therefore cannot predict the arrival time of a fluorescent photon. Instead, we can only specify the probability distribution over all the possible lifetimes or the probability of observing some number of photons at a given time.</p>
-<h1>Poisson and Exponential Distributions</h1>
+<h3>Poisson and Exponential Distributions</h3>
 <p>Two key probability distributions in photonics are the <strong>Poisson distribution</strong> and the <strong>exponential distribution</strong>. Both of these distrubutions fall under the umbrella of Poisson processes and are just two different ways of the describing the same Poisson process. The Poisson distribution is discrete and provides the probability of observing N events in a fixed time interval. On the other hand, the exponential distribution is continuous and provides the probability of a given time interval between events in a Poisson process. In photonics, the Poisson distribution gives us the probability of observing N photons during the exposure time. The exponential distribution tells us the probability a photon will be emitted as a function of time. Let's look at the Poisson distribution first:</p>
 <p>\begin{equation<em>}
 P(n,\mu_{p}) = \frac{\mu_{p}^{n}e^{-\mu_{p}}}{n!}
@@ -81,7 +60,7 @@ plt.legend()
 plt.show()
 </code></pre>
 
-<p><img alt="png" src="photon-statistics_files/photon-statistics_2_0.png" /></p>
+<p><img alt="png" src="photon-statistics_files/photon-statistics_1_0.png" /></p>
 <pre><code class="python">import matplotlib.pyplot as plt
 import numpy as np
 import math
@@ -102,7 +81,7 @@ plt.legend()
 plt.show()
 </code></pre>
 
-<p><img alt="png" src="photon-statistics_files/photon-statistics_3_0.png" /></p>
+<p><img alt="png" src="photon-statistics_files/photon-statistics_2_0.png" /></p>
                 </div>
                  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
                         <script type="text/javascript" id="MathJax-script" async

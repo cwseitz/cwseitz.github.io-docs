@@ -1,4 +1,4 @@
-# Frequency response of an RC circuit
+### Frequency response of an RC circuit
 
 The RC circuit can behave in different ways, depending on how we probe it. To achieve a low-pass configuration, we can probe the voltage across the capacitor. In that configuration, high frequencies are bled to ground through the cap. If we decide to swap the components like the figure the right, we have a high-pass filter, where low frequencies are bled to ground instead.
 
@@ -13,7 +13,7 @@ I = \frac{V_{in}}{R + \frac{1}{j\omega C}}
 We use this expression when examining both the low-pass and high-pass cases even though the wiring appears different. It it is interesting to note that you can wire the two devices in series with the source and whether you measure the voltage over the resistor or the capacitor determines whether it is a high-pass or low-pass circuit, respectively. 
 
 
-# RC Low-Pass Filter (LPF)
+### RC Low-Pass Filter (LPF)
 
 Ultimately we want to come up with the *transfer function* for an RC low-pass circuit. The transfer function $H(\omega)$ is simply the ratio of the output and input voltages as a function of frequency. Determining what that function is requires that we utilize the *impedance* for the RC device.
 
@@ -63,7 +63,7 @@ plt.show()
 ![png](frequency-response-of-an-rc-circuit_files/frequency-response-of-an-rc-circuit_1_0.png)
 
 
-# RC High-Pass Filter (HPF)
+### RC High-Pass Filter (HPF)
 
 Again, we want to come up with the transfer function this time for a RC high-pass circuit. The only difference is that the output voltage is measured accross the resistor this time:
 
@@ -104,8 +104,3 @@ plt.show()
 
 ![png](frequency-response-of-an-rc-circuit_files/frequency-response-of-an-rc-circuit_3_0.png)
 
-
-
-```python
-
-```

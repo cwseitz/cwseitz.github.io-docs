@@ -1,8 +1,8 @@
-# Introduction
+### Introduction
 
 The C programming language was first developed in the 1970s by Dennis Ritchie a Bell Labs. The language was inspired by its predecessor B and eventually would be standardized by the American National Standards Institute (ANSI) in the 1980s. The C programming language is a relatively low-level programming language which means that, as the programmer, you are required to do most of the leg work that is done automatically by higher level languages like Python. Practically speaking, we have to take memory management into our own hands when programming in C. This makes it very easy to shoot yourself in the foot as the programmer, but it also allows you program just about anything. This is by no means a comprehensive guide; it is only meant to be a rough overview of the language. The C Programming Language textbook is a great resources if you want to learn the ins and outs of the language.
 
-# Hello World
+### Hello World
 
 Let's start with the hello world program in C. First, we must import the header file stdio.h, which handles basic input and output from the keyboard and display, respectively. Then we define the function main() which is required in every C program. In C, we are given the option of including the return type of the program before the function name but if our function does not return anything we can omit this. Lastly, we make a function call to *printf()*, where the f stands for format. This is the standard function used for printing to the console and we will see of an example of formatting in the next section. 
 
@@ -48,7 +48,7 @@ main() {
 
 In the code above you can see that we defined five different variables: fahr, celsius, lower, upper, and step. Each of these is an integer so is preceded by *int*. The rest is just a standard while loop for incrementing the temperature in fahrenheit. 
 
-# Data types in C
+### Data types in C
 
 Of course, there are other data types available for use in C. You can even define your own custom data types but we won't discuss that here. Anyway, we can arrange some of the commonly used data types in a table:
 
@@ -117,11 +117,11 @@ int main() {
     The size of unsigned long is 8 byte(s)
 
 
-# Looping
+### Looping
 
 To learn the syntax for looping in C, we will write a Fahrenheit-Celsius conversion program which can also be found in the standard  C Programming Language textbook. 
 
-## While-Loops
+#### While-Loops
 
 The standard syntax for a while loop is while(condition){do something}. We can utilize our newfound knowledge of variable definitions to set some bounds on the while-loop.
 
@@ -168,7 +168,7 @@ int main() {
     300	148
 
 
-## For-Loops
+### For-Loops
 
 Let's write the same program using a for-loop this time. The standard syntax for a for-loop is for(lower bound; upper bound; increment){do something}. In place of 'lower bound' we set some initial condition for the counter that will be modified in the body of the loop. Upper bound is of course the value the counter will take it the loops last iteration, and the increment determines how much the counter is incremented at each iteration. In this case, the counter is the temperature on a fahrenheit scale.
 
@@ -214,9 +214,9 @@ int main() {
     300	148
 
 
-# Arrays
+### Arrays
 
-## Character Arrays
+#### Character Arrays
 
 In this next section, we will focus on arrays and their implementation in C. This brings up an interesting topic: there is no such thing as a string at this level, rather, strings are implemented as arrays of characters. So we can defined a string by defining an array and assigning its elements as the characters of string like 'bananas'.
 
@@ -235,7 +235,7 @@ int main() {
     The size of 'bananas' is 7 byte(s)
 
 
-## Integer Arrays
+### Integer Arrays
 
 Arrays of integers are defined in a similar way; however, you cannot print the entire array as we did with the character array above. You have to iterate through the array and call printf() for each element. 
 
@@ -266,7 +266,7 @@ int main() {
     5
 
 
-# Control Flow
+### Control Flow
 
 Another indispensible tool in C programming is the use of control-flow that will determine the behavior of the program given certain inputs. One useful example of this involves using control flow to determine whether a variable is an integer or alphabetical character. This kind of control flow could be very useful when reading raw data from files and parsing the content. 
 
@@ -301,7 +301,7 @@ int main(){
     var2 = |5| is a digit
 
 
-# Functions & Arguments
+### Functions & Arguments
 
 I really like how the C Programming Language textbook describes the philosophy of a function. The author writes: "With properly defined functions, it is possible to ignore *how* a job is done; knowing *what* is done is sufficient. Thus far, we've utilized functions like printf(), isdigit(), etc.; now, we'd like to define some functions of our own. When defining user functions in C, we have to use a *function prototype* which is typically one line of code that includes three things: the function's return type, name, and arguments. For example if we want to define a function that performs multiplication, it's prototype would look like: float sqrt(float m, float n);. Then, we can write out the body of the function and invoke it in main.
 
@@ -334,9 +334,7 @@ float mult(float m, float n){
 
     The product is: 10.000000
 
-# Pointers and Address Arithmetic 
-
-# Pointers
+### Pointers
 
 A pointer in C is a variable that contains the address of another variable. To really understand pointers and why
 they are useful, it is necessary to understand how RAM in a computer is organized. RAM is typically an array of memory cells which are numbered consecutively. That address is usually in hexadecimal format. To define a pointer, we precede the pointer name with an asterisk. If b is the variable containing the pointer and type is the data type of the variable that b will point to. For example, we can assign the address of a variable a to another variable b. Also, we can access and modify what is stored in a via the *indirection* or *dereferencing* operator This is best shown by example:
@@ -406,10 +404,7 @@ int main(){
     The variable y contains: 2
 
 
-
-```c
 As you can see, nothing happened. Now let's try it the correct way by using pointers to x and y.
-```
 
 
 ```c
@@ -442,7 +437,7 @@ int main(){
     The variable y contains: 1
 
 
-# Address Arithmetic
+### Address Arithmetic
 
 In its most basic form, address arithmetic allows you to define a pointer to a particular location in memory and then increment that pointer to arrive at neighboring memory locations. This is especially useful if you want to allocate a block of memory addresses for storage. In the code below, we will allocate a block of memory allocbuf that will fit ALLOCSIZE characters. The user can then call the function alloc() to allocate chunks of allocbuf for their storage needs.   
 

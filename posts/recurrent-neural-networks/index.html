@@ -31,13 +31,7 @@
                 border: 1px solid black; padding: 50px;
                 margin-top: 100px; text-align: left;
                 font-size: 14px">
-                <pre><code class="python">from IPython.core.display import display, HTML
-display(HTML(&quot;&lt;style&gt;.container { width:50% !important; }&lt;/style&gt;&quot;))
-</code></pre>
-
-<style>.container { width:50% !important; }</style>
-
-<h3>Time as Depth</h3>
+                <h3>Time as Depth</h3>
 <p>Recurrent neural networks differ from typical feedforward networks (like CNNs) in that a single set of parameters $A$ is used repeatedly rather than multiple sets of parameters stacked in space as in a MLP. This particularly useful for applications like language modeling where each word in a sentence comes at a particular time.</p>
 <p>Below it can be seen that the same transformation $A$ is used in sequence and that transformation can be itself an MLP or whatever architecture is necessary. At each time-step, $A$ takes in an input $x_{t}$ and the output of the previous transformation $h_{t-1}$ which is referred to as the <em>hidden state</em>.</p>
 <p><img src="../../images/rnn-model.png" width="300"/></p>
@@ -67,8 +61,6 @@ G[b,t,j] &amp;=&amp; \sigma(W^{h,G}[j,I]h[b,t-1, j] + W^{x,G}[j,K]x[b,t,K] - B^{
 \end{eqnarray}</p>
 <h3>Bidirectional RNNs</h3>
 <p>Another useful architecture especially for machine translation is the bidirectional RNN. In this setup, you compute the hidden states in both directions and concatenate the results to make predictions</p>
-<pre><code class="python">
-</code></pre>
                 </div>
                  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
                         <script type="text/javascript" id="MathJax-script" async

@@ -1,12 +1,3 @@
-```python
-from IPython.core.display import display, HTML
-display(HTML("<style>.container { width:50% !important; }</style>"))
-```
-
-
-<style>.container { width:50% !important; }</style>
-
-
 ### Error rate vs. Loss
 
 I need to make an important distinct before proceeding. The loss function, which we typically take to be the cross-entropy loss, is fundamentally distinct from the error-rate. The error-rate is the fraction of testing, validation, or testing samples that we correctly predict. This is an important metric for assessing the performance of a model and also things such as overfitting.
@@ -70,8 +61,3 @@ $$\Phi_{i+1} = \Phi_i - \eta\hat{g}_i  - \frac{\eta}{N\sigma^2}\Phi$$
 Now we can see why this is called shrinkage
 
 $${ \Phi_{i+1}} = \Phi_i - \eta\hat{g} - \frac{\eta}{N\sigma^2}\Phi_i\;\;\;\; = {\Phi_i - \eta\hat{g} - \gamma\Phi_i}$$
-
-
-```python
-
-```

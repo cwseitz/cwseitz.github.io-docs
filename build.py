@@ -3,7 +3,6 @@ import pandas as pd
 from glob import glob
 from util import *
 
-
 navi = open('partials/navi.html').read()
 logo = open('partials/logo.html').read()
 body = open('partials/body.html').read()
@@ -23,6 +22,7 @@ posts.set_style('../assets/main.css')
 posts.add_header(logo, navi)
 
 #Build posts
+clean_dir('posts')
 files = glob('raw/*.md')
 for file in files:
     file = os.path.basename(file)

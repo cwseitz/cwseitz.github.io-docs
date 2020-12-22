@@ -1,12 +1,3 @@
-```python
-from IPython.core.display import display, HTML
-display(HTML("<style>.container { width:50% !important; }</style>"))
-```
-
-
-<style>.container { width:50% !important; }</style>
-
-
 ### Stochastic gradient descent (SGD)
 
 The purpose of stochastic gradient descent is to update the model parameters of a neural network so as to reduce a loss function. We do that by computing the gradient of that loss function, averaging over a batch, and tweaking model parameters proportional to that average gradient 
@@ -112,10 +103,6 @@ In stochastic gradient descent, we have a model vector $\Phi$ in parameter space
 \frac{d\Phi}{dt} = -g(\Phi)
 \end{eqnarray*}
 
-### Stationary distributions
-
-
-
 ### Langevin dynamics of SGD
 
 In statistical mechanics, we often write down continuous time stochastic differential equations to describe the motion of a particle diffusing through a viscous medium at non-zero temperature. 
@@ -137,8 +124,3 @@ where we have added and subtracted the true gradient $g(\Phi)$. Applying the law
 \end{eqnarray*}
 
 The first is a **gradient flow** component while the second is a stochastic component arising from our estimates of the gradient or a kind of **diffusion flow**. 
-
-
-```python
-
-```

@@ -1,12 +1,3 @@
-```python
-from IPython.core.display import display, HTML
-display(HTML("<style>.container { width:50% !important; }</style>"))
-```
-
-
-<style>.container { width:50% !important; }</style>
-
-
 ### Sequence to sequence learning
 
 One method developed by Sutskever et al in 2015 is a sequence to sequence (seq2seq) method for machine translation. As will all seq2seq translation tasks, we want to estimate distribution over the output sequence given the input sequence

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="../../assets/main.css">
+</head>
+<body>
+<div><header class="header">
+                        <span class="header__inner">
+                                <div class="logo">
+  <span class="logo__mark">></span>
+  <span class="logo__text">cd ~</span>
+  <span class="logo__cursor"
+  style="background-color:#ffffff;animation-duration:0.75s;">
+  </span>
+</div>
+
+                                    <span class="header__right">
+                                        <nav class="menu">
+  <ul class="menu__inner">
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts/">Drafts</a></li>
+    <li><a href="/projects/">Projects</a></li>
+  </ul>
+</nav>
+
+                                    </span>
+                        </span>
+                        </header><div style="margin: 0 auto; width: 850px;
+                border: 1px solid black; padding: 50px;
+                margin-top: 100px; text-align: left;
+                font-size: 14px">
+                <h3>The Python/C API</h3>
+<p>This post will cover one method for improving the performance of native Python code. Python is an interpreted language and is therefore not compiled directly. Naturally, the solution is to make use of direclty compiled code rather than interpreted code to achieve performance gains. In the python world, that is commonly achieved by making use of the Python/C API. </p>
+<p>The Python/C API provides an interface between the Python interpreter and the C standard libarary as well as custom modules. The most common use of this API is to write extension C modules than can extend the python interpreter. This is particularly useful when execution speed is critical or an existing module(s) is written in C and needs to be invoked from Python.</p>
+<p>We can get started by writing a module in C that provides an interface to the C library function fputs(). The declaration of fputs looks like this:</p>
+<pre><code class="c">int fputs(const char *str, FILE *stream)
+</code></pre>
+
+<p>We can see that fputs takes an array of characters as well a pointer to a FILE object that identifies the stream where the string is to be written. Now, let's create a module called magicpants that will serve as a wrapper to the fputs() standard library function. In a file magicpants.c we define the following functions.</p>
+<pre><code class="c">#include &lt;Python.h&gt;
+
+
+static PyObject *magicpants_fputs(PyObject *self, PyObject *args) {
+    char *str, *filename = NULL;
+    int bytes_copied = -1;
+
+    /* Parse arguments */
+    if(!PyArg_ParseTuple(args, &quot;ss&quot;, &amp;str, &amp;filename)) {
+        return NULL;
+    }
+
+    FILE *fp = fopen(filename, &quot;w&quot;);
+    bytes_copied = fputs(str, fp);
+    fclose(fp);
+
+    return PyLong_FromLong(bytes_copied);
+}
+
+static PyMethodDef MagicpantsMethods[] = {
+    {&quot;fputs&quot;, magicpants_fputs, METH_VARARGS, &quot;Python interface for fputs C library function&quot;},
+    {NULL, NULL, 0, NULL}
+};
+
+
+static struct PyModuleDef magicpantsmodule = {
+    PyModuleDef_HEAD_INIT,
+    &quot;magicpants&quot;,
+    &quot;Python interface for the fputs C library function&quot;,
+    -1,
+    MagicpantsMethods
+};
+
+PyMODINIT_FUNC PyInit_magicpants(void) {
+    return PyModule_Create(&amp;magicpantsmodule);
+}
+
+</code></pre>
+
+<p>There are a total of four functions that make up our Python extension module written in C. The first function <em>magicpants_fputs</em> is the function that will be invoked by the user. It calls the fputs() C function and allows the user to write a Python string object to a file. At this point, it is critical to address the declaration</p>
+<pre><code class="c">static PyObject *magicpants_fputs(PyObject *self, PyObject *args){}
+</code></pre>
+
+<p>Notice that the function is set to return the PyObject type. Everything you can touch in Python is a PyObject in C. That includes lists, dictionaries, sockets, files, integers, strings, functions, classes, you name it. If you can touch it in Python, it’s a PyObject in C. In addition, the function takes PyObjects as arguments which are parsed by the following chunk of code:</p>
+<pre><code class="c">/* Parse arguments */
+if(!PyArg_ParseTuple(args, &quot;ss&quot;, &amp;str, &amp;filename)) {
+    return NULL;
+}
+</code></pre>
+
+<p>After that, fputs() is invoked and we return the number of bytes written with <em>PyLong_FromLong</em> which of course is a Python object. </p>
+<p>The second function is called the method mapping table:</p>
+<pre><code class="c">static PyMethodDef MagicpantsMethods[] = {
+    {&quot;fputs&quot;, magicpants_fputs, METH_VARARGS, &quot;Python interface for fputs C library function&quot;},
+    {NULL, NULL, 0, NULL}
+};
+</code></pre>
+
+<p>It is a structure that contains the following information:</p>
+<p><strong>ml_name</strong> − This is the name of the function as the Python interpreter presents when it is used in Python programs.</p>
+<p><strong>ml_meth</strong> − This must be the address to a function that has any one of the signatures described in previous section.</p>
+<p><strong>ml_flags</strong> − This tells the interpreter which of the three signatures ml_meth is using.</p>
+<p><strong>ml_doc</strong> − This is the docstring for the function, which could be NULL if you do not feel like writing one.</p>
+<p>The third function defines the module itself: </p>
+<pre><code class="c">static struct PyModuleDef magicpantsmodule = {
+    PyModuleDef_HEAD_INIT,
+    &quot;magicpants&quot;,
+    &quot;Python interface for the fputs C library function&quot;,
+    -1,
+    MagicpantsMethods
+};
+</code></pre>
+
+<pre><code class="c">The fourth simply initializes the C extension
+</code></pre>
+
+<pre><code class="c">PyMODINIT_FUNC PyInit_magicpants(void) {
+    return PyModule_Create(&amp;magicpantsmodule);
+}
+
+</code></pre>
+
+<p>Finally, to call our C functions, we can install our module to our current environment by creating the following setup.py file in the same directory as magicpants.c </p>
+<pre><code class="c">from distutils.core import setup, Extension
+
+def main():
+    setup(name=&quot;magicpants&quot;,
+          version=&quot;1.0.0&quot;,
+          description=&quot;Python interface for the fputs C library function&quot;,
+          author=&quot;Clayton Seitz&quot;,
+          author_email=&quot;cwseitz@uchicago.edu&quot;,
+          ext_modules=[Extension(&quot;magicpants&quot;, [&quot;magicpants.c&quot;])])
+
+if __name__ == &quot;__main__&quot;:
+    main()
+
+</code></pre>
+
+<pre><code class="c">python setup.py install
+python
+&gt;&gt;&gt; import magicpants
+&gt;&gt;&gt; magicpants.fputs(&quot;You now have magical pants&quot;, &quot;magicpants.txt&quot;)
+</code></pre>
+
+<p>If you are saving a python script to call this, be sure to name it something other than magicpants.py to avoid any conflicts</p>
+                </div>
+                 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+                        <script type="text/javascript" id="MathJax-script" async
+                        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+                        <script type="text/javascript" src="assets/main.js"></script></div></body>
+</html>

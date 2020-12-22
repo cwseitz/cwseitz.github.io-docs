@@ -1,18 +1,9 @@
-```python
-from IPython.core.display import display, HTML
-display(HTML("<style>.container { width:50% !important; }</style>"))
-```
-
-
-<style>.container { width:50% !important; }</style>
-
-
-# Introduction
+### Introduction
 
 In this post I would like to model the interaction of a particle with its environment. In principle, if we could specify all the forces on a particle by its environment in a deterministic way, we could just add up all the components of the forces and write Newton's law of motion and solve. In the real world, we have no way of predicted those forces and have to use a stochastic variant of Newton's law of motion called the **Langevin equation**.
 
 
-# The Langevin Equation
+### The Langevin Equation
 
 The Langevin equation is a first-order differential equation which predicts the diffusion of a particle experiencing friction as well as a stochastic driving force. As stated above, it is a modified form of Newton's equation of motion:
 
@@ -22,7 +13,7 @@ m\frac{dv}{dt} = \xi (t) - \gamma v(t)
 
 The first term in the Langevin equation $\xi(t)$ is a stochastic force (which will be shown to be normally distributed) and the second term $\gamma v(t)$ is a damping force proportional to the velocity of the particle. To better understand it, let's subject it to different conditions and take a look at its solution. 
 
-# The Damped Solution
+### The Damped Solution
 
 First, we consider the the simplest possible case by setting $\xi (t) = 0$ for all $t$. This reduces the Langevin equation to a form for which the solution is already known:
 
@@ -33,7 +24,7 @@ First, we consider the the simplest possible case by setting $\xi (t) = 0$ for a
 It is common to refer the ratio $\frac{m}{\gamma}$ as the Brownian timescale for relaxation, $\tau_{B}$. From our solution, we see that, in the presence of damping, $v \rightarrow 0$ as $t \rightarrow \infty$. Short and sweet!
 
 
-# The Damped/Driven Solution
+### The Damped/Driven Solution
 
 Our satisfaction from the damped solution may be premature if we want to consider a realistic scenario. If our particle is in thermal equilibium with some kind of bath at non-zero temperature, it should be occasionally be kicked around by other particles. From thermodynamics, we know that the average velocity of a particle as a function of temperature is given by the equipartition theorem: 
 
@@ -84,8 +75,3 @@ If we make the additional assumption that the timescale over which the random fo
 \end{equation*}
 
 This result is called the *fluctuation-dissipation theorem* which relates $T, \gamma, and \xi$. Any system in contact with a heat bath will experience both a stochastic force and friction - you cannot have one without the other.
-
-
-```python
-
-```

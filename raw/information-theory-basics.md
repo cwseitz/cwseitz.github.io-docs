@@ -1,17 +1,8 @@
-```python
-from IPython.core.display import display, HTML
-display(HTML("<style>.container { width:50% !important; }</style>"))
-```
-
-
-<style>.container { width:50% !important; }</style>
-
-
-## Information theory
+### Information theory
 
 Information entropy is an information theoretic concept introduced by Claude Shannon in a paper titled *A mathematical theory of communication* published in 1948. At it's core, information entropy tells us how much information is contained in the distribution of a variable. Bits are chosen as the unit of measure because information theory was originally devised to describe the novel communication systems of the mid 20th century: digital systems. 
 
-### Entropy
+#### Entropy
 
 Similar to statistical mechanics, information entropy $\mathbf{H}$ is a measure of uncertainty. In information theory, it is the average number of bits it takes to encode all possible states of the "system" $\chi$ given some probability distribution over those states $P(x)$. An example provides the quickest route to intuition so here is the definition straight away
 
@@ -46,12 +37,12 @@ plt.show()
 ```
 
 
-![png](information-theory-basics_files/information-theory-basics_2_0.png)
+![png](information-theory-basics_files/information-theory-basics_1_0.png)
 
 
 The plot in blue shows the contribution to the entropy in bits for a particular value of $p$. The total entropy is then found by sampling the blue curve according to the particular distribution $p(x)$ and adding up the samples.
 
-### An example
+#### An example
 
 Consider a horse race where the horses are equally likely to win. For the sake of generality let's assume there are $N$ horses and we want to send someone a binary string that tells them which horse won the race. The entropy is 
 
@@ -185,8 +176,3 @@ H(x,y) &=& H(x) + H(y|x)\\
 If we can show that $H(y|x) = 0$ then the data-processing inequality holds. This is more obvious if you notice that if $y = f(x)$ then the distribution $P(x,y) = P(x)$ or $P(y|x) = 0$. 
 
 In terms of our venn diagram above, $H(y)$ is a *subset* of $H(x)$ which also implies the following for the mutual information: $I(x,y) = H(y)$. 
-
-
-```python
-
-```

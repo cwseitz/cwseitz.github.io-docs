@@ -31,13 +31,7 @@
                 border: 1px solid black; padding: 50px;
                 margin-top: 100px; text-align: left;
                 font-size: 14px">
-                <pre><code class="python">from IPython.core.display import display, HTML
-display(HTML(&quot;&lt;style&gt;.container { width:50% !important; }&lt;/style&gt;&quot;))
-</code></pre>
-
-<style>.container { width:50% !important; }</style>
-
-<h3>Neuroelectronics</h3>
+                <h3>Neuroelectronics</h3>
 <p>In the resting state, the cytosol of a neuron is negatively charged relative to the extracellular fluid with a potential of about -70$\mathrm{mV}$ which is maintained by ion pumps. There is a nonzero potential because 3-4 nm thick lipid bilayer blocks ions. Clearly the membrane is behaving like a capacitor.</p>
 <p>At the same time, the membrane has a finite resistance (net conductance) as it contains highly specific ion channels which allow the passage of ions. What we have then is an RC circuit. </p>
 <h3>Single-compartment models</h3>
@@ -171,7 +165,7 @@ fig.tight_layout()
 plt.show()
 </code></pre>
 
-<p><img alt="png" src="neuroelectronics_files/neuroelectronics_7_0.png" /></p>
+<p><img alt="png" src="neuroelectronics_files/neuroelectronics_6_0.png" /></p>
 <p>Now lets add 10,000 "leaky" Channels to Compartment and again inject 50ms current at 5nA</p>
 <pre><code class="python">neuron = Compartment(t, injected=injected)
 leaks = [Channel(100e-12,-70e-3) for i in range(100)]
@@ -209,7 +203,7 @@ fig.tight_layout()
 plt.show()
 </code></pre>
 
-<p><img alt="png" src="neuroelectronics_files/neuroelectronics_10_0.png" /></p>
+<p><img alt="png" src="neuroelectronics_files/neuroelectronics_9_0.png" /></p>
 <h3>Simulating channels</h3>
 <p>This is great but lets say we want to define some more realistic channels. One class of channels important to neuroscience are voltage-dependent i.e. their probability of being open is a function of the voltage. If $n$ is the probability that a channel is open, then it will evolve according to</p>
 <p>\begin{equation<em>}
@@ -291,7 +285,7 @@ fig.tight_layout()
 plt.show()
 </code></pre>
 
-<p><img alt="png" src="neuroelectronics_files/neuroelectronics_14_0.png" /></p>
+<p><img alt="png" src="neuroelectronics_files/neuroelectronics_13_0.png" /></p>
                 </div>
                  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
                         <script type="text/javascript" id="MathJax-script" async

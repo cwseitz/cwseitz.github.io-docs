@@ -1,4 +1,4 @@
-# Maxwell's equations in vacuum
+### Maxwell's equations in vacuum
 
 \begin{equation*}
 \nabla \cdot \vec{E} = \frac{\rho}{\epsilon_{0}} 
@@ -16,8 +16,3 @@
 \nabla \times \vec{B} = \frac{1}{c^{2}}\frac{\partial E}{\partial t} + \mu_{0}J
 \end{equation*}
 
-
-
-```python
-
-```
