@@ -1,30 +1,14 @@
 import os
 import pandas as pd
 from glob import glob
-from document import HTMLDocument
-from util import md_to_post
-
-def build_posts_html():
-	
-	posts = pd.read_csv('posts.csv')
-	posts = posts.fillna('')
-	cols = posts.columns
-
-	for col in cols:
-		posts[col] = posts[col].apply(lambda x: '<a href="{0}/index.html">{0}</a>'.format(x))
-	
-	html = posts.to_html(justify='left', index=False, escape=False)
-	html = html.replace('border="1"','border="0"')
-
-
-	return html
-
+from util import *
 
 
 navi = open('partials/navi.html').read()
 logo = open('partials/logo.html').read()
 body = open('partials/body.html').read()
 post_style = open('partials/post_style.html').read()
+proj_style = open('partials/proj_style.html').read()
 
 #Build index page
 index = HTMLDocument()
@@ -57,5 +41,14 @@ for file in files:
 
 
 posts.head = post_style
-posts.add_content(build_posts_html())
+posts.add_content(csv_to_html('util/posts.csv'))
 posts.write('posts/index.html')
+
+
+#Build project page 
+projects = HTMLDocument()
+projects.set_style('../assets/main.css')
+projects.add_header(logo, navi)
+projects.head = proj_style
+projects.add_content(csv_to_html('util/projects.csv'))
+projects.write('projects/index.html')

@@ -20,7 +20,7 @@ class HTMLDocument:
             f'{self.head}'
             '</head>\n'
             '<body>\n'
-            '<div class="container">'
+            '<div>'
             f'{self.body}'
             '</div>'
             '</body>\n'
