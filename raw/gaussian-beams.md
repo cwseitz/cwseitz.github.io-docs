@@ -12,8 +12,3 @@ where $\psi(r)$ is an unknown spatial function that defines the shape of the bea
 \nabla_{\perp}^{2}\psi(r) - 2ik\partial_{z}\psi(r) = 0
 \end{equation*}
 
-
-
-```python
-
-```

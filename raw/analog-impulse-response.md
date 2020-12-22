@@ -55,8 +55,3 @@ So we see that the impulse response of an RC circuit is a decaying expontential.
 \begin{align}
 \mathcal{F}[h(t)] = \frac{1}{\tau}\int_{-\infty}^{\infty}e^{-t(i\omega + 1/\tau)}dt = \frac{1}{-(1 + i\omega\tau)}
 \end{align}
-
-
-```python
-
-```

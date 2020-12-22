@@ -106,8 +106,3 @@ With query-key attention, for each of our words $t$ and each of its heads $k$, w
 \Key_{l+1}[k,t,i] &=& W_{l+1}^{K}[k,i,J]L_{l}[t,J] \\
 \end{eqnarray}
 
-
-
-```python
-
-```

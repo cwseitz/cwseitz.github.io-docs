@@ -19,32 +19,9 @@ main() {
 
     Hello World
 
-# Defining variables
+### Defining variables
 
  The first instance of this that we will encounter is in the definition of variables and their data types. This comes down to what is called *static typing* and *dynamic typing*  and there is a nice thread on this [here](https://stackoverflow.com/questions/1517582/what-is-the-difference-between-statically-typed-and-dynamically-typed-languages), but the tl;dr version is just that statically typed languages, like C, require the programmer to explicitly specify the data type of a particular variable when it is defined. Dynamically typed languages, like Python, have a system for inferring the type of a variable. Let's see this in action by creating a Farhenheit-Celsius table.
-
-
-```c
-
-```
-
-    0	-17
-    20	-6
-    40	4
-    60	15
-    80	26
-    100	37
-    120	48
-    140	60
-    160	71
-    180	82
-    200	93
-    220	104
-    240	115
-    260	126
-    280	137
-    300	148
-
 
 In the code above you can see that we defined five different variables: fahr, celsius, lower, upper, and step. Each of these is an integer so is preceded by *int*. The rest is just a standard while loop for incrementing the temperature in fahrenheit. 
 

@@ -1,12 +1,3 @@
-```python
-from IPython.core.display import display, HTML
-display(HTML("<style>.container { width:50% !important; }</style>"))
-```
-
-
-<style>.container { width:50% !important; }</style>
-
-
 ### What is a deep network?
 
 The human brain contains (~$10^{11}$) neurons that form an intricate network to form an interface between our bodies and the world around us. The job of neuroscientists is to determine the nature of that network and how it allows for interactions with the external world such as perception, prediction, and action. The ultimate goal of deep learning is to be able to harness what biological neural networks can do in artificial models. However, most deep learning models share few similarities with their biological counterparts due to a lack of understanding of how the biological networks learn and operate. That being said, drastically simplified models of these networks have been developed in recent years such as feed-forward networks, recurrent neural networks, and the like. At the same time learning-rules such as backpropagation have been developed to train networks for a specific purpose. Unlike the general intelligence seen in biological brains, these networks are typically developed to perform very specific tasks, such as the classification of hand-written digits. The search for artificial general intelligence remains.
