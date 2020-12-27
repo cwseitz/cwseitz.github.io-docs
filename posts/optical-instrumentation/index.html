@@ -4,6 +4,28 @@
 <meta charset="UTF-8">
 <title></title>
 <link rel="stylesheet" href="../../assets/main.css">
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'],['\\(', '\\)']],	 
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div><header class="header">
@@ -56,8 +78,5 @@ s_{2} = \frac{(s_{0}' - x)f}{s_{0}' - x - f} = \frac{s_{0}f(f - \frac{fd}{D})}{f
 \end{equation</em>}</p>
 <p>Some important practical takeaways from this are that the depth of field increases for decreasing focal length and longer shooting distances. Of course, you can't (or shouldn't) tweak object distances in photography; you change the distance between the lens and sensor $s_{0}'$. However, in this form, the equation tells you what the depth of field is when a particular object of interest is in focus. Furthermore, as the ratio $\frac{f}{D}$ which is often called the <em>relative aperture</em> or <em>f-stop</em> number is increased, the depth of field increases. In turn, smaller lens diameters give you increased depth of field but at the same time the field of view and total intensity is decreased. In summary, the depth of field is determined by two main parameters: the distance to an object of interest and the relative aperture $\frac{f}{D}$.</p>
                 </div>
-                 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-                        <script type="text/javascript" id="MathJax-script" async
-                        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-                        <script type="text/javascript" src="assets/main.js"></script></div></body>
+                 <script type="text/javascript" src="assets/main.js"></script></div></body>
 </html>

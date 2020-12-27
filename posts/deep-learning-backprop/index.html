@@ -4,6 +4,28 @@
 <meta charset="UTF-8">
 <title></title>
 <link rel="stylesheet" href="../../assets/main.css">
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'],['\\(', '\\)']],	 
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div><header class="header">
@@ -33,10 +55,21 @@
                 font-size: 14px">
                 <h3>Deep learning frameworks</h3>
 <p>A deep learning framework is a high-level interface that allows the user to define a model $\Phi$. That model produces an output for a given input according to it's mathematical definition. It is the job of the framework to to optimize the model by minimizing a particular loss function $\mathcal{L}$.</p>
-<p>\begin{equation<em>}
-\DeclareMathOperator</em>{\argmin}{argmin}
-\Phi^{<em>} = \underset{\Phi}{\argmin} E_{(x,y)}\mathcal{L(x,y)}
-\end{equation</em>}</p>
+<p>$$\begin{equation}
+\Phi^{*} = 1
+\end{equation}$$</p>
+<p>$$\begin{equation}
+\DeclareMathOperator<em>{\argmin}{argmin}
+\Phi^{</em>} = 1
+\end{equation}$$</p>
+<p>$$\begin{equation}
+\DeclareMathOperator<em>{\argmin}{argmin}
+\Phi^{</em>} = \underset{\Phi}{\argmin}
+\end{equation}$$</p>
+<p>$$\begin{equation}
+\DeclareMathOperator<em>{\argmin}{argmin}
+\Phi^{</em>} = \underset{\Phi}{\argmin} E_{(x,y)}\mathcal{L(x,y)}
+\end{equation}$$</p>
 <p>The are many deep learning frameworks in use today such as Tensorflow (Google), PyTorch (Facebook, Academics), Microsoft Cognitive Toolkit, Chainer, etc. Rather than jump straight into using one of these frameworks, we can learn a lot about how they work by building a stripped down version ourselves. In the end, we want to use that framework to make predictions on the classic MNIST dataset of handwritten digits. We will build a multi-layer perceptron (MLP) to do that. </p>
 <h3>Multi-layer perceptron</h3>
 <p>The MLP is defined by the following equations</p>
@@ -85,8 +118,5 @@ Moving forward, let's continue the chain and calculate $\partial_{W}\mathcal{L}$
 \end{equation</em>}</p>
 <p>Again, we can't actually calculate this on a vector or a matrix. The actual calculations are made by looping over the vector and matrices according to standard matrix multiplication.</p>
                 </div>
-                 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-                        <script type="text/javascript" id="MathJax-script" async
-                        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-                        <script type="text/javascript" src="assets/main.js"></script></div></body>
+                 <script type="text/javascript" src="assets/main.js"></script></div></body>
 </html>

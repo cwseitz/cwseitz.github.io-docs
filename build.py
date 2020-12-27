@@ -6,8 +6,10 @@ from util import *
 navi = open('partials/navi.html').read()
 logo = open('partials/logo.html').read()
 body = open('partials/body.html').read()
+mjax = open('partials/mathjax.html').read()
 post_style = open('partials/post_style.html').read()
 proj_style = open('partials/proj_style.html').read()
+
 
 #Build index page
 index = HTMLDocument()
@@ -33,6 +35,7 @@ for file in files:
 
     post = md_to_post(file)
     this_post = HTMLDocument()
+    this_post.head += mjax
     this_post.set_style('../../assets/main.css')
     this_post.add_header(logo, navi)
     this_post.add_content(post)

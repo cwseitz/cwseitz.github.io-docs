@@ -1,11 +1,26 @@
 ### Deep learning frameworks
  
  A deep learning framework is a high-level interface that allows the user to define a model $\Phi$. That model produces an output for a given input according to it's mathematical definition. It is the job of the framework to to optimize the model by minimizing a particular loss function $\mathcal{L}$.
- 
-\begin{equation*}
+
+$$\begin{equation}
+\Phi^{*} = 1
+\end{equation}$$
+
+
+$$\begin{equation}
+\DeclareMathOperator*{\argmin}{argmin}
+\Phi^{*} = 1
+\end{equation}$$
+
+$$\begin{equation}
+\DeclareMathOperator*{\argmin}{argmin}
+\Phi^{*} = \underset{\Phi}{\argmin}
+\end{equation}$$
+
+$$\begin{equation}
 \DeclareMathOperator*{\argmin}{argmin}
 \Phi^{*} = \underset{\Phi}{\argmin} E_{(x,y)}\mathcal{L(x,y)}
-\end{equation*}
+\end{equation}$$
 
 The are many deep learning frameworks in use today such as Tensorflow (Google), PyTorch (Facebook, Academics), Microsoft Cognitive Toolkit, Chainer, etc. Rather than jump straight into using one of these frameworks, we can learn a lot about how they work by building a stripped down version ourselves. In the end, we want to use that framework to make predictions on the classic MNIST dataset of handwritten digits. We will build a multi-layer perceptron (MLP) to do that. 
 

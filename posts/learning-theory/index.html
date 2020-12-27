@@ -4,6 +4,28 @@
 <meta charset="UTF-8">
 <title></title>
 <link rel="stylesheet" href="../../assets/main.css">
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'],['\\(', '\\)']],	 
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div><header class="header">
@@ -70,8 +92,5 @@ f^</em> &amp; = &amp; {\argmin_f \hat{\cal L}(f) + \frac{5 L_\mathrm{max}}{N_\ma
 <p>$$L(q) \leq \frac{1}{1-\frac{1}{2\lambda}}({\hat{L}(q) + \frac{\lambda L_{max}}{N_\mathrm{Train}}){KL(q,p) + \ln \frac{1}{\delta}}}$$</p>
 <p>This is the bound that is compatible with deep learning because we are always learning continuous parameters.</p>
                 </div>
-                 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-                        <script type="text/javascript" id="MathJax-script" async
-                        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-                        <script type="text/javascript" src="assets/main.js"></script></div></body>
+                 <script type="text/javascript" src="assets/main.js"></script></div></body>
 </html>

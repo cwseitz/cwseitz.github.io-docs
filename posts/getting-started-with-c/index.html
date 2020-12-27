@@ -4,6 +4,28 @@
 <meta charset="UTF-8">
 <title></title>
 <link rel="stylesheet" href="../../assets/main.css">
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'],['\\(', '\\)']],	 
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div><header class="header">
@@ -417,8 +439,5 @@ void afree(char *p){
 
 <p>Notice the alloc() checks first to see if n characters will fit in allocbuf. If their request can be fulfilled, n is added to the pointer allocp and allocp - n is returned so the user has the starting point for their block of memory. Recall that allocp is a global variable so successive calls to alloc() will affect allocp permanently. Finally, afree() can be used to free memory beyond a memory location p. It does this by simply reassigning the pointer allocp to the memory location beyond which memory should be freed. These functions are implemented in the standard library (but more robustly) as malloc() and free().</p>
                 </div>
-                 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-                        <script type="text/javascript" id="MathJax-script" async
-                        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-                        <script type="text/javascript" src="assets/main.js"></script></div></body>
+                 <script type="text/javascript" src="assets/main.js"></script></div></body>
 </html>

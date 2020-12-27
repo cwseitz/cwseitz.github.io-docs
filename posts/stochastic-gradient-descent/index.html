@@ -4,6 +4,28 @@
 <meta charset="UTF-8">
 <title></title>
 <link rel="stylesheet" href="../../assets/main.css">
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'],['\\(', '\\)']],	 
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div><header class="header">
@@ -35,11 +57,21 @@
 <p>The purpose of stochastic gradient descent is to update the model parameters of a neural network so as to reduce a loss function. We do that by computing the gradient of that loss function, averaging over a batch, and tweaking model parameters proportional to that average gradient </p>
 <p>$$\Delta\Phi = - \eta \hat{g}$$</p>
 <p>where $\hat{g}$ is defined to be the average gradient of the loss over the batch. We also define $g$ which is the ideal average gradient of the loss for the population distribution</p>
-<p>\begin{eqnarray<em>}
-  \hat{g} &amp; = &amp; E_{(x,y) \sim \mathrm{Batch}}\;\nabla_\Phi\;\mathrm{\mathcal{L}}(\Phi,x,y) \
-  \
-  g &amp; = &amp; E_{(x,y) \sim \mathrm{Pop}}\;\nabla_\Phi\;\mathrm{\mathcal{L}}(\Phi,x,y) \
-\end{eqnarray</em>}</p>
+<p>$$\begin{align}
+n^<em>{11} &amp; = \frac{n</em>{1{\cdot}}\times n_{{\cdot}1}}{n} \
+         &amp; = \frac{120 \times 120}{200}     \
+\text{avec} \quad \sum_{k=1}^{q} n^<em>{jk}  &amp;  =  n</em>{j{\cdot}}
+  \quad \text{et}  \quad   \sum_{j=1}^{p} n^<em>{jk}   = n</em>{.k}   \
+n^<em>{jk} &amp; = \frac{120\times 120}{200}  \
+n^</em>{12} &amp; = \frac{n_{1{\cdot}}\times n_{{\cdot}2}}{n} \
+         &amp; = \frac{120\times 80}{200}  \
+n^<em>{21} &amp; = \frac{n</em>{2{\cdot}}\times n_{{\cdot}1}}{n}  \
+n^_{21} &amp; = \frac{60\times 120}{200}
+\end{align}$$</p>
+<p>$$\begin{eqnarray}
+  \hat{g} &amp;=&amp; E_{(x,y) \sim \mathrm{Batch}}\;\nabla_\Phi\;\mathrm{\mathcal{L}}(\Phi,x,y)\
+  g &amp;=&amp; E_{(x,y) \sim \mathrm{Pop}}\;\nabla_\Phi\;\mathrm{\mathcal{L}}(\Phi,x,y)
+\end{eqnarray}$$</p>
 <h3>The thermodynamics of SGD</h3>
 <p>A common analogy used to explain SGD is that the model $\Phi$ is a particle bouncing around in a higher dimensional space where each parameter defines a dimension. In this model, that space is endowed with a landscape or <em>potential</em> which, in deep learning, is the loss function. SGD is then the process of moving the particle through that higher dimensional space stochastically until it approximately reaches a global minimum of the loss function. This brings us to the parameter $\eta$, called the <strong>learning rate</strong> which, in our particle analogy, determines proportionality of the step size of the particle in our higher dimensional space to the average gradient of the loss. </p>
 <h3>Learning rate as temperature</h3>
@@ -114,8 +146,5 @@ m\frac{dv}{dt} = \xi (t) - \gamma v(t)
 \end{eqnarray</em>}</p>
 <p>The first is a <strong>gradient flow</strong> component while the second is a stochastic component arising from our estimates of the gradient or a kind of <strong>diffusion flow</strong>. </p>
                 </div>
-                 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-                        <script type="text/javascript" id="MathJax-script" async
-                        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-                        <script type="text/javascript" src="assets/main.js"></script></div></body>
+                 <script type="text/javascript" src="assets/main.js"></script></div></body>
 </html>

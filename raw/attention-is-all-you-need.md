@@ -24,10 +24,10 @@ For this architecture, the thought vector representation is computed right-to-le
 
 Now that we have established what the thought-vector is and its role, we can move on to actually doing the autoregression. As mentioned above, the autoregression is implemented as an RNN from which we read out probabilities $ P_{\Phi}(w_{t}|\overset\leftarrow{h_{in}}[1,J],w_{0}...w_{t-1})$ according to
 
-\begin{equation*}
+\begin{equation}
 \DeclareMathOperator*{\softmax}{softmax}
 P(w_{t_{out}}|\overset\leftarrow{h_{in}}[1,J], w_{1},..,w_{t_{out}-1}) = \underset{w_{t_{out}}}{\softmax} e[w_{t_{out}},J]h_{out}[t_{out}-1,J] 
-\end{equation*}
+\end{equation}
 
 where $e$ is the encoding for a particular word and $h$ is the hidden state at that point in the network. 
 
@@ -59,11 +59,11 @@ The decoder is where the main differences are because we need a way to implement
 
 \begin{eqnarray}
 \DeclareMathOperator*{\RNN}{RNN}
-\overset\rightarrow{h_{out}}[t_{out},J] = \RNN(\overset\rightarrow{h_{out}}[t_{out},J], e[w_{t_{out}},I], \color{red}{\hat{h}_{in}[t_{out},J]})
+\overset\rightarrow{h_{out}}[t_{out},J] = \RNN(\overset\rightarrow{h_{out}}[t_{out},J], e[w_{t_{out}},I],\overset\wedge{h_{in}}[t_{out},J])
 \end{eqnarray}
 
 
-where $\hat{h}_{in}[t_{out},J]$ is added to provide information for the alignment. To get that information, we construct the following $\alpha$
+where $\overset\wedge{h_{in}}[t_{out},J]$ is added to provide information for the alignment. To get that information, we construct the following $\alpha$
 
 \begin{eqnarray}
 \DeclareMathOperator*{\softmax}{softmax}
@@ -72,10 +72,10 @@ where $\hat{h}_{in}[t_{out},J]$ is added to provide information for the alignmen
 
 In words, we compute the softmax of the inner product of the embedding of the word we most recently produced $w_{t_{out}}$ and the encoding at all input positions. In effect, this gives us a probability distribution over input positions for each word that we produce at $t_{out}$. Basically that tells us where to look in the input when generating $w_{t_{out}}$.
 
-We then multiply each slice $t_{out}$ of the association matrix with the entire matrix $\overset\leftrightarrow{h_{in}}[T_{in},J]$ from the encoder step to give us a new matrix $\hat{h}_{in}[T_{out},J]$. This is done for every $t_{out}$ giving us the relevant parts of the encoder to produce  $w_{t_{out}}$. 
+We then multiply each slice $t_{out}$ of the association matrix with the entire matrix $\overset\leftrightarrow{h_{in}}[T_{in},J]$ from the encoder step to give us a new matrix $\overset\wedge{h_{in}}[T_{out},J]$. This is done for every $t_{out}$ giving us the relevant parts of the encoder to produce  $w_{t_{out}}$. 
 
 \begin{eqnarray}
-\color{red}{\hat{h}_{in}[t_{out},J]} = \alpha[t_{out},T_{in}]\overset\leftrightarrow{h_{in}}[T_{in},J]
+\overset\wedge{h_{in}}[t_{out},J] = \alpha[t_{out},T_{in}]\overset\leftrightarrow{h_{in}}[T_{in},J]
 \end{eqnarray}
 
 
@@ -93,16 +93,4 @@ Each layer in the transformer has the same shape $L[T,J]$ which contains a time 
 
 ### The decoder
 
-Each layer in the transformer has the same shape $L[T,J]$ which contains a time index which could be a particular word in a sentence and for each word we have the vector $L[t,J]$. It is pretty efficient on a modern machine because the transfomer can compute layer $L_{l+1}[T,J]$ from $L_{l}[T,J]$ in $O(\ln(TI))$ time by using a tree of additions.  
-
-### Query-key attention 
-
-With query-key attention, for each of our words $t$ and each of its heads $k$, we compute
-
-\begin{eqnarray}
-\DeclareMathOperator*{\Query}{Query}
-\DeclareMathOperator*{\Key}{Key}
-\Query_{l+1}[k,t,i] &=& W_{\mathcal{l}+1}^{Q}[k,i,J]L_{l}[t,J] \\
-\Key_{l+1}[k,t,i] &=& W_{l+1}^{K}[k,i,J]L_{l}[t,J] \\
-\end{eqnarray}
-
+Each layer in the transformer has the same shape $L[T,J]$ which contains a time index which could be a particular word in a sentence and for each word we have the vector $L[t,J]$. It is pretty efficient on a modern machine because the transfomer can compute layer $L_{l+1}[T,J]$ from $L_{l}[T,J]$ in $O(\ln(TI))$ time by using a tree of additions.

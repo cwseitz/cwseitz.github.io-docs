@@ -6,11 +6,22 @@ $$\Delta\Phi = - \eta \hat{g}$$
 
 where $\hat{g}$ is defined to be the average gradient of the loss over the batch. We also define $g$ which is the ideal average gradient of the loss for the population distribution
 
-\begin{eqnarray*}
-  \hat{g} & = & E_{(x,y) \sim \mathrm{Batch}}\;\nabla_\Phi\;\mathrm{\mathcal{L}}(\Phi,x,y) \\
-  \\
-  g & = & E_{(x,y) \sim \mathrm{Pop}}\;\nabla_\Phi\;\mathrm{\mathcal{L}}(\Phi,x,y) \\
-\end{eqnarray*}
+$$\begin{align}
+n^_{11} & = \frac{n_{1{\cdot}}\times n_{{\cdot}1}}{n} \\
+         & = \frac{120 \times 120}{200}     \\
+\text{avec} \quad \sum_{k=1}^{q} n^_{jk}  &  =  n_{j{\cdot}}
+  \quad \text{et}  \quad   \sum_{j=1}^{p} n^_{jk}   = n_{.k}   \\
+n^_{jk} & = \frac{120\times 120}{200}  \\
+n^_{12} & = \frac{n_{1{\cdot}}\times n_{{\cdot}2}}{n} \\
+         & = \frac{120\times 80}{200}  \\
+n^_{21} & = \frac{n_{2{\cdot}}\times n_{{\cdot}1}}{n}  \\
+n^_{21} & = \frac{60\times 120}{200}
+\end{align}$$
+
+$$\begin{eqnarray}
+  \hat{g} &=& E_{(x,y) \sim \mathrm{Batch}}\;\nabla_\Phi\;\mathrm{\mathcal{L}}(\Phi,x,y)\\
+  g &=& E_{(x,y) \sim \mathrm{Pop}}\;\nabla_\Phi\;\mathrm{\mathcal{L}}(\Phi,x,y)
+\end{eqnarray}$$
 
 ### The thermodynamics of SGD
 
