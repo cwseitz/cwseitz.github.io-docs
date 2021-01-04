@@ -47,11 +47,3 @@ posts.head = post_style
 posts.add_content(csv_to_html('util/posts.csv'))
 posts.write('posts/index.html')
 
-
-#Build project page 
-projects = HTMLDocument()
-projects.set_style('../assets/main.css')
-projects.add_header(logo, navi)
-projects.head = proj_style
-projects.add_content(csv_to_html('util/projects.csv'))
-projects.write('projects/index.html')
