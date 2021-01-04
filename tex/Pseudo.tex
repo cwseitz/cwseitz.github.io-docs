@@ -1,0 +1,124 @@
+\input preamble
+
+
+\begin{document}
+
+{\Huge
+
+  \centerline{\bf TTIC 31230, Fundamentals of Deep Learning}
+  \bigskip
+  \centerline{David McAllester, Autumn 2020}
+  \vfill
+  \vfill
+  \centerline{\bf Pseudo-Likelihood and Contrastive Divergence}
+\vfill
+\vfill
+\vfill
+
+\slide{Some Pseudo-Likelihood Notation}
+
+We let {\color{red} $\hat{\cal Y} \backslash n$} be the assignment of colors given by $\hat{\cal Y}$ except that no color is assigned to node $n$.
+
+\vfill
+We let {\color{red} $\hat{\cal Y}[N(n)]$} be the assignment that $\hat{\cal Y}$ gives to the nodes (pixels) that are the neighbors of node $n$ (connected to $n$ by an edge.)
+
+\slide{Psuedo-Likelihood}
+
+For any distribution $P(\hat{\cal Y})$ on colorings $\hat{\cal Y}$,
+we define the {\color{red} pseudo-likelihood}  $\tilde{P}(\hat{\cal Y})$ as follows
+
+{\color{red} $$\tilde{P}(\hat{\cal Y}) = \prod_n\;P(\hat{\cal Y}[n]\;|\; \hat{\cal Y}/n) = \prod_n\;P(\hat{\cal Y}[n]\;|\; \hat{\cal Y}[N(n)])$$}
+
+\vfill
+While computing $P_{\Phi,x}({\cal Y})$ is intractable, computing $\tilde{P}_{\Phi,x}({\cal Y})$ is tractable.  We then use
+
+{\color{red} $$\Phi^* = \argmin_\Phi E_{\tuple{x,{\cal Y}} \sim \pop}\;\;-\ln \tilde{P}_{\Phi,x}({\cal Y})$$}
+
+\slide{Pseudolikelihood Theorem}
+
+{\color{red} $$\argmin_Q \; E_{{\cal Y} \sim \pop} \;-\ln \tilde{Q}({\cal Y}) = \pop$$}
+
+\vfill
+It suffices to show that for any $Q$ we have
+
+\vfill
+$$ E_{{\cal Y} \sim \pop}\;-\ln \widetilde{\pop}({\cal Y}) \leq \;E_{{\cal Y} \sim \pop}\;-\ln \tilde{Q}({\cal Y})$$
+
+\slide{Proof II}
+
+We will prove the case of two nodes.
+
+\vfill
+\begin{eqnarray*}
+  & & \min_Q \;E_{y\sim \pop}{-\ln Q({\cal Y}[1]|{\cal Y}[2])\;Q({\cal Y}[2]|{\cal Y}[1])} \\
+  \\
+  & \geq & \min_{P_1,P_2} E_{{\cal Y} \sim \pop}{-\ln P_1({\cal Y}[1]|{\cal Y}[2])\;P_2({\cal Y}[2]|{\cal Y}[1])} \\
+  \\
+  & = & \min_{P_1} E_{{\cal Y} \sim \pop}{-\ln P_1({\cal Y}[1]|{\cal Y}[2])} + \min_{P_2} E_{{\cal Y} \sim \pop}{-\ln P_2({\cal Y}[2]|{\cal Y}[1])} \\
+  \\
+  & = & E_{{\cal Y} \sim \pop}{-\ln \pop({\cal Y}[1]|{\cal Y}[2])} + E_{{\cal Y} \sim \pop}{-\ln \pop({\cal Y}[2]|{\cal Y}[1])} \\
+  \\
+  & = & E_{{\cal Y} \sim \pop}{-\ln \widetilde{\pop}({\cal Y})}
+\end{eqnarray*}
+
+\slideplain{Contrastive Divergence (CDk)}
+
+In contrastive divergence we first construct an MCMC process whose stationary distribution is ${\color{red} P_s}$.  This could be
+Metropolis or Gibbs or something else.
+
+\vfill
+{\bf Algorithm CDk}: Given a gold segmentation ${\cal Y}$, start the MCMC process from initial state ${\cal Y}$ and run the process for $k$ steps
+to get ${\color{red} \hat{\cal Y}'}$.  Then take the loss to be
+
+\vfill
+{\color{red} $${\cal L}_{\mathrm{CD}}  = s(\hat{\cal Y}') - s({\cal Y})$$}
+
+If $P_s = \pop$ then the the distribution on $\hat{\cal Y}'$ is the same as the distribution on ${\cal Y}$ and the
+expected loss gradient is zero.
+
+\slideplain{Gibbs CD1}
+
+CD1 for the Gibbs MCMC process is a particularly interesting special case.
+
+\vfill
+{\bf Algorithm (Gibbs CD1)}: Given ${\cal Y}$, select a node $n$ at random and draw {\color{red} $y \sim P({\cal Y}[n]\;| \;{\cal Y}[N(n)])$}. Define {\color{red} ${\cal Y}[n=y]$}
+to be the assignment (segmentation) which is the same as ${\cal Y}$ except that node $n$ is assigned label $y$.  Take the loss to be
+
+\vfill
+{\color{red} $${\cal L}_{\mathrm{CD}}  = s({\cal Y}[n=y]) - s({\cal Y})$$}
+
+\slide{Gibbs CD1 Theorem}
+
+Gibbs CD1 is equivalent in expectation to pseudolikelihood.
+
+{\huge
+\begin{eqnarray*}
+{\cal L}_{\mathrm{PL}} & = & E_{{\cal Y} \sim \pop}\;\sum_n \; - \ln P_s({\cal Y}[n]=y\;|\;{\cal Y}\backslash n) \\
+\\
+ & = & E_{{\cal Y} \sim \pop}\;\sum_n -\ln \frac{e^{s({\cal Y})}}{Z_n}\;\;\;\;\;{Z_n = \sum_{y'} e^{s({\cal Y}[n=y'])}} \\
+\\
+& = & E_{{\cal Y} \sim \pop}\;\sum_n\; \left(\ln Z_n - s({\cal Y})\right) \\
+\\
+\nabla_\Phi {\cal L}_{\mathrm{PL}} & = & E_{{\cal Y} \sim \pop}\;\sum_n \left(\frac{1}{Z_n} \sum_{y'} e^{s({\cal Y}[n=y'])} \; \nabla_\Phi\;s({\cal Y}[n]=y')\right) - \nabla_\Phi s({\cal Y}) \\
+\\
+& = & E_{{\cal Y} \sim \pop}\;\sum_n \left(\sum_{y'} P({\cal Y}[n=y'\;|\;{\cal Y}\backslash n]) \; \nabla_\Phi\;s({\cal Y}[n=y'])\right) - \nabla_\Phi s({\cal Y})
+\end{eqnarray*}
+}
+
+\slideplain{Gibbs CD1 Theorem}
+
+{\huge
+\begin{eqnarray*}
+\nabla_\Phi\;{\cal L}_{\mathrm{PL}} & = & E_{{\cal Y} \sim \pop}\;\sum_n \left(\sum_{y'} P({\cal Y}[n=y'\;|\;{\cal Y}\backslash n]) \nabla_\Phi\;s({\cal Y}[n]=y')\right) - \nabla_\Phi s({\cal Y}) \\
+\\
+& = & E_{{\cal Y} \sim \pop}\;\sum_n \left(E_{y' \sim P({\cal Y}[n=y'\;|\;{\cal Y}\backslash n])} \nabla_\Phi\;s({\cal Y}[n]=y')\right) - \nabla_\Phi s({\cal Y}) \\
+\\
+& \propto & E_{{\cal Y} \sim \pop}\;E_n\; E_{y' \sim P({\cal Y}[n=y'\;|\;{\cal Y}\backslash n])}\;\; (\nabla_\Phi\;s({\cal Y}[n]=y') - \nabla_\Phi s({\cal Y})) \\
+\\
+& = & E_{{\cal Y} \sim \pop}\;E_n\; E_{y' \sim P({\cal Y}[n=y'\;|\;{\cal Y}\backslash n])}\;\; \nabla_\Phi\;{\cal L}_{\mbox{Gibbs CD(1)}}
+\end{eqnarray*}
+}
+
+\slide{END}
+}
+\end{document}
