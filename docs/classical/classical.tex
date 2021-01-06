@@ -1,102 +1,117 @@
-\input ../SlidePreamble
-\input ../preamble
+\input SlidePreamble
+\input preamble
+
+\newcommand{\solution}[1]{\bigskip {\bf Solution}: #1}
 
 \begin{document}
 
 {\Huge
-
   \centerline{\bf TTIC 31230, Fundamentals of Deep Learning}
   \bigskip
-  \centerline{David McAllester, Winter 2020}
-
+  \centerline{David McAllester, Autumn 2020}
   \vfill
-  \centerline{\bf Representing Functions with Shallow Circuits}
+  \centerline{\bf Stochastic Gradient Descent (SGD)}
   \vfill
-  \centerline{\bf The Classical Universality Theorems}
+  \centerline{\bf The Classical Convergence Theorem}
   \vfill
   \vfill
 
-\slide{Function Representations}
+\slide{Vanilla SGD}
 
-Consider continuous functions $f: [0,1]^N \rightarrow \reals$
-
-\vfill
-\vfill
-\centerline{\includegraphics[width = 2in]{../images/n-cube} 
-\begin{minipage}[b]{2.0in}
-  $\stackrel{f}{\rightarrow} \;\;\;\reals$ \newline
-  \vspace{2ex}
-\end{minipage}}
-
-\vfill
-Given the corner values, the interior can be filled.
-
-$$f(x_1,\ldots,x_N) = E_{y_1,\ldots,y_N \sim \mathrm{Round}(x_1,\ldots,x_N)}\;f(y_1,\ldots,y_n)$$
-
-\vfill
-Hence each of the $2^N$ corners has an independent value.
-
-\slide{The Kolmogorov-Arnold representation theorem (1956)}
-
-For continuous $f: [0,1]^N \rightarrow \reals$ there exists continuous
-``activation functions'' $\sigma_i: \mathbb{R} \rightarrow \mathbb{R}$ and continuous $w_{i,j} : \reals \rightarrow \reals$ such that
-
-
-\vfill
-$$f(x_1,\;\ldots,\;x_N)=\sum _{{i=1}}^{{2N+1}} \sigma_i \left(\sum_{j=1}^N\;w_{i,j}(x_j)\right)$$
-
-
-
-\slide{A Simpler, Similar Theorem}
-
-For (possibly discontinuous) $f: [0,1]^N \rightarrow \reals$ there exists (possibly discontinuous)
-$\sigma, w_i: \reals \rightarrow \reals$.
-
-\vfill
-$$f(x_1,\;\ldots,\;x_N) = \sigma\left(\sum_i w_i(x_i)\right)$$
-
-\vfill
-Proof: Select $w_i$ to spread out the digits of its argument so that $\sum_i w_i(x_i)$ contains all the digits of all the $x_i$.
-
-\slide{Cybenko's Universal Approximation Theorem (1989)}
-
-For continuous $f: [0,1]^N \rightarrow \reals$ and $\varepsilon >0$ there exists
+$$\Phi \;\minuseq\; \eta \hat{g}$$
 
 \vfill
 \begin{eqnarray*}
-  F(x) &= & \alpha^\top \sigma(Wx + \beta) \\
+  \hat{g} & = & E_{(x,y) \sim \mathrm{Batch}}\;\nabla_\Phi\;\mathrm{loss}(\Phi,x,y) \\
   \\
-  & = & \sum_i \alpha_i \sigma\left(\sum_j W_{i,j} \;x_j + \beta_i\right)
+  \\
+  g & = & E_{(x,y) \sim \mathrm{Pop}}\;\nabla_\Phi\;\mathrm{loss}(\Phi,x,y) \\
 \end{eqnarray*}
 
+\vfill
+\centerline{$\eta$ is the ``learning rate'' hyper-parameter (a parameter not in $\Phi$).}
+
+
+\slide{Issues}
 
 \vfill
-such that for all $x$ in $[0,1]^N$ we have $| F( x ) - f ( x ) | < \varepsilon$.
+\begin{itemize}
+\item {\bf Gradient Estimation.} The accuracy of $\hat{g}$ as an estimate of $g$.
 
-\slide{How Many Hidden Units?}
+  \vfill
+\item {\bf Gradient Drift (second order structure).} The fact that $g$ changes as the parameters change.
 
-Consider Boolean functions $f:\;\{0,1\}^N \rightarrow \{0,1\}$.
+  \vfill
+\item {\bf Convergence.} To converge to a local optimum the learning rate must be gradually reduced toward zero.
 
-\vfill
-For Boolean functions we can simply list the inputs $x^0,\;\ldots,\;x^k$ where the function is true.
+  \vfill
+  \item {\bf Exploration.} Since deep models are non-convex we need to search over the parameter space.  SGD can behave like MCMC.
+\end{itemize}
+
+\slide{A One Dimensional Example}
+
+Suppose that $y$ is a scalar, and consider
 
 \begin{eqnarray*}
-  f(x) & = & \sum_k \mathbf{1}[x=x^k] \\
+ \mathrm{loss}(\beta,y) & = & \frac{1}{2}(\beta - y)^2 \\
+ \\
+  g & = &  \nabla_\beta\;E_{y \sim \mathrm{Pop}}\;\frac{1}{2}(\beta - y)^2 \\
   \\
-  \mathbf{1}[x = x^k] & \approx & \sigma\left(\sum_i W_{k,i} x_i + b_k\right)
+  & = & \beta - E_{y \sim \mathrm{Pop}} \; y \\
+  \\
+  \hat{g} & = &\beta - E_{y \sim \mathrm{Batch}} \;y
 \end{eqnarray*}
 
 \vfill
-A simpler statement is that any Boolean function can be put in disjunctive normal form.
+Even if $\beta$ is optimal, for a finite batch we will have $\hat{g} \not = 0$.
 
-\slide{Representing Functions as IO Tables}
+\slide{The Classical Convergence Theorem}
 
-These universality theorems implicitly treat functions as tables of intput-output pairs.
+$$\Phi \;\minuseq \; \eta_t \nabla_\Phi\;\mathrm{loss}(\Phi,x_t,y_t)$$
 
 \vfill
-\centerline{\includegraphics[height = 1in]{../images/Frown}}
+For ``sufficiently smooth'' non-negative loss with
+
+\vfill
+$$\eta_t \geq 0\;\;\;\;\;\;\;\;\lim_{t \rightarrow \infty} \;\eta_t = 0\;\;\;\;\;\;\;\;\sum_t \eta_t = \infty \;\;\;\;\;\;\sum_t \;\eta_t^2 < \infty$$
+
+\vfill
+we have that the training loss $E_{(x,y) \sim \mathrm{Train}}\; \mathrm{loss}(\Phi,x,t)$ converges to a limit and any limit point of the sequence $\Phi_t$
+is a stationary point in the sense that {\huge  $\nabla_\Phi \; E_{(x,y) \sim \mathrm{Train}} \;\mathrm{loss}(\Phi,x,t) = 0$}.
+
+\vfill
+{\Large
+\vfill
+{\bf Rigor Police:} One can construct cases where $\Phi$ diverges to infinity, converges to a saddle point, or even converges to a limit cycle.
+
+}
+
+\slide{Physicist's Proof of the Convergence Theorem}
+
+Since $\lim_{t \rightarrow 0} \;\eta_t = 0$ we will eventually get to arbitrarilly small learning rates.
+
+\vfill
+For sufficiently small learning rates any meaningful update of the parameters will be based on an arbitrarily large sample
+of gradients at essentially the same parameter value.
+
+\vfill
+An arbitrarily large sample will become arbitrarily accurate as an estimate of the full gradient.
+
+\vfill
+But since $\sum_t \eta_t = \infty$, no matter how small the learning rate gets, we still can make arbitrarily large motions in parameter space.
+
+
+\vfill
+{\Large
+\vfill
+For a rigorous proof see Neuro-Dynamic Programming, Bertsekas and Tsitsiklis, 1996.}
+
+\slidetwo{SGD as a form of MCMC}{Learning Rate as a Temperature Parameter}
+
+\centerline{\includegraphics[height= 4in]{\images/AnnealingSGD}}
+\centerline{\Large Gao Huang et. al., ICLR 2017}
 
 \slide{END}
 
-}
-\end{document}
+} \end{document}
+

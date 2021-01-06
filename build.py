@@ -52,7 +52,7 @@ def get_doc_content(fldr):
     for file in files:
         filetype = os.path.splitext(file)[1]
         if filetype == '.pdf':
-            html = f'<div style="margin-top: 5%;"><object width=100% height=500px data="{file}" type="application/pdf"></object></div>'
+            html = f'<div style="margin-top: 5%;"><object width=100% height=800px data="{file}" type="application/pdf"></object></div>'
     return html
 
 if __name__ == "__main__":
