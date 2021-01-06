@@ -1,2 +1,2 @@
-from ._util import *
 from ._document import *
+from ._util import *

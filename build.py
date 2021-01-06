@@ -1,49 +1,60 @@
 import os
-import pandas as pd
+import subprocess
+from os.path import basename, splitext
 from glob import glob
 from util import *
 
-navi = open('partials/navi.html').read()
-logo = open('partials/logo.html').read()
-body = open('partials/body.html').read()
-mjax = open('partials/mathjax.html').read()
-post_style = open('partials/post_style.html').read()
-proj_style = open('partials/proj_style.html').read()
+PATH_TO_DOCS = './docs/'
+PATH_TO_DOCS_TABLE = 'docs/docs.csv'
 
+def build_site():
 
-#Build index page
-index = HTMLDocument()
-index.set_style('assets/main.css')
-index.add_header(logo, navi)
-index.add_content(body)
-index.write('index.html')
+    #Read HTML partials
+    navi = open('partials/navigation.html').read()
+    land = open('partials/landing.html').read()
 
-#Initialize post listing page
-posts = HTMLDocument()
-posts.set_style('../assets/main.css')
-posts.add_header(logo, navi)
+    #Build index page
+    index = HTMLDocument()
+    index.set_style('assets/main.css')
+    index.add_header(navi)
+    index.add_content(land)
+    index.write('index.html')
 
-#Build posts
-clean_dir('posts')
-files = glob('raw/*.md')
-for file in files:
-    file = os.path.basename(file)
-    rootname = file.split('.')[0]
-    dir = f'posts/{rootname}'
-    if not os.path.exists(dir):
-        os.mkdir(dir)
+    #Build document listing page
+    documents = HTMLDocument()
+    documents.set_style('../assets/main.css')
+    documents.add_header(navi)
+    documents.add_content(csv_to_html(PATH_TO_DOCS_TABLE))
+    documents.write(PATH_TO_DOCS + 'index.html')
 
-    post = md_to_post(file)
-    this_post = HTMLDocument()
-    this_post.head += mjax
-    this_post.set_style('../../assets/main.css')
-    this_post.add_header(logo, navi)
-    this_post.add_content(post)
-    this_post.add_scripts()
-    this_post.write(f'posts/{rootname}/index.html')
+    #Build document pages
+    docs = os.listdir(PATH_TO_DOCS)
+    docs = [x for x in docs if '.' not in x]
 
+    for fldr in docs:
 
-posts.head = post_style
-posts.add_content(csv_to_html('util/posts.csv'))
-posts.write('posts/index.html')
+        this_doc = HTMLDocument()
+        this_doc.set_style('../../assets/main.css')
+        this_doc.add_header(navi)
+
+        html = get_doc_content(PATH_TO_DOCS + fldr)
+        if html is not None:
+            this_doc.add_content(html)
+            new_file =  PATH_TO_DOCS + '%s/index.html' % fldr
+            this_doc.write(new_file)
+        
+def get_doc_content(fldr):
+
+    """This function only supports inserting pdf currently"""
+
+    files = os.listdir(fldr)
+    html = None
+    for file in files:
+        filetype = os.path.splitext(file)[1]
+        if filetype == '.pdf':
+            html = f'<div style="margin-top: 5%;"><object width=100% height=500px data="{file}" type="application/pdf"></object></div>'
+    return html
+
+if __name__ == "__main__":
+    build_site()
 

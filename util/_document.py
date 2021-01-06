@@ -1,4 +1,5 @@
 class HTMLDocument:
+
     """HTML Document class."""
 
     def __init__(self):
@@ -20,9 +21,7 @@ class HTMLDocument:
             f'{self.head}'
             '</head>\n'
             '<body>\n'
-            '<div>'
             f'{self.body}'
-            '</div>'
             '</body>\n'
             '</html>\n'
         )
@@ -33,17 +32,9 @@ class HTMLDocument:
     def add_content(self, content):
         self.body += content
 
-    def add_header(self, logo, navi):
+    def add_header(self, header):
 
-        self.header = f"""
-                        <span class="header__inner">
-                                {logo}
-                                    <span class="header__right">
-                                        {navi}
-                                    </span>
-                        </span>
-                        """
-        self.body += f'<header class="header">{self.header}</header>'
+        self.body += f'<header class="header">{header}</header>'
 
     def add_text(self,
         text,
@@ -72,5 +63,6 @@ class HTMLDocument:
         self.title = title
 
     def write(self, filepath):
-        with open(filepath, 'w') as f:
-            f.write(str(self))
+        f = open(filepath, 'w+')
+        f.write(str(self))
+        f.close()
