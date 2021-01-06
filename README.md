@@ -2,13 +2,11 @@ All documents should be stored in **cwseitz.github.io/docs** under
 a directory named with the same rootname as the document itself 
 Any additional renderings should also be stored there
 
-For example, to render a .tex file as .pdf, enter the documents directory and run
+For example, to render a .tex file as .pdf, enter cwseitz.github.io/docs/DOCNAME directory and run
 
 ```bash
 latexpdf --interaction=nonstopmode DOCNAME.tex
 ```
-
-###Notes
 
 To take advantage of the maturity of LaTeX w.r.t
 most HTML-based math rendering tools e.g. MathJax
