@@ -13047,7 +13047,7 @@ div#notebook {
 
 <!-- Custom stylesheet, it must be in the same directory as the html file -->
 <link rel="stylesheet" href="custom.css">
-
+<link rel="stylesheet" href="../../assets/main.css">
 <!-- Loading mathjax macro -->
 <!-- Load mathjax -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
@@ -13071,6 +13071,22 @@ div#notebook {
     </script>
     <!-- End of mathjax configuration --></head>
 <body>
+  <span class="header__inner">
+    <div class="logo">
+       <span class="logo__mark">></span>
+       <span class="logo__text">cd ~</span>
+       <span class="logo__cursor" style="background-color:#ffffff;animation-duration:0.75s;"></span>
+    </div>
+
+  <span class="header__right">
+    <nav class="menu">
+       <ul class="menu__inner">
+         <li><a href="/">Home</a></li>
+         <li><a href="/docs/">Docs</a></li>
+       </ul>
+    </nav>
+   </span>
+  </span>
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
