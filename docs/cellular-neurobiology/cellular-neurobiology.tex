@@ -101,9 +101,90 @@
 \begin{document}
 \lecture{1}{January 11}{Ruth Eatock}{Clayton Seitz}
 
-\section{Action Potentials}
+\section{Electrical properties of neurons}
+
+This section covers the origins of electrical properties of
+single neurons. The physical properties of membranes ultimately 
+govern the way that electrical signals can be generated and transmitted
+in the nervous system. 
+
+Neuroscience research can be conducted at molecular/genetic scales
+as well as cellular/system scales. Hyperpolarization refers to a more
+negative polarization while depolarization refers to a more postive
+polarization. A threshold of -50\si{mV} is common for neurons. Larger
+currents will result in faster firing (spike frequency). 
+
+\subsection{Passive membrane properties}
+
+The electrical properties of the membrane can be represented by a 
+resistance (conductance), a capacitance, and a DC battery that maintains
+the resting potential. Ions cannot move across the bilayer due to its
+hydrophobicity and the ion channels reduce the membrane resistance 
+(increase conductance). 
+
+Outside the cell the potential is zero (ground). Membrane current has 
+capacitive and resistive components
+
+\begin{equation}
+I_{m} = IC + I_{R}
+\end{equation}
+
+\subsection{Current Conventions}
+
+Positive current is a flow of positive charges out of the cell. For example, 
+a current of potassium into the cell is a negative current. Keep in mind
+the electrical equivalence of in efflux of positive and influx of negative
+and vice-versa. The capacitive current is given by 
+
+\begin{equation}
+I_{C} = C\frac{dV}{dt}
+\end{equation}
+
+which has a solution
+
+\begin{equation}
+V_{m}(t) = V_{\infty}(1-e^{\frac{-t}{\tau}})
+\end{equation}
+
+where $V_{\infty}$ is the steady state voltage. At long times
+we can apply to Ohm's Law. The membrane is a low-pass filter. 
+Vision runs on gain rather than speed while neurons involved 
+in hearing are faster. The membrane time constant nicely 
+summarizes the response of a neuron to an injected current.
+
+The cell membrane is the dielectric of a parallel plate 
+capacitor while the "plates" are the ions in the solution. 
+
+A capacitance of 10pF is a common value for the total 
+capacitance. Physiological range of voltage is +/- 100mV
+beyond which you get membrane break-down. Average resting
+is between -40mV and -80mV. 
+
+Capactive current flows only when voltage is changing. Parallel 
+capacitors (one per unit area) just sum to give the total 
+capacitance. Recall the basic relation
+
+\begin{equation}
+C = \epsilon\frac{A}{d}
+\end{equation}
+
+There is a bath of chloride, potassium, sodium, and calcium. 
+each of which has an associated channel. 
+There are other anions that are too large to pass through 
+ion channels: proteins, saccharides, ATP/GTP, etc. Charges
+move across the membrane via pumps and channels. A transporter
+(pump) moves a few ions at a time so we generally neglect them.  
+The sodium-potassium pump is a common one. ATPases burn ATP
+to pump ions across the membrane. 
+
+
+
+
+
 
 \end{document}
+
+
 
 
 
