@@ -14,8 +14,6 @@ and the ability to create reusable LaTeX markup,
 all posts will be rendered as PDF for reading 
 purposes. 
 
-Forcing yourself to write entire documents
-encourages incorporation of smaller ideas 
-into a larger work
+
 
 
