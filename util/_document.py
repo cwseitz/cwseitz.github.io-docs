@@ -26,8 +26,8 @@ class HTMLDocument:
             '</html>\n'
         )
 
-    def add_scripts(self):
-    	self.body += """<script type="text/javascript" src="assets/main.js"></script>"""
+    def add_script(self, path):
+    	self.body += f"""<script type="text/javascript" src={path}></script>"""
 
     def add_content(self, content):
         self.body += content

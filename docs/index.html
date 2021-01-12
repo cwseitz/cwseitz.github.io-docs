@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../assets/main.css">
 </head>
 <body>
-<header class="header">
+<script type="text/javascript" src=../assets/table.js></script><header class="header">
   <span class="header__inner">
     <div class="logo">
        <span class="logo__mark">></span>
@@ -23,333 +23,248 @@
     </nav>
    </span>
   </span>
-</header><table border="0" class="dataframe">
+</header><table border="0" id="myTable" class="dataframe">
   <thead>
     <tr style="text-align: left;">
-      <th>title</th>
-      <th>author</th>
-      <th>category</th>
+      <th onclick="sortTable(0)">Title</th>
+      <th onclick="sortTable(1)">Subject</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>python-c-api</td>
-      <td>Clayton Seitz</td>
+      <td><a href="python-c-api">The Python/C API</a></td>
       <td>programming</td>
     </tr>
     <tr>
-      <td>network-programming-with-c-and-pcap</td>
-      <td>Clayton Seitz</td>
+      <td><a href="network-programming-with-c-and-pcap">TCP/IP Networking Programming</a></td>
       <td>programming</td>
     </tr>
     <tr>
-      <td>getting-started-with-c</td>
-      <td>Clayton Seitz</td>
+      <td><a href="getting-started-with-c">Introduction to C</a></td>
       <td>programming</td>
     </tr>
     <tr>
-      <td>c-vs-python-bubble-sort-performance</td>
-      <td>Clayton Seitz</td>
+      <td><a href="c-vs-python-bubble-sort-performance">C/Python Bubble Sort</a></td>
       <td>programming</td>
     </tr>
     <tr>
-      <td>how-to-install-c-kernel-in-jupyter</td>
-      <td>Clayton Seitz</td>
+      <td><a href="how-to-install-c-kernel-in-jupyter">C Kernel in Jupyter</a></td>
       <td>programming</td>
     </tr>
     <tr>
-      <td>attention-is-all-you-need</td>
-      <td>Clayton Seitz</td>
+      <td><a href="attention-is-all-you-need">Attention is all you need</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>deep-learning-backprop</td>
-      <td>Clayton Seitz</td>
+      <td><a href="deep-learning-backprop">Backpropagation</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>regularization</td>
-      <td>Clayton Seitz</td>
+      <td><a href="regularization">Regularization</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>information-theory-basics</td>
-      <td>Clayton Seitz</td>
+      <td><a href="learning-theory">Learning Theory</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>stochastic-gradient-descent</td>
-      <td>Clayton Seitz</td>
+      <td><a href="fundamentals-of-deep-learning">Deep Learning Fundamentals</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>learning-theory</td>
-      <td>Clayton Seitz</td>
+      <td><a href="a3c">Actor-Critic Algorithms</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>fundamentals-of-deep-learning</td>
-      <td>Clayton Seitz</td>
+      <td><a href="alphabeta">Alpha-Beta Algorithm</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>recurrent-neural-networks</td>
-      <td>Clayton Seitz</td>
+      <td><a href="alphago">Alpha-Go</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>a3c</td>
-      <td>David McAllester</td>
+      <td><a href="alphastar">Alpha-Star</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>alphabeta</td>
-      <td>David McAllester</td>
+      <td><a href="backprop">Backpropagation</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>alphago</td>
-      <td>David McAllester</td>
+      <td><a href="backprop2">Backpropagation 2</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>alphastar</td>
-      <td>David McAllester</td>
+      <td><a href="circuits">Circuits</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>backprop</td>
-      <td>David McAllester</td>
+      <td><a href="classical">Classical</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>backprop2</td>
-      <td>David McAllester</td>
+      <td><a href="cnns">Convolutional Neural Networks</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>circuits</td>
-      <td>David McAllester</td>
+      <td><a href="cnns2">Convolutional Neural Networks 2</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>classical</td>
-      <td>David McAllester</td>
+      <td><a href="collapse">Mode Collapse</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>cnns</td>
-      <td>David McAllester</td>
+      <td><a href="contrastive">Contrasive GANs</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>cnns2</td>
-      <td>David McAllester</td>
+      <td><a href="ctc">CTC</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>collapse</td>
-      <td>David McAllester</td>
+      <td><a href="decoupling1">Decoupling</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>contrastive</td>
-      <td>David McAllester</td>
+      <td><a href="dgms">Graphical Algorithms</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>ctc</td>
-      <td>David McAllester</td>
+      <td><a href="dgms1">Graphical Algorithms 2</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>decoupling1</td>
-      <td>David McAllester</td>
+      <td><a href="dgms2">Graphical Algorithms 3</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>dgms</td>
-      <td>David McAllester</td>
+      <td><a href="double">Double Descent</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>dgms1</td>
-      <td>David McAllester</td>
+      <td><a href="dropout">Dropout</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>dgms2</td>
-      <td>David McAllester</td>
+      <td><a href="early">Early Stopping</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>double</td>
-      <td>David McAllester</td>
+      <td><a href="early2">Early Stopping 2</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>dropout</td>
-      <td>David McAllester</td>
+      <td><a href="edfslides">EDF Framework</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>early</td>
-      <td>David McAllester</td>
+      <td><a href="einstein">Einstein Notation</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>early2</td>
-      <td>David McAllester</td>
+      <td><a href="elbo">Evidence Lower Bound</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>edfslides</td>
-      <td>David McAllester</td>
+      <td><a href="flow">Gradient Flow</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>einstein</td>
-      <td>David McAllester</td>
+      <td><a href="frameworks">Deep Learning Frameworks</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>elbo</td>
-      <td>David McAllester</td>
+      <td><a href="fundamentals">Deep Learning Fundamentals</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>flow</td>
-      <td>David McAllester</td>
+      <td><a href="fundamentals2">Deep Learning Fundamentals 2</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>frameworks</td>
-      <td>David McAllester</td>
+      <td><a href="gans">GANs</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>fundamentals</td>
-      <td>David McAllester</td>
+      <td><a href="gans2">GANs 2</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>fundamentals2</td>
-      <td>David McAllester</td>
+      <td><a href="gaussianrdas">Gaussian RDAs</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>gans</td>
-      <td>David McAllester</td>
+      <td><a href="heat">Thermodynamics in Deep Learning</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>gans2</td>
-      <td>David McAllester</td>
+      <td><a href="highway">Highway</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>gaussianrdas</td>
-      <td>David McAllester</td>
+      <td><a href="history">History of Deep Learning</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>heat</td>
-      <td>David McAllester</td>
+      <td><a href="implicit">Implicit Regularization</a></td>
       <td>deep-learning</td>
     </tr>
     <tr>
-      <td>highway</td>
-      <td>David McAllester</td>
-      <td>deep-learning</td>
-    </tr>
-    <tr>
-      <td>history</td>
-      <td>David McAllester</td>
-      <td>deep-learning</td>
-    </tr>
-    <tr>
-      <td>implicit</td>
-      <td>David McAllester</td>
-      <td>deep-learning</td>
-    </tr>
-    <tr>
-      <td>optical-instrumentation</td>
-      <td>Clayton Seitz</td>
+      <td><a href="optical-instrumentation">Optical Instrumentation</a></td>
       <td>physics</td>
     </tr>
     <tr>
-      <td>gaussian-beams</td>
-      <td>Clayton Seitz</td>
+      <td><a href="mean-squared-displacement">Mean Squared Displacement</a></td>
       <td>physics</td>
     </tr>
     <tr>
-      <td>mean-squared-displacement</td>
-      <td>Clayton Seitz</td>
+      <td><a href="localization-error">Localization Errror</a></td>
       <td>physics</td>
     </tr>
     <tr>
-      <td>localization-error</td>
-      <td>Clayton Seitz</td>
+      <td><a href="introduction-to-fast-fourier-transforms-fft">1D Fast Fourier Transforms (FFT)</a></td>
       <td>physics</td>
     </tr>
     <tr>
-      <td>introduction-to-fast-fourier-transforms-fft</td>
-      <td>Clayton Seitz</td>
+      <td><a href="electric-and-magnetic-fields-in-a-dielectric-medium">EM-Fields in a Dielectric</a></td>
       <td>physics</td>
     </tr>
     <tr>
-      <td>electric-and-magnetic-fields-in-a-dielectric-medium</td>
-      <td>Clayton Seitz</td>
+      <td><a href="characterizing-digital-ccdcmos-light-sensors">Light Sensors</a></td>
       <td>physics</td>
     </tr>
     <tr>
-      <td>characterizing-digital-ccdcmos-light-sensors</td>
-      <td>Clayton Seitz</td>
+      <td><a href="brownian-motion-the-langevin-equation">The Langevin Equation</a></td>
       <td>physics</td>
     </tr>
     <tr>
-      <td>brownian-motion-the-langevin-equation</td>
-      <td>Clayton Seitz</td>
+      <td><a href="electrodynamics-of-isotropic-media">Electrodynamics in Isotropic Media</a></td>
       <td>physics</td>
     </tr>
     <tr>
-      <td>electrodynamics-of-isotropic-media</td>
-      <td>Clayton Seitz</td>
+      <td><a href="photon-statistics">Photon Statistics</a></td>
       <td>physics</td>
     </tr>
     <tr>
-      <td>photon-statistics</td>
-      <td>Clayton Seitz</td>
-      <td>physics</td>
-    </tr>
-    <tr>
-      <td>neuroelectronics</td>
-      <td>Clayton Seitz</td>
+      <td><a href="neuroelectronics">Neuroelectronics</a></td>
       <td>electronics</td>
     </tr>
     <tr>
-      <td>fourier-analysis-of-digital-images</td>
-      <td>Clayton Seitz</td>
+      <td><a href="fourier-analysis-of-digital-images">2D Fast Fourier Transforms (FFT)</a></td>
       <td>electronics</td>
     </tr>
     <tr>
-      <td>frequency-response-of-an-rc-circuit</td>
-      <td>Clayton Seitz</td>
+      <td><a href="frequency-response-of-an-rc-circuit">RC Frequency Response</a></td>
       <td>electronics</td>
     </tr>
     <tr>
-      <td>analog-impulse-response</td>
-      <td>Clayton Seitz</td>
+      <td><a href="analog-impulse-response">Analog Impulse Response</a></td>
       <td>electronics</td>
     </tr>
     <tr>
-      <td>simulating-a-transformer-in-ltspice</td>
-      <td>Clayton Seitz</td>
-      <td>electronics</td>
-    </tr>
-    <tr>
-      <td>solving-an-lrc-circuit</td>
-      <td>Clayton Seitz</td>
+      <td><a href="solving-an-lrc-circuits">LRC Circuits</a></td>
       <td>electronics</td>
     </tr>
   </tbody>

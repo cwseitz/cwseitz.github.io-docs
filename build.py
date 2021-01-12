@@ -23,6 +23,7 @@ def build_site():
     #Build document listing page
     documents = HTMLDocument()
     documents.set_style('../assets/main.css')
+    documents.add_script('../assets/table.js')
     documents.add_header(navi)
     documents.add_content(excel_to_html(PATH_TO_DOCS_TABLE))
     documents.write(PATH_TO_DOCS + 'index.html')
