@@ -12,6 +12,7 @@ def excel_to_html(file):
     html = posts.to_html(justify='left', index=False, escape=False)
     html = html.replace('border="1"','border="0" id="myTable"')
     html = html.replace('<th>link</th>', '<th onclick="sortTable(0)">Title</th>')
-    html = html.replace('<th>subject</th>', '<th onclick="sortTable(1)">Subject</th>')
+    html = html.replace('<th>subject</th>', '<th onclick="sortTable(1)">Subject</th>') 
+    html = html.replace('<th>group</th>', '<th onclick="sortTable(2)">Group</th>')
     
     return html
