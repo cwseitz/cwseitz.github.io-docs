@@ -13074,6 +13074,39 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;style&gt;.container { width:60% !important; }&lt;/style&gt;&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+
+<div class="output_html rendered_html output_subarea ">
+<style>.container { width:60% !important; }</style>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13088,11 +13121,11 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
 
 <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
 
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello World&quot;</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">);</span>
     
 <span class="p">}</span>
 </pre></div>
@@ -13207,34 +13240,34 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[57]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<span class="nb">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
 
-    <span class="kt">char</span> <span class="n">a_char</span><span class="p">;</span> 
-    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">a_uchar</span><span class="p">;</span>
-    <span class="kt">signed</span> <span class="kt">char</span> <span class="n">a_schar</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">a_int</span><span class="p">;</span> 
-    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">a_uint</span><span class="p">;</span>
-    <span class="kt">float</span> <span class="n">a_float</span><span class="p">;</span>
-    <span class="kt">double</span> <span class="n">a_double</span><span class="p">;</span>
-    <span class="kt">short</span> <span class="n">a_short</span><span class="p">;</span>
-    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">a_ushort</span><span class="p">;</span>
-    <span class="kt">long</span> <span class="n">a_long</span><span class="p">;</span>
-    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">a_ulong</span><span class="p">;</span>
+    <span class="n">char</span> <span class="n">a_char</span><span class="p">;</span> 
+    <span class="n">unsigned</span> <span class="n">char</span> <span class="n">a_uchar</span><span class="p">;</span>
+    <span class="n">signed</span> <span class="n">char</span> <span class="n">a_schar</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">a_int</span><span class="p">;</span> 
+    <span class="n">unsigned</span> <span class="nb">int</span> <span class="n">a_uint</span><span class="p">;</span>
+    <span class="nb">float</span> <span class="n">a_float</span><span class="p">;</span>
+    <span class="n">double</span> <span class="n">a_double</span><span class="p">;</span>
+    <span class="n">short</span> <span class="n">a_short</span><span class="p">;</span>
+    <span class="n">unsigned</span> <span class="n">short</span> <span class="n">a_ushort</span><span class="p">;</span>
+    <span class="n">long</span> <span class="n">a_long</span><span class="p">;</span>
+    <span class="n">unsigned</span> <span class="n">long</span> <span class="n">a_ulong</span><span class="p">;</span>
     
     
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The size of char is %zu byte(s)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">a_char</span><span class="p">));</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The size of unsigned char is %zu byte(s)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">a_uchar</span><span class="p">));</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The size of signed char is %zu byte(s)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">a_schar</span><span class="p">));</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The size of int is %zu byte(s)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">a_int</span><span class="p">));</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The size of unsigned int is %zu byte(s)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">a_uint</span><span class="p">));</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The size of a float is %zu byte(s)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">a_float</span><span class="p">));</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The size of a double is %zu byte(s)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">a_double</span><span class="p">));</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The size of short is %zu byte(s)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">a_short</span><span class="p">));</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The size of unsigned short is %zu byte(s)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">a_ushort</span><span class="p">));</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The size of long is %zu byte(s)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">a_long</span><span class="p">));</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The size of unsigned long is %zu byte(s)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">a_ulong</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The size of char is %zu byte(s)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">a_char</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The size of unsigned char is %zu byte(s)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">a_uchar</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The size of signed char is %zu byte(s)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">a_schar</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The size of int is %zu byte(s)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">a_int</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The size of unsigned int is %zu byte(s)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">a_uint</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The size of a float is %zu byte(s)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">a_float</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The size of a double is %zu byte(s)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">a_double</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The size of short is %zu byte(s)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">a_short</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The size of unsigned short is %zu byte(s)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">a_ushort</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The size of long is %zu byte(s)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">a_long</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The size of unsigned long is %zu byte(s)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">a_ulong</span><span class="p">));</span>
     
     
 <span class="p">}</span>
@@ -13287,23 +13320,23 @@ The size of unsigned long is 8 byte(s)
 <div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<span class="nb">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
 
-    <span class="kt">int</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">celsius</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="n">step</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">celsius</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="n">step</span><span class="p">;</span>
     
-    <span class="n">lower</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* lower limit of temp table */</span>
-    <span class="n">upper</span> <span class="o">=</span> <span class="mi">300</span><span class="p">;</span> <span class="cm">/* upper limit of temp table */</span>
-    <span class="n">step</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span> <span class="cm">/* step size */</span>
+    <span class="n">lower</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">/*</span> <span class="n">lower</span> <span class="n">limit</span> <span class="n">of</span> <span class="n">temp</span> <span class="n">table</span> <span class="o">*/</span>
+    <span class="n">upper</span> <span class="o">=</span> <span class="mi">300</span><span class="p">;</span> <span class="o">/*</span> <span class="n">upper</span> <span class="n">limit</span> <span class="n">of</span> <span class="n">temp</span> <span class="n">table</span> <span class="o">*/</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span> <span class="o">/*</span> <span class="n">step</span> <span class="n">size</span> <span class="o">*/</span>
     
     <span class="n">fahr</span> <span class="o">=</span> <span class="n">lower</span><span class="p">;</span>
     
     <span class="k">while</span> <span class="p">(</span><span class="n">fahr</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">){</span>
         
         <span class="n">celsius</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">fahr</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">/</span> <span class="mi">9</span><span class="p">;</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\t</span><span class="s">%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">celsius</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\t</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">celsius</span><span class="p">);</span>
         <span class="n">fahr</span> <span class="o">=</span> <span class="n">fahr</span> <span class="o">+</span> <span class="n">step</span><span class="p">;</span>
     
     <span class="p">}</span>   
@@ -13361,23 +13394,23 @@ The size of unsigned long is 8 byte(s)
 <div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<span class="nb">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
 
-    <span class="kt">int</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">celsius</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="n">step</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">celsius</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">,</span> <span class="n">step</span><span class="p">;</span>
     
-    <span class="n">lower</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* lower limit of temp table */</span>
-    <span class="n">upper</span> <span class="o">=</span> <span class="mi">300</span><span class="p">;</span> <span class="cm">/* upper limit of temp table */</span>
-    <span class="n">step</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span> <span class="cm">/* step size */</span>
+    <span class="n">lower</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">/*</span> <span class="n">lower</span> <span class="n">limit</span> <span class="n">of</span> <span class="n">temp</span> <span class="n">table</span> <span class="o">*/</span>
+    <span class="n">upper</span> <span class="o">=</span> <span class="mi">300</span><span class="p">;</span> <span class="o">/*</span> <span class="n">upper</span> <span class="n">limit</span> <span class="n">of</span> <span class="n">temp</span> <span class="n">table</span> <span class="o">*/</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span> <span class="o">/*</span> <span class="n">step</span> <span class="n">size</span> <span class="o">*/</span>
     
     <span class="n">fahr</span> <span class="o">=</span> <span class="n">lower</span><span class="p">;</span>
     
     <span class="k">for</span> <span class="p">(</span><span class="n">fahr</span> <span class="o">=</span> <span class="n">lower</span><span class="p">;</span> <span class="n">fahr</span> <span class="o">&lt;=</span> <span class="n">upper</span><span class="p">;</span> <span class="n">fahr</span> <span class="o">=</span> <span class="n">fahr</span> <span class="o">+</span> <span class="n">step</span><span class="p">){</span>
     
         <span class="n">celsius</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">fahr</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">/</span> <span class="mi">9</span><span class="p">;</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\t</span><span class="s">%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">celsius</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\t</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fahr</span><span class="p">,</span> <span class="n">celsius</span><span class="p">);</span>
     <span class="p">}</span>
 
 <span class="p">}</span>
@@ -13434,12 +13467,12 @@ The size of unsigned long is 8 byte(s)
 <div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<span class="nb">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
 
-    <span class="kt">char</span> <span class="n">mystr</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;bananas&quot;</span><span class="p">;</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The size of &#39;%s&#39; is %zu byte(s)</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">mystr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">mystr</span><span class="p">));</span>
+    <span class="n">char</span> <span class="n">mystr</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;bananas&quot;</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The size of &#39;</span><span class="si">%s</span><span class="s2">&#39; is %zu byte(s)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">mystr</span><span class="p">,</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">mystr</span><span class="p">));</span>
 
 <span class="p">}</span>
 </pre></div>
@@ -13480,18 +13513,18 @@ The size of unsigned long is 8 byte(s)
 <div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<span class="nb">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
 
-    <span class="kt">int</span> <span class="n">ndigits</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">digits</span><span class="p">[</span><span class="n">ndigits</span><span class="p">];</span>
+    <span class="nb">int</span> <span class="n">ndigits</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">i</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">digits</span><span class="p">[</span><span class="n">ndigits</span><span class="p">];</span>
     
     <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">ndigits</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
 
         <span class="n">digits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">digits</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">digits</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
     
     <span class="p">}</span>    
 <span class="p">}</span>
@@ -13538,27 +13571,27 @@ The size of unsigned long is 8 byte(s)
 <div class="prompt input_prompt">In&nbsp;[55]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;ctype.h&gt;</span><span class="cp"></span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
+<span class="c1">#include &lt;ctype.h&gt;</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="nb">int</span> <span class="n">main</span><span class="p">(){</span>
 
-   <span class="kt">int</span> <span class="n">var1</span> <span class="o">=</span> <span class="sc">&#39;a&#39;</span><span class="p">;</span>
-   <span class="kt">int</span> <span class="n">var2</span> <span class="o">=</span> <span class="sc">&#39;5&#39;</span><span class="p">;</span>
+   <span class="nb">int</span> <span class="n">var1</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span><span class="p">;</span>
+   <span class="nb">int</span> <span class="n">var2</span> <span class="o">=</span> <span class="s1">&#39;5&#39;</span><span class="p">;</span>
     
     
-   <span class="cm">/* Check variable 1 */</span>
+   <span class="o">/*</span> <span class="n">Check</span> <span class="n">variable</span> <span class="mi">1</span> <span class="o">*/</span>
    <span class="k">if</span><span class="p">(</span><span class="n">isdigit</span><span class="p">(</span><span class="n">var1</span><span class="p">))</span> <span class="p">{</span>
-      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;var1 = |%c| is a digit</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">var1</span><span class="p">);</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;var1 = |</span><span class="si">%c</span><span class="s2">| is a digit</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">var1</span><span class="p">);</span>
    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">isalpha</span><span class="p">(</span><span class="n">var1</span><span class="p">)){</span>
-      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;var1 = |%c| is an alphabetical character</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">var1</span><span class="p">);</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;var1 = |</span><span class="si">%c</span><span class="s2">| is an alphabetical character</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">var1</span><span class="p">);</span>
    <span class="p">}</span>
    
-   <span class="cm">/* Check variable 2 */</span>
+   <span class="o">/*</span> <span class="n">Check</span> <span class="n">variable</span> <span class="mi">2</span> <span class="o">*/</span>
    <span class="k">if</span><span class="p">(</span><span class="n">isdigit</span><span class="p">(</span><span class="n">var2</span><span class="p">)){</span>
-      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;var2 = |%c| is a digit</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">var2</span><span class="p">);</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;var2 = |</span><span class="si">%c</span><span class="s2">| is a digit</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">var2</span><span class="p">);</span>
    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">isalpha</span><span class="p">(</span><span class="n">var2</span><span class="p">)){</span>
-      <span class="n">printf</span><span class="p">(</span><span class="s">&quot;var2= |%c| is an alphabetical character</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">var2</span><span class="p">);</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;var2= |</span><span class="si">%c</span><span class="s2">| is an alphabetical character</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">var2</span><span class="p">);</span>
    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -13600,23 +13633,23 @@ var2 = |5| is a digit
 <div class="prompt input_prompt">In&nbsp;[61]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
 
-<span class="kt">float</span> <span class="nf">mult</span><span class="p">(</span><span class="kt">float</span> <span class="n">m</span><span class="p">,</span> <span class="kt">float</span> <span class="n">n</span><span class="p">);</span>
+<span class="nb">float</span> <span class="n">mult</span><span class="p">(</span><span class="nb">float</span> <span class="n">m</span><span class="p">,</span> <span class="nb">float</span> <span class="n">n</span><span class="p">);</span>
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="nb">int</span> <span class="n">main</span><span class="p">(){</span>
 
-    <span class="kt">float</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">;</span>
+    <span class="nb">float</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">;</span>
     <span class="n">m</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> 
     <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">mult</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The product is: %f&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The product is: </span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
     
 <span class="p">}</span>
 
-<span class="kt">float</span> <span class="nf">mult</span><span class="p">(</span><span class="kt">float</span> <span class="n">m</span><span class="p">,</span> <span class="kt">float</span> <span class="n">n</span><span class="p">){</span>
+<span class="nb">float</span> <span class="n">mult</span><span class="p">(</span><span class="nb">float</span> <span class="n">m</span><span class="p">,</span> <span class="nb">float</span> <span class="n">n</span><span class="p">){</span>
 
-    <span class="kt">float</span> <span class="n">p</span><span class="p">;</span> 
+    <span class="nb">float</span> <span class="n">p</span><span class="p">;</span> 
     <span class="n">p</span> <span class="o">=</span> <span class="n">m</span><span class="o">*</span><span class="n">n</span><span class="p">;</span>
     <span class="k">return</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
     
@@ -13660,25 +13693,25 @@ they are useful, it is necessary to understand how RAM in a computer is organize
 <div class="prompt input_prompt">In&nbsp;[77]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
 
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="nb">int</span> <span class="n">main</span><span class="p">(){</span>
 
-    <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="o">*</span><span class="n">b</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="o">*</span><span class="n">b</span><span class="p">;</span>
     
     <span class="n">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
     <span class="n">b</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span> 
     
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The variable a is located at: %p</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span> 
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The contents of a is: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">b</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The variable a is located at: %p</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span> 
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The contents of a is: </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">b</span><span class="p">);</span>
     
     <span class="n">c</span> <span class="o">=</span> <span class="o">*</span><span class="n">b</span><span class="p">;</span>
     <span class="o">*</span><span class="n">b</span> <span class="o">+=</span> <span class="mi">5</span><span class="p">;</span>
     <span class="o">++*</span><span class="n">b</span><span class="p">;</span>
 
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The contents of a is: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">b</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The contents of c is: %d&quot;</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The contents of a is: </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">b</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The contents of c is: </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
     
 <span class="p">}</span>
 </pre></div>
@@ -13721,11 +13754,11 @@ The contents of c is: 5</pre>
 <div class="prompt input_prompt">In&nbsp;[78]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
 
-<span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
+<span class="n">void</span> <span class="n">swap</span><span class="p">(</span><span class="nb">int</span> <span class="n">x</span><span class="p">,</span> <span class="nb">int</span> <span class="n">y</span><span class="p">){</span>
 
-    <span class="kt">int</span> <span class="n">temp</span><span class="p">;</span> 
+    <span class="nb">int</span> <span class="n">temp</span><span class="p">;</span> 
     <span class="n">temp</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span> 
     <span class="n">y</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
@@ -13733,15 +13766,15 @@ The contents of c is: 5</pre>
 <span class="p">}</span>
 
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="nb">int</span> <span class="n">main</span><span class="p">(){</span>
 
-    <span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span> 
+    <span class="nb">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span> 
     <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> 
     <span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
     
     <span class="n">swap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The variable x contains: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span> 
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The variable y contains: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span> 
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The variable x contains: </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span> 
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The variable y contains: </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span> 
 
 <span class="p">}</span>
 </pre></div>
@@ -13783,11 +13816,11 @@ The variable y contains: 2
 <div class="prompt input_prompt">In&nbsp;[80]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#include &lt;stdio.h&gt;</span>
 
-<span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">px</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">py</span><span class="p">){</span>
+<span class="n">void</span> <span class="n">swap</span><span class="p">(</span><span class="nb">int</span> <span class="o">*</span><span class="n">px</span><span class="p">,</span> <span class="nb">int</span> <span class="o">*</span><span class="n">py</span><span class="p">){</span>
 
-    <span class="kt">int</span> <span class="n">temp</span><span class="p">;</span> 
+    <span class="nb">int</span> <span class="n">temp</span><span class="p">;</span> 
     <span class="n">temp</span> <span class="o">=</span> <span class="o">*</span><span class="n">px</span><span class="p">;</span>
     <span class="o">*</span><span class="n">px</span> <span class="o">=</span> <span class="o">*</span><span class="n">py</span><span class="p">;</span> 
     <span class="o">*</span><span class="n">py</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
@@ -13795,15 +13828,15 @@ The variable y contains: 2
 <span class="p">}</span>
 
 
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="nb">int</span> <span class="n">main</span><span class="p">(){</span>
 
-    <span class="kt">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span> 
+    <span class="nb">int</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">;</span> 
     <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> 
     <span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
     
     <span class="n">swap</span><span class="p">(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">);</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The variable x contains: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span> 
-    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;The variable y contains: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span> 
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The variable x contains: </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span> 
+    <span class="n">printf</span><span class="p">(</span><span class="s2">&quot;The variable y contains: </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span> 
 
 <span class="p">}</span>
 </pre></div>
@@ -13845,25 +13878,25 @@ The variable y contains: 1
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c"><pre><span></span><span class="cp">#define ALLOCSIZE 10000</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#define ALLOCSIZE 10000</span>
 
-<span class="k">static</span> <span class="kt">char</span> <span class="n">allocbuf</span><span class="p">[</span><span class="n">ALLOCSIZE</span><span class="p">];</span> <span class="cm">/* array of characters */</span>
-<span class="k">static</span> <span class="kt">char</span> <span class="o">*</span><span class="n">allocp</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">allocbuf</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="cm">/* initialize pointer to start of allocbuf */</span>
+<span class="n">static</span> <span class="n">char</span> <span class="n">allocbuf</span><span class="p">[</span><span class="n">ALLOCSIZE</span><span class="p">];</span> <span class="o">/*</span> <span class="n">array</span> <span class="n">of</span> <span class="n">characters</span> <span class="o">*/</span>
+<span class="n">static</span> <span class="n">char</span> <span class="o">*</span><span class="n">allocp</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">allocbuf</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="o">/*</span> <span class="n">initialize</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">start</span> <span class="n">of</span> <span class="n">allocbuf</span> <span class="o">*/</span>
 
-<span class="kt">char</span> <span class="o">*</span><span class="nf">alloc</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">){</span>
+<span class="n">char</span> <span class="o">*</span><span class="n">alloc</span><span class="p">(</span><span class="nb">int</span> <span class="n">n</span><span class="p">){</span>
     
-    <span class="k">if</span><span class="p">(</span><span class="n">allocbuf</span> <span class="o">+</span> <span class="n">ALLOCSIZE</span> <span class="o">-</span> <span class="n">allocp</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">){</span> <span class="cm">/* check if n chars will fit */</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">allocbuf</span> <span class="o">+</span> <span class="n">ALLOCSIZE</span> <span class="o">-</span> <span class="n">allocp</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">){</span> <span class="o">/*</span> <span class="n">check</span> <span class="k">if</span> <span class="n">n</span> <span class="n">chars</span> <span class="n">will</span> <span class="n">fit</span> <span class="o">*/</span>
         <span class="n">allocp</span> <span class="o">+=</span> <span class="n">n</span><span class="p">;</span>
         <span class="k">return</span> <span class="n">allocp</span> <span class="o">-</span> <span class="n">n</span><span class="p">;</span> 
         
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* signal that there is no space */</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="o">/*</span> <span class="n">signal</span> <span class="n">that</span> <span class="n">there</span> <span class="ow">is</span> <span class="n">no</span> <span class="n">space</span> <span class="o">*/</span>
     <span class="p">}</span>
 
 <span class="p">}</span>
 
-<span class="kt">void</span> <span class="nf">afree</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">p</span><span class="p">){</span>
+<span class="n">void</span> <span class="n">afree</span><span class="p">(</span><span class="n">char</span> <span class="o">*</span><span class="n">p</span><span class="p">){</span>
     
     <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">&gt;=</span> <span class="n">allocbuf</span> <span class="o">&amp;&amp;</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="n">allocbuf</span> <span class="o">+</span> <span class="n">ALLOCSIZE</span><span class="p">){</span>
         
