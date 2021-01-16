@@ -55,20 +55,19 @@ td {
 	margin: 0px;
 }
 
-.bgimg {
-	  background-image: url('./landing');
-	  height: 500px;
-	  width: 900px;
-	  margin-right:auto;
-	  margin-left:auto;
-	  margin-top: 7%;
-	}
+.bgimg{ 
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 7%;
+}
 
 .subheading {
 	margin-right:auto;
 	margin-left:auto;
 	text-align:center;
-	font-family: "Lucida Console";
+	font-size: 12px;
+	font-family: 'Verdana';
 	padding: 10px;
 	}
 
