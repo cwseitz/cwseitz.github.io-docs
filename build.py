@@ -70,7 +70,9 @@ def build_photo_page():
     photos = glob('photos/*.jpg')
     for photo in photos:
         photo = photo.split('/')[-1]
-        page += template.replace('src=""',f'src="{photo}"')
+        this_template = template.replace('src=""',f'src="{photo}"')
+        this_template = this_template.replace('href=""',f'href="{photo}"')
+        page += this_template
 
     return page
 
