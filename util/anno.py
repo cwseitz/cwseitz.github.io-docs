@@ -2,6 +2,7 @@ from exif import Image as _Image
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw 
+from glob import glob
 
 def get_exif(file):
 	
@@ -29,7 +30,7 @@ def anno_exif(file, str, box_size=(600,400), out_file=None):
 	width, height = img.size
 	rect_width, rect_height = box_size
 
-	font = ImageFont.truetype('arial.ttf', 50)
+	font = ImageFont.truetype('assets/arial.ttf', 50)
 	draw = ImageDraw.Draw(img)
 	draw.rectangle((width-rect_width, height-rect_height, width, height), fill='black')
 	draw.text((width-rect_width,height-rect_height),str,(255,255,255), font=font)
@@ -37,3 +38,8 @@ def anno_exif(file, str, box_size=(600,400), out_file=None):
 	img.save(out_file)
 
 
+str = 'photos/*.jpg'
+files = glob(str)
+for file in files:
+	exif = get_exif(file)
+	anno_exif(file, exif)

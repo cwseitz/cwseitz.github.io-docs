@@ -12,6 +12,7 @@ def build_site():
     #Read HTML partials
     navi = open('partials/navigation.html').read()
     land = open('partials/landing.html').read()
+    regi = open('partials/photos.html').read()
 
     #Build index page
     index = HTMLDocument()
@@ -32,7 +33,7 @@ def build_site():
     photos = HTMLDocument()
     photos.set_style('../assets/main.css')
     photos.add_header(navi)
-    photos.add_content(build_photo_page())
+    photos.add_content(regi)
     photos.write('./photos/index.html')
 
     #Build document pages
@@ -62,19 +63,6 @@ def get_doc_content(fldr):
         if filetype == '.pdf':
             html = f'<div style="margin-top: 5%;"><object width=100% height=800px data="{file}" type="application/pdf"></object></div>'
     return html
-
-def build_photo_page():
-
-    page = ''
-    template = open('partials/photos.html').read()
-    photos = glob('photos/*.jpg')
-    for photo in photos:
-        photo = photo.split('/')[-1]
-        this_template = template.replace('src=""',f'src="{photo}"')
-        this_template = this_template.replace('href=""',f'href="{photo}"')
-        page += this_template
-
-    return page
 
 if __name__ == "__main__":
     build_site()
