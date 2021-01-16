@@ -66,11 +66,10 @@ def get_doc_content(fldr):
 def build_photo_page():
 
     page = ''
-    p = open('partials/photos.html').read()
-    registry = pd.read_excel('photos/photos.xlsx')
-    for index, row in registry.iterrows():
-        link = row['link']
-        page += p.replace('src=""',f'src="{link}"')
+    template = open('partials/photos.html').read()
+    photos = glob('photos/*.jpg')
+    for photo in photos:
+        page += template.replace('src=""',f'src="{photo}"')
 
     return page
 
