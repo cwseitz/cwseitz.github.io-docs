@@ -69,6 +69,7 @@ def build_photo_page():
     template = open('partials/photos.html').read()
     photos = glob('photos/*.jpg')
     for photo in photos:
+        photo = photo.split('/')[-1]
         page += template.replace('src=""',f'src="{photo}"')
 
     return page
