@@ -1,24 +1,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% LaTeX book template                           %%
-%% Author:  Amber Jain (http://amberj.devio.us/) %%
-%% License: ISC license                          %%
+%% LaTeX book template 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[a4paper,11pt]{book}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Source: http://en.wikibooks.org/wiki/LaTeX/Hyperlinks %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 'dedication' environment: To add a dedication paragraph at the start of book %
-% Source: http://www.tug.org/pipermail/texhax/2010-June/015184.html            %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newenvironment{dedication}
 {
    \cleardoublepage
@@ -33,10 +26,6 @@
    \clearpage
 }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Chapter quote at the start of chapter        %
-% Source: http://tex.stackexchange.com/a/53380 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \makeatletter
 \renewcommand{\@chapapp}{}% Not necessary...
 \newenvironment{chapquote}[2][2em]
@@ -47,40 +36,22 @@
   {\par\normalfont\hfill--\ \chapquote@author\hspace*{\@tempdima}\par\bigskip}
 \makeatother
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% First page of book which contains 'stuff' like: %
-%  - Book title, subtitle                         %
-%  - Book author name                             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\Huge \textbf{Neural dynamics of vision}  \\ \huge A computational perspective}
 
-% Book's title and subtitle
-\title{\Huge \textbf{Elements of neural analysis}  \footnote{This is a footnote.} \\ \huge Sample book subtitle \footnote{This is yet another footnote.}}
-% Author
-\author{\textsc{Clayton Seitz}\thanks{\url{www.example.com}}}
-
+\author{\textsc{Clayton Seitz}\thanks{\url{cwseitz.github.io}}}
 
 \begin{document}
 
 \frontmatter
 \maketitle
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Add a dedication paragraph to dedicate your book to someone %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{dedication}
 Dedicated to Calvin and Hobbes.
 \end{dedication}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Auto-generated table of contents, list of figures and list of tables %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \tableofcontents
-
 \mainmatter
 
-%%%%%%%%%%%
-% Preface %
-%%%%%%%%%%%
 \chapter*{Preface}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis risus ante, auctor et pulvinar non, posuere ac lacus. Praesent egestas nisi id metus rhoncus ac lobortis sem hendrerit. Etiam et sapien eget lectus interdum posuere sit amet ac urna.
 
@@ -102,10 +73,6 @@ The website\footnote{\url{https://github.com/amberj/latex-book-template}} for th
   \item Miscellaneous material (e.g. suggested readings etc).
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Give credit where credit is due. %
-% Say thanks!                      %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Acknowledgements}
 \begin{itemize}
 \item A special word of thanks goes to Professor Don Knuth\footnote{\url{http://www-cs-faculty.stanford.edu/~uno/}} (for \TeX{}) and Leslie Lamport\footnote{\url{http://www.lamport.org/}} (for \LaTeX{}).
@@ -172,5 +139,99 @@ The website\footnote{\url{https://github.com/amberj/latex-book-template}} for th
 \end{chapquote}
 
 \section{Section heading}
+
+\chapter{Information and Coding Theory}
+
+\begin{chapquote}{Claude Shannon}
+``We may have knowledge of the past but cannot control it; we may control the future but have no knowledge of it''
+\end{chapquote}
+
+\section{Introduction}
+
+Information theory is a framework first introduced by Claude Shannon's seminal paper $\textit{A mathematical theory of communication}$  published in 1948. At it's core, information theory makes the intuitive concept of $\textit{information}$ mathematically rigorous and forms the foundation of many modern communication systems. Neural circuits in the visual system are an especially interesting example of such a communication system. Therefore, in this section, the information theoretic concepts necessary for studying neural circuits are introduced. 
+
+\section{Entropy}
+
+The concept of entropy is not exclusive to information theory; rather, it is used widely in disciplines such as physics and mathematical statistics. In fact, entropy was originally defined in statistical physics when Ludwig Boltzmann gave a statistical description of a thermodynamic system of particles. Since this is arguably the more intuitive path as opposed an entirely mathematical description, I will follow a similar line of reasoning in the following paragraphs.
+
+In every application, the entropy $\mathbf{H}$ is a measure of uncertainty or how much information is contained in a random variable $x$. In information theory, the entropy is a property of a probability distribution of a random variable $P(x)$ where $x$ can take on continuous or discrete values. For the discrete case, we can express the entropy in bits 
+
+\begin{equation}
+\textbf{H} = -\sum_{x\in S} P(x)\log P(x)
+\end{equation}
+
+where the set $S$ spans the entire space of possible discrete values of $x$. Notice that $\mathbf{H} \geq 0$ since $P(x) \leq 1$ and therefore $\log P(x) \leq 0$  for all $x$. We might guess that the $P(x)$ with maximum entropy is the uniform distribution and to prove that we need to introduce a famous inequality.
+
+\subsection{Jensen's Inequality}
+
+Jensen's inequality is a statement about convexity. Consider a binary variable $x$ that takes the value 0 with probability $\alpha$ and value 1 with probability $1-\alpha$.
+
+\[x= \begin{cases} 
+      0 & \alpha \\
+      1 & 1-\alpha \\
+   \end{cases}
+\]
+
+A function $f$ of the variable $x$ is said to be $\textit{convex}$ if the following inequality holds
+
+\begin{equation*}
+\alpha f(x) + (1-\alpha)f(y) \leq f(\alpha x + (1-\alpha)y)
+\end{equation*}
+
+which when generalized for an arbitrary random variable $x$ forms Jensen's inequality
+
+\begin{equation}
+\mathbf{E}[f(x)] \leq f(\mathbf{E}[x])
+\end{equation}
+
+and if we flip the inequality we call the function $\textit{concave}$.
+
+\begin{eqnarray*}
+\textbf{H} &=& -\sum_{x\in S} P(x)\log P(x) \\
+&=& \sum_{x\in S} \frac{1}{N}\log N  = \log N\\
+\end{eqnarray*}
+
+We have now shown that the upper bound on the entropy for a random variable with $N$ possible values is $\log N$.
+
+\subsection{Kraft's Inequality}
+
+Kraft's inequality is a constraint on prefix-free codes. A code is prefix free if and only-if the following statement is true
+
+\begin{equation}
+\sum_{i} 2^{-l_{i}} \leq 1
+\end{equation}
+
+for code lengths $l_{i}$.
+
+
+\subsection{Example 1: Applying Jensen's Inequality}
+
+Let's consider a function $f: \mathbb{R} \rightarrow \mathbb{R}$. Using Jensen's inequality, we can prove that $f=x^{2}$ or $f=x\log x$ are convex functions. Let's begin by applying it to $x^{2}$ for a general normalized probability distribution $p(x)$.
+
+\begin{eqnarray*}
+\int p(x)f(x)dx & = & \int x^{2}p(x)dx\\
+&=& x^{2} - 2\int xdx\\
+&=& 0 \leq x^{2} \; \forall x
+\end{eqnarray*}
+
+We have a similar proof for $f(x) = x\log x$
+
+\begin{eqnarray*}
+\int p(x)f(x)dx & = & \int x\log x\; p(x)dx\\
+&=& x\log x - \int \frac{d}{dx}x\log x\;dx\\
+&=& 0 \leq \mu \log \mu
+\end{eqnarray*}
+
+where $\mu = \mathbf{E}[x] \geq 0$ since $f$ is only defined on $[0, \infty]$.
+
+\subsection{Example 2: Proving Cauchy-Schwarz}
+
+A common form of the Cauchy-Schwarz inequality states that for two vectors $u$ and $v$, we have
+
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+\begin{eqnarray*}
+u \cdot v  \leq \norm{u}\norm{v}
+\end{eqnarray*}
+
 
 \end{document}
