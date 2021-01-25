@@ -1,0 +1,63 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath} % AMS Math Package
+\usepackage{amsthm} % Theorem Formatting
+\usepackage{amssymb}    % Math symbols such as \mathbb
+\usepackage{graphicx} % Allows for eps images
+\usepackage[dvips,letterpaper,margin=1in,bottom=0.7in]{geometry}
+\usepackage{tensor}
+\usepackage{amsmath}
+\usepackage{siunitx}
+
+\newtheorem{p}{Problem}[section]
+\usepackage{cancel}
+\newtheorem*{lem}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{dfn}{Definition}
+ \newenvironment{s}{%\small%
+        \begin{trivlist} \item \textbf{Solution}. }{%
+            \hspace*{\fill} $\blacksquare$\end{trivlist}}%
+
+
+\begin{document}
+
+{\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Problem Set I}         }\\[2\baselineskip] % Title
+{ {\bf \fontfamily{cmr}\selectfont Information and Coding Theory}\\ {\textit{\fontfamily{cmr}\selectfont     January 29, 2021}}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    {\large \textsc{Clayton Seitz}
+\\[1.4\baselineskip] 
+
+\begin{p} Two teams A and B play a series of up to 5 games, in which the team to win 3 games wins the series.   Let X be a random variable which is a sequence of letters corresponding to the winners of each of the games played - possible values for X then include AAA, ABBAB etc. Let Y be the number of games played (the teams play till the series winner is decided).  Calculate $H(X), H(Y), H(X|Y), H(Y|X)$ and $I(X;Y)$. Assume both teams are equally likely to win each game independent of any previous games.
+\end{p}
+
+\begin{s} 
+The series can be 3, 4, or 5 games long. There are a total of $2^{5}=32$ possible 5-bit strings but we need to truncate strings after one team has won. For example, any nodes below strings 000 or 111 in the binary tree should be deleted. This removes a total of  $2^{5}(\frac{2}{2^{3}})=8 $ possible leaves. Also, there are 8 ways the series can end after 4 games, so we subtract $2^{5}(\frac{8}{2^{4}})=16$ more leaves. However, two of these were already subtracted before so we have a total of 10 possible series. Assuming each is equally likely,
+ 
+\begin{equation*}
+H(X) = \sum_{X} P(X)\frac{1}{\log P(X)} = \log 10 \approx 3.3 \si{bits}
+\end{equation*}
+
+where $\log x = \log_{2} x$. There are 2 ways the series can end after 3 games or after 5 games and there is 6 ways it can end after 4 games. Therefore, 
+
+\begin{equation*}
+H(Y) = \sum_{Y} P(Y)\frac{1}{\log P(Y)} = \frac{2}{5}\log 5 + \frac{3}{5}\log\frac{5}{3} \approx 1.4 \si{bits}
+\end{equation*}
+
+The conditional entropy $H(X|Y)$ is given by
+
+\begin{equation*}
+H(X|Y) = \sum_{y} P(y)H(X|Y=y) = \frac{1}{5}\cdot 1 + \frac{3}{5}\cdot \log 6 + \frac{1}{5}\cdot 1 \approx 2 \si{bits}
+\end{equation*}
+
+The conditional entropy $H(Y|X)$ is given by
+
+\begin{equation*}
+H(Y|X) = \sum_{x} P(x)H(Y|X=x) =  0 \si{bits}
+\end{equation*}
+
+The mutual information $I(X;Y)$ is given by
+
+\begin{equation*}
+I(X;Y) = H(X) - H(X|Y) = 1.3\si{bits}
+\end{equation*}
+
+
+\end{s}
+\end{document}
