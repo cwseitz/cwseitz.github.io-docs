@@ -59,6 +59,41 @@ I(X;Y) = H(X) - H(X|Y) = 1.3\si{bits}
 \end{equation*}
 \end{s}
 
+
+\begin{p}
+Lost in transmission
+\end{p}
+
+\begin{s}
+\begin{eqnarray*}
+I(X_{n};X_{1}) &=& H(x_{n}) - H(x_{n}|x_{1})\\
+&=& \sum_{y}P(x_{1}=y)\sum_{x}P(x_{n}=x|x_{1}=y)\log \frac{1}{P(x_{n}=x|x_{n}=y)}\\
+\end{eqnarray*}
+
+where $x,y \rightarrow 0,1$. We can compute $P(x_{n}=x_{1})$ by noticing that this will only occur if there is an even number of bit flips. If $\epsilon$ is the probability of a flip which we can define as a "success" and each trial is independent, then $P(x_{n}=x_{1})$ is a sum over the binomial distribution $B(n,k)$ for even values of $k$. Define $P(x_{n}=x_{1})$ as
+
+\begin{eqnarray*}
+\Omega &=& 1-\frac{1}{2}[1+(1-2\epsilon)^{n}]
+\end{eqnarray*}
+
+Therefore ,
+
+\begin{eqnarray*}
+H(x_{n}|x_{1}) &=& \Omega \log \frac{1}{\Omega} + (1-\Omega)\log\frac{1}{1-\Omega}\\
+&=& H_{b}(\Omega)
+\end{eqnarray*}
+
+and because $H(x_{n})=1$, the mutual information is given by
+
+\begin{eqnarray*}
+I(X_{n};X_{1}) &=& 1 - \Omega \log \frac{1}{\Omega} + (1-\Omega)\log\frac{1}{1-\Omega}\\
+\end{eqnarray*}
+
+As a sanity check, we can show that for $n=1$ this takes the form of a binary symmetric channel and when $\epsilon = 0$ or $\epsilon = 1$ we have $I(x_{1};x_{n})=1$.
+
+
+\end{s}
+
 \begin{p}
 Prove the following basic identities about the quantities we have studied so far.
 \end{p}

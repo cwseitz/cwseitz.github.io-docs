@@ -11,6 +11,8 @@
 \usepackage[english]{babel}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{amsthm}
+\newtheorem{definition}{Definition}
 
 \newenvironment{dedication}
 {
@@ -135,10 +137,64 @@ The concept of entropy is not exclusive to information theory; rather, it is use
 In every application, the entropy $\mathbf{H}$ is a measure of uncertainty or how much information is contained in a random variable $x$. In information theory, the entropy is a property of a probability distribution of a random variable $P(x)$ where $x$ can take on continuous or discrete values. For the discrete case, we can express the entropy in bits 
 
 \begin{equation}
-\textbf{H} = -\sum_{x\in S} P(x)\log P(x)
+\textbf{H} = \sum_{x\in S} P(x)\log\frac{1}{P(x)}
 \end{equation}
 
-where the set $S$ spans the entire space of possible discrete values of $x$. Notice that $\mathbf{H} \geq 0$ since $P(x) \leq 1$ and therefore $\log P(x) \leq 0$  for all $x$. We might guess that the $P(x)$ with maximum entropy is the uniform distribution and to prove that we need to introduce a famous inequality.
+where the set $S$ spans the entire space of possible discrete values of $x$. We can go on to derive upper and lower bounds for the entropy. Notice that $\mathbf{H} \geq 0$ since $P(x) \leq 1$ and therefore $\log P(x) \leq 0$  for all $x$. At the same time, if we define a variable $Y = \frac{1}{\log x}$, we can write
+
+\begin{eqnarray*}
+\textbf{H} &=& \mathbf{E}[\log Y]\\
+&\leq & \log \mathbf{E}[Y]\\
+&=& \log \sum_{y}P(x) \frac{1}{P(x)}\\
+&=& \log |S|
+\end{eqnarray*}
+
+which is just the entropy of a uniform distribution. 
+
+\section{Joint Entropy}
+
+\begin{eqnarray*}
+\textbf{H}(X,Y) &=& \sum_{x,y} P(x,y)\log \frac{1}{P(x,y)} \\
+&=& \sum_{x,y} P(x)P(y|x)\log \frac{1}{P(x)P(y|x)}\\
+&=& \sum_{x,y}  P(x)P(y|x)\log \frac{1}{P(x)} + \sum_{x,y}  P(x)P(y|x)\log\frac{1}{P(y|x)} \\
+&=& \sum_{x,y}  P(x)P(y|x)\log \frac{1}{P(x)} + \sum_{x}  P(x)\sum_{y}P(y|x)\log\frac{1}{P(y|x)} \\
+&=& H(X) + H(Y|X)
+\end{eqnarray*}
+
+This result defines the $\mathbf{chain \; rule}$ for entropy.
+
+\section{Source Coding}
+
+\begin{definition}
+A code of a set $S$ that uses an alphabet $\Omega$ is a map $C: S\rightarrow \Omega$ that assigns each element of $S$ a finite string over the alphabet $\Omega$. We say that the mapping $C$ is $\mathbf{prefix \; free}$ if for all pairs $x,y \in S$ where $x \neq y$, $C(x)$ is not a prefix of $C(y)$.
+\end{definition}
+
+Most of the time the alphabet $\Omega$ we use is the set $0,1$.
+
+\subsection{Kraft's Inequality}
+
+\begin{definition}
+For a binary code, there exists a prefix free code $C$ with codeword lengths $l_{i}$ if and only if
+\end{definition}
+
+\begin{equation}
+\sum_{i} 2^{-l_{i}} \leq 1
+\end{equation}
+
+At this point we would like to apply the concept of entropy to source coding. Indeed, it is true that if we have a random variable $X$ over the set $S$, the minimum number of bits it will take us to communicate the value of $X$ on average is the entropy $H(X)$.
+
+\begin{proof}
+  The expected number of bits to communicate $X$ is given by $\sum_{x}p(x)|C(x)|$
+  \begin{align*}
+    H(X) - \sum_{x}P(x)|C(x)| &= \sum P(x)[\log\frac{1}{P(x)} - |C(x)|] \\
+    &= \sum P(x)\log\frac{1}{P(x)2^{|C(x)|}} \\
+    &\geq \log\sum P(x)\frac{1}{P(x)2^{|C(x)|}}  \\
+    &= \log\sum \frac{1}{2^{|C(x)|}}  \\
+    &\leq 0 &&\qedhere
+  \end{align*}
+  by Kraft's inequality for prefix-free codes.
+\end{proof}
+
 
 \subsection{Jensen's Inequality}
 
@@ -162,25 +218,18 @@ which when generalized for an arbitrary random variable $x$ forms Jensen's inequ
 \mathbf{E}[f(x)] \leq f(\mathbf{E}[x])
 \end{equation}
 
-and if we flip the inequality we call the function $\textit{concave}$.
+\subsection{The Data-Processing Inequality}
 
-\begin{eqnarray*}
-\textbf{H} &=& -\sum_{x\in S} P(x)\log P(x) \\
-&=& \sum_{x\in S} \frac{1}{N}\log N  = \log N\\
-\end{eqnarray*}
+The data-processing inequality states that for any function $f$ s.t. $y = f(X)$, we have that $H(Y) \geq H(X)$. In plain english, that means that the process of transforming $X$ can never decrease it's entropy. Recall from our analysis of joint entropy above that
 
-We have now shown that the upper bound on the entropy for a random variable with $N$ possible values is $\log N$.
+\begin{eqnarray}
+H(X,Y) &=& H(X) + H(Y|X)\\
+&=& H(Y) + H(X|Y)
+\end{eqnarray}
 
-\subsection{Kraft's Inequality}
+If we can show that $H(y|x) = 0$ then the data-processing inequality holds. This is more obvious if you notice that if $y = f(x)$ then the distribution $P(x,y) = P(x)$ or $P(y|x) = 0$. 
 
-Kraft's inequality is a constraint on prefix-free codes. A code is prefix free if and only-if the following statement is true
-
-\begin{equation}
-\sum_{i} 2^{-l_{i}} \leq 1
-\end{equation}
-
-for code lengths $l_{i}$.
-
+In terms of our venn diagram above, $H(y)$ is a *subset* of $H(x)$ which also implies the following for the mutual information: $I(x,y) = H(y)$. 
 
 \subsection{Example 1: Applying Jensen's Inequality}
 
