@@ -116,6 +116,40 @@ I(X;Y) &=& H(X) - H(X|Y)\\
 
 \end{s}
 
+\begin{p}
+Expand our definition for mutual information between three random variables $X,Y,Z$.
+\end{p}
+
+\begin{s}
+\begin{eqnarray*}
+I(X;Y;Z) &=& I(X;Y) - I(X;Y|Z)\\
+&=& [H(X) + H(Y) - H(XY)]- [H(XZ)+H(YZ)-H(XYZ)-H(Z)] \\
+&=& H(X) + H(Y) + H(Z) - H(XY) - H(XZ) - H(YZ) + H(XYZ)
+\end{eqnarray*}
+\end{s}
+
+We need to design $X,Y,Z$ such that $I(X;Y|Z) > I(X;Y)$. Lets consider a scenario where $I(X;Z) = I(Y;Z)=0$ but together $Y,Z$ carry information about $X$.
+
+\[(X,Y,Z)= \begin{cases} 
+      011 & w.p \; 1/4 \\
+      000 & w.p \; 1/4 \\
+      101 & w.p \; 1/4 \\
+      110 & w.p \; 1/4 \\
+   \end{cases}
+\]
+
+It is necessary to show that $I(X;Y|Z) > 0$. Indeed,
+
+\begin{eqnarray*}
+I(X;Y|Z) &=& \mathbf{E}_{z}[I(X|Z=z; Y|Z=z)]\\
+&=& \frac{1}{2}I(X|Z=0; Y|Z=0) + \frac{1}{2}I(X|Z=1; Y|Z=1)\\
+&=& \frac{1}{2}\log 2 + \frac{1}{2} \log 2 = 1
+\end{eqnarray*}
+
+which means that $I(X;Y;Z) < 0$.
+
+
+
 
 
 
