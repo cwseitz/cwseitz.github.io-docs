@@ -148,7 +148,24 @@ I(X;Y|Z) &=& \mathbf{E}_{z}[I(X|Z=z; Y|Z=z)]\\
 
 which means that $I(X;Y;Z) < 0$.
 
+\begin{p}
+Prove that $\mathbf{E}_{x}||P(Y|X=x) - P(Y)||_{1} \leq \sqrt{2\ln 2 \;I(X;Y)}$
+\end{p}
 
+\begin{s}
+We begin with Pinsker's inequality
+
+\begin{equation*}
+||P(Y|X)-P(Y)||_{1} \leq \sqrt{2\ln 2 \; D_{KL}(P(Y|X)||P(Y))}
+\end{equation*}
+
+\begin{eqnarray*}
+\mathbf{E}_{x}||P(Y|X=x) - P(Y)||_{1} &\leq & \mathbf{E}_{x}\sqrt{2\ln 2 \;D_{KL}(P(Y|X=x)||P(Y))}\\
+&\leq & \sqrt{2\ln 2 \cdot \mathbf{E}_{x}\; D_{KL}(P(Y|X=x)||P(Y))}\\
+&=& \sqrt{2\ln 2 \;I(X;Y)}
+\end{eqnarray*}
+
+\end{s}
 
 
 
