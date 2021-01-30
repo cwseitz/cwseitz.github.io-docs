@@ -28,31 +28,31 @@
 \end{p}
 
 \begin{s} 
-The series can be 3, 4, or 5 games long. There are a total of $2^{5}=32$ possible 5-bit strings but we need to truncate strings after one team has won. For example, any nodes below strings 000 or 111 in the binary tree should be deleted. This removes a total of  $2^{5}(\frac{2}{2^{3}})=8 $ possible leaves. Also, there are 8 ways the series can end after 4 games, so we subtract $2^{5}(\frac{8}{2^{4}})=16$ more leaves. However, two of these were already subtracted before so we have a total of 10 possible series. Assuming each is equally likely,
+The series can be 3, 4, or 5 games long. There are a total of $2^{5}=32$ possible 5-bit strings but we need to truncate strings after one team has won. Starting with 32 leaves, any nodes below strings 000 or 111 in the binary tree should be deleted. This trims $2^{5}\cdot \frac{2}{2^{3}}=8$ leaves down to 2. Also, there are 6 ways the series can end after 4 games, so we trim $2^{5}(\frac{6}{2^{4}})=12$ leaves to 6. We have removed a total of 12 leaves leaving us with 20 possible leaves (series).
  
 \begin{equation*}
-H(X) = \sum_{X} P(X)\frac{1}{\log P(X)} = \log 10 \approx 3.3 \si{bits}
+H(X) = \sum_{X} P(X)\frac{1}{\log P(X)} = \log 20 \approx 4.3 \si{bits}
 \end{equation*}
 
-where $\log x = \log_{2} x$. There are 2 ways the series can end after 3 games or after 5 games and there is 6 ways it can end after 4 games. Therefore, 
+where $\log x = \log_{2} x$. There are 2 ways the series can end after 3 games, 6 ways it can end after 4 games, and 12 ways it can end after 5 games. If $Y$ is the number of games played, 
 
 \begin{equation*}
-H(Y) = \sum_{Y} P(Y)\frac{1}{\log P(Y)} = \frac{2}{5}\log 5 + \frac{3}{5}\log\frac{5}{3} \approx 1.4 \si{bits}
+H(Y) = \sum_{Y} P(Y)\frac{1}{\log P(Y)} = \frac{1}{10}\log 10 + \frac{3}{10}\log\frac{10}{3} + \frac{6}{10}\log \frac{5}{3} \approx  1.3 \si{bits}
 \end{equation*}
 
 The conditional entropy $H(X|Y)$ is given by
 
 \begin{equation*}
-H(X|Y) = \sum_{y} P(y)H(X|Y=y) = \frac{1}{5}\cdot 1 + \frac{3}{5}\cdot \log 6 + \frac{1}{5}\cdot 1 \approx 2 \si{bits}
+H(X|Y) = \sum_{y} P(y)H(X|Y=y) = \frac{1}{10}\cdot 1 + \frac{3}{10}\cdot \log 6 + \frac{6}{10}\cdot \log 12 \approx 3 \si{bits}
 \end{equation*}
 
-The conditional entropy $H(Y|X)$ is given by
+We see that conditioning on $Y$ reduced the entropy in $X$. The conditional entropy $H(Y|X)$ is
 
 \begin{equation*}
 H(Y|X) = \sum_{x} P(x)H(Y|X=x) =  0 \si{bits}
 \end{equation*}
 
-The mutual information $I(X;Y)$ is given by
+since if we are given the series, it is certain how many games were played. Finally the mutual information $I(X;Y)$ is
 
 \begin{equation*}
 I(X;Y) = H(X) - H(X|Y) = 1.3\si{bits}
@@ -76,7 +76,7 @@ where $x,y \rightarrow 0,1$. We can compute $P(x_{n}=x_{1})$ by noticing that th
 \Omega &=& 1-\frac{1}{2}[1+(1-2\epsilon)^{n}]
 \end{eqnarray*}
 
-Therefore ,
+From which we can compute the entropy
 
 \begin{eqnarray*}
 H(x_{n}|x_{1}) &=& \Omega \log \frac{1}{\Omega} + (1-\Omega)\log\frac{1}{1-\Omega}\\
@@ -153,7 +153,7 @@ Prove that $\mathbf{E}_{x}||P(Y|X=x) - P(Y)||_{1} \leq \sqrt{2\ln 2 \;I(X;Y)}$
 \end{p}
 
 \begin{s}
-We begin with Pinsker's inequality
+We can use  Pinsker's inequality
 
 \begin{equation*}
 ||P(Y|X)-P(Y)||_{1} \leq \sqrt{2\ln 2 \; D_{KL}(P(Y|X)||P(Y))}
@@ -167,7 +167,19 @@ We begin with Pinsker's inequality
 
 \end{s}
 
+\begin{p}
+Prove that 
 
+\begin{equation*}
+\sum (\frac{\sqrt{5}-1}{2})^{e_{i}} \leq 1
+\end{equation*}
+
+\end{p}
+
+\begin{s}
+Let the sum of energies of all possible codes in a tree of depth $l_{max}$ be $E$. We need to show that the fraction of $E$ we delete when we select a code of energy $e_{i}$ is equal to $(\frac{\sqrt{5}-1}{2})^{e_{i}}$.
+
+\end{s}
 
 
 \end{document}
