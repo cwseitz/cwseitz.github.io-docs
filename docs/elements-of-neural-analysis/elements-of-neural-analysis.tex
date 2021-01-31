@@ -12,6 +12,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
 \newtheorem{definition}{Definition}
 
 \newenvironment{dedication}
@@ -151,7 +152,9 @@ where the set $S$ spans the entire space of possible discrete values of $x$. We 
 
 which is just the entropy of a uniform distribution. 
 
-\section{Joint Entropy}
+\subsection{Joint and Conditional Entropy}
+
+In this section, we discuss joint and conditional entropy which are really just two sides of the same coin
 
 \begin{eqnarray*}
 \textbf{H}(X,Y) &=& \sum_{x,y} P(x,y)\log \frac{1}{P(x,y)} \\
@@ -161,7 +164,78 @@ which is just the entropy of a uniform distribution.
 &=& H(X) + H(Y|X)
 \end{eqnarray*}
 
-This result defines the $\mathbf{chain \; rule}$ for entropy.
+This result defines the $\mathbf{chain \; rule}$ for entropy. We typically refer to the term $H(Y|X)$ as the $\mathbf{conditional \; entropy}$. It can be calculated independently using the following definition
+
+\begin{eqnarray*}
+H(X|Y) &=& \mathbf{E}_{y} H(X|Y=y)\\
+&=& \mathbf{E}_{y} \sum_{x} P(X|Y=y)\log \frac{1}{P(X|Y=y)}\\
+\end{eqnarray*}
+
+
+Furthermore, it can be shown that the chain rule derived above applies to a tuple of random variables longer than two. 
+
+\begin{equation*}
+H(X_{1}, ...\;, X_{m}) = H(X_{1}) + H(X_{2}|X_{1}) + H(X_{3}|X_{2},X_{1}) \;...\; H(X_{m}|X_{1} ... X_{m-1}) 
+\end{equation*}
+
+Recalling that conditioning reduces entropy or does nothing at all, we can write
+
+\begin{equation*}
+H(X_{1}, ...\;, X_{m}) \leq H(X_{1}) + H(X_{2}) +  \;...\; + H(X_{m}) 
+\end{equation*}
+
+which is referred to as the $\mathbf{subadditivity}$ property of entropy. We should also address what to do when we need to compute the entropy of a joint distribution $(X,Y)$ conditioned on a variable $Z$ or when $Z$ itself is conditioned on a joint distribution. These two things are related by using the chain rule for joint entropy
+
+\begin{eqnarray*}
+H(X,Y|Z) &=& H(X,Y) + H(Z|X,Y)\\
+\end{eqnarray*}
+
+
+Now we will prove that conditioning the distribution of a random variable $X$ on another variable $Y$ i.e. can reduce the entropy of $X$. What we need to show is that $H(X|Y) - H(X) \leq 0$.
+
+
+\section{KL-Divergence and Mutual Information}
+
+The Kullbeck-Leiber distance or $\mathbf{KL\;Divergence}$ is a measure of the distance between two distributions over a random variable $X$. Assume we have two distributions $P,Q$ on a random variable $X$ where $P$ is the correct distribution on $X$ and $Q$ is an incorrect distribution. By definition, the KL-Divergence $D_{KL}(P||Q)$ is the extra information (bits) it takes to communicate $X$ when using the incorrect distribution $Q$. To be precise, $H(Q) = H(P) + D_{KL}(P||Q)$.
+
+\begin{definition}
+The KL-Divergence is 
+\begin{equation*}
+D_{KL}(P||Q) = \sum_{X} P(X) \log \frac{P(X)}{Q(X)}
+\end{equation*}
+\end{definition}
+
+Furthermore, an indispensable tool in information theory is the idea of $\mathbf{mutual\;information}$ which, as the name suggests, measures the amount of overlapping information in a pair of random variables. More formally, it is the KL-Divergence between the joint distribution of the pair of variables and the product of their marginal distributions (which implies they are independent)
+
+\begin{definition}
+The mutual information is 
+\begin{eqnarray*}
+I(X;Y) &=& D_{KL}(P(X,Y)||P(X)P(Y)) \\
+&=& \sum_{x}\sum_{y} P(X,Y) \log \frac{P(X,Y)}{P(X)P(Y)}
+\end{eqnarray*}
+\end{definition}
+
+A very useful property of the mutual information is that it is strongly related to conditional entropy and statistical independence. Conditional entropy tells us how much information is contained in a variable $X$ which its distribution is conditioned on $Y$. We might expect that this conditioning doesn't really have an effect if $X$ and $Y$ are completely independent. Indeed,
+
+\begin{eqnarray*}
+I(X;Y) &=& D_{KL}(P(X,Y)||P(X)P(Y)) \\
+&=& \sum P(x,y) \log \frac{P(x,y)}{P(x)P(y)}\\
+&=& \sum P(x)\log \frac{1}{P(x)} + \sum P(x,y)\log \frac{P(x,y)}{P(y)} \\
+ &=& H(X) - H(X|Y)
+\end{eqnarray*}
+
+Note that this result implies that $I(X;Y) = I(Y;X)$. We will next address the mutual information between a distribution on $X$ and a joint distribution $(Y,Z)$ making use of the relationship derived above. 
+
+\begin{eqnarray*}
+I(X;(Y,Z)) &=& H(X) - H(X|Y,Z)\\
+&=& H(X) + H(Y,Z|X) - H(Y,Z)\\
+\end{eqnarray*}
+
+Finally, we look at the mutual information between a distribution on $X$ and a conditional distribution $Y|Z$.
+
+\subsection{The Data-Processing Inequality}
+
+The data-processing inequality states that if a function operates on a random variable $X$ it can only decrease its entropy. That is, for any function $f$ s.t. $Y= f(X)$, we have that $H(Y) \geq H(X)$. We can prove that this is true using the mutual information $I(X;Y)$.
 
 \section{Source Coding}
 
@@ -195,6 +269,16 @@ At this point we would like to apply the concept of entropy to source coding. In
   by Kraft's inequality for prefix-free codes.
 \end{proof}
 
+\subsection{Source Coding Theorem}
+
+So far we have seen how to construct a prefix-free code and that the absolute lower bound on the number of bits it takes to encode a random variable is its entropy. Next, we would like to answer the following question: how do we actually design a code to communicate a random variable $X$ so that it approaches this lower bound?  The answer is addressed by the $\it{fundamental \; source \; coding \; theorem}$ 
+
+\begin{theorem}
+For all $epsilon > 0$ there is a $n_{0} \leq n$ such that given $n$ instances of a variable $X$ it is possible to communicate $X$ with $H(X) + \epsilon$ bits on average.
+\end{theorem}
+
+This means that we can approach the entropy by increasing $n$.
+
 
 \subsection{Jensen's Inequality}
 
@@ -218,18 +302,6 @@ which when generalized for an arbitrary random variable $x$ forms Jensen's inequ
 \mathbf{E}[f(x)] \leq f(\mathbf{E}[x])
 \end{equation}
 
-\subsection{The Data-Processing Inequality}
-
-The data-processing inequality states that for any function $f$ s.t. $y = f(X)$, we have that $H(Y) \geq H(X)$. In plain english, that means that the process of transforming $X$ can never decrease it's entropy. Recall from our analysis of joint entropy above that
-
-\begin{eqnarray}
-H(X,Y) &=& H(X) + H(Y|X)\\
-&=& H(Y) + H(X|Y)
-\end{eqnarray}
-
-If we can show that $H(y|x) = 0$ then the data-processing inequality holds. This is more obvious if you notice that if $y = f(x)$ then the distribution $P(x,y) = P(x)$ or $P(y|x) = 0$. 
-
-In terms of our venn diagram above, $H(y)$ is a *subset* of $H(x)$ which also implies the following for the mutual information: $I(x,y) = H(y)$. 
 
 \subsection{Example 1: Applying Jensen's Inequality}
 
