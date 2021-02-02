@@ -270,6 +270,8 @@ D_{KL}(P||Q) = \sum_{X} P(X) \log \frac{P(X)}{Q(X)}
 \end{equation*}
 \end{definition}
 
+Additionally, we can show that KL-Divergence follows a chain rule 
+
 Furthermore, an indispensable tool in information theory is the idea of $\mathbf{mutual\;information}$ which, as the name suggests, measures the amount of overlapping information in a pair of random variables. More formally, it is the KL-Divergence between the joint distribution of the pair of variables and the product of their marginal distributions (which implies they are independent)
 
 \begin{definition}
@@ -345,6 +347,10 @@ For all $epsilon > 0$ there is a $n_{0} \leq n$ such that given $n$ instances of
 This means that we can approach the entropy by increasing $n$.
 
 
+\subsection{Fano's Inequality}
+
+Fano's inequality quantifies the amount of information lost in a noisy channel given some probability of transmission error. 
+
 \subsection{Jensen's Inequality}
 
 Jensen's inequality is a statement about convexity. Consider a binary variable $x$ that takes the value 0 with probability $\alpha$ and value 1 with probability $1-\alpha$.
@@ -368,7 +374,7 @@ which when generalized for an arbitrary random variable $x$ forms Jensen's inequ
 \end{equation}
 
 
-\subsection{Example 1: Applying Jensen's Inequality}
+\subsubsection{Example}
 
 Let's consider a function $f: \mathbb{R} \rightarrow \mathbb{R}$. Using Jensen's inequality, we can prove that $f=x^{2}$ or $f=x\log x$ are convex functions. Let's begin by applying it to $x^{2}$ for a general normalized probability distribution $p(x)$.
 
@@ -388,14 +394,9 @@ We have a similar proof for $f(x) = x\log x$
 
 where $\mu = \mathbf{E}[x] \geq 0$ since $f$ is only defined on $[0, \infty]$.
 
-\subsection{Example 2: Proving Cauchy-Schwarz}
+\subsection{Fano's Inequality}
 
-A common form of the Cauchy-Schwarz inequality states that for two vectors $u$ and $v$, we have
 
-\newcommand\norm[1]{\left\lVert#1\right\rVert}
-\begin{eqnarray*}
-u \cdot v  \leq \norm{u}\norm{v}
-\end{eqnarray*}
 
 \section{Error Correcting Codes}
 
