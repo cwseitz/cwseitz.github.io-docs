@@ -4,9 +4,8 @@
 \usepackage{amssymb}    % Math symbols such as \mathbb
 \usepackage{graphicx} % Allows for eps images
 \usepackage[dvips,letterpaper,margin=1in,bottom=0.7in]{geometry}
-\usepackage{tensor}
 \usepackage{amsmath}
-\usepackage{siunitx}
+
 
 \newtheorem{p}{Problem}[section]
 \usepackage{cancel}
@@ -25,14 +24,38 @@
 \\[1.4\baselineskip] 
 
 \begin{p}
-Find tight upper and lower bounds on two extremely biased coins
+Find tight upper and lower bounds on two extremely biased coins where the first coin is distributed according to 
+
+\[P = \begin{cases} 
+      0 & \; \epsilon \\
+      1 & \; 1 - \epsilon \\
+   \end{cases}
+\]
+
+and the second is distributed according to
+
+\[Q = \begin{cases} 
+      0 & \; 2\epsilon \\
+      1 & \; 1 - 2\epsilon \\
+   \end{cases}
+\]
+
 \end{p}
 
 \begin{s}
-We start by writing out the KL-Divergence between the distributions $P$ and $Q$ for a sequence of $n$ coin tosses
+I will assume that distinguishing the two coins means that, given a sequence of $n$ flips, we can say whether it is coin $P$ or coin $Q$ 90 percent of the time. Setting this threshold gives
+
+\begin{equation*}
+D(P||Q) \leq \frac{1}{2\ln 2}||P-Q||_{1}^{2} = \frac{1}{2\ln 2}\left(\frac{8}{5}\right)^{2}
+\end{equation*}
+
+
+To start, we write out the KL-Divergence between the distributions $P$ and $Q$ for a sequence of $n$ coin tosses
 
 \begin{eqnarray*}
-D(P(x_{1} \;...\; x_{n}) || Q(x_{1} \;...\; x_{n})) &=& \\
+D(P(x_{1} \;...\; x_{n}) || Q(x_{1} \;...\; x_{n})) &=& nD(P||Q)\\
+&=& n\left[P(0)\log \frac{1}{Q(0)} + P(1)\log \frac{1}{Q(1)}\right]\\
+&=& n\left[\epsilon\log \frac{1}{2\epsilon} + (1-\epsilon)\log \frac{1}{1-2\epsilon}\right]
 \end{eqnarray*}
 
 \end{s}
