@@ -83,14 +83,62 @@ The lower bound must be true because $D(P||M) \geq 0$ and $Q(P||M) \geq 0$. For 
 \begin{eqnarray*}
 D(P||M) &=& \frac{1}{2}\sum_{x\sim P} P(x)\log \frac{P(x)}{M(x)}\\
 &=&  \frac{1}{2}\sum_{x\sim P} P(x)\log \frac{2P(x)}{P(x)+Q(x)}\\
-&\leq &  \frac{1}{2}\sum_{x\sim P} P(x)\log 2 = 1
+&\leq &  \frac{1}{2}\sum_{x\sim P} P(x)\log 2 = \frac{1}{2}
 \end{eqnarray*}
 
 Therefore, $\mathbf{JSD}(P,Q) \leq 1$.
 
 Show that $\mathbf{JSD}(P,Q) \geq \frac{1}{8\ln 2} \cdot ||P-Q||_{1}^{2}$
 
+\begin{eqnarray*}
+\mathbf{JSD}(P,Q) &=&  \frac{1}{2}\left[D(P||M) + D(Q||M)\right]\\
+&\geq & \frac{1}{4\ln 2}\left[||P-M||_{1}^{2} + ||Q-M||_{1}^{2}\right]\\
+&= & \frac{1}{4\ln 2}\left[\left(\sum |P-M|\right)^{2} + \left(\sum |Q-M|\right)^{2} \right]\\ &= & \frac{1}{8\ln 2}\left[\left(\sum |P-Q|\right)^{2} + \left(\sum |Q-P|\right)^{2} \right]\\
+\\ &= & \frac{1}{8\ln 2} \cdot ||P-Q||_{1}^{2}\\
+\end{eqnarray*}
+
+
+\begin{equation*}
+\mathbf{JSD}_{\lambda}(P_{1} \; ... \; P_{k}) =  \sum_{i} \lambda_{i}D(P_{i}||M)
+\end{equation*}
+
+where $M = \sum_{i} \lambda_{i}P_{i}$. Show that 
+
+\begin{equation*}
+0 \leq \mathbf{JSD}_{\lambda}(P_{1} \; ... \; P_{k}) \leq H(\lambda)
+\end{equation*}
+
+As before, the lower bound must be true because $D(P_{i}||M) \geq 0$ and $\lambda$ is non-negative. As for the upper bound,
+
+\begin{eqnarray*}
+\mathbf{JSD}_{\lambda}(P_{1} \; ... \; P_{k}) &=&  \sum_{i} \lambda_{i}D(P_{i}||M)\\
+&=& \sum_{i} \lambda_{i}P_{i} \log \frac{P_{i}}{M}\\
+&=& H(\sum_{i} \lambda_{i}P_{i}) - \sum_{i}\lambda_{i}H(P_{i})\\
+&=& H(\lambda) - \sum_{i}\lambda_{i}H(P_{i})\\
+&\leq & H(\lambda)
+\end{eqnarray*}
+
 \end{s}
 
+\begin{p}
+Differential entropy of the multivariate Gaussian
+
+\begin{equation*}
+\phi(x) = \frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}\exp-\frac{1}{2}(x-\mu)^{T}\Sigma^{-1}(x-\mu)
+\end{equation*}
+
+\end{p}
+
+\begin{s}
+
+
+\begin{eqnarray*}
+h(x) &=& -\int \phi(x)\log \phi(x) dx\\
+&=& \int \phi(x) \left[\frac{n}{2}\log (2\pi e) +\frac{1}{2} \log|\Sigma| + \frac{1}{2}(x-\mu)^{T}\Sigma^{-1}(x-\mu)\right]dx\\
+&=& \frac{n}{2}\log (2\pi e) +\frac{1}{2} \log|\Sigma| + \mathbf{E}\left[\frac{1}{2}(x-\mu)^{T}\Sigma^{-1}(x-\mu)\right]\\
+&=& \frac{n}{2}\log (2\pi e) +\frac{1}{2} \log|\Sigma|\\
+\end{eqnarray*}
+
+\end{s}
 
 \end{document}
