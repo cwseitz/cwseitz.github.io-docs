@@ -43,16 +43,16 @@ and the second is distributed according to
 \end{p}
 
 \begin{s}
-I will assume that distinguishing the two coins means that, given a sequence of $n$ flips, we can say whether it is coin $P$ or coin $Q$ 90 percent of the time. To start, we write out the KL-Divergence between the distributions $P$ and $Q$ for a sequence of $n$ coin tosses.
+I will assume that distinguishing the two coins means that, given a sequence of $n$ flips, we can say whether it is coin $P$ or coin $Q$ in at least $\frac{9}{10}n$ trials, on average. To start, we write out the KL-Divergence between the distributions $P$ and $Q$
 
-\begin{eqnarray*}
-D(P||Q) &=& \epsilon\log \frac{1}{2\epsilon} + (1-\epsilon)\log \frac{1}{1-2\epsilon}\\
-&=& \epsilon\log \frac{1-2\epsilon}{2\epsilon} + \epsilon\log \left(\frac{1}{1-2\epsilon}\right)^{1/\epsilon}\\
-&=& \epsilon\left(\log \frac{1}{2\epsilon}(1-2\epsilon)^{\frac{1-\epsilon}{\epsilon}}\right)\\
-&=& \frac{\epsilon}{2\ln 2}\left(\ln \frac{(1-2\epsilon)^{\frac{1-\epsilon}{\epsilon}}}{2\epsilon}\right)\\
-&=& \frac{\epsilon}{2\ln 2}\left(\ln \left(1 + \frac{(1-2\epsilon)^{\frac{1-\epsilon}{\epsilon}}-2\epsilon}{2\epsilon}\right)\right)\\
-&\leq& \frac{1}{3\ln 2}(1-2\epsilon)^{\frac{1-\epsilon}{\epsilon}}-2\epsilon
-\end{eqnarray*}
+\begin{align*}
+D(P||Q) &= \epsilon\log \frac{\epsilon}{2\epsilon} + (1-\epsilon)\log \frac{1-\epsilon}{1-2\epsilon}\\
+&= (1-\epsilon)\log \frac{1-\epsilon}{1-2\epsilon} - \epsilon\\
+&= (1-\epsilon)\log \left(1 + \frac{\epsilon}{1-2\epsilon}\right) - \epsilon\\
+&\leq (1-\epsilon)\left(\frac{\epsilon}{1-2\epsilon}\right) - \epsilon\\
+&= \frac{1}{2\ln 2}\cdot \frac{\epsilon^{2}}{1-2\epsilon}
+\end{align*}
+
 
 At the same time, we know that
 
@@ -60,10 +60,10 @@ At the same time, we know that
 n \geq \frac{1}{2\ln 2 \cdot D(P||Q)}\left(\frac{8}{5}\right)^{2}
 \end{equation*}
 
-which means that
+given the constraint on successful predictions. Substituting for $D(P||Q)$ gives us the lower bound on $n$
 
 \begin{equation*}
-n \geq \frac{3}{2}\frac{1}{(1-2\epsilon)^{\frac{1-\epsilon}{\epsilon}}-2\epsilon}\left(\frac{8}{5}\right)^{2}
+n \geq \left(\frac{1}{\epsilon^{2}} - \frac{2}{\epsilon}\right)\left(\frac{8}{5}\right)^{2}
 \end{equation*}
 
 \end{s}
@@ -97,6 +97,18 @@ Show that $\mathbf{JSD}(P,Q) \geq \frac{1}{8\ln 2} \cdot ||P-Q||_{1}^{2}$
 \\ &= & \frac{1}{8\ln 2} \cdot ||P-Q||_{1}^{2}\\
 \end{eqnarray*}
 
+Show that $\mathbf{JSD(P,Q)} \leq \frac{1}{2}\cdot ||P-Q||_{1}$ 
+
+\begin{align*}
+\mathbf{JSD}_{\lambda}(P,Q) &=  \frac{1}{2}\left[D(P||M) + D(Q||M)\right]\\
+&= \frac{1}{2}\left[\sum_{x\sim P} P(x)\log\frac{P(x)}{M(x)} + \sum_{x\sim Q} Q(x)\log\frac{Q(x)}{M(x)}\right]\\
+&= \frac{1}{2}\sum_{x\sim \chi}\left[P(x)\log\frac{2P(x)}{P(x)+Q(x)} + Q(x)\log\frac{2Q(x)}{P(x)+Q(x)} \right]\\
+&= \frac{1}{2}\sum_{x\sim \chi}\left[P(x)+Q(x)\right]\cdot\frac{P(x)}{P(x)+Q(x)}\log\frac{2P(x)}{P(x)+Q(x)}\\
+&\quad + \frac{Q(x)}{P(x)+Q(x)}\log\frac{2Q(x)}{P(x)+Q(x)}\\
+&= \frac{1}{2}\sum_{x\sim \chi}\left[P(x)+Q(x)\right] \cdot |1-H\left(\frac{P(x)}{P(x)+Q(x)},\frac{Q(x)}{P(x)+Q(x)}\right)|\\
+&\leq \sum_{x\sim \chi} |P(x)-Q(x)|
+\end{align*}
+
 
 \begin{equation*}
 \mathbf{JSD}_{\lambda}(P_{1} \; ... \; P_{k}) =  \sum_{i} \lambda_{i}D(P_{i}||M)
@@ -117,6 +129,39 @@ As before, the lower bound must be true because $D(P_{i}||M) \geq 0$ and $\lambd
 &=& H(\lambda) - \sum_{i}\lambda_{i}H(P_{i})\\
 &\leq & H(\lambda)
 \end{eqnarray*}
+
+\end{s}
+
+\begin{p}
+Counting using the method of types
+\end{p}
+
+\begin{s}
+Sanov's Theorem states that 
+
+\begin{equation*}
+Q^{n}(E) = (n+1)^{r}2^{-nD(P^{*}||Q)}
+\end{equation*}
+
+where $P^{*}$ is the distribution in $E$ that is closest to $Q$. Since $Q$ is a uniform distribution we have that 
+
+\begin{equation*}
+D(P^{*}||Q) = \log m - H(P)
+\end{equation*}
+
+Therefore, if we let $H^{*}$ be the entropy of the distribution which has maximum entropy, Sanov's theorem becomes 
+
+\begin{equation*}
+Q^{n}(E) = (n+1)^{r}2^{-n(\log m - H^{*})}
+\end{equation*}
+
+\begin{align*}
+|S| &= m^{n} (n+1)^{r}2^{-n(\log m - H^{*})} \\
+&= (n+1)^{r}2^{-nH^{*}}  
+\end{align*}
+
+and therefore, in general, $|S| \leq (n+1)^{r}2^{-nH^{*})}  $.
+
 
 \end{s}
 
