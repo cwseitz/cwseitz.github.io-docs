@@ -66,6 +66,15 @@ given the constraint on successful predictions. Substituting for $D(P||Q)$ gives
 n \geq \left(\frac{1}{\epsilon^{2}} - \frac{2}{\epsilon}\right)\left(\frac{8}{5}\right)^{2}
 \end{equation*}
 
+As for the upper bound on $n$, we can use Chernoff bounds which 
+states the probability of significant deviations from the expected number of 
+heads (tails). 
+
+\begin{equation*}
+\mathbb{P}_{P}\left[ \sum_{i}x_{i} \geq \frac{n}{2} + \epsilon n \right] \leq (n+1)\cdot 2^{-c\cdot n\cdot \epsilon^{2}}
+\end{equation*}
+
+
 \end{s}
 
 \begin{p}
@@ -166,7 +175,7 @@ and therefore, in general, $|S| \leq (n+1)^{r}2^{-nH^{*})}  $.
 \end{s}
 
 \begin{p}
-Differential entropy of the multivariate Gaussian
+Differential entropy of the multivariate Gaussian with $n$ variables
 
 \begin{equation*}
 \phi(x) = \frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}\exp-\frac{1}{2}(x-\mu)^{T}\Sigma^{-1}(x-\mu)
@@ -183,6 +192,65 @@ h(x) &=& -\int \phi(x)\log \phi(x) dx\\
 &=& \frac{n}{2}\log (2\pi e) +\frac{1}{2} \log|\Sigma| + \mathbf{E}\left[\frac{1}{2}(x-\mu)^{T}\Sigma^{-1}(x-\mu)\right]\\
 &=& \frac{n}{2}\log (2\pi e) +\frac{1}{2} \log|\Sigma|\\
 \end{eqnarray*}
+
+Now, we would like to show that 
+
+\begin{equation*}
+|\alpha\Sigma_{1} + (1-\alpha)\Sigma_{2}| \leq |\Sigma_{1}|^{\alpha} \cdot |\Sigma_{2}|^{1-\alpha}
+\end{equation*}
+
+\end{s}
+
+\begin{p}
+Chernoff bound for read-k families
+\end{p}
+
+\begin{s}
+We can modify Shearer's Lemma for the scenario where we are dealing with subsets of $\it{at \;most}$ size $k$.
+
+\begin{equation*}
+k\cdot H(X_{1} \; ... \; X_{n}) \geq \sum_{S\in \mathcal{F}} H(X_{S})
+\end{equation*}
+
+where $\mathcal{F}$ is a collection of subsets  $S$ of $[n]$ which are at most of length $k$ and $X_{S}$ is a particular subset. Consider the following modification
+
+\begin{equation*}
+k\cdot H(X_{1} \; ... \; X_{n}) - k\cdot H(Y_{1} \; ... \; Y_{n})\geq  \sum_{S\in \mathcal{F}} H(X_{S}) - k\cdot H(Y_{1} \; ... \; Y_{n}) 
+\end{equation*}
+
+since $X$ is uniformly distributed we have that
+
+\begin{align*}
+k\cdot D(Y_{1} \; ... \; Y_{n}||X_{1} \; ... \; X_{n}) &\geq \sum_{S\in \mathcal{F}} H(X_{S}) - k\cdot H(Y_{1} \; ... \; Y_{n}) \\
+&= \sum_{S\in \mathcal{F}} H(X_{S})  - k\cdot H(Y_{1} \; ... \; Y_{n}) \\
+&= k\sum H(X)  - k\cdot H(Y_{1} \; ... \; Y_{n}) \\
+&\geq k\sum H(X)  - \sum H(Y_{S})\\
+&= D(Y_{S}||X_{S}) 
+\end{align*}
+
+We can see why this last equality is true by using the fact that $X$ is uniformly distributed and each $X$ is independent
+
+\begin{equation*}
+D(Y_{S}||X_{S})  = \sum H(X_{S}) - H(Y_{S}) = k\sum H(X) - \sum H(Y_{S})
+\end{equation*}
+
+Since both are uniformly distributed, we can calculate the ratio of the number of subsets where the condition is satisfied to the total number of possible subsets. This can be written in terms of entropies
+
+\begin{align*}
+\mathbb{P}_{X_{1}\; ... \; X_{n}} \left[\sum f_{i}(X_{S}) \leq t\right] &= \frac{|A|}{|X|} \\
+&= 2^{H(Y_{1} \; ... \; Y_{n}) - H(X_{1} \; ... \; X_{n})}\\
+&= 2^{-D(Y_{1} \; ... \; Y_{n}||X_{1} \; ... \; X_{n})}
+\end{align*}
+
+Since the distributions are uniform. Now, 
+
+\begin{align*}
+D(Y_{S_{i}}||X_{S_{i}}) &\geq D(f(Y_{S_{i}})||f(X_{S_{i}})) \\
+&= \sum f(Y_{S_{i}})\log\frac{f(Y_{S_{i}})}{f(X_{S_{i}})}\\
+&= \nu_{i}\frac{\nu_{i}}{\mu_{i}} + (1-\nu_{i})\frac{1-\nu_{i}}{1-\mu_{i}}\\
+&= D(\nu_{i}||\mu_{i})
+\end{align*}
+
 
 \end{s}
 
