@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  12 FEB 2021 19:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  13 FEB 2021 17:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -253,7 +253,13 @@ Non-PDF special ignored!
 <special> papersize=614.295pt,794.96999pt
 
 {/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2] [3] [4] [5] [6] (./info-theory-ps2.aux) )
+[2] [3] [4] [5] [6]
+Overfull \hbox (10.84074pt too wide) in paragraph at lines 259--260
+[]\OT1/cmr/m/n/14.4 Finally, we can com-bine these re-sults and use the con-vex
+-ity of KL-Divergence
+ []
+
+[7] (./info-theory-ps2.aux) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 23 ({)
@@ -261,11 +267,11 @@ Non-PDF special ignored!
 Here is how much of TeX's memory you used:
  2894 strings out of 480608
  38340 string characters out of 5903631
- 287265 words of memory out of 5000000
+ 288265 words of memory out of 5000000
  18772 multiletter control sequences out of 15000+600000
  538763 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,10n,34p,285b,232s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 30i,11n,34p,516b,232s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmbx12.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmcsc10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/
@@ -281,10 +287,10 @@ b></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
 /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.p
 fb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm
 10.pfb>
-Output written on info-theory-ps2.pdf (6 pages, 154736 bytes).
+Output written on info-theory-ps2.pdf (7 pages, 159869 bytes).
 PDF statistics:
- 79 PDF objects out of 1000 (max. 8388607)
- 56 compressed objects within 1 object stream
+ 84 PDF objects out of 1000 (max. 8388607)
+ 60 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

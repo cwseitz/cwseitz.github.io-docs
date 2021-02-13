@@ -66,14 +66,17 @@ given the constraint on successful predictions. Substituting for $D(P||Q)$ gives
 n \geq \left(\frac{1}{\epsilon^{2}} - \frac{2}{\epsilon}\right)\left(\frac{8}{5}\right)^{2}
 \end{equation*}
 
-As for the upper bound on $n$, we can use Chernoff bounds which 
-states the probability of significant deviations from the expected number of 
-heads (tails). 
+As for the upper bound on $n$, we can use Chernoff bounds. Chernoff bounds tell us the probability that a sequence drawn from the product distribution $Q^{n}$ deviates from $\mathbb{E}_{\bar{x}\sim Q^{n}}[\bar{x}]$ where $\bar{x} = (X_{1}\; ... \; X_{n})$. We seek the probability that $\bar{x}$ deviates from the expectation by at least $2\epsilon$. For a bias of $1-2\epsilon$ we expect a sum over $\bar{x}$ to give $n(1-2\epsilon)$. So if we draw $\bar{x}$ from $Q^{n}$, we expect that
 
 \begin{equation*}
-\mathbb{P}_{P}\left[ \sum_{i}x_{i} \geq \frac{n}{2} + \epsilon n \right] \leq (n+1)\cdot 2^{-c\cdot n\cdot \epsilon^{2}}
+\underset{Q^{n}}{\mathbb{P}}\left[ \sum_{i}X_{i} \geq n(1-2\epsilon) \right] = (n+1)\cdot 2^{-n\cdot D(P||Q)} \leq (n+1)\cdot 2^{-\frac{n\epsilon^{2}}{2\ln 2(1-2\epsilon)}}
 \end{equation*}
 
+If we require that $9/10$ of our predictions are correct, then
+
+\begin{equation*}
+(n+1)\cdot 2^{-\frac{n\epsilon^{2}}{2\ln 2(1-2\epsilon)}} \geq \frac{1}{10}
+\end{equation*}
 
 \end{s}
 
@@ -225,7 +228,7 @@ k\cdot D(Y_{1} \; ... \; Y_{n}||X_{1} \; ... \; X_{n}) &\geq \sum_{S\in \mathcal
 &= \sum_{S\in \mathcal{F}} H(X_{S})  - k\cdot H(Y_{1} \; ... \; Y_{n}) \\
 &= k\sum H(X)  - k\cdot H(Y_{1} \; ... \; Y_{n}) \\
 &\geq k\sum H(X)  - \sum H(Y_{S})\\
-&= D(Y_{S}||X_{S}) 
+&= \sum_{i} D(Y_{S_{i}}||X_{S_{i}}) 
 \end{align*}
 
 We can see why this last equality is true by using the fact that $X$ is uniformly distributed and each $X$ is independent
@@ -237,18 +240,29 @@ D(Y_{S}||X_{S})  = \sum H(X_{S}) - H(Y_{S}) = k\sum H(X) - \sum H(Y_{S})
 Since both are uniformly distributed, we can calculate the ratio of the number of subsets where the condition is satisfied to the total number of possible subsets. This can be written in terms of entropies
 
 \begin{align*}
-\mathbb{P}_{X_{1}\; ... \; X_{n}} \left[\sum f_{i}(X_{S}) \leq t\right] &= \frac{|A|}{|X|} \\
+\mathbb{P}_{X_{1}\; ... \; X_{n}} \left[\sum f_{i}(X_{S}) \geq t\right] &= \frac{|A|}{|X|} \\
 &= 2^{H(Y_{1} \; ... \; Y_{n}) - H(X_{1} \; ... \; X_{n})}\\
 &= 2^{-D(Y_{1} \; ... \; Y_{n}||X_{1} \; ... \; X_{n})}
 \end{align*}
 
-Since the distributions are uniform. Now, 
+when the distributions are uniform. Also, since the expectation 
 
 \begin{align*}
-D(Y_{S_{i}}||X_{S_{i}}) &\geq D(f(Y_{S_{i}})||f(X_{S_{i}})) \\
-&= \sum f(Y_{S_{i}})\log\frac{f(Y_{S_{i}})}{f(X_{S_{i}})}\\
-&= \nu_{i}\frac{\nu_{i}}{\mu_{i}} + (1-\nu_{i})\frac{1-\nu_{i}}{1-\mu_{i}}\\
+D(Y_{S_{i}}||X_{S_{i}}) &\geq D(f_{i}(Y_{S_{i}})||f_{i}(X_{S_{i}})) \\
+&= \mathbb{E}_{f_{i}(Y_{S_{i}})}\left[\log\frac{\mathbf{Pr}[f_{i}(Y_{S_{i}})]}{\mathbf{Pr}[f_{i}(X_{S_{i}})]} \right]\\
+&= \mathbf{Pr}[f_{i}(Y_{S_{i}})=0]\log\frac{\mathbf{Pr}[f_{i}(Y_{S_{i}})=0]}{\mathbf{Pr}[f_{i}(X_{S_{i}})=0]} \\
+&+ \mathbf{Pr}[f_{i}(Y_{S_{i}})=1]\log\frac{\mathbf{Pr}[f_{i}(Y_{S_{i}})=1]}{\mathbf{Pr}[f_{i}(X_{S_{i}})=1]}\\
+&= \nu_{i}\log \frac{\nu_{i}}{\mu_{i}} + (1-\nu_{i})\log \frac{1-\nu_{i}}{1-\mu_{i}}\\
 &= D(\nu_{i}||\mu_{i})
+\end{align*}
+
+Finally, we can combine these results and use the convexity of KL-Divergence to show that
+
+\begin{align*}
+\mathbb{P}_{X_{1}\; ... \; X_{n}} \left[\sum_{i} f_{i}(X_{S_{i}}) \geq t\right] &= 2^{-D(Y_{1} \; ... \; Y_{n}||X_{1} \; ... \; X_{n})}\\
+&\leq 2^{-\frac{1}{k}\sum_{i} D(Y_{S_{i}}||X_{S_{i}})}\\
+&= 2^{-\frac{1}{k}\sum_{i} D(\nu_{i}||\mu_{i})}\\
+&\leq 2^{-\frac{r}{k}D(\mu + \epsilon||\mu)}
 \end{align*}
 
 
