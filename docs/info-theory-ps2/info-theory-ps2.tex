@@ -53,29 +53,25 @@ D(P||Q) &= \epsilon\log \frac{\epsilon}{2\epsilon} + (1-\epsilon)\log \frac{1-\e
 &= \frac{1}{2\ln 2}\cdot \frac{\epsilon^{2}}{1-2\epsilon}
 \end{align*}
 
-
-At the same time, we know that
+Now, for a sequence $\bar{x}$ drawn from the product distribution $Q^{n}$, we can bound the probability that $\bar{x}$ is of a particular type $P$
 
 \begin{equation*}
-n \geq \frac{1}{2\ln 2 \cdot D(P||Q)}\left(\frac{8}{5}\right)^{2}
+\frac{1}{(n+1)} 2^{-nD(P||Q)} \leq \underset{\bar{x} \sim Q^{n}}{\mathbb{P}}\left[P_{\bar{x}} = P\right] \leq 2^{-nD(P||Q)}
 \end{equation*}
 
-given the constraint on successful predictions. Substituting for $D(P||Q)$ gives us the lower bound on $n$
+For the lower bound, we have
 
 \begin{equation*}
-n \geq \left(\frac{1}{\epsilon^{2}} - \frac{2}{\epsilon}\right)\left(\frac{8}{5}\right)^{2}
+\underset{\bar{x} \sim Q^{n}}{\mathbb{P}}\left[\sum_{i}\bar{x}_{i} \geq 
+2\epsilon n\right]\geq 
+\left(\frac{(1-2\epsilon)n + 1}{n+1}\right) 2^{-nD(P||Q)}
 \end{equation*}
 
-As for the upper bound on $n$, we can use Chernoff bounds. Chernoff bounds tell us the probability that a sequence drawn from the product distribution $Q^{n}$ deviates from $\mathbb{E}_{\bar{x}\sim Q^{n}}[\bar{x}]$ where $\bar{x} = (X_{1}\; ... \; X_{n})$. We seek the probability that $\bar{x}$ deviates from the expectation by at least $2\epsilon$. For a bias of $1-2\epsilon$ we expect a sum over $\bar{x}$ to give $n(1-2\epsilon)$. So if we draw $\bar{x}$ from $Q^{n}$, we expect that
+because there are $(1-2\epsilon)n + 1$ choices between $2\epsilon n$ and $n$ and we would like to know what is the probability a sequence drawn from $Q^{n}$ has a deviation of at least $2\epsilon n$ heads. Now for the upper bound we have
 
 \begin{equation*}
-\underset{Q^{n}}{\mathbb{P}}\left[ \sum_{i}X_{i} \geq n(1-2\epsilon) \right] = (n+1)\cdot 2^{-n\cdot D(P||Q)} \leq (n+1)\cdot 2^{-\frac{n\epsilon^{2}}{2\ln 2(1-2\epsilon)}}
-\end{equation*}
-
-If we require that $9/10$ of our predictions are correct, then
-
-\begin{equation*}
-(n+1)\cdot 2^{-\frac{n\epsilon^{2}}{2\ln 2(1-2\epsilon)}} \geq \frac{1}{10}
+\underset{\bar{x} \sim P^{n}}{\mathbb{P}}\left[\sum_{i}\bar{x}_{i} \geq 
+2\epsilon n\right] \leq ((1-2\epsilon)n + 1)\cdot 2^{-nD(P||Q)}
 \end{equation*}
 
 \end{s}
@@ -90,7 +86,7 @@ Show that $0 \leq \mathbf{JSD}(P,Q) \leq 1$
 \mathbf{JSD}(P,Q) &=& \frac{1}{2}D(P||M) + \frac{1}{2}D(Q||M)\\
 \end{eqnarray*}
 
-The lower bound must be true because $D(P||M) \geq 0$ and $Q(P||M) \geq 0$. For the upper bound, consider just one of the terms
+The lower bound must be true because $D(P||M) \geq 0$ and $D(Q||M) \geq 0$. These bounds can be seen directly from the fact that the ratio $\frac{P(x)}{P(x)+Q(x)}$ must lie between 1 and 2. To be precise, consider just one of the terms
 
 \begin{eqnarray*}
 D(P||M) &=& \frac{1}{2}\sum_{x\sim P} P(x)\log \frac{P(x)}{M(x)}\\
@@ -99,7 +95,9 @@ D(P||M) &=& \frac{1}{2}\sum_{x\sim P} P(x)\log \frac{P(x)}{M(x)}\\
 \end{eqnarray*}
 
 Therefore, $\mathbf{JSD}(P,Q) \leq 1$.
-
+\\
+\\
+\\
 Show that $\mathbf{JSD}(P,Q) \geq \frac{1}{8\ln 2} \cdot ||P-Q||_{1}^{2}$
 
 \begin{eqnarray*}
@@ -118,9 +116,10 @@ Show that $\mathbf{JSD(P,Q)} \leq \frac{1}{2}\cdot ||P-Q||_{1}$
 &= \frac{1}{2}\sum_{x\sim \chi}\left[P(x)+Q(x)\right]\cdot\frac{P(x)}{P(x)+Q(x)}\log\frac{2P(x)}{P(x)+Q(x)}\\
 &\quad + \frac{Q(x)}{P(x)+Q(x)}\log\frac{2Q(x)}{P(x)+Q(x)}\\
 &= \frac{1}{2}\sum_{x\sim \chi}\left[P(x)+Q(x)\right] \cdot |1-H\left(\frac{P(x)}{P(x)+Q(x)},\frac{Q(x)}{P(x)+Q(x)}\right)|\\
-&\leq \sum_{x\sim \chi} |P(x)-Q(x)|
+&\leq \frac{1}{2}\sum_{x\sim \chi} |P(x)-Q(x)|
 \end{align*}
 
+Since the entropy is strictly non-negative.
 
 \begin{equation*}
 \mathbf{JSD}_{\lambda}(P_{1} \; ... \; P_{k}) =  \sum_{i} \lambda_{i}D(P_{i}||M)
