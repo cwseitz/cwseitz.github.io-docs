@@ -43,7 +43,7 @@ and the second is distributed according to
 \end{p}
 
 \begin{s}
-I will assume that distinguishing the two coins means that, given a sequence of $n$ flips, we can say whether it is coin $P$ or coin $Q$ in at least $\frac{9}{10}n$ trials, on average. To start, we write out the KL-Divergence between the distributions $P$ and $Q$
+I will assume that distinguishing the two coins means that, given a sequence of $n$ flips, we can say whether it is coin $P$ or coin $Q$ in at least $\frac{9}{10}n$ trials, on average. To start, we will bound the KL-Divergence between the distributions $P$ and $Q$
 
 \begin{align*}
 D(P||Q) &= \epsilon\log \frac{\epsilon}{2\epsilon} + (1-\epsilon)\log \frac{1-\epsilon}{1-2\epsilon}\\
@@ -53,25 +53,39 @@ D(P||Q) &= \epsilon\log \frac{\epsilon}{2\epsilon} + (1-\epsilon)\log \frac{1-\e
 &= \frac{1}{2\ln 2}\cdot \frac{\epsilon^{2}}{1-2\epsilon}
 \end{align*}
 
-Now, for a sequence $\bar{x}$ drawn from the product distribution $Q^{n}$, we can bound the probability that $\bar{x}$ is of a particular type $P$
+So we have found an upper bound for the KL-Divergence i.e. there exists a distribution $P$ Now, for a sequence $\bar{x}$ drawn from the product distribution $Q^{n}$, we can bound the probability that $\bar{x}$ is of a particular type $P$
 
 \begin{equation*}
-\frac{1}{(n+1)} 2^{-nD(P||Q)} \leq \underset{\bar{x} \sim Q^{n}}{\mathbb{P}}\left[P_{\bar{x}} = P\right] \leq 2^{-nD(P||Q)}
+\frac{1}{(n+1)}\cdot 2^{-nD(P||Q)} \leq \underset{\bar{x} \sim Q^{n}}{\mathbf{Pr}}\left[T(P_{\bar{x}}) = T(P)\right] \leq 2^{-nD(P||Q)}
 \end{equation*}
 
-For the lower bound, we have
+where $T(P)$ denotes the type of an empirical distribution $P$. For the lower bound, the arbitrary type $T(P)$ becomes any $\bar{x}\sim Q^{n}$ such that the number of heads in $\bar{x}$ is at least $n(1-\epsilon)$. 
 
 \begin{equation*}
-\underset{\bar{x} \sim Q^{n}}{\mathbb{P}}\left[\sum_{i}\bar{x}_{i} \geq 
-2\epsilon n\right]\geq 
-\left(\frac{(1-2\epsilon)n + 1}{n+1}\right) 2^{-nD(P||Q)}
+\underset{\bar{x} \sim Q^{n}}{\mathbf{Pr}}\left[\sum_{i}\bar{x}_{i} \geq 
+n(1-\epsilon)\right]\geq 
+(n+1) \cdot 2^{-nD(P||Q)}
 \end{equation*}
 
-because there are $(1-2\epsilon)n + 1$ choices between $2\epsilon n$ and $n$ and we would like to know what is the probability a sequence drawn from $Q^{n}$ has a deviation of at least $2\epsilon n$ heads. Now for the upper bound we have
+At this point we substitute a desirable error rate of 1/10 for our classifier and take the logarithm of both sides to get 
+
+\begin{align*}
+(n+1) \cdot 2^{-nD(P||Q)} &\leq 1 + n(1 - D(P||Q))\\
+&= 1 + n(1 - \frac{1}{2\ln 2}\cdot \frac{\epsilon^{2}}{1-2\epsilon})\\
+&\leq -\log 10
+\end{align*}
+
+So, we can conclude for the upper bound that
+
+\begin{align*}
+n \leq \frac{1-2\epsilon}{\epsilon^{2}}
+\end{align*}
+
+Now for the upper bound the prefactor cancels and we have
 
 \begin{equation*}
-\underset{\bar{x} \sim P^{n}}{\mathbb{P}}\left[\sum_{i}\bar{x}_{i} \geq 
-2\epsilon n\right] \leq ((1-2\epsilon)n + 1)\cdot 2^{-nD(P||Q)}
+\underset{\bar{x} \sim Q^{n}}{\mathbf{Pr}}\left[\sum_{i}\bar{x}_{i} \geq 
+n(1-\epsilon)\right] \leq 2^{-nD(P||Q)}
 \end{equation*}
 
 \end{s}
