@@ -50,7 +50,7 @@ D(P||Q) &= \epsilon\log \frac{\epsilon}{2\epsilon} + (1-\epsilon)\log \frac{1-\e
 &= (1-\epsilon)\log \frac{1-\epsilon}{1-2\epsilon} - \epsilon\\
 &= (1-\epsilon)\log \left(1 + \frac{\epsilon}{1-2\epsilon}\right) - \epsilon\\
 &\leq (1-\epsilon)\left(\frac{\epsilon}{1-2\epsilon}\right) - \epsilon\\
-&= \frac{1}{2\ln 2}\cdot \frac{\epsilon^{2}}{1-2\epsilon}
+&= \frac{\epsilon^{2}}{1-2\epsilon}
 \end{align*}
 
 So we have found an upper bound for the KL-Divergence i.e. there exists a distribution $P$ Now, for a sequence $\bar{x}$ drawn from the product distribution $Q^{n}$, we can bound the probability that $\bar{x}$ is of a particular type $P$
@@ -59,33 +59,43 @@ So we have found an upper bound for the KL-Divergence i.e. there exists a distri
 \frac{1}{(n+1)}\cdot 2^{-nD(P||Q)} \leq \underset{\bar{x} \sim Q^{n}}{\mathbf{Pr}}\left[T(P_{\bar{x}}) = T(P)\right] \leq 2^{-nD(P||Q)}
 \end{equation*}
 
-where $T(P)$ denotes the type of an empirical distribution $P$. For the lower bound, the arbitrary type $T(P)$ becomes any $\bar{x}\sim Q^{n}$ such that the number of heads in $\bar{x}$ is at least $n(1-\epsilon)$. 
+where $T(P)$ denotes the type of an empirical distribution $P$. For the lower bound on $n$, the arbitrary type $T(P)$ becomes any $\bar{x}\sim Q^{n}$ such that the number of heads in $\bar{x}$ is at least $n(1-\epsilon)$. 
+
+\begin{align*}
+\underset{\bar{x} \sim Q^{n}}{\mathbf{Pr}}\left[\sum_{i}\bar{x}_{i} \geq 
+n(1-\epsilon)\right]&\leq \sum_{j} 2^{-nD(P_{j}||Q)} \\
+&= \sum_{j} 2^{-nD(P||Q)}\\
+&= s\cdot 2^{-nD(P||Q)}
+\end{align*}
+
+where the empirical distribution $P_{j}$ has more than $n(1-\epsilon)$ heads and $s$ is the total number of them. At this point we want to substitute a desirable error rate of 1/10 for the LHS and solve for the $n$ that satisfies this inequality.
 
 \begin{equation*}
-\underset{\bar{x} \sim Q^{n}}{\mathbf{Pr}}\left[\sum_{i}\bar{x}_{i} \geq 
-n(1-\epsilon)\right]\geq 
-(n+1) \cdot 2^{-nD(P||Q)}
+s \cdot 2^{-nD(P||Q)} \geq \frac{1}{10}
 \end{equation*}
 
-At this point we substitute a desirable error rate of 1/10 for our classifier and take the logarithm of both sides to get 
-
-\begin{align*}
-(n+1) \cdot 2^{-nD(P||Q)} &\leq 1 + n(1 - D(P||Q))\\
-&= 1 + n(1 - \frac{1}{2\ln 2}\cdot \frac{\epsilon^{2}}{1-2\epsilon})\\
-&\leq -\log 10
-\end{align*}
-
-So, we can conclude for the upper bound that
-
-\begin{align*}
-n \leq \frac{1-2\epsilon}{\epsilon^{2}}
-\end{align*}
-
-Now for the upper bound the prefactor cancels and we have
+taking the logarithm of both sides gives
 
 \begin{equation*}
-\underset{\bar{x} \sim Q^{n}}{\mathbf{Pr}}\left[\sum_{i}\bar{x}_{i} \geq 
-n(1-\epsilon)\right] \leq 2^{-nD(P||Q)}
+n \geq \log \left(10\cdot s\right)\frac{1-2\epsilon}{\epsilon^{2}}
+\end{equation*}
+
+showing that $n$ is $O(\frac{1-2\epsilon}{\epsilon^{2}})$. Now for the upper bound on $n$, we have
+
+\begin{equation*}
+\left(\frac{s}{n+1}\right) 2^{-nD(P||Q)} \leq \frac{1}{10}
+\end{equation*}
+
+by again taking logarithms and converting to base $e$ is approximately
+
+\begin{equation*}
+n(\ln 2 -\frac{\epsilon^{2}}{1-2\epsilon})\leq \frac{\ln 10\cdot s}{\ln 2}
+\end{equation*}
+
+Giving an upper bound on $n$ such that our classifier performs well
+
+\begin{equation*}
+n \leq \frac{1}{(\ln 2 -\frac{\epsilon^{2}}{1-2\epsilon})}\cdot \frac{\ln \left(10\cdot s\right)}{\ln 2}
 \end{equation*}
 
 \end{s}
@@ -129,7 +139,7 @@ Show that $\mathbf{JSD(P,Q)} \leq \frac{1}{2}\cdot ||P-Q||_{1}$
 &= \frac{1}{2}\sum_{x\sim \chi}\left[P(x)\log\frac{2P(x)}{P(x)+Q(x)} + Q(x)\log\frac{2Q(x)}{P(x)+Q(x)} \right]\\
 &= \frac{1}{2}\sum_{x\sim \chi}\left[P(x)+Q(x)\right]\cdot\frac{P(x)}{P(x)+Q(x)}\log\frac{2P(x)}{P(x)+Q(x)}\\
 &\quad + \frac{Q(x)}{P(x)+Q(x)}\log\frac{2Q(x)}{P(x)+Q(x)}\\
-&= \frac{1}{2}\sum_{x\sim \chi}\left[P(x)+Q(x)\right] \cdot |1-H\left(\frac{P(x)}{P(x)+Q(x)},\frac{Q(x)}{P(x)+Q(x)}\right)|\\
+&= \frac{1}{2}\sum_{x\sim \chi}\left(P(x)+Q(x)\right) \cdot \left(1-H\left(\frac{P(x)}{P(x)+Q(x)},\frac{Q(x)}{P(x)+Q(x)}\right)\right)\\
 &\leq \frac{1}{2}\sum_{x\sim \chi} |P(x)-Q(x)|
 \end{align*}
 
