@@ -1,0 +1,95 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath} % AMS Math Package
+\usepackage{amsthm} % Theorem Formatting
+\usepackage{amssymb}    % Math symbols such as \mathbb
+\usepackage{graphicx} % Allows for eps images
+\usepackage[dvips,letterpaper,margin=1in,bottom=0.7in]{geometry}
+\usepackage{amsmath}
+
+
+\newtheorem{p}{Problem}[section]
+\usepackage{cancel}
+\newtheorem*{lem}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{dfn}{Definition}
+ \newenvironment{s}{%\small%
+        \begin{trivlist} \item \textbf{Solution}. }{%
+            \hspace*{\fill} $\blacksquare$\end{trivlist}}%
+
+
+\begin{document}
+
+{\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Problem Set 3}         }\\[2\baselineskip] % Title
+{ {\bf \fontfamily{cmr}\selectfont Information and Coding Theory}\\ {\textit{\fontfamily{cmr}\selectfont     February 26, 2021}}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    {\large \textsc{Clayton Seitz}
+\\[1.4\baselineskip] 
+
+\begin{p}
+A single dice is rolled and we gain a dollar if the outcome is 2,3,4,5 and lose a dollar if the outcome is 1 or 6. Find the expected gain and the maximum entropy distribution over the possible outcomes of a roll.
+\end{p}
+
+\begin{s}
+
+Let $P$ be the uniform distribution over the dice universe $\chi$ where an outcome of a roll is $x \in \chi$. Furthermore, let $\phi(x)$ be the gain given the outcome of a roll $x$ according the problem definition
+
+\[\phi = \begin{cases} 
+      1 & \; 2,3,4,5 \\
+      -1 & \; 1,6 \\
+   \end{cases}
+\]
+
+and $\bar{x}\sim P^{n}$ be a draw of a sequence of $n$ rolls from the product distribution $P^{n}$. We can then calculate the expected gain over $n$ rolls as
+
+\begin{align*}
+\underset{\bar{x} \sim P^{n}}{\mathbf{E}}\left[\phi(\bar{x})\right] &= \sum_{n}\left(\sum_{i} \phi(x_{n})\cdot p(x_{n})\right)\\
+&=\sum_{n}\left(\frac{1}{6}\sum_{i}\phi(x_{n})\right)\\
+&= \frac{n}{3}
+\end{align*}
+
+Now, we would like to find the maximum entropy distribution $P^{*}$ over $\chi$ in the set of distributions $\Pi$ such that
+
+\begin{equation}
+\underset{\bar{x} \sim (P^{*})^{n}}{\mathbf E}\left[\phi(\bar{x})\right] > \frac{n}{3}
+\end{equation}
+
+We can find such a distribution $P^{*}$ by defining the linear family of distributions that satisfy this constraint on the expected gain
+
+\begin{equation*}
+\mathcal{L} = \left\{ P : \underset{\bar{x} \sim P^{n}}{\mathbf E}\left[\phi(\bar{x})\right] = \sum_{x\in \chi} p(x)\cdot \phi(x) > \alpha \right\}
+\end{equation*}
+
+We would like to find the distribution $P^{*}$ such that $P^{*} = \mathbf{Proj}_{\mathcal{L}}(Q)$ and we now compute this projection by using the Lagrangian
+
+\begin{equation}
+\mathbf{\Lambda}(P, \lambda_{0}, \lambda_{1}) = D(P||Q) + \lambda_{0}\left(\sum p(x) - 1\right) + \lambda_{1}\xi_{\alpha}(x)
+\end{equation}
+
+where 
+
+\[\xi_{\alpha} = \begin{cases} 
+      -x & x < \alpha \\
+      0 & x \geq \alpha \\
+   \end{cases}
+\]
+
+We find a solution by setting the derivative of this Lagrangian to zero
+
+\begin{equation*}
+\nabla \Lambda = \log\left(\frac{p^{*}(x)}{q(x)}\right) + \frac{1}{2\ln 2} + \lambda_{0} + \nabla \xi_{\alpha}
+\end{equation*}
+
+\[\nabla \xi_{\alpha} = \begin{cases} 
+      -\lambda_{1} & x < \alpha \\
+      0 & x > \alpha \\
+   \end{cases}
+\]
+
+Ultimately, we have the solution
+
+\begin{equation*}
+p^{*}(x) = q(x) \cdot 2^{\lambda_{0} -\lambda_{1}\cdot \phi(x)}
+\end{equation*}
+
+
+\end{s}
+
+\end{document}
