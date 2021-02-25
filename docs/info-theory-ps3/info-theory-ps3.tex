@@ -115,7 +115,41 @@ D(P||Q) &= \sum_{x\sim \chi} p(x)\log\frac{p(x)}{q(x)}\\
 &= H(Q) - H(P)
 \end{align*}
 
+Finally, we can show that $Q$ is the maximum entropy distribution in the family $\mathcal{L}$
+
+\begin{align*}
+D(P||Q) &=  H(Q) - H(P) \geq 0
+\end{align*}
+
+which requires that $H(Q) \geq H(P)$.
+
 \end{s}
 
+
+\begin{p}
+Minimax rates for denoising
+\end{p}
+
+\begin{s}
+
+This can be shown by using the chain rule for KL-Divergence
+
+\begin{align*}
+D(P(X,Y)||Q(X,Y)) &= D(P(X)||Q(X)) + D(P(Y|X)||Q(Y|X))\\
+&= D(P(Y|X)||Q(Y|X))\\
+&= D(\mathcal{N}(f(x),\sigma^{2})||\mathcal{N}(g(x),\sigma^{2}))\\
+\end{align*}
+
+which we now compute
+
+\begin{align*}
+D(\mathcal{N}(f(x),\sigma^{2})||\mathcal{N}(g(x),\sigma^{2})) &= 
+\frac{1}{\ln 2}\int_{0}^{1} \exp\left(-(x-f(x))^{2}/2\sigma\right)\\ &\cdot \ln \left(\frac{\exp\left(-(x-f(x))^{2}/2\sigma\right)}{\exp\left(-(x-g(x))^{2}/2\sigma\right)}\right)dx\\
+&= \frac{1}{2\ln 2\cdot \sigma}\int_{0}^{1} \exp\left(-(x-f(x))^{2}\right)\\ &\cdot \left((x-g(x))^{2}-(x-f(x))^{2}\right)dx\\
+&= \frac{1}{2\ln 2\cdot \sigma}\int_{0}^{1} |f(x)-g(x)|^{2}dx\\
+&= \frac{1}{2\ln 2}\cdot ||f(x)-g(x)||_{2}^{2}\\
+\end{align*}
+
+\end{s}
 
 \end{document}

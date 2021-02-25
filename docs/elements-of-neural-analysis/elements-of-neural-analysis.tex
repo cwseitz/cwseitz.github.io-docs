@@ -55,125 +55,24 @@ Dedicated to Calvin and Hobbes.
 \tableofcontents
 \mainmatter
 
-\chapter{The Neural Code}
+\chapter{Introduction}
 
-\section{Introduction}
+The purpose of the following chapters is to highlight some of the statistical properties of visual inputs and neural responses. In particular, we will discuss the statistics and information theory of natural images and how constraints on the space of inputs can in turn constrain the response statistics. Then, we will discuss some of the ways the human visual system might compare inputs to this learned model - a phenomenon we will call $\it{visual \; alignment}$.
 
-Throughout this section of the text we will coarsely examine the biophysical properties of the elements of the nervous systems: neurons. The hope is that by introducing the nervous system from a physical perspective, much of the mathematical developments in later chapters will seem natural and well-motivated. However, we will see that much of the later work neglects many of the features of neurons this chapter will introduce and for good reason. It never hurts to know what you have left out of your model.
 
-Neurons are one of the most interesting cell types in animals particularly for their evolved ability to sense their external environment and produce a myriad of responses in favor of the survival of the host organism. All vertebrates have a distinct central nervous system consisting of a brain and a spinal cord which process information from or send information to a peripheral nervous system. Here we will discuss the cellular elements that allow neurons to send information to each other in such a system.
 
-\section{Neuroelectronics}
-
-Neurons are bounded by a 3-4nm thick membrane composed of a diverse set of lipids forming a bi-layer and are submerged in a bath of water and ions $\it{in \;vivo}$. These cells have evolved a vast array of membrane ion channels that control the concentrations of ions on either side of the membrane. The degree to which these channels allow ions to flow in and out of the membrane is the basis of all neural processing and in turn all of our actions and conscious awareness. 
-
-\subsection{RC Model}
-
-A well-known model of a neuron membrane is an RC circuit where the resistor represents a sort of permeability of the membrane to ions while the capacitor models the membrane itself. Since either side of the membrane contains electrically charged ions there exists an electrical potential in these regions and in turn a potential difference across the lipid bi-layer. The current through the membrane is ultimately determined by the balance between diffusion of ions down their concentration gradients and electrical potential gradients. 
+\chapter{Natural Image Statistics}
 
 \begin{figure}
-\centering
-  \includegraphics[width=3in]{assets/circuit-model.png}
-  \caption{RC Circuit Model}
-  \label{fig:circuit}
+  \includegraphics[width=\linewidth]{assets/natural-images.png}
+  \caption{Comparison of images generated from white noise with natural images}
 \end{figure}
 
-If we inject a current $I_{E}$ into the cell, by conservation of current we have
+The study of natural images has recently taken hold in the neuroscience community and there are several reasons for this, one of which is that the human visual system and visual systems in other organisms have developed in an environment sampled by these images. It is then reasonable to hypothesize that these visual systems have developed within and optimized for these kinds of inputs. To be more precise, the architecture of the visual system could be wired to represent the statistical distribution of natural scenes. On the other hand, natural images are a very sparse subset of the entire space of possible images - natural images are speckled throughout image space according to some kind of natural image distribution. The volume of the space of possible images consumed by natural images is unimaginably small but we still might ask, is it possible to write down features of the natural image distribution over the space of images? In other words, we would like to determine the shape of the distribution, be it isolated pockets in the space, a hyperplane, etc. Then, even if we could write down such features, how would a network of neurons encode it?
 
-\begin{eqnarray*}
-I_{E} &=& C\frac{dV}{dt} + I_{R}\\
-\end{eqnarray*}
+\section{Image Statistics}
 
-where $V$ is the membrane voltage. We can also use Maxwell's equations (Kirchhoff's voltage rule) to write
-
-\begin{eqnarray*}
-I_{R} &=& \frac{V-V_{0}}{R}\\
-\end{eqnarray*}
-
-
-where have replaced the resistance by the conductance $g$. Combining these two equations we are left with the following differential equation for the membrane voltage.
-
-\begin{eqnarray*}
-C\frac{dV}{dt} &=& I_{E} - \frac{V - V_{0}}{R}\\
-\end{eqnarray*}
-
-which is commonly rewritten by defining the membrane time constant $\tau = RC$
-
-\begin{eqnarray*}
-\tau\frac{dV_{C}}{dt} &=& I_{E}R - (V - V_{0})\\
-\end{eqnarray*}
-
-Notice that as $t\rightarrow \infty$ we have $V_{C}-V_{rest} \rightarrow I_{E}R + V_{0}$ and so we define the steady-state voltage $V_{\infty} = I_{E}R + V_{0}$. Inserting this new definition into the equation
-
-\begin{eqnarray*}
-\tau\frac{dV}{dt} &=& V_{\infty} - V\\
-\end{eqnarray*}
-
-which can be solved to give
-
-\begin{eqnarray*}
-V(t) &=& V_{\infty}(1-e^{-\frac{t}{\tau}})\\
-\end{eqnarray*}
-
-\subsection{Equilibrium and Reversal Potentials}
-
-The flux of ions through the cell membrane is due to an imbalance of electrical and chemical potentials. Recall the Boltzmann distribution of energies at a temperature $T$
-
-\begin{equation*}
-P(\epsilon) = \frac{e^{-\frac{\epsilon}{k_{B}T}}}{Z}
-\end{equation*}
-
-where the partition function $Z= \int e^{-\frac{\epsilon}{k_{B}T}}d\epsilon$. We define the $\mathbf{reversal\; potential}$ as the membrane potential at which electrical forces perfectly balance the diffusion of ions down their concentration gradient and their is no current through the membrane. We compute this using the famous Nernst equation
-
-\begin{equation*}
-E = \frac{RT}{zF}\ln \frac{[o]}{[i]}
-\end{equation*}
-
-Perhaps we would rather compute the resting potential of the membrane with knowledge of the concentrations of ions inside and outside of the cell. For a set of positive ions $M$ and negative ions $A$
-
-\begin{equation*}
-E = \frac{RT}{F}\ln \frac{\sum_{i} M_{i}[M_{i}]_{out} + \sum_{i} A_{i}[A_{i}]_{in}}{\sum_{i} M_{i}[M_{i}]_{in} +\sum_{i} A_{i}[M_{i}]_{out}}
-\end{equation*}
-
-where we have used $M_{i}, A_{i}$ to represent the permeability of these ions.
-
-\subsection{Membrane Current}
-
-We saw in our basic RC circuit model of the cell membrane that the membrane current $I_{R}$ was very simply given by Ohm's law $I_{R} = (V-V_{0})/R$. This very simple model assumes that the entire membrane can be lumped as a single resistor $R$; however, in reality, neural membranes have a diverse set of channel types each with their own respective resistance to current flow. Therefore, we need to expand $R$ into a set of parallel resistors each with their own resistance.
-
-\begin{equation*}
-I = \sum_{i} g_{i}(V-E_{i})
-\end{equation*}
-
-This setup is more accurate but still not entirely correct; Ohm's law assumes that we are dealing with a $\mathbf{linear \; circuit}$ where the resistance is a constant (not a function of the voltage). In the cell, many channels are $\mathbf{voltage \; gated}$ which means that they $\it{are}$ a function of the voltage and Ohm's law doesn't apply. A more correct definition of the total membrane current is then
-
-\begin{equation}
-I = \sum_{i} g_{i}(V)(V-E_{i})
-\end{equation}
-
-The functions $g_{i}(V)$ are difficult to estimate due to the complexity of ion channels and their mechanisms of opening and closing. Hodgkin and Huxley came up with a model for these voltage-dependent conductance for sodium and potassium. Their model defines what we call an $\mathbf{open \; probability}$ for a single ion channel at a particular voltage. In the case of the potassium channel, Hodgkin and Huxley thought of the channel as a structure composed of 4 particles which each probability $n$ of being in the $\it{permissive\; state}$. If all four particles are in such a state, the channel will open. Each particle has a probability of being in this state which increases with the voltage sigmoidally
-
-\begin{equation}
-n(V) = \frac{1}{1+(A_{\beta}/A_{\alpha})\exp ((B_{\alpha} - B_{\beta}))V/V_{T}}
-\end{equation}
-
-and so the total probability the channel is open is $n^{4}$. The model of the sodium channel is slightly different. They introduced two probabilities $m$ and $h$ where $m$ is directly analogous to $n$ and $h$ is the probability that a gate on the sodium channel is open. They fit their experimental data using $m^{3}$ and so  probability the sodium channel is open is then $m^{3}h$. The total membrane current according to the Hodgkin-Huxley model can then be found by expanding Eq. 1.1
-
-\begin{equation}
-I = \bar{g}_{Na}m^{3}h(V-E_{Na}) + \bar{g}_{K}n^{4}(V-E_{K}) + \bar{g}_{L}(V-E_{L})
-\end{equation}
-
-where a leakage conductance $g_{L}$ is also included.
-
-\chapter{Gabor Theory and Image Statistics}
-
-\section{2D Gabor Wavelets}
-
-The 2D Gabor wavelet in the spatial domain is the product of an elliptical gaussian function with a harmonic function
-
-\begin{equation*}
-
-\end{equation*}
+The treatment used throughout this chapter will draw heavily from information theory, coding theory, and statistics. It is by no means a comprehensive introduction to any of these topics, although many of the fundamental concepts will be introduced. By the end of this chapter, we will have a better idea of how to formulate a generative model, which produces a natural image from a set of latent variables.
 
 \section{Section heading}
 
@@ -387,8 +286,6 @@ where $\mu = \mathbf{E}[x] \geq 0$ since $f$ is only defined on $[0, \infty]$.
 
 \subsection{Fano's Inequality}
 
-
-
 \section{Error Correcting Codes}
 
 \chapter{Microscopy and Image Analysis}
@@ -398,5 +295,115 @@ where $\mu = \mathbf{E}[x] \geq 0$ since $f$ is only defined on $[0, \infty]$.
 \end{chapquote}
 
 \section{Section heading}
+
+\chapter{The Neural Code}
+
+\section{Introduction}
+
+Throughout this section of the text we will coarsely examine the biophysical properties of the elements of the nervous systems: neurons. The hope is that by introducing the nervous system from a physical perspective, much of the mathematical developments in later chapters will seem natural and well-motivated. However, we will see that much of the later work neglects many of the features of neurons this chapter will introduce and for good reason. It never hurts to know what you have left out of your model.
+
+Neurons are one of the most interesting cell types in animals particularly for their evolved ability to sense their external environment and produce a myriad of responses in favor of the survival of the host organism. All vertebrates have a distinct central nervous system consisting of a brain and a spinal cord which process information from or send information to a peripheral nervous system. Here we will discuss the cellular elements that allow neurons to send information to each other in such a system.
+
+\section{Neuroelectronics}
+
+Neurons are bounded by a 3-4nm thick membrane composed of a diverse set of lipids forming a bi-layer and are submerged in a bath of water and ions $\it{in \;vivo}$. These cells have evolved a vast array of membrane ion channels that control the concentrations of ions on either side of the membrane. The degree to which these channels allow ions to flow in and out of the membrane is the basis of all neural processing and in turn all of our actions and conscious awareness. 
+
+\subsection{RC Model}
+
+A well-known model of a neuron membrane is an RC circuit where the resistor represents a sort of permeability of the membrane to ions while the capacitor models the membrane itself. Since either side of the membrane contains electrically charged ions there exists an electrical potential in these regions and in turn a potential difference across the lipid bi-layer. The current through the membrane is ultimately determined by the balance between diffusion of ions down their concentration gradients and electrical potential gradients. 
+
+\begin{figure}
+\centering
+  \includegraphics[width=3in]{assets/circuit-model.png}
+  \caption{RC Circuit Model}
+  \label{fig:circuit}
+\end{figure}
+
+If we inject a current $I_{E}$ into the cell, by conservation of current we have
+
+\begin{eqnarray*}
+I_{E} &=& C\frac{dV}{dt} + I_{R}\\
+\end{eqnarray*}
+
+where $V$ is the membrane voltage. We can also use Maxwell's equations (Kirchhoff's voltage rule) to write
+
+\begin{eqnarray*}
+I_{R} &=& \frac{V-V_{0}}{R}\\
+\end{eqnarray*}
+
+
+where have replaced the resistance by the conductance $g$. Combining these two equations we are left with the following differential equation for the membrane voltage.
+
+\begin{eqnarray*}
+C\frac{dV}{dt} &=& I_{E} - \frac{V - V_{0}}{R}\\
+\end{eqnarray*}
+
+which is commonly rewritten by defining the membrane time constant $\tau = RC$
+
+\begin{eqnarray*}
+\tau\frac{dV_{C}}{dt} &=& I_{E}R - (V - V_{0})\\
+\end{eqnarray*}
+
+Notice that as $t\rightarrow \infty$ we have $V_{C}-V_{rest} \rightarrow I_{E}R + V_{0}$ and so we define the steady-state voltage $V_{\infty} = I_{E}R + V_{0}$. Inserting this new definition into the equation
+
+\begin{eqnarray*}
+\tau\frac{dV}{dt} &=& V_{\infty} - V\\
+\end{eqnarray*}
+
+which can be solved to give
+
+\begin{eqnarray*}
+V(t) &=& V_{\infty}(1-e^{-\frac{t}{\tau}})\\
+\end{eqnarray*}
+
+\subsection{Equilibrium and Reversal Potentials}
+
+The flux of ions through the cell membrane is due to an imbalance of electrical and chemical potentials. Recall the Boltzmann distribution of energies at a temperature $T$
+
+\begin{equation*}
+P(\epsilon) = \frac{e^{-\frac{\epsilon}{k_{B}T}}}{Z}
+\end{equation*}
+
+where the partition function $Z= \int e^{-\frac{\epsilon}{k_{B}T}}d\epsilon$. We define the $\mathbf{reversal\; potential}$ as the membrane potential at which electrical forces perfectly balance the diffusion of ions down their concentration gradient and their is no current through the membrane. We compute this using the famous Nernst equation
+
+\begin{equation*}
+E = \frac{RT}{zF}\ln \frac{[o]}{[i]}
+\end{equation*}
+
+Perhaps we would rather compute the resting potential of the membrane with knowledge of the concentrations of ions inside and outside of the cell. For a set of positive ions $M$ and negative ions $A$
+
+\begin{equation*}
+E = \frac{RT}{F}\ln \frac{\sum_{i} M_{i}[M_{i}]_{out} + \sum_{i} A_{i}[A_{i}]_{in}}{\sum_{i} M_{i}[M_{i}]_{in} +\sum_{i} A_{i}[M_{i}]_{out}}
+\end{equation*}
+
+where we have used $M_{i}, A_{i}$ to represent the permeability of these ions.
+
+\subsection{Membrane Current}
+
+We saw in our basic RC circuit model of the cell membrane that the membrane current $I_{R}$ was very simply given by Ohm's law $I_{R} = (V-V_{0})/R$. This very simple model assumes that the entire membrane can be lumped as a single resistor $R$; however, in reality, neural membranes have a diverse set of channel types each with their own respective resistance to current flow. Therefore, we need to expand $R$ into a set of parallel resistors each with their own resistance.
+
+\begin{equation*}
+I = \sum_{i} g_{i}(V-E_{i})
+\end{equation*}
+
+This setup is more accurate but still not entirely correct; Ohm's law assumes that we are dealing with a $\mathbf{linear \; circuit}$ where the resistance is a constant (not a function of the voltage). In the cell, many channels are $\mathbf{voltage \; gated}$ which means that they $\it{are}$ a function of the voltage and Ohm's law doesn't apply. A more correct definition of the total membrane current is then
+
+\begin{equation}
+I = \sum_{i} g_{i}(V)(V-E_{i})
+\end{equation}
+
+The functions $g_{i}(V)$ are difficult to estimate due to the complexity of ion channels and their mechanisms of opening and closing. Hodgkin and Huxley came up with a model for these voltage-dependent conductance for sodium and potassium. Their model defines what we call an $\mathbf{open \; probability}$ for a single ion channel at a particular voltage. In the case of the potassium channel, Hodgkin and Huxley thought of the channel as a structure composed of 4 particles which each probability $n$ of being in the $\it{permissive\; state}$. If all four particles are in such a state, the channel will open. Each particle has a probability of being in this state which increases with the voltage sigmoidally
+
+\begin{equation}
+n(V) = \frac{1}{1+(A_{\beta}/A_{\alpha})\exp ((B_{\alpha} - B_{\beta}))V/V_{T}}
+\end{equation}
+
+and so the total probability the channel is open is $n^{4}$. The model of the sodium channel is slightly different. They introduced two probabilities $m$ and $h$ where $m$ is directly analogous to $n$ and $h$ is the probability that a gate on the sodium channel is open. They fit their experimental data using $m^{3}$ and so  probability the sodium channel is open is then $m^{3}h$. The total membrane current according to the Hodgkin-Huxley model can then be found by expanding Eq. 1.1
+
+\begin{equation}
+I = \bar{g}_{Na}m^{3}h(V-E_{Na}) + \bar{g}_{K}n^{4}(V-E_{K}) + \bar{g}_{L}(V-E_{L})
+\end{equation}
+
+where a leakage conductance $g_{L}$ is also included.
 
 \end{document}
