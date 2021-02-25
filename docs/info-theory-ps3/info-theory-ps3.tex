@@ -146,8 +146,45 @@ which we now compute
 D(\mathcal{N}(f(x),\sigma^{2})||\mathcal{N}(g(x),\sigma^{2})) &= 
 \frac{1}{\ln 2}\int_{0}^{1} \exp\left(-(x-f(x))^{2}/2\sigma\right)\\ &\cdot \ln \left(\frac{\exp\left(-(x-f(x))^{2}/2\sigma\right)}{\exp\left(-(x-g(x))^{2}/2\sigma\right)}\right)dx\\
 &= \frac{1}{2\ln 2\cdot \sigma}\int_{0}^{1} \exp\left(-(x-f(x))^{2}\right)\\ &\cdot \left((x-g(x))^{2}-(x-f(x))^{2}\right)dx\\
-&= \frac{1}{2\ln 2\cdot \sigma}\int_{0}^{1} |f(x)-g(x)|^{2}dx\\
-&= \frac{1}{2\ln 2}\cdot ||f(x)-g(x)||_{2}^{2}\\
+&= \frac{1}{2\ln 2\cdot \sigma^{2}}\int_{0}^{1} |f(x)-g(x)|^{2}dx\\
+&= \frac{1}{2\ln 2\cdot \sigma^{2}}\cdot ||f(x)-g(x)||_{2}^{2}\\
+\end{align*}
+
+Next we will prove a lower bound on the minimax loss for $n$ samples when we have a collection of $S$ functions. First, we can manipulate the result from above and show that
+
+\begin{align*}
+D(P_{f}||P_{g}) &= \frac{1}{2\ln 2\sigma^{2}}\cdot ||f(x)-g(x)||_{2}^{2} \\
+&\leq \frac{32\delta^{2}}{\ln 2\cdot \sigma^{2}}
+\end{align*}
+
+since we have assumed $||f-g||_{2}^{2} \leq 8\delta$. At the same time, we can use what we already know about lower bounds for minimax rates via multiple hypotheses. Let's say that the data $\bar{x}$ is drawn from the distribution $P_{s}$. The probability of error by a classifier $T(\bar{x})$ that outputs the distribution $s\in S$ the data was drawn from is lower bounded by
+
+\begin{equation*}
+\mathbf{Pr}\left[T(\bar{x}) \neq s]\right] \geq 1 - \frac{n\cdot \underset{s_{1},s_{2}\in S}{\mathbf{E}}\left[D(P_{s_{1}}||P_{s_{2}})\right] + 1}{\log |S|}
+\end{equation*}
+
+Also, we define the loss function to be $\ell = ||f-g||_{2}^{2}$
+
+\begin{align*}
+M_{n}(\Pi, \ell) &\geq \ell(\delta)\cdot \underset{T}{\inf}\left\{\mathbf{Pr}\left[T(\bar{x}) \neq s]\right]\right\}\\
+&= \delta^{2}\cdot\left(1 - \frac{n\cdot \underset{s_{1},s_{2}\in S}{\mathbf{E}}\left[D(P_{s_{1}}||P_{s_{2}})\right] + 1}{\log |S|}\right)\\
+&= \delta^{2}\cdot\left(1 - \frac{n\cdot \left(32\delta^{2}/\sigma^{2}\ln 2\right) + 1}{\log |S|}\right)
+\end{align*}
+
+since the expectation over all possible pairs of functions can be at most the largest distance between two functions. Now, if we define the family to be the bump functions, which are $L$-Lipschitz since
+
+\begin{align*}
+|B_{\epsilon}(x_{1}) - B_{\epsilon}(x_{2})| &= L\cdot ||x_{2}|-|x_{1}||\\
+&\leq L\cdot |x_{2}-x_{1}|
+\end{align*}
+
+and assuming $\epsilon < 1$
+
+\begin{align*}
+\int_{-1}^{1}(B_{\epsilon}(x))^{2}dx &= \int_{-\epsilon}^{\epsilon}(B_{\epsilon}(x))^{2}dx\\
+&= 2\int_{0}^{\epsilon} (L\cdot (\epsilon-|x|)^{2}dx\\
+&= 2L^{2}\int_{0}^{\epsilon} (x-\epsilon)^{2}dx\\
+&= \frac{2L^{2}\epsilon^{3}}{3}
 \end{align*}
 
 \end{s}
