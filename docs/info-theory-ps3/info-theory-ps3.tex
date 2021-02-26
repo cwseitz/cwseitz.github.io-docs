@@ -187,6 +187,16 @@ and assuming $\epsilon < 1$
 &= \frac{2L^{2}\epsilon^{3}}{3}
 \end{align*}
 
+Next, we will show something
+
+\begin{align*}
+||f_{a}-f_{b}||_{2}^{2} &= \int_{-1}^{1} |f_{a}(x)-f_{b}(x)|^{2}dx\\
+&= \int_{-1}^{1} |\sum_{i=1}^{m}(a_{i}-b_{i})B_{\epsilon}(x-z_{i})|^{2}dx\\
+&= \int_{-1}^{1} |\sum_{a_{i}\neq b_{i}}B_{\epsilon}(x-z_{i})|^{2}dx\\
+&= \sum_{a_{i}\neq b_{i}}\int_{-1}^{1} \left(B_{\epsilon}(x-z_{i})\right)^{2}dx\\
+&= \frac{2L^{2}\epsilon^{3}}{3}d_{H}(a,b)
+\end{align*}
+
 \end{s}
 
 \end{document}
