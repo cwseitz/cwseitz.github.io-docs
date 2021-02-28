@@ -236,11 +236,6 @@ For all $epsilon > 0$ there is a $n_{0} \leq n$ such that given $n$ instances of
 
 This means that we can approach the entropy by increasing $n$.
 
-
-\subsection{Fano's Inequality}
-
-Fano's inequality quantifies the amount of information lost in a noisy channel given some probability of transmission error. 
-
 \subsection{Jensen's Inequality}
 
 Jensen's inequality is a statement about convexity. Consider a binary variable $x$ that takes the value 0 with probability $\alpha$ and value 1 with probability $1-\alpha$.
@@ -263,38 +258,15 @@ which when generalized for an arbitrary random variable $x$ forms Jensen's inequ
 \mathbf{E}[f(x)] \leq f(\mathbf{E}[x])
 \end{equation}
 
+\section{Error Correcting Codes (Channel Coding)}
 
-\subsubsection{Example}
+Suppose that we have a message $W$ that we would like to communicate. Preceding communication, $W$ must be encoded according to a well-defined encoding scheme. In other words we need to define a mapping $W \rightarrow X^{n}$ which could be a sequence of $n$ bits. The bit string $X^{n}$ is then communicated over a channel and, at the destination, decoded using an inverse mapping $Y^{n} \rightarrow \hat{W}$. The challenge of channel coding is that, due to the fact that the channel can be noisy, it is possible that $X^{n} \neq Y^{n}$ and therefore $W \neq \hat{W}$. Our primary goal is to determine optimal codes under the assumption that the channel can introduce a bounded error into the original message. 
 
-Let's consider a function $f: \mathbb{R} \rightarrow \mathbb{R}$. Using Jensen's inequality, we can prove that $f=x^{2}$ or $f=x\log x$ are convex functions. Let's begin by applying it to $x^{2}$ for a general normalized probability distribution $p(x)$.
+First, we will define the $rate$ which is the ratio of the number of bits it takes to specify the message (the entropy of a uniform distribution over messages) and the number of transmissions $n$ I need to make.
 
-\begin{eqnarray*}
-\int p(x)f(x)dx & = & \int x^{2}p(x)dx\\
-&=& x^{2} - 2\int xdx\\
-&=& 0 \leq x^{2} \; \forall x
-\end{eqnarray*}
-
-We have a similar proof for $f(x) = x\log x$
-
-\begin{eqnarray*}
-\int p(x)f(x)dx & = & \int x\log x\; p(x)dx\\
-&=& x\log x - \int \frac{d}{dx}x\log x\;dx\\
-&=& 0 \leq \mu \log \mu
-\end{eqnarray*}
-
-where $\mu = \mathbf{E}[x] \geq 0$ since $f$ is only defined on $[0, \infty]$.
-
-\subsection{Fano's Inequality}
-
-\section{Error Correcting Codes}
-
-\chapter{Microscopy and Image Analysis}
-
-\begin{chapquote}{Author's name, \textit{Source of this quote}}
-``This is a quote and I don't know who said this.''
-\end{chapquote}
-
-\section{Section heading}
+\begin{equation*}
+R = \frac{\log M}{n}
+\end{equation*}
 
 \chapter{The Neural Code}
 
