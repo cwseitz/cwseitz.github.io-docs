@@ -29,66 +29,59 @@ A single dice is rolled and we gain a dollar if the outcome is 2,3,4,5 and lose 
 
 \begin{s}
 
-Let $P$ be the uniform distribution over the dice universe $\chi$ where an outcome of a roll is $x \in \chi$. Furthermore, let $\phi(x)$ be the gain given the outcome of a roll $x$ according the problem definition
+Let $P$ be the uniform distribution over the dice universe $\chi =\left\{1,2,3,4,5,6\right\}$ where an outcome of a roll is $x \in \chi$. Furthermore, let $\phi(x)$ be the gain given the outcome of a roll $x$ according the problem definition
 
-\[\phi = \begin{cases} 
-      1 & \; 2,3,4,5 \\
-      -1 & \; 1,6 \\
+\[\phi(x) = \begin{cases} 
+      1 & \; x \in \left\{2,3,4,5\right\}\\
+      -1 & \; x \in \left\{1,6\right\}\\
    \end{cases}
 \]
 
-and $\bar{x}\sim P^{n}$ be a draw of a sequence of $n$ rolls from the product distribution $P^{n}$. We can then calculate the expected gain over $n$ rolls as
+and $\bar{x}\sim P^{n}$ be a draw of a sequence of $n$ rolls from the product distribution $P^{n}$. We can then calculate the expected gain over $n$ rolls where $\bar{x} = \left\{x_{1} \;...\; x_{n}\right\}$ denotes the outcome of a sequence of rolls
 
 \begin{align*}
-\underset{\bar{x} \sim P^{n}}{\mathbf{E}}\left[\phi(\bar{x})\right] &= \sum_{n}\left(\sum_{i} \phi(x_{n})\cdot p(x_{n})\right)\\
-&=\sum_{n}\left(\frac{1}{6}\sum_{i}\phi(x_{n})\right)\\
+\underset{\bar{x} \sim P^{n}}{\mathbf{E}}\left[\phi(\bar{x})\right] &= \sum_{n}\left(\underset{x_{n} \sim P}{\mathbf{E}}\left[\phi(x_{n})\right] \right)\\
+&= n\cdot \left(\sum_{x\in \chi} \phi(x)\cdot p(x)\right)\\
+&=n\cdot \left(\frac{1}{6}\sum_{x\in \chi}\phi(x)\right)\\
 &= \frac{n}{3}
 \end{align*}
 
-Now, we would like to find the maximum entropy distribution $P^{*}$ over $\chi$ in the set of distributions $\Pi$ such that
-
-\begin{equation}
-\underset{\bar{x} \sim (P^{*})^{n}}{\mathbf E}\left[\phi(\bar{x})\right] > \frac{n}{3}
-\end{equation}
-
-We can find such a distribution $P^{*}$ by defining the linear family of distributions that satisfy this constraint on the expected gain
+Now, we would like to find the maximum entropy distribution $P^{*}$ over $\chi$ such that
 
 \begin{equation*}
-\mathcal{L} = \left\{ P : \underset{\bar{x} \sim P^{n}}{\mathbf E}\left[\phi(\bar{x})\right] = \sum_{x\in \chi} p(x)\cdot \phi(x) > \alpha \right\}
+\underset{\bar{x} \sim (P^{*})^{n}}{\mathbf E}\left[\phi(\bar{x})\right] > \alpha
 \end{equation*}
 
-We would like to find the distribution $P^{*}$ such that $P^{*} = \mathbf{Proj}_{\mathcal{L}}(Q)$ and we now compute this projection by using the Lagrangian
-
-\begin{equation}
-\mathbf{\Lambda}(P, \lambda_{0}, \lambda_{1}) = D(P||Q) + \lambda_{0}\left(\sum p(x) - 1\right) + \lambda_{1}\xi_{\alpha}(x)
-\end{equation}
-
-where 
-
-\[\xi_{\alpha} = \begin{cases} 
-      -x & x < \alpha \\
-      0 & x \geq \alpha \\
-   \end{cases}
-\]
-
-We find a solution by setting the derivative of this Lagrangian to zero
+where $\alpha =  \frac{n}{3}$. We begin by defining the linear family of distributions that satisfy this constraint on the expected gain
 
 \begin{equation*}
-\nabla \Lambda = \log\left(\frac{p^{*}(x)}{q(x)}\right) + \frac{1}{2\ln 2} + \lambda_{0} + \nabla \xi_{\alpha}
+\mathcal{L} = \left\{ Q : \underset{\bar{x} \sim P^{n}}{\mathbf E}\left[\phi(\bar{x})\right] = 
+n\cdot\left(\sum_{x\in \chi} \phi(x)\cdot p(x)\right) > \alpha \right\}
 \end{equation*}
 
-\[\nabla \xi_{\alpha} = \begin{cases} 
-      -\lambda_{1} & x < \alpha \\
-      0 & x > \alpha \\
-   \end{cases}
-\]
-
-Ultimately, we have the solution
+We would like to find the distribution $P^{*}$ such that $P^{*} = \mathbf{Proj}_{\mathcal{L}}(P)$ which amounts to finding the distribution $P^{*}$ in $\mathcal{L}$ such that
 
 \begin{equation*}
-p^{*}(x) = q(x) \cdot 2^{\lambda_{0} -\lambda_{1}\cdot \phi(x)}
+P^{*} = \inf_{Q} D(P||Q)
 \end{equation*}
 
+To determine $P^{*}$, we include two constraints in the Lagrangian weighted by coefficients $\lambda_{0},\lambda_{1}\in \mathbb{R}$. 
+
+\begin{equation*}
+\mathbf{\Lambda}(P, \lambda_{0}, \lambda_{1}) = D(P||Q) + \lambda_{0}\left(\sum_{x} p(x) - 1\right) + \lambda_{1}\cdot  \max(0,\alpha-\Phi)
+\end{equation*}
+
+where we have let $\Phi = \sum_{x \in \chi} \phi(x)\cdot p(x)$ denote the expected gain and defined a rectified linear unit that linearly penalizes deviation away from $\alpha$. We find the extremum by setting the gradient of this Lagrangian to zero for every $x\in \chi$
+
+\begin{equation*}
+\log\left(\frac{p^{*}(x)}{q(x)}\right) + \frac{1}{\ln 2} + \lambda_{0} + \phi(x)\cdot \max(0,\lambda_{1}) = 0
+\end{equation*}
+
+Therefore, the optimal distribution can be found from $P$ by computing the following for each $x\in \chi$
+
+\begin{equation*}
+p^{*}(x) = p(x)\cdot 2^{-\lambda_{0}-\left(\phi(x)\cdot \max(0,\lambda_{1})\right)}
+\end{equation*}
 
 \end{s}
 
@@ -98,7 +91,6 @@ Exponential families and maximum entropy
 
 \begin{s}
 
-
 \begin{align*}
 H(Q) &= -\sum_{x\sim \chi} Q(x)\log\exp\left\{\lambda_{0} + \sum_{i\sim [k]} \lambda_{i}f_{i}(x)\right\}\\ 
 &= -\frac{1}{\ln 2}\sum_{x\sim \chi} Q(x)\left\{\lambda_{0} + \sum_{i\sim [k]} \lambda_{i}f_{i}(x)\right\}\\
@@ -106,7 +98,7 @@ H(Q) &= -\sum_{x\sim \chi} Q(x)\log\exp\left\{\lambda_{0} + \sum_{i\sim [k]} \la
 &= -\frac{1}{\ln 2}\left(\lambda_{0} + \sum_{i\sim [k]} \lambda_{i}\alpha_{i}\right)
 \end{align*}
 
-Now we will show that the KL-Divergence is the difference of entropies
+Now we will show that the KL-Divergence is simply the difference of the entropies of $Q$ and $P$
 
 \begin{align*}
 D(P||Q) &= \sum_{x\sim \chi} p(x)\log\frac{p(x)}{q(x)}\\
@@ -115,7 +107,7 @@ D(P||Q) &= \sum_{x\sim \chi} p(x)\log\frac{p(x)}{q(x)}\\
 &= H(Q) - H(P)
 \end{align*}
 
-Finally, we can show that $Q$ is the maximum entropy distribution in the family $\mathcal{L}$
+using the result from above. Finally, using the fundamental lower bound on the KL-Divergence we can show that $Q$ is the maximum entropy distribution in the family $\mathcal{L}$
 
 \begin{align*}
 D(P||Q) &=  H(Q) - H(P) \geq 0
@@ -131,8 +123,9 @@ Minimax rates for denoising
 \end{p}
 
 \begin{s}
-
-This can be shown by using the chain rule for KL-Divergence
+\\
+\\
+We will start by writing out the form of the KL-Divergence between the joint distributions over $(X,Y)$ denoted as $P_{f},P_{g}\in \Pi$ for a set of so far undefined functions $\Pi$. Using the chain rule for KL-Divergence,
 
 \begin{align*}
 D(P(X,Y)||Q(X,Y)) &= D(P(X)||Q(X)) + D(P(Y|X)||Q(Y|X))\\
@@ -140,27 +133,26 @@ D(P(X,Y)||Q(X,Y)) &= D(P(X)||Q(X)) + D(P(Y|X)||Q(Y|X))\\
 &= D(\mathcal{N}(f(x),\sigma^{2})||\mathcal{N}(g(x),\sigma^{2}))\\
 \end{align*}
 
-which we now compute
+which is the KL-Divergence between two Gaussians. This can be computed as follows for the special case that $\sigma$ is the same for both distributions
 
 \begin{align*}
 D(\mathcal{N}(f(x),\sigma^{2})||\mathcal{N}(g(x),\sigma^{2})) &= 
 \frac{1}{\ln 2}\int_{0}^{1} \exp\left(-(x-f(x))^{2}/2\sigma\right)\\ &\cdot \ln \left(\frac{\exp\left(-(x-f(x))^{2}/2\sigma\right)}{\exp\left(-(x-g(x))^{2}/2\sigma\right)}\right)dx\\
-&= \frac{1}{2\ln 2\cdot \sigma}\int_{0}^{1} \exp\left(-(x-f(x))^{2}\right)\\ &\cdot \left((x-g(x))^{2}-(x-f(x))^{2}\right)dx\\
+&= \frac{1}{2\ln 2\cdot \sigma^{2}}\int_{0}^{1} \exp\left(-(x-f(x))^{2}\right)\\ &\cdot \left((x-g(x))^{2}-(x-f(x))^{2}\right)dx\\
 &= \frac{1}{2\ln 2\cdot \sigma^{2}}\int_{0}^{1} |f(x)-g(x)|^{2}dx\\
 &= \frac{1}{2\ln 2\cdot \sigma^{2}}\cdot ||f(x)-g(x)||_{2}^{2}\\
 \end{align*}
 
-Next we will prove a lower bound on the minimax loss for $n$ samples when we have a collection of $S$ functions. First, we can manipulate the result from above and show that
-
-\begin{align*}
-D(P_{f}||P_{g}) &= \frac{1}{2\ln 2\sigma^{2}}\cdot ||f(x)-g(x)||_{2}^{2} \\
-&\leq \frac{32\delta^{2}}{\ln 2\cdot \sigma^{2}}
-\end{align*}
-
-since we have assumed $||f-g||_{2}^{2} \leq 8\delta$. At the same time, we can use what we already know about lower bounds for minimax rates via multiple hypotheses. Let's say that the data $\bar{x}$ is drawn from the distribution $P_{s}$. The probability of error by a classifier $T(\bar{x})$ that outputs the distribution $s\in S$ the data was drawn from is lower bounded by
+Next we will prove a lower bound on the minimax loss for $n$ samples when we have a set of functions $S$. s.t. $f,g \in S$. First, we can manipulate the result from above and show that
 
 \begin{equation*}
-\mathbf{Pr}\left[T(\bar{x}) \neq s]\right] \geq 1 - \frac{n\cdot \underset{s_{1},s_{2}\in S}{\mathbf{E}}\left[D(P_{s_{1}}||P_{s_{2}})\right] + 1}{\log |S|}
+D(P_{f}||P_{g}) = \frac{1}{2\ln 2\cdot \sigma^{2}}\cdot ||f(x)-g(x)||_{2}^{2} \leq \frac{32\delta^{2}}{\ln 2\cdot \sigma^{2}}
+\end{equation*}
+
+since we have said that $||f-g||_{2}^{2} \leq 8\delta$. At the same time, we can use what we know about lower bounds for minimax rates via multiple hypotheses. Let's say that a sequence of $(X,Y)$ pairs $\bar{z}$ is drawn from the joint distribution $P_{s}$ where $s \in S$ and a tester $T$ determines which $P_{s}$ the data was drawn from (which amounts to denoising the data by determining the function $s$ that generated it). The probability of error by $T$ that outputs the distribution $s\in S$ the data was drawn from is lower bounded by
+
+\begin{equation*}
+\mathbf{Pr}\left[T(\bar{z}) \neq s]\right] \geq 1 - \frac{n\cdot \underset{s_{1},s_{2}\in S}{\mathbf{E}}\left[D(P_{s_{1}}||P_{s_{2}})\right] + 1}{\log |S|}
 \end{equation*}
 
 Also, we define the loss function to be $\ell = ||f-g||_{2}^{2}$
@@ -171,14 +163,14 @@ M_{n}(\Pi, \ell) &\geq \ell(\delta)\cdot \underset{T}{\inf}\left\{\mathbf{Pr}\le
 &= \delta^{2}\cdot\left(1 - \frac{n\cdot \left(32\delta^{2}/\sigma^{2}\ln 2\right) + 1}{\log |S|}\right)
 \end{align*}
 
-since the expectation over all possible pairs of functions can be at most the largest distance between two functions. Now, if we define the family to be the bump functions, which are $L$-Lipschitz since
+where we substituted the result from above since the expectation over all possible pairs of functions can be at most the largest distance between two functions. Now, we define the set of functions $S$ to be a series of non-intersecting bump functions which are $L$-Lipschitz since
 
 \begin{align*}
 |B_{\epsilon}(x_{1}) - B_{\epsilon}(x_{2})| &= L\cdot ||x_{2}|-|x_{1}||\\
 &\leq L\cdot |x_{2}-x_{1}|
 \end{align*}
 
-and assuming $\epsilon < 1$
+and if we make the assumption that $\epsilon < 1$
 
 \begin{align*}
 \int_{-1}^{1}(B_{\epsilon}(x))^{2}dx &= \int_{-\epsilon}^{\epsilon}(B_{\epsilon}(x))^{2}dx\\
@@ -187,7 +179,7 @@ and assuming $\epsilon < 1$
 &= \frac{2L^{2}\epsilon^{3}}{3}
 \end{align*}
 
-Next, we will show something
+Next, we will show that the squared $L_{2}$ distance can be written in terms of the Hamming distance between the two position vectors
 
 \begin{align*}
 ||f_{a}-f_{b}||_{2}^{2} &= \int_{-1}^{1} |f_{a}(x)-f_{b}(x)|^{2}dx\\
@@ -196,6 +188,12 @@ Next, we will show something
 &= \sum_{a_{i}\neq b_{i}}\int_{-1}^{1} \left(B_{\epsilon}(x-z_{i})\right)^{2}dx\\
 &= \frac{2L^{2}\epsilon^{3}}{3}d_{H}(a,b)
 \end{align*}
+
+Finally, there exists a constant $c_{0}$ such that
+
+\begin{equation*}
+\mathcal{M}_{n}(\Pi, \ell) \geq c_{0}\cdot \left(\frac{\sigma^{2}\cdot L}{n}\right)^{2/3}
+\end{equation*}
 
 \end{s}
 
