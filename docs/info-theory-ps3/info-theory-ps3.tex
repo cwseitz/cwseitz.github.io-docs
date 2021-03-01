@@ -29,7 +29,7 @@ A single dice is rolled and we gain a dollar if the outcome is 2,3,4,5 and lose 
 
 \begin{s}
 
-Let $P$ be the uniform distribution over the dice universe $\chi =\left\{1,2,3,4,5,6\right\}$ where an outcome of a roll is $x \in \chi$. Furthermore, let $\phi(x)$ be the gain given the outcome of a roll $x$ according the problem definition
+Let $Q$ be the uniform distribution over the dice universe $\chi =\left\{1,2,3,4,5,6\right\}$ where an outcome of a roll is $x \in \chi$. Furthermore, let $\phi(x)$ be the gain given the outcome of a roll $x$ according the problem definition
 
 \[\phi(x) = \begin{cases} 
       1 & \; x \in \left\{2,3,4,5\right\}\\
@@ -37,16 +37,16 @@ Let $P$ be the uniform distribution over the dice universe $\chi =\left\{1,2,3,4
    \end{cases}
 \]
 
-and $\bar{x}\sim P^{n}$ be a draw of a sequence of $n$ rolls from the product distribution $P^{n}$. We can then calculate the expected gain over $n$ rolls where $\bar{x} = \left\{x_{1} \;...\; x_{n}\right\}$ denotes the outcome of a sequence of rolls
+and $\bar{x}\sim Q^{n}$ be a draw of a sequence of $n$ rolls from the product distribution $Q^{n}$. We can then calculate the expected gain over $n$ rolls where $\bar{x} = \left\{x_{1} \;...\; x_{n}\right\}$ denotes the outcome of a sequence of rolls
 
 \begin{align*}
-\underset{\bar{x} \sim P^{n}}{\mathbf{E}}\left[\phi(\bar{x})\right] &= \sum_{n}\left(\underset{x_{n} \sim P}{\mathbf{E}}\left[\phi(x_{n})\right] \right)\\
-&= n\cdot \left(\sum_{x\in \chi} \phi(x)\cdot p(x)\right)\\
+\underset{\bar{x} \sim Q^{n}}{\mathbf{E}}\left[\phi(\bar{x})\right] &= \sum_{n}\left(\underset{x_{n} \sim Q}{\mathbf{E}}\left[\phi(x_{n})\right] \right)\\
+&= n\cdot \left(\sum_{x\in \chi} \phi(x)\cdot q(x)\right)\\
 &=n\cdot \left(\frac{1}{6}\sum_{x\in \chi}\phi(x)\right)\\
 &= \frac{n}{3}
 \end{align*}
 
-Now, we would like to find the maximum entropy distribution $P^{*}$ over $\chi$ such that
+Now, we would like to find the maximum entropy distribution $P^{*}$ over support $\chi$ such that
 
 \begin{equation*}
 \underset{\bar{x} \sim (P^{*})^{n}}{\mathbf E}\left[\phi(\bar{x})\right] > \alpha
@@ -55,32 +55,27 @@ Now, we would like to find the maximum entropy distribution $P^{*}$ over $\chi$ 
 where $\alpha =  \frac{n}{3}$. We begin by defining the linear family of distributions that satisfy this constraint on the expected gain
 
 \begin{equation*}
-\mathcal{L} = \left\{ Q : \underset{\bar{x} \sim P^{n}}{\mathbf E}\left[\phi(\bar{x})\right] = 
+\mathcal{L} = \left\{ P : \underset{\bar{x} \sim P^{n}}{\mathbf E}\left[\phi(\bar{x})\right] = 
 n\cdot\left(\sum_{x\in \chi} \phi(x)\cdot p(x)\right) > \alpha \right\}
 \end{equation*}
 
-We would like to find the distribution $P^{*}$ such that $P^{*} = \mathbf{Proj}_{\mathcal{L}}(P)$ which amounts to finding the distribution $P^{*}$ in $\mathcal{L}$ such that
+We would like to find the distribution $P^{*}$ such that $P^{*} = \mathbf{Proj}_{\mathcal{L}}(Q)$. To determine $P^{*}$, we include two constraints in the Lagrangian weighted by coefficients $\lambda_{0},\lambda_{1}\in \mathbb{R}$. For a particular distribution $P \in \mathcal{L}$ we have 
+
+\begin{align*}
+\mathbf{\Lambda}(P, \lambda_{0}, \lambda_{1}) &= D(P||Q) + \lambda_{0}\cdot \left(\sum_{x} p(x) - 1\right) + \lambda_{1}\cdot (\alpha-\Phi)\\
+&= \sum_{x\in \chi} \left(p(x)\log\frac{p(x)}{q(x)} + \lambda_{0}\cdot \left(p(x) - \frac{1}{d}\right) + \lambda_{1}\cdot \left(\frac{\alpha}{d}-\phi(x)\right)\right)\\
+\end{align*}
+
+where we have let $\Phi = \sum_{x \in \chi} \phi(x)\cdot p(x)$ denote the expected gain and defined a linear penalty for deviation away from $\alpha$ that subtracts from the Lagrangian for $\Phi > \alpha$. We find the extremum by setting the gradient of this Lagrangian with respect to $p(x)$ to zero for every $x\in \chi$
 
 \begin{equation*}
-P^{*} = \inf_{Q} D(P||Q)
-\end{equation*}
-
-To determine $P^{*}$, we include two constraints in the Lagrangian weighted by coefficients $\lambda_{0},\lambda_{1}\in \mathbb{R}$. 
-
-\begin{equation*}
-\mathbf{\Lambda}(P, \lambda_{0}, \lambda_{1}) = D(P||Q) + \lambda_{0}\left(\sum_{x} p(x) - 1\right) + \lambda_{1}\cdot  \max(0,\alpha-\Phi)
-\end{equation*}
-
-where we have let $\Phi = \sum_{x \in \chi} \phi(x)\cdot p(x)$ denote the expected gain and defined a rectified linear unit that linearly penalizes deviation away from $\alpha$. We find the extremum by setting the gradient of this Lagrangian to zero for every $x\in \chi$
-
-\begin{equation*}
-\log\left(\frac{p^{*}(x)}{q(x)}\right) + \frac{1}{\ln 2} + \lambda_{0} + \phi(x)\cdot \max(0,\lambda_{1}) = 0
+\log\left(\frac{p^{*}(x)}{q(x)}\right) + \frac{1}{\ln 2} + \lambda_{0} -\lambda_{1}\cdot \phi(x) = 0
 \end{equation*}
 
 Therefore, the optimal distribution can be found from $P$ by computing the following for each $x\in \chi$
 
 \begin{equation*}
-p^{*}(x) = p(x)\cdot 2^{-\lambda_{0}-\left(\phi(x)\cdot \max(0,\lambda_{1})\right)}
+p^{*}(x) = q(x)\cdot 2^{\; \lambda_{1}\;\cdot\; \phi(x) - \lambda_{0}}
 \end{equation*}
 
 \end{s}
