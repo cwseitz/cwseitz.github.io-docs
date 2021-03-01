@@ -12,6 +12,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{wrapfig}
 \newtheorem{theorem}{Theorem}
 \newtheorem{definition}{Definition}
 
@@ -236,37 +237,36 @@ For all $epsilon > 0$ there is a $n_{0} \leq n$ such that given $n$ instances of
 
 This means that we can approach the entropy by increasing $n$.
 
-\subsection{Jensen's Inequality}
-
-Jensen's inequality is a statement about convexity. Consider a binary variable $x$ that takes the value 0 with probability $\alpha$ and value 1 with probability $1-\alpha$.
-
-\[x= \begin{cases} 
-      0 & \alpha \\
-      1 & 1-\alpha \\
-   \end{cases}
-\]
-
-A function $f$ of the variable $x$ is said to be $\textit{convex}$ if the following inequality holds
-
-\begin{equation*}
-\alpha f(x) + (1-\alpha)f(y) \leq f(\alpha x + (1-\alpha)y)
-\end{equation*}
-
-which when generalized for an arbitrary random variable $x$ forms Jensen's inequality
-
-\begin{equation}
-\mathbf{E}[f(x)] \leq f(\mathbf{E}[x])
-\end{equation}
-
 \section{Error Correcting Codes (Channel Coding)}
 
 Suppose that we have a message $W$ that we would like to communicate. Preceding communication, $W$ must be encoded according to a well-defined encoding scheme. In other words we need to define a mapping $W \rightarrow X^{n}$ which could be a sequence of $n$ bits. The bit string $X^{n}$ is then communicated over a channel and, at the destination, decoded using an inverse mapping $Y^{n} \rightarrow \hat{W}$. The challenge of channel coding is that, due to the fact that the channel can be noisy, it is possible that $X^{n} \neq Y^{n}$ and therefore $W \neq \hat{W}$. Our primary goal is to determine optimal codes under the assumption that the channel can introduce a bounded error into the original message. 
 
-First, we will define the $rate$ which is the ratio of the number of bits it takes to specify the message (the entropy of a uniform distribution over messages) and the number of transmissions $n$ I need to make.
+
+Lets say that we want to send one symbol of a family of symbols over a channel. The distribution over symbols has some entropy and therefore we can specify the minimum number of bits I must send for you to know which symbol I sent, on average. However, in a lossy channel, the entropy is difficult to achieve and so we define the $rate$ which is the ratio of the number of bits it takes to specify the message (the entropy of a uniform distribution over messages) and the number of bits $n$ I actually send you. We can imagine a much lower rate when the channel is very noisy.
 
 \begin{equation*}
 R = \frac{\log M}{n}
 \end{equation*}
+
+In practice, we try to maximize the value of the rate. We can think of the communication channel as a conditional distribution $P(Y|X)$. At the same time, if we have a distribution over the inputs $P(X)$We define the $channel\; capacity$ as the following 
+
+\begin{equation*}
+C = \underset{P(X)}\max \;I(X;Y) 
+\end{equation*}
+
+If you recall that $I(X;Y) = H(X) - H(X|Y)$ which is zero when knowledge of $Y$ affords no information about $X$ and is at most the entropy of $X$ (when $Y=X$). Of course, the channel is useless if $H(X|Y) = H(X)$. The channel coding theorem says that the maximum achievable rate is the channel capacity:
+
+\begin{equation*}
+\sup R = \underset{P(X)}\max \;I(X;Y) 
+\end{equation*}
+
+
+\begin{figure}
+\centering
+  \includegraphics[width=0.8\textwidth]{assets/channel-coding.png}
+  \caption{Channel coding Markov chain}
+  \label{fig:circuit}
+\end{figure}
 
 \chapter{The Neural Code}
 
