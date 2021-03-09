@@ -1,0 +1,57 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath} % AMS Math Package
+\usepackage{amsthm} % Theorem Formatting
+\usepackage{amssymb}    % Math symbols such as \mathbb
+\usepackage{graphicx} % Allows for eps images
+\usepackage[dvips,letterpaper,margin=1in,bottom=0.7in]{geometry}
+\usepackage{amsmath}
+
+
+\newtheorem{p}{Problem}[section]
+\usepackage{cancel}
+\newtheorem*{lem}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{dfn}{Definition}
+ \newenvironment{s}{%\small%
+        \begin{trivlist} \item \textbf{Solution}. }{%
+            \hspace*{\fill} $\blacksquare$\end{trivlist}}%
+
+
+\begin{document}
+
+{\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Problem Set 4}         }\\[2\baselineskip] % Title
+{ {\bf \fontfamily{cmr}\selectfont Information and Coding Theory}\\ {\textit{\fontfamily{cmr}\selectfont     March 14, 2021}}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    {\large \textsc{Clayton Seitz}
+\\[1.4\baselineskip] 
+
+\begin{p}
+This is the first problem
+\end{p}
+
+\begin{s}
+\begin{align*}
+\Delta(C) &= \min_{x_{1},x_{2}\in C} \Delta(x_{1},x_{2})\\
+&= \min_{x_{1},x_{2}\in C} \Delta(0,x_{2}-x_{1})\\
+&= \min_{x\in C} \mathbf{wt}(x)
+\end{align*}
+
+Since the code is linear, $x_{2}-x_{1} \in C$. Now, we consider the parity check matrix $H \in \mathbb{F}_{2}^{r\times n}$ where $n = 2^{r} - 1$. We will find the dimension, block length, and distance for such a code. First, the dimension of the code $\dim(C)$ is $r+1$ since the rank of $H$ is $r$. The block length is then $2^{r+1}$ and the distance is 3. Now, consider the Hamming code $C: \mathbb{F}_{2}^{k} \rightarrow \mathbb{F}_{2}^{n}$ which is formally defined as the set of $x$ in the null space in of the parity check matrix:
+
+\begin{equation*}
+C = \left\{x\in \mathbb{F}_{2}^{n} | Hx = 0\right\}
+\end{equation*}
+
+where $H \in \mathbb{F}_{2}^{k\times n}$ is the parity check matrix. We can also define the dual code $C^{\perp}$ to be the code with generator matrix $H^{T}$ and  parity check matrix $G^{T}$. 
+
+To see why this is possible, we will use the fact that we have defined our code $C$ to be the vectors $x$ that lie in the null space of the parity matrix $H$. Now, the definition of our code requires that $H(x)=H(G(w))=0$ which means that the generator matrix $G$ is a matrix with columns equal to the basis vectors of the null space of $H$ i.e. $HG = 0$. This is equivalent to saying that the columns of $H^{T}$ form the basis of the null space of $G^{T}$:
+
+\begin{equation*}
+HG = 0 \iff G^{T}H^{T}=0
+\end{equation*}
+
+Therefore $H^{T}$ can be viewed as the generator matrix and $G^{T}$ the parity check matrix for the dual code $C^{\perp}$.
+
+\end{s}
+
+
+
+\end{document}
