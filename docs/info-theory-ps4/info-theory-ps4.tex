@@ -52,6 +52,47 @@ Therefore $H^{T}$ can be viewed as the generator matrix and $G^{T}$ the parity c
 
 \end{s}
 
+\begin{p}
+We will now show that we can get good distance codes from linear compression
+\end{p}
+
+\begin{s}
+
+\begin{align*}
+\underset{Z\sim (\mathbf{Bern}(p))^{n}}{\mathbb{P}}\left[\mathbf{Decom}(HZ)\neq Z\right] &= 1 - \underset{Z\sim (\mathbf{Bern}(p))^{n}}{\mathbb{P}}\left[\mathbf{Decom}(HZ)= Z\right]\\
+&= 1 - \sum_{w\in \mathbb{F}_{q}^{m}}\underset{Z\sim (\mathbf{Bern}(p))^{n}}{\mathbb{P}}\left[\mathbf{Decom}(w)= Z\right]
+\end{align*} 
+
+where we have used that 
+
+\begin{equation*}
+ \underset{Z\sim (\mathbf{Bern}(p))^{n}}{\mathbb{P}}\left[\mathbf{Decom}(HZ)= Z\right] =  \sum_{w\in \mathbb{F}_{q}^{m}}\underset{Z\sim (\mathbf{Bern}(p))^{n}}{\mathbb{P}}\left[\mathbf{Decom}(w)= Z\right]
+\end{equation*}
+
+This last equality follows from that if we are considering any particular compressed $w$ then the probability another draw $Z\sim (\mathbf{Bern}(p))^{n}$ will be the same as $\mathbf{Decom}(w)$ is $q^{-M}$ only in the case that the compression algorithm is a bijection. In other words, if multiple $Z$ map to the same $w$ after compression, the probability of error will be nonzero.
+
+\begin{align*}
+ \sum_{w\in \mathbb{F}_{q}^{m}}\underset{Z\sim (\mathbf{Bern}(p))^{n}}{\mathbb{P}}\left[\mathbf{Decom}(w)= Z\right] &\geq \sum_{w\in \mathbb{F}_{q}^{m}}\underset{Z\sim (\mathbf{Bern}(p))^{n}}{\mathbb{P}}\left[\underset{Z:HZ=w}{\mathbf{argmin}}\left\{\mathbf{wt}(Z)\right\} = Z\right]
+\end{align*} 
+
+\end{s}
+
+\begin{p}
+Mixing polynomials
+\end{p}
+
+\begin{s}
+
+We are given two sequences of values $(b_{1}, \;...\;, b_{n})$ and $(c_{1}, \;...\;, c_{n})$ which are the result of evaluating polynomials $f_{1}$ and $f_{2}$ at points $a_{i}$, respectively. Notice that for any particular $a_{i}$ we have that the sum $f_{1}(a_{i}) + f_{2}(a_{i}) = b_{i} + c_{i}$ and the product $f_{1}(a_{i})\cdot f_{2}(a_{i}) = b_{i}\cdot c_{i}$ do not change upon swapping $b_{i}$ and $c_{i}$. This suggests that we can write a bivariate polynomial
+
+\begin{align*}
+h(x,y) &= (y-f_{1}(x))(y-f_{2}(x))\\
+&= y^{2} - y(f_{1}(x)+f_{2}(x)) + f_{1}(x)\cdot f_{2}(x)
+\end{align*}
+
+Therefore, if we are able to factor the polynomial $h(x,y)$ then we can descramble $f_{1}(x)$ and $f_{2}(x)$.
+
+\end{s}
 
 
 \end{document}
