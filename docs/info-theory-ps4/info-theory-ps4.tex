@@ -83,14 +83,21 @@ Mixing polynomials
 
 \begin{s}
 
-We are given two sequences of values $(b_{1}, \;...\;, b_{n})$ and $(c_{1}, \;...\;, c_{n})$ which are the result of evaluating polynomials $f_{1}$ and $f_{2}$ at points $a_{i}$, respectively. Notice that for any particular $a_{i}$ we have that the sum $f_{1}(a_{i}) + f_{2}(a_{i}) = b_{i} + c_{i}$ and the product $f_{1}(a_{i})\cdot f_{2}(a_{i}) = b_{i}\cdot c_{i}$ do not change upon swapping $b_{i}$ and $c_{i}$. This suggests that we can write a bivariate polynomial
+We are given two sequences of values $(b_{1}, \;...\;, b_{n})$ and $(c_{1}, \;...\;, c_{n})$ which are the result of evaluating polynomials $f_{1}$ and $f_{2}$ at points $a_{i}$, respectively. Notice that for any particular $a_{i}$ we have that the sum $f_{1}(a_{i}) + f_{2}(a_{i}) = b_{i} + c_{i}$ and the product $f_{1}(a_{i})\cdot f_{2}(a_{i}) = b_{i}\cdot c_{i}$ which of course do not change upon swapping $b_{i}$ and $c_{i}$. If $y$ is the sequence of values received, then we can write a bivariate polynomial
 
 \begin{align*}
-h(x,y) &= (y-f_{1}(x))(y-f_{2}(x))\\
-&= y^{2} - y(f_{1}(x)+f_{2}(x)) + f_{1}(x)\cdot f_{2}(x)
+h(x,y) &= y^{2} - y(f_{1}(x)+f_{2}(x)) + f_{1}(x)\cdot f_{2}(x)\\
+&= (y-f_{1}(x))(y-f_{2}(x))
 \end{align*}
 
-Therefore, if we are able to factor the polynomial $h(x,y)$ then we can descramble $f_{1}(x)$ and $f_{2}(x)$.
+If we can perform such a factorization of $h(x,y)$ then we can descramble $f_{1}(x)$ and $f_{2}(x)$. 
+
+In the second case, we are given a value $\beta_{i}$ at each point in the domain $a_{i}$ but we don't know whether $\beta_{i}$ came from $f_{1}(x)$ or $f_{2}(x)$. However, we are given the guarantee that the number of points coming from $f_{1}(x)$ satisfies $\frac{n}{3} \leq n_{1} \leq \frac{2n}{3}$ and the points coming from $f_{2}(x)$ satisfies $\frac{n}{3} \leq n_{2} \leq \frac{2n}{3}$ where $n = n_{1} + n_{2}$. 
+
+We can recast this problem by thinking of the points that came from one polynomial, say $f_{1}(x)$, as "errors" and define an error polynomial $e$ that is zero when $y \neq f_{1}(x)$. Then, we can use the Reed-Solomon decoding scheme to solve for $f_{2}(x)$. Once we have $f_{2}(x)$, finding $f_{1}(x)$ is straightforward: use Lagrange interpolation again on the difference between $f_{2}(x)$ and $y$. 
+
+Recall that Lagrange interpolation requires that $k\leq n-t$ where $n$ is the total number of points, $t$ the number of errors, and $k$ is the degree of the polynomial to interpolate. We can still apply Lagrange interpolation here since $k \leq \frac{n}{3}$ because $t=\frac{2n}{3}$ is the maximum number of "errors" which must be true since we have already been told $k < \frac{n}{6}$.
+
 
 \end{s}
 
