@@ -40,7 +40,7 @@ Since the code is linear, $x_{2}-x_{1} \in C$. Now, we consider the parity check
 C = \left\{x\in \mathbb{F}_{2}^{n} | Hx = 0\right\}
 \end{equation*}
 
-where $H \in \mathbb{F}_{2}^{k\times n}$ is the parity check matrix. We can also define the dual code $C^{\perp}$ to be the code with generator matrix $H^{T}$ and  parity check matrix $G^{T}$. 
+where $H \sim \mathbb{F}_{2}^{k\times n}$ is the parity check matrix. We can also define the dual code $C^{\perp}$ to be the code with generator matrix $H^{T}$ and  parity check matrix $G^{T}$. 
 
 To see why this is possible, we will use the fact that we have defined our code $C$ to be the vectors $x$ that lie in the null space of the parity matrix $H$. Now, the definition of our code requires that $H(x)=H(G(w))=0$ which means that the generator matrix $G$ is a matrix with columns equal to the basis vectors of the null space of $H$ i.e. $HG = 0$. This is equivalent to saying that the columns of $H^{T}$ form the basis of the null space of $G^{T}$:
 
@@ -53,27 +53,40 @@ Therefore $H^{T}$ can be viewed as the generator matrix and $G^{T}$ the parity c
 \end{s}
 
 \begin{p}
-We will now show that we can get good distance codes from linear compression
+Good distance codes from linear compression
 \end{p}
+
+We would like to prove that an arbitrary compression algorithm $\text{Com}:  \mathbb{F}_{2}^{n} \rightarrow  \mathbb{F}_{2}^{m}$ implemented by the matrix $H \sim \mathbb{F}_{2}^{m\times n}$ yields a good compression scheme for a sequence $Z \sim (\text{Bern}(p))^{n}$ which means that there exists a decompression algorithm $\text{Decom}:  \mathbb{F}_{2}^{m} \rightarrow  \mathbb{F}_{2}^{n}$ with the following error bound
+
+\begin{equation*}
+\underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(HZ)\neq Z\right] \leq 2^{-t}
+\end{equation*}
 
 \begin{s}
 
+To prove such a bound, we can first rewrite the LHS of the above. Notice that since $m < n$ whether or not we have a $\text{Decom}:  \mathbb{F}_{2}^{m} \rightarrow  \mathbb{F}_{2}^{n}$ that comes close to a bijection depends on the distribution over the input: $Z \sim (\text{Bern}(p))^{n}$. 
+\\
+\\
+Assuming that $\text{im}(H) = \mathbb{F}_{2}^{m}$, if we consider all possible elements $w \in  \mathbb{F}_{2}^{m}$, the "lack of bijectivity" is captured by the expected size of a set of inputs that map to a particular output. However, it is simpler to think of the inverse problem where a draw from the input distribution is equal to the decompression of $w$: $\underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(w)= Z\right]$. Therefore,
+
 \begin{align*}
-\underset{Z\sim (\mathbf{Bern}(p))^{n}}{\mathbb{P}}\left[\mathbf{Decom}(HZ)\neq Z\right] &= 1 - \underset{Z\sim (\mathbf{Bern}(p))^{n}}{\mathbb{P}}\left[\mathbf{Decom}(HZ)= Z\right]\\
-&= 1 - \sum_{w\in \mathbb{F}_{q}^{m}}\underset{Z\sim (\mathbf{Bern}(p))^{n}}{\mathbb{P}}\left[\mathbf{Decom}(w)= Z\right]
+\underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(HZ)\neq Z\right] &= 1 - \underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(HZ)= Z\right]\\
+&= 1 - \sum_{w\in \mathbb{F}_{q}^{m}}\underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(w)= Z\right]
 \end{align*} 
 
-where we have used that 
+Now, let's say there is a set of inputs that map to the same output $S = \left\{z\in \mathbb{F}_{q}^{n}|Hz=w\right\}$. Since we have said that $p < \frac{1}{2}$, the decompression algorithm that picks the $z$ with minimal weight i.e.
 
 \begin{equation*}
- \underset{Z\sim (\mathbf{Bern}(p))^{n}}{\mathbb{P}}\left[\mathbf{Decom}(HZ)= Z\right] =  \sum_{w\in \mathbb{F}_{q}^{m}}\underset{Z\sim (\mathbf{Bern}(p))^{n}}{\mathbb{P}}\left[\mathbf{Decom}(w)= Z\right]
+\text{Decom}(w) := \underset{z\;\in\; S}{\text{argmin}}\left\{S\right\}
 \end{equation*}
 
-This last equality follows from that if we are considering any particular compressed $w$ then the probability another draw $Z\sim (\mathbf{Bern}(p))^{n}$ will be the same as $\mathbf{Decom}(w)$ is $q^{-M}$ only in the case that the compression algorithm is a bijection. In other words, if multiple $Z$ map to the same $w$ after compression, the probability of error will be nonzero.
+minimizes $\underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(w)= Z\right]$. This can be seen if we let $z^{*} \in S$ be the element with minimal weight
 
-\begin{align*}
- \sum_{w\in \mathbb{F}_{q}^{m}}\underset{Z\sim (\mathbf{Bern}(p))^{n}}{\mathbb{P}}\left[\mathbf{Decom}(w)= Z\right] &\geq \sum_{w\in \mathbb{F}_{q}^{m}}\underset{Z\sim (\mathbf{Bern}(p))^{n}}{\mathbb{P}}\left[\underset{Z:HZ=w}{\mathbf{argmin}}\left\{\mathbf{wt}(Z)\right\} = Z\right]
-\end{align*} 
+\begin{equation*}
+\underset{Z\;\in\; S}{\mathbf{Pr}}\left[\text{wt}(z)\geq\text{wt}(z^{*})\right] = \sum_{t > \text{wt}(z)}{n \choose t}\cdot p^{t}(1-p)^{n-t} \rightarrow 0 
+\end{equation*}
+
+as $p\rightarrow 0$.
 
 \end{s}
 
