@@ -83,7 +83,7 @@ Now, let's say there is a set of inputs that map to the same output $S = \left\{
 minimizes $\underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(w)= Z\right]$. This can be seen if we let $z^{*} \in S$ be the element with minimal weight
 
 \begin{equation*}
-\underset{Z\;\in\; S}{\mathbf{Pr}}\left[\text{wt}(z)\geq\text{wt}(z^{*})\right] = \sum_{t > \text{wt}(z)}{n \choose t}\cdot p^{t}(1-p)^{n-t} \rightarrow 0 
+\underset{Z\;\in\; S}{\mathbf{Pr}}\left[\text{wt}(z)\geq\text{wt}(z^{*})\right] = \sum_{t > \text{wt}(z^{*})}{n \choose t}\cdot p^{t}(1-p)^{n-t} \rightarrow 0 
 \end{equation*}
 
 as $p\rightarrow 0$.
