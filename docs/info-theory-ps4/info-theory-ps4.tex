@@ -24,31 +24,62 @@
 \\[1.4\baselineskip] 
 
 \begin{p}
-This is the first problem
+More on linear codes
 \end{p}
+
+A linear code is a subspace $C \subseteq \mathbb{F}_{2}^{n}$. The distance of such a code $\Delta(C)$ can be written as a minimization of the weight over all $x \in C$. 
 
 \begin{s}
 \begin{align*}
 \Delta(C) &= \min_{x_{1},x_{2}\in C} \Delta(x_{1},x_{2})\\
 &= \min_{x_{1},x_{2}\in C} \Delta(0,x_{2}-x_{1})\\
-&= \min_{x\in C} \mathbf{wt}(x)
+&= \min_{x\in C\; \backslash \{0^{n}\}} \text{wt}(x)
 \end{align*}
 
-Since the code is linear, $x_{2}-x_{1} \in C$. Now, we consider the parity check matrix $H \in \mathbb{F}_{2}^{r\times n}$ where $n = 2^{r} - 1$. We will find the dimension, block length, and distance for such a code. First, the dimension of the code $\dim(C)$ is $r+1$ since the rank of $H$ is $r$. The block length is then $2^{r+1}$ and the distance is 3. Now, consider the Hamming code $C: \mathbb{F}_{2}^{k} \rightarrow \mathbb{F}_{2}^{n}$ which is formally defined as the set of $x$ in the null space in of the parity check matrix:
+Since we have required that $C$ is linear i.e. $\forall x_{1},x_{2} \in C$ we have that $x_{2}-x_{1} \in C$ ($C$ is closed under addition). 
+\\
+\\
+Now, we consider the general Hamming code $C:  \mathbb{F}_{2}^{k} \rightarrow  \mathbb{F}_{2}^{n}$ which maps messages $w$ of length $k$ to  $\mathbb{F}_{2}^{n}$ via the generator matrix $G\in \mathbb{F}_{2}^{n\times k}$. We also define the parity check matrix $H \in \mathbb{F}_{2}^{r\times n}$ which has the property that for any encoded message $x$ we have $Hx = 0$. Note this also means that the columns of $G$ form a basis for the null space of $H$.
+\\
+\\
+Since we are defining our code to be the null space of $H \in \mathbb{F}_{2}^{r\times n}$, the dimension of the code is given by
 
-\begin{equation*}
-C = \left\{x\in \mathbb{F}_{2}^{n} | Hx = 0\right\}
-\end{equation*}
+\begin{align*}
+\text{dim}(\text{null}(H)) &= n - \text{rank}(H)\\
+&=n - r\\
+&= 2^{r} - 1 - r
+\end{align*}
+\\
+\\
 
-where $H \sim \mathbb{F}_{2}^{k\times n}$ is the parity check matrix. We can also define the dual code $C^{\perp}$ to be the code with generator matrix $H^{T}$ and  parity check matrix $G^{T}$. 
+Also, since $H$ has $r$ columns, the block length of a general Hamming code is $2^{r}-1$. Finally, we can show that the distance of such a code is 3 by writing the Hamming bound and assuming we can correct $t=1$ errors:
 
-To see why this is possible, we will use the fact that we have defined our code $C$ to be the vectors $x$ that lie in the null space of the parity matrix $H$. Now, the definition of our code requires that $H(x)=H(G(w))=0$ which means that the generator matrix $G$ is a matrix with columns equal to the basis vectors of the null space of $H$ i.e. $HG = 0$. This is equivalent to saying that the columns of $H^{T}$ form the basis of the null space of $G^{T}$:
+\begin{align*}
+|C| &\leq \frac{2^{n}}{|B(0,t)|}\\
+&= \frac{2^{n}}{|B(0,1)|}\\
+&= 2^{n-r}
+\end{align*}
+
+
+where $2^{n-r}$ is indeed the size of the code according to $\text{dim}(\text{null}(H))$ calculated above.  
+\\
+\\
+Finally, we will define the dual code $C^{\perp}$ to be the code with generator matrix $H^{T}$ and  parity check matrix $G^{T}$. As stated above, the generator matrix $G$ is a matrix with columns equal to the basis vectors of the null space of $H$ i.e. $HG = 0$. This is equivalent to saying that the columns of $H^{T}$ form the basis of the null space of $G^{T}$:
 
 \begin{equation*}
 HG = 0 \iff G^{T}H^{T}=0
 \end{equation*}
 
-Therefore $H^{T}$ can be viewed as the generator matrix and $G^{T}$ the parity check matrix for the dual code $C^{\perp}$.
+Therefore $H^{T}$ can be viewed as the generator matrix and $G^{T}$ the parity check matrix for the dual code $C^{\perp}$. We can repeat our calculations of dimension, block length, and minimum distance for the dual code $C^{\perp}$:
+
+\begin{align*}
+\text{dim}(\text{null}(G^{T})) &= n - \text{rank}(G^{T})\\
+&=n - k\\
+&= 2^{r} - 1 - k
+\end{align*}
+\\
+\\
+and has block length $2^{n}-1$ and minimum distance 3 by the same packing argument made above except the size of the dual code $|C^{\perp}| = 2^{n-k}$.
 
 \end{s}
 
@@ -64,17 +95,17 @@ We would like to prove that an arbitrary compression algorithm $\text{Com}:  \ma
 
 \begin{s}
 
-To prove such a bound, we can first rewrite the LHS of the above. Notice that since $m < n$ whether or not we have a $\text{Decom}:  \mathbb{F}_{2}^{m} \rightarrow  \mathbb{F}_{2}^{n}$ that comes close to a bijection depends on the distribution over the input: $Z \sim (\text{Bern}(p))^{n}$. 
+To prove such a bound, we can first rewrite the LHS of the above. Notice that since $m < n$ (compression) we cannot have a $\text{Decom}:  \mathbb{F}_{2}^{m} \rightarrow  \mathbb{F}_{2}^{n}$ that is a bijection. Thus, we have to define $\text{Decom}$ in such a way that we minimize the probability that the wrong $Z$ is recovered after decompression while accounting for the distribution over the input: $Z \sim (\text{Bern}(p))^{n}$. 
 \\
 \\
-Assuming that $\text{im}(H) = \mathbb{F}_{2}^{m}$, if we consider all possible elements $w \in  \mathbb{F}_{2}^{m}$, the "lack of bijectivity" is captured by the expected size of a set of inputs that map to a particular output. However, it is simpler to think of the inverse problem where a draw from the input distribution is equal to the decompression of $w$: $\underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(w)= Z\right]$. Therefore,
+Assuming that $\text{im}(H) = \mathbb{F}_{2}^{m}$, we need to capture this ``lack of bijectivity" of our compression scheme. To do this, we consider the probability that our $\text{Decom}$ decompresses $w \in \mathbb{F}_{2}^{m}$ to a draw from the input distribution. Therefore,
 
 \begin{align*}
 \underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(HZ)\neq Z\right] &= 1 - \underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(HZ)= Z\right]\\
 &= 1 - \sum_{w\in \mathbb{F}_{q}^{m}}\underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(w)= Z\right]
 \end{align*} 
 
-Now, let's say there is a set of inputs that map to the same output $S = \left\{z\in \mathbb{F}_{q}^{n}|Hz=w\right\}$. Since we have said that $p < \frac{1}{2}$, the decompression algorithm that picks the $z$ with minimal weight i.e.
+Now, let's say there is a set of elements in $\mathbb{F}_{2}^{n}$ that map to the same element in $\mathbb{F}_{2}^{m}$: $S = \left\{z\in \mathbb{F}_{q}^{n}|Hz=w\right\}$. Since we have said that $p < \frac{1}{2}$, the decompression algorithm that picks the $z$ with minimal weight i.e.
 
 \begin{equation*}
 \text{Decom}(w) := \underset{z\;\in\; S}{\text{argmin}}\left\{S\right\}
@@ -86,7 +117,13 @@ minimizes $\underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(
 \underset{Z\;\in\; S}{\mathbf{Pr}}\left[\text{wt}(z)\geq\text{wt}(z^{*})\right] = \sum_{t > \text{wt}(z^{*})}{n \choose t}\cdot p^{t}(1-p)^{n-t} \rightarrow 0 
 \end{equation*}
 
-as $p\rightarrow 0$.
+as $p\rightarrow 0$. Finally, we can show that a code $C\subseteq\mathbb{F}_{q}^{n}$ which is defined as 
+
+\begin{equation*}
+C = \left\{x \in  \mathbb{F}_{q}^{n} | Hx=0\right\}
+\end{equation*}
+
+has distance at least $t/\log(1/p)$ if $H$ is the compression matrix defined above. To see this, we will try to find $z\in \mathbb{F}_{q}^{n}$ such that $\text{Decom}(Hz)$ is correct 
 
 \end{s}
 
@@ -95,8 +132,12 @@ Mixing polynomials
 \end{p}
 
 \begin{s}
-
-We are given two sequences of values $(b_{1}, \;...\;, b_{n})$ and $(c_{1}, \;...\;, c_{n})$ which are the result of evaluating polynomials $f_{1}$ and $f_{2}$ at points $a_{i}$, respectively. Notice that for any particular $a_{i}$ we have that the sum $f_{1}(a_{i}) + f_{2}(a_{i}) = b_{i} + c_{i}$ and the product $f_{1}(a_{i})\cdot f_{2}(a_{i}) = b_{i}\cdot c_{i}$ which of course do not change upon swapping $b_{i}$ and $c_{i}$. If $y$ is the sequence of values received, then we can write a bivariate polynomial
+\\
+\\
+We are given two sequences of values $b_{n}$ and $c_{n}$ which are the result of evaluating polynomials $f_{1}(x)$ and $f_{2}(x)$ at points $a_{n}$. However, for some values of $n$, $b_{n}$ and $c_{n}$ are swapped during transmission.
+\\
+\\
+For any particular $a_{n}$, the sum $f_{1}(a_{n}) + f_{2}(a_{n}) = b_{n} + c_{n}$ and the product $f_{1}(a_{n})\cdot f_{2}(a_{n}) = b_{n}\cdot c_{n}$ do not change upon swapping $b_{n}$ and $c_{n}$. Let $y$ be the sequence of values received, then we can write a bi-variate polynomial
 
 \begin{align*}
 h(x,y) &= y^{2} - y(f_{1}(x)+f_{2}(x)) + f_{1}(x)\cdot f_{2}(x)\\
@@ -104,12 +145,14 @@ h(x,y) &= y^{2} - y(f_{1}(x)+f_{2}(x)) + f_{1}(x)\cdot f_{2}(x)\\
 \end{align*}
 
 If we can perform such a factorization of $h(x,y)$ then we can descramble $f_{1}(x)$ and $f_{2}(x)$. 
+\\
+\\
+In the second case, we are given a value $\beta_{n}$ at each point in the domain $a_{n}$ but we don't know whether $\beta_{n}$ came from $f_{1}(x)$ or $f_{2}(x)$. However, we are given the guarantee that the number of points coming from $f_{1}(x)$ satisfies $\frac{n}{3} \leq n_{1} \leq \frac{2n}{3}$ and the points coming from $f_{2}(x)$ satisfies $\frac{n}{3} \leq n_{2} \leq \frac{2n}{3}$ where $n = n_{1} + n_{2}$. 
+\\
+\\
+We can recast this problem by thinking of the points that came from one polynomial, say $f_{1}(x)$, as ``errors" and define an error polynomial $e$ that is zero when $y \neq f_{1}(x)$. Then, we can use the general Reed-Solomon decoding scheme to solve for $f_{2}(x)$. Once we have $f_{2}(x)$, finding $f_{1}(x)$ is straightforward: use Lagrange interpolation again on the difference between $f_{2}(x)$ and $y$. 
 
-In the second case, we are given a value $\beta_{i}$ at each point in the domain $a_{i}$ but we don't know whether $\beta_{i}$ came from $f_{1}(x)$ or $f_{2}(x)$. However, we are given the guarantee that the number of points coming from $f_{1}(x)$ satisfies $\frac{n}{3} \leq n_{1} \leq \frac{2n}{3}$ and the points coming from $f_{2}(x)$ satisfies $\frac{n}{3} \leq n_{2} \leq \frac{2n}{3}$ where $n = n_{1} + n_{2}$. 
-
-We can recast this problem by thinking of the points that came from one polynomial, say $f_{1}(x)$, as "errors" and define an error polynomial $e$ that is zero when $y \neq f_{1}(x)$. Then, we can use the Reed-Solomon decoding scheme to solve for $f_{2}(x)$. Once we have $f_{2}(x)$, finding $f_{1}(x)$ is straightforward: use Lagrange interpolation again on the difference between $f_{2}(x)$ and $y$. 
-
-Recall that Lagrange interpolation requires that $k\leq n-t$ where $n$ is the total number of points, $t$ the number of errors, and $k$ is the degree of the polynomial to interpolate. We can still apply Lagrange interpolation here since $k \leq \frac{n}{3}$ because $t=\frac{2n}{3}$ is the maximum number of "errors" which must be true since we have already been told $k < \frac{n}{6}$.
+Recall that Lagrange interpolation requires that $k\leq n-t$ where $n$ is the total number of points, $t$ the number of errors, and $k$ is the degree of the polynomial to interpolate. We can still apply Lagrange interpolation here since $k \leq \frac{n}{3}$ because $t=\frac{2n}{3}$ is the maximum number of "errors" which must be true since we are certain that $k < \frac{n}{6}$.
 
 
 \end{s}
