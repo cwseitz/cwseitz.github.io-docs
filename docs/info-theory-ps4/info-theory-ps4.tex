@@ -98,23 +98,29 @@ We would like to prove that an arbitrary compression algorithm $\text{Com}:  \ma
 To prove such a bound, we can first rewrite the LHS of the above. Notice that since $m < n$ (compression) we cannot have a $\text{Decom}:  \mathbb{F}_{2}^{m} \rightarrow  \mathbb{F}_{2}^{n}$ that is a bijection. Thus, we have to define $\text{Decom}$ in such a way that we minimize the probability that the wrong $Z$ is recovered after decompression while accounting for the distribution over the input: $Z \sim (\text{Bern}(p))^{n}$. 
 \\
 \\
-Assuming that $\text{im}(H) = \mathbb{F}_{2}^{m}$, we need to capture this ``lack of bijectivity" of our compression scheme. To do this, we consider the probability that our $\text{Decom}$ decompresses $w \in \mathbb{F}_{2}^{m}$ to a draw from the input distribution. Therefore,
+Given that $\text{im}(H) = \mathbb{F}_{2}^{m}$, we need to capture this ``lack of bijectivity" of our compression scheme. To do this, we consider the probability that our $\text{Decom}$ decompresses $w \in \mathbb{F}_{2}^{m}$ to a draw from the input distribution.
+
+\begin{equation*}
+\underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(HZ)\neq Z\right] = 1 - \underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(HZ)= Z\right]
+\end{equation*} 
+
+where we can write the term on the right hand side as 
 
 \begin{align*}
-\underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(HZ)\neq Z\right] &= 1 - \underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(HZ)= Z\right]\\
-&= 1 - \sum_{w\in \mathbb{F}_{q}^{m}}\underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(w)= Z\right]
-\end{align*} 
+\underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(HZ)= Z\right]
+&= \sum_{w\in \mathbb{F}_{q}^{m}}\underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(w)= Z\right]
+\end{align*}
 
 Now, let's say there is a set of elements in $\mathbb{F}_{2}^{n}$ that map to the same element in $\mathbb{F}_{2}^{m}$: $S = \left\{z\in \mathbb{F}_{q}^{n}|Hz=w\right\}$. Since we have said that $p < \frac{1}{2}$, the decompression algorithm that picks the $z$ with minimal weight i.e.
 
 \begin{equation*}
-\text{Decom}(w) := \underset{z\;\in\; S}{\text{argmin}}\left\{S\right\}
+\text{Decom}(w) := \underset{x\;\in\; S}{\text{argmin}}\left\{\text{wt}(x)\right\}
 \end{equation*}
 
-minimizes $\underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(w)= Z\right]$. This can be seen if we let $z^{*} \in S$ be the element with minimal weight
+maximizes $\underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(w)= Z\right]$. This can be seen if we let $z^{*} \in S$ be the element with minimal weight
 
 \begin{equation*}
-\underset{Z\;\in\; S}{\mathbf{Pr}}\left[\text{wt}(z)\geq\text{wt}(z^{*})\right] = \sum_{t > \text{wt}(z^{*})}{n \choose t}\cdot p^{t}(1-p)^{n-t} \rightarrow 0 
+\underset{z\;\in\; S}{\mathbf{Pr}}\left[\text{wt}(z)\geq\text{wt}(z^{*})\right] = \sum_{t > \text{wt}(z^{*})}{n \choose k}\cdot p^{k}(1-p)^{n-k} \rightarrow 0 
 \end{equation*}
 
 as $p\rightarrow 0$. Finally, we can show that a code $C\subseteq\mathbb{F}_{q}^{n}$ which is defined as 
@@ -123,7 +129,26 @@ as $p\rightarrow 0$. Finally, we can show that a code $C\subseteq\mathbb{F}_{q}^
 C = \left\{x \in  \mathbb{F}_{q}^{n} | Hx=0\right\}
 \end{equation*}
 
-has distance at least $t/\log(1/p)$ if $H$ is the compression matrix defined above. To see this, we will try to find $z\in \mathbb{F}_{q}^{n}$ such that $\text{Decom}(Hz)$ is correct 
+has distance that satisfies
+
+\begin{equation*}
+\Delta(C) \geq \frac{t}{\log(1/p)}
+\end{equation*}
+
+To see why this inequality is true, consider $z \in \mathbb{F}_{q}^{n}$ and $z' \in \mathbb{F}_{q}^{n}$ where $Hz = Hz'$ i.e. both $z$ and $z'$ map to the same codeword $x \in C$. Now if 
+
+\begin{align*}
+\text{dim}(C) &= n - \text{rank}(H)\\
+&= n - m 
+\end{align*}
+
+and $z$ and $z'$ each define a linear combination of $n-m$ column vectors of $H$. Such a linear combination may result in the same $x \in C$. In the worst case, such a collision can occur by flipping a single bit which occurs with probability $p$ since $Z \sim (\text{Bern}(p))^{n}$. The number of ways we can perform such a flip is $2^{\delta}$ so we have
+
+\begin{align*}
+\underset{Z\sim (\text{Bern}(p))^{n}}{\mathbf{Pr}}\left[\text{Decom}(HZ)\neq Z\right] &= 2^{\delta} \cdot p \leq 2^{-t}
+\end{align*}
+
+Therefore, $\delta \geq \frac{t}{\log(1/p)}$.
 
 \end{s}
 
