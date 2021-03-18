@@ -1,0 +1,184 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath} % AMS Math Package
+\usepackage{amsthm} % Theorem Formatting
+\usepackage{amssymb}    % Math symbols such as \mathbb
+\usepackage{graphicx} % Allows for eps images
+\usepackage[dvips,letterpaper,margin=1in,bottom=0.7in]{geometry}
+\usepackage{amsmath}
+
+
+\newtheorem{p}{Problem}[section]
+\usepackage{cancel}
+\newtheorem*{lem}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{dfn}{Definition}
+ \newenvironment{s}{%\small%
+        \begin{trivlist} \item \textbf{Solution}. }{%
+            \hspace*{\fill} $\blacksquare$\end{trivlist}}%
+
+
+\begin{document}
+
+{\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Final Exam}         }\\[2\baselineskip] % Title
+{ {\bf \fontfamily{cmr}\selectfont Information and Coding Theory}\\ {\textit{\fontfamily{cmr}\selectfont     March 18, 2021}}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    {\large \textsc{Clayton Seitz}
+\\[1.4\baselineskip] 
+
+\begin{p}
+Chang's Lemma
+\end{p}
+
+\begin{s}
+We first find the entropy of $\bar{X}$
+
+\begin{equation*}
+H(\bar{X}) = H((X_{1}\; ...\; X_{n}) = \alpha \cdot 2^{n} \cdot H_{2}(p)
+\end{equation*}
+
+Next we show
+
+\begin{align*}
+H(X_{i}) &= H_{2}(p)\\
+&= H_{2}\left(\frac{1 + 2p - 1}{2}\right)\\
+&= H_{2}\left(\frac{1 + \mathbb{E}[X_{i}]}{2}\right)\\
+&\leq 1 - \frac{\left(\mathbb{E}[X_{i}]\right)^{2}}{2\ln 2}
+\end{align*}
+
+Now, we show that 
+
+\begin{align*}
+\sum_{i\in[n]} H(X_{i}) \leq \sum_{x\in[n]} \left(1 - \frac{\left(\mathbb{E}[X_{i}]\right)^{2}}{2\ln 2}\right)\\
+\end{align*}
+
+when taking the maximum possible value for the LHS to be $n\log2 + \log\alpha$, since we have a uniform distribution, we have
+
+\begin{align*}
+\sum_{i\in[n]} \left(\left(\mathbb{E}[X_{i}]\right)^{2}\right) &\leq -2\ln 2 \cdot \left(n(\log2-1) + \log\alpha\right)\\
+&= -2\ln 2 \cdot \frac{\ln(\alpha)}{\ln2 } = 2\cdot \ln \frac{1}{\alpha}
+\end{align*}
+
+
+\end{s}
+
+\begin{p}
+q-ary Entropy and Counting Codes
+\end{p}
+
+\begin{s}
+We would like to prove the following bounds on the size of Hamming ball of radius $r$ centered at the origin 
+
+\begin{equation*}
+q^{H_{q}(\alpha)\cdot n - o(n))} \leq |B_{q}(\alpha\cdot n)| \leq q^{H_{q}(\alpha)\cdot n}
+\end{equation*}
+
+where we have 
+
+\begin{equation*}
+H_{q}(\alpha) = \alpha\cdot \log_{q}(q-1) - \alpha\cdot\log_{q}(\alpha) - (1-\alpha)\cdot\log_{q}(1-\alpha)
+\end{equation*}
+
+and therefore, 
+
+
+\begin{align*}
+q^{H_{q}(\alpha)\cdot n} &= q^{\alpha n\cdot \log_{q}(q-1) - \alpha n\cdot\log_{q}(\alpha) - (1-\alpha)n\cdot\log_{q}(1-\alpha)}\\
+&= (q-1)^{r} \cdot \alpha^{-r} \cdot  (1-\alpha)^{r-n}
+\end{align*}
+
+First, we will show the upper bound by showing that $|B_{q}(\alpha\cdot n)|/q^{H_{q}(\alpha)\cdot n} \leq 1$
+
+\begin{align*}
+\frac{|B_{q}(r)|}{q^{H_{q}(r)}} &= \frac{\sum_{i=0}^{r} {n \choose i}(q-1)^{i}}{(q-1)^{r} \cdot \alpha^{-r} \cdot  (1-\alpha)^{r-n}}\\
+&= \sum_{i=0}^{r} {n \choose i}(q-1)^{i}(q-1)^{-r}\alpha^{r}(1-\alpha)^{n-r}\\
+\end{align*}
+
+Since $\alpha \leq 1- \frac{1}{q}$, we have
+
+Now we can show a $q$-ary Hamming bound . Analogous to the binary case we must have
+
+\begin{align*}
+|C|\cdot |B_{q}(r)| \leq |\mathbb{F}_{q}^{n}|
+\end{align*}
+
+Using the upper bound we derived above, we have
+
+\begin{align*}
+|C| &\leq \frac{|\mathbb{F}_{q}^{n}|}{{|B_{q}(r)|}}\\
+&= q^{n\cdot (1-H_{q}(\alpha)) + o(n)}
+\end{align*}
+
+\end{s}
+
+\begin{p}
+
+\end{p}
+
+\begin{p}
+Through two codes at once
+\end{p}
+
+\begin{s}
+\\
+\\
+If $C_{1} \cap C_{2}$ is a linear code, then $x_{1},x_{2} \in C_{1}\cap C_{2}$ requires that $x_{1}+x_{2} \in C_{1}\cap C_{2}$
+\\
+\\
+By the nature of the intersection, if $x_{1},x_{2} \in C_{1}$ then we also have $x_{1},x_{2} \in C_{2}$ and since $C_{1}$ and $C_{2}$ are linear, $x_{1}+x_{2}\in C_{1}$ and $x_{1}+x_{2}\in C_{2}$ which means $x_{1} + x_{2} \in C_{1}\cap C_{2}$.
+\\
+\\
+We define the parity check matrix $H_{1}$ for a code $C_{1}$ s.t.
+\begin{equation*}
+C_{1} = \left\{x\in C_{1} | H_{1} x=0\right\}
+\end{equation*}
+Simultaneously, we define the parity check matrix $H_{2}$ for a code $C_{2}$ s.t.
+\begin{equation*}
+C_{2} = \left\{x\in C_{2} | H_{2} x=0\right\}
+\end{equation*}
+If we now want to find a parity check matrix $H$ for $C_{1}\cap C_{2}$, we
+\begin{equation*}
+C_{1} \cap C_{2} = \left\{x\in C_{1}\cap C_{2} | Hx=0\right\}
+\end{equation*}
+which can be found easily if we consider $x_{1} + x_{2} \in C_{1}\cap C_{2}$ which means 
+$H_{1}(x_{1} + x_{2}) = 0$ and $H_{2}(x_{1}+x_{2})=0$ and a parity check matrix $H = H_{1}+H_{2}$ gives 
+\begin{equation*}
+(H_{1}+H_{2})(x_{1}+x_{2}) = 0
+\end{equation*}
+In other words, if $x \in \text{null}(H_{1})$ and $x \in \text{null}(H_{2})$ then $x \in \text{null}(H_{1}+H_{2})$.
+\\
+\\
+Now we would like to prove that 
+\begin{equation*}
+\Delta (C_{1}\cap C_{2}) = \text{max}\left\{\Delta(C_{1}),\Delta(C_{2})\right\}
+\end{equation*}
+To see this, consider the two codewords
+\begin{equation*}
+x_{1} = \underset{x\in C_{1}}{\text{argmin}}\left\{\text{wt}(x)\right\}
+\end{equation*}
+\begin{equation*}
+x_{2} = \underset{x\in C_{2}}{\text{argmin}}\left\{\text{wt}(x)\right\}
+\end{equation*}
+where $\text{wt}(x_{1}) > \text{wt}(x_{2})$. Now, notice that only $x_{2} \in C_{1}\cap C_{2}$ since if it $x_{1}\in C_{1}\cap C_{2}$, then $\Delta(C_{1}) = \Delta(C_{2})$. Therefore, $\Delta(C_{1}\cap C_{2}) = \text{max}\left\{\Delta(C_{1}),\Delta(C_{2})\right\}$. 
+Finally, these two Reed-Solomon codes are each defined over $n$ positions in the domain and have degree at most $d$. However, $C_{1} \cap C_{2}$ consists of at most $n - r + 1$ positions, and the number of times a polynomial will pass through zero is $d$, the number of nonzero values in these $n-r+1$ positions region can only be $d - r + 1$. Thus we have 
+
+\begin{equation*}
+\text{dim}(C_{1}\cap C_{2}) = d - r + 1
+\end{equation*}
+
+\end{s}
+
+\begin{p}
+Confused professor
+\end{p}
+
+\begin{s}
+
+We can use Sanov's theorem to show that 
+
+\begin{align*}
+\beta - \alpha &= \underset{n\rightarrow\infty}{\text{lim}}\left[\frac{1}{n}\left(\log\left(\underset{\bar{x}\sim Q^{n}}{\mathbf{Pr}}[P_{\bar{x}} \in \mathcal{L}_{0}]\right) - \log\left(\underset{\bar{x}\sim Q^{n}}{\mathbf{Pr}}[P_{\bar{x}} \in \mathcal{L}_{1}]\right)\right)\right]\\
+&= D(P_{0}^{*}||Q) - D(P_{1}^{*}||Q) \\
+&= D(P_{0}^{*}||P_{1}^{*})\\
+&\leq \epsilon
+\end{align*}
+\end{s}
+
+\end{document}
