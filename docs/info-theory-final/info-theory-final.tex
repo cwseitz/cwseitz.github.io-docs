@@ -89,28 +89,69 @@ First, we will show the upper bound by showing that $|B_{q}(\alpha\cdot n)|/q^{H
 \begin{align*}
 \frac{|B_{q}(r)|}{q^{H_{q}(r)}} &= \frac{\sum_{i=0}^{r} {n \choose i}(q-1)^{i}}{(q-1)^{r} \cdot \alpha^{-r} \cdot  (1-\alpha)^{r-n}}\\
 &= \sum_{i=0}^{r} {n \choose i}(q-1)^{i}(q-1)^{-r}\alpha^{r}(1-\alpha)^{n-r}\\
+&= \sum_{i=0}^{r} {n \choose i}(q-1)^{i}(1-\alpha)^{n}\left(\frac{\alpha}{(q-1)(1-\alpha)}\right)^{r}\\
+&\leq \sum_{i=0}^{r} {n \choose i}\alpha^{i}(1-\alpha)^{n-i} = 1
 \end{align*}
 
-Since $\alpha \leq 1- \frac{1}{q}$, we have
+which can be seen from the condition $\alpha \leq 1 - \frac{1}{q}$. Also this last result is just the binomial distribution. The lower bound comes from the fact that 
 
-Now we can show a $q$-ary Hamming bound . Analogous to the binary case we must have
+\begin{align*}
+|B_{q}(r)| &\geq {n \choose r}(q-1)^{r}\\
+&> \frac{(q-1)^{r}}{\alpha^{r}(1-\alpha)^{n-r}}\\
+&\geq q^{H_{q}(\alpha)\cdot n - o(n))}
+\end{align*}
+
+Now we can show a $q$-ary Hamming bound
 
 \begin{align*}
 |C|\cdot |B_{q}(r)| \leq |\mathbb{F}_{q}^{n}|
 \end{align*}
 
-Using the upper bound we derived above, we have
+We can find the maximum $|C|$ by using the lower bound on $ |B_{q}(r)|$ that we derived above:
 
 \begin{align*}
-|C| &\leq \frac{|\mathbb{F}_{q}^{n}|}{{|B_{q}(r)|}}\\
-&= q^{n\cdot (1-H_{q}(\alpha)) + o(n)}
+|C| &\leq \frac{|\mathbb{F}_{q}^{n}|}{{|B_{q}(r)|}} = \frac{q^{n}}{q^{H_{q}(\alpha)\cdot n - o(n)}} = q^{n\cdot (1-H_{q}(\alpha)) + o(n)}
 \end{align*}
 
 \end{s}
 
 \begin{p}
-
+Correlated bad inputs
 \end{p}
+
+\begin{s}
+We have that $\forall x$
+
+\begin{equation*}
+\underset{R}{\mathbf{Pr}}[A(R,x)\neq f(x)] \leq \delta
+\end{equation*}
+
+Then it must be true that
+
+\begin{align*}
+\underset{R,X}{\mathbf{Pr}}[A(R,X)\neq f(x)] &= \sum_{x} P(x)\cdot \underset{R}{\mathbf{Pr}}[A(R,x)\neq f(x)] \\
+&= \underset{R}{\mathbf{Pr}}[A(R,x)\neq f(x)] \leq \delta
+\end{align*}
+
+Now, we have
+
+\begin{align*}
+H(R|X,E) &= (1-p)\cdot H(R|X, E=0) + p \cdot H(R|X, E=1)\\
+&\leq (1-p)\cdot H(R) + p \cdot H(R|X, E=1)\\
+&= H(R) - p\cdot \log\frac{1}{\delta}
+\end{align*}
+
+Finally, we can rearrange this result to show that 
+
+\begin{align*}
+p &= \underset{R,X}{\mathbf{Pr}}[A(R,X)\neq f(x)]\\
+&\leq \frac{H(R) - H(R|X,E)}{\log\frac{1}{\delta}}\\
+&= \frac{H(R) - (H(R|X)-H(E|R,X))}{\log\frac{1}{\delta}}\\
+&\leq \frac{I(R;X) + 1}{\log\frac{1}{\delta}}
+\end{align*}
+
+
+\end{s}
 
 \begin{p}
 Through two codes at once
@@ -157,7 +198,14 @@ x_{1} = \underset{x\in C_{1}}{\text{argmin}}\left\{\text{wt}(x)\right\}
 x_{2} = \underset{x\in C_{2}}{\text{argmin}}\left\{\text{wt}(x)\right\}
 \end{equation*}
 where $\text{wt}(x_{1}) > \text{wt}(x_{2})$. Now, notice that only $x_{2} \in C_{1}\cap C_{2}$ since if it $x_{1}\in C_{1}\cap C_{2}$, then $\Delta(C_{1}) = \Delta(C_{2})$. Therefore, $\Delta(C_{1}\cap C_{2}) = \text{max}\left\{\Delta(C_{1}),\Delta(C_{2})\right\}$. 
-Finally, these two Reed-Solomon codes are each defined over $n$ positions in the domain and have degree at most $d$. However, $C_{1} \cap C_{2}$ consists of at most $n - r + 1$ positions, and the number of times a polynomial will pass through zero is $d$, the number of nonzero values in these $n-r+1$ positions region can only be $d - r + 1$. Thus we have 
+\\
+\\
+We just showed that 
+\begin{equation*}
+\Delta (C_{1}\cap C_{2}) = \text{max}\left\{\Delta(C_{1}),\Delta(C_{2})\right\}
+\end{equation*}
+
+and we know that for $C_{1} \cap C_{2}$ to be linear, we can only use $n - r + 1$ points in the domain. Since each of these codes can have $n-d$ nonzero values we have $\Delta(C) = (n-r+1)-(n-d) = d - r + 1$. Thus $\Delta (C_{1}\cap C_{2}) = d - r + 1$ and
 
 \begin{equation*}
 \text{dim}(C_{1}\cap C_{2}) = d - r + 1
@@ -171,14 +219,37 @@ Confused professor
 
 \begin{s}
 
-We can use Sanov's theorem to show that 
+Recall that Sanov's theorem states that if
 
+\begin{equation*}
+P^{*} := \text{Proj}_{Q}(\mathcal{L}_{1}) = \underset{P}{\text{argmin}} \; D(P\in\mathcal{L}_{1}||Q)
+\end{equation*} then
+
+\begin{equation*}
+ \underset{n\rightarrow\infty}{\text{lim}}\left(\frac{1}{n}\log \underset{\bar{x}\sim Q^{n}}{\mathbf{Pr}}[P_{\bar{x}} \in \mathcal{L}_{0}]\right) \rightarrow -D(P^{*}||Q)
+\end{equation*}
+Therefore, we can write $\beta - \alpha$ as
 \begin{align*}
 \beta - \alpha &= \underset{n\rightarrow\infty}{\text{lim}}\left[\frac{1}{n}\left(\log\left(\underset{\bar{x}\sim Q^{n}}{\mathbf{Pr}}[P_{\bar{x}} \in \mathcal{L}_{0}]\right) - \log\left(\underset{\bar{x}\sim Q^{n}}{\mathbf{Pr}}[P_{\bar{x}} \in \mathcal{L}_{1}]\right)\right)\right]\\
-&= D(P_{0}^{*}||Q) - D(P_{1}^{*}||Q) \\
-&= D(P_{0}^{*}||P_{1}^{*})\\
-&\leq \epsilon
+\\
+&\rightarrow D(P_{1}^{*}||Q) - D(P_{0}^{*}||Q) \\
 \end{align*}
+
+Now consider the Pythagoras theorem which holds with equality for both of these linear families $\mathcal{L}_{1}$ and $\mathcal{L}_{2}$
+
+\begin{align*}
+D(P_{0}||Q) = D(P_{0}||P_{0}^{*}) + D(P_{0}^{*}||Q)
+\end{align*}
+\begin{align*}
+D(P_{1}||Q) = D(P_{1}||P_{1}^{*}) + D(P_{1}^{*}||Q)
+\end{align*}
+
+combining these equations and using that $P_{1} \in \mathcal{L}_{0}$ since $ \mathcal{L}_{1} \subseteq  \mathcal{L}_{0}$ gives
+
+\begin{align*}
+D(P_{1}^{*}||Q) - D(P_{0}^{*}||Q)  &= D(P_{0}||P_{1}^{*}) \leq \epsilon
+\end{align*}
+
 \end{s}
 
 \end{document}
