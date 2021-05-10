@@ -2,8 +2,9 @@
 \setbeamertemplate{navigation symbols}{}
 
 \usepackage{beamerthemeshadow}
+\usepackage{amsmath}
 \begin{document}
-\title{Learning a dynamical attractor by maximizing multivariate information}  
+\title{Training a dynamical system by using multivariate information}  
 \author{Clayton Seitz}
 \date{\today} 
 
@@ -14,162 +15,139 @@
 \begin{frame}[plain]\frametitle{Table of contents}\tableofcontents
 \end{frame} 
 
-
-\section{Section no.1} 
-\begin{frame}[plain]\frametitle{Title} 
-Each frame should have a title.
-\end{frame}
-\subsection{Subsection no.1.1  }
-\begin{frame} [plain]
-Without title somethink is missing. 
-\end{frame}
-
-
-\section{Section no. 2} 
-\subsection{Lists I}
-\begin{frame}[plain]\frametitle{unnumbered lists}
-\begin{itemize}
-\item Introduction to  \LaTeX  
-\item Course 2 
-\item Termpapers and presentations with \LaTeX 
-\item Beamer class
-\end{itemize} 
-\end{frame}
-
-\begin{frame}[plain]\frametitle{lists with pause}
-\begin{itemize}
-\item Introduction to  \LaTeX \pause 
-\item Course 2 \pause 
-\item Termpapers and presentations with \LaTeX \pause 
-\item Beamer class
-\end{itemize} 
-\end{frame}
-
-\subsection{Lists II}
-\begin{frame}[plain]\frametitle{numbered lists}
-\begin{enumerate}
-\item Introduction to  \LaTeX  
-\item Course 2 
-\item Termpapers and presentations with \LaTeX 
-\item Beamer class
-\end{enumerate}
-\end{frame}
-
-\begin{frame}[plain]\frametitle{numbered lists with pause}
-\begin{enumerate}
-\item Introduction to  \LaTeX \pause 
-\item Course 2 \pause 
-\item Termpapers and presentations with \LaTeX \pause 
-\item Beamer class
-\end{enumerate}
-\end{frame}
-
-\section{Section no.3} 
-\subsection{Tables}
-\begin{frame}[plain]\frametitle{Tables}
-\begin{tabular}{|c|c|c|}
-\hline
-\textbf{Date} & \textbf{Instructor} & \textbf{Title} \\
-\hline
-WS 04/05 & Sascha Frank & First steps with  \LaTeX  \\
-\hline
-SS 05 & Sascha Frank & \LaTeX \ Course serial \\
-\hline
-\end{tabular}
-\end{frame}
-
-
-\begin{frame}[plain]\frametitle{Tables with pause}
-\begin{tabular}{c c c}
-A & B & C \\ 
-\pause 
-1 & 2 & 3 \\  
-\pause 
-A & B & C \\ 
-\end{tabular} 
-\end{frame}
-
-
-\section{Section no. 4}
-\subsection{blocs}
-\begin{frame}[plain]\frametitle{blocs}
-
-\begin{block}{title of the bloc}
-bloc text
-\end{block}
-
-\begin{exampleblock}{title of the bloc}
-bloc text
-\end{exampleblock}
-
-
-\begin{alertblock}{title of the bloc}
-bloc text
-\end{alertblock}
-\end{frame}
-
-\section{Section no. 5}
-\subsection{split screen}
-
-\begin{frame}[plain]\frametitle{splitting screen}
-\begin{columns}
-\begin{column}{5cm}
-\begin{itemize}
-\item Beamer 
-\item Beamer Class 
-\item Beamer Class Latex 
-\end{itemize}
-\end{column}
-\begin{column}{5cm}
-\begin{tabular}{|c|c|}
-\hline
-\textbf{Instructor} & \textbf{Title} \\
-\hline
-Sascha Frank &  \LaTeX \ Course 1 \\
-\hline
-Sascha Frank &  Course serial  \\
-\hline
-\end{tabular}
-\end{column}
-\end{columns}
-\end{frame}
-
-\subsection{Pictures} 
-\begin{frame}[plain]\frametitle{pictures in latex beamer class}
-\begin{figure}
-
-\end{figure}
-\end{frame}
-
-\subsection{joining picture and lists} 
+\section{Introduction} 
 
 \begin{frame}[plain]
-\frametitle{pictures and lists in beamer class}
-\begin{columns}
-\begin{column}{5cm}
-\begin{itemize}
-\item<1-> subject 1
-\item<3-> subject 2
-\item<5-> subject 3
-\end{itemize}
-\vspace{3cm} 
-\end{column}
-\begin{column}{5cm}
-\begin{overprint}
+\frametitle{Introduction} 
 
-\end{overprint}
-\end{column}
-\end{columns}
+Neuroethology argues that neural networks evolve according to the stimuli to which they are exposed
+
+\begin{center}
+\includegraphics[scale=0.35]{natural-images}
+\end{center}
+
 \end{frame}
 
 
-\subsection{pictures which need more space} 
+\section{Channel coding for neural networks} 
+
 \begin{frame}[plain]
-\frametitle{plain, or a way to get more space}
-\begin{figure}
-\
-\end{figure}
+\frametitle{Channel coding for neural networks} 
+
+Networks of neurons can be viewed as a communication channel
+
+Except this communication channel \emph{learns} the transformation $F$ based on the statistical structure of its input $X$. Visual cortex has learned an encoding for visual scenes (that perhaps maximizes information)
+
 \end{frame}
+
+
+\section{Supervised training of low-rate critical networks} 
+
+\begin{frame}[plain]
+\frametitle{Leaky integrate and fire neurons} 
+
+A realistic LIF model might look like
+
+\begin{equation*}
+\tau_{m}\frac{d\mathbf{V}[I]}{dt} = (\mathbf{V}[I]-E)\sum_{j} \mathbf{W^{0}}[I,j] + (\mathbf{V}[I] - E_{in})\sum_{k}\mathbf{W^{1}}[I,k])
+\end{equation*}
+
+Instead, we ignore changes in the voltage of the postsynaptic neuron due to subthreshold voltages of the presynaptic neuron and let matrices $\mathbf{W}$ learn the input-output voltage relationship
+
+\begin{equation*}
+V[j,t+1] = \alpha V[j,t+1] + \sum_{i\neq j} W^{0}_{ij}z[i,t] + \sum_{i} W^{1}_{ij}x[i,t+1] - z[j,t]v_{th} 
+\end{equation*}
+
+where $z = H(v-v_{th})$
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\frametitle{Estimating gradients} 
+
+Say we have a model $\Phi = (W^{0},W^{1})$ and want to use gradient descent to train a network to have a target rate or a target branching parameter. The rate and its associated loss for a single unit is
+
+\begin{equation*}
+r(t) = \frac{1}{\Delta t}\int_{t}^{t+\Delta t} d\tau \langle \rho(\tau)\rangle\;\;\;\;\;\mathcal{L} = \alpha(r-r_{0})^{2}
+\end{equation*}
+
+We would like the standard update 
+
+\begin{equation*}
+\Delta W_{ij} = -\eta \frac{\partial\mathcal{L}}{\partial W_{ij}}
+\end{equation*}
+
+
+But it is intractable to compute $\frac{\partial\mathcal{L}}{\partial W_{ij}}$ since $\rho(t)$ depends on other neurons through space and time.
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\frametitle{Estimating gradients} 
+
+Bellec et al. presented a solution to estimating $\frac{\partial\mathcal{L}}{\partial W_{ij}}$ for online learning, but it can just as well be used for supervised learning
+
+\begin{equation*}
+\frac{\partial\mathcal{L}}{\partial W_{ij}} = \sum_{t} \frac{\partial \mathcal{L}}{\partial z[j,t]} \cdot \frac{\partial z[j,t]}{\partial W_{ij}}
+\end{equation*}
+
+where the gradient $\frac{\partial z[j,t]}{\partial W_{ij}}$ is computed locally.
+
+
+
+
+\end{frame}
+
+\section{Multivariate information theory} 
+
+\begin{frame}[plain]
+\frametitle{Multivariate information theory} 
+\end{frame}
+
+\section{Adaptation of the transfer function} 
+
+\begin{frame}[plain]
+\frametitle{Adaptation of the transfer function} 
+How do neuron transfer functions adapt to stimuli in an unsupervised manner?
+\end{frame}
+
+\section{Learning an energy function over phase space} 
+
+\begin{frame}[plain]
+\frametitle{Adaptation defines an energy function over phase space} 
+\end{frame}
+
+\section{Generalization bounds and density estimation} 
+
+\begin{frame}[plain]
+\frametitle{Generalization bounds}
+What is the distance of a code defined by a particular energy function $\mathbf{E}$
+\end{frame}
+
+\section{The energy function defines a dynamical system} 
+
+\begin{frame}[plain]
+\frametitle{The energy function defines a dynamical system} 
+\end{frame}
+
+
+\section{The energy function is a generative model} 
+
+\begin{frame}[plain]
+\frametitle{The energy function is a generative model} 
+\end{frame}
+
+\section{Application to natural image statistics} 
+
+\begin{frame}[plain]
+\frametitle{Application to natural image statistics} 
+\end{frame}
+
+
 
 
 
