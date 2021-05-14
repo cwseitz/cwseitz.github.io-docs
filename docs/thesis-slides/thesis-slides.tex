@@ -4,7 +4,7 @@
 \usepackage{beamerthemeshadow}
 \usepackage{amsmath}
 \begin{document}
-\title{Attractor dynamics in rate-distortion networks trained via spike-timing dependent plasticity}  
+\title{Attractor dynamics and generalization bounds of rate-distortion networks trained via spike-timing dependent plasticity}  
 \author{Clayton Seitz}
 \date{\today} 
 
@@ -20,14 +20,124 @@
 \begin{frame}[plain]
 \frametitle{Introduction} 
 
-How can a network of neurons learn to categorize its inputs from a simple learning rule based on synaptic plasticity?
+\end{frame}
 
-How can a network form a memory and how do later inputs retrieve that memory? 
-\\
-It may be that repeated stimulation leaves an "impression" on the network via plasticity rules and that impression is a kind of dynamical attractor
+\begin{frame}[plain]
+\frametitle{Training low-rate critical networks} 
+
+\begin{equation*}
+\mathcal{L}_{global} = \alpha(r_{global} - \hat{r})
+\end{equation*}
+
+\begin{center}
+\includegraphics[scale=0.5]{global-rate-vars}
+\end{center}
+
+Training on an average firing rate has many (perhaps undesirable) solutions
 
 \end{frame}
 
+\begin{frame}[plain]
+\frametitle{Training low-rate critical networks} 
+
+\begin{equation*}
+\mathcal{L}_{SSE} = \alpha\sum_{n} (r_{n} - \hat{r})^{2}
+\end{equation*}
+
+\begin{center}
+\includegraphics[scale=0.5]{sse-vars}
+\end{center}
+
+Training on the instantaneous firing rate doesn't work either
+
+\end{frame}
+
+\begin{frame}[plain]
+\frametitle{Training low-rate critical networks} 
+
+\begin{equation*}
+\mathcal{L}_{\alpha} = \alpha\sum_{n} (r_{n} - \hat{r})^{2}
+\end{equation*}
+
+\begin{center}
+\includegraphics[scale=0.5]{alpha-beta-vars}
+\end{center}
+
+Binning the firing rate over 100ms ($r_{n}$) reduces its variability.
+
+\end{frame}
+
+\begin{frame}[plain]
+\frametitle{} 
+
+Optimization of $\mathcal{L}_{global}$ results in some strong excitatory recurrent weights
+
+\begin{center}
+\includegraphics[scale=0.5]{global-rec-weights}
+\end{center}
+
+\end{frame}
+
+\begin{frame}[plain]
+\frametitle{} 
+
+Optimization of $\mathcal{L}_{\alpha}$ results in few strong excitatory recurrent synapses
+
+\begin{center}
+\includegraphics[scale=0.5]{alpha-rec-weights}
+\end{center}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\frametitle{} 
+Optimization of $\mathcal{L}_{\alpha}$ shows inhibition of inputs
+
+\begin{center}
+\includegraphics[scale=0.7]{alpha-traces}
+\end{center}
+
+\end{frame}
+
+\begin{frame}[plain]
+\frametitle{} 
+Optimization of $\mathcal{L}_{\alpha}$ shows inhibition of inputs
+
+\begin{center}
+\includegraphics[scale=0.65]{alpha-in-weights}
+\end{center}
+
+\end{frame}
+
+\begin{frame}[plain]
+\frametitle{} 
+
+Optimization of $\mathcal{L}_{global}$ doesn't
+
+\begin{center}
+\includegraphics[scale=0.65]{global-traces}
+\end{center}
+
+\end{frame}
+
+\begin{frame}[plain]
+\frametitle{} 
+
+Optimization of $\mathcal{L}_{global}$ doesn't
+
+\begin{center}
+\includegraphics[scale=0.65]{global-in-weights}
+\end{center}
+
+\end{frame}
+
+\begin{frame}[plain]
+\frametitle{} 
+
+To me the above results suggest that the network is finding a balance between recurrence and input to maintain a stable firing rate as shown in Cramer et al. 2020
+
+\end{frame}
 
 \section{Channel coding for neural networks} 
 
@@ -37,29 +147,6 @@ It may be that repeated stimulation leaves an "impression" on the network via pl
 Networks of neurons can be viewed as a communication channel
 
 Except this communication channel \emph{learns} the transformation $F$ based on the statistical structure of its input $X$. Visual cortex has learned an encoding for visual scenes (that perhaps maximizes information)
-
-\end{frame}
-
-
-\section{Supervised training of low-rate critical networks} 
-
-\begin{frame}[plain]
-\frametitle{Leaky integrate and fire neurons} 
-
-A realistic LIF model might look like
-
-\begin{equation*}
-\tau_{m}\frac{d\mathbf{V}[I]}{dt} = (\mathbf{V}[I]-E)\sum_{j} \mathbf{W^{0}}[I,j] + (\mathbf{V}[I] - E_{in})\sum_{k}\mathbf{W^{1}}[I,k])
-\end{equation*}
-
-Instead, we ignore changes in the voltage of the postsynaptic neuron due to subthreshold voltages of the presynaptic neuron and let matrices $\mathbf{W}$ learn the input-output voltage relationship
-
-\begin{equation*}
-V[j,t+1] = \alpha V[j,t+1] + \sum_{i\neq j} W^{0}_{ij}z[i,t] + \sum_{i} W^{1}_{ij}x[i,t+1] - z[j,t]v_{th} 
-\end{equation*}
-
-where $z = H(v-v_{th})$
-
 
 \end{frame}
 
@@ -139,20 +226,6 @@ You can then collect terms that are multiplied $L_{j}^{t}$
 \end{align*}
 
 \end{frame}
-
-\begin{frame}[plain]
-\frametitle{The eligibility vector for LIF neurons} 
-
-We would like to know the eligibility is per synapse $\epsilon_{ij}^{t}$ for a network of RNN neurons.
-
-Gradients can be computed using e-prop if we use a pseudo-derivative $\psi_{j}^{t} = \frac{\partial z^{t}_{j}}{\partial v^{t}_{j}}$ and use the fact that the eligibility vector $\epsilon$ is just a low passed filter of $z$. 
-
-\begin{equation*}
-\Delta W_{ij} = -\eta \sum_{t}\frac{\partial \mathcal{L}}{\partial z_{j}^{t}}\psi_{j}^{t} \mathcal{F}_{\alpha}(z_{i}^{t})
-\end{equation*}
-
-\end{frame}
-
 \begin{frame}[plain]
 \frametitle{Constraining the global firing rate distribution} 
 
