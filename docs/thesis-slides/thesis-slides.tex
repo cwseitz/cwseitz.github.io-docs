@@ -23,76 +23,54 @@
 \end{frame}
 
 \begin{frame}[plain]
-\frametitle{Training low-rate critical networks} 
+\frametitle{Training low-rate critical networks on uniform stimulus} 
 
 \begin{equation*}
-\mathcal{L}_{global} = \alpha(r_{global} - \hat{r})
-\end{equation*}
-
-\begin{center}
-\includegraphics[scale=0.5]{global-rate-vars}
-\end{center}
-
-Training on an average firing rate has many (perhaps undesirable) solutions
-
-\end{frame}
-
-\begin{frame}[plain]
-\frametitle{Training low-rate critical networks} 
-
-\begin{equation*}
-\mathcal{L}_{SSE} = \alpha\sum_{n} (r_{n} - \hat{r})^{2}
+\mathcal{L}_{1} = \alpha \sum_{j} (r_{j} - \hat{r})^{2}
 \end{equation*}
 
 \begin{center}
 \includegraphics[scale=0.5]{sse-vars}
 \end{center}
 
-Training on the instantaneous firing rate doesn't work either
+Training on an SSE of average rate per neuron (current setup)
 
 \end{frame}
 
+
 \begin{frame}[plain]
-\frametitle{Training low-rate critical networks} 
+\frametitle{Training low-rate critical networks on uniform stimulus} 
 
 \begin{equation*}
-\mathcal{L}_{\alpha} = \alpha\sum_{n} (r_{n} - \hat{r})^{2}
+\mathcal{L}_{2} = \alpha\sum_{t} (r(t) - \hat{r})^{2}
 \end{equation*}
 
 \begin{center}
-\includegraphics[scale=0.5]{alpha-beta-vars}
+\includegraphics[scale=0.5]{alpha-1ms-bin}
 \end{center}
 
-Binning the firing rate over 100ms ($r_{n}$) reduces its variability.
+Training on the instantaneous firing rate $r(t)$ reduces variability, improves branching parameter
 
 \end{frame}
 
 \begin{frame}[plain]
-\frametitle{} 
+\frametitle{Training low-rate critical networks on uniform stimulus} 
 
-Optimization of $\mathcal{L}_{global}$ results in some strong excitatory recurrent weights
+\begin{equation*}
+\mathcal{L}_{2} = \alpha\sum_{t} (r(t) - \hat{r})^{2}
+\end{equation*}
 
 \begin{center}
-\includegraphics[scale=0.5]{global-rec-weights}
+\includegraphics[scale=0.5]{last-epoch}
 \end{center}
+
 
 \end{frame}
 
 \begin{frame}[plain]
 \frametitle{} 
 
-Optimization of $\mathcal{L}_{\alpha}$ results in few strong excitatory recurrent synapses
-
-\begin{center}
-\includegraphics[scale=0.5]{alpha-rec-weights}
-\end{center}
-
-\end{frame}
-
-
-\begin{frame}[plain]
-\frametitle{} 
-Optimization of $\mathcal{L}_{\alpha}$ shows inhibition of inputs
+But optimization of $\mathcal{L}_{2}$ shows a more sparse response
 
 \begin{center}
 \includegraphics[scale=0.7]{alpha-traces}
@@ -102,40 +80,27 @@ Optimization of $\mathcal{L}_{\alpha}$ shows inhibition of inputs
 
 \begin{frame}[plain]
 \frametitle{} 
-Optimization of $\mathcal{L}_{\alpha}$ shows inhibition of inputs
 
-\begin{center}
-\includegraphics[scale=0.65]{alpha-in-weights}
-\end{center}
-
-\end{frame}
-
-\begin{frame}[plain]
-\frametitle{} 
-
-Optimization of $\mathcal{L}_{global}$ doesn't
+Optimization of $\mathcal{L}_{1}$ doesn't
 
 \begin{center}
 \includegraphics[scale=0.65]{global-traces}
 \end{center}
 
+Does the network move towards a particular balance of recurrence and input as in Cramer et al. 2020?
+
 \end{frame}
 
-\begin{frame}[plain]
-\frametitle{} 
 
-Optimization of $\mathcal{L}_{global}$ doesn't
+\begin{frame}[plain]
+\frametitle{Higher order correlations} 
+
+The correlation structure of the network depends on the correlation structure of the stimulus
 
 \begin{center}
-\includegraphics[scale=0.65]{global-in-weights}
+\includegraphics[scale=0.35]{higher-order-interactions}
 \end{center}
 
-\end{frame}
-
-\begin{frame}[plain]
-\frametitle{} 
-
-To me the above results suggest that the network is finding a balance between recurrence and input to maintain a stable firing rate as shown in Cramer et al. 2020
 
 \end{frame}
 
