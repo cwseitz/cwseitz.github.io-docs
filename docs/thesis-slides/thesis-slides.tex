@@ -26,6 +26,10 @@
 \frametitle{Training low-rate critical networks on uniform stimulus} 
 
 \begin{equation*}
+p_{ee} = 0.16 \; p_{ie} = 0.318 \;  p_{ei} = 0.244 \; p_{ii} = 0.343
+\end{equation*}
+
+\begin{equation*}
 \mathcal{L}_{1} = \alpha \sum_{j} (r_{j} - \hat{r})^{2}
 \end{equation*}
 
@@ -41,6 +45,9 @@ Training on an SSE of average rate per neuron (current setup)
 \begin{frame}[plain]
 \frametitle{Training low-rate critical networks on uniform stimulus} 
 
+\begin{equation*}
+p_{ee} = 0.16 \; p_{ie} = 0.318 \;  p_{ei} = 0.244 \; p_{ii} = 0.343
+\end{equation*}
 \begin{equation*}
 \mathcal{L}_{2} = \alpha\sum_{t} (r(t) - \hat{r})^{2}
 \end{equation*}
@@ -87,15 +94,43 @@ Optimization of $\mathcal{L}_{1}$ doesn't
 \includegraphics[scale=0.65]{global-traces}
 \end{center}
 
-Does the network move towards a particular balance of recurrence and input as in Cramer et al. 2020?
-
 \end{frame}
 
 
 \begin{frame}[plain]
+\frametitle{Balancing internal and recurrent inputs} 
+
+We know something about the balance of excitation and inhibition that gives critical dynamics. What about the balance between input and recurrence? (Cramer et al. 2020)
+
+
+\begin{center}
+\includegraphics[scale=0.55]{cramer-criticality}
+\end{center}
+
+\end{frame}
+
+\begin{frame}[plain]
+\frametitle{Balancing internal and recurrent inputs} 
+
+
+
+\end{frame}
+
+\begin{frame}[plain]
+\frametitle{The role of criticality in information transmission} 
+
+\begin{itemize}
+\item What are the synaptic weight distributions before and after optimizing firing rate?
+\item Can we generate critical networks by changing 
+\end{itemize}
+
+
+\end{frame}
+
+\begin{frame}[plain]
 \frametitle{Higher order correlations} 
 
-The correlation structure of the network depends on the correlation structure of the stimulus
+Does the correlation structure of the network depend on the correlation structure of the stimulus?
 
 \begin{center}
 \includegraphics[scale=0.35]{higher-order-interactions}
