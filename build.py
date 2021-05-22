@@ -30,7 +30,7 @@ def build_site():
     sub_page.write('docs/index.html')
 
     #Build document listing page
-    categories = ['bio/', 'prog/', 'dlrn/', 'phys/', 'neuro/', 'info/', 'phil/']
+    categories = ['bio/', 'prog/', 'dlrn/', 'phys/', 'neuro/', 'info/', 'phil/', 'thesis/']
 
     for category in categories:
 
