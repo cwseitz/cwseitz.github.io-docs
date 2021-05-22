@@ -1,4 +1,4 @@
-All documents should be stored in **cwseitz.github.io/docs** under
+All documents should be stored in **cwseitz.github.io/docs/subject** under
 a directory named with the same rootname as the document itself.
 Any additional renderings should also be stored there.
 
