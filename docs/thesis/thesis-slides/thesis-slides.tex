@@ -17,11 +17,17 @@
 \begin{frame}[plain]
 \frametitle{RNNs trained with a Hebbian learning rule}
 
+It is difficult to infer learning rules \emph{in vivo} solely from spikes
+
+
 \begin{center}
 \includegraphics[scale=0.5]{network-diagram}
 \end{center}
 
-Measure $\Delta r$ to infer the learning rule $\Delta W_{ij}$. 
+
+\vspace{0.2in}
+
+Learning rules can be inferred (with assumptions) from firing rates
 
 \footnote{\cite{peirera}}
 
@@ -51,7 +57,7 @@ Measuring the \emph{static} transfer function from novel images assuming that in
 \frametitle{Inferring the learning rule from ITC data}
 
 \begin{center}
-\includegraphics[scale=0.55]{learning-rules}
+\includegraphics[scale=0.55]{learning}
 \end{center}
 
 Inferring the change in input current $\xi_{in}$ from the change in firing rate in {\color{red} novel} relative to {\color{blue} familiar} stimuli
@@ -64,7 +70,7 @@ Inferring the change in input current $\xi_{in}$ from the change in firing rate 
 \frametitle{Inferring the learning rule from ITC data}
 
 \begin{center}
-\includegraphics[scale=0.55]{learning-rules}
+\includegraphics[scale=0.52]{learning}
 \end{center}
 
 The change in input current to a neuron can then be read from the firing rate of that neuron when presented a novel stimulus
@@ -78,31 +84,85 @@ The change in input current to a neuron can then be read from the firing rate of
 \end{frame}
 
 \begin{frame}[plain]
-\frametitle{A Hebbian update for synaptic weights}
+\frametitle{Determining the input change}
 
-Assuming that $\Delta W_{ij} \propto f(r_{i})g(r_{j})$, the change in input current is related to synaptic plasticity by
+\begin{center}
+\includegraphics[scale=0.5]{net}
+\end{center}
+
+Assuming that $\Delta W_{ij} \propto f(r_{i})g(r_{j})$, the change in input current $\xi_{i}$ is related to the learning rule by
 
 \begin{equation*}
 \Delta \xi_{i}  \propto  f(r_{i}) \sum_{j} g(r_{j})r_{j}
 \end{equation*}
 
-which we have fit from the data as 
+\end{frame}
+
+\begin{frame}[plain]
+\frametitle{Determining the learning rule}
+
+
+\begin{columns}[T]
+\begin{column}{.3\textwidth}
+\begin{center}
+\includegraphics[scale=0.5]{net}
+\end{center}
+\end{column}
+
+\begin{column}{.7\textwidth}
+\begin{center}
+\includegraphics[scale=0.65]{learning-rules-g}
+\end{center}
+\end{column}
+
+\end{columns}
+
+\vspace{0.2in}
+
+We can fit input change $\Delta \xi_{i}(r)$ from the data (top right)
 
 \begin{align*}
-\Delta \xi_{i}(r) \propto (2q + 1 - \tanh (\beta (r-x)))
+\Delta \xi_{i}(r_{i}) \propto (2q + 1 - \tanh (\beta (r_{i}-r_{0})))
 \end{align*}
 
-so we can write
+\footnote{\cite{lim}}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\frametitle{Determining the learning rule}
+
+
+\begin{columns}[T]
+\begin{column}{.3\textwidth}
+\begin{center}
+\includegraphics[scale=0.5]{net}
+\end{center}
+\end{column}
+
+\begin{column}{.7\textwidth}
+\begin{center}
+\includegraphics[scale=0.65]{learning-rules-g}
+\end{center}
+\end{column}
+
+\end{columns}
+
+\vspace{0.2in}
+
+We can infer the dependence of the learning rule on the post-synaptic firing rate $f(r_{i})$
 
 \begin{align*}
-f(r_{i}) =  \frac{(2q + 1 - \tanh (\beta (r-x)))}{\sum_{j} g(r_{j})r_{j}}\\
+f(r_{i}) = \Delta \xi_{i}(r_{i})/\sum_{j} g(r_{j})r_{j}
 \end{align*}
 
+\footnote{\cite{lim}}
 
 \end{frame}
 
 \begin{frame}[plain]
-\frametitle{A Hebbian update for synaptic weights}
+\frametitle{Training the model inferred from ITC data}
 
 During training, we stimulate the network with
 
@@ -111,13 +171,10 @@ During training, we stimulate the network with
 \end{equation*}
 
 
-
-\footnote{\cite{hopfield}}
 \end{frame}
 
-
 \begin{frame}[plain]
-\frametitle{Presenting novel and familiar stimuli to the network}
+\frametitle{Attractor dynamics of the trained model}
 
 \vspace{0.2in}
 
@@ -125,7 +182,30 @@ During training, we stimulate the network with
 \includegraphics[scale=0.4]{novel-familiar}
 \end{center}
 
+Attractor states can be observed from the overlap $m$
+
 \footnote{\cite{peirera}}
+
+\end{frame}
+
+\begin{frame}[plain]
+\frametitle{Signatures of critical points from stimuli addition}
+
+
+
+\end{frame}
+
+\begin{frame}[plain]
+\frametitle{Information content of firing rates at a fixed point}
+
+
+
+\end{frame}
+
+\begin{frame}[plain]
+\frametitle{The effect of noisy stimuli}
+
+
 
 \end{frame}
 
@@ -139,6 +219,8 @@ Are these networks functioning at a critical point? What about the balance betwe
 \end{center}
 
 \end{frame}
+
+
 
 
 \begin{frame}[plain]
