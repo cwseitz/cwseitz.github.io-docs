@@ -6,31 +6,12 @@
 \usepackage{bm}
 
 \begin{document}
-\title{Information bounds and attractor dynamics of a Hebbian associative memory}  
+\title{Dynamics of plastic networks of excitatory and inhibitory spiking neurons}  
 \author{Clayton Seitz}
 \date{\today} 
 
 \begin{frame}[plain]
 \titlepage
-\end{frame}
-
-\begin{frame}[plain]
-\frametitle{RNNs trained with a Hebbian learning rule}
-
-It is difficult to infer learning rules \emph{in vivo} solely from spikes
-
-
-\begin{center}
-\includegraphics[scale=0.5]{network-diagram}
-\end{center}
-
-
-\vspace{0.2in}
-
-Learning rules can be inferred (with assumptions) from firing rates
-
-\footnote{\cite{peirera}}
-
 \end{frame}
 
 
@@ -57,7 +38,7 @@ Measuring the \emph{static} transfer function from novel images assuming that in
 \frametitle{Inferring the learning rule from ITC data}
 
 \begin{center}
-\includegraphics[scale=0.55]{learning}
+\includegraphics[scale=0.55]{learning-rules}
 \end{center}
 
 Inferring the change in input current $\xi_{in}$ from the change in firing rate in {\color{red} novel} relative to {\color{blue} familiar} stimuli
@@ -70,7 +51,7 @@ Inferring the change in input current $\xi_{in}$ from the change in firing rate 
 \frametitle{Inferring the learning rule from ITC data}
 
 \begin{center}
-\includegraphics[scale=0.52]{learning}
+\includegraphics[scale=0.55]{learning-rules}
 \end{center}
 
 The change in input current to a neuron can then be read from the firing rate of that neuron when presented a novel stimulus
@@ -84,97 +65,33 @@ The change in input current to a neuron can then be read from the firing rate of
 \end{frame}
 
 \begin{frame}[plain]
-\frametitle{Determining the input change}
+\frametitle{A Hebbian update for synaptic weights}
 
-\begin{center}
-\includegraphics[scale=0.5]{net}
-\end{center}
-
-Assuming that $\Delta W_{ij} \propto f(r_{i})g(r_{j})$, the change in input current $\xi_{i}$ is related to the learning rule by
+Assuming that $\Delta W_{ij} \propto f(r_{i})g(r_{j})$, the change in input current is related to synaptic plasticity by
 
 \begin{equation*}
 \Delta \xi_{i}  \propto  f(r_{i}) \sum_{j} g(r_{j})r_{j}
 \end{equation*}
 
-\end{frame}
-
-\begin{frame}[plain]
-\frametitle{Determining the learning rule}
-
-
-\begin{columns}[T]
-\begin{column}{.3\textwidth}
-\begin{center}
-\includegraphics[scale=0.5]{net}
-\end{center}
-\end{column}
-
-\begin{column}{.7\textwidth}
-\begin{center}
-\includegraphics[scale=0.65]{learning-rules-g}
-\end{center}
-\end{column}
-
-\end{columns}
-
-\vspace{0.2in}
-
-We can fit input change $\Delta \xi_{i}(r)$ from the data (top right)
+which we have fit from the data as 
 
 \begin{align*}
-\Delta \xi_{i}(r_{i}) \propto (2q + 1 - \tanh (\beta (r_{i}-r_{0})))
+\Delta \xi_{i}(r) \propto (2q + 1 - \tanh (\beta (r-x)))
 \end{align*}
 
-\footnote{\cite{lim}}
-
-\end{frame}
-
-
-\begin{frame}[plain]
-\frametitle{Determining the learning rule}
-
-
-\begin{columns}[T]
-\begin{column}{.3\textwidth}
-\begin{center}
-\includegraphics[scale=0.5]{net}
-\end{center}
-\end{column}
-
-\begin{column}{.7\textwidth}
-\begin{center}
-\includegraphics[scale=0.65]{learning-rules-g}
-\end{center}
-\end{column}
-
-\end{columns}
-
-\vspace{0.2in}
-
-We can infer the dependence of the learning rule on the post-synaptic firing rate $f(r_{i})$
+so we can write
 
 \begin{align*}
-f(r_{i}) = \Delta \xi_{i}(r_{i})/\sum_{j} g(r_{j})r_{j}
+f(r_{i}) =  \frac{(2q + 1 - \tanh (\beta (r-x)))}{\sum_{j} g(r_{j})r_{j}}\\
 \end{align*}
 
-\footnote{\cite{lim}}
 
 \end{frame}
 
-\begin{frame}[plain]
-\frametitle{Training the model inferred from ITC data}
 
-During training, we stimulate the network with
-
-\begin{equation*}
-\xi_{in}(\bm{\mu}, \bm{\Sigma}) = \frac{1}{(2\pi)^{n/2}|\bm{\Sigma}|^{1/2}}\exp-\frac{1}{2}(\bm{r}-\bm{\mu})^{T}\bm{\Sigma}^{-1}(\bm{r}-\bm{\mu})
-\end{equation*}
-
-
-\end{frame}
 
 \begin{frame}[plain]
-\frametitle{Attractor dynamics of the trained model}
+\frametitle{Presenting novel and familiar stimuli to the network}
 
 \vspace{0.2in}
 
@@ -182,57 +99,11 @@ During training, we stimulate the network with
 \includegraphics[scale=0.4]{novel-familiar}
 \end{center}
 
-Attractor states can be observed from the overlap $m$
-
 \footnote{\cite{peirera}}
 
 \end{frame}
 
-\begin{frame}[plain]
-\frametitle{Signatures of critical points from stimuli addition}
 
-
-
-\end{frame}
-
-\begin{frame}[plain]
-\frametitle{Information content of firing rates at a fixed point}
-
-
-
-\end{frame}
-
-\begin{frame}[plain]
-\frametitle{The effect of noisy stimuli}
-
-
-
-\end{frame}
-
-\begin{frame}[plain]
-\frametitle{Do these networks optimize information transmission?} 
-
-Are these networks functioning at a critical point? What about the balance between input and recurrence? (Cramer et al. 2020)
-
-\begin{center}
-\includegraphics[scale=0.55]{cramer-criticality}
-\end{center}
-
-\end{frame}
-
-
-
-
-\begin{frame}[plain]
-\frametitle{A coding theory perspective} 
-
-How much information does the response $R$ carry about the input pattern $S$ i.e. $I(R;S)$ on novel and familiar stimuli?
-
-\vspace{0.2in}
-
-What is the fundamental coding capacity of these networks?
-
-\end{frame}
 
 
 \begin{thebibliography}{99} 
