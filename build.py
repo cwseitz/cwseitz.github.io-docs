@@ -58,12 +58,12 @@ def build_site():
                 this_doc.write(new_file)
 
 
-    #Build photos page
-    photos = HTMLDocument()
-    photos.set_style('../assets/main.css')
-    photos.add_header(navi)
-    photos.add_content(regi)
-    photos.write('./photos/index.html')
+    # #Build photos page
+    # photos = HTMLDocument()
+    # photos.set_style('../assets/main.css')
+    # photos.add_header(navi)
+    # photos.add_content(regi)
+    # photos.write('./photos/index.html')
 
 
 def get_doc_content(fldr):
