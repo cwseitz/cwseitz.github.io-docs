@@ -39,6 +39,15 @@ To present a comprehensive picture of recent research on information processing 
 
 We begin by reviewing the Hopfield network as originally formulated by J.J. Hopfield in [2]. The Hopfield network appears primitive these days; however, it provides a useful starting point as it set the stage for its descendant models. We will conclude this section by pointing out some of the biological inaccuracies and reflect on the computational utility of those additional ingredients.
 
+We describe the state of the neural network as a set of spins (neurons) $\{\sigma_{i}\}$ with $1 \leq i \leq n$. Each $\sigma_{i} \in \{0,1\}$  which we will take to indicate whether or not a spike occured. The neurons $\sigma_{i}$ and $\sigma_{j}$ are coupled according to a connectivity matrix $J_{ij}$. If we let the network state $\{\sigma_{i}\}$ evolve in discrete time, it may relax to a particular state $\xi_{i}$ with $1 \leq i \leq m$, in which case we say the pattern $\xi_{i}$ is stored in the connectivity matrix $J$. We can be very general and write $\xi$ as a matrix of $m$ binary patterns i.e. $\xi \in \mathbb{F}_{2}^{n\times m}$ The mechanism to store all patterns $\xi_{i}$ in the matrix simultaneously via an outer-product learning rule
+
+\begin{equation*}
+J = \xi^{T}\xi - mI
+\end{equation*}
+
+where the second term serves to remove all $n$ self connections $J_{ii} = 0$ for $1 \leq i \leq n$. 
+
+
 The Hopfield network is an attractive model because the theoretical treatment it requires is identical to that used for magnetic systems. However, when using such a system to directly describe a spiking neural network in cortex, there are notable gaps. Here are a few:
 
 \begin{itemize}
