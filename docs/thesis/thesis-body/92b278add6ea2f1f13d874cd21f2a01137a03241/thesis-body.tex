@@ -31,11 +31,15 @@ Fundamental questions in theoretical neuroscience pertain to how circuits in cor
 \end{abstract}
 
 
-\section{Review}
+\section{Introduction}
 
 To present a comprehensive picture of recent research on information processing in spiking cortical circuits, we classify studies on their primary focus: information storage and network topology, network dynamics, or both. It is generally accepted that neural network models date back to McCulloch and Pitts [1] followed later by the Hopfield network [2]. We now proceed to an implementation of the Hopfield network. All code for the following analysis can be found at [9].  
 
+\section{The Hopfield Network}
 
+We begin by reviewing the Hopfield network as originally formulated by J.J. Hopfield in [2]. The Hopfield network appears primitive these days; however, it provides a useful starting point and sets the stage for its descendant models. We will point out some of the biological inaccuracies at the end and reflect on the computational utility of those additional ingredients.
+
+\section{Critical phenomena}
 
 It is thought that neural networks that lie at a critical point between order and chaos maximize basic processing properties such as sensitivity, dynamic range, correlation length, information transfer, and susceptibility [1]. Multiple signatures of criticality have been proposed in the literature, one being power-law distributions of neuronal avalanches following a branching process similar to that seen in physical theories of avalanches [2]. However, it has recently been demonstrated that criticality is not a universal determinant of computational power; rather, critical networks are only well-suited for more complex tasks such as those that require integration of stimulus information over long timescales [1]. 
 
