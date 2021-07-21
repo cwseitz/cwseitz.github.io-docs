@@ -56,6 +56,14 @@ In principle, the time evolution of the synaptic weights and the spiking dynamic
 Furthermore, while the Hopfield model lacks many features thought to be characteristic of real neural networks, it has an alternative interpretation where the spins are taken to be indicators of whether that neuron is firing at high or low rates. This is only possible if we take a `memory' to be a set of neurons firing at rates but it is a useful interpretation considering our deep understanding of the storage capacity of these networks from [3,4]. We argue that this defines a lower bound on the storage capacity of these networks. we extend [7] by assessing the storage capacity of the network and with matrix decomposition arguments to move towards a well-defined relationship between stimuli and learned synaptic weights. Free energy minima in the Ising model define the landscape of these networks.
 
 
+\section{Dependence of storage capacity on the learning rule}
+
+If we take stored network states to be defined only by firing at high rate and firing at low rate, then the upper bound on the number of stored states is equivalent to the number of possible cliques in the network $2^{n} - n - 1$. 
+
+Which classes synaptic weight matrices can store the largest amount information?
+Which can retrieve memories reliably without catastrophic forgetting?
+Which learning rules promote that class of matrices? 
+
 
 \section*{References}
 
