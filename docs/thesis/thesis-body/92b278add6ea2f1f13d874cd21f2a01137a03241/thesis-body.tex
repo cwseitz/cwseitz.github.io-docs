@@ -23,17 +23,16 @@
 
 \maketitle
 
-\begin{abstract}
-
-Fundamental questions in theoretical neuroscience pertain to how circuits in cortex store and process information. Recent decades have yielded a number of experimental and theoretical advances in our understanding of the mechanisms information storage, such as homosynaptic, heterosynaptic, and homeostatic plasticity. However, the precise mathematical relationship between synaptic weights and the stimuli or `patterns' to which the network is exposed, remains elusive. At the same time, statistical physics and the theory of dynamical systems have provided substantial insight on network dynamics during processing. There remain questions on the optimum dynamical state or \emph{phase} of the network during information processing and how that state is simultaneous with a particular class of synaptic connectivity. Here, we review the stream of research on the above topics.
-
-
-\end{abstract}
-
-
 \section{Introduction}
 
-To present a comprehensive picture of recent research on information processing in spiking cortical circuits, we classify studies on their primary focus: information storage and network topology, network dynamics, or both. It is generally accepted that neural network models date back to McCulloch and Pitts [1] followed later by the Hopfield network [2] and many others. The purpose of the following sections is to summarize the important points in the development of neural networks with a unifying notation. All software for the following analysis can be found at [9].  
+Fundamental questions in theoretical neuroscience pertain to how circuits in cortex store and process information. Recent decades have yielded a number of experimental and theoretical advances in our understanding of the mechanisms information storage, such as homosynaptic, heterosynaptic, and homeostatic plasticity. However, the precise mathematical relationship between synaptic weights and the stimuli or `patterns' to which the network is exposed, remains elusive. At the same time, statistical physics and the theory of dynamical systems have provided substantial insight on network dynamics during processing. There remain questions on the optimum dynamical state or \emph{phase} of the network during information processing and how that state is simultaneous with a particular class of synaptic connectivity. 
+
+
+It is generally accepted that neural network models date back to McCulloch and Pitts [1] followed later by the Hopfield network [2]. J.J. Hopfield pioneered a concrete application of statistical physics to the description of a simplified neural network and the model's elegance triggered an avalanche of research. Of particular interest has been the storage capacity of the network, which has been well-characterized by Gardner [4], Amit [10], and Nishimori [11]. Such models draw direct comparisons between simplified neural networks and magnetic systems, thereby reducing their statistical properties to those previously known to statistical physics. At the same time, such comparisons potentially allow one to write down the Hamiltonian for the system analytically, and therefore the probability over the phase space of the network. However, it is not a simple task to probe the geometry of the free energy landscape and therefore the probability over states and the problem is further aggravated by the replacement of spins with even minimally biologically realistic units such as leaky integrate and fire (LIF) neurons. The state space of a network is made much more diverse, which could have implications for computation, with the addition of different cell types such as excitatory and inhibitory units. 
+
+Great progress towards an understanding of the dynamics of coupled excitatory and inhibitory populations was made by the Brunel network [5] in spite of the rather harsh assumption that weights between different populations were homogeneous. Nevertheless, these networks have been used commonly to initialize so-called balanced networks which maintain asynchronous irregular firing. Balanced networks have, for example, been used to initialize networks trained via a family of orchestrated slow and fast plasticity mechanisms [7]. After training, these networks have been shown to exhibit attractor dynamics towards states imprinted on the network weights by previous stimuli, all in an arguably more brain-like fashion than the original Hopfield model. Many questions remain, such as the range of spiking dynamics observed for weight matrices that range from fully connected to fully random as in a Erdos-Renyi directed binomial graph and the storage capacity of such networks and their compresson and error correction capabilities.
+
+Here, we assess the ability of a network initialized in a balance state and trained using similiar plasticity mechanisms in [7] to exhibit attractor dynamics, and probe the mechanism by which `memories' are stored in the synaptic weights, using ideas from compressed sensing and information theory. We also comment on the role of individual plasticity rules during learning as they pertain to the various network phases observed, network error correction, and potential applications in neuromorphic content addressable memory devices. An understanding of the mapping between weight matrices that store maximal information and precise network states is a critical step in creating programmable neuromorphic systems.
 
 \section{The Hopfield Network}
 
@@ -107,5 +106,9 @@ in spiking neural networks}. Nature Communications. 2015.
 [8] Williams et al. \textit{Nonnegative decomposition of multivariate information}. arXiv. 2010.
 
 [9] \url{https://github.com/cwseitz/hebb.git}
+
+[10] Amit et al. \textit{Storing infinite numbers of patterns in a spin-glass model of neural networks}. Physical Rev. Letters. 1985
+
+[11] Nishimori. \textit{Statistical physics of spin glasses and information processing: an introduction}. Clarendon Press. 2010
 
 \end{document}
