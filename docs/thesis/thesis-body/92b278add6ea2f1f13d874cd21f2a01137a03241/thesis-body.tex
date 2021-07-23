@@ -47,7 +47,19 @@ The state space of a network model is made even more diverse with the addition o
 
 Here, we assess the ability of a network initialized in a balance state and trained using similiar plasticity mechanisms in [7] to exhibit attractor dynamics, and probe the mechanism by which `memories' are stored in the synaptic weights, using ideas from compressed sensing and information theory. We also comment on the role of individual plasticity rules during learning as they pertain to the various network phases observed, network error correction, and potential applications in neuromorphic content addressable memory devices. An understanding of the mapping between weight matrices that store maximal information and precise network states is a critical step in creating programmable neuromorphic systems.
 
-\section{Formalism}
+\section{Methods}
+
+We utilize the following voltage-based leaky integrate and fire (LIF) neuron model
+
+\begin{equation}
+\tau\frac{dv_{i}}{dt} = (v_{i} - v_{0}) + \sum_{k}\sum_{j}J_{ij}^{k}(t)z_{j}^{k}(t)
+\end{equation}
+
+where neuron $i$ receives post-synaptic potential $J_{ij}^{k}$ from the $j$th neuron in the $k$th population. For the following simulations we consider two populations: excitatory and inhibitory which are abbreviated as $E$ and $I$, respectively. Our model combines different forms of plasticity. Excitatory synapses exhibit STP, STDP, heterosynaptic plasticity and transmitter-induced plasticity. Inhibitory synapses on excitatory neurons are plastic and obey an STDP rule that is globally modulated by a secreted factor.
+
+\subsection{Short-term plasticity}
+
+\subsection{Long-term plasticity}
 
 Perhaps we are aware of a rectangular matrix $S(t) \in \mathbb{F}_{2}^{n\times t}$ which represents the stimulation of a network of $x$ input neurons over a time interval $t$. Ideally, in a noise-free scenario, we would like to be able to predict the evolution of the synaptic weights $J_{ij}(t)$ analytically throughout the duration of the stimulus. At the same time, we would like to be able to predict the spiking dynamics of the network $\mathbf{z} \in \mathbb{F}_{2}^{n}$ for a system of $n$ neurons amidst changing synaptic connectivity. The vector $\mathbf{z}$ traces out a trajectory over the field $\mathbb{F}_{2}^{n}$ in a time $t$.
 
