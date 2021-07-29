@@ -1,0 +1,37 @@
+% Source: http://tex.stackexchange.com/a/5374/23931
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newcommand{\Hrule}{\rule{\linewidth}{0.3mm}}
+
+\makeatletter% since there's an at-sign (@) in the command name
+\renewcommand{\@maketitle}{%
+  \parindent=0pt% don't indent paragraphs in the title block
+  \centering
+  {\Large \bfseries\textsc{\@title}}
+  \HRule\par%
+  \textit{\@author \hfill \@date}
+  \par
+}
+\makeatother% resets the meaning of the at-sign (@)
+
+\title{Personal Statement}
+\author{Clayton W. Seitz}
+\date{25 July, 2021}
+
+\begin{document}
+  \maketitle% prints the title block
+\vspace{0.4in}
+
+\indent During in my undergraduate degree in physics, informatics, and mathematics, I became fascinated by the physics of complex systems and their emergent phenomena. Early on, my attention was drawn to neural networks for their striking computational power while following a relatively simple set of rules. I began my academic journey in the computational sciences, focusing on modern programming paradigms and later developed foundations in the natural sciences through physics. After a fair amount of preparation, I joined a research laboratory in the physics department where I studied the application of tools from computer vision and deep learning to image processing for light microscopy. During that experience, I played a major role in the development of a computer vision software package for the extraction of quantitative measurements of various biological objects in video data. By the end of my undergraduate career, I had received the Hudson and Holland Scholarship, Cigital Scholarship from the Luddy School of Informatics, Computing and Engineering, the Founders Scholar award, and presented research on computer vision in biological applications on several occasions.\\
+\\
+\indent  The transition from the undergraduate to the graduate level defined a critical point in my academic career. I had been trained to use deep learning as a tool; however, by the end of my stay at Indiana University, neural networks became my primary research interest. Therefore, I decided to attend graduate school at the University of Chicago. There, I took courses in deep learning, information theory, theoretical neuroscience, and neurobiology. These courses solidifed my interest in artificial intelligence and expanded my perspectives on its mathematical treatment. I then began research with a focus was on biologically-plausible learning algorithms for networks of spiking neurons i.e. synaptic plasticity rules. In particular, I researched the orchestration of learning rules during memory formation while also considering the implementation of biologically-realistic neural networks in dedicated hardware. Currently, I am pursuing a new opportunity where I can focus on research questions relevant to neuromorphic engineering and artificial intelligence.\\
+\\
+\indent Biological neural networks are known for their remarkable cognitive and decision making abilities relying only on basic neural primitives. Indeed, the brain performs highly complex functions such as visual object recognition, classification, and language processing at very low power consumption. In principle, neuromorphic algorithms implemented in dedicated hardware can parallel the computational efficiency of cortical circuits by performing computations in-memory with model neurons and synapses. Thus far, I have been exposed to classic research in this domain by J.J. Hopfield, D.J. Amit, and Elizabeth Gardner as well more contemporary research by a variety of physicists, computational neuroscientists and neuromorphic engineers. I hope to extend this work by applying techniques from information theory to further our understanding of how information is stored in synaptic weights while highlighting the corresponding implications for neuromorphic computing. Significant efforts have been made in the biophysical and neuroscience communities towards an elegant description of the learning dynamics measured in cortical neurons but very few have implemented these rather sophisticated algorithms in hardware. I believe that Electrical and Computer Engineering program at Purdue University is the optimal venue to perform this research and implementation. The Center for Brain-Inspired Computing and its distinguished affiliates such as Kaushik Roy and Anand Raghunathan would provide the necessary resources to do so. Ultimately, I believe that my background in physics and computing make me a good fit for this program and that my strong research background and inspiration from neuroscience present a unique combination for innovative research.\\
+
+
+
+\end{document}
