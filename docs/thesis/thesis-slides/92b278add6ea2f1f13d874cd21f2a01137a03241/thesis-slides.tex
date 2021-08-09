@@ -1,4 +1,5 @@
-\documentclass{beamer}
+
+\documentclass[aspectratio=169]{beamer}
 \setbeamertemplate{navigation symbols}{}
 
 \usepackage{beamerthemeshadow}
@@ -10,8 +11,38 @@
 \author{Clayton Seitz}
 \date{\today} 
 
+
 \begin{frame}[plain]
 \titlepage
+\end{frame}
+
+\begin{frame}[plain]
+\frametitle{A loopy picture of computational neuroscience}
+
+\begin{columns}
+
+\begin{column}{0.4\textwidth}  %%<--- here
+Biological neural networks
+
+\begin{itemize}
+\item Store and recall enormous amounts of information
+\item Function at very low power
+\item Rely only on basic neural primitives
+\end{itemize}
+
+
+\end{column}
+
+\begin{column}{0.6\textwidth}
+\begin{center}
+\includegraphics[scale=0.75]{analysis-by-synthesis}
+\end{center}
+\end{column}
+
+\end{columns}
+
+\footnote{\cite{peirera}}
+
 \end{frame}
 
 
