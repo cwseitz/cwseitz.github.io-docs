@@ -12,8 +12,6 @@ def build_site():
     #Read HTML partials
     navi = open('partials/navigation.html').read()
     land = open('partials/landing.html').read()
-    regi = open('partials/photos.html').read()
-    subs = open('partials/subjects.html').read()
 
     #Build index page
     index = HTMLDocument()
@@ -23,11 +21,11 @@ def build_site():
     index.write('index.html')
 
     #Build subject page
-    sub_page = HTMLDocument()
-    sub_page.set_style('../assets/main.css')
-    sub_page.add_header(navi)
-    sub_page.add_content(subs)
-    sub_page.write('docs/index.html')
+    # sub_page = HTMLDocument()
+    # sub_page.set_style('../assets/main.css')
+    # sub_page.add_header(navi)
+    # sub_page.add_content(subs)
+    # sub_page.write('docs/index.html')
 
     #Build document listing page
     categories = ['bio/', 'prog/', 'dlrn/', 'phys/', 'neuro/', 'info/', 'phil/', 'personal/']
