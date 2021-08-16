@@ -20,39 +20,34 @@ def build_site():
     index.add_content(land)
     index.write('index.html')
 
-    #Build subject page
-    # sub_page = HTMLDocument()
-    # sub_page.set_style('../assets/main.css')
-    # sub_page.add_header(navi)
-    # sub_page.add_content(subs)
-    # sub_page.write('docs/index.html')
+    #Build project listing page
+    projects = ['iplm/', 'dsa/', 'fdl/', 'info/', 'rsnn/', 'phil/', 'bio/']
 
-    #Build document listing page
-    categories = ['prog/', 'dlrn/', 'phys/', 'neuro/', 'info/', 'phil/', 'personal/']
-
-    for category in categories:
+    for project in projects:
 
         doc_page = HTMLDocument()
         doc_page.set_style('../../assets/main.css')
         doc_page.add_script('../../assets/table.js')
         doc_page.add_header(navi)
-        doc_page.add_content(excel_to_html('docs/' + category + 'docs.xlsx'))
-        doc_page.write(PATH_TO_DOCS + category + '/index.html')
+        doc_page.add_content(excel_to_html('docs/' + project + 'docs.xlsx'))
+        doc_page.write(PATH_TO_DOCS + project + '/index.html')
 
         #Build document pages
-        docs = os.listdir(PATH_TO_DOCS + category)
+        docs = os.listdir(PATH_TO_DOCS + project)
         docs = [x for x in docs if '.' not in x]
 
         for doc in docs:
 
             this_doc = HTMLDocument()
-            this_doc.set_style('../../../assets/main.css')
+            this_doc.set_style('../../../../assets/main.css')
             this_doc.add_header(navi)
 
-            html = get_doc_content(PATH_TO_DOCS + category + doc)
+            DOC_PATH = PATH_TO_DOCS + project + doc + '/' + doc
+            html = get_doc_content(DOC_PATH)
+
             if html is not None:
                 this_doc.add_content(html)
-                new_file =  PATH_TO_DOCS + category + '%s/index.html' % doc
+                new_file =  PATH_TO_DOCS + project + doc + '/%s/index.html' % doc
                 this_doc.write(new_file)
 
 
