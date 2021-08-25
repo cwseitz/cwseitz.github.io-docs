@@ -54,11 +54,39 @@ A central goal of modern neuroscience is the discovery of the mechanisms by whic
 
 Recent decades have yielded a number of experimental and theoretical advances in our understanding of learning in biological neural networks through the introduction of as homosynaptic, heterosynaptic, and homeostatic plasticity. However, the precise mathematical relationship between the synaptic plasticity mechanisms or \emph{learning rules} implemented by neurons and the formation of probabilistic models of their inputs, remains elusive.
 
-Neural network models date back to McCulloch and Pitts [1] followed later by the Hopfield network [2] which spawned the application of techniques from the statistical physics of spin glasses to the description of neural activity. By simplifying a network of neurons firing action potentials to an ensemble of coupled spins $\sigma \in \{-1, +1\}$, the Hopfield model related the patterns learnt by a network to an energy landscape over the discrete space of states. The storage capacity of these networks and the geometry of this energy landscape were of particular interest and rigorous mathematical treatment has been used to show limits on the density of basins of attraction in such energy landscapes [4,10,11]. However, a primary feature of these attractor networks, that is unlikely to be realized in neural circuitry, is that they are deterministic. There are many examples in the literature of trial-to-trial variability in the response of cortical neurons to identical stimuli, suggesting that computations in the brain are inherently stochastic []. Interestingly, the Boltzmann machine, which is an extension of the Hopfield model, actually leverages stochastic activity of Ising spins to perform powerful computations [14]. In such a model, the set of synaptic weights $\Phi$ ``embody" the joint distribution $P_{\Phi}(X,R) = P_{\Phi}(X)P_{\Phi}(R|X)$ over network inputs and network response, respectively. Then, computations can be viewed as probabilistic inference after suitable transformations of the weights $\Delta\Phi$. Our primary goal is to understand the relationship between a choice of the learning rule $\Delta \Phi$ and features of the learned distribution $P_{\Phi}(X,R)$.
+Neural network models date back to McCulloch and Pitts [1] followed later by the Hopfield network [2] which spawned the application of techniques from the statistical physics of spin glasses to the description of neural activity. By simplifying a network of neurons firing action potentials to an ensemble of coupled spins $z \in \{-1, +1\}$, the Hopfield model related the patterns learnt by a network to an energy landscape over the discrete space of states. The storage capacity of these networks and the geometry of this energy landscape were of particular interest and rigorous mathematical treatment has been used to show limits on the density of basins of attraction in such energy landscapes [4,10,11]. However, a primary feature of these attractor networks, that is unlikely to be realized in neural circuitry, is that they are deterministic. There are many examples in the literature of trial-to-trial variability in the response of cortical neurons to identical stimuli, suggesting that computations in the brain are inherently stochastic []. Interestingly, the Boltzmann machine, which is an extension of the Hopfield model, actually leverages stochastic activity of Ising spins to perform powerful computations [14]. In such a model, the set of synaptic weights $\Phi$ ``embody" the joint distribution $P_{\Phi}(X,R) = P_{\Phi}(X)P_{\Phi}(R|X)$ over network inputs and network response, respectively. Then, computations can be viewed as probabilistic inference after suitable transformations of the weights $\Delta\Phi$. Our primary goal is to understand the relationship between a choice of the learning rule $\Delta \Phi$ and features of the learned distribution $P_{\Phi}(X,R)$.
 
 
 \chapter{Stochastic Networks of Neurons: The Boltzmann Machine}
 \section{Introduction}
+
+This is the introduction to the section
+
+\section{Glauber Dynamics}
+
+In the simplest form of the Boltzmann machine, we consider an ensemble of recurrently connected point neurons which can be described by a binary variable $z_{i}(t) \in \{0, 1\}$ where $z_{i}(t) = 1$ if  neuron $i$ fired an action potential at time $t$ and $z_{i}(t) = 0$ otherwise. We will make use of the standard architecture of a Boltzmann machine with an input layer $X$ and a hidden layer $M$ with feedforward connections from $X$ to $M$ are allowed and 
+recurrent connections from layer $M$ to itself. The probability that a neuron $i$ fires an action potenetial at a time $t + \Delta t$ is given by 
+
+\begin{equation}
+P(z_{i}(t+\Delta t) = 1) = \sigma(v_{i}(t)) = \frac{1}{1 + \exp(-v_{i}(t))}
+\end{equation}
+
+where $v_{i}(t)$ is taken to be the membrane voltage of the neuron $i$. We will begin with the assumption that neural dynamics form a Markov process we take $v_{i}(t)$ to be a sum over feedforward and recurrent inputs at a time $t$
+
+\begin{equation}
+v_{i}(t) = \sum_{j}X_{ij}z_{j}(t) + \sum_{k}M_{ik}z_{k}(t)
+\end{equation}
+
+which clearly has the Markov memoryless property: our defintion of $\mathbb{P}(z_{i}(t+\Delta t) = 1)$ in (1) dictates that the probability of a state transition $z_{i}(t) = 0 \rightarrow z_{i}(t+\Delta t) = 1$ is determined by a weighted sum over input $z_{j}(t)$ and recurrent $z_{k}(t)$ at a time $t$ only. The advantage of Glauber dynamics is that is that stationary distribution over the network state $\mathbf{z}$ can be predicted via the Boltzmann distribution
+
+\begin{equation}
+P[\mathbf{z}] = \frac{1}{Z}\exp\left(-E(\mathbf{z})\right)
+\end{equation}
+
+
+with $E(\mathbf{z}) = -\mathbf{X} \cdot \mathbf{z} - \frac{1}{2}\mathbf{z}\cdot \mathbf{M} \cdot \mathbf{z}$ and the partition function $Z = \sum \exp\left(-E(\mathbf{z})\right)$. This is a particularly useful property since we have expressed a direct relationship between the synaptic connectivity $\mathbf{X}$ and $\mathbf{M}$ and the probability distribution $P$ they implement. 
+
+The input-output relationship of the network is described by the distribution $P_{\Phi}(\mathbf{z}|\mathbf{x})$ where we refer to $\Phi = \left(\mathbf{X}, \mathbf{M}\right)$ as `the model'. That is an input $x \sim P(\mathbf{x})$ has a stochastic relationship to the network response $\mathbf{z}$ implemented by the model $P_{\Phi}(\mathbf{z}|\mathbf{x})$ 
 
 
 \chapter{Dynamical States of Recurrent Networks}
