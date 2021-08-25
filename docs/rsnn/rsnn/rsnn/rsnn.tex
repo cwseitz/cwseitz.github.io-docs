@@ -44,33 +44,29 @@
 % Enter Acknowledgements here
 
 \abstract
-One of the least understood subjects in biology is the mechanisms by which networks of neurons extract and store information from signals originating in their evironment and perform rather complex, yet efficient, computations on those signals. Fundamental questions still pervade the neuroscience community such as how networks of neurons compute and what they compute - questions that simply cannot be fully answered without a rigorous mathematical theory of computation in neural circuits. However, it is widely accepted in the neuroscience community that the connectivity of networks of neurons and its modification via synaptic plasticity are fundamental mechanisms by which information is extracted and stored by neural circuits. It is natural to then infer, then, that the storage of information and the process of computation are simultaneous and their delicate balance dictates the function of the circuit. At the same time, various dynamical regimes can be observed in regions of the brain thought to have varying functions, bringing the relationship between network dynamics and computation into question. The problem is even further exacerbated by the library of plasticity mechanisms neurons undergo and the shear complexity of their connectivity \emph{in vivo}. Therefore, it appears that an approach starting from first principles, such as that provided by information theory and statistics, is necessary - adding in the complex biological details as we move forward. Here, we introduce a model of recurrent spiking neural networks (RSNNs), illustrating the impact of network dynamics on its topology and interpret the computational character of these states using Shannon's information theory. It will be shown that computation in these networks is unavoidably stochastic but, still, the brain computes.
 
-
+One of the most challenging questions in modern neuroscience is the mechanisms by which primate cortical circuits learn from example and perform inference based upon their past experience. The cerebral cortex is responsible for many higher-order brain functions including memory and . The search for principles of neural computation common to these phenomena is made extremely difficult by the diversity of cortical structures and their putative functions. Nevertheless, progress has been made in our understanding of the interplay between the organization of cortical neurons, network dynamics, and the resulting reorganization via synaptic plasticity during learning. Many deficiencies in our models of these processes can be attributed to our lack of a mathematical understanding of both the fundamental computational paradigm implemented by neural circuits and the roles of synaptic plasticity mechanisms observed \emph{in vivo}. These problems are further aggravated by the apparent stochastic features of the firing activity of neurons and experimentally observed trial-to-trial variability in population recordings. However, there is, in principle, a very powerful framework for stochastic computation evident in the Boltzmann machine: probabilistic inference by sampling. Here, we implement a recurrent spiking neural network (RSNN) as a variant of the Boltzmann machine and propose a precise mathematical role for a set of synaptic plasticity mechanisms in the formation of a set of synaptic weights that successfully ``embody" a Gaussian input statistic.
 
 
 \mainmatter
 
 \chapter{Introduction}
 
-Fundamental questions in theoretical neuroscience pertain to how circuits in cortex store and process information. Recent decades have yielded a number of experimental and theoretical advances in our understanding of the mechanisms information storage, such as homosynaptic, heterosynaptic, and homeostatic plasticity. However, the precise mathematical relationship between the synaptic weights and the stimuli or `patterns' to which the network has been exposed, remains elusive. 
+Recent decades have yielded a number of experimental and theoretical advances in our understanding of learning in biological neural networks through the introduction of as homosynaptic, heterosynaptic, and homeostatic plasticity. However, the precise mathematical relationship between the synaptic plasticity mechanisms or \emph{learning rules} implemented by neurons and the formation of probabilistic models of their inputs, remains elusive.
 
-It is generally accepted that neural network models date back to McCulloch and Pitts [1] followed later by the Hopfield network [2] which spawned a concrete application of statistical physics to the description of neural circuits. At the time, the storage of memories in the Hopfield model was of particular interest and was well-characterized by Gardner [4], Amit [10], and Nishimori [11]. Such models draw direct comparisons between simplified neural networks and magnetic systems, thereby reducing their statistical properties to those previously known to statistical physics. More specifically, such comparisons potentially allow one to write down the Hamiltonian for the system analytically, and in turn the probability density over the phase space of the network. However, it is not a simple task to probe the geometry of the free energy landscape and the problem is further aggravated by the replacement of spins with even minimally biologically realistic units. 
-
-The state space of a network model is made even more diverse with the addition of biological realism e.g. variable cell types as in the Brunel network [5]. Even in this case, statistical physics has inspired great progress towards an understanding of the dynamics of coupled excitatory and inhibitory populations, in spite of the common assumption that weights between different populations are homogeneous. The Brunel network has been used to initialize so-called balanced networks which maintain asynchronous irregular firing. Such balanced networks have been used to initialize networks to be later trained via a family of orchestrated slow and fast plasticity mechanisms [7]. After training, these networks have been shown to exhibit attractor dynamics towards states imprinted on the network weights by previous stimuli, all in an arguably more brain-like fashion than the original Hopfield model. Many questions remain, such as the range of spiking dynamics observed for weight matrices that range from fully connected to fully random as in a Erdos-Renyi directed binomial graph and the storage capacity of such networks and their compresson and error correction capabilities.
+Neural network models date back to McCulloch and Pitts [1] followed later by the Hopfield network [2] which spawned an entire field of research applying techniques from the statistical physics of spin glasses to the description of neural activity. By simplifying a network of neurons firing action potentials to an ensemble of coupled spins $\sigma \in \{-1, +1\}$, the Hopfield model related the patterns learned by a network to the energy landscape over the discrete space of states. The storage capacity of these networks and the geometry of this energy landscape were of particular interest and rigorous mathematical treatment has been used to show limits on the basins of attraction in such energy landscapes [4,10,11]. However, a primary feature of these attractor networks that is unlikely to be realized in neural circuitry is that they are deterministic. There are many examples in the literature of trial-to-trial variability in the response of cortical neurons to identical stimuli, suggesting that computations in the brain are inherently stochastic. Interestingly, an extension of the Hopfield model - the Boltzmann machine actually leverages stochastic activity of Ising spins to perform powerful computations [14]. In such a model, the set of synaptic weights $\Phi$ ``embody" the joint distribution $P_{\Phi}(X,R) = P_{\Phi}(X)P_{\Phi}(R|X)$ over network inputs and network response, respectively. Then, computations can be viewed as probabilistic inference after suitable transformations of the weights $\Delta\Phi$. Our primary goal is to understand the relationship between a choice of the learning rule $\Delta \Phi$ and features of the learned distribution $P_{\Phi}(X,R)$.
 
 
-\chapter{Network Connectivity and Dynamics}
+\chapter{Stochastic Networks of Neurons: The Boltzmann Machine}
 \section{Introduction}
-How a circuit computes, physically. How connectivity shapes dynamics and the computational description of different dynamical regimes according to information theory
 
-\chapter{Information Theory of Spiking Neurons}
-\section{Introduction}
-Does a neural circuit compute? The theoretical toolkit for understanding the computational capabilities of a neural circuit. Proving the processing of information.
 
-\chapter{Stochastic Computation in Recurrent Networks}
+\chapter{Dynamical States of Recurrent Networks}
 \section{Introduction}
-If the network processed information, what does it do with that information. How does it build a model with that information
+
+
+\chapter{Biologically-Motivated Learning}
+\section{Introduction}
 
 \chapter{Conclusions}
 
@@ -106,6 +102,8 @@ in spiking neural networks}. Nature Communications. 2015.
 [12] Pecevski et al. \textit{Learning Probabilisitc Inference through Spike-Timing-Dependent Plasticitys}. eNeuro. 2016
 
 [13] Pecevski et al. \textit{Formation and maintenance of neuronal assemblies through synaptic plasticity}. Nature Communications. 2014
+
+[14] Pecevski et al. \textit{A learning algorithm for Boltzmann Machines}. Cognitive Science. 1985
 
 % Figures and tables, if you decide to leave them to the end
 %\input{figure}
