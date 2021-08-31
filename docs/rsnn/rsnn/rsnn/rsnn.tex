@@ -45,7 +45,7 @@
 
 \abstract
 
-A central goal of modern neuroscience is the discovery of the mechanisms by which primate cortical circuits permit learning from example and performing inference from those experiences. The cerebral cortex is responsible for many higher-order brain functions including memory and learning; however, the search for principles of neural computation common to these phenomena is made extremely difficult by the diversity of cortical structures and their putative functions. Nevertheless, progress has been made in our understanding of the interplay between the organization of cortical neurons, network dynamics, and the reorganization via synaptic plasticity during learning. Many deficiencies in our models of these processes can be attributed to our lack of a mathematical understanding of both the fundamental computational paradigm implemented by neural circuits and the roles of synaptic plasticity mechanisms observed \emph{in vivo}. These problems are further aggravated by the apparent stochastic features of the firing activity of neurons and experimentally observed trial-to-trial variability in population recordings. However, there is, in principle, a very powerful framework for stochastic computation: probabilistic inference by sampling. Here, we implement a recurrent spiking neural network (RSNN) as a variant of the Boltzmann machine and propose a precise mathematical role for a set of synaptic plasticity mechanisms in the formation of a set of synaptic weights that successfully ``embody" a Gaussian input statistic.
+One of the most challenging questions in modern neuroscience is the mechanisms by which primate cortical circuits learn from example and perform inference based upon their past experience. The cerebral cortex is responsible for many higher-order brain functions including memory and . The search for principles of neural computation common to these phenomena is made extremely difficult by the diversity of cortical structures and their putative functions. Nevertheless, progress has been made in our understanding of the interplay between the organization of cortical neurons, network dynamics, and the resulting reorganization via synaptic plasticity during learning. Many deficiencies in our models of these processes can be attributed to our lack of a mathematical understanding of both the fundamental computational paradigm implemented by neural circuits and the roles of synaptic plasticity mechanisms observed \emph{in vivo}. These problems are further aggravated by the apparent stochastic features of the firing activity of neurons and experimentally observed trial-to-trial variability in population recordings. However, there is, in principle, a very powerful framework for stochastic computation evident in the Boltzmann machine: probabilistic inference by sampling. Here, we implement a recurrent spiking neural network (RSNN) as a variant of the Boltzmann machine and propose a precise mathematical role for a set of synaptic plasticity mechanisms in the formation of a set of synaptic weights that successfully ``embody" a Gaussian input statistic.
 
 
 \mainmatter
@@ -54,46 +54,52 @@ A central goal of modern neuroscience is the discovery of the mechanisms by whic
 
 Recent decades have yielded a number of experimental and theoretical advances in our understanding of learning in biological neural networks through the introduction of as homosynaptic, heterosynaptic, and homeostatic plasticity. However, the precise mathematical relationship between the synaptic plasticity mechanisms or \emph{learning rules} implemented by neurons and the formation of probabilistic models of their inputs, remains elusive.
 
-Neural network models date back to McCulloch and Pitts [1] followed later by the Hopfield network [2] which spawned the application of techniques from the statistical physics of spin glasses to the description of neural activity. By simplifying a network of neurons firing action potentials to an ensemble of coupled spins $z \in \{-1, +1\}$, the Hopfield model related the patterns learnt by a network to an energy landscape over the discrete space of states. The storage capacity of these networks and the geometry of this energy landscape were of particular interest and rigorous mathematical treatment has been used to show limits on the density of basins of attraction in such energy landscapes [4,10,11]. However, a primary feature of these attractor networks, that is unlikely to be realized in neural circuitry, is that they are deterministic. There are many examples in the literature of trial-to-trial variability in the response of cortical neurons to identical stimuli, suggesting that computations in the brain are inherently stochastic []. Interestingly, the Boltzmann machine, which is an extension of the Hopfield model, actually leverages stochastic activity of Ising spins to perform powerful computations [14]. In such a model, the set of synaptic weights $\Phi$ ``embody" the joint distribution $P_{\Phi}(X,R) = P_{\Phi}(X)P_{\Phi}(R|X)$ over network inputs and network response, respectively. Then, computations can be viewed as probabilistic inference after suitable transformations of the weights $\Delta\Phi$. Our primary goal is to understand the relationship between a choice of the learning rule $\Delta \Phi$ and features of the learned distribution $P_{\Phi}(X,R)$.
+Neural network models date back to McCulloch and Pitts [1] followed later by the Hopfield network [2] which spawned an entire field of research applying techniques from the statistical physics of spin glasses to the description of neural activity. By simplifying a network of neurons firing action potentials to an ensemble of coupled spins $\sigma \in \{-1, +1\}$, the Hopfield model related the patterns learned by a network to the energy landscape over the discrete space of states. The storage capacity of these networks and the geometry of this energy landscape were of particular interest and rigorous mathematical treatment has been used to show limits on the basins of attraction in such energy landscapes [4,10,11]. However, recent experimental evidence has suggested that networks of neurons may follow a stochastic, rather than deterministic, computational paradigm. There are many examples in the literature of trial-to-trial variability in the response of cortical neurons to identical stimuli, suggesting that computations in the brain are inherently stochastic. The origins of this stochasticity are hypothesized to originate in noise in synaptic conductances and infidelity in processes clearing neurotransmitters from the synaptic cleft. Interestingly, an extension of the Hopfield model - the Boltzmann machine actually leverages stochastic activity of Ising spins to perform powerful computations [14]. In such a model, the set of synaptic weights $\Phi$ ``embody" the joint distribution $P_{\Phi}(X,R) = P_{\Phi}(X)P_{\Phi}(R|X)$ over network inputs and network response, respectively. Then, computations can be viewed as probabilistic inference after suitable transformations of the weights $\Delta\Phi$. Such physically inspired models have proven useful; however, the models are sufficiently abstract to make experimental comparisons difficult. More recent endeavors appear to make useful predictions on network dynamics by using Fokker-Planck equations to compute distributions of the membrane voltage as a function of time [5]. Here, we apply a similar formalism to the description of network dynamics with heterogeneous and stochastic synaptic weights to probe the distribution over network states $P_{\Phi}(R)$ and describe how this framework can be used to provide insights on how the neural networks embody the distribution $P_{\Phi}(R|X)$ in statistical inference tasks. To conclude, we discuss the effect of synaptic plasticity.
+
+By solving the Fokker-Planck equations numerically for the time evolution of the distribution over membrane voltages $P_{\Phi}(V,t)$ simulataneously permits knowledge of the distribution $P_{\Phi}(\mathbf{z},t)$. To see this, consider thresholding a sample from the joint distribution $\mathbf{z} \sim \Theta\left(\mathbf{v}\right)$ where $\mathbf{v} \sim (P_{\Phi}(V,t))^{N}$. We might then ask how local synaptic plasticity rules permit the formation of cell assemblies which collectively encode stimuli.
+
+\chapter{Statistical mechanics of a population of neurons}
+
+In this section we will give exemplify the use of Fokker-Planck equations from statistical mechanics in the description of neural dynamics. A natural example is to describe the voltage dynamics of a single leaky integrate and fire (LIF) neuron that receives $N$ feedforward Poisson input spike trains. The formalism presented can then be generalized to a population of LIF neurons.\\
+
+\section{A single leaky integrate and fire neuron}
+
+It is fundamentally intractable to predict the time evolution of the membrane potential in a single LIF neuron embedded in a complex network - we can only speak of probability densities over the space of membrane voltages $P(v)$. The problem is further aggravated by the fact that $P(v)$ is often not stationary and we therefore must predict how the distribution evolves in time $P(v,t)$. This situation bears many similiarities to a situation often encountered the statistical physics of systems far from equilibrium where the task at hand is to predict the time evolution of the distribution over states e.g., particle velocities, and the stationary distribution at thermal equilibrium. If the spike trains input to the LIF neuron follow an inhomogeneous Poisson process i.e. we assume every sequence of spikes has equal probability, the probability of observing $n$ spikes in a time step $\Delta t$ is given by
+
+\begin{equation*}
+P[X=n] = \frac{(r\Delta t)^{n}}{n!}\exp\left(-r\Delta t\right)
+\end{equation*}
+
+Under this assumption, the membrane voltage follows a Markov process and we can define a transition operator
+
+\begin{align*}
+T(v[t+1]\;|\;v[t]) &= \left(1-\Delta t\sum_{k}r[t]\right)\delta\left(v[t]-\alpha\cdot v[t]\right)\\
+&+ \Delta t\sum_{k}r_{k}[t]\cdot\delta\left(v[t]-\alpha \cdot v[t] + w_{k}\right)
+\end{align*}
+
+with $\alpha = \exp\left(-\frac{\Delta t}{\tau_{m}}\right)$ and a membrane time constant $\tau_{m}$. This means that the probability of arriving at a voltage $v$ is the integral
+
+\begin{align*}
+P(v,t+\Delta t) &= \int T(v[t+\Delta t]\;|\;v[t])P(v[t])dv\\
+&= \int \left(1-\Delta t\sum_{k}r[t]\right)\delta\left(v[t]-\alpha\cdot v[t]\right)dv\\
+&+ \int \Delta t\sum_{k}r_{k}[t]\cdot\delta\left(v[t]-\alpha \cdot v[t] + w_{k}\right)P(v[t])dv\\
+&= \left(1-\Delta t\sum_{k}r[t]\right)\alpha^{-1}P(\alpha^{-1}v,t) + \Delta t \sum_{k}r[t] \alpha^{-1}P(\alpha^{-1}v-w_{k},t)
+\end{align*}
+
+Expanding around $\Delta t = 0$ to first order gives
+
+\begin{equation*}
+P(v,t+\Delta t) - P(v,t) = 
+\end{equation*}
+
+\section{A network of leaky integrate and fire neurons}
 
 
-\chapter{Stochastic Networks of Neurons: The Boltzmann Machine}
+\chapter{Dynamical states of recurrent networks}
 \section{Introduction}
 
-This is the introduction to the section
 
-\section{Glauber Dynamics}
-
-In the simplest form of the Boltzmann machine, we consider an ensemble of recurrently connected point neurons which can be described by a binary variable $z_{i}(t) \in \{0, 1\}$ where $z_{i}(t) = 1$ if  neuron $i$ fired an action potential at time $t$ and $z_{i}(t) = 0$ otherwise. We will make use of the standard architecture of a Boltzmann machine with an input layer $X$ and a hidden layer $M$ with feedforward connections from $X$ to $M$ are allowed and 
-recurrent connections from layer $M$ to itself. The probability that a neuron $i$ fires an action potenetial at a time $t + \Delta t$ is given by 
-
-\begin{equation}
-P(z_{i}(t+\Delta t) = 1) = \sigma(v_{i}(t)) = \frac{1}{1 + \exp(-v_{i}(t))}
-\end{equation}
-
-where $v_{i}(t)$ is taken to be the membrane voltage of the neuron $i$. We will begin with the assumption that neural dynamics form a Markov process we take $v_{i}(t)$ to be a sum over feedforward and recurrent inputs at a time $t$
-
-\begin{equation}
-v_{i}(t) = \sum_{j}X_{ij}z_{j}(t) + \sum_{k}M_{ik}z_{k}(t)
-\end{equation}
-
-which clearly has the Markov memoryless property: our defintion of $\mathbb{P}(z_{i}(t+\Delta t) = 1)$ in (1) dictates that the probability of a state transition $z_{i}(t) = 0 \rightarrow z_{i}(t+\Delta t) = 1$ is determined by a weighted sum over input $z_{j}(t)$ and recurrent $z_{k}(t)$ at a time $t$ only. The advantage of Glauber dynamics is that is that stationary distribution over the network state $\mathbf{z}$ can be predicted via the Boltzmann distribution
-
-\begin{equation}
-P[\mathbf{z}] = \frac{1}{Z}\exp\left(-E(\mathbf{z})\right)
-\end{equation}
-
-
-with $E(\mathbf{z}) = -\mathbf{X} \cdot \mathbf{z} - \frac{1}{2}\mathbf{z}\cdot \mathbf{M} \cdot \mathbf{z}$ and the partition function $Z = \sum \exp\left(-E(\mathbf{z})\right)$. This is a particularly useful property since we have expressed a direct relationship between the synaptic connectivity $\mathbf{X}$ and $\mathbf{M}$ and the probability distribution $P$ they implement. 
-
-The input-output relationship of the network is described by the distribution $P_{\Phi}(\mathbf{z}|\mathbf{x})$ where we refer to $\Phi = \left(\mathbf{X}, \mathbf{M}\right)$ as `the model'. That is an input $x \sim P(\mathbf{x})$ has a stochastic relationship to the network response $\mathbf{z}$ implemented by the model $P_{\Phi}(\mathbf{z}|\mathbf{x})$ 
-
-
-\chapter{Dynamical States of Recurrent Networks}
-\section{Introduction}
-
-
-\chapter{Biologically-Motivated Learning}
+\chapter{Stochastic computation by recurrent networks}
 \section{Introduction}
 
 \chapter{Conclusions}
