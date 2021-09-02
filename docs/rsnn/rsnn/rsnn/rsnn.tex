@@ -60,7 +60,44 @@ By solving the Fokker-Planck equations numerically for the time evolution of the
 
 \chapter{Statistical mechanics of a population of neurons}
 
-In this section we will give exemplify the use of Fokker-Planck equations from statistical mechanics in the description of neural dynamics. A natural example is to describe the voltage dynamics of a single leaky integrate and fire (LIF) neuron that receives $N$ feedforward Poisson input spike trains. The formalism presented can then be generalized to a population of LIF neurons.\\
+In this section we make use of Fokker-Planck equations from statistical mechanics in the description of neural dynamics. A natural example is to describe the voltage dynamics of a single leaky integrate and fire (LIF) neuron that receives $N$ feedforward Poisson input spike trains. The formalism presented can then be generalized to a population of LIF neurons.\\
+
+\section{Formalism}
+
+We consider two main populations of neurons: an external population and a recurrent population. The input neurons are described only by their spiking activity and are symbolized by the binary vector $\mathbf{s}(t)\in \mathbb{F}_{2}^{n}$. Furthermore, we describe the \emph{state} variables of the recurrent population by a vector of voltages $\mathbf{v}(t)\in \mathbb{R}^{n\times 1}$ and a vector of so-called observable states denoted by $\mathbf{z}(t) = \Theta(\mathbf{v}(t))$ where $\Theta(v(t)) = H(v(t) - \theta)$ and $H$ is the Heaviside step function. Input neurons communicate to the recurrent population through excitatory connections summarized by the input weight matrix $\mathbf{X}\in \mathbb{R}^{n\times m}$. Similarly, a recurrent weight matrix $\mathbf{J}\in \mathbb{R}^{n\times n}$ specifies the recurrent network connectivity. The matrix $\mathbf{J}$ may contain both excitatory and inhibitory connections. Therefore, it will prove useful to partition $\mathbf{X}$ and $\mathbf{J}$ into four quadrants as follows
+
+\begin{align}
+\mathbf{X} = \begin{bmatrix}
+    X_{E}\\
+    X_{I} 
+\end{bmatrix}  && \mathbf{J} = \begin{bmatrix}
+    J_{EE} & J_{IE} \\
+    J_{EI} & J_{II} 
+\end{bmatrix} 
+\end{align}
+
+and an appropriate partitioning scheme is applied to the network state variables
+
+\begin{align}
+\mathbf{v} = \begin{bmatrix}
+    v_{E}\\
+    v_{I} 
+\end{bmatrix}  && \mathbf{z} = \begin{bmatrix}
+    z_{E}\\
+    z_{I} 
+\end{bmatrix} 
+\end{align}
+
+which are defined such that, for example, the inputs from the external and recurrent population to an excitatory neuron $j \in \{1, 2, ..., n'-1, n'\}$ with $n' \leq n$ is simply $\xi_{j}(t) = J_{EE}z_{E} + J_{IE}z_{I}$. More generally, the voltage state variable for an arbitrary neuron evolves according to the update equation for the voltage 
+
+\begin{align*}
+v_{j}(t+\Delta t) &= v_{j}(t)\exp\left(-\frac{\Delta t}{\tau}\right) + \xi_{j}(t)\\
+&= v_{j}(t)\exp\left(-\frac{\Delta t}{\tau}\right) + \sum_{k\neq \ell}X_{k\ell}s_{k}(t) + \sum_{i\neq j} J_{ij}z_{i}(t)
+\end{align*}
+
+Letting the leakage term $\alpha = \exp\left(-\frac{\Delta t}{\tau}\right)$ this can be written for the entire population as $\mathbf{v}(t) = \alpha\mathbf{v}(t) + \mathbf{X}(t)\cdot \mathbf{s} + \mathbf{J}(t)\cdot \mathbf{z}$ where $\cdot$ denotes standard matrix multiplication. 
+
+The input spike train $\mathbf{s}_{k}(t)$ of neuron $k$ is taken to be a heterogeneous Poisson process with firing rate $\nu_{k}(t)$. Given the nature of such a stochastic process, a fundamental description of network dynamics demands knowledge of the time evolution of the voltage distribution $P(v,t)$ over the population, which is the focus of the following sections.
 
 \section{A single leaky integrate and fire neuron}
 
