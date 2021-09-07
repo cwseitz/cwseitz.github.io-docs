@@ -18,8 +18,6 @@
 \date{Winter 2021}
 
 %% Use these commands to set a dedication and epigraph text
-%\dedication{I dedicate this thesis to my friends and family, who have pushed me to think critically and live a principled life}
-
 
 \epigraph{Epigraph}
 
@@ -104,32 +102,39 @@ The input spike train $\mathbf{s}_{k}(t)$ of neuron $k$ is taken to be a heterog
 It is fundamentally intractable to predict the time evolution of the membrane potential in a single LIF neuron embedded in a complex network - we can only speak of probability densities over the space of membrane voltages $P(v)$. The problem is further aggravated by the fact that $P(v)$ is often not stationary and we therefore must predict how the distribution evolves in time $P(v,t)$. This situation bears many similiarities to a situation often encountered the statistical physics of systems far from equilibrium where the task at hand is to predict the time evolution of the distribution over states e.g., particle velocities, and the stationary distribution at thermal equilibrium. If the spike trains input to the LIF neuron follow an inhomogeneous Poisson process i.e. we assume every sequence of spikes has equal probability, the probability of observing $n$ spikes in a time step $\Delta t$ is given by
 
 \begin{equation*}
-P[X=n] = \frac{(r\Delta t)^{n}}{n!}\exp\left(-r\Delta t\right)
+P[X=n] = \frac{(\nu\Delta t)^{n}}{n!}\exp\left(-\nu\Delta t\right)
 \end{equation*}
 
-Under this assumption, the membrane voltage follows a Markov process and we can define a transition operator
+Under this assumption, the membrane voltage follows a Markov process and we can define the following transition operator
 
 \begin{align*}
-T(v[t+1]\;|\;v[t]) &= \left(1-\Delta t\sum_{k}r[t]\right)\delta\left(v[t]-\alpha\cdot v[t]\right)\\
-&+ \Delta t\sum_{k}r_{k}[t]\cdot\delta\left(v[t]-\alpha \cdot v[t] + w_{k}\right)
+T(v[t+1]\;|\;v[t]) &= \left(1-\Delta t\sum_{k}\nu[t]\right)\delta\left(v[t]-\alpha\cdot v[t]\right)\\
+&+ \Delta t\sum_{k}\nu_{k}[t]\cdot\delta\left(v[t]-\alpha \cdot v[t] + w_{k}\right)
 \end{align*}
 
 with $\alpha = \exp\left(-\frac{\Delta t}{\tau_{m}}\right)$ and a membrane time constant $\tau_{m}$. This means that the probability of arriving at a voltage $v$ is the integral
 
 \begin{align*}
 P(v,t+\Delta t) &= \int T(v[t+\Delta t]\;|\;v[t])P(v[t])dv\\
-&= \int \left(1-\Delta t\sum_{k}r[t]\right)\delta\left(v[t]-\alpha\cdot v[t]\right)dv\\
-&+ \int \Delta t\sum_{k}r_{k}[t]\cdot\delta\left(v[t]-\alpha \cdot v[t] + w_{k}\right)P(v[t])dv\\
-&= \left(1-\Delta t\sum_{k}r[t]\right)\alpha^{-1}P(\alpha^{-1}v,t) + \Delta t \sum_{k}r[t] \alpha^{-1}P(\alpha^{-1}v-w_{k},t)
+&= \int \left(1-\Delta t\sum_{k}\nu[t]\right)\delta\left(v[t]-\alpha\cdot v[t]\right)dv\\
+&+ \int \Delta t\sum_{k}\nu_{k}[t]\cdot\delta\left(v[t]-\alpha \cdot v[t] + w_{k}\right)P(v[t])dv\\
+&= \left(1-\Delta t\sum_{k}\nu[t]\right)\alpha^{-1}P(\alpha^{-1}v,t) + \Delta t \sum_{k}\nu[t] \alpha^{-1}P(\alpha^{-1}v-w_{k},t)
 \end{align*}
 
-Expanding around $\Delta t = 0$ to first order gives
-
-\begin{equation*}
-P(v,t+\Delta t) - P(v,t) = 
-\end{equation*}
+The interpetation of the left term is that a fraction of the probability mass at a voltage $\alpha^{-1}v$ moves to $v$ according to the probability that no input neurons fire. The right term then adds in probability mass at points $\alpha^{-1}v -w_{k}$ depending on the firing rate of input neuron $k$, in the case of nonzero input. In practice, we consider the voltage to be discrete, with a resolution equal to $\Delta v  = \alpha$.
 
 \section{A network of leaky integrate and fire neurons}
+
+We would like to obtain the joint distribution over membrane voltages and its time evolution $P(v_{1}, v_{2}, ... , v_{n}, t)$. The transition operator for a neuron $j$ is given by 
+
+
+\begin{align*}
+T(v[t+1]\;|\;v[t]) &= \left(1-\Delta t\sum_{k}\nu[t]\right)\delta\left(v[t]-\alpha\cdot v[t]\right)\\
+&+ \Delta t\sum_{k}\nu_{k}[t]\cdot\delta\left(v[t]-\alpha \cdot v[t] + w_{k}\right)\\
+&+ \sum_{k} \mathrm{erfc}_{\theta}\left(P_{k}(v, t)\right)\delta\left(v[t]-\alpha \cdot v[t] + w_{k}\right) + \mathrm{erfc}_{\theta}\left(P(v,t)\right)\delta\left(0\right)
+\end{align*}
+
+The above transition operator has four terms: two for the input from an external population, one for the input from the recurrent population, and one that enforces the spiking threshold $\theta$. From this we can see that the probability mass that reaches the threshold $\theta$ for a neuron $k$ is distributed across other dimensions of the $N$ dimensional space according to the weight between those dimensions. Also, for the neuron under consideration, that probability mass passes through the threshold $\theta$ back to the resting potential, according to periodic boundary conditions. An analagous process is a particle undergoing diffusion in $N$ dimensions with periodic boundary conditions for each dimension. When the particle reaches the boundary along a dimension it receives a `kick' along a direction $\vec{\Delta v} = \sum_{k}w_{k}\hat{k}$ 
 
 
 \chapter{Dynamical states of recurrent networks}
