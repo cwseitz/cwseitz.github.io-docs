@@ -60,5 +60,3 @@ def run_budget_app():
     print(expense_table)
     print('\n\n\n')
     generate_budget(expense_table, d0, d1, initial_amount=initial_amount)
-
-run()
