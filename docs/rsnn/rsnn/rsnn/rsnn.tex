@@ -97,44 +97,51 @@ Letting the leakage term $\alpha = \exp\left(-\frac{\Delta t}{\tau}\right)$ this
 
 The input spike train $\mathbf{s}_{k}(t)$ of neuron $k$ is taken to be a heterogeneous Poisson process with firing rate $\nu_{k}(t)$. Given the nature of such a stochastic process, a fundamental description of network dynamics demands knowledge of the time evolution of the voltage distribution $P(v,t)$ over the population, which is the focus of the following sections.
 
-\section{A single leaky integrate and fire neuron}
+\section{The Fokker-Planck Equation}
 
-It is fundamentally intractable to predict the time evolution of the membrane potential in a single LIF neuron embedded in a complex network - we can only speak of probability densities over the space of membrane voltages $P(v)$. The problem is further aggravated by the fact that $P(v)$ is often not stationary and we therefore must predict how the distribution evolves in time $P(v,t)$. This situation bears many similiarities to a situation often encountered the statistical physics of systems far from equilibrium where the task at hand is to predict the time evolution of the distribution over states e.g., particle velocities, and the stationary distribution at thermal equilibrium. If the spike trains input to the LIF neuron follow an inhomogeneous Poisson process i.e. we assume every sequence of spikes has equal probability, the probability of observing $n$ spikes in a time step $\Delta t$ is given by
+The quantitative discussion of the dynamics of many complex systems (systems where the number of interacting units $N$ is large) in nature from networks of spiking neurons, geophysical systems, to excitable media, all necessarily require a statistical description. Indeed, enumerating the available states to such a system itself has proven intractable, even for small systems over short time scales. As an example, consider the states of an interacting system of $N$ binary variables denoted $\{z_{i}\}_{i=1}^{N}$ which might be physically realized as an ensemble of spins in a ferromagnet. Even for extremely small cases such as $N=100$ the system can take on $2^{100} = 1.26\times 10^{30}$ different configurations and by $N=300$ the number of configurations exceed our best estimates for the number of atoms in the known universe. At the same time, we cannot hope to make enough measurements of such a system to estimate the probability distribution over the space of states and make inferences on the organization and interactions of the individual elements based on such a distribution. We can, however, develop model distributions over the available states based on stochastic interaction between the individual units that account for the degrees of freedom which we cannot approach analytically - a technique often employed in the description of the statistical physics of particles. This family of techniques, often formally referred to as Langevin dynamics, is defined by the use of stochastic differential equations to model the evolution of molecular systems. A common example is the description of molecular diffusion where a particle of interest is immersed in a liquid or a gas and is subject to stochastic thermal fluctuations as well as frictional forces. One can write down a statistical description of the  motion of a particle in such a scenario, yielding insights into the possible spatial trajectories it may follow in time. An alternative view, pioneered by Adriaan Fokker and later by Max Planck, utilizes a probabilistic framework and yields the so-called Fokker-Planck equations which allow us to solve for the time evolution of the probability distribution of such a stochastic variable. In the context of neuroscience, this approach has been taken by many in describing the dynamics of the membrane potential distribution in a population of neurons. In the following paragraphs, we will sketch a derivation of the Fokker-Planck equation for a diffusion process in $N$ dimensions and we will later see the power of this decripton in describing the time evolution of the joint distribution over the membrane voltage in a spiking neural network.
 
-\begin{equation*}
-P[X=n] = \frac{(\nu\Delta t)^{n}}{n!}\exp\left(-\nu\Delta t\right)
-\end{equation*}
+Our objective is to determine the time evolution of the joint probability distribution over $N$ variables written as $P(\{v_{i}\}, t)$. If we make a basic assumption that the evolution of $P$ follows a Markov process i.e. its evolution has the memoryless property, then we can write
 
-Under this assumption, the membrane voltage follows a Markov process and we can define the following transition operator
+\begin{equation}
+P(v, t) = \int P(v, t | v', t-\tau)P(v', t-\tau)dv
+\end{equation} 
 
-\begin{align*}
-T(v[t+1]\;|\;v[t]) &= \left(1-\Delta t\sum_{k}\nu[t]\right)\delta\left(v[t]-\alpha\cdot v[t]\right)\\
-&+ \Delta t\sum_{k}\nu_{k}[t]\cdot\delta\left(v[t]-\alpha \cdot v[t] + w_{k}\right)
-\end{align*}
-
-with $\alpha = \exp\left(-\frac{\Delta t}{\tau_{m}}\right)$ and a membrane time constant $\tau_{m}$. This means that the probability of arriving at a voltage $v$ is the integral
+which is known at the Chapman-Kolmogorov equation. The term $P(\{v_{i}\}, t | \{v_{i}\}'$ is known as the \emph{transition operator} in a Markov process. We can rewrite the transition operator as
 
 \begin{align*}
-P(v,t+\Delta t) &= \int T(v[t+\Delta t]\;|\;v[t])P(v[t])dv\\
-&= \int \left(1-\Delta t\sum_{k}\nu[t]\right)\delta\left(v[t]-\alpha\cdot v[t]\right)dv\\
-&+ \int \Delta t\sum_{k}\nu_{k}[t]\cdot\delta\left(v[t]-\alpha \cdot v[t] + w_{k}\right)P(v[t])dv\\
-&= \left(1-\Delta t\sum_{k}\nu[t]\right)\alpha^{-1}P(\alpha^{-1}v,t) + \Delta t \sum_{k}\nu[t] \alpha^{-1}P(\alpha^{-1}v-w_{k},t)
-\end{align*}
+P(v,t | v',t-\tau) &= \int \delta(u-v)P(u, t | v', t-\tau)du\\
+&= \int \delta(v'-v+u-v')P(u, t | x', t-\tau)du\\
+&= \int \sum_{n=0}^{\infty} \frac{(y-x')^{n}}{n!}\left(-\frac{\partial}{\partial x}\right)^{n}P(u, t | x', t-\tau)\delta(x'-x)du\\
+&= \sum_{n=0}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial x}\right)^{n}
+\delta(x'-x)\int(u-x')^{n}P(u, t | x', t-\tau)du
+\end{align*} 
 
-The interpetation of the left term is that a fraction of the probability mass at a voltage $\alpha^{-1}v$ moves to $v$ according to the probability that no input neurons fire. The right term then adds in probability mass at points $\alpha^{-1}v -w_{k}$ depending on the firing rate of input neuron $k$, in the case of nonzero input. In practice, we consider the voltage to be discrete, with a resolution equal to $\Delta v  = \alpha$.
+Noticing that $\int(u-x')^{n}P(u, t | x', t-\tau)du$ is just the $n$th moment of the distribution $P(u, t | x', t-\tau)$, we have 
 
-\section{A network of leaky integrate and fire neurons}
+\begin{align}
+P(v,t | v',t-\tau) &= \left(1 + \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial v}\right)^{n} M_{n}(v,t,\tau)\right)\delta(v'-v)
+\end{align} 
 
-We would like to obtain the joint distribution over membrane voltages and its time evolution $P(v_{1}, v_{2}, ... , v_{n}, t)$. The transition operator for a neuron $j$ is given by 
+Plugging this back in to (2.3) gives 
 
+\begin{align}
+P(v, t) &= \int \left(1 + \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial v}\right)^{n} M_{n}(v,t,\tau)\right)\delta(v'-v)P(v', t-\tau)dv\\
+&= P(v', t-\tau) + \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial v}\right)^{n} M_{n}(v,t,\tau)
+\end{align} 
 
-\begin{align*}
-T(v[t+1]\;|\;v[t]) &= \left(1-\Delta t\sum_{k}\nu[t]\right)\delta\left(v[t]-\alpha\cdot v[t]\right)\\
-&+ \Delta t\sum_{k}\nu_{k}[t]\cdot\delta\left(v[t]-\alpha \cdot v[t] + w_{k}\right)\\
-&+ \sum_{k} \mathrm{erfc}_{\theta}\left(P_{k}(v, t)\right)\delta\left(v[t]-\alpha \cdot v[t] + w_{k}\right) + \mathrm{erfc}_{\theta}\left(P(v,t)\right)\delta\left(0\right)
-\end{align*}
+Approximating the derivative as a finite difference and sending $\tau \rightarrow 0$ gives
 
-The above transition operator has four terms: two for the input from an external population, one for the input from the recurrent population, and one that enforces the spiking threshold $\theta$. From this we can see that the probability mass that reaches the threshold $\theta$ for a neuron $k$ is distributed across other dimensions of the $N$ dimensional space according to the weight between those dimensions. Also, for the neuron under consideration, that probability mass passes through the threshold $\theta$ back to the resting potential, according to periodic boundary conditions. An analagous process is a particle undergoing diffusion in $N$ dimensions with periodic boundary conditions for each dimension. When the particle reaches the boundary along a dimension it receives a `kick' along a direction $\vec{\Delta v} = \sum_{k}w_{k}\hat{k}$ 
+\begin{align}
+\frac{\partial P(v,t)}{\partial t} &= \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial v}\right)^{n} M_{n}(v,t,\tau)P(v,t)\\
+&= \mathcal{L}_{\mathrm{KM}} P(v,t)
+\end{align} 
+
+with $ \mathcal{L}_{\mathrm{KM}} =\sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial v}\right)^{n} M_{n}$  which is the Kramers-Moyal (KM) expansion. The Fokker-Planck equation is an approximation of the KM expansion in (2.7) which neglects terms $n\geq 3$ in the so-called diffusion approximation.
+
+\begin{align}
+\frac{\partial P(v,t)}{\partial t} &= D_{1}\frac{\partial P(v,t)}{\partial v} - D_{2}\frac{\partial^{2} P(v,t)}{\partial v^{2}}
+\end{align} 
 
 
 \chapter{Dynamical states of recurrent networks}
