@@ -137,11 +137,30 @@ Approximating the derivative as a finite difference and sending $\tau \rightarro
 &= \mathcal{L}_{\mathrm{KM}} P(v,t)
 \end{align} 
 
-with $ \mathcal{L}_{\mathrm{KM}} =\sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial v}\right)^{n} M_{n}$  which is the Kramers-Moyal (KM) expansion. The Fokker-Planck equation is an approximation of the KM expansion in (2.7) which neglects terms $n\geq 3$ in the so-called diffusion approximation.
+with $ \mathcal{L}_{\mathrm{KM}} =\sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial v}\right)^{n} M_{n}$  which is the Kramers-Moyal (KM) expansion. The Fokker-Planck equation is an approximation of the KM expansion in (2.7) which neglects terms $n\geq 3$ in the so-called diffusion approximation. Recalling that $M_{n}$ represents the moments of the distribution over changes in the voltage of the population suggests that we can write the first two moments as
 
-\begin{align}
-\frac{\partial P(v,t)}{\partial t} &= D_{1}\frac{\partial P(v,t)}{\partial v} - D_{2}\frac{\partial^{2} P(v,t)}{\partial v^{2}}
-\end{align} 
+\begin{equation*}
+M_{1} = \mu(t) = NA(t)\langle J\rangle - \frac{v-v_{L}}{\tau} + \mu_{ext}
+\end{equation*}
+
+\begin{equation*}
+M_{2} = NA(t)\langle J^{2}\rangle = \frac{\sigma^{2}(t)}{\tau} + \sigma_{ext}^{2}
+\end{equation*}
+
+with $A(t) = \int_{\theta}^{\infty} P(v,t)dv$ which represent a drift term and diffusion term and we arrive at the following Fokker-Planck equation
+
+\begin{align*}
+\frac{\partial P(v,t)}{\partial t} &= \left(\mu(t) - \frac{v-v_{L}}{\tau}\right) \frac{\partial}{\partial v} P(v,t) - \frac{\sigma^{2}(t)}{2\tau}\frac{\partial^{2}}{\partial v^{2}} P(v,t)\\
+\end{align*} 
+
+which we approximate by central finite differences
+
+\begin{align*}
+\frac{p(v, t+\Delta t) - p(v,t)}{\Delta t} &= \left(N\xi - \frac{v-v_{L}}{\tau}+ \mu_{ext}\right)\frac{p(v+\Delta v, t) - p(v,t)}{\Delta v} \\
+&- \frac{1}{2}\left(\frac{N\xi(1-\xi)}{\tau} + \sigma_{ext}^{2}\right)\frac{p(v+\Delta v, t) - 2p(v,t) + p(v-\Delta v, t)}{\Delta v^{2}}
+\end{align*} 
+
+with $\xi = \sum_{p_{i} > \theta}p_{i}(v,t)$
 
 
 \chapter{Dynamical states of recurrent networks}
