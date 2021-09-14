@@ -86,18 +86,15 @@ and an appropriate partitioning scheme is applied to the network state variables
 \end{bmatrix} 
 \end{align}
 
-which are defined such that, for example, the inputs from the external and recurrent population to an excitatory neuron $j \in \{1, 2, ..., n'-1, n'\}$ with $n' \leq n$ is simply $\xi_{j}(t) = J_{EE}z_{E} + J_{IE}z_{I}$. More generally, the voltage state variable for an arbitrary neuron evolves according to the update equation for the voltage 
+which are defined such that, for example, the inputs from the external and recurrent population to an excitatory neuron $j \in \{1, 2, ..., n'-1, n'\}$ with $n' \leq n$ is simply $\xi_{j}(t) = J_{EE}z_{E} + J_{IE}z_{I}$. More generally, the voltage state variable for an arbitrary neuron evolves according to the following differential equation for the voltage
 
-\begin{align*}
-v_{j}(t+\Delta t) &= v_{j}(t)\exp\left(-\frac{\Delta t}{\tau}\right) + \xi_{j}(t)\\
-&= v_{j}(t)\exp\left(-\frac{\Delta t}{\tau}\right) + \sum_{k\neq \ell}X_{k\ell}s_{k}(t) + \sum_{i\neq j} J_{ij}z_{i}(t)
-\end{align*}
+\begin{equation*}
+\tau\frac{dV_{i}}{dt} = -V_{i}(t) + RI_{i}(t)
+\end{equation*}
 
-Letting the leakage term $\alpha = \exp\left(-\frac{\Delta t}{\tau}\right)$ this can be written for the entire population as $\mathbf{v}(t) = \alpha\mathbf{v}(t) + \mathbf{X}(t)\cdot \mathbf{s} + \mathbf{J}(t)\cdot \mathbf{z}$ where $\cdot$ denotes standard matrix multiplication. 
+where $I_{i}(t)$ is the total synaptic current arriving at the soma. The input spike train $\mathbf{s}_{k}(t)$ of neuron $k$ is, in general, a heterogeneous Poisson process with firing rate $\nu_{k}(t)$. Given the nature of such a stochastic process, a fundamental description of network dynamics demands knowledge of the time evolution of the voltage distribution $P(v,t)$ over the population, which is the focus of the following section.
 
-The input spike train $\mathbf{s}_{k}(t)$ of neuron $k$ is taken to be a heterogeneous Poisson process with firing rate $\nu_{k}(t)$. Given the nature of such a stochastic process, a fundamental description of network dynamics demands knowledge of the time evolution of the voltage distribution $P(v,t)$ over the population, which is the focus of the following sections.
-
-\section{The Fokker-Planck Equation}
+\section{The Kramers-Moyal Expansion}
 
 The quantitative discussion of the dynamics of many complex systems (systems where the number of interacting units $N$ is large) in nature from networks of spiking neurons, geophysical systems, to excitable media, all necessarily require a statistical description. Indeed, enumerating the available states to such a system itself has proven intractable, even for small systems over short time scales. As an example, consider the states of an interacting system of $N$ binary variables denoted $\{z_{i}\}_{i=1}^{N}$ which might be physically realized as an ensemble of spins in a ferromagnet. Even for extremely small cases such as $N=100$ the system can take on $2^{100} = 1.26\times 10^{30}$ different configurations and by $N=300$ the number of configurations exceed our best estimates for the number of atoms in the known universe. At the same time, we cannot hope to make enough measurements of such a system to estimate the probability distribution over the space of states and make inferences on the organization and interactions of the individual elements based on such a distribution. We can, however, develop model distributions over the available states based on stochastic interaction between the individual units that account for the degrees of freedom which we cannot approach analytically - a technique often employed in the description of the statistical physics of particles. This family of techniques, often formally referred to as Langevin dynamics, is defined by the use of stochastic differential equations to model the evolution of molecular systems. A common example is the description of molecular diffusion where a particle of interest is immersed in a liquid or a gas and is subject to stochastic thermal fluctuations as well as frictional forces. One can write down a statistical description of the  motion of a particle in such a scenario, yielding insights into the possible spatial trajectories it may follow in time. An alternative view, pioneered by Adriaan Fokker and later by Max Planck, utilizes a probabilistic framework and yields the so-called Fokker-Planck equations which allow us to solve for the time evolution of the probability distribution of such a stochastic variable. In the context of neuroscience, this approach has been taken by many in describing the dynamics of the membrane potential distribution in a population of neurons. In the following paragraphs, we will sketch a derivation of the Fokker-Planck equation for a diffusion process in $N$ dimensions and we will later see the power of this decripton in describing the time evolution of the joint distribution over the membrane voltage in a spiking neural network.
 
@@ -137,15 +134,25 @@ Approximating the derivative as a finite difference and sending $\tau \rightarro
 &= \mathcal{L}_{\mathrm{KM}} P(v,t)
 \end{align} 
 
-with $ \mathcal{L}_{\mathrm{KM}} =\sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial v}\right)^{n} M_{n}$  which is the Kramers-Moyal (KM) expansion. The Fokker-Planck equation is an approximation of the KM expansion in (2.7) which neglects terms $n\geq 3$ in the so-called diffusion approximation. Recalling that $M_{n}$ represents the moments of the distribution over changes in the voltage of the population suggests that we can write the first two moments $M_{1}$ and $M_{2}$ as
+with $ \mathcal{L}_{\mathrm{KM}} =\sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial v}\right)^{n} M_{n}$  which is the Kramers-Moyal (KM) expansion. 
 
-\begin{equation*}
-\mu(t) = N\nu(t)\langle J\rangle - \frac{v-v_{L}}{\tau} + \mu_{ext}
-\end{equation*}
+\section{Fokker-Planck for Homogeneous Sparse Networks}
 
-\begin{equation*}
-\sigma^{2}(t) = N\nu(t)\langle J^{2}\rangle + \sigma_{ext}^{2}
-\end{equation*}
+We will first consider a classic case, where we have a sparse directed network with constant synaptic efficacy between all presynaptic and postsynaptic pairs of cells. This primary pool of neurons is subject to stimulation by $N_{\mathrm{in}}$ input neurons with a connection probability $\gamma_{\mathrm{in}}$ giving $C_{\mathrm{in}} = \gamma_{\mathrm{in}}N_{\mathrm{rec}}$ unique connections between the input population and a single neuron in the recurrent pool. Within the recurrent pool, we have a connection probability of $\gamma_{\mathrm{rec}} << 1$ for any pair giving $C_{\mathrm{rec}} = \gamma_{\mathrm{rec}} N_{\mathrm{rec}}$ recurrent inputs per postsynaptic cell. We assume that a presynaptic action potential invokes a post synaptic potential (PSP) with magnitude $J_{0}$ in the postsynaptic cell with $J_{0} << \theta$ for both input and recurrent projections. As outlined above, the instantaneous firing rate $\nu(t)$ The first moment of the KM expansion reads
+
+\begin{align*}
+\mu(t) &= \mu_{in} + \mu_{rec}(t)\\
+&= \left(C_{\mathrm{in}}\nu_{\mathrm{in}}(t) + C_{\mathrm{rec}}\nu_{\mathrm{rec}}(t)\right)\tau\langle J\rangle\\
+&= \left(C_{\mathrm{in}}\nu_{\mathrm{in}}(t) + C_{\mathrm{rec}}\nu_{\mathrm{rec}}(t)\right)\tau J_{0}
+\end{align*}
+
+where $\nu_{\mathrm{in}}(t)$ is the rate parameter for the input Poisson process. The second moment
+
+\begin{align*}
+\sigma^{2}(t) &= \sigma_{\mathrm{rec}}^{2} + \sigma_{\mathrm{ext}}^{2}\\
+&= \left(C_{\mathrm{in}}\nu_{\mathrm{in}}(t) + C_{\mathrm{rec}}\nu_{\mathrm{rec}}(t)\right)\tau\langle J^{2}\rangle\\
+&= \left(C_{\mathrm{in}}\nu_{\mathrm{in}}(t) + C_{\mathrm{rec}}\nu_{\mathrm{rec}}(t)\right)\tau J_{0}^{2}
+\end{align*}
 
 with $A(t) = \int_{\theta}^{\infty} P(v,t)dv$ which represent a drift term and diffusion term and we arrive at the following Fokker-Planck equation
 
