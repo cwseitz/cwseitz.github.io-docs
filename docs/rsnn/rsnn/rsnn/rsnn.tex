@@ -88,57 +88,65 @@ and an appropriate partitioning scheme is applied to the network state variables
 
 which are defined such that, for example, the inputs from the external and recurrent population to an excitatory neuron $j \in \{1, 2, ..., n'-1, n'\}$ with $n' \leq n$ is simply $\xi_{j}(t) = J_{EE}z_{E} + J_{IE}z_{I}$. More generally, the voltage state variable for an arbitrary neuron evolves according to the following differential equation for the voltage
 
-\begin{equation*}
-\tau\frac{dV_{i}}{dt} = -V_{i}(t) + RI_{i}(t)
-\end{equation*}
+\begin{equation}
+\tau\dot{V}_{i} = -V_{i}(t) + \eta_{i}(t)
+\end{equation}
 
-where $I_{i}(t)$ is the total synaptic current arriving at the soma. The input spike train $\mathbf{s}_{k}(t)$ of neuron $k$ is, in general, a heterogeneous Poisson process with firing rate $\nu_{k}(t)$. Given the nature of such a stochastic process, a fundamental description of network dynamics demands knowledge of the time evolution of the voltage distribution $P(v,t)$ over the population, which is the focus of the following section.
+where $\eta_{i}(t) = RI_{i}(t)$ is the total synaptic current arriving at the soma and $\dot{V}_{i}$ denotes the time derivative of $V_{i}$.  In general, we cannot predict any particular trajectory $V_{i}(t)$, and we must search for an expression for the time-dependent distribution $P(V_{i}, t)$ via the transition probability distribution $T(V_{i}', t+\tau | V_{i}, t)$.
 
-\section{The Kramers-Moyal Expansion}
+\section{Stochastic systems and Fokker-Planck equations}
 
-The quantitative discussion of the dynamics of many complex systems (systems where the number of interacting units $N$ is large) in nature from networks of spiking neurons, geophysical systems, to excitable media, all necessarily require a statistical description. Indeed, enumerating the available states to such a system itself has proven intractable, even for small systems over short time scales. As an example, consider the states of an interacting system of $N$ binary variables denoted $\{z_{i}\}_{i=1}^{N}$ which might be physically realized as an ensemble of spins in a ferromagnet. Even for extremely small cases such as $N=100$ the system can take on $2^{100} = 1.26\times 10^{30}$ different configurations and by $N=300$ the number of configurations exceed our best estimates for the number of atoms in the known universe. At the same time, we cannot hope to make enough measurements of such a system to estimate the probability distribution over the space of states and make inferences on the organization and interactions of the individual elements based on such a distribution. We can, however, develop model distributions over the available states based on stochastic interaction between the individual units that account for the degrees of freedom which we cannot approach analytically - a technique often employed in the description of the statistical physics of particles. This family of techniques, often formally referred to as Langevin dynamics, is defined by the use of stochastic differential equations to model the evolution of molecular systems. A common example is the description of molecular diffusion where a particle of interest is immersed in a liquid or a gas and is subject to stochastic thermal fluctuations as well as frictional forces. One can write down a statistical description of the  motion of a particle in such a scenario, yielding insights into the possible spatial trajectories it may follow in time. An alternative view, pioneered by Adriaan Fokker and later by Max Planck, utilizes a probabilistic framework and yields the so-called Fokker-Planck equations which allow us to solve for the time evolution of the probability distribution of such a stochastic variable. In the context of neuroscience, this approach has been taken by many in describing the dynamics of the membrane potential distribution in a population of neurons. In the following paragraphs, we will sketch a derivation of the Fokker-Planck equation for a diffusion process in $N$ dimensions and we will later see the power of this decripton in describing the time evolution of the joint distribution over the membrane voltage in a spiking neural network.
+The quantitative discussion of the dynamics of many complex systems (systems where the number of interacting units $N$ is large) in nature from networks of spiking neurons, geophysical systems, to excitable media, all necessarily require a statistical description. Indeed, enumerating the available states to such a system itself has proven intractable, even for small systems over short time scales. As an example, consider the states of an interacting system of $N$ binary variables denoted $\{z_{i}\}_{i=1}^{N}$ which might be physically realized as an ensemble of spins in a ferromagnet. Even for extremely small cases such as $N=100$ the system can take on $2^{100} = 1.26\times 10^{30}$ different configurations and by $N=300$ the number of configurations exceed our best estimates for the number of atoms in the known universe. At the same time, we cannot hope to make enough measurements of such a system to estimate the probability distribution over the space of states and make inferences on the organization and interactions of the individual elements based on such a distribution. We can, however, develop model distributions over the available states based on stochastic interaction between the individual units that account for the degrees of freedom which we cannot approach analytically - a technique often employed in the description of the statistical physics of particles. This family of techniques, often formally referred to as Langevin dynamics, is defined by the use of stochastic differential equations to model the evolution of systems with high degrees of freedom. A Fokker-Planck equation allows us to solve for the time evolution of the probability distribution over such a variable, providing insights into the dynamics which cannot be seen from any one trajectory through the space of states. 
 
-Our objective is to determine the time evolution of the joint probability distribution over $N$ variables written as $P(\{v_{i}\}, t)$. If we make a basic assumption that the evolution of $P$ follows a Markov process i.e. its evolution has the memoryless property, then we can write
+In the context of neuroscience, the Fokker-Planck approach has been taken by many in describing the dynamics of the membrane potential distribution in a population of neurons. In the following paragraphs, we will sketch a derivation of the Fokker-Planck equation for a general stochastic process in one dimension and apply this result to networks of integrate and fire neurons.
+
+\subsection{The Kramers-Moyal expansion}
+
+Given many instantiations of a stochastic variable $V$, we can construct a normalize histogram over all observations as a function of time $P(V,t)$. However, in order to systematically explore the relationship between the parameterization of the process and $P(V,t)$ we require an expression for $\dot{P}(V,t)$. If we make a fundamental assumption that the evolution of $P(V,t)$ follows a Markov process i.e. its evolution has the memoryless property, then we can write
 
 \begin{equation}
-P(v, t) = \int P(v, t | v', t-\tau)P(v', t-\tau)dv
+P(V, t) = \int T(V', t | V, t-\tau)P(V, t-\tau)dV
 \end{equation} 
 
-which is known at the Chapman-Kolmogorov equation. The term $P(\{v_{i}\}, t | \{v_{i}\}'$ is known as the \emph{transition operator} in a Markov process. We can rewrite the transition operator as
+which is known at the Chapman-Kolmogorov equation. The factor $T(V', t | V, t-\tau)$ is known as the \emph{transition operator} in a Markov process and determines the evolution of $P(V,t)$ in time. We proceed by writing $T(V', t | V, t-\tau)$ in a form referred to as the Kramers-Moyal expansion
 
 \begin{align*}
-P(v,t | v',t-\tau) &= \int \delta(u-v)P(u, t | v', t-\tau)du\\
-&= \int \delta(v'-v+u-v')P(u, t | x', t-\tau)du\\
-&= \int \sum_{n=0}^{\infty} \frac{(y-x')^{n}}{n!}\left(-\frac{\partial}{\partial x}\right)^{n}P(u, t | x', t-\tau)\delta(x'-x)du\\
-&= \sum_{n=0}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial x}\right)^{n}
-\delta(x'-x)\int(u-x')^{n}P(u, t | x', t-\tau)du
+T(V', t | V, t-\tau) &= \int \delta(u-V')T(u, t | V, t-\tau)du\\
+&= \int \delta(V+u-V'-V)T(u, t | V, t-\tau)du\\
 \end{align*} 
 
-Noticing that $\int(u-x')^{n}P(u, t | x', t-\tau)du$ is just the $n$th moment of the distribution $P(u, t | x', t-\tau)$, we have 
+If we use the Taylor expansion of the $\delta$-function 
+
+\begin{equation*}
+\delta(V+u-V'-V) = \sum_{n=0}^{\infty} \frac{(u-V)^{n}}{n!}\left(-\frac{\partial}{\partial V}\right)^{n}\delta(V-V')
+\end{equation*}
+
+Inserting this into the result from above, pulling out terms independent of $u$ and swapping the order of the sum and integration gives
 
 \begin{align}
-P(v,t | v',t-\tau) &= \left(1 + \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial v}\right)^{n} M_{n}(v,t,\tau)\right)\delta(v'-v)
+T(V', t | V, t-\tau) &= \sum_{n=0}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial V}\right)^{n}\delta(V-V')\int(u-V)^{n}T(u, t | V, t-\tau)du\\
+&= \sum_{n=0}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial V}\right)^{n}\delta(V-V')M_{n}(V,t)
 \end{align} 
 
-Plugging this back in to (2.3) gives 
+noticing that $M_{n}(V,t) = \int(u-V)^{n}T(u, t | V, t-\tau)du$ is just the $n$th moment of the transition operator $T$. Plugging (2.6) back in to (2.4) gives 
 
 \begin{align}
-P(v, t) &= \int \left(1 + \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial v}\right)^{n} M_{n}(v,t,\tau)\right)\delta(v'-v)P(v', t-\tau)dv\\
-&= P(v', t-\tau) + \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial v}\right)^{n} M_{n}(v,t,\tau)
+P(V, t) &= \int \left(1 + \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial V}\right)^{n} M_{n}(V,t)\right)\delta(V-V')P(V, t-\tau)dV\\
+&= P(V', t-\tau) + \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial V}\right)^{n} \left[M_{n}(V,t)P(V,t)\right]
 \end{align} 
 
-Approximating the derivative as a finite difference and sending $\tau \rightarrow 0$ gives
+Approximating the derivative as a finite difference and taking the limit $\tau\rightarrow 0$ gives
 
 \begin{align}
-\frac{\partial P(v,t)}{\partial t} &= \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial v}\right)^{n} M_{n}(v,t,\tau)P(v,t)\\
-&= \mathcal{L}_{\mathrm{KM}} P(v,t)
+\dot{P}(V,t)  &= \underset{\tau\rightarrow 0}{\mathrm{lim}}\left(\frac{P(V, t)-P(V, t-\tau)}{\tau}\right)\\
+&= \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial V}\right)^{n} \left[M_{n}(V,t)P(V,t)\right]
 \end{align} 
 
-with $ \mathcal{L}_{\mathrm{KM}} =\sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial v}\right)^{n} M_{n}$  which is the Kramers-Moyal (KM) expansion. 
+which is formally known as the Kramers-Moyal (KM) expansion. The Fokker-Planck equation is a special case of (2.10) where we neglect terms $n>2$ in the \emph{diffusion approximation}.
 
 \section{Fokker-Planck for Homogeneous Sparse Networks}
 
-We will first consider a classic case, where we have a sparse directed network with constant synaptic efficacy between all presynaptic and postsynaptic pairs of cells. This primary pool of neurons is subject to stimulation by $N_{\mathrm{in}}$ input neurons with a connection probability $\gamma_{\mathrm{in}}$ giving $C_{\mathrm{in}} = \gamma_{\mathrm{in}}N_{\mathrm{rec}}$ unique connections between the input population and a single neuron in the recurrent pool. Within the recurrent pool, we have a connection probability of $\gamma_{\mathrm{rec}} << 1$ for any pair giving $C_{\mathrm{rec}} = \gamma_{\mathrm{rec}} N_{\mathrm{rec}}$ recurrent inputs per postsynaptic cell. We assume that a presynaptic action potential invokes a post synaptic potential (PSP) with magnitude $J_{0}$ in the postsynaptic cell with $J_{0} << \theta$ for both input and recurrent projections. As outlined above, the instantaneous firing rate $\nu(t)$ The first moment of the KM expansion reads
+The moments $M_{n}(t)$ derived above in the Kramers-Moyal expansion are dependent on the connectivity of the network and the statistics of the input. We will first consider a classic case, where we have a sparse directed network with constant synaptic efficacy between all presynaptic and postsynaptic pairs of cells. This primary pool of neurons is subject to stimulation by $N_{\mathrm{in}}$ input neurons with a connection probability $\gamma_{\mathrm{in}}$ giving $C_{\mathrm{in}} = \gamma_{\mathrm{in}}N_{\mathrm{rec}}$ unique connections between the input population and a single neuron in the recurrent pool. Within the recurrent pool, we have a connection probability of $\gamma_{\mathrm{rec}} << 1$ for any pair giving $C_{\mathrm{rec}} = \gamma_{\mathrm{rec}} N_{\mathrm{rec}}$ recurrent inputs per postsynaptic cell. We assume that a presynaptic action potential invokes a post synaptic potential (PSP) with magnitude $J_{0}$ in the postsynaptic cell with $J_{0} << \theta$ for both input and recurrent projections. The first moment of the transition operator $T(V',t| V,t-\tau)$ is given by
 
 \begin{align*}
 \mu(t) &= \mu_{in} + \mu_{rec}(t)\\
@@ -154,10 +162,10 @@ where $\nu_{\mathrm{in}}(t)$ is the rate parameter for the input Poisson process
 &= \left(C_{\mathrm{in}}\nu_{\mathrm{in}}(t) + C_{\mathrm{rec}}\nu_{\mathrm{rec}}(t)\right)\tau J_{0}^{2}
 \end{align*}
 
-with $A(t) = \int_{\theta}^{\infty} P(v,t)dv$ which represent a drift term and diffusion term and we arrive at the following Fokker-Planck equation
+After inserting the first two moments into (2.10) we arrive at the following Fokker-Planck equation
 
 \begin{align*}
-\frac{\partial P(v,t)}{\partial t} &= \left(\mu(t) - \frac{v-v_{L}}{\tau}\right) \frac{\partial}{\partial v} P(v,t) - \frac{\sigma^{2}(t)}{2\tau}\frac{\partial^{2}}{\partial v^{2}} P(v,t)\\
+\dot{P}(V,t) &= -\frac{\partial}{\partial v}[\mu(t)P(v,t)] + \frac{1}{2}\frac{\partial^{2}}{\partial v^{2}}[\sigma^{2}(t)P(V,t)]\\
 \end{align*} 
 
 At this point, it is necessary to impose the appropriate boundary conditions on the above Fokker-Planck equation as in so as to maintain biological realism. The Fokker-Planck equation can be written as the continuity equation 
