@@ -92,7 +92,7 @@ which are defined such that, for example, the inputs from the external and recur
 \tau\dot{V}_{i} = -V_{i}(t) + \eta_{i}(t)
 \end{equation}
 
-where $\eta_{i}(t) = RI_{i}(t)$ is the total synaptic current arriving at the soma and $\dot{V}_{i}$ denotes the time derivative of $V_{i}$.  In general, we cannot predict any particular trajectory $V_{i}(t)$, and we must search for an expression for the time-dependent distribution $P(V_{i}, t)$ via the transition probability distribution $T(V_{i}', t+\tau | V_{i}, t)$.
+where $\eta_{i}(t)$ is a noise term representing the total synaptic current arriving at the soma and $\dot{V}_{i}$ denotes the time derivative of $V_{i}$.  In general, we cannot predict any particular trajectory $V_{i}(t)$, and we must search for an expression for the time-dependent distribution $P(V_{i}, t)$ accounting for the sampled noise $\eta_{i}(t)$.
 
 \section{Stochastic systems and Fokker-Planck equations}
 
@@ -144,6 +144,35 @@ Approximating the derivative as a finite difference and taking the limit $\tau\r
 
 which is formally known as the Kramers-Moyal (KM) expansion. The Fokker-Planck equation is a special case of (2.10) where we neglect terms $n>2$ in the \emph{diffusion approximation}.
 
+\subsection{Fokker-Planck for a Gaussian process}
+
+Consider the following Langevin equation (first order stochastic differential equation) representing a leaky integration process
+
+\begin{equation*}
+\tau \dot{V}(t) = -V(t) + J\eta(t)
+\end{equation*}
+
+with initial condition $V(0) = 0$ and noise amplitude $J$. To illustrate the applicability of (2.10) in predicting the distribution $P(V,t)$, we consider the highly simplified case where the stochastic term is a 1D Gaussian white noise with linear drift and unit variance i.e. $\eta(t) \sim \mathcal{N}(\alpha t,1)$. Therefore, the first two moments are $\mu(t) = \alpha t$ and $\sigma^{2}(t) = 1$ and all higher order moments are zero, giving the following Fokker-Planck equation
+
+\begin{align*}
+\dot{P}(V,t) &= -\alpha t\frac{\partial}{\partial V}[P(V,t)] + \frac{1}{2}\frac{\partial^{2}}{\partial V^{2}}[P(V,t)]\\
+\end{align*}
+
+which we integrate numerically using the forward Euler method
+
+\begin{align*}
+P(V, t+\Delta t) &= P(V,t)+ \Delta t\left[\alpha t\cdot \frac{P(V+\Delta V, t) - P(V,t)}{\Delta V}\right] \\
+&- \Delta t\left[\frac{1}{2}\frac{P(V+\Delta V, t) - 2P(V,t) + P(V-\Delta V, t)}{\Delta V^{2}}\right]
+\end{align*} 
+
+\begin{figure}
+\centering
+\subfigure[]{\label{fig:a}\includegraphics[width=80mm]{fig_1-A}}
+\subfigure[]{\label{fig:b}\includegraphics[width=80mm]{fig_1-B}}
+\caption{Results of numerical integration of a Langevin equation for a gaussian white noise process. (a) Distribution of the stochastic variable over $N=1000$ units as a function of time. (b) Time course for $N=1000$ units}
+\end{figure}
+
+
 \section{Fokker-Planck for Homogeneous Sparse Networks}
 
 The moments $M_{n}(t)$ derived above in the Kramers-Moyal expansion are dependent on the connectivity of the network and the statistics of the input. We will first consider a classic case, where we have a sparse directed network with constant synaptic efficacy between all presynaptic and postsynaptic pairs of cells. This primary pool of neurons is subject to stimulation by $N_{\mathrm{in}}$ input neurons with a connection probability $\gamma_{\mathrm{in}}$ giving $C_{\mathrm{in}} = \gamma_{\mathrm{in}}N_{\mathrm{rec}}$ unique connections between the input population and a single neuron in the recurrent pool. Within the recurrent pool, we have a connection probability of $\gamma_{\mathrm{rec}} << 1$ for any pair giving $C_{\mathrm{rec}} = \gamma_{\mathrm{rec}} N_{\mathrm{rec}}$ recurrent inputs per postsynaptic cell. We assume that a presynaptic action potential invokes a post synaptic potential (PSP) with magnitude $J_{0}$ in the postsynaptic cell with $J_{0} << \theta$ for both input and recurrent projections. The first moment of the transition operator $T(V',t| V,t-\tau)$ is given by
@@ -165,7 +194,7 @@ where $\nu_{\mathrm{in}}(t)$ is the rate parameter for the input Poisson process
 After inserting the first two moments into (2.10) we arrive at the following Fokker-Planck equation
 
 \begin{align*}
-\dot{P}(V,t) &= -\frac{\partial}{\partial v}[\mu(t)P(v,t)] + \frac{1}{2}\frac{\partial^{2}}{\partial v^{2}}[\sigma^{2}(t)P(V,t)]\\
+\dot{P}(V,t) &= -\frac{\partial}{\partial V}[\mu(t)P(V,t)] + \frac{1}{2}\frac{\partial^{2}}{\partial V^{2}}[\sigma^{2}(t)P(V,t)]\\
 \end{align*} 
 
 At this point, it is necessary to impose the appropriate boundary conditions on the above Fokker-Planck equation as in so as to maintain biological realism. The Fokker-Planck equation can be written as the continuity equation 
