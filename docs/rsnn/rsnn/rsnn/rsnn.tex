@@ -43,60 +43,23 @@
 
 \abstract
 
-One of the most challenging questions in modern neuroscience is the mechanisms by which primate cortical circuits learn from example and perform inference based upon their past experience. The cerebral cortex is responsible for many higher-order brain functions including memory and . The search for principles of neural computation common to these phenomena is made extremely difficult by the diversity of cortical structures and their putative functions. Nevertheless, progress has been made in our understanding of the interplay between the organization of cortical neurons, network dynamics, and the resulting reorganization via synaptic plasticity during learning. Many deficiencies in our models of these processes can be attributed to our lack of a mathematical understanding of both the fundamental computational paradigm implemented by neural circuits and the roles of synaptic plasticity mechanisms observed \emph{in vivo}. These problems are further aggravated by the apparent stochastic features of the firing activity of neurons and experimentally observed trial-to-trial variability in population recordings. However, there is, in principle, a very powerful framework for stochastic computation evident in the Boltzmann machine: probabilistic inference by sampling. Here, we implement a recurrent spiking neural network (RSNN) as a variant of the Boltzmann machine and propose a precise mathematical role for a set of synaptic plasticity mechanisms in the formation of a set of synaptic weights that successfully ``embody" a Gaussian input statistic.
+The primate cerebral cortex is a complex system estimated to harbor more than 25 billion neurons communicating via action potentials or `spikes' and is responsible for many higher-order brain functions including memory and learning. Recent years have hosted many efforts to understand how such complex phenomena emerge from the communication of individual cells. Many studies have provided evidence that long term plasticity (LTP) in the connections between neurons permits a long-lasting alteration of network dynamics and, in turn, forms the basis of long-term memory and learning. Capturing the features of neural activity observed \emph{in-vivo} in computer based models such as recurrent spiking neural networks (RSNNs) while explaining the manipulation of information by cortical microcircuits in mathematical detail has become the gold standard for computational neuroscience. At the same time, more biophysical approaches have described the dynamics of an RSNN by modeling the membrane potential of a cortical neuron as obeying a form of Langevin dynamics i.e., a diffusion process. Here, we apply this physical treatment to the study of cell assembly formation via synaptic plasticity, drawing a relationship between the synaptic connectivity and the diffusion tensor used to describe diffusive processes in higher dimensional spaces. This approach serves to bridge fundamental biological mechanisms and their emergent computational qualities.
 
 
 \mainmatter
 
 \chapter{Introduction}
 
-Recent decades have yielded a number of experimental and theoretical advances in our understanding of learning in biological neural networks through the introduction of as homosynaptic, heterosynaptic, and homeostatic plasticity. However, the precise mathematical relationship between the synaptic plasticity mechanisms or \emph{learning rules} implemented by neurons and the formation of probabilistic models of their inputs, remains elusive.
+Towards the Hopfield network [2] which spawned an entire field of research applying techniques from the statistical physics of spin glasses to the description of neural activity. A popular approach towards the end of 20th century simplified a network of neurons firing action potentials to an ensemble of coupled spins obeying an energy function over the space of states. , the Hopfield model related the patterns learned by a network to the energy landscape over the discrete space of states. The storage capacity of these networks and the geometry of this energy landscape were of particular interest and rigorous mathematical treatment has been used to show limits on the basins of attraction in such energy landscapes [4,10,11]. However, recent experimental evidence has suggested that networks of neurons may follow a stochastic, rather than deterministic, computational paradigm. There are many examples in the literature of trial-to-trial variability in the response of cortical neurons to identical stimuli, suggesting that computations in the brain are inherently stochastic. The origins of this stochasticity are hypothesized to originate in noise in synaptic conductances and infidelity in processes clearing neurotransmitters from the synaptic cleft. Interestingly, an extension of the Hopfield model - the Boltzmann machine actually leverages stochastic activity of Ising spins to perform powerful computations [14]. In such a model, the set of synaptic weights $\Phi$ ``embody" the joint distribution $P_{\Phi}(X,R) = P_{\Phi}(X)P_{\Phi}(R|X)$ over network inputs and network response, respectively. Then, computations can be viewed as probabilistic inference after suitable transformations of the weights $\Delta\Phi$. Such physically inspired models have proven useful; however, the models are sufficiently abstract to make experimental comparisons difficult. More recent endeavors appear to make useful predictions on network dynamics by using Fokker-Planck equations to compute distributions of the membrane voltage as a function of time [5]. Here, we apply a similar formalism to the description of network dynamics with heterogeneous and stochastic synaptic weights to probe the distribution over network states $P_{\Phi}(R)$ and describe how this framework can be used to provide insights on how the neural networks embody the distribution $P_{\Phi}(R|X)$ in statistical inference tasks. To conclude, we discuss the effect of synaptic plasticity.
 
-Neural network models date back to McCulloch and Pitts [1] followed later by the Hopfield network [2] which spawned an entire field of research applying techniques from the statistical physics of spin glasses to the description of neural activity. By simplifying a network of neurons firing action potentials to an ensemble of coupled spins $\sigma \in \{-1, +1\}$, the Hopfield model related the patterns learned by a network to the energy landscape over the discrete space of states. The storage capacity of these networks and the geometry of this energy landscape were of particular interest and rigorous mathematical treatment has been used to show limits on the basins of attraction in such energy landscapes [4,10,11]. However, recent experimental evidence has suggested that networks of neurons may follow a stochastic, rather than deterministic, computational paradigm. There are many examples in the literature of trial-to-trial variability in the response of cortical neurons to identical stimuli, suggesting that computations in the brain are inherently stochastic. The origins of this stochasticity are hypothesized to originate in noise in synaptic conductances and infidelity in processes clearing neurotransmitters from the synaptic cleft. Interestingly, an extension of the Hopfield model - the Boltzmann machine actually leverages stochastic activity of Ising spins to perform powerful computations [14]. In such a model, the set of synaptic weights $\Phi$ ``embody" the joint distribution $P_{\Phi}(X,R) = P_{\Phi}(X)P_{\Phi}(R|X)$ over network inputs and network response, respectively. Then, computations can be viewed as probabilistic inference after suitable transformations of the weights $\Delta\Phi$. Such physically inspired models have proven useful; however, the models are sufficiently abstract to make experimental comparisons difficult. More recent endeavors appear to make useful predictions on network dynamics by using Fokker-Planck equations to compute distributions of the membrane voltage as a function of time [5]. Here, we apply a similar formalism to the description of network dynamics with heterogeneous and stochastic synaptic weights to probe the distribution over network states $P_{\Phi}(R)$ and describe how this framework can be used to provide insights on how the neural networks embody the distribution $P_{\Phi}(R|X)$ in statistical inference tasks. To conclude, we discuss the effect of synaptic plasticity.
-
-By solving the Fokker-Planck equations numerically for the time evolution of the distribution over membrane voltages $P_{\Phi}(V,t)$ simulataneously permits knowledge of the distribution $P_{\Phi}(\mathbf{z},t)$. To see this, consider thresholding a sample from the joint distribution $\mathbf{z} \sim \Theta\left(\mathbf{v}\right)$ where $\mathbf{v} \sim (P_{\Phi}(V,t))^{N}$. We might then ask how local synaptic plasticity rules permit the formation of cell assemblies which collectively encode stimuli.
-
-\chapter{Statistical mechanics of a population of neurons}
-
-In this section we make use of Fokker-Planck equations from statistical mechanics in the description of neural dynamics. A natural example is to describe the voltage dynamics of a single leaky integrate and fire (LIF) neuron that receives $N$ feedforward Poisson input spike trains. The formalism presented can then be generalized to a population of LIF neurons.\\
-
-\section{Formalism}
-
-We consider two main populations of neurons: an external population and a recurrent population. The input neurons are described only by their spiking activity and are symbolized by the binary vector $\mathbf{s}(t)\in \mathbb{F}_{2}^{n}$. Furthermore, we describe the \emph{state} variables of the recurrent population by a vector of voltages $\mathbf{v}(t)\in \mathbb{R}^{n\times 1}$ and a vector of so-called observable states denoted by $\mathbf{z}(t) = \Theta(\mathbf{v}(t))$ where $\Theta(v(t)) = H(v(t) - \theta)$ and $H$ is the Heaviside step function. Input neurons communicate to the recurrent population through excitatory connections summarized by the input weight matrix $\mathbf{X}\in \mathbb{R}^{n\times m}$. Similarly, a recurrent weight matrix $\mathbf{J}\in \mathbb{R}^{n\times n}$ specifies the recurrent network connectivity. The matrix $\mathbf{J}$ may contain both excitatory and inhibitory connections. Therefore, it will prove useful to partition $\mathbf{X}$ and $\mathbf{J}$ into four quadrants as follows
-
-\begin{align}
-\mathbf{X} = \begin{bmatrix}
-    X_{E}\\
-    X_{I} 
-\end{bmatrix}  && \mathbf{J} = \begin{bmatrix}
-    J_{EE} & J_{IE} \\
-    J_{EI} & J_{II} 
-\end{bmatrix} 
-\end{align}
-
-and an appropriate partitioning scheme is applied to the network state variables
-
-\begin{align}
-\mathbf{v} = \begin{bmatrix}
-    v_{E}\\
-    v_{I} 
-\end{bmatrix}  && \mathbf{z} = \begin{bmatrix}
-    z_{E}\\
-    z_{I} 
-\end{bmatrix} 
-\end{align}
-
-which are defined such that, for example, the inputs from the external and recurrent population to an excitatory neuron $j \in \{1, 2, ..., n'-1, n'\}$ with $n' \leq n$ is simply $\xi_{j}(t) = J_{EE}z_{E} + J_{IE}z_{I}$. More generally, the voltage state variable for an arbitrary neuron evolves according to the following differential equation for the voltage
-
-\begin{equation}
-\tau\dot{V}_{i} = -V_{i}(t) + \eta_{i}(t)
-\end{equation}
-
-where $\eta_{i}(t)$ is a noise term representing the total synaptic current arriving at the soma and $\dot{V}_{i}$ denotes the time derivative of $V_{i}$.  In general, we cannot predict any particular trajectory $V_{i}(t)$, and we must search for an expression for the time-dependent distribution $P(V_{i}, t)$ accounting for the sampled noise $\eta_{i}(t)$.
-
-\section{Stochastic systems and Fokker-Planck equations}
 
 The quantitative discussion of the dynamics of many complex systems (systems where the number of interacting units $N$ is large) in nature from networks of spiking neurons, geophysical systems, to excitable media, all necessarily require a statistical description. Indeed, enumerating the available states to such a system itself has proven intractable, even for small systems over short time scales. As an example, consider the states of an interacting system of $N$ binary variables denoted $\{z_{i}\}_{i=1}^{N}$ which might be physically realized as an ensemble of spins in a ferromagnet. Even for extremely small cases such as $N=100$ the system can take on $2^{100} = 1.26\times 10^{30}$ different configurations and by $N=300$ the number of configurations exceed our best estimates for the number of atoms in the known universe. At the same time, we cannot hope to make enough measurements of such a system to estimate the probability distribution over the space of states and make inferences on the organization and interactions of the individual elements based on such a distribution. We can, however, develop model distributions over the available states based on stochastic interaction between the individual units that account for the degrees of freedom which we cannot approach analytically - a technique often employed in the description of the statistical physics of particles. This family of techniques, often formally referred to as Langevin dynamics, is defined by the use of stochastic differential equations to model the evolution of systems with high degrees of freedom. A Fokker-Planck equation allows us to solve for the time evolution of the probability distribution over such a variable, providing insights into the dynamics which cannot be seen from any one trajectory through the space of states. 
+
+\chapter{Stochastic systems and Fokker-Planck equations}
+
+\section{The Langevin Equation}
+
+
 
 In the context of neuroscience, the Fokker-Planck approach has been taken by many in describing the dynamics of the membrane potential distribution in a population of neurons. In the following paragraphs, we will sketch a derivation of the Fokker-Planck equation for a general stochastic process in one dimension and apply this result to networks of integrate and fire neurons.
 
@@ -169,7 +132,7 @@ P(V, t+\Delta t) &= P(V,t)+ \Delta t\left[\alpha t\cdot \frac{P(V+\Delta V, t) -
 \centering
 \subfigure[]{\label{fig:a}\includegraphics[width=80mm]{fig_1-A}}
 \subfigure[]{\label{fig:b}\includegraphics[width=80mm]{fig_1-B}}
-\caption{Results of numerical integration of a Langevin equation for a gaussian white noise process. (a) Distribution of the stochastic variable over $N=1000$ units as a function of time. (b) Time course for $N=1000$ units}
+\caption{Results of numerical integration of a Langevin equation for a gaussian white noise process with $J=1$, $\tau=1$, $\alpha=0.01$, and $V(0)=0$. (a) Distribution of the stochastic variable over $N=1000$ units as a function of time. (b) Time course for $N=1000$ units}
 \end{figure}
 
 
