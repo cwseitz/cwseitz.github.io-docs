@@ -110,17 +110,23 @@ which is formally known as the Kramers-Moyal (KM) expansion. The Fokker-Planck e
 
 \subsection{The Ornstein-Uhlenbeck Process}
 
-To illustrate the power of th Fokker-Planck equations, we will consider a generic Ornstein-Uhlenbeck process - a natural starting point for its similarity to simplified neuron models. Consider the following Langevin equation representing a stochastic process with drift
+The Ornstein-Uhlenbeck can be thought of as an extension of the Wiener process or \emph{Brownian Motion} where the displacement of a variable $x$ in a time $dt$ is normally distributed with variance proportional to $\Delta t$ i.e. $x(t+dt) - x(t) \sim N(0, \sigma^{2}dt)$ or equivalently $dx \sim \sigma\sqrt{dt}\eta(t)$ where the parameter $\sigma^{2}$ defines the proportionality. The Ornstein-Uhlenbeck process is commonly written as a Langevin equation with a noise term similar to Brownian motion but with an added frictional term $-\theta x(t)$ and non-stationary noise $\mu(t) + \sigma\sqrt{dt}\eta(t)$ giving
 
 \begin{equation*}
-\dot{V}(t) = -\frac{V(t)-V_{r}}{\tau} + \sigma\eta(t)
+\dot{x}(t) = -\theta x(t) + \mu(t) + \sigma\sqrt{dt}\eta(t)
 \end{equation*}
 
-with linear drift back to a resting state $V_{r}$ according to the rate constant $\tau$ and noise amplitude $\sigma$. To illustrate the applicability of (2.10) in predicting the distribution $P(V,t)$, we consider the case where $\eta(t)$ is a 1D Gaussian white noise. We have the following Fokker-Planck equation
+which, with a simple change of variables, becomes a leaky integrate and fire neuron model 
 
-\begin{align*}
-\dot{P}(V,t) &= \frac{1}{\tau}\frac{\partial}{\partial V}[\left(V(t)-V_{r}\right) P(V,t)] + \frac{\sigma^{2}}{2}\frac{\partial^{2}}{\partial V^{2}}[P(V,t)]\\
-\end{align*}
+\begin{equation*}
+\dot{V}(t) = -\frac{V(t)}{\tau} + \mu(t) + \sigma\sqrt{dt}\eta(t)
+\end{equation*}
+
+we define $I(t) = \mu(t) + \sigma\sqrt{dt}\eta(t)$ as the input current arriving at the soma of a neuron and $\eta(t) \sim \mathcal{N}(0,1)$. To illustrate the applicability of (2.10) in predicting the distribution $P(V,t)$, we consider the case where $\eta(t)$ is a 1D Gaussian white noise. We have the following Fokker-Planck equation
+
+\begin{align}
+\tau\dot{P}(V,t) &= \frac{\partial}{\partial V}[\left(V(t)-\mu(t)\right) P(V,t)] + \frac{\sigma^{2}}{2}\frac{\partial^{2}}{\partial V^{2}}[P(V,t)]
+\end{align}
 
 The transition density $T(V',t'|V,t)$ has a known analytical form:
 
@@ -134,6 +140,8 @@ Plugging this into (2.1) and setting the initial condition $P(V,t) = \delta(V-V_
 P(V', t) &= \sqrt{\frac{1}{\tau\pi\sigma^{2}(1-\exp\left(-2\Delta t/\tau)\right))}}\exp\left(-\frac{1}{\tau\sigma^{2}}\frac{(V'-V\exp(-\Delta t/\tau))^{2}}{1-\exp\left(-2\Delta t/\tau\right)}\right)\delta(V-V_{R})dV\\
 &= \sqrt{\frac{1}{\tau\pi\sigma^{2}(1-\exp\left(-2\Delta t/\tau)\right))}}\exp\left(-\frac{1}{\tau\sigma^{2}}\frac{(V'-V_{R}\exp(-\Delta t/\tau))^{2}}{1-\exp\left(-2\Delta t/\tau\right)}\right)\delta(V-V_{R})dV\\
 \end{align*} 
+
+We will now show that (2.8) can be integrated numerically
 
 \begin{align*}
 P(V, t+\Delta t) &= P(V,t)+ \Delta t\left[\alpha t\cdot \frac{P(V+\Delta V, t) - P(V,t)}{\Delta V}\right] \\
