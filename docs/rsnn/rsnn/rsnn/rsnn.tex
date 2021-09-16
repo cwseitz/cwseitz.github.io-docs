@@ -43,7 +43,8 @@
 
 \abstract
 
-The primate cerebral cortex is a complex system estimated to harbor more than 25 billion neurons communicating via action potentials or `spikes' and is responsible for many higher-order brain functions including memory and learning. Recent years have hosted many efforts to understand how such complex phenomena emerge from the communication of individual cells. Many studies have provided evidence that long term plasticity (LTP) in synapses permits a long-lasting alteration of network dynamics and, in turn, forms the basis of long-term memory and learning. However, understanding memory formation and learning in the brain is made difficult by the variability in the response of cortical neurons to stimuli. Therefore, capturing the apparent stochastic features of neural activity in computer based models, such as recurrent spiking neural networks (RSNNs), while explaining their manipulation of information mathematically has become the gold standard for computational neuroscience. Models derived from statistical mechanics, such as those which assert that the membrane potential of a cortical neuron obeys a form of Langevin dynamics, can account for stochastic network activity and provide the intriguing interpretation that neural dynamics represent sampling from a probability distribution.  Here, we apply a similiar mathematical treatment to the study of an RSNN by modeling the membrane potential statistics of an integrate and fire neuron using Fokker-Planck equations. With this statistical framework in hand, we can recast the biological system as a diffusion process in higher dimensions and explore the relationships between synaptic connectivity to the correlation structure of neural spike trains. This approach is also amenable to information theoretic analysis and is a step toward a mathematical relationship between neuroplasticity mechanisms and the emergent computational capabilities of cortical microcircuits.
+The primate cerebral cortex is a complex system estimated to harbor more than 25 billion neurons communicating via action potentials or `spikes' and is responsible for many higher-order brain functions including memory and learning. Recent years have hosted many efforts to understand how such complex phenomena emerge from the communication of individual cells. Many studies have provided evidence that long term plasticity (LTP) in synapses permits a long-lasting alteration of network dynamics and, in turn, forms the basis of long-term memory and learning. However, understanding memory formation and learning in the brain is made difficult by the variability in the response of cortical neurons to stimuli. Therefore, capturing the apparent stochastic features of neural activity in computer based models, such as recurrent spiking neural networks (RSNNs), while explaining their manipulation of information mathematically has become the gold standard for computational neuroscience. Models of neural networks derived from statistical mechanics, such as those which assert that the membrane potential of a cortical neuron obeys a form of Langevin dynamics, can potentially account for stochastic network activity. Such models also provide the intriguing interpretation that neural activity represents sampling from a probability distribution - a technique central to statistical inference.  Here, we apply a similiar mathematical treatment to the study of an RSNN by modeling the membrane potential statistics of an integrate and fire neuron using Fokker-Planck equations. With this statistical framework in hand, we can recast a network of neurons as a stochastic process in higher dimensions and explore the relationships between synaptic connectivity and its plasticity to the correlation structure of neural spike trains. This approach is also amenable to information theoretic analysis and is a step toward a mathematical relationship between neuroplasticity mechanisms and the emergent computational capabilities of cortical microcircuits.
+
 
 
 \mainmatter
@@ -68,7 +69,7 @@ In the context of neuroscience, the Fokker-Planck approach has been taken by man
 Given many instantiations of a stochastic variable $V$, we can construct a normalize histogram over all observations as a function of time $P(V,t)$. However, in order to systematically explore the relationship between the parameterization of the process and $P(V,t)$ we require an expression for $\dot{P}(V,t)$. If we make a fundamental assumption that the evolution of $P(V,t)$ follows a Markov process i.e. its evolution has the memoryless property, then we can write
 
 \begin{equation}
-P(V, t) = \int T(V', t | V, t-\tau)P(V, t-\tau)dV
+P(V', t) = \int T(V', t | V, t-\tau)P(V, t-\tau)dV
 \end{equation} 
 
 which is known at the Chapman-Kolmogorov equation. The factor $T(V', t | V, t-\tau)$ is known as the \emph{transition operator} in a Markov process and determines the evolution of $P(V,t)$ in time. We proceed by writing $T(V', t | V, t-\tau)$ in a form referred to as the Kramers-Moyal expansion
@@ -107,21 +108,32 @@ Approximating the derivative as a finite difference and taking the limit $\tau\r
 
 which is formally known as the Kramers-Moyal (KM) expansion. The Fokker-Planck equation is a special case of (2.10) where we neglect terms $n>2$ in the \emph{diffusion approximation}.
 
-\subsection{Fokker-Planck for a Gaussian process}
+\subsection{The Ornstein-Uhlenbeck Process}
 
-Consider the following Langevin equation (first order stochastic differential equation) representing a leaky integration process
+To illustrate the power of th Fokker-Planck equations, we will consider a generic Ornstein-Uhlenbeck process - a natural starting point for its similarity to simplified neuron models. Consider the following Langevin equation representing a stochastic process with drift
 
 \begin{equation*}
-\tau \dot{V}(t) = -V(t) + J\eta(t)
+\dot{V}(t) = -\frac{V(t)-V_{r}}{\tau} + \sigma\eta(t)
 \end{equation*}
 
-with initial condition $V(0) = 0$ and noise amplitude $J$. To illustrate the applicability of (2.10) in predicting the distribution $P(V,t)$, we consider the highly simplified case where the stochastic term is a 1D Gaussian white noise with linear drift and unit variance i.e. $\eta(t) \sim \mathcal{N}(\alpha t,1)$. Therefore, the first two moments are $\mu(t) = \alpha t$ and $\sigma^{2}(t) = 1$ and all higher order moments are zero, giving the following Fokker-Planck equation
+with linear drift back to a resting state $V_{r}$ according to the rate constant $\tau$ and noise amplitude $\sigma$. To illustrate the applicability of (2.10) in predicting the distribution $P(V,t)$, we consider the case where $\eta(t)$ is a 1D Gaussian white noise. We have the following Fokker-Planck equation
 
 \begin{align*}
-\dot{P}(V,t) &= -\alpha t\frac{\partial}{\partial V}[P(V,t)] + \frac{1}{2}\frac{\partial^{2}}{\partial V^{2}}[P(V,t)]\\
+\dot{P}(V,t) &= \frac{1}{\tau}\frac{\partial}{\partial V}[\left(V(t)-V_{r}\right) P(V,t)] + \frac{\sigma^{2}}{2}\frac{\partial^{2}}{\partial V^{2}}[P(V,t)]\\
 \end{align*}
 
-which we integrate numerically using the forward Euler method
+The transition density $T(V',t'|V,t)$ has a known analytical form:
+
+\begin{align*}
+T(V',t+\Delta t|V,t) = \sqrt{\frac{1}{\tau\pi\sigma^{2}(1-\exp\left(-2\Delta t/\tau)\right))}}\exp\left(-\frac{1}{\tau\sigma^{2}}\frac{(V'-V\exp(-\Delta t/\tau))^{2}}{1-\exp\left(-2\Delta t/\tau\right)}\right)
+\end{align*} 
+
+Plugging this into (2.1) and setting the initial condition $P(V,t) = \delta(V-V_{R})$ gives
+
+\begin{align*}
+P(V', t) &= \sqrt{\frac{1}{\tau\pi\sigma^{2}(1-\exp\left(-2\Delta t/\tau)\right))}}\exp\left(-\frac{1}{\tau\sigma^{2}}\frac{(V'-V\exp(-\Delta t/\tau))^{2}}{1-\exp\left(-2\Delta t/\tau\right)}\right)\delta(V-V_{R})dV\\
+&= \sqrt{\frac{1}{\tau\pi\sigma^{2}(1-\exp\left(-2\Delta t/\tau)\right))}}\exp\left(-\frac{1}{\tau\sigma^{2}}\frac{(V'-V_{R}\exp(-\Delta t/\tau))^{2}}{1-\exp\left(-2\Delta t/\tau\right)}\right)\delta(V-V_{R})dV\\
+\end{align*} 
 
 \begin{align*}
 P(V, t+\Delta t) &= P(V,t)+ \Delta t\left[\alpha t\cdot \frac{P(V+\Delta V, t) - P(V,t)}{\Delta V}\right] \\
