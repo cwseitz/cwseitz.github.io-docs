@@ -139,13 +139,15 @@ Plugging this into (2.1) and setting the initial condition $P(V,t) = \delta(V-V_
 \begin{align*}
 P(V', t) &= \sqrt{\frac{1}{\tau\pi\sigma^{2}(1-\exp\left(-2\Delta t/\tau)\right))}}\exp\left(-\frac{1}{\tau\sigma^{2}}\frac{(V'-V\exp(-\Delta t/\tau))^{2}}{1-\exp\left(-2\Delta t/\tau\right)}\right)\delta(V-V_{R})dV\\
 &= \sqrt{\frac{1}{\tau\pi\sigma^{2}(1-\exp\left(-2\Delta t/\tau)\right))}}\exp\left(-\frac{1}{\tau\sigma^{2}}\frac{(V'-V_{R}\exp(-\Delta t/\tau))^{2}}{1-\exp\left(-2\Delta t/\tau\right)}\right)\delta(V-V_{R})dV\\
-\end{align*} 
+\end{align*}
 
-We will now show that (2.8) can be integrated numerically
+\subsection{Numerical solution to the 1D FP equation}
+
+We will now show that (2.8) can be integrated using finite central differences method which gives a stable solution
 
 \begin{align*}
-P(V, t+\Delta t) &= P(V,t)+ \Delta t\left[\alpha t\cdot \frac{P(V+\Delta V, t) - P(V,t)}{\Delta V}\right] \\
-&- \Delta t\left[\frac{1}{2}\frac{P(V+\Delta V, t) - 2P(V,t) + P(V-\Delta V, t)}{\Delta V^{2}}\right]
+P(V_{j}, t+\Delta t) &= P(V_{j},t) - \Delta t\left[\alpha \cdot \frac{P(V_{j+1}, t) - P(V_{j},t)}{\Delta V}\right] \\
+&+ \Delta t\left[\frac{\sigma^{2}}{2}\frac{P(V_{j+1}, t) - 2P(V_{j},t) + P(V_{j-1},t) }{\Delta V^{2}}\right]
 \end{align*} 
 
 \begin{figure}
