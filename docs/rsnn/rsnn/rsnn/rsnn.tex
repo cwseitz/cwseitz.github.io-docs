@@ -108,7 +108,7 @@ Approximating the derivative as a finite difference and taking the limit $\tau\r
 
 which is formally known as the Kramers-Moyal (KM) expansion. The Fokker-Planck equation is a special case of (2.10) where we neglect terms $n>2$ in the \emph{diffusion approximation}.
 
-\subsection{The Ornstein-Uhlenbeck Process}
+\subsection{The Ornstein-Uhlenbeck Prototype}
 
 The Ornstein-Uhlenbeck can be thought of as an extension of the Wiener process or \emph{Brownian Motion} where the displacement of a variable $x$ in a time $dt$ is normally distributed with variance proportional to $\Delta t$ i.e. $x(t+dt) - x(t) \sim N(0, \sigma^{2}dt)$ or equivalently $dx \sim \sigma\sqrt{dt}\eta(t)$ where the parameter $\sigma^{2}$ defines the proportionality. The Ornstein-Uhlenbeck process is commonly written as a Langevin equation with a noise term similar to Brownian motion but with an added frictional term $-\theta x(t)$ and non-stationary noise $\mu(t) + \sigma\sqrt{dt}\eta(t)$ giving
 
@@ -131,30 +131,16 @@ we define $I(t) = \mu(t) + \sigma\sqrt{dt}\eta(t)$ as the input current arriving
 The transition density $T(V',t'|V,t)$ has a known analytical form:
 
 \begin{align*}
-T(V',t+\Delta t|V,t) = \sqrt{\frac{1}{\tau\pi\sigma^{2}(1-\exp\left(-2\Delta t/\tau)\right))}}\exp\left(-\frac{1}{\tau\sigma^{2}}\frac{(V'-V\exp(-\Delta t/\tau))^{2}}{1-\exp\left(-2\Delta t/\tau\right)}\right)
+T(V',t+\Delta t|V,t) = \sqrt{\frac{1}{\tau\pi\sigma^{2}(1-\exp\left(-2\Delta t/\tau)\right))}}\exp\left(-\frac{1}{\tau\sigma^{2}}\frac{(V'-V_{R}\exp(-\Delta t/\tau))^{2}}{1-\exp\left(-2\Delta t/\tau\right)}\right)
 \end{align*} 
 
-Plugging this into (2.1) and setting the initial condition $P(V,t) = \delta(V-V_{R})$ gives
-
-\begin{align*}
-P(V', t) &= \sqrt{\frac{1}{\tau\pi\sigma^{2}(1-\exp\left(-2\Delta t/\tau)\right))}}\exp\left(-\frac{1}{\tau\sigma^{2}}\frac{(V'-V\exp(-\Delta t/\tau))^{2}}{1-\exp\left(-2\Delta t/\tau\right)}\right)\delta(V-V_{R})dV\\
-&= \sqrt{\frac{1}{\tau\pi\sigma^{2}(1-\exp\left(-2\Delta t/\tau)\right))}}\exp\left(-\frac{1}{\tau\sigma^{2}}\frac{(V'-V_{R}\exp(-\Delta t/\tau))^{2}}{1-\exp\left(-2\Delta t/\tau\right)}\right)\delta(V-V_{R})dV\\
-\end{align*}
-
-\subsection{Numerical solution to the 1D FP equation}
-
-We will now show that (2.8) can be integrated using finite central differences method which gives a stable solution
-
-\begin{align*}
-P(V_{j}, t+\Delta t) &= P(V_{j},t) - \Delta t\left[\alpha \cdot \frac{P(V_{j+1}, t) - P(V_{j},t)}{\Delta V}\right] \\
-&+ \Delta t\left[\frac{\sigma^{2}}{2}\frac{P(V_{j+1}, t) - 2P(V_{j},t) + P(V_{j-1},t) }{\Delta V^{2}}\right]
-\end{align*} 
+This is equivalent to the distribution $P(V,t)$ as can be seen by plugging $T$ into (2.1) and setting the initial condition $P(V,t) = \delta(V-V_{R})$.
 
 \begin{figure}
 \centering
 \subfigure[]{\label{fig:a}\includegraphics[width=80mm]{fig_1-A}}
 \subfigure[]{\label{fig:b}\includegraphics[width=80mm]{fig_1-B}}
-\caption{Results of numerical integration of a Langevin equation for a gaussian white noise process with $J=1$, $\tau=1$, $\alpha=0.01$, and $V(0)=0$. (a) Distribution of the stochastic variable over $N=1000$ units as a function of time. (b) Time course for $N=1000$ units}
+\caption{Results of numerical integration of a Langevin equation for a gaussian white noise process with $\sigma = 1$, $\Delta t=0.002$, $\alpha=10$, and $V(0)=-1$. (a) Distribution of $V$ for $N=10,000$ units as a function of time (dashed is the theoretical prediction, solid is the simulation result). See stationary distribution in cyan (b) Time course for $N=10,000$ units}
 \end{figure}
 
 
