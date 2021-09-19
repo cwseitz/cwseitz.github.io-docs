@@ -108,6 +108,36 @@ Approximating the derivative as a finite difference and taking the limit $\tau\r
 
 which is formally known as the Kramers-Moyal (KM) expansion. The Fokker-Planck equation is a special case of (2.10) where we neglect terms $n>2$ in the \emph{diffusion approximation}.
 
+\subsection{A network of leaky integrate and fire neurons}
+
+We consider a general network of $N$ leaky integrate and fire units expressed mathematically as a weighted graph $\mathcal{N}$. We defined the state vector $\mathbf{V}$ that stores the membrane potential of each cell, which evolves according to a set of $N$ coupled differential equations
+
+\begin{align*}
+\dot{V_{j}}(t) = -\frac{V_{j}(t)}{\tau} + \sum_{i}J_{ij}\delta(t-t_{spike}) + X_{j}(t)
+\end{align*}
+
+for a stochastic input $X$, which we assume can be written as a compound Poisson process, and a weighted summation of spikes in the primary population $\sum_{i}J_{ij}\delta(t-t_{spike})$. The state vector for the system is then $\mathbf{V}(t) = (V_{0}(t), V_{1}(t), ..., V_{N}(t))$ and we look for an analytical relationship between the joint distribution $P(\mathbf{V}(t))$ and the synaptic connectivity $J$. In principle, if we know the moments $\{M_{j}^{n}\}$  of the transition operator $T_{j}(V',t'|V,t)$ for every neuron $j$ to arbitrary order, we can express $\dot{P}(\mathbf{V}(t))$ according to the KM expansion in (2.7). The primary hurdle we need to overcome in this procedure then becomes relating the moments $\{M_{j}^{n}\}$ to the synaptic connectivity $J$. For example, we can construct a general template for the distribution $T_{j}$ by noticing that the probability of a binary input pattern
+
+\begin{align*}
+P(\mathbf{z}) = \underset{j}{\prod} \; p_{j}^{z_{j}}(1-p_{j})^{1-z_{j}}
+\end{align*}
+
+which is a multivariate Bernoulli distribution. If we let $\xi$ index the space of possible binary patterns
+
+\begin{align}
+T(V',t'|V,t) = \sum_{\xi} \delta(V'- V - J\cdot z_{\xi})\underset{j}{\prod} \; p_{j}^{z_{j}}(1-p_{j})^{1-z_{j}}
+\end{align}
+
+so we see that we must first know $P(\mathbf{z})$ which in turn requires knowledge of all $p_{j} = P_{j}(\theta, t)$ i.e. the probability flux at the threshold $\theta$. We now argue that the moments of (2.8) can be found 
+
+\begin{align}
+M_{n} = \int (V-V')^{n} T(V',t'|V,t) dV
+\end{align}
+
+which are essentially the moments of a compound Bernoulli distribution where the individual probabilities $p_{j}(t')$ are given by $P_{j}(\theta, t)$.
+
+
+
 \subsection{The Ornstein-Uhlenbeck Prototype}
 
 The Ornstein-Uhlenbeck can be thought of as an extension of the Wiener process or \emph{Brownian Motion} where the displacement of a variable $x$ in a time $dt$ is normally distributed with variance proportional to $\Delta t$ i.e. $x(t+dt) - x(t) \sim N(0, \sigma^{2}dt)$ or equivalently $dx \sim \sigma\sqrt{dt}\eta(t)$ where the parameter $\sigma^{2}$ defines the proportionality. The Ornstein-Uhlenbeck process is commonly written as a Langevin equation with a noise term similar to Brownian motion but with an added frictional term $-\theta x(t)$ and non-stationary noise $\mu(t) + \sigma\sqrt{dt}\eta(t)$ giving
@@ -116,13 +146,13 @@ The Ornstein-Uhlenbeck can be thought of as an extension of the Wiener process o
 \dot{x}(t) = -\theta x(t) + \mu(t) + \sigma\sqrt{dt}\eta(t)
 \end{equation*}
 
-which, with a simple change of variables, becomes a leaky integrate and fire neuron model 
+which, with a simple change of variables, becomes a leaky integrate and fire neuron model for a neuron $j$
 
 \begin{equation*}
-\dot{V}(t) = -\frac{V(t)}{\tau} + \mu(t) + \sigma\sqrt{dt}\eta(t)
+\dot{V_{j}}(t) = -\frac{V_{j}(t)}{\tau} + \mu_{j}(t) + \sigma_{j}\sqrt{dt}\eta(t)
 \end{equation*}
 
-we define $I(t) = \mu(t) + \sigma\sqrt{dt}\eta(t)$ as the input current arriving at the soma of a neuron and $\eta(t) \sim \mathcal{N}(0,1)$. To illustrate the applicability of (2.10) in predicting the distribution $P(V,t)$, we consider the case where $\eta(t)$ is a 1D Gaussian white noise. We have the following Fokker-Planck equation
+we define $I_{j}(t) = \mu_{j}(t) + \sigma_{j}\sqrt{dt}\eta(t)$ as the input current arriving at the soma of a neuron and $\eta(t) \sim \mathcal{N}(0,1)$. To illustrate the applicability of (2.10) in predicting the distribution $P(V,t)$, we consider the case where $\eta(t)$ is a 1D Gaussian white noise. We have the following Fokker-Planck equation
 
 \begin{align}
 \tau\dot{P}(V,t) &= \frac{\partial}{\partial V}[\left(V(t)-\mu(t)\right) P(V,t)] + \frac{\sigma^{2}}{2}\frac{\partial^{2}}{\partial V^{2}}[P(V,t)]
