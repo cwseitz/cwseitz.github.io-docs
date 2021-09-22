@@ -52,7 +52,11 @@ The primate cerebral cortex is a complex system estimated to harbor more than 25
 
 \chapter{Introduction}
 
-The quantitative discussion of the dynamics of many complex systems (systems where the number of interacting units $N$ is large) in nature from networks of spiking neurons, geophysical systems, to excitable media, all necessarily require a statistical description. Indeed, enumerating the available states to such a system itself has proven intractable, even for small systems over short time scales. As an example, consider the states of an interacting system of $N$ binary variables denoted $\{z_{i}\}_{i=1}^{N}$ which might be physically realized as an ensemble of spins in a ferromagnet. Even for extremely small cases such as $N=100$ the system can take on $2^{100} = 1.26\times 10^{30}$ different configurations and by $N=300$ the number of configurations exceed our best estimates for the number of atoms in the known universe. At the same time, we cannot hope to make enough measurements of such a system to estimate the probability distribution over the space of states and make inferences on the organization and interactions of the individual elements based on such a distribution. We can, however, develop model distributions over the available states based on stochastic interaction between the individual units that account for the degrees of freedom which we cannot approach analytically - a technique often employed in the description of the statistical physics of particles. This family of techniques, often formally referred to as Langevin dynamics, is defined by the use of stochastic differential equations to model the evolution of systems with high degrees of freedom. A Fokker-Planck equation allows us to solve for the time evolution of the probability distribution over such a variable, providing insights into the dynamics which cannot be seen from any one trajectory through the space of states. 
+\subsection{A physical perspective of neuroscience}
+
+Quantitative discussion of the dynamics of many complex systems in nature including neural networks, often, if not always, require some form of approximations. In order to begin to understand a complex system at a physical level, we need two pieces of information (i) the space of states available to the system and (ii) . As an example, consider the states of an interacting system of $N$ binary variables denoted $\{z_{i}\}_{i=1}^{N}$ which might be physically realized as an ensemble of spins in a ferromagnet. Even for extremely small cases such as $N=100$ the system can take on $2^{100} = 1.26\times 10^{30}$ different configurations and by $N=300$ the number of configurations exceed our best estimates for the number of atoms in the known universe. These unimaginabily large numbers simultaneously suggest that we cannot even hope to estimate a probability distribution over the phase space of the system, even with the most cutting edge experimental apparatus. One possible solution to this problem is to instead perform \emph{analysis by synthesis}.
+
+On the other hand, it is precisely this problem that has been the subject of research in other disciplines where complex systems require a statistical description, e.g. the many-body problems of statistical physics. the degrees of freedom which we cannot approach analytically - a technique often employed in the description of the statistical physics of particles. This family of techniques, often formally referred to as Langevin dynamics, is defined by the use of stochastic differential equations to model the evolution of systems with high degrees of freedom. A Fokker-Planck equation allows us to solve for the time evolution of the probability distribution over such a variable, providing insights into the dynamics which cannot be seen from any one trajectory through the space of states. 
 
 \subsection{Models of action potential generation in cortical neurons}
 
@@ -93,14 +97,14 @@ which requires that $V$ decays back to a resting value $E$ exponentially with ti
 \begin{figure}
 \centering
 \includegraphics[width=115mm]{fig_2-A}
-\caption{Simulation of a leaky integrate and fire neuron}
+\caption{A leaky integrate and fire neuron with constant current injection}
 \end{figure}
 
 
 \i\begin{figure}
 \centering
-\includegraphics[width=115mm]{fig_2-B}
-\caption{Simulation of a Hodgkin-Huxley neuron}
+\includegraphics[width=115mm]{fig_3-A}
+\caption{A leaky integrate and fire neuron embedded in a recurrent network}
 \end{figure}
 
 \subsection{Physical models of networks of neurons}
