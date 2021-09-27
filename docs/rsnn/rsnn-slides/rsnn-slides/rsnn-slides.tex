@@ -6,6 +6,7 @@
 \usepackage{beamerthemeshadow}
 \usepackage{amsmath}
 \usepackage{bm}
+\usepackage{siunitx}
 
 \setbeamertemplate{footline}{}
 \setbeamertemplate{navigation symbols}{}
@@ -41,13 +42,13 @@ Hodkin and Huxley developed a mathematical model for nerve cell communication in
 
 Animal models and experimental technologies have improved drastically
 
-Scale bars: b, 250 um; c, d, 100 um
 \begin{figure}
 \centering
 \includegraphics[width=140mm]{figure-16}
 \end{figure}
+Scale bars: b, 250 um; c, d, 100 um
 
-But our mathematical and physical theories of sensory processing are lacking...
+$4\si{mm}^{2}$ FOV at $\sim 8\si{Hz}$
 
 \end{frame}
 
@@ -61,7 +62,7 @@ But our mathematical and physical theories of sensory processing are lacking...
 
 \begin{figure}
 \centering
-\includegraphics[width=125mm]{figure-14}
+\includegraphics[width=115mm]{figure-14}
 \end{figure}
 
 \begin{equation*}
@@ -73,7 +74,7 @@ But our mathematical and physical theories of sensory processing are lacking...
 
 \begin{frame}{Synaptic strengths are dynamic}
 
-$w_{n}$ represents the change in the post-synaptic membrane potential induced by an action potential at the presynaptic cell
+$w_{n}$ represents the change in the post-synaptic membrane potential induced by an action potential at the presynaptic cell ($\sim 1-4 \si{mV}$)
 
 \begin{figure}
 \centering
@@ -81,27 +82,41 @@ $w_{n}$ represents the change in the post-synaptic membrane potential induced by
 \end{figure}
 
 $w_{n}$ is a result of complex biochemical pathways and is not necessarily a constant (synaptic plasticity)
-
 \end{frame}
 
-\begin{frame}{Langevin dynamics of the membrane potential}
+\begin{frame}{Synaptic current as a stochastic process}
+
 
 \begin{figure}
 \centering
-\includegraphics[width=100mm]{figure-10}
+\includegraphics[width=105mm]{figure-23}
 \end{figure}
-
-Predicting $I(t)$ is hard especially with dynamic synapses. We often model $I(t)$ as a stochastic process e.g., $I(t) = \mu(t) + \sqrt{2D}\eta(t)$
 
 \begin{equation*}
 \tau\dot{V(t)} = -g_{L}V(t) + \mu(t) + \sqrt{2D}\eta(t)
 \end{equation*}
 
-which is a Langevin equation
+\end{frame}
+
+\begin{frame}{Fokker-Planck equation for Brownian motion}
+
+\begin{figure}
+\centering
+\subfigure[]{\label{fig:a}\includegraphics[width=65mm]{figure-21}}
+\subfigure[]{\label{fig:b}\includegraphics[width=65mm]{figure-22}}
+\end{figure}
+
+Predicting $I_{n}(t)$ is hard in complex networks. We instead solve for $P(V,t)$
+
+\begin{equation*}
+\tau\frac{\partial P}{\partial t} = (\mu(t)-V)\frac{\partial P}{\partial V} + \sqrt{2D}\frac{\partial^{2}P}{\partial V^{2}}
+\end{equation*}
 
 \end{frame}
 
-\begin{frame}{Statistical mechanics of networks of neurons}
+\begin{frame}{An example simulation}
+
+
 
 \end{frame}
 
