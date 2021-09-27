@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.4.29)  26 SEP 2021 18:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.8.24)  26 SEP 2021 21:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -479,6 +479,12 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/sansmathaccent/sansmathaccent.sty
+Package: sansmathaccent 2020/01/31
+
+(/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrlfile.sty
+Package: scrlfile 2020/01/24 v3.29 KOMA-Script package (loading files)
 )))
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerbasetranslator.sty
 (/usr/share/texlive/texmf-dist/tex/latex/translator/translator.sty
@@ -677,11 +683,17 @@ Package: epsfig 2017/06/25 v1.7b (e)psfig emulation (SPQR)
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerouterthemeshadow.sty
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerouterthemesplit.sty))
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerfontthemestructurebold.st
-y)) (/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty
+y))
+\sympureletters=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
+(Font)                  OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl on inp
+ut line 9.
+ (/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty
 Package: bm 2019/07/24 v1.2d Bold Symbol Support (DPC/FMi)
-\symboldoperators=\mathgroup6
-\symboldletters=\mathgroup7
-\symboldsymbols=\mathgroup8
+\symboldoperators=\mathgroup7
+\symboldletters=\mathgroup8
+\symboldsymbols=\mathgroup9
+\symboldpureletters=\mathgroup10
 LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 141.
 LaTeX Info: Redefining \bm on input line 209.
 )
@@ -793,8 +805,14 @@ LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 13.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 13.
-\symnumbers=\mathgroup9
-\sympureletters=\mathgroup10
+\symnumbers=\mathgroup11
+LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 13.
+LaTeX Font Info:    Overwriting symbol font `pureletters' in version `normal'
+(Font)                  OT1/mathkerncmss/m/sl --> OT1/cmss/m/it on input line 1
+3.
+LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
+(Font)                  OT1/mathkerncmss/bx/sl --> OT1/cmss/m/it on input line 
+13.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
 (Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 13.
 LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 13.
@@ -827,6 +845,16 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 13.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> OT1/cmtt/b/n on input line 13.
+LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 13.
+LaTeX Font Info:    Overwriting symbol font `pureletters' in version `normal'
+(Font)                  OT1/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 1
+3.
+LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
+(Font)                  OT1/cmss/b/it --> OT1/mathkerncmss/m/sl on input line 1
+3.
+LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
+(Font)                  OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl on inp
+ut line 13.
 
 (/usr/share/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary
 -English.dict
@@ -859,73 +887,85 @@ Package hyperref Warning: Option `pdfauthor' has already been used,
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-<figure-0.png, id=29, 573.8238pt x 427.5975pt>
-File: figure-0.png Graphic file (type png)
-<use figure-0.png>
-Package pdftex.def Info: figure-0.png  used on input line 29.
-(pdftex.def)             Requested size: 284.52756pt x 212.02353pt.
+<figure-20.png, id=29, 845.1575pt x 555.07375pt>
+File: figure-20.png Graphic file (type png)
+<use figure-20.png>
+Package pdftex.def Info: figure-20.png  used on input line 29.
+(pdftex.def)             Requested size: 270.30118pt x 177.52557pt.
  [2
 
- <./figure-0.png>]
-<figure-11.png, id=39, 776.9025pt x 422.57875pt>
-File: figure-11.png Graphic file (type png)
-<use figure-11.png>
-Package pdftex.def Info: figure-11.png  used on input line 39.
-(pdftex.def)             Requested size: 355.65944pt x 193.45361pt.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 39.
+ <./figure-20.png>]
+<figure-19.png, id=39, 462.528pt x 346.896pt>
+File: figure-19.png Graphic file (type png)
+<use figure-19.png>
+Package pdftex.def Info: figure-19.png  used on input line 38.
+(pdftex.def)             Requested size: 298.75394pt x 224.07703pt.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 38.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 39.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 38.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [3
+)
+LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on inp
+ut line 38.
 
- <./figure-11.png>]
-<figure-16.png, id=48, 1100.11pt x 397.485pt>
+(/usr/share/texlive/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
+File: ot1mathkerncmss.fd 2020/01/31 Fontinst v1.933 font definitions for OT1/ma
+thkerncmss.
+)
+Overfull \vbox (5.93982pt too high) detected at line 38
+ []
+
+[3
+
+ <./figure-19.png>]
+<figure-16.png, id=47, 1100.11pt x 397.485pt>
 File: figure-16.png Graphic file (type png)
 <use figure-16.png>
-Package pdftex.def Info: figure-16.png  used on input line 51.
+Package pdftex.def Info: figure-16.png  used on input line 52.
 (pdftex.def)             Requested size: 398.33858pt x 143.9254pt.
  [4
 
  <./figure-16.png>]
-<figure-15.png, id=55, 736.7525pt x 209.78375pt>
+<figure-15.png, id=54, 736.7525pt x 209.78375pt>
 File: figure-15.png Graphic file (type png)
 <use figure-15.png>
-Package pdftex.def Info: figure-15.png  used on input line 70.
+Package pdftex.def Info: figure-15.png  used on input line 71.
 (pdftex.def)             Requested size: 213.39566pt x 60.7621pt.
-<figure-14.png, id=56, 771.88374pt x 226.8475pt>
+<figure-14.png, id=55, 771.88374pt x 226.8475pt>
 File: figure-14.png Graphic file (type png)
 <use figure-14.png>
-Package pdftex.def Info: figure-14.png  used on input line 70.
+Package pdftex.def Info: figure-14.png  used on input line 71.
 (pdftex.def)             Requested size: 355.65944pt x 104.52419pt.
 
-Overfull \vbox (0.53667pt too high) detected at line 70
+Overfull \vbox (0.53667pt too high) detected at line 71
  []
 
 [5
 
  <./figure-15.png> <./figure-14.png>]
-<figure-12.png, id=69, 933.4875pt x 537.00626pt>
+<figure-12.png, id=68, 933.4875pt x 537.00626pt>
 File: figure-12.png Graphic file (type png)
 <use figure-12.png>
-Package pdftex.def Info: figure-12.png  used on input line 84.
+Package pdftex.def Info: figure-12.png  used on input line 85.
 (pdftex.def)             Requested size: 270.30118pt x 155.49838pt.
  [6
 
  <./figure-12.png>]
-File: figure-14.png Graphic file (type png)
-<use figure-14.png>
-Package pdftex.def Info: figure-14.png  used on input line 101.
-(pdftex.def)             Requested size: 355.65944pt x 104.52419pt.
+<figure-10.png, id=75, 493.845pt x 237.88875pt>
+File: figure-10.png Graphic file (type png)
+<use figure-10.png>
+Package pdftex.def Info: figure-10.png  used on input line 102.
+(pdftex.def)             Requested size: 284.52756pt x 137.05719pt.
  [7
 
-] [8
+ <./figure-10.png>] [8
 
 ]
 \tf@nav=\write6
@@ -937,36 +977,34 @@ Package pdftex.def Info: figure-14.png  used on input line 101.
 \tf@snm=\write8
 \openout8 = `rsnn-slides.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 108.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 108.
-
-(./rsnn-slides.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 108.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 108.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 109.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 109.
+ (./rsnn-slides.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 109.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 109.
 Package rerunfilecheck Info: File `rsnn-slides.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 18005 strings out of 483065
- 341865 string characters out of 5963550
- 583483 words of memory out of 5000000
- 32553 multiletter control sequences out of 15000+600000
- 549047 words of font info for 83 fonts, out of 8000000 for 9000
- 81 hyphenation exceptions out of 8191
- 54i,11n,57p,818b,532s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 18306 strings out of 481239
+ 349909 string characters out of 5920377
+ 591394 words of memory out of 5000000
+ 33076 multiletter control sequences out of 15000+600000
+ 553636 words of font info for 89 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 58i,11n,67p,818b,532s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmssi12.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmssi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmsy10.pfb>
-Output written on rsnn-slides.pdf (8 pages, 1990355 bytes).
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmssi8.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmsy10.pfb>
+Output written on rsnn-slides.pdf (8 pages, 2282693 bytes).
 PDF statistics:
- 122 PDF objects out of 1000 (max. 8388607)
- 79 compressed objects within 1 object stream
+ 120 PDF objects out of 1000 (max. 8388607)
+ 76 compressed objects within 1 object stream
  17 named destinations out of 1000 (max. 500000)
- 103 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 108 words of extra memory for PDF output out of 10000 (max. 10000000)
 
