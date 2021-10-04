@@ -72,18 +72,6 @@ $4\si{mm}^{2}$ FOV at $\sim 8\si{Hz}$
 \end{frame}
 
 
-\begin{frame}{Synaptic strengths are dynamic}
-
-$w_{n}$ represents the change in the post-synaptic membrane potential induced by an action potential at the presynaptic cell ($\sim 1-4 \si{mV}$)
-
-\begin{figure}
-\centering
-\includegraphics[width=95mm]{figure-12}
-\end{figure}
-
-$w_{n}$ is a result of complex biochemical pathways and is not necessarily a constant (synaptic plasticity)
-\end{frame}
-
 \begin{frame}{Synaptic current as a stochastic process}
 
 
@@ -95,15 +83,6 @@ $w_{n}$ is a result of complex biochemical pathways and is not necessarily a con
 \begin{equation*}
 \tau\dot{V(t)} = -g_{L}V(t) + \mu(t) + \sqrt{2D}\eta(t)
 \end{equation*}
-
-\end{frame}
-
-\begin{frame}{An example simulation}
-
-\begin{figure}
-\centering
-\includegraphics[width=105mm]{figure-24}
-\end{figure}
 
 \end{frame}
 
@@ -121,23 +100,6 @@ Predicting $I_{n}(t)$ is hard in complex networks. We instead solve for $P(V,t)$
 \begin{equation*}
 \tau\frac{\partial P}{\partial t} = (\mu(t)-V)\frac{\partial P}{\partial V} + \sqrt{2D}\frac{\partial^{2}P}{\partial V^{2}}
 \end{equation*}
-
-\end{frame}
-
-\begin{frame}{Potential applications: neuromorphic computing}
-
-\begin{itemize}
-\item Very low power consumption
-\item Dynamically remaps the synapses between artificial neurons
-\item Useful in embedded applications
-\end{itemize}
-
-
-\begin{figure}
-\centering
-\includegraphics[width=130mm]{figure-26}
-\end{figure}
-
 
 \end{frame}
 
