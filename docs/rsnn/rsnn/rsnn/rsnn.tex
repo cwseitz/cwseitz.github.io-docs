@@ -50,9 +50,7 @@ The primate cerebral cortex is a complex system estimated to harbor more than 25
 
 \mainmatter
 
-\chapter{Introduction}
-
-\section{Self-organization of complex systems and Hebbian learning}
+\chapter{Self-organization of complex systems}
 
 Complex systems are ubiquitous in nature yet our scientific efforts have thus far only begun to gain traction on their governing principles. Many of the most intriguing complex systems in nature exihibit behaviors that simply cannot be explained by any of the components in isolation but rather arise from their complex interactions, bringing emergent phenomena into the focus of modern science. Such systems may be of physical, economic, or biological in nature, but all are thought to exihibit emergent properties under the appropriate conditions, suggesting broad relevance for the study of complex systems. 
 
@@ -60,16 +58,18 @@ To put complexity into perspective, consider the states of an interacting system
 
 Neurons in cortex connect when afferent nerve fibers of a presynaptic cell meet a small patch of the dendritic tree or soma of a post-synaptic, forming the synapse. The complexity of neural networks arises from the complexity of these communication channels. It is a great challenge to understand how the complex connectivity patterns in cortex give rise to stable functions including the formation and retrieval of memories. In his famous neurophysiological postulate, Donald Hebb first proposed a cellular mechanism for the self-organization of networks of neurons [1]. Hebb suggested that repeated stimulation of specific receptors of sensory signals would lead slowly to the formation of a \emph{cell assembly} and these structural changes would constitute a representation or imprint of an internally or externally generated sensation e.g., an image or idea. This process, referred to as Hebbian learning, is argued to be driven by the temporal order of action potentials where the synaptic efficacy of the connection between neurons increases when a presynaptic neuron fires an action potential before a postsynaptic neuron.
 
-\subsection{Synaptic plasticity as a basis for memory and learning}
+\section{Synaptic plasticity as the basis for memory and learning}
 
 Synaptic plasticity refers to the activity-dependent modification of the strength or efficacy of synaptic transmission at preexisting synapses, and has been proposed to play a central role in the incorporation of transient experiences into persistent memory traces. The efficacy of an excitatory synapse can be either potentiated or depressed by a variety of mechanisms which occur over a wide range of time scales: from milliseconds to hours to days. Short-term synaptic plasticity (STP) is thought to play an important role in information processing in the brain. Its duration allows STP to modify the response of cortical circuits to stimuli and potentially provide a richer set of response properties without permanently altering the circuit architecture. One of several mechanisms thought to underly STP can be seen by the repeated stimulation of a presynaptic cell causing a transient accumulation of calcium in the presynaptic terminal (Mongillo et al. 2008). Calcium generally thought to elevate the probability of neurotransmitter release due to its proposed interaction with the biochemical machinery involved in synaptic vesicle excytosis. Other short term changes in synaptic efficacy can occur such as the facilitation or depression based upon the temporal characteristics of the stimulus. In paired-pulse experiments, a pair of stimuli is delivered a sub-20ms interval shows depression of the efficacy of the second stimulus (Zucker and Regehr, 2002). This phenomenon is hypothesized to arise from inactivation of voltage-dependent sodium and/or calcium channels or depletion of the release ready pool of synaptic vesicles at the presynaptic terminal [1]. Synaptic efficacy can be lowered by the release of biochemical modulators which can interact with the synaptic machinery to inhibit the release of neurotransmitter into the synaptic cleft. In addition, receptors at the presynaptic terminal which play a role in the secretion of neurotransmitter are sensitive to the presence of presynaptic neurmodulators. Therefore, these neuromodulators can also play a role in facilitation or depression in STP.
 
 It is widely believed that neural circuits also possess the mechanisms for long term changes in synaptic strength formally referred to as long term potentiation (LTP) and long term depression (LTD). The brain encodes internally and externally generated stimuli as spatiotemporal patterns of action potentials and long-term modifications to such patterns via changes in synaptic transmission provide a feasible mechanism for the storage of information. In other words, changes in synaptic weights alter the spatiotemporal response of population of neurons to stimuli and therefore provide a method for long term memory formation. Since its original introduction by Cajal, this idea has been rigorously tested, for example in the CA1 region of the hippocampus (Whitlock et al. 2006). LTP and LTD have been extensively studied in the CA1 region of the hippocampus due to compelling evidence that it is a brain region that is central to learning and memory. Indeed, the cellular and biochemical mechanisms underlying these phenomena have been well-characterized. 
 
 
-\section{Models of action potential generation in cortical neurons}
+\chapter{Models of action potential generation}
 
-\subsection{The leaky integrate and fire (LIF) model}
+Here is some text introducing models
+
+\section{The leaky integrate and fire (LIF) model}
 
 The dominating information processing unit in neocortex is the spiking neuron - a neural cell which exhibits transient depolarization of the cell membrane called \emph{spikes}. The membrane voltage is regulated by a diverse set of highly specific ion channels embedded in the plasma membrane which open and close based on environmental factors such as the membrane potential itself or changes in the concentration of neurotransmitters. This dependence of the so-called \emph{open probability} of ion channels results in changes of the membrane conductance for the ions they transport and is the origin of the non-linear properties of  cells in the nervous system. Several mathematical models have been proposed to explain this process in various levels of detail, generally depending on their application. Some consider the biophysical details of action potential generation by considering specific types of ion channels and their dynamics while others neglect such details for the sake of mathematical simplicity. At the same time, models are often classified as conductance-based or current-based, depending on whether they model the membrane conductance explicitly or summarize membrane depolarization as a sum of membrane currents. The famous Hodgkin-Huxley (HH) model published in 1952 was originally used to fit experimental voltage traces measured in the squid giant axon and is arguably the most biophysically accurate of model of membrane depolarization. The membrane potential of an HH neuron evolves according to a a set of ordinary differential equations that include a term for each of the ion channels thought to be critical for the generation of an action potential. In the following paragraphs, we will briefly introduce the Hodgkin-Huxley model alongside an integrate and fire (IF) model to provide context for the following chapters.
 
@@ -88,40 +88,32 @@ F(V) = -g_{L}(V-E_{L})
 
 which requires that $V$ decays back to a resting value $E$ exponentially with time constant $\tau$, ignoring the explicit dependence of the membrane current on individual voltage-gated channels.
 
-\subsection{Origins of stochastic membrane potential dynamics}
+\section{Origins of stochastic membrane potential dynamics}
 
 One of the most prominent conceptual barriers in neuroscience is related to how the brain performs reliable computations with relatively unreliable units. Various patch clamp experiments have shown that neurons tend to fire action potentials in an irregular fashion, even when stimulated with a highly regulated current. This observation has provoked a large numer of studies, many of which have concluded that this irregularity owes its origins to the unreliable transmission of synaptic vesicles. At the same time, stochasticity in the brain along with the reliability of sensory percepts suggest that the brain has evolved around the issue. Indeed, it is possible that this stochasticity is central to the computational paradigm used in cortex. There is, in principle, a very powerful framework for stochastic computation based on sampling from a probability distribution.
 
+\chapter{The topology of cortical networks}
+
+\section{Translationally-invariant connectivity patterns}
 
 \begin{figure}
 \centering
-\includegraphics[width=115mm]{fig_2-A}
-\caption{A leaky integrate and fire neuron with constant current injection}
+\includegraphics[width=150mm]{fig_5-A}
+\caption{An example 2D gaussian lattice model with periodic boundary conditions}
 \end{figure}
 
+Present the 2D gaussian lattice model with periodic boundary conditions
 
-\i\begin{figure}
-\centering
-\includegraphics[width=115mm]{fig_3-A}
-\caption{A leaky integrate and fire neuron embedded in a recurrent network}
-\end{figure}
+\section{Excitatory and inhibitory balance}
 
-\subsection{The LIF transfer function}
+Show that the spatial distribution of excitatory and inhibitory connections contributes to network dynamics
 
-\section{Networks of neurons in cortex}
-
-\subsection{Excitatory and Inhibitory Networks}
-
-Towards the Hopfield network [2] which spawned an entire field of research applying techniques from the statistical physics of spin glasses to the description of neural activity. A popular approach towards the end of 20th century simplified a network of neurons firing action potentials to an ensemble of coupled spins obeying an energy function over the space of states. , the Hopfield model related the patterns learned by a network to the energy landscape over the discrete space of states. The storage capacity of these networks and the geometry of this energy landscape were of particular interest and rigorous mathematical treatment has been used to show limits on the basins of attraction in such energy landscapes [4,10,11]. 
-
-\section{Stochastic computation by networks of neurons}
-
-Interestingly, an extension of the Hopfield model called the Boltzmann machine actually leverages stochastic activity of Ising spins to perform powerful computations [14]. In such a model, the set of synaptic weights $\Phi$ ``embody" the joint distribution $P_{\Phi}(X,R) = P_{\Phi}(X)P_{\Phi}(R|X)$ over network inputs and network response, respectively. Then, computations can be viewed as probabilistic inference after suitable transformations of the weights $\Delta\Phi$. Such physically inspired models have proven useful; however, more recent studies appear have described network dynamics by using Fokker-Planck equations to compute distributions of the membrane voltage as a function of time [5]. Here, we apply a similar formalism to the description of network dynamics with heterogeneous and stochastic synaptic weights to probe the distribution over network states $P_{\Phi}(R)$ and describe how this framework can be used to provide insights on how the neural networks embody the distribution $P_{\Phi}(R|X)$ in statistical inference tasks. 
+\chapter{Mean-field theories of network dynamics}
 
 This family of techniques, often formally referred to as Langevin dynamics, is defined by the use of stochastic differential equations to model the evolution of systems with high degrees of freedom. A Fokker-Planck equation allows us to solve for the time evolution of the probability distribution over such a variable, providing insights into the dynamics which cannot be seen from any one trajectory through the space of states. 
 
 
-\subsection{The Ornstein-Uhlenbeck Prototype}
+\section{Monte carlo simulations of the Ornstein-Uhlenbeck process}
 
 The Ornstein-Uhlenbeck can be thought of as an extension of the Wiener process or \emph{Brownian Motion} where the displacement of a variable $x$ in a time $dt$ is normally distributed with variance proportional to $\Delta t$ i.e. $x(t+dt) - x(t) \sim N(0, \sigma^{2}dt)$ or equivalently $dx \sim \sigma\sqrt{dt}\eta(t)$ where the parameter $\sigma^{2}$ defines the proportionality. The Ornstein-Uhlenbeck process is commonly written as a Langevin equation with a noise term similar to Brownian motion but with an added frictional term $-\theta x(t)$ and non-stationary noise $\mu(t) + \sigma\sqrt{dt}\eta(t)$ giving
 
@@ -153,18 +145,10 @@ This is equivalent to the distribution $P(V,t)$ as can be seen by plugging $T$ i
 \centering
 \subfigure[]{\label{fig:a}\includegraphics[width=80mm]{fig_1-A}}
 \subfigure[]{\label{fig:b}\includegraphics[width=80mm]{fig_1-B}}
-\caption{Results of numerical integration of a Langevin equation for a gaussian white noise process with $\sigma = 1$, $\Delta t=0.002$, $\alpha=10$, and $V(0)=-1$. (a) Distribution of $V$ for $N=10,000$ units as a function of time (dashed is the theoretical prediction, solid is the simulation result). See stationary distribution in cyan (b) Time course for $N=10,000$ units}
+\caption{Monte Carlo simulation of a Langevin equation for a gaussian white noise process with $\sigma = 1$, $\Delta t=0.002$, $\alpha=10$, and $V(0)=-1$. (a) Distribution of $V$ for $N=10,000$ units as a function of time (dashed is the theoretical prediction, solid is the simulation result). See stationary distribution in cyan (b) Time course for $N=10,000$ units}
 \end{figure}
 
-
-\chapter{Methods}
-
-
-\section{Network topology and dynamics}
-
-\subsection{Small world networks and connectivity statistics}
-
-\section{Fokker-Planck equations for coupled subpopulations}
+\section{The diffusion approximation on the 2D Gaussian lattice}
 
 The moments $M_{n}(t)$ derived above in the Kramers-Moyal expansion are dependent on the connectivity of the network and the statistics of the input. We will first consider a classic case, where we have a sparse directed network with constant synaptic efficacy between all presynaptic and postsynaptic pairs of cells. This primary pool of neurons is subject to stimulation by $N_{\mathrm{in}}$ input neurons with a connection probability $\gamma_{\mathrm{in}}$ giving $C_{\mathrm{in}} = \gamma_{\mathrm{in}}N_{\mathrm{rec}}$ unique connections between the input population and a single neuron in the recurrent pool. Within the recurrent pool, we have a connection probability of $\gamma_{\mathrm{rec}} << 1$ for any pair giving $C_{\mathrm{rec}} = \gamma_{\mathrm{rec}} N_{\mathrm{rec}}$ recurrent inputs per postsynaptic cell. We assume that a presynaptic action potential invokes a post synaptic potential (PSP) with magnitude $J_{0}$ in the postsynaptic cell with $J_{0} << \theta$ for both input and recurrent projections. The first moment of the transition operator $T(V',t| V,t-\tau)$ is given by
 
@@ -256,7 +240,6 @@ M_{n} = \int (V-V')^{n} T(V',t'|V,t) dV
 
 which are essentially the moments of a compound Bernoulli distribution where the individual probabilities $p_{j}(t')$ are given by $P_{j}(\theta, t)$.
 
-\section{Through the lens of information theory}
 
 \begin{appendices}
 \chapter{The Kramers-Moyal expansion}
