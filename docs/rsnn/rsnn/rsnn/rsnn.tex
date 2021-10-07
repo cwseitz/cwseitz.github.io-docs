@@ -102,11 +102,13 @@ One of the most prominent conceptual barriers in neuroscience is related to how 
 \caption{An example 2D gaussian lattice model with periodic boundary conditions}
 \end{figure}
 
-Present the 2D gaussian lattice model with periodic boundary conditions
+Significant effort has been spent in recent years to map the connectivity patterns of networks in cortex and thus variety of models have appeared. Connection patterns have been quantified by calculating a broad range of structural measures, including small-world attributes and motif composition, as well as some global measures of functional connectivity (Sporns 2006). The structural measures defined in this framework have proven quite useful; however, many models are defined without consideration of the fact that cortical networks are embedded in real space. In principle these spatially-dependent connectivity patterns could be hidden in the topology of an arbitrary graph; however, in some cases it is more straightforward to interpret connectivity patterns in the spatial domain. For example, the connectivity in a 2D lattice of LIF neurons with local and global synaptic connections are readily understood in terms of distances in real space (Rosenbaum 2014). At the same time, theoretical models e.g., mean-field theories of network dynamics have relaxed the strong assumption that cortical networks are spatially homogeneous (Brunel 2000). Defining a periodic connectivity kernel for each neuron on a lattice is an attractive model for cortical networks as it accurately describes the invariance of connectivity to translations. In other words, each neuron in the network has a similiar input and output structure - a property which drastically simplifies theoretical calculations.
 
-\section{Excitatory and inhibitory balance}
+\begin{figure}
+\centering
+\includegraphics[width=200mm]{fig_5-B}
+\end{figure}
 
-Show that the spatial distribution of excitatory and inhibitory connections contributes to network dynamics
 
 \chapter{Mean-field theories of network dynamics}
 
@@ -115,7 +117,7 @@ This family of techniques, often formally referred to as Langevin dynamics, is d
 
 \section{Monte carlo simulations of the Ornstein-Uhlenbeck process}
 
-The Ornstein-Uhlenbeck can be thought of as an extension of the Wiener process or \emph{Brownian Motion} where the displacement of a variable $x$ in a time $dt$ is normally distributed with variance proportional to $\Delta t$ i.e. $x(t+dt) - x(t) \sim N(0, \sigma^{2}dt)$ or equivalently $dx \sim \sigma\sqrt{dt}\eta(t)$ where the parameter $\sigma^{2}$ defines the proportionality. The Ornstein-Uhlenbeck process is commonly written as a Langevin equation with a noise term similar to Brownian motion but with an added frictional term $-\theta x(t)$ and non-stationary noise $\mu(t) + \sigma\sqrt{dt}\eta(t)$ giving
+The Ornstein-Uhlenbeck can be thought of as an extension of the Wiener process or \emph{Brownian Motion} where the displacement of a variable $x$ in a time $dt$ is normally distributed with variance proportional to $\Delta t$ i.e. $x(t+dt) - x(t) \sim N(0, \sigma^{2}dt)$ or equivalently $dx \sim \sigma\sqrt{dt}\eta(t)$ where the parameter $\sigma^{2}$ defines the proportionality. The Ornstein-Uhlenbeck process is commonly written as a Langevin equation with a noise term similar to Brownian motion but with an added frictional term $-\theta x(t)$ and a stationary white-noise $\mu(t) + \sigma\sqrt{dt}\eta(t)$ giving
 
 \begin{equation*}
 \dot{x}(t) = -\theta x(t) + \mu(t) + \sigma\sqrt{dt}\eta(t)
@@ -291,7 +293,6 @@ which is formally known as the Kramers-Moyal (KM) expansion. The Fokker-Planck e
 \makebibliography
 
 [1] D.O. Hebb \textit{The organization of behavior: A neurophysiological theory}. John Wiley and Sons. 1949.
-
 
 % Figures and tables, if you decide to leave them to the end
 %\input{figure}
