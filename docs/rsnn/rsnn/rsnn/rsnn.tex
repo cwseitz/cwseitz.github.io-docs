@@ -8,7 +8,7 @@
 \usepackage[toc,page]{appendix}
 
 \usepackage{url}
-
+ 
 
 %% Use these commands to set biographic information for the title page:
 \title{Stochastic computation in recurrent networks of spiking neurons}
@@ -64,8 +64,7 @@ Noisy variants of IF models have been introduced to summarize the enormous numbe
 \tau\dot{V_{j}} = -V_{j} + \mu_{j}(t) + \xi_{j}(t)
 \end{align}
 
-
-with $\langle\xi(t)\xi(t')\rangle = \sigma^{2}\delta(t-t')$. The afferent currents $\mu(t)$ and $\xi(t)$ are interpreted as post-synaptic potentials (PSPs) and thus have dimensions of voltage. Eq. (1.1) has the form of a well-known stochastic differential equation (SDE) called the Langevin equation. When the voltage $V$ crosses a firing threshold $\Theta$, we say the neuron has fired an action potential and the voltage is reset to the resting value $V_{R}$. Therefore, we define an additional state variable $z(t) = H(V-v_{th})$ where $H$ denotes the Heaviside step function.
+The variables $\mu(t)$ and $\xi(t)$ are interpreted as post-synaptic potentials (PSPs) and thus have dimensions of voltage. Eq. (1.1) has the form of a well-known stochastic differential equation (SDE) called the Langevin equation. When the voltage $V$ crosses a firing threshold $\Theta$, we say the neuron has fired an action potential and the voltage is reset to the resting value $V_{R}$. Therefore, we define an additional state variable $z(t) = H(V-v_{th})$ where $H$ denotes the Heaviside step function.
 
 
 Stochasticity in IF neurons can be obtained through several mechanisms, such as a noisy reset potential, noisy firing threshold, or intrinsic noise originating in the stochastic features of membrane channels (Plesser and Gerstner 2000, Neftci 2014) or the exocytosis of synaptic vesicles. At the same time, stochastic spike arrival may contribute to fast fluctuations in the membrane potential that cannot be described by a deterministic component $I(t)$. Contrary to intuition, many have suggested that this randomness could contribute positively to the computational paradigm employed in cortical circuits. This phenomenon, referred to as \emph{stochastic resonance} is a property of a dynamical system subject to both periodic forcing and random perturbation may show a resonance only when both the periodic forcing and random perturbation are present (Benzi, 1981). In the context of IF models, the deterministic current $I(t)$ (the summation of post-synaptic potentials) may be subthreshold and $\xi(t)$ is required to push the membrane potential over threshold. Neurons in this regime have a large coefficient of variation just as cortical neurons (Konig, Engel, Singer 1996). More recently, additional evidence has been found that an optimal noise level coincides with the critical regime (Rodriguez 2017) a parameterization of the network that optimizes information transmission (Cramer 2020).
@@ -79,26 +78,41 @@ Langevin equations in the form of (1.1) have been studied extensively and their 
 \tau\dot{V_{j}}(t) = -V_{j}(t) + \mu_{j}(t) + \sigma_{j}\sqrt{dt}\eta(t)
 \end{equation}
 
-with $\eta(t) \sim \mathcal{N}(0,1)$. Note this equation is identical to (1.1) with $\xi_{j}(t) = \sigma_{j}\sqrt{dt}\eta(t)$. The last two terms in (1.2) are summarized by the total current arriving at the soma of a neuron $I_{j}(t) = \mu_{j}(t) + \sigma_{j}\sqrt{dt}\eta(t)$. Since (1.1) is stochastic, its solution is a probability distribution over the stochastic variable as a function of time $P(V,t)$. This distribution can be found by using the Kramers-Moyal Expansion (KME) which is derived in Appendix A. We state the result of that derivation here for brevity
+with $\eta(t) \sim \mathcal{N}(0,1)$. This is equivalent to (1.1) with $\xi_{j}(t) = \sigma_{j}\sqrt{dt}\eta(t)$. The last two terms in (1.2) are summarized by the total current arriving at the soma of a neuron $I_{j}(t) = \mu_{j}(t) + \sigma_{j}\sqrt{dt}\eta_{j}(t)$. The solution of (1.2) is a probability distribution over the stochastic variable $V_{j}$ as a function of time i.e. $P(V_{j},t)$. 
+
+\subsection{The Kramers-Moyal Expansion}
+
+In general, the distribution $P_{j}$ at a time $t'$ can be conditionally dependent on its previous states $t < t'$. Here, we will make the assumption that the evolution of $P_{j}(V_{j},t)$ follows a Markov chain meaning that it has the memoryless property. We are then permitted to write the Chapman-Kolmogorov (CK) equation
+
+\begin{equation}
+P(V'_{j}, t) = \int T_{j}(V'_{j}, t | V_{j}, t-\tau)P(V_{j}, t-\tau)dV
+\end{equation} 
+
+In terms of (1.2), this requires $\langle\eta(t)\eta(t')\rangle = \delta(t-t')$. Starting from the CK equation in (1.3) we can derive the Kramers-Moyal Expansion (KME) 
 
 \begin{align}
-\tau\dot{P}(V,t) &= \frac{\partial}{\partial V}[\left(V(t)-\mu(t)\right) P(V,t)] + \frac{\sigma^{2}}{2}\frac{\partial^{2}}{\partial V^{2}}[P(V,t)]
+\frac{\partial P_{j}}{\partial t} = \sum_{n} \frac{(-1)^{n}}{n!} \left(\frac{\partial}{\partial V_{j}}\right)^{n} M_{n}(V_{j},t,\tau) P(V_{j},t)
 \end{align}
 
-An important difference in the IF model in (1.1) and the OU process is that the voltage variable $V$ in the IF model is bounded below by $V_{R}$ and above by the threshold $\theta$ while the OU process is unbounded, in general. The transition density $T(V',t'|V,t)$ has a known analytical form:
+where $M_{n}(V,t,\tau)$ denotes the $nth$ order moment of the transition density $T_{j}(V'_{j}, t | V_{j}, t-\tau)$. If we approximate the KME by truncating the summation for $n > 2$ we arrive at the so-called \emph{diffusion approximation} or Fokker-Planck equation
 
-\begin{align*}
+\begin{align}
+\frac{\partial P_{j}}{\partial t} &= \frac{\partial}{\partial V_{j}}[\left(V_{j}(t)-\mu_{j}(t)\right) P_{j}(V_{j},t)] + \frac{\sigma_{j}^{2}(t)}{2}\frac{\partial^{2}}{\partial V_{j}^{2}}[P(V_{j},t)]
+\end{align}
+
+where the first and second moments have been substituted by their standard symbols $\mu$ and $\sigma^{2}$.
+
+\subsection{Fokker-Planck Solution for Unbounded Diffusion}
+
+ An important difference in the IF model in (1.1) and the OU process is that the voltage variable $V$ in the IF model is bounded below by $V_{R}$ and above by the threshold $\Theta$ while the OU process is not necessarily bounded. For the unbounded case of the OU process, the transition density $T(V',t'|V,t)$ has a known analytical form:
+
+\begin{align}
 T(V',t+\Delta t|V,t) = \sqrt{\frac{1}{\tau\pi\sigma^{2}(1-\exp\left(-2\Delta t/\tau)\right))}}\exp\left(-\frac{1}{\tau\sigma^{2}}\frac{(V'-V_{R}\exp(-\Delta t/\tau))^{2}}{1-\exp\left(-2\Delta t/\tau\right)}\right)
-\end{align*} 
+\end{align} 
 
-This is equivalent to the distribution $P(V,t)$ as can be seen by plugging $T$ into (2.1) and setting the initial condition $P(V,t) = \delta(V-V_{R})$.
+This is equivalent to the distribution $P(V,t)$ as can be seen by plugging $T$ into (2.1) and setting the initial condition $P(V,t) = \delta(V-V_{R})$. 
 
-\begin{figure}
-\centering
-\subfigure[]{\label{fig:a}\includegraphics[width=80mm]{fig_1-A}}
-\subfigure[]{\label{fig:b}\includegraphics[width=80mm]{fig_1-B}}
-\caption{Monte Carlo simulation of a Langevin equation for a gaussian white noise process with $\sigma = 1$, $\Delta t=0.002$, $\alpha=10$, and $V(0)=-1$. (a) Distribution of $V$ for $N=10,000$ units as a function of time (dashed is the theoretical prediction, solid is the simulation result). See stationary distribution in cyan (b) Time course for $N=10,000$ units}
-\end{figure}
+\subsection{The Schr\"{o}dinger Renewal Ansatz}
 
 \section{Monte Carlo Simulations}
 
@@ -135,77 +149,8 @@ Significant effort has been spent in recent years to map the connectivity patter
 This family of techniques, often formally referred to as Langevin dynamics, is defined by the use of stochastic differential equations to model the evolution of systems with high degrees of freedom. A Fokker-Planck equation allows us to solve for the time evolution of the probability distribution over such a variable, providing insights into the dynamics which cannot be seen from any one trajectory through the space of states. 
 
 
-\section{The diffusion approximation on the 2D Gaussian lattice}
+\section{Coding theory for neural spike trains}
 
-The moments $M_{n}(t)$ derived above in the Kramers-Moyal expansion are dependent on the connectivity of the network and the statistics of the input. We will first consider a classic case, where we have a sparse directed network with constant synaptic efficacy between all presynaptic and postsynaptic pairs of cells. This primary pool of neurons is subject to stimulation by $N_{\mathrm{in}}$ input neurons with a connection probability $\gamma_{\mathrm{in}}$ giving $C_{\mathrm{in}} = \gamma_{\mathrm{in}}N_{\mathrm{rec}}$ unique connections between the input population and a single neuron in the recurrent pool. Within the recurrent pool, we have a connection probability of $\gamma_{\mathrm{rec}} << 1$ for any pair giving $C_{\mathrm{rec}} = \gamma_{\mathrm{rec}} N_{\mathrm{rec}}$ recurrent inputs per postsynaptic cell. We assume that a presynaptic action potential invokes a post synaptic potential (PSP) with magnitude $J_{0}$ in the postsynaptic cell with $J_{0} << \theta$ for both input and recurrent projections. The first moment of the transition operator $T(V',t| V,t-\tau)$ is given by
-
-\begin{align*}
-\mu(t) &= \mu_{in} + \mu_{rec}(t)\\
-&= \left(C_{\mathrm{in}}\nu_{\mathrm{in}}(t) + C_{\mathrm{rec}}\nu_{\mathrm{rec}}(t)\right)\tau\langle J\rangle\\
-&= \left(C_{\mathrm{in}}\nu_{\mathrm{in}}(t) + C_{\mathrm{rec}}\nu_{\mathrm{rec}}(t)\right)\tau J_{0}
-\end{align*}
-
-where $\nu_{\mathrm{in}}(t)$ is the rate parameter for the input Poisson process. The second moment
-
-\begin{align*}
-\sigma^{2}(t) &= \sigma_{\mathrm{rec}}^{2} + \sigma_{\mathrm{ext}}^{2}\\
-&= \left(C_{\mathrm{in}}\nu_{\mathrm{in}}(t) + C_{\mathrm{rec}}\nu_{\mathrm{rec}}(t)\right)\tau\langle J^{2}\rangle\\
-&= \left(C_{\mathrm{in}}\nu_{\mathrm{in}}(t) + C_{\mathrm{rec}}\nu_{\mathrm{rec}}(t)\right)\tau J_{0}^{2}
-\end{align*}
-
-After inserting the first two moments into (2.10) we arrive at the following Fokker-Planck equation
-
-\begin{align*}
-\dot{P}(V,t) &= -\frac{\partial}{\partial V}[\mu(t)P(V,t)] + \frac{1}{2}\frac{\partial^{2}}{\partial V^{2}}[\sigma^{2}(t)P(V,t)]\\
-\end{align*} 
-
-At this point, it is necessary to impose the appropriate boundary conditions on the above Fokker-Planck equation as in so as to maintain biological realism. The Fokker-Planck equation can be written as the continuity equation 
-
-\begin{equation*}
-\frac{\partial P(v,t)}{\partial t} = -\frac{\partial S}{\partial V}
-\end{equation*}
-
-(Risken, 1984) with 
-
-\begin{equation*}
-S(V,t) = -\frac{v-V_{L}-\mu}{\tau}P(V,t) - \frac{\sigma^{2}(t)}{2\tau}\frac{\partial P(V,t)}{\partial V}
-\end{equation*}
-
-which is known as the \emph{probability current} through voltage $V$ at a time $t$. The instantaneous firing rate is equivalent to the probability current through the threshold i.e. $\nu(t) = S(\theta,t)$. Furthermore, we require that the probability current through the firing threshold $P(\theta, t)=0$ and that instead this probability emerges at the resting potential after a refactory period of $\tau_{\mathrm{ref}}$. This condition gives the following boundary condition for the derivative of the probability with respect to voltage
-
-\begin{equation*}
-\frac{\partial P(\theta,t)}{\partial V} = -\frac{2\tau\nu(t)}{\sigma^{2}(t)}
-\end{equation*}
-
-To account for the refractory period $\tau_{\mathrm{ref}}$, we define an auxililary distribution
-
-\begin{equation*}
-p_{r}(t) = \int_{t-\tau_{\mathrm{ref}}}^{t} \nu(t)dt
-\end{equation*}
-
-which together with the distribution $P(V,t)$ satisfy the normalization condition:
-
-\begin{equation*}
-\int P(v,t)dV + p_{r}(t) = 1
-\end{equation*}
-
-\begin{align*}
-\frac{\partial P(v,t)}{\partial t} &= \left(\mu(t) - \frac{v-v_{L}}{\tau}\right) \frac{\partial}{\partial v} P(v,t) - \frac{\sigma^{2}(t)}{2\tau}\frac{\partial^{2}}{\partial v^{2}} P(v,t) + \nu(t-\tau_{\mathrm{ref}})\delta(v-V_{R})\\
-\end{align*} 
-
-
-which we approximate by central finite differences
-
-\begin{align*}
-\frac{p(v, t+\Delta t) - p(v,t)}{\Delta t} &= \left(\mu(t) - \frac{v-v_{L}}{\tau}+ \mu_{ext}\right)\frac{p(v+\Delta v, t) - p(v,t)}{\Delta v} \\
-&- \frac{1}{2}\left(\sigma^{2}(t) + \sigma_{ext}^{2}\right)\frac{p(v+\Delta v, t) - 2p(v,t) + p(v-\Delta v, t)}{\Delta v^{2}}
-\end{align*} 
-
-We consider a general network of $N$ leaky integrate and fire units expressed mathematically as a weighted graph $\mathcal{N}$. We defined the state vector $\mathbf{V}$ that stores the membrane potential of each cell, which evolves according to a set of $N$ coupled differential equations
-
-\begin{align*}
-\dot{V_{j}}(t) = -\frac{V_{j}(t)}{\tau} + \sum_{i}J_{ij}\delta(t-t_{spike}) + X_{j}(t)
-\end{align*}
 
 for a stochastic input $X$, which we assume can be written as a compound Poisson process, and a weighted summation of spikes in the primary population $\sum_{i}J_{ij}\delta(t-t_{spike})$. The state vector for the system is then $\mathbf{V}(t) = (V_{0}(t), V_{1}(t), ..., V_{N}(t))$ and we look for an analytical relationship between the joint distribution $P(\mathbf{V}(t))$ and the synaptic connectivity $J$. In principle, if we know the moments $\{M_{j}^{n}\}$  of the transition operator $T_{j}(V',t'|V,t)$ for every neuron $j$ to arbitrary order, we can express $\dot{P}(\mathbf{V}(t))$ according to the KM expansion in (2.7). The primary hurdle we need to overcome in this procedure then becomes relating the moments $\{M_{j}^{n}\}$ to the synaptic connectivity $J$. For example, we can construct a general template for the distribution $T_{j}$ by noticing that the probability of a binary input pattern
 
