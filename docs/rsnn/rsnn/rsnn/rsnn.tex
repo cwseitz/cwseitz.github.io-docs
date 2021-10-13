@@ -104,15 +104,29 @@ where the first and second moments have been substituted by their standard symbo
 
 \subsection{Fokker-Planck Solution for Unbounded Diffusion}
 
- An important difference in the IF model in (1.1) and the OU process is that the voltage variable $V$ in the IF model is bounded below by $V_{R}$ and above by the threshold $\Theta$ while the OU process is not necessarily bounded. For the unbounded case of the OU process, the transition density $T(V',t'|V,t)$ has a known analytical form:
+For the unbounded case of the OU process, the solution of (1.5) is known. The transition density $T_{j}(V_{j}',t+\Delta t|V_{j},t)$ has the following analytical form:
 
 \begin{align}
-T(V',t+\Delta t|V,t) = \sqrt{\frac{1}{\tau\pi\sigma^{2}(1-\exp\left(-2\Delta t/\tau)\right))}}\exp\left(-\frac{1}{\tau\sigma^{2}}\frac{(V'-V_{R}\exp(-\Delta t/\tau))^{2}}{1-\exp\left(-2\Delta t/\tau\right)}\right)
+T_{j}(V_{j}',t+\Delta t|V_{j},t) = \sqrt{\frac{1}{\tau\pi\sigma_{j}^{2}(t)(1-\exp\left(-2\Delta t/\tau)\right))}}\exp\left(-\frac{1}{\tau\sigma_{j}^{2}}\frac{(V_{j}'-V_{R}\exp(-\Delta t/\tau))^{2}}{1-\exp\left(-2\Delta t/\tau\right)}\right)
 \end{align} 
 
-This is equivalent to the distribution $P(V,t)$ as can be seen by plugging $T$ into (2.1) and setting the initial condition $P(V,t) = \delta(V-V_{R})$. 
+This is equivalent to the distribution $P_{j}(V_{j},t)$ as can be seen by plugging $T$ into (2.1) and setting the initial condition $P_{j}(V_{j},t) = \delta(V_{j}-V_{R})$.  An important difference in the IF model in (1.1) and the OU process is that the voltage variable $V$ in the IF model is bounded below by $V_{R}$ and above by the threshold $\Theta$. The reset mechanism requires that $V(t+\Delta t) = V(t)(1-z_{j}(t))$ which is a \emph{renewal process} in the language of statistics, making $V = \Theta$ an absorbing barrier. The bounded case is an example of a first passage time (FPT) problem in statistics where the objective is to find the distribution over times it takes the stochastic variable to diffuse over the barrier. In this context, if we know that a neuron spiked at a time $t^{*}$, we cannot predict the timing of the next action potential. Rather, we can only hope to find the interspike-interval (ISI) distribution $\rho(\tau | t^{*})$ which gives the probability that the next spike occurs at a time $t^{*} + \tau$.  
 
-\subsection{The Schr\"{o}dinger Renewal Ansatz}
+\section{Interspike-interval (ISI) Density}
+
+For the Ornstein-Uhlenbeck process, great effort has been devoted to estimating the ISI density $\rho(\tau | t^{*})$ analytically. In particular, the mean first passage time (MFPT) was found by has been obtained (Plesser 1999). That solution is based on the observation that the ISI density may be expressed in terms of the membrane potential density for unbounded diffusion in (1.6). The foundation of this approach was laid by Schr\"{o}dinger in his analysis of Brownian motion. His original idea was to divide a trajectory $V(t)$ into two segments (1) the initial approach to threshold $\Theta$ at time $t$ with $t^{*} < t < t^{*} + \tau$ and (2) any later returns to the threshold (as shown by the dotted lines in Fig 1.1). This allows one to write the following Volterra integral equation 
+
+\begin{align*}
+P_{j}(\Theta, t^{*}+\tau)|V_{R},t^{*}) = \int_{0}^{\tau} P_{j}(\Theta, t^{*}+\tau | \Theta, t^{*}+u)\rho(u|t^{*})du 
+\end{align*}
+
+which is an Abel equation.
+
+\begin{figure}
+\centering
+\includegraphics[width=125mm]{fig_6-A}
+\caption{Splitting each path between $V_{R}$ and $\Theta$ into two segments. Taken from (Plesser 1999)}
+\end{figure}
 
 \section{Monte Carlo Simulations}
 
