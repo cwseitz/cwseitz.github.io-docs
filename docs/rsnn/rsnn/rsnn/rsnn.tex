@@ -147,17 +147,18 @@ It is widely believed that neural circuits also possess the mechanisms for long 
 
 \chapter{The topology of cortical networks}
 
-\section{Translationally-invariant connectivity patterns}
+\section{Simplified models of cortical connectivity}
 
-Significant effort has been spent in recent years to map the connectivity patterns of networks in cortex and thus variety of models have appeared. Connection patterns have been quantified by calculating a broad range of structural measures, including small-world attributes and motif composition, as well as some global measures of functional connectivity (Sporns 2006). The structural measures defined in this framework have proven quite useful; however, many models are defined without consideration of the fact that cortical networks are embedded in real space. In principle these spatially-dependent connectivity patterns could be hidden in the topology of an arbitrary graph; however, in some cases it is more straightforward to interpret connectivity patterns in the spatial domain. For example, the connectivity in a 2D lattice of LIF neurons with local and global synaptic connections are readily understood in terms of distances in real space (Rosenbaum 2014). At the same time, theoretical models e.g., mean-field theories of network dynamics have relaxed the strong assumption that cortical networks are spatially homogeneous (Brunel 2000). Defining a periodic connectivity kernel for each neuron on a lattice is an attractive model for cortical networks as it allows us to explore the dynamical consequences of translational invariance. 
+Significant effort has been spent in recent years to map the connectivity patterns of networks in cortex and thus variety of models have appeared. Connection patterns have been quantified by calculating a broad range of structural measures, including small-world attributes and motif composition, as well as some global measures of functional connectivity (Sporns 2006). The structural measures defined in this framework have proven quite useful; however, many models are defined without consideration of the fact that cortical networks are embedded in real space. In principle these spatially-dependent connectivity patterns could be hidden in the topology of an arbitrary graph; however, in some cases it is more straightforward to interpret connectivity patterns in the spatial domain. For example, the connectivity in a 2D lattice of LIF neurons with local and global synaptic connections are readily understood in terms of distances in real space (Rosenbaum 2014). At the same time, theoretical models e.g., mean-field theories of network dynamics have relaxed the strong assumption that cortical networks are spatially homogeneous (Brunel 2000). Defining a periodic connectivity kernel for each neuron on a lattice is an attractive model for cortical networks as it allows us to explore the dynamical consequences of translational invariance.
+
 
 Let us define a connectivity kernel $k_{ij}$ which defines the probability of a connection between neuron $i$ and neuron $j$. Note that $k_{ij}$ is not a probability distribution. Rather, $k_{ij}$ defines the binary probability of a synapse from $i\rightarrow j$. Similarly, $k_{ji}$ defines the probability of a synapse from $j\rightarrow i$ and, in general, $k_{ij} \neq k_{ji}$. We will refer to this case at \emph{heterogeneous spatial connectivity}. For symmetry reasons, we will begin with the following Gaussian model
 
 \begin{align*}
-k_{ij}(\mathbf{r}_{i}, \mathbf{r}_{j}) = \frac{1}{2\pi\sqrt{|\Sigma_{i}|}}\exp\left(-\frac{1}{2}(\mathbf{r}_{i} - \mathbf{r}_{j})^{T}\Sigma_{i}^{-1}(\mathbf{r}_{i} - \mathbf{r}_{j})\right)
+k_{ij}(|\Delta\mathbf{r}_{ij}|) = \frac{1}{\sigma\sqrt{2\pi}}\exp\left(-\frac{1}{2}\frac{|\Delta\mathbf{r}_{ij}|^{2}}{\sigma_{i}^{2}} \right)
 \end{align*}
 
-where $\Sigma_{i}$ is a two-dimensional covariance matrix. We assume that connectivity is radially symmetric and therefore $\Sigma_{i} = \sigma_{i}^{2}I$ where $I$ is the identity matrix. The property $k_{ij} \neq k_{ji}$ has important consequences. In the case that $k_{ij} = k_{ji}$ the direction $i\rightarrow j$ and $j\rightarrow i$ have equal probability. However, when $k_{ij} \neq k_{ji}$, we need the follow normalization when determining direction of the synapse
+where $|\Delta\mathbf{r}_{ij}|$ represents the norm of a vector with tail at the position of $i$ and head at the position of neuron $j$. Notice that the assumed symmetry allows us to write this in one dimension. We assume that connectivity is radially symmetric and therefore $\Sigma_{i} = \sigma_{i}^{2}I$ where $I$ is the identity matrix. The property $k_{ij} \neq k_{ji}$ has important consequences. In the case that $k_{ij} = k_{ji}$ the direction $i\rightarrow j$ and $j\rightarrow i$ have equal probability. However, when $k_{ij} \neq k_{ji}$, we need the follow normalization when determining direction of the synapse
 
 \begin{align*}
 p_{ij} = \frac{k_{ij}}{k_{ij} + k_{ji}},\;\;\;\;\;\;\;\; p_{ji} = \frac{k_{ji}}{k_{ij} + k_{ji}}
@@ -172,6 +173,12 @@ Note that this could be generalized beyond pairwise connections to fully-connect
 and the out-degree can be easily found by swapping $i$ and $j$. A connectivity matrix can be generated by iterating over $i$ and assigning the synapse $i\rightarrow j$ if $x\sim U([0,1]) < p_{ij}$ and $j\rightarrow i$ otherwise, where $U$ is the uniform distribution. 
 
 An important example of a network with heterogeneous spatial connectivity is an excitatory-inhibitory network where neurons are assigned exctitatory and inhibitory character with probabilities $p_{\mathrm{E}}$ and $p_{\mathrm{I}}$, respectively. The statistics $\langle N_{ij}\rangle, \mathrm{Var}(N_{ij})$ in this case can be decomposed into $\langle N_{ij}^{\mathrm{E}}\rangle, \langle N_{ij}^{\mathrm{I}}\rangle$ and $\mathrm{Var}(N_{ij}^{\mathrm{E}}), \mathrm{Var}(N_{ij}^{\mathrm{I}})$ which allows us to assess the impact of kernels $k_{ij}$ and in turn parameters $\sigma_{E}^{2}$ and $\sigma_{I}^{2}$ on the voltage-dynamics of a neuron $i$.
+
+Suppose that we have a two-dimensional lattice $\mathcal{L}_{\Delta}$, which contains points separated by a distance $\Delta$ along the axial directions and has periodic boundary conditions. The distance between any two points on such a lattice is then the Euclidean distance between two points on a torus
+
+\begin{align*}
+|\Delta\mathbf{r}_{ij}|^{2} = \mathrm{min}(|x_1 - x_2|, n\Delta - |x_1 - x_2|)^2 + \mathrm{min}(|y_1 - y_2|, n\Delta - |y_1 - y_2|)^2
+\end{align*}
 
 
 \chapter{Sampling from the posterior}
