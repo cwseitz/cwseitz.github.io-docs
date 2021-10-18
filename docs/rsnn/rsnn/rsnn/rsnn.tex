@@ -217,12 +217,11 @@ The largest possible value of the exponential is achieved at $\underset{j}{\math
 \rho_{i} \leq \sigma_{i}\sqrt{2\pi}\exp\left(\frac{\Delta^{2}}{2\sigma_{i}^{2}}\right)
 \end{align*}
 
-
 Let us now examine the mean number of projections (out-degree) of a neuron $i$ assuming that the connectivity parameter $\sigma$ is homogeneous across the network which implies that $k_{ij} = k_{ji}$
 
 \begin{align*}
 \langle N_{ij} \rangle &= \frac{1}{Z_{ij}}\sum_{j} k_{ij}(1-k_{ji})\\
-&= \frac{1}{Z_{ij}}\left(\sum_{x,y} \frac{1}{\sigma_{i}\sqrt{2\pi}}\exp\left(-\frac{1}{2}\frac{|\mathbf{r}-\mathbf{r}_{0}|^{2}}{\sigma_{i}^{2}} \right) - \frac{1}{2\pi\sigma_{i}^{2}}\exp\left(-\frac{|\mathbf{r}-\mathbf{r}_{0}|^{2}}{\sigma_{i}^{2}} \right)\right)\\
+&= \frac{1}{Z_{ij}}\left(\sum_{x,y} \frac{\rho_{i}}{\sigma_{i}\sqrt{2\pi}}\exp\left(-\frac{1}{2}\frac{|\mathbf{r}-\mathbf{r}_{0}|^{2}}{\sigma_{i}^{2}} \right) - \frac{\rho_{i}^{2}}{2\pi\sigma_{i}^{2}}\exp\left(-\frac{|\mathbf{r}-\mathbf{r}_{0}|^{2}}{\sigma_{i}^{2}} \right)\right)\\
 \end{align*}
 
 Rather than approximate the above summations with gaussian integrals, we will compute $\langle N_{ij}\rangle$ numerically. The normalization constant is given by 
