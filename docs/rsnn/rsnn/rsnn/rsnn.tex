@@ -164,17 +164,17 @@ In our case, there are three possibilities: no synapse, $i\rightarrow j$, and $j
 
   \[
     \mathcal{P} = \left\{\begin{array}{lr}
-        p_{ij} = \gamma_{ij}\cdot k_{ij}(1-k_{ji})(1-q)\\
-        p_{ji} = \gamma_{ji}\cdot k_{ji}(1-k_{ij})(1-q)\\
-        p_{\emptyset} = q(1-k_{ij})(1-k_{ji})\\
+        p_{ij} = \gamma_{ij}\cdot k_{ij}(1-k_{ji})(1-q_{i})\\
+        p_{ji} = \gamma_{ji}\cdot k_{ji}(1-k_{ij})(1-q_{i})\\
+        p_{\emptyset} = q_{i}(1-k_{ij})(1-k_{ji})\\
         \end{array}\right\}/Z
   \]
   
 \begin{align*}
-Z = k_{ij}(1-k_{ji})(1-q) + k_{ji}(1-k_{ij})(1-q) + q(1-k_{ij})(1-k_{ji})
+Z = k_{ij}(1-k_{ji})(1-q_{i}) + k_{ji}(1-k_{ij})(1-q_{i}) + q_{i}(1-k_{ij})(1-k_{ji})
 \end{align*}
 
-In the expression above, $q$ acts as a parameter that controls the sparsity of the network. We can also enforce synapse-specific constraints on the direction with boost parameters $\gamma_{ij}$ and $\gamma_{ji}$ which can provide a preferential direction for a synapse between $i$ and $j$. The spatial distribution of the pair $(\gamma_{ij},\gamma_{ji}$) provide a mechanism for creating \emph{sources} and \emph{sinks} for spikes. This is particularly useful when defining feedforward inputs to a population which are clamped to specific spike trains. 
+The distribution $\mathcal{P}$ contains four parameters $(\sigma_{i},\gamma_{ij},\gamma_{ji},q_{i})$ which each are expressed as a map over the lattice. $\sigma_{i}$ controls the \emph{reach} of neuron $i$, $\gamma_{ij}$ and $\gamma_{ji}$ control the \emph{bias} for synaptic direction (and thus in-out degree ratios of neuron $i$) and $q_{i}$ controls the overall probability of a synapse. If $q_{i}$ is a constant, it controls the global sparsity of the network. The spatial distribution of the pair $(\gamma_{ij},\gamma_{ji}$) provide a mechanism for creating \emph{sources} and \emph{sinks} for spikes. This is particularly useful when defining feedforward inputs to a population which are clamped to specific spike trains. 
 
 The first two moments of  the number of incoming and outgoing connections (in-degree and out-degree) then are given by binomial statistics. The first two moments of the in-degree are given by
 
@@ -244,13 +244,19 @@ Let us now examine the mean number of projections (out-degree) of a neuron $i$ a
 
 \begin{figure}
 \centering
-\includegraphics[width=165mm]{fig_8}
+\includegraphics[width=125mm]{fig_8}
 \caption{Statistics of the out-degree of a neuron $i$ in a homogeneous gaussian network for different values of the reach parameter $\sigma$ and boost parameter $\gamma$ (which ranges from 1 to $\rho_{max}(\sigma)$) We can see that as $\rho \rightarrow \rho_{max}$ ($k_{ij} = k_{ji} = 1$), the out-degree saturates at $N/2$}
 \end{figure}
 
 
+\subsection{Homogeneous Gaussian networks}
 
-\subsection{Homogeneous Gaussian networks maximize graph entropy}
+We define the \emph{homogeneous gaussian network} as the case where parameters $(\sigma_{i}, \gamma_{ij}, \gamma_{ji}, q_{i})$ are constants over the entire lattice and $\gamma_{ij}=\gamma_{ji}$ (there is no bias for synaptic direction). In this case, the bias parameter and the sparsity parameter become redundant. This can be seen by considering that multiplying $p_{ij}$ and $p_{ji}$ by the same constant factor $\gamma$ is equivalent to the linear transformation $q' = 1-\gamma(1-q)$. In other words, for the homogeneous case, the multiplication by $\gamma$ for a given value of $q$ can be replaced by using $q' = 1-\gamma(1-q)$. This suggests that the connectivity statistics can be derived from $q$ alone while setting $\gamma = 1$.
+
+
+
+
+\subsection{Entropy of Gaussian networks}
 
 Thus far we have assumed that every synapse is generated independently of every other synapse. This greatly simplifies our calculations, although is reasonable that correlations in the generation of synapses exist. For example, if a neuron $i$ projects to a distant neuron $j$, it may be more likely that it also projects to other neurons nearby neuron $j$. For now, we ignore this possibility and focus on the independent case. We now examine the entropy of the connectivity matrix. Since we have assumed every synapse is generated independently, we have
 
