@@ -244,8 +244,20 @@ Let us now examine the mean number of projections (out-degree) of a neuron $i$ a
 
 \begin{figure}
 \centering
-\includegraphics[width=150mm]{fig_8}
+\includegraphics[width=175mm]{fig_8}
 \caption{Statistics of the out-degree of a neuron $i$ in a homogeneous gaussian network for different values of the reach parameter $\sigma$ and boost parameter $\gamma$ (which ranges from 1 to $\rho_{max}(\sigma)$) We can see that as $\rho \rightarrow \rho_{max}$ ($k_{ij} = k_{ji} = 1$), the out-degree saturates at $N/2$}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=175mm]{fig_9}
+\caption{}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=130mm]{fig_10}
+\caption{}
 \end{figure}
 
 
@@ -258,12 +270,6 @@ We define the \emph{homogeneous gaussian network} as the case where parameters $
 \subsection{Heterogeneous Gaussian networks}
 
 An important example of a network with heterogeneous spatial connectivity is an excitatory-inhibitory network where neurons are assigned exctitatory and inhibitory character with probabilities $p_{\mathrm{E}}$ and $p_{\mathrm{I}}$, respectively. The statistics $\langle N_{ij}\rangle, \mathrm{Var}(N_{ij})$ in this case can be decomposed into $\langle N_{ij}^{\mathrm{E}}\rangle, \langle N_{ij}^{\mathrm{I}}\rangle$ and $\mathrm{Var}(N_{ij}^{\mathrm{E}}), \mathrm{Var}(N_{ij}^{\mathrm{I}})$ which allows us to assess the impact of kernels $k_{ij}$ and in turn parameters $\sigma_{E}^{2}$ and $\sigma_{I}^{2}$ on the voltage-dynamics of a neuron $i$.
-
-\begin{figure}
-\centering
-\includegraphics[width=150mm]{fig_9}
-\end{figure}
-
 
 
 \section{Coding theory for neural spike trains}
