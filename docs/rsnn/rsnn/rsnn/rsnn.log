@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.10.1)  26 OCT 2021 19:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.10.1)  26 OCT 2021 23:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -188,44 +188,63 @@ Package: appendix 2020/02/08 v1.2c extra appendix facilities
 \c@@ppsavesec=\count195
 \c@@ppsaveapp=\count196
 )
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2020/01/03 v3.4h Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 61.
+\captionmargin=\dimen151
+\captionmargin@=\dimen152
+\captionwidth=\dimen153
+\caption@tempdima=\dimen154
+\caption@indent=\dimen155
+\caption@parindent=\dimen156
+\caption@hangindent=\dimen157
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count197
+\c@continuedfloat=\count198
+Package caption Info: subfigure package is loaded.
+)
 (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count197
+\l__kernel_color_stack_int=\count199
 \l__pdf_internal_box=\box47
 )
 (./rsnn.aux)
 \openout1 = `rsnn.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
  (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count198
-\scratchdimen=\dimen151
+\scratchcounter=\count266
+\scratchdimen=\dimen158
 \scratchbox=\box48
-\nofMPsegments=\count199
-\nofMParguments=\count266
+\nofMPsegments=\count267
+\nofMParguments=\count268
 \everyMPshowfont=\toks28
-\MPscratchCnt=\count267
-\MPscratchDim=\dimen152
-\MPnumerator=\count268
-\makeMPintoPDFobject=\count269
+\MPscratchCnt=\count269
+\MPscratchDim=\dimen159
+\MPnumerator=\count270
+\makeMPintoPDFobject=\count271
 \everyMPtoPDFconversion=\toks29
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -236,6 +255,9 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
@@ -271,7 +293,7 @@ Chapter 1.
 <fig_6-A.png, id=46, 519.9425pt x 252.945pt>
 File: fig_6-A.png Graphic file (type png)
 <use fig_6-A.png>
-Package pdftex.def Info: fig_6-A.png  used on input line 127.
+Package pdftex.def Info: fig_6-A.png  used on input line 128.
 (pdftex.def)             Requested size: 355.65944pt x 173.02312pt.
  [6 <./fig_6-A.png>] [7]
 Chapter 2.
@@ -281,50 +303,50 @@ Chapter 2.
 Chapter 3.
 [11
 
-] [12] [13] [14]
-<fig_8.png, id=79, 650.43pt x 433.62pt>
+] [12] [13]
+<fig_8.png, id=76, 650.43pt x 433.62pt>
 File: fig_8.png Graphic file (type png)
 <use fig_8.png>
-Package pdftex.def Info: fig_8.png  used on input line 247.
+Package pdftex.def Info: fig_8.png  used on input line 226.
 (pdftex.def)             Requested size: 497.92322pt x 331.9564pt.
 
-Overfull \hbox (28.16823pt too wide) in paragraph at lines 247--248
+Overfull \hbox (28.16823pt too wide) in paragraph at lines 226--227
  [][] 
  []
 
-<fig_9.png, id=80, 722.7pt x 216.81pt>
+<fig_9.png, id=77, 722.7pt x 216.81pt>
 File: fig_9.png Graphic file (type png)
 <use fig_9.png>
-Package pdftex.def Info: fig_9.png  used on input line 253.
+Package pdftex.def Info: fig_9.png  used on input line 232.
 (pdftex.def)             Requested size: 497.92322pt x 149.3774pt.
 
-Overfull \hbox (28.16823pt too wide) in paragraph at lines 253--254
+Overfull \hbox (28.16823pt too wide) in paragraph at lines 232--233
  [][] 
  []
 
-<fig_10.png, id=81, 505.89pt x 722.7pt>
+<fig_10.png, id=78, 505.89pt x 722.7pt>
 File: fig_10.png Graphic file (type png)
 <use fig_10.png>
-Package pdftex.def Info: fig_10.png  used on input line 259.
+Package pdftex.def Info: fig_10.png  used on input line 238.
 (pdftex.def)             Requested size: 369.88582pt x 528.41573pt.
-[15 <./fig_8.png>] [16 <./fig_9.png>] [17 <./fig_10.png>] [18] [19
+[14] [15 <./fig_8.png> <./fig_9.png>] [16 <./fig_10.png>] [17] [18
 
 
 ]
 Appendix A.
-[20
+[19
 
-] [21]
+] [20]
 No file rsnn.bbl.
-[22] (./rsnn.aux) ) 
+[21] (./rsnn.aux) ) 
 Here is how much of TeX's memory you used:
- 3294 strings out of 481239
- 42560 string characters out of 5920377
- 280379 words of memory out of 5000000
- 18527 multiletter control sequences out of 15000+600000
- 539000 words of font info for 48 fonts, out of 8000000 for 9000
+ 4388 strings out of 481239
+ 62471 string characters out of 5920377
+ 299683 words of memory out of 5000000
+ 19613 multiletter control sequences out of 15000+600000
+ 539698 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,13n,29p,2128b,229s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,13n,42p,2128b,320s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/
 share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/
@@ -333,14 +355,14 @@ e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb
->
-Output written on rsnn.pdf (28 pages, 523956 bytes).
+blic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbol
+s/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on rsnn.pdf (27 pages, 524104 bytes).
 PDF statistics:
- 148 PDF objects out of 1000 (max. 8388607)
- 98 compressed objects within 1 object stream
+ 149 PDF objects out of 1000 (max. 8388607)
+ 99 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

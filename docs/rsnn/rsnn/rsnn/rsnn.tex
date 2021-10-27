@@ -6,6 +6,7 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage[toc,page]{appendix}
+\usepackage[labelfont=bf]{caption}
 
 \usepackage{url}
  
@@ -145,102 +146,80 @@ Synaptic plasticity refers to the activity-dependent modification of the strengt
 It is widely believed that neural circuits also possess the mechanisms for long term changes in synaptic strength formally referred to as long term potentiation (LTP) and long term depression (LTD). The brain encodes internally and externally generated stimuli as spatiotemporal patterns of action potentials and long-term modifications to such patterns via changes in synaptic transmission provide a feasible mechanism for the storage of information. In other words, changes in synaptic weights alter the spatiotemporal response of population of neurons to stimuli and therefore provide a method for long term memory formation. Since its original introduction by Cajal, this idea has been rigorously tested, for example in the CA1 region of the hippocampus (Whitlock et al. 2006). LTP and LTD have been extensively studied in the CA1 region of the hippocampus due to compelling evidence that it is a brain region that is central to learning and memory. Indeed, the cellular and biochemical mechanisms underlying these phenomena have been well-characterized. 
 
 
-\chapter{The topology of cortical networks}
+\chapter{A spatial model of cortical connectivity}
 
-\section{Spatial models of cortical connectivity}
+\section{Introduction}
 
 Significant effort has been spent in recent years to map the connectivity patterns of networks in cortex and thus variety of models have appeared. Connection patterns have been quantified by calculating a broad range of structural measures, including small-world attributes and motif composition, as well as some global measures of functional connectivity (Sporns 2006). The structural measures defined in this framework have proven quite useful; however, many models are defined without consideration of the fact that cortical networks are embedded in real space. In principle these spatially-dependent connectivity patterns could be hidden in the topology of an arbitrary graph; however, in some cases it is more straightforward to interpret connectivity patterns in the spatial domain. For example, the connectivity in a 2D lattice of LIF neurons with local and global synaptic connections are readily understood in terms of distances in real space (Rosenbaum 2014). At the same time, theoretical models e.g., mean-field theories of network dynamics have relaxed the strong assumption that cortical networks are spatially homogeneous (Brunel 2000). Defining a periodic connectivity kernel for each neuron on a lattice is an attractive model for cortical networks as it allows us to explore the dynamical consequences of translational invariance.
 
+\section{A statistical framework for generating connectivity}
 
-Let us define a connectivity kernel $k_{ij}$ which defines the probability of a connection between neuron $i$ and neuron $j$. Note that $k_{ij}$ is not a probability distribution. Rather, $k_{ij}$ defines the binary probability of a synapse from $i\rightarrow j$. Similarly, $k_{ji}$ defines the probability of a synapse from $j\rightarrow i$ and, in general, $k_{ij} \neq k_{ji}$. We will refer to this case at \emph{heterogeneous spatial connectivity}. 
+The following model for generating the backbone for network of neurons rests on the assumption that we can create connectivity solely from pairwise connection probabilities. Let us define a spatial connectivity kernel $\Gamma_{i}(\mathbf{r}_{j})$ with $i,j\in \{n\}_{n=1}^{N}$ which defines the binomial probability that a neuron $i$ synapses onto a different cell $j\neq i$ at spatial coordinate $\mathbf{r}_{j}$. Here, the function $\Gamma_{i}(\mathbf{r})$ is not itself a probability distribution but rather represents one component of a distribution that is defined for each possible pairs $i,j$ for a given $i$. That distribution is completely represented for a pair $i,j$ with knowledge of the kernel $\Gamma_{j}(\mathbf{r}_{i})$ and an additional probability that no synapse occurs $\Gamma_{0}$. The parameter $\Gamma_{0}$ will be referred to as the $\emph{sparsity parameter}$ throughout the remainder of the text. Together, these three binomial probabilities can be renormalized to form a multinomial distribution $\mathbb{P}_{ij}$ at every possible synapse $ij$. A general definition of the multinomial distribution is
 
-We now proceed to define the adjacency matrix $\mathcal{C} \in \mathbb{F}_{2}^{N\times N}$ where $\mathcal{C}_{ij} = 1$ defines a synapse from $i\rightarrow j$. The matrix $\mathcal{C}$ defines a directed graph which suggests that we need a mechanism of defining the probabilities $p_{ij}, p_{ji}, q$ where $q$ is the probability of no synapse. In the case that $k_{ij} = k_{ji}$ then $p_{ij} =  p_{ji}$. However, when $k_{ij} \neq k_{ji}$, we need to carefully define these three probabilities. Essentially, $k_{ij}$ and $k_{ji}$ are binomial probabilities so we use a multinomial distribution
+\begin{align}
+\mathbb{P} = \frac{p_{n}\prod_{m\neq n}(1-p_{m})}{\sum_{n}p_{n}\prod_{m\neq n}(1-p_{m})} = \frac{p_{n}\prod_{m\neq n}(1-p_{m})}{Z}
+\end{align}
 
-\begin{align*}
-\mathcal{P} = \frac{p_{n}\prod_{m\neq n}(1-p_{m})}{\sum_{n}p_{n}\prod_{m\neq n}(1-p_{m})} = \frac{p_{n}\prod_{m\neq n}(1-p_{m})}{Z}
-\end{align*}
-
-In our case, there are three possibilities: no synapse, $i\rightarrow j$, and $j\rightarrow i$. We therefore have the following multinomial probabilities over the possible synaptic states
+where $Z$ is a normalization constant. For generating synapses, the probabilities of (3.1) are the probabilities over the possible synaptic states between $i$ and $j$
 
   \[
-    \mathcal{P} = \left\{\begin{array}{lr}
-        p_{ij} = \gamma_{ij}\cdot k_{ij}(1-k_{ji})(1-q_{i})\\
-        p_{ji} = \gamma_{ji}\cdot k_{ji}(1-k_{ij})(1-q_{i})\\
-        p_{\emptyset} = q_{i}(1-k_{ij})(1-k_{ji})\\
-        \end{array}\right\}/Z
+    \mathbb{P} = \left\{\begin{array}{lr}
+        p_{ij} = \Gamma_{ij}(1-\Gamma_{ji})(1-\Gamma_{0})\cdot Z^{-1}\\
+        p_{ji} = \Gamma_{ji}(1-\Gamma_{ij})(1-\Gamma_{0})\cdot Z^{-1}\\
+        p_{0} = \Gamma_{0}(1-\Gamma_{ij})(1-\Gamma_{ji})\cdot Z^{-1}\\
+        \end{array}\right\}
   \]
   
 \begin{align*}
-Z = k_{ij}(1-k_{ji})(1-q_{i}) + k_{ji}(1-k_{ij})(1-q_{i}) + q_{i}(1-k_{ij})(1-k_{ji})
+Z = \Gamma_{ij}(1-\Gamma_{ji})(1-\Gamma_{0}) + \Gamma_{ji}(1-\Gamma_{ij})(1-\Gamma_{0}) + \Gamma_{0}(1-\Gamma_{ij})(1-\Gamma_{ji})
 \end{align*}
 
-The distribution $\mathcal{P}$ contains four parameters $(\sigma_{i},\gamma_{ij},\gamma_{ji},q_{i})$ which each are expressed as a map over the lattice. $\sigma_{i}$ controls the \emph{reach} of neuron $i$, $\gamma_{ij}$ and $\gamma_{ji}$ control the \emph{bias} for synaptic direction (and thus in-out degree ratios of neuron $i$) and $q_{i}$ controls the overall probability of a synapse. If $q_{i}$ is a constant, it controls the global sparsity of the network. The spatial distribution of the pair $(\gamma_{ij},\gamma_{ji}$) provide a mechanism for creating \emph{sources} and \emph{sinks} for spikes. This is particularly useful when defining feedforward inputs to a population which are clamped to specific spike trains. 
+Sampling from the distribution $\mathbb{P}$ for each of the $N^{2} - N$ possible synapses (excluding autapses), we can generate an asymmetric adjacency matrix $\mathcal{C} \in \mathbb{F}_{2}^{N\times N}$. An element $\mathcal{C}_{ij} = 1$ defines a synapse from $i\rightarrow j$ and $\mathcal{C}_{ji} = 1$ defines a synapse from $j\rightarrow i$.
 
-The first two moments of  the number of incoming and outgoing connections (in-degree and out-degree) then are given by binomial statistics. The first two moments of the in-degree are given by
+Defining the generation of network connectivity in this way proves useful upon the realization that the network can be described by binomial statistics, similar to the well-known Erdos-Renyi (ER) random graph. Graph theory provides a rich set of metrics that can be used to discuss the statistical properties of the network defined by $\mathcal{C}$ and in turn the chosen kernel $\Gamma$. Assuming that we can compute the probabilities $p_{ij}, p_{ji}$ and $p_{0}$ for a particular $\Gamma$ and every synapse is generated independently, the mean of the out-degree distribution is
 
-\begin{equation*}
-\langle N_{ij} \rangle = \sum_{j} \gamma_{ij}\cdot k_{ij}(1-k_{ji})(1-q)
-\end{equation*}
+\begin{equation}
+\langle N_{ij} \rangle = \sum_{j} \Gamma_{ij}(1-\Gamma_{ji})(1-\Gamma_{0})\cdot Z^{-1}
+\end{equation}
 
-\begin{equation*}
-\mathrm{Var}(N_{ij}) = \sum_{j}\gamma_{ij}\cdot k_{ij}(1-k_{ji})(1-q)(1-\gamma_{ij}\cdot k_{ij}(1-k_{ji})(1-q))
-\end{equation*}
+where the spatial dependence of the individual kernels is implied. The in-degree distribution is found by simply swapping $i$ and $j$. The variance of the out-degree distribution is then
 
-and the first two moments of the out-degree are found simply by swapping $i$ and $j$. Unfortunately, generating a matrix $\mathcal{C}$ is computationally expensive. It can be generated in $\mathcal{O}(n^{2})$ time by iterating over the upper triangle of $\mathcal{C}$, each iteration sampling $x\sim U([0,1])$ and applying the conditional
+\begin{align}
+\mathrm{Var}(N_{ij}) &= \sum_{j} \langle N_{ij}^{2} \rangle - \langle N_{ij} \rangle ^{2} \\
+&= \sum_{j} \langle N_{ij}\rangle - \langle N_{ij} \rangle ^{2} 
+\end{align}
 
-  \[
-    \left\{\begin{array}{lr}
-        i\rightarrow j \;\;\mathrm{if}\;\; 0 \leq x \leq p_{ij}\\
-        j\rightarrow i \;\;\mathrm{if}\;\; p_{ij} \leq x \leq p_{ij}+p_{ji}\\
-        \emptyset \;\; \mathrm{if} \;\; x \geq p_{ij}+p_{ji}
-        \end{array}\right\}
-  \]
+from the linearity of variance property. We will analyze the in-degree and out-degree distributions of a graph generated when the connectivity kernel is a symmetric Gaussian extending over two-dimensions. We refer to this case as a \emph{two-dimensional gaussian network}.
 
 
-\subsection{A 2D Gaussian Lattice}
+\section{The two-dimensional Gaussian network}
 
-Suppose that we have a two-dimensional lattice $\mathcal{L}_{\Delta}$, which contains points separated by a distance $\Delta$ along the axial directions and has periodic boundary conditions. The distance between any two points on such a lattice is then the following Euclidean distance metric
+Suppose that we have a two-dimensional lattice which contains points separated by a distance $\Delta$ along the axial directions with periodic boundary conditions. The distance between any two points on such a lattice is the following Euclidean distance metric
 
 \begin{align*}
 |\Delta\mathbf{r}_{ij}|^{2} = \mathrm{min}(|x_1 - x_2|, n\Delta - |x_1 - x_2|)^2 + \mathrm{min}(|y_1 - y_2|, n\Delta - |y_1 - y_2|)^2
 \end{align*}
 
-A natural choice for the kernel $k_{ij}$ is the one-dimensional Gaussian
+Now, let the kernel $\Gamma_{ij}$ be the two-dimensional symmetric Gaussian reduced to a function of a single variable $|\Delta\mathbf{r}_{ij}|$ 
 
-\begin{align*}
-k_{ij}(|\Delta\mathbf{r}_{ij}|) = \gamma_{ij}\cdot \exp\left(-\frac{1}{2}\frac{|\Delta\mathbf{r}_{ij}|^{2}}{\sigma_{i}^{2}} \right)
-\end{align*}
+\begin{align}
+\Gamma_{ij}(|\Delta\mathbf{r}_{ij}|) = \gamma\cdot \exp\left(-\frac{1}{2}\frac{|\Delta\mathbf{r}_{ij}|^{2}}{\sigma_{i}^{2}} \right)
+\end{align}
 
-where $|\Delta\mathbf{r}_{ij}|$ represents the norm of a vector with tail at the position of neuron $i$ and head at the position of neuron $j$. Notice that the connectivity kernel $k_{ij}$ is radially symmetric. Now, we write down two constraints on the kernel $k_{ij}$: 
-
-\begin{equation}
-k_{ij}(|\Delta\mathbf{r}_{ij}|) = 0 \;\; \mathrm{if} \;\; |\Delta\mathbf{r}_{ij}| \geq \sqrt{N}/2
-\end{equation}
+where $|\Delta\mathbf{r}_{ij}|$ represents the norm of a vector with tail at the position of neuron $i$ and head at the position of neuron $j$. The parameter $\sigma_{i}$ can be intepreted as the \emph{reach} of a neuron $i$. Furthermore, for the kernel $\Gamma_{ij}$ to represent a binomial probability at each point of its domain, we must have that
 
 
 \begin{equation}
-\gamma_{ij}\cdot k_{ij}(|\Delta\mathbf{r}_{ij}|) \leq 1
+\Gamma_{ij}(|\Delta\mathbf{r}_{ij}|)  \leq 1
 \end{equation}
 
-
-The first constraint is easily satisfied when these equations are evaluated numerically. In that case, we can safely assume that $\sigma$ is unbounded and we only sample the function $k_{ij}$ to the edge of the lattice. The second constraint comes from that fact that $k_{ij}$ at the point $|\Delta\mathbf{r}_{ij}|$ represents a Bernoulli probability. This gives the following inequality
-
-\begin{align*}
-\frac{\gamma_{ij}}{\sigma_{i}\sqrt{2\pi}}\exp\left(-\frac{\underset{j}{\mathrm{min}}\left(|\Delta\mathbf{r}_{ij}|^{2}\right)}{2\sigma_{i}^{2}} \right) \leq 1
-\end{align*}
-
-The largest possible value of the exponential is achieved at $\underset{j}{\mathrm{min}}\left(|\Delta\mathbf{r}_{ij}|^{2}\right) = \Delta$ (a neighboring lattice point). Therefore, $\gamma_{ij}$ must satisfy the upper bound
+Pluggin in our definition (3.5) gives the following inequality
 
 \begin{align*}
-\gamma_{ij} \leq \sigma_{i}\sqrt{2\pi}\exp\left(\frac{\Delta^{2}}{2\sigma_{i}^{2}}\right)
+\gamma\cdot \exp\left(-\frac{\underset{j}{\mathrm{min}}\left(|\Delta\mathbf{r}_{ij}|^{2}\right)}{2\sigma_{i}^{2}} \right) \leq 1
 \end{align*}
 
-Let us now examine the mean number of projections (out-degree) of a neuron $i$ assuming that the connectivity parameter $\sigma$ is homogeneous across the network i.e. it is constant for all neurons. From here on, we refer this regime as a \emph{homogeneous gaussian network}.
-
-\begin{align*}
-\langle N_{ij} \rangle = \sum_{j} \frac{k_{ij}(|\Delta\mathbf{r}_{ij}|)}{Z_{ij}} = \frac{\gamma_{ij}}{Z_{ij}}\cdot \exp\left(-\frac{1}{2}\frac{|\Delta\mathbf{r}_{ij}|^{2}}{\sigma_{i}^{2}} \right)
-\end{align*}
-
+The largest possible value of the exponential is achieved at $\underset{j}{\mathrm{min}}\left(|\Delta\mathbf{r}_{ij}|^{2}\right) = \Delta$ (a neighboring lattice point). Therefore, $\gamma$ is upper bounded according to $\gamma \leq \exp\left(\frac{\Delta^{2}}{2\sigma_{i}^{2}}\right)$. For the remainder of our analysis we will fix $\gamma = 1$ and focus our attention to the impact of the parameters $\sigma$ and $\Gamma_{0}$ on the statistics of connectivity. 
 
 \begin{figure}
 \centering
@@ -263,37 +242,19 @@ Let us now examine the mean number of projections (out-degree) of a neuron $i$ a
 
 \subsection{Homogeneous Gaussian networks}
 
-We define the \emph{homogeneous gaussian network} as the case where parameters $(\sigma_{i}, \gamma_{ij}, \gamma_{ji}, q_{i})$ are constants over the entire lattice and $\gamma_{ij}=\gamma_{ji}$ (there is no bias for synaptic direction). In this case, the bias parameter and the sparsity parameter become redundant. This can be seen by considering that multiplying $p_{ij}$ and $p_{ji}$ by the same constant factor $\gamma$ is equivalent to the linear transformation $q' = 1-\gamma(1-q)$. In other words, for the homogeneous case, the multiplication by $\gamma$ for a given value of $q$ can be replaced by using $q' = 1-\gamma(1-q)$. This suggests that the connectivity statistics can be derived from $q$ alone while setting $\gamma = 1$.
-
-
-
-\subsection{Heterogeneous Gaussian networks}
-
-An important example of a network with heterogeneous spatial connectivity is an excitatory-inhibitory network where neurons are assigned exctitatory and inhibitory character with probabilities $p_{\mathrm{E}}$ and $p_{\mathrm{I}}$, respectively. The statistics $\langle N_{ij}\rangle, \mathrm{Var}(N_{ij})$ in this case can be decomposed into $\langle N_{ij}^{\mathrm{E}}\rangle, \langle N_{ij}^{\mathrm{I}}\rangle$ and $\mathrm{Var}(N_{ij}^{\mathrm{E}}), \mathrm{Var}(N_{ij}^{\mathrm{I}})$ which allows us to assess the impact of kernels $k_{ij}$ and in turn parameters $\sigma_{E}^{2}$ and $\sigma_{I}^{2}$ on the voltage-dynamics of a neuron $i$.
-
-
-\section{Coding theory for neural spike trains}
-
-
-for a stochastic input $X$, which we assume can be written as a compound Poisson process, and a weighted summation of spikes in the primary population $\sum_{i}J_{ij}\delta(t-t_{spike})$. The state vector for the system is then $\mathbf{V}(t) = (V_{0}(t), V_{1}(t), ..., V_{N}(t))$ and we look for an analytical relationship between the joint distribution $P(\mathbf{V}(t))$ and the synaptic connectivity $J$. In principle, if we know the moments $\{M_{j}^{n}\}$  of the transition operator $T_{j}(V',t'|V,t)$ for every neuron $j$ to arbitrary order, we can express $\dot{P}(\mathbf{V}(t))$ according to the KM expansion in (2.7). The primary hurdle we need to overcome in this procedure then becomes relating the moments $\{M_{j}^{n}\}$ to the synaptic connectivity $J$. For example, we can construct a general template for the distribution $T_{j}$ by noticing that the probability of a binary input pattern
+Let us now examine the statistics of the out-degree of a neuron $i$ assuming that the connectivity parameter $\sigma$ and $\Gamma_{0}$ are homogeneous across the network i.e., they are constant for all neurons. Using Eq. (3.2), we have
 
 \begin{align*}
-P(\mathbf{z}) = \underset{j}{\prod} \; p_{j}^{z_{j}}(1-p_{j})^{1-z_{j}}
+\langle N_{ij} \rangle = \sum_{j} \frac{k_{ij}(|\Delta\mathbf{r}_{ij}|)}{Z_{ij}} = \frac{\gamma_{ij}}{Z_{ij}}\cdot \exp\left(-\frac{1}{2}\frac{|\Delta\mathbf{r}_{ij}|^{2}}{\sigma_{i}^{2}} \right)
 \end{align*}
 
-which is a multivariate Bernoulli distribution. If we let $\xi$ index the space of possible binary patterns
 
-\begin{align}
-T(V',t'|V,t) = \sum_{\xi} \delta(V'- V - J\cdot z_{\xi})\underset{j}{\prod} \; p_{j}^{z_{j}}(1-p_{j})^{1-z_{j}}
-\end{align}
+Interestingly, in the homogeneous case, the parameter $\gamma$ and $\Gamma_{0}$ become redundant. This can be seen by considering that multiplying $p_{ij}$ and $p_{ji}$ by the same constant factor $\gamma$ is equivalent to the transformation $\Gamma_{0}' = 1-\gamma(1-\Gamma_{0})$. In other words, for the homogeneous case, the multiplication by $\gamma$ can be represented by a suitable selection of $\Gamma_{0}$ and need not be introduced into the model.
 
-so we see that we must first know $P(\mathbf{z})$ which in turn requires knowledge of all $p_{j} = P_{j}(\theta, t)$ i.e. the probability flux at the threshold $\theta$. We now argue that the moments of (2.8) can be found 
 
-\begin{align}
-M_{n} = \int (V-V')^{n} T(V',t'|V,t) dV
-\end{align}
 
-which are essentially the moments of a compound Bernoulli distribution where the individual probabilities $p_{j}(t')$ are given by $P_{j}(\theta, t)$.
+\subsection{Excitatory-inhibitory Gaussian networks}
+
 
 
 \begin{appendices}
