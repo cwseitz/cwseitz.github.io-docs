@@ -264,7 +264,7 @@ In practice, the spatially-dependent connectivity models defined in the previous
 
 \section{Mean-field equations for population firing rates}
 
-The total synaptic current into a neuron $i$ can be decomposed according to 
+The total synaptic current into a neuron $i$ can be decomposed according to (Vreeswijk, 1998)
 
 \begin{align}
 I_{i}^{\alpha}(t) &= I_{\mathrm{ext}}^{\alpha}(t) + I_{\mathrm{rec}}^{\alpha}(t)\\
@@ -292,23 +292,54 @@ where we have used the identitiy $p_{\alpha\beta} = \tilde{p}_{\alpha\beta}p_{\a
 \end{align}
 
 
-Preventing blow-up of the synaptic currents requires that the sum in (3.5) scales as $\mathcal{O}\left(1/\sqrt{N}\right)$ s.t. as $N\rightarrow \infty$ 
+Preventing blow-up of the synaptic currents requires that the sum in (3.5) scales as $\mathcal{O}\left(1/\sqrt{N}\right)$ s.t. as $N\rightarrow \infty$ (Rosenbaum, 2016)
 
 \begin{align}
-\underset{N\rightarrow \infty}{\mathrm{lim}}\langle I_{k}^{e}(t)\rangle &= \langle I_{\mathrm{ext}}^{e}(t)\rangle + J_{ee}p_{ee}r_{e} + J_{ie}p_{ie}r_{i}\\
-\underset{N\rightarrow \infty}{\mathrm{lim}}\langle I_{k}^{i}(t)\rangle &= \langle I_{\mathrm{ext}}^{i}(t)\rangle + J_{ei}p_{ei}r_{e} + J_{ii}p_{ii}r_{i}
-\end{align}
-
-which gives
-
-\begin{align}
-r_{e} = \frac{\langle I_{\mathrm{ext}}^{e}\rangle J_{ii}p_{ii} - \langle I_{\mathrm{ext}}^{i}\rangle J_{ei}p_{ei}}{J_{ei}J_{ie}p_{ei}p_{ie} - J_{ee}J_{ii}p_{ee}p_{ii}}
+\underset{N\rightarrow \infty}{\mathrm{lim}}r_{e} = \frac{\langle I_{\mathrm{ext}}^{e}\rangle J_{ii}p_{ii} - \langle I_{\mathrm{ext}}^{i}\rangle J_{ei}p_{ei}}{J_{ei}J_{ie}p_{ei}p_{ie} - J_{ee}J_{ii}p_{ee}p_{ii}}
 \end{align}
 
 \begin{align}
-r_{i} = \frac{\langle I_{\mathrm{ext}}^{e}\rangle J_{ei}p_{ei} - \langle I_{\mathrm{ext}}^{i}\rangle J_{ee}p_{ee}}{J_{ei}J_{ie}p_{ei}p_{ie} - J_{ee}J_{ii}p_{ee}p_{ii}}
+\underset{N\rightarrow \infty}{\mathrm{lim}}r_{i} = \frac{\langle I_{\mathrm{ext}}^{e}\rangle J_{ei}p_{ei} - \langle I_{\mathrm{ext}}^{i}\rangle J_{ee}p_{ee}}{J_{ei}J_{ie}p_{ei}p_{ie} - J_{ee}J_{ii}p_{ee}p_{ii}}
 \end{align}
 
+\section{Cross-correlations of synaptic currents}
+
+We now summarize a mature technique for probing the covariance properties of networks of integrate and fire neurons (Rosenbaum 2016). We define the variables $\mathbf{Z}(t)\in \mathbb{F}_{2}^{N\times 1}$ as the instantaneous observable state vector of a network $\mathcal{N}$, $\mathbf{I}(t)\in \mathbb{R}_{2}^{N\times 1}$, $\mathbf{I}(t)\in \mathbb{R}_{2}^{N\times 1}$ which can be decomposed into its feedforward and recurrent components
+
+\begin{align}
+I(t) = I_{\mathrm{ext}}(t) + J\cdot Z(t)
+\end{align}
+
+To compute cross-correlations between components of $\mathbf{I}$ efficiently, we can compute the cross-spectrum (the cross-correlation in the frequency domain) and replace convolutions with products. The general definition of the cross-spectrum for two time-series $I_{1}$ and $I_{2}$ can be expressed in terms of the convolution theorem
+
+\begin{align}
+\langle i_{1}, i_{2}\rangle &= \mathcal{F}\left[i_{1}(t)*i_{2}^{*}(-t)\right] = \tilde{i_{1}}\tilde{i_{2}}^{*}
+\end{align}
+
+where $i_{1}(t)*i_{2}^{*}(-t)$ represents the cross-correlation of functions $i_{1}$ and $i_{2}$. Expressions of the form (3.11) can be evaluated for many pairs in a single operation by defining the cross-spectral matrix operator (Gardiner, 1985)
+
+\begin{align}
+\langle A, B\rangle = \begin{bmatrix} 
+    \langle A_{1}, B_{1}\rangle  & \dots & \langle A_{1}, B_{M}\rangle\\
+    \vdots & \ddots & \\
+    \langle A_{N}, B_{1}\rangle &        & \langle A_{N}, B_{M}\rangle
+    \end{bmatrix}
+\end{align}
+
+which is the analog of the covariance matrix in the frequency domain. Applying this operator to (3.10) gives (Rosenbaum, 2016)
+
+\begin{align}
+\langle I, I \rangle &= \langle I_{\mathrm{ext}} + J(H*Z), I_{\mathrm{ext}} + J(H*Z) \rangle\\
+&= \langle I_{\mathrm{ext}}, I_{\mathrm{ext}}\rangle  + J\tilde{H}\langle Z, I_{\mathrm{ext}} \rangle + \langle I_{\mathrm{ext}, Z\rangle}\tilde{H}^{*}J^{T} + J\tilde{H}\langle Z, Z\rangle \tilde{H}^{*}J^{T}
+\end{align}
+
+Correlations between $I$ and $I_{\mathrm{ext}}$ can be calculated in a similar fashion
+
+\begin{align}
+\langle I, I_{\mathrm{ext}} \rangle &= \langle I_{\mathrm{ext}}, I_{\mathrm{ext}}\rangle + J\tilde{H} \langle Z, I_{\mathrm{ext}}\rangle
+\end{align}
+
+We now proceed to summarize the mean-field approximations of (3.14) and (3.15) presented in (Rosenbaum, 2016). 
 
 \section{Finite-size effects in numerical simulations}
 
