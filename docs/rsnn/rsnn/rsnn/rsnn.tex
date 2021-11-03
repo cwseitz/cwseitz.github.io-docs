@@ -94,49 +94,6 @@ Synaptic plasticity refers to the activity-dependent modification of the strengt
 
 It is widely believed that neural circuits also possess the mechanisms for long term changes in synaptic strength formally referred to as long term potentiation (LTP) and long term depression (LTD). The brain encodes internally and externally generated stimuli as spatiotemporal patterns of action potentials and long-term modifications to such patterns via changes in synaptic transmission provide a feasible mechanism for the storage of information. In other words, changes in synaptic weights alter the spatiotemporal response of population of neurons to stimuli and therefore provide a method for long term memory formation. Since its original introduction by Cajal, this idea has been rigorously tested, for example in the CA1 region of the hippocampus (Whitlock et al. 2006). LTP and LTD have been extensively studied in the CA1 region of the hippocampus due to compelling evidence that it is a brain region that is central to learning and memory. Indeed, the cellular and biochemical mechanisms underlying these phenomena have been well-characterized. 
 
-\section{The Ornstein-Uhlenbeck Process}
-
-Langevin equations in the form of (1.1) have been studied extensively and their statistical features have been defined rigorously. In this form, they resemble the Ornstein-Uhlenbeck (OU) process, which is often used in statistical physics to describe a diffusing particle undergoing Brownian motion (Wiener process) with friction. In Brownian motion, the displacement of a variable $x$ in a time $dt$ is normally distributed with variance proportional to $\Delta t$ i.e. $V(t+dt) - V(t) \sim N(0, \sigma^{2}dt)$ or equivalently $dV \sim \sigma\sqrt{dt}\eta(t)$. The Ornstein-Uhlenbeck process is commonly written as a Langevin equation with a noise term similar to Brownian motion but with an added frictional term $-V(t)$ and a non-stationary white-noise $\mu(t) + \sigma\sqrt{dt}\eta(t)$ giving
-
-
-\begin{equation}
-\tau\dot{V_{j}}(t) = -V_{j}(t) + \mu_{j}(t) + \sigma_{j}\sqrt{dt}\eta(t)
-\end{equation}
-
-with $\eta(t) \sim \mathcal{N}(0,1)$. This is equivalent to (1.1) with $\xi_{j}(t) = \sigma_{j}\sqrt{dt}\eta(t)$. The last two terms in (1.2) are summarized by the total current arriving at the soma of a neuron $I_{j}(t) = \mu_{j}(t) + \sigma_{j}\sqrt{dt}\eta_{j}(t)$. The solution of (1.2) is a probability distribution over the stochastic variable $V_{j}$ as a function of time i.e. $P(V_{j},t)$. 
-
-\section{The Kramers-Moyal Expansion}
-
-In general, the distribution $P_{j}$ at a time $t'$ can be conditionally dependent on its previous states $t < t'$. Here, we will make the assumption that the evolution of $P_{j}(V_{j},t)$ follows a Markov chain meaning that it has the memoryless property. We are then permitted to write the Chapman-Kolmogorov (CK) equation
-
-\begin{equation}
-P(V'_{j}, t) = \int T_{j}(V'_{j}, t | V_{j}, t-\tau)P(V_{j}, t-\tau)dV
-\end{equation} 
-
-In terms of (1.2), this requires $\langle\eta(t)\eta(t')\rangle = \delta(t-t')$. Starting from the CK equation in (1.3) we can derive the Kramers-Moyal Expansion (KME) 
-
-\begin{align}
-\frac{\partial P_{j}}{\partial t} = \sum_{n} \frac{(-1)^{n}}{n!} \left(\frac{\partial}{\partial V_{j}}\right)^{n} M_{n}(V_{j},t,\tau) P(V_{j},t)
-\end{align}
-
-where $M_{n}(V,t,\tau)$ denotes the $nth$ order moment of the transition density $T_{j}(V'_{j}, t | V_{j}, t-\tau)$. If we approximate the KME by truncating the summation for $n > 2$ we arrive at the so-called \emph{diffusion approximation} or Fokker-Planck equation
-
-\begin{align}
-\frac{\partial P_{j}}{\partial t} &= \frac{\partial}{\partial V_{j}}[\left(V_{j}(t)-\mu_{j}(t)\right) P_{j}(V_{j},t)] + \frac{\sigma_{j}^{2}(t)}{2}\frac{\partial^{2}}{\partial V_{j}^{2}}[P(V_{j},t)]
-\end{align}
-
-where the first and second moments have been substituted by their standard symbols $\mu$ and $\sigma^{2}$.
-
-\section{Fokker-Planck Solution for Unbounded Diffusion}
-
-For the unbounded case of the OU process, the solution of (1.5) is known. The transition density $T_{j}(V_{j}',t+\Delta t|V_{j},t)$ has the following analytical form:
-
-\begin{align}
-T_{j}(V_{j}',t+\Delta t|V_{j},t) = \sqrt{\frac{1}{\tau\pi\sigma_{j}^{2}(t)(1-\exp\left(-2\Delta t/\tau)\right))}}\exp\left(-\frac{1}{\tau\sigma_{j}^{2}}\frac{(V_{j}'-V_{R}\exp(-\Delta t/\tau))^{2}}{1-\exp\left(-2\Delta t/\tau\right)}\right)
-\end{align} 
-
-This is equivalent to the distribution $P_{j}(V_{j},t)$ as can be seen by plugging $T$ into (2.1) and setting the initial condition $P_{j}(V_{j},t) = \delta(V_{j}-V_{R})$.  An important difference in the IF model in (1.1) and the OU process is that the voltage variable $V$ in the IF model is bounded below by $V_{R}$ and above by the threshold $\Theta$. The reset mechanism requires that $V(t+\Delta t) = V(t)(1-z_{j}(t))$ which is a \emph{renewal process} in the language of statistics, making $V = \Theta$ an absorbing barrier. The bounded case is an example of a first passage time (FPT) problem in statistics where the objective is to find the distribution over times it takes the stochastic variable to diffuse over the barrier. In this context, if we know that a neuron spiked at a time $t^{*}$, we cannot predict the timing of the next action potential. Rather, we can only hope to find the interspike-interval (ISI) distribution $\rho(\tau | t^{*})$ which gives the probability that the next spike occurs at a time $t^{*} + \tau$.  
-
 
 \chapter{A spatial model of cortical connectivity}
 
@@ -278,15 +235,71 @@ To account for excitatory and inhibitory cell types within this framework, we mu
 \caption{\textbf{Average degree in an excitatory-inhibitory network} (A) Schematic illustrating the notation used for excitatory-excitatory, excitatory-inhibitory, inhibitory-excitatory, and inhibitory-inhibitory synapses. (B) An example dense excitatory-inihbitory network ($\Gamma_{0}=0.2$) and $p_{E} = 0.8$. (C) Average number of synapses in the dense network normalized to the target population size as a function of parameters $\sigma_{E}$ and $\sigma_{I}$. (D) An example sparse excitatory-inihbitory network ($\Gamma_{0}=0.8$) and $p_{E} = 0.8$. (E) Average number of synapses in the sparse network normalized to the target population size as a function of parameters $\sigma_{E}$ and $\sigma_{I}$.}
 \end{figure}
 
-\chapter{Mean-field theory for cortical dynamics}
+\chapter{Dynamics of spiking neural networks}
 
 \section{Introduction}
 
-There are two known ways in which pairwise correlations in the network can be zero, on average: (i) the network topology is sufficiently sparse that it is very unlikely that two neurons share common inputs and (ii) the network is balanced such that spike timing is determined by intrinsic noise (which is uncorrelated between neurons). The former case was used by (Brunel 2000) to derive an expression for the steady state population firing rate and is valid per the central limit theorem. In either case, the lack of correlated inputs in the limit $N\rightarrow \infty$ permits the approximation of synaptic inputs by normal distribution i.e., white noise. Correlated inputs, on the other hand, will result in a power spectrum  of the synaptic input that deviates from gaussian noise. In any case, for uncorrelated inputs and a Langevin equation of the form (1.1), the joint distribution $P(\mathbf{V})$ takes the form of a $N$ dimensional Ornstein-Uhlenbeck process governed by a diffusion tensor proportional to the identity matrix. On the other hand, if synaptic inputs are correlated, the diffusion tensor takes a more complicated form that we cannot directly predict. However, we can estimate it with the mean-field estimates of the covariance matrix in (Rosenbaum 2017). This applies to the spatial network topologies as well.
+The goal of this chapter is two-fold: first, it serves to briefly summarize our current understanding of the relationship between dynamics of networks of neurons and network topology and stimulus drive. Once the state of the art has been established we seek to highlight points for future development and ultimately an improved understanding of the neural code. We examine network dynamics through the lens of statistical physics and information theory. The second owes its origins to the first but contains new insights on the emergent coding properties of physical systems. Questions regarding the dynamics of networks in the brain can be addressed under this framework which cannot be addressed experimentally, to date. The following models can be inverted after gathering empirical data to determine the accuracy of their description of the biological substrate.
 
-Mean-field techniques are a common approach utilized in statistical mechanics, being first introduced in the description of phase transitions. More generally, a mean-field theory approximates the behavior of single units in many-body interacting systems with a large number of degrees of freedom. In the context of neuroscience, we may wish to estimate the synaptic current $I_{j}$ through the membrane of a neuron $j$ based on the average firing rate of the population and known features of the synaptic connectivity. The mathematical relationship between synaptic currents and firing rates is often called the \emph{transfer-function} of a neuron - a quantitative relationship that proves useful in probing neuron response properties when synaptic currents are known. For example, when a feedforward population is clamped to spike trains with well-defined statistics. Furthermore, it has been hypothesized that the temporal irregularity of spiking activity of cortical neurons \emph{in-vivo} is due to a balance of excitatory and inhibitory currents into the cortical cells (Vreeswijk, 1998). Indeed, the interaction of balanced excitatory and inhibitory synaptic currents with the intrinsic noise of neurons has strong implications for the coding scheme and metabolic efficiency in cortex (Sengupta, 2013). 
+Recent studies have strongly suggested that understanding the neural code will amount to a rigorous understanding of correlations between neuron spike-timing. Such correlation studies are necessarily contextual - correlations must be interpeted in the context of known stimulus drive, learning or experience, or changes in behavioral context (Cohen 2011). This presents a significant challenge for theoretical studies given that the correlation structure of spiking between neurons can be considered a highly granular description of the population dynamics. The stochastic properties of individual cells and ensuing unpredictability of network states makes the discussion of fine characeteristics a serious challenge. Historically, many-body problems like this have been treated by mean-field theories such as the approximation of motion of gas particles using average properties of the medium e.g., temperature and pressure. Furthermore, a natural description of many-body systems is their distribution over a phase space defined by the state variables of the system. Dynamics of the system as a whole are then described by the dynamics of this population density, which may or may not have a stationary (equilibrium) state. Mathematically, determination of this density and its time-dependence, amounts to the solution of the Kramers-Moyal expansion, which in the diffusion approximation, reduces to the Fokker-Planck equation.
 
-In practice, the spatially-dependent connectivity models defined in the previous chapter present a fairly large parameter space determining network dynamics. As an alternative to exploring that parameter space exhaustively, we make the appropriate simplifications in order to make predictions of network dynamics analytically. The regime in which excitatatory and inhibitory currents are balanced is a natural starting point for our investigation.
+This class of techniques has had great success in neuroscience applications in recent years. Indeed, it has been used to analytically derive expressions for the firing rate of excitatory and inhibitory integrate and fire neurons in a sparse network (Brunel, 2000). Integrate and fire neurons simplify the solution of the Fokker-Planck equation considerably, giving some hope for analytical treatment. Monte Carlo simulations of networks of neurons often preclude our understanding of the mechanisms that give rise to the observed dynamics, due to computational costs (Rosenbaum, 2016). For simplified neuron models, the Fokker-Planck formalism provides a method for mapping membrane dynamics and input statistics to spiking statistics, i.e., firing rates. However, many of these approaches have required strict assumptions such as the lack of correlations in afferent synaptic inputs. This lack of input correlations permits invocation of the central limit theorem and the Fokker Planck equation can be solved in one dimension analytically (Brunel 2000) or numerically or using the threshold integration method (Richardson 2007, 2008, 2010). Of course, such as assumption precludes the inversion of the theoretical model using cellular recordings with known correlations in spike timing, and in turn correlated synaptic inputs. This observation suggests that an extension of the above approach is needed for the correlated case.
+
+Two possible ways in which pairwise correlations in a network can vanish on average are: (i) the network topology is sufficiently sparse that it is very unlikely that two neurons share common inputs and (ii) the network is balanced in such a way that the timing of a spike is driven by intrinsic noise, which is reasonably assumed to be uncorrelated between neurons (Plesser 2000). The former case was used by (Brunel 2000) to derive an expression for the steady state population voltage distribution, an extension of previous work where an expression for the steady-state firing rate was derived analytically (Riccardi 1977; Amit 1991). In the uncorrelated case, this approach is valid since the synaptic currents are normally distributed and the problem resembles the mean first-passage time problem for the Ornstein-Uhlenbeck process. At this point, we extend the neuron model presented in the first chapter to 
+
+\begin{equation}
+\tau\dot{V_{j}}(t) = -V_{j}(t) + \mu_{j}(t) + \sigma_{j}\sqrt{dt}\eta(t)
+\end{equation}
+
+The above equation is a Langevin equation, used frequently in statistical physics. It has a noise term similar to Brownian motion but with an added frictional term $-V(t)$. In summary, the total current arriving at the soma of a neuron reads $\xi_{j}(t) = \mu_{j}(t) + \sigma_{j}\sqrt{dt}\eta_{j}(t)$. If either of the conditions mentioned abve for vanishing correlations is satisfied, we have
+
+\begin{equation}
+\langle \eta_{i}(t)\eta_{j}(t)\rangle = \delta(i-j)
+\end{equation}
+
+\begin{equation}
+\langle \eta_{i}(t)\eta_{i}(t+\tau)\rangle = \delta(\tau)
+\end{equation}
+
+Put another way, the lack of correlated inputs in the limit of network size $N\rightarrow \infty$ permits the approximation of synaptic inputs by a normal distribution, which is delta-correlated. Equation (3.2) and (3.3) are commonly known as the cross-correlation and autocorrelation, respectively. Also, we assume that $\eta(t)$ is the intrinsic noise of neuron $j$ and that (3.2) and (3.3) are satisfied. If (3.1) is not satisfied, synaptic currents will have a ``colored" power spectrum and previous solutions to (3.1) do not apply (Brunel 2000). In the worst case, the one-dimensional Fokker-Planck equation must be solved in $N$ dimensions and the covariance matrix of synaptic currents must be known. For arbitrary connectivity patterns, estimating the systems covariance is challenging, although the problem was recently addressed via a mean-field theory for discrete networks and networks with spatial connectivity (Rosenbaum 2017). We now summarize the Kramers-Moyal expansion, a full derivation is included in (A.1). followed by a short summary of this mean-field theory.
+
+\section{The Kramers-Moyal Expansion}
+
+The problem at hand is the determination of the distribution of the state variable $V$ for a neuron $j$ i.e. the density $P_{j}(V)$ as a function of time. The central assumption made in the derivation of the Kramers-Moyal expansion is that the evolution of $P_{j}(V_{j},t)$ follows a Markov chain. We are then permitted to write the Chapman-Kolmogorov (CK) equation
+
+\begin{equation}
+P(V'_{j}, t) = \int T_{j}(V'_{j}, t | V_{j}, t-\tau)P(V_{j}, t-\tau)dV
+\end{equation} 
+
+which expresses the density of $V$ in terms of an integral over a transition density $T_{j}$. The transition density is directly related to the distribution over synaptic currents. If $T_{j}$ is normally distributed, then $P(V_{j},t)$ must also be normally distribution (as in the Ornstein-Uhlenbeck process). Starting from the CK equation in (1.3) we can derive the Kramers-Moyal Expansion (KME) which has the form
+
+\begin{align}
+\frac{\partial P_{j}}{\partial t} = \sum_{n} \frac{(-1)^{n}}{n!} \left(\frac{\partial}{\partial V_{j}}\right)^{n} M_{n}(V_{j},t,\tau) P(V_{j},t)
+\end{align}
+
+where $M_{n}(V,t,\tau)$ denotes the $nth$ order moment of the transition density $T_{j}(V'_{j}, t | V_{j}, t-\tau)$. If we approximate the KME by truncating the summation for $n > 2$ we arrive at the so-called \emph{diffusion approximation} or Fokker-Planck equation
+
+\begin{align}
+\frac{\partial P_{j}}{\partial t} &= \frac{\partial}{\partial V_{j}}[\left(V_{j}(t)-\mu_{j}(t)\right) P_{j}(V_{j},t)] + \frac{\sigma_{j}^{2}(t)}{2}\frac{\partial^{2}}{\partial V_{j}^{2}}[P(V_{j},t)]
+\end{align}
+
+where the first and second moments have been substituted by their standard symbols $\mu$ and $\sigma^{2}$. For an N-dimensional system that is uncorrelated, we have 
+
+\section{The uncorrelated regime}
+
+The general form of the Fokker-Planck equation in N-dimensions reads
+
+\begin{align}
+\frac{\partial P_{j}}{\partial t} &= \sum_{i}
+\beta_{ij}\frac{\partial}{\partial V_{i}}[\left(V_{j}(t)-\mu_{j}(t)\right) P_{j}(V_{j},t)] + \sum_{i}D_{ij}\frac{\partial^{2}}{\partial V_{i}\partial V_{j}}[P(V_{j},t)]
+\end{align}
+
+where the term $D_{ij}$ is called the \emph{diffusion tensor} and is related to the covariance matrix $\Sigma$ by $D_{ij} = \frac{\Sigma\Sigma^{T}}{2}$. If pairwise correlations are indeed zero, then $\Sigma = \sigma^{2}I$ and equation (3.6) takes the simplified form (3.5). After enforcing the boundary conditions appropriate for a neuron with a threshold $\theta$ and a nonzero refractory period $\tau_{\mathrm{ref}}$, we arrive at a steady state solution for the instantaneous firing rate (Brunel 2000). 
+
+\begin{align}
+\frac{1}{\nu_{0}} = \tau_{\mathrm{ref}} + \tau\sqrt{\pi}\int_{\frac{V_{r}-\mu_{0}}{\sigma_{0}}}^{\frac{\theta-\mu_{0}}{\sigma_{0}}} \exp(u^{2})(1+\mathrm{erf}(u))du
+\end{align}
+
 
 \section{Mean-field equations for population firing rates}
 
