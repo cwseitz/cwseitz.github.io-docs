@@ -253,15 +253,18 @@ Two possible ways in which pairwise correlations in a network can vanish on aver
 
 The above equation is a Langevin equation, used frequently in statistical physics. It has a noise term similar to Brownian motion but with an added frictional term $-V(t)$. In summary, the total current arriving at the soma of a neuron reads $\xi_{j}(t) = \mu_{j}(t) + \sigma_{j}\sqrt{dt}\eta_{j}(t)$. If either of the conditions mentioned abve for vanishing correlations is satisfied, we have
 
-\begin{equation}
-\langle \eta_{i}(t)\eta_{j}(t)\rangle = \delta(i-j)
-\end{equation}
+\begin{align}
+&\langle \eta_{i}(t)\eta_{j}(t)\rangle = \delta(i-j)\\
+&\langle \eta_{i}(t)\eta_{i}(t+\tau)\rangle = \delta(\tau)
+\end{align}
+
+Put another way, the lack of correlated inputs in the limit of network size $N\rightarrow \infty$ permits the approximation of synaptic inputs by a normal distribution, which is delta-correlated. Equation (3.2) and (3.3) are commonly known as the cross-correlation and autocorrelation, respectively. Also, we assume that $\eta(t)$ is the intrinsic noise of neuron $j$ and that (3.2) and (3.3) are satisfied. If (3.1) is not satisfied, synaptic currents will have a ``colored" power spectrum and previous solutions to (3.1) do not apply (Brunel 2000). In the worst case, the one-dimensional Fokker-Planck equation must be solved in $N$ dimensions and the covariance matrix of synaptic currents must be known. For the $N$ dimensional case, (3.1) generalizes to 
 
 \begin{equation}
-\langle \eta_{i}(t)\eta_{i}(t+\tau)\rangle = \delta(\tau)
+\tau\dot{\mathbf{V}}(t) = -\mathbf{V}(t) + \mathbf{\Sigma}(t)\mathbf{W}(t)
 \end{equation}
 
-Put another way, the lack of correlated inputs in the limit of network size $N\rightarrow \infty$ permits the approximation of synaptic inputs by a normal distribution, which is delta-correlated. Equation (3.2) and (3.3) are commonly known as the cross-correlation and autocorrelation, respectively. Also, we assume that $\eta(t)$ is the intrinsic noise of neuron $j$ and that (3.2) and (3.3) are satisfied. If (3.1) is not satisfied, synaptic currents will have a ``colored" power spectrum and previous solutions to (3.1) do not apply (Brunel 2000). In the worst case, the one-dimensional Fokker-Planck equation must be solved in $N$ dimensions and the covariance matrix of synaptic currents must be known. For arbitrary connectivity patterns, estimating the systems covariance is challenging, although the problem was recently addressed via a mean-field theory for discrete networks and networks with spatial connectivity (Rosenbaum 2017). We now summarize the Kramers-Moyal expansion, a full derivation is included in (A.1). followed by a short summary of this mean-field theory.
+For arbitrary connectivity patterns, estimating the systems covariance is challenging, although the problem was recently addressed via a mean-field theory for discrete networks and networks with spatial connectivity (Rosenbaum 2017). We now summarize the Kramers-Moyal expansion, a full derivation is included in (A.1). followed by a short summary of this mean-field theory.
 
 \section{The Kramers-Moyal Expansion}
 
@@ -283,25 +286,28 @@ where $M_{n}(V,t,\tau)$ denotes the $nth$ order moment of the transition density
 \frac{\partial P_{j}}{\partial t} &= \frac{\partial}{\partial V_{j}}[\left(V_{j}(t)-\mu_{j}(t)\right) P_{j}(V_{j},t)] + \frac{\sigma_{j}^{2}(t)}{2}\frac{\partial^{2}}{\partial V_{j}^{2}}[P(V_{j},t)]
 \end{align}
 
-where the first and second moments have been substituted by their standard symbols $\mu$ and $\sigma^{2}$. For an N-dimensional system that is uncorrelated, we have 
-
-\section{The uncorrelated regime}
-
-The general form of the Fokker-Planck equation in N-dimensions reads
+where the first and second moments have been substituted by their standard symbols $\mu$ and $\sigma^{2}$. The general form of the Fokker-Planck equation in $N$ dimensions; that is, the time-dependence of the joint distribution over $N$ voltage variables $P(V_{1}\;...\;V_{N})$ is
 
 \begin{align}
-\frac{\partial P_{j}}{\partial t} &= \sum_{i}
+\frac{\partial P}{\partial t} &= \sum_{i}
 \beta_{ij}\frac{\partial}{\partial V_{i}}[\left(V_{j}(t)-\mu_{j}(t)\right) P_{j}(V_{j},t)] + \sum_{i}D_{ij}\frac{\partial^{2}}{\partial V_{i}\partial V_{j}}[P(V_{j},t)]
 \end{align}
 
-where the term $D_{ij}$ is called the \emph{diffusion tensor} and is related to the covariance matrix $\Sigma$ by $D_{ij} = \frac{\Sigma\Sigma^{T}}{2}$. If pairwise correlations are indeed zero, then $\Sigma = \sigma^{2}I$ and equation (3.6) takes the simplified form (3.5). After enforcing the boundary conditions appropriate for a neuron with a threshold $\theta$ and a nonzero refractory period $\tau_{\mathrm{ref}}$, we arrive at a steady state solution for the instantaneous firing rate (Brunel 2000). 
+where the term $D_{ij}$ is called the \emph{diffusion tensor} and is related to the covariance matrix $\Sigma$ by $D_{ij} = \frac{\Sigma\Sigma^{T}}{2}$.
+
+\section{The uncorrelated regime}
+
+We now investigate the two possible cases for uncorrelated synaptic currents highlighted above. If pairwise correlations are indeed zero, then $\Sigma = \sigma^{2}I$ and equation (3.7) takes the simplified form (3.6) and we need only solve the Fokker-Planck equation in one dimension. After enforcing the boundary conditions appropriate for a neuron with a threshold $\theta$ and a nonzero refractory period $\tau_{\mathrm{ref}}$, we arrive at a steady state solution for the instantaneous firing rate (Brunel 2000). 
 
 \begin{align}
 \frac{1}{\nu_{0}} = \tau_{\mathrm{ref}} + \tau\sqrt{\pi}\int_{\frac{V_{r}-\mu_{0}}{\sigma_{0}}}^{\frac{\theta-\mu_{0}}{\sigma_{0}}} \exp(u^{2})(1+\mathrm{erf}(u))du
 \end{align}
 
+\section{The correlated regime}
 
-\section{Mean-field equations for population firing rates}
+Introducing correlations into synaptic the synaptic currents over a population greatly complicates the development of a solution to (3.7). We can no longer describe the high-dimensional solution with a one-dimensional equation. At the same time, covariance matrices are difficult to predict unless the system satisfies the limit for a mean-field approach. In summary, equation (3.7) must be solved for very large $N$ to avoid finite size effects in a solution of the steady state covariance while nonzero correlations give rise to non-gaussian features.  Of course, traditional numerical methods such as finite element and finite difference all suffer from the curse of dimension (Chen 2017, Pichler 2013). Another solution is a Monte Carlo simulation of (X); however, the required sample size increases in an exponential rate as the dimension and the same curse dimensionality problem appears. However, recently a method for solving the Fokker-Planck equation in high dimensions, even on the order of millions, has been developed for complex systems with non-gaussian features (Chen 2017). 
+
+\subsection{Mean-field equations for population firing rates}
 
 The total synaptic current into a neuron $i$ can be decomposed according to (Vreeswijk, 1998)
 
@@ -381,8 +387,6 @@ Correlations between $I$ and $I_{\mathrm{ext}}$ can be calculated in a similar f
 We now proceed to summarize the mean-field approximations of (3.14) and (3.15) presented in (Rosenbaum, 2016). 
 
 \section{Finite-size effects in numerical simulations}
-
-\section{Connecting network topology to information theory}
 
 
 \begin{appendices}
