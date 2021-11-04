@@ -70,10 +70,10 @@ The remainder of this thesis is organized as follows. First, we review the body 
 The integrate and fire (IF) model of a cortical neuron has become a standard tool for exploring neuronal dynamics. It's relative simplicity makes it an appealing choice for large scale simulations where the precise details of synaptic transmission can be neglected and a neuron can be described with only a few state variables. A large body of research has shown that precise timing of action potentials has an important role in neural information processing - a feature central to the IF model (Rieke, 1997). However, even the minimalist IF model presents substantial barriers to theoretical analysis in the context of networks (Brunel 2000). Noisy variants of IF models have been introduced to summarize the enormous number of degrees of freedom due to millions of ion channels and thousands of presynaptic signals impinging on the neuron (Tuckwell 1989, Plesser 2000). Such models describe the process of synaptic integration by the following linear ordinary differential equation for the membrane potential
 
 \begin{align}
-\tau\dot{V} = -V + \xi(t)
+\tau\dot{V} = -V + \zeta(t)
 \end{align}
 
-If a neuron described by (1.1) is embedded in a network, the variable $\xi(t)$ represents the synaptic input at a time $t$ by its presynaptic neighbors. In the presence of noise, $\xi(t)$ is non-deterministic and (1.1) takes the form of a well-known stochastic differential equation (SDE) called the Langevin equation. Furthermore, to represent the firing of an action potential, the variable $V$ in (1.1) is bounded from above. When $V$ crosses a firing threshold $\theta$, we say the neuron has spiked and the voltage is reset to a resting value. This process is often summarized by defining an additional state variable $z(t) = H(V-v_{th})$ where $H$ denotes the Heaviside step function.
+If a neuron described by (1.1) is embedded in a network, the variable $\zeta(t)$ represents the synaptic input at a time $t$ by its presynaptic neighbors. In the presence of noise, $\zeta(t)$ is non-deterministic and (1.1) takes the form of a well-known stochastic differential equation (SDE) called the Langevin equation. Furthermore, to represent the firing of an action potential, the variable $V$ in (1.1) is bounded from above. When $V$ crosses a firing threshold $\theta$, we say the neuron has spiked and the voltage is reset to a resting value. This process is often summarized by defining an additional state variable $z(t) = H(V-v_{th})$ where $H$ denotes the Heaviside step function.
 
 \section{Balanced and correlated states}
 
@@ -248,62 +248,61 @@ This class of techniques has had great success in neuroscience applications in r
 Two possible ways in which pairwise correlations in a network can vanish on average are: (i) the network topology is sufficiently sparse that it is very unlikely that two neurons share common inputs and (ii) the network is balanced in such a way that the timing of a spike is driven by intrinsic noise, which is reasonably assumed to be uncorrelated between neurons (Plesser 2000). The former case was used by (Brunel 2000) to derive an expression for the steady state population voltage distribution, an extension of previous work where an expression for the steady-state firing rate was derived analytically (Riccardi 1977; Amit 1991). In the uncorrelated case, this approach is valid since the synaptic currents are normally distributed and the problem resembles the mean first-passage time problem for the Ornstein-Uhlenbeck process. At this point, we extend the neuron model presented in the first chapter to 
 
 \begin{equation}
-\tau\dot{V_{j}}(t) = -V_{j}(t) + \mu_{j}(t) + \sigma_{j}\sqrt{dt}\eta(t)
+\tau\dot{V_{j}}^{\alpha}(t) = -V_{j}^{\alpha}(t) + \zeta_{j}^{\alpha}(t)
 \end{equation}
 
-The above equation is a Langevin equation, used frequently in statistical physics. It has a noise term similar to Brownian motion but with an added frictional term $-V(t)$. In summary, the total current arriving at the soma of a neuron reads $\xi_{j}(t) = \mu_{j}(t) + \sigma_{j}\sqrt{dt}\eta_{j}(t)$. If either of the conditions mentioned abve for vanishing correlations is satisfied, we have
+The above equation is a Langevin equation, used frequently in statistical physics. Take the case when $\zeta(t)$ is  the synaptic current arising from excitatory and inhbitory inputs to a neuron in a recurrent spiking network
 
 \begin{align}
-&\langle \eta_{i}(t)\eta_{j}(t)\rangle = \delta(i-j)\\
-&\langle \eta_{i}(t)\eta_{i}(t+\tau)\rangle = \delta(\tau)
+\zeta_{j}^{\alpha}(t) = F_{j}^{\alpha}(t) + R_{j}^{\alpha}(t) + \sigma_{j}\sqrt{dt}\eta_{j}^{\alpha}(t)
 \end{align}
 
-Put another way, the lack of correlated inputs in the limit of network size $N\rightarrow \infty$ permits the approximation of synaptic inputs by a normal distribution, which is delta-correlated. Equation (3.2) and (3.3) are commonly known as the cross-correlation and autocorrelation, respectively. Also, we assume that $\eta(t)$ is the intrinsic noise of neuron $j$ and that (3.2) and (3.3) are satisfied. If (3.1) is not satisfied, synaptic currents will have a ``colored" power spectrum and previous solutions to (3.1) do not apply (Brunel 2000). In the worst case, the one-dimensional Fokker-Planck equation must be solved in $N$ dimensions and the covariance matrix of synaptic currents must be known. For the $N$ dimensional case, (3.1) generalizes to 
+where we have reserved $\eta(t) \sim \mathcal{N}(0,1)$ for the intrinsic noise of a neuron. We assume that this intrinsic noise is delta correlated i.e. $\langle \eta_{i}(t)\eta_{j}(t)\rangle = \delta(i-j)$ and $\langle \eta_{i}(t)\eta_{i}(t+\tau)\rangle = \delta(\tau)$. In general, the same condition is not necessarily satisifed for the total synaptic current. There are presumably network architectures and stimulus regimes that can realize a case where $\langle \zeta_{i}(t)\zeta_{j}(t)\rangle \neq 0$ and $\langle \zeta_{i}(t)\zeta_{i}(t+\tau)\rangle \neq 0$ for $i \neq j$. However, a natural starting point in the study of excitatory-inhibitory networks is the case where these are indeed zero, on average. If the above condition is not satisfied, synaptic currents will have a ``colored" power spectrum. 
 
-\begin{equation}
-\tau\dot{\mathbf{V}}(t) = -\mathbf{V}(t) + \mathbf{\Sigma}(t)\mathbf{W}(t)
-\end{equation}
+\section{Theoretical analysis of random network dynamics}
 
-For arbitrary connectivity patterns, estimating the systems covariance is challenging, although the problem was recently addressed via a mean-field theory for discrete networks and networks with spatial connectivity (Rosenbaum 2017). We now summarize the Kramers-Moyal expansion, a full derivation is included in (A.1). followed by a short summary of this mean-field theory.
+We begin the theoretical discussion of spiking dynamics by adopting the terminology for network architectures introduced in (Renart 2010). We say a network is \emph{sparsely} connected if the average in-degree of a neuron scales as $\mathcal{O}(1/N)$ meaning it is independent of the network size. Naturally, we then say that a network is \emph{dense} if the in-degree scales as $\mathcal{O}(1)$. At the same time, a network is said to have \emph{strong} coupling if the fraction of inputs that need to be active for the cell to fire is small. Thus, for dense networks the synaptic coupling must scale at least as fast as $\mathcal{O}(1/N)$. In previous work, the synaptic couplings have been taken to scale as $\mathcal{O}(1/\sqrt{N})$ (Renart 2010, Rosenbaum 2017). This scaling has been chosen s.t. the fluctuations in the synaptic input currents to the neurons in an asynchronous network saturates to a value of the order of the spiking threshold in the limit of large networks (Vreeswijk, 1996).
 
-\section{The Kramers-Moyal Expansion}
-
-The problem at hand is the determination of the distribution of the state variable $V$ for a neuron $j$ i.e. the density $P_{j}(V)$ as a function of time. The central assumption made in the derivation of the Kramers-Moyal expansion is that the evolution of $P_{j}(V_{j},t)$ follows a Markov chain. We are then permitted to write the Chapman-Kolmogorov (CK) equation
-
-\begin{equation}
-P(V'_{j}, t) = \int T_{j}(V'_{j}, t | V_{j}, t-\tau)P(V_{j}, t-\tau)dV
-\end{equation} 
-
-which expresses the density of $V$ in terms of an integral over a transition density $T_{j}$. The transition density is directly related to the distribution over synaptic currents. If $T_{j}$ is normally distributed, then $P(V_{j},t)$ must also be normally distribution (as in the Ornstein-Uhlenbeck process). Starting from the CK equation in (1.3) we can derive the Kramers-Moyal Expansion (KME) which has the form
+We now present the theoretical framework that will be used to investigate the balanced state of a random excitatory-inhibitory network, also known as the asynchronous regime. The asynchronous regime is, in effect, a constraint on the correlation strucute of the synaptic currents. Generally, we define the cross-correlation of a pair of synaptic currents of neurons $j$ and $k$ in population $\alpha$ and $\beta$ in the time domain as
 
 \begin{align}
-\frac{\partial P_{j}}{\partial t} = \sum_{n} \frac{(-1)^{n}}{n!} \left(\frac{\partial}{\partial V_{j}}\right)^{n} M_{n}(V_{j},t,\tau) P(V_{j},t)
+\mathrm{CC}(\zeta_{j}^{\alpha},\zeta_{k}^{\beta}) = \int \zeta_{j}^{\alpha}(t)\zeta_{k}^{\beta}(t+\tau)d\tau
 \end{align}
 
-where $M_{n}(V,t,\tau)$ denotes the $nth$ order moment of the transition density $T_{j}(V'_{j}, t | V_{j}, t-\tau)$. If we approximate the KME by truncating the summation for $n > 2$ we arrive at the so-called \emph{diffusion approximation} or Fokker-Planck equation
+Which can also be expressed in the frequency domain by making use of the convolution theorem
 
 \begin{align}
-\frac{\partial P_{j}}{\partial t} &= \frac{\partial}{\partial V_{j}}[\left(V_{j}(t)-\mu_{j}(t)\right) P_{j}(V_{j},t)] + \frac{\sigma_{j}^{2}(t)}{2}\frac{\partial^{2}}{\partial V_{j}^{2}}[P(V_{j},t)]
+\widetilde{\mathrm{CC}}(\zeta_{j}^{\alpha},\zeta_{k}^{\beta})  &= \mathcal{F}\left[\zeta_{j}^{\alpha}(t)(\zeta_{k}^{\beta}(-t))^{*}\right] 
 \end{align}
 
-where the first and second moments have been substituted by their standard symbols $\mu$ and $\sigma^{2}$. The general form of the Fokker-Planck equation in $N$ dimensions; that is, the time-dependence of the joint distribution over $N$ voltage variables $P(V_{1}\;...\;V_{N})$ is
+where the symbol $\mathcal{F}$ represents the forward Fourier transform. Furthermore, the balanced state can be characterized by a constraint on the average over indices $j$ and $k$, that is 
 
 \begin{align}
-\frac{\partial P}{\partial t} &= \sum_{i}
-\beta_{ij}\frac{\partial}{\partial V_{i}}[\left(V_{j}(t)-\mu_{j}(t)\right) P_{j}(V_{j},t)] + \sum_{i}D_{ij}\frac{\partial^{2}}{\partial V_{i}\partial V_{j}}[P(V_{j},t)]
+\langle \widetilde{\mathrm{CC}}(\zeta_{j}^{\alpha},\zeta_{k}^{\beta})\rangle_{j,k} = \langle \widetilde{\zeta_{j}^{\alpha}}(t)(\widetilde{\zeta_{k}^{\beta}}(-t))^{*} \rangle_{j,k}
 \end{align}
 
-where the term $D_{ij}$ is called the \emph{diffusion tensor} and is related to the covariance matrix $\Sigma$ by $D_{ij} = \frac{\Sigma\Sigma^{T}}{2}$.
+For the sake of notational clarity, we adopt the notation convention $\langle \zeta_{\alpha}, \zeta_{\beta}\rangle = \langle \mathrm{CC}(\zeta_{j}^{\alpha},\zeta_{k}^{\beta})\rangle_{j,k}$ which represents the cross spectrum between populations $\alpha$ and $\beta$ averaged over neurons in those populations. We now summarize the relevant parts of the computation of $\langle \zeta_{\alpha}, \zeta_{\beta}\rangle$ as originally outlined by (Renart, 2010) and later improved in (Rosenbaum, 2017).
 
-\section{The uncorrelated regime}
+\begin{align}
+\langle \zeta_{\alpha}, \zeta_{\beta}\rangle &= \langle \mathrm{CC}(\zeta_{j}^{\alpha},\zeta_{k}^{\beta})\rangle_{j,k}\\
+&= \langle \mathrm{CC}(F_{j}^{\alpha} + R_{j}^{\alpha} + \eta,F_{j}^{\beta} + R_{j}^{\beta} + \eta)\rangle_{j,k}
+\end{align}
 
-We now investigate the two possible cases for uncorrelated synaptic currents highlighted above. If pairwise correlations are indeed zero, then $\Sigma = \sigma^{2}I$ and equation (3.7) takes the simplified form (3.6) and we need only solve the Fokker-Planck equation in one dimension. After enforcing the boundary conditions appropriate for a neuron with a threshold $\theta$ and a nonzero refractory period $\tau_{\mathrm{ref}}$, we arrive at a steady state solution for the instantaneous firing rate (Brunel 2000). 
+Assuming that the intrinsic noise $\eta$ is uncorrelated with feedforward and recurrent inputs, these terms of the convolution will vanish and we are left with 
+
+\begin{align}
+\langle \zeta_{\alpha}, \zeta_{\beta}\rangle &= \langle \mathrm{CC}(F_{j}^{\alpha} + R_{j}^{\alpha},F_{k}^{\beta} + R_{k}^{\beta})\rangle_{j,k}\\
+&= \langle \mathrm{CC}(F_{j}^{\alpha},F_{k}^{\beta}) + \mathrm{CC}(F_{j}^{\alpha},R_{k}^{\beta})\\
+&+ \mathrm{CC}(R_{j}^{\alpha},F_{k}^{\beta}) + \mathrm{CC}(R_{j}^{\alpha},R_{k}^{\beta})\rangle_{j,k}
+\end{align}
+
+Investigate the two possible cases for uncorrelated synaptic currents highlighted above. If pairwise correlations are indeed zero, then $\Sigma = \sigma^{2}I$ and equation (3.7) takes the simplified form (3.6) and we need only solve the Fokker-Planck equation in one dimension. After enforcing the boundary conditions appropriate for a neuron with a threshold $\theta$ and a nonzero refractory period $\tau_{\mathrm{ref}}$, we arrive at a steady state solution for the instantaneous firing rate (Brunel 2000). 
 
 \begin{align}
 \frac{1}{\nu_{0}} = \tau_{\mathrm{ref}} + \tau\sqrt{\pi}\int_{\frac{V_{r}-\mu_{0}}{\sigma_{0}}}^{\frac{\theta-\mu_{0}}{\sigma_{0}}} \exp(u^{2})(1+\mathrm{erf}(u))du
 \end{align}
 
-\section{The correlated regime}
+
 
 Introducing correlations into synaptic the synaptic currents over a population greatly complicates the development of a solution to (3.7). We can no longer describe the high-dimensional solution with a one-dimensional equation. At the same time, covariance matrices are difficult to predict unless the system satisfies the limit for a mean-field approach. In summary, equation (3.7) must be solved for very large $N$ to avoid finite size effects in a solution of the steady state covariance while nonzero correlations give rise to non-gaussian features.  Of course, traditional numerical methods such as finite element and finite difference all suffer from the curse of dimension (Chen 2017, Pichler 2013). Another solution is a Monte Carlo simulation of (X); however, the required sample size increases in an exponential rate as the dimension and the same curse dimensionality problem appears. However, recently a method for solving the Fokker-Planck equation in high dimensions, even on the order of millions, has been developed for complex systems with non-gaussian features (Chen 2017). 
 
@@ -316,7 +315,7 @@ I_{i}^{\alpha}(t) &= I_{\mathrm{ext}}^{\alpha}(t) + I_{\mathrm{rec}}^{\alpha}(t)
 &= I_{\mathrm{ext}}^{\alpha}(t) + \sum_{\beta}\sum_{j} \frac{J_{ij}^{\alpha\beta}}{\sqrt{N}}(\phi * z^{\beta}_{j}(t))
 \end{align}
 
-For the sake of generality, the term $\phi * z(t)$ represents the convolution of the spike variable $z(t) = \Theta(v(t) - \theta)$ with a kernel $\phi$, determining the shape of the post-synaptic current in response to a spike. In the mean-field approximation we replace the currents in (3.2) by averaging over $t$ and indices of the summation $j$ and $k$. For a fully-connected network, we have
+For the sake of generality, the term $\phi * z(t)$ represents the convolution of the spike variable $z(t) = \Theta(v(t) - \theta)$ with a kernel $\phi$, determining the shape of the post-synaptic current in response to a spike. In the mean-field approzetamation we replace the currents in (3.2) by averaging over $t$ and indices of the summation $j$ and $k$. For a fully-connected network, we have
 
 \begin{align}
 \langle I_{i}^{\alpha}(t)\rangle &= \langle I_{\mathrm{ext}}^{\alpha}(t)\rangle + \sum_{\beta}\sum_{j} \frac{J_{ij}^{\alpha\beta}}{\sqrt{N}}\langle z_{j}^{\beta}(t)\rangle_{t,j}\\
@@ -384,9 +383,45 @@ Correlations between $I$ and $I_{\mathrm{ext}}$ can be calculated in a similar f
 \langle I, I_{\mathrm{ext}} \rangle &= \langle I_{\mathrm{ext}}, I_{\mathrm{ext}}\rangle + J\tilde{H} \langle Z, I_{\mathrm{ext}}\rangle
 \end{align}
 
-We now proceed to summarize the mean-field approximations of (3.14) and (3.15) presented in (Rosenbaum, 2016). 
+We now proceed to summarize the mean-field approzetamations of (3.14) and (3.15) presented in (Rosenbaum, 2016). 
 
 \section{Finite-size effects in numerical simulations}
+
+\section{Future developments}
+and previous solutions to (3.1) do not apply (Brunel 2000). In the worst case, the one-dimensional Fokker-Planck equation must be solved in $N$ dimensions and the covariance matrix of synaptic currents must be known. For the $N$ dimensional case, (3.1) generalizes to 
+
+\begin{equation}
+\tau\dot{\mathbf{V}}(t) = -\mathbf{V}(t) + \mathbf{\Sigma}(t)\mathbf{W}(t)
+\end{equation}
+
+For arbitrary connectivity patterns, estimating the systems covariance is challenging, although the problem was recently addressed via a mean-field theory for discrete networks and networks with spatial connectivity (Rosenbaum 2017). We now summarize the Kramers-Moyal expansion, a full derivation is included in (A.1). followed by a short summary of this mean-field theory.
+
+The problem at hand is the determination of the distribution of the state variable $V$ for a neuron $j$ i.e. the density $P_{j}(V)$ as a function of time. The central assumption made in the derivation of the Kramers-Moyal expansion is that the evolution of $P_{j}(V_{j},t)$ follows a Markov chain. We are then permitted to write the Chapman-Kolmogorov (CK) equation
+
+\begin{equation}
+P(V'_{j}, t) = \int T_{j}(V'_{j}, t | V_{j}, t-\tau)P(V_{j}, t-\tau)dV
+\end{equation} 
+
+which expresses the density of $V$ in terms of an integral over a transition density $T_{j}$. The transition density is directly related to the distribution over synaptic currents. If $T_{j}$ is normally distributed, then $P(V_{j},t)$ must also be normally distribution (as in the Ornstein-Uhlenbeck process). Starting from the CK equation in (1.3) we can derive the Kramers-Moyal Expansion (KME) which has the form
+
+\begin{align}
+\frac{\partial P_{j}}{\partial t} = \sum_{n} \frac{(-1)^{n}}{n!} \left(\frac{\partial}{\partial V_{j}}\right)^{n} M_{n}(V_{j},t,\tau) P(V_{j},t)
+\end{align}
+
+where $M_{n}(V,t,\tau)$ denotes the $nth$ order moment of the transition density $T_{j}(V'_{j}, t | V_{j}, t-\tau)$. If we approzetamate the KME by truncating the summation for $n > 2$ we arrive at the so-called \emph{diffusion approzetamation} or Fokker-Planck equation
+
+\begin{align}
+\frac{\partial P_{j}}{\partial t} &= \frac{\partial}{\partial V_{j}}[\left(V_{j}(t)-\mu_{j}(t)\right) P_{j}(V_{j},t)] + \frac{\sigma_{j}^{2}(t)}{2}\frac{\partial^{2}}{\partial V_{j}^{2}}[P(V_{j},t)]
+\end{align}
+
+where the first and second moments have been substituted by their standard symbols $\mu$ and $\sigma^{2}$. The general form of the Fokker-Planck equation in $N$ dimensions; that is, the time-dependence of the joint distribution over $N$ voltage variables $P(V_{1}\;...\;V_{N})$ is
+
+\begin{align}
+\frac{\partial P}{\partial t} &= \sum_{i}
+\beta_{ij}\frac{\partial}{\partial V_{i}}[\left(V_{j}(t)-\mu_{j}(t)\right) P_{j}(V_{j},t)] + \sum_{i}D_{ij}\frac{\partial^{2}}{\partial V_{i}\partial V_{j}}[P(V_{j},t)]
+\end{align}
+
+where the term $D_{ij}$ is called the \emph{diffusion tensor} and is related to the covariance matrix $\Sigma$ by $D_{ij} = \frac{\Sigma\Sigma^{T}}{2}$.
 
 
 \begin{appendices}
@@ -425,14 +460,14 @@ P(V, t) &= \int \left(1 + \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}
 &= P(V', t-\tau) + \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial V}\right)^{n} \left[M_{n}(V,t)P(V,t)\right]
 \end{align} 
 
-Approximating the derivative as a finite difference and taking the limit $\tau\rightarrow 0$ gives
+Approzetamating the derivative as a finite difference and taking the limit $\tau\rightarrow 0$ gives
 
 \begin{align}
 \dot{P}(V,t)  &= \underset{\tau\rightarrow 0}{\mathrm{lim}}\left(\frac{P(V, t)-P(V, t-\tau)}{\tau}\right)\\
 &= \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial V}\right)^{n} \left[M_{n}(V,t)P(V,t)\right]
 \end{align} 
 
-which is formally known as the Kramers-Moyal (KM) expansion. The Fokker-Planck equation is a special case of (2.10) where we neglect terms $n>2$ in the \emph{diffusion approximation}.
+which is formally known as the Kramers-Moyal (KM) expansion. The Fokker-Planck equation is a special case of (2.10) where we neglect terms $n>2$ in the \emph{diffusion appromation}.
 \end{appendices}
 
 % Format a LaTeX bibliography
