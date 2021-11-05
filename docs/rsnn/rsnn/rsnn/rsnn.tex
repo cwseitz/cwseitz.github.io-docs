@@ -261,7 +261,7 @@ where we have reserved $\eta(t) \sim \mathcal{N}(0,1)$ for the intrinsic noise o
 
 \section{Theoretical analysis of random network dynamics}
 
-We begin the theoretical discussion of spiking dynamics by adopting the terminology for network architectures introduced in (Renart 2010). We say a network is \emph{sparsely} connected if the average in-degree of a neuron scales as $\mathcal{O}(1/N)$ meaning it is independent of the network size. Naturally, we then say that a network is \emph{dense} if the in-degree scales as $\mathcal{O}(1)$. At the same time, a network is said to have \emph{strong} coupling if the fraction of inputs that need to be active for the cell to fire is small. Thus, for dense networks the synaptic coupling must scale at least as fast as $\mathcal{O}(1/N)$. In previous work, the synaptic couplings have been taken to scale as $\mathcal{O}(1/\sqrt{N})$ (Renart 2010, Rosenbaum 2017). This scaling has been chosen s.t. the fluctuations in the synaptic input currents to the neurons in an asynchronous network saturates to a value of the order of the spiking threshold in the limit of large networks (Vreeswijk, 1996).
+We begin the theoretical discussion of spiking dynamics by adopting the terminology for network architectures introduced in (Renart 2010). We say a network is \emph{sparse} if the probability of a connection between population $\alpha$ and population $\beta$ scales according to $p_{\alpha\beta} \sim \mathcal{O}(1/N)$ meaning it is independent of the network size. Naturally, we then say that a network is \emph{dense} if the in-degree scales as $p_{\alpha\beta} \sim \mathcal{O}(1)$ . This provides a more precise definition for these terms and allows a more quantitative discussion of their role in network dynamics. Furthermore, a network is said to have \emph{weak} coupling if the synaptic coupling strength satisfies $J_{\alpha\beta} << \theta$ and \emph{strong} coupling if it is some moderate fraction of the threshold $J_{\alpha\beta} \sim \theta$. In other words, the fraction of inputs that need to be active for the cell to fire is small.  Here, we will consider dense networks where $p_{\alpha\beta} \sim \mathcal{O}(1)$ while the synaptic couplings scale as $\mathcal{O}(1/\sqrt{N})$. In this case, it is possible that fluctuations in the synaptic input currents to the neurons in an asynchronous network saturates to a value of the order of the spiking threshold, in the limit of large networks (Vreeswijk, 1996; Renart 2010; Rosenbaum 2017).
 
 We now present the theoretical framework that will be used to investigate the balanced state of a random excitatory-inhibitory network, also known as the asynchronous regime. The asynchronous regime is, in effect, a constraint on the correlation strucute of the synaptic currents. Generally, we define the cross-correlation of a pair of synaptic currents of neurons $j$ and $k$ in population $\alpha$ and $\beta$ in the time domain as
 
@@ -290,18 +290,27 @@ For the sake of notational clarity, we adopt the notation convention $\langle \z
 
 Assuming that the intrinsic noise $\eta$ is uncorrelated with feedforward and recurrent inputs, these terms of the convolution will vanish and we are left with 
 
-\begin{align}
-\langle \zeta_{\alpha}, \zeta_{\beta}\rangle &= \langle \mathrm{CC}(F_{j}^{\alpha} + R_{j}^{\alpha},F_{k}^{\beta} + R_{k}^{\beta})\rangle_{j,k}\\
-&= \langle \mathrm{CC}(F_{j}^{\alpha},F_{k}^{\beta}) + \mathrm{CC}(F_{j}^{\alpha},R_{k}^{\beta})\\
-&+ \mathrm{CC}(R_{j}^{\alpha},F_{k}^{\beta}) + \mathrm{CC}(R_{j}^{\alpha},R_{k}^{\beta})\rangle_{j,k}
-\end{align}
+\begin{align*}
+\langle \zeta_{\alpha}, \zeta_{\beta}\rangle &= \mathrm{CC}(F_{j}^{\alpha} + R_{j}^{\alpha},F_{k}^{\beta} + R_{k}^{\beta})\\
+&= \mathrm{CC}(F_{j}^{\alpha},F_{k}^{\beta}) + \mathrm{CC}(F_{j}^{\alpha},R_{k}^{\beta})\\
+&+ \mathrm{CC}(R_{j}^{\alpha},F_{k}^{\beta}) + \mathrm{CC}(R_{j}^{\alpha},R_{k}^{\beta})
+\end{align*}
+
+Now, the term $\mathrm{CC}(F_{j}^{\alpha},R_{k}^{\beta})$ satisfies the relation
 
 \begin{align*}
-\mathrm{CC}(R_{j}^{\alpha},R_{k}^{\beta}) &=\mathrm{CC} \left(\left(\sum_{i\neq j}J_{ij}Z_{i}(t)\right)\left(\sum_{i\neq k}J_{ik}Z_{ik}(t+\tau)\right)\right)\\
-&= \mathrm{CC} \left(\left(J_{jk}Z_{k}(t) + \sum_{i\neq j,k}J_{ij}Z_{ij}(t)\right)\left(J_{kj}Z_{j}(t+\tau) + \sum_{i\neq j,k}J_{ik}Z_{ik}(t+\tau)\right)\right)\\
-&= \mathrm{CC} \left(\left(J_{jk}Z_{k}(t) + \sum_{i\neq j,k}J_{ij}Z_{ij}(t)\right)\left(\sum_{i\neq j,k}J_{ik}Z_{ik}(t+\tau)\right)\right)\\
-&= \mathrm{CC} \left(J_{jk}Z_{k}(t),\mu_{k}\right) + \mathrm{CC} \left(\mu_{j},\mu_{k}\right)
+\mathrm{CC}(F_{j}^{\alpha},R_{k}^{\beta}) = J^{\alpha\beta}_{jk}\mathrm{CC}(F_{j}^{\alpha},Z_{k}^{\beta})
 \end{align*}
+
+and a similar relation exists for the term $\mathrm{CC}(R_{j}^{\alpha},F_{k}^{\beta})$ and $\mathrm{CC}(R_{j}^{\alpha},R_{k}^{\beta})$. Putting these all together gives
+
+\begin{align*}
+\langle \zeta_{j}, \zeta_{k}\rangle &= \langle\mathrm{CC}(F_{j} + R_{j},F_{k} + R_{k})\rangle_{\mathrm{trials}}\\
+&= \mathrm{CC}(F_{j},F_{k}) + \mathrm{CC}(F_{j},J_{k}^{T}Z_{k}) + \mathrm{CC}(J_{j}^{T} Z_{j}, F_{k}) + \mathrm{CC}(J_{k}^{T}Z, J_{j}^{T}Z) \\
+\end{align*}
+
+The asynchronous state is defined by scaling laws $\langle \zeta_{j}, \zeta_{k}\rangle, \langle Z_{j}, Z_{k}\rangle \sim \mathcal{O}(1/N)$ (Rosenbaum 2017).
+
 
 So we see that one component of the correlation comes from the interaction between neurons $j$ and $k$ and another component comes from the correlation in their inputs from the rest of the population, as expected. Investigate the two possible cases for uncorrelated synaptic currents highlighted above. If pairwise correlations are indeed zero, then $\Sigma = \sigma^{2}I$ and equation (3.7) takes the simplified form (3.6) and we need only solve the Fokker-Planck equation in one dimension. After enforcing the boundary conditions appropriate for a neuron with a threshold $\theta$ and a nonzero refractory period $\tau_{\mathrm{ref}}$, we arrive at a steady state solution for the instantaneous firing rate (Brunel 2000). 
 
