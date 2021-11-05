@@ -296,7 +296,14 @@ Assuming that the intrinsic noise $\eta$ is uncorrelated with feedforward and re
 &+ \mathrm{CC}(R_{j}^{\alpha},F_{k}^{\beta}) + \mathrm{CC}(R_{j}^{\alpha},R_{k}^{\beta})\rangle_{j,k}
 \end{align}
 
-Investigate the two possible cases for uncorrelated synaptic currents highlighted above. If pairwise correlations are indeed zero, then $\Sigma = \sigma^{2}I$ and equation (3.7) takes the simplified form (3.6) and we need only solve the Fokker-Planck equation in one dimension. After enforcing the boundary conditions appropriate for a neuron with a threshold $\theta$ and a nonzero refractory period $\tau_{\mathrm{ref}}$, we arrive at a steady state solution for the instantaneous firing rate (Brunel 2000). 
+\begin{align*}
+\mathrm{CC}(R_{j}^{\alpha},R_{k}^{\beta}) &=\mathrm{CC} \left(\left(\sum_{i\neq j}J_{ij}Z_{i}(t)\right)\left(\sum_{i\neq k}J_{ik}Z_{ik}(t+\tau)\right)\right)\\
+&= \mathrm{CC} \left(\left(J_{jk}Z_{k}(t) + \sum_{i\neq j,k}J_{ij}Z_{ij}(t)\right)\left(J_{kj}Z_{j}(t+\tau) + \sum_{i\neq j,k}J_{ik}Z_{ik}(t+\tau)\right)\right)\\
+&= \mathrm{CC} \left(\left(J_{jk}Z_{k}(t) + \sum_{i\neq j,k}J_{ij}Z_{ij}(t)\right)\left(\sum_{i\neq j,k}J_{ik}Z_{ik}(t+\tau)\right)\right)\\
+&= \mathrm{CC} \left(J_{jk}Z_{k}(t),\mu_{k}\right) + \mathrm{CC} \left(\mu_{j},\mu_{k}\right)
+\end{align*}
+
+So we see that one component of the correlation comes from the interaction between neurons $j$ and $k$ and another component comes from the correlation in their inputs from the rest of the population, as expected. Investigate the two possible cases for uncorrelated synaptic currents highlighted above. If pairwise correlations are indeed zero, then $\Sigma = \sigma^{2}I$ and equation (3.7) takes the simplified form (3.6) and we need only solve the Fokker-Planck equation in one dimension. After enforcing the boundary conditions appropriate for a neuron with a threshold $\theta$ and a nonzero refractory period $\tau_{\mathrm{ref}}$, we arrive at a steady state solution for the instantaneous firing rate (Brunel 2000). 
 
 \begin{align}
 \frac{1}{\nu_{0}} = \tau_{\mathrm{ref}} + \tau\sqrt{\pi}\int_{\frac{V_{r}-\mu_{0}}{\sigma_{0}}}^{\frac{\theta-\mu_{0}}{\sigma_{0}}} \exp(u^{2})(1+\mathrm{erf}(u))du
