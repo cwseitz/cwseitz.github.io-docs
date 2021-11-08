@@ -259,39 +259,113 @@ The above equation is a Langevin equation, used frequently in statistical physic
 
 where we have reserved $\eta(t) \sim \mathcal{N}(0,1)$ for the intrinsic noise of a neuron. We assume that this intrinsic noise is delta correlated i.e. $\langle \eta_{i}(t)\eta_{j}(t)\rangle = \delta(i-j)$ and $\langle \eta_{i}(t)\eta_{i}(t+\tau)\rangle = \delta(\tau)$. In general, the same condition is not necessarily satisifed for the total synaptic current. There are presumably network architectures and stimulus regimes that can realize a case where $\langle \zeta_{i}(t)\zeta_{j}(t)\rangle \neq 0$ and $\langle \zeta_{i}(t)\zeta_{i}(t+\tau)\rangle \neq 0$ for $i \neq j$. However, a natural starting point in the study of excitatory-inhibitory networks is the case where these are indeed zero, on average. If the above condition is not satisfied, synaptic currents will have a ``colored" power spectrum. 
 
-\section{Theoretical analysis of random network dynamics}
+\subsection{Mean-field firing rates in a balanced network}
 
-We begin the theoretical discussion of spiking dynamics by adopting the terminology for network architectures introduced in (Renart 2010). We say a network is \emph{sparse} if the probability of a connection between population $\alpha$ and population $\beta$ scales according to $p_{\alpha\beta} \sim \mathcal{O}(1/N)$ meaning it is independent of the network size. Naturally, we then say that a network is \emph{dense} if the in-degree scales as $p_{\alpha\beta} \sim \mathcal{O}(1)$ . This provides a more precise definition for these terms and allows a more quantitative discussion of their role in network dynamics. Furthermore, a network is said to have \emph{weak} coupling if the synaptic coupling strength satisfies $J_{\alpha\beta} << \theta$ and \emph{strong} coupling if it is some moderate fraction of the threshold $J_{\alpha\beta} \sim \theta$. In other words, the fraction of inputs that need to be active for the cell to fire is small.  Here, we will consider dense networks where $p_{\alpha\beta} \sim \mathcal{O}(1)$ while the synaptic couplings scale as $\mathcal{O}(1/\sqrt{N})$. In this case, it is possible that fluctuations in the synaptic input currents to the neurons in an asynchronous network saturates to a value of the order of the spiking threshold, in the limit of large networks (Vreeswijk, 1996; Renart 2010; Rosenbaum 2017).
+Local cortical networks can contain thousands of cells, each neuron having thousands of synaptic connections to other cells within the local network as well as other cortical areas (Binzegger 2004). Indeed, connection probabilities between nearby neurons in cortex has been shown experimentally to sometimes exceed 40 percent (Ko 2011; Levy 2012). This small-world feature of cortical networks arguably plays an important role in guiding network dynamics. However, network models that incorporate spatial information present a challenge for theoretical calculations that are simplified when the network contains discrete populations of cells. The random network has been used extensively in the literature, although it has been extended to create a network with a more modular architecture (Sporns 2006). In any case, analytical treatment of network architecture and its relation to dynamics requires a careful definition of the scaling laws of network parameters as a function of network size $N$. Therefore, we begin the theoretical discussion of spiking dynamics by adopting the following terminology for network parameterization. 
 
-We now present the theoretical framework that will be used to investigate the balanced state of a random excitatory-inhibitory network, also known as the asynchronous regime. The asynchronous regime is, in effect, a constraint on the correlation strucute of the synaptic currents. Generally, we define the cross-correlation of a pair of synaptic currents of neurons $j$ and $k$ in population $\alpha$ and $\beta$ in the time domain as
+A network model is called \emph{sparse} if the probability of a connection between arbitrary populations $\alpha$ and $\beta$ scales according to $p_{\alpha\beta} \sim \mathcal{O}(1/N)$ meaning that the degree of a neuron does not depend on the scale of the network or $K \sim \mathcal{O}(1)$. Naturally, we then say that a network is \emph{dense} if the in-degree scales as $p_{\alpha\beta} \sim \mathcal{O}(1)$ such that the degree of a neuron $K \sim \mathcal{O}(N)$. In both of these cases, the strength of a synapse plays an equally important role. The synaptic coupling strength is said to be \emph{strong} if $J^{\alpha\beta} \sim \mathcal{O}(1)$. It is common to define \emph{weak} coupling as the case where $J^{\alpha\beta} \sim \mathcal{O}(1/\sqrt{N})$ such that, when the network is dense, the strength of synaptic connection decreases but at a slower rate than the degree $K$ is increasing. In this case, it is possible that fluctuations in the synaptic input currents saturates to a value of the order of the spiking threshold, in the limit of large networks (Vreeswijk, 1996; Renart 2010; Rosenbaum 2017).
+
+The irregularity of spike timing and large coefficient of variation observed in cortex has presented a challenging puzzle for computational neuroscience. This irregularity results weak but often nonzero correlations in spike trains, raising a number of questions regarding its role in robust sensory processing. Interestingly, this irregular spike timing or \emph{asychronous state} can be reproduced in network simulations via a balance of excitatory and inhibitory synaptic currents (Vreeswijk, 1996). By using a mean-field theory of neuron dynamics, firing rates and spike count correlations can be predicted analytically, for very large networks. In terms of its relationship to network topology, the balanced state can be achieved when synaptic weights are scaled like $J^{\alpha\beta} \sim \mathcal{O}(1/\sqrt{N})$ where $N$ is the network size. The recurrent part of the synaptic current in (3.2) can then be written explicitly giving a total synaptic current
 
 \begin{align}
-\mathrm{CC}(\zeta_{j}^{\alpha},\zeta_{k}^{\beta}) = \int \zeta_{j}^{\alpha}(t)\zeta_{k}^{\beta}(t+\tau)d\tau
+\xi_{i}^{\alpha}(t) &= F_{i}^{\alpha}(t) + R_{i}^{\alpha}(t) + \eta_{i}(t)\\
+&= F_{i}^{\alpha}(t) + \sum_{\beta}\sum_{j} \frac{J_{ij}^{\alpha\beta}}{\sqrt{N}}(\phi * Z^{\beta}_{j}(t)) + \eta_{i}(t)
 \end{align}
+
+where the variable $Z^{\beta}_{j}(t) = H(V^{\beta}_{j}(t) - \theta)$ with $H$ being the Heaviside step function. For the sake of generality, the term $\phi * Z^{\beta}_{j}(t)$ represents the convolution of the spike variable $Z^{\beta}_{j}(t)$ with a kernel $\phi$, determining the shape of the post-synaptic current waveform in response to a spike. However, in the remainder of this analysis we will assume that $\phi = \delta(t)$. In the mean-field approximation we replace the individual currents in (3.4) by their average values, which is valid in the limit $N\rightarrow\infty$. This gives the following expression
+
+\begin{align*}
+\langle \xi_{i}^{\alpha}(t)\rangle &= \langle F_{i}^{\alpha}(t)\rangle + \langle R_{i}^{\alpha}(t)\rangle + \langle\eta_{i}(t)\rangle\\
+&= \langle F_{i}^{\alpha}(t)\rangle + \sqrt{N}\sum_{\beta}J_{\alpha\beta}p_{\alpha\beta}r_{\beta} + \langle\eta_{i}(t)\rangle
+\end{align*}
+
+where we have used that $p_{\alpha\beta} = \tilde{p}_{\alpha\beta}p_{\alpha}$ with $\tilde{p}_{\alpha\beta}$ being the probability of a synapse of a neuron $\alpha$ onto type $\beta$ and $p_{\alpha}$ the probability of a neuron being of type $\alpha$. Notice that the average value of the recurrent contribution to the synaptic current saturates for large $N$. Writing the above equation explicitly for a neuron in an excitatory-inhibitory network gives
+
+\begin{align}
+\langle \xi_{j}^{e}(t)\rangle &= \langle F_{j}^{e}(t)\rangle + \sqrt{N}\left(J_{ee}p_{ee}r_{e} + J_{ie}p_{ie}r_{i}\right)\\
+\langle \xi_{k}^{i}(t)\rangle &= \langle F_{k}^{i}(t)\rangle + \sqrt{N}\left(J_{ii}p_{ii}r_{i} + J_{ei}p_{ei}r_{e}\right)
+\end{align}
+
+where subsripts of the from $J_{\alpha\beta}$ refers to the strength of a connection in the direction $\alpha\rightarrow\beta$. If we require that, in the mean-field limit $N\rightarrow\infty$, the external and recurrent currents cancel each other, and $\langle F_{j}^{\alpha}(t)\rangle \sim \mathcal{O}(\sqrt{N})$ we have the following matrix equation
+
+\begin{align}
+\begin{pmatrix}
+j_{ee} & j_{ie}\\
+j_{ei} & j_{ii}
+\end{pmatrix}
+\begin{pmatrix}
+r_{e}\\
+r_{i}
+\end{pmatrix}
+= 
+-\begin{pmatrix}
+\langle F_{j}^{e}\rangle\\
+\langle F_{k}^{i}\rangle
+\end{pmatrix}
+\end{align}
+
+which can be summarized as $\mathbf{r} = -\mathbf{J}^{-1}\mathbf{f}$. Assuming that $\mathbf{J}$ is invertible, we have the following solution
+
+\begin{align}
+\underset{N\rightarrow \infty}{\mathrm{lim}}r_{e} = \frac{\langle F_{j}^{e}\rangle j_{ii}-\langle F_{k}^{i}\rangle j_{ie}}{j_{ei}j_{ie} - j_{ee}j_{ii}}
+\end{align}
+
+\begin{align}
+\underset{N\rightarrow \infty}{\mathrm{lim}}r_{i} = \frac{\langle F_{k}^{i}\rangle j_{ee}-\langle F_{j}^{e}\rangle j_{ei}}{j_{ei}j_{ie} - j_{ee}j_{ii}}
+\end{align}
+
+For positive solutions for the above firing rates and for the above matrix to be invertible we have the condition $\langle F_{j}^{e}\rangle/\langle F_{k}^{i}\rangle > j_{ie}/j_{ii} > j_{ee}/j_{ei}$ and we recover the condition given in (Rosenbaum 2014; Rosenbaum 2017; Akil 2021).
+
+\subsection{Signal processing techniques}
+
+The cross-correlation of discrete signals $x(t)$ and $y(t)$ is generally defined as the following convolution in the time-domain
+
+\begin{align}
+R_{xy}(\tau) = x(t) * y(t) = \sum_{k =-\infty}^{\infty}x(t)y(t+\tau)
+\end{align}
+
+where the $*$ symbol represents the convolution operation. Let $\psi_{x}(\omega)$ be the discrete-time Fourier transform (DTFT) of $x(t)$ i.e.,
+
+\begin{align}
+\psi_{x}(\omega) = \sum_{t =-\infty}^{\infty}x(t)\left(\exp{-i\omega t}\right)
+\end{align}
+
+where an identical expression exists for $\psi_{y}(\omega)$. According to the convolution theorem, convolution in the time-domain is equivalent to multiplication in the frequency domain with one of the signals time-reversed. Therefore, we can write
+
+\begin{align}
+\mathrm{DTFT}[x(t) * y(t)](\omega) = \underset{T\rightarrow\infty}{\mathrm{lim}}\frac{1}{2\pi T}\psi_{x}^{*}(\omega)\psi_{y}(\omega)
+\end{align}
+
+
+Let $S_{xy}(\omega) = \underset{T\rightarrow\infty}{\mathrm{lim}}\frac{1}{2\pi T}\psi_{x}^{*}(\omega)\psi_{y}(\omega)$, which is commonly called the \emph{cross spectral density} of signals $x(t)$ and $y(t)$. This is simply the DTFT of the cross-correlation function meaning that $R_{xx}(\tau)$ and $S_{xx}(\omega)$ form a Fourier pair. This result provides us an efficient means of computing cross-correlations and autocorrelations of synaptic currents by multiplication in the frequency domain and taking the inverse discrete transform.
+
+
+\subsection{Spike count correlations in a balanced network}
+
 
 Which can also be expressed in the frequency domain by making use of the convolution theorem
 
 \begin{align}
-\widetilde{\mathrm{CC}}(\zeta_{j}^{\alpha},\zeta_{k}^{\beta})  &= \mathcal{F}\left[\zeta_{j}^{\alpha}(t)(\zeta_{k}^{\beta}(-t))^{*}\right] 
+\widetilde{\mathrm{CC}}(\xi_{j}^{\alpha},\xi_{k}^{\beta})  &= \mathcal{F}\left[\xi_{j}^{\alpha}(t)(\xi_{k}^{\beta}(-t))^{*}\right] 
 \end{align}
 
 where the symbol $\mathcal{F}$ represents the forward Fourier transform. Furthermore, the balanced state can be characterized by a constraint on the average over indices $j$ and $k$, that is 
 
 \begin{align}
-\langle \widetilde{\mathrm{CC}}(\zeta_{j}^{\alpha},\zeta_{k}^{\beta})\rangle_{j,k} = \langle \widetilde{\zeta_{j}^{\alpha}}(t)(\widetilde{\zeta_{k}^{\beta}}(-t))^{*} \rangle_{j,k}
+\langle \widetilde{\mathrm{CC}}(\xi_{j}^{\alpha},\xi_{k}^{\beta})\rangle_{j,k} = \langle \widetilde{\xi_{j}^{\alpha}}(t)(\widetilde{\xi_{k}^{\beta}}(-t))^{*} \rangle_{j,k}
 \end{align}
 
-For the sake of notational clarity, we adopt the notation convention $\langle \zeta_{\alpha}, \zeta_{\beta}\rangle = \langle \mathrm{CC}(\zeta_{j}^{\alpha},\zeta_{k}^{\beta})\rangle_{j,k}$ which represents the cross spectrum between populations $\alpha$ and $\beta$ averaged over neurons in those populations. We now summarize the relevant parts of the computation of $\langle \zeta_{\alpha}, \zeta_{\beta}\rangle$ as originally outlined by (Renart, 2010) and later improved in (Rosenbaum, 2017).
+For the sake of notational clarity, we adopt the notation convention $\langle \xi_{\alpha}, \xi_{\beta}\rangle = \langle \mathrm{CC}(\xi_{j}^{\alpha},\xi_{k}^{\beta})\rangle_{j,k}$ which represents the cross spectrum between populations $\alpha$ and $\beta$ averaged over neurons in those populations. We now summarize the relevant parts of the computation of $\langle \xi_{\alpha}, \xi_{\beta}\rangle$ as originally outlined by (Renart, 2010) and later improved in (Rosenbaum, 2017).
 
 \begin{align}
-\langle \zeta_{\alpha}, \zeta_{\beta}\rangle &= \langle \mathrm{CC}(\zeta_{j}^{\alpha},\zeta_{k}^{\beta})\rangle_{j,k}\\
+\langle \xi_{\alpha}, \xi_{\beta}\rangle &= \langle \mathrm{CC}(\xi_{j}^{\alpha},\xi_{k}^{\beta})\rangle_{j,k}\\
 &= \langle \mathrm{CC}(F_{j}^{\alpha} + R_{j}^{\alpha} + \eta,F_{j}^{\beta} + R_{j}^{\beta} + \eta)\rangle_{j,k}
 \end{align}
 
 Assuming that the intrinsic noise $\eta$ is uncorrelated with feedforward and recurrent inputs, these terms of the convolution will vanish and we are left with 
 
 \begin{align*}
-\langle \zeta_{\alpha}, \zeta_{\beta}\rangle &= \mathrm{CC}(F_{j}^{\alpha} + R_{j}^{\alpha},F_{k}^{\beta} + R_{k}^{\beta})\\
+\langle \xi_{\alpha}, \xi_{\beta}\rangle &= \mathrm{CC}(F_{j}^{\alpha} + R_{j}^{\alpha},F_{k}^{\beta} + R_{k}^{\beta})\\
 &= \mathrm{CC}(F_{j}^{\alpha},F_{k}^{\beta}) + \mathrm{CC}(F_{j}^{\alpha},R_{k}^{\beta})\\
 &+ \mathrm{CC}(R_{j}^{\alpha},F_{k}^{\beta}) + \mathrm{CC}(R_{j}^{\alpha},R_{k}^{\beta})
 \end{align*}
@@ -305,11 +379,11 @@ Now, the term $\mathrm{CC}(F_{j}^{\alpha},R_{k}^{\beta})$ satisfies the relation
 and a similar relation exists for the term $\mathrm{CC}(R_{j}^{\alpha},F_{k}^{\beta})$ and $\mathrm{CC}(R_{j}^{\alpha},R_{k}^{\beta})$. Putting these all together gives
 
 \begin{align*}
-\langle \zeta_{j}, \zeta_{k}\rangle &= \langle\mathrm{CC}(F_{j} + R_{j},F_{k} + R_{k})\rangle_{\mathrm{trials}}\\
+\langle \xi_{j}, \xi_{k}\rangle &= \langle\mathrm{CC}(F_{j} + R_{j},F_{k} + R_{k})\rangle_{\mathrm{trials}}\\
 &= \mathrm{CC}(F_{j},F_{k}) + \mathrm{CC}(F_{j},J_{k}^{T}Z_{k}) + \mathrm{CC}(J_{j}^{T} Z_{j}, F_{k}) + \mathrm{CC}(J_{k}^{T}Z, J_{j}^{T}Z) \\
 \end{align*}
 
-The asynchronous state is defined by scaling laws $\langle \zeta_{j}, \zeta_{k}\rangle, \langle Z_{j}, Z_{k}\rangle \sim \mathcal{O}(1/N)$ (Rosenbaum 2017).
+The asynchronous state is defined by scaling laws $\langle \xi_{j}, \xi_{k}\rangle, \langle Z_{j}, Z_{k}\rangle \sim \mathcal{O}(1/N)$ (Rosenbaum 2017).
 
 
 So we see that one component of the correlation comes from the interaction between neurons $j$ and $k$ and another component comes from the correlation in their inputs from the rest of the population, as expected. Investigate the two possible cases for uncorrelated synaptic currents highlighted above. If pairwise correlations are indeed zero, then $\Sigma = \sigma^{2}I$ and equation (3.7) takes the simplified form (3.6) and we need only solve the Fokker-Planck equation in one dimension. After enforcing the boundary conditions appropriate for a neuron with a threshold $\theta$ and a nonzero refractory period $\tau_{\mathrm{ref}}$, we arrive at a steady state solution for the instantaneous firing rate (Brunel 2000). 
@@ -321,48 +395,6 @@ So we see that one component of the correlation comes from the interaction betwe
 
 
 Introducing correlations into synaptic the synaptic currents over a population greatly complicates the development of a solution to (3.7). We can no longer describe the high-dimensional solution with a one-dimensional equation. At the same time, covariance matrices are difficult to predict unless the system satisfies the limit for a mean-field approach. In summary, equation (3.7) must be solved for very large $N$ to avoid finite size effects in a solution of the steady state covariance while nonzero correlations give rise to non-gaussian features.  Of course, traditional numerical methods such as finite element and finite difference all suffer from the curse of dimension (Chen 2017, Pichler 2013). Another solution is a Monte Carlo simulation of (X); however, the required sample size increases in an exponential rate as the dimension and the same curse dimensionality problem appears. However, recently a method for solving the Fokker-Planck equation in high dimensions, even on the order of millions, has been developed for complex systems with non-gaussian features (Chen 2017). 
-
-\subsection{Mean-field equations for population firing rates}
-
-The total synaptic current into a neuron $i$ can be decomposed according to (Vreeswijk, 1998)
-
-\begin{align}
-I_{i}^{\alpha}(t) &= I_{\mathrm{ext}}^{\alpha}(t) + I_{\mathrm{rec}}^{\alpha}(t)\\
-&= I_{\mathrm{ext}}^{\alpha}(t) + \sum_{\beta}\sum_{j} \frac{J_{ij}^{\alpha\beta}}{\sqrt{N}}(\phi * z^{\beta}_{j}(t))
-\end{align}
-
-For the sake of generality, the term $\phi * z(t)$ represents the convolution of the spike variable $z(t) = \Theta(v(t) - \theta)$ with a kernel $\phi$, determining the shape of the post-synaptic current in response to a spike. In the mean-field approzetamation we replace the currents in (3.2) by averaging over $t$ and indices of the summation $j$ and $k$. For a fully-connected network, we have
-
-\begin{align}
-\langle I_{i}^{\alpha}(t)\rangle &= \langle I_{\mathrm{ext}}^{\alpha}(t)\rangle + \sum_{\beta}\sum_{j} \frac{J_{ij}^{\alpha\beta}}{\sqrt{N}}\langle z_{j}^{\beta}(t)\rangle_{t,j}\\
-&= \langle I_{\mathrm{ext}}^{\alpha}(t)\rangle + \sqrt{N}\sum_{\beta}J_{ij}^{\alpha\beta} r_{\beta}
-\end{align}
-
-If the network is not fully-connected and instead has spatial properties as presented in the previous chapter, (3.4) becomes
-
-\begin{align}
-\langle I_{i}^{\alpha}(t)\rangle &= \langle I_{\mathrm{ext}}^{\alpha}(t)\rangle + \sqrt{N}\sum_{\beta}J_{ij}^{\alpha\beta}p_{\alpha\beta}r_{\beta}
-\end{align}
-
-where we have used the identitiy $p_{\alpha\beta} = \tilde{p}_{\alpha\beta}p_{\alpha}$ with $\tilde{p}_{\alpha\beta}$ being the probability of a synapse of a neuron $\alpha$ onto type $\beta$ and $p_{\alpha}$ the probability of a neuron being of type $\alpha$. Writing (3.5) explicitly for an excitatory or inhibitory neuron $k$ gives
-
-\begin{align}
-\langle I_{k}^{e}(t)\rangle &= \langle I_{\mathrm{ext}}^{e}(t)\rangle + \sqrt{N}\left(J_{ee}p_{ee}r_{e} + J_{ie}p_{ie}r_{i}\right)\\
-\langle I_{k}^{i}(t)\rangle &= \langle I_{\mathrm{ext}}^{i}(t)\rangle + \sqrt{N}\left(J_{ii}p_{ii}r_{i} + J_{ei}p_{ei}r_{e}\right)
-\end{align}
-
-
-Preventing blow-up of the synaptic currents requires that the sum in (3.5) scales as $\mathcal{O}\left(1/\sqrt{N}\right)$ s.t. as $N\rightarrow \infty$ (Rosenbaum, 2016)
-
-\begin{align}
-\underset{N\rightarrow \infty}{\mathrm{lim}}r_{e} = \frac{\langle I_{\mathrm{ext}}^{e}\rangle J_{ii}p_{ii} - \langle I_{\mathrm{ext}}^{i}\rangle J_{ei}p_{ei}}{J_{ei}J_{ie}p_{ei}p_{ie} - J_{ee}J_{ii}p_{ee}p_{ii}}
-\end{align}
-
-\begin{align}
-\underset{N\rightarrow \infty}{\mathrm{lim}}r_{i} = \frac{\langle I_{\mathrm{ext}}^{e}\rangle J_{ei}p_{ei} - \langle I_{\mathrm{ext}}^{i}\rangle J_{ee}p_{ee}}{J_{ei}J_{ie}p_{ei}p_{ie} - J_{ee}J_{ii}p_{ee}p_{ii}}
-\end{align}
-
-\section{Cross-correlations of synaptic currents}
 
 We now summarize a mature technique for probing the covariance properties of networks of integrate and fire neurons (Rosenbaum 2016). We define the variables $\mathbf{Z}(t)\in \mathbb{F}_{2}^{N\times 1}$ as the instantaneous observable state vector of a network $\mathcal{N}$, $\mathbf{I}(t)\in \mathbb{R}_{2}^{N\times 1}$, $\mathbf{I}(t)\in \mathbb{R}_{2}^{N\times 1}$ which can be decomposed into its feedforward and recurrent components
 
