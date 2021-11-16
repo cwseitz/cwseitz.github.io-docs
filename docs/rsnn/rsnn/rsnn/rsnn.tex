@@ -79,106 +79,87 @@ Nevertheless, these models are highly task-oriented and therefore difficult to a
 
 \section{Theory}
 
-\subsection{Bayesian models of cognition}
+A central goal of modern neuroscience is to explain how functional brain states emerge from the interactions of dozens, perhaps hundreds, of brain regions, each containing its own complex subnetworks.  These subnetworks can themselves contain thousands of cells, each neuron having on the order of thousands of synaptic connections to other cells within the local network (Binzegger 2004). In fact, connection probabilities between nearby neurons in cortex has been shown experimentally to sometimes exceed 40 percent (Ko 2011; Levy 2012) suggesting a \emph{small-world} organization of the brain. 
 
-\subsection{The neural sampling hypothesis}
+The canonical small-world network developed by Watts and Strogatz is one in which the majority of connections form small densely connected clusters with respect to the size of larger brain regions.  The remaining connections then maintain intermediate connections between these islands of dense synaptic connectivity. The conjunction of local clustering and global interaction provides a structural substrate for the coexistence of functional segregation and integration in the brain (Sporns 2006). Also, this structural quality of brain networks has led to network models which consist of large numbers of densely connected populations with sparse channels of connectivity between them, called fractal networks (Sporns 2006).
 
-\subsection{Dynamical models and spike-train correlations}
 
-The integrate and fire (IF) model of a cortical neuron has become a standard tool for exploring neuronal dynamics. It's relative simplicity makes it an appealing choice for large scale simulations where the precise details of synaptic transmission can be neglected and a neuron can be described with only a few state variables. A large body of research has shown that precise timing of action potentials has an important role in neural information processing - a feature central to the IF model (Rieke, 1997). However, even the minimalist IF model presents substantial barriers to theoretical analysis in the context of networks (Brunel 2000). Noisy variants of IF models have been introduced to summarize the enormous number of degrees of freedom due to millions of ion channels and thousands of presynaptic signals impinging on the neuron (Tuckwell 1989, Plesser 2000). Such models describe the process of synaptic integration by the following linear ordinary differential equation for the membrane potential
+\subsection{The uncorrelated regime}
+
+Dynamical network models that incorporate this kind of spatial information present a challenge for theoretical calculations of population dynamics. This has led to the description of neural field theories or tissue scale models which provide a coarse-grained description of cortical activity, such as population-scale fluctuations in the firing rate. Moving towards a more fine description of network dynamics, some have assumed a small number of discrete populations of cells - a classic example being the excitatory inhibitory random network. For example, population density methods have been used to succesfully predict the steady-state firing rates and membrane potential density of the excitatory-inhibitory random network using the Fokker-Planck formalism (Brunel 2000). Consider the following ordinary differential equation for the membrane potential of a neuron $j$
+
+\begin{equation}
+\tau\dot{V_{j}}(t) = -V_{j}(t) + I_{j}(t)
+\end{equation}
+
+which is a Langevin equation. Take the case when $I_{j}(t)$ is the post-synaptic potential induced by feedforward and recurrent synaptic currents plus additive noise
 
 \begin{align}
-\tau\dot{V} = -V + \zeta(t)
+I_{j}(t) = F_{j}(t) + R_{j}(t) + \sigma_{j}\sqrt{dt}\eta(t)
 \end{align}
 
-If a neuron described by (1.1) is embedded in a network, the variable $\zeta(t)$ represents the synaptic input at a time $t$ by its presynaptic neighbors. In the presence of noise, $\zeta(t)$ is non-deterministic and (1.1) takes the form of a well-known stochastic differential equation (SDE) called the Langevin equation. Furthermore, to represent the firing of an action potential, the variable $V$ in (1.1) is bounded from above. When $V$ crosses a firing threshold $\theta$, we say the neuron has spiked and the voltage is reset to a resting value. This process is often summarized by defining an additional state variable $z(t) = H(V-v_{th})$ where $H$ denotes the Heaviside step function.
-
-Neurons in cortex are characterized by irregular time intervals between spikes. However, the role of this temporal irregularity in sensory processing remains unclear. One hypothesis that attempts to explain this irregularity claims that an approximate balance of excitatory and inhibitory synaptic currents explains the large coefficient of variation observed in cortex (Vreeswijk, 1996). In this balanced regime, the timing of the firing of cells in cortex is sensitive to the relatively small fluctuations in their total synaptic input because the excitatory and inhibitory inputs cancel each other (Amit, 1995). Also, excitatory and inhibitory balance has been theoretically shown to enhance the sensitivity of fast stimulus fluctuations much smaller than a typical integration time constant for a single neuron (Vreeswijk, 1996). This is largely consistent with the notion that precise spike timing contains information that cannot be captured by firing rates alone. Interestingly, model neurons optimally detect temporal information when the average membrane potential is one standard deviation of the noise below threshold, a phenomenon known as stochastic resonance (Plesser, 2000; Kempter, 1998). More recently, evidence has emerged that sensory stimuli only modulate ongoing irregular activity in cortex (Fiser, 2004). Taken together, one might hypothesize that network computations are carried out as a modulation of irregular ``carrier" activity. 
+where we have reserved $\eta(t) \sim \mathcal{N}(0,1)$ for the intrinsic noise of a neuron. We assume that this intrinsic noise is delta correlated i.e. $\langle \eta_{i}(t)\eta_{j}(t)\rangle = \delta(i-j)$ and $\langle \eta_{i}(t)\eta_{i}(t+\tau)\rangle = \delta(\tau)$. Obviously, the same condition is not necessarily satisifed for the total synaptic current: there exist network architectures and stimulus regimes that can realize a case where $\langle I_{i}(t)I_{j}(t)\rangle \neq 0$ and $\langle I_{i}(t)I_{i}(t+\tau)\rangle \neq 0$ for $i \neq j$.
 
 
-A large body of evidence suggests that understanding the population code employed by the brain will include a detailed analysis of the correlation structure of neuronal responses. In sensory systems, correlations can be separated into signal and noise components. The signal correlation refers to the correlation that is repeatable across trials when the stimulus is identical. On the other hand, the noise correlation represents the component of the correlation that cannot be reproduced across trials. The role of noise correlations in the brain is poorly understood, although it is widely regarded to contribute to the amount of information that can be encoded by a neuronal population (Cohen 2011). It may be argued that noise correlations arise from hidden variables that are difficult to observe experimentally. In principle, stochasticity can be introduced into a system of neurons in a few different ways: (i) by intrinsic noise - the noise introduced into the system by the random interactions of a cell's molecular components at nonzero temperature (ii) background activity i.e., afferent synaptic inputs that are not members of the population being simulated or recorded (iii) by stochastic features of the stimulus used to generate network activity. If the system is assumed to be closed (as in a network simulation), the only possible noise sources come from (i) and (iii). In our remaining analysis, we assume the system is closed and that the only contributing factors to neuronal correlations are overlapping synaptic input pools and that any intrinsic noise is uncorrelated.
-
-\subsection{Synaptic plasticity for unsupervised learning}
+There are several  ways in which pairwise correlations can vanish. One is if the network topology is sufficiently sparse that it is unlikely that two neurons share common inputs or synaptic weights are sufficiently small that the timing of a spike is driven by intrinsic noise, which is often assumed to be uncorrelated between neurons (Plesser 2000). Another is when the network is balanced in such a way that uncorrelated inputs cause the total correlation to become weak (Rosenbaum 2017). The first condition was used to derive an expression for the steady state population voltage distribution using the Fokker-Planck equation (Brunel 2000), an extension of previous work where an expression for the steady-state firing rate was derived analytically (Riccardi 1977; Amit 1991). If any of the criteria for uncorrelated synaptic inputs are met, the post-synaptic potentials in (1.7) will have a normal distribution according to the central limit theorem.
 
 
-
-Synaptic plasticity refers to the activity-dependent modification of the strength or efficacy of synaptic transmission at preexisting synapses, and has been proposed to play a central role in the incorporation of transient experiences into persistent memory traces. The efficacy of an excitatory synapse can be either potentiated or depressed by a variety of mechanisms which occur over a wide range of time scales: from milliseconds to hours to days. Short-term synaptic plasticity (STP) is thought to play an important role in information processing in the brain. Its duration allows STP to modify the response of cortical circuits to stimuli and potentially provide a richer set of response properties without permanently altering the circuit architecture. One of several mechanisms thought to underly STP can be seen by the repeated stimulation of a presynaptic cell causing a transient accumulation of calcium in the presynaptic terminal (Mongillo et al. 2008). Calcium generally thought to elevate the probability of neurotransmitter release due to its proposed interaction with the biochemical machinery involved in synaptic vesicle excytosis. Other short term changes in synaptic efficacy can occur such as the facilitation or depression based upon the temporal characteristics of the stimulus. In paired-pulse experiments, a pair of stimuli is delivered a sub-20ms interval shows depression of the efficacy of the second stimulus (Zucker and Regehr, 2002). This phenomenon is hypothesized to arise from inactivation of voltage-dependent sodium and/or calcium channels or depletion of the release ready pool of synaptic vesicles at the presynaptic terminal [1]. Synaptic efficacy can be lowered by the release of biochemical modulators which can interact with the synaptic machinery to inhibit the release of neurotransmitter into the synaptic cleft. In addition, receptors at the presynaptic terminal which play a role in the secretion of neurotransmitter are sensitive to the presence of presynaptic neurmodulators. Therefore, these neuromodulators can also play a role in facilitation or depression in STP.
-
-It is widely believed that neural circuits also possess the mechanisms for long term changes in synaptic strength formally referred to as long term potentiation (LTP) and long term depression (LTD). The brain encodes internally and externally generated stimuli as spatiotemporal patterns of action potentials and long-term modifications to such patterns via changes in synaptic transmission provide a feasible mechanism for the storage of information. In other words, changes in synaptic weights alter the spatiotemporal response of population of neurons to stimuli and therefore provide a method for long term memory formation. Since its original introduction by Cajal, this idea has been rigorously tested, for example in the CA1 region of the hippocampus (Whitlock et al. 2006). LTP and LTD have been extensively studied in the CA1 region of the hippocampus due to compelling evidence that it is a brain region that is central to learning and memory. Indeed, the cellular and biochemical mechanisms underlying these phenomena have been well-characterized. 
-
-
-Significant effort has been spent in recent years to map the connectivity patterns of networks in cortex and thus variety of models have appeared. Connection patterns have been quantified by calculating a broad range of structural measures, including small-world attributes and motif composition, as well as some global measures of functional connectivity (Sporns 2006). The structural measures defined in this framework have proven quite useful; however, many models are defined without consideration of the fact that cortical networks are embedded in real space. In principle these spatially-dependent connectivity patterns could be hidden in the topology of an arbitrary graph; however, in some cases it is more straightforward to interpret connectivity patterns in the spatial domain. For example, the connectivity in a 2D lattice of LIF neurons with local and global synaptic connections are readily understood in terms of distances in real space (Rosenbaum 2014). At the same time, theoretical models e.g., mean-field theories of network dynamics have relaxed the strong assumption that cortical networks are spatially homogeneous (Brunel 2000). Defining a periodic connectivity kernel for each neuron on a lattice is an attractive model for cortical networks as it allows us to explore the dynamical consequences of translational invariance.
-
-
-
-\section{Results}
-
-
-The goal of this chapter is two-fold: first, it serves to briefly summarize our current understanding of the relationship between dynamics of networks of neurons and network topology and stimulus drive. Once the state of the art has been established we seek to highlight points for future development and ultimately an improved understanding of the neural code. We examine network dynamics through the lens of statistical physics and information theory. The second owes its origins to the first but contains new insights on the emergent coding properties of physical systems. Questions regarding the dynamics of networks in the brain can be addressed under this framework which cannot be addressed experimentally, to date. The following models can be inverted after gathering empirical data to determine the accuracy of their description of the biological substrate.
-
-Recent studies have strongly suggested that understanding the neural code will amount to a rigorous understanding of correlations between neuron spike-timing. Such correlation studies are necessarily contextual - correlations must be interpeted in the context of known stimulus drive, learning or experience, or changes in behavioral context (Cohen 2011). This presents a significant challenge for theoretical studies given that the correlation structure of spiking between neurons can be considered a highly granular description of the population dynamics. The stochastic properties of individual cells and ensuing unpredictability of network states makes the discussion of fine characeteristics a serious challenge. Historically, many-body problems like this have been treated by mean-field theories such as the approximation of motion of gas particles using average properties of the medium e.g., temperature and pressure. Furthermore, a natural description of many-body systems is their distribution over a phase space defined by the state variables of the system. Dynamics of the system as a whole are then described by the dynamics of this population density, which may or may not have a stationary (equilibrium) state. Mathematically, determination of this density and its time-dependence, amounts to the solution of the Kramers-Moyal expansion, which in the diffusion approximation, reduces to the Fokker-Planck equation.
-
-This class of techniques has had great success in neuroscience applications in recent years. Indeed, it has been used to analytically derive expressions for the firing rate of excitatory and inhibitory integrate and fire neurons in a sparse network (Brunel, 2000). Integrate and fire neurons simplify the solution of the Fokker-Planck equation considerably, giving some hope for analytical treatment. Monte Carlo simulations of networks of neurons often preclude our understanding of the mechanisms that give rise to the observed dynamics, due to computational costs (Rosenbaum, 2016). For simplified neuron models, the Fokker-Planck formalism provides a method for mapping membrane dynamics and input statistics to spiking statistics, i.e., firing rates. However, many of these approaches have required strict assumptions such as the lack of correlations in afferent synaptic inputs. This lack of input correlations permits invocation of the central limit theorem and the Fokker Planck equation can be solved in one dimension analytically (Brunel 2000) or numerically or using the threshold integration method (Richardson 2007, 2008, 2010). Of course, such as assumption precludes the inversion of the theoretical model using cellular recordings with known correlations in spike timing, and in turn correlated synaptic inputs. This observation suggests that an extension of the above approach is needed for the correlated case.
-
-Two possible ways in which pairwise correlations in a network can vanish on average are: (i) the network topology is sufficiently sparse that it is very unlikely that two neurons share common inputs and (ii) the network is balanced in such a way that the timing of a spike is driven by intrinsic noise, which is reasonably assumed to be uncorrelated between neurons (Plesser 2000). The former case was used by (Brunel 2000) to derive an expression for the steady state population voltage distribution, an extension of previous work where an expression for the steady-state firing rate was derived analytically (Riccardi 1977; Amit 1991). In the uncorrelated case, this approach is valid since the synaptic currents are normally distributed and the problem resembles the mean first-passage time problem for the Ornstein-Uhlenbeck process. At this point, we extend the neuron model presented in the first chapter to 
-
-\clearpage
+%\clearpage
 \begin{figure}[t!]
 \centering
 \includegraphics[width=150mm]{figure-1}
-\caption{}
+\caption{(a) Diagram of a recurrent neural network receving a time-dependent feedforward stimulus. (b) Diagram of the stochastic encoding scheme used a recurrent neural network with noise}
 \end{figure}
 
+Uncorrelated synaptic currents greatly simplify the analysis of network dynamics. The previously $N$-dimensional stochastic differential equation for the voltage can be collapsed to one dimension and the problem becomes the determination of the voltage density over the population (or for a single neuron) $P(V,t)$. This can be done by making use of the Kramers-Moyal expansion, which is derived from the Chapman-Kolmogorov (CK) equation
 
 \begin{equation}
-\tau\dot{V_{j}}^{\alpha}(t) = -V_{j}^{\alpha}(t) + \zeta_{j}^{\alpha}(t)
-\end{equation}
+P(V'_{j}, t) = \int T_{j}(V'_{j}, t | V_{j}, t-\tau)P(V_{j}, t-\tau)dV
+\end{equation} 
 
-The above equation is a Langevin equation, used frequently in statistical physics. Take the case when $\zeta(t)$ is  the synaptic current arising from excitatory and inhbitory inputs to a neuron in a recurrent spiking network
-
-\begin{align}
-\zeta_{j}^{\alpha}(t) = F_{j}^{\alpha}(t) + R_{j}^{\alpha}(t) + \sigma_{j}\sqrt{dt}\eta_{j}^{\alpha}(t)
-\end{align}
-
-where we have reserved $\eta(t) \sim \mathcal{N}(0,1)$ for the intrinsic noise of a neuron. We assume that this intrinsic noise is delta correlated i.e. $\langle \eta_{i}(t)\eta_{j}(t)\rangle = \delta(i-j)$ and $\langle \eta_{i}(t)\eta_{i}(t+\tau)\rangle = \delta(\tau)$. In general, the same condition is not necessarily satisifed for the total synaptic current. There are presumably network architectures and stimulus regimes that can realize a case where $\langle \zeta_{i}(t)\zeta_{j}(t)\rangle \neq 0$ and $\langle \zeta_{i}(t)\zeta_{i}(t+\tau)\rangle \neq 0$ for $i \neq j$. However, a natural starting point in the study of excitatory-inhibitory networks is the case where these are indeed zero, on average. If the above condition is not satisfied, synaptic currents will have a ``colored" power spectrum. 
-
-\subsection{Mean-field firing rates in a balanced network}
-
-Local cortical networks can contain thousands of cells, each neuron having thousands of synaptic connections to other cells within the local network as well as other cortical areas (Binzegger 2004). Indeed, connection probabilities between nearby neurons in cortex has been shown experimentally to sometimes exceed 40 percent (Ko 2011; Levy 2012). This small-world feature of cortical networks arguably plays an important role in guiding network dynamics. However, network models that incorporate spatial information present a challenge for theoretical calculations that are simplified when the network contains discrete populations of cells. The random network has been used extensively in the literature, although it has been extended to create a network with a more modular architecture (Sporns 2006). In any case, analytical treatment of network architecture and its relation to dynamics requires a careful definition of the scaling laws of network parameters as a function of network size $N$. Therefore, we begin the theoretical discussion of spiking dynamics by adopting the following terminology for network parameterization. 
-
-\clearpage
-\begin{sidewaysfigure}
-\centering
-\includegraphics[scale=1.1]{figure-2}
-\caption{Weak correlations of synaptic currents in the asychronous state}
-\label{fig:foo}
-\end{sidewaysfigure}
-
-
-A network model is called \emph{sparse} if the probability of a connection between arbitrary populations $\alpha$ and $\beta$ scales according to $p_{\alpha\beta} \sim \mathcal{O}(1/N)$ meaning that the degree of a neuron does not depend on the scale of the network or $K \sim \mathcal{O}(1)$. Naturally, we then say that a network is \emph{dense} if the in-degree scales as $p_{\alpha\beta} \sim \mathcal{O}(1)$ such that the degree of a neuron $K \sim \mathcal{O}(N)$. In both of these cases, the strength of a synapse plays an equally important role. The synaptic coupling strength is said to be \emph{strong} if $J^{\alpha\beta} \sim \mathcal{O}(1)$. It is common to define \emph{weak} coupling as the case where $J^{\alpha\beta} \sim \mathcal{O}(1/\sqrt{N})$ such that, when the network is dense, the strength of synaptic connection decreases but at a slower rate than the degree $K$ is increasing. In this case, it is possible that fluctuations in the synaptic input currents saturates to a value of the order of the spiking threshold, in the limit of large networks (Vreeswijk, 1996; Renart 2010; Rosenbaum 2017).
-
-The irregularity of spike timing and large coefficient of variation observed in cortex has presented a challenging puzzle for computational neuroscience. This irregularity results weak but often nonzero correlations in spike trains, raising a number of questions regarding its role in robust sensory processing. Interestingly, this irregular spike timing or \emph{asychronous state} can be reproduced in network simulations via a balance of excitatory and inhibitory synaptic currents (Vreeswijk, 1996). By using a mean-field theory of neuron dynamics, firing rates and spike count correlations can be predicted analytically, for very large networks. In terms of its relationship to network topology, the balanced state can be achieved when synaptic weights are scaled like $J^{\alpha\beta} \sim \mathcal{O}(1/\sqrt{N})$ where $N$ is the network size. The recurrent part of the synaptic current in (3.2) can then be written explicitly giving a total synaptic current
+In words, the voltage distribution at a time $t$ is expressed as an integral over all possible previous states $P(V_{j}, t-\tau)$ and the probability of transition $T_{j}(V'_{j}, t | V_{j})$ or \emph{transition operator}. From the above equation we can derive the Kramers-Moyal Expansion (KME) which has the form
 
 \begin{align}
-\xi_{i}^{\alpha}(t) &= F_{i}^{\alpha}(t) + R_{i}^{\alpha}(t) + \eta_{i}(t)\\
-&= F_{i}^{\alpha}(t) + \sum_{\beta}\sum_{j} \frac{J_{ij}^{\alpha\beta}}{\sqrt{N}}(\phi * Z^{\beta}_{j}(t)) + \eta_{i}(t)
+\frac{\partial P_{j}}{\partial t} = \sum_{n} \frac{(-1)^{n}}{n!} \left(\frac{\partial}{\partial V_{j}}\right)^{n} M_{n}(V_{j},t,\tau) P(V_{j},t)
 \end{align}
 
-where the variable $Z^{\beta}_{j}(t) = H(V^{\beta}_{j}(t) - \theta)$ with $H$ being the Heaviside step function. For the sake of generality, the term $\phi * Z^{\beta}_{j}(t)$ represents the convolution of the spike variable $Z^{\beta}_{j}(t)$ with a kernel $\phi$, determining the shape of the post-synaptic current waveform in response to a spike. However, in the remainder of this analysis we will assume that $\phi = \delta(t)$. In the mean-field approximation we replace the individual currents in (3.4) by their average values, which is valid in the limit $N\rightarrow\infty$. This gives the following expression
+where $M_{n}(V,t,\tau)$ denotes the $nth$ order moment of the transition density $T_{j}(V'_{j}, t | V_{j}, t-\tau)$. If we approximate the KME by truncating the summation for $n > 2$ we arrive at the so-called \emph{diffusion approximation} or Fokker-Planck equation
+
+\begin{align}
+\frac{\partial P_{j}(V,t)}{\partial t} &= \frac{\partial}{\partial V_{j}}[\left(V_{j}(t)-\mu_{j}(t)\right) P_{j}(V_{j},t)] + \frac{\sigma_{j}^{2}(t)}{2}\frac{\partial^{2}}{\partial V_{j}^{2}}[P(V_{j},t)]
+\end{align}
+
+More recent developments have relied on a mean-field theory of neuronal interactions in large populations. This approach appears promising for its account of the stochastic features of network dynamics while maintaining a description of population dynamics with resolution down to the individual neuron. It is also readily applicable to populations with small-world features and even networks with connection probabilities defined continuously over a spatial domain (Rosenbaum 2017).
+
+Neurons in cortex are characterized by irregular time intervals between spikes. However, the role of this temporal irregularity in sensory processing remains unclear. One hypothesis that attempts to explain this irregularity claims that an approximate balance of excitatory and inhibitory synaptic currents explains the large coefficient of variation observed in cortex (Vreeswijk, 1996). In this balanced regime, the timing of the firing of cells in cortex is sensitive to the relatively small fluctuations in their total synaptic input because the excitatory and inhibitory inputs cancel each other (Amit, 1995). Also, excitatory and inhibitory balance has been theoretically shown to enhance the sensitivity of fast stimulus fluctuations much smaller than a typical integration time constant for a single neuron (Vreeswijk, 1996; Tian 2020). Interestingly, model neurons optimally detect temporal information when the average membrane potential is one standard deviation of the noise below threshold, a phenomenon known as stochastic resonance (Plesser, 2000; Kempter, 1998).
+
+Furthermore, the complexity of cortical networks and subnetworks therein present very large parameter spaces for analytical study and computer simulations. Exploring this parameter space exhaustively is extremely computationally expensive, demanding the careful choice of our origin within such a space. If the network model contains both excitatory and inhibitory neurons, a natural starting point is one in which excitatory, inhibitory, and feedforward currents balance each other (Vreeswijk, 1996). Indeed, one can construct a newtork in which this occurs by using a mean-field theory of synaptic currents into single neurons embedded in a large population. In the following paragraphs, the terminology and mathematical machinery needed to build this network will be described.
+
+
+A network model is called \emph{sparse} if the probability of a connection between a neuron in a population $\alpha$ and another neurons in a population $\beta$ scales with the network size $N$ according to $p_{\alpha\beta} \sim \mathcal{O}(1/N)$. Using terminology borrowed from graph theory, the degree $K$ of a neuron does not depend on the scale of the network or $K \sim \mathcal{O}(1)$. In contrast, we then say that a network is \emph{dense} if the above connection probability scales as $p_{\alpha\beta} \sim \mathcal{O}(1)$ such that the degree of a neuron scales as $K \sim \mathcal{O}(N)$. Moreover, the efficacy of a synaptic connection between populations $\alpha$ and $\beta$ is said to be \emph{strong} if $J_{\alpha\beta} \sim \mathcal{O}(1)$ and \emph{weak} coupling occurs when $J_{\alpha\beta} \sim \mathcal{O}(1/\sqrt{N})$. This choice of scaling for $J_{\alpha\beta}$ and the degree $K$ results in the total synaptic input to a neuron scaling as $\mathcal{O}(\sqrt{N})$. In this case, it is possible parameterize the network s.t. fluctuations in the synaptic input currents saturates to a value of the order of the spiking threshold, in the limit of large $N$ (Vreeswijk, 1996; Renart 2010; Rosenbaum 2017).  
+
+The scaling of synaptic inputs outline above are a critical step towards finding the balanced state. To see this, consider the total synaptic current injected into a neuron $i$ within a population $\alpha$, decomposed into its feedfoward and recurrent components
+
+\begin{align}
+I_{i}^{\alpha}(t) &= F_{i}^{\alpha}(t) + R_{i}^{\alpha}(t)\\
+&= F_{i}^{\alpha}(t) + \sum_{\beta}\sum_{j} \frac{J_{ij}^{\alpha\beta}}{\sqrt{N}}(\psi * z^{\beta}_{j}(t))
+\end{align}
+
+where the variable $z^{\beta}_{j}(t)$ is sometimes called the \emph{observable state} of neuron $j$ and is given by thresholding the voltage: $z^{\beta}_{j}(t) = H(v^{\beta}_{j}(t) - \theta)$ where $H$ is the Heaviside step function. For the sake of generality, the term $z^{\beta}_{j}(t)$ is convolved with a with a kernel $\psi$, determining the shape of the post-synaptic potential induced by a spike. In the mean-field approximation we replace the current in each term of the sum over $j$ in (1.2) by its average value, which is a valid approximation in the limit $N\rightarrow\infty$ (Vreeswijk 1996). Taking $\psi = \delta(t)$, the observable state $z^{\beta}_{j}(t)$ is replaced by the average firing rate of a neuron in population $\beta$ multiplied by the probability of a connection $p_{\alpha\beta}$
 
 \begin{align*}
-\langle \xi_{i}^{\alpha}(t)\rangle &= \langle F_{i}^{\alpha}(t)\rangle + \langle R_{i}^{\alpha}(t)\rangle + \langle\eta_{i}(t)\rangle\\
-&= \langle F_{i}^{\alpha}(t)\rangle + \sqrt{N}\sum_{\beta}J_{\alpha\beta}p_{\alpha\beta}r_{\beta} + \langle\eta_{i}(t)\rangle
+\langle I_{i}^{\alpha}(t)\rangle &= \langle F_{i}^{\alpha}(t)\rangle + \langle R_{i}^{\alpha}(t)\rangle\\
+&= \langle F_{i}^{\alpha}(t)\rangle + \sqrt{N}\sum_{\beta}j_{\alpha\beta}p_{\alpha\beta}r_{\beta}
 \end{align*}
 
-where we have used that $p_{\alpha\beta} = \tilde{p}_{\alpha\beta}p_{\alpha}$ with $\tilde{p}_{\alpha\beta}$ being the probability of a synapse of a neuron $\alpha$ onto type $\beta$ and $p_{\alpha}$ the probability of a neuron being of type $\alpha$. Notice that the average value of the recurrent contribution to the synaptic current saturates for large $N$. Writing the above equation explicitly for a neuron in an excitatory-inhibitory network gives
+with $j_{\alpha\beta} = J_{\alpha\beta}\sqrt{N}$. Notice that the average value of the recurrent contribution to the synaptic current indeed saturates for large $N$. Writing the above equation explicitly for a neuron in an excitatory-inhibitory network i.e. $\alpha, \beta \in \{e, i\}$
 
 \begin{align}
-\langle \xi_{j}^{e}(t)\rangle &= \langle F_{j}^{e}(t)\rangle + \sqrt{N}\left(j_{ee}p_{ee}r_{e} + j_{ie}p_{ie}r_{i}\right)\\
-\langle \xi_{k}^{i}(t)\rangle &= \langle F_{k}^{i}(t)\rangle + \sqrt{N}\left(j_{ii}p_{ii}r_{i} + j_{ei}p_{ei}r_{e}\right)
+\langle I_{j}^{e}(t)\rangle &= \langle F_{j}^{e}(t)\rangle + \sqrt{N}\left(j_{ee}p_{ee}r_{e} + j_{ie}p_{ie}r_{i}\right)\\
+\langle I_{k}^{i}(t)\rangle &= \langle F_{k}^{i}(t)\rangle + \sqrt{N}\left(j_{ii}p_{ii}r_{i} + j_{ei}p_{ei}r_{e}\right)
 \end{align}
 
-where subsripts of the from $J_{\alpha\beta}$ refers to the strength of a connection in the direction $\alpha\rightarrow\beta$. If we require that, in the mean-field limit $N\rightarrow\infty$, the external and recurrent currents cancel each other, and $\langle F_{j}^{\alpha}(t)\rangle \sim \mathcal{O}(\sqrt{N})$ we have the following matrix equation
+If we require that, in the mean-field limit $N\rightarrow\infty$, the average current vanishes and that $\langle F_{j}^{\alpha}(t)\rangle \sim \mathcal{O}(\sqrt{N})$ we have the following matrix equation relating the mean field firing rates to the synaptic weights and average feedforward current
 
 \begin{align}
 \begin{pmatrix}
@@ -206,13 +187,158 @@ which can be summarized as $\mathbf{r} = -\mathbf{J}^{-1}\mathbf{f}$. Assuming t
 \underset{N\rightarrow \infty}{\mathrm{lim}}r_{i} = \frac{\langle F_{k}^{i}\rangle j_{ee}-\langle F_{j}^{e}\rangle j_{ei}}{j_{ei}j_{ie} - j_{ee}j_{ii}}
 \end{align}
 
-For positive solutions for the above firing rates and for the above matrix to be invertible we have the condition $\langle F_{j}^{e}\rangle/\langle F_{k}^{i}\rangle > j_{ie}/j_{ii} > j_{ee}/j_{ei}$ and we recover the condition given in (Rosenbaum 2014; Rosenbaum 2017; Akil 2021).
+For positive solutions for the above firing rates and for the above matrix to be invertible we have the rather loose condition $\langle F_{j}^{e}\rangle/\langle F_{k}^{i}\rangle > j_{ie}/j_{ii} > j_{ee}/j_{ei}$ and we recover the condition given in (Rosenbaum 2014; Rosenbaum 2017; Akil 2021). 
+
+Since the balanced state is simultaneously an asychronous state, the recurrent inputs $R_{i}$ are uncorrelated and can be written as a gaussian random variable
+
+\begin{align*}
+R_{i}(t) = \sqrt{N}\mu_{R}(t) + \sigma_{R}(t)\xi_{R}(t)
+\end{align*}
+
+where $\mu_{R}^{\alpha} = (j_{e\alpha}p_{e\alpha}r_{e\alpha} + j_{i\alpha}p_{i\alpha}r_{e\alpha})$ and $\sigma_{R}^{\alpha} = (j_{e\alpha}^{2}p_{e\alpha}r_{e\alpha} + j_{i\alpha}^{2}p_{i\alpha}r_{e\alpha})$ (Brunel 2000).
+
+
+Assuming the feedforward current $F_{i}(t)$ is also uncorrelated, the total current is also a gaussian random variable 
+
+\begin{align*}
+I_{i}(t) = \sqrt{N}\mu_{I}(t) + \sigma_{R}(t)\xi_{R}(t)
+\end{align*}
+
+
+using the shorthand $\mu_{I}(t) = \mu_{F}(t) + \mu_{R}(t)$ and $\sigma_{I}(t) = \sigma_{F}(t) + \sigma_{R}(t)$. The Fokker-Planck equation in (1.5) then applies, and becomes
+
+\begin{align}
+\frac{\partial P(V,t)}{\partial t} &= \frac{\partial}{\partial V}[\left(V(t)-\mu_{I}(t)\right) P(V,t)] + \frac{\sigma_{I}^{2}(t)}{2}\frac{\partial^{2}}{\partial V^{2}}[P(V,t)]
+\end{align}
+
+Due to the firing threshold $\theta$, boundary conditions on the above equation must be imposed (Brunel and Hakim 1999; Brunel 2000)
+
+\begin{align*}
+P(V,t) &= 0, v\geq \theta\\
+P(v_{r}^{-},t) &= P(v_{r}^{+})\\
+\frac{\partial P(v_{r}^{+},t)}{\partial t}-\frac{\partial P(v_{r}^{-},t)}{\partial t} &= \frac{\partial P(\theta,t)}{\partial t}\\
+\int_{-\infty}^{\theta} P(V,t)dV &= 1
+\end{align*}
+
+
+\subsection{The correlated regime}
+
+Recent studies have strongly suggested that understanding the neural code will amount to a rigorous understanding of correlations between neuron spike-timing. Such correlation studies are necessarily contextual - correlations must be interpeted in the context of known stimulus drive, learning or experience, or changes in behavioral context (Cohen 2011). This presents a significant challenge for theoretical studies given that the correlation structure of spiking between neurons can be considered a highly granular description of the population dynamics.
+
+In the correlated regime, (1.10) no longer applies. Solving (1.10) in higher dimensions is difficult, and the use of Monte Carlo simulations requires a sample size that increses at an exponential rate, not to mention the associated computational costs. In addition, traditional numerical methods such as finite element and finite difference all suffer from the curse of dimension (Chen 2017, Pichler 2013). However, recently a method for solving the Fokker-Planck equation in high dimensions, even on the order of millions, has been developed for networks of Fitzhugh-Nagumo neurons with non-Gaussian features (Chen 2017), which may be a viable option in the future.
+
+In sensory systems, correlations can be separated into signal and noise components. The signal correlation refers to the correlation that is repeatable across trials when the stimulus is identical. On the other hand, the noise correlation represents the component of the correlation that cannot be reproduced across trials. The role of noise correlations in the brain is poorly understood, although it is widely regarded to contribute to the amount of information that can be encoded by a neuronal population (Cohen 2011). It may be argued that noise correlations arise from hidden variables that are difficult to observe experimentally. In principle, stochasticity can be introduced into a system of neurons in a few different ways: (i) by intrinsic noise - the noise introduced into the system by the random interactions of a cell's molecular components at nonzero temperature (ii) background activity i.e., afferent synaptic inputs that are not members of the population being simulated or recorded (iii) by stochastic features of the stimulus used to generate network activity. If the system is assumed to be closed (as in a network simulation), the only possible noise sources come from (i) and (iii). In our remaining analysis, we assume the system is closed and that the only contributing factors to neuronal correlations are overlapping synaptic input pools and that any intrinsic noise is uncorrelated.
+
+\subsection{Bayesian models of cognition}
+
+\subsection{The neural sampling hypothesis}
+
+\section{Results}
+
+
+\begin{sidewaysfigure}
+\centering
+\includegraphics[scale=1.1]{figure-2}
+\caption{Weak correlations of synaptic currents in the asychronous state}
+\label{fig:foo}
+\end{sidewaysfigure}
 
 
 
-Introducing correlations into synaptic the synaptic currents over a population greatly complicates the development of a solution to (3.7). We can no longer describe the high-dimensional solution with a one-dimensional equation. At the same time, covariance matrices are difficult to predict unless the system satisfies the limit for a mean-field approach. In summary, equation (3.7) must be solved for very large $N$ to avoid finite size effects in a solution of the steady state covariance while nonzero correlations give rise to non-gaussian features.  Of course, traditional numerical methods such as finite element and finite difference all suffer from the curse of dimension (Chen 2017, Pichler 2013). Another solution is a Monte Carlo simulation of (X); however, the required sample size increases in an exponential rate as the dimension and the same curse dimensionality problem appears. However, recently a method for solving the Fokker-Planck equation in high dimensions, even on the order of millions, has been developed for complex systems with non-gaussian features (Chen 2017). 
+\subsection{The two-dimensional Gaussian network}
 
-The following model for generating the backbone for network of neurons rests on the assumption that we can create connectivity solely from pairwise connection probabilities. Let us define a spatial connectivity kernel $\Gamma_{i}(\mathbf{r}_{j})$ with $i,j\in \{n\}_{n=1}^{N}$ which defines the binomial probability that a neuron $i$ synapses onto a different cell $j\neq i$ at spatial coordinate $\mathbf{r}_{j}$. Here, the function $\Gamma_{i}(\mathbf{r})$ is not itself a probability distribution but rather represents one component of a distribution that is defined for each possible pairs $i,j$ for a given $i$. That distribution is completely represented for a pair $i,j$ with knowledge of the kernel $\Gamma_{j}(\mathbf{r}_{i})$ and an additional probability that no synapse occurs $\Gamma_{0}$. The parameter $\Gamma_{0}$ will be referred to as the $\emph{sparsity parameter}$ throughout the remainder of the text. Together, these three binomial probabilities can be renormalized to form a multinomial distribution $\mathbb{P}_{ij}$ at every possible synapse $ij$. A general definition of the multinomial distribution is
+Suppose that we have a two-dimensional lattice which contains points separated by a distance $\Delta$ along the axial directions with periodic boundary conditions. The distance between any two points on such a lattice is the following Euclidean distance metric
+
+\begin{align*}
+|\Delta\mathbf{r}_{ij}|^{2} = \mathrm{min}(|x_1 - x_2|, n\Delta - |x_1 - x_2|)^2 + \mathrm{min}(|y_1 - y_2|, n\Delta - |y_1 - y_2|)^2
+\end{align*}
+
+Now, let the kernel $\Gamma_{ij}$ be the two-dimensional symmetric Gaussian
+
+\begin{align}
+\Gamma_{ij}(|\Delta\mathbf{r}_{ij}|) = \gamma\cdot \exp\left(-\frac{1}{2}(\mathbf{r}_{i}-\mathbf{r}_{j})^{T}\mathbf{\Sigma}_{i}(\mathbf{r}_{i}-\mathbf{r}_{j})\right)
+\end{align}
+
+where $\mathbf{\Sigma}_{i} = \sigma_{i}^{2}I$ with the two-dimesional identity matrix $I$. The parameter $\sigma_{i}$ can be intepreted as the \emph{reach} of a neuron $i$. Furthermore, for the kernel $\Gamma_{ij}$ to represent a binomial probability at each point of its domain, we must have that
+
+
+\begin{equation}
+\Gamma_{ij}(|\Delta\mathbf{r}_{ij}|)  \leq 1
+\end{equation}
+
+Plugging in our definition (3.5) gives the following inequality
+
+\begin{align*}
+\gamma\cdot \exp\left(-\frac{\underset{j}{\mathrm{min}}\left(|\Delta\mathbf{r}_{ij}|^{2}\right)}{2\sigma_{i}^{2}} \right) \leq 1
+\end{align*}
+
+The largest possible value of the exponential is achieved at $\underset{j}{\mathrm{min}}\left(|\Delta\mathbf{r}_{ij}|^{2}\right) = \Delta$ (a neighboring lattice point). Therefore, $\gamma$ is upper bounded according to $\gamma \leq \exp\left(\frac{\Delta^{2}}{2\sigma_{i}^{2}}\right)$. For the remainder of our analysis we will fix $\gamma = 1$ and focus our attention to the impact of the parameters $\sigma$ and $\Gamma_{0}$ on the statistics of connectivity. 
+
+As can be seen in Fig. (3.1a), when $\Gamma_{ij} = \Gamma_{ji}$ we have that $p_{ij} = p_{ji}$ for all $|\Delta \mathbf{r}_{ij}|$. We formally refer to this case as the \emph{homogeneous gaussian network}. While this is not necessarily a realistic case, it serves as a useful testbed for the graph theoretic concepts to be used in later analyses. 
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=100mm]{fig_11}
+\caption{\textbf{Synapse probabilities for gaussian connectivity} (a) Binomial probabilities for two identical gaussian kernels ($\sigma=1$) separated by a distance $|\Delta\mathbf{r}_{ij}|$ and the probability of no synapse $\Gamma_{0}$ (left) and the corresponding multinomial probabilities (right). (b) Binomial probabilities for two different gaussian kernels ($\sigma_{1}=1, \sigma_{2}=2$) separated by a distance $|\Delta\mathbf{r}_{ij}|$ and the probability of no synapse $\Gamma_{0}$ (left) and the corresponding multinomial probabilities (right). }
+\end{figure}
+
+
+
+\subsection{Homogeneous Gaussian networks}
+
+Let us now examine the statistics of the out-degree of a neuron $i$ assuming that the connectivity parameter $\sigma$ and $\Gamma_{0}$ are homogeneous across the network i.e., they are constant for all neurons. Using Eq. (3.2), we have
+
+\begin{align}
+\langle N_{ij} \rangle &= \left(\frac{1-\Gamma_{0}}{N}\right)\sum_{j} \Gamma_{ij}(1-\Gamma_{ji})\cdot Z_{ij}^{-1}
+\end{align}
+
+a sum that can be carried out numerically. Interestingly, in the homogeneous case, the parameter $\gamma$ and $\Gamma_{0}$ become redundant. This can be seen by considering that multiplying $p_{ij}$ and $p_{ji}$ by the same constant factor $\gamma$ is equivalent to the transformation $\Gamma_{0}' = 1-\gamma(1-\Gamma_{0})$. 
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=175mm]{fig_8}
+\caption{\textbf{The homogeneous Gaussian network}. (A) An example homogeneous network containing $N=100$ neurons. (B) An example neuron extracted from (A) with outgoing synapses labeled in blue and incoming synapses labeled in red. (C,D) The ratio $\langle N_{ij}\rangle/N$ as a function parameters ($\sigma, \Gamma_{0}$) for a sparse network (C) and a network with variable sparsity (D). (E,F) The ratio $\langle N_{ij}\rangle/N$ for fixed $\sigma$ and variable sparsity. (G,H) Binomial probability maps for two nearby neurons expressed as a sum $p_{ij}+p_{ji}$ and product $p_{ij}p_{ji}$}
+\end{figure}
+
+In other words, for the homogeneous case, the multiplication by $\gamma$ can be represented by a suitable selection of $\Gamma_{0}$ and can be set $\gamma=1$. Numerical evaluation of (3.7) shows that the ratio $\langle N_{ij}\rangle$ increases monotonically for increasing $\sigma$, as expected from (3.1b) and saturates at $\langle N_{ij}\rangle = 0.5$ at a rate proportional to $\sigma$. This can be understood from the fact that as $\Gamma_{0} \rightarrow 1$ we have $p_{0} \rightarrow 0$ and the multinomial distribution in (3.2) is reduced to a binomial distribution with $p_{ij} = p_{ji} = 1/2$. 
+
+Furthermore, in addition to the average degree of a neuron, we are interested in the average number of shared inputs (outputs) between two neurons. We expect that this statistic makes at least a partial contribution to pairwise correlations in the voltage dynamics between two cells. To address this, we consider the average number of shared connections $\langle S_{ij} \rangle$ between a neuron $i$ and $j$ as a function of their distance $|\Delta \mathbf{r}_{ij}|$. In essence, this is the product $p_{ik}\cdot p_{jk}$ for a third neuron $k$ with $i,j\neq k$. The symmetry present in the homogeneous case allows us to perform this computation rather easily,
+
+\begin{align}
+\langle S_{ij} \rangle &= \frac{1}{N}\sum_{k} p_{ik}\cdot p_{jk} \\
+&= \frac{\left(1-\Gamma_{0}\right)^{2}}{N}\sum_{k}\frac{\Gamma_{ik}(1-\Gamma_{ki})\Gamma_{jk}(1-\Gamma_{kj})}{Z_{ik}Z_{jk}}
+\end{align}
+
+
+which can be carried out numerically over the two-dimensions of space. Self-consistent with our definition of the connectivity kernel, the normalized number of shared connections decays with a gaussian profile for increasing $|\Delta \mathbf{r}_{ij}|$ as can be seen in Fig. (3.3).
+
+\begin{figure}
+\centering
+\includegraphics[width=175mm]{fig_9}
+\caption{\textbf{Shared connections in a homogeneous Gaussian network} (A,B,C) The average number of shared incoming or outgoing connections $\langle S_{ij}\rangle /N$ as a function of distance between two neurons $|\Delta r_{ij}|$ for three different values of the reach parameter $\sigma$.}
+\end{figure}
+
+
+
+\subsection{Excitatory-inhibitory Gaussian networks}
+
+Thus far we have considered only the case where the spatial connectivity kernel is the same for every neuron. However, the integrative properties of neurons depend strongly on the number, proportions and distribution of excitatory and inhibitory synaptic inputs they receive (Megias 2001). Also, the role excitatory-inhibitory balance in network dynamics has been a subject of recent debate. Indeed, balanced recurrent excitation and inhibition capture the irregular and asynchronous spiking activity with weak correlations reported in cortex. The spatial extent of excitation relative to inhibition has been shown to have a strong impact on network dynamics. In particular, when the spatial extent of excitation is sufficiently smaller than inhibition, the balanced fixed point loses stability (Rosenbaum 2014). 
+
+To account for excitatory and inhibitory cell types within this framework, we must differentiate $\langle N_{ij}\rangle$ for excitatory and inhibitory neurons and solving for both the mean in-degree and out-degree separately. Thus we have the quantities $\langle E_{E}^{\mathrm{out}} \rangle,\langle E_{I}^{\mathrm{out}} \rangle,\langle E_{I}^{\mathrm{in}} \rangle$ and $\langle I_{E}^{\mathrm{out}} \rangle,\langle I_{I}^{\mathrm{out}} \rangle,\langle I_{E}^{\mathrm{in}} \rangle$. Under the assumption that excitatory and inhibitory neurons are distributed uniformly  in two-dimensional space, we have that $\langle E_{I}^{\mathrm{out}} \rangle = \langle I_{E}^{\mathrm{in}} \rangle$ and $\langle E_{I}^{\mathrm{in}} \rangle = \langle I_{E}^{\mathrm{out}}\rangle$. For brevity, we drop the superscripts and compute the above averages according the general prescription provided by (3.3). The result of these numerical calculations allow us to observe that, for $\Gamma_{0} = 0.2$, the fraction of the target population saturated by excitatory or inhibitory outputs increases monotonically with $\sigma_{E}$ and $\sigma_{I}$  (Fig 3.4 b,d). The parameter maps provided in (Fig 3.4 b,d) are a starting point for our later discussions of newtork dynamics. 
+
+
+\clearpage
+\begin{figure}[t!]
+\centering
+\includegraphics[width=165mm]{fig_10}
+\caption{\textbf{Average degree in an excitatory-inhibitory network} (A) Schematic illustrating the notation used for excitatory-excitatory, excitatory-inhibitory, inhibitory-excitatory, and inhibitory-inhibitory synapses. (B) An example dense excitatory-inihbitory network ($\Gamma_{0}=0.2$) and $p_{E} = 0.8$. (C) Average number of synapses in the dense network normalized to the target population size as a function of parameters $\sigma_{E}$ and $\sigma_{I}$. (D) An example sparse excitatory-inihbitory network ($\Gamma_{0}=0.8$) and $p_{E} = 0.8$. (E) Average number of synapses in the sparse network normalized to the target population size as a function of parameters $\sigma_{E}$ and $\sigma_{I}$.}
+\end{figure}
+
+
+\section{Methods}
+
+
+\subsection{Network formalism}
 
 \begin{align}
 \mathbb{P} = \frac{p_{n}\prod_{m\neq n}(1-p_{m})}{\sum_{n}p_{n}\prod_{m\neq n}(1-p_{m})} = \frac{p_{n}\prod_{m\neq n}(1-p_{m})}{Z}
@@ -249,101 +375,7 @@ where the spatial dependence of the individual kernels is implied. The in-degree
 
 from the linearity of variance property. We will analyze the in-degree and out-degree distributions of a graph generated when the connectivity kernel is a symmetric Gaussian extending over two-dimensions. We refer to this case as a \emph{two-dimensional gaussian network}.
 
-
-\subsection{The two-dimensional Gaussian network}
-
-Suppose that we have a two-dimensional lattice which contains points separated by a distance $\Delta$ along the axial directions with periodic boundary conditions. The distance between any two points on such a lattice is the following Euclidean distance metric
-
-\begin{align*}
-|\Delta\mathbf{r}_{ij}|^{2} = \mathrm{min}(|x_1 - x_2|, n\Delta - |x_1 - x_2|)^2 + \mathrm{min}(|y_1 - y_2|, n\Delta - |y_1 - y_2|)^2
-\end{align*}
-
-Now, let the kernel $\Gamma_{ij}$ be the two-dimensional symmetric Gaussian
-
-\begin{align}
-\Gamma_{ij}(|\Delta\mathbf{r}_{ij}|) = \gamma\cdot \exp\left(-\frac{1}{2}(\mathbf{r}_{i}-\mathbf{r}_{j})^{T}\mathbf{\Sigma}_{i}(\mathbf{r}_{i}-\mathbf{r}_{j})\right)
-\end{align}
-
-where $\mathbf{\Sigma}_{i} = \sigma_{i}^{2}I$ with the two-dimesional identity matrix $I$. The parameter $\sigma_{i}$ can be intepreted as the \emph{reach} of a neuron $i$. Furthermore, for the kernel $\Gamma_{ij}$ to represent a binomial probability at each point of its domain, we must have that
-
-
-\begin{equation}
-\Gamma_{ij}(|\Delta\mathbf{r}_{ij}|)  \leq 1
-\end{equation}
-
-Plugging in our definition (3.5) gives the following inequality
-
-\begin{align*}
-\gamma\cdot \exp\left(-\frac{\underset{j}{\mathrm{min}}\left(|\Delta\mathbf{r}_{ij}|^{2}\right)}{2\sigma_{i}^{2}} \right) \leq 1
-\end{align*}
-
-The largest possible value of the exponential is achieved at $\underset{j}{\mathrm{min}}\left(|\Delta\mathbf{r}_{ij}|^{2}\right) = \Delta$ (a neighboring lattice point). Therefore, $\gamma$ is upper bounded according to $\gamma \leq \exp\left(\frac{\Delta^{2}}{2\sigma_{i}^{2}}\right)$. For the remainder of our analysis we will fix $\gamma = 1$ and focus our attention to the impact of the parameters $\sigma$ and $\Gamma_{0}$ on the statistics of connectivity. 
-
-As can be seen in Fig. (3.1a), when $\Gamma_{ij} = \Gamma_{ji}$ we have that $p_{ij} = p_{ji}$ for all $|\Delta \mathbf{r}_{ij}|$. We formally refer to this case as the \emph{homogeneous gaussian network}. While this is not necessarily a realistic case, it serves as a useful testbed for the graph theoretic concepts to be used in later analyses. 
-
-\clearpage
-\begin{figure}[t!]
-\centering
-\includegraphics[width=100mm]{fig_11}
-\caption{\textbf{Synapse probabilities for gaussian connectivity} (a) Binomial probabilities for two identical gaussian kernels ($\sigma=1$) separated by a distance $|\Delta\mathbf{r}_{ij}|$ and the probability of no synapse $\Gamma_{0}$ (left) and the corresponding multinomial probabilities (right). (b) Binomial probabilities for two different gaussian kernels ($\sigma_{1}=1, \sigma_{2}=2$) separated by a distance $|\Delta\mathbf{r}_{ij}|$ and the probability of no synapse $\Gamma_{0}$ (left) and the corresponding multinomial probabilities (right). }
-\end{figure}
-
-
-
-\subsection{Homogeneous Gaussian networks}
-
-Let us now examine the statistics of the out-degree of a neuron $i$ assuming that the connectivity parameter $\sigma$ and $\Gamma_{0}$ are homogeneous across the network i.e., they are constant for all neurons. Using Eq. (3.2), we have
-
-\begin{align}
-\langle N_{ij} \rangle &= \left(\frac{1-\Gamma_{0}}{N}\right)\sum_{j} \Gamma_{ij}(1-\Gamma_{ji})\cdot Z_{ij}^{-1}
-\end{align}
-
-a sum that can be carried out numerically. Interestingly, in the homogeneous case, the parameter $\gamma$ and $\Gamma_{0}$ become redundant. This can be seen by considering that multiplying $p_{ij}$ and $p_{ji}$ by the same constant factor $\gamma$ is equivalent to the transformation $\Gamma_{0}' = 1-\gamma(1-\Gamma_{0})$. 
-
-\clearpage
-\begin{figure}[t!]
-\centering
-\includegraphics[width=175mm]{fig_8}
-\caption{\textbf{The homogeneous Gaussian network}. (A) An example homogeneous network containing $N=100$ neurons. (B) An example neuron extracted from (A) with outgoing synapses labeled in blue and incoming synapses labeled in red. (C,D) The ratio $\langle N_{ij}\rangle/N$ as a function parameters ($\sigma, \Gamma_{0}$) for a sparse network (C) and a network with variable sparsity (D). (E,F) The ratio $\langle N_{ij}\rangle/N$ for fixed $\sigma$ and variable sparsity. (G,H) Binomial probability maps for two nearby neurons expressed as a sum $p_{ij}+p_{ji}$ and product $p_{ij}p_{ji}$}
-\end{figure}
-
-In other words, for the homogeneous case, the multiplication by $\gamma$ can be represented by a suitable selection of $\Gamma_{0}$ and can be set $\gamma=1$. Numerical evaluation of (3.7) shows that the ratio $\langle N_{ij}\rangle$ increases monotonically for increasing $\sigma$, as expected from (3.1b) and saturates at $\langle N_{ij}\rangle = 0.5$ at a rate proportional to $\sigma$. This can be understood from the fact that as $\Gamma_{0} \rightarrow 1$ we have $p_{0} \rightarrow 0$ and the multinomial distribution in (3.2) is reduced to a binomial distribution with $p_{ij} = p_{ji} = 1/2$. 
-
-Furthermore, in addition to the average degree of a neuron, we are interested in the average number of shared inputs (outputs) between two neurons. We expect that this statistic makes at least a partial contribution to pairwise correlations in the voltage dynamics between two cells. To address this, we consider the average number of shared connections $\langle S_{ij} \rangle$ between a neuron $i$ and $j$ as a function of their distance $|\Delta \mathbf{r}_{ij}|$. In essence, this is the product $p_{ik}\cdot p_{jk}$ for a third neuron $k$ with $i,j\neq k$. The symmetry present in the homogeneous case allows us to perform this computation rather easily,
-
-\begin{align}
-\langle S_{ij} \rangle &= \frac{1}{N}\sum_{k} p_{ik}\cdot p_{jk} \\
-&= \frac{\left(1-\Gamma_{0}\right)^{2}}{N}\sum_{k}\frac{\Gamma_{ik}(1-\Gamma_{ki})\Gamma_{jk}(1-\Gamma_{kj})}{Z_{ik}Z_{jk}}
-\end{align}
-
-
-which can be carried out numerically over the two-dimensions of space. Self-consistent with our definition of the connectivity kernel, the normalized number of shared connections decays with a gaussian profile for increasing $|\Delta \mathbf{r}_{ij}|$ as can be seen in Fig. (3.3).
-\begin{figure}
-\centering
-\includegraphics[width=175mm]{fig_9}
-\caption{\textbf{Shared connections in a homogeneous Gaussian network} (A,B,C) The average number of shared incoming or outgoing connections $\langle S_{ij}\rangle /N$ as a function of distance between two neurons $|\Delta r_{ij}|$ for three different values of the reach parameter $\sigma$.}
-\end{figure}
-
-\clearpage
-
-
-
-\subsection{Excitatory-inhibitory Gaussian networks}
-
-Thus far we have considered only the case where the spatial connectivity kernel is the same for every neuron. However, the integrative properties of neurons depend strongly on the number, proportions and distribution of excitatory and inhibitory synaptic inputs they receive (Megias 2001). Also, the role excitatory-inhibitory balance in network dynamics has been a subject of recent debate. Indeed, balanced recurrent excitation and inhibition capture the irregular and asynchronous spiking activity with weak correlations reported in cortex. The spatial extent of excitation relative to inhibition has been shown to have a strong impact on network dynamics. In particular, when the spatial extent of excitation is sufficiently smaller than inhibition, the balanced fixed point loses stability (Rosenbaum 2014). 
-
-To account for excitatory and inhibitory cell types within this framework, we must differentiate $\langle N_{ij}\rangle$ for excitatory and inhibitory neurons and solving for both the mean in-degree and out-degree separately. Thus we have the quantities $\langle E_{E}^{\mathrm{out}} \rangle,\langle E_{I}^{\mathrm{out}} \rangle,\langle E_{I}^{\mathrm{in}} \rangle$ and $\langle I_{E}^{\mathrm{out}} \rangle,\langle I_{I}^{\mathrm{out}} \rangle,\langle I_{E}^{\mathrm{in}} \rangle$. Under the assumption that excitatory and inhibitory neurons are distributed uniformly  in two-dimensional space, we have that $\langle E_{I}^{\mathrm{out}} \rangle = \langle I_{E}^{\mathrm{in}} \rangle$ and $\langle E_{I}^{\mathrm{in}} \rangle = \langle I_{E}^{\mathrm{out}}\rangle$. For brevity, we drop the superscripts and compute the above averages according the general prescription provided by (3.3). The result of these numerical calculations allow us to observe that, for $\Gamma_{0} = 0.2$, the fraction of the target population saturated by excitatory or inhibitory outputs increases monotonically with $\sigma_{E}$ and $\sigma_{I}$  (Fig 3.4 b,d). The parameter maps provided in (Fig 3.4 b,d) are a starting point for our later discussions of newtork dynamics. 
-
-
-\clearpage
-\begin{figure}[t!]
-\centering
-\includegraphics[width=165mm]{fig_10}
-\caption{\textbf{Average degree in an excitatory-inhibitory network} (A) Schematic illustrating the notation used for excitatory-excitatory, excitatory-inhibitory, inhibitory-excitatory, and inhibitory-inhibitory synapses. (B) An example dense excitatory-inihbitory network ($\Gamma_{0}=0.2$) and $p_{E} = 0.8$. (C) Average number of synapses in the dense network normalized to the target population size as a function of parameters $\sigma_{E}$ and $\sigma_{I}$. (D) An example sparse excitatory-inihbitory network ($\Gamma_{0}=0.8$) and $p_{E} = 0.8$. (E) Average number of synapses in the sparse network normalized to the target population size as a function of parameters $\sigma_{E}$ and $\sigma_{I}$.}
-\end{figure}
-
-
-\section{Methods}
+The following model for generating the backbone for network of neurons rests on the assumption that we can create connectivity solely from pairwise connection probabilities. Let us define a spatial connectivity kernel $\Gamma_{i}(\mathbf{r}_{j})$ with $i,j\in \{n\}_{n=1}^{N}$ which defines the binomial probability that a neuron $i$ synapses onto a different cell $j\neq i$ at spatial coordinate $\mathbf{r}_{j}$. Here, the function $\Gamma_{i}(\mathbf{r})$ is not itself a probability distribution but rather represents one component of a distribution that is defined for each possible pairs $i,j$ for a given $i$. That distribution is completely represented for a pair $i,j$ with knowledge of the kernel $\Gamma_{j}(\mathbf{r}_{i})$ and an additional probability that no synapse occurs $\Gamma_{0}$. The parameter $\Gamma_{0}$ will be referred to as the $\emph{sparsity parameter}$ throughout the remainder of the text. Together, these three binomial probabilities can be renormalized to form a multinomial distribution $\mathbb{P}_{ij}$ at every possible synapse $ij$. A general definition of the multinomial distribution is
 
 \subsection{Signal processing techniques}
 
@@ -381,34 +413,6 @@ and previous solutions to (3.1) do not apply (Brunel 2000). In the worst case, t
 \end{equation}
 
 For arbitrary connectivity patterns, estimating the systems covariance is challenging, although the problem was recently addressed via a mean-field theory for discrete networks and networks with spatial connectivity (Rosenbaum 2017). We now summarize the Kramers-Moyal expansion, a full derivation is included in (A.1). followed by a short summary of this mean-field theory.
-
-The problem at hand is the determination of the distribution of the state variable $V$ for a neuron $j$ i.e. the density $P_{j}(V)$ as a function of time. The central assumption made in the derivation of the Kramers-Moyal expansion is that the evolution of $P_{j}(V_{j},t)$ follows a Markov chain. We are then permitted to write the Chapman-Kolmogorov (CK) equation
-
-\begin{equation}
-P(V'_{j}, t) = \int T_{j}(V'_{j}, t | V_{j}, t-\tau)P(V_{j}, t-\tau)dV
-\end{equation} 
-
-which expresses the density of $V$ in terms of an integral over a transition density $T_{j}$. The transition density is directly related to the distribution over synaptic currents. If $T_{j}$ is normally distributed, then $P(V_{j},t)$ must also be normally distribution (as in the Ornstein-Uhlenbeck process). Starting from the CK equation in (1.3) we can derive the Kramers-Moyal Expansion (KME) which has the form
-
-\begin{align}
-\frac{\partial P_{j}}{\partial t} = \sum_{n} \frac{(-1)^{n}}{n!} \left(\frac{\partial}{\partial V_{j}}\right)^{n} M_{n}(V_{j},t,\tau) P(V_{j},t)
-\end{align}
-
-where $M_{n}(V,t,\tau)$ denotes the $nth$ order moment of the transition density $T_{j}(V'_{j}, t | V_{j}, t-\tau)$. If we approzetamate the KME by truncating the summation for $n > 2$ we arrive at the so-called \emph{diffusion approzetamation} or Fokker-Planck equation
-
-\begin{align}
-\frac{\partial P_{j}}{\partial t} &= \frac{\partial}{\partial V_{j}}[\left(V_{j}(t)-\mu_{j}(t)\right) P_{j}(V_{j},t)] + \frac{\sigma_{j}^{2}(t)}{2}\frac{\partial^{2}}{\partial V_{j}^{2}}[P(V_{j},t)]
-\end{align}
-
-where the first and second moments have been substituted by their standard symbols $\mu$ and $\sigma^{2}$. The general form of the Fokker-Planck equation in $N$ dimensions; that is, the time-dependence of the joint distribution over $N$ voltage variables $P(V_{1}\;...\;V_{N})$ is
-
-\begin{align}
-\frac{\partial P}{\partial t} &= \sum_{i}
-\beta_{ij}\frac{\partial}{\partial V_{i}}[\left(V_{j}(t)-\mu_{j}(t)\right) P_{j}(V_{j},t)] + \sum_{i}D_{ij}\frac{\partial^{2}}{\partial V_{i}\partial V_{j}}[P(V_{j},t)]
-\end{align}
-
-where the term $D_{ij}$ is called the \emph{diffusion tensor} and is related to the covariance matrix $\Sigma$ by $D_{ij} = \frac{\Sigma\Sigma^{T}}{2}$.
-
 
 \begin{appendices}
 \chapter{The Kramers-Moyal expansion}
