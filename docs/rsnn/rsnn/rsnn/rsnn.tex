@@ -8,12 +8,13 @@
 \usepackage[toc,page]{appendix}
 \usepackage[labelfont=bf]{caption}
 \usepackage{rotating}
+\usepackage[dvipsnames]{xcolor}
 
 \usepackage{url}
  
 
 %% Use these commands to set biographic information for the title page:
-\title{Stochastic computation in recurrent networks of spiking neurons}
+\title{Towards a theory of correlation transfer in excitatatory-inhibitory neuronal networks}
 \author{Clayton W. Seitz}
 \department{Graduate Program in Biophysics}
 \division{Physical and Biological Sciences}
@@ -52,7 +53,7 @@ The primate cerebral cortex is a complex system estimated to harbor more than 25
 
 \mainmatter
 
-\chapter{Stochastic computation in recurrent networks of spiking neurons}
+\chapter{Towards a theory of correlation transfer in excitatatory-inhibitory neuronal networks}
 
 \section{Introduction}
 
@@ -77,63 +78,53 @@ Most recently, artificial spiking neural networks (SNNs) have been developed tha
 Nevertheless, these models are highly task-oriented and therefore difficult to apply to other tasks or sensory processing at large. Therefore, here we consider the dynamics of a spiking neural network stimulated with a multivariate gaussian signal with well-defined covariance. 
 
 
-\section{Theory}
+\section{Literature Review}
 
 A central goal of modern neuroscience is to explain how functional brain states emerge from the interactions of dozens, perhaps hundreds, of brain regions, each containing its own complex subnetworks.  These subnetworks can themselves contain thousands of cells, each neuron having on the order of thousands of synaptic connections to other cells within the local network (Binzegger 2004). In fact, connection probabilities between nearby neurons in cortex has been shown experimentally to sometimes exceed 40 percent (Ko 2011; Levy 2012) suggesting a \emph{small-world} organization of the brain. 
 
-The canonical small-world network developed by Watts and Strogatz is one in which the majority of connections form small densely connected clusters with respect to the size of larger brain regions.  The remaining connections then maintain intermediate connections between these islands of dense synaptic connectivity. The conjunction of local clustering and global interaction provides a structural substrate for the coexistence of functional segregation and integration in the brain (Sporns 2006). Also, this structural quality of brain networks has led to network models which consist of large numbers of densely connected populations with sparse channels of connectivity between them, called fractal networks (Sporns 2006).
+The canonical small-world network in the context of neuroscience is one in which the majority of connections in a neural network form small densely connected clusters with respect to the size of larger brain regions.  The remaining connections then maintain intermediate communication channels between these islands of dense synaptic connectivity. The conjunction of local clustering and global interaction is thought to provide a structural substrate for the coexistence of functional segregation and integration in the brain (Sporns 2006). However, accessing brain regions in which computations are carried out in a non-perturbative fashion is a long-lasting challenge. In addition, the extremely high dimensional parameter spaces of even small networks of neurons makes a systems-scale understanding of neural computation difficult. However, in an era of high-performance computing there is some hope of contributing to our understanding of functional brain states via \emph{analysis by synthesis}. In the following paragraphs, the progression towards the state of the art for theoretical and computational models of brain-like neural networks will be summarized. 
 
 
-\subsection{The uncorrelated regime}
+\subsection{The diffusion approximation}
 
-Dynamical network models that incorporate this kind of spatial information present a challenge for theoretical calculations of population dynamics. This has led to the description of neural field theories or tissue scale models which provide a coarse-grained description of cortical activity, such as population-scale fluctuations in the firing rate. Moving towards a more fine description of network dynamics, some have assumed a small number of discrete populations of cells - a classic example being the excitatory inhibitory random network. For example, population density methods have been used to succesfully predict the steady-state firing rates and membrane potential density of the excitatory-inhibitory random network using the Fokker-Planck formalism (Brunel 2000). Consider the following ordinary differential equation for the membrane potential of a neuron $j$
+Recent experimental advances permit the recording of spike trains of many neurons simultaneously \emph{in-vivo}. These experiments have revealed that significant spatial and temporal correlations exist in the timing of spikes by individual neurons, bringing the role of correlations in neural computation into question. Often, such studies are necessarily contextual - correlations must be interpeted in the context of known stimulus drive, learning or experience, or changes in behavioral context (Cohen 2011). Interpretation of such correlations has been a fruitful exercise; however, it is also important to understand the functional properties of neuronal networks that give rise to them such as topological parameters, stimulus statistics, and synaptic plasticity. For pairs of neurons, correlations are often quantified according to the cross-correlation function of their spike trains (Ostojic 2009). The profile of this cross-correlation function is dependent on several factors including direct synaptic wiring (Snider et al., 1998; Csicsvari et al., 1998; Barthó et al., 2004; Fujisawa et al., 2008) or common and potentially correlated inputs (Sears and Stagg, 1976; Binder and Powers, 2001; Constantinidis et al., 2001; Türker and Powers, 2001, 2002). Although cross-correlation analysis can provide substantial information regarding the topology of a neural circuit, relating the correlations of spike trains to the underlying circuit architecture is a long-lasting problem in computational neuroscience. To approach this problem, simulations of integrate and fire neurons are often used. In these simulations, network parameters are tuned to examine the resulting correlation structure of spike trains with the hope of inverting the model for comparison with \emph{in-vivo} recordings. 
+
+In addition to non-trivial correlations in their spike timing, neurons in cortical networks tend to exhibit highly irregular time intervals between spikes. The stochasticity in spike timing has can be attributed to cellular and sensory noise (Faisal 2008), or alternatively to network-scale mechanisms such as excitatory-inhibitory balance (Vreeswijk 1996, 1998). Amidst this irregularity, our understanding of spike correlations are further complicated by the nonlinear dynamics of recurrent network models (Baker 2019; Tetzlaff 2008, 2012; Doiron 2016; Ocker 2017). It is common to tame this complexity by making suitable combinations of assumptions regarding the statistics of network stimuli, the mechanism of neuron-neuron interactions, or the statistics of synaptic connectivity. In the so-called diffusion approximation, all of these assumptions are involved in order predict features network dynamics, making it a natural starting point for review. 
+
+As a rule, the postsynaptic current to a neuron embedded in a spiking network consists of two components: feedforward (sometimes called background) and feedback (sometimes called recurrent):
+
+\begin{align}
+I(t) = F(t) + R(t)
+\end{align}
+
+A variety of models for the integration of this current into a stateful membrane potential exist. For example, the integrate and fire model
 
 \begin{equation}
-\tau\dot{V_{j}}(t) = -V_{j}(t) + I_{j}(t)
+\tau\dot{V}(t) = \psi(V) + I(t)
 \end{equation}
 
-which is a Langevin equation. Take the case when $I_{j}(t)$ is the post-synaptic potential induced by feedforward and recurrent synaptic currents plus additive noise
-
-\begin{align}
-I_{j}(t) = F_{j}(t) + R_{j}(t) + \sigma_{j}\sqrt{dt}\eta(t)
-\end{align}
-
-where we have reserved $\eta(t) \sim \mathcal{N}(0,1)$ for the intrinsic noise of a neuron. We assume that this intrinsic noise is delta correlated i.e. $\langle \eta_{i}(t)\eta_{j}(t)\rangle = \delta(i-j)$ and $\langle \eta_{i}(t)\eta_{i}(t+\tau)\rangle = \delta(\tau)$. Obviously, the same condition is not necessarily satisifed for the total synaptic current: there exist network architectures and stimulus regimes that can realize a case where $\langle I_{i}(t)I_{j}(t)\rangle \neq 0$ and $\langle I_{i}(t)I_{i}(t+\tau)\rangle \neq 0$ for $i \neq j$.
-
-
-There are several  ways in which pairwise correlations can vanish. One is if the network topology is sufficiently sparse that it is unlikely that two neurons share common inputs or synaptic weights are sufficiently small that the timing of a spike is driven by intrinsic noise, which is often assumed to be uncorrelated between neurons (Plesser 2000). Another is when the network is balanced in such a way that uncorrelated inputs cause the total correlation to become weak (Rosenbaum 2017). The first condition was used to derive an expression for the steady state population voltage distribution using the Fokker-Planck equation (Brunel 2000), an extension of previous work where an expression for the steady-state firing rate was derived analytically (Riccardi 1977; Amit 1991). If any of the criteria for uncorrelated synaptic inputs are met, the post-synaptic potentials in (1.7) will have a normal distribution according to the central limit theorem.
-
-
-%\clearpage
-\begin{figure}[t!]
-\centering
-\includegraphics[width=150mm]{figure-1}
-\caption{(a) Diagram of a recurrent neural network receving a time-dependent feedforward stimulus. (b) Diagram of the stochastic encoding scheme used a recurrent neural network with noise}
-\end{figure}
-
-Uncorrelated synaptic currents greatly simplify the analysis of network dynamics. The previously $N$-dimensional stochastic differential equation for the voltage can be collapsed to one dimension and the problem becomes the determination of the voltage density over the population (or for a single neuron) $P(V,t)$. This can be done by making use of the Kramers-Moyal expansion, which is derived from the Chapman-Kolmogorov (CK) equation
+where the function $\psi(V)$ is a arbitrary function of the membrane potential. To produce spiking behavior, the membrane potential is passed through a special type of activation function or thresholding function which produces neural spike trains
 
 \begin{equation}
-P(V'_{j}, t) = \int T_{j}(V'_{j}, t | V_{j}, t-\tau)P(V_{j}, t-\tau)dV
-\end{equation} 
+z_{j}(t) = \sum_{i} \delta(t-t_{i})
+\end{equation}
 
-In words, the voltage distribution at a time $t$ is expressed as an integral over all possible previous states $P(V_{j}, t-\tau)$ and the probability of transition $T_{j}(V'_{j}, t | V_{j})$ or \emph{transition operator}. From the above equation we can derive the Kramers-Moyal Expansion (KME) which has the form
+where $t_{i}$ is the time at which the $i$-th spike of neuron $j$ occured. A primary goal of modern computational neuroscience is to understand the origins of correlations or lack thereof in the variable $z(t)$ across a population of neurons. A first step in this direction is to reveal general principles of the relationship between spike correlations and the interaction between stimulus statistics and the statistics of synaptic connectivity.
 
-\begin{align}
-\frac{\partial P_{j}}{\partial t} = \sum_{n} \frac{(-1)^{n}}{n!} \left(\frac{\partial}{\partial V_{j}}\right)^{n} M_{n}(V_{j},t,\tau) P(V_{j},t)
-\end{align}
+Perhaps the most fundamental approximation of the dynamics excitatory-inhibitory networks is the so-called \emph{diffusion approximation} where synaptic currents are assumed to be uncorrelated Gaussian white noise. This approximation is valid in multiple regimes. For example, when synaptic connectivity is sufficiently weak and/or sparse, synaptic inputs to a neuron can be guaranteed to follow a normal distribution, per the central limit theorem. However, the diffusion approximation is not exclusive to these network architectures. It is also a valid assumption when there exists an appropriate cancellation of correlations between feedforward $F(t)$ and feedback $R(t)$ synaptic currents, even in dense networks (Rosenbaum 2017). In the following paragraphs the mathematics of the diffusion approximation will be summarized.
 
-where $M_{n}(V,t,\tau)$ denotes the $nth$ order moment of the transition density $T_{j}(V'_{j}, t | V_{j}, t-\tau)$. If we approximate the KME by truncating the summation for $n > 2$ we arrive at the so-called \emph{diffusion approximation} or Fokker-Planck equation
+
+In the case that synaptic currents are uncorrelated across an excitatory-inhibitory network, a high dimensional stochastic version of (1.2) describing network dynamics can be collapsed to one dimension. The problem becomes the determination of the membrane potential density over the population as a function of time $P(V,t)$. Generally, this can be done by making use of the diffusion approximation of the Kramers-Moyal expansion, also known as the Fokker-Planck equation (Brunel 2000; Brunel and Hakim 1999)
+
 
 \begin{align}
 \frac{\partial P_{j}(V,t)}{\partial t} &= \frac{\partial}{\partial V_{j}}[\left(V_{j}(t)-\mu_{j}(t)\right) P_{j}(V_{j},t)] + \frac{\sigma_{j}^{2}(t)}{2}\frac{\partial^{2}}{\partial V_{j}^{2}}[P(V_{j},t)]
 \end{align}
 
-More recent developments have relied on a mean-field theory of neuronal interactions in large populations. This approach appears promising for its account of the stochastic features of network dynamics while maintaining a description of population dynamics with resolution down to the individual neuron. It is also readily applicable to populations with small-world features and even networks with connection probabilities defined continuously over a spatial domain (Rosenbaum 2017).
 
-Neurons in cortex are characterized by irregular time intervals between spikes. However, the role of this temporal irregularity in sensory processing remains unclear. One hypothesis that attempts to explain this irregularity claims that an approximate balance of excitatory and inhibitory synaptic currents explains the large coefficient of variation observed in cortex (Vreeswijk, 1996). In this balanced regime, the timing of the firing of cells in cortex is sensitive to the relatively small fluctuations in their total synaptic input because the excitatory and inhibitory inputs cancel each other (Amit, 1995). Also, excitatory and inhibitory balance has been theoretically shown to enhance the sensitivity of fast stimulus fluctuations much smaller than a typical integration time constant for a single neuron (Vreeswijk, 1996; Tian 2020). Interestingly, model neurons optimally detect temporal information when the average membrane potential is one standard deviation of the noise below threshold, a phenomenon known as stochastic resonance (Plesser, 2000; Kempter, 1998).
+Interestingly, the stationary solution of the density $P(V,t)$ can be found analytically, providing an estimate of steady state firing rates. As expected, uncorrelated synaptic currents produce uncorrelated spike trains, although transitions towards synchrony in this regime have been discussed (Brunel 2000). 
 
-Furthermore, the complexity of cortical networks and subnetworks therein present very large parameter spaces for analytical study and computer simulations. Exploring this parameter space exhaustively is extremely computationally expensive, demanding the careful choice of our origin within such a space. If the network model contains both excitatory and inhibitory neurons, a natural starting point is one in which excitatory, inhibitory, and feedforward currents balance each other (Vreeswijk, 1996). Indeed, one can construct a newtork in which this occurs by using a mean-field theory of synaptic currents into single neurons embedded in a large population. In the following paragraphs, the terminology and mathematical machinery needed to build this network will be described.
+As mentioned, additional theoretical work has proposed that the irregular inter-spike intervals observed in cortex can be explained by approximate balance of excitatory and inhibitory synaptic currents (Vreeswijk, 1996). In this balanced regime, the timing of the firing of cells in cortex is sensitive to the relatively small fluctuations in their total synaptic input because the excitatory and inhibitory inputs cancel each other (Amit, 1995). Also, excitatory and inhibitory balance has been theoretically shown to enhance the sensitivity of fast stimulus fluctuations much smaller than a typical integration time constant for a single neuron (Vreeswijk, 1996; Tian 2020). Interestingly, model neurons optimally detect temporal information when the average membrane potential is one standard deviation of the noise below threshold, a phenomenon known as stochastic resonance (Plesser, 2000; Kempter, 1998). Importantly, a general framework for generating balanced networks has been developed. In the following paragraphs, the terminology and mathematical machinery introduced in (Vreeswijk 1996) and later used by (Renart 2010; Rosenbaum 2017) will be described.
 
 
 A network model is called \emph{sparse} if the probability of a connection between a neuron in a population $\alpha$ and another neurons in a population $\beta$ scales with the network size $N$ according to $p_{\alpha\beta} \sim \mathcal{O}(1/N)$. Using terminology borrowed from graph theory, the degree $K$ of a neuron does not depend on the scale of the network or $K \sim \mathcal{O}(1)$. In contrast, we then say that a network is \emph{dense} if the above connection probability scales as $p_{\alpha\beta} \sim \mathcal{O}(1)$ such that the degree of a neuron scales as $K \sim \mathcal{O}(N)$. Moreover, the efficacy of a synaptic connection between populations $\alpha$ and $\beta$ is said to be \emph{strong} if $J_{\alpha\beta} \sim \mathcal{O}(1)$ and \emph{weak} coupling occurs when $J_{\alpha\beta} \sim \mathcal{O}(1/\sqrt{N})$. This choice of scaling for $J_{\alpha\beta}$ and the degree $K$ results in the total synaptic input to a neuron scaling as $\mathcal{O}(\sqrt{N})$. In this case, it is possible parameterize the network s.t. fluctuations in the synaptic input currents saturates to a value of the order of the spiking threshold, in the limit of large $N$ (Vreeswijk, 1996; Renart 2010; Rosenbaum 2017).  
@@ -189,6 +180,8 @@ which can be summarized as $\mathbf{r} = -\mathbf{J}^{-1}\mathbf{f}$. Assuming t
 
 For positive solutions for the above firing rates and for the above matrix to be invertible we have the rather loose condition $\langle F_{j}^{e}\rangle/\langle F_{k}^{i}\rangle > j_{ie}/j_{ii} > j_{ee}/j_{ei}$ and we recover the condition given in (Rosenbaum 2014; Rosenbaum 2017; Akil 2021). 
 
+\textcolor{red}{Make a stronger argument for why the inputs are uncorrelated in the asychronous state}
+
 Since the balanced state is simultaneously an asychronous state, the recurrent inputs $R_{i}$ are uncorrelated and can be written as a gaussian random variable
 
 \begin{align*}
@@ -205,10 +198,10 @@ I_{i}(t) = \sqrt{N}\mu_{I}(t) + \sigma_{R}(t)\xi_{R}(t)
 \end{align*}
 
 
-using the shorthand $\mu_{I}(t) = \mu_{F}(t) + \mu_{R}(t)$ and $\sigma_{I}(t) = \sigma_{F}(t) + \sigma_{R}(t)$. The Fokker-Planck equation in (1.5) then applies, and becomes
+using the shorthand $\mu_{I}(t) = \mu_{F}(t) + \mu_{R}(t)$ and $\sigma_{I}(t) = \sigma_{F}(t) + \sigma_{R}(t)$. The Fokker-Planck equation in (1.5) then applies, and in the steady-state becomes
 
 \begin{align}
-\frac{\partial P(V,t)}{\partial t} &= \frac{\partial}{\partial V}[\left(V(t)-\mu_{I}(t)\right) P(V,t)] + \frac{\sigma_{I}^{2}(t)}{2}\frac{\partial^{2}}{\partial V^{2}}[P(V,t)]
+\frac{\sigma_{I}^{2}(t)}{2}\frac{\partial^{2}}{\partial V^{2}}[P(V,t)] = \frac{\partial}{\partial V}[\left(V(t)-\mu_{I}(t)\right) P(V,t)]
 \end{align}
 
 Due to the firing threshold $\theta$, boundary conditions on the above equation must be imposed (Brunel and Hakim 1999; Brunel 2000)
@@ -221,28 +214,79 @@ P(v_{r}^{-},t) &= P(v_{r}^{+})\\
 \end{align*}
 
 
-\subsection{The correlated regime}
+\subsection{Beyond the diffusion approximation}
 
-Recent studies have strongly suggested that understanding the neural code will amount to a rigorous understanding of correlations between neuron spike-timing. Such correlation studies are necessarily contextual - correlations must be interpeted in the context of known stimulus drive, learning or experience, or changes in behavioral context (Cohen 2011). This presents a significant challenge for theoretical studies given that the correlation structure of spiking between neurons can be considered a highly granular description of the population dynamics.
+More recently, neuroscientists have developed a framework for understanding spike train correlations beyond the diffusion approximation. This development has been motivated by the fact that the integration of temporally correlated presynaptic spike trains can result in non-trivial two-point correlation functions that are not well-described by a Gaussian white noise process (Moreno-Bote 2008). In addition, recent experiments have shown that local cortical networks can be dense with connection probabilities sometimes exceeding 40 percent (Ko 2011; Levy 2012; Fino 2011). A novel approach, based on linear response theory, lifts the diffusion approximation and makes predictions on spike correlations directly in terms of circuit architecture (Ocker 2017). More specifically, by making use of a linear response theory, one can derive the matrix of auto and cross-spectra of spike trains in terms of synaptic coupling matrices directly (Pernice 2011; Trousdale 2013; Ocker 2017).
 
-In the correlated regime, (1.10) no longer applies. Solving (1.10) in higher dimensions is difficult, and the use of Monte Carlo simulations requires a sample size that increses at an exponential rate, not to mention the associated computational costs. In addition, traditional numerical methods such as finite element and finite difference all suffer from the curse of dimension (Chen 2017, Pichler 2013). However, recently a method for solving the Fokker-Planck equation in high dimensions, even on the order of millions, has been developed for networks of Fitzhugh-Nagumo neurons with non-Gaussian features (Chen 2017), which may be a viable option in the future.
+In essence, a linear response theory of network dynamics determines the auto and cross spectra of spike trains by assuming a linear relationship between the output firing rate of a neuron and its presynaptic input spikes. For example, the approach pioneered by Pernice et al. leverages Hawkes theory of linearly interacting point processes to calculate stationary firing rates and spike correlations in excitatory-inhibitory networks (Pernice 2011, 2012). If neural spike trains are taken to be realizations of heterogeneous Poisson proccesses i.e. $r_{i}(t) = \langle z_{i}(t)\rangle$, Hawkes theory can be used to estimate the vector of firing rates $\mathbf{r}(t)$
 
-In sensory systems, correlations can be separated into signal and noise components. The signal correlation refers to the correlation that is repeatable across trials when the stimulus is identical. On the other hand, the noise correlation represents the component of the correlation that cannot be reproduced across trials. The role of noise correlations in the brain is poorly understood, although it is widely regarded to contribute to the amount of information that can be encoded by a neuronal population (Cohen 2011). It may be argued that noise correlations arise from hidden variables that are difficult to observe experimentally. In principle, stochasticity can be introduced into a system of neurons in a few different ways: (i) by intrinsic noise - the noise introduced into the system by the random interactions of a cell's molecular components at nonzero temperature (ii) background activity i.e., afferent synaptic inputs that are not members of the population being simulated or recorded (iii) by stochastic features of the stimulus used to generate network activity. If the system is assumed to be closed (as in a network simulation), the only possible noise sources come from (i) and (iii). In our remaining analysis, we assume the system is closed and that the only contributing factors to neuronal correlations are overlapping synaptic input pools and that any intrinsic noise is uncorrelated.
+\begin{equation}
+\mathbf{r(t)} = \mathbf{r_{0}} + \int_{-\infty}^{\infty} G(t-\tau)z(\tau)d\tau
+\end{equation}
+
+The matrix element $g_{ij}(t)$ represents the linear influence of a spike of neuron $i$ on the firing rate of neuron $j$. The matrix of cross-covariances is determined by the equation 
+
+\begin{equation}
+C_{0}(\tau) = G(\tau)Y + (G*C_{0})(\tau)
+\end{equation} 
+
+which has the following solution in the Fourier domain i.e. the cross-spectral matrix (Pernice 2012)
+
+\begin{equation}
+C(\omega) = [1-G(\omega)]^{-1}Y[1-G^{*}(\omega)]^{-1}
+\end{equation} 
+
+Therefore, the linear theory provides a direct mechanism for solving for the cross-covariance of spiking in the population in terms of the synaptic coupling matrix. However, thus far previous analyses have restricted feedforward inputs to be uncorrelated, providing little information regarding the transfer of correlations from input to response. 
+
+More recently, a mean-field approach starting from the balanced state discussed previously has been proposed to accomodate for correlated external inputs (Baker 2019). This approach approximates the population average cross spectrum between spike trains  as
+
+\begin{equation}
+\langle S,S\rangle \approx \frac{1}{N}W^{-1}\langle X,X\rangle W{-*} - \frac{1}{N}[]
+\end{equation} 
+
+However, a significant drawback of this approach is that utilizes only four distinct synaptic weights.
+
+%\clearpage
+\begin{figure}[t!]
+\centering
+\includegraphics[width=150mm]{figure-1}
+\caption{(a) Diagram of a recurrent neural network receving a time-dependent feedforward stimulus. (b) Diagram of the stochastic encoding scheme used a recurrent neural network with noise}
+\end{figure}
+
 
 \subsection{Bayesian models of cognition}
 
-\subsection{The neural sampling hypothesis}
+From the perspective of dynamical systems, sensory processing is often interpreted as an attraction of the neural state variables to a particular state corresponding to the encoding of the sensory stimulus. This point of view adopts the notion that sensory stimuli are then represented in the brain by \emph{attractor states} or locations in phase space which the network is driven towards during sensory processing (Hopfield, 1982). Early models of this form were deterministic in that the path taken towards a fixed steady state of the network dynamics is entirely determined by the initial conditions. On the other hand, recent experimental evidence suggests that neurons, synapses, and neural systems are inherently stochastic (Buesing 2011). These observations have provoked a dramatic paradigm shift in the way we view computations as being carried out in the brain. Namely, researchers now widely believe that information processing by the brain is carried out via a form of probabilistic inference.
+
+Variability in sensory stimuli and the biological constitution of networks of neurons require the brain to make inferences about the external world amidst uncertainty. For example, the perception of objects in the external world by an organism is, in part, the transformation of a noisy continously valued variable to a discrete mental representation of the object. The injection of stochasticity into the pathway mapping stimuli to their neural representation has led many to believe that networks of neurons represent probability distributions rather than implementing logical circuits. Interestingly, behavioral studies have confirmed that human observers not only take uncertainty into account in a wide variety of tasks, but do so in a way that is nearly optimal (Ma 2006). It stands to reason that variability in sensory stimuli and performing inference amidst uncertainty are two sides of the same coin. If sensory stimuli were not variable, meaning that the mapping of sensory stimuli to neural responses was deterministic, the neural response from trial to trial would be identical. Therefore, the ability to handle small variations in the stimulus and the ability to generalize would be diminished.
+
+Probabilistic inference is a well-established mathematical framework for making logical conclusions when only partial information is given or when the full information has become corrupt. Indeed, this framework is a critical tool in modern machine learning and artificial intelligence. A typical inference scenario is the deduction of the probability that the observed information was drawn from a distribution already known by the model. That is, the encoding scheme during sensory processing is the distribution of responses conditioned on the stimulus i.e., the posterior distribution $P(R|S)$. In the context of biological and artificial neural networks, that distribution is often \emph{learned} by the model via previous exposure to a large number of samples from the so-called population distribution of the data or stimulus. However, the mechanism by which spiking neural networks carry out inference tasks remains unclear. 
+
+A popular point of view is that neural activity can be expressed in discrete-time and the set of spikes in each time bin can be interpreted as samples from the posterior $P(R|S)$, a distribution which is encoded by the synaptic weights. This interpretation has spawned the development of interesting parallels between neural dynamics and statistical sampling processes such as Markov chain Monte Carlo (MCMC) sampling (Buesing 2011). However, the interpretation of neural dynamics as implementing an artificial sampling process as in the Boltzmann machine, necessarily excludes biological details, such as synaptic plasticity and spike-adaptation, which are thought to play a major role in neural computation.
+
 
 \section{Results}
 
 
-\begin{sidewaysfigure}
-\centering
-\includegraphics[scale=1.1]{figure-2}
-\caption{Weak correlations of synaptic currents in the asychronous state}
-\label{fig:foo}
-\end{sidewaysfigure}
+%\begin{sidewaysfigure}
+%\centering
+%\includegraphics[scale=1.1]{figure-2}
+%\caption{Weak correlations of synaptic currents in the asychronous state}
+%\label{fig:foo}
+%\end{sidewaysfigure}
 
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=175mm]{figure-2}
+\caption{}
+\end{figure}
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=150mm]{figure-3}
+\caption{}
+\end{figure}
 
 
 \subsection{The two-dimensional Gaussian network}
