@@ -218,25 +218,31 @@ P(v_{r}^{-},t) &= P(v_{r}^{+})\\
 
 More recently, neuroscientists have developed a framework for understanding spike train correlations beyond the diffusion approximation. This development has been motivated by the fact that the integration of temporally correlated presynaptic spike trains can result in non-trivial two-point correlation functions that are not well-described by a Gaussian white noise process (Moreno-Bote 2008). In addition, recent experiments have shown that local cortical networks can be dense with connection probabilities sometimes exceeding 40 percent (Ko 2011; Levy 2012; Fino 2011). A novel approach, based on linear response theory, lifts the diffusion approximation and makes predictions on spike correlations directly in terms of circuit architecture (Ocker 2017). More specifically, by making use of a linear response theory, one can derive the matrix of auto and cross-spectra of spike trains in terms of synaptic coupling matrices directly (Pernice 2011; Trousdale 2013; Ocker 2017).
 
-In essence, a linear response theory of network dynamics determines the auto and cross spectra of spike trains by assuming a linear relationship between the output firing rate of a neuron and its presynaptic input spikes. For example, the approach pioneered by Pernice et al. leverages Hawkes theory of linearly interacting point processes to calculate stationary firing rates and spike correlations in excitatory-inhibitory networks (Pernice 2011, 2012). If neural spike trains are taken to be realizations of heterogeneous Poisson proccesses i.e. $r_{i}(t) = \langle z_{i}(t)\rangle$, Hawkes theory can be used to estimate the vector of firing rates $\mathbf{r}(t)$
+In essence, a linear response theory of network dynamics determines the auto and cross spectra of spike trains by assuming a linear relationship between the output firing rate of a neuron and its presynaptic input spikes. For example, the approach pioneered by Pernice et al. leverages Hawkes theory of linearly interacting point processes to calculate stationary firing rates and spike correlations in excitatory-inhibitory networks (Pernice 2011, 2012). Put simply, if neural spike trains are taken to be realizations of heterogeneous Poisson proccesses i.e. $r_{i}(t) = \langle z_{i}(t)\rangle$, Hawkes theory can be used to estimate the vector of firing rates $\mathbf{r}(t)$. To do this, we first define a matrix $G(\tau)$ which can be convolved with the vector of spikes $\mathbf{z}(\tau)$ to give the linear influence of $\mathbf{z}(\tau)$ on the firing rates $\mathbf{r}(t)$. The matrix element $g_{ij}(\tau)$ represents the linear influence of a spike of neuron $i$ on the firing rate of neuron $j$ which can be computed as the normalized covariance of a Poisson spike train $z_{i}$ with $z_{j}$ (Pernice 2012)
 
 \begin{equation}
-\mathbf{r(t)} = \mathbf{r_{0}} + \int_{-\infty}^{\infty} G(t-\tau)z(\tau)d\tau
+g_{ij}(J,\tau) = \frac{\langle z_{i}(t+\tau), z_{j}(t)\rangle - \langle z_{i}(t+\tau)\rangle\langle z_{j}(t)\rangle}{\langle z_{i}(t)\rangle}
+\end{equation} 
+
+Furthermore, in the linear theory the vector of firing rates is predicted by the convolution of $G(\tau)$ and $\mathbf{z}(\tau)$ in the time-domain
+
+\begin{equation}
+\mathbf{r}(t) = \mathbf{r}_{0} + \int_{-\infty}^{\infty} G(t-\tau)\mathbf{z}(\tau)d\tau
 \end{equation}
 
-The matrix element $g_{ij}(t)$ represents the linear influence of a spike of neuron $i$ on the firing rate of neuron $j$. The matrix of cross-covariances is determined by the equation 
+Assuming that $\mathbf{r}(t)$ reaches a steady state, we then construct a diagonal matrix $\Lambda$ s.t. $\Lambda_{ii} = r_{i}$. The matrix of cross-covariances is then given by (Pernice 2012; Ocker 2017)
 
 \begin{equation}
-C_{0}(\tau) = G(\tau)Y + (G*C_{0})(\tau)
+C_{0}(\tau) = G(\tau)\Lambda + (G*C_{0})(\tau)
 \end{equation} 
 
-which has the following solution in the Fourier domain i.e. the cross-spectral matrix (Pernice 2012)
+where $G^{*}(\omega)$ represents the which has the following solution in the Fourier domain i.e. the cross-spectral matrix 
 
 \begin{equation}
-C(\omega) = [1-G(\omega)]^{-1}Y[1-G^{*}(\omega)]^{-1}
+C(\omega) = [1-G(\omega)]^{-1}\Lambda[1-G^{*}(\omega)]^{-1}
 \end{equation} 
 
-Therefore, the linear theory provides a direct mechanism for solving for the cross-covariance of spiking in the population in terms of the synaptic coupling matrix. However, thus far previous analyses have restricted feedforward inputs to be uncorrelated, providing little information regarding the transfer of correlations from input to response. 
+Therefore, the linear theory provides a direct mechanism for solving for the cross-covariance of spiking in the population in terms of the synaptic coupling matrix, for arbitrary network topologies. However, thus far previous analyses have restricted feedforward inputs to be uncorrelated, providing little information regarding the transfer of correlations from input to response. 
 
 More recently, a mean-field approach starting from the balanced state discussed previously has been proposed to accomodate for correlated external inputs (Baker 2019). This approach approximates the population average cross spectrum between spike trains  as
 
