@@ -220,37 +220,42 @@ More recently, neuroscientists have developed a framework for understanding spik
 
 In essence, a linear response theory of network dynamics determines the auto and cross spectra of spike trains by assuming a linear relationship between the output firing rate of a neuron and its presynaptic input spikes. For example, the approach pioneered by Pernice et al. leverages Hawkes theory of linearly interacting point processes to calculate stationary firing rates and spike correlations in excitatory-inhibitory networks (Pernice 2011, 2012). Put simply, if neural spike trains are taken to be realizations of heterogeneous Poisson proccesses i.e. $r_{i}(t) = \langle z_{i}(t)\rangle$, Hawkes theory can be used to estimate the vector of firing rates $\mathbf{r}(t)$. To do this, we first define a matrix $G(\tau)$ which can be convolved with the vector of spikes $\mathbf{z}(\tau)$ to give the linear influence of $\mathbf{z}(\tau)$ on the firing rates $\mathbf{r}(t)$. The matrix element $g_{ij}(\tau)$ represents the linear influence of a spike of neuron $i$ on the firing rate of neuron $j$ which can be computed as the normalized covariance of a Poisson spike train $z_{i}$ with $z_{j}$ (Pernice 2012)
 
-\begin{equation}
-g_{ij}(J,\tau) = \frac{\langle z_{i}(t+\tau), z_{j}(t)\rangle - \langle z_{i}(t+\tau)\rangle\langle z_{j}(t)\rangle}{\langle z_{i}(t)\rangle}
-\end{equation} 
+\begin{align}
+g_{ij}(J_{ij},\tau) &= J_{ij}a_{ij}(\tau)
+\end{align} 
 
-Furthermore, in the linear theory the vector of firing rates is predicted by the convolution of $G(\tau)$ and $\mathbf{z}(\tau)$ in the time-domain
+where we have the following expression for the interaction kernel $a_{ij}(\tau)$ in the time-domain
+
+\begin{align}
+a_{ij}(\tau) = \frac{\langle z_{i}(t+\tau), z_{j}(t)\rangle - \langle z_{i}(t+\tau)\rangle\langle z_{j}(t)\rangle}{\langle z_{i}(t)\rangle}
+\end{align}
+
+which is the normalized cross-covariance of point processes (spike trains) $z_{i}$ and $z_{j}$. Packaging $g_{ij}(J_{ij},\tau) \;\;\forall\; i,j$ into a matrix $G(\tau)$, the vector of firing rates is predicted by the convolution of $G(\tau)$ and $z(\tau)$ in the time-domain
 
 \begin{equation}
-\mathbf{r}(t) = \mathbf{r}_{0} + \int_{-\infty}^{\infty} G(t-\tau)\mathbf{z}(\tau)d\tau
+r(t) = r_{0} + \int_{-\infty}^{\infty} G(t-\tau)z(\tau)d\tau
 \end{equation}
 
-Assuming that $\mathbf{r}(t)$ reaches a steady state, we then construct a diagonal matrix $\Lambda$ s.t. $\Lambda_{ii} = r_{i}$. The matrix of cross-covariances is then given by (Pernice 2012; Ocker 2017)
+We then have the following steady-state matrix of cross-covariances in the time domain (Pernice 2012; Ocker 2017)
 
 \begin{equation}
-C_{0}(\tau) = G(\tau)\Lambda + (G*C_{0})(\tau)
+C_{0}(\tau) = G(\tau)R_{0} + (G*C_{0})(\tau)
 \end{equation} 
 
-where $G^{*}(\omega)$ represents the which has the following solution in the Fourier domain i.e. the cross-spectral matrix 
+Noting that the Fourier transform of a Poisson process with rate $r_{i}$ takes the value $r_{i}$ for all frequencies in the frequency domain, we can find the cross spectral matrix $C(\omega)$ as (Pernice 2012)
 
-\begin{equation}
-C(\omega) = [1-G(\omega)]^{-1}\Lambda[1-G^{*}(\omega)]^{-1}
-\end{equation} 
+\begin{align}
+C(\omega) &= [1-G(\omega)]^{-1}R_{0}(\omega)(\omega)[1-G^{*}(\omega)]^{-1}\\
+&= \Delta(\omega)\;R_{0}\;\Delta^{*}(\omega)
+\end{align} 
 
-Therefore, the linear theory provides a direct mechanism for solving for the cross-covariance of spiking in the population in terms of the synaptic coupling matrix, for arbitrary network topologies. However, thus far previous analyses have restricted feedforward inputs to be uncorrelated, providing little information regarding the transfer of correlations from input to response. 
+where the Fourier transform of the rates has been arranged as a digonal matrix. Recently, the matrix $\Delta(\omega)$ has been termed a \emph{propagator} as it propagates the rates of each neuron to the rest of the population (Ocker 2016). Also, $\Delta(\omega) = (I - A(\omega)J)^{-1}$, taking the fourier transform of the interaction kernel in (1.14) and organizing this as a diagonal matrix $A(\omega)$. Furthermore, the solution for $C(\omega)$ has been extended to also account for correlations in feedforward inputs (Ocker 2015; Ocker 2016)
 
-More recently, a mean-field approach starting from the balanced state discussed previously has been proposed to accomodate for correlated external inputs (Baker 2019). This approach approximates the population average cross spectrum between spike trains  as
+\begin{align}
+C(\omega) &= \Delta(\omega)\;R_{0}\;\Delta^{*}(\omega) + \Delta(\omega)\;A(\omega)C^{\mathrm{ext}}(\omega)A^{*}(\omega)\;\Delta^{*}(\omega)
+\end{align} 
 
-\begin{equation}
-\langle S,S\rangle \approx \frac{1}{N}W^{-1}\langle X,X\rangle W{-*} - \frac{1}{N}[]
-\end{equation} 
-
-However, a significant drawback of this approach is that utilizes only four distinct synaptic weights.
+After taking the inverse Fourier transform, we then have the cross-covariance matrix where correlations can arise from both feedforward and recurrent activity. In summary, the linear theory provides a direct mechanism for solving for the cross-covariance of spiking in the population in terms of the synaptic coupling matrix, for arbitrary network topologies. Previous analyses have restricted feedforward inputs to be uncorrelated and have considered only random networks (Pernice 2012). Other analyses have considered more complex networks, such as Erdos-Renyni networks with a spike-timing dependent plasticity rule, but have left external input uncorrelated (Ocker 2015).
 
 %\clearpage
 \begin{figure}[t!]
@@ -262,14 +267,34 @@ However, a significant drawback of this approach is that utilizes only four dist
 
 \subsection{Synaptic plasticity and Bayesian models of cognition}
 
-Synaptic plasticity refers to the activity-dependent modification of the strength or efficacy of synaptic transmission at preexisting synapses, and has been proposed to play a central role in the incorporation of transient experiences into persistent memory traces. The efficacy of an excitatory synapse can be either potentiated or depressed by a variety of mechanisms which occur over a wide range of time scales: from milliseconds to hours to days. Short-term synaptic plasticity (STP) is thought to play an important role in information processing in the brain. Its duration allows STP to modify the response of cortical circuits to stimuli and potentially provide a richer set of response properties without permanently altering the circuit architecture. One of several mechanisms thought to underly STP can be seen by the repeated stimulation of a presynaptic cell causing a transient accumulation of calcium in the presynaptic terminal (Mongillo et al. 2008). Calcium generally thought to elevate the probability of neurotransmitter release due to its proposed interaction with the biochemical machinery involved in synaptic vesicle excytosis. Other short term changes in synaptic efficacy can occur such as the facilitation or depression based upon the temporal characteristics of the stimulus. In paired-pulse experiments, a pair of stimuli is delivered a sub-20ms interval shows depression of the efficacy of the second stimulus (Zucker and Regehr, 2002). This phenomenon is hypothesized to arise from inactivation of voltage-dependent sodium and/or calcium channels or depletion of the release ready pool of synaptic vesicles at the presynaptic terminal [1]. Synaptic efficacy can be lowered by the release of biochemical modulators which can interact with the synaptic machinery to inhibit the release of neurotransmitter into the synaptic cleft. In addition, receptors at the presynaptic terminal which play a role in the secretion of neurotransmitter are sensitive to the presence of presynaptic neurmodulators. Therefore, these neuromodulators can also play a role in facilitation or depression in STP.
+Activity dependent modification of synaptic efficacy or the formation of new synapses is the putative basis of learning and memory formation. In his famous neurophysiological postulate, Donald Hebb suggested that repeated stimulation of specific receptors of sensory signals would lead to the formation of a \emph{cell assembly} and these structural changes would constitute a representation or imprint of an internally or externally generated sensation (Hebb 1949). The chaining of these assemblies then could provide a structural basis for cognitive processes such as memory retrieval, reasoning, and planning (Buzaki 2010). Recent neurobiological advances have provided substantial insight on the biochemical and biophysical mechanisms of plasticity. However, the formation of functional circuits and their stability amidst ongoing network dynamics remains unclear.
 
-It is widely believed that neural circuits also possess the mechanisms for long term changes in synaptic strength formally referred to as long term potentiation (LTP) and long term depression (LTD). The brain encodes internally and externally generated stimuli as spatiotemporal patterns of action potentials and long-term modifications to such patterns via changes in synaptic transmission provide a feasible mechanism for the storage of information. In other words, changes in synaptic weights alter the spatiotemporal response of population of neurons to stimuli and therefore provide a method for long term memory formation. Since its original introduction by Cajal, this idea has been rigorously tested, for example in the CA1 region of the hippocampus (Whitlock et al. 2006). LTP and LTD have been extensively studied in the CA1 region of the hippocampus due to compelling evidence that it is a brain region that is central to learning and memory. Indeed, the cellular and biochemical mechanisms underlying these phenomena have been well-characterized. 
+Plasticity mechanisms are highly diverse and occur over a wide range of time scales: from milliseconds to hours to days (Zenke 2015). For example, short-term synaptic plasticity (STP) is thought to provide a richer set of response properties without permanently altering the circuit architecture. One of several mechanisms thought to underly STP can be seen by the repeated stimulation of a presynaptic cell causing a transient accumulation of calcium in the presynaptic terminal (Mongillo 2008). Calcium ions elevate the probability of neurotransmitter release due to its proposed interaction with the biochemical machinery involved in synaptic vesicle excytosis. Other short term changes in synaptic efficacy can occur such as the facilitation or depression based upon the temporal characteristics of the stimulus. Paired-pulse experiments have yielded evidence that tetanic stimulation can result in inactivation of voltage-dependent sodium and/or calcium channels or depletion of the release ready pool of synaptic vesicles at the presynaptic terminal. Synaptic efficacy can alternatively be lowered by the release of biochemical neuromodulators which can interact with the synaptic machinery to inhibit the release of neurotransmitter into the synaptic cleft. Thus, these neuromodulators can also play a role in facilitation or depression in STP.
+
+Here, we focus on long-term plasticity mechanisms. Indeed, is widely believed that neural circuits also possess the mechanisms for long term changes in synaptic strength formally referred to as long term potentiation (LTP) and long term depression (LTD). The brain encodes internally and externally generated stimuli as spatiotemporal patterns of action potentials and long-term modifications to such patterns via changes in synaptic transmission provide a feasible mechanism for the storage of information. In other words, permanent or semi-permanent changes in synaptic weights alter the spatiotemporal response of population of neurons to stimuli and therefore provide a method for long term memory formation. Since its inception by Cajal, this idea has been rigorously tested, for example in the CA1 region of the hippocampus (Whitlock et al. 2006). The modification of spatiotemporal characteristics of the neural response to stimuli suggest that evidence for plasticity can be found in the correlation structure of neural spike trains.
+
+In the canonical form of spike timing dependent plasticity (STDP), LTP can occur when presynaptic spikes lead postsynaptic spikes by $\sim 20\mathrm{ms}$ and LTD can occur when postsynaptic spikes lead presynaptic spikes by $\sim 20-100\mathrm{ms}$ (Feldman 2012). 
+
+In computational studies, various forms of plasticity has been implemented to further our understanding of its potential role in learning and memory. The temporal character of many plasticity mechanisms highlight the importance of spike-time correlations, generated by recurrent feedback or feedforward projections, determines the topological evolution of the network. By making approximations of the correlations between spike trains, we are able to simultaneously estimate plasticity dynamics and the formation and stability or cell assemblies or \emph{motifs} (Ocker 2015, 2016). At the same time, many existing theoretical networks are randomly connected and therefore do not capture the modular structure known to be present in the brain (Song 2005). A well-studied phenomenological model of Hebbian STDP has the form (Ocker 2015)
+
+\begin{align*}
+L(\Delta t) = \begin{cases}
+      H(J_{max}-J_{ij})f_{+}\exp(-\Delta t/\tau_{+}), & \text{if}\ \Delta t \geq 0 \\
+       H(J_{ij})(-f_{-})\exp(-\Delta t/\tau_{-}), & \text{if} \;\Delta t < 0
+    \end{cases}
+\end{align*}
+
+The next step is then to relate that statistics of spike trains $z_{i}(t)$ and $z_{j}(t)$ to the evolution of the synaptic weights (Kempter 1999). If the evolution of synaptic weights is slow compared to the integration timescale of a single neuron, the evolution of the synaptic weights can be approximated by (Ocker 2015)
+
+\begin{align}
+\frac{dJ}{dt} = J_{ij}^{0}\int_{-\infty}^{\infty} L(s)(r_{i}r_{j} + C_{ij}(s))ds
+\end{align}
 
 
-Significant effort has been spent in recent years to map the connectivity patterns of networks in cortex and thus variety of models have appeared. Connection patterns have been quantified by calculating a broad range of structural measures, including small-world attributes and motif composition, as well as some global measures of functional connectivity (Sporns 2006). The structural measures defined in this framework have proven quite useful; however, many models are defined without consideration of the fact that cortical networks are embedded in real space. In principle these spatially-dependent connectivity patterns could be hidden in the topology of an arbitrary graph; however, in some cases it is more straightforward to interpret connectivity patterns in the spatial domain. For example, the connectivity in a 2D lattice of LIF neurons with local and global synaptic connections are readily understood in terms of distances in real space (Rosenbaum 2014). At the same time, theoretical models e.g., mean-field theories of network dynamics have relaxed the strong assumption that cortical networks are spatially homogeneous (Brunel 2000). Defining a periodic connectivity kernel for each neuron on a lattice is an attractive model for cortical networks as it allows us to explore the dynamical consequences of translational invariance.
 
-From the perspective of dynamical systems, sensory processing is often interpreted as an attraction of the neural state variables to a particular state corresponding to the encoding of the sensory stimulus. This point of view adopts the notion that sensory stimuli are then represented in the brain by \emph{attractor states} or locations in phase space which the network is driven towards during sensory processing (Hopfield, 1982). Early models of this form were deterministic in that the path taken towards a fixed steady state of the network dynamics is entirely determined by the initial conditions. On the other hand, recent experimental evidence suggests that neurons, synapses, and neural systems are inherently stochastic (Buesing 2011). These observations have provoked a dramatic paradigm shift in the way we view computations as being carried out in the brain. Namely, researchers now widely believe that information processing by the brain is carried out via a form of probabilistic inference.
+\textcolor{red}{Break into probabilistic interpretations}
+
+From the perspective of dynamical systems, sensory processing is often interpreted as an attraction of the neural state variables to a steady state corresponding to the encoding of the sensory stimulus. This point of view adopts the notion that sensory stimuli are then represented in the brain by \emph{attractor states} or locations in phase space which the network is driven towards during sensory processing (Hopfield, 1982). Early models of this form were deterministic in that the path taken towards a fixed steady state of the network dynamics is entirely determined by the initial conditions. On the other hand, recent experimental evidence suggests that neurons, synapses, and neural systems are inherently stochastic (Buesing 2011). These observations have provoked a dramatic paradigm shift in the way we view computations as being carried out in the brain. Namely, researchers now widely believe that information processing by the brain is carried out via a form of probabilistic inference.
 
 Variability in sensory stimuli and the biological constitution of networks of neurons require the brain to make inferences about the external world amidst uncertainty. For example, the perception of objects in the external world by an organism is, in part, the transformation of a noisy continously valued variable to a discrete mental representation of the object. The injection of stochasticity into the pathway mapping stimuli to their neural representation has led many to believe that networks of neurons represent probability distributions rather than implementing logical circuits. Interestingly, behavioral studies have confirmed that human observers not only take uncertainty into account in a wide variety of tasks, but do so in a way that is nearly optimal (Ma 2006). It stands to reason that variability in sensory stimuli and performing inference amidst uncertainty are two sides of the same coin. If sensory stimuli were not variable, meaning that the mapping of sensory stimuli to neural responses was deterministic, the neural response from trial to trial would be identical. Therefore, the ability to handle small variations in the stimulus and the ability to generalize would be diminished.
 
