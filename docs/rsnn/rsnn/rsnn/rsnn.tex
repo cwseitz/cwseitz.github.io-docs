@@ -284,13 +284,11 @@ Furthermore, the biochemical mechanism of synaptic plasticity is regulated by th
 
 Beyond spike-timing dependent plasticity, other plasticity mechanisms have been observed experimentally. In the hippocampus, non-Hebbian heterosynaptic LTD alongside LTP was described shortly after the phenomenon of LTP was discovered (Lynch 1977). The Hebbian mechanisms or \emph{associative mechanisms} discussed above are termed homosynaptic mechanisms, as they depend on both pre- and post-synaptic activity. There are also heterosynaptic mechanisms which depend on only the state of the post-synaptic neuron and are thought to exist to counteract chaotic dynamics introduced by Hebbian-type rules and to balance synaptic changes (Chistakova 2014). Hebbian homosynaptic learning rules, by definition, potentiate (depress) synapses with positive feedback, meaning that increasing (decreasing) synaptic efficacy will promote further potentiation (depression). For example, The standard doublet STDP model gives rise to splitting of synaptic weights, producing a bimodal distribution; however, weight distributions observed in experiments are unimodal and long-tailed (Perin 1997; Song 2005). The result is the overexcitability of some neurons and silencing of others making network dynamics unstable. Induction of LTD at high firing rates of the postsynaptic neuron is a candidate for an intrinsic stabilization mechanism (Kempter 2001). Also, it has been recent suggested that rate-dependent terms in the synaptic learning rule can stabilize motif configurations (Ocker 2015). Ultimately, it is thought that a push-pull mechanism exists in which homosynaptic LTP prevents the network from falling silent at low firing rates while heterosynaptic LTD prevents the runaway dynamics at high firing rates.
 
-Understanding the stable formation and maintenance of cell assemblies is an additional goal of synaptic plasticity research. From a naive point of view, a cell assembly could form if a subset of a neuron's inputs were to potentiate while other inputs depress. However, for this to occur both groups should be repeatedly activated either with highly specific patterns to promote LTP or LTD, respectively (Chistikova 2014). This would then limit network stability to special sequences of input patterns while we expect that plasticity mechanisms exist to promote stability under a variety of input stimuli. A strong candidate along a similar vein to weight normalization is balanced STDP (Royan 2003). In this framework, synaptic weights are redistributed, perhaps by a correlation mechanism like STDP, while maintaining a balance between potentiation and depression. One interpretation is that this represents a competitive process in which neurons "compete" for a constant supply of synaptic efficacy. More broadly, this type of architecture resembles the so-called winner take-all (WTA) circuits in which synaptic competition leads to self-organization of functional assemblies.
+Understanding the stable formation and maintenance of cell assemblies is an additional goal of synaptic plasticity research. From a naive point of view, a cell assembly could form if a subset of a neuron's inputs were to potentiate while other inputs depress. However, for this to occur both groups should be repeatedly activated either with highly specific patterns to promote LTP or LTD, respectively (Chistikova 2014). This would then limit network stability to special sequences of input patterns while we expect that plasticity mechanisms exist to promote stability under a variety of input stimuli. Moreover, experiments involving intercalated neurons of the amygdala have demonstrated that LTP induction with high-frequency stimulation can simultaneously result in heterosynaptic depression (Royan 2003). Conversely, LTD induction with low-frequency stimulation was also shown to induce LTP. These observations indicate the existence of intracellular signaling that would provide synapses with `awareness' of eachother. Learning rules which depend on the post-synaptic firing rate would produce a similar result, although often these rules do not perform selective potentiation or depression. That is, synaptic weights are normalized without regard to which synapses can be blamed for chaotic or silent neuron states. In circuits with highly regular organization of the inputs, such as the hippocampus or amygdala, the onset of LTP can induce weaker LTP at nearby inputs while concurrently inducing heterosynaptic LTD at more distant inputs, while the magnitude of LTD decreasies with distance (Royer 2003; White 1990).
 
+The experiemental observations discussed suggest that balanced LTP and LTD may be a powerful mechanism of for synaptic normalization and synaptic competition. Thus, several computational studies incorporating more realistic forms of synaptic plasticity with conductance based neuron models have surfaced e.g., (Zenke 2015; Kumar 2014). Many have incorporated a balance between excitation and inhibition to capture the irregular activity of cortical networks, but stable formation of cell assemblies is difficult to achieve. This shortcoming could, in part, be due to the tendency of STDP to lead to pathological behavior in balanced networks (Morrison 2007). The introduction of homeostatic mechanisms such as normalization of total excitatory conductance alongside inhibitory STDP to control the firing rate of excitatory neurons has been used to inhibit pathological activity in the balanced regime (Kumar 2014). At the same time, the spatial properties of homeostatic plasticity mechanisms mentioned above have yet to be investigated. This, in combination with spatially dependent connection probabilities as in (Rosenbaum 2017) could provide insight into the stabiliy of cell assemblies.
 
-
-\textcolor{red}{Theory of intrinsic stabilization as a homeostatic mechanism}
-
-Recently, several studies incorporating more realistic forms of synaptic plasticity with conductance based neuron models have surfaced e.g., (Zenke 2015; Kumar 2014). Some have incorporated a balance between excitation and inhibition as well to capture the irregular activity of cortical networks. It has been argued that this shortcoming is due to the tendency of STDP to lead to pathological behavior in balanced networks (Morrison 2007). Until recently, it was unclear how synaptic plasticity promotes the stability of learned network architectures within networks exhibiting irregular cortical dynamics. Interestingly, the introduction of homeostatic mechanisms alongside STDP in random excitatory-inhibitory networks has been shown to inhibit pathological activity in the balanced regime (Kumar 2014). Consider the exponential integrate and fire model 
+In the following paragraphs, the mathematical details of a subset of these models will be discussed. Consider the exponential integrate and fire model 
 
 \begin{align*}
 \tau\dot{V}_{j} = -(V_{j}-E_{L}) + \Delta_{T}\exp\left(\frac{V_{j}-V_{T}}{\Delta T}\right) + I_{j}(t)
@@ -305,29 +303,53 @@ I_{j}^{\alpha}(t) &= \sum_{\beta}\sum_{i} g_{ij}^{\beta}(t)(E_{\beta} - V_{j})\\
 
 where $\alpha \in \{E,I,X\}$. To be clear, excitatory conductances, whether in the external or primary population would be under the control of an inhibitory neurotransmitter such as gamma-aminobutyric acid (GABA) while inhibitory conductances would be under the control of glutamate e.g., AMPAR/NMDAR. Notice that the time-dependence of $g^{\alpha}$ can then be given by the convolution of an excitatory presynaptic spike train $z_{i}(t)$ or inhibitory spike train $z_{k}(t)$ with an appropriate synaptic kernel $\phi$. The synaptic plasticity rule is then a rule for the time-derivative $\dot{J}^{\alpha\beta}_{ij}$.
 
-The cellular machinery of plasticity mechanisms described above highlights the importance of spike-time correlations, generated by recurrent feedback or feedforward projections, in determining the evolution of synaptic weights $\dot{J}^{\alpha\beta}_{ij}$. By making approximations of the cross-covariance between spike trains, we are able to simultaneously approximate the evolution of synapic weights and the formation and stability or cell assemblies or \emph{motifs} (Ocker 2015, 2016). A classic derivation of the co-evolution of synaptic weights and network dynamics was given (Kempter 1999) for interacting Poisson processes, which we now review. Consider the total change in the synaptic weight between neurons $i$ and $j$ as $\Delta J_{ij} = J_{ij}(t+\Delta t) - J_{ij}(t)$ in a time interval $\Delta t$. The spike trains are a summation of delta functions over time, i.e. $z_{i}(t) = \sum_{n} \delta(t-t_{i}^{n})$ and $z_{j}(t) = \sum_{m} = \delta(t-t_{j}^{m})$. Now, considering each spike of neuron $i$ at time $t_{i}^{n}$, we consider the difference $s = t_{i}^{n} - t_{j}^{m}$ for all $t_{i}^{n}$ and compute the value of the learning window function $\mathcal{L}(t_{i}^{n} - t_{j}^{m})$ in the time interval $\Delta t$. Integrating over the window $\Delta t$ gives the total change $\Delta J_{ij}$
+The cellular machinery of plasticity mechanisms described above highlights the importance of spike-time correlations, generated by recurrent feedback or feedforward projections, in determining the evolution of synaptic weights. A classic derivation of the evolution of synaptic weights for interacting Poisson processes was given by Kempter et al. (Kempter 1999). This result is an important starting point for later analysis. Consider the total change in the synaptic weight between neurons $i$ and $j$ as $\Delta J_{ij} = J_{ij}(t+\Delta t) - J_{ij}(t)$ in a time interval $\Delta t$. If we temporarily confine ourselves to rate-based learning rules, consider the very general rule for a single neuron $i$ receiving many inputs $1 < j \leq N$ (Kempter 2001)
 
-%\clearpage
+\begin{align*}
+\tau_{\mathrm{lrn}}\frac{dJ_{ij}}{dt} = a + b_{i}r_{i}(t) + b_{j}r_{j}(t) + c_{ij}r_{i}(t)r_{j}(t) + d_{i}r_{i}^{2}(t) + d_{j}r_{j}^{2}(t)
+\end{align*}
+
+which is a second-order expansion in the input and output rates. For our purposes, we will need an equation analogous to the one above adapted for spike-timing based learning rules. Spike trains are a summation of delta functions over time, i.e. $z_{i}(t) = \sum_{n} \delta(t-t_{i}^{n})$ and $z_{j}(t) = \sum_{m} = \delta(t-t_{j}^{m})$. If we consider only rules that consider the timing of pairs of spikes, changes in synaptic weight can occur from the arrival of a presynaptic spike $z_{i}(t) = 1$, a postsynaptic spike $z_{j}(t) = 1$ or as a function of the delay in spike timing  $\tau = t_{i}^{n} - t_{j}^{m}$. The spike-timing component of the learning rule is given by the learning window function $W(t_{i}^{n} - t_{j}^{m})$. Integrating over a time window $\Delta T_{\mathrm{lrn}}$ gives the total change $\Delta J_{ij}$ (Kempter 1999)
+
+
+\begin{align}
+\Delta J_{ij}(\Delta T_{\mathrm{lrn}}) &= \int_{0}^{\Delta T_{\mathrm{lrn}}} dt'\left(a_{i}z_{i}(t') + a_{j}z_{j}(t')\right) \\
+&+ \int_{0}^{\Delta T_{\mathrm{lrn}}} dt'\int_{0}^{\Delta T_{\mathrm{lrn}}} dt''W(\tau)z_{i}(t'')z_{j}(t')
+\end{align}
+
+The stochasticity of the spike functions $z_{i}(t)$ and $z_{j}(t)$ means that we can only hope to derive the behavior of the above integral on average. In other words, $\Delta J_{ij}$ is itself a stochastic process but we can focus on its drift or expected rate of change. Simulaneously, $z_{i}(t)$ and $z_{j}(t)$ are strongly dependent on the weights $J_{ij}$; however, if the time scale of plasticity $\Delta T_{\mathrm{lrn}}$ is sufficiently long compared to the correlation time scale of the neurons activity, the correlation between $z_{i}(t)$ and $z_{j}(t)$ can be treated as stationary (Kempter 2001). Importantly, the effective correlation time scale of neuron dynamics is intimately related to the timescale over which it is `picked up' by the learning window $W(\tau)$. Analyzing the drift in $\Delta J_{ij}$ then reads
+
+
+\begin{align*}
+\Delta T_{\mathrm{lrn}}\frac{\langle \Delta J_{ij}\rangle(t)}{\Delta T_{\mathrm{lrn}}} &= \int_{0}^{\Delta T_{\mathrm{lrn}}} dt'\left(a_{i}z_{i}(t') + a_{j}z_{j}(t')\right)\\
+&+ \int_{0}^{\Delta T_{\mathrm{lrn}}} dt'\int_{-t'}^{\Delta T_{\mathrm{lrn}}-t'} d\tau W(\tau)\langle z_{i}(t'+\tau)z_{j}(t')\rangle\\
+\end{align*}
+
+Note that we can make the same approximations for a sufficiently slow process as we can for a relatively fast process with high time resolution. Then, if synaptic plasticity is sufficiently slow, then we can approximate the average rate of change as $dJ_{ij}/dt \approx \Delta J_{ij}/\Delta T_{\mathrm{lrn}}$, and the bounds of integration can be set to $-\infty$ and $+\infty$ (Kempter 1999) and we have the final result
+
+
+\begin{align}
+\Delta T_{\mathrm{lrn}}\frac{d J_{ij}(t)}{dt} &=  a_{i}\langle z_{i}(t)\rangle  + a_{j}\langle z_{j}(t)\rangle + \int_{-\infty}^{+\infty} d\tau W(\tau)C_{ij}(\tau)
+\end{align}
+
+where $\langle z_{i}(t)\rangle$ and $\langle z_{j}(t)\rangle$ can be interpreted as the instantaneous firing rate of neurons $i$ and $j$, respectively. It has already been shown that linear response theory can be used to estimate $C_{ij}(\tau)$ for arbitrary network topologies (Pernice 2012). Furthermore, the equation (1.22) including the instantaneous post-synaptic firing rate can serve as a homeostatic term if $a_{j} < 0$. Although, as highlighted previously, rate-dependent terms in the learning rule do not selectively enforce LTP and LTD since the term $a_{j}\langle z_{j}(t)\rangle$ appears in the equation for $\dot{J_{ij}}$ for all input neurons $i$ (assuming $a_{j}$ is a constant). Thus we need to modify (1.22) to arrive at a synaptic plasticity rule which delivers potentiation or depression heterogeneously, for example using information regarding spatial proximity. Interestingly, a class of spatially connected networks has been studied (Rosenbaum 2011, 2017).
+
+
+
 \begin{figure}[t!]
 \centering
 \includegraphics[width=175mm]{figure-4}
 \caption{Computational graph describing the update of synaptic weights $J_{ij}$ and the cross-covariance matrix $C(\tau)$ over multiple stimulus blocks of length $\Delta T_{\mathrm{stim}}$. The learning period $\Delta T_{\mathrm{lrn}}<< T_{\mathrm{stim}}$ determines the frequency of learning updates within the period $\Delta T_{\mathrm{stim}}$}
 \end{figure}
 
-
-
-\begin{align*}
-\Delta J_{ij}(\Delta t) = \int_{0}^{\Delta t} dt'\int_{0}^{\Delta t} dt''\mathcal{L}(\tau)z_{i}(t'')z_{j}(t')
-\end{align*}
-
-Dividing by $\Delta t$ and averaging over trials gives 
+Say we have the learning window function $W(\tau)$ corresponding to the standard doublet spike-timing dependent plasticity rule
 
 \begin{align*}
-\frac{\langle \Delta J_{ij}\rangle(t)}{\Delta t} &= \frac{1}{\Delta t}\int_{0}^{\Delta t} dt'\int_{0}^{\Delta t} dt''\langle\mathcal{L}(\tau)z_{i}(t'')z_{j}(t')\rangle\\
-&= \frac{1}{\Delta t}\int_{0}^{\Delta t} dt'\int_{-t'}^{\Delta t - t'} d\tau\mathcal{L}(\tau)\langle z_{i}(t'+\tau), z_{j}(t')\rangle
+W(\tau) = \begin{cases}
+      H(J_{max}-J_{ij})\gamma_{+}\exp(-\tau/\tau_{+}), & \text{if}\ \Delta t \geq 0 \\
+       H(J_{ij})(-\gamma_{-})\exp(-\tau/\tau_{-}), & \text{if} \;\Delta t < 0
+    \end{cases}
 \end{align*}
-
-noticing that $\langle z_{i}(t'+\tau), z_{j}(t')\rangle$ is the element $C_{ij}(\tau)$ of the cross-covariance matrix, and approximating $dJ_{ij}/dt \approx \Delta J_{ij}/\Delta t$, we have (Kempter 1999)
 
 %\clearpage
 \begin{figure}[t!]
@@ -335,26 +357,6 @@ noticing that $\langle z_{i}(t'+\tau), z_{j}(t')\rangle$ is the element $C_{ij}(
 \includegraphics[width=150mm]{figure-5}
 \caption{Computational graph describing the update of synaptic weights $J_{ij}$ and the cross-covariance matrix $C(\tau)$ over multiple stimulus periods of length $\Delta T_{\mathrm{stim}}$. The learning period $\Delta T_{\mathrm{lrn}}<< T_{\mathrm{stim}}$ determines the frequency of learning updates within the period $\Delta T_{\mathrm{stim}}$}
 \end{figure}
-
-\begin{align*}
-\frac{d J_{ij}(t)}{dt} &=  \frac{1}{\Delta t}\int_{0}^{\Delta t} dt'\int_{-t'}^{\Delta t - t'} d\tau\mathcal{L}(\tau)\langle z_{i}(t'+\tau), z_{j}(t')\rangle
-\end{align*}
-
-In total, we have the coupled system of equations for the covariance matrix $C_{ij}(\tau)$ and the synaptic weights $J_{ij}$ (Ocker 2015)
-
-\begin{align*}
-\frac{dJ_{ij}(t)}{dt} &=  J_{ij}^{0}\int_{-\infty}^{\infty} \mathcal{L}(s)(r_{i}r_{j} + C_{ij}(\tau)ds\\
-C_{ij}(\tau) &= \mathcal{F}^{-1}\left(\Delta(\omega)\;R_{0}\;\Delta^{*}(\omega) + \Delta(\omega)\;A(\omega)C^{\mathrm{ext}}(\omega)A^{*}(\omega)\;\Delta^{*}(\omega)\right)
-\end{align*}
-
-where the second equation for $C_{ij}(\tau)$ comes from the linear response approximation. The above equation is valid if the learning rate is sufficiently slow that the cross-covariance matrix $C_{ij}(\tau)$ can be considered constant on the interval $\Delta t$. A well-studied phenomenological model of Hebbian STDP has the form (Ocker 2015)
-
-\begin{align*}
-L(\Delta t) = \begin{cases}
-      H(J_{max}-J_{ij})f_{+}\exp(-\Delta t/\tau_{+}), & \text{if}\ \Delta t \geq 0 \\
-       H(J_{ij})(-f_{-})\exp(-\Delta t/\tau_{-}), & \text{if} \;\Delta t < 0
-    \end{cases}
-\end{align*}
 
 
 
@@ -372,14 +374,6 @@ A popular point of view is that neural activity can be expressed in discrete-tim
 
 \section{Results}
 
-
-%\begin{sidewaysfigure}
-%\centering
-%\includegraphics[scale=1.1]{figure-2}
-%\caption{Weak correlations of synaptic currents in the asychronous state}
-%\label{fig:foo}
-%\end{sidewaysfigure}
-
 \clearpage
 \begin{sidewaysfigure}
 \centering
@@ -393,6 +387,94 @@ A popular point of view is that neural activity can be expressed in discrete-tim
 \caption{}
 \end{figure}
 
+\subsection{The two-dimensional Gaussian network}
+
+Suppose that we have a two-dimensional lattice which contains points separated by a distance $\Delta$ along the axial directions with periodic boundary conditions. The distance between any two points on such a lattice is the following Euclidean distance metric
+
+\begin{align*}
+|\Delta\mathbf{r}_{ij}|^{2} = \mathrm{min}(|x_1 - x_2|, n\Delta - |x_1 - x_2|)^2 + \mathrm{min}(|y_1 - y_2|, n\Delta - |y_1 - y_2|)^2
+\end{align*}
+
+Now, let the kernel $\Gamma_{ij}$ be the two-dimensional symmetric Gaussian
+
+\begin{align}
+\Gamma_{ij}(|\Delta\mathbf{r}_{ij}|) = \gamma\cdot \exp\left(-\frac{1}{2}(\mathbf{r}_{i}-\mathbf{r}_{j})^{T}\mathbf{\Sigma}_{i}(\mathbf{r}_{i}-\mathbf{r}_{j})\right)
+\end{align}
+
+where $\mathbf{\Sigma}_{i} = \sigma_{i}^{2}I$ with the two-dimesional identity matrix $I$. The parameter $\sigma_{i}$ can be intepreted as the \emph{reach} of a neuron $i$. Furthermore, for the kernel $\Gamma_{ij}$ to represent a binomial probability at each point of its domain, we must have that
+
+
+\begin{equation}
+\Gamma_{ij}(|\Delta\mathbf{r}_{ij}|)  \leq 1
+\end{equation}
+
+Plugging in our definition (3.5) gives the following inequality
+
+\begin{align*}
+\gamma\cdot \exp\left(-\frac{\underset{j}{\mathrm{min}}\left(|\Delta\mathbf{r}_{ij}|^{2}\right)}{2\sigma_{i}^{2}} \right) \leq 1
+\end{align*}
+
+The largest possible value of the exponential is achieved at $\underset{j}{\mathrm{min}}\left(|\Delta\mathbf{r}_{ij}|^{2}\right) = \Delta$ (a neighboring lattice point). Therefore, $\gamma$ is upper bounded according to $\gamma \leq \exp\left(\frac{\Delta^{2}}{2\sigma_{i}^{2}}\right)$. For the remainder of our analysis we will fix $\gamma = 1$ and focus our attention to the impact of the parameters $\sigma$ and $\Gamma_{0}$ on the statistics of connectivity. 
+
+As can be seen in Fig. (3.1a), when $\Gamma_{ij} = \Gamma_{ji}$ we have that $p_{ij} = p_{ji}$ for all $|\Delta \mathbf{r}_{ij}|$. We formally refer to this case as the \emph{homogeneous gaussian network}. While this is not necessarily a realistic case, it serves as a useful testbed for the graph theoretic concepts to be used in later analyses. 
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=100mm]{fig_11}
+\caption{\textbf{Synapse probabilities for gaussian connectivity} (a) Binomial probabilities for two identical gaussian kernels ($\sigma=1$) separated by a distance $|\Delta\mathbf{r}_{ij}|$ and the probability of no synapse $\Gamma_{0}$ (left) and the corresponding multinomial probabilities (right). (b) Binomial probabilities for two different gaussian kernels ($\sigma_{1}=1, \sigma_{2}=2$) separated by a distance $|\Delta\mathbf{r}_{ij}|$ and the probability of no synapse $\Gamma_{0}$ (left) and the corresponding multinomial probabilities (right). }
+\end{figure}
+
+
+
+\subsection{Homogeneous Gaussian networks}
+
+Let us now examine the statistics of the out-degree of a neuron $i$ assuming that the connectivity parameter $\sigma$ and $\Gamma_{0}$ are homogeneous across the network i.e., they are constant for all neurons. Using Eq. (3.2), we have
+
+\begin{align}
+\langle N_{ij} \rangle &= \left(\frac{1-\Gamma_{0}}{N}\right)\sum_{j} \Gamma_{ij}(1-\Gamma_{ji})\cdot Z_{ij}^{-1}
+\end{align}
+
+a sum that can be carried out numerically. Interestingly, in the homogeneous case, the parameter $\gamma$ and $\Gamma_{0}$ become redundant. This can be seen by considering that multiplying $p_{ij}$ and $p_{ji}$ by the same constant factor $\gamma$ is equivalent to the transformation $\Gamma_{0}' = 1-\gamma(1-\Gamma_{0})$. 
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=175mm]{fig_8}
+\caption{\textbf{The homogeneous Gaussian network}. (A) An example homogeneous network containing $N=100$ neurons. (B) An example neuron extracted from (A) with outgoing synapses labeled in blue and incoming synapses labeled in red. (C,D) The ratio $\langle N_{ij}\rangle/N$ as a function parameters ($\sigma, \Gamma_{0}$) for a sparse network (C) and a network with variable sparsity (D). (E,F) The ratio $\langle N_{ij}\rangle/N$ for fixed $\sigma$ and variable sparsity. (G,H) Binomial probability maps for two nearby neurons expressed as a sum $p_{ij}+p_{ji}$ and product $p_{ij}p_{ji}$}
+\end{figure}
+
+In other words, for the homogeneous case, the multiplication by $\gamma$ can be represented by a suitable selection of $\Gamma_{0}$ and can be set $\gamma=1$. Numerical evaluation of (3.7) shows that the ratio $\langle N_{ij}\rangle$ increases monotonically for increasing $\sigma$, as expected from (3.1b) and saturates at $\langle N_{ij}\rangle = 0.5$ at a rate proportional to $\sigma$. This can be understood from the fact that as $\Gamma_{0} \rightarrow 1$ we have $p_{0} \rightarrow 0$ and the multinomial distribution in (3.2) is reduced to a binomial distribution with $p_{ij} = p_{ji} = 1/2$. 
+
+Furthermore, in addition to the average degree of a neuron, we are interested in the average number of shared inputs (outputs) between two neurons. We expect that this statistic makes at least a partial contribution to pairwise correlations in the voltage dynamics between two cells. To address this, we consider the average number of shared connections $\langle S_{ij} \rangle$ between a neuron $i$ and $j$ as a function of their distance $|\Delta \mathbf{r}_{ij}|$. In essence, this is the product $p_{ik}\cdot p_{jk}$ for a third neuron $k$ with $i,j\neq k$. The symmetry present in the homogeneous case allows us to perform this computation rather easily,
+
+\begin{align}
+\langle S_{ij} \rangle &= \frac{1}{N}\sum_{k} p_{ik}\cdot p_{jk} \\
+&= \frac{\left(1-\Gamma_{0}\right)^{2}}{N}\sum_{k}\frac{\Gamma_{ik}(1-\Gamma_{ki})\Gamma_{jk}(1-\Gamma_{kj})}{Z_{ik}Z_{jk}}
+\end{align}
+
+
+which can be carried out numerically over the two-dimensions of space. Self-consistent with our definition of the connectivity kernel, the normalized number of shared connections decays with a gaussian profile for increasing $|\Delta \mathbf{r}_{ij}|$ as can be seen in Fig. (3.3).
+
+\begin{figure}
+\centering
+\includegraphics[width=175mm]{fig_9}
+\caption{\textbf{Shared connections in a homogeneous Gaussian network} (A,B,C) The average number of shared incoming or outgoing connections $\langle S_{ij}\rangle /N$ as a function of distance between two neurons $|\Delta r_{ij}|$ for three different values of the reach parameter $\sigma$.}
+\end{figure}
+
+
+
+\subsection{Excitatory-inhibitory Gaussian networks}
+
+Thus far we have considered only the case where the spatial connectivity kernel is the same for every neuron. However, the integrative properties of neurons depend strongly on the number, proportions and distribution of excitatory and inhibitory synaptic inputs they receive (Megias 2001). Also, the role excitatory-inhibitory balance in network dynamics has been a subject of recent debate. Indeed, balanced recurrent excitation and inhibition capture the irregular and asynchronous spiking activity with weak correlations reported in cortex. The spatial extent of excitation relative to inhibition has been shown to have a strong impact on network dynamics. In particular, when the spatial extent of excitation is sufficiently smaller than inhibition, the balanced fixed point loses stability (Rosenbaum 2014). 
+
+To account for excitatory and inhibitory cell types within this framework, we must differentiate $\langle N_{ij}\rangle$ for excitatory and inhibitory neurons and solving for both the mean in-degree and out-degree separately. Thus we have the quantities $\langle E_{E}^{\mathrm{out}} \rangle,\langle E_{I}^{\mathrm{out}} \rangle,\langle E_{I}^{\mathrm{in}} \rangle$ and $\langle I_{E}^{\mathrm{out}} \rangle,\langle I_{I}^{\mathrm{out}} \rangle,\langle I_{E}^{\mathrm{in}} \rangle$. Under the assumption that excitatory and inhibitory neurons are distributed uniformly  in two-dimensional space, we have that $\langle E_{I}^{\mathrm{out}} \rangle = \langle I_{E}^{\mathrm{in}} \rangle$ and $\langle E_{I}^{\mathrm{in}} \rangle = \langle I_{E}^{\mathrm{out}}\rangle$. For brevity, we drop the superscripts and compute the above averages according the general prescription provided by (3.3). The result of these numerical calculations allow us to observe that, for $\Gamma_{0} = 0.2$, the fraction of the target population saturated by excitatory or inhibitory outputs increases monotonically with $\sigma_{E}$ and $\sigma_{I}$  (Fig 3.4 b,d). The parameter maps provided in (Fig 3.4 b,d) are a starting point for our later discussions of newtork dynamics. 
+
+
+\clearpage
+\begin{figure}[t!]
+\centering
+\includegraphics[width=165mm]{fig_10}
+\caption{\textbf{Average degree in an excitatory-inhibitory network} (A) Schematic illustrating the notation used for excitatory-excitatory, excitatory-inhibitory, inhibitory-excitatory, and inhibitory-inhibitory synapses. (B) An example dense excitatory-inihbitory network ($\Gamma_{0}=0.2$) and $p_{E} = 0.8$. (C) Average number of synapses in the dense network normalized to the target population size as a function of parameters $\sigma_{E}$ and $\sigma_{I}$. (D) An example sparse excitatory-inihbitory network ($\Gamma_{0}=0.8$) and $p_{E} = 0.8$. (E) Average number of synapses in the sparse network normalized to the target population size as a function of parameters $\sigma_{E}$ and $\sigma_{I}$.}
+\end{figure}
 
 
 \section{Methods}
@@ -420,6 +502,43 @@ where an identical expression exists for $\psi_{y}(\omega)$. According to the co
 
 
 Let $S_{xy}(\omega) = \underset{T\rightarrow\infty}{\mathrm{lim}}\frac{1}{2\pi T}\psi_{x}^{*}(\omega)\psi_{y}(\omega)$, which is commonly called the \emph{cross spectral density} of signals $x(t)$ and $y(t)$. This is simply the DTFT of the cross-correlation function meaning that $R_{xx}(\tau)$ and $S_{xx}(\omega)$ form a Fourier pair. This result provides us an efficient means of computing cross-correlations and autocorrelations of synaptic currents by multiplication in the frequency domain and taking the inverse discrete transform.
+
+\begin{align}
+\mathbb{P} = \frac{p_{n}\prod_{m\neq n}(1-p_{m})}{\sum_{n}p_{n}\prod_{m\neq n}(1-p_{m})} = \frac{p_{n}\prod_{m\neq n}(1-p_{m})}{Z}
+\end{align}
+
+where $Z$ is a normalization constant. For generating synapses, the probabilities of (3.1) are the probabilities over the possible synaptic states between $i$ and $j$
+
+\begin{equation}
+    \mathbb{P} = \left\{\begin{array}{lr}
+        p_{ij} = \Gamma_{ij}(1-\Gamma_{ji})(1-\Gamma_{0})\cdot Z^{-1}\\
+        p_{ji} = \Gamma_{ji}(1-\Gamma_{ij})(1-\Gamma_{0})\cdot Z^{-1}\\
+        p_{0} = \Gamma_{0}(1-\Gamma_{ij})(1-\Gamma_{ji})\cdot Z^{-1}\\
+        \end{array}\right\}
+\end{equation}
+
+\begin{align*}
+Z = \Gamma_{ij}(1-\Gamma_{ji})(1-\Gamma_{0}) + \Gamma_{ji}(1-\Gamma_{ij})(1-\Gamma_{0}) + \Gamma_{0}(1-\Gamma_{ij})(1-\Gamma_{ji})
+\end{align*}
+
+Sampling from the distribution $\mathbb{P}$ for each of the $N^{2} - N$ possible synapses (excluding autapses), we can generate an asymmetric adjacency matrix $\mathcal{C} \in \mathbb{F}_{2}^{N\times N}$. An element $\mathcal{C}_{ij} = 1$ defines a synapse from $i\rightarrow j$ and $\mathcal{C}_{ji} = 1$ defines a synapse from $j\rightarrow i$.
+
+Defining the generation of network connectivity in this way proves useful upon the realization that the network can be described by binomial statistics, similar to the well-known Erdos-Renyi (ER) random graph. Graph theory provides a rich set of metrics that can be used to discuss the statistical properties of the network defined by $\mathcal{C}$ and in turn the chosen kernel $\Gamma$. Assuming that we can compute the probabilities $p_{ij}, p_{ji}$ and $p_{0}$ for a particular $\Gamma$ and every synapse is generated independently, the mean of the out-degree distribution is
+
+\begin{equation}
+\langle N_{ij} \rangle = \sum_{j} \Gamma_{ij}(1-\Gamma_{ji})(1-\Gamma_{0})\cdot Z^{-1}
+\end{equation}
+
+where the spatial dependence of the individual kernels is implied. The in-degree distribution is found by simply swapping $i$ and $j$. The variance of the out-degree distribution is then
+
+\begin{align}
+\mathrm{Var}(N_{ij}) &= \sum_{j} \langle N_{ij}^{2} \rangle - \langle N_{ij} \rangle ^{2} \\
+&= \sum_{j} \langle N_{ij}\rangle - \langle N_{ij} \rangle ^{2} 
+\end{align}
+
+from the linearity of variance property. We will analyze the in-degree and out-degree distributions of a graph generated when the connectivity kernel is a symmetric Gaussian extending over two-dimensions. We refer to this case as a \emph{two-dimensional gaussian network}.
+
+The following model for generating the backbone for network of neurons rests on the assumption that we can create connectivity solely from pairwise connection probabilities. Let us define a spatial connectivity kernel $\Gamma_{i}(\mathbf{r}_{j})$ with $i,j\in \{n\}_{n=1}^{N}$ which defines the binomial probability that a neuron $i$ synapses onto a different cell $j\neq i$ at spatial coordinate $\mathbf{r}_{j}$. Here, the function $\Gamma_{i}(\mathbf{r})$ is not itself a probability distribution but rather represents one component of a distribution that is defined for each possible pairs $i,j$ for a given $i$. That distribution is completely represented for a pair $i,j$ with knowledge of the kernel $\Gamma_{j}(\mathbf{r}_{i})$ and an additional probability that no synapse occurs $\Gamma_{0}$. The parameter $\Gamma_{0}$ will be referred to as the $\emph{sparsity parameter}$ throughout the remainder of the text. Together, these three binomial probabilities can be renormalized to form a multinomial distribution $\mathbb{P}_{ij}$ at every possible synapse $ij$. A general definition of the multinomial distribution is
 
 \begin{appendices}
 \end{appendices}
