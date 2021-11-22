@@ -286,12 +286,6 @@ Understanding the stable formation and maintenance of cell assemblies is an addi
 
 The experiemental observations discussed suggest that balanced LTP and LTD may be a powerful mechanism of for synaptic normalization and synaptic competition. Thus, several computational studies incorporating more realistic forms of synaptic plasticity with conductance based neuron models have surfaced e.g., (Zenke 2015; Kumar 2014). Many have incorporated a balance between excitation and inhibition to capture the irregular activity of cortical networks, but stable formation of cell assemblies is difficult to achieve. This shortcoming could, in part, be due to the tendency of STDP to lead to pathological behavior in balanced networks (Morrison 2007). The introduction of homeostatic mechanisms such as normalization of total excitatory conductance alongside inhibitory STDP to control the firing rate of excitatory neurons has been used to inhibit pathological activity in the balanced regime (Kumar 2014). At the same time, the spatial properties of homeostatic plasticity mechanisms mentioned above have yet to be investigated. This, in combination with spatially dependent connection probabilities as in (Rosenbaum 2017) could provide insight into the stabiliy of cell assemblies.
 
-In the following paragraphs, the mathematical details of a subset of these models will be discussed. Consider the exponential integrate and fire model 
-
-\begin{align*}
-\tau\dot{V}_{j} = -(V_{j}-E_{L}) + \Delta_{T}\exp\left(\frac{V_{j}-V_{T}}{\Delta T}\right) + I_{j}(t)
-\end{align*}
-
 In plastic networks, synaptic weights (conductances) are functions of time, thus we expand $I(t)$ as a sum of individual conductances as in (Zenke 2015) to give a total current for a single neuron
 
 \begin{align*}
