@@ -14,7 +14,7 @@
  
 
 %% Use these commands to set biographic information for the title page:
-\title{Towards a theory of correlation transfer in plastic excitatatory-inhibitory neuronal networks}
+\title{Spatiotemporal correlation transfer in plastic excitatatory-inhibitory neuronal networks}
 \author{Clayton W. Seitz}
 \department{Graduate Program in Biophysics}
 \division{Physical and Biological Sciences}
@@ -52,7 +52,7 @@ A central goal in computational neuroscience is to explain how functional brain 
 
 \mainmatter
 
-\chapter{Towards a theory of correlation transfer in plastic excitatatory-inhibitory neuronal networks}
+\chapter{Spatiotemporal correlation transfer in plastic excitatatory-inhibitory neuronal networks}
 
 \section{Introduction}
 
@@ -255,7 +255,7 @@ where the Fourier transform of the rates has been arranged as a digonal matrix. 
 \begin{align}
 C(\omega) &= \Delta(\omega)\;R_{0}\;\Delta^{*}(\omega) + \Delta(\omega)\;A(\omega)C^{\mathrm{ext}}(\omega)A^{*}(\omega)\;\Delta^{*}(\omega)
 \end{align} 
-
+ 
 After taking the inverse Fourier transform, we then have the cross-covariance matrix where correlations can arise from both feedforward and recurrent activity. In summary, the linear theory provides a direct mechanism for solving for the cross-covariance of spiking in the population in terms of the synaptic coupling matrix, for arbitrary network topologies. Previous analyses have restricted feedforward inputs to be uncorrelated and have considered only random networks (Pernice 2012). Other analyses have considered more complex networks, such as Erdos-Renyni networks with a spike-timing dependent plasticity rule, but have left external input uncorrelated (Ocker 2015).
 
 %\clearpage
@@ -329,7 +329,7 @@ where $\langle z_{i}(t)\rangle$ and $\langle z_{j}(t)\rangle$ can be interpreted
 
 \begin{figure}[t!]
 \centering
-\includegraphics[width=175mm]{figure-4}
+\includegraphics[width=150mm]{figure-2}
 \caption{Computational graph describing the update of synaptic weights $J_{ij}$ and the cross-covariance matrix $C(\tau)$ over multiple stimulus blocks of length $\Delta T_{\mathrm{stim}}$. The learning period $\Delta T_{\mathrm{lrn}}<< T_{\mathrm{stim}}$ determines the frequency of learning updates within the period $\Delta T_{\mathrm{stim}}$}
 \end{figure}
 
@@ -342,12 +342,6 @@ W(\tau) = \begin{cases}
     \end{cases}
 \end{align*}
 
-%\clearpage
-\begin{figure}[t!]
-\centering
-\includegraphics[width=150mm]{figure-5}
-\caption{Computational graph describing the update of synaptic weights $J_{ij}$ and the cross-covariance matrix $C(\tau)$ over multiple stimulus periods of length $\Delta T_{\mathrm{stim}}$. The learning period $\Delta T_{\mathrm{lrn}}<< T_{\mathrm{stim}}$ determines the frequency of learning updates within the period $\Delta T_{\mathrm{stim}}$}
-\end{figure}
 
 
 \subsection{Reflecting on the interpretation of network dynamics}
@@ -364,14 +358,27 @@ A typical inference scenario is the deduction of the probability that the observ
 
 \begin{sidewaysfigure}
 \centering
-\includegraphics[width=225mm]{figure-2}
+\includegraphics[width=225mm]{figure-3}
 \caption{}
 \end{sidewaysfigure}
 
 \begin{figure}[t!]
 \centering
-\includegraphics[width=175mm]{figure-3}
+\includegraphics[width=140mm]{figure-4}
 \caption{}
+\end{figure}
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=140mm]{figure-5}
+\caption{}
+\end{figure}
+
+%\clearpage
+\begin{figure}[t!]
+\centering
+\includegraphics[width=150mm]{figure-6}
+\caption{Computational graph describing the update of synaptic weights $J_{ij}$ and the cross-covariance matrix $C(\tau)$ over multiple stimulus periods of length $\Delta T_{\mathrm{stim}}$. The learning period $\Delta T_{\mathrm{lrn}}<< T_{\mathrm{stim}}$ determines the frequency of learning updates within the period $\Delta T_{\mathrm{stim}}$}
 \end{figure}
 
 \subsection{The two-dimensional Gaussian network}
@@ -407,7 +414,7 @@ As can be seen in Fig. (3.1a), when $\Gamma_{ij} = \Gamma_{ji}$ we have that $p_
 
 \begin{figure}[t!]
 \centering
-\includegraphics[width=100mm]{fig_11}
+\includegraphics[width=100mm]{figure-7}
 \caption{\textbf{Synapse probabilities for gaussian connectivity} (a) Binomial probabilities for two identical gaussian kernels ($\sigma=1$) separated by a distance $|\Delta\mathbf{r}_{ij}|$ and the probability of no synapse $\Gamma_{0}$ (left) and the corresponding multinomial probabilities (right). (b) Binomial probabilities for two different gaussian kernels ($\sigma_{1}=1, \sigma_{2}=2$) separated by a distance $|\Delta\mathbf{r}_{ij}|$ and the probability of no synapse $\Gamma_{0}$ (left) and the corresponding multinomial probabilities (right). }
 \end{figure}
 
@@ -425,7 +432,7 @@ a sum that can be carried out numerically. Interestingly, in the homogeneous cas
 
 \begin{figure}[t!]
 \centering
-\includegraphics[width=175mm]{fig_8}
+\includegraphics[width=175mm]{figure-8}
 \caption{\textbf{The homogeneous Gaussian network}. (A) An example homogeneous network containing $N=100$ neurons. (B) An example neuron extracted from (A) with outgoing synapses labeled in blue and incoming synapses labeled in red. (C,D) The ratio $\langle N_{ij}\rangle/N$ as a function parameters ($\sigma, \Gamma_{0}$) for a sparse network (C) and a network with variable sparsity (D). (E,F) The ratio $\langle N_{ij}\rangle/N$ for fixed $\sigma$ and variable sparsity. (G,H) Binomial probability maps for two nearby neurons expressed as a sum $p_{ij}+p_{ji}$ and product $p_{ij}p_{ji}$}
 \end{figure}
 
@@ -441,14 +448,6 @@ Furthermore, in addition to the average degree of a neuron, we are interested in
 
 which can be carried out numerically over the two-dimensions of space. Self-consistent with our definition of the connectivity kernel, the normalized number of shared connections decays with a gaussian profile for increasing $|\Delta \mathbf{r}_{ij}|$ as can be seen in Fig. (3.3).
 
-\begin{figure}
-\centering
-\includegraphics[width=175mm]{fig_9}
-\caption{\textbf{Shared connections in a homogeneous Gaussian network} (A,B,C) The average number of shared incoming or outgoing connections $\langle S_{ij}\rangle /N$ as a function of distance between two neurons $|\Delta r_{ij}|$ for three different values of the reach parameter $\sigma$.}
-\end{figure}
-
-
-
 \subsection{Excitatory-inhibitory Gaussian networks}
 
 Thus far we have considered only the case where the spatial connectivity kernel is the same for every neuron. However, the integrative properties of neurons depend strongly on the number, proportions and distribution of excitatory and inhibitory synaptic inputs they receive (Megias 2001). Also, the role excitatory-inhibitory balance in network dynamics has been a subject of recent debate. Indeed, balanced recurrent excitation and inhibition capture the irregular and asynchronous spiking activity with weak correlations reported in cortex. The spatial extent of excitation relative to inhibition has been shown to have a strong impact on network dynamics. In particular, when the spatial extent of excitation is sufficiently smaller than inhibition, the balanced fixed point loses stability (Rosenbaum 2014). 
@@ -459,7 +458,7 @@ To account for excitatory and inhibitory cell types within this framework, we mu
 \clearpage
 \begin{figure}[t!]
 \centering
-\includegraphics[width=165mm]{fig_10}
+\includegraphics[width=165mm]{figure-9}
 \caption{\textbf{Average degree in an excitatory-inhibitory network} (A) Schematic illustrating the notation used for excitatory-excitatory, excitatory-inhibitory, inhibitory-excitatory, and inhibitory-inhibitory synapses. (B) An example dense excitatory-inihbitory network ($\Gamma_{0}=0.2$) and $p_{E} = 0.8$. (C) Average number of synapses in the dense network normalized to the target population size as a function of parameters $\sigma_{E}$ and $\sigma_{I}$. (D) An example sparse excitatory-inihbitory network ($\Gamma_{0}=0.8$) and $p_{E} = 0.8$. (E) Average number of synapses in the sparse network normalized to the target population size as a function of parameters $\sigma_{E}$ and $\sigma_{I}$.}
 \end{figure}
 
@@ -526,9 +525,6 @@ where the spatial dependence of the individual kernels is implied. The in-degree
 from the linearity of variance property. We will analyze the in-degree and out-degree distributions of a graph generated when the connectivity kernel is a symmetric Gaussian extending over two-dimensions. We refer to this case as a \emph{two-dimensional gaussian network}.
 
 The following model for generating the backbone for network of neurons rests on the assumption that we can create connectivity solely from pairwise connection probabilities. Let us define a spatial connectivity kernel $\Gamma_{i}(\mathbf{r}_{j})$ with $i,j\in \{n\}_{n=1}^{N}$ which defines the binomial probability that a neuron $i$ synapses onto a different cell $j\neq i$ at spatial coordinate $\mathbf{r}_{j}$. Here, the function $\Gamma_{i}(\mathbf{r})$ is not itself a probability distribution but rather represents one component of a distribution that is defined for each possible pairs $i,j$ for a given $i$. That distribution is completely represented for a pair $i,j$ with knowledge of the kernel $\Gamma_{j}(\mathbf{r}_{i})$ and an additional probability that no synapse occurs $\Gamma_{0}$. The parameter $\Gamma_{0}$ will be referred to as the $\emph{sparsity parameter}$ throughout the remainder of the text. Together, these three binomial probabilities can be renormalized to form a multinomial distribution $\mathbb{P}_{ij}$ at every possible synapse $ij$. A general definition of the multinomial distribution is
-
-\begin{appendices}
-\end{appendices}
 
 % Format a LaTeX bibliography
 \makebibliography
