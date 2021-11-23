@@ -98,32 +98,44 @@ As a rule, the postsynaptic current to a neuron embedded in a spiking network co
 I(t) = F(t) + R(t)
 \end{align}
 
-A variety of models for the integration of this current into a stateful membrane potential exist. For example, the integrate and fire model
+A variety of models for the integration of this current into a stateful membrane potential exist. Here, we are particularly interested in non-linear integrate and fire models which are described by the Langevin equation
 
 \begin{equation}
-\tau\dot{V}(t) = \psi(V) + I(t)
+\tau\dot{V}(t) = E - V + \psi(V) + I(t)
 \end{equation}
 
-where the function $\psi(V)$ is a arbitrary function of the membrane potential. To produce spiking behavior, the membrane potential is passed through a special type of activation function or thresholding function which produces neural spike trains
+where the function $\psi(V)$ is a function of the membrane potential. To produce spiking behavior, the membrane potential is passed through a thresholding function which produces neural spike trains
 
 \begin{equation}
 z_{j}(t) = \sum_{i} \delta(t-t_{i})
 \end{equation}
 
-where $t_{i}$ is the time at which the $i$-th spike of neuron $j$ occured. A primary goal of modern computational neuroscience is to understand the origins of correlations or lack thereof in the variable $z(t)$ across a population of neurons. A first step in this direction is to reveal general principles of the relationship between spike correlations and the interaction between stimulus statistics and the statistics of synaptic connectivity.
+where the variable $z_{j}(t)$ is sometimes called the \emph{observable state} of neuron $j$ and is given by thresholding the voltage: $z_{j}(t) = H(v_{j}(t) - \theta)$ where $H$ is the Heaviside step function. Immediately after firing an action potential, the membrane potential is reset to a resting value $V_{\mathrm{reset}}$. A primary goal of modern computational neuroscience is to understand the origins of correlations or lack thereof in the variable $z(t)$ across a population of neurons. A first step in this direction is to reveal general principles of the relationship between spike correlations and the interaction between stimulus statistics and the statistics of synaptic connectivity.
 
-Perhaps the most fundamental approximation of the dynamics excitatory-inhibitory networks is the so-called \emph{diffusion approximation} where synaptic currents are assumed to be uncorrelated Gaussian white noise. This approximation is valid in multiple regimes. For example, when synaptic connectivity is sufficiently weak and/or sparse, synaptic inputs to a neuron can be guaranteed to follow a normal distribution, per the central limit theorem. However, the diffusion approximation is not exclusive to these network architectures. It is also a valid assumption when there exists an appropriate cancellation of correlations between feedforward $F(t)$ and feedback $R(t)$ synaptic currents, even in dense networks (Rosenbaum 2017). In the following paragraphs the mathematics of the diffusion approximation will be summarized.
+Perhaps the most fundamental approximation of the dynamics excitatory-inhibitory networks is the so-called \emph{diffusion approximation}. In real neural networks, the synaptic currents $I(t)$ from the integration of spikes of their presynaptic partners. If the presynaptic cells are described by a inhomogeneous point process, $I(t)$ can have complex statistics depending on presynaptic firing rates and correlations. However, in some special cases, such as when presynaptic firing are large, synaptic currents are safely assumed to be uncorrelated Gaussian white noise. That is, (1.2) becomes (Richardson 2007)
 
+\begin{equation}
+\tau\dot{V}(t) = E - V + \psi(V) + \sigma\sqrt{2\tau}\xi(t)
+\end{equation}
 
-In the case that synaptic currents are uncorrelated across an excitatory-inhibitory network, a high dimensional stochastic version of (1.2) describing network dynamics can be collapsed to one dimension. The problem becomes the determination of the membrane potential density over the population as a function of time $P(V,t)$. Generally, this can be done by making use of the diffusion approximation of the Kramers-Moyal expansion, also known as the Fokker-Planck equation (Brunel 2000; Brunel and Hakim 1999)
+This approximation is not limited to the example given above. Another example is when synaptic connectivity is sufficiently weak and/or sparse, synaptic inputs to a neuron can be guaranteed to follow a normal distribution, per the central limit theorem (Brunel 2000). However, the diffusion approximation is not exclusive to these network architectures either. It is also a valid assumption when the population fires asychronously and the feedback $R(t)$ is a sum over independent processes, even in dense networks (Tian 2020; Rosenbaum 2017). In the following paragraphs the mathematics of the diffusion approximation will be summarized.
+
+Since (1.2) is a stochastic differential equation, its solution is the probability density $P(V,t)$. This can be useful, since the solution is directly applicable to ensembles of neurons and thus examining network dynamics. Under conditions in which the diffusion approximation applies, the Kramers-Moyal expansion can be reduced to the following Fokker-Planck equation for (1.4) ((Richardson 2007)
 
 
 \begin{align}
-\frac{\partial P_{j}(V,t)}{\partial t} &= \frac{\partial}{\partial V_{j}}[\left(V_{j}(t)-\mu_{j}(t)\right) P_{j}(V_{j},t)] + \frac{\sigma_{j}^{2}(t)}{2}\frac{\partial^{2}}{\partial V_{j}^{2}}[P(V_{j},t)]
+\frac{\partial P(V,t)}{\partial t} &= \frac{\sigma^{2}}{2}\frac{\partial^{2}P}{\partial V^{2}} + \frac{\partial}{\partial V}\left(\frac{V-E-\psi}{\tau}P\right)
 \end{align}
 
 
-Interestingly, the stationary solution of the density $P(V,t)$ can be found analytically, providing an estimate of steady state firing rates. As expected, uncorrelated synaptic currents produce uncorrelated spike trains, although transitions towards synchrony in this regime have been discussed (Brunel 2000). 
+The stationary solution of the density $P(V,t)$ has been found for linear models (Brunel 2000; Brunel and Hakim 1999). However, solution for non-linear integrate and fire models require numerical integration of (1.5) to find the stationary density over the membrane potential and to estimate of steady state firing rates. Equation (1.5) is often formulated as the continuity equation
+
+\begin{align*}
+\frac{\partial P(V,t)}{\partial t} &= -\frac{\partial J}{\partial V}\\
+J &= \frac{E-V+\psi}{\tau} - \frac{\sigma^{2}}{\tau}\frac{\partial}{\partial V}
+\end{align*}
+
+The quantity $J$ is called the probability current. Details of the numerical integration of (1.5) were given in (Richardson 2007). This result will later be discussed in the context of a linear response theory (see results section). 
 
 As mentioned, additional theoretical work has proposed that the irregular inter-spike intervals observed in cortex can be explained by approximate balance of excitatory and inhibitory synaptic currents (Vreeswijk, 1996). In this balanced regime, the timing of the firing of cells in cortex is sensitive to the relatively small fluctuations in their total synaptic input because the excitatory and inhibitory inputs cancel each other (Amit, 1995). Also, excitatory and inhibitory balance has been theoretically shown to enhance the sensitivity of fast stimulus fluctuations much smaller than a typical integration time constant for a single neuron (Vreeswijk, 1996; Tian 2020). Interestingly, model neurons optimally detect temporal information when the average membrane potential is one standard deviation of the noise below threshold, a phenomenon known as stochastic resonance (Plesser, 2000; Kempter, 1998). Importantly, a general framework for generating balanced networks has been developed. In the following paragraphs, the terminology and mathematical machinery introduced in (Vreeswijk 1996) and later used by (Renart 2010; Rosenbaum 2017) will be described.
 
@@ -137,7 +149,7 @@ I_{i}^{\alpha}(t) &= F_{i}^{\alpha}(t) + R_{i}^{\alpha}(t)\\
 &= F_{i}^{\alpha}(t) + \sum_{\beta}\sum_{j} \frac{J_{ij}^{\alpha\beta}}{\sqrt{N}}(\psi * z^{\beta}_{j}(t))
 \end{align}
 
-where the variable $z^{\beta}_{j}(t)$ is sometimes called the \emph{observable state} of neuron $j$ and is given by thresholding the voltage: $z^{\beta}_{j}(t) = H(v^{\beta}_{j}(t) - \theta)$ where $H$ is the Heaviside step function. For the sake of generality, the term $z^{\beta}_{j}(t)$ is convolved with a with a kernel $\psi$, determining the shape of the post-synaptic potential induced by a spike. In the mean-field approximation we replace the current in each term of the sum over $j$ in (1.2) by its average value, which is a valid approximation in the limit $N\rightarrow\infty$ (Vreeswijk 1996). Taking $\psi = \delta(t)$, the observable state $z^{\beta}_{j}(t)$ is replaced by the average firing rate of a neuron in population $\beta$ multiplied by the probability of a connection $p_{\alpha\beta}$
+For the sake of generality, the term $z^{\beta}_{j}(t)$ is convolved with a with a synaptic kernel $\psi$, determining the shape of the post-synaptic potential induced by a spike. In the mean-field approximation we replace the current in each term of the sum over $j$ in (1.2) by its average value, which is a valid approximation in the limit $N\rightarrow\infty$ (Vreeswijk 1996). Taking $\psi = \delta(t)$, the observable state $z^{\beta}_{j}(t)$ is replaced by the average firing rate of a neuron in population $\beta$ multiplied by the probability of a connection $p_{\alpha\beta}$
 
 \begin{align*}
 \langle I_{i}^{\alpha}(t)\rangle &= \langle F_{i}^{\alpha}(t)\rangle + \langle R_{i}^{\alpha}(t)\rangle\\
@@ -215,23 +227,14 @@ P(v_{r}^{-},t) &= P(v_{r}^{+})\\
 \end{align*}
 
 
-\subsection{Beyond the diffusion approximation}
+\subsection{Mean field and linear response approximations}
 
 More recently, neuroscientists have developed a framework for understanding spike train correlations beyond the diffusion approximation. This development has been motivated by the fact that the integration of temporally correlated presynaptic spike trains can result in non-trivial two-point correlation functions that are not well-described by a Gaussian white noise process (Moreno-Bote 2008). In addition, recent experiments have shown that local cortical networks can be dense with connection probabilities sometimes exceeding 40 percent (Ko 2011; Levy 2012; Fino 2011). A novel approach, based on linear response theory, lifts the diffusion approximation and makes predictions on spike correlations directly in terms of circuit architecture (Ocker 2017). More specifically, by making use of a linear response theory, one can derive the matrix of auto and cross-spectra of spike trains in terms of synaptic coupling matrices directly (Pernice 2011; Trousdale 2013; Ocker 2017).
 
-In essence, a linear response theory of network dynamics determines the auto and cross spectra of spike trains by assuming a linear relationship between the output firing rate of a neuron and its presynaptic input spikes. For example, the approach pioneered by Pernice et al. leverages Hawkes theory of linearly interacting point processes to calculate stationary firing rates and spike correlations in excitatory-inhibitory networks (Pernice 2011, 2012). Put simply, if neural spike trains are taken to be realizations of heterogeneous Poisson proccesses i.e. $r_{i}(t) = \langle z_{i}(t)\rangle$, Hawkes theory can be used to estimate the vector of firing rates $\mathbf{r}(t)$. To do this, we first define a matrix $G(\tau)$ which can be convolved with the vector of spikes $\mathbf{z}(\tau)$ to give the linear influence of $\mathbf{z}(\tau)$ on the firing rates $\mathbf{r}(t)$. The matrix element $g_{ij}(\tau)$ represents the linear influence of a spike of neuron $i$ on the firing rate of neuron $j$ which can be computed as the normalized covariance of a Poisson spike train $z_{i}$ with $z_{j}$ (Pernice 2012)
+In essence, a linear response theory of network dynamics determines the auto and cross spectra of spike trains by assuming a linear relationship between the output firing rate of a neuron and its presynaptic input spikes. For example, the approach given by Pernice et al. leverages Hawkes theory of linearly interacting point processes to calculate stationary firing rates and spike correlations in excitatory-inhibitory networks (Pernice 2011, 2012). Other approaches have used an analagous linear response theory to examine the the impact of network dynamics on network structure and vice-versa. In the following paragraphs we will summarize the latter approach as it more readily generalizes to non-linear neuron models.
 
-\begin{align}
-g_{ij}(J_{ij},\tau) &= J_{ij}a_{ij}(\tau)
-\end{align} 
+The first step is to compute the stationary firing density by solving the Fokker-Planck equation under white-noise stimulation. This simultaneously provides the steady state firing rate. Then, this solution is used to find the first passage time density from which we can extract the spike train power spectrum. After additionally calculating the linear response of a neuron to input and the synaptic kernel in the frequency domain, we can solve the following set of matrix equations for the cross-spectra (cross-covariance) in the network
 
-where we have the following expression for the interaction kernel $a_{ij}(\tau)$ in the time-domain
-
-\begin{align}
-a_{ij}(\tau) = \frac{\langle z_{i}(t+\tau), z_{j}(t)\rangle - \langle z_{i}(t+\tau)\rangle\langle z_{j}(t)\rangle}{\langle z_{i}(t)\rangle}
-\end{align}
-
-which is the normalized cross-covariance of point processes (spike trains) $z_{i}$ and $z_{j}$. Packaging $g_{ij}(J_{ij},\tau) \;\;\forall\; i,j$ into a matrix $G(\tau)$, the vector of firing rates is predicted by the convolution of $G(\tau)$ and $z(\tau)$ in the time-domain
 
 \begin{equation}
 r(t) = r_{0} + \int_{-\infty}^{\infty} G(t-\tau)z(\tau)d\tau
