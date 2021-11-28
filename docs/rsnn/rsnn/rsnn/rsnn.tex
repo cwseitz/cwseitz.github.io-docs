@@ -42,7 +42,7 @@
 %\listoffigures
 %\listoftables
 
-\acknowledgments
+%\acknowledgments
 % Enter Acknowledgements here
 
 \abstract
@@ -54,6 +54,8 @@ A central goal in computational neuroscience is to explain how functional brain 
 
 \chapter{Towards a theory of spatiotemporal correlation transfer in plastic neuronal networks}
 
+The thesis has been divided into two primary sections. The first section paints a broad picture of the theoretical techniques that can be used to analyze spike train cross correlations as well as their mathematical connections to network structure. In addition, this section summarizes the mathematical machinery that can relate network dynamics to synaptic plasticity. The primary goal of the first section as a whole is to lay out a necessary set of tools for the project outline laid out at the start of the second section. In addition, the second section contains the results from a set of rudimentary simulations. The scope of these simulations is necessarily narrow. Significant computational advances are needed in order for the simulations to fully connect with the theory presented in the first section. Nevertheless, they do form a basic substrate for future work.
+
 \section{Introduction}
 
 Complex systems are ubiquitous in nature yet our scientific efforts have thus far only begun to gain traction on their governing principles. Complex systems often exihibit behaviors that simply cannot be explained by any of the components in isolation but rather arise from their interactions, bringing emergent phenomena into the focus of modern science. The human brain exemplifies this complexity, thought to consist of billions of noisy neurons, yet the dynamics of these neurons simulataneously maintain an order evident in the stability of our sensory percepts. Furthermore, a central goal of modern neuroscience is to explain how functional brain states emerge from the interactions of dozens, perhaps hundreds, of brain regions, each containing its own complex subnetworks.  These subnetworks can themselves contain thousands of cells, each neuron having on the order of thousands of synaptic connections to other cells within the local network (Binzegger 2004).
@@ -64,9 +66,9 @@ Early models of neural networks were often deterministic; however, an increasing
 
 An essential feature of a network model is its ability to relate network dynamics directly to the network topology and the external stimulus. In other words, one metric of a models quality is its its ability to relate structure and function. Under the linear response approximation, spike train cross-correlations can be predicted for arbitrary network topologies. This has led to its application for both networks with static topology as well as plastic networks undergoing changes according to a spike-timing dependent plasticity rule. In his famous neurophysiological postulate, Donald Hebb first proposed a cellular mechanism for the self-organization of networks of neurons. Hebb suggested that repeated stimulation of specific receptors of sensory signals would lead slowly to the formation of a \emph{cell assembly} and these structural changes would constitute a representation or imprint of an internally or externally generated sensation e.g., an image or idea [1]. This process, referred to as Hebbian learning, is argued to be driven by the temporal order of action potentials where the efficacy of transmission across a synapse can be modified according to sensory experience. Linear response theory and related theories provide a framework for examining the precise biophysical mechanisms that implement the pheneomena that Hebb originally described. However, these theories have not fully caught up with their phenomenological counterparts. Experimental evidence and the results of computational studies have shown that a complex orchestration of heterosynaptic, homosynaptic, and homeostatic mechanisms are necessary. These observations suggest that a theoretical framework is needed in which we can examine the effects of various plasticity mechanisms on network topology. 
 
-At any rate, models dependent on a diffusion approximation, like a linear response theory, have limitations. In particular, the integration of temporally correlated presynaptic spike trains can result in non-trivial two-point correlation functions that are not well-described by a Gaussian white noise process (Moreno-Bote 2008). This has been noted before, in studies of the numerical solution of the Fokker-Planck and master equations which recognized a disparity between the diffusion approximation and full shot-noise stochastic dynamics (Nykamp 2001). Recordings \emph{in-vivo} also have shown the synaptic fluctuations can have significant non-Gaussian properties (DeWeese 2006). In any case, the diffusion approximation and solution of the Fokker-Planck equation can describe important biophysical properties of neuronal response. For example, synaptic filtering, activation of non-linear voltage-gated currents, and non-linear response properties at the onset of a spike (Richardson 2007). In the following section, the application of mean-field analysis and the diffusion approximation to the analysis of spike train correlations will be discussed in more detail.
+At any rate, models dependent on a diffusion approximation, like a linear response theory, have limitations. In particular, the integration of temporally correlated presynaptic spike trains can result in non-trivial two-point correlation functions that are not well-described by a Gaussian white noise process (Moreno-Bote 2008). This has been noted before, in studies of the numerical solution of the Fokker-Planck and master equations which recognized a disparity between the diffusion approximation and full shot-noise stochastic dynamics (Nykamp 2001). Recordings \emph{in-vivo} also have shown the synaptic fluctuations can have significant non-Gaussian properties (DeWeese 2006). In any case, the diffusion approximation and solution of the Fokker-Planck equation can describe important biophysical properties of neuronal response. For example, synaptic filtering, activation of non-linear voltage-gated currents, and non-linear response properties at the onset of a spike (Richardson 2007).
 
-\section{Literature Review}
+\section{Literature Review and Theoretical Foundations}
 
 
 Recent experimental advances permit the recording of spike trains of many neurons simultaneously \emph{in-vivo}. These experiments have revealed that significant spatial and temporal correlations exist in the timing of spikes by individual neurons, bringing the role of correlations in neural computation into question. Often, such studies are necessarily contextual - correlations must be interpeted in the context of known stimulus drive, learning or experience, or changes in behavioral context (Cohen 2011). Interpretation of such correlations has been a fruitful exercise; however, it is also important to understand the functional properties of neuronal networks that give rise to them such as topological parameters, stimulus statistics, and synaptic plasticity. For pairs of neurons, correlations are often quantified according to the cross-correlation function of their spike trains (Ostojic 2009). The profile of this cross-correlation function is dependent on several factors including direct synaptic wiring (Snider et al., 1998; Csicsvari et al., 1998; Barthó et al., 2004; Fujisawa et al., 2008) or common and potentially correlated inputs (Sears and Stagg, 1976; Binder and Powers, 2001; Constantinidis et al., 2001; Türker and Powers, 2001, 2002). Although cross-correlation analysis can provide substantial information regarding the topology of a neural circuit, relating the correlations of spike trains to the underlying circuit architecture is a long-lasting problem in computational neuroscience. To approach this problem, simulations of integrate and fire neurons are often used. In these simulations, network parameters are tuned to examine the resulting correlation structure of spike trains with the hope of inverting the model for comparison with \emph{in-vivo} recordings. 
@@ -220,7 +222,7 @@ The stationary solution of the density $P(V,t)$ has been found for simple models
 J &= \frac{E-V+\psi}{\tau} - \frac{\sigma^{2}}{\tau}\frac{\partial}{\partial V}
 \end{align*}
 
-The quantity $J$ is called the probability current. Details of the numerical integration (sometimes called the threshold integration method) of the above pair of equations are known for stationary white noise input. See (Richardson 2007; 2009) for a full derivation of these methods. The first step is to compute the stationary density for the membrane potential by solving the Fokker-Planck equation under white-noise stimulation. This simultaneously provides the steady state firing rate $r_{0}$. The steady state firing rate can then be used to derive the frequency spectrum $C^{0}(\omega)$. Once this is obtained, the frequency response can be found by using Richardson's method of solving the Fokker-Planck equation for a weak sinusoidal perturbation in the synaptic current.
+Details of the numerical integration (sometimes called the threshold integration method) of the above pair of equations are known for stationary white noise input. See (Richardson 2007; 2009) for a full derivation of these methods. The first step is to compute the stationary density for the membrane potential by solving the Fokker-Planck equation under white-noise stimulation. This simultaneously provides the steady state firing rate $r_{0}$. The steady state firing rate can then be used to derive the frequency spectrum $C^{0}(\omega)$. Once this is obtained, the frequency response can be found by using Richardson's method of solving the Fokker-Planck equation for a weak sinusoidal perturbation in the synaptic current.It should be noted that the diffusion approximation is not limited to this context. Rather, it also applies when synaptic connectivity is sufficiently sparse, and the probability of two neurons sharing synaptic inputs vanishes. Then, the synaptic current to a neuron can be guaranteed to follow a normal distribution, per the central limit theorem (Brunel 2000). However, the diffusion approximation is not exclusive to these network architectures either. It is also a valid assumption when the population fires asychronously and the feedback $R(t)$ is a sum over independent processes, even in dense networks (Tian 2020; Rosenbaum 2017).
 
 Furthermore, the solution for $C(\omega)$ given in (1.2) has been derived in an alternative fashion by using an iterative approach (Trousdale 2012). This approach is highly valuable as it builds an estimate of $C(\omega)$ by considering paths through a recurrent network of increasing length. However, the mathematics used to derive an estimate of $C(\omega)$ is very dense. Here, only the key points will be highlighted and most of the mathematical details are deferred to the original text (Trousdale 2012). Intuitively, the spike-train correlation between a pair of cells can be estimated from the activity of presynaptic cells $n$ synapses away from the cells under consideration. We expect then to improve our estimate of $C(\omega)$ for large values of $n$. For the simplest case, when $n=0$, the neurons are uncoupled and we have $C(\omega) = C^{0}(\omega)$. Now, when $n=1$, we consider only the nearest neighbors in calculating the cross-correlation between neurons $i$ and $j$ and improve on the estimate $C^{0}(\omega)$ by computing
 
@@ -260,12 +262,9 @@ where $C^{ext} = \langle F(t+\tau)F(t)^{T}\rangle$ for $F(t) = [F_{1}(t)\;,...,\
 C(\omega) &= \Delta(\omega)\;C^{0}\;\Delta^{*}(\omega) + \Delta(\omega)\;A(\omega)C^{\mathrm{ext}}(\omega)A^{*}(\omega)\;\Delta^{*}(\omega)
 \end{align} 
 
-Here, we are particularly interested in using (1.26) to estimate the matrix $C(\omega)$ when the feedforward inputs $F(t)$ are drawn from a multivariate gaussian distribution i.e. $F(t) \sim \mathcal{N}(\mu,\Sigma)$. This can be done; however, it has been noted that corrections for $C^{0}(\omega)$ are needed. 
+Here, we are particularly interested in using (1.26) to estimate the matrix $C(\omega)$ when the feedforward inputs $F(t)$ are drawn from a multivariate gaussian distribution i.e. $F(t) \sim \mathcal{N}(\mu,\Sigma)$. This can be done; however, it has been noted that corrections for $C^{0}(\omega)$ are needed. These corrections are detailed in the methods section of (Trousdale 2012).
 
-See the appendix for a derivation for the result above which accounts for correlations in the feedforward input. Solving the above matrix equation and taking the inverse Fourier transform then gives the matrix of corss-correlations when correlations can arise from both feedforward and recurrent activity. In summary, the linear theory provides a direct mechanism for solving for the cross-covariance of spiking in the population in terms of the synaptic coupling matrix, for arbitrary network topologies, provided that the diffusion approximation applies. Previous analyses have restricted feedforward inputs to be uncorrelated (Trousdale 2012; Ocker 2015). Other analyses have considered more complex network topologies with a spike-timing dependent plasticity rule, but still have left external input uncorrelated (Ocker 2015). A natural development is to then generalize these approaches to the case where the network topology can be dynamic and the feedforward inputs have nonzero correlations.
-
-It should be noted that the diffusion approximation is not limited to this context. Rather, it also applies when synaptic connectivity is sufficiently sparse, and the probability of two neurons sharing synaptic inputs vanishes. Then, the synaptic current to a neuron can be guaranteed to follow a normal distribution, per the central limit theorem (Brunel 2000). However, the diffusion approximation is not exclusive to these network architectures either. It is also a valid assumption when the population fires asychronously and the feedback $R(t)$ is a sum over independent processes, even in dense networks (Tian 2020; Rosenbaum 2017).
-
+In summary, the linear theory provides a direct mechanism for solving for the cross-covariance of spiking in the population in terms of the synaptic coupling matrix, for arbitrary network topologies. Previous analyses have restricted feedforward inputs to be uncorrelated (Trousdale 2012; Ocker 2015). Other analyses have considered more complex network topologies with a spike-timing dependent plasticity rule, but still have left external input uncorrelated (Ocker 2015). A natural development is to then generalize these approaches to the case where the network topology can be dynamic and the feedforward inputs have nonzero correlations.
 
 
 \subsection{Reshaping network structure with synaptic plasticity}
@@ -296,6 +295,12 @@ I_{j}^{\alpha}(t) &= \sum_{\beta}\sum_{i} g_{ij}^{\beta}(t)(E_{\beta} - V_{j})\\
 \end{align*}
 
 where $\alpha \in \{E,I,X\}$. To be clear, excitatory conductances, whether in the external or primary population would be under the control of an inhibitory neurotransmitter such as gamma-aminobutyric acid (GABA) while inhibitory conductances would be under the control of glutamate e.g., AMPAR/NMDAR. Notice that the time-dependence of $g^{\alpha}$ can then be given by the convolution of an excitatory presynaptic spike train $z_{i}(t)$ or inhibitory spike train $z_{k}(t)$ with an appropriate synaptic kernel $\phi$. The synaptic plasticity rule is then a rule for the time-derivative $\dot{J}^{\alpha\beta}_{ij}$.
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=130mm]{figure-6}
+\caption{Computational graph describing the update of synaptic weights $J_{ij}$ and the cross-covariance matrix $C(\tau)$ over multiple stimulus periods of length $\Delta T_{\mathrm{stim}}$. The learning period $\Delta T_{\mathrm{lrn}}<< T_{\mathrm{stim}}$ determines the frequency of learning updates within the period $\Delta T_{\mathrm{stim}}$}
+\end{figure}
 
 The cellular machinery of plasticity mechanisms described above highlights the importance of spike-time correlations, generated by recurrent feedback or feedforward projections, in determining the evolution of synaptic weights. A classic derivation of the evolution of synaptic weights for interacting Poisson processes was given by Kempter et al. (Kempter 1999). This result is an important starting point for later analysis. Consider the total change in the synaptic weight between neurons $i$ and $j$ as $\Delta J_{ij} = J_{ij}(t+\Delta t) - J_{ij}(t)$ in a time interval $\Delta t$. Consider the very general rule for a single spiking neuron $i$ receiving many inputs $1 < j \leq N$ 
 \begin{align*}
@@ -344,6 +349,19 @@ W(\tau) = \begin{cases}
     \end{cases}
 \end{align*}
 
+\subsection{Biologically-realistic network topologies}
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=100mm]{figure-7}
+\caption{\textbf{Synapse probabilities for gaussian connectivity} (a) Binomial probabilities for two identical gaussian kernels ($\sigma=1$) separated by a distance $|\Delta\mathbf{r}_{ij}|$ and the probability of no synapse $\Gamma_{0}$ (left) and the corresponding multinomial probabilities (right). (b) Binomial probabilities for two different gaussian kernels ($\sigma_{1}=1, \sigma_{2}=2$) separated by a distance $|\Delta\mathbf{r}_{ij}|$ and the probability of no synapse $\Gamma_{0}$ (left) and the corresponding multinomial probabilities (right). }
+\end{figure}
+
+
+Thus far we have considered only the case where the spatial connectivity kernel is the same for every neuron. However, the integrative properties of neurons depend strongly on the number, proportions and distribution of excitatory and inhibitory synaptic inputs they receive (Megias 2001). Also, the role excitatory-inhibitory balance in network dynamics has been a subject of recent debate. Indeed, balanced recurrent excitation and inhibition capture the irregular and asynchronous spiking activity with weak correlations reported in cortex. The spatial extent of excitation relative to inhibition has been shown to have a strong impact on network dynamics. In particular, when the spatial extent of excitation is sufficiently smaller than inhibition, the balanced fixed point loses stability (Rosenbaum 2014). 
+
+To account for excitatory and inhibitory cell types within this framework, we must differentiate $\langle N_{ij}\rangle$ for excitatory and inhibitory neurons and solving for both the mean in-degree and out-degree separately. Thus we have the quantities $\langle E_{E}^{\mathrm{out}} \rangle,\langle E_{I}^{\mathrm{out}} \rangle,\langle E_{I}^{\mathrm{in}} \rangle$ and $\langle I_{E}^{\mathrm{out}} \rangle,\langle I_{I}^{\mathrm{out}} \rangle,\langle I_{E}^{\mathrm{in}} \rangle$. Under the assumption that excitatory and inhibitory neurons are distributed uniformly  in two-dimensional space, we have that $\langle E_{I}^{\mathrm{out}} \rangle = \langle I_{E}^{\mathrm{in}} \rangle$ and $\langle E_{I}^{\mathrm{in}} \rangle = \langle I_{E}^{\mathrm{out}}\rangle$. For brevity, we drop the superscripts and compute the above averages according the general prescription provided by (3.3). The result of these numerical calculations allow us to observe that, for $\Gamma_{0} = 0.2$, the fraction of the target population saturated by excitatory or inhibitory outputs increases monotonically with $\sigma_{E}$ and $\sigma_{I}$  (Fig 3.4 b,d). The parameter maps provided in (Fig 3.4 b,d) are a starting point for our later discussions of newtork dynamics.
+
 
 
 \subsection{Prevalent interpretations of network dynamics}
@@ -356,6 +374,14 @@ A typical inference scenario is the deduction of the probability that the observ
 
 
 \section{Results}
+
+\subsection{Theory}
+
+Introduce a plasticity rule which is a function of space and time
+
+\subsection{Demonstration of the balanced state}
+
+
 
 
 \begin{sidewaysfigure}
@@ -376,12 +402,6 @@ A typical inference scenario is the deduction of the probability that the observ
 \caption{}
 \end{figure}
 
-%\clearpage
-\begin{figure}[t!]
-\centering
-\includegraphics[width=150mm]{figure-6}
-\caption{Computational graph describing the update of synaptic weights $J_{ij}$ and the cross-covariance matrix $C(\tau)$ over multiple stimulus periods of length $\Delta T_{\mathrm{stim}}$. The learning period $\Delta T_{\mathrm{lrn}}<< T_{\mathrm{stim}}$ determines the frequency of learning updates within the period $\Delta T_{\mathrm{stim}}$}
-\end{figure}
 
 \subsection{The two-dimensional Gaussian network}
 
@@ -414,14 +434,6 @@ The largest possible value of the exponential is achieved at $\underset{j}{\math
 
 As can be seen in Fig. (3.1a), when $\Gamma_{ij} = \Gamma_{ji}$ we have that $p_{ij} = p_{ji}$ for all $|\Delta \mathbf{r}_{ij}|$. We formally refer to this case as the \emph{homogeneous gaussian network}. While this is not necessarily a realistic case, it serves as a useful testbed for the graph theoretic concepts to be used in later analyses. 
 
-\begin{figure}[t!]
-\centering
-\includegraphics[width=100mm]{figure-7}
-\caption{\textbf{Synapse probabilities for gaussian connectivity} (a) Binomial probabilities for two identical gaussian kernels ($\sigma=1$) separated by a distance $|\Delta\mathbf{r}_{ij}|$ and the probability of no synapse $\Gamma_{0}$ (left) and the corresponding multinomial probabilities (right). (b) Binomial probabilities for two different gaussian kernels ($\sigma_{1}=1, \sigma_{2}=2$) separated by a distance $|\Delta\mathbf{r}_{ij}|$ and the probability of no synapse $\Gamma_{0}$ (left) and the corresponding multinomial probabilities (right). }
-\end{figure}
-
-
-
 \subsection{Homogeneous Gaussian networks}
 
 Let us now examine the statistics of the out-degree of a neuron $i$ assuming that the connectivity parameter $\sigma$ and $\Gamma_{0}$ are homogeneous across the network i.e., they are constant for all neurons. Using Eq. (3.2), we have
@@ -450,13 +462,8 @@ Furthermore, in addition to the average degree of a neuron, we are interested in
 
 which can be carried out numerically over the two-dimensions of space. Self-consistent with our definition of the connectivity kernel, the normalized number of shared connections decays with a gaussian profile for increasing $|\Delta \mathbf{r}_{ij}|$ as can be seen in Fig. (3.3).
 
-\subsection{Excitatory-inhibitory Gaussian networks}
 
-Thus far we have considered only the case where the spatial connectivity kernel is the same for every neuron. However, the integrative properties of neurons depend strongly on the number, proportions and distribution of excitatory and inhibitory synaptic inputs they receive (Megias 2001). Also, the role excitatory-inhibitory balance in network dynamics has been a subject of recent debate. Indeed, balanced recurrent excitation and inhibition capture the irregular and asynchronous spiking activity with weak correlations reported in cortex. The spatial extent of excitation relative to inhibition has been shown to have a strong impact on network dynamics. In particular, when the spatial extent of excitation is sufficiently smaller than inhibition, the balanced fixed point loses stability (Rosenbaum 2014). 
-
-To account for excitatory and inhibitory cell types within this framework, we must differentiate $\langle N_{ij}\rangle$ for excitatory and inhibitory neurons and solving for both the mean in-degree and out-degree separately. Thus we have the quantities $\langle E_{E}^{\mathrm{out}} \rangle,\langle E_{I}^{\mathrm{out}} \rangle,\langle E_{I}^{\mathrm{in}} \rangle$ and $\langle I_{E}^{\mathrm{out}} \rangle,\langle I_{I}^{\mathrm{out}} \rangle,\langle I_{E}^{\mathrm{in}} \rangle$. Under the assumption that excitatory and inhibitory neurons are distributed uniformly  in two-dimensional space, we have that $\langle E_{I}^{\mathrm{out}} \rangle = \langle I_{E}^{\mathrm{in}} \rangle$ and $\langle E_{I}^{\mathrm{in}} \rangle = \langle I_{E}^{\mathrm{out}}\rangle$. For brevity, we drop the superscripts and compute the above averages according the general prescription provided by (3.3). The result of these numerical calculations allow us to observe that, for $\Gamma_{0} = 0.2$, the fraction of the target population saturated by excitatory or inhibitory outputs increases monotonically with $\sigma_{E}$ and $\sigma_{I}$  (Fig 3.4 b,d). The parameter maps provided in (Fig 3.4 b,d) are a starting point for our later discussions of newtork dynamics. 
-
-
+ 
 \clearpage
 \begin{figure}[t!]
 \centering
@@ -494,6 +501,8 @@ Let $S_{xy}(\omega) = \underset{T\rightarrow\infty}{\mathrm{lim}}\frac{1}{2\pi T
 \begin{align}
 \mathbb{P} = \frac{p_{n}\prod_{m\neq n}(1-p_{m})}{\sum_{n}p_{n}\prod_{m\neq n}(1-p_{m})} = \frac{p_{n}\prod_{m\neq n}(1-p_{m})}{Z}
 \end{align}
+
+\subsection{Generating spatially extended networks}
 
 where $Z$ is a normalization constant. For generating synapses, the probabilities of (3.1) are the probabilities over the possible synaptic states between $i$ and $j$
 
