@@ -81,22 +81,22 @@ Recent experimental advances permit the recording of spike trains of many neuron
 In addition to non-trivial correlations in their spike timing, neurons in cortical networks tend to exhibit highly irregular time intervals between spikes. The stochasticity in spike timing has can be attributed to cellular and sensory noise (Faisal 2008), or alternatively to network-scale mechanisms such as excitatory-inhibitory balance (Vreeswijk 1996, 1998). Amidst this irregularity, our understanding of spike correlations are further complicated by the nonlinear dynamics of recurrent network models (Baker 2019; Tetzlaff 2008, 2012; Doiron 2016; Ocker 2017). It is common to tame this complexity by making suitable combinations of assumptions regarding the statistics of network stimuli, the mechanism of neuron-neuron interactions, or the statistics of synaptic connectivity. In the mean-field approximation strong assumptions are often made regarding the synaptic connectivity in order to estimate the mean value of synaptic currents. As a rule, the postsynaptic current to a neuron embedded in a spiking network consists of two components: feedforward and feedback (sometimes called recurrent):
 
 \begin{align}
-I(t) = F(t) + R(t)
+I(t) = F(t) + R(t) + \xi(t)
 \end{align}
 
-A variety of models for the integration of this current into a stateful membrane potential exist. Here, we are particularly interested in non-linear integrate and fire models which are described by the Langevin equation
+Notice that an additional noise term $\xi(t)$ to capture channel noise or noise in the synaptic integration process. This is frequently taken to be a i.i.d Gaussian white noise. A variety of models for the integration of this current into a stateful membrane potential exist. Here, we are particularly interested in non-linear integrate and fire models which are described by the Langevin equation
 
 \begin{equation}
 \tau\dot{V}(t) = E - V + \psi(V) + I(t)
 \end{equation}
 
-where the function $\psi(V)$ is a function of the membrane potential. An important case of (1.2) is the exponential integrate and fire (EIF) model where $\psi(V) = \Delta_{T}\exp\left(\frac{V-V_{T}}{\Delta_{T}}\right)$. This model is an extension of the standard linear integrate and fire models which more accurately captures the initial dynamics of opening of spike-generating sodium channels (Richardson 2007). To produce spiking behavior, the membrane potential is passed through a thresholding function which produces spike trains, which are represented as sums over delta functions
+where the function $\psi(V)$ is a function of the membrane potential. An important case of (1.2) is the exponential integrate and fire (EIF) model where $\psi(V) = \Delta_{T}\exp\left(\frac{V-V_{T}}{\Delta_{T}}\right)$ is a spike generating current. This model is an extension of the standard linear integrate and fire models which more accurately captures the initial dynamics of opening of spike-generating sodium channels (Richardson 2007). To produce spiking behavior, the membrane potential is passed through a thresholding function which produces spike trains, which are represented as sums over delta functions
 
 \begin{equation}
 z_{j}(t) = \sum_{i} \phi(t) * \delta(t-t_{i})
 \end{equation}
 
-where the variable $z_{j}(t)$ is sometimes called the \emph{observable state} of neuron $j$ and is given by thresholding the voltage: $z_{j}(t) = H(v_{j}(t) - \theta)$ where $H$ is the Heaviside step function. In addition, to avoid instantaneous synapses, $z_{j}(t)$ is convolved with the synaptic kernel $\phi(t)$, which is often taken to be a decaying exponential, as is done in later sections. Immediately after firing an action potential, the membrane potential is reset to a resting value $V_{\mathrm{reset}}$. Importantly, in a recurrent network, (1.3) is directly related to the feedback current in (1.2) by 
+where the variable $z_{j}(t)$ is sometimes called the \emph{observable state} of neuron $j$ and is given by thresholding the voltage: $z_{j}(t) = H(v_{j}(t) - \theta)$ where $H$ is the Heaviside step function. The time-dependent firing rate of a neuron is given by averaging the above spike train across multiple realizations $r_{j}(t) = \langle z_{j}(t) \rangle$. In addition, to avoid instantaneous synapses, $z_{j}(t)$ is convolved with the synaptic kernel $\phi(t)$, which is often taken to be a decaying exponential, as is done in later sections. Immediately after firing an action potential, the membrane potential is reset to a resting value $V_{\mathrm{reset}}$ and it is held there for a refractory period $\tau_{\mathrm{ref}}$. Importantly, in a recurrent network, (1.3) is directly related to the feedback current in (1.2) by 
 
 \begin{equation}
 R_{j}(t) = \sum_{i} J_{ij}(t)\cdot \phi(t) * \delta(t-t_{i})
@@ -166,63 +166,106 @@ The technique used above has also been extended to account for correlations in n
 \subsection{The diffusion approximation and linear response}
 
 
-A fundamental approximation used to estimate the dynamics of excitatory-inhibitory networks is the so-called \emph{diffusion approximation}. If the presynaptic partners of a neuron are described by an inhomogeneous point process, the total synaptic current $I(t)$ can have complex statistics depending on presynaptic firing rates and their correlations. However, in some special cases, such as when presynaptic firing rates are large, synaptic currents are safely assumed to be Gaussian (Richardson 2007). That is, (1.2) becomes 
+A fundamental approximation used to estimate the dynamics of excitatory-inhibitory networks is the so-called \emph{diffusion approximation}. If the presynaptic partners of a neuron are described by an inhomogeneous point process, the total synaptic current $I(t)$ can have complex statistics depending on presynaptic firing rates and their correlations. However, in some special cases, such as when presynaptic firing rates are large, synaptic currents are safely assumed to be Gaussian (Richardson 2007). To begin to examine this, we combine equations (1.1), (1.2), and (1.4) for a single neuron $i$ to give 
 
 \begin{equation}
-\tau\dot{V}(t) = E - V + \psi(V) + \sigma\sqrt{2\tau}\xi(t)
+\tau\dot{V}_{i}(t) = E_{i} - V_{i} + \psi(V_{i}) + F_{i}(t) + \xi(t) + \sum_{j} J_{ij}(t)\cdot \left(\phi(t) * z_{j}(t)\right)
 \end{equation}
 
-where $\xi(t)$ is a delta correlated white noise i.e. $\langle\xi_{i}(t)\xi_{j}(t)\rangle = \delta_{ij}$ and $\langle\xi_{i}(t)\xi_{i}(t')\rangle = \delta(t-t')$. This approximation is not limited to the example given above. Another example is when synaptic connectivity is sufficiently sparse, and the probability of two neurons sharing synaptic inputs vanishes. Then, the synaptic current to a neuron can be guaranteed to follow a normal distribution, per the central limit theorem (Brunel 2000). However, the diffusion approximation is not exclusive to these network architectures either. It is also a valid assumption when the population fires asychronously and the feedback $R(t)$ is a sum over independent processes, even in dense networks (Tian 2020; Rosenbaum 2017). In the following paragraphs the mathematics of the diffusion approximation will be summarized.
+where it is implicitly assumed that $\xi(t)$ is a delta correlated white noise i.e. $\langle\xi_{i}(t)\xi_{j}(t)\rangle = \delta_{ij}$ and $\langle\xi_{i}(t)\xi_{i}(t')\rangle = \delta(t-t')$. When expressed for all neurons $i$ simultaneously, the above becomes a high-dimensional stochastic differential equation, which in general is difficult to work with. Previously, a realization of the spike train $z_{i}(t)$ that arise from thresholding (1.12) are approximated as a sum of two terms which represent the spike train in the absence of feedforward and feedback currents and a linear filter of synaptic inputs
 
-Since (1.2) is a stochastic differential equation, its solution is the probability density $P(V,t)$. This can be useful, since the solution is directly applicable to ensembles of neurons and thus permits the analysis network dynamics. Under conditions in which the diffusion approximation applies, the Kramers-Moyal expansion can be reduced to the following Fokker-Planck equation the general nonlinear integrate and fire model given in (1.4)
+\begin{align}
+z(t) \approx z_{0}(t) + (A * X)(t) 
+\end{align}
 
+If averaged over many realizations, the above instead becomes an expression for the firing rate $r(t)$. The equation above is the central claim made by a linear reponse theory of network dynamics. For simplicity, it is natural to start with the case where $F_{i}(t)$ is itself a Gaussian white noise independent of the intrinsic noise. Therefore, the intrinsic noise $\xi(t)$ and the feedforward stimulus can be absorbed into a single noise term. Then, $z_{0}(t)$ is a realization of a spike train in the absence of feedback when its stimulation is a sum of feedforward and intrinsic noise. In the frequency domain this equation reads (Linder 2005; Trousdale 2012)
+
+\begin{align}
+\tilde{z}_{i}(\omega) = \tilde{z}_{i}^{0}(\omega) + \tilde{A}(\omega)\left(\sum_{j}\tilde{J}_{ij}(\omega)\tilde{z}_{j}(\omega)\right)
+\end{align}
+
+The matrix $\tilde{J}(\omega)$ is the frequency domain representation of the synaptic connectivity matrix after convolution with the synaptic kernel and $\tilde{A}(\omega)$ is the transfer function or response function in the frequency domain. This equation can then be rewritten in matrix form to give the frequenty domain representation of the spiking activity across all neurons in the population simultaneously
+
+\begin{align}
+\tilde{z}(\omega) = \tilde{z}^{0}(\omega) + \tilde{A}(\omega)\tilde{J}(\omega)\tilde{z}(\omega)
+\end{align}
+
+The result above can then be solved for $\tilde{z}(\omega)$ to give 
+
+
+\begin{align}
+\tilde{z}(\omega) = \left(I-\tilde{A}(\omega)\tilde{J}(\omega)\right)\tilde{z}^{0}(\omega)
+\end{align}
+
+where $I$ is the identity matrix. The expression above can then be used to obtain the cross-spectrum (and therefore the cross-correlations) of two spike trains $z_{i}(\omega)$ and $z_{j}(\omega)$ for all possible pairs. 
+
+\begin{align}
+\langle\tilde{z}(\omega)\tilde{z}^{*}(\omega)\rangle &= \langle \left(I-\tilde{A}(\omega)\tilde{J}(\omega)\right)\tilde{z}_{0}(\omega)\tilde{z}_{0}^{*}(\omega)\left(I-\tilde{A}(\omega)\tilde{J}(\omega)\right)^{*}\rangle\\
+&= \Delta(\omega)C^{0}(\omega)\Delta(\omega)^{*}
+\end{align}
+
+The above result is the matrix of cross spectra across the population $C(\omega)$ in the situation where feedforward inputs are uncorrelated.
+In essence, a linear response theory of network dynamics determines the auto- and cross-correlations of spike trains. Studies have used the above result as a foundation for analyzing the effects of the topology $J$ on the matrix $C(\omega)$ (Trousdale 2012; Ocker 2015). In any case, the matrix $C^{0}(\omega)$ and the linear response function $A(\omega)$ are still unknown, and must be found. In general, this can be challenging; however, the assumption that feedforward inputs and intrinsic noise are white permits the use of the diffusion approximation. In other words, we can use the Fokker-Planck equation to estimate $C^{0}(\omega)$ and $A(\omega)$ by using methods introduced in (Richardson 2007). The primary result of that study is a numerical solution to the Fokker-Planck equation under a weak sinusoidal perturbation to the synaptic current (Richardson 2007; 2009). 
+
+Under conditions in which the diffusion approximation applies, the Kramers-Moyal expansion can be reduced to the following Fokker-Planck equation for the general nonlinear stochastic integrate and fire model given in (1.4)
 
 \begin{align}
 \frac{\partial P(V,t)}{\partial t} &= \frac{\sigma^{2}}{2}\frac{\partial^{2}P}{\partial V^{2}} + \frac{\partial}{\partial V}\left(\frac{V-E-\psi}{\tau}P\right)
 \end{align}
 
-
-The stationary solution of the density $P(V,t)$ has been found for simple models such as when $\psi(V) = -V$, which resembles the Ornstein-Uhlenbeck process with special boundary conditions imposed by the threshold (Brunel 2000; Brunel and Hakim 1999). However, the solution for non-linear integrate and fire models frequently requires numerical integration of (1.5) to find the stationary density over the membrane potential and to estimate steady state firing rates. A novel approach, based on linear response theory, leverages the diffusion approximation to make predictions on spike train correlations directly in terms of circuit architecture (Ocker 2017).
-
-In essence, a linear response theory of network dynamics determines the auto- and cross-correlations of spike trains by defining a linear interaction between presynaptic and postsynaptic firing rates. For example, the approach given by Pernice et al. leverages Hawkes theory of linearly interacting point processes to calculate stationary firing rates and spike correlations in excitatory-inhibitory networks with arbitrary topology (Pernice 2011, 2012). Other studies have used a similar approach in which the linear response function of a neuron is found by numerically integrating the corresponding Fokker-Planck equation with a weak sinusoidal perturbation to the synaptic current (Richardson 2007; 2009). In the following paragraphs we will summarize the latter approach as it has been adapted for more realistic neuron models such as the EIF.
-
-The first step is to compute the stationary density for the membrane potential by solving the Fokker-Planck equation under white-noise stimulation. This simultaneously provides the steady state firing rate by evaluating the density at threshold $P(\theta,t)$. The following is a brief summary of the procedure for finding the stationary density, see (Richardson 2007) for a full derivation. Now, (1.5) is often reformulated as the continuity equation
+The stationary solution of the density $P(V,t)$ has been found for simple models such as when $\psi(V) = -V$, which resembles the Ornstein-Uhlenbeck process with special boundary conditions imposed by the threshold (Brunel 2000; Brunel and Hakim 1999). However, the solution for non-linear integrate and fire models frequently requires numerical integration of (1.5) to find the stationary density over the membrane potential and to estimate steady state firing rates. If (1.13) is resolved into a pair of first order differential equations, we have
 
 \begin{align*}
 \frac{\partial P(V,t)}{\partial t} &= -\frac{\partial J}{\partial V}\\
 J &= \frac{E-V+\psi}{\tau} - \frac{\sigma^{2}}{\tau}\frac{\partial}{\partial V}
 \end{align*}
 
+The quantity $J$ is called the probability current. Details of the numerical integration (sometimes called the threshold integration method) of the above pair of equations are known for stationary white noise input. See (Richardson 2007; 2009) for a full derivation of these methods. The first step is to compute the stationary density for the membrane potential by solving the Fokker-Planck equation under white-noise stimulation. This simultaneously provides the steady state firing rate $r_{0}$. The steady state firing rate can then be used to derive the frequency spectrum $C^{0}(\omega)$. Once this is obtained, the frequency response can be found by using Richardson's method of solving the Fokker-Planck equation for a weak sinusoidal perturbation in the synaptic current.
 
-Then, this solution is used to find the first passage time density from which we can extract the spike train power spectrum. After additionally calculating the linear response of a neuron to input and the synaptic kernel in the frequency domain, we can solve the following set of matrix equations for the cross-spectra (cross-covariance) in the network
-
-
-The quantity $J$ is called the probability current. Details of the numerical integration of (1.5) were given in (Richardson 2007). This result will be discussed later in the context of a linear response theory. 
-
-\begin{equation}
-r(t) = r_{0} + \int_{-\infty}^{\infty} G(t-\tau)z(\tau)d\tau
-\end{equation}
-
-We then have the following steady-state matrix of cross-covariances in the time domain (Pernice 2012; Ocker 2017)
-
-\begin{equation}
-C_{0}(\tau) = G(\tau)R_{0} + (G*C_{0})(\tau)
-\end{equation} 
-
-Noting that the Fourier transform of a Poisson process with rate $r_{i}$ takes the value $r_{i}$ for all frequencies in the frequency domain, we can find the cross spectral matrix $C(\omega)$ as (Pernice 2012)
+Furthermore, the solution for $C(\omega)$ given in (1.2) has been derived in an alternative fashion by using an iterative approach (Trousdale 2012). This approach is highly valuable as it builds an estimate of $C(\omega)$ by considering paths through a recurrent network of increasing length. However, the mathematics used to derive an estimate of $C(\omega)$ is very dense. Here, only the key points will be highlighted and most of the mathematical details are deferred to the original text (Trousdale 2012). Intuitively, the spike-train correlation between a pair of cells can be estimated from the activity of presynaptic cells $n$ synapses away from the cells under consideration. We expect then to improve our estimate of $C(\omega)$ for large values of $n$. For the simplest case, when $n=0$, the neurons are uncoupled and we have $C(\omega) = C^{0}(\omega)$. Now, when $n=1$, we consider only the nearest neighbors in calculating the cross-correlation between neurons $i$ and $j$ and improve on the estimate $C^{0}(\omega)$ by computing
 
 \begin{align}
-C(\omega) &= [1-G(\omega)]^{-1}R_{0}(\omega)(\omega)[1-G^{*}(\omega)]^{-1}\\
-&= \Delta(\omega)\;R_{0}\;\Delta^{*}(\omega)
+z_{i}^{1}(t) = z_{i}^{0} + \sum_{j}K_{ij}[y_{j}^{0}-r_{j}](t)
 \end{align} 
 
-where the Fourier transform of the rates has been arranged as a digonal matrix. Recently, the matrix $\Delta(\omega)$ has been termed a \emph{propagator} as it propagates the rates of each neuron to the rest of the population (Ocker 2016). Also, $\Delta(\omega) = (I - A(\omega)J)^{-1}$, taking the fourier transform of the interaction kernel in (1.14) and organizing this as a diagonal matrix $A(\omega)$. Furthermore, the solution for $C(\omega)$ has been extended to also account for correlations in feedforward inputs (Ocker 2015; Ocker 2016)
+As mentioned, the iteration can proceed by incrementing $n$ to account for directed chains with increasing length. If the iteration does proceed to order $n$, then we have a more general form of the above equation (Trousdale 2012)
 
 \begin{align}
-C(\omega) &= \Delta(\omega)\;R_{0}\;\Delta^{*}(\omega) + \Delta(\omega)\;A(\omega)C^{\mathrm{ext}}(\omega)A^{*}(\omega)\;\Delta^{*}(\omega)
+z_{i}^{n+1}(t) &= z_{i}^{0} + K*[z^{n}-r](t)\\
+&= z_{i}^{0} + \sum_{k=1}^{n+1} K^{(k)} *[z^{0}-r](t)
 \end{align} 
- 
-After taking the inverse Fourier transform, we then have the cross-covariance matrix where correlations can arise from both feedforward and recurrent activity. In summary, the linear theory provides a direct mechanism for solving for the cross-covariance of spiking in the population in terms of the synaptic coupling matrix, for arbitrary network topologies. Previous analyses have restricted feedforward inputs to be uncorrelated and have considered only random networks (Pernice 2012). Other analyses have considered more complex networks, such as Erdos-Renyni networks with a spike-timing dependent plasticity rule, but have left external input uncorrelated (Ocker 2015).
+
+As in the original derivation, $K^{(k)}$ is the k-fold convolution of $K$ with itself. A central result of (Trousdale 2012) was the following expression for the $n$-th order estimate of the matrix $C(\tau)$ 
+
+\begin{align}
+C^{n}(\tau) = \sum_{m}\sum_{n} K^{m}*C^{0}*(K^{n})^{T}(\tau)
+\end{align} 
+
+After taking the Fourier transformation and the limit $n\rightarrow\infty$ gives a result identical to (1.18). Most importantly for this thesis, this method been extended to also account for the network response to external signals. In this case, the estimate of $z(t)$ up to a chain of length $n$ gives
+
+\begin{align}
+z^{n+1}(t) &= z^{0} + K*[z^{n}-r](t) + A*F(t)
+\end{align} 
+
+where $F(t)$ is the feedforward input as usual and $A$ is a diagonal matrix containing the linear response of each neuron in the time domain. In this case, the expression analagous to (1.23) is 
+
+\begin{align}
+C^{n}(\tau) = \sum_{m}\sum_{n} K^{m}*C^{0}*(K^{n})^{T}(\tau) + \sum_{m}\sum_{n} K^{m}*A*C^{ext}A(K^{n})^{T}(\tau)
+\end{align} 
+
+where $C^{ext} = \langle F(t+\tau)F(t)^{T}\rangle$ for $F(t) = [F_{1}(t)\;,...,\;F_{N}]$ (the cross-correlation matrix of the external signals). Transforming (1.25) to the frequency domain as before then gives a crucial result (Trousdale 2012; Ocker 2017). 
+
+
+\begin{align}
+C(\omega) &= \Delta(\omega)\;C^{0}\;\Delta^{*}(\omega) + \Delta(\omega)\;A(\omega)C^{\mathrm{ext}}(\omega)A^{*}(\omega)\;\Delta^{*}(\omega)
+\end{align} 
+
+Here, we are particularly interested in using (1.26) to estimate the matrix $C(\omega)$ when the feedforward inputs $F(t)$ are drawn from a multivariate gaussian distribution i.e. $F(t) \sim \mathcal{N}(\mu,\Sigma)$. This can be done; however, it has been noted that corrections for $C^{0}(\omega)$ are needed. 
+
+See the appendix for a derivation for the result above which accounts for correlations in the feedforward input. Solving the above matrix equation and taking the inverse Fourier transform then gives the matrix of corss-correlations when correlations can arise from both feedforward and recurrent activity. In summary, the linear theory provides a direct mechanism for solving for the cross-covariance of spiking in the population in terms of the synaptic coupling matrix, for arbitrary network topologies, provided that the diffusion approximation applies. Previous analyses have restricted feedforward inputs to be uncorrelated (Trousdale 2012; Ocker 2015). Other analyses have considered more complex network topologies with a spike-timing dependent plasticity rule, but still have left external input uncorrelated (Ocker 2015). A natural development is to then generalize these approaches to the case where the network topology can be dynamic and the feedforward inputs have nonzero correlations.
+
+It should be noted that the diffusion approximation is not limited to this context. Rather, it also applies when synaptic connectivity is sufficiently sparse, and the probability of two neurons sharing synaptic inputs vanishes. Then, the synaptic current to a neuron can be guaranteed to follow a normal distribution, per the central limit theorem (Brunel 2000). However, the diffusion approximation is not exclusive to these network architectures either. It is also a valid assumption when the population fires asychronously and the feedback $R(t)$ is a sum over independent processes, even in dense networks (Tian 2020; Rosenbaum 2017).
+
 
 
 \subsection{Reshaping network structure with synaptic plasticity}
