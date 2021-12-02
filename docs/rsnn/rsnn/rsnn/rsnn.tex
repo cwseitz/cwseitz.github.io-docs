@@ -70,7 +70,7 @@ In his famous neurophysiological postulate, Donald Hebb first proposed a cellula
 
 In this thesis, it will be argued that the spatial correlation structure predicted by mean-field theory for balanced spatially-extended networks could result in spatially-dependent plasticity. The non-monotonicity of the spatial-dependence of spike-train correlations could have important implications for synaptic competition and stable assembly formation. Deviations from the balanced state predicted by mean-field theory could then be addressed using linear response techniques, which have been recently generalized to accomodate for slow changes in network topology (Ocker 2015).
 
-
+\clearpage
 \section{Literature Review and Theoretical Foundations}
 
 
@@ -321,7 +321,7 @@ Furthermore, spatially extended excitatory-inhibitory networks have been rigorou
 \caption{\textbf{Qualitative sketch of the spatial dependence of spike correlations}. Plot shows the spatial profile of correlations that has been measured in balanced spatially-extended networks as well as in electrode recordings of macaque V1.}
 \end{figure}
 
-The striking similarity between the spatial correlation structure in simulations of balanced networks and multielectrode recordings could have important implications for cell assembly formation. A spatial-dependence of correlations and long-term plasticity could help drive synaptic competition and synaptic weight normalization. In other words, if the total synaptic conductance a neuron has for its inputs is approximately conserved, the redistribution of condutance could be dependent on spatial proximity. In network models with a logically connected topology, how synaptic conductance should be redistributed is not obvious. Considering then the observation that LTP and LTD can have spatially inhomogeneous properties, we might hypothesize that the balance of excitation and inhibition can result in not only balanced network dynamics but also stability in the formation and maintenance of cell assemblies. An added bonus of this point of view is that predictions on the dynamics of synaptic weights can be expressed theoretically. Using the linear response approximation to predict the matrix of cross-spectra $C(\omega)$ and inserting that prediction into (1.29) gives a coupled set of differential equations for the correlations and the weights. Indeed, that mathematical relationship has already been leveraged to make predictions on the dynamics of motifs in an excitatory network (Ocker 2015). Here, a similar formalism is being proposed, except that a special emphasis is placed on the role of excitatory-inhibitory balance in cell assembly formation. 
+The striking similarity between the spatial correlation structure in simulations of balanced networks and multielectrode recordings could have important implications for cell assembly formation. A spatial-dependence of correlations and long-term plasticity could help drive synaptic competition and synaptic weight normalization. In other words, if the total synaptic conductance a neuron has for its inputs is approximately conserved, the redistribution of conductance could be dependent on spatial proximity. In network models with a logically connected topology, how synaptic conductance should be redistributed is not obvious. Considering then the observation that LTP and LTD can have spatially inhomogeneous properties, we might hypothesize that the balance of excitation and inhibition can result in not only balanced network dynamics but also stability in the formation and maintenance of cell assemblies. An added bonus of this point of view is that predictions on the dynamics of synaptic weights can be expressed theoretically. Using the linear response approximation to predict the matrix of cross-spectra $C(\omega)$ and inserting that prediction into (1.29) gives a coupled set of differential equations for the correlations and the weights. Indeed, that mathematical relationship has already been exploited to make predictions on the dynamics of motifs in an excitatory network (Ocker 2015). Here, a similar formalism is being proposed, except that a special emphasis is placed on the role of excitatory-inhibitory balance in cell assembly formation. 
 
 To begin to answer questions on the relationship of excitatory-inhibitory balance, spike-train correlations, and plasticity effects, the fundamentals of the linear response approximation will first be demonstrated. The following analysis is applied to the simple case of a random network model in the absence of plasticity. This reduction is necessary for two main reasons. First, spike train correlations can be approximated in networks with arbitrary topology; however, proving the existence of a balanced state for an arbitrary topology is not a trivial task. Thus far, proof of a balanced state for spatially-extended networks has been found in a mean-field setting under specific topological constraints. Second, numerical solution of the coupled equations for the synaptic weights and spike-train correlations is a computationally expensive task, especially for large networks. Significant optimization of these numerical methods is needed to address the hypothesis given here.
 
@@ -331,22 +331,23 @@ A very general protocol for solving for the matrix of cross spectra $C(\omega)$ 
 C(\omega) &= \Delta(\omega)C^{0}(\omega)\Delta^{*}(\omega)
 \end{align}
 
-where the matrix $C^{0}(\omega)$ is again a diagonal matrix of cross-spectra when we do not account for the effect of feedback in the network. I
+where again the matrix $C^{0}(\omega)$ is again a diagonal matrix of cross-spectra when we do not account for the effect of feedback in the network. 
+
 \subsection{Predicting uncoupled firing rates}
 
-t is therefore necessary to find the baseline firing rate of neuron $i$ from its average input current which is a sum of the mean feedforward input and the mean recurrent input i.e. $\mu_{i} = \mu_{F}^{i} + \mu_{R}^{i}$. Generally, the mean of the feedback current $\mu_{R}^{i}$ is found by iteratively solving the Fokker-Planck equation for the specified neuron model and using the predicted firing rate for each neuron to update the rate of the rest of the neurons in the next iteration. That is, at each iteration, 
+In the linear response framework it is necessary to find the baseline firing rate of neuron from its average input current which is a sum of the mean feedforward input and the mean recurrent input i.e. $\mu = \mu_{F} + \mu_{R}$. Generally, the mean of the feedback current $\mu_{R}$ is found by iteratively solving the Fokker-Planck equation for the specified neuron model and using the predicted firing rate for each neuron to update the rate of the rest of the neurons in the next iteration. That is, at each iteration, we compute
 
 \begin{align*}
 \mu_{R}^{t+1} = \mu_{F} + J * r^{t}
 \end{align*}
 
-where the calculation of average feedback current is expressed in matrix form and $*$ represents standard matrix multiplication. The Fokker-Planck equation is then reparameterized for Gaussian white noise with mean $\mu_{R}^{t+1}$ and variance equal to the variance of the feedforward input. This is referred to as a fixed-point iteration to find the steady state firing rates of all neurons in the network (Trousdale 2012; Ocker 2015). Summarizing the sum of feedforward and feedback currents as a single gaussian variable with mean $\mu_{i}$ gives the following simplified Langevin equation for the membrane potentiial
+assuming that $\mu_{F}$ is constant. The calculation of average feedback current is expressed in matrix form and $*$ represents standard matrix multiplication. The Fokker-Planck equation is then reparameterized for Gaussian white noise with mean $\mu_{R}^{t+1}$ and variance equal to the variance of the feedforward input. This is referred to as a fixed-point iteration to find the steady state firing rates of all neurons in the network (Trousdale 2012; Ocker 2015). Summarizing the sum of feedforward and feedback currents as a single gaussian variable with mean $\mu_{i}$ gives the following simplified Langevin equation for the membrane potentiial
 
 \begin{align}
 \tau\dot{V}_{i}(t) = E - V_{i} + \psi(V_{i}) + \eta_{i}(t)
 \end{align}
 
-where $\eta_{i}(t) \sim \mathcal{N}(\mu_{i},\sigma_{F}^{2})$. The corresponding Fokker-Planck equation reads
+where $\eta_{i}(t) \sim \mathcal{N}(\mu_{i},\sigma^{2})$. The corresponding Fokker-Planck equation reads
 
 \begin{align}
 \frac{\partial P}{\partial t} &= \frac{\sigma^{2}}{\tau}\frac{\partial^{2}P}{\partial V^{2}} + \frac{\partial}{\partial V}\left(\frac{V-E+\psi}{\tau}P\right)
@@ -357,14 +358,14 @@ The full details of this method for finding both the steady state density as wel
 \begin{figure}[t!]
 \centering
 \includegraphics[width=175mm]{figure-3}
-\caption{\textbf{Fokker-Planck solution in the uncoupled regime} (A) Steady-state raster plot of $N=100$ uncoupled EIF neurons undergoing stimulation with GWN with $\mu = 2\mu A/\mathrm{cm}^{2}$ and $\sigma = 9 \;\mu A/\mathrm{cm}^{2}$. (B) Histogram of the membrane potential in the steady-state and Fokker-Planck predicted histogram. (C) Two randomly selected voltage traces (D) Histogram of the population-averaged firing rate and its mean value (D) Covariance matrix of the feedforward GWN input}
+\caption{\textbf{Fokker-Planck solution in the uncoupled regime} (A) Steady-state raster plot of $N=100$ uncoupled EIF neurons undergoing stimulation with GWN with $\mu = 2\mu A/\mathrm{cm}^{2}$ and $\sigma = 9 \;\mu A/\mathrm{cm}^{2}$. (B) Histogram of the membrane potential in the steady-state and Fokker-Planck predicted histogram. (C) Two randomly selected voltage traces (D) Histogram of the population-averaged firing rate and its mean value (D) Covariance matrix of the feedforward white-noise input}
 \end{figure}
 
 To determine the level of similarity between the numerical prediction of $r_{0}$ versus the result of Monte-Carlo simulations, $N=100$ EIF neurons were simulated for GWN input with $\mu = 2\mu A/\mathrm{cm}^{2}$ and $\sigma = 9 \;\mu A/\mathrm{cm}^{2}$ over a period $T = 1\mathrm{s}$. A spike raster illustrating network activity in the steady state (the last $100\mathrm{ms}$ of the simulation) is shown in Fig (1.4a) with example voltage traces from two randomly selected neurons in Fig (1.4c). The average firing rate measured in simulations was $69.2\mathrm{Hz}$ (Fig 1.4d) in strong agreement with the numerical prediction $73.2\mathrm{Hz}$ (Fig 1.4b). The numerically predicted firing rate can then be used to estimate the frequency spectrum of the spiking activity of each neuron i.e. the value of $C_{ii}^{0}(\omega)$. 
 
 \begin{figure}[t!]
 \centering
-\includegraphics[width=125mm]{figure-4}
+\includegraphics[width=150mm]{figure-4}
 \caption{\textbf{Frequency reponse as a function of average input} (A) Predicted firing rate under a weak sinsuoidal perturbation with frequency $\omega$ for various values of the average input current $\mu$. (B) Phase of the response. }
 \end{figure}
 
@@ -422,6 +423,7 @@ The dependence of $\Gamma$ on distance has been suppressed for simplicity. Quali
 To begin to determine if this network topology can exhibit a balanced state, we dissect the degree distribution for both excitatory and inhibitory neurons. The average number of inputs of type $\alpha$ to a neuron of type $\beta$ denoted as $\langle \beta_{\alpha} \rangle$ is simply found by integrating the function $\Gamma$ over the two-dimensional spatial domain (see Methods). The results of this integration are shown in Fig (1.8) for $N=100$ neurons. In principle, we would expect that correlations in this network may arise due to the fact that nearby neurons will tend to have overlapping connections.
 
 
+\clearpage
 \section{Methods}
 
 \subsection{Monte-Carlo simulations}
@@ -466,49 +468,6 @@ In the steady state, the second equation above is rearranged to give a coupled s
 
 where $V_{\mathrm{th}}$ and $V_{\mathrm{re}}$ refer to the firing threshold and reset potentials, respectively. Briefly, the steady state firing rate $r_{0}$ can be cancelled from the above equations and they can be integrated numerically. Similar expressions exist for the case when the current undergoes a weak sinusoidal perturbation, which is important for finding the linear response function of the firing rate $A(\omega)$. 
 
-\clearpage
-\begin{center}
-\captionof{table}{EIF neuron parameters}
-    \begin{tabular}{ | p{4cm} p{7cm} p{4cm} |}
-    \hline
-    Parameter & Description & Value \\ \hline
-    $C$ & Membrane capacitance & 1 $\mu F/\mathrm{cm}^{2}$ \\
-    $g_{\ell}$ & Leak conductance & 0.1 $\mathrm{mS}/\mathrm{cm}^{2}$\\
-    $V_{\ell}$ & Leak reversal potential & -60 $\mathrm{mV}$ \\
-    $\Delta$ & Action pontential steepness & 2 $\mathrm{mV}$ \\
-    $V_{T}$ & Action potential initiation threshold & -50 $\mathrm{mV}$ \\
-    $V_{\mathrm{th}}$ & Action potential threshold & -10 $\mathrm{mV}$ \\
-    $V_{\mathrm{re}}$ & Action potential reset & -60 $\mathrm{mV}$ \\
-    $\tau_{\mathrm{ref}}$ & Action potential width & 1.5 $\mathrm{ms}$ \\
-    $\mu_{\mathrm{ext}}$ & External input mean & 1 $\mu A/\mathrm{cm}^{2}$ \\
-    $\sigma_{\mathrm{ext}}$ & External input s.d. & 9 $\mu A/\mathrm{cm}^{2}$ \\
-    \hline
-
-    \end{tabular}
-\end{center}
-
-\begin{center}
-\captionof{table}{EIF balanced network parameters}
-    \begin{tabular}{ | p{4cm} p{7cm} p{4cm} |}
-    \hline
-    Parameter & Description & Value \\ \hline
-    $N_{e}$ & Number of excitatory neurons & 500 \\
-    $N_{i}$ & Number of inhibitory neurons & 500 \\
-    $p_{ee}$ & Probability of $E\rightarrow E$ & 0.25 \\
-    $p_{ei}$ & Probability of $E\rightarrow I$ & 0.25 \\
-    $p_{ie}$ & Probability of $I\rightarrow E$ & 0.25 \\
-    $p_{ii}$ & Probability of $I\rightarrow I$ & 0.25 \\
-    $j_{ee}$ & Weight of $E\rightarrow E$ & 12.5 $\mu A/\mathrm{cm}^{2}$ \\
-    $j_{ei}$ & Weight of $I\rightarrow E$ & 50 $\mu A/\mathrm{cm}^{2}$\\
-    $j_{ie}$ & Weight of $E\rightarrow I$ & 20 $\mu A/\mathrm{cm}^{2}$ \\
-    $j_{ii}$ & Weight of $I\rightarrow I$ & 50 $\mu A/\mathrm{cm}^{2}$\\
-    $\tau_{s}$ & Excitatory synaptic time constant & 4 $\mathrm{ms}$\\
-    \hline
-
-    \end{tabular}    
-   
-\end{center}
-
 
 \subsection{Generating spatially extended networks}
 
@@ -541,13 +500,59 @@ Sampling from the distribution $\mathbb{P}$ for each of the $N^{2} - N$ possible
 \langle N_{ij} \rangle = \sum_{j} \Gamma_{ij}(1-\Gamma_{ji})(1-\Gamma_{0})\cdot Z^{-1}
 \end{equation}
 
-The in-degree distribution is found by simply swapping $i$ and $j$.
+\clearpage
+\begin{center}
+\captionof{table}{EIF neuron parameters}
+    \begin{tabular}{ | p{4cm} p{7cm} p{4cm} |}
+    \hline
+    Parameter & Description & Value \\ \hline
+    $C$ & Membrane capacitance & 1 $\mu F/\mathrm{cm}^{2}$ \\
+    $g_{\ell}$ & Leak conductance & 0.1 $\mathrm{mS}/\mathrm{cm}^{2}$\\
+    $V_{\ell}$ & Leak reversal potential & -60 $\mathrm{mV}$ \\
+    $\Delta$ & Action pontential steepness & 2 $\mathrm{mV}$ \\
+    $V_{T}$ & Action potential initiation threshold & -50 $\mathrm{mV}$ \\
+    $V_{\mathrm{th}}$ & Action potential threshold & -10 $\mathrm{mV}$ \\
+    $V_{\mathrm{re}}$ & Action potential reset & -60 $\mathrm{mV}$ \\
+    $\tau_{\mathrm{ref}}$ & Action potential width & 1.5 $\mathrm{ms}$ \\
+    $\mu_{\mathrm{ext}}$ & External input mean & 1 $\mu A/\mathrm{cm}^{2}$ \\
+    $\sigma_{\mathrm{ext}}$ & External input s.d. & 9 $\mu A/\mathrm{cm}^{2}$ \\
+    $N_{e}$ & Number of excitatory neurons & 500 \\
+    $N_{i}$ & Number of inhibitory neurons & 500 \\
+    $p_{ee}$ & Probability of $E\rightarrow E$ & 0.25 \\
+    $p_{ei}$ & Probability of $E\rightarrow I$ & 0.25 \\
+    $p_{ie}$ & Probability of $I\rightarrow E$ & 0.25 \\
+    $p_{ii}$ & Probability of $I\rightarrow I$ & 0.25 \\
+    $j_{ee}$ & Weight of $E\rightarrow E$ & 12.5 $\mu A/\mathrm{cm}^{2}$ \\
+    $j_{ei}$ & Weight of $I\rightarrow E$ & 50 $\mu A/\mathrm{cm}^{2}$\\
+    $j_{ie}$ & Weight of $E\rightarrow I$ & 20 $\mu A/\mathrm{cm}^{2}$ \\
+    $j_{ii}$ & Weight of $I\rightarrow I$ & 50 $\mu A/\mathrm{cm}^{2}$\\
+    $\tau_{s}$ & Excitatory synaptic time constant & 4 $\mathrm{ms}$\\
+    \hline
+
+    \end{tabular}
+\end{center}
 
 % Format a LaTeX bibliography
 \makebibliography
 
+[1] Buesing et al. \textit{Neural dynamics as sampling: A model for stochastic computation in recurrent networks of spiking neurons}. PLoS Computational Biology 2011.\newline
+[1] Azouz et al. \textit{The organization of behavior: A neurophysiological theory}. John Wiley and Sons. 1949.
 [1] D.O. Hebb \textit{The organization of behavior: A neurophysiological theory}. John Wiley and Sons. 1949.
-
+[1] D.O. Hebb \textit{The organization of behavior: A neurophysiological theory}. John Wiley and Sons. 1949.
+[1] D.O. Hebb \textit{The organization of behavior: A neurophysiological theory}. John Wiley and Sons. 1949.
+[1] D.O. Hebb \textit{The organization of behavior: A neurophysiological theory}. John Wiley and Sons. 1949.
+[1] D.O. Hebb \textit{The organization of behavior: A neurophysiological theory}. John Wiley and Sons. 1949.
+[1] D.O. Hebb \textit{The organization of behavior: A neurophysiological theory}. John Wiley and Sons. 1949.
+[1] D.O. Hebb \textit{The organization of behavior: A neurophysiological theory}. John Wiley and Sons. 1949.
+[1] D.O. Hebb \textit{The organization of behavior: A neurophysiological theory}. John Wiley and Sons. 1949.
+[1] D.O. Hebb \textit{The organization of behavior: A neurophysiological theory}. John Wiley and Sons. 1949.
+[1] D.O. Hebb \textit{The organization of behavior: A neurophysiological theory}. John Wiley and Sons. 1949.
+[1] D.O. Hebb \textit{The organization of behavior: A neurophysiological theory}. John Wiley and Sons. 1949.
+[1] D.O. Hebb \textit{The organization of behavior: A neurophysiological theory}. John Wiley and Sons. 1949.
+[1] D.O. Hebb \textit{The organization of behavior: A neurophysiological theory}. John Wiley and Sons. 1949.
+[1] D.O. Hebb \textit{The organization of behavior: A neurophysiological theory}. John Wiley and Sons. 1949.
+[1] D.O. Hebb \textit{The organization of behavior: A neurophysiological theory}. John Wiley and Sons. 1949.
+[1] D.O. Hebb \textit{The organization of behavior: A neurophysiological theory}. John Wiley and Sons. 1949.
 
 \end{document}
 
