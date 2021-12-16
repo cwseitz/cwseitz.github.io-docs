@@ -8,6 +8,7 @@
 \usepackage{bm}
 \usepackage{siunitx}
 
+
 \setbeamertemplate{footline}{}
 \setbeamertemplate{navigation symbols}{}
 
@@ -18,132 +19,134 @@
 
 \maketitle
 
-\begin{frame}{The squid giant axon}
-
-Hodkin and Huxley developed a mathematical model for nerve cell communication in 1952 using voltage data from the giant axon of a squid
-
-\begin{figure}
-\centering
-\includegraphics[width=95mm]{figure-20}
-\end{figure}
-
-\end{frame}
-
-\begin{frame}{$Na^{+}$ and $K^{+}$ are the major charge carriers}
-
-\begin{figure}
-\centering
-\includegraphics[width=105mm]{figure-19}
-\end{figure}
-
-\end{frame}
-
-\begin{frame}{$Ca^{2+}$ sensors enable high-speed two-photon imaging}
-
-Animal models and experimental technologies have improved drastically
-
-\begin{figure}
-\centering
-\includegraphics[width=140mm]{figure-16}
-\end{figure}
-Scale bars: b, 250 um; c, d, 100 um
-
-$4\si{mm}^{2}$ FOV at $\sim 8\si{Hz}$
-
-\end{frame}
-
-\begin{frame}{Spiking neural networks (SNN): integrate and fire models}
-
-
-\begin{figure}
-\centering
-\includegraphics[width=75mm]{figure-15}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics[width=115mm]{figure-14}
-\end{figure}
-
-\begin{equation*}
-\tau\dot{V(t)} = -g_{L}V(t) + \sum_{n} w_{n}\theta_{n}(t)
-\end{equation*}
-
-\end{frame}
-
-\begin{frame}{Synaptic transmission}
+\begin{frame}{Introduction to networks of spiking neurons}
 
 \begin{columns}
-\column{0.38\linewidth}
+\column{0.5\linewidth}
+\begin{figure}
+\includegraphics[height=65mm, width=75mm]{figure-18}
+\end{figure}
+\column{0.5\linewidth}
 \begin{itemize}
-\item Presynaptic action potentials contribute to post-synaptic currents
-\item The amplitude of post-synaptic currents change in time 
-\item Amplitude changes thought to drive learning and memory
+\item $\sim$ 16 billion neurons in cortex
+\item A neuron receives on the order of $10^{3}$ to $10^{4}$ synaptic inputs
+\item Neurons communicate via action potentials in an all-or-nothing fashion
+\item Post-synaptic potentials (PSPs) allow pre-synaptic action potentials to change post-synaptic membrane potential
+\item PSPs can be positive or negative (excitatory or inhibitory)
 \end{itemize}
 
-\column{0.58\linewidth}
-\centering
-\includegraphics[width=65mm]{figure-3}
-\end{columns}
+\end{columns} 
+
+
+
 \end{frame}
 
-\begin{frame}{Synaptic current as a stochastic process}
+
+\begin{frame}{Integrate and fire (IF) neuron models}
+
+\begin{figure}
+\centering
+\includegraphics[width=140mm]{figure-19-1}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=140mm]{figure-19-2}
+\end{figure}
+
+Monte-Carlo simulations of neurons often use a Langevin equation:
+
+\begin{equation*}
+\tau\dot{V}(t) = g_{\ell}(E - V) + g_{\ell}\cdot \psi(V) + I(t)
+\end{equation*}
+
+
+\end{frame}
+
+\begin{frame}{Monte-Carlo simulation of an integrate and fire model}
+
+When $\psi(V) = g_{\ell}\Delta_{T}\exp\left(\frac{V-V_{L}}{\Delta_{T}}\right)$ we have the exponential integrate and fire model
+
+\begin{figure}
+\centering
+\includegraphics[width=140mm]{figure-3-1}
+\end{figure}
+
+Langevin equations have a corresponding Fokker-Planck equation 
+
+\begin{equation*}
+\frac{\partial P}{\partial t} = \frac{\sigma^{2}}{\tau}\frac{\partial^{2}P}{\partial V^{2}} + \frac{\partial}{\partial V}\left(\frac{V-E+\psi}{\tau}P\right)
+\end{equation*}
+
+which we can occasionally solve numerically
+
+\end{frame}
+
+\begin{frame}{Synaptic coupling can induce correlations in spiking activity}
 
 \begin{columns}
-\column{0.38\linewidth}
+\column{0.5\linewidth}
+\begin{figure}
+\caption{$N=1000$ densely coupled excitatory-inhibitory neurons}
+\includegraphics[height=60mm, width=70mm]{figure-17}
+\end{figure}
+\column{0.5\linewidth}
 \begin{itemize}
-\item Presynaptic action potentials contribute to post-synaptic currents
-\item The amplitude of post-synaptic currents change in time 
-\item Amplitude changes thought to drive learning and memory
+\item When neurons are coupled $I(t) = F(t) + R(t)$
+\item Non-trivial correlations then can arise from correlations in $F(t)$ and $R(t)$.
+\item Dynamics of $I(t)$ depend strongly on the connectivity matrix $\mathcal{C}$
+\item $\mathcal{C}$ itself is dynamic (synaptic plasticity)
 \end{itemize}
 
-\column{0.58\linewidth}
-\centering
-\includegraphics[width=65mm]{figure-3}
-\end{columns}
-
-\begin{figure}
-\centering
-\includegraphics[width=105mm]{figure-4}
-\end{figure}
-
-\begin{equation*}
-\tau\dot{V(t)} = -g_{L}V(t) + \mu(t) + \sqrt{2D}\eta(t)
-\end{equation*}
+\end{columns} 
 
 \end{frame}
 
 
-\begin{frame}{Fokker-Planck equation for Brownian motion}
+\begin{frame}{Synaptic coupling can induce correlations in spiking activity}
+
+\begin{itemize}
+\item For special $\mathcal{C}$, dynamical variables can remain uncorrelated between neurons
+\end{itemize}
+
 
 \begin{figure}
 \centering
-\subfigure[]{\label{fig:a}\includegraphics[width=65mm]{figure-21}}
-\subfigure[]{\label{fig:b}\includegraphics[width=65mm]{figure-22}}
+\includegraphics[width=140mm]{figure-12-1}
 \end{figure}
 
-Predicting $I_{n}(t)$ is hard in complex networks. We instead solve for $P(V,t)$
-
-\begin{equation*}
-\tau\frac{\partial P}{\partial t} = \sqrt{2D}\frac{\partial^{2}P}{\partial V^{2}}
-\end{equation*}
+\begin{itemize}
+\item Uncorrelated neural activity captures irregular spiking seen \emph{in-vivo}
+\item However correlated activity is thought to be fundamental to the neural code
+\end{itemize}
 
 \end{frame}
 
-\begin{frame}{Fokker-Planck equation for Brownian motion}
+\begin{frame}{Linear response of the EIF model}
+
+\begin{itemize}
+\item Neurons are often modeled as heterogeneous Poisson processes
+\item Heterogeneous Poisson processes have a time-dependent rate $r(t)$, which has a frequency response
+\end{itemize}
 
 \begin{figure}
 \centering
-\subfigure[]{\label{fig:a}\includegraphics[width=65mm]{figure-1}}
-\subfigure[]{\label{fig:b}\includegraphics[width=65mm]{figure-2}}
+\includegraphics[width=100mm]{figure-4}
 \end{figure}
 
-The Ornstein-Uhlenbeck (OU) process is a diffusion process with drift
+\end{frame}
 
-\begin{equation*}
-\tau\frac{\partial P}{\partial t} = (\mu(t)-V)\frac{\partial P}{\partial V} + \sqrt{2D}\frac{\partial^{2}P}{\partial V^{2}}
-\end{equation*}
+\begin{frame}{Predicting neuron correlations}
+The linear response of $r(t)$ allows us to also estimate the matrix of cross-correlations $C_{kj}(\tau)$
+from the synaptic connectivity $\mathcal{C}$
+\begin{figure}
+\centering
+\includegraphics[width=110mm]{figure-20}
+\end{figure}
+
+This has important implications for brain-inspired machine learning
 
 \end{frame}
+
 
 \end{document}
