@@ -19,28 +19,101 @@
 
 \maketitle
 
-\begin{frame}{Introduction to networks of spiking neurons}
+
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+\section{Deep learning in a nutshell}
+
+\begin{frame}{A brief survey of deep learning architectures}
+
+\begin{itemize}
+\item Perceptrons e.g. MLPs for classification of vectorized data
+\item Convolutional neural networks (CNNs) for image classification, segmentation
+\item Recurrent neural networks (RNNs) for temporal data
+\item Generative adversarial networks (GANs) and autoencoders e.g. VAEs for generative modeling
+\item ...
+\end{itemize}
+
+\vfill
+{\color{red} which are all trained offline on known samples from some (perhaps very complicated) population distribution}
+
+\end{frame}
+
+\begin{frame}{What \emph{is} a deep network?}
+
+Frank Rosenblatt, using the McCulloch-Pitts neuron and the findings of Donald Hebb, went on to develop the first perceptron
+\vfill
+
+Say there exists a set $\mathcal X$ of possible inputs and some set $\mathcal Y$ of possible outputs,
+and a parameter vector $\Phi \in \mathbb{R}^d$.
+
+\vfill
+For $x \in \mathcal X$ and $y \in \mathcal Y$ a deep network $\Phi$ computes a conditional probability {\color{red} $P_\Phi(y|x)$}.
+\end{frame}
+
+\begin{frame}{A general prescription for training a deep network}
+
+We assume a ``population'' probability distribution $\mathrm{Pop}$ on pairs $(x,y)$.
+
+\vfill
+\begin{eqnarray*}
+{\color{red} \Phi^*} & {\color{red}  =} & {\color{red} \underset{\Phi}{\mathrm{argmin}} \;{\mathcal L}(x,y,\Phi)}
+\end{eqnarray*}
+
+\vfill
+where $(x,y)\sim \mathrm{Pop}$. Learning (minimizing loss) occurs by some form of gradient descent e.g. stochastic gradient descent (SGD).
+
+\begin{equation*}
+\Delta \Phi = -\eta\frac{\partial \mathcal{L}}{\partial \Phi}
+\end{equation*}
+
+\end{frame}
+
+
+\begin{frame}{Training large neural networks is computationally expensive}
+
+\begin{itemize}
+\item The entire brain is estimated consume 10W of power
+\item Spiking networks (SNNs) perform computations in memory giving low-latency
+\item SNNs can in principle self-organize without backprop (unsupervised learning)
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=110mm]{hardware-figure}
+\end{figure}
+
+\end{frame}
+
+\section{Biologically inspired neural networks}
+\begin{frame}{The third generation of neural networks: spiking nets}
 
 \begin{columns}
 \column{0.5\linewidth}
 \begin{figure}
-\includegraphics[height=65mm, width=75mm]{figure-18}
+\includegraphics[height=55mm, width=75mm]{figure-18}
 \end{figure}
 \column{0.5\linewidth}
 \begin{itemize}
 \item $\sim$ 16 billion neurons in cortex
 \item A neuron receives on the order of $10^{3}$ to $10^{4}$ synaptic inputs
 \item Neurons communicate via action potentials in an all-or-nothing fashion
-\item Post-synaptic potentials (PSPs) allow pre-synaptic action potentials to change post-synaptic membrane potential
-\item PSPs can be positive or negative (excitatory or inhibitory)
 \end{itemize}
 
 \end{columns} 
 
+\end{frame}
+
+\begin{frame}{The third generation of neural networks: spiking nets}
+
+\begin{itemize}
+\item Post-synaptic potentials (PSPs) allow pre-synaptic action potentials to change post-synaptic membrane potential
+\item PSPs can be positive or negative (excitatory or inhibitory)
+\end{itemize}
 
 
 \end{frame}
-
 
 \begin{frame}{Integrate and fire (IF) neuron models}
 
@@ -54,8 +127,6 @@
 \includegraphics[width=140mm]{figure-19-2}
 \end{figure}
 
-Monte-Carlo simulations of neurons often use a Langevin equation:
-
 \begin{equation*}
 \tau\dot{V}(t) = g_{\ell}(E - V) + g_{\ell}\cdot \psi(V) + I(t)
 \end{equation*}
@@ -63,7 +134,7 @@ Monte-Carlo simulations of neurons often use a Langevin equation:
 
 \end{frame}
 
-\begin{frame}{Monte-Carlo simulation of an integrate and fire model}
+\begin{frame}{Monte-Carlo simulation of uncoupled IF neurons}
 
 When $\psi(V) = g_{\ell}\Delta_{T}\exp\left(\frac{V-V_{L}}{\Delta_{T}}\right)$ we have the exponential integrate and fire model
 
@@ -78,64 +149,23 @@ Langevin equations have a corresponding Fokker-Planck equation
 \frac{\partial P}{\partial t} = \frac{\sigma^{2}}{\tau}\frac{\partial^{2}P}{\partial V^{2}} + \frac{\partial}{\partial V}\left(\frac{V-E+\psi}{\tau}P\right)
 \end{equation*}
 
-which we can occasionally solve numerically
-
-\end{frame}
-
-\begin{frame}{Synaptic coupling can induce correlations in spiking activity}
-
-\begin{columns}
-\column{0.5\linewidth}
-\begin{figure}
-\caption{$N=1000$ densely coupled excitatory-inhibitory neurons}
-\includegraphics[height=60mm, width=70mm]{figure-17}
-\end{figure}
-\column{0.5\linewidth}
-\begin{itemize}
-\item When neurons are coupled $I(t) = F(t) + R(t)$
-\item Non-trivial correlations then can arise from correlations in $F(t)$ and $R(t)$.
-\item Dynamics of $I(t)$ depend strongly on the connectivity matrix $\mathcal{C}$
-\item $\mathcal{C}$ itself is dynamic (synaptic plasticity)
-\end{itemize}
-
-\end{columns} 
-
 \end{frame}
 
 
 \begin{frame}{Synaptic coupling can induce correlations in spiking activity}
 
-\begin{itemize}
-\item For special $\mathcal{C}$, dynamical variables can remain uncorrelated between neurons
-\end{itemize}
-
+For special synaptic connectivity regimes dynamical variables can remain uncorrelated between neurons
 
 \begin{figure}
 \centering
 \includegraphics[width=140mm]{figure-12-1}
 \end{figure}
 
-\begin{itemize}
-\item Uncorrelated neural activity captures irregular spiking seen \emph{in-vivo}
-\item However correlated activity is thought to be fundamental to the neural code
-\end{itemize}
+Uncorrelated neural activity captures irregular spiking seen \emph{in-vivo}
 
 \end{frame}
 
-\begin{frame}{Linear response of the EIF model}
-
-\begin{itemize}
-\item Neurons are often modeled as heterogeneous Poisson processes
-\item Heterogeneous Poisson processes have a time-dependent rate $r(t)$, which has a frequency response
-\end{itemize}
-
-\begin{figure}
-\centering
-\includegraphics[width=100mm]{figure-4}
-\end{figure}
-
-\end{frame}
-
+\section{Synaptic connectivity as an internal model}
 \begin{frame}{Predicting neuron correlations}
 The linear response of $r(t)$ allows us to also estimate the matrix of cross-correlations $C_{kj}(\tau)$
 from the synaptic connectivity $\mathcal{C}$
