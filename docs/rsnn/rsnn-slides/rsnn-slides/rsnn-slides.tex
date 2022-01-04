@@ -23,7 +23,7 @@
 }
 
 \begin{document}
-\title{Bayesian inference and memory in recurrent networks of spiking neurons}  
+\title{Statistical inference and memory in recurrent networks of spiking neurons}  
 \author{Clayton Seitz}
 \date{\today} 
 
@@ -67,7 +67,7 @@ $P(A|B)$ is called the posterior, $P(B|A)$ the likelihood, $P(A)$ the prior, and
 P(B) = \int P(B|A)P(A)dA
 \end{equation*}
 
-The prior and likelihood are often known explicitly while calculating the evidence is often intractable. Monte-Carlo Markov Chain (MCMC) methods and Variational Inference offer solutions
+Calculating this integral is often intractable. Monte-Carlo Markov Chain (MCMC) methods and variational inference offer solutions
 
 \end{frame}
 
@@ -78,7 +78,7 @@ The prior and likelihood are often known explicitly while calculating the eviden
 \includegraphics[width=135mm]{vae-diagram}
 \end{figure}
 
-In essence, we \emph{approximate} the true posterior $P(Z|X)$ with a neural network
+The VAE \emph{approximates} the true posterior $P(Z|X)$ with a neural network
 
 \end{frame}
 

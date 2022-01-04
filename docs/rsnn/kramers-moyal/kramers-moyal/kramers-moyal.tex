@@ -1,0 +1,65 @@
+
+
+\documentclass{article}
+\title{The Kramers-Moyal Expansion}
+\author{C.W. Seitz}
+\date{\today}
+
+\usepackage{graphicx}
+\usepackage{subfigure,epsfig,amsfonts}
+\usepackage{amsmath}
+\usepackage{siunitx}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Monte-Carlo Markov Chain (MCMC) techniques allow us to sample from a probability distribution which is difficult to evaluate or difficult to sample from directly. Gibbs sampling is a particular MCMC technique which    
+\end{abstract}
+
+\section{The Kramers-Moyal Expansion}
+
+Given many instantiations of a stochastic variable $V$, we can construct a normalize histogram over all observations as a function of time $P(V,t)$. However, in order to systematically explore the relationship between the parameterization of the process and $P(V,t)$ we require an expression for $\dot{P}(V,t)$. If we make a fundamental assumption that the evolution of $P(V,t)$ follows a Markov process i.e. its evolution has the memoryless property, then we can write
+
+\begin{equation}
+P(V', t) = \int T(V', t | V, t-\tau)P(V, t-\tau)dV
+\end{equation} 
+
+which is known at the Chapman-Kolmogorov equation. The factor $T(V', t | V, t-\tau)$ is known as the \emph{transition operator} in a Markov process and determines the evolution of $P(V,t)$ in time. We proceed by writing $T(V', t | V, t-\tau)$ in a form referred to as the Kramers-Moyal expansion
+
+\begin{align*}
+T(V', t | V, t-\tau) &= \int \delta(u-V')T(u, t | V, t-\tau)du\\
+&= \int \delta(V+u-V'-V)T(u, t | V, t-\tau)du\\
+\end{align*} 
+
+If we use the Taylor expansion of the $\delta$-function 
+
+\begin{equation*}
+\delta(V+u-V'-V) = \sum_{n=0}^{\infty} \frac{(u-V)^{n}}{n!}\left(-\frac{\partial}{\partial V}\right)^{n}\delta(V-V')
+\end{equation*}
+
+Inserting this into the result from above, pulling out terms independent of $u$ and swapping the order of the sum and integration gives
+
+\begin{align}
+T(V', t | V, t-\tau) &= \sum_{n=0}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial V}\right)^{n}\delta(V-V')\int(u-V)^{n}T(u, t | V, t-\tau)du\\
+&= \sum_{n=0}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial V}\right)^{n}\delta(V-V')M_{n}(V,t)
+\end{align} 
+
+noticing that $M_{n}(V,t) = \int(u-V)^{n}T(u, t | V, t-\tau)du$ is just the $n$th moment of the transition operator $T$. Plugging (2.6) back in to (2.4) gives 
+
+\begin{align}
+P(V, t) &= \int \left(1 + \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial V}\right)^{n} M_{n}(V,t)\right)\delta(V-V')P(V, t-\tau)dV\\
+&= P(V', t-\tau) + \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial V}\right)^{n} \left[M_{n}(V,t)P(V,t)\right]
+\end{align} 
+
+Approximating the derivative as a finite difference and taking the limit $\tau\rightarrow 0$ gives
+
+\begin{align}
+\dot{P}(V,t)  &= \underset{\tau\rightarrow 0}{\mathrm{lim}}\left(\frac{P(V, t)-P(V, t-\tau)}{\tau}\right)\\
+&= \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial V}\right)^{n} \left[M_{n}(V,t)P(V,t)\right]
+\end{align} 
+
+which is formally known as the Kramers-Moyal (KM) expansion. The Fokker-Planck equation is a special case of (2.10) where we neglect terms $n>2$ in the \emph{diffusion approximation}.
+
+
+\end{document}

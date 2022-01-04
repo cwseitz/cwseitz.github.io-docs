@@ -13,22 +13,43 @@
 \begin{document}
 \maketitle
 
-\begin{abstract}
-\noindent Sinds enkele jaren ben ik op zoek naar eenvoudige wiskundige en fysische problemen die onverwacht gerelateerd zijn met het getal $\pi$. In \emph{The bouncing balls and pi} beschreef ik eerder al hoe de opeenvolgende decimalen van $\pi$ kunnen berekend worden door twee ballen volledig elastisch tegen elkaar en tegen een muur te laten botsen. In dit artikel zal ik aantonen hoe het getal $\pi$ tevoorschijn komt door een oneindige serie rechthoeken met oppervlakte 1 spiraalsgewijze aan elkaar te kleven. In een veralgemening van dit probleem duikt op een natuurlijke wijze de gammafunctie en de formule van Stirling op.    
-\end{abstract}
+\section{Monte Carlo Methods}
 
-\section{Probleemstelling}
+The Monte Carlo method was invented by scientists working on the atomic bomb in the 1940s, who named it for the city in Monaco famed for its casinos and games of chance. Its core idea is to use random samples of parameters or inputs to explore the behavior of a complex system or process. The Monte Carlo methods are basically a class of computational algorithms that rely on repeated random sampling to obtain certain numerical results, and can be used to solve problems that have a probabilistic interpretation
 
-Het volgend probleem ontleende ik aan MindYourDecisions, het wiskundige videokanaal van Presh Talwalkar op YouTube. Hoewel de formulering van het probleem enkel eenvoudige meetkunde bevat, werd de oplossing op de website aangekondigd als zeer pittig. In vrije vertaling kan het probleem als volgt geformuleerd worden.
+\section{Markov Chains}
 
+A sequence of random variables ($X_{0}, X_{1}, ..., X_{n}$) follows a Markov chain if the probability of arriving at a state $X_{n}$ is dependent only on the previous state $X_{n-1}$. That is, 
 
+\begin{equation}
+X_{n} \sim P(X_{n} | X_{0} ,..., X_{n-1}) = P(X_{n}|X_{n-1})
+\end{equation} 
 
-Om deze limietverhouding te berekenen, gaan we eerst proefondervindelijk te werk. Aangezien het zijdelings aankleven van een rechthoek wiskundig een beetje afwijkt van het boven- of onderaan aankleven, zullen we in één stap simultaan stwee rechthoeken aankleven. Met de nummering van figuur \ref{spiraal} nemen we eerst de rechthoeken 1 en 2 samen, vervolgens de rechthoeken 3 en 4, daarna 5 en 6 enz.  
+We say that the chain is time-homogeneous if the transition-density is independent of time. The probability of arriving at any particular state $X_{n}$ is then given by integrating over all possible paths to that state
 
-Rechthoek 1 heeft de vorm van een eenheidsvierkant. Rechthoek 2 heeft breedte 2. Om een oppervlakte van 1 $\rm{dm}^2$ te verkrijgen moet de hoogte gelijk zijn aan $\frac{1}{2}$. Na uitbreiding met deze twee rechthoeken, vinden we een totale breedte die gelijk is aan 2 en een totale hoogte die gelijk is aan $\frac{3}{2}$. De breedte-hoogte-verhouding van de samengestelde rechthoek is dan  $\frac{4}{3}$.
+\begin{equation}
+P(X_{n}) = \int T(X_{n}| X_{n-1})P(X_{n-1})dx
+\end{equation} 
 
-Rechthoek 3 heeft een hoogte die gelijk is aan $\frac{3}{2}$. De breedte is bijgevolg gelijk aan $\frac{2}{3}$ want de oppervlakte van elke rechthoek is 1. Hierna kunnen we de breedte van rechthoek 4 berekenen. Die is gelijk aan $\frac{8}{3}$. Omdat ook deze rechthoek oppervlakte 1 heeft, moet de hoogte gelijk zijn aan $\frac{3}{8}$. De samengestelde rechthoek heeft na twee uitbereidingsronden een breedte van $\frac{8}{3}$ en een hoogte van $\frac{15}{8}$. De breedte-hoogte-verhouding is nu gelijk aan $\frac{64}{45}$.
+which is known as the Chapman-Kolmogorov equation.
 
-Zonder de gave van de helderziendheid is het vrijwel onmogelijk om het rijtje dat begint met de breuken $\frac{4}{3}$ en $\frac{64}{45}$ verder te zetten. Zelfs na de berekening van de volgende term, $\frac{256}{175}$, zal de regelmaat wellicht niet duidelijk worden. Daarom proberen we in dit verslag eerst een recursieformule op te stellen voor de opeenvolgende termen van deze rij van breedte-hoogte-verhoudingen. Deze betrekking zal volstaan om de breedte-hoogteverhouding in de limietsituatie te berekenen.
+\subsection{Ergodicity}
+
+Ergodicity expresses the idea that a stochastic process will eventually visit every state in the phase space $\chi$ that the system moves in. This implies that the statistics of the system can be deduced from a sufficiently long trajectory through $\chi$. Equivalently, a sufficiently large collection of random samples from a process can represent the average statistical properties of the entire process. This simultaneously implies that the statistics of the system's behavior is independent of the initial conditions, since we have not specified \emph{which} trajectory is under consideration. As a side note, the concept of ergodicity was cruicial for thermodynamics as it indicates that all possible microstates are equiprobable over a long period of time. Ergodic Markov chains are useful algorithmic tools in that, regardless of their initial state, they eventually reach a unique stationary distribution $\pi(x)$
+
+\subsection{Detailed balance}
+
+Detailed balance is a useful condition because it allows us to prove the existence of a stationary state. The condition states that the probability flux $X_{i}\rightarrow X_{j}$ exactly balances the flux $X_{j}\rightarrow X_{i}$ so that the net flux is zero. If $\pi$ is such a stationary distribution, then the detailed balance condition reads: 
+
+\begin{equation}
+\pi_{i}T(X_{i}|X_{j}) = \pi_{j}T(X_{j}|X_{i})
+\end{equation} 
+
+\section{Gibbs Sampling}
+
+An arbitrary joint probability distribution can be expressed as $p(x,y) = p(x|y)p(y) = p(x|y)\int p(x,y)dx$ where $p(y)$ is called the marginal distribution of $y$. Suppose that we would like to sample from the distribution $p(x,y)$, but for some reason, we cannot. 
+
+\section{The Hopfield Network and Boltzmann Machine}
+
 
 \end{document}
