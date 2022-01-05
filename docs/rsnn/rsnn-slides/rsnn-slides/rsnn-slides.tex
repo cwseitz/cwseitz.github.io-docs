@@ -34,20 +34,29 @@
 \tableofcontents
 \end{frame}
 
-\section{A short note on deep learning}
+\begin{frame}{The Hopfield Network}
+\begin{figure}
+\includegraphics[width=140mm]{hopfield}
+\end{figure}
+$>$ 23,000 citations in 2021
+\end{frame}
 
-\begin{frame}{A brief survey of deep learning architectures}
+\begin{frame}{The Hopfield Network}
+\begin{figure}
+\includegraphics[width=140mm]{hopfield-sketch}
+\end{figure}
+Recurrent artificial neural network which resembles a spin glass\\
+The network stores binary patterns $\mathbf{\xi}$ as attractor states\\
+Serves as content-addressable or associative memory
+\end{frame}
 
-\begin{itemize}
-\item Perceptrons e.g. MLPs for classification of vectorized data
-\item Convolutional neural networks (CNNs) for image classification, segmentation
-\item Recurrent neural networks (RNNs) for temporal data
-\item Generative adversarial networks (GANs) and autoencoders e.g. VAEs for generative modeling
-\item ...
-\end{itemize}
+\begin{frame}{The Hopfield Network}
 
-\vfill
-{\color{red} which are all trained offline on known samples from some (perhaps very complicated) population distribution}
+\end{frame}
+
+\begin{frame}{The Boltzmann Machine}
+
+The stochastic counterpart of the Hopfield Network
 
 \end{frame}
 
@@ -67,38 +76,11 @@ $P(A|B)$ is called the posterior, $P(B|A)$ the likelihood, $P(A)$ the prior, and
 P(B) = \int P(B|A)P(A)dA
 \end{equation*}
 
-Calculating this integral is often intractable. Monte-Carlo Markov Chain (MCMC) methods and variational inference offer solutions
+Calculating this integral is often intractable. Monte-Carlo Markov Chain (MCMC) methods and variational methods offer solutions
 
 \end{frame}
 
-\section{Deep generative models}
-\begin{frame}{Deep generative models: variational autoencoders (VAEs)}
-
-\begin{figure}
-\includegraphics[width=135mm]{vae-diagram}
-\end{figure}
-
-The VAE \emph{approximates} the true posterior $P(Z|X)$ with a neural network
-
-\end{frame}
-
-\begin{frame}{Deep generative models: variational autoencoders (VAE)}
-
-When training a VAE we're concerned with the following problem:
-
-$$\min_{\phi} \,\ \mathbb E_{x \sim Pop, z \sim P_\phi(z|x)} \left[ \ln \frac{P_\phi(z|x)}{P(z)} - \ln P_\phi(x|z) \right] \,.$$
-
-We can model $P_\phi(z|x)$ with an encoder and $P_\phi(x|z)$ with a decoder as follows:
-$$P_\phi(z|x) = \mathcal N \left(\mu_{\phi,z}(x), \Sigma_{\phi,z}(x) \right)$$
-$$P_\phi(x|z) = \mathcal N \left( \mu_{\phi,x}(z), \sigma^2 I \right) \,,$$
-where $\mu_{\phi,z}, \Sigma_{\phi,z}, \mu_{\phi,x}$ are neural networks, and $\Sigma_{\phi,z}(x)$ is diagonal.
-\vfill
-Let $P(z)$ (the prior over $z$) to be $\mathcal N(0, I)$.
-
-
-\end{frame}
-
-\begin{frame}{Using Monte-Carlo Markov Chain (MCMC) to sample the posterior}
+\begin{frame}{Monte-Carlo Markov Chain (MCMC) to sample the posterior}
 
 Monte Carlo methods estimate distributions by repeated sampling
 
@@ -109,24 +91,7 @@ A prominent hypothesis in neuroscience is that neurons use
 
 \end{frame}
 
-\begin{frame}{SNNs can run on emerging dedicated hardware}
 
-\begin{itemize}
-\item The entire brain is estimated consume 10W of power
-\item Spiking networks (SNNs) perform computations in memory giving low-latency
-\item SNNs can in principle self-organize without backprop (unsupervised learning)
-\end{itemize}
-
-\begin{figure}
-\includegraphics[width=110mm]{hardware-figure}
-\end{figure}
-
-\end{frame}
-
-\begin{frame}{SNNs can encode information in the phase of neural responses}
-Thus a coding of analog variables by firing rates seems quite dubious in the context of fast cortical computations 
-
-\end{frame}
 
 \section{Biologically inspired neural networks}
 \begin{frame}{The third generation of neural networks: spiking nets}
