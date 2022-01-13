@@ -1,8 +1,8 @@
 import pandas as pd
 
-def excel_to_html(file):
+def csv_to_html(file):
 
-    posts = pd.read_excel(file)
+    posts = pd.read_csv(file)
     posts['link'] = '<a href="' + posts['filename'] + '/' + posts['filename'] + '">' + posts['title'] + '</a>'
     del posts['filename']; del posts['title']
 

@@ -5,7 +5,7 @@ from glob import glob
 from util import *
 
 PATH_TO_DOCS = './docs/'
-PATH_TO_DOCS_TABLE = 'docs/docs.xlsx'
+PATH_TO_DOCS_TABLE = 'docs/docs.csv'
 
 def build_site():
 
@@ -29,7 +29,7 @@ def build_site():
         doc_page.set_style('../../assets/main.css')
         doc_page.add_script('../../assets/table.js')
         doc_page.add_header(navi)
-        doc_page.add_content(excel_to_html('docs/' + project + 'docs.xlsx'))
+        doc_page.add_content(csv_to_html('docs/' + project + 'docs.csv'))
         doc_page.write(PATH_TO_DOCS + project + '/index.html')
 
         #Build document pages
