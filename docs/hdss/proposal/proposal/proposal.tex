@@ -62,9 +62,9 @@
 
 Say we have a set of variables $\mathbf{x} = (x_{1},x_{2},...,x_{n})$ which might have some statistical dependence\\
 \vspace{0.2in}
-In supervised \textcolor{red}{discriminative} learning, we may use observations of $\mathbf{x}$ to try and learn distributions such as $p(x_{2}|x_{1})$ (i.e., inference)\\
-\vspace{0.2in}
 The variable $\mathbf{x}$ might be an amino acid sequence, DNA sequence, microscopy image, etc.\\
+\vspace{0.2in}
+In supervised \textcolor{red}{discriminative} learning, we may use observations of $\mathbf{x}$ to try and learn distributions such as $p(x_{2}|x_{1})$ (i.e., inference)\\
 \vspace{0.2in}
 In supervised \textcolor{red}{generative} learning, we try to explicity learn the joint distribution $p(\mathbf{x})=p(x_{1}|x_{2},...,x_{n})p(x_{2}|x_{3},...,x_{n}),...,p(x_{n})$, which is generally more difficult. 
 
@@ -87,19 +87,15 @@ $Z = \int p(x_{1}|x_{2})p(x_{2})dx_{2}$ can be very difficult or impossible to
 compute.\\
 \vspace{0.1in}
 2. In models from statistical physics, e.g. the Ising model, we only know
-$p(\mathbf{x}) = e^{−H(\mathbf{x})}$ where $H(\mathbf{x})$ is the Hamiltonian
+$\tilde{p}(\mathbf{x}) = e^{−H(\mathbf{x})}$ where $H(\mathbf{x})$ is the Hamiltonian
 - the Ising model is an example of a \textcolor{red}{Markov network} or an \textcolor{red}{undirected graphical model}.
 
 \end{frame}
 
 \begin{frame}{Approximating the joint distribution}
 
-Suppose we are given a joint distribution
-
-\begin{equation*}
-p(\mathbf{x}) = \frac{1}{Z}\tilde{p}(\mathbf{x})
-\end{equation*}
- 
+We would like to approximate $p(\mathbf{x})$\\
+\vspace{0.1in}
 \textcolor{red}{Variational methods} are generally useful for Bayesian inference like $p(x_{1}|x_{2})$ but can also be used to evaluate $p(\mathbf{x})$ by autoencoding $\mathbf{x}$ (called a variational autoencoder)\\
 \vspace{0.1in}
 \textcolor{red}{Generative adversarial networks (GANs)} model $p(\mathbf{x})$ directly\\
@@ -108,7 +104,7 @@ In special scenarios, we may know $\tilde{p}(\mathbf{x})$ and we can use \textco
 
 \end{frame}
 
-\begin{frame}{Applying generative models to biological data}
+\begin{frame}{Applying deep generative models to biological data}
 \begin{figure}
 \includegraphics[height=65mm, width=105mm]{dbm}
 \end{figure}
@@ -171,10 +167,40 @@ MCMC methods do not model $p(\mathbf{x})$ directly but allow us to draw samples 
 
 \begin{frame}{Gibbs sampling}
 
+\begin{itemize}
+\item Suppose $p(\mathbf{x})$ is a p.d.f.\ or p.m.f.\ that is difficult to sample from directly.  
+\item Suppose, though, that we \textit{can} easily sample from the conditional distributions e.g., $p(x_{1}|x_{2},...,x_{n})$. 
+\item  The Gibbs sampler proceeds as follows: 
+\begin{enumerate}
+\item set $\mathbf{x}$ to some initial starting values
+\item then sample $x_{1}|x_{2},...,x_{n}$, then sample $x_{2}|x_{1},...,x_{n}$, and so on.
+\end{enumerate}
+\end{itemize}
 \end{frame}
 
+\begin{frame}{Gibbs sampling}
+\begin{enumerate}
+\item[0.] Set \textcolor{blue}{$(x_0,y_0)$} to some starting value.
+\item[1.] Sample $x_1\sim p(x|y_0)$, that is, from the conditional distribution $X\mid Y=y_0$. \\
+\textcolor{blue}{Current state: $(x_1, y_0)$}\\
+          Sample $y_1\sim p(y|x_1)$, that is, from the conditional distribution $Y\mid X=x_1$.\\
+    \textcolor{blue}{      Current state: $(x_1, y_1)$}\\
+\item[2.] Sample $x_2\sim p(x|y_1)$, that is, from the conditional distribution $X\mid Y=y_1$. \\
+    \textcolor{blue}{      Current state: $(x_2, y_1)$}\\
+          Sample $y_2\sim p(y|x_2)$, that is, from the conditional distribution $Y\mid X=x_2$. \\
+            \textcolor{blue}{      Current state: $(x_2, y_2)$}\\
+        $\vdots$
+\end{enumerate}
+Repeat iterations 1 and 2, M times. 
+\end{frame}
 
 \section{Probabilistic Graphical Models}
+
+\begin{frame}{Markov blankets}
+When one wants to infer a random variable with a set of variables, usually a subset is enough.\\
+\vspace{0.1in}
+The useful information is called a \textcolor{red}{Markov blanket}
+\end{frame}
 
 \begin{frame}{Probabilistic graphical models}
 
