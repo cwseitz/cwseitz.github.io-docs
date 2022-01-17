@@ -157,11 +157,63 @@ algorithm (1970) and the Gibbs sampler of Geman and Geman (1984).
 
 \end{frame}
 
+
+
+\begin{frame}{Markov Chains}
+
+For a state space $\Omega$ s.t. $\mathbf{x}_t\in \Omega$. $\mathbf{x}_t$ is a Markov process if:\\
+\vspace{0.1in}
+\begin{equation*}
+P(\mathbf{x}_{t}|\mathbf{x}_{t-1},\mathbf{x}_{t-2},...,\mathbf{x}_{t-N}) = P(\mathbf{x}_{t}|\mathbf{x}_{t-1})
+\end{equation*}
+\\
+\vspace{0.1in}
+which is commonly called the \emph{memoryless property}.\\
+\vspace{0.1in}
+
+\begin{itemize}
+\item $\mathbf{x}_{t}$ can be generally be $N$-dimensional
+\item The chain is called \emph{homogeneous} if $T(\mathbf{x}_{t}|\mathbf{x}_{t-1})$ is time-invariant.
+\item For discrete $\Omega$, $T$ is a matrix of probabilities with $T_{ij} = \mathrm{Pr}(i\rightarrow j)$
+\item For continuous $\Omega$, $T$ is the joint probability density $T(x_{t},x_{t-1})$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Markov Chains}
+
+The Chapman-Kolmogorov equation marginalizes $T(x_{t},x_{t-1})$:
+
+\begin{align*}
+P(\mathbf{x}_t) &= \int T(x_{t},x_{t-1})d\mathbf{x}_{t-1}\\
+&= \int T(x_{t}|x_{t-1})P(\mathbf{x}_{t-1})d\mathbf{x}_{t-1}
+\end{align*} 
+
+The chain satisfies \emph{detailed balance} if 
+ 
+\begin{equation*}
+T(x_{t},x_{t-1})P(x_{t}) = T(x_{t-1},x_{t})P(x_{t-1})
+\end{equation*}
+
+\vspace{0.1in}
+which guarantees there is a unique stationary distribution $P_{0}(x_{t})$  
+
+\end{frame}
+
 \begin{frame}{Monte-Carlo Markov Chain (MCMC)}
 
-MCMC is used when we know the functional form of $p(\mathbf{x})$ up to the normalization constant e.g., Ising model\\
-\vspace{0.1in}
-MCMC methods do not model $p(\mathbf{x})$ directly but allow us to draw samples $\mathbf{x} \sim p(\mathbf{x})$
+A stationary distribution satisfies
+
+\begin{equation*}
+P_{0}(\mathbf{x}_t) = \int T(x_{t}|x_{t-1})P_{0}(\mathbf{x}_{t-1})d\mathbf{x}_{t-1}
+\end{equation*} 
+
+\begin{itemize}
+\item If a process is Markov e.g., Brownian motion, Ornstein-Uhlenbeck, $P_{0}(x_{t})$ is a solution to the SDE 
+\item We can also design $T(x_{t},x_{t-1})$ s.t. $P_{0}(x_{t})$ is a distribution we cannot sample from easily such as the Ising model
+\item The notion of ``time" in the second case is artificial
+\item There are several MCMC algorithms, we will focus on Gibbs MCMC
+\end{itemize}
 
 \end{frame}
 
@@ -196,17 +248,30 @@ Repeat iterations 1 and 2, M times.
 
 \section{Probabilistic Graphical Models}
 
-\begin{frame}{Markov blankets}
-When one wants to infer a random variable with a set of variables, usually a subset is enough.\\
-\vspace{0.1in}
+\begin{frame}{Bayesian inference using Gibbs sampling}
+
+Joint distributions factor according to 
+
+\begin{equation*}
+P(\mathbf{x})=P(x_{1}|x_{2},...,x_{n})P(x_{2}|x_{3},...,x_{n}),...,P(x_{n})
+\end{equation*}
+
+$P(x_{1}|x_{2},...,x_{n})$ may not include all $n-1$ variables
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{blanket}
+\end{center}
+
 The useful information is called a \textcolor{red}{Markov blanket}
+
+\vspace{0.1in}
+
+
 \end{frame}
 
-\begin{frame}{Probabilistic graphical models}
+\begin{frame}{Learning graph structure}
 
-\end{frame}
-
-\begin{frame}{Using Gibbs sampling with graphical models}
+Learning the graph structure $\mathcal{G}=(V,E)$ is a common task in machine learning.\\
 
 \end{frame}
 
