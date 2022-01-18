@@ -56,23 +56,66 @@
 %\end{frame}
 
 
-\section{Deep Generative Models}
+\section{Generative Models}
 
-\begin{frame}{Discriminative and generative models}
+\begin{frame}{The logic of generative modeling}
 
 Say we have a set of variables $\mathbf{x} = (x_{1},x_{2},...,x_{n})$ which might have some statistical dependence\\
-\vspace{0.2in}
+\vspace{0.1in}
 The variable $\mathbf{x}$ might be an amino acid sequence, DNA sequence, microscopy image, etc.\\
-\vspace{0.2in}
-In supervised \textcolor{red}{discriminative} learning, we may use observations of $\mathbf{x}$ to try and learn distributions such as $p(x_{2}|x_{1})$ (i.e., inference)\\
-\vspace{0.2in}
-In supervised \textcolor{red}{generative} learning, we try to explicity learn the joint distribution $p(\mathbf{x})=p(x_{1}|x_{2},...,x_{n})p(x_{2}|x_{3},...,x_{n}),...,p(x_{n})$, which is generally more difficult. 
+\vspace{0.1in}
+\begin{itemize}
+\item Often we are handed a batch of empirical samples $\{\mathbf{x}_{i}\}_{i=1}^{N}$
+\item We want to know the generating distribution $p(\mathbf{x})$
+\end{itemize}
+
+In supervised \textcolor{red}{generative learning}, we try to explicity learn the joint distribution $p(\mathbf{x})=p(x_{1}|x_{2},...,x_{n})p(x_{2}|x_{3},...,x_{n}),...,p(x_{n})$, which is generally more difficult than discriminative learning. 
 
 \end{frame}
 
-\begin{frame}{The basic sampling problem}
+\begin{frame}{Sampling from a model}
 
-Suppose we are given a joint distribution
+To find $p(\mathbf{x})$ we might fit a parametric model with parameters $\theta$ with MLE or some other method\\
+\vspace{0.1in}
+Lets assume we already know the model type and parameters $\theta$\\
+\vspace{0.2in}
+As a toy example, perhaps $x\sim \mathcal{N}(\mu,\sigma^{2})$ and we know $\theta = (\mu,\sigma)$\\
+\vspace{0.1in}
+In this simple case, we can draw samples by \textcolor{red}{rejection sampling}
+\end{frame}
+
+\begin{frame}{Rejection sampling with the uniform distribution}
+
+Let $\Omega$ be the state space or \emph{support} of $x$. Let $U(\Omega)$ be the uniform distribution over $\Omega$\\
+\vspace{0.1in}
+Also notice that $p(x) \leq 1 \;\;\forall x \in \Omega$\\
+\vspace{0.1in}
+The following procedure produces a sample $x\sim p(x)$.
+\begin{enumerate}
+\item Sample $u\sim U(\Omega)$
+\item Sample $y\sim U([0,1])$
+\item If $y < p(u)$ return $y$ as a sample of $p(x)$
+\end{enumerate}
+\vspace{0.2in}
+This algorithm suffers from the \textcolor{red}{curse of dimensionality}. Generally, sampling becomes 
+\end{frame}
+
+\begin{frame}{The sampling problem}
+
+Dimensionality can make it difficult to sample from $p(\mathbf{x})$ directly. For example, the multivariate Gaussian distribution\\
+
+\begin{equation*}
+p(\mathbf{x}) = \frac{1}{(2\pi)^{n}|\Sigma|}\exp\left(-\frac{1}{2}(\mathbf{x}-\mu)^{T}\Sigma^{-1}(\mathbf{x}-\mu)\right)
+\end{equation*}
+
+Sampling must be achieved in another way e.g., \textcolor{red}{Cholesky decomposition} or \textcolor{red}{Gibbs sampling}
+
+
+\end{frame}
+
+\begin{frame}{The sampling problem}
+
+We also may not know the proper normalization constant or \textcolor{red}{partition function} $Z$. Say we have
 
 \begin{equation*}
 p(\mathbf{x}) = \frac{1}{Z}\tilde{p}(\mathbf{x})
@@ -88,29 +131,22 @@ compute.\\
 \vspace{0.1in}
 2. In models from statistical physics, e.g. the Ising model, we only know
 $\tilde{p}(\mathbf{x}) = e^{−H(\mathbf{x})}$ where $H(\mathbf{x})$ is the Hamiltonian
-- the Ising model is an example of a \textcolor{red}{Markov network} or an \textcolor{red}{undirected graphical model}.
 
 \end{frame}
 
-\begin{frame}{Approximating the joint distribution}
 
-We would like to approximate $p(\mathbf{x})$\\
-\vspace{0.1in}
-\textcolor{red}{Variational methods} are generally useful for Bayesian inference like $p(x_{1}|x_{2})$ but can also be used to evaluate $p(\mathbf{x})$ by autoencoding $\mathbf{x}$ (called a variational autoencoder)\\
-\vspace{0.1in}
-\textcolor{red}{Generative adversarial networks (GANs)} model $p(\mathbf{x})$ directly\\
-\vspace{0.1in}
-In special scenarios, we may know $\tilde{p}(\mathbf{x})$ and we can use \textcolor{red}{Monte-Carlo Markov Chain (MCMC)} methods
+\begin{frame}{Sampling the joint distribution}
 
+How to generate samples depends on our model\\
+\vspace{0.1in}
+\textcolor{red}{Variational methods} can also be used to evaluate $p(\mathbf{x})$ by autoencoding $\mathbf{x}$ (called a variational autoencoder or VAE)\\
+\vspace{0.1in}
+If we have the model parameters we could use Monte-Carlo Markov Chain \textcolor{red}{(MCMC)} methods\\
+\vspace{0.1in}
+We will discuss both in the following slides
 \end{frame}
 
-\begin{frame}{Applying deep generative models to biological data}
-\begin{figure}
-\includegraphics[height=65mm, width=105mm]{dbm}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Generative models: variational autoencoder}
+\begin{frame}{The variational autoencoder (VAE)}
 
 \begin{center}
 \includegraphics[width=0.8\textwidth]{vae}
@@ -118,21 +154,13 @@ In special scenarios, we may know $\tilde{p}(\mathbf{x})$ and we can use \textco
 
 \end{frame}
 
-\begin{frame}{Generative models: adversarial networks}
+\begin{frame}{Theory of the VAE}
 
 \begin{center}
-\includegraphics[width=0.8\textwidth]{gan}
+\includegraphics[width=0.8\textwidth]{vae}
 \end{center}
 
-
 \end{frame}
-
-\begin{frame}{Cool biological applications of VAEs and GANs}
-
-Sequencing, Imaging, Other stuff
-
-\end{frame}
-
 
 \begin{frame}{Monte-Carlo Markov Chain (MCMC)}
 
@@ -272,6 +300,18 @@ The useful information is called a \textcolor{red}{Markov blanket}
 \begin{frame}{Learning graph structure}
 
 Learning the graph structure $\mathcal{G}=(V,E)$ is a common task in machine learning.\\
+
+\end{frame}
+
+\begin{frame}{Applying deep generative models to biological data}
+\begin{figure}
+\includegraphics[height=65mm, width=105mm]{dbm}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Cool biological applications of VAEs}
+
+Sequencing, Imaging, Other stuff
 
 \end{frame}
 
