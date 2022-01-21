@@ -62,55 +62,107 @@
 
 Say we have a set of variables $\mathbf{x} = (x_{1},x_{2},...,x_{n})$ which might have some statistical dependence\\
 \vspace{0.1in}
-The variable $\mathbf{x}$ might be an amino acid sequence, DNA sequence, microscopy image, etc.\\
+The variable $\mathbf{x}$ might be an amino acid sequence, gene expression data, microscopy image, etc.\\
 \vspace{0.1in}
 \begin{itemize}
 \item Often we are handed a batch of empirical samples $\{\mathbf{x}_{i}\}_{i=1}^{N}$
 \item We want to know the generating distribution $p(\mathbf{x})$
 \end{itemize}
 
-In supervised \textcolor{red}{generative learning}, we try to explicity learn the joint distribution $p(\mathbf{x})=p(x_{1}|x_{2},...,x_{n})p(x_{2}|x_{3},...,x_{n}),...,p(x_{n})$, which is generally more difficult than discriminative learning. 
+In supervised \textcolor{red}{generative learning}, we try to explicity learn the joint distribution $p(\mathbf{x}) = \prod_{i=1}^{N-1}p(x_{i}|x_{i+1:N})p(x_{N})$, which is generally more difficult than discriminative learning. 
 
 \end{frame}
 
-\begin{frame}{Sampling from a model}
-
-To find $p(\mathbf{x})$ we might fit a parametric model with parameters $\theta$ with MLE or some other method\\
-\vspace{0.1in}
-Lets assume we already know the model type and parameters $\theta$\\
-\vspace{0.2in}
-As a toy example, perhaps $x\sim \mathcal{N}(\mu,\sigma^{2})$ and we know $\theta = (\mu,\sigma)$\\
-\vspace{0.1in}
-In this simple case, we can draw samples by \textcolor{red}{rejection sampling}
+\begin{frame}{Applying deep generative models to biological data}
+\begin{figure}
+\includegraphics[height=65mm, width=105mm]{dbm}
+\end{figure}
 \end{frame}
 
-\begin{frame}{Rejection sampling with the uniform distribution}
+\begin{frame}{Perks of generative modeling}
 
-Let $\Omega$ be the state space or \emph{support} of $x$. Let $U(\Omega)$ be the uniform distribution over $\Omega$\\
-\vspace{0.1in}
-Also notice that $p(x) \leq 1 \;\;\forall x \in \Omega$\\
-\vspace{0.1in}
-The following procedure produces a sample $x\sim p(x)$.
-\begin{enumerate}
-\item Sample $u\sim U(\Omega)$
-\item Sample $y\sim U([0,1])$
-\item If $y < p(u)$ return $y$ as a sample of $p(x)$
-\end{enumerate}
-\vspace{0.2in}
-This algorithm suffers from the \textcolor{red}{curse of dimensionality}. Generally, sampling becomes 
+\begin{itemize}
+\item Fitting complete multivariate distributions $p(\mathbf{x})$ goes beyond correlation-based or clustering approaches
+\item Correlations cannot discover partial correlation in the context of other neighbors
+\item Fitting $p(\mathbf{x})$ permits sampling based inference
+\end{itemize}
+
 \end{frame}
 
-\begin{frame}{The sampling problem}
+\begin{frame}{Generative learning: probabilistic graphical models}
 
-Dimensionality can make it difficult to sample from $p(\mathbf{x})$ directly. For example, the multivariate Gaussian distribution\\
+PGMs may aid in the discovery of gene networks that drive complex diseases  
 
-\begin{equation*}
-p(\mathbf{x}) = \frac{1}{(2\pi)^{n}|\Sigma|}\exp\left(-\frac{1}{2}(\mathbf{x}-\mu)^{T}\Sigma^{-1}(\mathbf{x}-\mu)\right)
-\end{equation*}
+\begin{center}
+\begin{figure}
+\includegraphics[width=1.0\textwidth]{gene-net}
+\caption{\textbf{Bayesian networks} for gene network discovery in (A) Schizophrenia (B) Epilepsy (C) Autism. Taken from Mezlini et al. 2017}
+\end{figure}
+\end{center}
 
-Sampling must be achieved in another way e.g., \textcolor{red}{Cholesky decomposition} or \textcolor{red}{Gibbs sampling}
+\end{frame}
+
+\begin{frame}{Probabilistic graphical models (PGMs) are generative}
+
+\begin{center}
+\begin{figure}
+\includegraphics[width=0.75\textwidth]{pgm}
+\caption{\textbf{PGMs} for the joint distribution $P(X,Y,Z)$}
+\end{figure}
+\end{center}
+
+Two important classes are directed PGMs (\textcolor{red}{Bayesian networks}) and undirected PGMs (\textcolor{red}{Markov random fields}). Many applications: image processing, genomics, statistical mechanics
+
+\end{frame}
 
 
+\begin{frame}{Generative learning: variational autoencoder (VAE)}
+
+\begin{center}
+\includegraphics[width=1.0\textwidth]{vae}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Embedding the latent space of a VAE in 2D}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=1.0\textwidth]{immune}
+\end{center}
+\caption{Phenotype segregation using a VAE on single-cell transcriptomics data. Taken from Seninge et al.}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{Probabilistic graphical model}s\\
+\vspace{0.1in}
+\textcolor{green}{+} structured representation\\
+\vspace{0.1in}
+\textcolor{green}{+} rigidity = efficiency\\
+\vspace{0.1in}
+\textcolor{red}{-} rigid assumptions may not fit\\
+\vspace{0.1in}
+\textcolor{red}{-} feature engineering
+\end{column}
+\begin{column}{0.5\textwidth}  %%<--- here
+\begin{center}
+\textbf{Deep learning}\\
+\vspace{0.1in}
+\textcolor{red}{-} Neural net "goo"\\
+\vspace{0.1in}
+\textcolor{red}{-} Difficult parameterization\\
+\vspace{0.1in}
+\textcolor{green}{+} Flexible, high capacity\\
+\vspace{0.1in}
+\textcolor{green}{+} Feature learning\\
+\vspace{0.1in}
+\end{center}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}{The sampling problem}
@@ -134,186 +186,41 @@ $\tilde{p}(\mathbf{x}) = e^{−H(\mathbf{x})}$ where $H(\mathbf{x})$ is the Hami
 
 \end{frame}
 
+\begin{frame}{Markov random fields}
 
-\begin{frame}{Sampling the joint distribution}
-
-How to generate samples depends on our model\\
-\vspace{0.1in}
-\textcolor{red}{Variational methods} can also be used to evaluate $p(\mathbf{x})$ by autoencoding $\mathbf{x}$ (called a variational autoencoder or VAE)\\
-\vspace{0.1in}
-If we have the model parameters we could use Monte-Carlo Markov Chain \textcolor{red}{(MCMC)} methods\\
-\vspace{0.1in}
-We will discuss both in the following slides
-\end{frame}
-
-\begin{frame}{The variational autoencoder (VAE)}
-
-\begin{center}
-\includegraphics[width=0.8\textwidth]{vae}
-\end{center}
-
-\end{frame}
-
-\begin{frame}{Theory of the VAE}
-
-\begin{center}
-\includegraphics[width=0.8\textwidth]{vae}
-\end{center}
-
-\end{frame}
-
-\begin{frame}{Monte-Carlo Markov Chain (MCMC)}
-
-\begin{itemize}
-
-\item MCMC algorithms were originally developed in the 1940’s by physicists at
-Los Alamos
-
-\item They were interested in modeling the probabilistic behavior of collections of
-atomic particles
-
-\item Simulation was difficult – the normalization constant $Z$ was not known
-
-\item The term “Monte-Carlo” was coined at Los Alamos.
-
-\item Ulam and Metropolis overcame this problem by constructing a Markov chain
-for which the desired distribution was the stationary distribution
-
-\item Introduced to statistics and generalized with the Metropolis-Hastings
-algorithm (1970) and the Gibbs sampler of Geman and Geman (1984).
-\end{itemize}
-
-\end{frame}
-
-
-
-\begin{frame}{Markov Chains}
-
-For a state space $\Omega$ s.t. $\mathbf{x}_t\in \Omega$. $\mathbf{x}_t$ is a Markov process if:\\
-\vspace{0.1in}
 \begin{equation*}
-P(\mathbf{x}_{t}|\mathbf{x}_{t-1},\mathbf{x}_{t-2},...,\mathbf{x}_{t-N}) = P(\mathbf{x}_{t}|\mathbf{x}_{t-1})
-\end{equation*}
-\\
-\vspace{0.1in}
-which is commonly called the \emph{memoryless property}.\\
-\vspace{0.1in}
-
-\begin{itemize}
-\item $\mathbf{x}_{t}$ can be generally be $N$-dimensional
-\item The chain is called \emph{homogeneous} if $T(\mathbf{x}_{t}|\mathbf{x}_{t-1})$ is time-invariant.
-\item For discrete $\Omega$, $T$ is a matrix of probabilities with $T_{ij} = \mathrm{Pr}(i\rightarrow j)$
-\item For continuous $\Omega$, $T$ is the joint probability density $T(x_{t},x_{t-1})$
-\end{itemize}
-
-\end{frame}
-
-\begin{frame}{Markov Chains}
-
-The Chapman-Kolmogorov equation marginalizes $T(x_{t},x_{t-1})$:
-
-\begin{align*}
-P(\mathbf{x}_t) &= \int T(x_{t},x_{t-1})d\mathbf{x}_{t-1}\\
-&= \int T(x_{t}|x_{t-1})P(\mathbf{x}_{t-1})d\mathbf{x}_{t-1}
-\end{align*} 
-
-The chain satisfies \emph{detailed balance} if 
- 
-\begin{equation*}
-T(x_{t},x_{t-1})P(x_{t}) = T(x_{t-1},x_{t})P(x_{t-1})
+P(\mathbf{x}) = \frac{\exp\left(-H(\mathbf{x})\right)}{\sum_{i} \exp\left(-H(\mathbf{x}_{i})\right)}
 \end{equation*}
 
-\vspace{0.1in}
-which guarantees there is a unique stationary distribution $P_{0}(x_{t})$  
-
-\end{frame}
-
-\begin{frame}{Monte-Carlo Markov Chain (MCMC)}
-
-A stationary distribution satisfies
-
+Suppose the energy function can be written as a sum over cliques: 
 \begin{equation*}
-P_{0}(\mathbf{x}_t) = \int T(x_{t}|x_{t-1})P_{0}(\mathbf{x}_{t-1})d\mathbf{x}_{t-1}
-\end{equation*} 
+H(\mathbf{x}) = \sum_{n} \tilde{\psi}_{n}(c_{n})
+\end{equation*}
+Let $\psi_{n} = \log \tilde{\psi_{n}}$, which means $P(\mathbf{x})$ factors according to 
+\begin{equation*}
+P(\mathbf{x}) = \frac{\prod_{n} \psi_{n}(c_{n})}{\sum_{i} \prod_{n} \psi_{n}(c_{n})}
+\end{equation*}
 
-\begin{itemize}
-\item If a process is Markov e.g., Brownian motion, Ornstein-Uhlenbeck, $P_{0}(x_{t})$ is a solution to the SDE 
-\item We can also design $T(x_{t},x_{t-1})$ s.t. $P_{0}(x_{t})$ is a distribution we cannot sample from easily such as the Ising model
-\item The notion of ``time" in the second case is artificial
-\item There are several MCMC algorithms, we will focus on Gibbs MCMC
-\end{itemize}
 
 \end{frame}
 
-\begin{frame}{Gibbs sampling}
 
-\begin{itemize}
-\item Suppose $p(\mathbf{x})$ is a p.d.f.\ or p.m.f.\ that is difficult to sample from directly.  
-\item Suppose, though, that we \textit{can} easily sample from the conditional distributions e.g., $p(x_{1}|x_{2},...,x_{n})$. 
-\item  The Gibbs sampler proceeds as follows: 
+\begin{frame}{Rejection sampling with the uniform distribution}
+
+Let $\Omega$ be the state space or \emph{support} of $x$. Let $U(\Omega)$ be the uniform distribution over $\Omega$\\
+\vspace{0.1in}
+Also notice that $p(x) \leq 1 \;\;\forall x \in \Omega$\\
+\vspace{0.1in}
+The following procedure produces a sample $x\sim p(x)$.
 \begin{enumerate}
-\item set $\mathbf{x}$ to some initial starting values
-\item then sample $x_{1}|x_{2},...,x_{n}$, then sample $x_{2}|x_{1},...,x_{n}$, and so on.
+\item Sample $u\sim U(\Omega)$
+\item Sample $y\sim U([0,1])$
+\item If $y < p(u)$ return $y$ as a sample of $p(x)$
 \end{enumerate}
-\end{itemize}
+\vspace{0.2in}
+This algorithm suffers from the \textcolor{red}{curse of dimensionality}. Generally, sampling becomes 
 \end{frame}
 
-\begin{frame}{Gibbs sampling}
-\begin{enumerate}
-\item[0.] Set \textcolor{blue}{$(x_0,y_0)$} to some starting value.
-\item[1.] Sample $x_1\sim p(x|y_0)$, that is, from the conditional distribution $X\mid Y=y_0$. \\
-\textcolor{blue}{Current state: $(x_1, y_0)$}\\
-          Sample $y_1\sim p(y|x_1)$, that is, from the conditional distribution $Y\mid X=x_1$.\\
-    \textcolor{blue}{      Current state: $(x_1, y_1)$}\\
-\item[2.] Sample $x_2\sim p(x|y_1)$, that is, from the conditional distribution $X\mid Y=y_1$. \\
-    \textcolor{blue}{      Current state: $(x_2, y_1)$}\\
-          Sample $y_2\sim p(y|x_2)$, that is, from the conditional distribution $Y\mid X=x_2$. \\
-            \textcolor{blue}{      Current state: $(x_2, y_2)$}\\
-        $\vdots$
-\end{enumerate}
-Repeat iterations 1 and 2, M times. 
-\end{frame}
-
-\section{Probabilistic Graphical Models}
-
-\begin{frame}{Bayesian inference using Gibbs sampling}
-
-Joint distributions factor according to 
-
-\begin{equation*}
-P(\mathbf{x})=P(x_{1}|x_{2},...,x_{n})P(x_{2}|x_{3},...,x_{n}),...,P(x_{n})
-\end{equation*}
-
-$P(x_{1}|x_{2},...,x_{n})$ may not include all $n-1$ variables
-
-\begin{center}
-\includegraphics[width=0.4\textwidth]{blanket}
-\end{center}
-
-The useful information is called a \textcolor{red}{Markov blanket}
-
-\vspace{0.1in}
-
-
-\end{frame}
-
-\begin{frame}{Learning graph structure}
-
-Learning the graph structure $\mathcal{G}=(V,E)$ is a common task in machine learning.\\
-
-\end{frame}
-
-\begin{frame}{Applying deep generative models to biological data}
-\begin{figure}
-\includegraphics[height=65mm, width=105mm]{dbm}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Cool biological applications of VAEs}
-
-Sequencing, Imaging, Other stuff
-
-\end{frame}
 
 \section{References}
 

@@ -1,137 +1,71 @@
+% Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
+% For more details: https://www.sharelatex.com/learn/Beamer
 
-\documentclass[aspectratio=169]{beamer}
+\documentclass{beamer}					% Document class
+
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}Correlated dynamics in spiking neural networks\hfill\insertshortauthor\hfill\insertpagenumber}}
 \setbeamertemplate{navigation symbols}{}
 
-\usepackage{subfigure,epsfig,amsfonts}
-\usepackage{beamerthemeshadow}
-\usepackage{amsmath}
-\usepackage{bm}
-\usepackage{siunitx}
+\usepackage[english]{babel}				% Set language
+\usepackage[utf8x]{inputenc}			% Set encoding
 
-
-\setbeamertemplate{footline}{}
-\setbeamertemplate{navigation symbols}{}
-\setbeamertemplate{headline}
-{%
-  \leavevmode%
-  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex]{section in head/foot}%
-    \hbox to .5\paperwidth{\hfil\insertsectionhead\hfil}
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.5ex,dp=1.125ex]{subsection in head/foot}%
-    \hbox to .5\paperwidth{\hfil\insertsubsectionhead\hfil}
-  \end{beamercolorbox}%
+\mode<presentation>						% Set options
+{
+  \usetheme{default}					% Set theme
+  \usecolortheme{default} 				% Set colors
+  \usefonttheme{default}  				% Set font theme
+  \setbeamertemplate{caption}[numbered]	% Set caption to be numbered
 }
 
+% Uncomment this to have the outline at the beginning of each section highlighted.
+%\AtBeginSection[]
+%{
+%  \begin{frame}{Outline}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+%}
+
+\usepackage{graphicx}					% For including figures
+\usepackage{booktabs}					% For table rules
+\usepackage{hyperref}					% For cross-referencing
+
+\title{Correlated dynamics in spiking neural networks}	% Presentation title
+\author{Clayton W. Seitz}								% Presentation author
+\date{\today}									% Today's date	
+
 \begin{document}
-\title{Statistical inference and memory in recurrent networks of spiking neurons}  
-\author{Clayton Seitz}
-\date{\today} 
 
-\maketitle
+% Title page
+% This page includes the informations defined earlier including title, author/s, affiliation/s and the date
+\begin{frame}
+  \titlepage
+\end{frame}
 
-
+% Outline
+% This page includes the outline (Table of content) of the presentation. All sections and subsections will appear in the outline by default.
 \begin{frame}{Outline}
-\tableofcontents
+  \tableofcontents
 \end{frame}
 
-\begin{frame}{The Hopfield Network}
-\begin{figure}
-\includegraphics[width=140mm]{hopfield}
-\end{figure}
-$>$ 23,000 citations in 2021
-\end{frame}
+% The following is the most frequently used slide types in beamer
+% The slide structure is as follows:
+%
+%\begin{frame}{<slide-title>}
+%	<content>
+%\end{frame}
 
-\begin{frame}{The Hopfield Network}
-\begin{figure}
-\includegraphics[width=140mm]{hopfield-sketch}
-\end{figure}
-Recurrent artificial neural network which resembles a spin glass\\
-The network stores binary patterns $\mathbf{\xi}$ as attractor states\\
-Serves as content-addressable or associative memory
-\end{frame}
-
-\begin{frame}{The Hopfield Network}
-
-\end{frame}
-
-\begin{frame}{The Boltzmann Machine}
-
-The stochastic counterpart of the Hopfield Network
-
-\end{frame}
-
-\begin{frame}{Review of Bayesian inference}
-
-Recall Bayes theorem from fundamental probability theory
-
-\begin{equation*}
-P(A|B) = \frac{P(B|A)P(A)}{P(B)} = \frac{P(B|A)P(A)}{\int P(B|A)P(A)dA}
-\end{equation*}
-\vfill
-
-$P(A|B)$ is called the posterior, $P(B|A)$ the likelihood, $P(A)$ the prior, and $P(B)$ the evidence
-\vfill
-
-\begin{equation*}
-P(B) = \int P(B|A)P(A)dA
-\end{equation*}
-
-Calculating this integral is often intractable. Monte-Carlo Markov Chain (MCMC) methods and variational methods offer solutions
-
-\end{frame}
-
-\begin{frame}{Monte-Carlo Markov Chain (MCMC) to sample the posterior}
-
-Monte Carlo methods estimate distributions by repeated sampling
-
-\vfill
-If calculating $P(B)$ is intractable and we require samples from the posterior $P(A|B )$ we can use MCMC
-\vfill
-A prominent hypothesis in neuroscience is that neurons use 
-
-\end{frame}
-
-
-
-\section{Biologically inspired neural networks}
-\begin{frame}{The third generation of neural networks: spiking nets}
-
-\begin{columns}
-\column{0.5\linewidth}
-\begin{figure}
-\includegraphics[height=55mm, width=75mm]{figure-18}
-\end{figure}
-\column{0.5\linewidth}
-\begin{itemize}
-\item $\sim$ 16 billion neurons in cortex
-\item A neuron receives on the order of $10^{3}$ to $10^{4}$ synaptic inputs
-\item Neurons communicate via action potentials in an all-or-nothing fashion
-\end{itemize}
-
-\end{columns} 
-
-\end{frame}
-
-\begin{frame}{The third generation of neural networks: spiking nets}
-
-\begin{itemize}
-\item Post-synaptic potentials (PSPs) allow pre-synaptic action potentials to change post-synaptic membrane potential
-\item PSPs can be positive or negative (excitatory or inhibitory)
-\end{itemize}
-
-
-\end{frame}
 
 \begin{frame}{Integrate and fire (IF) neuron models}
 
 \begin{figure}
 \centering
-\includegraphics[width=140mm]{figure-19-1}
+\includegraphics[width=100mm]{figure-19-1}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics[width=140mm]{figure-19-2}
+\includegraphics[width=100mm]{figure-19-2}
 \end{figure}
 
 \begin{equation*}
@@ -147,7 +81,7 @@ When $\psi(V) = g_{\ell}\Delta_{T}\exp\left(\frac{V-V_{L}}{\Delta_{T}}\right)$ w
 
 \begin{figure}
 \centering
-\includegraphics[width=140mm]{figure-3-1}
+\includegraphics[width=100mm]{figure-3-1}
 \end{figure}
 
 Langevin equations have a corresponding Fokker-Planck equation 
@@ -165,7 +99,7 @@ For special synaptic connectivity regimes dynamical variables can remain uncorre
 
 \begin{figure}
 \centering
-\includegraphics[width=140mm]{figure-12-1}
+\includegraphics[width=100mm]{figure-12-1}
 \end{figure}
 
 Uncorrelated neural activity captures irregular spiking seen \emph{in-vivo}
@@ -185,5 +119,13 @@ This has important implications for brain-inspired machine learning
 
 \end{frame}
 
+
+\section{References}
+
+% Adding the option 'allowframebreaks' allows the contents of the slide to be expanded in more than one slide.
+\begin{frame}[allowframebreaks]{References}
+	\tiny\bibliography{references}
+	\bibliographystyle{apalike}
+\end{frame}
 
 \end{document}
