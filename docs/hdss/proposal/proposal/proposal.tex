@@ -186,41 +186,6 @@ $\tilde{p}(\mathbf{x}) = e^{−H(\mathbf{x})}$ where $H(\mathbf{x})$ is the Hami
 
 \end{frame}
 
-\begin{frame}{Markov random fields}
-
-\begin{equation*}
-P(\mathbf{x}) = \frac{\exp\left(-H(\mathbf{x})\right)}{\sum_{i} \exp\left(-H(\mathbf{x}_{i})\right)}
-\end{equation*}
-
-Suppose the energy function can be written as a sum over cliques: 
-\begin{equation*}
-H(\mathbf{x}) = \sum_{n} \tilde{\psi}_{n}(c_{n})
-\end{equation*}
-Let $\psi_{n} = \log \tilde{\psi_{n}}$, which means $P(\mathbf{x})$ factors according to 
-\begin{equation*}
-P(\mathbf{x}) = \frac{\prod_{n} \psi_{n}(c_{n})}{\sum_{i} \prod_{n} \psi_{n}(c_{n})}
-\end{equation*}
-
-
-\end{frame}
-
-
-\begin{frame}{Rejection sampling with the uniform distribution}
-
-Let $\Omega$ be the state space or \emph{support} of $x$. Let $U(\Omega)$ be the uniform distribution over $\Omega$\\
-\vspace{0.1in}
-Also notice that $p(x) \leq 1 \;\;\forall x \in \Omega$\\
-\vspace{0.1in}
-The following procedure produces a sample $x\sim p(x)$.
-\begin{enumerate}
-\item Sample $u\sim U(\Omega)$
-\item Sample $y\sim U([0,1])$
-\item If $y < p(u)$ return $y$ as a sample of $p(x)$
-\end{enumerate}
-\vspace{0.2in}
-This algorithm suffers from the \textcolor{red}{curse of dimensionality}. Generally, sampling becomes 
-\end{frame}
-
 
 \section{References}
 
