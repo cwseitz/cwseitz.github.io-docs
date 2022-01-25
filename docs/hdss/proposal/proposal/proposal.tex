@@ -120,7 +120,7 @@ A variational solution to generative modeling
 The variable $\mathbf{x}$ has a latent representation or code $\mathbf{z}$. We often say that $\mathbf{z}$ is the \emph{causal source} of $\mathbf{x}$. Ultimately, we would like to know the distribution $P_{\Phi}(\mathbf{x})$
 
 \begin{equation*}
-P_{\phi}(\mathbf{x}) = \frac{P_{\phi}(\mathbf{x|z})P_{\phi}(\mathbf{z})}{P_{\psi}(\mathbf{z|x})}
+P_{\phi}(\mathbf{x}) = \frac{P_{\phi}(\mathbf{x|z})P_{\phi}(\mathbf{z})}{Q_{\psi}(\mathbf{z|x})}
 \end{equation*}
 
 in order to find the model parameters that maximize the likelihood of the observed data:
@@ -150,8 +150,15 @@ where $P_{\phi}(\mathbf{z|x})$ is our model "encoder"
 \begin{frame}{The evidence lower bound}
 
 \begin{align*}
-\log P_{\phi}(\mathbf{x}) &= \mathbb{E}_{\mathbf{z}\sim P_{\phi}(\mathbf{z|x})} \log\frac{P_{\phi}(\mathbf{z})P_{\phi}(\mathbf{x|z})}{P_{\phi}(\mathbf{z|x})}
+\log P_{\phi}(\mathbf{x}) &= \log \int_{z}P(x,z)dx\\
+&= \log \int_{z} P(x,z)\frac{Q(z|x)}{Q(z|x)}dz\\
+&= \log \mathbb{E}_{\mathbf{z}\sim P_{\phi}(\mathbf{z|x})} \frac{P(x|z)P(z)}{Q(z|x)}\\
+&\geq \mathbb{E}_{\mathbf{z}\sim P_{\phi}(\mathbf{z|x})} \log \frac{Q(x|z)}{P(z)} + \log P(x|z)
 \end{align*}
+
+\begin{equation*}
+-\log P_{\phi}(\mathbf{x}) \leq \mathbb{E}_{\mathbf{z}\sim P_{\phi}(\mathbf{z|x})} \log \frac{P(z)}{Q(x|z)} - \log P(x|z)
+\end{equation*}
 
 
 \end{frame}
