@@ -147,7 +147,7 @@ where $P_{\phi}(\mathbf{z|x})$ is our model "encoder"
 
 \end{frame}
 
-\begin{frame}{The evidence lower bound}
+\begin{frame}{The evidence lower bound (ELBO)}
 
 \begin{align*}
 \log P_{\phi}(\mathbf{x}) &= \log \int_{z}P(x,z)dx\\
@@ -157,11 +157,25 @@ where $P_{\phi}(\mathbf{z|x})$ is our model "encoder"
 \end{align*}
 
 \begin{equation*}
--\log P_{\phi}(\mathbf{x}) \leq \mathbb{E}_{\mathbf{z}\sim P_{\phi}(\mathbf{z|x})} \log \frac{P(z)}{Q(x|z)} - \log P(x|z)
+-\log P_{\phi}(\mathbf{x}) \leq \mathbb{E}_{\mathbf{z}\sim P_{\phi}(\mathbf{z|x})} \log \frac{Q(x|z)}{P(z)} - \log P(x|z)
 \end{equation*}
 
 
 \end{frame}
+
+\begin{frame}{The ELBO objective}
+
+
+\begin{equation*}
+\Phi^{*} = \underset{\Phi}{\mathrm{argmin}} \;\;\mathbb{E}_{\mathbf{x}\sim \mathrm{Pop},\; \mathbf{z}\sim P_{\phi}(\mathbf{\mathbf{z}|\mathbf{x}})} \log \frac{Q_{\Psi}(\mathbf{z}|\mathbf{x})}{P(\mathbf{z})} - \log P(\mathbf{x}|\mathbf{z})
+\end{equation*}
+
+The ELBO can be rewritten in terms of a KL-divergence and population entropy
+
+
+
+\end{frame}
+
 
 
 \begin{frame}{Applying deep generative models to biological data}
@@ -183,6 +197,41 @@ where $P_{\phi}(\mathbf{z|x})$ is our model "encoder"
 \end{center}
 \caption{Phenotype segregation using a VAE on single-cell transcriptomics data. Taken from Seninge et al.}
 \end{figure}
+
+\end{frame}
+
+\begin{frame}{Previous studies lack interpretability}
+
+\end{frame}
+
+\begin{frame}{Previous studies lack spatial information}
+
+\end{frame}
+
+\begin{frame}{Multiplexed RNA imaging}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.75\textwidth]{merfish}
+\end{center}
+\caption{}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Minimum Hamming Distance (MHD) codes}
+
+Very basic codes that generate codewords $x\in\mathcal{C}$ based on Hamming distance: 
+\begin{equation*}
+D = \sum_{n=1}^{L} \mathbb{I}(x_{n}=\hat{x}_{n})
+\end{equation*}
+$2^{L}$ possible code words (with $2^{L}-1$ usable ones) 
+
+\end{frame}
+
+\begin{frame}{Binary symmetric channel (BSC)}
+
+
 
 \end{frame}
 
