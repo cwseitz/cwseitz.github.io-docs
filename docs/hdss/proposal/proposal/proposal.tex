@@ -4,7 +4,7 @@
 \documentclass{beamer}					% Document class
 
 \setbeamertemplate{footline}[text line]{%
-  \parbox{\linewidth}{\vspace*{-8pt}Deep generative models for spatial transcriptomics\hfill\insertshortauthor\hfill\insertpagenumber}}
+  \parbox{\linewidth}{\vspace*{-8pt}A brief introduction to deep generative models\hfill\insertshortauthor\hfill\insertpagenumber}}
 \setbeamertemplate{navigation symbols}{}
 
 \usepackage[english]{babel}				% Set language
@@ -30,7 +30,7 @@
 \usepackage{booktabs}					% For table rules
 \usepackage{hyperref}					% For cross-referencing
 
-\title{Deep generative models for spatial transcriptomics}	% Presentation title
+\title{A brief introduction to deep generative models}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -56,7 +56,7 @@
 %\end{frame}
 
 
-\section{Deep generative models}
+\section{Generative Models}
 
 \begin{frame}{The logic of generative modeling}
 
@@ -82,12 +82,6 @@ In supervised \textcolor{red}{generative learning}, we try to explicity learn th
 \item Fitting $p(\mathbf{x})$ permits sampling based inference
 \end{itemize}
 
-\end{frame}
-
-\begin{frame}{Applying deep generative models to biological data}
-\begin{figure}
-\includegraphics[height=65mm, width=105mm]{dbm}
-\end{figure}
 \end{frame}
 
 \begin{frame}{Why generative modeling is difficult}
@@ -169,60 +163,81 @@ where $P_{\phi}(\mathbf{z|x})$ is our model "encoder"
 
 \end{frame}
 
-
-\section{Generative modeling in transcriptomics}
-
-\begin{frame}{Applying the VAE to transcriptomics}
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=1.0\textwidth]{force}
-\end{center}
-\caption{Distance matrices and 2D embedding of the latent space for CORTEX dataset ($n=3005$ cells) and HEMATO ($n=4016$ hematopoietic progenitor cells)}
-\end{figure}
-
-\end{frame}
-
-\section{Future directions}
-
-\begin{frame}{Previous studies lack interpretability and spatial information}
-
-\begin{itemize}
-\item VAEs (and deep networks in general) are very flexible or ``expressive''
-\item The latent distribution (which is typically multivariate normal) can be difficult to interpret
-\item But can still perform clustering, visualization, etc.
-\item Field is moving towards using spatial features as well
-\end{itemize}
+\begin{frame}{The ELBO objective}
 
 
+\begin{align*}
+\Phi^{*} &= \mathcal{L}(\Phi)\\
+&= \underset{\Phi}{\mathrm{argmin}} \;\;\mathbb{E}_{\mathbf{x}\sim \mathrm{Pop},\; \mathbf{z}\sim P_{\phi}(\mathbf{\mathbf{z}|\mathbf{x}})} \log \frac{Q_{\Psi}(\mathbf{z}|\mathbf{x})}{P(\mathbf{z})} - \log P(\mathbf{x}|\mathbf{z})
+\end{align*}
 
-\end{frame}
-
-\begin{frame}{Multiplexed RNA imaging with MHD4 code}
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=0.7\textwidth]{merfish}
-\end{center}
-\end{figure}
-
-Open-source datasets from the Zhuang lab at Harvard
-
-\end{frame}
-
-\begin{frame}{Multiplexed RNA imaging with MHD4 code}
-
-\begin{itemize}
-\item Human genome codes nearly 30k non-redundant types of
-RNA molecules
-\item Some of those end up translated into protein
-\item Original study used 16-bit codes with minimum Hamming distance 4
-\item Code distance is chosen due to false positive and false negative rates
-\end{itemize}
 \vspace{0.1in}
-Using $L=16$ bit codewords with distance 4, gives 140 unique RNAs. Other methods SlideSeq, 10x Visium can achieve whole-genome spatial transcriptomics
+The ELBO can be rewritten in terms of a KL-divergence and population entropy. We often think of $\Phi$ as ``position'' and the loss $\mathcal{L}$ as an ``energy''
 
 \end{frame}
+
+\begin{frame}{Stochastic gradient descent}
+
+\end{frame}
+
+
+\begin{frame}{Applying deep generative models to biological data}
+\begin{figure}
+\includegraphics[height=65mm, width=105mm]{dbm}
+\end{figure}
+\end{frame}
+
+\begin{frame}{A recent VAE for transcriptomics data: scV1}
+
+\end{frame}
+
+
+\begin{frame}{Recent improvements of interpretability}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=1.0\textwidth]{immune}
+\end{center}
+\caption{Phenotype segregation using a VAE on single-cell transcriptomics data. Taken from Seninge et al.}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Previous studies lack interpretability}
+
+\end{frame}
+
+\begin{frame}{Previous studies lack spatial information}
+
+\end{frame}
+
+\begin{frame}{Multiplexed RNA imaging}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.75\textwidth]{merfish}
+\end{center}
+\caption{}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Minimum Hamming Distance (MHD) codes}
+
+Very basic codes that generate codewords $x\in\mathcal{C}$ based on Hamming distance: 
+\begin{equation*}
+D = \sum_{n=1}^{L} \mathbb{I}(x_{n}=\hat{x}_{n})
+\end{equation*}
+$2^{L}$ possible code words (with $2^{L}-1$ usable ones) 
+
+\end{frame}
+
+\begin{frame}{Binary symmetric channel (BSC)}
+
+
+
+\end{frame}
+
 
 
 
