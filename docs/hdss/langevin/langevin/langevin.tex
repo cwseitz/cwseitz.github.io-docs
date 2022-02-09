@@ -1,0 +1,146 @@
+% Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
+% For more details: https://www.sharelatex.com/learn/Beamer
+
+\documentclass{beamer}					% Document class
+
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}Langevin Dynamics\hfill\insertshortauthor\hfill\insertpagenumber}}
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage[english]{babel}				% Set language
+\usepackage[utf8x]{inputenc}			% Set encoding
+\usepackage{bm}
+
+\mode<presentation>						% Set options
+{
+  \usetheme{default}					% Set theme
+  \usecolortheme{default} 				% Set colors
+  \usefonttheme{default}  				% Set font theme
+  \setbeamertemplate{caption}[numbered]	% Set caption to be numbered
+}
+
+% Uncomment this to have the outline at the beginning of each section highlighted.
+%\AtBeginSection[]
+%{
+%  \begin{frame}{Outline}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+%}
+
+\usepackage{graphicx}					% For including figures
+\usepackage{booktabs}					% For table rules
+\usepackage{hyperref}					% For cross-referencing
+
+\title{Langevin Dynamics}	% Presentation title
+\author{Clayton W. Seitz}								% Presentation author
+\date{\today}									% Today's date	
+
+\begin{document}
+
+% Title page
+% This page includes the informations defined earlier including title, author/s, affiliation/s and the date
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Outline
+% This page includes the outline (Table of content) of the presentation. All sections and subsections will appear in the outline by default.
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+\begin{frame}{Langevin Dynamics}
+
+Originally a reformulation of Einsteins theory of Brownian motion (BM) using stochastic differential equations (SDEs)
+
+\begin{equation*}
+\frac{dx}{dt} = \eta(t), \;\;\; \eta(t) \sim T(x,t|x',t')
+\end{equation*}
+
+For BM, $T(x,t|x',t') = \mathcal{N}(x',\sigma^{2})$ where $\langle \eta(t)\eta(t')\rangle = \delta(t-t')$. If we have many x's, and $\eta(t)$ is uncorrelated over the ensemble we may write 
+
+\begin{equation*}
+\langle \eta(t)\eta(t')\rangle = \sigma^{2}\delta_{ij}\delta(t-t')
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{Application to Brownian Motion}
+
+The solution to an SDE is a probability distribution $P(x,t)$ which obeys the Markov property
+
+\begin{equation*}
+P(x,t') = \int T(x,t|x',t')P(x',t')dx'
+\end{equation*}
+
+
+With some effort this can be transformed into the Fokker-Planck equation
+
+\begin{equation*}
+\frac{dP}{dt} = \frac{\sigma^{2}}{2}\frac{\partial^{2}P}{\partial x^{2}} = D\frac{\partial^{2}P}{\partial x^{2}}
+\end{equation*}
+
+which has a familiar non-stationary solution for $P(x,t)$ in BM:
+
+\begin{equation*}
+P(x,t) = \frac{1}{\sqrt{4\pi Dt}}\exp\left(-\frac{x^{2}}{4Dt}\right)
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{Generalization to higher dimensions}
+
+When $\langle \eta_{i}(t)\eta_{j}(t)\rangle_{t} = \delta_{ij}$, the one-dimensional solution applies. Otherwise, $\langle \eta_{i}(t)\eta_{j}(t)\rangle_{t} = D_{ij} = \bm{\Sigma}/2$
+
+\begin{equation*}
+\frac{d\bm{x}}{dt} = \sqrt{\bm{\Sigma}}\bm{\eta}(t) 
+\end{equation*}
+
+where $\bm{D} = \bm{\Sigma}/2$ becomes a \emph{diffusion tensor}. The Fokker-Planck equation for N-dimensional BM generalizes to 
+
+\begin{equation*}
+\frac{dP}{dt} = \sum_{i}\sum_{j}D_{ij}\frac{\partial P}{\partial x_{i}\partial x_{j}}
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{Diffusion in a harmonic potential: Ornstein-Uhlenbeck}
+
+A stochastic form of Newton's equation
+
+\begin{equation*}
+\frac{d\bm{v}}{dt} = -\lambda \bm{v} + \bm{\eta}(t) - \bm{k}\cdot \bm{x}
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{Mean squared displacement}
+
+A common quantity measured experimentally is the mean-squared displacement (MSD). This is essentially the variance of $T(x,t|x',t')$
+
+\begin{align*}
+\mathrm{MSD}(\tau) &= \langle \left(x(t+\tau) - x(t)\right)^{2}\rangle\\
+&=  4D\tau
+\end{align*}
+
+\end{frame}
+
+\begin{frame}
+We would like to perform maximum likelihood estimation
+
+\begin{equation*}
+\bm{k}^{*} = \underset{\bm{k}}{\mathrm{argmin}} -\log P(\bm{k}|\{\bm{x}\}_{i=1}^{N})
+\end{equation*}
+
+\end{frame}
+
+
+\section{References}
+
+% Adding the option 'allowframebreaks' allows the contents of the slide to be expanded in more than one slide.
+\begin{frame}[allowframebreaks]{References}
+	\tiny\bibliography{references}
+	\bibliographystyle{apalike}
+\end{frame}
+
+\end{document}
