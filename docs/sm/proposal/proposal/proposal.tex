@@ -4,7 +4,7 @@
 \documentclass{beamer}					% Document class
 
 \setbeamertemplate{footline}[text line]{%
-  \parbox{\linewidth}{\vspace*{-8pt}A brief introduction to deep generative models\hfill\insertshortauthor\hfill\insertpagenumber}}
+  \parbox{\linewidth}{\vspace*{-8pt}A brief introduction to graphical models\hfill\insertshortauthor\hfill\insertpagenumber}}
 \setbeamertemplate{navigation symbols}{}
 
 \usepackage[english]{babel}				% Set language
@@ -30,7 +30,7 @@
 \usepackage{booktabs}					% For table rules
 \usepackage{hyperref}					% For cross-referencing
 
-\title{A brief introduction to deep generative models}	% Presentation title
+\title{A brief introduction to graphical models}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -56,7 +56,7 @@
 %\end{frame}
 
 
-\section{Generative Models}
+\section{Graphical models as a unifying framework}
 
 \begin{frame}{The logic of generative modeling}
 
@@ -72,6 +72,13 @@ The variable $\mathbf{x}$ might be an amino acid sequence, gene expression data,
 In supervised \textcolor{red}{generative learning}, we try to explicity learn the joint distribution $p(\mathbf{x}) = \prod_{i=1}^{N-1}p(x_{i}|x_{i+1:N})p(x_{N})$, which is generally more difficult than discriminative learning. 
 
 \end{frame}
+
+\begin{frame}{Generative modeling with feedback}
+\begin{figure}
+\includegraphics[height=65mm, width=105mm]{dbm}
+\end{figure}
+\end{frame}
+
 
 
 \begin{frame}{Perks of generative modeling}
@@ -103,141 +110,70 @@ $\tilde{p}(\mathbf{x}) = e^{−H(\mathbf{x})}$ where $H(\mathbf{x})$ is the Hami
 
 \end{frame}
 
-\begin{frame}{Variational autoencoders (VAEs)}
-A variational solution to generative modeling
+\begin{frame}
 
-\begin{center}
-\begin{figure}
-\includegraphics[width=0.9\textwidth]{vae}
-\caption{\textbf{Variational autoencoder architecture} Taken from Lopez 2020 in EMBO}
-\end{figure}
-\end{center}
-\end{frame}
+In \textcolor{red}{image processing}, graphical models are a standard technique for:
 
+\begin{itemize}
+\item Image denoising
+\item Image interpolation (resolution enhancement)
+\item Semantic image segmentation
+\end{itemize}
 
-\begin{frame}{Bayesian inference}
+\vspace{0.2in}
+In biology, graphical models are used widely in \textcolor{red}{omics} i.e.
 
-The variable $\mathbf{x}$ has a latent representation or code $\mathbf{z}$. We often say that $\mathbf{z}$ is the \emph{causal source} of $\mathbf{x}$. Ultimately, we would like to know the distribution $P_{\Phi}(\mathbf{x})$
-
-\begin{equation*}
-P_{\phi}(\mathbf{x}) = \frac{P_{\phi}(\mathbf{x|z})P_{\phi}(\mathbf{z})}{Q_{\psi}(\mathbf{z|x})}
-\end{equation*}
-
-in order to find the model parameters that maximize the likelihood of the observed data:
-
-\begin{equation*}
-\Phi^{*} = \underset{\Phi}{\mathrm{argmin}} -\log P_{\Phi}(\mathbf{x}) 
-\end{equation*}
-
-but we generally do not know $P_{\psi}(\mathbf{z|x})$ due to the intractable integral $Z = \int P_{\phi}(\mathbf{x|z})P_{\phi}(\mathbf{z})d\mathbf{z}$ (see slide 5)
+\begin{itemize}
+\item Genomics
+\item Transcriptomics
+\item Proteomics
+\end{itemize}
 
 \end{frame}
 
-\begin{frame}{Computing the evidence}
+\begin{frame}{Bayesian image reconstruction}
 
-We can rewrite the evidence as
-
-\begin{align*}
-P_{\phi}(\mathbf{x}) &= \int P_{\phi}(\mathbf{z})P_{\phi}(\mathbf{x|z})d\mathbf{z}\\
-&= \int P_{\phi}(\mathbf{z})P_{\phi}(\mathbf{x|z})\frac{P_{\phi}(\mathbf{z|x})}{P_{\phi}(\mathbf{z|x})}d\mathbf{z}\\
-&= \mathbb{E}_{\mathbf{z}\sim P_{\phi}(\mathbf{z|x})} \frac{P_{\phi}(\mathbf{z})P_{\phi}(\mathbf{x|z})}{P_{\phi}(\mathbf{z|x})}
-\end{align*}
-
-where $P_{\phi}(\mathbf{z|x})$ is our model "encoder"
-
-\end{frame}
-
-\begin{frame}{The evidence lower bound (ELBO)}
-
-\begin{align*}
-\log P_{\phi}(\mathbf{x}) &= \log \int_{z}P(x,z)dx\\
-&= \log \int_{z} P(x,z)\frac{Q(z|x)}{Q(z|x)}dz\\
-&= \log \mathbb{E}_{\mathbf{z}\sim P_{\phi}(\mathbf{z|x})} \frac{P(x|z)P(z)}{Q(z|x)}\\
-&\geq \mathbb{E}_{\mathbf{z}\sim P_{\phi}(\mathbf{z|x})} \log \frac{Q(x|z)}{P(z)} + \log P(x|z)
-\end{align*}
-
-\begin{equation*}
--\log P_{\phi}(\mathbf{x}) \leq \mathbb{E}_{\mathbf{z}\sim P_{\phi}(\mathbf{z|x})} \log \frac{Q(x|z)}{P(z)} - \log P(x|z)
-\end{equation*}
-
-
-\end{frame}
-
-\begin{frame}{The ELBO objective}
-
-
-\begin{align*}
-\Phi^{*} &= \mathcal{L}(\Phi)\\
-&= \underset{\Phi}{\mathrm{argmin}} \;\;\mathbb{E}_{\mathbf{x}\sim \mathrm{Pop},\; \mathbf{z}\sim P_{\phi}(\mathbf{\mathbf{z}|\mathbf{x}})} \log \frac{Q_{\Psi}(\mathbf{z}|\mathbf{x})}{P(\mathbf{z})} - \log P(\mathbf{x}|\mathbf{z})
-\end{align*}
-
+Say a fluorophore emits photons at a rate $\lambda_{n}$. This is the best we can do due to QM
 \vspace{0.1in}
-The ELBO can be rewritten in terms of a KL-divergence and population entropy. We often think of $\Phi$ as ``position'' and the loss $\mathcal{L}$ as an ``energy''
 
-\end{frame}
+For a CMOS array with quantum efficiency $\gamma\;\;[e^{-}/p]$ we have
 
-\begin{frame}{Stochastic gradient descent}
-
-\end{frame}
-
-
-\begin{frame}{Applying deep generative models to biological data}
-\begin{figure}
-\includegraphics[height=65mm, width=105mm]{dbm}
-\end{figure}
-\end{frame}
-
-\begin{frame}{A recent VAE for transcriptomics data: scV1}
-
-\end{frame}
-
-
-\begin{frame}{Recent improvements of interpretability}
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=1.0\textwidth]{immune}
-\end{center}
-\caption{Phenotype segregation using a VAE on single-cell transcriptomics data. Taken from Seninge et al.}
-\end{figure}
-
-\end{frame}
-
-\begin{frame}{Previous studies lack interpretability}
-
-\end{frame}
-
-\begin{frame}{Previous studies lack spatial information}
-
-\end{frame}
-
-\begin{frame}{Multiplexed RNA imaging}
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=0.75\textwidth]{merfish}
-\end{center}
-\caption{}
-\end{figure}
-
-\end{frame}
-
-\begin{frame}{Minimum Hamming Distance (MHD) codes}
-
-Very basic codes that generate codewords $x\in\mathcal{C}$ based on Hamming distance: 
 \begin{equation*}
-D = \sum_{n=1}^{L} \mathbb{I}(x_{n}=\hat{x}_{n})
+I_{n} = \gamma g_{n}P_{n}(\lambda_{n}) + G_{n}(\mu_{n};\sigma_{n}^{2}) + \beta
 \end{equation*}
-$2^{L}$ possible code words (with $2^{L}-1$ usable ones) 
+
+where $\mu_{n} \;\;[\mathrm{ADU}]$ is the detector offset and $g_{n}\;\; [\mathrm{ADU}/e^{-}]$ is the gain. \\
+\vspace{0.2in}
+All we know is $\lambda_{n}$, so both the true signal $I_{n}$ and the detected signal $\hat{I}_{n}$ are stochastic processes. 
+
+\begin{equation*}
+P(I_{n},\hat{I}_{n}) = \frac{1}{Z}\frac{\exp\left({-\lambda_{n}}\right)\lambda_{n}^{p}}{p!}\exp\left(-\frac{(D-g_{n}p-\mu_{n})^{2}}{\sigma_{n}^{2}}\right)
+\end{equation*}
 
 \end{frame}
 
-\begin{frame}{Binary symmetric channel (BSC)}
+
+\begin{frame}{Bayesian image reconstruction}
+
+Marginalizing over $p$ gives the noise model
+
+\begin{equation*}
+P(I_{n}) = \frac{1}{Z}\sum_{p}\frac{\exp\left({-\lambda_{n}}\right)\lambda_{n}^{p}}{p!}\exp\left(-\frac{(D-g_{n}p-\mu_{n})^{2}}{\sigma_{n}^{2}}\right)
+\end{equation*}
 
 
 
 \end{frame}
 
+
+
+
+\section{Graphical models for cellular networks}
+
+
+
+
+\section{Graphical models in image processing}
 
 
 
