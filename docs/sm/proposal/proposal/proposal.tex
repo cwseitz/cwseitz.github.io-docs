@@ -133,7 +133,7 @@ In biology, graphical models are used widely in \textcolor{red}{omics} i.e.
 
 \begin{frame}{Bayesian image reconstruction}
 
-Say a fluorophore emits photons at a rate $\lambda_{n}$. This is the best we can do due to QM
+Say a fluorophore emits photons at a rate $\lambda_{n}$. This is the best we can do according to QM
 \vspace{0.1in}
 
 For a CMOS array with quantum efficiency $\gamma\;\;[e^{-}/p]$ we have
@@ -147,7 +147,7 @@ where $\mu_{n} \;\;[\mathrm{ADU}]$ is the detector offset and $g_{n}\;\; [\mathr
 All we know is $\lambda_{n}$, so both the true signal $I_{n}$ and the detected signal $\hat{I}_{n}$ are stochastic processes. 
 
 \begin{equation*}
-P(I_{n},\hat{I}_{n}) = \frac{1}{Z}\frac{\exp\left({-\lambda_{n}}\right)\lambda_{n}^{p}}{p!}\exp\left(-\frac{(D-g_{n}p-\mu_{n})^{2}}{\sigma_{n}^{2}}\right)
+P_{\lambda}(I_{n},\hat{I}_{n}) = \frac{1}{Z}\frac{\exp\left({-\lambda_{n}}\right)\lambda_{n}^{p}}{p!}\exp\left(-\frac{(D-g_{n}p-\mu_{n})^{2}}{\sigma_{n}^{2}}\right)
 \end{equation*}
 
 \end{frame}
@@ -155,10 +155,10 @@ P(I_{n},\hat{I}_{n}) = \frac{1}{Z}\frac{\exp\left({-\lambda_{n}}\right)\lambda_{
 
 \begin{frame}{Bayesian image reconstruction}
 
-Marginalizing over $p$ gives the noise model
+Marginalizing over $p$ gives the noise model as a function of the rate $\lambda_{n}$
 
 \begin{equation*}
-P(I_{n}) = \frac{1}{Z}\sum_{p}\frac{\exp\left({-\lambda_{n}}\right)\lambda_{n}^{p}}{p!}\exp\left(-\frac{(D-g_{n}p-\mu_{n})^{2}}{\sigma_{n}^{2}}\right)
+P_{\lambda}(I_{n}) = \frac{1}{Z}\sum_{p}\frac{\exp\left({-\lambda_{n}}\right)\lambda_{n}^{p}}{p!}\exp\left(-\frac{(D-g_{n}p-\mu_{n})^{2}}{\sigma_{n}^{2}}\right)
 \end{equation*}
 
 
