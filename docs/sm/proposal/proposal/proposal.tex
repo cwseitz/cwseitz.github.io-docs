@@ -73,18 +73,12 @@ In supervised \textcolor{red}{generative learning}, we try to explicity learn th
 
 \end{frame}
 
-\begin{frame}{Primary types of graphical models}
-
-\end{frame}
-
-
-
 \begin{frame}{Perks of generative modeling}
 
 \begin{itemize}
 \item Fitting complete multivariate distributions $p(\mathbf{x})$ goes beyond correlation-based or clustering approaches
 \item Correlations cannot discover partial correlation in the context of other neighbors
-\item Fitting $p(\mathbf{x})$ permits sampling based inference
+\item Fitting $p(\mathbf{x})$ permits inference
 \end{itemize}
 
 \end{frame}
@@ -108,24 +102,33 @@ $\tilde{p}(\mathbf{x}) = e^{−H(\mathbf{x})}$ where $H(\mathbf{x})$ is the Hami
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Primary types of graphical models}
 
-In \textcolor{red}{image processing}, graphical models are a standard technique for:
+\begin{center}
+\begin{figure}
+\includegraphics[width=0.75\textwidth]{pgms}
+\end{figure}
+\end{center}
+\vspace{0.1in}
+MRF: $P(X,Y,Z) = \psi(X,Y)\psi(X,Z)\psi(Y,Z)$\\
+\vspace{0.1in}
+Bayes: $P(X,Y,Z) = P(X|Y,Z)P(Z|Y)P(Y)$
 
-\begin{itemize}
-\item Image denoising
-\item Image interpolation (resolution enhancement)
-\item Semantic image segmentation
-\end{itemize}
+\end{frame}
 
-\vspace{0.2in}
-In biology, graphical models are used widely in \textcolor{red}{omics} i.e.
+\begin{frame}{The Markov Blanket}
+\begin{center}
+\begin{figure}
+\includegraphics[width=0.85\textwidth]{blanket}
+\end{figure}
+\end{center}
+\end{frame}
 
-\begin{itemize}
-\item Genomics
-\item Transcriptomics
-\item Proteomics
-\end{itemize}
+\begin{frame}{Bayesian networks for modeling gene interactions}
+
+\end{frame}
+
+\begin{frame}{MCMC Structure Samplers}
 
 \end{frame}
 
