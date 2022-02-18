@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.8.24)  17 FEB 2022 21:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.10.1)  18 FEB 2022 10:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**pgm.tex
-(./pgm.tex
+**ggm.tex
+(./ggm.tex
 LaTeX2e <2020-02-02> patch level 2
 L3 programming layer <2020-02-14>
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamer.cls
@@ -673,9 +673,9 @@ LaTeX Info: Redefining \textlatin on input line 2319.
 Package babel Info: \l@canadian = using hyphenrules for english
 (babel)             (\language0) on input line 102.
 Package babel Info: \l@australian = using hyphenrules for ukenglish
-(babel)             (\language33) on input line 105.
+(babel)             (\language53) on input line 105.
 Package babel Info: \l@newzealand = using hyphenrules for ukenglish
-(babel)             (\language33) on input line 108.
+(babel)             (\language53) on input line 108.
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2018/08/11 v1.3c Input encoding file
@@ -721,8 +721,8 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count318
 \l__pdf_internal_box=\box73
 )
-(./pgm.aux)
-\openout1 = `pgm.aux'.
+No file ggm.aux.
+\openout1 = `ggm.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
 LaTeX Font Info:    ... okay on input line 37.
@@ -740,7 +740,6 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
 LaTeX Font Info:    ... okay on input line 37.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 37.
 LaTeX Font Info:    ... okay on input line 37.
-
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -815,10 +814,8 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 37.
 LaTeX Info: Redefining \pageref on input line 37.
 LaTeX Info: Redefining \nameref on input line 37.
-
-(./pgm.out) (./pgm.out)
 \@outlinefile=\write5
-\openout5 = `pgm.out'.
+\openout5 = `ggm.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 37.
@@ -899,10 +896,10 @@ Dictionary: translator-theorem-dictionary, Language: English
 ) (/usr/share/texlive/texmf-dist/tex/latex/ucs/ucsencs.def
 File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 )
-(./pgm.nav)
+No file ggm.nav.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 37.
 
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 37.
@@ -920,44 +917,52 @@ thkerncmss.
 )
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./pgm.toc) [2
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+No file ggm.toc.
+[2
 
 ] [3
 
-]
-[4
+] [4
 
 ] [5
 
 ] [6
 
 ]
-No file pgm.bbl.
+No file ggm.bbl.
 [7
 
 ]
 \tf@nav=\write6
-\openout6 = `pgm.nav'.
+\openout6 = `ggm.nav'.
 
 \tf@toc=\write7
-\openout7 = `pgm.toc'.
+\openout7 = `ggm.toc'.
 
 \tf@snm=\write8
-\openout8 = `pgm.snm'.
+\openout8 = `ggm.snm'.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 116.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 116.
- (./pgm.aux)
+ (./ggm.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 116.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 116.
-Package rerunfilecheck Info: File `pgm.out' has not changed.
-(rerunfilecheck)             Checksum: 06E27B416B3B1946CD705C501CA5B3BD;45.
+
+
+Package rerunfilecheck Warning: File `ggm.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `ggm.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  06E27B416B3B1946CD705C501CA5B3BD;45.
  ) 
 Here is how much of TeX's memory you used:
- 18647 strings out of 481239
- 352488 string characters out of 5920377
- 624016 words of memory out of 5000000
- 33428 multiletter control sequences out of 15000+600000
+ 18603 strings out of 481239
+ 351957 string characters out of 5920377
+ 623879 words of memory out of 5000000
+ 33394 multiletter control sequences out of 15000+600000
  541028 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  58i,14n,67p,770b,371s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -974,10 +979,10 @@ onts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.
 pfb>
-Output written on pgm.pdf (7 pages, 121407 bytes).
+Output written on ggm.pdf (7 pages, 121149 bytes).
 PDF statistics:
- 116 PDF objects out of 1000 (max. 8388607)
- 87 compressed objects within 1 object stream
+ 111 PDF objects out of 1000 (max. 8388607)
+ 82 compressed objects within 1 object stream
  16 named destinations out of 1000 (max. 500000)
- 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 43 words of extra memory for PDF output out of 10000 (max. 10000000)
 

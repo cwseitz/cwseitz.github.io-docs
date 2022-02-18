@@ -4,7 +4,7 @@
 \documentclass{beamer}					% Document class
 
 \setbeamertemplate{footline}[text line]{%
-  \parbox{\linewidth}{\vspace*{-8pt}A (very) brief introduction to graphical models\hfill\insertshortauthor\hfill\insertpagenumber}}
+  \parbox{\linewidth}{\vspace*{-8pt}A brief introduction to graphical models\hfill\insertshortauthor\hfill\insertpagenumber}}
 \setbeamertemplate{navigation symbols}{}
 
 \usepackage[english]{babel}				% Set language
@@ -30,7 +30,7 @@
 \usepackage{booktabs}					% For table rules
 \usepackage{hyperref}					% For cross-referencing
 
-\title{A (very) brief introduction to graphical models}	% Presentation title
+\title{A brief introduction to graphical models}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -56,7 +56,7 @@
 %\end{frame}
 
 
-\section{Introduction to graphical models}
+\section{Graphical models as a unifying framework}
 
 \begin{frame}{The logic of generative modeling}
 
@@ -73,12 +73,20 @@ In supervised \textcolor{red}{generative learning}, we try to explicity learn th
 
 \end{frame}
 
+\begin{frame}{Generative modeling with feedback}
+\begin{figure}
+\includegraphics[height=65mm, width=105mm]{dbm}
+\end{figure}
+\end{frame}
+
+
+
 \begin{frame}{Perks of generative modeling}
 
 \begin{itemize}
 \item Fitting complete multivariate distributions $p(\mathbf{x})$ goes beyond correlation-based or clustering approaches
 \item Correlations cannot discover partial correlation in the context of other neighbors
-\item Fitting $p(\mathbf{x})$ permits inference
+\item Fitting $p(\mathbf{x})$ permits sampling based inference
 \end{itemize}
 
 \end{frame}
@@ -102,33 +110,24 @@ $\tilde{p}(\mathbf{x}) = e^{−H(\mathbf{x})}$ where $H(\mathbf{x})$ is the Hami
 
 \end{frame}
 
-\begin{frame}{Primary types of graphical models}
+\begin{frame}
 
-\begin{center}
-\begin{figure}
-\includegraphics[width=0.75\textwidth]{pgms}
-\end{figure}
-\end{center}
-\vspace{0.1in}
-MRF: $P(X,Y,Z) = \psi(X,Y)\psi(X,Z)\psi(Y,Z)$\\
-\vspace{0.1in}
-Bayes: $P(X,Y,Z) = P(X|Y,Z)P(Z|Y)P(Y)$
+In \textcolor{red}{image processing}, graphical models are a standard technique for:
 
-\end{frame}
+\begin{itemize}
+\item Image denoising
+\item Image interpolation (resolution enhancement)
+\item Semantic image segmentation
+\end{itemize}
 
-\begin{frame}{The Markov Blanket}
-\begin{center}
-\begin{figure}
-\includegraphics[width=0.85\textwidth]{blanket}
-\end{figure}
-\end{center}
-\end{frame}
+\vspace{0.2in}
+In biology, graphical models are used widely in \textcolor{red}{omics} i.e.
 
-\begin{frame}{Bayesian networks for modeling gene interactions}
-
-\end{frame}
-
-\begin{frame}{MCMC Structure Samplers}
+\begin{itemize}
+\item Genomics
+\item Transcriptomics
+\item Proteomics
+\end{itemize}
 
 \end{frame}
 
@@ -169,7 +168,7 @@ P_{\lambda}(I_{n}) = \frac{1}{Z}\sum_{p}\frac{\exp\left({-\lambda_{n}}\right)\la
 
 
 
-\section{Graphical models of gene expression}
+\section{Graphical models for cellular networks}
 
 
 
