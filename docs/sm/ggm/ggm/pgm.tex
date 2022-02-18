@@ -1,0 +1,116 @@
+% Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
+% For more details: https://www.sharelatex.com/learn/Beamer
+
+\documentclass{beamer}					% Document class
+
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}Gaussian Graphical Model Demo\hfill\insertshortauthor\hfill\insertpagenumber}}
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage[english]{babel}				% Set language
+\usepackage[utf8x]{inputenc}			% Set encoding
+
+\mode<presentation>						% Set options
+{
+  \usetheme{default}					% Set theme
+  \usecolortheme{default} 				% Set colors
+  \usefonttheme{default}  				% Set font theme
+  \setbeamertemplate{caption}[numbered]	% Set caption to be numbered
+}
+
+% Uncomment this to have the outline at the beginning of each section highlighted.
+%\AtBeginSection[]
+%{
+%  \begin{frame}{Outline}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+%}
+
+\usepackage{graphicx}					% For including figures
+\usepackage{booktabs}					% For table rules
+\usepackage{hyperref}					% For cross-referencing
+
+\title{Gaussian Graphical Model Demo}	% Presentation title
+\author{Clayton W. Seitz}								% Presentation author
+\date{\today}									% Today's date	
+
+\begin{document}
+
+% Title page
+% This page includes the informations defined earlier including title, author/s, affiliation/s and the date
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Outline
+% This page includes the outline (Table of content) of the presentation. All sections and subsections will appear in the outline by default.
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+% The following is the most frequently used slide types in beamer
+% The slide structure is as follows:
+%
+%\begin{frame}{<slide-title>}
+%	<content>
+%\end{frame}
+
+
+
+\begin{frame}{One-dimensional case}
+
+Let's first consider a toy example and work our way to the Gaussian graphical model. The standard definition of the 1D Gaussian is
+
+\begin{equation}
+P(x|\theta) = \frac{1}{\sqrt{2\pi \sigma^{2}}}\exp\left(-\frac{(x-\mu)^{2}}{2\sigma^{2}}\right)
+\end{equation}
+
+We'd like to maximize the log-likelihood $\mathcal{L}_{\theta}$ of the parameters $\theta=(\mu,\sigma)$ i.e.
+
+\begin{equation*}
+\theta^{*} = \underset{\theta}{\mathrm{argmin}} -\log P(\theta|X)
+\end{equation*}
+\end{frame}
+
+\begin{frame}{Bayesian Inference}
+
+We can use Bayesian inference to estimate the optimal parameters $\theta$ given a sample of data drawn from $P(x)$.
+
+\begin{equation}
+P(\theta|x) = \frac{P(x|\theta)P(\theta)}{\int_{\theta} P(x|\theta)P(\theta)d\theta}
+\end{equation}
+
+In MAP estimation, we try to maximize the numerator as a function of $\theta$. In MLE we assume a uniform prior and try to maximize $P(x|\theta) = \prod_{i=1}^{N} P(x_{i}|\theta)$.\\
+\vspace{0.1in}
+Those are standard methods (which work nicely in this simple case) but let's try and use MCMC instead
+
+\end{frame}
+
+\begin{frame}{Metropolis MCMC}
+
+Let $\tilde{P}(\theta|x) = P(x|\theta)P(\theta)$\\
+\vspace{0.1in}
+In the Metropolis algorithm, we randomly choose starting parameter values $\mu_{0}$ and $\sigma_{0}$. We will define two proposal distributions $T_{\mu}(\mu'|\mu) = \mathcal{N}(\mu,\sigma_{\mu}^{2})$ and $T_{\sigma}(\sigma'|\sigma) = \mathcal{N}(\sigma,\sigma_{\sigma}^{2})$\\
+\vspace{0.2in}
+Iterate:
+\begin{itemize}
+\item Draw $\mu'\sim T_{\mu}(\mu'|\mu)$, $\sigma'\sim T_{\sigma}(\sigma'|\sigma)$
+\item Compute $a_{\mu} = \mathrm{min}\left(1,\frac{P(\mu)}{P(\mu')}\right)$, $a_{\sigma} = \mathrm{min}\left(1,\frac{P(\sigma)}{P(\sigma')}\right)$
+\item Accept $\mu'$ w.p. $a_{\mu}$ and $\sigma'$ w.p. $a_{\sigma}$ 
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{MCMC Run: 1D Gaussian Parameters}
+\end{frame}
+
+
+\section{References}
+
+% Adding the option 'allowframebreaks' allows the contents of the slide to be expanded in more than one slide.
+\begin{frame}[allowframebreaks]{References}
+	\tiny\bibliography{references}
+	\bibliographystyle{apalike}
+\end{frame}
+
+\end{document}
