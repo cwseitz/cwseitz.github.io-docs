@@ -59,18 +59,22 @@
 
 \begin{frame}{Feature Selection}
 
-Why do we perform feature selection? \\
+What is it?\\
+\vspace{0.2in}
+A special type of dimensionality reduction where we select a subset of features, in contrast with \emph{feature extraction}\\
+\vspace{0.2in}
+Why do we do it? \\
 \vspace{0.2in}
 \begin{itemize}
 \item Quality of the input data is just as important as the algorithm you choose
-\item The volume of a feature space grows exponentially in the number of dimensions $V \propto \alpha^{N}$
-\item But we often have a small number of samples
+\item The volume of a feature space grows exponentially in the number of dimensions $n$
+\item But we often have a small number of samples $p<<n$
 \end{itemize}
 
 \end{frame}
 
 
-\begin{frame}{Using Mutual Information for Feature Selection}
+\begin{frame}{Mutual Information}
 
 Mutual information comes from information theory and statistics.
 
@@ -84,32 +88,42 @@ where $H$ denotes the entropy\\
 
 \begin{itemize}
 \item It quantifies the amount of information one variable carries about another
-\item Is a ``generalized correlation'' - it is not limited to continuous random variables
-\item $X = \{x_{i}\}_{i=1}^{N}$ and $Y$ could be categorical e.g., cellular phenotypes
+\item Captures nonlinear correlation and is not limited to continuous variables
+\item $Y$ could be categorical e.g., cellular phenotypes
 \end{itemize}
+
+\end{frame}
+
+\begin{frame}{An Example}
 
 \end{frame}
 
 \begin{frame}{Using Mutual Information for Feature Selection}
 
-For phenotyping, we might want to find the optimal $X$ which is most informative about the cell type $Y$\\
-\vspace{0.2in}
-This is just an optimization problem on maximizing the joint mutual information
-
 \begin{equation*}
 X^{*} = \underset{X}{\mathrm{argmax}}\;\; I(\bm{X};Y)
-\end{equation*}
+\end{equation*}\\
+\vspace{0.2in}
+For phenotyping, we might want to find the optimal $X$ which is most informative about the cell type $Y$\\
+\vspace{0.2in}
+This is an optimization problem (NP-hard) on maximizing the \emph{joint mutual information}\\
+\vspace{0.2in}
+There are approximate solutions
 
-But this is a NP-hard optimization problem, but there are approximate solutions
+\end{frame}
+
+\begin{frame}{Maximum Relevancy Minimum Redundancy (MRMR)}
+
+By making some approximations, we can rewrite $I(\bm{X};Y)$ as
+\begin{align*}
+I(\bm{X};Y) &\approx \sum_{i} \left(I(X_{i};Y)- \alpha\sum_{j}I(X_{i};X_{j}) \right)
+\end{align*}
+
+where the parameter $\alpha$ determines how strongly we consider redundancy
 
 \end{frame}
 
 \begin{frame}{Results for T1D dataset}
-
-Maximize:
-\begin{align*}
-I(\bm{X};Y) &\approx \sum_{i} \left(I(X_{i};Y)- \alpha\sum_{j}I(X_{i};X_{j}) \right)
-\end{align*}
 
 \begin{center}
 \begin{figure}
