@@ -71,7 +71,7 @@ Why do we do it? \\
 \begin{itemize}
 \item Quality of the input data is just as important as the algorithm you choose
 \item The volume of a feature space grows exponentially in the number of dimensions $n$
-\item But we often have a small number of samples $p<<n$
+\item But we often have a small number of samples $p\sim n$
 \end{itemize}
 
 \end{frame}
@@ -88,19 +88,25 @@ How do we define a notion of distance for probability distributions?
 
 \begin{frame}{Symmetric Kullbeck-Leibler (KL) Divergence}
 
-The standard definition of KL-Divergence is 
-
-The form that has been used in feature selection for classification tasks reads
+The standard definition of KL-Divergence:
 
 \begin{equation*}
-S = D_{KL}(P||Q) + D_{KL}(Q||P)
+D_{KL}(P||Q) = \sum_{x\in\chi} P(x)\log\frac{P(x)}{Q(x)}
 \end{equation*}
 
-The major drawback of univariate methods is that we do not consider contextual changes 
+This is asymmetric. The form used in feature selection for classification tasks reads
+
+\begin{equation*}
+S_{ij} = D_{KL}(P_{i}||Q_{j}) + D_{KL}(Q_{j}||P_{i})
+\end{equation*}
+
+where $P_{i} = P(X|\omega_{i}), Q_{j} = Q(X|\omega_{j})$ for arbitrary classes $\omega_{i},\omega_{j}$\\
+\vspace{0.1in}
+A major drawback of considering only conditional distributions is that we neglect pairwise or higher order changes
 
 \end{frame}
 
-\begin{frame}{Result}
+\begin{frame}{Result on T1D Dataset}
 \begin{center}
 \begin{figure}
 \includegraphics[width=0.9\textwidth]{kld.png}

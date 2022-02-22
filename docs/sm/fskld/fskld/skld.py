@@ -63,7 +63,7 @@ ax.plot(out_ab_sorted,color='black',label=r'$\omega_{1},\omega_{2}$')
 ax.plot(out_bc_sorted,color='blue',label=r'$\omega_{2},\omega_{3}$')
 ax.plot(out_ac_sorted,color='cyan',label=r'$\omega_{1},\omega_{3}$')
 ax.set_xlabel('Feature index (sorted)',fontsize=12)
-ax.set_ylabel(r'$D_{KL}(\omega_{x}||\omega_{y})$',fontsize=12)
+ax.set_ylabel(r'$S_{ij}$',fontsize=12)
 ax.legend(loc='lower right')
 
 # inset axes....
@@ -76,7 +76,7 @@ axins.plot(out_ab_sorted[:10],color='black',label=r'$\omega_{1},\omega_{2}$')
 axins.plot(out_bc_sorted[:10],color='blue',label=r'$\omega_{2},\omega_{3}$')
 axins.plot(out_ac_sorted[:10],color='cyan',label=r'$\omega_{1},\omega_{3}$')
 axins.set_xlabel('Feature index (sorted)',fontsize=12)
-axins.set_ylabel(r'$D_{KL}(\omega_{x}||\omega_{y})$',fontsize=12)
+axins.set_ylabel(r'$S_{ij}$',fontsize=12)
 plt.show()
 
 ######################################################################
