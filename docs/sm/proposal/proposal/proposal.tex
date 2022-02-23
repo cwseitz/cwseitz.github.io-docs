@@ -1,10 +1,10 @@
 % Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
 % For more details: https://www.sharelatex.com/learn/Beamer
 
-\documentclass{beamer}					% Document class
+\documentclass[aspectratio=1610]{beamer}					% Document class
 
 \setbeamertemplate{footline}[text line]{%
-  \parbox{\linewidth}{\vspace*{-8pt}A brief introduction to graphical models\hfill\insertshortauthor\hfill\insertpagenumber}}
+  \parbox{\linewidth}{\vspace*{-8pt}Deep methods for interpretable analysis of gene interactions\hfill\insertshortauthor\hfill\insertpagenumber}}
 \setbeamertemplate{navigation symbols}{}
 
 \usepackage[english]{babel}				% Set language
@@ -29,8 +29,9 @@
 \usepackage{graphicx}					% For including figures
 \usepackage{booktabs}					% For table rules
 \usepackage{hyperref}					% For cross-referencing
+\usepackage[absolute,overlay]{textpos}
 
-\title{A brief introduction to graphical models}	% Presentation title
+\title{Deep methods for interpretable analysis of gene interactions}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -55,8 +56,6 @@
 %	<content>
 %\end{frame}
 
-
-\section{Graphical models as a unifying framework}
 
 \begin{frame}{The logic of generative modeling}
 
@@ -91,91 +90,53 @@ In supervised \textcolor{red}{generative learning}, we try to explicity learn th
 
 \end{frame}
 
-\begin{frame}{Why generative modeling is difficult}
 
-When describing a distribution over multiple variables, we may not know the proper normalization $Z$. That is,
+%\section{The variational autoencoder}
+%\begin{frame}{Variational autoencoders (VAEs)}
+%A variational solution to generative modeling
+%
+%\begin{center}
+%\begin{figure}
+%\includegraphics[width=0.9\textwidth]{vae}
+%\caption{\textbf{Variational autoencoder architecture} Taken from Lopez 2020 in EMBO}
+%\end{figure}
+%\end{center}
+%\end{frame}
 
-\begin{equation*}
-p(\mathbf{x}) = \frac{1}{Z}\tilde{p}(\mathbf{x})
-\end{equation*}
-
-\vspace{0.1in}
-This \textcolor{red}{very important} situation arises in several contexts:\\
-\vspace{0.1in}
-1. In \textcolor{red}{Bayesian inference} where $p(x_{1}|x_{2}) = p(x_{2}|x_{1})p(x_{1})/p(x_{2})$ is intractable due to $Z = p(x_{2}) = \int p(x_{2}|x_{1})p(x_{1})dx_{1}$. This integral can be very difficult or impossible to
-compute.\\
-\vspace{0.1in}
-2. In models from statistical physics, e.g. the Ising model, we only know
-$\tilde{p}(\mathbf{x}) = e^{−H(\mathbf{x})}$ where $H(\mathbf{x})$ is the Hamiltonian
+\begin{frame}{Gene interactions are naturally represented as graphs}
 
 \end{frame}
 
-\begin{frame}
+\section{Graph convolutional networks}
 
-In \textcolor{red}{image processing}, graphical models are a standard technique for:
+\begin{frame}{Quick review of convolutional neural networks}
 
-\begin{itemize}
-\item Image denoising
-\item Image interpolation (resolution enhancement)
-\item Semantic image segmentation
-\end{itemize}
-
-\vspace{0.2in}
-In biology, graphical models are used widely in \textcolor{red}{omics} i.e.
-
-\begin{itemize}
-\item Genomics
-\item Transcriptomics
-\item Proteomics
-\end{itemize}
+Assume stationarity of image statistics and locality of pixel dependencies
 
 \end{frame}
 
-\begin{frame}{Bayesian image reconstruction}
+\begin{frame}{Defining Graph Convolution}
+Can be viewed as a generalization of convolutional neural networks to graph structured data
 
-Say a fluorophore emits photons at a rate $\lambda_{n}$. This is the best we can do according to QM
-\vspace{0.1in}
-
-For a CMOS array with quantum efficiency $\gamma\;\;[e^{-}/p]$ we have
-
+\begin{textblock*}{5cm}(1cm,5cm)
 \begin{equation*}
-I_{n} = \gamma g_{n}P_{n}(\lambda_{n}) + G_{n}(\mu_{n};\sigma_{n}^{2}) + \beta
+y = mx+b
 \end{equation*}
+\end{textblock*}
 
-where $\mu_{n} \;\;[\mathrm{ADU}]$ is the detector offset and $g_{n}\;\; [\mathrm{ADU}/e^{-}]$ is the gain. \\
-\vspace{0.2in}
-All we know is $\lambda_{n}$, so both the true signal $I_{n}$ and the detected signal $\hat{I}_{n}$ are stochastic processes. 
-
-\begin{equation*}
-P_{\lambda}(I_{n},\hat{I}_{n}) = \frac{1}{Z}\frac{\exp\left({-\lambda_{n}}\right)\lambda_{n}^{p}}{p!}\exp\left(-\frac{(D-g_{n}p-\mu_{n})^{2}}{\sigma_{n}^{2}}\right)
-\end{equation*}
+\begin{textblock*}{5cm}(7.5cm,0.5cm)
+\includegraphics[width=7cm]{graphs.png}
+\end{textblock*}
 
 \end{frame}
 
-
-\begin{frame}{Bayesian image reconstruction}
-
-Marginalizing over $p$ gives the noise model as a function of the rate $\lambda_{n}$
-
-\begin{equation*}
-P_{\lambda}(I_{n}) = \frac{1}{Z}\sum_{p}\frac{\exp\left({-\lambda_{n}}\right)\lambda_{n}^{p}}{p!}\exp\left(-\frac{(D-g_{n}p-\mu_{n})^{2}}{\sigma_{n}^{2}}\right)
-\end{equation*}
-
-
+\begin{frame}{Learning Bayesian network structure}
 
 \end{frame}
 
+\begin{frame}{Directed graph convolution on Bayesian networks}
 
-
-
-\section{Graphical models for cellular networks}
-
-
-
-
-\section{Graphical models in image processing}
-
-
+\end{frame}
 
 \section{References}
 

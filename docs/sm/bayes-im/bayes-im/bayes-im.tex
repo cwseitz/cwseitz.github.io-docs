@@ -1,0 +1,102 @@
+% Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
+% For more details: https://www.sharelatex.com/learn/Beamer
+
+\documentclass{beamer}					% Document class
+
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}Bayesian image reconstruction\hfill\insertshortauthor\hfill\insertpagenumber}}
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage[english]{babel}				% Set language
+\usepackage[utf8x]{inputenc}			% Set encoding
+
+\mode<presentation>						% Set options
+{
+  \usetheme{default}					% Set theme
+  \usecolortheme{default} 				% Set colors
+  \usefonttheme{default}  				% Set font theme
+  \setbeamertemplate{caption}[numbered]	% Set caption to be numbered
+}
+
+% Uncomment this to have the outline at the beginning of each section highlighted.
+%\AtBeginSection[]
+%{
+%  \begin{frame}{Outline}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+%}
+
+\usepackage{graphicx}					% For including figures
+\usepackage{booktabs}					% For table rules
+\usepackage{hyperref}					% For cross-referencing
+
+\title{Bayesian image reconstruction}	% Presentation title
+\author{Clayton W. Seitz}								% Presentation author
+\date{\today}									% Today's date	
+
+\begin{document}
+
+% Title page
+% This page includes the informations defined earlier including title, author/s, affiliation/s and the date
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Outline
+% This page includes the outline (Table of content) of the presentation. All sections and subsections will appear in the outline by default.
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+% The following is the most frequently used slide types in beamer
+% The slide structure is as follows:
+%
+%\begin{frame}{<slide-title>}
+%	<content>
+%\end{frame}
+
+
+\begin{frame}{Bayesian image reconstruction}
+
+Say a fluorophore emits photons at a rate $\lambda_{n}$. This is the best we can do according to QM
+\vspace{0.1in}
+
+For a CMOS array with quantum efficiency $\gamma\;\;[e^{-}/p]$ we have
+
+\begin{equation*}
+I_{n} = \gamma g_{n}P_{n}(\lambda_{n}) + G_{n}(\mu_{n};\sigma_{n}^{2}) + \beta
+\end{equation*}
+
+where $\mu_{n} \;\;[\mathrm{ADU}]$ is the detector offset and $g_{n}\;\; [\mathrm{ADU}/e^{-}]$ is the gain. \\
+\vspace{0.2in}
+All we know is $\lambda_{n}$, so both the true signal $I_{n}$ and the detected signal $\hat{I}_{n}$ are stochastic processes. 
+
+\begin{equation*}
+P_{\lambda}(I_{n},\hat{I}_{n}) = \frac{1}{Z}\frac{\exp\left({-\lambda_{n}}\right)\lambda_{n}^{p}}{p!}\exp\left(-\frac{(D-g_{n}p-\mu_{n})^{2}}{\sigma_{n}^{2}}\right)
+\end{equation*}
+
+\end{frame}
+
+
+\begin{frame}{Bayesian image reconstruction}
+
+Marginalizing over $p$ gives the noise model as a function of the rate $\lambda_{n}$
+
+\begin{equation*}
+P_{\lambda}(I_{n}) = \frac{1}{Z}\sum_{p}\frac{\exp\left({-\lambda_{n}}\right)\lambda_{n}^{p}}{p!}\exp\left(-\frac{(D-g_{n}p-\mu_{n})^{2}}{\sigma_{n}^{2}}\right)
+\end{equation*}
+
+
+
+\end{frame}
+
+
+\section{References}
+
+% Adding the option 'allowframebreaks' allows the contents of the slide to be expanded in more than one slide.
+\begin{frame}[allowframebreaks]{References}
+	\tiny\bibliography{references}
+	\bibliographystyle{apalike}
+\end{frame}
+
+\end{document}
