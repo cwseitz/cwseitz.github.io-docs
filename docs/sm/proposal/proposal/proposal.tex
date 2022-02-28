@@ -4,7 +4,7 @@
 \documentclass[aspectratio=1610]{beamer}					% Document class
 
 \setbeamertemplate{footline}[text line]{%
-  \parbox{\linewidth}{\vspace*{-8pt}Deep methods for interpretable analysis of gene interactions\hfill\insertshortauthor\hfill\insertpagenumber}}
+  \parbox{\linewidth}{\vspace*{-8pt}A brief introduction to graphical models and deep methods in computational network biology \hfill\insertshortauthor\hfill\insertpagenumber}}
 \setbeamertemplate{navigation symbols}{}
 
 \usepackage[english]{babel}				% Set language
@@ -30,8 +30,9 @@
 \usepackage{booktabs}					% For table rules
 \usepackage{hyperref}					% For cross-referencing
 \usepackage[absolute,overlay]{textpos}
+\usepackage{bm}
 
-\title{Deep methods for interpretable analysis of gene interactions}	% Presentation title
+\title{A brief introduction to graphical models and deep methods in computational network biology}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -56,86 +57,209 @@
 %	<content>
 %\end{frame}
 
+\section{Introduction to biological networks}
 
-\begin{frame}{The logic of generative modeling}
+\begin{frame}{Computational network biology}
 
-Say we have a set of variables $\mathbf{x} = (x_{1},x_{2},...,x_{n})$ which might have some statistical dependence\\
-\vspace{0.1in}
-The variable $\mathbf{x}$ might be an amino acid sequence, gene expression data, microscopy image, etc.\\
-\vspace{0.1in}
+Emerging research field that encompasses theory and applications of \textcolor{red}{network models} to study complex interactions of cells, DNA, RNA, proteins, and metabolites\\
+\vspace{0.2in}
+Say we have a set of variables $\bm{x} = (x_{1},x_{2},...,x_{n})$ which might have some statistical dependence. $\bm{x}$ might be RNA or protein expression data, for example\\
+\vspace{0.2in}
 \begin{itemize}
-\item Often we are handed a batch of empirical samples $\{\mathbf{x}_{i}\}_{i=1}^{N}$
-\item We want to know the generating distribution $p(\mathbf{x})$
+\item Often we are handed a batch of empirical samples $\bm{X} = \{\bm{x_{1}},..,\bm{x_{k}}\}$
+\item We want to learn about the generating distribution $P(\bm{x},t)$
 \end{itemize}
 
-In supervised \textcolor{red}{generative learning}, we try to explicity learn the joint distribution $p(\mathbf{x}) = \prod_{i=1}^{N-1}p(x_{i}|x_{i+1:N})p(x_{N})$, which is generally more difficult than discriminative learning. 
+\vspace{0.2in}
+Joint effort between physics, computer science, and biology
 
-\end{frame}
-
-\begin{frame}{Generative modeling with feedback}
+\begin{textblock*}{3cm}(12.25cm,5.5cm)
 \begin{figure}
-\includegraphics[height=65mm, width=105mm]{dbm}
+\includegraphics[width=3cm]{net.png}
 \end{figure}
-\end{frame}
-
-
-
-\begin{frame}{Perks of generative modeling}
-
-\begin{itemize}
-\item Fitting complete multivariate distributions $p(\mathbf{x})$ goes beyond correlation-based or clustering approaches
-\item Correlations cannot discover partial correlation in the context of other neighbors
-\item Fitting $p(\mathbf{x})$ permits sampling based inference
-\end{itemize}
+\end{textblock*}
 
 \end{frame}
 
+\begin{frame}{A gene interaction network}
+\begin{center}
+\begin{textblock*}{13cm}(1.3cm,1.5cm)
+\begin{figure}
+\includegraphics[width=8cm]{gene-network.png}
+\caption{\textbf{Landscape of genetic interactions} in cells. Edges between genes denote Pearson correlation coefficients ($\rho > 0.2$) calculated from the
+complete genetic interaction matrix.}
+\end{figure}
+\end{textblock*}
+\end{center}
+\end{frame}
 
-%\section{The variational autoencoder}
-%\begin{frame}{Variational autoencoders (VAEs)}
-%A variational solution to generative modeling
-%
-%\begin{center}
-%\begin{figure}
-%\includegraphics[width=0.9\textwidth]{vae}
-%\caption{\textbf{Variational autoencoder architecture} Taken from Lopez 2020 in EMBO}
-%\end{figure}
-%\end{center}
-%\end{frame}
+\begin{frame}{A protein interaction network}
+\begin{center}
+\begin{textblock*}{13cm}(1.5cm,1cm)
+\begin{figure}
+\includegraphics[width=10cm]{protein-interactome.png}
+\caption{\textbf{Human protein interactome} of 17,706 proteins and 351,444 interactions (A) Overall complex network of human interactome. (B) Degree
+(connectivity) distribution of proteins by following a power-law tail. (C) Several selected network topological characteristics of the interactome.}
+\end{figure}
+\end{textblock*}
+\end{center}
+\end{frame}
 
-\begin{frame}{Gene interactions are naturally represented as graphs}
+\begin{frame}{A cellular interaction network (model neurons)}
+\begin{textblock*}{12cm}(0.5cm,0.75cm)
+\begin{figure}
+\includegraphics[width=11cm]{neural-network.png}
+\caption{\textbf{Asychronous spiking of model neurons} (A) Steady-state raster plot of $N=100$ uncoupled EIF neurons undergoing stimulation with GWN with $\mu = 2\mu A/\mathrm{cm}^{2}$ and $\sigma = 9 \;\mu A/\mathrm{cm}^{2}$}
+\end{figure}
+\end{textblock*}
+\begin{textblock*}{3cm}(12.25cm,0.5cm)
+\begin{figure}
+\includegraphics[width=3cm]{neural-network-graph.png}
+\end{figure}
+\end{textblock*}
+\end{frame}
+
+\begin{frame}{Probabilistic graphical models (PGMs)}
+
+Probabilistic graphical models are a class of machine \\learning algorithms that represent statistical \\dependencies of probability distributions as graphs\\
+\vspace{0.2in}
+Two main types used in machine learning: \\\textcolor{red}{Bayesian Networks} (BNs), \textcolor{red}{Markov Random Fields} (MRFs), \\but there are others\\
+\vspace{0.2in}
+Major advantage is that they are \textcolor{red}{structured models}\\They do not scale as easily as deep networks
+
+
+\begin{textblock*}{5cm}(10.75cm,1cm)
+\begin{figure}
+\includegraphics[width=4cm]{mrf.png}
+\end{figure}
+\end{textblock*}
+
+\begin{textblock*}{5cm}(10.75cm,5cm)
+\begin{figure}
+\includegraphics[width=2.75cm]{bayes-net.png}
+\end{figure}
+\end{textblock*}
 
 \end{frame}
 
-\section{Graph convolutional networks}
 
-\begin{frame}{Quick review of convolutional neural networks}
+\begin{frame}{Probabilistic graphical models (PGMs)}
 
-Assume stationarity of image statistics and locality of pixel dependencies
+\begin{textblock*}{10cm}(1cm,1.5cm)
+Say we have a joint probability over gene expression $P(\bm{X})$\\A PGM describes how $P(\bm{X})$ factors\\
+\end{textblock*}
 
-\end{frame}
-
-\begin{frame}{Defining Graph Convolution}
-Can be viewed as a generalization of convolutional neural networks to graph structured data
-
-\begin{textblock*}{5cm}(1cm,5cm)
+\begin{textblock*}{9cm}(1cm,3.5cm)
+\textcolor{red}{Markov Random Fields} (MRFs) e.g., Ising model
 \begin{equation*}
-y = mx+b
+P(\bm{X};\Theta) = \frac{1}{Z}\prod_{i=1}^{N}P(\bm{X_{i}},\mathcal{C}(X_{i});\Theta_{i})
 \end{equation*}
 \end{textblock*}
 
-\begin{textblock*}{5cm}(7.5cm,0.5cm)
-\includegraphics[width=7cm]{graphs.png}
+\begin{textblock*}{7cm}(1cm,6.5cm)
+\textcolor{red}{Bayesian Network} (BNs) - include causality
+\begin{equation*}
+P(\bm{X}|\mathcal{G},\Theta) = \prod_{i=1}^{N}P(\bm{X_{i}}|\mathcal{C}(X_{i}),\Theta_{i})
+\end{equation*}
+\end{textblock*}
+
+
+\begin{textblock*}{5cm}(10.75cm,1cm)
+\begin{figure}
+\includegraphics[width=4cm]{mrf.png}
+\end{figure}
+\end{textblock*}
+
+\begin{textblock*}{5cm}(10.75cm,5cm)
+\begin{figure}
+\includegraphics[width=2.75cm]{bayes-net.png}
+\end{figure}
+\end{textblock*}
+
+\begin{textblock*}{15cm}(1cm,9cm)
+BNs as well as hybrid models have been used to examine gene expression
 \end{textblock*}
 
 \end{frame}
 
-\begin{frame}{Learning Bayesian network structure}
+\begin{frame}{An example graphical model}
+
+\begin{figure}
+\includegraphics[width=11cm]{pi3k-pathway.png}
+\caption{\textbf{PI3K pathway graph} discovery using graphical modeling (Ni et al. Bioinformatics 2018). c - transcript count, g - gene, p - protein, m - methylation}
+\end{figure}
+\end{frame}
+
+\begin{frame}{A tradeoff between mechanistic understanding and scale}
+
+Fine structure of molecular interactions sometimes can be resolved for low dimensionality\\
+\vspace{0.2in}
+\textcolor{red}{Computational complexity} often scales exponentially with an increase in variables, density of interactions\\
+\vspace{0.2in}
+In high-dimensional biological networks we often turn to classic dimensionality reduction or deep methods\\
+\vspace{0.2in}
+Introducing \textcolor{red}{latent variables} into the model can reduce \\computational complexity
+
+
+\begin{textblock*}{3cm}(12.25cm,5.5cm)
+\begin{figure}
+\includegraphics[width=3cm]{net.png}
+\end{figure}
+\end{textblock*}
 
 \end{frame}
 
-\begin{frame}{Directed graph convolution on Bayesian networks}
+\begin{frame}{Latent variables}
+Modeling all possible conditional dependencies quickly becomes intractable, lots of parameters\\
+\vspace{0.2in}
+Introducing latent variables $\bm{z}$ can reduce the number of needed parameters\\
+\vspace{0.2in}
 
+\begin{figure}
+\includegraphics[width=0.8\textwidth]{manifold.png}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Variational autoencoders (VAEs)}
+The VAE architecture has been very succesful when applied to RNA-seq datasets see (Lopez Nature Methods 2020)
+
+\begin{center}
+\begin{figure}
+\includegraphics[width=0.8\textwidth]{vae}
+\caption{\textbf{Variational autoencoder architecture} Lopez 2020 EMBO}
+\end{figure}
+\end{center}
+\end{frame}
+
+\begin{frame}{Using the VAE for cell phenotyping}
+
+\begin{textblock*}{15cm}(0.75cm,1.5cm)
+Can do hypothesis testing (Bayes factor) but does not explicitly capture visible-visible causal relationships (captures latent-visible)\\
+\vspace{0.1in}
+558 genes/3005 cells for CORTEX, 7,397 genes/4016 cells for HEMATO (Lopez Nature Methods 2020)
+\end{textblock*}
+\begin{textblock*}{7cm}(0.75cm,3.5cm)
+\begin{figure}
+\includegraphics[width=7cm]{cortex-legend.png}
+\end{figure}
+\end{textblock*}
+\begin{textblock*}{7cm}(0.75cm,5.5cm)
+\begin{figure}
+\includegraphics[width=7cm]{cortex.png}
+\end{figure}
+\end{textblock*}
+\begin{textblock*}{7cm}(8.5cm,3.5cm)
+\begin{figure}
+\includegraphics[width=7cm]{hemato-legend.png}
+\end{figure}
+\end{textblock*}
+\begin{textblock*}{7cm}(8.5cm,5.75cm)
+\begin{figure}
+\includegraphics[width=7cm]{hemato.png}
+\end{figure}
+\end{textblock*}
 \end{frame}
 
 \section{References}
