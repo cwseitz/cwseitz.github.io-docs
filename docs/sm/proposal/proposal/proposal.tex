@@ -57,16 +57,16 @@
 %	<content>
 %\end{frame}
 
-\section{Introduction to biological networks}
+\section{A few example networks in biology}
 
 \begin{frame}{Computational network biology}
 
 Emerging research field that encompasses theory and applications of \textcolor{red}{network models} to study complex interactions of cells, DNA, RNA, proteins, and metabolites\\
 \vspace{0.2in}
-Say we have a set of variables $\bm{x} = (x_{1},x_{2},...,x_{n})$ which might have some statistical dependence. $\bm{x}$ might be RNA or protein expression data, for example\\
+Say we have a set of variables $\bm{X} = (x_{1},x_{2},...,x_{n})$ which might have some statistical dependence. $\bm{X}$ might be expression data, for example\\
 \vspace{0.2in}
 \begin{itemize}
-\item Often we are handed a batch of empirical samples $\bm{X} = \{\bm{x_{1}},..,\bm{x_{k}}\}$
+\item Often we are handed a batch of empirical samples $\bm{X} = \{\bm{x_{1}},..,\bm{x_{p}}\}$
 \item We want to learn about the generating distribution $P(\bm{x},t)$
 \end{itemize}
 
@@ -119,6 +119,7 @@ complete genetic interaction matrix.}
 \end{textblock*}
 \end{frame}
 
+\section{Graphical models in a nutshell}
 \begin{frame}{Probabilistic graphical models (PGMs)}
 
 Probabilistic graphical models are a class of machine \\learning algorithms that represent statistical \\dependencies of probability distributions as graphs\\
@@ -152,14 +153,14 @@ Say we have a joint probability over gene expression $P(\bm{X})$\\A PGM describe
 \begin{textblock*}{9cm}(1cm,3.5cm)
 \textcolor{red}{Markov Random Fields} (MRFs) e.g., Ising model
 \begin{equation*}
-P(\bm{X};\Theta) = \frac{1}{Z}\prod_{i=1}^{N}P(\bm{X_{i}},\mathcal{C}(X_{i});\Theta_{i})
+P(\bm{X};\Theta) = \frac{1}{Z}\prod_{\mathcal{C}} \psi_{\mathcal{C}}(x_{\mathcal{C}}; \Theta)
 \end{equation*}
 \end{textblock*}
 
 \begin{textblock*}{7cm}(1cm,6.5cm)
 \textcolor{red}{Bayesian Network} (BNs) - include causality
 \begin{equation*}
-P(\bm{X}|\mathcal{G},\Theta) = \prod_{i=1}^{N}P(\bm{X_{i}}|\mathcal{C}(X_{i}),\Theta_{i})
+P(\bm{X};\Theta) = \prod_{i=1}^{N}P(\bm{X_{i}}|pa(X_{i}),\Theta_{i})
 \end{equation*}
 \end{textblock*}
 
@@ -182,7 +183,7 @@ BNs as well as hybrid models have been used to examine gene expression
 
 \end{frame}
 
-\begin{frame}{An example graphical model}
+\begin{frame}{An example Bayesian graphical model}
 
 \begin{figure}
 \includegraphics[width=11cm]{pi3k-pathway.png}
@@ -190,6 +191,7 @@ BNs as well as hybrid models have been used to examine gene expression
 \end{figure}
 \end{frame}
 
+\section{Issues with scaling graphical models and alternatives}
 \begin{frame}{A tradeoff between mechanistic understanding and scale}
 
 Fine structure of molecular interactions sometimes can be resolved for low dimensionality\\
@@ -236,9 +238,9 @@ The VAE architecture has been very succesful when applied to RNA-seq datasets se
 \begin{frame}{Using the VAE for cell phenotyping}
 
 \begin{textblock*}{15cm}(0.75cm,1.5cm)
-Can do hypothesis testing (Bayes factor) but does not explicitly capture visible-visible causal relationships (captures latent-visible)\\
+558 genes/3005 cells/7 cell types from mouse cortex - CORTEX\\
 \vspace{0.1in}
-558 genes/3005 cells for CORTEX, 7,397 genes/4016 cells for HEMATO (Lopez Nature Methods 2020)
+7,397 genes/4016 cells/continuous for HEMATO - hematopoietic progenitor cells (see Lopez Nature Methods 2020)\\
 \end{textblock*}
 \begin{textblock*}{7cm}(0.75cm,3.5cm)
 \begin{figure}
