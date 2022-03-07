@@ -3,20 +3,21 @@ import numpy as np
 import matplotlib.pyplot as plt
 import itertools
 
-labels = np.load('/home/cwseitz/Desktop/labels.npy')
+label_path = '/home/cwseitz/Desktop/labels.npy'
+labels = np.load(label_path)
 a_idx = np.where(labels == 0)
 b_idx = np.where(labels == 1)
 c_idx = np.where(labels == 2)
 
-print(f'{a_idx[0].shape[0]} entries of type 0')
-print(f'{b_idx[0].shape[0]} entries of type 1')
-print(f'{c_idx[0].shape[0]} entries of type 2')
+#print(f'{a_idx[0].shape[0]} entries of type 0')
+#print(f'{b_idx[0].shape[0]} entries of type 1')
+#print(f'{c_idx[0].shape[0]} entries of type 2')
 
-df = pd.read_csv('/home/cwseitz/Desktop/features.csv')
+feature_path = '/home/cwseitz/Desktop/features.csv'
+df = pd.read_csv(feature_path)
 cols = df.columns
 arr = df.to_numpy()
 eps = 1e-10
-print(arr.shape)
 
 ######################################################################
 #Compute the symmetric KL-divergence between conditional distributions
@@ -38,7 +39,7 @@ def SymmetricKL(x,y,bins=10,eps=1e-10):
 
     return kl
 
-num_top = 5
+num_top = 10
 out = np.zeros((arr.shape[1],3))
 for i in range(arr.shape[1]):
     a = arr[a_idx,i]
@@ -85,10 +86,12 @@ plt.show()
 
 fig, ax = plt.subplots(3,num_top)
 
+print('\n#############\na,b\n#############\n')
 for i in range(num_top):
     if i == 0:
         ax[0,0].set_ylabel(r'$(\omega_{1},\omega_{2})$')
     name = cols[out_ab_idx[i]]
+    print(out_ab_idx[i],name)
     xvals,xbins = np.histogram(arr[a_idx,out_ab_idx[i]],bins=10)
     yvals,ybins = np.histogram(arr[b_idx,out_ab_idx[i]],bins=xbins)
     xvals = xvals/np.sum(xvals)
@@ -98,10 +101,13 @@ for i in range(num_top):
     ax[0,i].legend(prop={'size': 6})
     ax[0,i].set_title(name,fontsize=8)
 
+
+print('\n#############\nb,c\n#############\n')
 for i in range(num_top):
     if i == 0:
         ax[1,0].set_ylabel(r'$(\omega_{2},\omega_{3})$',weight='bold')
     name = cols[out_bc_idx[i]]
+    print(out_bc_idx[i],name)
     xvals,xbins = np.histogram(arr[b_idx,out_bc_idx[i]],bins=10)
     yvals,ybins = np.histogram(arr[c_idx,out_bc_idx[i]],bins=xbins)
     xvals = xvals/np.sum(xvals)
@@ -111,10 +117,13 @@ for i in range(num_top):
     ax[1,i].set_title(name,fontsize=8)
     ax[1,i].legend(prop={'size': 6})
 
+
+print('\n#############\na,c\n#############\n')
 for i in range(num_top):
     if i == 0:
         ax[2,0].set_ylabel(r'$(\omega_{1},\omega_{3})$')
     name = cols[out_ac_idx[i]]
+    print(out_ac_idx[i],name)
     xvals,xbins = np.histogram(arr[a_idx,out_ac_idx[i]],bins=10)
     yvals,ybins = np.histogram(arr[c_idx,out_ac_idx[i]],bins=xbins)
     xvals = xvals/np.sum(xvals)
@@ -127,11 +136,10 @@ for i in range(num_top):
 plt.tight_layout()
 plt.show()
 
-
+"""
 #############################################################################
 #Plot the covariance matrices for each sample type 
 #############################################################################
-
 
 pd.plotting.scatter_matrix(df[cols[1:20]], alpha = 0.2, figsize = (6, 6), diagonal = 'kde')
 plt.show()
@@ -155,3 +163,4 @@ ax[1].imshow(b_cov,cmap='hot')
 ax[2].imshow(c_cov,cmap='hot')
 plt.tight_layout()
 plt.show()
+"""
