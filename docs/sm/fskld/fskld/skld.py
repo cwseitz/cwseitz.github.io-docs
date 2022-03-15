@@ -84,6 +84,10 @@ plt.show()
 ######################################################################
 
 
+import csv
+f = open('top.csv', 'w', newline='')
+writer = csv.writer(f)
+writer.writerow(['pair','feature_idx','skld','feature_name'])
 fig, ax = plt.subplots(3,num_top)
 
 print('\n#############\na,b\n#############\n')
@@ -92,6 +96,7 @@ for i in range(num_top):
         ax[0,0].set_ylabel(r'$(\omega_{1},\omega_{2})$')
     name = cols[out_ab_idx[i]]
     print(out_ab_idx[i],name)
+    writer.writerow(['ab',out_ab_idx[i], out[out_ab_idx[i],0], name])
     xvals,xbins = np.histogram(arr[a_idx,out_ab_idx[i]],bins=10)
     yvals,ybins = np.histogram(arr[b_idx,out_ab_idx[i]],bins=xbins)
     xvals = xvals/np.sum(xvals)
@@ -107,7 +112,10 @@ for i in range(num_top):
     if i == 0:
         ax[1,0].set_ylabel(r'$(\omega_{2},\omega_{3})$',weight='bold')
     name = cols[out_bc_idx[i]]
-    print(out_bc_idx[i],name)
+    print(out_bc_idx[i],name) 
+    writer.writerow(['bc',out_bc_idx[i], out[out_bc_idx[i],1], name])
+    xvals,xbins = np.histogram(arr[a_idx,out_ab_idx[i]],bins=10)
+    xvals,xbins = np.histogram(arr[a_idx,out_ab_idx[i]],bins=10)
     xvals,xbins = np.histogram(arr[b_idx,out_bc_idx[i]],bins=10)
     yvals,ybins = np.histogram(arr[c_idx,out_bc_idx[i]],bins=xbins)
     xvals = xvals/np.sum(xvals)
@@ -123,7 +131,10 @@ for i in range(num_top):
     if i == 0:
         ax[2,0].set_ylabel(r'$(\omega_{1},\omega_{3})$')
     name = cols[out_ac_idx[i]]
-    print(out_ac_idx[i],name)
+    print(out_ac_idx[i],name)  
+    writer.writerow(['ac',out_ac_idx[i], out[out_ac_idx[i],2], name])
+    xvals,xbins = np.histogram(arr[a_idx,out_ab_idx[i]],bins=10)
+    xvals,xbins = np.histogram(arr[a_idx,out_ab_idx[i]],bins=10)
     xvals,xbins = np.histogram(arr[a_idx,out_ac_idx[i]],bins=10)
     yvals,ybins = np.histogram(arr[c_idx,out_ac_idx[i]],bins=xbins)
     xvals = xvals/np.sum(xvals)
@@ -135,6 +146,7 @@ for i in range(num_top):
 
 plt.tight_layout()
 plt.show()
+f.close()
 
 """
 #############################################################################
