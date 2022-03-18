@@ -1,0 +1,91 @@
+
+
+\documentclass{article}
+\title{Linear gene networks}
+\author{C.W. Seitz}
+\date{\today}
+
+\usepackage{graphicx}
+\usepackage{subfigure,epsfig,amsfonts}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{float}
+\usepackage{bm}
+
+\begin{document}
+\maketitle
+
+\section{Definitions}
+
+Consider a set of stochastic linear differential equations which govern the concentration of RNA $x_{i}$ and protein $y_{i}$ associated with a particular gene:
+
+\begin{align*}
+\dot{x_{i}} &= \sum_{j}m_{ij}y_{j} - \alpha_{i} x_{i} + \sigma_{x}\eta_{i}^{x}\\
+\dot{y_{i}} &= r_{i}x_{i} - \beta_{i}y_{i} + \sigma_{y}\eta_{i}^{y}
+\end{align*}
+
+where $m_{ij}$ is the linear effect of a transcription factor $j$ on gene $i$ and therefore represents the rate of transcription. Similarly, $r_{i}$ represents the rate of translation from RNA to protein. The constants $\alpha_{i}$ and $\beta_{i}$ are the RNA degradation and protein degradation rates, respectively. Since these equations are stochastic, the gold-standard is to find a probability density $P_{\theta}(\bm{x},\bm{y}; t)$. In higher dimensions, this is a very difficult problem and we may need to settle for finding the stationary distribution $P_{\theta}^{0}(\bm{x},\bm{y})$, if it exists and finding its solution is tractable. To do this for the set of equations above, a fundamental assumption is that the rate of translation and protein degradation approximately balance and the timescale of of changes in protein concentration is very long. Intuitively, if $y_{j}$'s are constant, growth or decay of the first term will eventually balance with the $-\alpha_{i}x_{i}$ term and the system will approach a fixed point.
+\vspace{0.1in}
+\\If indeed changes in protein concentration are negligible over the course of evolution of the system i.e., $\dot{y_{i}} \approx 0$ we have that
+
+\begin{align*}
+y_{i} &= \frac{r_{i}x_{i} - \sigma_{x}\eta_{i}^{y}}{\beta_{i}}
+\end{align*}
+
+This assumption allows us to rewrite the system above as a single equation per gene
+
+\begin{align*}
+\dot{x_{i}} &= \sum_{j}m_{ij}\frac{r_{j}x_{j} - \sigma_{x}\eta_{j}^{y}}{\beta_{j}} - \alpha_{i} x_{i} + \sigma_{x}\eta_{i}^{x}\\
+&= \sum_{j}\left(\gamma_{ij}x_{j} - \theta_{ij}\eta_{j}^{y}\right) - \alpha_{i} x_{i} + \sigma_{x}\eta_{i}^{x}\\
+\end{align*}
+
+If we additionally assume that $\sigma_{x} << r_{i}x_{i}$
+
+\begin{align*}
+\dot{x_{i}} &= \sum_{j}\gamma_{ij}x_{j} - \alpha_{i} x_{i} + \sigma_{x}\eta_{i}^{x}\\
+\end{align*}
+
+which is the multivariate Ornstein-Uhlenbeck process. This can then be written as an Ito stochastic differential equation
+
+\begin{align*}
+dx &= -\Gamma x\; dt + \Sigma dW 
+\end{align*}
+
+For example, when $N=3$ we have the following matrix $\Gamma$
+\\
+\\
+\begin{equation*}
+\Gamma = \begin{bmatrix} 
+    \gamma_{11}-\alpha_{1} & \gamma_{21} & \gamma_{31}\\
+	\gamma_{12} & \gamma_{22} -\alpha_{2} & \gamma_{32}\\
+	\gamma_{13} & \gamma_{23} & \gamma_{33}-\alpha_{3}\\
+\end{bmatrix}
+\end{equation*}
+\\
+\\
+
+The SDE given above corresponds to the Kramers-Moyal expansion (KME) of a transition density $T(x',t'|x,t)$
+
+\begin{align}
+\frac{\partial P}{\partial t}  &= \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial V}\right)^{n} \left[M_{n}(V,t)P(V,t)\right]
+\end{align}
+
+where $M_{n}$ is the $n$th moment of the transition density. In the diffusion approximation, the KME becomes the Fokker-Planck equation (Risken 1989)
+
+
+\begin{align}
+\frac{\partial P}{\partial t}  &= \left(-\sum_{i=1}^{N}\frac{\partial}{\partial x_{i}} S_{i} + \sum_{i,j=1}^{N} D_{ij}\frac{\partial^{2}}{\partial x_{i}\partial x_{j}}\right)P\\
+&= \mathcal{L}_{FP} P
+\end{align}
+
+$S_{i}$ is the drift vector and $D_{ij}$ the diffusion matrix. The second term is the diffusion term which is volatile over time. Incorporating the quantities $S = \Gamma x$ and $2D = \Sigma\Sigma^{T}$ into this form for the OU process,
+
+\begin{align}
+\frac{\partial P}{\partial t}  &= \left(-\sum_{i=1}^{N}\frac{\partial}{\partial x_{i}}\Gamma x + \frac{1}{2}\sum_{i,j=1}^{N}(\Sigma\Sigma^{T})_{ij} \frac{\partial^{2}}{\partial x_{i}\partial x_{j}}\right)P\\
+\end{align}
+
+A distribution $\pi$ is the stationary distribution (equilibrium distribution) of $P$ if $\mathcal{L}_{FP}\pi = 0$. Such a system is said to obey \emph{detailed balance}, in which the Fokker-Planck operator leaves the distribution invariant. Qualitatively, this means that, at equilibrium, the probability current out of an infinitesimal volume $dV$ in the state space $\Omega$ is balanced by an equal and opposite current into $dV$. 
+
+
+
+\end{document}
