@@ -64,18 +64,56 @@ For example, when $N=3$ we have the following matrix $\Gamma$
 \\
 \\
 
-The SDE given above corresponds to the Kramers-Moyal expansion (KME) of a transition density $T(x',t'|x,t)$
+\section{The multivariate Fokker-Planck equation}
+
+The SDE given above corresponds to the Kramers-Moyal expansion (KME) of a transition density $T(x',t'|x,t)$ see (Risken 1989) for a full derivation.
 
 \begin{align}
-\frac{\partial P}{\partial t}  &= \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial V}\right)^{n} \left[M_{n}(V,t)P(V,t)\right]
+\frac{\partial P}{\partial t}  &= \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial x}\right)^{n} \left[M_{n}(x,t)P(x,t)\right]
 \end{align}
 
-where $M_{n}$ is the $n$th moment of the transition density. In the diffusion approximation, the KME becomes the Fokker-Planck equation (Risken 1989)
-
+where $M_{n}$ is the $n$th moment of the transition density. In the diffusion approximation, the KME becomes the Fokker-Planck equation (FPE) (Risken 1989). For the sake of demonstration, consider the univariate case with random variable $x$ and the form of $T(x',t'|x,t)$ is a Gaussian with mean $\mu(t)$ and variance $\sigma^{2}(t)$. In this scenario, the FPE applies because $M_{n} = 0$ for all $n > 2$. Given that $M_{1}(x,t) = \mu(t)$ (drift) and $M_{2}(x,t) = \sigma^{2}(t)$ (diffusion), the FPE reads
 
 \begin{align}
-\frac{\partial P}{\partial t}  &= \left(-\sum_{i=1}^{N}\frac{\partial}{\partial x_{i}} S_{i} + \sum_{i,j=1}^{N} D_{ij}\frac{\partial^{2}}{\partial x_{i}\partial x_{j}}\right)P\\
-&= \mathcal{L}_{FP} P
+\frac{\partial P(x,t)}{\partial t}  &= \left(-\frac{\partial}{\partial x}\mu(t) + \frac{\sigma^{2}(t)}{2}\frac{\partial^{2}}{\partial x^{2}}\right)P(x,t)
+\end{align}
+
+It is common to additionally define the probability current $J(x,t)$ as 
+
+\begin{align}
+J(x,t)  &= \left(-\mu(t) + \frac{\sigma^{2}(t)}{2}\frac{\partial}{\partial x}\right)P(x,t)
+\end{align}
+
+which allows us to write the FPE as a continuity equation
+
+\begin{align}
+\frac{\partial P(x,t)}{\partial t} = \frac{\partial J(x,t)}{\partial x}
+\end{align}
+
+
+If we now generalize the above equation to a case where we are faced with many variables $\bm{x} = (x_{1},x_{2},...,x_{n})$. The continuity equation becomes 
+
+\begin{align}
+\frac{\partial P(x,t)}{\partial t} = \nabla_{\bm{x}} \cdot J(\bm{x},t)
+\end{align}
+
+where the multivariate probability current is given as 
+
+\begin{align}
+J(\bm{x},t)  &= \left(-\bm{\mu}(t) + \bm{D}\nabla_{\bm{x}}\right)P(\bm{x},t)
+\end{align}
+
+with $D = \frac{\Sigma\Sigma^{T}}{2}$. but the transition density remains Gaussian. Here, $M_{1}(\bm{x},t) = \bm{\mu}(t)$ and $M_{2}(\bm{x},t) = \bm{\Sigma}(t)$
+
+\begin{align}
+\frac{\partial P(\bm{x},t)}{\partial t}  &= \nabla_{\bm{x}} \cdot J(\bm{x},t)\\
+&= -\sum_{i=1}^{N}\bm{\mu}_{i}\frac{\partial P(\bm{x},t)}{\partial x_{i}} + \sum_{i,j}^{N} D_{ij}\frac{\partial^{2}P(\bm{x},t)}{\partial x_{i}\partial x_{j}} 
+\end{align}
+
+It proves quite useful in this form because we can see that $\partial P/\partial t$ is nothing but an operator acting on the current distribution $P(x,t)$
+
+\begin{align}
+\mathcal{L}_{FP} = -\sum_{i=1}^{N}\frac{\partial}{\partial x_{i}} S_{i} + \sum_{i,j=1}^{N} D_{ij}\frac{\partial^{2}}{\partial x_{i}\partial x_{j}}
 \end{align}
 
 $S_{i}$ is the drift vector and $D_{ij}$ the diffusion matrix. The second term is the diffusion term which is volatile over time. Incorporating the quantities $S = \Gamma x$ and $2D = \Sigma\Sigma^{T}$ into this form for the OU process,
@@ -86,6 +124,13 @@ $S_{i}$ is the drift vector and $D_{ij}$ the diffusion matrix. The second term i
 
 A distribution $\pi$ is the stationary distribution (equilibrium distribution) of $P$ if $\mathcal{L}_{FP}\pi = 0$. Such a system is said to obey \emph{detailed balance}, in which the Fokker-Planck operator leaves the distribution invariant. Qualitatively, this means that, at equilibrium, the probability current out of an infinitesimal volume $dV$ in the state space $\Omega$ is balanced by an equal and opposite current into $dV$. 
 
+\begin{align}
+\frac{\partial P}{\partial t}  &= \left(-\sum_{i=1}^{N}\frac{\partial}{\partial x_{i}}\Gamma x + \frac{1}{2}\sum_{i,j=1}^{N}(\Sigma\Sigma^{T})_{ij} \frac{\partial^{2}}{\partial x_{i}\partial x_{j}}\right)P\\
+\end{align}
+
+\section{Fourier Transform of the FPE}
+
+Fourier transformation is a general method used in the solution of differential equations. It is particularly useful for second order equations like the FPE. You may have seen its use in the heat equation, which is the Fokker-Planck equation for Brownian motion.
 
 
 \end{document}
