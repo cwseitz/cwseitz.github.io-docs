@@ -17,6 +17,8 @@
 
 \section{The Fokker-Planck Equation}
 
+\subsection{Forward and Backward Kolmogorov Equations}
+
 \subsection{Kramers-Moyal Expansion}
 
 Gixen many instantiations of a stochastic xariable $x$, we can construct a normalize histogram oxer all obserxations as a function of time $P(x,t)$. Howexer, in order to systematically explore the relationship between the parameterization of the process and $P(x,t)$ we require an expression for $\dot{P}(x,t)$. If we make a fundamental assumption that the exolution of $P(x,t)$ follows a Markox process i.e. its exolution has the memoryless property, then we can write
@@ -258,6 +260,8 @@ It proves quite useful in this form because we can see that the Fokker-Planck eq
 \hat{\mathcal{L}}_{FP} = \sum_{i=1}^{N}\left(-\frac{\partial}{\partial x_{i}}M_{i}^{(1)}(t) + \sum_{j=1}^{N} \frac{\partial^{2}}{\partial x_{i}\partial x_{j}}M_{ij}^{(2)}(t)\right)
 \end{align}
 
+In the case that $M_{i}^{(1)}$ is actually a function of $j$ (as in the multivariate OU process), the first term will also include a sum over $j$.
+
 \subsection{Ornstein-Uhlenbeck Process}
 
 If the transition density is Gaussian then the density is fully specified by the first two moments $M^{(1)}(t) = \vec{\mu}(t)$ and $M^{(2)}(\vec{x},t) = \Sigma(t)$. The moments can also be functions of $\vec{x}$. Both of these possibilities are evident in the Ornstein-Uhlenbeck (OU) process. Let the drift vector be a linear function of the state $\vec{x}$ and the diffusion matrix the square of the Gaussian covariances
@@ -269,23 +273,62 @@ M^{(1)}(t) = \Gamma \vec{x}\;\;\;\;\;M^{(2)}(t) = 2D
 with $D = \Sigma\Sigma^{T}$ and $\Gamma$ are assumed to be independent of time (non-volatile).
 
 
-The Fourier transform of (34) is fairly simple, since the FT is linear. We will switch to matrix notation to drop the summations
+The Fourier transform of (34) is fairly simple, since the FT is linear. 
 
 \begin{align}
-\frac{\partial \tilde{P}(\vec{x},t)}{\partial t}= -\bm{\Gamma}\bm{k}\frac{\partial}{\partial \bm{k}} \tilde{P}(\vec{k},t) + \bm{\mathrm{D}}\bm{k}\bm{k}^{T}\tilde{P}(\vec{k},t)
+\frac{\partial \tilde{P}(\vec{x},t)}{\partial t}= -\sum_{ij} \left(\gamma_{ij}k_{i}\frac{\partial}{\partial k_{j}} \tilde{P}(\vec{k},t) + D_{ij}k_{i}k_{j}\tilde{P}(\vec{k},t)\right)
+\end{align}
+
+We can switch to Einstein notation to make this summation implicit
+
+\begin{align}
+\frac{\partial \tilde{P}(\vec{x},t)}{\partial t} + \gamma_{ij}k_{i}\frac{\partial}{\partial k_{j}} \tilde{P}(\vec{k},t) + D_{ij}k_{i}k_{j}\tilde{P}(\vec{k},t) = 0
 \end{align}
 
 This is in a very similar form to the single variable case (18). We then make the ansatz in analogy with (27)
 
 \begin{align}
-\tilde{P}(\bm{k},t) &= \exp\left(-i \bm{k}^{T} \bm{\mu}(t) -\frac{\bm{k}\bm{k}^{T}}{2}\bm{\Sigma}(t)\right)
+\tilde{P}(\vec{k},t) &= \exp\left(-\sum_{i} i k_{i}\mu_{i}(t) - \frac{1}{2}\sum_{ij}k_{i}k_{j}\sigma_{ij}(t)\right)
 \end{align}
 
-Plugging this into (34) we have
+where we have written the sums explicitly to make the next step clear. We now plug this into (34), considering each term of (35) separately
 
 \begin{align}
-\frac{\partial \tilde{P}(\vec{x},t)}{\partial t}+ \bm{\Gamma}\bm{k}\frac{\partial}{\partial \bm{k}} \tilde{P}(\vec{k},t) + \bm{\mathrm{D}}\bm{k}\bm{k}^{T}\tilde{P}(\vec{k},t)\\
-= -i\bm{k}\dot{\bm\mu}(t) - \frac{1}{2}\bm{k}\bm{k}^{T}\dot{\bm\Sigma}-i\bm\Gamma \bm\mu^{T}
+\frac{\partial \tilde{P}(\vec{x},t)}{\partial t} &= \frac{\partial}{\partial t} \exp\left(-\sum_{i} i k_{i}\mu_{i}(t) - \frac{1}{2}\sum_{ij}k_{i}k_{j}\sigma_{ij}(t)\right)\\
+&= \tilde{P}\left(-i\sum_{i}k_{i}\dot{\mu}_{i} - \frac{1}{2}\sum_{ij}k_{i}k_{j}\dot{\sigma}_{ij}\right)
 \end{align}
+
+Now for the second term,
+
+\begin{align}
+\gamma_{ij}k_{i}\frac{\partial \tilde{P}}{\partial k_{j}}  &= \gamma_{ij}k_{i}\frac{\partial}{\partial k_{j}}\exp\left(-\sum_{i} i k_{i}\mu_{i}(t) - \frac{1}{2}\sum_{ij}k_{i}k_{j}\sigma_{ij}(t)\right)\\
+&= \gamma_{ij}k_{i}\tilde{P}\left(-i\mu_{j}-k_{\ell}\sigma_{\ell j}\right)
+\end{align}
+
+We can see that, in the first part, the derivative w.r.t $k_{j}$ selects the $j$-th term of the summation over $i$. In the second part, we have the following
+
+\begin{align}
+-\frac{1}{2}\frac{\partial}{\partial k_{j}}\sum_{ij}k_{i}k_{j}\sigma_{ij} &= -\frac{1}{2}\sum_{\ell,j}\frac{\partial}{\partial k_{j}}k_{\ell}k_{j}\sigma_{\ell j}\\
+&= -\sum_{\ell,j}k_{\ell}\sigma_{\ell j}\\
+\end{align}
+
+We see that the only terms in the sum over $i,j$ that survive are those for which $\sigma_{ij}\neq -\sigma_{ji}$ i.e, the antisymmetric part of $\sigma$ drops out. Furthermore, if we require that $\sigma_{\ell j} = \sigma_{j\ell}$ then the factor of $1/2$ vanishes. Finally, the third term remains unchanged and we write (dropping summations)
+
+\begin{align}
+\tilde{P}\left(-i k_{i}\dot{\mu}_{i} - \frac{1}{2}k_{i}k_{j}\dot{\sigma}_{ij} -\gamma_{ij}k_{i}i\mu_{j}-\gamma_{ij}k_{i}k_{\ell}\sigma_{\ell j} + D_{ij}k_{i}k_{j}\right) = 0
+\end{align}
+
+Since $\tilde{P} \neq 0$ we must have that
+
+\begin{align}
+\dot{\mu}_{i} &= -\gamma_{ij}\mu_{j}\\
+\dot{\sigma}_{ij} &= -\gamma_{i\ell}\sigma_{lj} - \gamma_{jl}\sigma_{li} + 2D_{ij}
+\end{align}
+
+The first equation implies that $\mu_{i}(t) = \exp(-\sum_{j}\gamma_{ij}\mu_{j}t)$ or $\bm{\mu}(t) = \exp(-\bm{\Gamma}t)\bm{\mu}_{0}$
+
+\subsection{Detailed balance of the Fokker-Planck operator}
+
+We will now define the notation of \emph{detailed balance} for the FP operator. This is important, especially because it allows us to find the stationary distribution for the Ornstein-Uhlenbeck process in a much simpler way than the direct solution of the FPE shown above. A system that is at equilibrium will obey detailed balance in the sense that the net probability current at any point is zero. Another way of thinking about this is that, at equilibrium, the evolution of the probability density is time-reversible i.e., the Fokker-Planck equation is invariant under time reversal. This observation can drastically simplify the process of finding the equilibrium distribution. 
 
 \end{document}
