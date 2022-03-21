@@ -165,7 +165,7 @@ which is a Gaussian distribution will time-dependent variance $\sigma=4Dt$, give
 
 \subsection{Solving the FPE: Ornstein-Uhlenbeck}
 
-The Ornstein-Uhlenbeck process is another special case of the FPE where $M^{(1)}(t) = -\gamma$ and $M^{(2)}(t) = \sigma^{2} = \mathrm{const}$. The Ito SDE for this process reads
+The Ornstein-Uhlenbeck process is another special case of the FPE where $M^{(1)}(t) = -\gamma$ and $M^{(2)}(t) = \sigma^{2} = \mathrm{const}$. It is a stationary Gauss–Markov process, which means that it is a Gaussian process, a Markov process, and is temporally homogeneous. The Ito SDE for this process reads
 
 \begin{align}
 dx = -\gamma xdt + \sigma dW
@@ -266,12 +266,21 @@ If the transition density is Gaussian then the density is fully specified by the
 M^{(1)}(t) = \Gamma \vec{x}\;\;\;\;\;M^{(2)}(t) = 2D
 \end{align*}
 
-with $D = \Sigma\Sigma^{T}$ which is assumed to be independent of time.
+with $D = \Sigma\Sigma^{T}$ and $\Gamma$ are assumed to be independent of time (non-volatile).
+
+
+The Fourier transform of (34) is fairly simple, since the FT is linear
 
 \begin{align}
-\hat{\mathcal{L}}_{FP} = \sum_{i=1}^{N}\left(-\frac{\partial}{\partial x_{i}}\Gamma\vec{x} + \sum_{j=1}^{N} \frac{\partial^{2}}{\partial x_{i}\partial x_{j}}D\right)
+\frac{\partial \tilde{P}(\vec{x},t)}{\partial t}= \sum_{i,j=1}^{N}\left(-\gamma_{ij}\frac{\partial}{\partial k_{i}}k_{j}\tilde{P}(\vec{k},t) + D_{ij}k_{i}k_{j}\tilde{P}(\vec{k},t)\right)
 \end{align}
 
+We can drop the summation temporarily since it doesn't contribute to the solution for each $i,j$
 
+\begin{align}
+\frac{\partial \tilde{P}_{ij}}{\partial t} + \gamma_{ij}\frac{\partial}{\partial k_{i}}k_{j}\tilde{P}_{ij} + D_{ij}k_{i}k_{j}\tilde{P}_{ij} = 0
+\end{align}
+
+Similar to the single variable case we have $\vec{v} = \langle \gamma_{ij} k_{j}, 1, -k_{i}k_{j}D_{ij}\rangle$
 
 \end{document}
