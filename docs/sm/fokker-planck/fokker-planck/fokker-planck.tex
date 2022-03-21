@@ -269,18 +269,23 @@ M^{(1)}(t) = \Gamma \vec{x}\;\;\;\;\;M^{(2)}(t) = 2D
 with $D = \Sigma\Sigma^{T}$ and $\Gamma$ are assumed to be independent of time (non-volatile).
 
 
-The Fourier transform of (34) is fairly simple, since the FT is linear
+The Fourier transform of (34) is fairly simple, since the FT is linear. We will switch to matrix notation to drop the summations
 
 \begin{align}
-\frac{\partial \tilde{P}(\vec{x},t)}{\partial t}= \sum_{i,j=1}^{N}\left(-\gamma_{ij}\frac{\partial}{\partial k_{i}}k_{j}\tilde{P}(\vec{k},t) + D_{ij}k_{i}k_{j}\tilde{P}(\vec{k},t)\right)
+\frac{\partial \tilde{P}(\vec{x},t)}{\partial t}= -\bm{\Gamma}\bm{k}\frac{\partial}{\partial \bm{k}} \tilde{P}(\vec{k},t) + \bm{\mathrm{D}}\bm{k}\bm{k}^{T}\tilde{P}(\vec{k},t)
 \end{align}
 
-We can drop the summation temporarily since it doesn't contribute to the solution for each $i,j$
+This is in a very similar form to the single variable case (18). We then make the ansatz in analogy with (27)
 
 \begin{align}
-\frac{\partial \tilde{P}_{ij}}{\partial t} + \gamma_{ij}\frac{\partial}{\partial k_{i}}k_{j}\tilde{P}_{ij} + D_{ij}k_{i}k_{j}\tilde{P}_{ij} = 0
+\tilde{P}(\bm{k},t) &= \exp\left(-i \bm{k}^{T} \bm{\mu}(t) -\frac{\bm{k}\bm{k}^{T}}{2}\bm{\Sigma}(t)\right)
 \end{align}
 
-Similar to the single variable case we have $\vec{v} = \langle \gamma_{ij} k_{j}, 1, -k_{i}k_{j}D_{ij}\rangle$
+Plugging this into (34) we have
+
+\begin{align}
+\frac{\partial \tilde{P}(\vec{x},t)}{\partial t}+ \bm{\Gamma}\bm{k}\frac{\partial}{\partial \bm{k}} \tilde{P}(\vec{k},t) + \bm{\mathrm{D}}\bm{k}\bm{k}^{T}\tilde{P}(\vec{k},t)\\
+= -i\bm{k}\dot{\bm\mu}(t) - \frac{1}{2}\bm{k}\bm{k}^{T}\dot{\bm\Sigma}-i\bm\Gamma \bm\mu^{T}
+\end{align}
 
 \end{document}
