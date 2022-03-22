@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.10.1)  21 MAR 2022 17:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.10.1)  21 MAR 2022 15:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**fokker-planck.tex
-(./fokker-planck.tex
+**eigen.tex
+(./eigen.tex
 LaTeX2e <2020-02-02> patch level 2
 L3 programming layer <2020-02-14>
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -229,8 +229,8 @@ Package: bm 2019/07/24 v1.2d Bold Symbol Support (DPC/FMi)
 \symboldsymbols=\mathgroup8
 LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 141.
 LaTeX Info: Redefining \bm on input line 209.
-) (./fokker-planck.aux)
-\openout1 = `fokker-planck.aux'.
+) (./eigen.aux)
+\openout1 = `eigen.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
 LaTeX Font Info:    ... okay on input line 15.
@@ -287,79 +287,30 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 15.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Overfull \hbox (8.15448pt too wide) in paragraph at lines 30--31
-[]\OT1/cmr/m/n/10 which is known at the Chapman-Kolmogorox equa-tion. The fac-t
-or $\OML/cmm/m/it/10 T\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x[]; t\OMS/cmsy/m/n/10 
-j\OML/cmm/m/it/10 x; t \OMS/cmsy/m/n/10 ^^@
- []
+) [1
 
-[1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (1.21248pt too wide) in paragraph at lines 64--65
-[]\OT1/cmr/m/n/10 which is for-mally known as the Kramers-Moyal (KM) ex-pan-sio
-n. The Fokker-
- []
-
-[2] [3]
-Overfull \hbox (41.55125pt too wide) detected at line 151
-[]
- []
-
-
-Overfull \hbox (62.11734pt too wide) detected at line 164
-[]
- []
-
-
-Overfull \hbox (12.94379pt too wide) in paragraph at lines 170--171
-\OT1/cmr/m/n/10 The Ornstein-Uhlenbeck pro-cess is an-other spe-cial case of th
-e FPE where $\OML/cmm/m/it/10 M[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 t\OT1/cmr/m/
-n/10 ) =
- []
-
-[4] [5]
-<ou.png, id=30, 722.7pt x 216.81pt>
-File: ou.png Graphic file (type png)
-<use ou.png>
-Package pdftex.def Info: ou.png  used on input line 217.
-(pdftex.def)             Requested size: 345.0pt x 103.4986pt.
- [6 <./ou.png>] [7] [8]
-Overfull \hbox (9.25449pt too wide) in paragraph at lines 336--337
-[]\OT1/cmr/m/n/10 The first equa-tion im-plies that $\OML/cmm/m/it/10 ^^V[]\OT1
-/cmr/m/n/10 (\OML/cmm/m/it/10 t\OT1/cmr/m/n/10 ) = [](\OMS/cmsy/m/n/10 ^^@ [][]
- \OML/cmm/m/it/10 ^^M[]^^V[]t\OT1/cmr/m/n/10 )$ or $\OML/cmm/b/it/10 ^^V\OT1/cm
-r/m/n/10 (\OML/cmm/m/it/10 t\OT1/cmr/m/n/10 ) = [](\OMS/cmsy/m/n/10 ^^@\OT1/cmr
-/bx/n/10 ^^@\OML/cmm/m/it/10 t\OT1/cmr/m/n/10 )\OML/cmm/b/it/10 ^^V[]$ 
- []
-
-[9] (./fokker-planck.aux) ) 
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./eigen.aux) ) 
 Here is how much of TeX's memory you used:
- 5039 strings out of 481239
- 109421 string characters out of 5920377
- 337978 words of memory out of 5000000
- 20243 multiletter control sequences out of 15000+600000
- 548279 words of font info for 84 fonts, out of 8000000 for 9000
+ 5030 strings out of 481239
+ 109256 string characters out of 5920377
+ 333964 words of memory out of 5000000
+ 20237 multiletter control sequences out of 15000+600000
+ 547933 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 35i,11n,40p,717b,549s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-ex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmti10.pfb>
-Output written on fokker-planck.pdf (9 pages, 253019 bytes).
+ 35i,14n,40p,234b,409s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmsy10.pfb>
+Output written on eigen.pdf (1 page, 78845 bytes).
 PDF statistics:
- 89 PDF objects out of 1000 (max. 8388607)
- 62 compressed objects within 1 object stream
+ 40 PDF objects out of 1000 (max. 8388607)
+ 28 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

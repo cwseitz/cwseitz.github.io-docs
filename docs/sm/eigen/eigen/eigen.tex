@@ -1,0 +1,60 @@
+
+
+\documentclass{article}
+\title{Eigenvectors and Eigenvalues}
+\author{C.W. Seitz}
+\date{\today}
+
+\usepackage{graphicx}
+\usepackage{subfigure,epsfig,amsfonts}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{float}
+\usepackage{bm}
+
+\begin{document}
+\maketitle
+
+\begin{section}{Eigenvectors and Eigenvalues}
+
+For a $N\times N$ matrix we have a maximum of $N$ eigenvectors and $N$ eigenvalues. The definition of an eigenvector is that it satisfies the matrix equation
+
+\begin{align*}
+A\vec{e} = \lambda \vec{e}
+\end{align*}
+
+Say we would like to find the $\vec{x}$ and $\lambda$ satisfy this equation for a particular $A$. For small $N$, we can find these eigenvectors and their corresponding eigevalues relatively easily. For example, when $N=2$ 
+
+\begin{align*}
+A\vec{e} = \begin{bmatrix}
+    a & b\\
+    c & d\\
+\end{bmatrix}
+\begin{bmatrix}
+    e_{1}\\
+    e_{2}\\
+\end{bmatrix}
+= \lambda  \begin{bmatrix}
+    e_{1}\\
+    e_{2}\\
+\end{bmatrix}
+\end{align*}
+
+This matrix equation represents the following system of equations
+
+\begin{align*}
+ae_{1}+be_{2} &= \lambda e_{1}\\
+ce_{1}+de_{2} &= \lambda e_{2}
+\end{align*}
+
+We have two equations and two unknowns so we can solve it easily. We want $e_{1}$ and $e_{2}$ in terms of $a,b,c,d$
+
+\begin{align*}
+ae_{1}+be_{2} &= \lambda e_{1}\\
+c\frac{be_{2}}{\lambda - a} + de_{2} &= \lambda e_{2}
+\end{align*}
+
+
+\end{section}
+
+\end{document}

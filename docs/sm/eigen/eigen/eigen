@@ -17,7 +17,7 @@
 
 \section{The Fokker-Planck Equation}
 
-\subsection{Forward and Backward Kolmogorov Equations}
+\subsection{Kolmogorov Equations}
 
 \subsection{Kramers-Moyal Expansion}
 
@@ -211,14 +211,6 @@ since the vector field given by the Fokker-Planck equation we have is $\vec{v} =
 \frac{d\tilde{P}}{dt} &= -k^{2}D\tilde{P}\\
 &= -Dk_{0}^{2}\exp(2\gamma t)\tilde{P}
 \end{align}
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=1.0\textwidth]{ou.png}
-\caption{Simulation of the OU process in 1D}
-\end{figure}
-\end{center}
-
 
 and we have the solution in the Fourier domain
 
