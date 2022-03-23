@@ -39,7 +39,7 @@ def SymmetricKL(x,y,bins=10,eps=1e-10):
 
     return kl
 
-num_top = 10
+num_top = 20
 out = np.zeros((arr.shape[1],3))
 for i in range(arr.shape[1]):
     a = arr[a_idx,i]
@@ -77,6 +77,7 @@ axins.plot(out_bc_sorted[:num_top],color='blue',label=r'$\omega_{2},\omega_{3}$'
 axins.plot(out_ac_sorted[:num_top],color='cyan',label=r'$\omega_{1},\omega_{3}$')
 axins.set_xlabel('Feature index (sorted)',fontsize=12)
 axins.set_ylabel(r'$S_{ij}$',fontsize=12)
+axins.set_ylim([0,1.5])
 plt.show()
 
 ######################################################################
@@ -88,7 +89,8 @@ import csv
 f = open('top.csv', 'w', newline='')
 writer = csv.writer(f)
 writer.writerow(['pair','feature_idx','skld','feature_name'])
-fig, ax = plt.subplots(3,num_top)
+hist_top = 3
+fig, ax = plt.subplots(3,hist_top)
 
 print('\n#############\na,b\n#############\n')
 for i in range(num_top):
@@ -97,14 +99,15 @@ for i in range(num_top):
     name = cols[out_ab_idx[i]]
     print(out_ab_idx[i],name)
     writer.writerow(['ab',out_ab_idx[i], out[out_ab_idx[i],0], name])
-    xvals,xbins = np.histogram(arr[a_idx,out_ab_idx[i]],bins=10)
-    yvals,ybins = np.histogram(arr[b_idx,out_ab_idx[i]],bins=xbins)
-    xvals = xvals/np.sum(xvals)
-    yvals = yvals/np.sum(yvals)
-    ax[0,i].plot(xbins[:-1],xvals,color='red',label=r'$\omega_{1}$')
-    ax[0,i].plot(ybins[:-1],yvals,color='blue',label=r'$\omega_{2}$')
-    ax[0,i].legend(prop={'size': 6})
-    ax[0,i].set_title(name,fontsize=8)
+    if i < hist_top:
+        xvals,xbins = np.histogram(arr[a_idx,out_ab_idx[i]],bins=10)
+        yvals,ybins = np.histogram(arr[b_idx,out_ab_idx[i]],bins=xbins)
+        xvals = xvals/np.sum(xvals)
+        yvals = yvals/np.sum(yvals)
+        ax[0,i].plot(xbins[:-1],xvals,color='red',label=r'$\omega_{1}$')
+        ax[0,i].plot(ybins[:-1],yvals,color='blue',label=r'$\omega_{2}$')
+        ax[0,i].legend(prop={'size': 6})
+        ax[0,i].set_title(name,fontsize=8)
 
 
 print('\n#############\nb,c\n#############\n')
@@ -112,18 +115,19 @@ for i in range(num_top):
     if i == 0:
         ax[1,0].set_ylabel(r'$(\omega_{2},\omega_{3})$',weight='bold')
     name = cols[out_bc_idx[i]]
-    print(out_bc_idx[i],name) 
+    print(out_bc_idx[i],name)
     writer.writerow(['bc',out_bc_idx[i], out[out_bc_idx[i],1], name])
-    xvals,xbins = np.histogram(arr[a_idx,out_ab_idx[i]],bins=10)
-    xvals,xbins = np.histogram(arr[a_idx,out_ab_idx[i]],bins=10)
-    xvals,xbins = np.histogram(arr[b_idx,out_bc_idx[i]],bins=10)
-    yvals,ybins = np.histogram(arr[c_idx,out_bc_idx[i]],bins=xbins)
-    xvals = xvals/np.sum(xvals)
-    yvals = yvals/np.sum(yvals)
-    ax[1,i].plot(xbins[:-1],xvals,color='red',label=r'$\omega_{2}$')
-    ax[1,i].plot(ybins[:-1],yvals,color='blue',label=r'$\omega_{3}$')
-    ax[1,i].set_title(name,fontsize=8)
-    ax[1,i].legend(prop={'size': 6})
+    if i < hist_top:
+        xvals,xbins = np.histogram(arr[a_idx,out_ab_idx[i]],bins=10)
+        xvals,xbins = np.histogram(arr[a_idx,out_ab_idx[i]],bins=10)
+        xvals,xbins = np.histogram(arr[b_idx,out_bc_idx[i]],bins=10)
+        yvals,ybins = np.histogram(arr[c_idx,out_bc_idx[i]],bins=xbins)
+        xvals = xvals/np.sum(xvals)
+        yvals = yvals/np.sum(yvals)
+        ax[1,i].plot(xbins[:-1],xvals,color='red',label=r'$\omega_{2}$')
+        ax[1,i].plot(ybins[:-1],yvals,color='blue',label=r'$\omega_{3}$')
+        ax[1,i].set_title(name,fontsize=8)
+        ax[1,i].legend(prop={'size': 6})
 
 
 print('\n#############\na,c\n#############\n')
@@ -131,18 +135,19 @@ for i in range(num_top):
     if i == 0:
         ax[2,0].set_ylabel(r'$(\omega_{1},\omega_{3})$')
     name = cols[out_ac_idx[i]]
-    print(out_ac_idx[i],name)  
+    print(out_ac_idx[i],name)
     writer.writerow(['ac',out_ac_idx[i], out[out_ac_idx[i],2], name])
-    xvals,xbins = np.histogram(arr[a_idx,out_ab_idx[i]],bins=10)
-    xvals,xbins = np.histogram(arr[a_idx,out_ab_idx[i]],bins=10)
-    xvals,xbins = np.histogram(arr[a_idx,out_ac_idx[i]],bins=10)
-    yvals,ybins = np.histogram(arr[c_idx,out_ac_idx[i]],bins=xbins)
-    xvals = xvals/np.sum(xvals)
-    yvals = yvals/np.sum(yvals)
-    ax[2,i].plot(xbins[:-1],xvals,color='red',label=r'$\omega_{1}$')
-    ax[2,i].plot(ybins[:-1],yvals,color='blue',label=r'$\omega_{3}$')
-    ax[2,i].set_title(name,fontsize=8)
-    ax[2,i].legend(prop={'size': 6})
+    if i < hist_top:
+        xvals,xbins = np.histogram(arr[a_idx,out_ab_idx[i]],bins=10)
+        xvals,xbins = np.histogram(arr[a_idx,out_ab_idx[i]],bins=10)
+        xvals,xbins = np.histogram(arr[a_idx,out_ac_idx[i]],bins=10)
+        yvals,ybins = np.histogram(arr[c_idx,out_ac_idx[i]],bins=xbins)
+        xvals = xvals/np.sum(xvals)
+        yvals = yvals/np.sum(yvals)
+        ax[2,i].plot(xbins[:-1],xvals,color='red',label=r'$\omega_{1}$')
+        ax[2,i].plot(ybins[:-1],yvals,color='blue',label=r'$\omega_{3}$')
+        ax[2,i].set_title(name,fontsize=8)
+        ax[2,i].legend(prop={'size': 6})
 
 plt.tight_layout()
 plt.show()
@@ -150,7 +155,7 @@ f.close()
 
 """
 #############################################################################
-#Plot the covariance matrices for each sample type 
+#Plot the covariance matrices for each sample type
 #############################################################################
 
 pd.plotting.scatter_matrix(df[cols[1:20]], alpha = 0.2, figsize = (6, 6), diagonal = 'kde')
