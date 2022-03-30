@@ -17,9 +17,40 @@
 \section{Detailed Balance}
 
 This note will discuss the notion of \emph{detailed balance} for Markov processes. Detailed balance is a property of a time-dependent probability density for which the net probability current is zero and in thus has a form that is independent of time. Under such conditions, we say that the density is stationary or at \emph{equilibrium}. This concept has many important applications, for example in Markov Chain Monte Carlo (MCMC) algorithms, we design a Markov chain whose stationary distribution is a target distribution which we cannot sample from directly. Other examples come from thermodynamics and statistical mechanics, where detailed balance is synonymous with \emph{reversibility} of a thermodynamic system.\\
-\vspace{0.05in}
 
-We will start with the case where the phase space $\Omega$ of our system is discrete which implies that the density $P(\Omega)$ has finite support.
+We will start with a toy example where the phase space $\Omega$ of our system is discrete which implies that the density $P(\Omega)$ has finite support. In the following section we will generalize these concepts to the continuous setting. Consider a stochastic process represented by a series of values $(\omega_{1}, 
+\omega_{2},...,\omega_{t})$ which can be thought of as a path through the phase space $\Omega$. Say we are in a state $\omega_{i}$ at time $t$, and we have a probability $T_{ij}$ of transitioning to the arbitrary state $\omega_{j}$ where $i,j\in\Omega$ and we can have $i=j$. Formally, we have a conditional probability density over states $j$ conditioned on the fact that we are currently in the state $i$, denoted $P(\omega_{j}|\omega_{i})$.\\ 
+
+Generally, we must express this for all possible $\omega_{i}$ and thus we have to write down $|\Omega|$ conditional distributions. Furthermore, it is not necessarily the case that $P(\omega_{j}|\omega_{i})$ and $P(\omega_{i}|\omega_{j})$ are equivalent, giving us $2|\Omega|$ distributions to work with. For a discrete system, these distributions are organized as a \emph{transition matrix} sometimes called a stochastic matrix. When $|\Omega|=3$ the transition matrix reads
+
+\begin{align*}
+T_{ij} = \begin{bmatrix} 
+    T_{11}&T_{21}&T_{31}\\
+	T_{12}&T_{22}&T_{32}\\
+	T_{13}&T_{23}&T_{33}\\
+    \end{bmatrix}
+\;\;\;\;\; \sum_{j}T_{ij} = 1 \;\;\;\;\; \sum_{i}T_{ij} = 1
+\end{align*}
+
+which has the property that rows and columns both sum to unity as they represent probability densities over $\Omega$. Say that we start in state $\omega_{1}$ and then let the system evolve over a time $\tau$ (where $T_{ij}$ can be taken to have units of transition probability per unit time). The associated probability distribution is $P(\Omega,0) = \langle 1, 0, 0\rangle$.
+
+\begin{align*}
+P(\Omega,\tau) = P(\Omega,0) + T_{ij}P(\Omega,0)\cdot \tau
+\end{align*}
+
+Taking the limit $\tau\rightarrow 0$ gives a so-called \emph{master equation}
+
+\begin{align*}
+\frac{dP}{dt} &= \underset{\tau\rightarrow 0}{\lim} \frac{P(\Omega,t+\tau) - P(\Omega,t)}{\tau} = T_{ij}P(\Omega,t)\\
+\end{align*}
+
+
+The phenomenon of detailed balance occurs when there is zero net probability flow into any particular state $\omega$, leaving the distribution invariant. In other words, the probability from $i\rightarrow j$ cancels the flow from $j\rightarrow i$ and $dP/dt = 0$. This suggests that there exists a distribution $\pi(\Omega)$ such that
+
+\begin{align*}
+T_{ij}\pi(\Omega) = \pi^{T}(\Omega)T_{ij}
+\end{align*}
+
 
 
 \end{document}
