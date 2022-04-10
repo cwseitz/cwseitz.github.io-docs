@@ -134,7 +134,8 @@ Models range from networks of a few genes with detailed dynamical models to very
 \begin{itemize}
 \item Linear dynamics of small networks (deterministic, stochastic)
 \item Nonlinear dynamics of small networks (deterministic, stochastic) - Bintu model
-\item Inferring linear network structure - Hidden Markov Models
+\item Inferring network structure - Phi-Mixing Coefficient
+\item Inferring network structure from linear dynamics - Hidden Markov Models
 \item Inferring nonlinear network structure from empirical data - ?
 \item Simulating stochastic dynamics (Gillespie algorithm)
 \item Simulating stochastic nonlinear dynamics (Michaelis-Menten kinetics, SERGIO)
@@ -263,6 +264,35 @@ p(x_{1}) &= \mathcal{N}\left(\mu_{1},\sigma_{1}^{2}\right)
 
 Conditional independence implies that $\mathcal{N}\left(\mu_{1},\sigma_{1}^{2}\right) = \mathcal{N}\left(\mu_{1|2},\sigma_{1|2}^{2}\right)$. We can then factor $p(\bm{x})$ into a Bayesian network. \\
 
+
+\end{frame}
+
+\begin{frame}{A scalable algorithm for inferring gene regulatory networks}
+
+Interest in reverse-engineering whole-genome interaction networks from simultaneous measurements of the
+expression levels of all (or at least most) genes in many
+samples, under a common set of experimental conditions\\
+\vspace{0.2in}
+This algorithm applies when it is valid to assume that the system is in a steady state. For systems out of equilibrium, we need inference algorithms designed to operate on time-series data\\
+\vspace{0.2in}
+Typically gene expression data have low sampling rates and relatively small
+amount of data. Moreover, GRNs have a high number of genes
+with complex, nonlinear regulatory mechanisms
+
+\end{frame}
+
+
+\begin{frame}{The Phi-Mixing Coefficient}
+
+Interest in reverse-engineering whole-genome interaction networks from simultaneous measurements of the
+expression levels of all (or at least most) genes in many
+samples, under a common set of experimental conditions\\
+\vspace{0.2in}
+This algorithm applies when it is valid to assume that the system is in a steady state. For systems out of equilibrium, we need inference algorithms designed to operate on time-series data\\
+\vspace{0.2in}
+Typically gene expression data have low sampling rates and relatively small
+amount of data. Moreover, GRNs have a high number of genes
+with complex, nonlinear regulatory mechanisms
 
 \end{frame}
 
