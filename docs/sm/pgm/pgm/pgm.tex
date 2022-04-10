@@ -1,7 +1,7 @@
 % Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
 % For more details: https://www.sharelatex.com/learn/Beamer
 
-\documentclass{beamer}					% Document class
+\documentclass[aspectratio=1610]{beamer}					% Document class
 
 \setbeamertemplate{footline}[text line]{%
   \parbox{\linewidth}{\vspace*{-8pt}Probabilistic graphical models\hfill\insertshortauthor\hfill\insertpagenumber}}
@@ -29,6 +29,8 @@
 \usepackage{graphicx}					% For including figures
 \usepackage{booktabs}					% For table rules
 \usepackage{hyperref}					% For cross-referencing
+\usepackage[absolute,overlay]{textpos}
+\usepackage{bm}
 
 \title{Probabilistic graphical models}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
@@ -56,6 +58,44 @@
 %\end{frame}
 
 
+\begin{frame}{Probabilistic graphical models (PGMs)}
+
+\begin{textblock*}{10cm}(1cm,1.5cm)
+Say we have a joint probability over gene expression $P(\bm{X})$\\A PGM describes how $P(\bm{X})$ factors\\
+\end{textblock*}
+
+\begin{textblock*}{9cm}(1cm,3.5cm)
+\textcolor{red}{Markov Random Fields} (MRFs) e.g., Ising model
+\begin{equation*}
+P(\bm{X};\Theta) = \frac{1}{Z}\prod_{i=1}^{N}P(\bm{X_{i}},\mathcal{C}(X_{i});\Theta_{i})
+\end{equation*}
+\end{textblock*}
+
+\begin{textblock*}{7cm}(1cm,6.5cm)
+\textcolor{red}{Bayesian Network} (BNs) - include causality
+\begin{equation*}
+P(\bm{X}|\mathcal{G},\Theta) = \prod_{i=1}^{N}P(\bm{X_{i}}|\mathcal{C}(X_{i}),\Theta_{i})
+\end{equation*}
+\end{textblock*}
+
+
+\begin{textblock*}{5cm}(10.75cm,1cm)
+\begin{figure}
+\includegraphics[width=4cm]{mrf.png}
+\end{figure}
+\end{textblock*}
+
+\begin{textblock*}{5cm}(10.75cm,5cm)
+\begin{figure}
+\includegraphics[width=2.75cm]{bayes-net.png}
+\end{figure}
+\end{textblock*}
+
+\begin{textblock*}{15cm}(1cm,9cm)
+BNs as well as hybrid models have been used to examine gene expression
+\end{textblock*}
+
+\end{frame}
 
 \begin{frame}{Markov random fields}
 
