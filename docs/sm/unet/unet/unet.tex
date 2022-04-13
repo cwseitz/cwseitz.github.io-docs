@@ -1,0 +1,78 @@
+% Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
+% For more details: https://www.sharelatex.com/learn/Beamer
+
+\documentclass[aspectratio=1610]{beamer}					% Document class
+
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}Semantic Segmentation with UNET \hfill\insertshortauthor\hfill\insertpagenumber}}
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage[english]{babel}				% Set language
+\usepackage[utf8x]{inputenc}			% Set encoding
+
+\mode<presentation>						% Set options
+{
+  \usetheme{default}					% Set theme
+  \usecolortheme{default} 				% Set colors
+  \usefonttheme{default}  				% Set font theme
+  \setbeamertemplate{caption}[numbered]	% Set caption to be numbered
+}
+
+% Uncomment this to have the outline at the beginning of each section highlighted.
+%\AtBeginSection[]
+%{
+%  \begin{frame}{Outline}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+%}
+
+\usepackage{graphicx}					% For including figures
+\usepackage{booktabs}					% For table rules
+\usepackage{hyperref}					% For cross-referencing
+\usepackage[absolute,overlay]{textpos}
+\usepackage{bm}
+
+\title{Semantic Segmentation with UNET}	% Presentation title
+\author{Clayton W. Seitz}								% Presentation author
+\date{\today}									% Today's date	
+
+\begin{document}
+
+% Title page
+% This page includes the informations defined earlier including title, author/s, affiliation/s and the date
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{UNET Architecture}
+
+\end{frame}
+
+\begin{frame}{Training and Performance Metrics}
+
+Pixel Accuracy: 
+
+\begin{equation*}
+PA = \frac{TP+TN}{TP+TN+FP+FN}
+\end{equation*}
+
+DICE Metric: 
+
+\begin{equation*}
+DICE = \frac{TP}{2TP+FP+FN}
+\end{equation*}
+
+Precision:
+\begin{equation*}
+P = \frac{TP}{TP+FP}
+\end{equation*}
+
+Recall:
+\begin{equation*}
+R = \frac{TP}{TP+FN}
+\end{equation*}
+
+\end{frame}
+
+
+\end{document}
