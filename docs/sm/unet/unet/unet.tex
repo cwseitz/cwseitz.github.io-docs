@@ -32,7 +32,7 @@
 \usepackage[absolute,overlay]{textpos}
 \usepackage{bm}
 
-\title{Semantic Segmentation of WM989 Cells with U-NET}	% Presentation title
+\title{Semantic Segmentation of Nuclei with U-NET}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -44,25 +44,19 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{Introduction}
-
-\begin{center}
-\begin{figure}
-\includegraphics[width=0.85\textwidth]{scvi.png}
-\caption{U2OS nuclei from BBBC039 dataset}
-\end{figure}
-\end{center}
-
-\end{frame}
-
 \begin{frame}{Segmentation problem}
 
-Single-cell RNA expression has sample, batch, and real biological variability. Need a lot of data
+\begin{itemize}
+\item Need a lot of data due to sample, batch, and real biological variability. 
+\item Automating segmentation
+\item Simple thresholding/watershed do not work well over large FOV
+\item Imprecise estimates of cell boundaries\\
+\end{itemize}
 
-\textbf{Motivation}: Automating segmentation, simple thresholding/watershed do not work well over large FOV and make imprecise estimates of cell boundaries\\
 \vspace{0.1in}
+
 \textbf{But...} probably need a new model for every sample type. Worth the effort if we can achieve low validation loss with few training samples (few-shot learning)\\
-\vspace{0.1in}
+
 \begin{center}
 \begin{figure}
 \includegraphics[width=0.85\textwidth]{input-train.png}
@@ -114,14 +108,4 @@ Learning rate $\eta=0.01$, Batch-size $B=5$ (32 train iterations, 8 validation)
 \end{center}
 
 \end{frame}
-
-
-\begin{frame}{Boundary-only model}
-
-
-
-\end{frame}
-
-
-
 \end{document}
