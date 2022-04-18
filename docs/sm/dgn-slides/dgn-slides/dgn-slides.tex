@@ -106,11 +106,15 @@ complete genetic interaction matrix.}
 
 Gene interactions are inferred from gene expression data. RNA-seq has single cell-specificity and time resolution but lacks spatial resolution and data is noisy\\
 \vspace{0.2in}
-FISH techniques have single-cell specificity, spatial resolution, less noisy, but multiplexing is difficult\\
+FISH techniques have single-cell specificity, spatial resolution, less noisy, but multiplexing is difficult and cells are fixed\\
 \vspace{0.2in}
 
 High cost of multiplexing precludes acquisition of time-resolved data is single cell studies, which is important when statistics of the genes of interest are not stationary (circadian rhythms, cell-cycle, drug-treatment.\\
 \vspace{0.2in}
+
+Transcription is not necessarily Poisson-like and has been shown to have switching behavior (transcriptional bursts). This has important implications for our models\\
+\vspace{0.2in}
+
 Even when we can collect single-cell time-series data, data collected at a time point will contain extra variability due to asynchrony of cells within a population (in terms of progression through a biological process)\\
 
 \end{frame}
@@ -139,6 +143,7 @@ Models range from networks of a few genes with detailed dynamical models to very
 \item Inferring nonlinear network structure from empirical data - ?
 \item Simulating stochastic dynamics (Gillespie algorithm)
 \item Simulating stochastic nonlinear dynamics (Michaelis-Menten kinetics, SERGIO)
+\item Transcriptional bursting - switching behavior of gene promoter
 \end{itemize}
 
 
