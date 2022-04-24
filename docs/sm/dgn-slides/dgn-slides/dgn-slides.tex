@@ -45,12 +45,6 @@
   \titlepage
 \end{frame}
 
-% Outline
-% This page includes the outline (Table of content) of the presentation. All sections and subsections will appear in the outline by default.
-\begin{frame}{Outline}
-  \tableofcontents
-\end{frame}
-
 % The following is the most frequently used slide types in beamer
 % The slide structure is as follows:
 %
@@ -58,18 +52,31 @@
 %	<content>
 %\end{frame}
 
+\begin{frame}{Data Summary}
+
+
+\end{frame}
+
 \begin{frame}{Research Strategy}
 
 \begin{textblock*}{14cm}(0.75cm,0.75cm)
 \begin{figure}
 \captionsetup{font={footnotesize,it}}
 \includegraphics[width=14cm]{logic.png}
-\caption{\textbf{A} 10-gene network sampled from \emph{Saccharomyces Genome Database} (SGD). \textbf{B} Steady state values from Monte Carlo simulation. \textbf{C} Barcoding scheme for multiplexed RNA imaging \textbf{D} Cartoon of a joint distribution in higher dimensions \textbf{E} Relationships between components}
+\caption{\textbf{A} 10-gene network sampled from \emph{Saccharomyces Genome Database} (SGD). \textbf{B} Steady state values from Monte Carlo simulation. \textbf{C} Barcoding scheme for multiplexed RNA imaging (Alessio, 2021) \textbf{D} Cartoon of a joint distribution in higher dimensions \textbf{E} Relationships between components}
 \end{figure}
 \end{textblock*}
 
 \end{frame}
 
+\begin{frame}{Simulating gene expression \emph{in-silico}}
+\begin{textblock*}{15cm}(0.5cm,1cm)
+\begin{figure}
+\includegraphics[width=10cm]{sergio.png}
+\caption{(Dibaeinia and Sinha, Cell Systems 2020)}
+\end{figure}
+\end{textblock*}
+\end{frame}
 
 \begin{frame}{Simulating gene expression \emph{in-silico}}
 
@@ -95,7 +102,7 @@ The transcription rate of gene $i$\\
 depends non-linearly on its regulators:
 \begin{align*}
 P_{i} &= \sum_{j}p_{ij} + b_{i}\\
-p_{ij} &= m_{ij}\frac{y_{ij}^{n_{ij}}}{y_{ij}^{n_{ij}}+h_{ij}^{n_{ij}}}
+p_{ij} &= m_{ij}\frac{x_{ij}^{n_{ij}}}{x_{ij}^{n_{ij}}+h_{ij}^{n_{ij}}}
 \end{align*}
 \end{textblock*}
 
@@ -105,8 +112,49 @@ p_{ij} &= m_{ij}\frac{y_{ij}^{n_{ij}}}{y_{ij}^{n_{ij}}+h_{ij}^{n_{ij}}}
 \end{figure}
 \end{textblock*}
 
+\end{frame}
+
+\begin{frame}{Generating ``cell types" for differentiation analyses}
+
+\begin{textblock*}{10cm}(0.5cm,1.5cm)
+Genes A and B are so-called \emph{master regulators}
+\end{textblock*}
+
+\begin{textblock*}{10cm}(0.5cm,2.2cm)
+\begin{align*}
+\dot{x_{A}} &= P_{A} -\lambda_{A}x_{A} + \phi(x_{A})\\
+\dot{x_{B}} &= P_{B} -\lambda_{B}x_{B} + \phi(x_{B})\\
+\dot{x_{C}} &= P_{C}(A,B) -\lambda_{C}x_{C} + \phi(x_{A},x_{B},x_{C})\\
+\dot{x_{D}} &= P_{D}(C) -\lambda_{D}x_{D} + \phi(x_{C},x_{D})\\
+\end{align*}
+\end{textblock*}
+
+\begin{textblock*}{15cm}(0.5cm,6cm)
+$\phi$ summarizes the noise dependence. Tuning the basal expression rates $P_{A}$ and $P_{B}$ is one way of generating ``cell types"
+\end{textblock*}
+
+\begin{textblock*}{15cm}(0.5cm,7.5cm)
+This is useful when benchmarking algorithms which detect genuine biological variability or experimental variability
+\end{textblock*}
+
+
+\begin{textblock*}{3.5cm}(10cm,1.5cm)
+\begin{figure}
+\includegraphics[width=3.5cm]{master.png}
+\end{figure}
+\end{textblock*}
 
 \end{frame}
+
+\begin{frame}{Convergence tests for Markov chains}
+\end{frame}
+
+\begin{frame}{GRN Inference from simulated data}
+\end{frame}
+
+\begin{frame}{Autoencoding simulated data}
+\end{frame}
+
 
 \begin{frame}{Training on BBBC039 U2OS Cells}
 \vspace{0.1in}
@@ -145,72 +193,6 @@ Learning rate $\eta=0.01$, Batch-size $B=5$ (32 train iterations, 8 validation)
 \end{frame}
 
 
-\begin{frame}{A scalable algorithm for inferring gene regulatory networks}
-
-Interest in reverse-engineering whole-genome interaction networks from simultaneous measurements of the
-expression levels of all (or at least most) genes in many
-samples, under a common set of experimental conditions\\
-\vspace{0.2in}
-This algorithm applies when it is valid to assume that the system is in a steady state. For systems out of equilibrium, we need inference algorithms designed to operate on time-series data\\
-\vspace{0.2in}
-Typically gene expression data have low sampling rates and relatively small
-amount of data. Moreover, GRNs have a high number of genes
-with complex, nonlinear regulatory mechanisms
-
-\end{frame}
-
-
-\begin{frame}{Experimental considerations}
-
-Gene interactions are inferred from gene expression data. RNA-seq has single cell-specificity and time resolution but lacks spatial resolution and data is noisy\\
-\vspace{0.2in}
-FISH techniques have single-cell specificity, spatial resolution, less noisy, but multiplexing is difficult and cells are fixed\\
-\vspace{0.2in}
-
-High cost of multiplexing precludes acquisition of time-resolved data is single cell studies, which is important when statistics of the genes of interest are not stationary (circadian rhythms, cell-cycle, drug-treatment.\\
-\vspace{0.2in}
-
-Transcription is not necessarily Poisson-like and has been shown to have switching behavior (transcriptional bursts). This has important implications for our models\\
-\vspace{0.2in}
-
-Even when we can collect single-cell time-series data, data collected at a time point will contain extra variability due to asynchrony of cells within a population (in terms of progression through a biological process)\\
-
-\end{frame}
-
-\begin{frame}{The Phi-Mixing Coefficient}
-
-Interest in reverse-engineering whole-genome interaction networks from simultaneous measurements of the
-expression levels of all (or at least most) genes in many
-samples, under a common set of experimental conditions\\
-\vspace{0.2in}
-This algorithm applies when it is valid to assume that the system is in a steady state. For systems out of equilibrium, we need inference algorithms designed to operate on time-series data\\
-\vspace{0.2in}
-Typically gene expression data have low sampling rates and relatively small
-amount of data. Moreover, GRNs have a high number of genes
-with complex, nonlinear regulatory mechanisms
-
-\end{frame}
-
-\section{References}
-
-\begin{frame}{Important topics}
-
-Models range from networks of a few genes with detailed dynamical models to very large networks with coarse statistical description.
-\vspace{0.2in}
-
-\begin{itemize}
-\item Linear dynamics of small networks (deterministic, stochastic)
-\item Nonlinear dynamics of small networks (deterministic, stochastic) - Bintu model
-\item Inferring network structure - Phi-Mixing Coefficient
-\item Inferring network structure from linear dynamics - Hidden Markov Models
-\item Inferring nonlinear network structure from empirical data - ?
-\item Simulating stochastic dynamics (Gillespie algorithm)
-\item Simulating stochastic nonlinear dynamics (Michaelis-Menten kinetics, SERGIO)
-\item Transcriptional bursting - switching behavior of gene promoter
-\end{itemize}
-
-
-\end{frame}
 
 % Adding the option 'allowframebreaks' allows the contents of the slide to be expanded in more than one slide.
 \begin{frame}[allowframebreaks]{References}
