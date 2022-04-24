@@ -31,6 +31,7 @@
 \usepackage{hyperref}					% For cross-referencing
 \usepackage[absolute,overlay]{textpos}
 \usepackage{bm}
+\usepackage[font=small,labelfont=bf]{caption}
 
 \title{Dynamics on gene networks}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
@@ -57,14 +58,53 @@
 %	<content>
 %\end{frame}
 
-\begin{frame}{Project Overview and Research Strategy}
+\begin{frame}{Research Strategy}
 
-\begin{textblock*}{7cm}(1cm,2cm)
+\begin{textblock*}{14cm}(0.75cm,0.75cm)
 \begin{figure}
-\includegraphics[width=7cm]{linear.png}
-\caption{5-gene network sampled from \emph{Saccharomyces Genome Database} (SGD)}
+\captionsetup{font={footnotesize,it}}
+\includegraphics[width=14cm]{logic.png}
+\caption{\textbf{A} 10-gene network sampled from \emph{Saccharomyces Genome Database} (SGD). \textbf{B} Steady state values from Monte Carlo simulation. \textbf{C} Barcoding scheme for multiplexed RNA imaging \textbf{D} Cartoon of a joint distribution in higher dimensions \textbf{E} Relationships between components}
 \end{figure}
 \end{textblock*}
+
+\end{frame}
+
+
+\begin{frame}{Simulating gene expression \emph{in-silico}}
+
+\begin{textblock*}{15cm}(0.5cm,1.5cm)
+We can simulate the expression of a gene as a function of the levels of its regulators (TFs), as prescribed by a
+fixed gene regulatory network (GRN) 
+\end{textblock*}
+
+\begin{textblock*}{15cm}(0.5cm,2.75cm)
+This is done via the chemical Langevin equation (Gillespie, 2000; Dibaeinia 2020):
+\end{textblock*}
+
+\begin{textblock*}{7cm}(4cm,3cm)
+\begin{figure}
+\begin{align*}
+\dot{x_{i}} &= P_{i}(t) -\lambda_{i}x_{i}(t) + q_{i}\left(\sqrt{P_{i}(t)}\alpha + \sqrt{\lambda_{i}x_{i}}\beta\right)  \\
+\end{align*}
+\end{figure}
+\end{textblock*}
+
+\begin{textblock*}{7cm}(0.5cm,5cm)
+The transcription rate of gene $i$\\
+depends non-linearly on its regulators:
+\begin{align*}
+P_{i} &= \sum_{j}p_{ij} + b_{i}\\
+p_{ij} &= m_{ij}\frac{y_{ij}^{n_{ij}}}{y_{ij}^{n_{ij}}+h_{ij}^{n_{ij}}}
+\end{align*}
+\end{textblock*}
+
+\begin{textblock*}{8cm}(7cm,5cm)
+\begin{figure}
+\includegraphics[width=8cm]{logic-ab.png}
+\end{figure}
+\end{textblock*}
+
 
 \end{frame}
 
@@ -103,59 +143,6 @@ Learning rate $\eta=0.01$, Batch-size $B=5$ (32 train iterations, 8 validation)
 \end{center}
 
 \end{frame}
-
-\begin{frame}{Useful Algorithms for Data Processing}
-
-1. Single Cell Variational Inference\\
-2. Phi-Mixing Coefficient
-
-\end{frame}
-
-\begin{frame}{Models of transcription and translation}
-
-\begin{textblock*}{5cm}(2cm,1.25cm)
-\textbf{Linear Model}
-\end{textblock*}
-
-\begin{textblock*}{7cm}(0.35cm,1.25cm)
-\begin{figure}
-\begin{align*}
-\dot{y_{i}} &= a_{i}x_{i} - b_{i}y_{i} + \xi_{i}\\
-\dot{x_{i}} &= \sum_{j}m_{ij}y_{j} - c_{i}x_{i} + \eta_{i}
-\end{align*}
-\end{figure}
-\end{textblock*}
-
-\begin{textblock*}{5cm}(8cm,1.25cm)
-\textbf{Nonlinear Model}
-\end{textblock*}
-
-\begin{textblock*}{7cm}(8cm,1.25cm)
-\begin{figure}
-\begin{align*}
-\dot{y_{i}} &= a_{i}x_{i} - b_{i}y_{i} + \alpha_{i}\\
-\dot{x_{i}} &= \sum_{j}m_{ij}\frac{y_{ij}^{n_{ij}}}{y_{ij}^{n_{ij}}+h_{ij}^{n_{ij}}} - c_{i}x_{i} + \beta_{i}
-\end{align*}
-\end{figure}
-\end{textblock*}
-
-
-\begin{textblock*}{7cm}(0.5cm,3.5cm)
-\begin{figure}
-\includegraphics[width=7cm]{linear.png}
-\caption{5-gene network sampled from \emph{Saccharomyces Genome Database} (SGD)}
-\end{figure}
-\end{textblock*}
-
-\begin{textblock*}{7cm}(8cm,4cm)
-\begin{figure}
-\includegraphics[width=7cm]{hill.png}
-\caption{Hill approximation to stat mech based TF binding model}
-\end{figure}
-\end{textblock*}
-
-\end{frame}
-
 
 
 \begin{frame}{A scalable algorithm for inferring gene regulatory networks}
