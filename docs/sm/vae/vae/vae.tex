@@ -44,9 +44,7 @@
 
 % Outline
 % This page includes the outline (Table of content) of the presentation. All sections and subsections will appear in the outline by default.
-\begin{frame}{Outline}
-  \tableofcontents
-\end{frame}
+
 
 % The following is the most frequently used slide types in beamer
 % The slide structure is as follows:
@@ -55,50 +53,7 @@
 %	<content>
 %\end{frame}
 
-\begin{frame}{The logic of generative modeling}
 
-Say we have a set of variables $\mathbf{x} = (x_{1},x_{2},...,x_{n})$ which might have some statistical dependence\\
-\vspace{0.1in}
-The variable $\mathbf{x}$ might be an amino acid sequence, gene expression data, microscopy image, etc.\\
-\vspace{0.1in}
-\begin{itemize}
-\item Often we are handed a batch of empirical samples $\{\mathbf{x}_{i}\}_{i=1}^{N}$
-\item We want to know the generating distribution $p(\mathbf{x})$
-\end{itemize}
-
-In supervised \textcolor{red}{generative learning}, we try to explicity learn the joint distribution $p(\mathbf{x}) = \prod_{i=1}^{N-1}p(x_{i}|x_{i+1:N})p(x_{N})$, which is generally more difficult than discriminative learning. 
-
-\end{frame}
-
-
-\begin{frame}{Perks of generative modeling}
-
-\begin{itemize}
-\item Fitting complete multivariate distributions $p(\mathbf{x})$ goes beyond correlation-based or clustering approaches
-\item Correlations cannot discover partial correlation in the context of other neighbors
-\item Fitting $p(\mathbf{x})$ permits sampling based inference
-\end{itemize}
-
-\end{frame}
-
-\begin{frame}{Why generative modeling is difficult}
-
-When describing a distribution over multiple variables, we may not know the proper normalization $Z$. That is,
-
-\begin{equation*}
-p(\mathbf{x}) = \frac{1}{Z}\tilde{p}(\mathbf{x})
-\end{equation*}
-
-\vspace{0.1in}
-This \textcolor{red}{very important} situation arises in several contexts:\\
-\vspace{0.1in}
-1. In \textcolor{red}{Bayesian inference} where $p(x_{1}|x_{2}) = p(x_{2}|x_{1})p(x_{1})/p(x_{2})$ is intractable due to $Z = p(x_{2}) = \int p(x_{2}|x_{1})p(x_{1})dx_{1}$. This integral can be very difficult or impossible to
-compute.\\
-\vspace{0.1in}
-2. In models from statistical physics, e.g. the Ising model, we only know
-$\tilde{p}(\mathbf{x}) = e^{−H(\mathbf{x})}$ where $H(\mathbf{x})$ is the Hamiltonian
-
-\end{frame}
 
 %\begin{frame}{Variational autoencoders (VAEs)}
 %A variational solution to generative modeling
@@ -112,49 +67,46 @@ $\tilde{p}(\mathbf{x}) = e^{−H(\mathbf{x})}$ where $H(\mathbf{x})$ is the Hami
 %\end{frame}
 
 
-\begin{frame}{Bayesian inference}
+\begin{frame}{Variational Bayes}
 
-The variable $\mathbf{x}$ has a latent representation or code $\mathbf{z}$. We often say that $\mathbf{z}$ is the \emph{causal source} of $\mathbf{x}$. Ultimately, we would like to know the distribution $P_{\Phi}(\mathbf{x})$
-
-\begin{equation*}
-P_{\phi}(\mathbf{x}) = \frac{P_{\phi}(\mathbf{x|z})P_{\phi}(\mathbf{z})}{Q_{\psi}(\mathbf{z|x})}
-\end{equation*}
-
-in order to find the model parameters that maximize the likelihood of the observed data:
+The variable $\mathbf{x}$ has a latent representation or code $\mathbf{z}$. We often say that $\mathbf{z}$ is the \emph{causal source} of $\mathbf{x}$. The distribution we are after is the \emph{evidence} in Bayes rule $P(\mathbf{x})$
 
 \begin{equation*}
-\Phi^{*} = \underset{\Phi}{\mathrm{argmin}} -\log P_{\Phi}(\mathbf{x}) 
+P(\mathbf{x}) = \frac{P_{\Phi}(\mathbf{x|z})P_{\Omega}(\mathbf{z})}{Q_{\Psi}(\mathbf{z|x})}
 \end{equation*}
 
-but we generally do not know $P_{\psi}(\mathbf{z|x})$ due to the intractable integral $Z = \int P_{\phi}(\mathbf{x|z})P_{\phi}(\mathbf{z})d\mathbf{z}$ (see slide 5)
+It is common to take $P_{\Omega}(\mathbf{z})$ to be Gaussian. We then try find the model parameters $\Theta = (\Phi,\Psi)$ that maximize the likelihood of the observed data:
+
+\begin{equation*}
+\Theta^{*} = \underset{\Theta}{\mathrm{argmin}} -\log P(\mathbf{x}_{\textrm{obs}}) 
+\end{equation*}
+
 
 \end{frame}
 
 \begin{frame}{Computing the evidence}
 
-We can rewrite the evidence as
+We can alternatively write the evidence as
 
 \begin{align*}
-P_{\phi}(\mathbf{x}) &= \int P_{\phi}(\mathbf{z})P_{\phi}(\mathbf{x|z})d\mathbf{z}\\
-&= \int P_{\phi}(\mathbf{z})P_{\phi}(\mathbf{x|z})\frac{P_{\phi}(\mathbf{z|x})}{P_{\phi}(\mathbf{z|x})}d\mathbf{z}\\
-&= \mathbb{E}_{\mathbf{z}\sim P_{\phi}(\mathbf{z|x})} \frac{P_{\phi}(\mathbf{z})P_{\phi}(\mathbf{x|z})}{P_{\phi}(\mathbf{z|x})}
+P(\mathbf{x}) &= \int P_{\Omega}(\mathbf{z})P_{\Phi}(\mathbf{x|z})d\mathbf{z}\\
+&= \int P_{\Omega}(\mathbf{z})P_{\Phi}(\mathbf{x|z})\frac{P_{\Psi}(\mathbf{z|x})}{P_{\Psi}(\mathbf{z|x})}d\mathbf{z}\\
+&= \mathbb{E}_{\mathbf{z}\sim P_{\Psi}(\mathbf{z|x})} \frac{P_{\Omega}(\mathbf{z})P_{\Phi}(\mathbf{x|z})}{P_{\Psi}(\mathbf{z|x})}
 \end{align*}
 
-where $P_{\phi}(\mathbf{z|x})$ is our model "encoder"
+We call $\Psi$ and $\Phi$ the encoder and decoder, respectively
 
 \end{frame}
 
 \begin{frame}{The evidence lower bound (ELBO)}
 
 \begin{align*}
-\log P_{\phi}(\mathbf{x}) &= \log \int_{z}P(x,z)dx\\
-&= \log \int_{z} P(x,z)\frac{Q(z|x)}{Q(z|x)}dz\\
-&= \log \mathbb{E}_{\mathbf{z}\sim P_{\phi}(\mathbf{z|x})} \frac{P(x|z)P(z)}{Q(z|x)}\\
-&\geq \mathbb{E}_{\mathbf{z}\sim P_{\phi}(\mathbf{z|x})} \log \frac{Q(x|z)}{P(z)} + \log P(x|z)
+\log P(\mathbf{x}) &= \log \;\mathbb{E}_{\mathbf{z}\sim P_{\Psi}(\mathbf{z|x})} \frac{P_{\Omega}(\mathbf{z})P_{\Phi}(\mathbf{x|z})}{P_{\Psi}(\mathbf{z|x})}\\
+&\geq \mathbb{E}_{\mathbf{z}\sim  P_{\Psi}(\mathbf{z|x})} \log \;\frac{P_{\Omega}(\mathbf{z})P_{\Phi}(\mathbf{x|z})}{P_{\Psi}(\mathbf{z|x})}
 \end{align*}
 
 \begin{equation*}
--\log P_{\phi}(\mathbf{x}) \leq \mathbb{E}_{\mathbf{z}\sim P_{\phi}(\mathbf{z|x})} \log \frac{Q(x|z)}{P(z)} - \log P(x|z)
+-\log P(\mathbf{x}) \leq \mathbb{E}_{\mathbf{z}\sim P_{\phi}(\mathbf{z|x})} \log \frac{P_{\Psi}(\mathbf{z|x})}{P_{\Omega}(\mathbf{z})} - \log P_{\Phi}(\mathbf{x|z})
 \end{equation*}
 
 
@@ -164,12 +116,12 @@ where $P_{\phi}(\mathbf{z|x})$ is our model "encoder"
 
 
 \begin{align*}
-\Phi^{*} &= \mathcal{L}(\Phi)\\
-&= \underset{\Phi}{\mathrm{argmin}} \;\;\mathbb{E}_{\mathbf{x}\sim \mathrm{Pop},\; \mathbf{z}\sim P_{\phi}(\mathbf{\mathbf{z}|\mathbf{x}})} \log \frac{Q_{\Psi}(\mathbf{z}|\mathbf{x})}{P(\mathbf{z})} - \log P(\mathbf{x}|\mathbf{z})
+\Theta^{*} &= \underset{\Phi,\Psi}{\mathrm{argmin}} \;\;\mathbb{E}_{\mathbf{x}\sim \mathrm{Pop},\; \mathbf{z}\sim P_{\Psi}(\mathbf{\mathbf{z}|\mathbf{x}})} \log \frac{P_{\Psi}(\mathbf{z|x})}{P_{\Omega}(\mathbf{z})} - \log P_{\Phi}(\mathbf{x|z})\\
+&= \underset{\Phi,\Psi}{\mathrm{argmin}} \;\; D_{\mathrm{KL}}\left(P_{\Psi}||P_{\Omega}\right) - \mathbb{E}_{\mathbf{x}\sim \mathrm{Pop},\;\mathbf{z}\sim P_{\Psi}(\mathbf{\mathbf{z}|\mathbf{x}})}  \log P_{\Phi}(\mathbf{x|z})
 \end{align*}
 
 \vspace{0.1in}
-The ELBO can be rewritten in terms of a KL-divergence and population entropy. We often think of $\Phi$ as ``position'' and the loss $\mathcal{L}$ as an ``energy''
+The first term is a \textbf{rate term} to be minimized and the second a \textbf{reconstruction term} to be maximized
 
 \end{frame}
 
