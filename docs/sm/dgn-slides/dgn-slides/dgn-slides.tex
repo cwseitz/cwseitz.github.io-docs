@@ -33,7 +33,7 @@
 \usepackage{bm}
 \usepackage[font=small,labelfont=bf]{caption}
 
-\title{Dynamics on gene networks}	% Presentation title
+\title{Isolating the perturbation response of gene regulatory networks in the presence of biological and technical noise}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -54,49 +54,21 @@
 
 \begin{frame}{Data Summary}
 
-\begin{textblock*}{3cm}(3.5cm,1cm)
+\begin{textblock*}{15cm}(0.5cm,1cm)
 \begin{figure}
-\includegraphics[width=3cm]{ch1.jpg}
+\includegraphics[width=15cm]{data-summary.png}
 \end{figure}
-\end{textblock*}
-\begin{textblock*}{3cm}(6.5cm,1cm)
-\begin{figure}
-\includegraphics[width=3cm]{ch2.jpg}
-\end{figure}
-\end{textblock*}
-\begin{textblock*}{3cm}(9.5cm,1cm)
-\begin{figure}
-\includegraphics[width=3cm]{ch3.jpg}
-\end{figure}
-\end{textblock*}
-\begin{textblock*}{3cm}(3.5cm,4cm)
-\begin{figure}
-\includegraphics[width=3cm]{ch4.jpg}
-\end{figure}
-\end{textblock*}
-\begin{textblock*}{3cm}(6.5cm,4cm)
-\begin{figure}
-\includegraphics[width=3cm]{ch5.jpg}
-\end{figure}
-\end{textblock*}
-\begin{textblock*}{3cm}(9.5cm,4cm)
-\begin{figure}
-\includegraphics[width=3cm]{ch6.jpg}
-\end{figure}
-\end{textblock*}
-\begin{textblock*}{10cm}(3cm,8cm)
-\textbf{Figure 1} WM989 Melanocytes before treatment, Experiment 1/2, Tile 1/16, Hybridization 1/5. Top right DAPI
 \end{textblock*}
 
 \end{frame}
 
 \begin{frame}{Research Strategy}
 
-\begin{textblock*}{14cm}(0.75cm,0.75cm)
+\begin{textblock*}{12cm}(2.2cm,0.75cm)
 \begin{figure}
 \captionsetup{font={footnotesize,it}}
-\includegraphics[width=14cm]{logic.png}
-\caption{\textbf{A} 10-gene network sampled from \emph{Saccharomyces Genome Database} (SGD). \textbf{B} Steady state values from Monte Carlo simulation. \textbf{C} Barcoding scheme for multiplexed RNA imaging (Alessio, 2021) \textbf{D} Cartoon of a joint distribution in higher dimensions \textbf{E} Relationships between components}
+\includegraphics[width=12cm]{sketch.png}
+\caption{\textbf{A} 10-gene network sampled from \emph{Saccharomyces Genome Database} (SGD) and samples from Monte Carlo simulation after burn-in \textbf{B} Latent space of the variational autoencoder trained on RNA-seq datastes CORTEX and HEMATO}
 \end{figure}
 \end{textblock*}
 
@@ -142,38 +114,6 @@ p_{ij} &= m_{ij}\frac{x_{ij}^{n_{ij}}}{x_{ij}^{n_{ij}}+h_{ij}^{n_{ij}}}
 \begin{textblock*}{8cm}(7cm,5cm)
 \begin{figure}
 \includegraphics[width=8cm]{logic-ab.png}
-\end{figure}
-\end{textblock*}
-
-\end{frame}
-
-\begin{frame}{Generating ``cell types" for differentiation analyses}
-
-\begin{textblock*}{10cm}(0.5cm,1.5cm)
-Genes A and B are so-called \emph{master regulators}
-\end{textblock*}
-
-\begin{textblock*}{10cm}(0.5cm,2.2cm)
-\begin{align*}
-\dot{x_{A}} &= P_{A} -\lambda_{A}x_{A} + \phi(x_{A})\\
-\dot{x_{B}} &= P_{B} -\lambda_{B}x_{B} + \phi(x_{B})\\
-\dot{x_{C}} &= P_{C}(A,B) -\lambda_{C}x_{C} + \phi(x_{A},x_{B},x_{C})\\
-\dot{x_{D}} &= P_{D}(C) -\lambda_{D}x_{D} + \phi(x_{C},x_{D})\\
-\end{align*}
-\end{textblock*}
-
-\begin{textblock*}{15cm}(0.5cm,6cm)
-$\phi$ summarizes the noise dependence. Tuning the basal expression rates $P_{A}$ and $P_{B}$ is one way of generating ``cell types"
-\end{textblock*}
-
-\begin{textblock*}{15cm}(0.5cm,7.5cm)
-This is useful when benchmarking algorithms which detect genuine biological variability or experimental variability
-\end{textblock*}
-
-
-\begin{textblock*}{3.5cm}(10cm,1.5cm)
-\begin{figure}
-\includegraphics[width=3.5cm]{master.png}
 \end{figure}
 \end{textblock*}
 
