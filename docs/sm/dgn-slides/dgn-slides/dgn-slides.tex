@@ -33,7 +33,7 @@
 \usepackage{bm}
 \usepackage[font=small,labelfont=bf]{caption}
 
-\title{Isolating the perturbation response of gene regulatory networks in the presence of biological and technical noise}	% Presentation title
+\title{Isolating the perturbation response of gene regulatory networks in the presence of biological variability and technical noise}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -52,7 +52,19 @@
 %	<content>
 %\end{frame}
 
-\begin{frame}{Data Summary}
+\begin{frame}{Drug-induced
+reprogramming as a mode of cancer drug resistance}
+
+\begin{textblock*}{12cm}(2cm,1cm)
+\begin{figure}
+\includegraphics[width=12cm]{resistance.png}
+\caption{Shaffer et al., Nature 2017}
+\end{figure}
+\end{textblock*}
+
+\end{frame}
+
+\begin{frame}{WM989-A6 RNA-FISH data summary}
 
 \begin{textblock*}{15cm}(0.5cm,1cm)
 \begin{figure}
@@ -62,13 +74,13 @@
 
 \end{frame}
 
-\begin{frame}{Research Strategy}
+\begin{frame}{Graphical abstract}
 
-\begin{textblock*}{12cm}(2.2cm,0.75cm)
+\begin{textblock*}{14cm}(1.15cm,1.5cm)
 \begin{figure}
 \captionsetup{font={footnotesize,it}}
-\includegraphics[width=12cm]{sketch.png}
-\caption{\textbf{A} 10-gene network sampled from \emph{Saccharomyces Genome Database} (SGD) and samples from Monte Carlo simulation after burn-in \textbf{B} Latent space of the variational autoencoder trained on RNA-seq datastes CORTEX and HEMATO}
+\includegraphics[width=14cm]{sketch.png}
+\caption{Gene expression matrices used as training data to learn a latent-space representation of gene expression, uncovering latent structure of the joint distribution and permitting cell typing, account for batch variability. Type information is then used for inference of the underlying regulatory network using the phi-mixing coefficient, which may differ across types}
 \end{figure}
 \end{textblock*}
 
