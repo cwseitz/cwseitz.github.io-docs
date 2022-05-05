@@ -28,72 +28,44 @@
   \maketitle% prints the title block
 \vspace{0.4in}
 
+\begin{abstract}
+\end{abstract}
+
 \section{Introduction}
 
-The central dogma of molecular biology has recently stimulated the development of a rich set of computational techniques for cellular phenotyping at the molecular scale. The intracellular environment harbors a diverse set of biomolecules which undergo complex interactions in order to carry out cellular functions. Classical biological techniques have yielded great insights into biochemical and biophysical mechanisms of these interactions; however, the development of even simple models of the interaction scheme of DNA, RNA, and protein remains a challenge. This barrier in turn precludes the abstraction of fundamental interactions to the scale of the phenotype. At the same time, recent advances in single-cell sequencing and multiplexed fluorescent labeling of nucleic acids and proteins present a practical top-down route to this abstraction, if complemented by the appropriate analysis paradigm. Indeed, high-throughput variants of these methods e.g., genome wide or transcriptome wide analyses,  output data volumes that have enabled discovery-driven research. This has important implications for both fundamental biological research as well as the discovery of the molecular drivers of disease states.
+The intracellular environment harbors a delicate set of interactions between DNA, RNA, and protein in order to carry out cellular functions and perform signal processing. State of the art multi-omics technologies have fostered a generalization of the notion of a biochemical pathway to the large-scale biochemical network, in an attempt to understand the structure of these interactions across different cellular states. In the context of gene regulation, the biochemical network perspective has proven quite powerful, as it leverages the power of probabilistic graphical models thus revealing the conditional dependence structure of high-dimensional joint probability distribution over protein and or RNA copy numbers. Such an approach simultaneously permits clues towards unknown regulatory interactions or the impact of controlled perturbations on the dynamics of biochemical reaction networks. Recently, the inference of gene regulatory networks (GRNs) from static experimental data has become a relatively mature class of methods when applied to gene expression data from single-cell RNA-sequencing (Singh, 2018). Interactions between different genes are represented as a directed graph in which nodes represent genes and directed edges indicate a causual relationship between a source gene and destination gene. 
 
-One of the most common applications of machine learning in molecular biology has been the use of supervised learning to learn a mapping from a high-dimensional dataset to a target variable of interest. This amounts to learning a conditional probability distribution $p(y|\mathbf{x})$, where $x$ is, in general, a high-dimensional variable such as a gene expression profile while $y$ is a target variable such as the cellular phenotype. This technique falls into a broader class of \emph{dicriminative} learning algorithms such as random forests, support vector machines, and multi-layer perceptrons. Such algorithms exploit the structure of $\mathbf{x}$ to learn its relationship to $y$ and are a preferred method when we are not directly concerned with the statistical structure of the input covariates $\mathbf{x}$. On the other hand, occasionally we are interested in the statistics of $\mathbf{x}$ itself, as is the case in protein design, analyzing genomic mutations, and dissecting transcriptional variability between single cells. In supervised generative learning, we try to explicity learn the joint distribution which produced that data - a task which is generally a more difficult task than discriminative learning. Overcoming the barrier to generative modeling carries significant benefits; fitting complete multivariate distributions goes beyond correlation-based or clustering approaches as it permits the discovery of partial correlations, outlier detection, as well as sampling based inference. 
+We have identified several shortcomings of this approach in need of development. First, there exists biological varability and technical noise in our datasets, introducing heterogeneity which is difficult to detect. This can be thought of as a byproduct of the curse of dimensionality, in which we are unable to directly infer the joint distribution over biomolecule counts. The inability to segregate samples either by discriminative or generative modeling may create the illusion that the joint distribution is unimodal - a kind of ``modal collapse''. Furthermore, by design, any network inference algorithm neglects biochemical processes when drawing directed edges between nodes. Inferring precise biochemical kinetics is a much more difficult problem, but remains desirable. Gene expression is thought to be inherently stochastic, governed by an unknown and highly complex coupled system of stochastic differential equations (SDEs). Our inability to assign further detail to network edges stems from our inability to determine the form of these differential equations and their parameterization, or even its stationary statistics. At any rate, Bayesian inference of more detailed kinetic parameters may be possible, under the assumption that transcriptional kinetics are solely governed by a Hill function of transcription factor concentration (Burton, 2021). 
 
-When modeling $p(\mathbf{x})$, the dimension $N$ of $\mathbf{x}$ is often very large, as is the case when $\mathbf{x}$ is an image or a genome wide expression profile. Typically, we are given a finite number of empirical observations of $\mathbf{x}$ with the hope of constructing $p(\mathbf{x})$ from those observations. In high dimensions, the volume of the state space grows exponentially in the number of dimensions while we generally do not have a comparable number of training examples to accurately ``populate'' this volume. Even if we did have a sufficient number of samples to obtain a good estimate of $p(\mathbf{x})$, simply \emph{counting} the number of times each $\mathbf{x}$ to construction $p(\mathbf{x})$ is generally intractable. This can be seen from the fact that if $\mathbf{x_{i}}\in \Omega$ where $\Omega$ is the state space of each element of $\mathbf{x}$, normalizing the counts requires an summation over $|\Omega|^{N}$ possible states. This issue arises in many contexts, for example Bayesian inference and a large class of problems in statistical physics. 
+Of course, there are also a number of other confounding factors, such as the spatial organization of key biomolecules, the biophysical details of transcription factor binding, DNA accessibility, and RNA preprocessing, which enter into this hypothetical system of equations. We choose to focus our attention on spatial organization, as this information can be readily measured in multiplexed RNA-imaging experiments. Spatial regulation could contribute to non-Hill dynamics.  Network inference is frequently carried out on RNA-seq datasets or multiplexed RNA-FISH while neglecting the role of the placement of proteins in space and time. Transcription factors mediate the causual effect between the expression of a source gene and a target gene, making this information valuable in resolving the nature of this interaction. Finally, substantial evidence has surfaced that genes are not expressed constitutively; rather, gene expression occurs in a bursting fashion (Dar 2012; Larrson 2019; Tunnacliffe 2020) which has been suggested to occur due to switching of a gene promoter between inactivate and activate transcriptional states. Bursting phenomena challenge our assumptions of stationarity and ergodicity of the joint distribution over gene expression, posing important theoretical questions.
 
-Using deep networks to represent $p(\mathbf{x})$ is an active area of research, as deep networks are well-known to be flexible and expressive in modeling high-dimensional data. Two state of the art methods: variational autoencoders (VAEs) and generative adversarial networks (GANs) implement generative models as deep networks. In biological research, GANs have fewer significant contributions compared to VAEs, partially because that they do not provide an immediate way of tracing back the representation of each observation in the latent space (Lopez 2020).
+In this study, we use the drug-treatment response of WM989 melanoma cells to treatment with a chemotherapy drug Vemurafenib - a BRAF inhibitor. Statistical treatment has revealed a core set of genes and their logical interactions, which are thought to be of importance during the development of resistance to chemotherapy treatment \emph{in-vitro} (Shaffer 2017). Development of resistance to treatment has been proposed to a transient state of gene expression which has been attributed to non-genetic expression variability from transcriptional bursting (Schuh 2020). However, the mechanism by which drug treatment alters gene expression irreversibly remains unclear. We expect that this question can begin to be answered by probing alterations in the logical structure of the gene regulatory network alongside Bayesian inference of parameters of the functions governing transcription rates.
 
-In generative modelings, there is often a trade-off between model complexity and interpretability. Models that use neural networks, which perform non-linear operations, are often difficult to interpret.
+\subsection{Identifying key genomic regulators in melanoma}
 
+\subsection{Transcriptional bursting: a source of non-genetic variability}
 
-\begin{figure}
-\centering
-\includegraphics[width=0.7\textwidth]{force}
-\caption{\textbf{Variational autoencoder architecture} Taken from Lopez 2020 in EMBO}
-\end{figure}
+\subsection{Spatial properties of gene expression}
 
+\section{Methods}
 
+\subsection{Theoretical Methods}
 
+\subsubsection{Statistical mechanics of transcription factor binding}
 
+\subsubsection{The Gillespie algorithm}
 
-\section{Statistical physics of deep learning}
+\subsubsection{Stability analysis of stochastic differential equations}
 
+\subsubsection{Inferring biochemical networks from data}
 
+\subsubsection{Learning interaction functions with Gaussian Processes}
 
-In classical gradient descent, we attempt to find a global minimum a generally non-convex function $\mathcal{L}(\Phi)$ by compute the gradient $\nabla_{\Phi} \mathcal{L}$ with respect to the parameters or ``position vector'' $\Phi$. By iteratively computing the gradient and updating the parameters, we can arrive at a local minimum of $\mathcal{L}$. This method works well when we can explicitly evaluate $\nabla_{\Phi} \mathcal{L}$ but this is rarely the case in real-world optimization problems. We typically can only \emph{estimate} the value of the loss $\mathcal{L}(\Phi)$ based on a batch of training examples. Those training examples are sampled from $p(\mathbf{x})$ at random, which means the evolution of the parameters $\Phi$ is a stochastic process. In this scenario, conventional gradient descent becomes stochastic gradient descent or SGD. 
+\subsection{Experimental Methods}
 
-\begin{equation*}
-\frac{d\Phi}{dt} = - \eta \hat{g}
-\end{equation*}
+\subsubsection{Multiplexed fluorescence in-situ hybridization (FISH)}
 
-which is analogous to a ``velocity''. It follows that 
-
-
-\begin{equation*}
-\Delta\Phi \approx - \eta \Delta t \hat{g}
-\end{equation*}
-
-which can be decomposed into 
-
-\begin{equation*}
-\Delta\Phi \approx - \eta \Delta t g(\Phi) + \eta \sum_{i} (g(\Phi) - \hat{g}_{i}(\Phi))
-\end{equation*}
-
-Applying the central limit theorem to the last term gives the Langevin equation
-
-\begin{equation*}
-\Delta\Phi \approx - \eta \Delta t g(\Phi) + \eta \epsilon \sqrt{N}
-\end{equation*}
-
-where $\epsilon \sim \mathcal{N}(0,\sigma^{2})$. We can now see that $\Phi(t)$ follows a stochastic differential equation reminiscent of the Ornstein-Uhlenbeck (OU) process. The OU process has a corresponding Fokker-Planck equation. We would like the stationary distribution of that stochastic process to center on the point at which $\mathcal{L}$ is a minimum.
-
-
-
-\section{Specific Aims}
-
-\subsection{Specific Aim 1: Develop an interpretable deep generative model for single-cell expression data}
-
-
-\subsection{Specific Aim 2: Discover latent variables in single-cell expression profiles   }
-
-
-
-
+\subsubsection{Techniques for high-throughput image processing}
 
 
 \end{document}
