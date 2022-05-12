@@ -46,6 +46,11 @@
   \titlepage
 \end{frame}
 
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+
 % The following is the most frequently used slide types in beamer
 % The slide structure is as follows:
 %
@@ -53,6 +58,91 @@
 %	<content>
 %\end{frame}
 
+\begin{frame}{Gene expression can be non-constitutive}
+
+
+\begin{textblock*}{7cm}(0.5cm,1.5cm)
+\begin{figure}
+\includegraphics[width=7cm]{burst-1.png}
+\end{figure}
+\end{textblock*}
+
+\begin{textblock*}{7cm}(8cm,1.5cm)
+\begin{figure}
+\includegraphics[width=7cm]{burst-2.png}
+\end{figure}
+\end{textblock*}
+
+
+\begin{textblock*}{15cm}(0.5cm,6cm)
+\begin{itemize}
+\item Non-equilibrium expression cannot be measured directly with \emph{ensemble snapshots}
+\item Tracking counts in live cells limits the number of species considered simultaneously
+\item If the biochemical network is known a-priori, we can build parametric dynamical models
+\item Bayesian inference allows us to fit parametric dynamical models without continuous dynamical trajectories
+\end{itemize}
+\end{textblock*}
+
+
+\end{frame}
+
+\begin{section}{Modeling stochastic biochemical reaction networks}
+
+\begin{frame}{Stochastic biochemical reaction networks: the repressilator}
+\begin{textblock*}{10.5cm}(3cm,1cm)
+\begin{figure}
+\includegraphics[width=10.5cm]{repressilator.jpg}
+\caption{Niederholtmyer et al., eLife 2015}
+\end{figure}
+\end{textblock*}
+\end{frame}
+
+
+
+\begin{frame}{Bayesian parameter inference for gene regulation}
+
+Suppose we have a series of ensemble snapshots of an \emph{in-vitro} population:
+
+\begin{align*}
+\mathcal{D} = \{\mathcal{D}^{0}, ..., \mathcal{D}^{t}\}
+\end{align*}
+
+with $\mathcal{D}^{t} = \{d_{1}, ..., d_{n}\}$. We would like to use $\mathcal{D}$ to fit a dynamical model $\mathcal{M}(\theta)$\\
+\vspace{0.2in}
+Bayesian inference lets us infer $\theta$ from $\mathcal{D}$ while quantifying the uncertainty in our estimate:
+
+\begin{align*}
+P(\theta|\mathcal{D}) \propto P(\mathcal{D}|\theta)P(\theta) = P(\theta)\prod_{n,t} P(\mathcal{D}_{n}^{t}|\theta)
+\end{align*}
+
+The likelihood $P(\mathcal{D}_{n}^{t}|\theta)$ is often difficult to define or intractable to compute due to the curse of dimensionality
+
+\end{frame}
+
+\end{section}
+
+\begin{frame}{Estimating the likelihood}
+
+If all reactions take place in a well-mixed solution (Markov), the chemical master equation (CME) applies\\
+\begin{align*}
+\frac{dP(\mathbf{x},t)}{dt} = \sum_{j} a_{j}(\mathbf{x}-\nu_{j}|\theta)P(\mathbf{x}-\nu_{j},t) - a_{j}(\mathbf{x}|\theta)P(\mathbf{x},t)
+\end{align*}
+$P(\mathcal{D}^{t}|\theta)$ is the solution to the master equation $P(\mathbf{x},t)$ under parameterization $\theta$\\
+\vspace{0.2in}
+ABC methods simulate data $\tilde{\mathcal{D}}$ from $\mathcal{M}(\theta)$ using the Gillespie algorithm and compute a distance metric $d(\mathcal{D},\tilde{\mathcal{D}})$ or $d(\mathcal{S}(\mathcal{D}),\mathcal{S}(\tilde{\mathcal{D}}))$ where $\mathcal{S}$ is a summary statistic to approximate the likelihood\\
+\vspace{0.2in}
+\textcolor{red}{Both suffer from the curse of dimensionality}\\
+\vspace{0.2in}
+
+\end{frame}
+
+\begin{frame}{Beating the curse of dimensionality to compute the likelihood}
+Deep networks are known to be capable of circumventing the curse. They can model very high-dimensional joint distributions e.g., distributions over images\\
+\vspace{0.2in}
+Can we use a deep network to perform the map $\Theta\in \mathbb{R}^{n} \rightarrow f(\Theta) = P(\mathcal{D}|\Theta) \in \mathbb{R}^{n+1}$ i.e., compute the likelihood?
+\end{frame}
+
+\begin{section}{Application to chemotherapy resistance in melanoma}
 \begin{frame}{Drug-induced
 reprogramming as a mode of cancer drug resistance}
 
@@ -86,62 +176,7 @@ reprogramming as a mode of cancer drug resistance}
 \end{textblock*}
 
 \end{frame}
-
-\begin{frame}{Modeling stochastic biochemical reaction networks}
-
-\begin{textblock*}{15cm}(0.5cm,1.5cm)
-Three ways of representing a biochemical reaction network:
-\end{textblock*}
-
-\begin{textblock*}{15cm}(0.5cm,2cm)
-\begin{center}
-\noindent\begin{minipage}{.3\linewidth}
-\begin{center}
-\begin{align*}
-r_{1}&: x_{1} + x_{2} \rightarrow x_{3}\\
-r_{2}&: x_{3} + x_{4} \rightarrow 2x_{3}\\
-r_{3}&: x_{4} + x_{5} \rightarrow x_{2}
-\end{align*}
-\end{center}
-\end{minipage}%
-\begin{minipage}{.3\linewidth}
-\begin{center}
-\begin{align*}
-\mathbf{\nu} = \begin{pmatrix}
--1 & -1 & 1 & 0 & 0\\
-0 & 0 & 1 & 1 & 0\\
-0 & 1 & 0 & -1 & -1\\
-\end{pmatrix}
-\end{align*}
-\end{center}
-\end{minipage}
-\begin{minipage}{.3\linewidth}
-\begin{center}
-\begin{tikzpicture}
-\Vertex[label=$x_{1}$]{A}
-\Vertex[x=2,label=$x_{2}$]{B}
-\Vertex[x=1,y=1,label=$x_{3}$]{C}
-\Vertex[x=0,y=2,label=$x_{4}$]{D}
-\Vertex[x=2,y=2,label=$x_{5}$]{E}
-\Edge[Math,Direct=true,color=red](A)(C)
-\Edge[Math,Direct=true,color=red](B)(C)
-\Edge[Math,Direct=true,color=blue](C)(C)
-\Edge[Math,Direct=true,color=blue](D)(C)
-\Edge[Math,Direct=true,bend=-45,color=gray](D)(B)
-\Edge[Math,Direct=true,color=gray](E)(B)
-\end{tikzpicture}
-\end{center}
-\end{minipage}
-\end{center}
-\end{textblock*}
-
-\end{frame}
-
-\begin{frame}{Bayesian parameter inference for gene regulation}
-
-Suppose we 
-
-\end{frame}
+\end{section}
 
 \begin{frame}{Training on BBBC039 U2OS Cells}
 \vspace{0.1in}
