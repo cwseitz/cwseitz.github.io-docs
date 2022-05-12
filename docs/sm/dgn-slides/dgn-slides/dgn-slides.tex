@@ -97,37 +97,74 @@
 \end{textblock*}
 \end{frame}
 
+\begin{frame}{What about Markov models?}
+From another point of view, molecular counts can be thought of as a Markov model which progresses through states
+\vspace{0.2in}
 
+\begin{center}
+\begin{tikzpicture}
+\Vertex[x=0,y=0,label=$x_{1}$]{A}
+\Vertex[x=3,y=0,label=$x_{2}$]{B}
+\Vertex[x=6,y=0,label=$x_{3}$]{C}
+\Vertex[x=9,y=0,label=$x_{4}$]{D}
+\Vertex[x=12,y=0,label=$x_{5}$]{E}
+\Edge[Math,Direct=true,color=black,label=T_{12}](A)(B)
+\Edge[Math,Direct=true,color=black,label=T_{23}](B)(C)
+\Edge[Math,Direct=true,color=black,label=T_{34}](C)(D)
+\Edge[Math,Direct=true,color=black,label=T_{45}](D)(E)
+\end{tikzpicture}
+\end{center}
+
+Markov models are very powerful, and the EM algorithm can be used for MAP estimation, but this requires time-series measurements, which are incompatible with ensemble snapshots
+\end{frame}
 
 \begin{frame}{Bayesian parameter inference for gene regulation}
 
 Suppose we have a series of ensemble snapshots of an \emph{in-vitro} population:
 
 \begin{align*}
-\mathcal{D} = \{\mathcal{D}^{0}, ..., \mathcal{D}^{t}\}
+\mathbf{x} = \{\mathbf{x}^{0}, ..., \mathbf{x}^{t}\}\;\;\; \mathbf{y} = \{\mathbf{y}^{0}, ..., \mathbf{y}^{t}\}
 \end{align*}
 
-with $\mathcal{D}^{t} = \{d_{1}, ..., d_{n}\}$. We would like to use $\mathcal{D}$ to fit a dynamical model $\mathcal{M}(\theta)$\\
+with $\mathbf{x}^{t} = \{x_{1}, ..., x_{n}\}$ and similarly for $\mathbf{y}$. Under perfect measurements $\mathbf{x}=\mathbf{y}$\\
 \vspace{0.2in}
-Bayesian inference lets us infer $\theta$ from $\mathcal{D}$ while quantifying the uncertainty in our estimate:
+We would like to use $\mathbf{x}$ to fit a dynamical model $\mathcal{M}(\theta)$. Bayesian inference lets us infer $\theta$ from $\mathbf{x}$ while quantifying the uncertainty in our estimate:
 
 \begin{align*}
-P(\theta|\mathcal{D}) \propto P(\mathcal{D}|\theta)P(\theta) = P(\theta)\prod_{n,t} P(\mathcal{D}_{n}^{t}|\theta)
+P(\theta|\mathbf{x}) \propto \mathcal{L}(\mathbf{x}|\theta)P(\theta) = P(\theta)\prod_{t} P(\mathbf{x},t|\theta)
 \end{align*}
 
 The likelihood $P(\mathcal{D}_{n}^{t}|\theta)$ is often difficult to define or intractable to compute due to the curse of dimensionality
 
 \end{frame}
 
+\begin{frame}{The Chapman-Kolmogorov Equation}
+
+\vspace{0.1in}
+Consider the discrete-time Chapman-Kolmogorov equation for a discrete state space
+
+\begin{align*}
+P(\mathbf{x}_{i},t) &= \sum_{j} T_{ji}(\mathbf{x}_{i},t|\mathbf{x}_{j},t-\Delta t)P(\mathbf{x}_{j},t-\Delta t)\\ 
+&= \sum_{k} T_{k}(\mathbf{x}_{i},t|\mathbf{x}_{i}-\nu_{k},t-\Delta t)P(\mathbf{x}_{i}-\nu_{k},t-\Delta t)
+\end{align*}
+
+where $T_{k}$ is the probability of a reaction channel $k$ firing in the interval $(t,t+\Delta t)$.\\
+\vspace{0.1in}
+Taking the limit $\Delta t \rightarrow 0$ one can derive the forward Kolmogorov equation or chemical master equation (CME)
+
+\begin{align*}
+\frac{dP(\mathbf{x},t|\mathbf{x}_{0})}{dt} = \sum_{k} T_{k}(\mathbf{x}-\nu_{k})P(\mathbf{x}-\nu_{k},t) - T_{k}(\mathbf{x})P(\mathbf{x},t)
+\end{align*}
+
+
+
+\end{frame}
+
 \end{section}
 
-\begin{frame}{Estimating the likelihood}
+\begin{frame}{Estimating the likelihood function}
 
-If all reactions take place in a well-mixed solution (Markov), the chemical master equation (CME) applies\\
-\begin{align*}
-\frac{dP(\mathbf{x},t)}{dt} = \sum_{j} a_{j}(\mathbf{x}-\nu_{j}|\theta)P(\mathbf{x}-\nu_{j},t) - a_{j}(\mathbf{x}|\theta)P(\mathbf{x},t)
-\end{align*}
-$P(\mathcal{D}^{t}|\theta)$ is the solution to the master equation $P(\mathbf{x},t)$ under parameterization $\theta$\\
+The finite state projection (FSP) offers a solution to the master equation $P(\mathbf{x},t)$ under parameterization $\theta$\\
 \vspace{0.2in}
 ABC methods simulate data $\tilde{\mathcal{D}}$ from $\mathcal{M}(\theta)$ using the Gillespie algorithm and compute a distance metric $d(\mathcal{D},\tilde{\mathcal{D}})$ or $d(\mathcal{S}(\mathcal{D}),\mathcal{S}(\tilde{\mathcal{D}}))$ where $\mathcal{S}$ is a summary statistic to approximate the likelihood\\
 \vspace{0.2in}
@@ -154,6 +191,7 @@ reprogramming as a mode of cancer drug resistance}
 \end{textblock*}
 
 \end{frame}
+
 
 \begin{frame}{WM989-A6 RNA-FISH data summary}
 
