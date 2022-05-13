@@ -58,7 +58,7 @@
 %	<content>
 %\end{frame}
 
-\begin{frame}{Gene expression can be non-constitutive}
+\begin{frame}{Gene expression is stochasic and non-constitutive}
 
 
 \begin{textblock*}{7cm}(0.5cm,1.5cm)
@@ -76,8 +76,6 @@
 
 \begin{textblock*}{15cm}(0.5cm,6cm)
 \begin{itemize}
-\item Non-equilibrium expression cannot be measured directly with \emph{ensemble snapshots}
-\item Tracking counts in live cells limits the number of species considered simultaneously
 \item If the biochemical network is known a-priori, we can build parametric dynamical models
 \item Bayesian inference allows us to fit parametric dynamical models without continuous dynamical trajectories
 \end{itemize}
@@ -97,8 +95,30 @@
 \end{textblock*}
 \end{frame}
 
+
+\begin{frame}{Kolmogorov's forward equation (chemical master equation)}
+
+Dynamics on biochemical reaction networks are inherently stochastic and the state space is discrete. We can only write probabilities over the state space
+
+\vspace{0.1in}
+
+\begin{align*}
+P(\mathbf{x}_{i},t) &= \sum_{j} T_{ji}(\mathbf{x}_{i},t|\mathbf{x}_{j},t-\Delta t)P(\mathbf{x}_{j},t-\Delta t)\\ 
+&= \sum_{k} T_{k}(\mathbf{x}_{i},t|\mathbf{x}_{i}-\nu_{k},t-\Delta t)P(\mathbf{x}_{i}-\nu_{k},t-\Delta t)
+\end{align*}
+
+where $T_{k}$ is the probability of a reaction channel $k$ firing in the interval $(t,t+\Delta t)$.\\
+\vspace{0.1in}
+Taking the limit $\Delta t \rightarrow 0$ one can derive the forward Kolmogorov equation or chemical master equation (CME)
+
+\begin{align*}
+\frac{dP(\mathbf{x},t|\mathbf{x}_{0})}{dt} = \sum_{k} T_{k}(\mathbf{x}-\nu_{k})P(\mathbf{x}-\nu_{k},t) - T_{k}(\mathbf{x})P(\mathbf{x},t)
+\end{align*}
+
+\end{frame}
+
 \begin{frame}{What about Markov models?}
-From another point of view, molecular counts can be thought of as a Markov model which progresses through states
+From another point of view, since the dynamics are Markov the state $\mathbf{x}$ follows the DAG
 \vspace{0.2in}
 
 \begin{center}
@@ -115,68 +135,46 @@ From another point of view, molecular counts can be thought of as a Markov model
 \end{tikzpicture}
 \end{center}
 
-Markov models are very powerful, and the EM algorithm can be used for MAP estimation, but this requires time-series measurements, which are incompatible with ensemble snapshots
+For MMs, the EM algorithm can be used for MAP estimation, but this requires time-series measurements\\
+\vspace{0.1in}
+Time-series measurements in live cells severely limits the number of species considered simultaneously\\
+\vspace{0.1in}
+More often than not the data we have are \emph{ensemble snapshots}
+
 \end{frame}
 
-\begin{frame}{Bayesian parameter inference for gene regulation}
+\begin{frame}{Bayesian parameter inference using ensemble snapshots}
 
 Suppose we have a series of ensemble snapshots of an \emph{in-vitro} population:
 
 \begin{align*}
-\mathbf{x} = \{\mathbf{x}^{0}, ..., \mathbf{x}^{t}\}\;\;\; \mathbf{y} = \{\mathbf{y}^{0}, ..., \mathbf{y}^{t}\}
+\mathbf{x} = \{\mathbf{x}_{0}, ..., \mathbf{x}_{t}\}\;\;\; \mathbf{y} = \{\mathbf{y}_{0}, ..., \mathbf{y}_{t}\}
 \end{align*}
 
-with $\mathbf{x}^{t} = \{x_{1}, ..., x_{n}\}$ and similarly for $\mathbf{y}$. Under perfect measurements $\mathbf{x}=\mathbf{y}$\\
+with $\mathbf{x}_{t} = \{x_{1}, ..., x_{n}\}$ and similarly for $\mathbf{y}$. Under perfect measurements $\mathbf{x}=\mathbf{y}$\\
 \vspace{0.2in}
 We would like to use $\mathbf{x}$ to fit a dynamical model $\mathcal{M}(\theta)$. Bayesian inference lets us infer $\theta$ from $\mathbf{x}$ while quantifying the uncertainty in our estimate:
 
 \begin{align*}
-P(\theta|\mathbf{x}) \propto \mathcal{L}(\mathbf{x}|\theta)P(\theta) = P(\theta)\prod_{t} P(\mathbf{x},t|\theta)
+P(\theta|\mathbf{x}) \propto f(\mathbf{x}|\theta)\pi(\theta) = \pi(\theta)\prod_{t} f(\mathbf{x}_{t}|\theta)
 \end{align*}
 
-The likelihood $P(\mathcal{D}_{n}^{t}|\theta)$ is often difficult to define or intractable to compute due to the curse of dimensionality
+The likelihood $f(\mathbf{x}_{t}|\theta)$ is often difficult to define or intractable to compute due to the curse of dimensionality, making even MLE a challenge
 
 \end{frame}
 
-\begin{frame}{The Chapman-Kolmogorov Equation}
-
-\vspace{0.1in}
-Consider the discrete-time Chapman-Kolmogorov equation for a discrete state space
-
-\begin{align*}
-P(\mathbf{x}_{i},t) &= \sum_{j} T_{ji}(\mathbf{x}_{i},t|\mathbf{x}_{j},t-\Delta t)P(\mathbf{x}_{j},t-\Delta t)\\ 
-&= \sum_{k} T_{k}(\mathbf{x}_{i},t|\mathbf{x}_{i}-\nu_{k},t-\Delta t)P(\mathbf{x}_{i}-\nu_{k},t-\Delta t)
-\end{align*}
-
-where $T_{k}$ is the probability of a reaction channel $k$ firing in the interval $(t,t+\Delta t)$.\\
-\vspace{0.1in}
-Taking the limit $\Delta t \rightarrow 0$ one can derive the forward Kolmogorov equation or chemical master equation (CME)
-
-\begin{align*}
-\frac{dP(\mathbf{x},t|\mathbf{x}_{0})}{dt} = \sum_{k} T_{k}(\mathbf{x}-\nu_{k})P(\mathbf{x}-\nu_{k},t) - T_{k}(\mathbf{x})P(\mathbf{x},t)
-\end{align*}
-
-
-
-\end{frame}
 
 \end{section}
 
-\begin{frame}{Estimating the likelihood function}
+\begin{frame}{Beating the curse of dimensionality for parameter inference}
 
-The finite state projection (FSP) offers a solution to the master equation $P(\mathbf{x},t)$ under parameterization $\theta$\\
-\vspace{0.2in}
-ABC methods simulate data $\tilde{\mathcal{D}}$ from $\mathcal{M}(\theta)$ using the Gillespie algorithm and compute a distance metric $d(\mathcal{D},\tilde{\mathcal{D}})$ or $d(\mathcal{S}(\mathcal{D}),\mathcal{S}(\tilde{\mathcal{D}}))$ where $\mathcal{S}$ is a summary statistic to approximate the likelihood\\
-\vspace{0.2in}
-\textcolor{red}{Both suffer from the curse of dimensionality}\\
-\vspace{0.2in}
+We want to avoid needing to train new networks for every parameter value $\theta$ (expensive!) then computing the likelihood of the experimental data. Instead we compute the likelihood of simulated data under set of target variational distributions trained on experimental data. This assumes simulations and experimental data are "exchangeable" when computing the posterior
 
-\end{frame}
-
-\begin{frame}{Beating the curse of dimensionality to compute the likelihood}
-Deep networks are known to be capable of circumventing the curse. They can model very high-dimensional joint distributions e.g., distributions over images\\
 \vspace{0.2in}
-Can we use a deep network to perform the map $\Theta\in \mathbb{R}^{n} \rightarrow f(\Theta) = P(\mathcal{D}|\Theta) \in \mathbb{R}^{n+1}$ i.e., compute the likelihood?
+\textbf{Variational step}: we learn $N_{t}$ target distributions by training a deep network on the experimental data. In this way we have $N_{t}$ variational target distributions\\
+\vspace{0.2in}
+\textbf{ABC step}: We sample parameters from our prior $\theta \sim \pi(\theta)$, and produce $N$ Monte Carlo trajectories $\mathbf{x}(t)$. We compute the likelihood of the simulated trajectory with a tolerance $\epsilon$ (with a tolerance schedule). This replaces the distance metric in ABC with a variational likelihood
+
 \end{frame}
 
 \begin{section}{Application to chemotherapy resistance in melanoma}
