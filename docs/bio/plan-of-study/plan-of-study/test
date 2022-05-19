@@ -1,0 +1,23 @@
+\documentclass{article}
+\usepackage[english]{babel}
+\usepackage[square,numbers]{natbib}
+\bibliographystyle{abbrvnat}
+
+\title{Bibliography management: \texttt{natbib} package}
+\author{Overleaf}
+\date {April 2021}
+
+\begin{document}
+
+\maketitle
+
+This document is an example of \texttt{natbib} package using in bibliography 
+management. Three items are cited: \textit{The \LaTeX\ Companion} book \cite{latexcompanion}, the Einstein journal paper \citet{einstein}, and the 
+Donald Knuth's website \cite{knuthwebsite}. The \LaTeX\ related items are
+\cite{latexcompanion,knuthwebsite}. 
+
+\medskip
+
+\bibliography{sample}
+
+\end{document}

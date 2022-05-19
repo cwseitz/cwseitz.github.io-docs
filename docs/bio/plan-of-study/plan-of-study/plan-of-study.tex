@@ -7,6 +7,8 @@
 \usepackage{graphicx}
 \usepackage{tikz-network}
 \usepackage{multicol}
+\usepackage[square,numbers]{natbib}
+\bibliographystyle{abbrvnat}
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \newcommand{\Hrule}{\rule{\linewidth}{0.3mm}}
@@ -35,7 +37,9 @@
 
 \section{Introduction}
 
-The intracellular environment harbors a delicate set of interactions between DNA, RNA, and protein in order to carry out primitive cellular functions and perform signal processing. Recent developments in fluorescent labeling and imaging technologies permit the simultaneous measurement of RNA and protein copy numbers in single cells, allowing us to analyze these interactions in space and time. The scalability of these methods has stimulated a generalization of the notion of a biochemical pathway to the large-scale biochemical network. In the context of gene regulation, this biochemical network perspective has proven quite powerful, as it leverages the power of probabilistic graphical models. Such models allow us to efficiently estimate the conditional dependence structure of high-dimensional joint probability distributions, providing clues towards unknown regulatory interactions or the impact of controlled perturbations on network architecture. Recently, the inference of gene regulatory networks (GRNs) from static experimental data has become a relatively mature class of methods when applied to gene expression data from single-cell RNA-sequencing (Singh, 2018). More recent efforts have gone beyond static datasets, inferring network structure from time-series measurements e.g., oscillations in gene experession during the circadian rhythms of plants, or simulations based on stochastic differential equations (Aalto 2020). 
+Type-I interferons are an important class of cytokines produced during the immune response, which are capable of invoking transcriptional programs involved in the dialogue between invading immune cells and host tissues. Recent efforts have begun to reveal the structure of the transcriptional networks which form the basic substrate for these programs by interrogating model cell lines by chromatin immunoprecipitation and DNA sequencing (ChIP-seq). At the same time, putative members of interferon-induced transcriptional programs have shown considerable heterogeneity in the timing of their expression after interferon induction, with certain genes being co-expressed in waves [1]. This phenomenon is consistent with mounting evidence that transcription of genes in eukaryotes occurs in transient bursts, resulting in non-genetic variability in gene expression. However, the origins of transcriptional bursting and its relationship to the structural properties of the gene regulatory network remain unclear.
+
+In the context of gene regulation, this biochemical network perspective has proven quite powerful, as it leverages the power of probabilistic graphical models. Such models allow us to efficiently estimate the conditional dependence structure of high-dimensional joint probability distributions, providing clues towards unknown regulatory interactions or the impact of controlled perturbations on network architecture. Recently, the inference of gene regulatory networks (GRNs) from static experimental data has become a relatively mature class of methods when applied to gene expression data from single-cell RNA-sequencing (Singh, 2018). More recent efforts have gone beyond static datasets, inferring network structure from time-series measurements e.g., oscillations in gene experession during the circadian rhythms of plants, or simulations based on stochastic differential equations (Aalto 2020). 
 
 By design, network inference algorithms neglect biochemical kinetics and signed interactions when drawing directed edges between nodes. Inferring precise biochemical kinetics is a much more difficult problem, but remains desirable when perturbations to gene regulation are more nuanced. Gene expression is thought to be inherently stochastic, ultimately governed by an unknown and highly complex coupled system of stochastic differential equations (SDEs). Our inability to assign further detail to network edges stems from the difficulty in determining the form of these differential equations and their parameterization i.e., regression. Nevertheless, Bayesian inference of more detailed kinetic parameters may be possible, under the assumption that transcriptional kinetics can be expressed as relatively simple analytical functions (Burton, 2021) or by using Gaussian processes. Also, a feedback loop between experimental data and Monte Carlo simulations of the chemical master equation (CME) can be estabilished if interaction functions are known.
 
@@ -127,5 +131,6 @@ The chemical master equation is notoriously difficult to solve, and in most case
 
 \subsubsection{Techniques for high-throughput image processing}
 
+\bibliography{sample}
 
 \end{document}
