@@ -210,6 +210,62 @@ $\bm{F}$ are TF conc. - independent observables which determine binding probabil
 Model the first reaction as a Boltzmann machine with weights $W$ where the output node is the probability the promoter is active\\
 \end{frame}
 
+\begin{frame}{Constitutive (Poisson) Transcription + Ising Model}
+
+\begin{align*}
+\mathcal{H} = -\frac{1}{2}\sum_{i,j}J_{ij}x_{i}x_{j} - \sum_{j}h_{j}x_{j}\;\;\;\; P(\bm{x}) = \frac{1}{Z}\exp\left(-\beta \mathcal{H}(\bm{x})\right)
+\end{align*}
+
+We know $p(x_{j}=1) = \exp(-\beta H(x_{i}=1))$. Then, we define 
+
+\begin{align*}
+h_{j} = -\frac{1}{\beta}\log p(x_{i}=1) = -\frac{1}{\beta}\log \frac{[x_{j}]}{K_{j} + [x_{j}]}
+\end{align*}
+
+Suppose that there is a single state or set of states $\bm{x}^{*}$ for which the promoter is active
+
+\begin{align*}
+\lambda = \frac{Z_{on}}{Z_{on}+Z_{off}} \;\;\rightarrow\;\; P(n|\mu) = \frac{\mu^{n}}{n!}\exp(-\mu)
+\end{align*}
+
+with $\mu=\lambda t$
+
+\end{frame}
+
+\begin{frame}{Super-Poissonian Transcription}
+
+Unexplained variance suggests in RNA distributions suggests that transcription occurs non-constitutively\\
+\vspace{0.1in}
+
+
+\end{frame}
+
+\begin{frame}{Transcription is non-ergodic}
+\begin{textblock*}{10cm}(1cm,1.4cm)
+Ergodicity of a Markov chain at the heart of MCMC
+\end{textblock*}
+
+\begin{textblock*}{7cm}(1cm,1.5cm)
+\begin{figure}
+\includegraphics[width=7cm]{ergodic-1.png}
+\end{figure}
+\end{textblock*}
+
+\begin{textblock*}{7cm}(8cm,1.5cm)
+\begin{figure}
+\includegraphics[width=7cm]{ergodic-2.png}
+\end{figure}
+\end{textblock*}
+
+\begin{textblock*}{15cm}(0.5cm,7.25cm)
+
+Statistical properties (moments) of an ensemble and a single instance are the same:
+\begin{equation*}
+\underset{N\rightarrow \infty}{\mathrm{lim}} \frac{1}{N}\sum_{i=1}^{N} x_{i} = \int x\; p(x)dx\;\;\;\;\underset{N\rightarrow \infty}{\mathrm{lim}} \frac{1}{N}\sum_{i=1}^{N} (x_{i}-\mu)^{2} = \int (x-\mu)^{2} p(x)dx
+\end{equation*}
+\end{textblock*}
+
+\end{frame}
 
 \begin{frame}{The Interferon-$\beta$ Enhanceosome}
 
