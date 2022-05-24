@@ -177,7 +177,51 @@ We want to avoid needing to train new networks for every parameter value $\theta
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Confounding factors in bursty gene expression}
+Transcription factors bind to $cis$-regulatory elements of the genes they regulate\\
+\vspace{0.1in}
+Transcription factors allow cells to perform logic operations and integrate information\\
+\vspace{0.1in}
+In some cases, we may have a pool of transcription factors which could be regulate a gene, but we aren't sure which and how\\
+\vspace{0.1in}
+Silencing TFs is time consuming and expensive. Can we infer the logical operation from the data?
+
+Pure induction of transcriptional bursting requires complete control over gene expression by an external perturbation\\
+\vspace{0.1in}
+Finding ``purely inducible'' genes for which the exact biophysical regulatory mechanism is known is very rare\\
+\vspace{0.1in}
+Even if all factors \emph{are} known, evidence for the transcriptional logic implemented by those factors and their interaction with the DNA must be found in gene expression data\\
+\vspace{0.1in}
+\end{frame}
+
+\begin{frame}{Jointly learning regulators and kinetics}
+
+1. Identify a set of potential regulators $\bm{F}$ using TFBS predictions e.g., using DeepBind\\
+2. A gene coding for $(X,Y)$ is regulated according to 
+
+\begin{align*}
+G_{off} + \bm{F} &\leftrightarrow G_{on}\\
+G_{on} &\overset{k_{1}}{\rightarrow} G_{on} + X\\
+X &\overset{\gamma}{\rightarrow} \emptyset\\
+X &\overset{k_{2}}{\rightarrow} Y
+\end{align*}
+$\bm{F}$ are TF conc. - independent observables which determine binding probabilities\\
+\vspace{0.1in}
+Model the first reaction as a Boltzmann machine with weights $W$ where the output node is the probability the promoter is active\\
+\end{frame}
+
+
+\begin{frame}{The Interferon-$\beta$ Enhanceosome}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{enhance.png}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{The Interferon-$\beta$ Enhanceosome}
+
+Enhanceosomes are protein complexes which solely regulate gene transcription
 
 \end{frame}
 
