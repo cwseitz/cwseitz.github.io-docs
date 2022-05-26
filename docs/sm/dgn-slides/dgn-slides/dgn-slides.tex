@@ -4,7 +4,7 @@
 \documentclass[aspectratio=1610]{beamer}					% Document class
 
 \setbeamertemplate{footline}[text line]{%
-  \parbox{\linewidth}{\vspace*{-8pt}Dynamics on gene networks \hfill\insertshortauthor\hfill\insertpagenumber}}
+  \parbox{\linewidth}{\vspace*{-8pt}Predictive spatial models of gene regulation via Bayesian inference \hfill\insertshortauthor\hfill\insertpagenumber}}
 \setbeamertemplate{navigation symbols}{}
 
 \usepackage[english]{babel}				% Set language
@@ -34,7 +34,7 @@
 \usepackage{bm}
 \usepackage[font=small,labelfont=bf]{caption}
 
-\title{Isolating the perturbation response of gene regulatory networks in the presence of biological variability and technical noise}	% Presentation title
+\title{Predictive spatial models of gene regulation via Bayesian inference}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -46,10 +46,6 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{Outline}
-  \tableofcontents
-\end{frame}
-
 
 % The following is the most frequently used slide types in beamer
 % The slide structure is as follows:
@@ -58,88 +54,119 @@
 %	<content>
 %\end{frame}
 
-\begin{frame}{Gene expression is stochasic and non-constitutive}
+\begin{frame}{Gene expression is stochastic and non-constitutive}
 
 
-\begin{textblock*}{7cm}(0.5cm,1.5cm)
+\begin{textblock*}{7cm}(0.5cm,1cm)
 \begin{figure}
 \includegraphics[width=7cm]{burst-1.png}
 \end{figure}
 \end{textblock*}
 
-\begin{textblock*}{7cm}(8cm,1.5cm)
+\begin{textblock*}{7cm}(8cm,1cm)
 \begin{figure}
 \includegraphics[width=7cm]{burst-2.png}
 \end{figure}
 \end{textblock*}
 
 
-\begin{textblock*}{15cm}(0.5cm,6cm)
+\begin{textblock*}{15cm}(0.5cm,5cm)
+\textbf{Single-state models}
 \begin{itemize}
-\item If the biochemical network is known a-priori, we can build parametric dynamical models
-\item Bayesian inference allows us to fit parametric dynamical models without continuous dynamical trajectories
+\item Transcription occurs at a fixed rate
+\item mRNA counts are Poisson
+\item \textcolor{red}{Underestimates variance in mRNA counts}
 \end{itemize}
 \end{textblock*}
+\begin{textblock*}{15cm}(8.5cm,5cm)
+\textbf{Two-state models}
+\begin{itemize}
+\item Promoter can be on or off
+\item mRNA counts are not Poisson
+\end{itemize}
 
+\end{textblock*}
+
+\begin{textblock*}{15cm}(0.5cm,8cm)
+Chromatin structure is complicated e.g., loops. Multiple \emph{cis}-regulatory elements can contribute to promoter switching and transcription control
+\end{textblock*}
 
 \end{frame}
 
-\begin{section}{Modeling stochastic biochemical reaction networks}
-
-\begin{frame}{Stochastic biochemical reaction networks: the repressilator}
-\begin{textblock*}{10.5cm}(3cm,1cm)
+\begin{frame}{STL1/CTT1 induction with NaCl in yeast}
+\begin{textblock*}{12cm}(2cm,1.25cm)
 \begin{figure}
-\includegraphics[width=10.5cm]{repressilator.jpg}
-\caption{Niederholtmyer et al., eLife 2015}
+\includegraphics[width=12cm]{salt.png}
+\caption{Munsky et al., PNAS 2018}
 \end{figure}
 \end{textblock*}
 \end{frame}
 
+\begin{frame}{A quick note on ergodicity and ensemble snapshots}
+\begin{itemize}
+\item \textcolor{red}{Ergodicity} = statistics of the ensemble and a single process are the same
+\item Implies the parameters of the process are the same for every cell
+\item Ensemble snapshots useful due to experimental constraints (multiplexing)
+\end{itemize}
+\begin{textblock*}{15cm}(0.5cm,7.25cm)
 
-\begin{frame}{Kolmogorov's forward equation (chemical master equation)}
-
-Dynamics on biochemical reaction networks are inherently stochastic and the state space is discrete. We can only write probabilities over the state space
-
-\vspace{0.1in}
-
-\begin{align*}
-P(\mathbf{x}_{i},t) &= \sum_{j} T_{ji}(\mathbf{x}_{i},t|\mathbf{x}_{j},t-\Delta t)P(\mathbf{x}_{j},t-\Delta t)\\ 
-&= \sum_{k} T_{k}(\mathbf{x}_{i},t|\mathbf{x}_{i}-\nu_{k},t-\Delta t)P(\mathbf{x}_{i}-\nu_{k},t-\Delta t)
-\end{align*}
-
-where $T_{k}$ is the probability of a reaction channel $k$ firing in the interval $(t,t+\Delta t)$.\\
-\vspace{0.1in}
-Taking the limit $\Delta t \rightarrow 0$ one can derive the forward Kolmogorov equation or chemical master equation (CME)
-
-\begin{align*}
-\frac{dP(\mathbf{x},t|\mathbf{x}_{0})}{dt} = \sum_{k} T_{k}(\mathbf{x}-\nu_{k})P(\mathbf{x}-\nu_{k},t) - T_{k}(\mathbf{x})P(\mathbf{x},t)
-\end{align*}
+\begin{equation*}
+\underset{N\rightarrow \infty}{\mathrm{lim}} \frac{1}{N}\sum_{i=1}^{N} (x_{i}-\mu)^{n} = \int (x-\mu)^{n} p(x)dx
+\end{equation*}
+\end{textblock*}
 
 \end{frame}
 
-\begin{frame}{What about Markov models?}
-From another point of view, since the dynamics are Markov the state $\mathbf{x}$ follows the DAG
-\vspace{0.2in}
+\begin{frame}{A compartment model for spatial gene expression}
+\begin{textblock*}{10cm}(3cm,1.25cm)
+\begin{figure}
+\includegraphics[width=10cm]{compartment.png}
+\caption{Munsky et al., PNAS 2018}
+\end{figure}
+\end{textblock*}
+\end{frame}
 
-\begin{center}
-\begin{tikzpicture}
-\Vertex[x=0,y=0,label=$x_{1}$]{A}
-\Vertex[x=3,y=0,label=$x_{2}$]{B}
-\Vertex[x=6,y=0,label=$x_{3}$]{C}
-\Vertex[x=9,y=0,label=$x_{4}$]{D}
-\Vertex[x=12,y=0,label=$x_{5}$]{E}
-\Edge[Math,Direct=true,color=black,label=T_{12}](A)(B)
-\Edge[Math,Direct=true,color=black,label=T_{23}](B)(C)
-\Edge[Math,Direct=true,color=black,label=T_{34}](C)(D)
-\Edge[Math,Direct=true,color=black,label=T_{45}](D)(E)
-\end{tikzpicture}
-\end{center}
+\begin{frame}{A compartment model for spatial gene expression}
 
-For MMs, the EM algorithm can be used for MAP estimation, but this requires time-series measurements\\
-\vspace{0.1in}
-Time-series measurements in live cells severely limits the number of species considered simultaneously\\
-\vspace{0.1in}
-More often than not the data we have are \emph{ensemble snapshots}
+Let $X$ represent an arbitrary RNA transcript of gene $G$
+
+\begin{align*}
+\mathrm{Gene\;activation}: G_{off} &\overset{k_{on}}{\rightarrow} G_{on}\\
+\mathrm{Gene\;inactivation}: G_{off} &\overset{k_{off}}{\rightarrow} G_{on}\\
+\mathrm{Transcription}: G_{on} &\overset{k_{t}}{\rightarrow} G_{on} + X_{\mathrm{nuc}}\\
+\mathrm{RNA \;Export}: X_{\mathrm{nuc}} &\overset{k_{exp}}{\rightarrow} X_{\mathrm{cyt}}\\
+\mathrm{RNA\; degradation}: X_{\mathrm{cyt}} &\overset{\gamma}{\rightarrow} \emptyset\\
+\end{align*}
+
+Raw data collected post induction can be used to infer parameters
+
+\begin{equation*}
+\theta = \left( k_{on},k_{off},k_{t},k_{exp},\gamma\right)
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{An Ising model of promoter switching}
+
+Promoter activation often requires chromatin reorganization, binding of specific TF combinations. We can imagine a random (?) walk through the binding phase space
+
+\begin{align*}
+\mathcal{H} = -\frac{1}{2}\sum_{i,j}J_{ij}x_{i}x_{j} - \sum_{j}h_{j}x_{j}\;\;\;\; P(\bm{x}) = \frac{1}{Z}\exp\left(-\beta \mathcal{H}(\bm{x})\right)
+\end{align*}
+
+We know $p(x_{j}=1) = \exp(-\beta H(x_{i}=1))$. Then, we define 
+
+\begin{align*}
+h_{j} = -\frac{1}{\beta}\log p(x_{i}=1) = -\frac{1}{\beta}\log \frac{[x_{j}]}{K_{j} + [x_{j}]}
+\end{align*}
+
+Suppose that there is a single state or set of states $\bm{x}^{*}$ for which the promoter is active
+
+\begin{align*}
+\lambda = \frac{Z_{on}}{Z_{on}+Z_{off}} \;\;\rightarrow\;\; P(n|\mu) = \frac{\mu^{n}}{n!}\exp(-\mu)
+\end{align*}
+
+with $\mu=\lambda t$
 
 \end{frame}
 
@@ -164,159 +191,26 @@ The likelihood $f(\mathbf{x}_{t}|\theta)$ is often difficult to define or intrac
 \end{frame}
 
 
-\end{section}
+\begin{frame}{Kolmogorov's forward equation (chemical master equation)}
 
-\begin{frame}{Beating the curse of dimensionality for parameter inference}
+Dynamics on biochemical reaction networks are inherently stochastic and the state space is discrete. We can only write probabilities over the state space
 
-We want to avoid needing to train new networks for every parameter value $\theta$ (expensive!) then computing the likelihood of the experimental data. Instead we compute the likelihood of simulated data under set of target variational distributions trained on experimental data. This assumes simulations and experimental data are "exchangeable" when computing the posterior
-
-\vspace{0.2in}
-\textbf{Variational step}: we learn $N_{t}$ target distributions by training a deep network on the experimental data. In this way we have $N_{t}$ variational target distributions\\
-\vspace{0.2in}
-\textbf{ABC step}: We sample parameters from our prior $\theta \sim \pi(\theta)$, and produce $N$ Monte Carlo trajectories $\mathbf{x}(t)$. We compute the likelihood of the simulated trajectory with a tolerance $\epsilon$ (with a tolerance schedule). This replaces the distance metric in ABC with a variational likelihood
-
-\end{frame}
-
-\begin{frame}{Confounding factors in bursty gene expression}
-Transcription factors bind to $cis$-regulatory elements of the genes they regulate\\
 \vspace{0.1in}
-Transcription factors allow cells to perform logic operations and integrate information\\
-\vspace{0.1in}
-In some cases, we may have a pool of transcription factors which could be regulate a gene, but we aren't sure which and how\\
-\vspace{0.1in}
-Silencing TFs is time consuming and expensive. Can we infer the logical operation from the data?
-
-Pure induction of transcriptional bursting requires complete control over gene expression by an external perturbation\\
-\vspace{0.1in}
-Finding ``purely inducible'' genes for which the exact biophysical regulatory mechanism is known is very rare\\
-\vspace{0.1in}
-Even if all factors \emph{are} known, evidence for the transcriptional logic implemented by those factors and their interaction with the DNA must be found in gene expression data\\
-\vspace{0.1in}
-\end{frame}
-
-\begin{frame}{Jointly learning regulators and kinetics}
-
-1. Identify a set of potential regulators $\bm{F}$ using TFBS predictions e.g., using DeepBind\\
-2. A gene coding for $(X,Y)$ is regulated according to 
 
 \begin{align*}
-G_{off} + \bm{F} &\leftrightarrow G_{on}\\
-G_{on} &\overset{k_{1}}{\rightarrow} G_{on} + X\\
-X &\overset{\gamma}{\rightarrow} \emptyset\\
-X &\overset{k_{2}}{\rightarrow} Y
+P(\mathbf{x}_{i},t) &= \sum_{j} T_{ji}(\mathbf{x}_{i},t|\mathbf{x}_{j},t-\Delta t)P(\mathbf{x}_{j},t-\Delta t)\\ 
+&= \sum_{k} T_{k}(\mathbf{x}_{i},t|\mathbf{x}_{i}-\nu_{k},t-\Delta t)P(\mathbf{x}_{i}-\nu_{k},t-\Delta t)
 \end{align*}
-$\bm{F}$ are TF conc. - independent observables which determine binding probabilities\\
-\vspace{0.1in}
-Model the first reaction as a Boltzmann machine with weights $W$ where the output node is the probability the promoter is active\\
-\end{frame}
 
-\begin{frame}{Constitutive (Poisson) Transcription + Ising Model}
+where $T_{k}$ is the probability of a reaction channel $k$ firing in the interval $(t,t+\Delta t)$.\\
+\vspace{0.1in}
+Taking the limit $\Delta t \rightarrow 0$ one can derive the forward Kolmogorov equation or chemical master equation (CME)
 
 \begin{align*}
-\mathcal{H} = -\frac{1}{2}\sum_{i,j}J_{ij}x_{i}x_{j} - \sum_{j}h_{j}x_{j}\;\;\;\; P(\bm{x}) = \frac{1}{Z}\exp\left(-\beta \mathcal{H}(\bm{x})\right)
+\frac{dP(\mathbf{x},t|\mathbf{x}_{0})}{dt} = \sum_{k} T_{k}(\mathbf{x}-\nu_{k})P(\mathbf{x}-\nu_{k},t) - T_{k}(\mathbf{x})P(\mathbf{x},t)
 \end{align*}
 
-We know $p(x_{j}=1) = \exp(-\beta H(x_{i}=1))$. Then, we define 
-
-\begin{align*}
-h_{j} = -\frac{1}{\beta}\log p(x_{i}=1) = -\frac{1}{\beta}\log \frac{[x_{j}]}{K_{j} + [x_{j}]}
-\end{align*}
-
-Suppose that there is a single state or set of states $\bm{x}^{*}$ for which the promoter is active
-
-\begin{align*}
-\lambda = \frac{Z_{on}}{Z_{on}+Z_{off}} \;\;\rightarrow\;\; P(n|\mu) = \frac{\mu^{n}}{n!}\exp(-\mu)
-\end{align*}
-
-with $\mu=\lambda t$
-
 \end{frame}
-
-\begin{frame}{Super-Poissonian Transcription}
-
-Unexplained variance suggests in RNA distributions suggests that transcription occurs non-constitutively\\
-\vspace{0.1in}
-
-
-\end{frame}
-
-\begin{frame}{Transcription is non-ergodic}
-\begin{textblock*}{10cm}(1cm,1.4cm)
-Ergodicity of a Markov chain at the heart of MCMC
-\end{textblock*}
-
-\begin{textblock*}{7cm}(1cm,1.5cm)
-\begin{figure}
-\includegraphics[width=7cm]{ergodic-1.png}
-\end{figure}
-\end{textblock*}
-
-\begin{textblock*}{7cm}(8cm,1.5cm)
-\begin{figure}
-\includegraphics[width=7cm]{ergodic-2.png}
-\end{figure}
-\end{textblock*}
-
-\begin{textblock*}{15cm}(0.5cm,7.25cm)
-
-Statistical properties (moments) of an ensemble and a single instance are the same:
-\begin{equation*}
-\underset{N\rightarrow \infty}{\mathrm{lim}} \frac{1}{N}\sum_{i=1}^{N} x_{i} = \int x\; p(x)dx\;\;\;\;\underset{N\rightarrow \infty}{\mathrm{lim}} \frac{1}{N}\sum_{i=1}^{N} (x_{i}-\mu)^{2} = \int (x-\mu)^{2} p(x)dx
-\end{equation*}
-\end{textblock*}
-
-\end{frame}
-
-\begin{frame}{The Interferon-$\beta$ Enhanceosome}
-
-\begin{center}
-\includegraphics[width=0.8\textwidth]{enhance.png}
-\end{center}
-
-\end{frame}
-
-\begin{frame}{The Interferon-$\beta$ Enhanceosome}
-
-Enhanceosomes are protein complexes which solely regulate gene transcription
-
-\end{frame}
-
-\begin{frame}{Training on BBBC039 U2OS Cells}
-\vspace{0.1in}
-BBBC039: 200 images, 160 train + 40 validation, 256\;x\;256 random crop
-
-\begin{center}
-\includegraphics[width=0.8\textwidth]{weights.png}
-\end{center}
-
-We train a 3-channel semantic segmentation model with \textbf{weighted} cross-entropy loss:
-
-\begin{equation*}
-\mathcal{L} = \sum_{i,j} w_{ij}\log p_{ij}(\tilde{x}) = \sum_{i,j} w_{ij}\log \frac{\exp(-s_{ij}(\tilde{x}))}{\sum_{x\in\chi} \exp(-s_{ij}(\tilde{x}))}
-\end{equation*}
-
-$p_{ij}$ is the probability the model assigns a pixel to the true class $\tilde{x} \in \{\textrm{a}, \textrm{b}, \textrm{c}\}$
-
-\end{frame}
-
-\begin{frame}{Training on BBBC039 U2OS Cells}
-
-\begin{center}
-\includegraphics[width=0.85\textwidth]{input-train.png}
-\includegraphics[width=0.85\textwidth]{target-train.png}
-\includegraphics[width=0.85\textwidth]{output-train.png}
-\end{center}
-
-\end{frame}
-
-\begin{frame}{Training on BBBC039 U2OS Cells}
-Learning rate $\eta=0.01$, Batch-size $B=5$ (32 train iterations, 8 validation)
-\begin{center}
-\includegraphics[width=0.85\textwidth]{metrics.png}
-\end{center}
-
-\end{frame}
-
 
 
 % Adding the option 'allowframebreaks' allows the contents of the slide to be expanded in more than one slide.
