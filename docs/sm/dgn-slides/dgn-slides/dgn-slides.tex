@@ -155,16 +155,22 @@ Raw data collected post induction can be used to infer parameters
 \end{figure}
 \end{textblock*}
 
-
 \end{frame}
 
 \begin{frame}{Rate of nuclear export is determined by diffusion}
 
-The first passage time density (FPTD) determines the rate of RNA export\\
+Particles have beens shown to be distinguishable (non-ergodic dynamics) \\
 \vspace{0.1in}
-Particles are distinguishable (non-ergodic dynamics) \\
+The probability current $J(r,t)$ determines the rate of RNA export\\
 \vspace{0.1in}
-Brownian motion and ``corralled" motion raise questions about a constant export rate parameter
+Even if diffusion is Brownian motion, the export rate parameter is not constant:
+
+\begin{equation*}
+\frac{dP(x,y,t)}{dt} = D\cdot\nabla^{2}P = D\frac{dJ(x,y,t)}{dt}
+\end{equation*}
+
+There is also the birth of new particles affecting the density\\
+\vspace{0.1in}
 
 \end{frame}
 
