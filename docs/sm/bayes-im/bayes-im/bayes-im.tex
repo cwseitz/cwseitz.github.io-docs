@@ -118,6 +118,44 @@ For example photostable fluorophores like quantum dots would be a good choice
 
 \end{frame}
 
+\begin{frame}{Fisher Information and the Cramer-Rao Bound}
+
+Consider maximum likelihood estimation (MLE) where the objective is to find an optimal parameter(s) that best explains the data
+
+\begin{align*}
+\theta^{*} = \underset{\theta}{\mathrm{argmax}}\; \ell(\mathcal{D}|\theta)
+\end{align*}
+
+where $\ell = \log\mathcal{L}$ is the log-likelihood function. We can define the sensitivity of $\ell$ with respect to $\theta$
+
+\begin{align*}
+\ell'(x|\theta) = \frac{\partial}{\partial\theta} \ell(x|\theta) = \frac{\mathcal{L}'(x|\theta)}{\mathcal{L}(x|\theta)}
+\end{align*}
+
+for $x\in\mathcal{D}$. Intuitively, if the likelihood is insensitive to changes in $\theta$, then $\mathcal{D}$ does not provide very much information about $\theta$
+
+\end{frame}
+
+\begin{frame}{Fisher Information and the Cramer-Rao Bound}
+
+Since $x$ is a continuous random variable, we have to consider the average sensitivity\\
+\vspace{0.2in}
+That is, for each $x\sim P(x)$ we can compute $\ell'(x|\theta)$ for all $\theta$
+
+\begin{align*}
+I(\theta) = \mathbb{E}\left[\frac{\partial}{\partial\theta} \left(\ell(x|\theta)\right)^{2}\right] = \int \left(\ell(x|\theta)\right)^{2} \mathcal{L}(x|\theta)dx
+\end{align*}
+
+for $x\in\mathcal{D}$. Intuitively, if the likelihood is insensitive to changes in $\theta$, then $\mathcal{D}$ does not provide very much information about $\theta$\\
+\vspace{0.1in}
+The Cramer-Rao Bound places a lower bound on the variance in our parameter estimate in iterms of $I(\theta)$ :
+
+\begin{equation*}
+\mathrm{Var}(\hat{\theta}) \geq \frac{1}{I(\theta)}
+\end{equation*}
+
+\end{frame}
+
 \begin{frame}{Consequences for single molecule localization}
 
 The point spread function
