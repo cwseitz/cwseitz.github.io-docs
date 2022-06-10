@@ -1,7 +1,7 @@
 % Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
 % For more details: https://www.sharelatex.com/learn/Beamer
 
-\documentclass{beamer}					% Document class
+\documentclass[aspectratio=1610]{beamer}					% Document class
 
 \setbeamertemplate{footline}[text line]{%
   \parbox{\linewidth}{\vspace*{-8pt}Bayesian image reconstruction\hfill\insertshortauthor\hfill\insertpagenumber}}
@@ -56,40 +56,73 @@
 %\end{frame}
 
 
-\begin{frame}{Bayesian image reconstruction}
+\begin{frame}{Photon statistics of CMOS cameras}
+\begin{itemize}
+\item Imaging noise consists of shot noise, thermal noise, and readout noise
+\vspace{0.1in}
+\item Shot noise is Poisson, thermal noise and readout noise are Gaussian
+\end{itemize}
+\vspace{0.2in}
+For a CMOS pixel $n$, the true signal $S_{n}\; [\mathrm{ADU}]$ is a Poisson process with rate parameter $\lambda_{n}$
 
-Say a fluorophore emits photons at a rate $\lambda_{n}$. This is the best we can do according to QM
+\begin{equation*}
+S_{n} = \gamma g_{n}P_{n}(\lambda_{n})
+\end{equation*}
+
+where $\gamma\;\;[e^{-}/p]$ is the quantum efficiency and $g_{n}\;\; [\mathrm{ADU}/e^{-}]$ is the pixel's gain
 \vspace{0.1in}
 
-For a CMOS array with quantum efficiency $\gamma\;\;[e^{-}/p]$ we have
-
 \begin{equation*}
-I_{n} = \gamma g_{n}P_{n}(\lambda_{n}) + G_{n}(\mu_{n};\sigma_{n}^{2}) + \beta
+P(S_{n}) = \frac{\exp\left({-\lambda_{n}}\right)\lambda_{n}^{p}}{p!}
 \end{equation*}
 
-where $\mu_{n} \;\;[\mathrm{ADU}]$ is the detector offset and $g_{n}\;\; [\mathrm{ADU}/e^{-}]$ is the gain. \\
+\textcolor{blue}{But what is the distribution over the corrupted signal $P(\hat{S}_{n})$?}
+
+
+\end{frame}
+
+
+\begin{frame}{Photon statistics of CMOS cameras}
+
+To find $P(\hat{S}_{n})$, we first evaluate the joint density $P(S_{n},\hat{S}_{n})$
+\vspace{0.1in}
+\begin{align*}
+P(S_{n},\hat{S}_{n}) &= P(\hat{S}_{n}|S_{n}=s)P(S_{n}=s)\\
+&= \frac{1}{Z}\exp\left(-\frac{(\hat{S}_{n}-g_{n}s-\mu_{n})^{2}}{\sigma_{n}^{2}}\right)\frac{\exp\left({-\lambda_{n}}\right)\lambda_{n}^{s}}{s!}
+\end{align*}
+\vspace{0.1in}
+
+Marginalizing over $S_{n}$ gives the desired distribution over $\hat{S}_{n}$
+
+\begin{equation*}
+P(\hat{S}_{n}) = \frac{1}{Z}\sum_{s=0}^{\infty}\frac{\exp\left({-\lambda_{n}}\right)\lambda_{n}^{s}}{s!}\exp\left(-\frac{(\hat{S}_{n}-g_{n}s-\mu_{n})^{2}}{\sigma_{n}^{2}}\right)
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{Bayesian parameter inference for CMOS photon statistics}
+
+The parameters in our model $\theta = (\lambda_{n},g_{n},\mu_{n},\sigma^{2}_{n})$ are unknown apriori
+
+
+\begin{equation*}
+P(\theta|\hat{S}_{n}) \propto P(\hat{S}_{n}|\theta)P(\theta)
+\end{equation*}
+
 \vspace{0.2in}
-All we know is $\lambda_{n}$, so both the true signal $I_{n}$ and the detected signal $\hat{I}_{n}$ are stochastic processes. 
-
-\begin{equation*}
-P_{\lambda}(I_{n},\hat{I}_{n}) = \frac{1}{Z}\frac{\exp\left({-\lambda_{n}}\right)\lambda_{n}^{p}}{p!}\exp\left(-\frac{(D-g_{n}p-\mu_{n})^{2}}{\sigma_{n}^{2}}\right)
-\end{equation*}
-
-\end{frame}
-
-
-\begin{frame}{Bayesian image reconstruction}
-
-Marginalizing over $p$ gives the noise model as a function of the rate $\lambda_{n}$
-
-\begin{equation*}
-P_{\lambda}(I_{n}) = \frac{1}{Z}\sum_{p}\frac{\exp\left({-\lambda_{n}}\right)\lambda_{n}^{p}}{p!}\exp\left(-\frac{(D-g_{n}p-\mu_{n})^{2}}{\sigma_{n}^{2}}\right)
-\end{equation*}
-
-
+We can just computed the likelihood $P(\hat{S}_{n}|\theta)$ on the last slide. Samples from the posterior can be found for example by MCMC or we could use MAP estimation\\
+\vspace{0.2in}
+Either of these approaches only make sense for stationary statistics, which means the physical locations and photophysics of the sample remain unchanged in time\\
+\vspace{0.2in}
+For example photostable fluorophores like quantum dots would be a good choice
 
 \end{frame}
 
+\begin{frame}{Consequences for single molecule localization}
+
+The point spread function
+
+\end{frame}
 
 \section{References}
 
