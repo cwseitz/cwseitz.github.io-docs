@@ -1,7 +1,7 @@
 
 
 \documentclass{article}
-\title{Dynamics on gene networks}
+\title{Interferon-stimulated transcriptional bursting in space and time}
 \author{C.W. Seitz}
 \date{\today}
 
@@ -15,130 +15,38 @@
 \begin{document}
 \maketitle
 
-\section{Definitions}
+\section{Introduction: Inferferon-stimulated gene expression}
 
-Consider a set of stochastic linear differential equations which govern the concentration of RNA $x_{i}$ and protein $y_{i}$ associated with a particular gene:
+Motivate the study of inferferon stimulated transcriptional bursting. Why is interferon stimulated gene expression important and what are the potential consequences of non-constitutive gene expression? 
 
-\begin{align*}
-\dot{x_{i}} &= \sum_{j}m_{ij}y_{j} - \alpha_{i} x_{i} + \sigma_{x}\eta_{i}^{x}\\
-\dot{y_{i}} &= r_{i}x_{i} - \beta_{i}y_{i} + \sigma_{y}\eta_{i}^{y}
-\end{align*}
+\section{Transcriptional bursting}
 
-where $m_{ij}$ is the linear effect of a transcription factor $j$ on gene $i$ and therefore represents the rate of transcription. Similarly, $r_{i}$ represents the rate of translation from RNA to protein. The constants $\alpha_{i}$ and $\beta_{i}$ are the RNA degradation and protein degradation rates, respectively. Since these equations are stochastic, the gold-standard is to find a probability density $P_{\theta}(\bm{x},\bm{y}; t)$. In higher dimensions, this is a very difficult problem and we may need to settle for finding the stationary distribution $P_{\theta}^{0}(\bm{x},\bm{y})$, if it exists and finding its solution is tractable. To do this for the set of equations above, a fundamental assumption is that the rate of translation and protein degradation approximately balance and the timescale of of changes in protein concentration is very long. Intuitively, if $y_{j}$'s are constant, growth or decay of the first term will eventually balance with the $-\alpha_{i}x_{i}$ term and the system will approach a fixed point.
-\vspace{0.1in}
-\\If indeed changes in protein concentration are negligible over the course of evolution of the system i.e., $\dot{y_{i}} \approx 0$ we have that
+Summarize statistical signatures of transcriptional bursting (Poisson versus non-Poisson gene expression)
 
-\begin{align*}
-y_{i} &= \frac{r_{i}x_{i} - \sigma_{x}\eta_{i}^{y}}{\beta_{i}}
-\end{align*}
+\section{Promoter switching in mammalian nuclei}
 
-This assumption allows us to rewrite the system above as a single equation per gene
+Summarize the origins of bursting at the promoter sequence
 
-\begin{align*}
-\dot{x_{i}} &= \sum_{j}m_{ij}\frac{r_{j}x_{j} - \sigma_{x}\eta_{j}^{y}}{\beta_{j}} - \alpha_{i} x_{i} + \sigma_{x}\eta_{i}^{x}\\
-&= \sum_{j}\left(\gamma_{ij}x_{j} - \theta_{ij}\eta_{j}^{y}\right) - \alpha_{i} x_{i} + \sigma_{x}\eta_{i}^{x}\\
-\end{align*}
+\section{Testing the ergodic hypothesis}
 
-If we additionally assume that $\sigma_{x} << r_{i}x_{i}$
+Discuss ergodic and non-ergodic regimes of transcriptional bursting. This determines the statistical equivalence of ensemble snapshots and time-series data
 
-\begin{align*}
-\dot{x_{i}} &= \sum_{j}\gamma_{ij}x_{j} - \alpha_{i} x_{i} + \sigma_{x}\eta_{i}^{x}\\
-\end{align*}
+\section{Diffusion of nascent RNA in live-cell nuclei}
 
-which is the multivariate Ornstein-Uhlenbeck process. This can then be written as an Ito stochastic differential equation
+If RNA copy number is an ergodic process, is the diffusion also ergodic? What type of diffusion do we observe and why? 
 
-\begin{align*}
-dx &= -\Gamma x\; dt + \Sigma dW 
-\end{align*}
+\section{Diffusion-based compartment models of gene expression}
 
-For example, when $N=3$ we have the following matrix $\Gamma$
-\\
-\\
-\begin{equation*}
-\Gamma = \begin{bmatrix} 
-    \gamma_{11}-\alpha_{1} & \gamma_{21} & \gamma_{31}\\
-	\gamma_{12} & \gamma_{22} -\alpha_{2} & \gamma_{32}\\
-	\gamma_{13} & \gamma_{23} & \gamma_{33}-\alpha_{3}\\
-\end{bmatrix}
-\end{equation*}
-\\
-\\
-
-\section{The multivariate Fokker-Planck equation}
-
-The SDE given above corresponds to the Kramers-Moyal expansion (KME) of a transition density $T(x',t'|x,t)$ see (Risken 1989) for a full derivation.
-
-\begin{align}
-\frac{\partial P}{\partial t}  &= \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial x}\right)^{n} \left[M_{n}(x,t)P(x,t)\right]
-\end{align}
-
-where $M_{n}$ is the $n$th moment of the transition density. In the diffusion approximation, the KME becomes the Fokker-Planck equation (FPE) (Risken 1989). For the sake of demonstration, consider the univariate case with random variable $x$ and the form of $T(x',t'|x,t)$ is a Gaussian with mean $\mu(t)$ and variance $\sigma^{2}(t)$. In this scenario, the FPE applies because $M_{n} = 0$ for all $n > 2$. Given that $M_{1}(x,t) = \mu(t)$ (drift) and $M_{2}(x,t) = \sigma^{2}(t)$ (diffusion), the FPE reads
-
-\begin{align}
-\frac{\partial P(x,t)}{\partial t}  &= \left(-\frac{\partial}{\partial x}M^{(1)}(t) + \frac{1}{2}\frac{\partial^{2}}{\partial x^{2}}M^{(2)}(t)\right)P(x,t)
-\end{align}
-
-It is common to additionally define the probability current $J(x,t)$ as 
-
-\begin{align}
-J(x,t)  &= \left(M^{(1)}(t) - \frac{1}{2})\frac{\partial}{\partial x}M^{(2)}(t\right)P(x,t)
-\end{align}
-
-This definition provides some useful intuition. The value of $J(x,t)$ is the net probability flux into the interval between $x$ and $x+dx$ at at time $t$. This also allows us to write the FPE as a continuity equation
-
-\begin{align}
-\frac{\partial P(x,t)}{\partial t} = -\frac{\partial J(x,t)}{\partial x}
-\end{align}
+Compartment models define promoter states and export of RNA out of the nucleus. Inference on compartment models is performed by using the finite state projection of the chemical master equation to compute the likelihood of parameters. RNA export rates are not diffusion-based in existing models, can we do this?   
 
 
-If we now generalize the above equation to a case where we are faced with many variables $\bm{x} = (x_{1},x_{2},...,x_{n})$. The continuity equation becomes 
+\appendix
 
-\begin{align}
-\frac{\partial P(\vec{x},t)}{\partial t} = -\vec{\nabla} \cdot J(\vec{x},t)
-\end{align}
-
-where the multivariate probability current now has the interpretation of the net flux into or out of a volume $dx^{n}$ centered around $\bm{x}$. If we consider each dimension, 
-
-\begin{align}
-J(x_{i},t)  &= \left(M_{i}^{(1)}(t) - \sum_{j}\frac{\partial}{\partial x_{j}}M_{ij}^{(2)}(t) \right)P(\vec{x},t)
-\end{align}
-
-The full Fokker-Planck equation then reads
-
-\begin{align}
-\frac{\partial P(\vec{x},t)}{\partial t}  &= \vec{\nabla} \cdot J(\vec{x},t)\\
-&= \sum_{i=1}^{N}\left(-\frac{\partial}{\partial x_{i}}M_{i}^{(1)}(t) + \sum_{j=1}^{N} \frac{\partial^{2}}{\partial x_{i}\partial x_{j}}M_{ij}^{(2)}(t)\right)P(\vec{x},t)
-\end{align}
-
-It proves quite useful in this form because we can see that the Fokker-Planck equation represents a differentiation operator acting on the distribution $P(\vec{x},t)$
-
-\begin{align}
-\hat{\mathcal{L}}_{FP} = \sum_{i=1}^{N}\left(-\frac{\partial}{\partial x_{i}}M_{i}^{(1)}(t) + \sum_{j=1}^{N} \frac{\partial^{2}}{\partial x_{i}\partial x_{j}}M_{ij}^{(2)}(t)\right)
-\end{align}
-
-\subsection{Ornstein-Uhlenbeck Process}
-
-If the transition density is Gaussian then the density is fully specified by the first two moments $M^{(1)}(t) = \vec{\mu}(t)$ and $M^{(2)}(\vec{x},t) = \Sigma(t)$. The moments can also be functions of $\vec{x}$. Both of these possibilities are evident in the Ornstein-Uhlenbeck (OU) process. Let the drift vector be a linear function of the state $\vec{x}$ and the diffusion matrix the square of the Gaussian covariances
-
-\begin{align*}
-M^{(1)}(t) = \Gamma \vec{x}\;\;\;\;\;M^{(2)}(t) = 2D
-\end{align*}
-
-with $D = \Sigma\Sigma^{T}$ which is assumed to be independent of time.
-
-\begin{align}
-\hat{\mathcal{L}}_{FP} = \sum_{i=1}^{N}\left(-\frac{\partial}{\partial x_{i}}\Gamma\vec{x} + \sum_{j=1}^{N} \frac{\partial^{2}}{\partial x_{i}\partial x_{j}}D\right)
-\end{align}
-
-\section{Lyapunov stability for the OU process}
-
-A distribution $\pi$ is the stationary distribution (equilibrium distribution) of $P$ if $\hat{\mathcal{L}}_{FP}\pi = \pi$. Such a system is said to obey \emph{detailed balance}, in which the Fokker-Planck operator leaves the distribution invariant. Qualitatively, this means that, at equilibrium, the probability current out of an infinitesimal volume $dx^{n}$ in the state space $\Omega$ is balanced by an equal and opposite current into $dx^{n}$. 
+\section{Photon statistics for fluorescence microscopy}
 
 
+\section{Single molecule localization: The Cramer-Rao bound}
 
-\section{Fourier Transform of the FPE}
-
-Fourier transformation is a general method used in the solution of differential equations. It is particularly useful for second order equations like the FPE. You may have seen its use in the heat equation, which is the Fokker-Planck equation for Brownian motion.
-
+Discuss parameter uncertainty, Fisher information and CR bound for RNA localization. This is important for achieving accuracy in particle detection and diffusion models
 
 \end{document}
