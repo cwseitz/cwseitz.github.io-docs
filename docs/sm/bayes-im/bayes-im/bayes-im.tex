@@ -120,33 +120,37 @@ For example photostable fluorophores like quantum dots would be a good choice
 
 \begin{frame}{Fisher Information and the Cramer-Rao Bound}
 
-Consider maximum likelihood estimation (MLE) where the objective is to find an optimal parameter(s) that best explains the data
+Consider the general prescripton of maxmimum likelihood parameter estimation:
 
 \begin{align*}
-\theta^{*} = \underset{\theta}{\mathrm{argmax}}\; \ell(\mathcal{D}|\theta)
+\mathcal{E}_{\mathrm{MLE}}: \theta^{*} = \underset{\theta}{\mathrm{argmax}}\; \ell(\mathcal{D}|\theta)
 \end{align*}
 
-where $\ell = \log\mathcal{L}$ is the log-likelihood function. We can define the sensitivity of $\ell$ with respect to $\theta$
+where $\ell = \log\mathcal{L}$ is the log-likelihood function\\
+\vspace{0.1in}
+\textcolor{blue}{Question: can we derive a theoretical lower bound on our uncertainty in $\theta^{*}$ for an arbitrary estimator $\mathcal{E}$?}\\
+\vspace{0.1in}
+Start by defining the \emph{score} of $\ell$ with respect to $\theta$ as
 
 \begin{align*}
-\ell'(x|\theta) = \frac{\partial}{\partial\theta} \ell(x|\theta) = \frac{\mathcal{L}'(x|\theta)}{\mathcal{L}(x|\theta)}
+\mathcal{S} = \underset{{x\sim p}}{\mathbb{E}}\left[\frac{\partial}{\partial\theta} \ell(x|\theta)\right]
 \end{align*}
 
-for $x\in\mathcal{D}$. Intuitively, if the likelihood is insensitive to changes in $\theta$, then $\mathcal{D}$ does not provide very much information about $\theta$
+Since $x$ is a continuous random variable, we have to consider the average score
 
 \end{frame}
 
-\begin{frame}{Fisher Information and the Cramer-Rao Bound}
+\begin{frame}{Fisher Information for a single parameter}
 
-Since $x$ is a continuous random variable, we have to consider the average sensitivity\\
-\vspace{0.2in}
-That is, for each $x\sim P(x)$ we can compute $\ell'(x|\theta)$ for all $\theta$
+The Fisher Information $I(\theta)$ is defined as the variance of the score
 
 \begin{align*}
-I(\theta) = \mathbb{E}\left[\frac{\partial}{\partial\theta} \left(\ell(x|\theta)\right)^{2}\right] = \int \frac{\partial}{\partial\theta}\left(\ell(x|\theta)\right)^{2} \mathcal{L}(x|\theta)dx
+I(\theta) = \underset{{x\sim p}}{\mathbb{E}}\left[\frac{\partial}{\partial\theta} \left(\ell(x|\theta)\right)\right]^{2} = \underset{{x\sim p}}{\mathbb{E}}\left[\frac{\partial^{2}}{\partial\theta^{2}} \left(\ell(x|\theta)\right)\right]
 \end{align*}
 
-for $x\in\mathcal{D}$. Intuitively, if the likelihood is insensitive to changes in $\theta$, then $\mathcal{D}$ does not provide very much information about $\theta$\\
+for $x\in\mathcal{D}$. The variance takes this from because it can be shown that $\mathcal{S}=0$\\
+\vspace{0.1in}
+Intuitively, if the likelihood is insensitive changes in $\theta$, then $\mathcal{D}$ does not provide very much information about $\theta$\\
 \vspace{0.1in}
 The Cramer-Rao Bound places a lower bound on the variance in our parameter estimate in iterms of $I(\theta)$ :
 
@@ -156,9 +160,53 @@ The Cramer-Rao Bound places a lower bound on the variance in our parameter estim
 
 \end{frame}
 
-\begin{frame}{Consequences for single molecule localization}
+\begin{frame}{Fisher Information for a multiple parameters}
 
-The point spread function
+When there are many parameters, the Fisher Information (second moment of the score) is a covariance matrix
+
+\begin{align*}
+I_{ij}(\theta) = \underset{{x\sim p}}{\mathbb{E}}\left[\frac{\partial}{\partial\theta_{i}} \left(\ell(x|\theta)\right)\frac{\partial}{\partial\theta_{j}} \left(\ell(x|\theta)\right)\right]
+\end{align*}
+
+We are going to consider the case where $\mathcal{L}$ is a multivariate Gaussian distribution:
+
+\begin{align*}
+\mathcal{L}(x|\mu,\Sigma) = \frac{1}{(2\pi)^{\frac{d}{2}}|\Sigma|^{\frac{1}{2}}}\exp\left(-\frac{1}{2}(x-\mu)\Sigma^{-1}(x-\mu)^{T}\right)
+\end{align*}
+
+We have $\theta=(\mu,\Sigma)$ so we need to compute $\frac{\partial \ell}{\partial \mu}$ and $\frac{\partial \ell}{\partial \Sigma}$
+
+
+\end{frame}
+
+\begin{frame}{Fisher Information for a multiple parameters}
+
+Using our definition of the Fisher information:
+
+\begin{align*}
+\mathbf{I}(\theta) &= \underset{{x\sim p}}{\mathbb{E}}\begin{pmatrix}
+\frac{\partial^{2}\ell}{\partial\mu^{2}} & \frac{\partial\ell}{\partial\Sigma}\frac{\partial\ell}{\partial\mu}\\
+\frac{\partial\ell}{\partial\mu}\frac{\partial\ell}{\partial\Sigma} & \frac{\partial^{2}\ell}{\partial\Sigma^{2}}
+\end{pmatrix}\\
+&= \underset{{x\sim p}}{\mathbb{E}}\left[\mathbf{H}_{\ell}\;\ell(x|\mu,\Sigma)\right]
+\end{align*}
+
+where $\mathbf{H}_{\ell}$ is the Hessian of the log-likelihood. We note that $\mathbf{I}(\theta)$ is essentially the Hessian of the cross-entropy\\
+\vspace{0.1in}
+Thus we need to evaluate $\mathbf{H}_{\ell}$ explicitly
+
+
+\end{frame}
+
+\begin{frame}{Fisher Information for a multiple parameters}
+
+The following derivatives can be shown using matrix calculus:
+
+\begin{align*}
+\frac{\partial\ell}{\partial\mu} &= \Sigma^{-1}(x-\mu)\\
+\frac{\partial\ell}{\partial\Sigma} &= -\frac{1}{2}\left(\Sigma^{-1} - \Sigma^{-1}(x-\mu)(x-\mu)^{T}\Sigma^{-1}\right)
+\end{align*}
+
 
 \end{frame}
 
