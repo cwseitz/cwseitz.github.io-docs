@@ -1,7 +1,7 @@
 
 
 \documentclass{article}
-\title{Interferon-stimulated transcriptional bursting in space and time}
+\title{Interferon-alpha induced transcriptional bursting in space and time}
 \author{C.W. Seitz}
 \date{\today}
 
@@ -11,21 +11,22 @@
 \usepackage{siunitx}
 \usepackage{float}
 \usepackage{bm}
+\usepackage{natbib}
+\bibliographystyle{unsrtnat}
 
 \begin{document}
 \maketitle
 
-\section{Introduction: Inferferon-stimulated gene expression}
+\section{Introduction}
 
-Motivate the study of inferferon stimulated transcriptional bursting. Why is interferon stimulated gene expression important and what are the potential consequences of non-constitutive gene expression? 
+Interferon signaling plays a complex role in the innate immune response following pathogen detection. Interferon molecules bind to cell surface receptors and initiate a signaling cascade leading to the transcriptional regulation of hundreds of IFN-regulated genes (IRGs). Recently, a new wave of interest in the precise mechanisms controlling transcription of IRGs has developed due to the advent of cytokine-based cancer treatments and implication of inteferons in autoimmune diseases such as type-1 diabetes. Genome-scale sequencing assays have revealed that interferon-alpha can induce chromatin remodeling as well as changes in transcriptional and translational regulation. In particular, ATAC-seq of human beta cells following interferon-alpha treatment has shown that over 4400 gained open chromatin regions (OCRs) formed two hours follwing cytokine treatment. These OCRs have been defined as putative distal regulatory elements for ISGs - a definition which is evident in the transcriptional up-regulation of genes within 40kb of an interferon-induced OCR. These observed changes in chromatin accessibility and upregulation of ISGs raise important questions regarding the spatial and temporal properties of gene expression. The development of OCRs following interferon stimulation may facilitate transcription; however, the spatial and temporal dynamics of ISG expression remain unclear. A rigorous characterization of the timescale and mode of transcription (e.g., non-constitutive or constitutive) would contribute to our understanding of the spatiotemporal kinetics of the transcriptional response to interferon stimulation.   
 
-\section{Transcriptional bursting}
+
+\section{RNA count distribution shapes cannot be explained by Poissonian gene expression}
+
+The classical view of constitutive gene expression in which gene products accumulate in a Poisson-like process has been challenged by recent observations of episodic transcription. Thus far, so-called transcriptional bursting has been attributed to chromatin remodeling as well as modulation of transcription by upstream transcription factors []. 
 
 Summarize statistical signatures of transcriptional bursting (Poisson versus non-Poisson gene expression)
-
-\section{Promoter switching in mammalian nuclei}
-
-Summarize the origins of bursting at the promoter sequence
 
 \section{Testing the ergodic hypothesis}
 
@@ -44,8 +45,13 @@ In-vivo data is ideal for kinetic parameter inference as it requires minimal ass
 Due to these complications, kinetic inference using  in-situ datasets has been well-studied in the literature, particularly by fitting models of promoter switching to ensemble snapshot time sequences (Munsky). Bayesian inference of kinetic parameters has become quite popular for in-situ datasets as this class of methods does not require detailed time-series data of transcription. Under the so-called ergodic assumption, the statistics of ensemble snapshots and time-series data are identical and useful for parameter inference. One can imagine that, when cells are indistinguishable in this way, the probability density over transcript counts is the same for the ensemble as for the time-resolved cell. In any case, computing the likelihood function for these data is generally intractable, and we have to make use of supplementary methods. Munsky et al. have performed a nice comparison study for fitting models where the likelihood which has been reduced to first and second order moments or computed explicitly by solving a chemical master equation (CME). Samples from the posterior on kinetic parameters are found in all cases via a MCMC algorithm, giving parameter uncertainties. Likelihood-free methods such as approximate Bayesian computation (ABC) avoid computing the likelihood, instead defining a notion of distance between the observed data and simulated trajectories using the Gillespie algorithm.
 
 
-Compartment models define promoter states and export of RNA out of the nucleus. Inference on compartment models is performed by using the finite state projection of the chemical master equation to compute the likelihood of parameters. RNA export rates are not diffusion-based in existing models, can we do this?   
+Compartment models define promoter states and export of RNA out of the nucleus. Inference on compartment models is performed by using the finite state projection of the chemical master equation to compute the likelihood of parameters. RNA export rates are not diffusion-based in existing models, can we do this?  
 
+Three items are cited: \textit{The \LaTeX\ Companion} book \cite{latexcompanion}, the Einstein journal paper \citet{einstein}, and the 
+Donald Knuth's website \cite{knuthwebsite}. The \LaTeX\ related items are
+\cite{latexcompanion,knuthwebsite}.  
+
+\bibliography{sample}
 
 \appendix
 
@@ -57,5 +63,7 @@ Compartment models define promoter states and export of RNA out of the nucleus. 
 \section{Single molecule localization: The Cramer-Rao bound}
 
 Discuss parameter uncertainty, Fisher information and CR bound for RNA localization. This is important for achieving accuracy in particle detection and diffusion models
+
+
 
 \end{document}
