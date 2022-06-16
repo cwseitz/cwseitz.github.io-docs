@@ -4,7 +4,7 @@
 \documentclass[aspectratio=1610]{beamer}					% Document class
 
 \setbeamertemplate{footline}[text line]{%
-  \parbox{\linewidth}{\vspace*{-8pt}Bayesian image reconstruction\hfill\insertshortauthor\hfill\insertpagenumber}}
+  \parbox{\linewidth}{\vspace*{-8pt}Bounding parameter uncertainty in single molecule localization\hfill\insertshortauthor\hfill\insertpagenumber}}
 \setbeamertemplate{navigation symbols}{}
 
 \usepackage[english]{babel}				% Set language
@@ -30,7 +30,7 @@
 \usepackage{booktabs}					% For table rules
 \usepackage{hyperref}					% For cross-referencing
 
-\title{Bayesian image reconstruction}	% Presentation title
+\title{Bounding parameter uncertainty in single molecule localization}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -42,11 +42,6 @@
   \titlepage
 \end{frame}
 
-% Outline
-% This page includes the outline (Table of content) of the presentation. All sections and subsections will appear in the outline by default.
-\begin{frame}{Outline}
-  \tableofcontents
-\end{frame}
 
 % The following is the most frequently used slide types in beamer
 % The slide structure is as follows:
@@ -55,28 +50,76 @@
 %	<content>
 %\end{frame}
 
-
 \begin{frame}{Photon statistics of CMOS cameras}
+
 \begin{itemize}
 \item Imaging noise consists of shot noise, thermal noise, and readout noise
 \vspace{0.1in}
 \item Shot noise is Poisson, thermal noise and readout noise are Gaussian
 \end{itemize}
 \vspace{0.2in}
-For a CMOS pixel $n$, the true signal $S_{n}\; [\mathrm{ADU}]$ is a Poisson process with rate parameter $\lambda_{n}$
+
+We will adopt the Gaussian PSF approximation (image function):
 
 \begin{equation*}
-S_{n} = \gamma g_{n}P_{n}(\lambda_{n})
+q(x,y) = \frac{1}{2\pi\sigma^{2}}\exp\left(-\frac{x^{2}+y^{2}}{2\sigma^{2}}\right)
+\end{equation*}
+
+and define the number of photoelectrons at a pixel $k$ as a sum of three random variables
+
+\begin{equation*}
+H_{\theta,k} = S_{\theta,k} + B_{\theta,k} + W_{\theta,k}
+\end{equation*}
+
+where $S_{\theta,k}$ and $B_{\theta,k}$ are Poisson processes for signal and background while $W_{\theta,k}$ represents  dark noise of a CMOS array
+
+\end{frame}
+
+\begin{frame}{Photon statistics of CMOS cameras}
+
+The mean values of the signal and background processes are
+
+\begin{equation*}
+\mu_{\theta,k} = \int_{t_{0}}^{t} \Lambda(\tau) \int_{C_{k}} q(x,y)dxdyd\tau
+\end{equation*}
+
+\begin{equation*}
+\beta_{\theta,k} = \int_{t_{0}}^{t} \Lambda(\tau) \int_{C_{k}} b(x,y)dxdyd\tau
+\end{equation*}
+
+where $b(x,y)$ is a spatially dependent background function. $\Lambda(\tau)$ is the emission rate as a function of time (for example exponential decay for photobleaching). 
+
+If we take the dark noise to be Gaussian with mean $m_{\theta,k}$, then we have: 
+
+\begin{equation*}
+\nu_{\theta,k} = \mu_{\theta,k} + \beta_{\theta,k} + m_{\theta,k}
+\end{equation*}
+\\
+\vspace{0.2in}
+\textcolor{blue}{We now need to show the form of $P(H_{k})$}
+
+
+\end{frame}
+
+\begin{frame}{Photon statistics of CMOS cameras}
+
+Let's start by explicitly writing $P(S_{k})$
+
+\vspace{0.2in}
+For a CMOS pixel $k$, the true signal $S_{k}\; [\mathrm{ADU}]$ is a Poisson process with rate parameter $\Lambda_{k}$
+
+\begin{equation*}
+S_{k} = \gamma g_{k}P_{k}(s_{k}|\Lambda_{k})
 \end{equation*}
 
 where $\gamma\;\;[e^{-}/p]$ is the quantum efficiency and $g_{n}\;\; [\mathrm{ADU}/e^{-}]$ is the pixel's gain
 \vspace{0.1in}
 
 \begin{equation*}
-P(S_{n}) = \frac{\exp\left({-\lambda_{n}}\right)\lambda_{n}^{p}}{p!}
+P(S_{k}) = \frac{\exp\left({-\Lambda_{k}}\right)\lambda_{k}^{p}}{p!}
 \end{equation*}
 
-\textcolor{blue}{But what is the distribution over the corrupted signal $P(\hat{S}_{n})$?}
+\textcolor{blue}{We can use this to find the distribution over the corrupted signal $P(H_{k})$}
 
 
 \end{frame}
@@ -84,41 +127,25 @@ P(S_{n}) = \frac{\exp\left({-\lambda_{n}}\right)\lambda_{n}^{p}}{p!}
 
 \begin{frame}{Photon statistics of CMOS cameras}
 
-To find $P(\hat{S}_{n})$, we first evaluate the joint density $P(S_{n},\hat{S}_{n})$
+To find $P(H_{k})$, we first evaluate the joint density $P(S_{k},H_{k})$
 \vspace{0.1in}
 \begin{align*}
-P(S_{n},\hat{S}_{n}) &= P(\hat{S}_{n}|S_{n}=s)P(S_{n}=s)\\
-&= \frac{1}{Z}\exp\left(-\frac{(\hat{S}_{n}-g_{n}s-\mu_{n})^{2}}{\sigma_{n}^{2}}\right)\frac{\exp\left({-\lambda_{n}}\right)\lambda_{n}^{s}}{s!}
+P(S_{k},H_{k}) &= P(H_{k}|S_{k}=s)P(S_{k}=s)\\
+&= \frac{1}{Z}\exp\left(-\frac{(H_{k}-g_{k}s-\mu_{k})^{2}}{\sigma_{k}^{2}}\right)\frac{\exp\left({-\Lambda_{k}}\right)\Lambda_{k}^{s}}{s!}
 \end{align*}
 \vspace{0.1in}
 
-Marginalizing over $S_{n}$ gives the desired distribution over $\hat{S}_{n}$
+Marginalizing over $S_{k}$ gives the desired distribution over $H_{n}$
 
 \begin{equation*}
-P(\hat{S}_{n}) = \frac{1}{Z}\sum_{s=0}^{\infty}\frac{\exp\left({-\lambda_{n}}\right)\lambda_{n}^{s}}{s!}\exp\left(-\frac{(\hat{S}_{n}-g_{n}s-\mu_{n})^{2}}{\sigma_{n}^{2}}\right)
+P(H_{k}) = \frac{1}{Z}\sum_{s=0}^{\infty}\frac{\exp\left({-\Lambda_{k}}\right)\Lambda_{k}^{s}}{s!}\exp\left(-\frac{(H_{k}-g_{k}s-\mu_{k})^{2}}{\sigma_{k}^{2}}\right)
 \end{equation*}
 
 \end{frame}
 
-\begin{frame}{Bayesian parameter inference for CMOS photon statistics}
-
-The parameters in our model $\theta = (\lambda_{n},g_{n},\mu_{n},\sigma^{2}_{n})$ are unknown apriori
 
 
-\begin{equation*}
-P(\theta|\hat{S}_{n}) \propto P(\hat{S}_{n}|\theta)P(\theta)
-\end{equation*}
-
-\vspace{0.2in}
-We can just computed the likelihood $P(\hat{S}_{n}|\theta)$ on the last slide. Samples from the posterior can be found for example by MCMC or we could use MAP estimation\\
-\vspace{0.2in}
-Either of these approaches only make sense for stationary statistics, which means the physical locations and photophysics of the sample remain unchanged in time\\
-\vspace{0.2in}
-For example photostable fluorophores like quantum dots would be a good choice
-
-\end{frame}
-
-\begin{frame}{Fisher Information and the Cramer-Rao Bound}
+\begin{frame}{Fisher Information}
 
 Consider the general prescripton of maxmimum likelihood parameter estimation:
 
@@ -140,7 +167,7 @@ Since $x$ is a continuous random variable, we have to consider the average score
 
 \end{frame}
 
-\begin{frame}{Fisher Information for a single parameter}
+\begin{frame}{Fisher Information}
 
 The Fisher Information $I(\theta)$ is defined as the variance of the score
 
@@ -151,16 +178,6 @@ I(\theta) = \underset{{x\sim p}}{\mathbb{E}}\left[\frac{\partial}{\partial\theta
 for $x\in\mathcal{D}$. The variance takes this from because it can be shown that $\mathcal{S}=0$\\
 \vspace{0.1in}
 Intuitively, if the likelihood is insensitive changes in $\theta$, then $\mathcal{D}$ does not provide very much information about $\theta$\\
-\vspace{0.1in}
-The Cramer-Rao Bound places a lower bound on the variance in our parameter estimate in iterms of $I(\theta)$ :
-
-\begin{equation*}
-\mathrm{Var}(\hat{\theta}) \geq \frac{1}{I(\theta)}
-\end{equation*}
-
-\end{frame}
-
-\begin{frame}{Fisher Information for a multiple parameters}
 
 When there are many parameters, the Fisher Information (second moment of the score) is a covariance matrix
 
@@ -168,47 +185,27 @@ When there are many parameters, the Fisher Information (second moment of the sco
 I_{ij}(\theta) = \underset{{x\sim p}}{\mathbb{E}}\left[\frac{\partial}{\partial\theta_{i}} \left(\ell(x|\theta)\right)\frac{\partial}{\partial\theta_{j}} \left(\ell(x|\theta)\right)\right]
 \end{align*}
 
-We are going to consider the case where $\mathcal{L}$ is a multivariate Gaussian distribution:
-
-\begin{align*}
-\mathcal{L}(x|\mu,\Sigma) = \frac{1}{(2\pi)^{\frac{d}{2}}|\Sigma|^{\frac{1}{2}}}\exp\left(-\frac{1}{2}(x-\mu)\Sigma^{-1}(x-\mu)^{T}\right)
-\end{align*}
-
-We have $\theta=(\mu,\Sigma)$ so we need to compute $\frac{\partial \ell}{\partial \mu}$ and $\frac{\partial \ell}{\partial \Sigma}$
-
 
 \end{frame}
 
 \begin{frame}{Fisher Information for a multiple parameters}
 
-Using our definition of the Fisher information:
+We have shown that the model for the number of photoelectrons at a pixel is
+
+\begin{equation*}
+P(H_{k}) = \frac{1}{Z}\sum_{s=0}^{\infty}\frac{\exp\left({-\Lambda_{k}}\right)\Lambda_{k}^{s}}{s!}\exp\left(-\frac{(H_{k}-g_{k}s-\nu_{k})^{2}}{\sigma_{k}^{2}}\right)
+\end{equation*}
+
+which can be plugged into the following Fisher information matrix
 
 \begin{align*}
-\mathbf{I}(\theta) &= \underset{{x\sim p}}{\mathbb{E}}\begin{pmatrix}
-\frac{\partial^{2}\ell}{\partial\mu^{2}} & \frac{\partial\ell}{\partial\Sigma}\frac{\partial\ell}{\partial\mu}\\
-\frac{\partial\ell}{\partial\mu}\frac{\partial\ell}{\partial\Sigma} & \frac{\partial^{2}\ell}{\partial\Sigma^{2}}
-\end{pmatrix}\\
-&= \underset{{x\sim p}}{\mathbb{E}}\left[\mathbf{H}_{\ell}\;\ell(x|\mu,\Sigma)\right]
+I_{ij}(\theta) &= \underset{{H\sim P}}{\mathbb{E}}\left[\frac{\partial}{\partial\theta_{i}} \left(\log \prod_{k} P(H_{k})\right)\frac{\partial}{\partial\theta_{j}} \left(\log \prod_{k} P(H_{k})\right)\right]\\
+&= \underset{{H\sim P}}{\mathbb{E}}\sum_{k}\left[\frac{\partial}{\partial\theta_{i}} \log P(H_{k})\frac{\partial}{\partial\theta_{j}} \log P(H_{k})\right]
 \end{align*}
-
-where $\mathbf{H}_{\ell}$ is the Hessian of the log-likelihood. We note that $\mathbf{I}(\theta)$ is essentially the Hessian of the cross-entropy\\
-\vspace{0.1in}
-Thus we need to evaluate $\mathbf{H}_{\ell}$ explicitly
-
 
 \end{frame}
 
-\begin{frame}{Fisher Information for a multiple parameters}
 
-The following derivatives can be shown using matrix calculus:
-
-\begin{align*}
-\frac{\partial\ell}{\partial\mu} &= \Sigma^{-1}(x-\mu)\\
-\frac{\partial\ell}{\partial\Sigma} &= -\frac{1}{2}\left(\Sigma^{-1} - \Sigma^{-1}(x-\mu)(x-\mu)^{T}\Sigma^{-1}\right)
-\end{align*}
-
-
-\end{frame}
 
 \section{References}
 
