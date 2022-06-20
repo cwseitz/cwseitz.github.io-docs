@@ -5,7 +5,6 @@ from glob import glob
 from util import *
 
 PATH_TO_DOCS = './docs/'
-PATH_TO_DOCS_TABLE = 'docs/docs.csv'
 
 def build_site():
 
@@ -21,7 +20,7 @@ def build_site():
     index.write('index.html')
 
     #Build project listing page
-    projects = ['iplm/', 'fdl/', 'info/', 'sm/', 'bio/']
+    projects = ['iplm/', 'fdl/', 'info/', 'sm/', 'bio/', 'thesis/']
 
     for project in projects:
 
