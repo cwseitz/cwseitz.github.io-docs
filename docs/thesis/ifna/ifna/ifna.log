@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.4.9)  20 JUN 2022 18:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.4.9)  20 JUN 2022 22:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1289,29 +1289,77 @@ Package caption Info: End \AtBeginDocument code.
 
 (./ifna.nav) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-<volcano-2h.png, id=24, 578.16pt x 433.62pt>
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
+
+]
+<epi-hilo.png, id=29, 376.40625pt x 263.48438pt>
+File: epi-hilo.png Graphic file (type png)
+<use epi-hilo.png>
+Package pdftex.def Info: epi-hilo.png  used on input line 68.
+(pdftex.def)             Requested size: 284.52756pt x 199.18477pt.
+
+[3
+
+ <./epi-hilo.png>]
+<dapi-gapdh-1.png, id=37, 1216.545pt x 1225.57875pt>
+File: dapi-gapdh-1.png Graphic file (type png)
+<use dapi-gapdh-1.png>
+Package pdftex.def Info: dapi-gapdh-1.png  used on input line 97.
+(pdftex.def)             Requested size: 142.24794pt x 142.25699pt.
+<dapi-gapdh-2.png, id=38, 1216.545pt x 1225.57875pt>
+File: dapi-gapdh-2.png Graphic file (type png)
+<use dapi-gapdh-2.png>
+Package pdftex.def Info: dapi-gapdh-2.png  used on input line 97.
+(pdftex.def)             Requested size: 142.24794pt x 142.25699pt.
+ [4
+
+ <./dapi-gapdh-1.png> <./dapi-gapdh-2.png>]
+<burst-1.png, id=46, 1042.89626pt x 440.64626pt>
+File: burst-1.png Graphic file (type png)
+<use burst-1.png>
+Package pdftex.def Info: burst-1.png  used on input line 138.
+(pdftex.def)             Requested size: 170.71652pt x 72.12524pt.
+<burst-2.png, id=47, 1015.795pt x 488.82625pt>
+File: burst-2.png Graphic file (type png)
+<use burst-2.png>
+Package pdftex.def Info: burst-2.png  used on input line 138.
+(pdftex.def)             Requested size: 170.71652pt x 82.15208pt.
+ [5
+
+ <./burst-1.png> <./burst-2.png>] [6
+
+]
+<fold-change.png, id=64, 588.1975pt x 516.93124pt>
+File: fold-change.png Graphic file (type png)
+<use fold-change.png>
+Package pdftex.def Info: fold-change.png  used on input line 164.
+(pdftex.def)             Requested size: 227.62204pt x 200.0406pt.
+ [7
+
+ <./fold-change.png>]
+<volcano-2h.png, id=72, 578.16pt x 433.62pt>
 File: volcano-2h.png Graphic file (type png)
 <use volcano-2h.png>
-Package pdftex.def Info: volcano-2h.png  used on input line 62.
+Package pdftex.def Info: volcano-2h.png  used on input line 173.
 (pdftex.def)             Requested size: 284.52756pt x 213.39536pt.
- [2
+ [8
 
  <./volcano-2h.png>]
-<volcano-8h.png, id=32, 578.16pt x 433.62pt>
+<volcano-8h.png, id=79, 578.16pt x 433.62pt>
 File: volcano-8h.png Graphic file (type png)
 <use volcano-8h.png>
-Package pdftex.def Info: volcano-8h.png  used on input line 71.
+Package pdftex.def Info: volcano-8h.png  used on input line 182.
 (pdftex.def)             Requested size: 284.52756pt x 213.39536pt.
- [3
+
+[9
 
  <./volcano-8h.png>]
-<volcano-24h.png, id=39, 578.16pt x 433.62pt>
+<volcano-24h.png, id=86, 578.16pt x 433.62pt>
 File: volcano-24h.png Graphic file (type png)
 <use volcano-24h.png>
-Package pdftex.def Info: volcano-24h.png  used on input line 80.
+Package pdftex.def Info: volcano-24h.png  used on input line 191.
 (pdftex.def)             Requested size: 284.52756pt x 213.39536pt.
- [4
+ [10
 
  <./volcano-24h.png>]
 \tf@nav=\write7
@@ -1328,22 +1376,26 @@ Package rerunfilecheck Info: File `ifna.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 31827 strings out of 478287
- 631383 string characters out of 5849290
- 936654 words of memory out of 5000000
- 49327 multiletter control sequences out of 15000+600000
- 493551 words of font info for 102 fonts, out of 8000000 for 9000
+ 31931 strings out of 478287
+ 633304 string characters out of 5849290
+ 936656 words of memory out of 5000000
+ 49411 multiletter control sequences out of 15000+600000
+ 494201 words of font info for 104 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,16n,122p,384b,417s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb>
-Output written on ifna.pdf (4 pages, 132752 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/symbols/msam10.pfb>
+Output written on ifna.pdf (10 pages, 7354513 bytes).
 PDF statistics:
- 72 PDF objects out of 1000 (max. 8388607)
- 43 compressed objects within 1 object stream
- 9 named destinations out of 1000 (max. 500000)
- 58 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 138 PDF objects out of 1000 (max. 8388607)
+ 83 compressed objects within 1 object stream
+ 21 named destinations out of 1000 (max. 500000)
+ 88 words of extra memory for PDF output out of 10000 (max. 10000000)
 
