@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.5.19)  22 JUN 2022 16:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.5.19)  22 JUN 2022 18:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**burst.tex
-(./burst.tex
+**crlb.tex
+(./crlb.tex
 LaTeX2e <2020-02-02> patch level 2
 L3 programming layer <2020-02-14>
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -236,8 +236,8 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibsep=\skip65
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count280
-) (./burst.aux)
-\openout1 = `burst.aux'.
+) (./crlb.aux)
+\openout1 = `crlb.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
 LaTeX Font Info:    ... okay on input line 17.
@@ -294,46 +294,46 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 17.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Overfull \hbox (8.01248pt too wide) in paragraph at lines 26--26
-[]\OT1/cmr/bx/n/12 ISG transcript-count dis-tri-bu-tions are in-con-sis-tent wi
-th
+) [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+Underfull \hbox (badness 10000) in paragraph at lines 127--130
+
  []
 
-[1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] (./burst.bbl
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 23--26
-[]\OT1/cmr/m/n/10 Donald Knuth.  Knuth: Com-put-ers and type-set-ting.  URL
+Overfull \hbox (30.93309pt too wide) in paragraph at lines 155--156
+[]\OT1/cmr/m/n/10 Computing the mean value at a pixel in-volves com-put-ing an 
+in-te-gral $[][] \OML/cmm/m/it/10 q\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x; y\OT1/c
+mr/m/n/10 )\OML/cmm/m/it/10 dxdy$\OT1/cmr/m/n/10 .
  []
 
-)
-Overfull \hbox (4.2079pt too wide) in paragraph at lines 73--73
-[]\OT1/cmr/bx/n/14.4 Single molecule lo-cal-iza-tion: The Cramer-Rao
- []
-
-[4] (./burst.aux) ) 
+[4] (./crlb.aux) ) 
 Here is how much of TeX's memory you used:
- 5384 strings out of 481239
- 113467 string characters out of 5920377
- 340925 words of memory out of 5000000
- 20582 multiletter control sequences out of 15000+600000
- 548628 words of font info for 85 fonts, out of 8000000 for 9000
+ 5363 strings out of 481239
+ 113176 string characters out of 5920377
+ 342804 words of memory out of 5000000
+ 20565 multiletter control sequences out of 15000+600000
+ 547674 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 35i,6n,40p,1649b,382s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
-0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on burst.pdf (4 pages, 109140 bytes).
+ 35i,11n,40p,757b,198s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi1
+0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbo
+ls/msbm10.pfb>
+Output written on crlb.pdf (4 pages, 137763 bytes).
 PDF statistics:
- 49 PDF objects out of 1000 (max. 8388607)
- 34 compressed objects within 1 object stream
+ 69 PDF objects out of 1000 (max. 8388607)
+ 49 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

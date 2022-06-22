@@ -101,6 +101,13 @@ If we take the dark noise to be Gaussian with mean $m_{\theta,k}$, then we have:
 
 \end{frame}
 
+\begin{frame}{Monte Carlo integration over a pixel}
+
+Computing the mean value at a pixel involves computing an integral $ \int_{C_{k}} q(x,y)dxdy$. This integral is difficult to compute, but a 2D image is really just a 2D histogram. So if we can find the PSF $q(x,y)$ from the objective lens, we can use Monte Carlo integration (sample from the normalized PSF) and multiply by the emission rate $\nu$ to compute the mean of the Poisson process at a pixel $k$
+
+
+\end{frame}
+
 \begin{frame}{Photon statistics of CMOS cameras}
 
 Let's start by explicitly writing $P(S_{k})$
@@ -196,7 +203,7 @@ We have shown that the model for the number of photoelectrons at a pixel is
 P(H_{k}) = \frac{1}{Z}\sum_{s=0}^{\infty}\frac{\exp\left({-\Lambda_{k}}\right)\Lambda_{k}^{s}}{s!}\exp\left(-\frac{(H_{k}-g_{k}s-\nu_{k})^{2}}{\sigma_{k}^{2}}\right)
 \end{equation*}
 
-which can be plugged into the following Fisher information matrix
+Notice that $\nu_{k}$ is dependent on $\int q(x,y)dxdy$ and therefore the PSF parameters $\theta = (\mu_{x},\mu_{y},\sigma)$. These can be plugged into the following Fisher information matrix
 
 \begin{align*}
 I_{ij}(\theta) &= \underset{{H\sim P}}{\mathbb{E}}\left[\frac{\partial}{\partial\theta_{i}} \left(\log \prod_{k} P(H_{k})\right)\frac{\partial}{\partial\theta_{j}} \left(\log \prod_{k} P(H_{k})\right)\right]\\
