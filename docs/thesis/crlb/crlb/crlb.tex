@@ -84,10 +84,28 @@ P(H_{k}) = \frac{1}{Z}\sum_{n_{k}=0}^{\infty}\frac{\exp\left({-\lambda_{k}}\righ
 
 \begin{figure}
 \centering     %%% not \center
-\subfigure[Theoretical prediction of $P(S_{k},H_{k})$ and marginal distributions]{\label{fig:a}\includegraphics[width=120mm]{theoretical}}
-\subfigure[Sampling of $P(S_{k},H_{k})$ and marginal distributions]{\label{fig:b}\includegraphics[width=120mm]{experimental}}
+\subfigure[Theoretical prediction of $P(S_{k},H_{k})$ and marginal distributions for $g_{k}=1$, $\lambda_{k}=10\;\mathrm{cpms}$, and $\Delta t = 5\si{ms}$ and $\sigma_{k}=5 \;e^{-}$]{\label{fig:a}\includegraphics[width=120mm]{theoretical}}
+\subfigure[Simulation of $P(S_{k},H_{k})$ and marginal distributions]{\label{fig:b}\includegraphics[width=120mm]{experimental}}
 
 \end{figure}
+
+Notice that when $\mu_{k} = \lambda_{k}\Delta t$ is large, $P(S_{k})$ is well-approximated by a Gaussian distribution. It turns out the for $\mu > 20$ the Poisson distribution is approximately 
+
+\begin{equation*}
+S_{k} \sim \mathcal{N}(\lambda_{k}\Delta t, \lambda_{k}\Delta t)
+\end{equation*} 
+
+which turns out to be a very useful approximation for simplifying $P(H_{k})$. It can be shown that the product of two Gaussian PDFs is
+
+\begin{equation*}
+\mathcal{N}(\mu_{1},\sigma_{1}^{2}) \times \mathcal{N}(\mu_{2},\sigma_{2}^{2}) = \mathcal{N}\left(\frac{\mu_{1}\sigma_{2}^{2} + \mu_{2}\sigma_{2}^{2}}{\sigma_{1}^{2}+\sigma_{2}^{2}}, \frac{1}{\frac{1}{\sigma_{1}^{2}}+\frac{1}{\sigma_{2}^{2}}}\right)
+\end{equation*}
+
+a property which we can apply to the above equation to get
+
+\begin{equation*}
+P(H_{k}) = \frac{1}{Z}\sum_{n_{k}=0}^{\infty}\exp\left(-\frac{1}{2}\left(H_{k}-\frac{g_{k}n_{k}(\lambda_{k}\Delta t)^{2} +  (\lambda_{k}\Delta t)\sigma_{k}^{2}}{(\lambda_{k}\Delta t)^{2}+\sigma_{k}^{2}}\right)\left(\frac{1}{(\lambda_{k}\Delta t)^{2}}+\frac{1}{\sigma_{k}^{2}}\right)\right)
+\end{equation*}
 
 \section{An array detector}
 
@@ -97,7 +115,7 @@ Most detectors used for imaging have many elements (pixels) so that we can recor
 q(x,y) = \frac{1}{2\pi\sigma^{2}}\exp\left(-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}\right)
 \end{equation*}
 
-The function $q(x,y)$ can be thought of an the intensity profile of the fluorphore emission, although this is not exactly correct. The wave particle-duality in quantum mechanics says that observation of a wave produces a particle, and our detector is nothing but an observer. The EM field that is waving is observed and then we record a particle. However, the statistical nature of quantum mechanics says that $q(x,y)$ is actually a probability distribution and our photons are samples from it. The detector array is binning those samples in a 2D histogram that we call an image. All that said, the Poisson rate at every pixel is not the same and we need to re-evaluate $P(S_{k})$ for each pixel. This is fairly simple, since the rate at every bin is just the probability assigned to that bin, which is an integral of $q(x,y)$ over the bin
+The function $q(x,y)$ can be thought of an the intensity profile of the fluorophore emission, although this is not exactly correct. The wave particle-duality in quantum mechanics says that observation of a wave produces a particle, and our detector is nothing but an observer. The EM field that is waving is observed and then we record a particle. However, the statistical nature of quantum mechanics says that $q(x,y)$ is actually a probability distribution and our photons are samples from it. The detector array is binning those samples in a 2D histogram that we call an image. All that said, the Poisson rate at every pixel is not the same and we need to re-evaluate $P(S_{k})$ for each pixel. This is fairly simple, since the rate at every bin is just the probability assigned to that bin, which is an integral of $q(x,y)$ over the bin
 
 \begin{equation*}
 \lambda_{k} = \gamma\cdot\int_{C_{k}} q(x,y)dxdy
