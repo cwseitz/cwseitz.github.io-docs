@@ -113,8 +113,8 @@ P(H_{k}) = \frac{1}{Z}\sum_{s=0}^{\infty}\frac{\exp\left({-\lambda_{k}}\right)\l
 As we have noted above, $\lambda_{k}$ is dependent on $\int q(x,y)dxdy$ and therefore the PSF parameters $\theta = (\mu_{x},\mu_{y},\sigma)$. These can be plugged into the following Fisher information matrix
 
 \begin{align*}
-I_{ij}(\theta) &= \underset{{H\sim P(H)}}{\mathbb{E}}\left[\frac{\partial}{\partial\theta_{i}} \left(\log \prod_{k} P(H_{k})\right)\frac{\partial}{\partial\theta_{j}} \left(\log P(H_{k})\right)\right]\\
-&= \underset{{H\sim P(H)}}{\mathbb{E}}\left[\frac{\partial}{\partial\theta_{i}} \sum_{k}\log P(H_{k})\frac{\partial}{\partial\theta_{j}}\sum_{k} \log P(H_{k})\right]
+I_{ij}(\theta) &= \underset{{H\sim P(H)}}{\mathbb{E}}\left[\frac{\partial}{\partial\theta_{i}} \log P(H_{k})\frac{\partial}{\partial\theta_{j}} \log P(H_{k})\right]\\
+&= \underset{{H\sim P(H)}}{\mathbb{E}}\left[\frac{\partial}{\partial\theta_{i}} \log P(H_{k})\frac{\partial}{\partial\theta_{j}}\log P(H_{k})\right]
 \end{align*}
 
 where $H\sim P(H)$ is perhaps a small patch of an image containing a diffraction limited spot. We need to then calculate the derivatives with respect to each of the parameters $\theta = (x_{0},y_{0},\sigma)$. 
@@ -124,7 +124,10 @@ where $H\sim P(H)$ is perhaps a small patch of an image containing a diffraction
 &=  \frac{1}{ZP(H_{k})}\sum_{n_{k}=0}^{\infty}\frac{\partial}{\partial x_{0}}\frac{\exp\left({-\lambda_{k}}\right)\lambda_{k}^{n_{k}}}{n_{k}!}\exp\left(-\frac{(H_{k}-g_{k}n_{k})^{2}}{\sigma_{k}^{2}}\right)\\
 \end{align*}
 
-Let's consider just the parts relevant to the derivative $\frac{\partial}{\partial x_{0}}\exp\left(-\lambda_{k}\right)\lambda_{k}^{n_{k}}$. This is far too difficult to compute analytically. Instead, we need to compute this infinite sum numerically, using Monte Carlo integration to compute $\lambda_{k}$ on a 3D lattice of points in the parameter space $\theta$. In total, we have to for each pixel (1) compute this sum over the 3D parameter space numerically (2) take the logarithm of all values (3) sum the 3D tensors over pixels (4) compute the Hessian matrix (4) sum the Hessians over pixels and (5) 
+Let's consider just the parts relevant to the derivative $\frac{\partial}{\partial x_{0}}\exp\left(-\lambda_{k}\right)\lambda_{k}^{n_{k}}$. This is far too difficult to compute analytically. Instead, we need to compute this infinite sum numerically, using Monte Carlo integration to compute $\lambda_{k}$ on a 3D lattice of points in the parameter space $\theta$. In total, we have to for each pixel (1) compute this sum over the 3D parameter space numerically (2) take the logarithm of all values (3) compute the Hessian matrix (4) average the Hessians over pixels to get the Fisher information matrix. 
+
+\vspace{0.2in}
+We can then derive the Cramer-Rao bound by inverting that matrix and use that bound to filter out particles which cannot be well estimated by other means. It may be the case that the MLE estimator is an optimal estimator.
 
 
 
