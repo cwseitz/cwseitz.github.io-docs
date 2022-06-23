@@ -79,8 +79,15 @@ P(S_{k},H_{k}) &= P(H_{k}|S_{k})P(S_{k})\\
 Marginalizing over $S_{k}$ gives the desired distribution over $H_{n}$
 
 \begin{equation*}
-P(H_{k}) = \frac{1}{Z}\sum_{s=0}^{\infty}\frac{\exp\left({-\lambda_{k}}\right)\lambda_{k}^{n_{k}}}{n_{k}!}\exp\left(-\frac{(H_{k}-g_{k}n_{k})^{2}}{\sigma_{k}^{2}}\right)
+P(H_{k}) = \frac{1}{Z}\sum_{n_{k}=0}^{\infty}\frac{\exp\left({-\lambda_{k}}\right)\lambda_{k}^{n_{k}}}{n_{k}!}\exp\left(-\frac{(H_{k}-g_{k}n_{k})^{2}}{\sigma_{k}^{2}}\right)
 \end{equation*}
+
+\begin{figure}
+\centering     %%% not \center
+\subfigure[Theoretical prediction of $P(S_{k},H_{k})$ and marginal distributions]{\label{fig:a}\includegraphics[width=120mm]{theoretical}}
+\subfigure[Sampling of $P(S_{k},H_{k})$ and marginal distributions]{\label{fig:b}\includegraphics[width=120mm]{experimental}}
+
+\end{figure}
 
 \section{An array detector}
 
