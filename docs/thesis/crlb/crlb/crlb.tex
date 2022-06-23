@@ -17,45 +17,21 @@
 \begin{document}
 \maketitle
 
-We will adopt the Gaussian PSF approximation (image function):
+\section{An ideal single element detector}
 
-\begin{equation*}
-q(x,y) = \frac{1}{2\pi\sigma^{2}}\exp\left(-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}\right)
-\end{equation*}
-
-and define the number of photoelectrons at a pixel $k$ as a sum of three random variables
-
-\begin{equation*}
-H_{\theta,k} = S_{\theta,k} + B_{\theta,k} + W_{\theta,k}
-\end{equation*}
-
-where $S_{\theta,k}$ and $B_{\theta,k}$ are Poisson processes for signal and background while $W_{\theta,k}$ represents Gaussian noise of a CMOS array. Unless otherwise specified we will assume that $W_{k} \sim \mathcal{N}(m_{k},\sigma_{w,k}^{2})$. The mean of the variable $H_{\theta,k}$ is found by measuring $m_{k}$ and evaluating the following three equations
-
-\begin{equation*}
-\langle H_{\theta,k} \rangle = \mu_{\theta,k} + \beta_{k} + m_{k}
-\end{equation*}
-
-\begin{equation*}
-\mu_{\theta,k} = \int_{t_{0}}^{t} \Lambda(\tau) \int_{C_{k}} q(x,y)dxdyd\tau
-\end{equation*}
-
-\begin{equation*}
-\beta_{\theta,k} = \int_{t_{0}}^{t} \Lambda(\tau) \int_{C_{k}} b(x,y)dxdyd\tau
-\end{equation*}
-
-where $b(x,y)$ is a spatially dependent background function. $\Lambda(\tau)$ is the emission rate as a function of time which could, for example, be exponential decay for photobleaching. We now need to show the complete form of $P(H_{k})$ which requires that we first know $P(S_{k})$. Let's say that we have a fluorophore that emits photons according to a Poisson process with rate $\eta$ which therefore has mean $\mu = \eta\Delta t$ where $\Delta t$ is the exposure time. If that photon were to arrive at a particular CMOS pixel $k$, it can be detected with a probability equal to the quantum efficiency $0 \leq \gamma \leq 1$ of the detector. Given that the photon indeed arrives at pixel $k$, $S_{k}$ is then a product of two random variables
+Suppose that we have an imaginary single element detector $k$, with a magical shape, that has the potential to detect every photon emitted by a fluorophore. The fluorophore emits photons according to a Poisson process with rate $\eta$, which can be shown to have mean $\mu = \eta\Delta t$ where $\Delta t$ is the exposure time. The only source of photon-loss, is the quantum efficiency of $k$, which is a probability $0 \leq \gamma \leq 1$ that a photon is detected. We then have two random variables at play (1) how many photons will be emitted in $\Delta t$ and (2) whether not each photon emitted will be detected:
 
 \begin{equation*}
 M_{k} \sim \mathrm{Poisson}(\eta)\hspace{0.2in}N_{k} \sim \mathrm{Bern}(\gamma, 1-\gamma)
 \end{equation*}
 
-According to the first distribution, the probability $M_{k}$ photons will be detected in the exposure time $\Delta t$ is Poisson, which has the form 
+As mentioned, the probability $M_{k}$ photons will be detected in the exposure time $\Delta t$ is is a discrete Poisson random variable, which has the form 
 
 \begin{equation*}
 \mathrm{Poisson}(n; \eta) = \frac{\exp\left({-\eta\Delta t}\right)(\eta\Delta t)^{n}}{n!}
 \end{equation*}
 
-There are two variables: whether or not a photon was emitted and whether or not a photon can be detected. The number of detected photons is $S_{k} = M_{k}N_{k}$.
+Based on our intuition, we might expect that throwing out each photon with probability $\gamma$ will effectively reduce the rate of the Poisson process by a factor of $\gamma$. However, we would like to prove this in a mathematically rigorous way. We start by noting that we can define a new variable $S_{k} = M_{k}N_{k}$ such that our measurment is sampled from the density $P(S_{k})$. Let's write the joint distribution over all three variables
 
 \begin{align*}
 P(S_{k},M_{k},N_{k}) &= P(S_{k}|M_{k}=m_{k},N_{k}=n_{k})P(M_{k}|N_{k}=n_{k})P(N_{k}=n_{k})
@@ -67,7 +43,7 @@ Note that $m_{k},s_{k} \in \Omega$ where $\Omega = \{z \in \mathbb{Z}: z \geq 0\
 P(S_{k})  &= \sum_{m_{k}}\sum_{n_{k}} P(S_{k}|M_{k}=m_{k},N_{k}=n_{k})P(M_{k}|N_{k}n_{k})P(N_{k}=n_{k})
 \end{align*}
 
-Expanding this expression out over the support of $n_{k}$ gives
+Expanding this expression out over the support of $N_{k}$ gives
 
 \begin{align*}
 P(S_{k}) &= \sum_{m_{k}}P(S_{k}|M_{k}=m_{k},N_{k}=0)P(M_{k}|N_{k}=0)P(N_{k}=0)\\
@@ -81,52 +57,46 @@ P(S_{k}) &= \sum_{m_{k}}\gamma\delta(s_{k}-m_{k})P(M_{k}=m_{k})+(1-\gamma)\delta
 &= \gamma P(M_{k}) + \delta(s_{k})(1-\gamma)
 \end{align*}
 
-This result tells us that we reduce probability mass by a factor of $\gamma$ and inflate the value at zero by adding $1-\gamma$. Next, we can can use this to find the distribution over the corrupted signal $P(H_{k})$
+Interestingly, this result is fairly intuitive - the distribution $P(S_{k})$ is given by multiplying the probability mass $P(M_{k})$ by a factor of $\gamma$ and inflating the value at zero by the difference between the new and old distributions. It is worth nothing that adding $1-\gamma$ to the probability mass at zero is effectively reducing the Poisson rate $\eta$ to $\gamma\eta$, since the probability of observing an event is uniform in the interval $(t, t+\Delta t)$. Therefore, we conclude that
 
-To find $P(H_{k})$, we first evaluate the joint density $P(S_{k},H_{k})$
+\begin{align*}
+P(S_{k}) &= \mathrm{Poisson}(S_{k}; \lambda_{k})
+\end{align*}
+
+where we have used the \emph{effective rate} $\lambda_{k} = \gamma\eta_{k}$. 
+
+\subsection{Corrupting the signal}
+
+In the real-world, noise is unavoidable. Detectors often suffer from dark noise (thermal noise) and there may also be a background signal. Considering the former first, we define another r.v. $W_{\theta,k}$ which represents Gaussian dark noise of the detector element. Unless otherwise specified we will always assume that $W_{k} \sim \mathcal{N}(m_{k},\sigma_{w,k}^{2})$. Adding in dark noise leads to yet another distribution, this time over the corrupted signal $H_{k}$. Notice that while $S_{k}$ has units of photons $[\mathrm{p}]$, that $H_{k}$ has units of photoelectrons $[e^{-}]$. The conversion factor between the two is the gain of the detector element $g_{k}\; [e^{-}\mathrm{p}^{-1}]$. Moving on, we employ a similar trick as before, evaluating the joint density $P(S_{k},H_{k})$
+
 \vspace{0.1in}
 \begin{align*}
-P(S_{k},H_{k}) &= P(H_{k}|S_{k}=s)P(S_{k}=s)\\
-&= \frac{1}{Z}\exp\left(-\frac{(H_{k}-g_{k}s-\mu_{k})^{2}}{\sigma_{k}^{2}}\right)\frac{\exp\left({-\Lambda_{k}}\right)\Lambda_{k}^{s}}{s!}
+P(S_{k},H_{k}) &= P(H_{k}|S_{k})P(S_{k})\\
+&= \frac{1}{Z}\exp\left(-\frac{(H_{k}-g_{k}n_{k})^{2}}{\sigma_{k}^{2}}\right)\frac{\exp\left({-\lambda_{k}}\right)\lambda_{k}^{n_{k}}}{n_{k}!}
 \end{align*}
 \vspace{0.1in}
 
 Marginalizing over $S_{k}$ gives the desired distribution over $H_{n}$
 
 \begin{equation*}
-P(H_{k}) = \frac{1}{Z}\sum_{s=0}^{\infty}\frac{\exp\left({-\Lambda_{k}}\right)\Lambda_{k}^{s}}{s!}\exp\left(-\frac{(H_{k}-g_{k}s-\mu_{k})^{2}}{\sigma_{k}^{2}}\right)
+P(H_{k}) = \frac{1}{Z}\sum_{s=0}^{\infty}\frac{\exp\left({-\lambda_{k}}\right)\lambda_{k}^{n_{k}}}{n_{k}!}\exp\left(-\frac{(H_{k}-g_{k}n_{k})^{2}}{\sigma_{k}^{2}}\right)
 \end{equation*}
 
+\section{An array detector}
 
+Most detectors used for imaging have many elements (pixels) so that we can record an image projected onto the detect by a lens or system of lenses. Due to diffraction, a point emitter will be registered as a diffraction limited spot. We will adopt the Gaussian PSF approximation for such a spot:
 
-Consider the general prescripton of maxmimum likelihood parameter estimation:
+\begin{equation*}
+q(x,y) = \frac{1}{2\pi\sigma^{2}}\exp\left(-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}\right)
+\end{equation*}
 
-\begin{align*}
-\mathcal{E}_{\mathrm{MLE}}: \theta^{*} = \underset{\theta}{\mathrm{argmax}}\; \ell(\mathcal{D}|\theta)
-\end{align*}
+The function $q(x,y)$ can be thought of an the intensity profile of the fluorphore emission, although this is not exactly correct. The wave particle-duality in quantum mechanics says that observation of a wave produces a particle, and our detector is nothing but an observer. The EM field that is waving is observed and then we record a particle. However, the statistical nature of quantum mechanics says that $q(x,y)$ is actually a probability distribution and our photons are samples from it. The detector array is binning those samples in a 2D histogram that we call an image. All that said, the Poisson rate at every pixel is not the same and we need to re-evaluate $P(S_{k})$ for each pixel. This is fairly simple, since the rate at every bin is just the probability assigned to that bin, which is an integral of $q(x,y)$ over the bin
 
-where $\ell = \log\mathcal{L}$ is the log-likelihood function\\
-\vspace{0.1in}
-Question: can we derive a theoretical lower bound on our uncertainty in $\theta^{*}$ for an arbitrary estimator $\mathcal{E}$?\\
-\vspace{0.1in}
-Start by defining the \emph{score} of $\ell$ with respect to $\theta$ as
+\begin{equation*}
+\lambda_{k} = \gamma\cdot\int_{C_{k}} q(x,y)dxdy
+\end{equation*}
 
-\begin{align*}
-\mathcal{S} = \underset{{x\sim p}}{\mathbb{E}}\left[\frac{\partial}{\partial\theta} \ell(x|\theta)\right]
-\end{align*}
-
-Since $x$ is a continuous random variable, we have to consider the average score
-
-
-The Fisher Information $I(\theta)$ is defined as the variance of the score
-
-\begin{align*}
-I(\theta) = \underset{{x\sim p}}{\mathbb{E}}\left[\frac{\partial}{\partial\theta} \left(\ell(x|\theta)\right)\right]^{2} = \underset{{x\sim p}}{\mathbb{E}}\left[\frac{\partial^{2}}{\partial\theta^{2}} \left(\ell(x|\theta)\right)\right]
-\end{align*}
-
-for $x\in\mathcal{D}$. The variance takes this from because it can be shown that $\mathcal{S}=0$\\
-\vspace{0.1in}
-Intuitively, if the likelihood is insensitive changes in $\theta$, then $\mathcal{D}$ does not provide very much information about $\theta$\\
+\section{Fisher information and the Cramer-Rao bound}
 
 When there are many parameters, the Fisher Information (second moment of the score) is a covariance matrix
 
@@ -134,25 +104,28 @@ When there are many parameters, the Fisher Information (second moment of the sco
 I_{ij}(\theta) = \underset{{x\sim p}}{\mathbb{E}}\left[\frac{\partial}{\partial\theta_{i}} \left(\ell(x|\theta)\right)\frac{\partial}{\partial\theta_{j}} \left(\ell(x|\theta)\right)\right]
 \end{align*}
 
-
-
-
 We have shown that the model for the number of photoelectrons at a pixel is
 
 \begin{equation*}
-P(H_{k}) = \frac{1}{Z}\sum_{s=0}^{\infty}\frac{\exp\left({-\Lambda_{k}}\right)\Lambda_{k}^{s}}{s!}\exp\left(-\frac{(H_{k}-g_{k}s-\nu_{k})^{2}}{\sigma_{k}^{2}}\right)
+P(H_{k}) = \frac{1}{Z}\sum_{s=0}^{\infty}\frac{\exp\left({-\lambda_{k}}\right)\lambda_{k}^{n_{k}}}{n_{k}!}\exp\left(-\frac{(H_{k}-g_{k}n_{k})^{2}}{\sigma_{k}^{2}}\right)
 \end{equation*}
 
-Notice that $\nu_{k}$ is dependent on $\int q(x,y)dxdy$ and therefore the PSF parameters $\theta = (\mu_{x},\mu_{y},\sigma)$. These can be plugged into the following Fisher information matrix
+As we have noted above, $\lambda_{k}$ is dependent on $\int q(x,y)dxdy$ and therefore the PSF parameters $\theta = (\mu_{x},\mu_{y},\sigma)$. These can be plugged into the following Fisher information matrix
 
 \begin{align*}
-I_{ij}(\theta) &= \underset{{H\sim P}}{\mathbb{E}}\left[\frac{\partial}{\partial\theta_{i}} \left(\log \prod_{k} P(H_{k})\right)\frac{\partial}{\partial\theta_{j}} \left(\log \prod_{k} P(H_{k})\right)\right]\\
-&= \underset{{H\sim P}}{\mathbb{E}}\sum_{k}\left[\frac{\partial}{\partial\theta_{i}} \log P(H_{k})\frac{\partial}{\partial\theta_{j}} \log P(H_{k})\right]
+I_{ij}(\theta) &= \underset{{H\sim P(H)}}{\mathbb{E}}\left[\frac{\partial}{\partial\theta_{i}} \left(\log \prod_{k} P(H_{k})\right)\frac{\partial}{\partial\theta_{j}} \left(\log P(H_{k})\right)\right]\\
+&= \underset{{H\sim P(H)}}{\mathbb{E}}\left[\frac{\partial}{\partial\theta_{i}} \sum_{k}\log P(H_{k})\frac{\partial}{\partial\theta_{j}}\sum_{k} \log P(H_{k})\right]
 \end{align*}
 
-We need to then calculate the derivatives with respect to the parameters $\theta_{i}$. 
+where $H\sim P(H)$ is perhaps a small patch of an image containing a diffraction limited spot. We need to then calculate the derivatives with respect to each of the parameters $\theta = (x_{0},y_{0},\sigma)$. 
 
-Computing the mean value at a pixel involves computing an integral $ \int_{C_{k}} q(x,y)dxdy$. This integral is difficult to compute, but a 2D image is really just a 2D histogram. So if we can find the PSF $q(x,y)$ from the objective lens, we can use Monte Carlo integration (sample from the normalized PSF) and multiply by the emission rate $\nu$ to compute the mean of the Poisson process at a pixel $k$
+\begin{align*}
+\frac{\partial}{\partial x_{0}}\log P(H_{k}) &= \frac{1}{P(H_{k})} \frac{\partial P(H_{k})}{\partial x_{0}}\\
+&=  \frac{1}{ZP(H_{k})}\sum_{n_{k}=0}^{\infty}\frac{\partial}{\partial x_{0}}\frac{\exp\left({-\lambda_{k}}\right)\lambda_{k}^{n_{k}}}{n_{k}!}\exp\left(-\frac{(H_{k}-g_{k}n_{k})^{2}}{\sigma_{k}^{2}}\right)\\
+\end{align*}
+
+Let's consider just the parts relevant to the derivative $\frac{\partial}{\partial x_{0}}\exp\left(-\lambda_{k}\right)\lambda_{k}^{n_{k}}$. This is far too difficult to compute analytically. Instead, we need to compute this infinite sum numerically, using Monte Carlo integration to compute $\lambda_{k}$ on a 3D lattice of points in the parameter space $\theta$. In total, we have to for each pixel (1) compute this sum over the 3D parameter space numerically (2) take the logarithm of all values (3) sum the 3D tensors over pixels (4) compute the Hessian matrix (4) sum the Hessians over pixels and (5) 
+
 
 
 \end{document}
