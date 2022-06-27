@@ -123,6 +123,35 @@ The function $q(x,y)$ can be thought of an the intensity profile of the fluoroph
 
 \section{Fisher information and the Cramer-Rao bound}
 
+\subsection{Example: Fisher information for the normal distribution}
+
+Suppose the we have a normally distributed random variable $X \sim \mathcal{N}(\mu,\sigma^{2})$ where $\mu$ and $\sigma^{2}$ are both unknown parameters. We are also given a batch of $N$ samples $\{X_{i}\}_{i=1}^{N}$ and we would like to know how much information those samples carry about our parameters $\theta = (\mu,\sigma)$. In principle there is some probability distribution $P(\theta)=P(\mu,\sigma)$ which can be initially taken to be uniform (which has maximum entropy). A natural question that follows is, how much does the batch of samples reduce the entropy of $P(\theta)$ and thus our uncertainty about $\theta$?
+
+\begin{align*}
+I_{ij}(\theta) = \underset{{x\sim p}}{\mathbb{E}}\left[\frac{\partial}{\partial\theta_{i}} \left(\ell(x|\theta)\right)\frac{\partial}{\partial\theta_{j}} \left(\ell(x|\theta)\right)\right]
+\end{align*}
+
+For the 1D normal distribution, we only have two parameters, so the Fisher information matrix has a simple form 
+
+\begin{align*}
+\mathbf{I}(\theta) = \begin{pmatrix}
+\partial_{\mu}^{2}\ell & \partial_{\mu}\partial_{\sigma} \\
+\partial_{\sigma}\partial_{\mu} & \partial_{\sigma}^{2}\ell
+\end{pmatrix}
+\end{align*}
+
+It is straightforward to show that the log-likelihood of the data for this model is given by
+
+\begin{align*}
+\ell(x|\theta) = -\frac{1}{2}\log 2\pi\sigma^{2} - \frac{(x-\mu)^{2}}{2\sigma^{2}}
+\end{align*}
+
+\begin{align*}
+\partial_{\mu}^{2}\ell = -\partial_{\mu}^{2}\frac{(x-\mu)^{2}}{2\sigma^{2}}
+\end{align*}
+
+\subsection{The array detector again}
+
 When there are many parameters, the Fisher Information (second moment of the score) is a covariance matrix
 
 \begin{align*}
