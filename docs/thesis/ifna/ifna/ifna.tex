@@ -1,10 +1,10 @@
 % Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
 % For more details: https://www.sharelatex.com/learn/Beamer
 
-\documentclass{beamer}					% Document class
+\documentclass[aspectratio=1610]{beamer}					% Document class
 
 \setbeamertemplate{footline}[text line]{%
-  \parbox{\linewidth}{\vspace*{-8pt}Differential expression analysis in EndoC-$\beta$H1 beta cells after IFN-$\alpha$ treatment \hfill\insertshortauthor\hfill\insertpagenumber}}
+  \parbox{\linewidth}{\vspace*{-8pt}Statistical analysis for ensemble snapshots of transcriptional bursting \hfill\insertshortauthor\hfill\insertpagenumber}}
 \setbeamertemplate{navigation symbols}{}
 
 \usepackage[english]{babel}				% Set language
@@ -32,7 +32,7 @@
 \usepackage{bm}
 \usepackage[font=small,labelfont=bf]{caption}				% For cross-referencing
 
-\title{Differential expression analysis in EndoC-$\beta$H1 beta cells after IFN-$\alpha$ treatment}	% Presentation title
+\title{Statistical analysis for ensemble snapshots of transcriptional bursting}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -52,68 +52,25 @@
 %	<content>
 %\end{frame}
 
-\begin{frame}{Overview}
-1. Hybrid microscope setup\\
-2. Motivation for studying transcriptional bursting\\
-3. Gene selection\\
-\end{frame}
-
-\begin{frame}{Widefield-HILO hybrid microscope schematic}
-
-
-\begin{figure}
-\includegraphics[width=10cm]{epi-hilo.png}
-\end{figure}
-
-\end{frame}
-
-\begin{frame}{Example images}
-
-\begin{textblock*}{6cm}(0.25cm,1cm)
-\begin{figure}
-\includegraphics[width=5cm, height=5cm]{dapi-gapdh-1.png}
-\end{figure}
-\end{textblock*}
-
-\begin{textblock*}{6cm}(6.25cm,1cm)
-\begin{figure}
-\includegraphics[width=5cm, height=5cm]{dapi-gapdh-2.png}
-\end{figure}
-\end{textblock*}
-
-\begin{textblock*}{6cm}(0.75cm,1.35cm)
-\textcolor{blue}{DAPI}\\
-\textcolor{green}{GAPDH}
-\end{textblock*}
-
-\begin{textblock*}{15cm}(0.4cm,7cm)
-U2OS cells stained for DAPI and human GAPDH (housekeeping gene)\\ using in-situ hybridization\\
-\vspace{0.1in}
-~100ms and 750ms exposure respectively
-\end{textblock*}
-
-
-
-\end{frame}
 
 
 \begin{frame}{Gene expression is stochastic and non-constitutive}
 
 
-\begin{textblock*}{6cm}(0.25cm,1cm)
+\begin{textblock*}{7cm}(1cm,1cm)
 \begin{figure}
-\includegraphics[width=6cm]{burst-1.png}
+\includegraphics[width=7cm]{burst-1.png}
 \end{figure}
 \end{textblock*}
 
-\begin{textblock*}{6cm}(6.25cm,1cm)
+\begin{textblock*}{7cm}(8cm,1cm)
 \begin{figure}
 \includegraphics[width=6cm]{burst-2.png}
 \end{figure}
 \end{textblock*}
 
 
-\begin{textblock*}{6cm}(0.25cm,5cm)
+\begin{textblock*}{6cm}(1cm,5cm)
 \hspace{0.5in}\textbf{Single-state models}
 \begin{itemize}
 \item RNAs are 'born' at a fixed rate
@@ -121,7 +78,7 @@ U2OS cells stained for DAPI and human GAPDH (housekeeping gene)\\ using in-situ 
 \end{itemize}
 \end{textblock*}
 
-\begin{textblock*}{6cm}(6.25cm,5cm)
+\begin{textblock*}{6cm}(8cm,5cm)
 \hspace{0.5in}\textbf{Multi-state models}
 \begin{itemize}
 \item Promoter can be in multiple states
@@ -137,59 +94,134 @@ Single-state models tend to \textcolor{red}{underestimate variance in RNA counts
 
 \end{frame}
 
-\begin{frame}{EndoC-$\beta$H1 treated with IFN-$\alpha$}
+\begin{frame}
 
-Studies of IFN-$\alpha$ induced expression in cultured cells often lack:
+We would like to investigate transcriptional bursting using fluorescence in-situ hybridization (FISH)\\
 \vspace{0.2in}
 
 \begin{itemize}
-\item Single cell resolution of RNA counts and locations
-\item Sub-hour time resolution of transcript counts and locations
-\item Rigorous statistical models of gene expression
+\item Our image acquisition and detection strategy is standardized (5 by 5 regions, max-intensity z-projections, LoG blob detection and 2D Gaussian fitting)
+\item Need to identify a set of target genes, which we have good reason to believe are under the control of our treatment condition and not expressed constitutively
+\item Aiming for ~3000 cells (for each treatment condition?)
+\item Need to define a cell-line (HeLa?) and treatment condition pairing
+\item \textcolor{red}{Need to define a set of analysis methods compatible with ensemble snapshot data}
 \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Testing dataset:  STL1/CTT1 induction with NaCl in yeast}
+\begin{textblock*}{12cm}(2cm,1.25cm)
+\begin{figure}
+\includegraphics[width=12cm]{salt.png}
+\caption{Munsky et al., PNAS 2018}
+\end{figure}
+\end{textblock*}
+\end{frame}
+
+
+\begin{frame}{Testing dataset: STL1/CTT1 induction with NaCl in yeast}
+
+Useful as a guide when designing our own experiments:
 \vspace{0.2in}
-Starting point:\\
-\vspace{0.2in}
-Colli, M.L., et al. \textit{An integrated multi-omics approach identifies the landscape of interferon-$\alpha$-mediated responses of human pancreatic beta cells}. Nat Commun 11, 2584 (2020)
+
+\begin{itemize}
+\item 0.2M NaCl
+\begin{itemize}
+\item 2 biological replicates
+\begin{itemize}
+\item 15 time points per replicate
+\end{itemize}
+\end{itemize}
+\item 0.4M NaCl
+\begin{itemize}
+\item 3 biological replicates
+\begin{itemize}
+\item 15 time points per replicate
+\end{itemize}
+\end{itemize}
+\end{itemize}
 
 \end{frame}
 
-\begin{frame}{Identifying genes: EndoC-$\beta$H1 treated with IFN-$\alpha$}
+\begin{frame}{STL1 mRNA counts per cell at 0.4M NaCl}
 
-
+\begin{textblock*}{5cm}(3.4cm,0.75cm)
 \begin{figure}
-\includegraphics[width=8cm]{fold-change.png}
+\includegraphics[width=9cm]{count-hist-2.png}
 \end{figure}
+\end{textblock*}
 
-\end{frame}
-
-\begin{frame}{Identifying genes: EndoC-$\beta$H1 treated with IFN-$\alpha$ at 2h }
-
-
+\begin{textblock*}{5cm}(3.4cm,4.5cm)
 \begin{figure}
-\includegraphics[width=10cm]{volcano-2h.png}
+\includegraphics[width=9cm]{count-hist-1.png}
 \end{figure}
+\end{textblock*}
 
 \end{frame}
 
-\begin{frame}{Identifying genes: EndoC-$\beta$H1 treated with IFN-$\alpha$: 8h }
+\begin{frame}{STL1 mRNA counts per cell at 0.4M NaCl}
 
+\begin{textblock*}{5cm}(3.25cm,0.5cm)
 \begin{figure}
-\includegraphics[width=10cm]{volcano-8h.png}
+\includegraphics[width=10cm]{avg-count.png}
 \end{figure}
+\end{textblock*}
 
+\vspace{7.25cm}
+Error bars represent standard deviations from the mean. Cells marked ON for $>$ 3 STL1 mRNA
 
 \end{frame}
 
-\begin{frame}{Identifying genes: EndoC-$\beta$H1 treated with IFN-$\alpha$: 24h }
+\begin{frame}{Statistically defining the unit intensity}
 
+\begin{textblock*}{5cm}(3.25cm,0.5cm)
 \begin{figure}
-\includegraphics[width=10cm]{volcano-24h.png}
+\includegraphics[width=10cm]{int-hist.png}
 \end{figure}
+\end{textblock*}
 
+\vspace{7.25cm}
+The median of the mRNA intensity distribution is used to determine the number of nascent RNA at the transcription site (TS)
+
+\end{frame}
+
+\begin{frame}{Nascent mRNA counts at the transcription site}
+
+\begin{textblock*}{5cm}(0.75cm,1.5cm)
+\begin{itemize}
+\item Brightest spot in the nucleus defined as putative TS
+\item TS marked ACTIVE if $I>2*\mathrm{med}$
+\item Nascent mRNA count is $I/\mathrm{med}$
+\end{itemize}
+
+\end{textblock*}
+
+\begin{textblock*}{5cm}(7cm,0.75cm)
+\begin{figure}
+\includegraphics[width=8cm]{active-ts-dist-2.png}
+\end{figure}
+\end{textblock*}
+
+\begin{textblock*}{5cm}(7cm,4.5cm)
+\begin{figure}
+\includegraphics[width=8cm]{active-ts-dist-1.png}
+\end{figure}
+\end{textblock*}
 
 \end{frame}
 
 
+\begin{frame}{Comments}
+
+
+\begin{itemize}
+\item Average counts show a 'transcriptional burst', but variability is very high
+\item Cells are not necessarily bursting synchronously
+\item Ensemble averages may not accurately represent the underlying dynamics
+\item How to correlate transcriptional bursting with spatial organization of transcripts?
+\end{itemize}
+
+
+\end{frame}
 
 \end{document}
