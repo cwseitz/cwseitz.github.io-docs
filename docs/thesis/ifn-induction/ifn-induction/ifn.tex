@@ -52,7 +52,70 @@
 %	<content>
 %\end{frame}
 
+\begin{frame}{Key questions}
 
+\begin{itemize}
+\item Does IFN$\gamma$ induce transcriptional bursts in HeLa cells?
+\item Which genes?
+\item What are the parameters of the burst (size, frequency, etc.)?
+\item In general, it possible to correlate spatial patterning with transcriptional bursting, using only ensemble snapshots (FISH)?
+\end{itemize}
+
+
+\end{frame}
+
+\begin{frame}{Significant variability in STL1 mRNA counts per cell at 0.4M NaCl}
+
+\begin{textblock*}{5cm}(3.25cm,0.5cm)
+\begin{figure}
+\includegraphics[width=10cm]{avg-count.png}
+\end{figure}
+\end{textblock*}
+
+\vspace{7.25cm}
+Error bars represent standard deviations from the mean\\
+Cells marked ON for $>$ 3 STL1 mRNA in yeast
+
+\end{frame}
+
+\begin{frame}{Assessing STL1 mRNA count variability at the transcription site}
+
+\begin{textblock*}{5cm}(3.25cm,0.5cm)
+\begin{figure}
+\includegraphics[width=10cm]{int-hist.png}
+\end{figure}
+\end{textblock*}
+
+\vspace{7.25cm}
+The median of the mRNA intensity distribution is used to determine the number of nascent RNA at the transcription site (TS)
+
+\end{frame}
+
+\begin{frame}{Assessing STL1 mRNA count variability at the transcription site}
+
+\begin{textblock*}{5cm}(0.75cm,1.5cm)
+\begin{itemize}
+\item Brightest spot in the nucleus defined as putative TS
+\item TS marked ACTIVE if $I>2*\mathrm{med}$
+\item Nascent mRNA count is $\mathrm{round}(I/\mathrm{med})$
+\item Count variability suggests asynchrony
+\end{itemize}
+
+\end{textblock*}
+
+\begin{textblock*}{5cm}(7cm,0.75cm)
+\begin{figure}
+\includegraphics[width=8cm]{active-ts-dist-2.png}
+\end{figure}
+\end{textblock*}
+
+\begin{textblock*}{5cm}(7cm,4.5cm)
+\begin{figure}
+\includegraphics[width=8cm]{active-ts-dist-1.png}
+\end{figure}
+\end{textblock*}
+
+\end{frame}
 
 \begin{frame}{Gene expression is stochastic and non-constitutive}
 
@@ -81,7 +144,7 @@
 \begin{textblock*}{6cm}(8cm,5cm)
 \hspace{0.5in}\textbf{Multi-state models}
 \begin{itemize}
-\item Promoter can be in multiple states
+\item Promoter can be in multiple states (switching behavior)
 \item RNA counts are not Poissonian
 \end{itemize}
 
@@ -94,133 +157,109 @@ Single-state models tend to \textcolor{red}{underestimate variance in RNA counts
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Gene expression is stochastic and non-constitutive (live-cell MS2-MCP)}
+\begin{figure}
+\includegraphics[width=12cm]{live-cell.png}
+\end{figure}
+{\tiny Forero-Quintero, et al. \textit{Live-cell imaging reveals the spatiotemporal organization of endogenous RNAPII phosphorylation at a single gene}. Nat Commun 2021}\\
+\end{frame}
 
-We would like to investigate transcriptional bursting using fluorescence in-situ hybridization (FISH)\\
+\begin{frame}{Ensemble averages and variances do not fully explain underlying transcription dynamics}
+
+\begin{itemize}
+\item Transcription is stochastic, meaning that RNA counts can only be understood in terms of a probability distribution
 \vspace{0.2in}
-
-\begin{itemize}
-\item Our image acquisition and detection strategy is standardized (5 by 5 regions, max-intensity z-projections, LoG blob detection and 2D Gaussian fitting)
-\item Need to identify a set of target genes, which we have good reason to believe are under the control of our treatment condition and not expressed constitutively
-\item Aiming for ~3000 cells (for each treatment condition?)
-\item Need to define a cell-line (HeLa?) and treatment condition pairing
-\item \textcolor{red}{Need to define a set of analysis methods compatible with ensemble snapshot data}
-\end{itemize}
-
-\end{frame}
-
-\begin{frame}{Testing dataset:  STL1/CTT1 induction with NaCl in yeast}
-\begin{textblock*}{12cm}(2cm,1.25cm)
-\begin{figure}
-\includegraphics[width=12cm]{salt.png}
-\caption{Munsky et al., PNAS 2018}
-\end{figure}
-\end{textblock*}
-\end{frame}
-
-
-\begin{frame}{Testing dataset: STL1/CTT1 induction with NaCl in yeast}
-
-Useful as a guide when designing our own experiments:
+\item High variance in mRNA counts suggests more complicated underlying dynamics which are not evident in ensemble averages
 \vspace{0.2in}
-
+\item We cannot assume that cells are bursting synchronously
+\vspace{0.2in}
+\item \textcolor{red}{Bursting phase has implications for correlating bursting with spatial organization via ensemble data (FISH)}
+\vspace{0.1in}
 \begin{itemize}
-\item 0.2M NaCl
-\begin{itemize}
-\item 2 biological replicates
-\begin{itemize}
-\item 15 time points per replicate
-\end{itemize}
-\end{itemize}
-\item 0.4M NaCl
-\begin{itemize}
-\item 3 biological replicates
-\begin{itemize}
-\item 15 time points per replicate
-\end{itemize}
+\item Classification of cells based on $P(X_{nuc},X_{cyto},X_{TS})$?
+\item Can also look at the evolution of the spatial feature distributions
 \end{itemize}
 \end{itemize}
 
 \end{frame}
 
-\begin{frame}{STL1 mRNA counts per cell at 0.4M NaCl}
+\begin{frame}{Interferon-$\gamma$ induction in HeLa cells}
 
-\begin{textblock*}{5cm}(3.4cm,0.75cm)
-\begin{figure}
-\includegraphics[width=9cm]{count-hist-2.png}
-\end{figure}
-\end{textblock*}
+\vspace{0.1in}
+Single cell transcriptome measurements of polyA mRNA for naïve HeLa cells (N=90), induced with interferon gamma (50ng/mL) for 24h
 
-\begin{textblock*}{5cm}(3.4cm,4.5cm)
 \begin{figure}
-\includegraphics[width=9cm]{count-hist-1.png}
+\includegraphics[width=7cm]{volcano.png}
 \end{figure}
-\end{textblock*}
+
+{\tiny Siwek et al. 
+\it{Activation of Clustered IFN$\gamma$ Target Genes Drives Cohesin-Controlled Transcriptional Memory} Cell 2020}
 
 \end{frame}
 
-\begin{frame}{STL1 mRNA counts per cell at 0.4M NaCl}
+\begin{frame}{A compartment model for IFN$\gamma$ induced gene expression}
 
-\begin{textblock*}{5cm}(3.25cm,0.5cm)
-\begin{figure}
-\includegraphics[width=10cm]{avg-count.png}
-\end{figure}
-\end{textblock*}
+Let $X$ represent an arbitrary RNA transcript of IFN$\gamma$ induced gene $G$. Assume two chromatin states (on and off)
 
-\vspace{7.25cm}
-Error bars represent standard deviations from the mean. Cells marked ON for $>$ 3 STL1 mRNA
+\begin{align*}
+\mathrm{Gene\;activation}: G_{off} &\overset{k_{on}}{\rightarrow} G_{on}\\
+\mathrm{Gene\;inactivation}: G_{on} &\overset{k_{off}}{\rightarrow} G_{off}\\
+\mathrm{Transcription}: G_{on} &\overset{k_{t}}{\rightarrow} G_{on} + X_{\mathrm{nuc}}\\
+\mathrm{RNA \;Export}: X_{\mathrm{nuc}} &\overset{k_{exp}}{\rightarrow} X_{\mathrm{cyt}}\\
+\mathrm{RNA\; degradation}: X_{\mathrm{cyt}} &\overset{\gamma}{\rightarrow} \emptyset\\
+\end{align*}
 
-\end{frame}
+Raw data collected post induction can be used to infer parameters
 
-\begin{frame}{Statistically defining the unit intensity}
-
-\begin{textblock*}{5cm}(3.25cm,0.5cm)
-\begin{figure}
-\includegraphics[width=10cm]{int-hist.png}
-\end{figure}
-\end{textblock*}
-
-\vspace{7.25cm}
-The median of the mRNA intensity distribution is used to determine the number of nascent RNA at the transcription site (TS)
+\begin{equation*}
+\theta = \left( k_{on},k_{off},k_{t},k_{exp},\gamma\right)
+\end{equation*}
 
 \end{frame}
 
-\begin{frame}{Nascent mRNA counts at the transcription site}
+\begin{frame}{Bayesian parameter inference using ensemble snapshots}
+\vspace{0.1in}
 
-\begin{textblock*}{5cm}(0.75cm,1.5cm)
-\begin{itemize}
-\item Brightest spot in the nucleus defined as putative TS
-\item TS marked ACTIVE if $I>2*\mathrm{med}$
-\item Nascent mRNA count is $I/\mathrm{med}$
-\end{itemize}
+Likelihood-based methods can infer $\theta$ from ensemble snapshots (FISH data)
 
-\end{textblock*}
+\begin{equation*}
+\theta = \left( k_{on},k_{off},k_{t},k_{exp},\gamma\right)
+\end{equation*}
 
-\begin{textblock*}{5cm}(7cm,0.75cm)
-\begin{figure}
-\includegraphics[width=8cm]{active-ts-dist-2.png}
-\end{figure}
-\end{textblock*}
+One way is through maximum a posteriori estimation (MAP):
 
-\begin{textblock*}{5cm}(7cm,4.5cm)
-\begin{figure}
-\includegraphics[width=8cm]{active-ts-dist-1.png}
-\end{figure}
-\end{textblock*}
+\begin{align*}
+\theta^{*} = \underset{\theta}{\mathrm{argmax}} \;\;P(X|\theta)
+\end{align*}
+
+A more robust (but harder) way is via Bayesian inference, which lets us infer $\theta$ from $X$ while quantifying the uncertainty in our estimate:
+
+\begin{align*}
+P(\theta|\mathbf{x}) \propto P(\mathbf{x}|\theta)\pi(\theta) = \pi(\theta)\prod_{t} P(\mathbf{x}_{t}|\theta)
+\end{align*}
+
+The likelihood $P(X,t)$ is the solution to the chemical master equation at time $t$
 
 \end{frame}
 
+\begin{frame}{Kolmogorov's forward equation (chemical master equation)}
 
-\begin{frame}{Comments}
+Dynamics on biochemical reaction networks are inherently stochastic and the state space is discrete. We can only write probabilities over the state space
 
+\vspace{0.1in}
 
-\begin{itemize}
-\item Average counts show a 'transcriptional burst', but variability is very high
-\item Cells are not necessarily bursting synchronously
-\item Ensemble averages may not accurately represent the underlying dynamics
-\item How to correlate transcriptional bursting with spatial organization of transcripts?
-\end{itemize}
+\begin{align*}
+P(\mathbf{x}_{i},t) &= \sum_{j} T_{ji}(\mathbf{x}_{i},t|\mathbf{x}_{j},t-\Delta t)P(\mathbf{x}_{j},t-\Delta t)\\ 
+&= \sum_{k} T_{k}(\mathbf{x}_{i},t|\mathbf{x}_{i}-\nu_{k},t-\Delta t)P(\mathbf{x}_{i}-\nu_{k},t-\Delta t)
+\end{align*}
 
+where $T_{k}$ is the probability of a reaction channel $k$ firing in the interval $(t,t+\Delta t)$.\\
+\vspace{0.1in}
+Taking the limit $\Delta t \rightarrow 0$ one can derive the forward Kolmogorov equation or chemical master equation (CME)
+
+\begin{align*}
+\frac{dP(\mathbf{x},t|\mathbf{x}_{0})}{dt} = \sum_{k} T_{k}(\mathbf{x}-\nu_{k})P(\mathbf{x}-\nu_{k},t) - T_{k}(\mathbf{x})P(\mathbf{x},t)
+\end{align*}
 
 \end{frame}
 
