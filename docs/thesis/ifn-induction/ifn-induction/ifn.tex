@@ -4,7 +4,7 @@
 \documentclass[aspectratio=1610]{beamer}					% Document class
 
 \setbeamertemplate{footline}[text line]{%
-  \parbox{\linewidth}{\vspace*{-8pt}Establishing a quantitative framework for analyzing IFN$\gamma$ induction in HeLa cells \hfill\insertshortauthor\hfill\insertpagenumber}}
+  \parbox{\linewidth}{\vspace*{-8pt}Establishing a quantitative framework for analyzing inducible gene expression in HeLa cells \hfill\insertshortauthor\hfill\insertpagenumber}}
 \setbeamertemplate{navigation symbols}{}
 
 \usepackage[english]{babel}				% Set language
@@ -32,7 +32,7 @@
 \usepackage{bm}
 \usepackage[font=small,labelfont=bf]{caption}				% For cross-referencing
 
-\title{Establishing a quantitative framework for analyzing IFN$\gamma$ induction in HeLa cells}	% Presentation title
+\title{Establishing a quantitative framework for analyzing inducible gene expression in HeLa cells}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -52,91 +52,24 @@
 %	<content>
 %\end{frame}
 
+\begin{frame}{Transcriptional burst literature landscape}
 
-\begin{frame}{Interferon-$\gamma$ induces differential gene expression in HeLa cells}
-
-\vspace{0.1in}
-Single cell transcriptome measurements of polyA mRNA for naïve HeLa cells (N=90), induced with interferon gamma (50ng/mL) for 24h
 
 \begin{figure}
-\includegraphics[width=7cm]{volcano.png}
+\includegraphics[width=10cm]{lit.png}
 \end{figure}
-
-{\tiny Siwek et al. 
-\it{Activation of Clustered IFN$\gamma$ Target Genes Drives Cohesin-Controlled Transcriptional Memory} Cell 2020}
 
 \end{frame}
 
-\begin{frame}{Key questions}
 
-\begin{itemize}
-\item Does IFN$\gamma$ induce transcriptional bursts in HeLa cells?
-\item Which genes?
-\item What are the parameters of the burst (size, frequency, etc.)?
-\item In general, it possible to correlate spatial patterning with transcriptional bursting, using only ensemble snapshots (FISH)?
-\end{itemize}
-
-\vspace{1in}
-
-Need to establish analysis methods on a testing dataset... 
-
-
+\begin{frame}{Gene expression is stochastic (live-cell MS2-MCP)}
+\begin{figure}
+\includegraphics[width=12cm]{live-cell.png}
+\end{figure}
+{\tiny Forero-Quintero, et al. \textit{Live-cell imaging reveals the spatiotemporal organization of endogenous RNAPII phosphorylation at a single gene}. Nat Commun 2021}\\
 \end{frame}
 
-\begin{frame}{Significant variability in STL1 mRNA counts per cell at 0.4M NaCl}
-
-\begin{textblock*}{5cm}(3.25cm,0.5cm)
-\begin{figure}
-\includegraphics[width=10cm]{avg-count.png}
-\end{figure}
-\end{textblock*}
-
-\vspace{7.25cm}
-Error bars represent standard deviations from the mean\\
-Cells marked ON for $>$ 3 STL1 mRNA in yeast
-
-\end{frame}
-
-\begin{frame}{Assessing STL1 mRNA count variability at the transcription site}
-
-\begin{textblock*}{5cm}(3.25cm,0.5cm)
-\begin{figure}
-\includegraphics[width=10cm]{int-hist.png}
-\end{figure}
-\end{textblock*}
-
-\vspace{7.25cm}
-The median of the mRNA intensity distribution is used to determine the number of nascent RNA at the transcription site (TS)
-
-\end{frame}
-
-\begin{frame}{Assessing STL1 mRNA count variability at the transcription site}
-
-\begin{textblock*}{5cm}(0.75cm,1.5cm)
-\begin{itemize}
-\item Brightest spot in the nucleus defined as putative TS
-\item TS marked ACTIVE if $I>2*\mathrm{med}$
-\item Nascent mRNA count is $\mathrm{round}(I/\mathrm{med})$
-\item Count variability suggests asynchrony
-\end{itemize}
-
-\end{textblock*}
-
-\begin{textblock*}{5cm}(7cm,0.75cm)
-\begin{figure}
-\includegraphics[width=8cm]{active-ts-dist-2.png}
-\end{figure}
-\end{textblock*}
-
-\begin{textblock*}{5cm}(7cm,4.5cm)
-\begin{figure}
-\includegraphics[width=8cm]{active-ts-dist-1.png}
-\end{figure}
-\end{textblock*}
-
-\end{frame}
-
-\begin{frame}{Gene expression is stochastic and non-constitutive}
+\begin{frame}{Promoter models are necessary for non-constitutive gene expression}
 
 
 \begin{textblock*}{7cm}(1cm,1cm)
@@ -176,36 +109,52 @@ Single-state models tend to \textcolor{red}{underestimate variance in RNA counts
 
 \end{frame}
 
-\begin{frame}{Gene expression is stochastic and non-constitutive (live-cell MS2-MCP)}
+
+\begin{frame}{Example: variability in STL1 mRNA counts per cell at 0.4M NaCl}
+
+\begin{textblock*}{5cm}(3.25cm,0.5cm)
 \begin{figure}
-\includegraphics[width=12cm]{live-cell.png}
+\includegraphics[width=10cm]{avg-count.png}
 \end{figure}
-{\tiny Forero-Quintero, et al. \textit{Live-cell imaging reveals the spatiotemporal organization of endogenous RNAPII phosphorylation at a single gene}. Nat Commun 2021}\\
-\end{frame}
+\end{textblock*}
 
-\begin{frame}{Ensemble averages and variances do not fully explain underlying transcription dynamics}
-
-\begin{itemize}
-\item Transcription is stochastic, meaning that RNA counts can only be understood in terms of a probability distribution
-\vspace{0.2in}
-\item High variance in mRNA counts suggests more complicated underlying dynamics which are not evident in ensemble averages
-\vspace{0.2in}
-\item We cannot assume that cells are bursting synchronously
-\vspace{0.2in}
-\item \textcolor{red}{Bursting phase has implications for correlating bursting with spatial organization via ensemble data (FISH)}
-\vspace{0.1in}
-\begin{itemize}
-\item Classification of cells based on $P(X_{nuc},X_{cyto},X_{TS})$?
-\item Can also look at the evolution of the spatial feature distributions
-\end{itemize}
-\end{itemize}
+\vspace{7.25cm}
+Error bars represent standard deviations from the mean\\
+Cells marked ON for $>$ 3 STL1 mRNA in yeast
 
 \end{frame}
 
 
-\begin{frame}{A compartment model for IFN$\gamma$ induced gene expression}
+\begin{frame}{Assessing STL1 mRNA count variability at the transcription site}
 
-Let $X$ represent an arbitrary RNA transcript of IFN$\gamma$ induced gene $G$. Assume two chromatin states (on and off)
+\begin{textblock*}{5cm}(0.75cm,1.5cm)
+\begin{itemize}
+\item Brightest spot in the nucleus defined as putative TS
+\item TS marked ACTIVE if $I>2*\mathrm{med}$
+\item Nascent mRNA count is $\mathrm{round}(I/\mathrm{med})$
+\item Count variability suggests asynchrony
+\end{itemize}
+
+\end{textblock*}
+
+\begin{textblock*}{5cm}(7cm,0.75cm)
+\begin{figure}
+\includegraphics[width=8cm]{active-ts-dist-2.png}
+\end{figure}
+\end{textblock*}
+
+\begin{textblock*}{5cm}(7cm,4.5cm)
+\begin{figure}
+\includegraphics[width=8cm]{active-ts-dist-1.png}
+\end{figure}
+\end{textblock*}
+
+\end{frame}
+
+
+\begin{frame}{Adding spatial information: a compartment model for induced gene expression}
+
+Let $X$ represent an arbitrary RNA transcript of an induced gene $G$. Assume two promoter states (on and off)
 
 \begin{align*}
 \mathrm{Gene\;activation}: G_{off} &\overset{k_{on}}{\rightarrow} G_{on}\\
@@ -223,30 +172,31 @@ Raw data collected post induction can be used to infer parameters
 
 \end{frame}
 
-\begin{frame}{Bayesian parameter inference using ensemble snapshots}
+\begin{frame}{Interferon-$\gamma$ induction in HeLa cells}
+
 \vspace{0.1in}
+Single cell transcriptome measurements of polyA mRNA for naïve HeLa cells (N=90), induced with interferon gamma (50ng/mL) for 24h
 
-Likelihood-based methods can infer $\theta$ from ensemble snapshots (FISH data)
+\begin{figure}
+\includegraphics[width=7cm]{volcano.png}
+\end{figure}
 
-\begin{equation*}
-\theta = \left( k_{on},k_{off},k_{t},k_{exp},\gamma\right)
-\end{equation*}
-
-One way is through maximum a posteriori estimation (MAP):
-
-\begin{align*}
-\theta^{*} = \underset{\theta}{\mathrm{argmax}} \;\;P(X|\theta)
-\end{align*}
-
-A more robust (but harder) way is via Bayesian inference, which lets us infer $\theta$ from $X$ while quantifying the uncertainty in our estimate:
-
-\begin{align*}
-P(\theta|\mathbf{x}) \propto P(\mathbf{x}|\theta)\pi(\theta) = \pi(\theta)\prod_{t} P(\mathbf{x}_{t}|\theta)
-\end{align*}
-
-The likelihood $P(X,t)$ is the solution to the chemical master equation at time $t$
+{\tiny Siwek et al. 
+\it{Activation of Clustered IFN$\gamma$ Target Genes Drives Cohesin-Controlled Transcriptional Memory} Cell 2020}
 
 \end{frame}
+
+\begin{frame}{Interferon-$\gamma$ induces transcriptional bursting}
+
+For the purpose of gene selection, let's assume the simple two-state model\\
+\vspace{0.2in}
+Fitting and parameter selection
+
+
+\end{frame}
+
+
+
 
 \begin{frame}{Kolmogorov's forward equation (chemical master equation)}
 
