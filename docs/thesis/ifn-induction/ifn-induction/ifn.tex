@@ -52,24 +52,36 @@
 %	<content>
 %\end{frame}
 
+\begin{frame}{The three stages}
+\begin{itemize}
+\item Select a set of genes that are differentially expressed after interferon treatment
+\item Estimate the bursting parameters from sequencing data
+\item Iterative RNA FISH experiments, apply bursting models, spatial analysis
+\end{itemize}
+\end{frame}
 
 \begin{frame}{Interferon-$\gamma$ induces differential expression of many genes}
 
-\vspace{0.1in}
+\begin{textblock*}{14cm}(1cm,1.3cm)
 Single cell transcriptome measurements of polyA mRNA for naïve HeLa cells (N=90), induced with interferon gamma (50ng/mL) for 24h
 
+\end{textblock*}
+
+\begin{textblock*}{7cm}(1cm,2cm)
 \begin{figure}
 \includegraphics[width=7cm]{volcano.png}
 \end{figure}
+\end{textblock*}
 
-{\tiny Siwek et al. 
-\it{Activation of Clustered IFN$\gamma$ Target Genes Drives Cohesin-Controlled Transcriptional Memory} Cell 2020}
+\begin{textblock*}{7cm}(7cm,2cm)
+\begin{figure}
+\includegraphics[width=7cm]{graphs.png}
+\end{figure}
+\end{textblock*}
 
-This is just a birds eye view of whats really going on...
-
-\end{frame}
-
-\begin{frame}
+\begin{textblock*}{14cm}(1cm,8.4cm)
+Randomly selected $N=100$ genes with edges drawn for $I(X;Y) \geq 0.1$ using Kraskov's method: $I(X,Y) \approx \psi(k) - \langle\psi(n_{x}+1) + \psi(n_{y}+1)\rangle + \psi(N)$
+\end{textblock*}
 
 \end{frame}
 
@@ -204,22 +216,17 @@ Generally we have to resort to Monte Carlo methods to find $P(X|\theta)$
 
 \begin{frame}{Kolmogorov's forward equation (chemical master equation)}
 
-Dynamics on biochemical reaction networks are inherently stochastic and the state space is discrete. We can only write probabilities over the state space
+To calculate the likelihood $P(X|\theta)$ one has to address the forward Kolmogorov equation
 
 \vspace{0.1in}
-
-\begin{align*}
-P(\mathbf{x}_{i},t) &= \sum_{j} T_{ji}(\mathbf{x}_{i},t|\mathbf{x}_{j},t-\Delta t)P(\mathbf{x}_{j},t-\Delta t)\\ 
-&= \sum_{k} T_{k}(\mathbf{x}_{i},t|\mathbf{x}_{i}-\nu_{k},t-\Delta t)P(\mathbf{x}_{i}-\nu_{k},t-\Delta t)
-\end{align*}
-
-where $T_{k}$ is the probability of a reaction channel $k$ firing in the interval $(t,t+\Delta t)$.\\
-\vspace{0.1in}
-Taking the limit $\Delta t \rightarrow 0$ one can derive the forward Kolmogorov equation or chemical master equation (CME)
 
 \begin{align*}
 \frac{dP(\mathbf{x},t|\mathbf{x}_{0})}{dt} = \sum_{k} T_{k}(\mathbf{x}-\nu_{k})P(\mathbf{x}-\nu_{k},t) - T_{k}(\mathbf{x})P(\mathbf{x},t)
 \end{align*}
+
+It is possible to find $P(\mathbf{x},t|\mathbf{x}_{0})$ in two main ways: (1) Finite state projection (2) Monte Carlo simulation\\
+\vspace{0.2in}
+The former is exact, the latter is an approximation (see approximate Bayesian computation)
 
 \end{frame}
 
