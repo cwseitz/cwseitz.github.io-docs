@@ -52,12 +52,24 @@
 %	<content>
 %\end{frame}
 
-\begin{frame}{Transcriptional burst literature landscape}
 
+\begin{frame}{Interferon-$\gamma$ induces differential expression of many genes}
+
+\vspace{0.1in}
+Single cell transcriptome measurements of polyA mRNA for naïve HeLa cells (N=90), induced with interferon gamma (50ng/mL) for 24h
 
 \begin{figure}
-\includegraphics[width=10cm]{lit.png}
+\includegraphics[width=7cm]{volcano.png}
 \end{figure}
+
+{\tiny Siwek et al. 
+\it{Activation of Clustered IFN$\gamma$ Target Genes Drives Cohesin-Controlled Transcriptional Memory} Cell 2020}
+
+This is just a birds eye view of whats really going on...
+
+\end{frame}
+
+\begin{frame}
 
 \end{frame}
 
@@ -154,7 +166,7 @@ Cells marked ON for $>$ 3 STL1 mRNA in yeast
 \end{frame}
 
 
-\begin{frame}{Adding spatial information: a compartment model for induced gene expression}
+\begin{frame}{A spatial model for induced gene expression}
 
 Let $X$ represent an arbitrary RNA transcript of an induced gene $G$. Assume two promoter states (on and off)
 
@@ -174,31 +186,21 @@ Raw data collected post induction can be used to infer parameters
 
 \end{frame}
 
-\begin{frame}{Interferon-$\gamma$ induction in HeLa cells}
+\begin{frame}{Bayesian inference of model parameters}
 
-\vspace{0.1in}
-Single cell transcriptome measurements of polyA mRNA for naïve HeLa cells (N=90), induced with interferon gamma (50ng/mL) for 24h
-
-\begin{figure}
-\includegraphics[width=7cm]{volcano.png}
-\end{figure}
-
-{\tiny Siwek et al. 
-\it{Activation of Clustered IFN$\gamma$ Target Genes Drives Cohesin-Controlled Transcriptional Memory} Cell 2020}
-
-\end{frame}
-
-\begin{frame}{Interferon-$\gamma$ induces transcriptional bursting}
-
-For the purpose of gene selection, let's assume the simple two-state model\\
+It is well-known that using just means and variances gives poor estimates of the model parameters (Munsky et al. PNAS 2018)\\
 \vspace{0.2in}
-Fitting and parameter selection
+Let $\theta = \left( k_{on},k_{off},k_{t},k_{exp},\gamma\right)$. Using Bayes Rule: 
 
+\begin{align*}
+P(\theta|X) = \frac{P(X|\theta)P(\theta)}{\int P(X|\theta)P(\theta)} \propto P(X|\theta)P(\theta)
+\end{align*}
+
+Can infer $\theta$ if we know the likelihood $P(X|\theta)$ (the hard part) and specify a prior $P(\theta)$\\
+\vspace{0.2in}
+Generally we have to resort to Monte Carlo methods to find $P(X|\theta)$
 
 \end{frame}
-
-
-
 
 \begin{frame}{Kolmogorov's forward equation (chemical master equation)}
 
@@ -220,5 +222,8 @@ Taking the limit $\Delta t \rightarrow 0$ one can derive the forward Kolmogorov 
 \end{align*}
 
 \end{frame}
+
+
+
 
 \end{document}
