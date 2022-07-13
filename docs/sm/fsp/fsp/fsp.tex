@@ -1,0 +1,112 @@
+% Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
+% For more details: https://www.sharelatex.com/learn/Beamer
+
+\documentclass{beamer}					% Document class
+
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}The Finite State Projection Algorithm\hfill\insertshortauthor\hfill\insertpagenumber}}
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage[english]{babel}				% Set language
+\usepackage[utf8x]{inputenc}			% Set encoding
+
+\mode<presentation>						% Set options
+{
+  \usetheme{default}					% Set theme
+  \usecolortheme{default} 				% Set colors
+  \usefonttheme{default}  				% Set font theme
+  \setbeamertemplate{caption}[numbered]	% Set caption to be numbered
+}
+
+% Uncomment this to have the outline at the beginning of each section highlighted.
+%\AtBeginSection[]
+%{
+%  \begin{frame}{Outline}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+%}
+
+\usepackage{graphicx}					% For including figures
+\usepackage{booktabs}					% For table rules
+\usepackage{hyperref}					% For cross-referencing
+\usepackage{bm}
+\usepackage{algorithm,algorithmic}
+
+\title{The Finite State Projection Algorithm}	% Presentation title
+\author{Clayton W. Seitz}								% Presentation author
+\date{\today}									% Today's date	
+
+\begin{document}
+
+% Title page
+% This page includes the informations defined earlier including title, author/s, affiliation/s and the date
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+\begin{frame}{Master equations}
+\begin{itemize}
+\item Master equations describe the time-evolution of a \textcolor{red}{discrete state} Markov process in \textcolor{blue}{continous time}\\
+\vspace{0.1in}
+\item We define a probability $T_{ij}$ of transitioning to the arbitrary state $\omega_{j}$ from $\omega_{i}$ where $\omega_{i},\omega_{j}\in \Omega$\\
+\vspace{0.1in}
+\item These probabilities are efficiently described by a matrix $\mathbf{T}\in\mathbb{R}^{N\times N}$ where $N = |\Omega|$\\
+\vspace{0.1in}
+\item $\mathbf{T}[(I,t+dt),(j,t)]=\mathbf{Pr}\left((I,t+dt),(j,t)\right)$ is a conditional distribution, given that we are in a state $j$ at time $t$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The forward equation}
+
+\vspace{0.2in}
+The time evolution of $P(\Omega,t) \in \mathbb{R}^{N\times 1}$ is determined by the net probability flux into and out of each state:\\
+\vspace{0.1in}
+
+\begin{align*}
+P(\omega_{i},t+dt) &= \overbrace{\textcolor{red}{T_{ii}P(\omega_{i})dt + \sum_{j\neq i} T_{ij}P(\omega_{j},t)dt}}^\text{$j\rightarrow i$} + \overbrace{\textcolor{blue}{\sum_{j\neq i}T_{ji}P(\omega_{i},t)dt}}^\text{$i\rightarrow j$}\\
+&= \overbrace{\textcolor{red}{\sum_{j\neq i} T_{ij}P(\omega_{j},t)dt}}^\text{$j\rightarrow i$} + \overbrace{\textcolor{blue}{P(\omega_{i},t)\sum_{j}T_{ji}dt}}^\text{$i\rightarrow j$}\\
+&=  \overbrace{\textcolor{red}{\sum_{j\neq i} T_{ij}P(\omega_{j},t)dt}}^\text{$j\rightarrow i$} + \overbrace{\textcolor{blue}{P(\omega_{i},t)\left(1-\sum_{j}T_{ij}dt\right)}}^\text{$i\rightarrow j$}\\
+\end{align*}
+
+\end{frame}
+
+\begin{frame}
+
+\begin{align*}
+P(\omega_{i},t+dt) &=  \sum_{j\neq i} T_{ij}P(\omega_{j},t)dt + P(\omega_{i},t)\left(1-\sum_{j}T_{ij}dt\right)
+\end{align*}
+
+
+\begin{align*}
+\underset{dt\rightarrow 0}{\mathrm{lim}}\frac{P(\omega_{i},t+dt) - P(\omega_{i},t)}{dt} &=
+\sum_{j\neq i} T_{ij}P(\omega_{j},t) - P(\omega_{i},t)\sum_{j}T_{ij}
+\end{align*}
+
+It is common to then define a matrix $\mathbf{W}$ s.t. $W_{ij} = T_{ij}$ and $W_{ii} = -\sum_{j}T_{ij}$ 
+
+\begin{align*}
+\frac{dP(\omega_{i})}{dt} = \sum_{j}W_{ij}P(\omega_{j}) \rightarrow \frac{dP(\omega)}{dt} = \mathbf{W}P(\omega)
+\end{align*}
+
+
+\end{frame}
+
+\begin{frame}
+
+We have the following simplified form of a general master equation
+\begin{align*}
+\frac{dP(\omega)}{dt} = \mathbf{W}P(\omega)
+\end{align*}
+
+which suggests a solution in terms of a matrix exponential
+
+\begin{align*}
+P(\omega,t) = \exp\left(\mathbf{W}P(\omega)\right)
+\end{align*}
+
+However, the computation of this exponential is often intractable given the size of $|\Omega|$
+
+\end{frame}
+
+\end{document}
