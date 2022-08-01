@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.5.19)  1 AUG 2022 08:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.5.19)  1 AUG 2022 09:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1265,15 +1265,22 @@ thkerncmss.
 )
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+<title.png, id=22, 1017.8025pt x 328.22626pt>
+File: title.png Graphic file (type png)
+<use title.png>
+Package pdftex.def Info: title.png  used on input line 59.
+(pdftex.def)             Requested size: 398.33858pt x 128.45847pt.
+ [2
 
-] [3
+ <./title.png>]
+[3
 
 ]
 <figure-1.png, id=40, 1340.00626pt x 717.68124pt>
 File: figure-1.png Graphic file (type png)
 <use figure-1.png>
-Package pdftex.def Info: figure-1.png  used on input line 99.
+Package pdftex.def Info: figure-1.png  used on input line 88.
 (pdftex.def)             Requested size: 398.33858pt x 213.33487pt.
  [4
 
@@ -1281,43 +1288,38 @@ Package pdftex.def Info: figure-1.png  used on input line 99.
 <figure-2.png, id=48, 977.6525pt x 657.45625pt>
 File: figure-2.png Graphic file (type png)
 <use figure-2.png>
-Package pdftex.def Info: figure-2.png  used on input line 107.
+Package pdftex.def Info: figure-2.png  used on input line 96.
 (pdftex.def)             Requested size: 341.43306pt x 229.61154pt.
  [5
 
- <./figure-2.png>]
-<figure-3a.png, id=55, 977.6525pt x 475.7775pt>
+ <./figure-2.png>] [6
+
+]
+<figure-3a.png, id=61, 977.6525pt x 475.7775pt>
 File: figure-3a.png Graphic file (type png)
 <use figure-3a.png>
-Package pdftex.def Info: figure-3a.png  used on input line 115.
+Package pdftex.def Info: figure-3a.png  used on input line 120.
 (pdftex.def)             Requested size: 398.33858pt x 193.85039pt.
- [6
-
- <./figure-3a.png>]
-<figure-3b.png, id=62, 986.68625pt x 519.9425pt>
-File: figure-3b.png Graphic file (type png)
-<use figure-3b.png>
-Package pdftex.def Info: figure-3b.png  used on input line 123.
-(pdftex.def)             Requested size: 398.33858pt x 209.90913pt.
  [7
 
+ <./figure-3a.png>]
+<figure-3b.png, id=69, 986.68625pt x 519.9425pt>
+File: figure-3b.png Graphic file (type png)
+<use figure-3b.png>
+Package pdftex.def Info: figure-3b.png  used on input line 128.
+(pdftex.def)             Requested size: 398.33858pt x 209.90913pt.
+
+[8
+
  <./figure-3b.png>]
-<figure-4.png, id=70, 977.6525pt x 752.8125pt>
+<figure-4.png, id=76, 977.6525pt x 752.8125pt>
 File: figure-4.png Graphic file (type png)
 <use figure-4.png>
-Package pdftex.def Info: figure-4.png  used on input line 131.
+Package pdftex.def Info: figure-4.png  used on input line 136.
 (pdftex.def)             Requested size: 284.52756pt x 219.09114pt.
- [8
-
- <./figure-4.png>]
-<figure-5.png, id=77, 978.65625pt x 834.11626pt>
-File: figure-5.png Graphic file (type png)
-<use figure-5.png>
-Package pdftex.def Info: figure-5.png  used on input line 139.
-(pdftex.def)             Requested size: 256.0748pt x 218.25241pt.
  [9
 
- <./figure-5.png>]
+ <./figure-4.png>]
 \tf@nav=\write7
 \openout7 = `jc1.nav'.
 
@@ -1327,19 +1329,19 @@ Package pdftex.def Info: figure-5.png  used on input line 139.
 \tf@snm=\write9
 \openout9 = `jc1.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 142.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 142.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 138.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 138.
  (./jc1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 142.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 142.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 138.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 138.
 Package rerunfilecheck Info: File `jc1.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 27221 strings out of 481239
- 526073 string characters out of 5920377
- 845251 words of memory out of 5000000
- 41788 multiletter control sequences out of 15000+600000
+ 27222 strings out of 481239
+ 526066 string characters out of 5920377
+ 845252 words of memory out of 5000000
+ 41790 multiletter control sequences out of 15000+600000
  547603 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  66i,14n,106p,770b,375s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1354,9 +1356,9 @@ ublic/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmssi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmsy10.pfb>
-Output written on jc1.pdf (9 pages, 845624 bytes).
+Output written on jc1.pdf (9 pages, 825188 bytes).
 PDF statistics:
- 126 PDF objects out of 1000 (max. 8388607)
+ 125 PDF objects out of 1000 (max. 8388607)
  85 compressed objects within 1 object stream
  19 named destinations out of 1000 (max. 500000)
  73 words of extra memory for PDF output out of 10000 (max. 10000000)
