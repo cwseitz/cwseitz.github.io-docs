@@ -52,6 +52,44 @@
 %	<content>
 %\end{frame}
 
+
+\begin{frame}{A spatial model for induced gene expression}
+
+Let $X$ represent an arbitrary RNA transcript of an induced gene $G$. Assume two promoter states (on and off)
+
+\begin{align*}
+\mathrm{Gene\;activation}: G_{off} &\overset{k_{on}}{\rightarrow} G_{on}\\
+\mathrm{Gene\;inactivation}: G_{on} &\overset{k_{off}}{\rightarrow} G_{off}\\
+\mathrm{Transcription}: G_{on} &\overset{k_{t}}{\rightarrow} G_{on} + X_{\mathrm{nuc}}\\
+\mathrm{RNA \;Export}: X_{\mathrm{nuc}} &\overset{k_{exp}}{\rightarrow} X_{\mathrm{cyt}}\\
+\mathrm{RNA\; degradation}: X_{\mathrm{cyt}} &\overset{\gamma}{\rightarrow} \emptyset\\
+\end{align*}
+
+Raw data collected post induction can be used to infer parameters
+
+\begin{equation*}
+\theta = \left( k_{on},k_{off},k_{t},k_{exp},\gamma\right)
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{Bayesian inference of model parameters}
+
+It is well-known that using just means and variances gives poor estimates of the model parameters (Munsky et al. PNAS 2018)\\
+\vspace{0.2in}
+Let $\theta = \left( k_{on},k_{off},k_{t},k_{exp},\gamma\right)$. Using Bayes Rule: 
+
+\begin{align*}
+P(\theta|X) = \frac{P(X|\theta)P(\theta)}{\int P(X|\theta)P(\theta)} \propto P(X|\theta)P(\theta)
+\end{align*}
+
+Can infer $\theta$ if we know the likelihood $P(X|\theta)$ and specify a prior $P(\theta)$\\
+\vspace{0.2in}
+Generally we have to resort to Monte Carlo methods to find $P(X|\theta)$
+
+\end{frame}
+
+
 \begin{frame}{smFISH data of Npas4 mRNA in primary neurons after membrane depol.}
 
 \begin{figure}
