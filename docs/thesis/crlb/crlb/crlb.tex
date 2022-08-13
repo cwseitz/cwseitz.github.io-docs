@@ -17,55 +17,42 @@
 \begin{document}
 \maketitle
 
-\section{An ideal single element detector}
+\section{Poisson processes}
 
-Suppose that we have an imaginary single element detector $k$, with a magical shape, that has the potential to detect every photon emitted by a fluorophore. The fluorophore emits photons according to a Poisson process with rate $\eta$, which can be shown to have mean $\mu = \eta\Delta t$ where $\Delta t$ is the exposure time. The only source of photon-loss, is the quantum efficiency of $k$, which is a probability $0 \leq \gamma \leq 1$ that a photon is detected. We then have two random variables at play (1) how many photons will be emitted in $\Delta t$ and (2) whether not each photon emitted will be detected:
-
-\begin{equation*}
-M_{k} \sim \mathrm{Poisson}(\eta)\hspace{0.2in}N_{k} \sim \mathrm{Bern}(\gamma, 1-\gamma)
-\end{equation*}
-
-As mentioned, the probability $M_{k}$ photons will be detected in the exposure time $\Delta t$ is is a discrete Poisson random variable, which has the form 
-
-\begin{equation*}
-\mathrm{Poisson}(n; \eta) = \frac{\exp\left({-\eta\Delta t}\right)(\eta\Delta t)^{n}}{n!}
-\end{equation*}
-
-Based on our intuition, we might expect that throwing out each photon with probability $\gamma$ will effectively reduce the rate of the Poisson process by a factor of $\gamma$. However, we would like to prove this in a mathematically rigorous way. We start by noting that we can define a new variable $S_{k} = M_{k}N_{k}$ such that our measurment is sampled from the density $P(S_{k})$. Let's write the joint distribution over all three variables
+The Poisson process can be derived very quickly, as it is the continuous-time limit of the Binomial distribution.
 
 \begin{align*}
-P(S_{k},M_{k},N_{k}) &= P(S_{k}|M_{k}=m_{k},N_{k}=n_{k})P(M_{k}|N_{k}=n_{k})P(N_{k}=n_{k})
+B(m;t) &= {n\choose m}\lambda^{m}(1-\lambda)^{n-m}\\
 \end{align*}
 
-Note that $m_{k},s_{k} \in \Omega$ where $\Omega = \{z \in \mathbb{Z}: z \geq 0\}$ We can marginalize this distribution over $M_{k}$ and $N_{k}$
+Since $\lambda$ is the fraction of successes, the expected number of successes is $\mu = n\lambda$
 
 \begin{align*}
-P(S_{k})  &= \sum_{m_{k}}\sum_{n_{k}} P(S_{k}|M_{k}=m_{k},N_{k}=n_{k})P(M_{k}|N_{k}n_{k})P(N_{k}=n_{k})
+B(m;t) &=  {n\choose m}\left(\frac{\mu}{n}\right)^{m}\left(1-\frac{\mu}{n}\right)^{n-m}\\
+&= {n\choose m}\left(\frac{\mu}{n}\right)^{m}\left(1-\frac{\mu}{n}\right)^{n}\left(1-\frac{\mu}{n}\right)^{-m}
 \end{align*}
-
-Expanding this expression out over the support of $N_{k}$ gives
 
 \begin{align*}
-P(S_{k}) &= \sum_{m_{k}}P(S_{k}|M_{k}=m_{k},N_{k}=0)P(M_{k}|N_{k}=0)P(N_{k}=0)\\
-&+ P(S_{k}|M_{k}=m_{k},N_{k}=1)P(M_{k}|N_{k}=1)P(N_{k}=1)
+B(m;t) &= \frac{n!}{m!(n-m)!}\left(\frac{\mu}{n}\right)^{m}\left(1-\frac{\mu}{n}\right)^{n}\left(1-\frac{\mu}{n}\right)^{-m}\\
+&= \frac{n!}{(n-m)!}\left(\frac{1}{n}\right)^{m}\left(1-\frac{\mu}{n}\right)^{-m}\frac{\mu^{m}\left(1-\frac{\mu}{n}\right)^{n}}{m!}\\
 \end{align*}
 
-At this point it is quite clear that we have
+In the first term, we can take the first $m$ subterms of the numerator $n! = n(n-1)...(n-m)$ and, since $n>>m$, each term will cancel with one factor of $n$ from the term $1/n^{m}$. This leaves
 
 \begin{align*}
-P(S_{k}) &= \sum_{m_{k}}\gamma\delta(s_{k}-m_{k})P(M_{k}=m_{k})+(1-\gamma)\delta(s_{k}) P(M_{k}=m_{k})\\
-&= \gamma P(M_{k}) + \delta(s_{k})(1-\gamma)
+B(m;t) &= \frac{(n-m)!}{(n-m)!}\left(1-\frac{\mu}{n}\right)^{-m}\frac{\mu^{m}\exp(-\mu)}{m!}\\\\
 \end{align*}
 
-Interestingly, this result is fairly intuitive - the distribution $P(S_{k})$ is given by multiplying the probability mass $P(M_{k})$ by a factor of $\gamma$ and inflating the value at zero by the difference between the new and old distributions. It is worth nothing that adding $1-\gamma$ to the probability mass at zero is effectively reducing the Poisson rate $\eta$ to $\gamma\eta$, since the probability of observing an event is uniform in the interval $(t, t+\Delta t)$. Therefore, we conclude that
+We now take the continuous time limit i.e. $n\rightarrow\infty$ and, again, since $m << n$ we are left with 
 
 \begin{align*}
-P(S_{k}) &= \mathrm{Poisson}(S_{k}; \lambda_{k})
+\underset{n\rightarrow\infty}{\mathrm{lim}} \;\; B(m;t) &= \frac{\mu^{m}\exp(-\mu)}{m!}\\
 \end{align*}
 
-where we have used the \emph{effective rate} $\lambda_{k} = \gamma\eta_{k}$. 
+If an event can be detected will probability $\gamma$, the rate of the Poisson process will be reduced by that factor i.e., $\lambda' = \gamma\lambda$. Therefore, the mean and variance of the process becomes $\mu = \gamma\lambda\Delta t$
 
-\subsection{Corrupting the signal}
+
+\subsection{Corrupting a Poisson process with white noise}
 
 In the real-world, noise is unavoidable. Detectors often suffer from dark noise (thermal noise) and there may also be a background signal. Considering the former first, we define another r.v. $W_{\theta,k}$ which represents Gaussian dark noise of the detector element. Unless otherwise specified we will always assume that $W_{k} \sim \mathcal{N}(m_{k},\sigma_{w,k}^{2})$. Adding in dark noise leads to yet another distribution, this time over the corrupted signal $H_{k}$. Notice that while $S_{k}$ has units of photons $[\mathrm{p}]$, that $H_{k}$ has units of photoelectrons $[e^{-}]$. The conversion factor between the two is the gain of the detector element $g_{k}\; [e^{-}\mathrm{p}^{-1}]$. Moving on, we employ a similar trick as before, evaluating the joint density $P(S_{k},H_{k})$
 
