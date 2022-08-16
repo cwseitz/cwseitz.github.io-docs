@@ -78,7 +78,11 @@
 
 \chapter{Deconvolving immuogenic tumor substructure with variational inference}
 
-\textcolor{red}{Single cell variational inference. Using deep generative modeling to discover latent structure in the data, establish how that latent structure relates to immunogenicity. This latent structure can be used to design fluorescent probes, which will be added to T-cell markers to measure degree of inflammation for different modes of the data. Malignant cells are isolated first using standard methods e.g, filtering, normalization, and UMAP clustering}
+\textcolor{red}{Single cell variational inference. Using deep generative modeling for batch correction, differential expression, imputation, etc. Establish how that latent structure relates to immunogenicity. In particular, I am interested in the relationship between tumor substructure i.e. heterogenity and how it relates to the degree of T-cell inflammation. We can be confident that certain malignant clusters are more immunogenic than others, which, to a first approximation, can be understood by measuring T-cell quantity in the sample. This \emph{could} then be supplemented by using T-cell signatures documented in the literature, differential expression, and clustering methods/mixture models to design fluorescent biomarkers. These will then be added to T-cell markers. In principle, this would give a more complete association of gene expression to the inflammaotry state, and would be a useful method in trying to understand changes during the evolution of cancer and following pharmacological treatment.}
+
+\vspace{0.2in}
+to 
+\textcolor{red}{For the implementation, I will use Seurat for preprocessing and visualization, as these plotting functions are more visually appealing that Python functions. We can port the preprocessed data over to Python for the deep learning step. Malignant cells are isolated first using standard methods e.g, filtering, normalization, and UMAP clustering For training, I will try to place emphasis on physically inspired algorithms for optimization in variational methods}
 
 \chapter{A Bayesian approach for inferring neuronal connectivity from Ca2+ imaging data and Monte Carlo simulations}
 
