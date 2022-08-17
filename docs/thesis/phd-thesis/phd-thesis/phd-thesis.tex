@@ -13,7 +13,7 @@
  
 
 %% Use these commands to set biographic information for the title page:
-\title{Monte Carlo methods and deep variational inference for fast Bayesian analysis of high dimensional biological systems}
+\title{Efficient Bayesian analysis of high dimensional biological systems with Markov Chain Monte Carlo}
 \author{Clayton W. Seitz}
 \department{Department of Physics}
 \division{Physical Sciences}
@@ -69,20 +69,26 @@
 
 \section{Variational Inference}
 
-
-\subsection{Neural networks represent probability distributions}
-
-\subsection{Training criteria for neural networks}
+This won't be about deep learning, just introducing the concept so we can make a comparison with MCMC methods, in case that is relevant
 
 \subsection{The evidence lower bound}
 
-\chapter{Deconvolving immuogenic tumor substructure with variational inference}
-
-\textcolor{red}{Single cell variational inference. Using deep generative modeling to discover latent structure in the data, establish how that latent structure relates to immunogenicity. This latent structure can be used to design fluorescent probes, which will be added to T-cell markers to measure degree of inflammation for different modes of the data. Malignant cells are isolated first using standard methods e.g, filtering, normalization, and UMAP clustering}
 
 \chapter{A Bayesian approach for inferring neuronal connectivity from Ca2+ imaging data and Monte Carlo simulations}
 
 \chapter{Bayesian inference of the kinetic parameters of interferon-gamma induced transcription}
+
+\chapter{Stratifying immuogenic tumor substructure}
+
+\textcolor{red}{I am interested in the relationship between tumor substructure i.e. heterogenity and how it relates to the degree of T-cell inflammation. We can be confident that certain malignant clusters are more immunogenic than others, which, to a first approximation, can be understood by measuring T-cell quantity in the sample. This \emph{could} then be supplemented by using T-cell signatures documented in the literature, differential expression, and clustering methods/mixture models to design fluorescent biomarkers. These will then be added to T-cell markers. In principle, this would give a more complete association of gene expression to the inflammaotry state, and would be a useful method in trying to understand changes during the evolution of cancer and following pharmacological treatment.}
+
+\vspace{0.2in}
+
+\textcolor{red}{For the implementation, I will use Seurat for preprocessing and visualization. Malignant cells are isolated first using standard methods e.g, filtering, normalization, and UMAP clustering}
+
+\vspace{0.2in}
+
+\textcolor{red}{This section will probably have to deviate significantly from the central theme of the dissertation, but it will be a major component of my work so it's necessary to include it}
 
 %% Format a LaTeX bibliography
 
