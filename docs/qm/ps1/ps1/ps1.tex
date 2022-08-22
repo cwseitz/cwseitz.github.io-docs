@@ -7,8 +7,9 @@
 \usepackage{tensor}
 \usepackage{amsmath}
 \usepackage{siunitx}
+\usepackage{physics}
 
-\newtheorem{p}{Problem}[section]
+\newtheorem{p}{Problem}
 \usepackage{cancel}
 \newtheorem*{lem}{Lemma}
 \theoremstyle{definition}
@@ -25,6 +26,73 @@
 \\[1.4\baselineskip] 
 
 \begin{p}
+For the spin 1/2 state $\ket{+}_{x}$, evaluate both sides of the inequality
+\begin{align*}
+\langle(\Delta A)^{2}\rangle\langle(\Delta B)^{2}\rangle \geq \frac{1}{4}|\langle[A,B]\rangle|^{2}
+\end{align*}
+
+for the operators $A=S_x$ and $B=S_y$, and show that the inequality is satisfied. Repeat for the operators $A=S_z$ and $B=S_y$
+\end{p}
+
+\begin{s} 
+
+\vspace{0.2in}
+Let $A=S_x$ and $B=S_y$. The variance $\langle(\Delta S_x)^{2}\rangle$ in state $\ket{+}_{x}$ must be zero since $\ket{+}_{x}$ is an eigenvector of $S_{x}$  
+
+\begin{align*}
+\langle(\Delta S_x)^{2}\rangle = \langle S_x^{2}\rangle - \langle S_{x}\rangle^{2} = 0
+\end{align*}
+
+Therefore, the LHS of the above inequality is zero. The commutator $[S_{x},S_{y}] = i\hbar S_z$ and 
+
+\begin{align*}
+\langle S_z \rangle &= \bra{+}_{x} S_z \ket{+}_{x} = 0\\
+\end{align*}
+
+Clearly the inequality is satisfied since both sides are zero. Now let $A=S_z$ and $B=S_y$. Since the state is prepared in $\ket{+}_x$, the variances $\langle(\Delta S_x)^{2}\rangle$ and $\langle(\Delta S_x)^{2}\rangle$ must be $1/4$ (this is just a fair coin toss).
+\\
+The commutator $[S_{z},S_{y}] = -i\hbar S_x$ and $\langle S_x \rangle = \frac{\hbar}{2}$. The inequality then reads 
+
+\begin{align*}
+\frac{1}{16} \geq \frac{\hbar^{2}}{16}
+\end{align*}
+
+which is satisfied given that $\hbar \approx 10^{-34} \;\mathrm{J\cdot s}$
+
+
+
+\end{s}
+
+\begin{p}
+
+\end{p}
+
+\begin{s} 
+\end{s}
+
+\begin{p}
+
+\end{p}
+
+\begin{s} 
+\end{s}
+
+\begin{p}
+
+\end{p}
+
+\begin{s} 
+\end{s}
+
+\begin{p}
+
+\end{p}
+
+\begin{s} 
+\end{s}
+
+\begin{p}
+
 \end{p}
 
 \begin{s} 
