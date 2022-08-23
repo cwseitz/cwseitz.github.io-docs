@@ -60,14 +60,30 @@ The commutator $[S_{z},S_{y}] = -i\hbar S_x$ and $\langle S_x \rangle = \frac{\h
 which is satisfied given that $\hbar \approx 10^{-34} \;\mathrm{J\cdot s}$
 
 
-
 \end{s}
 
 \begin{p}
-
+Suppose a 2×2 matrix X (not necessarily Hermitian, nor unitary) is written as
 \end{p}
 
 \begin{s} 
+
+
+\begin{align*}
+\mathrm{Tr}(X) &= \mathrm{Tr}(a_{0}) + \mathrm{Tr}(\sigma_{k}\cdot a_{k})\\
+&= 2a_{0} + a_{k}\mathrm{Tr}(\sigma_{k})\\
+&= 2a_{0}
+\end{align*}
+
+since $\mathrm{Tr}(\sigma_{k}) = 0$.
+
+\begin{align*}
+\mathrm{Tr}(\sigma_{k}X) &= \mathrm{Tr}\left(\sigma_{k}a_{0} + \sigma_{k}^{2}a_{k}\right)\\
+&= \mathrm{Tr}\left(\sigma_{k}a_{0}\right) + \mathrm{Tr}\left(\sigma_{k}^{2}a_{k}\right)\\
+&= a_{0}\sum\sigma_{k} + a_{k}\mathrm{Tr}\left(\sigma_{k}^{2}\right)
+\end{align*}
+
+
 \end{s}
 
 \begin{p}
