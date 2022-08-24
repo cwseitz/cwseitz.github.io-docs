@@ -107,6 +107,9 @@ a_3 &= \frac{X_{11}-X_{22}}{2}
 \end{p}
 
 \begin{s} 
+\begin{align*}
+\sigma\cdot a' = \exp\left(\frac{i\sigma\cdot\hat{n}\phi}{2}\right)\sigma\cdot a \exp\left(-\frac{i\sigma\cdot\hat{n}\phi}{2}\right)
+\end{align*}
 \end{s}
 
 \begin{p}
@@ -114,6 +117,19 @@ a_3 &= \frac{X_{11}-X_{22}}{2}
 \end{p}
 
 \begin{s} 
+
+\begin{equation*}
+A(\ket{i} + \ket{j}) = i\ket{i} + j\ket{j}
+\end{equation*}
+
+If we have degenerate eigenvalues i.e., $i=j$ then
+
+\begin{equation*}
+A(\ket{i} + \ket{j}) = i(\ket{i} + \ket{j})
+\end{equation*}
+
+and $\ket{i} + \ket{j}$ is also an eigenvector of $A$
+
 \end{s}
 
 \begin{p}
@@ -121,6 +137,24 @@ a_3 &= \frac{X_{11}-X_{22}}{2}
 \end{p}
 
 \begin{s} 
+
+\begin{align*}
+\mathbf{S}\cdot\hat{n} &= \sin\beta\cos\alpha \; S_{x} +\sin\beta\sin\alpha\;S_{y} + \cos\beta\; S_{z}\\
+&= \begin{pmatrix}
+\cos\beta & \sin\beta\exp(-i\alpha)\\
+\sin\beta\exp(i\alpha) & -\cos\beta
+\end{pmatrix}
+\end{align*}
+
+Let $a$ and $b$ represent the components of the eigenket $\ket{+}$ of this operator. We then need to solve the following system for the components $a$ and $b$
+
+\begin{align*}
+a(\cos\beta-e) + b(\sin\beta\exp(-i\alpha)-e) &= 0\\
+a(\sin\beta\exp(i\alpha)-e) + b(-\cos\beta-e) &= 0
+\end{align*}
+
+where $e$ represents the eigenvalue.
+
 \end{s}
 
 \begin{p}
