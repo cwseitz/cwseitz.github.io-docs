@@ -1,6 +1,6 @@
 \relax 
 \@writefile{toc}{\contentsline {chapter}{Abstract}{iv}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {1}Primer on exact Bayesian methods and variational inference}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {1}Primer on exact Bayesian methods}{1}{}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {1.1}Markov Chain Monte Carlo}{1}{}\protected@file@percent }
@@ -8,17 +8,27 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1.2}Langevin Monte Carlo}{1}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1.3}Hamiltonian Monte Carlo}{1}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1.4}Stochastic Gradient Langevin Dynamics}{1}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {1.2}Variational Inference}{1}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.1}The evidence lower bound}{1}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{\numberline {2}A Bayesian approach for inferring neuronal connectivity from Ca2+ imaging data and Monte Carlo simulations}{2}{}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Bayesian inference of the kinetic parameters of interferon-gamma induced transcription}{3}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Introduction}{2}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Literature Review and Theoretical Foundations}{6}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Cartoon of a excitatory-inhibitory neural network receving a time-dependent feedforward current $F(t)$, feedback current $R(t)$, and synaptic noise $\xi (t)$. Excitatory neurons are shown in red and inhibitory neurons shown in blue. Synaptic current is drawn to be instantaneous and syanptic weights $J_{ij}$ are not functions of time. Feedforward inputs could be weighted Poisson processes where $F$ defines the rates, for example.\relax }}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Linear response: the forwards problem}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Inferring network structure: the backwards problem}{14}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Reshaping network structure with synaptic plasticity}{14}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces \textbf  {Cartoon of the doublet spike-timing dependent plasticity rule}. The time course of two spike trains $z_{i}(t)$ and $z_{j}(t)$ is shown in black and gray, respectively. The learning window $\mathcal  {L}(\tau )$ determines whether LTP or LTD occurs and the magnitude of the weight change. Adapted from (Kempter 2001).\relax }}{20}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Results}{22}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Predicting uncoupled firing rates}{22}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces \textbf  {Fokker-Planck solution in the uncoupled regime} (A) Steady-state raster plot of $N=100$ uncoupled EIF neurons undergoing stimulation with GWN with $\mu = 2\mu A/\mathrm  {cm}^{2}$ and $\sigma = 9 \tmspace  +\thickmuskip {.2777em}\mu A/\mathrm  {cm}^{2}$. (B) Histogram of the membrane potential in the steady-state and Fokker-Planck predicted histogram. (C) Two randomly selected voltage traces (D) Histogram of the population-averaged firing rate and its mean value (E) Covariance matrix of the feedforward white-noise input\relax }}{24}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces \textbf  {Frequency reponse as a function of average input} (left) Predicted firing rate under a weak sinsuoidal perturbation with frequency $\omega $ for various values of the average input current $\mu $. (right) Phase of the response. \relax }}{25}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Asynchronous spiking in the balanced state}{25}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces \textbf  {Asychronous spiking in the balanced state} (A) Steady-state raster plot of $N=100$ uncoupled EIF neurons undergoing stimulation with GWN with $\mu = 2\mu A/\mathrm  {cm}^{2}$ and $\sigma = 9 \tmspace  +\thickmuskip {.2777em}\mu A/\mathrm  {cm}^{2}$. (B) Distribution of the total synaptic current in the balanced state (C) Two randomly selected voltage traces (D) Histogram of the population-averaged firing rate and its mean value (E) Covariance matrix of the feedforward GWN input\relax }}{26}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces \textbf  {Auto- and cross-correlations in the balanced state} (A) Mean auto-correlation of spike trains (B) Mean cross-correlation of spike trains (C) Mean auto-correlation of the feedback current (D) Mean cross-correlation of the feedback current (E) Mean auto-correlation of the total synaptic current (F) Mean cross-correlation of the total synaptic current\relax }}{27}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}Methods}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}Monte-Carlo simulations}{28}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}Solution to the Fokker-Planck equation}{29}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Bayesian inference of the kinetic parameters of interferon-gamma induced transcription}{31}{}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Stratifying immuogenic tumor substructure}{4}{}\protected@file@percent }
-\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\addvspace {10\p@ }}
-\bibdata{ft2,master,refs}
-\bibstyle{plain}
-\gdef \@abspage@last{8}
+\gdef \@abspage@last{35}
