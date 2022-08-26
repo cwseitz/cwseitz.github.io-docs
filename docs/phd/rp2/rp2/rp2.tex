@@ -67,9 +67,22 @@
 \end{frame}
 
 
-\begin{frame}{RNA Flow: parameter inference}
-\end{frame}
 
+\begin{frame}{Bayesian inference of RNA flow parameters}
+
+It is well-known that using just means and variances gives poor estimates of the model parameters (Munsky et al. PNAS 2018)\\
+\vspace{0.2in}
+Let $\theta = \left( k_{on},k_{off},k_{t},k_{exp},\gamma\right)$. Using Bayes Rule: 
+
+\begin{align*}
+P(\theta|X) = \frac{P(X|\theta)P(\theta)}{\int P(X|\theta)P(\theta)} \propto P(X|\theta)P(\theta)
+\end{align*}
+
+Can infer $\theta$ if we know the likelihood $P(X|\theta)$ (the hard part) and specify a prior $P(\theta)$\\
+\vspace{0.2in}
+Generally we have to resort to Monte Carlo methods to find $P(X|\theta)$
+
+\end{frame}
 
 \begin{frame}{RNA Flow: parameter inference}
 Gene selection is based on hypothesized differences in rates $k_{i}$ or the behavior of $r(t)$ in different experimental conditions\\

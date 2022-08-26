@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.8.6)  18 AUG 2022 11:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.8.6)  26 AUG 2022 17:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1070,7 +1070,7 @@ File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count384
 \l__pdf_internal_box=\box84
 )
-No file rp1.aux.
+(./rp1.aux)
 \openout1 = `rp1.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
@@ -1091,6 +1091,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 39.
 LaTeX Font Info:    ... okay on input line 39.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 39.
 LaTeX Font Info:    ... okay on input line 39.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -1163,6 +1164,8 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 39.
 LaTeX Info: Redefining \pageref on input line 39.
 LaTeX Info: Redefining \nameref on input line 39.
+
+(./rp1.out) (./rp1.out)
 \@outlinefile=\write6
 \openout6 = `rp1.out'.
 
@@ -1250,10 +1253,10 @@ File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
-No file rp1.nav.
+(./rp1.nav)
 LaTeX Font Info:    Trying to load font information for U+msa on input line 39.
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 39.
@@ -1383,20 +1386,14 @@ LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <5> not available
 \openout9 = `rp1.snm'.
 
  (./rp1.aux)
-
-Package rerunfilecheck Warning: File `rp1.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `rp1.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
+Package rerunfilecheck Info: File `rp1.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 32397 strings out of 478287
- 638291 string characters out of 5849290
- 940557 words of memory out of 5000000
- 49882 multiletter control sequences out of 15000+600000
+ 32430 strings out of 478287
+ 638546 string characters out of 5849290
+ 940635 words of memory out of 5000000
+ 49907 multiletter control sequences out of 15000+600000
  495078 words of font info for 107 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,14n,122p,383b,596s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1414,7 +1411,7 @@ s/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 i8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
 
-Output written on rp1.pdf (10 pages, 996978 bytes).
+Output written on rp1.pdf (10 pages, 997160 bytes).
 PDF statistics:
  164 PDF objects out of 1000 (max. 8388607)
  100 compressed objects within 1 object stream
