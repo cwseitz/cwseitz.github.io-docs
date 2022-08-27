@@ -137,24 +137,37 @@ and $\ket{i} + \ket{j}$ is also an eigenvector of $A$
 \end{p}
 
 \begin{s} 
-
+We will make use of the following representations of the spin operators
 \begin{align*}
-\mathbf{S}\cdot\hat{n} &= \sin\beta\cos\alpha \; S_{x} +\sin\beta\sin\alpha\;S_{y} + \cos\beta\; S_{z}\\
-&= \begin{pmatrix}
-\cos\beta & \sin\beta\exp(-i\alpha)\\
-\sin\beta\exp(i\alpha) & -\cos\beta
-\end{pmatrix}
+S_{x} &= \frac{\hbar}{2}\left(\ket{+}\bra{-} + \ket{-}\bra{+}\right)\\
+S_{y} &= \frac{i\hbar}{2}\left(-\ket{+}\bra{-} + \ket{-}\bra{+}\right)\\
+S_{z} &= \frac{\hbar}{2}\left(\ket{+}\bra{+} - \ket{-}\bra{-}\right)
 \end{align*}
 
-Let $a$ and $b$ represent the components of the eigenket $\ket{+}$ of this operator. We then need to solve the following system for the components $a$ and $b$
-
 \begin{align*}
-a(\cos\beta-e) + b(\sin\beta\exp(-i\alpha)-e) &= 0\\
-a(\sin\beta\exp(i\alpha)-e) + b(-\cos\beta-e) &= 0
+[S_{x},S_{y}] &= \frac{i\hbar^{2}}{2}\left(\ket{+}\bra{-} + \ket{-}\bra{+}\right)\left(-\ket{+}\bra{-} + \ket{-}\bra{+}\right)\\
+&- \left(-\ket{+}\bra{-} + \ket{-}\bra{+}\right)\left(\ket{+}\bra{-} + \ket{-}\bra{+}\right)\\
+&= \frac{i\hbar^{2}}{2}\left(\ket{+}\bra{+} - \ket{-}\bra{-}\right)\\
+&= i\hbar S_{z}
 \end{align*}
 
-where $e$ represents the eigenvalue.
+Flipping the order of the commutator always flips the sign of the result i.e. $[S_{i},S_{j}] = -[S_{j},S_{i}]$. Thus for $[S_y,S_x]$ we would get $-i\hbar S_{z}$.
 
+\begin{align*}
+[S_{y},S_{z}] &= \frac{i\hbar^{2}}{4}\left(-\ket{+}\bra{-} + \ket{-}\bra{+}\right)\left(\ket{+}\bra{+} - \ket{-}\bra{-}\right)\\
+&- \left(\ket{+}\bra{+} - \ket{-}\bra{-}\right)\left(\ket{+}\bra{-} + \ket{-}\bra{+}\right)\\
+&= \frac{i\hbar^{2}}{4}\left(\ket{+}\bra{-} + \ket{-}\bra{+}\right)\\
+&= i\hbar S_{x}
+\end{align*}
+
+\begin{align*}
+[S_{z},S_{x}] &= \frac{\hbar^{2}}{4}\left(\ket{+}\bra{+} - \ket{-}\bra{-}\right)\left(\ket{+}\bra{-} + \ket{-}\bra{+}\right)\\
+&- \left(\ket{+}\bra{-} + \ket{-}\bra{+}\right)\left(\ket{+}\bra{+} - \ket{-}\bra{-}\right)\\
+&= -\frac{\hbar^{2}}{4}\left(-\ket{+}\bra{-} + \ket{-}\bra{+}\right)\\
+&= i\hbar S_{y}
+\end{align*}
+
+For the anticommutator relations, all we need to prove is that $S_{i}S_{j} = -S_{j}S_{i}$ when $i\neq j$. Of course, when $i=j$ we will always have $\{S_{i},S_{j}\} = 2S_{i}^{2} = \frac{\hbar^{2}}{2}$ since $S_{i}^{2} = I \;\;\forall i$
 \end{s}
 
 \begin{p}
@@ -162,7 +175,37 @@ where $e$ represents the eigenvalue.
 \end{p}
 
 \begin{s} 
+
+We would like to find a representation for the state $\ket{\mathbf{S}\cdot\hat{n}; +}$ in the $S_{z}$ basis. We first write the operator $\mathbf{S}\cdot\hat{n}$ explicitly in this basis
+
+\begin{align*}
+\mathbf{S}\cdot\hat{n} &= \sin\beta\cos\alpha \; S_{x} +\sin\beta\sin\alpha\;S_{y} + \cos\beta\; S_{z}\\
+&= \frac{\hbar}{2}\begin{pmatrix}
+\cos\beta & \sin\beta\exp(-i\alpha)\\
+\sin\beta\exp(i\alpha) & -\cos\beta
+\end{pmatrix}
+\end{align*}
+
+As usual, we find the eigenvalues of this operator by solving the characteristic equation:
+
+\begin{align*}
+\mathrm{det}\left(\mathbf{S}\cdot\hat{n} - \lambda I\right) &= \left(\frac{\hbar}{2}\cos\beta - \lambda\right)\left(-\frac{\hbar}{2}\cos\beta - \lambda\right) - \frac{\hbar^{2}}{4}\sin^{2}\beta\\
+&= \lambda^{2} - \frac{\hbar^{2}}{4} = 0
+\end{align*}
+
+Therefore $\lambda = \pm \frac{\hbar}{2}$ as expected. Let $\psi_{1}$ and $\psi_{2}$ represent the components of the eigenket $\ket{\mathbf{S}\cdot\hat{n}; +}$ of this operator. We then need to solve the following system for the components $\psi_{1}$ and $\psi_{2}$
+
+\begin{align*}
+\psi_{1}\cos\beta+\psi_{2}\sin\beta\exp(-i\alpha) &= \psi_{1}\\
+\psi_{1}\sin\beta\exp(i\alpha) - \psi_{2}\cos\beta &= \psi_{2}
+\end{align*}
+
+The system does not have a real solution. But we can make a lucky guess that $\psi_{1} = \cos\frac{\beta}{2}$ and $\psi_{2} = \sin\frac{\beta}{2}\exp(i\alpha)$
+
+
 \end{s}
+
+
 
 
 \end{document}
