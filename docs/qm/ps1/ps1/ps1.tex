@@ -1,5 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage{amsmath} % AMS Math Package
+\usepackage{bm}
 \usepackage{amsthm} % Theorem Formatting
 \usepackage{amssymb}    % Math symbols such as \mathbb
 \usepackage{graphicx} % Allows for eps images
@@ -108,8 +109,31 @@ a_3 &= \frac{X_{11}-X_{22}}{2}
 
 \begin{s} 
 \begin{align*}
-\sigma\cdot a' = \exp\left(\frac{i\sigma\cdot\hat{n}\phi}{2}\right)\sigma\cdot a \exp\left(-\frac{i\sigma\cdot\hat{n}\phi}{2}\right)
+\bm{\sigma}\cdot \bm{a}' = \exp\left(\frac{i\bm{\sigma}\cdot\bm{\hat{n}}\phi}{2}\right)\bm{\sigma}\cdot \bm{a} \exp\left(-\frac{i\bm{\sigma}\cdot\bm{\hat{n}}\phi}{2}\right)
 \end{align*}
+
+For the sake of simplicity let us define the matrices $A = \frac{i\bm{\sigma}\cdot\hat{n}\phi}{2}$, $B = \bm{\sigma}\cdot \bm{a} $ and $C = -\frac{i\bm{\sigma}\cdot\hat{n}\phi}{2}$. Now, the determinant can be written as a product of the determinant of each matrix: 
+
+\begin{align*}
+\mathrm{det}(\bm{\sigma}\cdot \bm{a}' ) &= \mathrm{det}(\exp(A))\cdot \mathrm{det}(B)\cdot\mathrm{det}(\exp(C))\\
+&= \exp(\mathrm{Tr}(A))\cdot \mathrm{det}(B)\cdot \exp(\mathrm{Tr}(C))
+\end{align*}
+
+We know that the only terms on the diagonal of $A$ and $C$ come from $S_{z}$ which has the property $\mathrm{Tr}(S_{z}) = 0$. Therefore, $\exp(\mathrm{Tr}(A)) = 1$ and  $\exp(\mathrm{Tr}(C)) = 1$. Ultimately, this means that the determinant is invariant
+
+\begin{align*}
+\mathrm{det}(\bm{\sigma}\cdot \bm{a}' ) &= \mathrm{det}(\bm{\sigma}\cdot \bm{a} )
+\end{align*}
+
+If we have $\bm{\hat{n}} = \hat{z}$, then the transformation reads
+
+\begin{align*}
+\bm{\sigma}\cdot \bm{a}' &= \exp\left(\frac{i\phi\sigma_{z}}{2}\right)\bm{\sigma}\cdot \bm{a} \exp\left(-\frac{i\phi\sigma_{z}}{2}\right)\\
+&= \bm{\sigma}\cdot \bm{a}
+\end{align*}
+ 
+Presumably this means that we can form a new set of operators $\bm{\sigma}$ in an arbitrary basis which have the same properties as the Pauli matrices. Choosing $\bm{\hat{n}} = \hat{z}$ just gives us the Pauli matrices again, as it should.
+
 \end{s}
 
 \begin{p}
