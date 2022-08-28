@@ -53,11 +53,50 @@
 %\end{frame}
 
 \begin{frame}{Summary}
+Attempting to cover everything from imaging strategy to analysis method\\
+\vspace{0.2in}
+\textbf{Part 1}
+\begin{itemize}
+\item Imaging strategy and BASIC processing
+\item Image stitching, registration, segmentation with MCMICRO
+\end{itemize}
+\textbf{Part 2}
 \begin{itemize}
 \item Recap of the compartment model for RNA flow
-\item Gene selection based on RNA flow
+\item Gene selection based on RNA flow model
 \item Brief comments on probe design
 \end{itemize}
+\end{frame}
+
+\begin{frame}{Imaging setup}
+\begin{figure}
+\includegraphics[width=10cm]{hilo-epi.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{The MCMICRO pipeline}
+\begin{figure}
+\includegraphics[width=14cm]{mcmicro.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{4-Channel acquisition}
+\begin{figure}
+\includegraphics[width=12cm]{tiling-1.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Stitching a single channel with ASHLAR}
+\begin{figure}
+\includegraphics[width=12cm]{tiling-2.png}
+\end{figure}
+\textit{Courtesy of the Laboratory of Systems Pharmacology at Harvard}
+\end{frame}
+
+\begin{frame}{Registering images between cycles with ASHLAR}
+\begin{figure}
+\includegraphics[width=12cm]{tiling-3.png}
+\end{figure}
 \end{frame}
 
 \begin{frame}{A model for RNA Flow}
@@ -70,26 +109,9 @@
 
 \begin{frame}{Bayesian inference of RNA flow parameters}
 
-It is well-known that using just means and variances gives poor estimates of the model parameters (Munsky et al. PNAS 2018)\\
-\vspace{0.2in}
-Let $\theta = \left( k_{on},k_{off},k_{t},k_{exp},\gamma\right)$. Using Bayes Rule: 
 
-\begin{align*}
-P(\theta|X) = \frac{P(X|\theta)P(\theta)}{\int P(X|\theta)P(\theta)} \propto P(X|\theta)P(\theta)
-\end{align*}
-
-Can infer $\theta$ if we know the likelihood $P(X|\theta)$ (the hard part) and specify a prior $P(\theta)$\\
-\vspace{0.2in}
-Generally we have to resort to Monte Carlo methods to find $P(X|\theta)$
 
 \end{frame}
-
-\begin{frame}{RNA Flow: parameter inference}
-Gene selection is based on hypothesized differences in rates $k_{i}$ or the behavior of $r(t)$ in different experimental conditions\\
-\vspace{0.2in}
-The selection method chosen where is based on expected differences in $r(t)$
-\end{frame}
-
 
 
 \begin{frame}{The principle of Interferon-$\gamma$ induced transcriptional memory}
