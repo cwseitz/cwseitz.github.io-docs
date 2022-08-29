@@ -114,7 +114,7 @@ Thus we have four equations involving $X_{ij}$'s and $a_k$ for $k = (1,2,3)$. We
 \begin{align*}
 a_0 &= \frac{X_{11}+X_{22}}{2}\\
 a_1 &= \frac{X_{12}+X_{21}}{2}\\
-a_2 &= \frac{X_{21}-X_{12}}{2}\\
+a_2 &= i\frac{X_{12}-X_{21}}{2}\\
 a_3 &= \frac{X_{11}-X_{22}}{2}
 \end{align*}
 
@@ -147,25 +147,9 @@ If we have $\bm{\hat{n}} = \hat{z}$, then the transformation reads
 
 \begin{align*}
 \bm{\sigma}\cdot \bm{a}' &= \exp\left(\frac{i\phi\sigma_{z}}{2}\right)\bm{\sigma}\cdot \bm{a} \exp\left(-\frac{i\phi\sigma_{z}}{2}\right)\\
-&= \exp\left(\frac{i\phi\sigma_{z}}{2}\right)\exp\left(-\frac{i\phi\sigma_{z}}{2}\right)\left[a_{x}\sigma_{x}+a_{y}\sigma_{y}+a_{z}\sigma_{z}\right]
 \end{align*}
 
-
-Notice that 
-
-\begin{align*}
-\exp\left(\frac{\pm i\phi\sigma_{z}}{2}\right) &= 
-\begin{pmatrix}\exp(\pm i\phi) & 0\\ 0 & \exp(\pm i\phi)\end{pmatrix}
-\end{align*}
-
-which is diagonal and will therefore commute with any other matrix. This allows us to write
-
-\begin{align*}
-\bm{\sigma}\cdot \bm{a}' &= \exp\left(\frac{i\phi\sigma_{z}}{2}\right)\bm{\sigma}\cdot \bm{a} \exp\left(-\frac{i\phi\sigma_{z}}{2}\right)\\
-\end{align*}
-
-
-Presumably this means that we have just rotated the spin 
+My intuition says that we are rotating the spin about the axis of rotation $\hat{n}$ by an angle $\phi$, but I'm unsure how to prove this from the above expression.
 
 \end{s}
 
