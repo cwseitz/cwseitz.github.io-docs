@@ -126,30 +126,89 @@ Problem 1.5 from Sakurai
 \end{p}
 
 \begin{s} 
+
+To simplify the notation, let $\theta = \phi/2$. The matrix exponential can be expanded as a power series
+
+\begin{align*}
+\exp(i(\bm{\sigma}\cdot\bm{\hat{n}})\theta) &= I + i\theta(\bm{\sigma}\cdot\bm{\hat{n}}) + \frac{(i\theta(\bm{\sigma}\cdot\bm{\hat{n}}))^{2}}{2!} + \frac{(i\theta(\bm{\sigma}\cdot\bm{\hat{n}}))^{3}}{3!} + ...\\
+&= I + i\theta(\bm{\sigma}\cdot\bm{\hat{n}}) - \frac{\theta^{2}}{2!} + \frac{\theta^{3}(\bm{\sigma}\cdot\bm{\hat{n}})}{3!} + ...\\
+&= \left(I - \frac{\theta^{2}}{2!}+...\right) + i(\bm{\sigma}\cdot\bm{\hat{n}})\left(\theta - \frac{\theta^{3}}{3!} +...\right)\\
+&= \cos\theta I + i(\bm{\sigma}\cdot\bm{\hat{n}})\sin\theta
+\end{align*}
+
+and similarly $\exp(-i(\bm{\sigma}\cdot\bm{\hat{n}})\theta) = \cos\theta I - i(\bm{\sigma}\cdot\bm{\hat{n}})\sin\theta$. We can use this result to write $\exp(\pm i(\bm{\sigma}\cdot\bm{\hat{n}})\theta)$ out more explicitly:
+
+\begin{align*}
+\exp(i(\bm{\sigma}\cdot\bm{\hat{n}})\theta) &=
+\begin{pmatrix}
+\cos\theta + in_{z}\sin\theta & (-in_{x}+n_{y})\sin\theta\\
+(in_{x}-n_{y})\sin\theta & \cos\theta - in_{z}\sin\theta 
+\end{pmatrix}
+\end{align*}
+
+\begin{align*}
+\exp(-i(\bm{\sigma}\cdot\bm{\hat{n}})\theta) &=
+\begin{pmatrix}
+\cos\theta - in_{z}\sin\theta & (-in_{x}-n_{y})\sin\theta\\
+(-in_{x}+n_{y})\sin\theta & \cos\theta + in_{z}\sin\theta 
+\end{pmatrix}
+\end{align*}
+
+Now, we were given the transformation
+
 \begin{align*}
 \bm{\sigma}\cdot \bm{a}' = \exp\left(\frac{i\bm{\sigma}\cdot\bm{\hat{n}}\phi}{2}\right)\bm{\sigma}\cdot \bm{a} \exp\left(-\frac{i\bm{\sigma}\cdot\bm{\hat{n}}\phi}{2}\right)
 \end{align*}
 
-For the sake of simplicity let us define the matrices $A = \frac{i\bm{\sigma}\cdot\hat{n}\phi}{2}$, $B = \bm{\sigma}\cdot \bm{a} $ and $C = -\frac{i\bm{\sigma}\cdot\hat{n}\phi}{2}$. Now, the determinant can be written as a product of the determinant of each matrix: 
-
-\begin{align*}
-\mathrm{det}(\bm{\sigma}\cdot \bm{a}' ) &= \mathrm{det}(\exp(A))\cdot \mathrm{det}(B)\cdot\mathrm{det}(\exp(C))\\
-&= \exp(\mathrm{Tr}(A))\cdot \mathrm{det}(B)\cdot \exp(\mathrm{Tr}(C))
-\end{align*}
-
-We know that the only terms on the diagonal of $A$ and $C$ come from $S_{z}$ which has the property $\mathrm{Tr}(S_{z}) = 0$. Therefore, $\exp(\mathrm{Tr}(A)) = 1$ and  $\exp(\mathrm{Tr}(C)) = 1$. Ultimately, this means that the determinant is invariant
+and would like to show that
 
 \begin{align*}
 \mathrm{det}(\bm{\sigma}\cdot \bm{a}' ) &= \mathrm{det}(\bm{\sigma}\cdot \bm{a} )
 \end{align*}
 
-If we have $\bm{\hat{n}} = \hat{z}$, then the transformation reads
+To see this, notice that the determinant of $\mathrm{det}(\bm{\sigma}\cdot \bm{a}')$ can be written as a product of three determinants. The two determinants coming from terms $\exp(\pm i(\bm{\sigma}\cdot\bm{\hat{n}})\theta)$ will multiply to unity 
 
 \begin{align*}
-\bm{\sigma}\cdot \bm{a}' &= \exp\left(\frac{i\phi\sigma_{z}}{2}\right)\bm{\sigma}\cdot \bm{a} \exp\left(-\frac{i\phi\sigma_{z}}{2}\right)\\
+\mathrm{det}(\exp(i(\bm{\sigma}\cdot\bm{\hat{n}})\theta)) \cdot \mathrm{det}(\exp(- i(\bm{\sigma}\cdot\bm{\hat{n}})\theta)) = 1
 \end{align*}
 
-My intuition says that we are rotating the spin about the axis of rotation $\hat{n}$ by an angle $\phi$, but I'm unsure how to prove this from the above expression.
+Leaving only $\mathrm{det}(\bm{\sigma}\cdot \bm{a} )$. In the case that $\mathbf{\hat{n}} = \mathbf{\hat{z}}$, the matrices $\exp(\pm i(\bm{\sigma}\cdot\bm{\hat{n}})\theta)$  reduce to 
+
+\begin{align*}
+\exp(i(\bm{\sigma}\cdot\bm{\hat{z}})\theta) &=
+\begin{pmatrix}
+\exp(i\theta) & 0\\
+0 & \exp(-i\theta)
+\end{pmatrix}
+\end{align*}
+
+\begin{align*}
+\exp(-i(\bm{\sigma}\cdot\bm{\hat{z}})\theta) &=
+\begin{pmatrix}
+\exp(-i\theta) & 0\\
+0 & \exp(i\theta)
+\end{pmatrix}
+\end{align*}
+
+Now using these matrices above in some simple matrix operations and substituting back $\phi = 2\theta$, we can show that the pure states on each axis transform as
+
+\begin{align*}
+\exp(i(\bm{\sigma}\cdot\bm{\hat{z}})\theta) \; \sigma_{z}\;\exp(-i(\bm{\sigma}\cdot\bm{\hat{z}})\theta) = \sigma_{z}
+\end{align*}
+
+\begin{align*}
+\exp(i(\bm{\sigma}\cdot\bm{\hat{z}})\theta) \; \sigma_{x}\;\exp(-i(\bm{\sigma}\cdot\bm{\hat{z}})\theta)
+&= \sigma_{x}\cos \phi - \sigma_{y}\sin \phi
+\end{align*}
+
+\begin{align*}
+\exp(i(\bm{\sigma}\cdot\bm{\hat{z}})\theta) \; \sigma_{y}\;\exp(-i(\bm{\sigma}\cdot\bm{\hat{z}})\theta)
+&= \sigma_{x}\sin \phi + \sigma_{y}\cos \phi
+\end{align*}
+
+which means that $a_{z}' = a_{z}$, $a_{y}' = a_{x}\sin\phi + a_{y}\cos\phi$, and $a_{x}' = a_{x}\cos\phi - a_{y}\sin\phi$. This is a rotation about $\mathbf{\hat{z}}$ by an angle $\phi$.
+
+
 
 \end{s}
 
