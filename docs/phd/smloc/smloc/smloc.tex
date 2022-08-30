@@ -24,15 +24,15 @@
 
 Most detectors used for imaging have many elements (pixels) so that we can record an image projected onto the detector by a system of lenses. In fluorescence imaging, this is usually a relay consisting of an objective lens and a tube lens to focus the image onto the camera. Due to diffraction, any point emitter, such as a single fluorescent molecule, will be registered as a diffraction limited spot. The profile of that spot is often described as a Gaussian point spread function
 
-\begin{equation*}
+\begin{equation}
 q(x,y) = \frac{1}{2\pi\sigma^{2}}\exp\left(-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}\right)
-\end{equation*}
+\end{equation}
 
 where $(x_0,y_0)$ defines the coordinates of a single fluorescent molecule on a detector $\mathcal{D}$. Since light is actually made up of photons, this function describes a probability density for photon arrivals in two-dimensions. Therefore, an image captured by a camera is just a histogram of photon arrivals and a discrete approximation of $q(x,y)$. If $q(x,y)$ is constant in time, and we detect a very large number of photons, the value at a pixel approaches an integral of $q(x,y)$ over the pixel:
 
-\begin{equation*}
+\begin{equation}
 \lambda_{k} = \gamma\cdot\int_{\mathcal{D}_{k}} q(x,y)dxdy
-\end{equation*}
+\end{equation}
 
 The variable $\lambda_{k}$ at a pixel $k$ defines the probability of observing a photon per unit time and therefore we can define the number of photons arriving at each pixel as a random variable
 
@@ -57,9 +57,9 @@ For the standard definition of a Gaussian with variance $\sigma^{2}$, $\alpha = 
 
 The (possibly cropped) detector $\mathcal{D}$ is a $M\times M$ array of square pixels of width $\Delta$ and quantum efficiency $\gamma$. Our goal is to evaluate $\lambda_{k}$ for all $\mathcal{D}_{k} \in \mathcal{D}$ according to the equation above. Therefore, we write the expression for the rate at pixel $k$ with coordinates $(x',y')$
 
-\begin{align*}
+\begin{align}
 \lambda_{k} &= \frac{\gamma\alpha}{4\pi}\left\{\mathrm{erf}((x'+\Delta)\sqrt{\alpha})-\mathrm{erf}(x'\sqrt{\alpha})\right\}\left\{\mathrm{erf}((y'+\Delta)\sqrt{\alpha})-\mathrm{erf}(y'\sqrt{\alpha})\right\}
-\end{align*}
+\end{align}
 
 \subsection{Corrupting a Poisson process with white noise}
 
@@ -68,15 +68,15 @@ Detectors often suffer from dark noise (thermal noise) and there may also be a b
 \vspace{0.1in}
 \begin{align*}
 P(S_{k},H_{k}) &= P(H_{k}|S_{k})P(S_{k})\\
-&= \frac{1}{Z}\exp\left(-\frac{(H_{k}-g_{k}n_{k})^{2}}{\sigma_{k}^{2}}\right)\frac{\exp\left({-\lambda_{k}}\right)\lambda_{k}^{n_{k}}}{n_{k}!}
+&= \frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(H_{k}-g_{k}n_{k}-m_{k})^{2}}{2\sigma_{k}^{2}}\right)\frac{\exp\left({-\lambda_{k}}\right)\lambda_{k}^{n_{k}}}{n_{k}!}
 \end{align*}
 \vspace{0.1in}
 
 Marginalizing over $S_{k}$ gives the desired distribution over $H_{k}$
 
-\begin{equation*}
-P(H_{k}) = \frac{1}{Z}\sum_{n_{k}=0}^{\infty}\frac{\exp\left({-\lambda_{k}}\right)\lambda_{k}^{n_{k}}}{n_{k}!}\exp\left(-\frac{(H_{k}-g_{k}n_{k})^{2}}{\sigma_{k}^{2}}\right)
-\end{equation*}
+\begin{equation}
+P(H_{k}) = \frac{\exp\left({-\lambda_{k}}\right)}{\sqrt{2\pi}\sigma}\sum_{n=0}^{\infty}\frac{\lambda_{k}^{n}}{n!}\exp\left(-\frac{(H_{k}-g_{k}n-m_{k})^{2}}{2\sigma_{k}^{2}}\right)
+\end{equation}
 
 \begin{figure}
 \centering     %%% not \center
@@ -84,24 +84,6 @@ P(H_{k}) = \frac{1}{Z}\sum_{n_{k}=0}^{\infty}\frac{\exp\left({-\lambda_{k}}\righ
 \subfigure[Simulation of $P(S_{k},H_{k})$ and marginal distributions]{\label{fig:b}\includegraphics[width=120mm]{experimental}}
 
 \end{figure}
-
-Notice that when $\mu_{k} = \lambda_{k}\Delta t$ is large, $P(S_{k})$ is well-approximated by a Gaussian distribution. It turns out the for $\mu > 20$ the Poisson distribution is approximately 
-
-\begin{equation*}
-S_{k} \sim \mathcal{N}(\lambda_{k}\Delta t, \lambda_{k}\Delta t)
-\end{equation*} 
-
-which turns out to be a very useful approximation for simplifying $P(H_{k})$. It can be shown that the product of two Gaussian PDFs is
-
-\begin{equation*}
-\mathcal{N}(\mu_{1},\sigma_{1}^{2}) \times \mathcal{N}(\mu_{2},\sigma_{2}^{2}) = \mathcal{N}\left(\frac{\mu_{1}\sigma_{2}^{2} + \mu_{2}\sigma_{2}^{2}}{\sigma_{1}^{2}+\sigma_{2}^{2}}, \frac{1}{\frac{1}{\sigma_{1}^{2}}+\frac{1}{\sigma_{2}^{2}}}\right)
-\end{equation*}
-
-a property which we can apply to the above equation to get
-
-\begin{equation*}
-P(H_{k}) = \frac{1}{Z}\sum_{n_{k}=0}^{\infty}\exp\left(-\frac{1}{2}\left(H_{k}-\frac{g_{k}n_{k}(\lambda_{k}\Delta t)^{2} +  (\lambda_{k}\Delta t)\sigma_{k}^{2}}{(\lambda_{k}\Delta t)^{2}+\sigma_{k}^{2}}\right)\left(\frac{1}{(\lambda_{k}\Delta t)^{2}}+\frac{1}{\sigma_{k}^{2}}\right)\right)
-\end{equation*}
 
 
 
@@ -131,9 +113,7 @@ I(\theta_{i}) &= \underset{\theta}{\mathbb{E}}\left[\sum_{k}\frac{\partial^{2}}{
 
 At this point, we need to evaluate the second derivative w.r.t each of the parameters in $\theta = (x_{0},y_{0},\sigma^{2})$. We have shown that the model for the number of photoelectrons at a pixel is
 
-\begin{equation*}
-P(H_{k}|\theta) = \frac{1}{Z}\sum_{s=0}^{\infty}\frac{\exp\left({-\lambda_{k}}\right)\lambda_{k}^{n_{k}}}{n_{k}!}\exp\left(-\frac{(H_{k}-g_{k}n_{k})^{2}}{\sigma_{k}^{2}}\right)
-\end{equation*}
+
 
 
 \section{Supplement on Poisson processes}
