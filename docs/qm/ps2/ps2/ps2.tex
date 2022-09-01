@@ -92,6 +92,27 @@ Problem 1.15 from Sakurai
 \end{p}
 
 \begin{s} 
+After the first measurement along $+\hat{z}$ , all of our atoms are prepared in the $\ket{+}$ state in the $S_{z}$ basis. At the next apparatus oriented along $\hat{n}$, more atoms will be filtered out since $\ket{+}$ is not an eigenket of the $\mathbf{S}\cdot \hat{n}$ operator. Recall that $\ket{+}_{n}$ is 
+
+\begin{align*}
+\ket{+}_{n} &= \cos\frac{\beta}{2}\ket{+} + \sin\frac{\beta}{2}\ket{-}
+\end{align*}
+
+The probability the state $\ket{+}$ survives is given by the inner product
+
+\begin{align*}
+|\bra{+}\ket{+}_{n}|^{2} &= |\bra{+}\cos\frac{\beta}{2}\ket{+} + \bra{+}\sin\frac{\beta}{2}\ket{-}|^{2}\\
+&= \cos^{2}\frac{\beta}{2}
+\end{align*}
+
+After this, all atoms are in the $\ket{+}_{n}$ state. We then filter the atoms one more time with an apparatus along $-\hat{z}$. The fraction that survive this one is given by
+
+\begin{align*}
+|\bra{-}\ket{+}_{n}|^{2} &= |\bra{-}\cos\frac{\beta}{2}\ket{+} + \bra{-}\sin\frac{\beta}{2}\ket{-}|^{2}\\
+&= \sin^{2}\frac{\beta}{2}
+\end{align*}
+
+Therefore the fraction output is $\cos^{2}\frac{\beta}{2}\sin^{2}\frac{\beta}{2}$. We can maximize this function by setting $\beta = \pi/2$
 
 \end{s}
 
