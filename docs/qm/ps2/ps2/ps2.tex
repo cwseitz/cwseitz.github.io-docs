@@ -22,7 +22,7 @@
 
 \begin{document}
 
-{\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Homework 1}         }\\[2\baselineskip] % Title
+{\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Homework 2}         }\\[2\baselineskip] % Title
 { {\bf \fontfamily{cmr}\selectfont Quantum Mechanics}\\ {\textit{\fontfamily{cmr}\selectfont     August 29th, 2022}}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    {\large \textsc{Clayton Seitz}
 \\[1.4\baselineskip] 
 
@@ -32,6 +32,34 @@ Problem 1.12 from Sakurai
 
 \begin{s} 
 
+If we choose the representation such that $\ket{1} = \frac{1}{\sqrt{2}}\begin{pmatrix} 1\\1 \end{pmatrix}$ and $\ket{2} = \frac{1}{\sqrt{2}}\begin{pmatrix} 1\\-1 \end{pmatrix}$ then we can use the definition of the outer product to show that
+
+\begin{equation*}
+H = a\begin{pmatrix} 1&1\\1&-1\end{pmatrix}
+\end{equation*}
+
+The energy eigenvalues are then found by
+
+\begin{align*}
+\mathrm{det}(H-\lambda I) &= \mathrm{det}\begin{pmatrix} a-\lambda&a\\a&-a-\lambda\end{pmatrix}\\
+&= (a-\lambda)(-a-\lambda) - a^{2}\\
+&= \lambda^{2} - 2a^{2} = 0
+\end{align*}
+
+therefore $E_{\pm} = \pm \sqrt{2a}$. The $+$ eigenvector $\ket{\psi_{1}}$ is given by the system
+
+\begin{align*}
+(\psi_{1}^{1} + \psi_{1}^{2}) &= \sqrt{\frac{2}{a}} \psi_{1}^{1}\\
+(\psi_{1}^{1} - \psi_{1}^{2}) &= \sqrt{\frac{2}{a}} \psi_{1}^{2}
+\end{align*}
+
+The $-$ eigenvector $\ket{\psi_{2}}$ is given by the system
+
+\begin{align*}
+(\psi_{2}^{1} + \psi_{2}^{2}) &= -\sqrt{\frac{2}{a}} \psi_{2}^{1}\\
+(\psi_{2}^{1} - \psi_{2}^{2}) &= -\sqrt{\frac{2}{a}} \psi_{2}^{2}
+\end{align*}
+
 \end{s}
 
 \begin{p}
@@ -39,6 +67,23 @@ Problem 1.13 from Sakurai
 \end{p}
 
 \begin{s} 
+
+Writing $H$ out in matrix form gives
+
+\begin{align*}
+H &= H_{11}\begin{pmatrix} 1&1\\1&1\end{pmatrix}
++ H_{12}\begin{pmatrix} 1&-1\\-1&1\end{pmatrix}
++ H_{22}\begin{pmatrix} 1&-1\\1&-1\end{pmatrix}
++ \begin{pmatrix} 1&1\\-1&-1\end{pmatrix}\\
+&= \begin{pmatrix} H_{11}+H_{12}+H_{22}+1&H_{11}-H_{12}-H_{22}+1\\H_{11}-H_{12}+H_{22}-1&H_{11}+H_{12}-H_{22}-1\end{pmatrix}
+\end{align*}
+
+\begin{align*}
+\mathrm{det}(H-\lambda I) &= \mathrm{det}\begin{pmatrix} H_{11}+H_{12}+H_{22}+1-\lambda &H_{11}-H_{12}-H_{22}+1\\H_{11}-H_{12}+H_{22}-1&H_{11}+H_{12}-H_{22}-1-\lambda\end{pmatrix}\\
+\end{align*}
+
+
+
 
 \end{s}
 
