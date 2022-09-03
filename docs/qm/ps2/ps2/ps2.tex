@@ -151,6 +151,71 @@ Problem 1.24 from Sakurai
 \end{p}
 
 \begin{s} 
+For the ground state, the position space wavefunction $\ket{\psi}$ is a solution to the eigenvalue equation  
+
+\begin{align*}
+H\ket{\psi} &= \left[\frac{\bm{p}^{2}}{2m} + \bm{V}(x)\right]\ket{\psi}\\
+&= -\frac{\hbar^{2}}{2m}\frac{\partial^{2}\ket{\psi}}{\partial x^{2}} + V(x)\ket{\psi}\\
+&= E\ket{\psi}
+\end{align*}
+
+We set the boundary conditions $\psi(0) = 0$ and $\psi(a) = 0$ since the wavefunction must vanish at the two walls. Since $V(x) = 0$ inside the well, Schrodinger's equation reduces to
+
+\begin{align*}
+H\ket{\psi} = -\frac{\hbar^{2}}{2m}\frac{\partial^{2}\ket{\psi}}{\partial x^{2}} = E\ket{\psi}
+\end{align*}
+
+This equation has the general solution
+
+\begin{align*}
+\ket{\psi} = A\exp(ikx) + B\exp(-ikx)
+\end{align*}
+
+Given our boundary condition $\psi(a) = 0$, the wavelength must satisfy $ka = n\pi$ which means that $k = \frac{n\pi}{a}$ for integer $n > 0$, which gives us the solution
+
+\begin{align*}
+\ket{\psi} = A\sin\left(\frac{n\pi x}{a}\right)
+\end{align*}
+
+It is straightforward to show that
+
+\begin{align*}
+\bra{\psi}\ket{\psi} = \frac{2}{a}\int_{0}^{a}\sin^{2}\left(\frac{n\pi x}{a}\right)dx = 1
+\end{align*}
+
+Giving the eigenkets 
+
+\begin{align*}
+\ket{\psi} = \sqrt{\frac{2}{a}}\sin\left(\frac{n\pi x}{a}\right)
+\end{align*}
+
+
+the variance in position when $n=1$ is
+\begin{align*}
+\langle (\Delta x)^{2}\rangle &= \langle x^{2} \rangle - \langle x\rangle^{2}\\
+&= \bra{\psi} x^{2} \ket{\psi} - \left(\bra{\psi} x \ket{\psi}\right)^{2}\\
+&= x^{2}\bra{\psi}\ket{\psi} - \left(x\bra{\psi}\ket{\psi}\right)^{2}\\
+&= \frac{2}{a}\int_{0}^{a} x^{2} \sin^{2}\left(\frac{\pi x}{a}\right) - \left(\frac{2}{a}\int_{0}^{a} x \sin^{2}\left(\frac{\pi x}{a}\right)\right)^{2}
+\end{align*}
+
+We can immediately write the value of $\left(\langle x \rangle\right)^{2}$ based on the symmetry of the wavefunction
+
+\begin{align*}
+\left(\int_{0}^{a} x \sin^{2}\left(\frac{\pi x}{a}\right)dx\right)^{2} &= \frac{a^{2}}{4}
+\end{align*}
+
+The term $\langle x^{2} \rangle$ is given by the integral
+
+\begin{align*}
+\int_{0}^{a} x^{2} \sin^{2}\left(\alpha x\right)dx 
+\end{align*}
+
+\begin{align*}
+\langle (\Delta p)^{2}\rangle &= \langle p^{2} \rangle - \langle p\rangle^{2}\\
+&= \bra{\psi} p^{2} \ket{\psi} - \left(\bra{\psi} p \ket{\psi}\right)^{2}\\
+&= \bra{\psi} \hbar^{2}\frac{\partial^{2}}{\partial x^{2}} \ket{\psi} - \left(\bra{\psi} -i\hbar\frac{\partial}{\partial x} \ket{\psi}\right)^{2}\\
+&= -c\alpha^{2}\hbar^{2}\int_{0}^{a} \sin(\alpha x)dx
+\end{align*}
 
 \end{s}
 
