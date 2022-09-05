@@ -46,19 +46,31 @@ The energy eigenvalues are then found by
 &= \lambda^{2} - 2a^{2} = 0
 \end{align*}
 
-therefore $E_{\pm} = \pm \sqrt{2a}$. The $+$ eigenvector $\ket{\psi_{1}}$ is given by the system
+therefore $E_{\pm} = \pm a\sqrt{2}$. The $+$ eigenvector $\ket{\psi_{+}}$ is given by the system
+
+\begin{equation*}
+\begin{pmatrix} a-E_{+}&a\\a&-a-E_{+}\end{pmatrix}\begin{pmatrix}\psi_{1}^{+}\\\psi_{2}^{+}\end{pmatrix} = \begin{pmatrix} a-a\sqrt{2}&a\\a&-a-a\sqrt{2}\end{pmatrix}\begin{pmatrix}\psi_{1}^{+}\\\psi_{2}^{+}\end{pmatrix}  = 0
+\end{equation*}
 
 \begin{align*}
-(\psi_{1}^{1} + \psi_{1}^{2}) &= \sqrt{\frac{2}{a}} \psi_{1}^{1}\\
-(\psi_{1}^{1} - \psi_{1}^{2}) &= \sqrt{\frac{2}{a}} \psi_{1}^{2}
+(1-\sqrt{2})\psi_{1}^{+} + \psi_{2}^{+} &= 0\\
+\psi_{1}^{+} - (1+\sqrt{2})\psi_{2}^{+} &= 0
 \end{align*}
 
-The $-$ eigenvector $\ket{\psi_{2}}$ is given by the system
+The second equation is just the first multiplied by $(1-\sqrt{2})$ so we can choose $\psi_{1}^{+} = 1$ giving $\psi_{2}^{+} = \sqrt{2} - 1$
+
+The eigenvector $\ket{\psi_{-}}$ is found similarly
+
+\begin{equation*}
+\begin{pmatrix} a-E_{-}&a\\a&-a-E_{-}\end{pmatrix}\begin{pmatrix}\psi_{1}^{-}\\\psi_{2}^{-}\end{pmatrix} = \begin{pmatrix} a+a\sqrt{2}&a\\a&-a+a\sqrt{2}\end{pmatrix}\begin{pmatrix}\psi_{1}^{-}\\\psi_{2}^{-}\end{pmatrix}  = 0
+\end{equation*}
 
 \begin{align*}
-(\psi_{2}^{1} + \psi_{2}^{2}) &= -\sqrt{\frac{2}{a}} \psi_{2}^{1}\\
-(\psi_{2}^{1} - \psi_{2}^{2}) &= -\sqrt{\frac{2}{a}} \psi_{2}^{2}
+(1+\sqrt{2})\psi_{1}^{+} + \psi_{2}^{+} &= 0\\
+\psi_{1}^{+} + (-1+\sqrt{2})\psi_{2}^{+} &= 0
 \end{align*}
+
+Similar to before, the second equation is $(-1+\sqrt{2})$ multiplied by the first, allowing us to set $\psi_{1}^{-} = 1$ and $\psi_{2}^{-} = -(1+\sqrt{2})$, giving a $\ket{\psi_{-}}$ that is orthogonal to $\ket{\psi_{+}}$
 
 \end{s}
 
@@ -71,18 +83,33 @@ Problem 1.13 from Sakurai
 Writing $H$ out in matrix form gives
 
 \begin{align*}
-H &= H_{11}\begin{pmatrix} 1&1\\1&1\end{pmatrix}
-+ H_{12}\begin{pmatrix} 1&-1\\-1&1\end{pmatrix}
-+ H_{22}\begin{pmatrix} 1&-1\\1&-1\end{pmatrix}
-+ \begin{pmatrix} 1&1\\-1&-1\end{pmatrix}\\
-&= \begin{pmatrix} H_{11}+H_{12}+H_{22}+1&H_{11}-H_{12}-H_{22}+1\\H_{11}-H_{12}+H_{22}-1&H_{11}+H_{12}-H_{22}-1\end{pmatrix}
+H &= \frac{H_{11}}{2}\begin{pmatrix} 1&1\\1&1\end{pmatrix}
++ \frac{H_{22}}{2}\begin{pmatrix} 1&-1\\-1&1\end{pmatrix}
++ H_{12}\begin{pmatrix} 1&0\\0&-1\end{pmatrix}\\
+&= \frac{H_{11}+H_{22}}{2}I + \frac{H_{11}-H_{12}}{2}\sigma_{x} + H_{12}\sigma_{z} \\
+&= a I + b\sigma_{x} + c\sigma_{z}
 \end{align*}
+
+where have made appropriate substitutions of constants for brevity. Now this implies, 
 
 \begin{align*}
-\mathrm{det}(H-\lambda I) &= \mathrm{det}\begin{pmatrix} H_{11}+H_{12}+H_{22}+1-\lambda &H_{11}-H_{12}-H_{22}+1\\H_{11}-H_{12}+H_{22}-1&H_{11}+H_{12}-H_{22}-1-\lambda\end{pmatrix}\\
+H\ket{\psi} &= \left(a I + b\sigma_{x} + c\sigma_{z}\right)\ket{\psi}\\
+&= a\ket{\psi} + (b\sigma_{x} + 0\sigma_{y} + c\sigma_{z})\ket{\psi}\\
 \end{align*}
 
+Any $\ket{\psi}$ is an eigenvector under the identity operation, so what we are really after is an eigenvector of the operator $\bm{\sigma}\cdot \bm{a}$ for $\bm{a} = (b, 0, c)$. In other words, if $\ket{\psi}$ is an eigenvector of $\bm{\sigma}\cdot\bm{a}$ then it is also an eigenvector of $H$. It is useful to work with the unit vector in the direction of $\bm{a}$ which is $\hat{\bm{n}}=(b/\sqrt{b^{2}+c^{2}}, 0, c/\sqrt{b^{2}+c^{2}})$. We already know the eigenvectors of $\bm{\sigma}\cdot\hat{\bm{n}}$
 
+\begin{align*}
+\ket{\psi_{+}} &= \cos\frac{\beta}{2}\ket{+} + \exp(i\alpha)\sin\frac{\beta}{2}\ket{-}\\
+\ket{\psi_{-}} &= -\sin\frac{\beta}{2}\ket{+} + \exp(i\alpha)\cos\frac{\beta}{2}\ket{-}
+\end{align*}
+
+where we take the definition that $\alpha$ is the polar angle and $\beta$ the azimuthal angle. Therefore
+
+\begin{align*}
+\alpha &= 0\\
+\beta &= \arctan\left(\frac{n_{z}}{n_{x}}\right) = \arctan\left(\frac{c}{b}\right) = \arctan\left(\frac{2H_{12}}{H_{11}-H_{12}}\right)
+\end{align*}
 
 
 \end{s}
@@ -138,16 +165,10 @@ Clearly our eigenvalues are $\lambda = \pm 1$
 
 \end{s}
 
+
+
 \begin{p}
 Problem 1.23 from Sakurai
-\end{p}
-
-\begin{s} 
-
-\end{s}
-
-\begin{p}
-Problem 1.24 from Sakurai
 \end{p}
 
 \begin{s} 
@@ -219,6 +240,12 @@ The term $\langle x^{2} \rangle$ is given by the integral
 
 \end{s}
 
+\begin{p}
+Problem 1.24 from Sakurai
+\end{p}
 
+\begin{s} 
+
+\end{s}
 
 \end{document}
