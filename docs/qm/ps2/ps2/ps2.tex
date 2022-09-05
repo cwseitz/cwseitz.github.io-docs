@@ -22,7 +22,7 @@
 
 \begin{document}
 
-{\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Homework 2}         }\\[2\baselineskip] % Title
+ {\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Homework 2}         }\\[2\baselineskip] % Title
 { {\bf \fontfamily{cmr}\selectfont Quantum Mechanics}\\ {\textit{\fontfamily{cmr}\selectfont     August 29th, 2022}}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    {\large \textsc{Clayton Seitz}
 \\[1.4\baselineskip] 
 
@@ -161,7 +161,41 @@ O = \frac{1}{\sqrt{2}}\begin{pmatrix} 0&1&0\\1&0&1\\0&1&0\end{pmatrix}
 &= -\lambda^{3} + \lambda = 0
 \end{align*}
 
-Clearly our eigenvalues are $\lambda = \pm 1$
+Clearly our eigenvalues are $\lambda = 0,\pm 1$. There is no degeneracy.
+
+\begin{equation*}
+\begin{pmatrix} -\lambda&\frac{1}{\sqrt{2}}&0\\\frac{1}{\sqrt{2}}&-\lambda&\frac{1}{\sqrt{2}}\\0&\frac{1}{\sqrt{2}}&-\lambda\end{pmatrix}
+\begin{pmatrix}\psi_{1}\\\psi_{2}\\\psi_{3}\end{pmatrix} = 0
+\end{equation*}
+
+For $\lambda = 0$, we have the system
+
+\begin{align*}
+\frac{1}{\sqrt{2}}\psi_{2} &= 0\\
+\frac{1}{\sqrt{2}}\psi_{1} + \frac{1}{\sqrt{2}}\psi_{3} &= 0\\
+\frac{1}{\sqrt{2}}\psi_{2} &= 0
+\end{align*}
+
+Therefore $\psi_{2} = 0$ and we can take $\psi_{1} = 1$ and $ \psi_{3} = -1$ For $\lambda = -1$, we have
+
+\begin{align*}
+\frac{1}{\sqrt{2}}\psi_{2} - \psi_{1} &= 0\\
+\frac{1}{\sqrt{2}}\psi_{1} - \psi_{2} + \frac{1}{\sqrt{2}}\psi_{3} &= 0\\
+\frac{1}{\sqrt{2}}\psi_{2} - \psi_{3} &= 0
+\end{align*}
+
+The second equation can be eliminated since it is just $-1/\sqrt{2}$ times the first plus $-1/\sqrt{2}$ times the second. We are free to set $\psi_{2} = 1$ which gives $\psi_{1} = \psi_{3} = \frac{1}{\sqrt{2}}$. For the second eigenvector we have the system
+
+\begin{align*}
+\frac{1}{\sqrt{2}}\psi_{2} + \psi_{1} &= 0\\
+\frac{1}{\sqrt{2}}\psi_{1} + \psi_{2} + \frac{1}{\sqrt{2}}\psi_{3} &= 0\\
+\frac{1}{\sqrt{2}}\psi_{2} + \psi_{3} &= 0
+\end{align*}
+
+Again, the second equation can be eliminated and $\psi_{2}=1$ and $\psi_{1}=\psi_{3} = -\frac{1}{\sqrt{2}}$
+
+\vspace{0.1in}
+A physical system where this is all relevant is the spin-1 system, which in general has three possible eigenstates. However, this observable $O$ only has two non-trivial eigenvectors and the observable is limited to a two dimensional subspace of the three dimensional space.
 
 \end{s}
 
