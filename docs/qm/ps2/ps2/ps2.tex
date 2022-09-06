@@ -220,19 +220,13 @@ We set the boundary conditions $\psi(0) = 0$ and $\psi(a) = 0$ since the wavefun
 H\ket{\psi} = -\frac{\hbar^{2}}{2m}\frac{\partial^{2}\ket{\psi}}{\partial x^{2}} = E\ket{\psi}
 \end{align*}
 
-This equation has the general solution
-
-\begin{align*}
-\ket{\psi} = A\exp(ikx) + B\exp(-ikx)
-\end{align*}
-
-Given our boundary condition $\psi(a) = 0$, the wavelength must satisfy $ka = n\pi$ which means that $k = \frac{n\pi}{a}$ for integer $n > 0$, which gives us the solution
+We have the following solution
 
 \begin{align*}
 \ket{\psi} = A\sin\left(\frac{n\pi x}{a}\right)
 \end{align*}
 
-It is straightforward to show that
+This solution comes from applying our boundary conditions $\psi(0) = 0$ and $\psi(a) = 0$. These require that the wavelength must satisfy $ka = n\pi$ which means that $k = \frac{n\pi}{a}$ for integer $n > 0$. Now, it is straightforward to show that
 
 \begin{align*}
 \bra{\psi}\ket{\psi} = \frac{2}{a}\int_{0}^{a}\sin^{2}\left(\frac{n\pi x}{a}\right)dx = 1
@@ -244,33 +238,92 @@ Giving the eigenkets
 \ket{\psi} = \sqrt{\frac{2}{a}}\sin\left(\frac{n\pi x}{a}\right)
 \end{align*}
 
+We would now like to compute the variance of our position measurement in the ground state ($n=1$). In general, for an observable $O$ and wavefunction $\psi(x)$, we can compute the variance of $O$ as 
 
-the variance in position when $n=1$ is
+\begin{align*}
+\langle (\Delta O)^{2}\rangle &= \langle O^{2} \rangle - \langle O\rangle^{2}\\
+\langle O \rangle &=  \bra{\psi} O \ket{\psi} = \int_{-\infty}^{+\infty} \psi^{*}(x) O \psi(x)dx
+\end{align*}
+
+For $O=x$, we have
+
 \begin{align*}
 \langle (\Delta x)^{2}\rangle &= \langle x^{2} \rangle - \langle x\rangle^{2}\\
 &= \bra{\psi} x^{2} \ket{\psi} - \left(\bra{\psi} x \ket{\psi}\right)^{2}\\
-&= x^{2}\bra{\psi}\ket{\psi} - \left(x\bra{\psi}\ket{\psi}\right)^{2}\\
-&= \frac{2}{a}\int_{0}^{a} x^{2} \sin^{2}\left(\frac{\pi x}{a}\right) - \left(\frac{2}{a}\int_{0}^{a} x \sin^{2}\left(\frac{\pi x}{a}\right)\right)^{2}
 \end{align*}
 
-We can immediately write the value of $\left(\langle x \rangle\right)^{2}$ based on the symmetry of the wavefunction
+We can immediately write the value of $\langle x \rangle^{2}= (\bra{\psi} x \ket{\psi})^{2}$ based on the symmetry of the wavefunction
 
 \begin{align*}
-\left(\int_{0}^{a} x \sin^{2}\left(\frac{\pi x}{a}\right)dx\right)^{2} &= \frac{a^{2}}{4}
+\langle x \rangle^{2} &= \frac{a^{2}}{4}
 \end{align*}
 
-The term $\langle x^{2} \rangle$ is given by the integral
+Let $\alpha = n\pi/a$. The term $\langle x^{2} \rangle$ is then given by the integral
 
 \begin{align*}
-\int_{0}^{a} x^{2} \sin^{2}\left(\alpha x\right)dx 
+I = \langle x^{2} \rangle &\propto \int_{0}^{a} x^{2} \sin^{2}\left(\alpha x\right)dx\\
+&= \int_{0}^{a} x^{2}\cdot \frac{1-\cos(2\alpha x)}{2}dx\\
+&= \frac{1}{2}\left[\frac{a^{3}}{3}- \int_{0}^{a}x^{2}\cos(2\alpha x)dx\right]\\
+&= \frac{1}{2}\left[\frac{a^{3}}{3}- \left[a^{2}\cdot \frac{\sin(2\alpha a)}{2\alpha} - \frac{1}{\alpha}\int_{0}^{a} x\sin(2\alpha x)\right]\right]\\
+&= \frac{1}{2}\left[\frac{a^{3}}{3}+ \frac{1}{\alpha}\left[\int_{0}^{a} x\sin(2\alpha x)\right]\right]\\
 \end{align*}
+
+The last integral can be evalulated as follows
+
+\begin{align*}
+\int_{0}^{a} x\sin(2\alpha x)dx &= -\bigg\rvert_{0}^{a} \frac{x}{2\alpha}\cos(2\alpha x) + \frac{1}{2\alpha}\int_{0}^{a} \cos(2\alpha x)dx\\
+&= -\frac{a}{2\alpha}\cos(2\alpha a) + \frac{1}{2\alpha}\sin(2\alpha a)\\
+&= -\frac{a}{2\alpha}\cos(2\alpha a)\\
+&= -\frac{a^{2}}{n\pi}\cos(n\pi)\\
+\end{align*}
+
+Combining these results, we get
+
+\begin{align*}
+I &= \frac{1}{2}\left[\frac{a^{3}}{3} - \frac{a^{3}}{n^{2}\pi^{2}}\cos(n\pi)\right]\\
+\end{align*}
+
+Finally, bringing in the normalization factor $2/a$ gives
+
+\begin{align*}
+I = \langle x^{2} \rangle &= a^{2}\left[\frac{1}{3} - \frac{1}{2 n^{2}\pi^{2}}\cos(n\pi)\right]\\
+\end{align*}
+
+which gives the variance 
+
+\begin{align*}
+\langle (\Delta x)^{2}\rangle &= \langle x^{2} \rangle - \langle x\rangle^{2}\\
+&= a^{2}\left[\frac{1}{3} - \frac{1}{2 n^{2}\pi^{2}}\cos(n\pi)\right] - \frac{a^{2}}{4}
+\end{align*}
+
+Now for $O = p = -i\hbar\frac{\partial}{\partial x}$, we have
 
 \begin{align*}
 \langle (\Delta p)^{2}\rangle &= \langle p^{2} \rangle - \langle p\rangle^{2}\\
 &= \bra{\psi} p^{2} \ket{\psi} - \left(\bra{\psi} p \ket{\psi}\right)^{2}\\
-&= \bra{\psi} \hbar^{2}\frac{\partial^{2}}{\partial x^{2}} \ket{\psi} - \left(\bra{\psi} -i\hbar\frac{\partial}{\partial x} \ket{\psi}\right)^{2}\\
-&= -c\alpha^{2}\hbar^{2}\int_{0}^{a} \sin(\alpha x)dx
 \end{align*}
+
+Since the potential in the well is zero, the first term is just
+
+\begin{align*}
+\langle p^{2} \rangle = 2mE_{n} = \frac{n^{2}\pi^{2}\hbar^{2}}{a^{2}}
+\end{align*}
+
+Using the same substitution as for position, the second terms reads
+
+\begin{align*}
+\bra{\psi} p \ket{\psi} &\propto -i\hbar \int_{0}^{a} 2\alpha\sin(\alpha x)\cos(\alpha x)dx\\
+&= -i\hbar \int_{0}^{a} \sin(2\alpha x)dx\\
+&= 0
+\end{align*}
+
+Summarizing, we have
+
+\begin{align*}
+\langle (\Delta p)^{2}\rangle &= \frac{n^{2}\pi^{2}\hbar^{2}}{a^{2}}
+\end{align*}
+
+
 
 \end{s}
 
