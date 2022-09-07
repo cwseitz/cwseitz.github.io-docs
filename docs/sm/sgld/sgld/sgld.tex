@@ -1,0 +1,93 @@
+% Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
+% For more details: https://www.sharelatex.com/learn/Beamer
+
+\documentclass{beamer}					% Document class
+
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}Stochastic gradient Langevin dynamics\hfill\insertshortauthor\hfill\insertpagenumber}}
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage[english]{babel}				% Set language
+\usepackage[utf8x]{inputenc}			% Set encoding
+
+\mode<presentation>						% Set options
+{
+  \usetheme{default}					% Set theme
+  \usecolortheme{default} 				% Set colors
+  \usefonttheme{default}  				% Set font theme
+  \setbeamertemplate{caption}[numbered]	% Set caption to be numbered
+}
+
+% Uncomment this to have the outline at the beginning of each section highlighted.
+%\AtBeginSection[]
+%{
+%  \begin{frame}{Outline}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+%}
+
+\usepackage{graphicx}					% For including figures
+\usepackage{booktabs}					% For table rules
+\usepackage{hyperref}					% For cross-referencing
+\usepackage{bm}
+\usepackage{algorithm,algorithmic}
+
+\title{Stochastic Gradient Langevin Dynamics}	% Presentation title
+\author{Clayton W. Seitz}								% Presentation author
+\date{\today}									% Today's date	
+
+\begin{document}
+
+% Title page
+% This page includes the informations defined earlier including title, author/s, affiliation/s and the date
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+% The following is the most frequently used slide types in beamer
+% The slide structure is as follows:
+%
+%\begin{frame}{<slide-title>}
+%	<content>
+%\end{frame}
+
+
+\begin{frame}{Langevin dynamics}
+
+Bayesian inference of parameters starts with Bayes rule
+
+\begin{align*}
+P(\theta|\mathcal{D},\mathcal{M}) = \frac{P(\mathcal{D}|\theta,\mathcal{M})P(\theta|\mathcal{M})}{\int P(\mathcal{D}|\theta,\mathcal{M})P(\theta|\mathcal{M})d\theta}
+\end{align*}
+
+where $P(\mathcal{D}|\theta,\mathcal{M}) = \prod_{i=1}^{N}P(\mathcal{D}_{i}|\theta,\mathcal{M}) $. In gradient based Bayesian learning we can define a loss function $\mathcal{L}$ 
+
+\begin{align*}
+\nabla_{\theta}\mathcal{L} &= \nabla_{\theta} \log P(\theta|\mathcal{D},\mathcal{M})\\
+&= \sum_{i=1}^{N} \nabla_{\theta}\log P(\mathcal{D}_{i}|\theta,\mathcal{M})  + \nabla_{\theta}\log P(\theta|\mathcal{M})
+\end{align*}
+
+
+\end{frame}
+
+
+\begin{frame}{Gradient-based Bayesian learning}
+
+In Stochastic gradient descent (SGD), we use minibatches to estimate the true gradient
+
+\begin{equation*}
+\theta_{t+1} = \theta_{t} - \eta \tilde{\nabla}_{\theta}\mathcal{L}
+\end{equation*}
+
+This is an unbiased estimator and we can model it as an SDE
+
+\begin{equation*}
+\theta_{t+1} = \theta_{t} - \eta \nabla_{\theta}\mathcal{L} + \eta\epsilon_{1} \;\;\;\; \epsilon_{1}\sim \mathcal{N}(0,\sigma^{2})
+\end{equation*}
+
+\end{frame}
+
+
+
+\end{document}
