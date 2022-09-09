@@ -55,6 +55,8 @@
 \vspace{0.1in}
 \item $\mathbf{T}[(I,t+dt),(j,t)]=\mathbf{Pr}\left((I,t+dt),(j,t)\right)$ is a conditional distribution, given that we are in a state $j$ at time $t$
 \end{itemize}
+\vspace{0.2in}
+Initially we assume $\bm{T}$ is constant in time
 \end{frame}
 
 \begin{frame}{The forward equation}
@@ -83,30 +85,84 @@ P(\omega_{i},t+dt) &=  \sum_{j\neq i} T_{ij}P(\omega_{j},t)dt + P(\omega_{i},t)\
 \sum_{j\neq i} T_{ij}P(\omega_{j},t) - P(\omega_{i},t)\sum_{j}T_{ij}
 \end{align*}
 
-It is common to then define a matrix $\mathbf{W}$ s.t. $W_{ij} = T_{ij}$ and $W_{ii} = -\sum_{j}T_{ij}$ 
+Rearranging, we arrive at the \textbf{master equation}
+
+\begin{align*}
+\textcolor{blue}{\frac{dP(\omega_{i})}{dt} = \sum_{j}T_{ji}P(\omega_{j},t) - T_{ij}P(\omega_{i},t)}
+\end{align*}
+
+\end{frame}
+
+
+\begin{frame}{Operator formulation}
+
+It is common to then define an operator $\bm{W}$ s.t. $W_{ij} = T_{ij}$ and $W_{ii} = -\sum_{j}T_{ij}$ 
 
 \begin{align*}
 \frac{dP(\omega_{i})}{dt} = \sum_{j}W_{ij}P(\omega_{j}) \rightarrow \frac{dP(\omega)}{dt} = \mathbf{W}P(\omega)
 \end{align*}
 
 
-\end{frame}
-
-\begin{frame}
-
 We have the following simplified form of a general master equation
 \begin{align*}
 \frac{dP(\omega)}{dt} = \mathbf{W}P(\omega)
 \end{align*}
 
-which suggests a solution in terms of a matrix exponential
+\end{frame}
+
+\begin{frame}{The chemical master equation}
+
+We transition from a state $\omega_{j}$ to $\omega_{i}$ via reaction $\bm{\nu}$\\
+\vspace{0.1in}
+Thus states are related by $\omega_{i} = \omega_{j} + \bm{\nu}_{j}$. Suppose that $\bm{T}$ varies with the state $\bm{x}$
 
 \begin{align*}
-P(\omega,t) = \exp\left(\mathbf{W}P(\omega)\right)
+\frac{dP(\omega_{i})}{dt} &= \sum_{j}T_{ji}P(\omega_{j},t) - T_{ij}P(\omega_{i},t)\\
+&= \sum_{j}T_{ji}(\bm{x}-\bm{\nu})P_{j}(\bm{x}-\bm{\nu},t) - T_{ij}(\bm{x})P_{j}(\bm{x},t)
 \end{align*}
 
-However, the computation of this exponential is often intractable given the size of $|\Omega|$
+Or in vector form, we have
+
+\begin{align*}
+\frac{dP(\bm{x})}{dt} &= \sum_{j}T_{j}(\bm{x}-\bm{\nu})P_{j}(\bm{x}-\bm{\nu},t) - T_{j}(\bm{x})P_{j}(\bm{x},t)
+\end{align*}
 
 \end{frame}
+
+\begin{frame}{The chemical master equation intuition}
+
+We arrived at the following equation
+
+\begin{align*}
+\mathcal{J} = \frac{dP(\bm{x})}{dt} &= \sum_{j}T_{j}(\bm{x}-\bm{\nu})P_{j}(\bm{x}-\bm{\nu},t) - T_{j}(\bm{x})P_{j}(\bm{x},t)
+\end{align*}
+
+where $\mathcal{J}$ is a probability current\\
+\vspace{0.1in}
+$P(\bm{x},t)$ is a density over the state space $\Omega$. This is then a sum over the entire state space\\
+\vspace{0.1in}
+Each term of the above sum is a vector multiplied by a scalar. The current $\mathcal{J}$ is a vector expressed as a sum of vectors
+\vspace{0.1in}
+
+
+\end{frame}
+
+\begin{frame}{The chemical master equation intuition}
+
+We write it as a matrix multiplication by arranging $T_{j}(\bm{x}-\bm{\nu}_{j})$ as the columns of a matrix $\mathcal{L}(\bm{x}-\bm{\nu}_{j})$
+
+\begin{align*}
+\mathcal{J}(\mathbf{x},t) = \mathcal{L}(\bm{x}-\bm{\nu}_{j},t)P(\bm{x}-\bm{\nu}_{j},t) -  \mathcal{L}(\bm{x},t)P(\bm{x},t)
+\end{align*}
+\\
+\vspace{0.2in}
+But $\bm{\nu}_{i} = 0$ so we define $\mathbf{W} = \mathcal{L}(\bm{x}-\bm{\nu}_{j},t) - \mathrm{diag}\left( \mathcal{L}(\bm{x},t)\right)$ which gives
+
+\begin{align*}
+\mathcal{J}(\mathbf{x},t) = \mathbf{W}P(\bm{x},t)
+\end{align*}
+
+\end{frame}
+
 
 \end{document}
