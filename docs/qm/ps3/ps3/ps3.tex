@@ -31,6 +31,34 @@ Problem 2.1 from Sakurai
 \end{p}
 
 \begin{s}
+The Heisenberg equation of motion reads
+
+\begin{align*}
+\frac{dA}{dt} = \frac{1}{i\hbar}\left[A,H\right]
+\end{align*}
+
+For the spin precession problem, we have the Hamiltonian
+
+\begin{align*}
+H = -\left(\frac{eB}{mc}\right)S_{z} = \omega S_{z}
+\end{align*}
+
+For $A = S_{x},S_{y},S_{z}$, the time evolution is given by
+
+\begin{align*}
+\frac{dS_{x}}{dt} &= \frac{\omega}{i\hbar}\left[S_{x},S_{z}\right] = -\omega S_{y}\\
+\frac{dS_{y}}{dt} &= \frac{\omega}{i\hbar}\left[S_{y},S_{z}\right] = \omega S_{x}\\
+\frac{dS_{z}}{dt} &= \frac{\omega}{i\hbar}\left[S_{z},S_{z}\right] = 0
+\end{align*}
+
+The above system has a straightforward solution:
+
+\begin{align*}
+S_{x}(t) &= \cos(\omega t)\\
+S_{y}(t) &= \sin(\omega t)\\
+S_{z}(t) &= S_{z}(0)
+\end{align*}
+
 
 \end{s}
 
@@ -39,6 +67,41 @@ Problem 2.3 from Sakurai
 \end{p}
 
 \begin{s}
+We are given that $\vec{B} = B\hat{z}$ and that we are in the eigenstate $\ket{\psi(0)} = \ket{\bm{S}\cdot \bm{\hat{n}}}_{+}$, which reads
+
+\begin{align*}
+\ket{\psi(0)} &= \psi_{+}\ket{+} + \psi_{-}\ket{-}\\
+&= \cos{\frac{\beta}{2}}\ket{+} + \sin{\frac{\beta}{2}}\ket{-}\\
+\end{align*}
+
+where we have set $\alpha=0$ since the ket is in the x-z plane. This state will evolve according to a Hamiltonian
+
+\begin{align*}
+H = -\left(\frac{eB}{m_{e}c}\right)S_{z} = \omega S_{z}
+\end{align*}
+
+
+Clearly the eigenkets of the Hamiltonian are the eigenkets of $S_{z}$
+
+\begin{align*}
+\ket{\psi(t)} &= \psi_{+}(0)\exp\left(\frac{-iE_{+}t}{\hbar}\right)\ket{+} + \psi_{-}(0)\exp\left(\frac{-iE_{-}t}{\hbar}\right)\ket{-}\\
+&= \cos{\frac{\beta}{2}}\exp\left(\frac{-i\omega t}{2}\right)\ket{+} + \sin{\frac{\beta}{2}}\exp\left(\frac{i\omega t}{2}\right)\ket{-}
+\end{align*}
+
+where we have used $E_{+}$ and $E_{-}$ to denote the energies in the eigenstates of $S_{z}$. In general, the probability of measuring $\ket{+}_{x} = \frac{1}{\sqrt{2}}\ket{+} + \frac{1}{\sqrt{2}}\ket{-}$ is given by the inner product
+
+\begin{align*}
+|\bra{+;x}\ket{\psi(t)}|^{2} = 
+\end{align*}
+
+
+
+
+
+The Hamiltonian is time-independent, therefore, in the Schrodinger picture, we can write the following
+
+\begin{align*}
+\end{align*}
 
 \end{s}
 
