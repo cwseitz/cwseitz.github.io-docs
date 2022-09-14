@@ -77,31 +77,50 @@ We are given that $\vec{B} = B\hat{z}$ and that we are in the eigenstate $\ket{\
 where we have set $\alpha=0$ since the ket is in the x-z plane. This state will evolve according to a Hamiltonian
 
 \begin{align*}
-H = -\left(\frac{eB}{m_{e}c}\right)S_{z} = \omega S_{z}
+H = -\left(\frac{eB}{m_{e}c}\right)S_{z}
 \end{align*}
 
+Let $\omega = |e|B/m_{e}c$ giving $H=\omega S_{z}$. We have the energies
 
-Clearly the eigenkets of the Hamiltonian are the eigenkets of $S_{z}$
+\begin{align*}
+E_{\pm} = \mp \frac{e\hbar B}{2m_{e}c} = \mp \hbar\omega
+\end{align*}
 
 \begin{align*}
 \ket{\psi(t)} &= \psi_{+}(0)\exp\left(\frac{-iE_{+}t}{\hbar}\right)\ket{+} + \psi_{-}(0)\exp\left(\frac{-iE_{-}t}{\hbar}\right)\ket{-}\\
 &= \cos{\frac{\beta}{2}}\exp\left(\frac{-i\omega t}{2}\right)\ket{+} + \sin{\frac{\beta}{2}}\exp\left(\frac{i\omega t}{2}\right)\ket{-}
 \end{align*}
 
-where we have used $E_{+}$ and $E_{-}$ to denote the energies in the eigenstates of $S_{z}$. In general, the probability of measuring $\ket{+}_{x} = \frac{1}{\sqrt{2}}\ket{+} + \frac{1}{\sqrt{2}}\ket{-}$ is given by the inner product
+In general, the probability of measuring $\ket{+}_{x} = \frac{1}{\sqrt{2}}\ket{+} + \frac{1}{\sqrt{2}}\ket{-}$ is given by the inner product
 
 \begin{align*}
-|\bra{+;x}\ket{\psi(t)}|^{2} = 
+|\bra{S_{x};+}\ket{\psi;t}|^{2} &= \bigg|\left(\frac{1}{\sqrt{2}}\bra{+} + \frac{1}{\sqrt{2}}\bra{-}\right)\cdot\\
+&\left(\psi_{+}\exp\left(\frac{-i\omega t}{2}\right)\ket{+} + \psi_{-}\exp\left(\frac{i\omega t}{2}\right)\ket{-}\right)\bigg|^{2}\\
+&= \bigg|\frac{1}{\sqrt{2}}\cos\frac{\beta}{2}\exp\left(\frac{-i\omega t}{2}\right)+\frac{1}{\sqrt{2}}\sin\frac{\beta}{2}\exp\left(\frac{i\omega t}{2}\right)\bigg|^{2}
+\end{align*}
+
+Using the half-angle identity for $\sin\theta$ and some straightforward arithmetic gives
+
+\begin{align*}
+|\bra{S_{x};+}\ket{\psi;t}|^{2} &= \frac{1+\sin\beta\cos\omega t}{2}
 \end{align*}
 
 
-
-
-
-The Hamiltonian is time-independent, therefore, in the Schrodinger picture, we can write the following
+For the time-dependence of $\langle S_{x}\rangle$, we have
 
 \begin{align*}
+\langle S_{x}\rangle(t) &= \bra{\psi;t}S_{x}\ket{\psi;t}\\
+&= \left(\psi_{+}\exp\left(\frac{i\omega t}{2}\right)\bra{+} + \psi_{-}\exp\left(\frac{-i\omega t}{2}\right)\bra{-}\right)\\
+&\cdot \frac{\hbar}{2} \left(\psi_{+}\exp\left(-\frac{i\omega t}{2}\right)\ket{-} + \psi_{-}\exp\left(\frac{i\omega t}{2}\right)\ket{+}\right)
 \end{align*}
+
+Subsituting $\psi_{+}$ and $\psi_{-}$ with the same values as above, we get
+
+\begin{align*}
+\langle S_{x}\rangle(t) &= \frac{\hbar}{2}\sin\beta\cos\omega t
+\end{align*}
+
+When $\beta = \pi /2$ the probability oscillates between 0 and 1 with frequency $\omega$ and when $\beta = 0$ then the probability is always $1/2$, as expected. The expectation value also makes sense because when $\beta = 0$, we can get $\pm \hbar /2$ with equal probability, giving zero on average. When $\beta = \pi /2$ the expectation value oscillates between $\hbar /2$ and $-\hbar /2$.
 
 \end{s}
 
@@ -118,6 +137,35 @@ Problem 2.10 from Sakurai
 \end{p}
 
 \begin{s}
+Let $\ket{\psi}=\alpha\ket{a'} + \beta\ket{a''}$ be an eigenvector of the Hamiltonian. Note that this must be real for the eigenvalue to be real. That means that
+
+\begin{align*}
+H\ket{\psi} &= \left(\ket{a'}\delta\bra{a''} + \ket{a''}\delta\bra{a'}\right)\left(\alpha\ket{a'} + \beta\ket{a''}\right)\\
+&= \delta\left(\alpha\ket{a''} + \beta\ket{a'}\right)
+\end{align*}
+
+Therefore $\alpha = \beta = \frac{1}{\sqrt{2}}$ or $\alpha=\frac{1}{\sqrt{2}}$ and $\beta=-\frac{1}{\sqrt{2}}$. Giving eigenvalues $\pm \delta$. To get the time evolution of the state, we need to express these in the basis of $H$. Just based on inspection of the the two bases, we can tell that
+
+\begin{align*}
+\ket{a'} &= \frac{1}{\sqrt{2}}\left(\ket{\psi_{1}}-\ket{\psi_{2}}\right)\\
+\ket{a''} &= \frac{1}{\sqrt{2}}\left(\ket{\psi_{1}}+\ket{\psi_{2}}\right)
+\end{align*}
+
+and, since the Hamiltonian is time-independent, a state prepared in $\ket{a'}$ will evolve according to 
+
+\begin{align*}
+\ket{\alpha(t)} = \frac{1}{\sqrt{2}}\exp\left(\frac{-i\delta t}{\hbar}\right)\ket{\psi_{1}} - \frac{1}{\sqrt{2}}\exp\left(\frac{i\delta t}{\hbar}\right)\ket{\psi_{2}}
+\end{align*}
+
+The probability of finding the system in the state $\ket{a''}$ at a later time is
+
+\begin{align*}
+|\bra{a''}\ket{\alpha(t)}|^{2} &= \bigg|\frac{1}{\sqrt{2}}\left(\bra{\psi_{1}}+\bra{\psi_{2}}\right)\\
+&\cdot \left(\frac{1}{\sqrt{2}}\exp\left(\frac{-i\delta t}{\hbar}\right)\ket{\psi_{1}} - \frac{1}{\sqrt{2}}\exp\left(\frac{i\delta t}{\hbar}\right)\ket{\psi_{2}}\right)\bigg|^2\\
+&= \frac{1}{4}\sin^{2}\frac{\delta t}{\hbar}
+\end{align*}
+
+This could describe a system in which the eigenvectors of the Hamiltonian are simultaneous with the eigenvectors of $S_{x}$, however the states $\ket{a'}$ and $\ket{a''}$ are expressed in the $S_{z}$ basis.
 
 \end{s}
 
