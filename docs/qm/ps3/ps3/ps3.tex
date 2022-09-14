@@ -174,6 +174,76 @@ Problem 2.12 from Sakurai
 \end{p}
 
 \begin{s}
+The state is prepared in 
+
+\begin{align*}
+\ket{\alpha;t=0} = \frac{1}{\sqrt{2}}\ket{0} + \frac{\exp(i\delta)}{\sqrt{2}}\ket{1}
+\end{align*}
+
+In general, the energies of $\ket{n}$ are $E_{n} = \left(n+\frac{1}{2}\right)\hbar\omega$. Therefore, the time dependence of the state can be evalulated as
+
+\begin{align*}
+\ket{\alpha;t} &= \exp\left(-\frac{iHt}{\hbar}\right)\ket{\alpha;t}\\
+&= \frac{1}{\sqrt{2}}\exp\frac{-i\omega t}{2}\ket{0} + \frac{1}{\sqrt{2}}\exp(i\delta)\exp\frac{-3i\omega t}{2}\ket{1}
+\end{align*}
+
+\begin{align*}
+\bra{x'}\ket{\alpha;t} = \frac{1}{\sqrt{2}}\exp\frac{-i\omega t}{2}\bra{x'}\ket{0} + \frac{1}{\sqrt{2}}\exp(i\delta)\exp\frac{-3i\omega t}{2}\bra{x'}\ket{1}
+\end{align*}
+
+and we know in general that the position representation of $\ket{n}$ i.e., $\bra{x'}\ket{n}$ are
+
+\begin{align*}
+\bra{x'}\ket{n} = \psi _{n}(x)={\frac {1}{\sqrt {2^{n}\,n!}}}\left({\frac {m\omega }{\pi \hbar }}\right)^{1/4}e^{-{\frac {m\omega x^{2}}{2\hbar }}}H_{n}\left({\sqrt {\frac {m\omega }{\hbar }}}x\right)
+\end{align*}
+
+
+\begin{align*}
+\langle x\rangle(t) &= \bra{\alpha;t}x\ket{\alpha;t}\\
+&= \left(\frac{1}{\sqrt{2}}\exp\frac{i\omega t}{2}\bra{0} + \frac{1}{\sqrt{2}}\exp(-i\delta)\exp\frac{3i\omega t}{2}\bra{1}\right) \\
+&x \left(\frac{1}{\sqrt{2}}\exp\frac{-i\omega t}{2}\ket{0} + \frac{1}{\sqrt{2}}\exp(i\delta)\exp\frac{-3i\omega t}{2}\ket{1}\right)\\
+&= \frac{1}{2}\bra{0}x\ket{0} + \frac{1}{2}\bra{1}x\ket{1} \\
+&+ \frac{1}{2}\exp(i\delta)\exp(-i\omega t)\bra{0}x\ket{1} + \frac{1}{2}\exp(-i\delta)\exp(i\omega t)\bra{1}x\ket{0}
+\end{align*}
+
+Now recall the general expression for the matrix element of $x$
+
+\begin{align*}
+\bra{n'}x\ket{n} = \sqrt{\frac{\hbar}{2m\omega}}\left(\sqrt{n}\delta_{n',n-1} +\sqrt{n+1}\delta_{n',n+1}\right)
+\end{align*}
+
+which means that the above expression simplifies to 
+
+\begin{align*}
+\langle x\rangle(t) &= \frac{1}{2}\exp(i\delta)\exp(-i\omega t)\bra{0}x\ket{1} + \frac{1}{2}\exp(-i\delta)\exp(i\omega t)\bra{1}x\ket{0}\\
+&= \frac{1}{2}\sqrt{\frac{\hbar}{2m\omega}}\left(\exp(i\delta)\exp(-i\omega t)+\exp(-i\delta)\exp(i\omega t)\right)\\
+&= \sqrt{\frac{\hbar}{2m\omega}}\cos(\delta-\omega t)\\
+&= \sqrt{\frac{\hbar}{2m\omega}}\cos(\omega t-\delta)
+\end{align*}
+
+For momentum, we can just replace the operator $x$ with $p$ in the expressions above:
+
+\begin{align*}
+\langle p\rangle(t) &= \bra{\alpha;t}x\ket{\alpha;t}\\
+&= \left(\frac{1}{\sqrt{2}}\exp\frac{i\omega t}{2}\bra{0} + \frac{1}{\sqrt{2}}\exp(-i\delta)\exp\frac{3i\omega t}{2}\bra{1}\right) \\
+&\hat{p} \left(\frac{1}{\sqrt{2}}\exp\frac{-i\omega t}{2}\ket{0} + \frac{1}{\sqrt{2}}\exp(i\delta)\exp\frac{-3i\omega t}{2}\ket{1}\right)\\
+&= \frac{1}{2}\bra{0}p\ket{0} + \frac{1}{2}\bra{1}p\ket{1} \\
+&+ \frac{1}{2}\exp(i\delta)\exp(-i\omega t)\bra{0}p\ket{1} + \frac{1}{2}\exp(-i\delta)\exp(i\omega t)\bra{1}p\ket{0}
+\end{align*}
+
+and we have another general expression for the matrix element of $p$
+
+\begin{align*}
+\bra{n'}p\ket{n} = i\sqrt{\frac{m\hbar\omega}{2}}\left(-\sqrt{n}\delta_{n',n-1} +\sqrt{n+1}\delta_{n',n+1}\right)
+\end{align*}
+
+which again means that the above expression simplifies to 
+
+\begin{align*}
+\langle p\rangle(t) &= \frac{1}{2}\exp(i\delta)\exp(-i\omega t)\bra{0}p\ket{1} + \frac{1}{2}\exp(-i\delta)\exp(i\omega t)\bra{1}p\ket{0}\\
+&= \frac{i}{2}\sqrt{\frac{m\hbar\omega}{2}}\left(-\exp(i\delta)\exp(-i\omega t)+\exp(-i\delta)\exp(i\omega t)\right)\\
+&= -\sqrt{\frac{m\hbar\omega}{2}}\sin(\omega t - \delta)
+\end{align*}
 
 \end{s}
 
