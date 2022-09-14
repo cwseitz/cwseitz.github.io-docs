@@ -245,6 +245,43 @@ which again means that the above expression simplifies to
 &= -\sqrt{\frac{m\hbar\omega}{2}}\sin(\omega t - \delta)
 \end{align*}
 
+In the Heisenberg picture, we have the Heisenberg equations of motion
+
+\begin{align*}
+\frac{dp}{dt} &= -m\omega^{2}x\\
+\frac{dx}{dt} &= \frac{p}{m}
+\end{align*}
+
+It is has been shown in the text how to uncouple these in terms of the ladder operators and solve the system for the time dependent operators $x(t)$ and $p(t)$
+
+\begin{align*}
+x(t) &= x(0)\cos(\omega t) + \left(\frac{p(0)}{m\omega}\right)\sin(\omega t)\\
+p(t) &= -m\omega x(0)\sin(\omega t) + p(0)\cos(\omega t)
+\end{align*}
+
+To get $\langle x \rangle (t)$ we have
+
+\begin{align*}
+\langle x \rangle (t) &= \bra{\alpha} x(0)\cos(\omega t) + \left(\frac{p(0)}{m\omega}\right)\sin(\omega t) \ket{\alpha}\\
+&= \bra{\alpha}x(0)\ket{\alpha}\cos(\omega t) + \bra{\alpha} p(0)\ket{\alpha}\frac{\sin(\omega t)}{m\omega}
+\end{align*}
+
+\begin{align*}
+\bra{\alpha}x(0)\ket{\alpha} &= \frac{1}{2}\bra{0}x(0)\ket{0} + \frac{1}{2}\bra{1}x(0)\ket{1} \\
+&+ \frac{1}{2}\exp(i\delta)\bra{0}x(0)\ket{1}+ \frac{1}{2}\exp(i\delta)\bra{1}x(0)\ket{0}\\
+&= \sqrt{\frac{\hbar}{2m\omega}}\exp(i\delta)
+\end{align*}
+
+The factor of one-half disappeared in the $\bra{\alpha}x(0)\ket{\alpha}$ term since $\bra{n'}x\ket{n}$ is real and therefore equal to its complex conjugate
+
+
+\begin{align*}
+\langle x \rangle (t) &= \sqrt{\frac{\hbar}{2m\omega}}\exp(i\delta)\cos(\omega t) + \frac{i}{2}\exp(i\delta)\sqrt{\frac{m\hbar\omega}{2}}\frac{\sin(\omega t)}{m\omega}\\
+&= \sqrt{\frac{\hbar}{2m\omega}}\exp(i\delta)\exp(i\omega t)\\
+&= \sqrt{\frac{\hbar}{2m\omega}}\exp(i(\omega t+\delta))
+\end{align*}
+
+
 \end{s}
 
 \begin{p}
@@ -253,6 +290,48 @@ Problem 2.13 from Sakurai
 
 \begin{s}
 
+The Heisenberg equations of motion are
+
+\begin{align*}
+\frac{dp}{dt} &= F\\
+\frac{dx}{dt} &= \frac{p_{0}+Ft}{m}
+\end{align*}
+
+The solution is simply
+
+\begin{align*}
+p(t) &= p(0) + Ft\\
+x(t) &= x(0) + \frac{p(0)}{m}t + \frac{1}{2}\frac{Ft^{2}}{m}
+\end{align*}
+
+\begin{align*}
+\langle x \rangle (t) &= \bra{\alpha} \left(x(0) + \frac{p_{0}}{m}t + \frac{1}{2}\frac{Ft^{2}}{m}\right)\ket{\alpha}\\
+&= x_{0} + \frac{p_{0}t}{m} + \frac{Ft^{2}}{2m}
+\end{align*}
+
+and for $\langle p\rangle$ we have
+
+\begin{align*}
+\langle p \rangle (t) &= \bra{\alpha} p(0) + Ft\ket{\alpha}\\
+&= p_{0} + Ft
+\end{align*}
+
+In the Schrodinger picture, this Hamiltonian is not a constant
+
+\begin{align*}
+H(t) = \frac{p(t)^{2}}{2m} + V(x,t) = \frac{p(t)^{2}}{2m} + Fx(t)
+\end{align*}
+
+although, using the canonical commutation relations, we can see that $H(t_{0})$ commutes with $H(t)$. So we should be able to define
+
+\begin{align*}
+\mathcal{U}(t,t_{0}) = \exp\left(-\frac{i}{\hbar}\int_{t_{0}}^{t} H(t)dt\right)
+\end{align*}
+
+such that $\ket{\alpha;t} = \mathcal{U}(t,t_{0}) \ket{\alpha;t_{0}}$. If we evaluated that expression, then we could write $\ket{\alpha;t}$ explicitly.
+
 \end{s}
+
+
 
 \end{document}
