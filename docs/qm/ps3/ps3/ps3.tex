@@ -9,6 +9,12 @@
 \usepackage{amsmath}
 \usepackage{siunitx}
 \usepackage{physics}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+
+\newcounter{mathematicapage}
 
 \newtheorem{p}{Problem}
 \usepackage{cancel}
@@ -130,6 +136,103 @@ Problem 2.9 from Sakurai
 
 \begin{s}
 
+We were given the wavefunction 
+
+\begin{align*}
+\bra{x}\ket{\alpha} = A(x-a)^{2}(x+a)^{2}\exp(ikx)
+\end{align*}
+
+We can start by visualizing the real and imaginary parts of the position representation $\bra{x}\ket{\alpha}$ when $A=a=k=1$
+
+
+\begin{doublespace}
+\noindent\(\pmb{\text{Plot}\left[(x-1)^2 (x+1)^2 \text{Cos}[x],\{x,-2,2\}\right]}\)
+\end{doublespace}
+
+\includegraphics{test_gr1.eps}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{Plot}\left[(x-1)^2 (x+1)^2 \text{Sin}[x],\{x,-2,2\}\right]}\)
+\end{doublespace}
+
+\includegraphics{test_gr2.eps}
+
+To find the normalization constant $A$, we just need to integrate $\bra{x}\ket{\alpha}$
+
+\begin{align*}
+A &= \left(\int_{-a}^{+a}\bra{x}\ket{\alpha}dx\right)^{-1}\\
+&= \left(\int_{-a}^{+a}(x-a)^{2}(x+a)^{2}\exp(ikx)dx\right)^{-1}\\
+&= \left(\int_{-a}^{+a}(x-a)^{2}(x+a)^{2}\cos(kx)dx\right)^{-1}\\
+&- \left(\int_{-a}^{+a}(x-a)^{2}(x+a)^{2}\sin(kx)dx\right)^{-1}
+\end{align*}
+
+We can evalulate these integrals individually:
+
+\begin{doublespace}
+\noindent\(\pmb{\text{Integrate}\left[(x-a)^2 (x+a)^2 \text{Cos}[k*x],\{x,-a,a\}\right]}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(-\frac{16 \left(3 a k \text{Cos}[a k]+\left(-3+a^2 k^2\right) \text{Sin}[a k]\right)}{k^5}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{Integrate}\left[(x-a)^2 (x+a)^2 \text{Sin}[k*x],\{x,-a,a\}\right]}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(0\)
+\end{doublespace}
+
+The integral of the imaginary part is obvious since that part of the wavefunction is odd.
+
+\begin{align*}
+A = -\frac{k^5}{16 \left(3ka\cos(ka)+\left(a^2 k^2-3\right) \sin(ka)\right)}
+\end{align*}
+
+The expectation value $\langle x\rangle$ is found by integrating
+
+\begin{align*}
+\langle x \rangle &= \int_{-a}^{a} x\bra{\alpha}\ket{x}\bra{x}\ket{\alpha}dx \\
+&= \int_{-a}^{+a} x\bra{\alpha}\ket{x}\bra{x}\ket{\alpha}dx \\
+&= \int_{-a}^{+a} x (x-a)^{2}(x+a)^{2}dx
+\end{align*}
+
+where the complex exponential vanishes due to the complex conjugation. The expectation value $\langle x^{2}\rangle$ is found by integrating
+
+\begin{align*}
+\langle x^{2} \rangle &= \int_{-a}^{+a} x^{2} (x-a)^{2}(x+a)^{2}dx
+\end{align*}
+
+The expectation value $\langle p\rangle$ is found similarly
+
+\begin{align*}
+\langle p \rangle &= \int_{-a}^{+a} \bra{\alpha}\ket{x}\frac{\hbar}{i}\frac{\partial}{\partial x}\bra{x}\ket{\alpha}dx\\
+&= A^{2} \int_{-a}^{+a}(x-a)^{2}(x+a)^{2}\exp(-ikx)\frac{\hbar}{i}\frac{\partial}{\partial x}(x-a)^{2}(x+a)^{2}\exp(ikx)
+\end{align*}
+
+The expectation value $\langle p^{2}\rangle$ is found by integrating
+
+\begin{align*}
+\langle p^{2} \rangle &= -\int_{-a}^{+a} \bra{\alpha}\ket{x}\hbar^{2}\frac{\partial^{2}}{\partial x^{2}}\bra{x}\ket{\alpha}dx\\
+&= -A^{2}\int_{-a}^{+a}(x-a)^{2}(x+a)^{2}\exp(-ikx)\hbar^{2}\frac{\partial^{2}}{\partial x^{2}}(x-a)^{2}(x+a)^{2}\exp(ikx)
+\end{align*}
+
+The variance $\langle (\Delta x)^{2}\rangle$ is just
+
+
+\begin{align*}
+\langle (\Delta x)^{2}\rangle = \langle x^{2} \rangle - \langle x \rangle^{2}
+\end{align*}
+
+The variance $\langle (\Delta p)^{2}\rangle$ is just
+
+
+\begin{align*}
+\langle (\Delta p)^{2}\rangle = \langle p^{2} \rangle - \langle p \rangle^{2}
+\end{align*}
+
+
 \end{s}
 
 \begin{p}
@@ -188,13 +291,13 @@ In general, the energies of $\ket{n}$ are $E_{n} = \left(n+\frac{1}{2}\right)\hb
 \end{align*}
 
 \begin{align*}
-\bra{x'}\ket{\alpha;t} = \frac{1}{\sqrt{2}}\exp\frac{-i\omega t}{2}\bra{x'}\ket{0} + \frac{1}{\sqrt{2}}\exp(i\delta)\exp\frac{-3i\omega t}{2}\bra{x'}\ket{1}
+\bra{x}\ket{\alpha;t} = \frac{1}{\sqrt{2}}\exp\frac{-i\omega t}{2}\bra{x}\ket{0} + \frac{1}{\sqrt{2}}\exp(i\delta)\exp\frac{-3i\omega t}{2}\bra{x}\ket{1}
 \end{align*}
 
-and we know in general that the position representation of $\ket{n}$ i.e., $\bra{x'}\ket{n}$ are
+and we know in general that the position representation of $\ket{n}$ i.e., $\bra{x}\ket{n}$ are
 
 \begin{align*}
-\bra{x'}\ket{n} = \psi _{n}(x)={\frac {1}{\sqrt {2^{n}\,n!}}}\left({\frac {m\omega }{\pi \hbar }}\right)^{1/4}e^{-{\frac {m\omega x^{2}}{2\hbar }}}H_{n}\left({\sqrt {\frac {m\omega }{\hbar }}}x\right)
+\bra{x}\ket{n} = \psi _{n}(x)={\frac {1}{\sqrt {2^{n}\,n!}}}\left({\frac {m\omega }{\pi \hbar }}\right)^{1/4}e^{-{\frac {m\omega x^{2}}{2\hbar }}}H_{n}\left({\sqrt {\frac {m\omega }{\hbar }}}x\right)
 \end{align*}
 
 
