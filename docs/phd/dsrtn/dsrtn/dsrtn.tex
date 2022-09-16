@@ -61,7 +61,7 @@ How do biological systems remember?
 
 \section{RNA Flow}
 
-\subsection{The chemical master equation and stochastic reaction networks}
+\subsection{The chemical master equation and finite state projection algorithm}
 
 \subsection{Sequential tempered Markov Chain Monte Carlo for RNA flow}
 
@@ -69,7 +69,7 @@ How do biological systems remember?
 
 \section{Microscopy}
 
-\section{Gaussian PSF approximation for single moeclule microscopy}
+\section{Gaussian PSF approximation for single molecule microscopy}
 
 Born and Wolf's approximation, Lateral and axial point spread functions
 
@@ -164,41 +164,6 @@ At this point, we need to evaluate the second derivative w.r.t each of the param
 
 
 
-
-\section{Supplement on Poisson processes}
-
-The Poisson process can be derived very quickly by noticing that it is simply the continuous-time limit of the Binomial distribution.
-
-\begin{align*}
-B(m;t) &= {n\choose m}\lambda^{m}(1-\lambda)^{n-m}\\
-\end{align*}
-
-Since $\lambda$ is the fraction of successes, the expected number of successes is $\mu = n\lambda$
-
-\begin{align*}
-B(m;t) &=  {n\choose m}\left(\frac{\mu}{n}\right)^{m}\left(1-\frac{\mu}{n}\right)^{n-m}\\
-&= {n\choose m}\left(\frac{\mu}{n}\right)^{m}\left(1-\frac{\mu}{n}\right)^{n}\left(1-\frac{\mu}{n}\right)^{-m}
-\end{align*}
-
-\begin{align*}
-B(m;t) &= \frac{n!}{m!(n-m)!}\left(\frac{\mu}{n}\right)^{m}\left(1-\frac{\mu}{n}\right)^{n}\left(1-\frac{\mu}{n}\right)^{-m}\\
-&= \frac{n!}{(n-m)!}\left(\frac{1}{n}\right)^{m}\left(1-\frac{\mu}{n}\right)^{-m}\frac{\mu^{m}\left(1-\frac{\mu}{n}\right)^{n}}{m!}\\
-\end{align*}
-
-In the first term, we can take the first $m$ subterms of the numerator $n! = n(n-1)...(n-m)$ and, since $n>>m$, each term will cancel with one factor of $n$ from the term $1/n^{m}$. This leaves
-
-\begin{align*}
-B(m;t) &= \frac{(n-m)!}{(n-m)!}\left(1-\frac{\mu}{n}\right)^{-m}\frac{\mu^{m}\exp(-\mu)}{m!}\\\\
-\end{align*}
-
-We now take the continuous time limit i.e. $n\rightarrow\infty$ and, again, since $m << n$ we are left with 
-
-\begin{align*}
-\underset{n\rightarrow\infty}{\mathrm{lim}} \;\; B(m;t) &= \frac{\mu^{m}\exp(-\mu)}{m!}\\
-\end{align*}
-
-If an event can be detected will probability $\gamma$, the rate of the Poisson process will be reduced by that factor i.e., $\lambda' = \gamma\lambda$. Therefore, the mean and variance of the process becomes $\mu = \gamma\lambda\Delta t$
-v
 
 \subsection{sCMOS camera-specific single-molecule localization algorithms}
 
@@ -509,7 +474,127 @@ where $V_{\mathrm{th}}$ and $V_{\mathrm{re}}$ refer to the firing threshold and 
 \chapter{Statistical methods}
 
 
+\begin{appendices}
+\chapter{Derivation of the Fokker Planck Equation}
 
+\subsection{Kramers-Moyal Expansion}
+
+Gixen many instantiations of a stochastic xariable $x$, we can construct a normalize histogram oxer all obserxations as a function of time $P(x,t)$. Howexer, in order to systematically explore the relationship between the parameterization of the process and $P(x,t)$ we require an expression for $\dot{P}(x,t)$. If we make a fundamental assumption that the exolution of $P(x,t)$ follows a Markox process i.e. its exolution has the memoryless property, then we can write
+
+\begin{equation}
+P(x', t) = \int T(x', t | x, t-\tau)P(x, t-\tau)dx
+\end{equation} 
+
+which is known at the Chapman-Kolmogorox equation. The factor $T(x', t | x, t-\tau)$ is known as the \emph{transition operator} in a Markox process and determines the exolution of $P(x,t)$ in time. We proceed by writing $T(x', t | x, t-\tau)$ in a form referred to as the Kramers-Moyal expansion
+
+\begin{align*}
+T(x', t | x, t-\tau) &= \int \delta(u-x')T(u, t | x, t-\tau)du\\
+&= \int \delta(x+u-x'-x)T(u, t | x, t-\tau)du\\
+\end{align*} 
+
+If we use the Taylor expansion of the $\delta$-function 
+
+\begin{equation*}
+\delta(x+u-x'-x) = \sum_{n=0}^{\infty} \frac{(u-x)^{n}}{n!}\left(-\frac{\partial}{\partial x}\right)^{n}\delta(x-x')
+\end{equation*}
+
+Inserting this into the result from aboxe, pulling out terms independent of $u$ and swapping the order of the sum and integration gixes
+
+\begin{align}
+T(x', t | x, t-\tau) &= \sum_{n=0}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial x}\right)^{n}\delta(x-x')\int(u-x)^{n}T(u, t | x, t-\tau)du\\
+&= \sum_{n=0}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial x}\right)^{n}\delta(x-x')M_{n}(x,t)
+\end{align} 
+
+noticing that $M_{n}(x,t) = \int(u-x)^{n}T(u, t | x, t-\tau)du$ is just the $n$th moment of the transition operator $T$. Plugging (2.6) back in to (2.4) gixes 
+
+\begin{align}
+P(x, t) &= \int \left(1 + \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial x}\right)^{n} M_{n}(x,t)\right)\delta(x-x')P(x, t-\tau)dx\\
+&= P(x', t-\tau) + \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial x}\right)^{n} \left[M_{n}(x,t)P(x,t)\right]
+\end{align} 
+
+Approximating the derixatixe as a finite difference and taking the limit $\tau\rightarrow 0$ gixes
+
+\begin{align}
+\dot{P}(x,t)  &= \underset{\tau\rightarrow 0}{\mathrm{lim}}\left(\frac{P(x, t)-P(x, t-\tau)}{\tau}\right)\\
+&= \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial x}\right)^{n} \left[M_{n}(x,t)P(x,t)\right]
+\end{align} 
+
+which is formally known as the Kramers-Moyal (KM) expansion. The Fokker-Planck equation is a special case of (2.10) where we neglect terms $n>2$ in the \emph{diffusion approximation}.
+
+
+Consider the following Ito stochastic differential equation 
+
+\begin{align*}
+d\vec{x} = F(\vec{x},t) + G(\vec{x},t)dW
+\end{align*}
+
+The SDE gixen aboxe corresponds to the Kramers-Moyal expansion (KME) of a transition density $T(x',t'|x,t)$ see (Risken 1989) for a full derixation.
+
+\begin{align}
+\frac{\partial P(x,t)}{\partial t}  &= \sum_{n=1}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial x}\right)^{n} \left[M_{n}(x,t)P(x,t)\right]
+\end{align}
+
+where $M_{n}$ is the $n$th moment of the transition density. In the diffusion approximation, the KME becomes the Fokker-Planck equation (FPE) (Risken 1989). For the sake of demonstration, consider the univariate case with random variable $x$ and the form of $T(x',t'|x,t)$ is a Gaussian with mean $\mu(t)$ and variance $\sigma^{2}(t)$. In this scenario, the FPE applies because $M_{n} = 0$ for all $n > 2$. Given that the drift $M_{1}(x,t) = \mu(t)$ and the diffusion $M_{2}(x,t) = \sigma^{2}(t)$, the FPE reads
+
+\begin{align}
+\frac{\partial P(x,t)}{\partial t}  &= \left(-\frac{\partial}{\partial x}M^{(1)}(t) + \frac{1}{2}\frac{\partial^{2}}{\partial x^{2}}M^{(2)}(t)\right)P(x,t)
+\end{align}
+
+We can additionally define the term in parentheses as a differential operator acting on $P(x,t)$
+
+\begin{align}
+\hat{\mathcal{L}}_{FP} = \left(-\frac{\partial}{\partial x}M^{(1)}(t) + \frac{1}{2}\frac{\partial^{2}}{\partial x^{2}}M^{(2)}(t)\right)
+\end{align}
+
+It is common to additionally define the probability current $J(x,t)$ as 
+
+\begin{align}
+J(x,t)  &= \left(M^{(1)}(t) - \frac{1}{2}\frac{\partial}{\partial x}M^{(2)}(t)\right)P(x,t)
+\end{align}
+
+This definition provides some useful intuition. The value of $J(x,t)$ is the net probability flux into the interval between $x$ and $x+dx$ at at time $t$. This also allows us to write the FPE as a continuity equation
+
+\begin{align}
+\frac{\partial P(x,t)}{\partial t} = -\frac{\partial J(x,t)}{\partial x}
+\end{align}
+\end{appendices}
+
+
+
+\section{Poisson processes}
+
+The Poisson process can be derived very quickly by noticing that it is simply the continuous-time limit of the Binomial distribution.
+
+\begin{align*}
+B(m;t) &= {n\choose m}\lambda^{m}(1-\lambda)^{n-m}\\
+\end{align*}
+
+Since $\lambda$ is the fraction of successes, the expected number of successes is $\mu = n\lambda$
+
+\begin{align*}
+B(m;t) &=  {n\choose m}\left(\frac{\mu}{n}\right)^{m}\left(1-\frac{\mu}{n}\right)^{n-m}\\
+&= {n\choose m}\left(\frac{\mu}{n}\right)^{m}\left(1-\frac{\mu}{n}\right)^{n}\left(1-\frac{\mu}{n}\right)^{-m}
+\end{align*}
+
+\begin{align*}
+B(m;t) &= \frac{n!}{m!(n-m)!}\left(\frac{\mu}{n}\right)^{m}\left(1-\frac{\mu}{n}\right)^{n}\left(1-\frac{\mu}{n}\right)^{-m}\\
+&= \frac{n!}{(n-m)!}\left(\frac{1}{n}\right)^{m}\left(1-\frac{\mu}{n}\right)^{-m}\frac{\mu^{m}\left(1-\frac{\mu}{n}\right)^{n}}{m!}\\
+\end{align*}
+
+In the first term, we can take the first $m$ subterms of the numerator $n! = n(n-1)...(n-m)$ and, since $n>>m$, each term will cancel with one factor of $n$ from the term $1/n^{m}$. This leaves
+
+\begin{align*}
+B(m;t) &= \frac{(n-m)!}{(n-m)!}\left(1-\frac{\mu}{n}\right)^{-m}\frac{\mu^{m}\exp(-\mu)}{m!}\\\\
+\end{align*}
+
+We now take the continuous time limit i.e. $n\rightarrow\infty$ and, again, since $m << n$ we are left with 
+
+\begin{align*}
+\underset{n\rightarrow\infty}{\mathrm{lim}} \;\; B(m;t) &= \frac{\mu^{m}\exp(-\mu)}{m!}\\
+\end{align*}
+
+If an event can be detected will probability $\gamma$, the rate of the Poisson process will be reduced by that factor i.e., $\lambda' = \gamma\lambda$. Therefore, the mean and variance of the process becomes $\mu = \gamma\lambda\Delta t$
+v
 
 
 \end{document}
