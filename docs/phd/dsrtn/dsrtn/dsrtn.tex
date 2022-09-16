@@ -10,7 +10,7 @@
 \usepackage{rotating}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{url}
- 
+\usepackage{bm}
 
 %% Use these commands to set biographic information for the title page:
 \title{Biophysical memory stuff}
@@ -59,15 +59,85 @@
 
 How do biological systems remember?
 
+
+\section{Microscopy}
+
+
 \section{RNA Flow}
 
+\subsection{The ergodic hypothesis and inhomogeneous Poisson processes}
+
 \subsection{The chemical master equation and finite state projection algorithm}
+
+The central assumption underlying a Markov process, is the memoryless property
+
+\begin{equation*}
+P(X_{t}|X_{t-1}, X_{t-2}, ..., X_{t-N}) = P(X_{t}|X_{t-1})
+\end{equation*}
+
+A single Markov chain is the set of states $\bm{X} = \{X_{1},X_{2},...,X_{N}\}$. Such a set can be generated provided that $P(X_{t}|X_{t-1})$ is known. To capture $P(X_{t}|X_{t-1})$ for all possible pairs $X_{t}$ and $X_{t-1}$, we define a square transition matrix $T\in \mathcal{R}^{N\times N}$ where $N = |\Omega|$. As such, the elements of $T$ represent the probability of a transition from a state $\omega_{j}$ to $\omega_{i}$ in a unit time
+
+\begin{equation*}
+T_{ij} = \mathrm{Pr}\left(X_{t}=\omega_{i}, | \;X_{t-1}=\omega_{j}\right)
+\end{equation*}
+
+Under these definitions, the row $T_{i}$ represents the present time, and is a conditional  probability distribution $P(\omega | X_{t-1} = \omega_{j})$ which requires that
+
+\begin{equation*}
+\sum_{j}T_{ij} = \sum_{j} P(X_{t} = \omega_{j} | X_{t-1} = \omega_{i}) = 1
+\end{equation*}
+
+The matrix $T$ is not necessarily symmetric i.e. $T_{ij} \neq T_{ji}$ and is defined in the \emph{forward direction}. One should note that the columns $T_{j}$ \emph{do not} define a probability distribution $P(X_{t} = \omega_{i} | X_{t-1} = \omega_{j})$ and therefore do not sum to unity. The probability $P(X_{t} = \omega_{i} | X_{t-1} = \omega_{j})$ has no meaning in this context, since by definition, time is flowing in the positive direction. Of course, we could write $T^T$ such that time flows backwards, which is important in the theory of detailed balance, but we do not introduce this here. We simply sample $X_{t} \sim P(X_{t} = \omega_{j} | X_{t-1} = \omega_{i})$, assign $i=j$, and repeat. It directly follows from the fundamental rules of probability, the first order dynamics for a \textbf{particular} state $\omega_{i}$: $P(\omega_{i},t)$ is given by
+
+\begin{equation}
+P(\omega_{i},t+dt) = P(\omega_{i},t) + \mathcal{J}_{i}dt
+\end{equation}
+
+The net probability current $\mathcal{J}_{i}$ must be 
+
+\begin{equation*}
+\mathcal{J}_{i} = \sum_{i}T_{ij}P(\omega_{j},t) - \sum_{j}T_{ij}P(\omega_{i},t)\\
+\end{equation*}
+
+The first is a sum on a column and the second a sum on a row. This can be simplified further by noticing that the normalization condition implies
+
+\begin{align*}
+T_{ij} &= 1 - \sum_{j}T_{ij}(1-\delta_{ij})\\
+&= 1 - \sum_{j}T_{ij} + \sum_{j}T_{ij}\delta_{ij}
+\end{align*}
+
+
+\begin{align*}
+\mathcal{J}_{i} &= \sum_{i}T_{ij}P(\omega_{j},t) - \sum_{j}T_{ij}P(\omega_{i},t)\\
+&= \sum_{i}\left(1 - \sum_{j}T_{ij} + \sum_{j}T_{ij}\delta_{ij}\right)P(\omega_{j},t) - \sum_{j}T_{ij}P(\omega_{i},t)\\
+&= |\Omega| - |\Omega| + \sum_{i}\sum_{j}T_{ij}P(\omega_{j},t)\delta_{ij} - \sum_{j}T_{ij}P(\omega_{i},t)\\
+&= \sum_{j}T_{ji}P(\omega_{j},t) - T_{ij}P(\omega_{i},t)\\
+\end{align*}
+
+Notice that the Kronecker delta effectively just swaps the index. Taking the limit of (1.1), we arrive at the \textbf{master equation}
+
+
+\begin{equation*}
+\frac{\partial P(\omega_{i})}{\partial t} = \sum_{j}T_{ji}P(\omega_{j},t) - T_{ij}P(\omega_{i},t)
+\end{equation*}
+
+It is common to then define an operator $\bm{W}$ s.t. $W_{ij} = T_{ij}$ and $W_{ii} = -\sum_{j}T_{ij}$ 
+
+\begin{align*}
+\frac{dP(\omega_{i})}{dt} = \sum_{j}W_{ij}P(\omega_{j}) \rightarrow \frac{dP(\bm{\omega})}{dt} = \mathcal{J}(\bm{\omega}) = \mathbf{W}P(\bm{\omega})
+\end{align*}
+
+This operator form has a solution in terms of a matrix exponential
+
+\begin{equation*}
+P(\bm{\omega}, t) = \exp(\mathcal{J}(\bm{\omega}))
+\end{equation*}
+
+This matrix exponential is intractable for large $|\Omega|$. However, in the Finite State Projection algorithm, it is possible to truncate the state space $\Omega \rightarrow \tilde{\Omega}$ and obtain good estimates $\tilde{P}(\bm{\omega}, t)$ with some certificate of accuracy.
 
 \subsection{Sequential tempered Markov Chain Monte Carlo for RNA flow}
 
 \subsection{Dissecting cytokine-induced transcriptional memory using RNA flow}
-
-\section{Microscopy}
 
 \section{Gaussian PSF approximation for single molecule microscopy}
 
