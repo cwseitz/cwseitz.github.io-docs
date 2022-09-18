@@ -1,0 +1,107 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath} % AMS Math Package
+\usepackage{bm}
+\usepackage{amsthm} % Theorem Formatting
+\usepackage{amssymb}    % Math symbols such as \mathbb
+\usepackage{graphicx} % Allows for eps images
+\usepackage[dvips,letterpaper,margin=1in,bottom=0.7in]{geometry}
+\usepackage{tensor}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{physics}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+
+\newcounter{mathematicapage}
+
+\newtheorem{p}{Problem}
+\usepackage{cancel}
+\newtheorem*{lem}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{dfn}{Definition}
+ \newenvironment{s}{%\small%
+        \begin{trivlist} \item \textbf{Solution}. }{%
+            \hspace*{\fill} $\blacksquare$\end{trivlist}}%
+
+
+\begin{document}
+
+ {\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Homework 4}         }\\[2\baselineskip] % Title
+{ {\bf \fontfamily{cmr}\selectfont Quantum Mechanics}\\ {\textit{\fontfamily{cmr}\selectfont     Sept 22nd, 2022}}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    {\large \textsc{Clayton Seitz}
+\\[1.4\baselineskip] 
+
+\begin{p}
+Problem 2.14 from Sakurai
+\end{p}
+
+\begin{s}
+
+We are given that the state vector is 
+
+\begin{equation*}
+\ket{\alpha} = \exp\left(\frac{-ipa}{\hbar}\right)\ket{0}
+\end{equation*}
+
+The Heisenberg equation of motion reads
+
+\begin{align*}
+\frac{dx}{dt} = \frac{1}{i\hbar}\left[x,H\right] = 0
+\end{align*}
+
+Therefore $x = x_{0}$ for all $t \geq t_{0}$
+
+\begin{align*}
+\langle x \rangle &= \int x_{0} \bra{x}\ket{\alpha}\bra{\alpha}\ket{x}dx\\
+&= \int x \exp\left(\frac{-ipa}{\hbar}\right)\bra{x}\ket{0}\exp\left(\frac{ipa}{\hbar}\right)\bra{0}\ket{x}dx\\
+&= \int x_{0} \;|\bra{x}\ket{0}|^{2}\;dx\\
+&= \int x_{0} \;|\bra{x}\ket{0}|^{2}\;dx\\
+\end{align*}
+
+We could write out $\bra{x}\ket{0}$, its complex conjugate, and do the integral. Instead recall the general expression for the matrix element of $x$
+
+\begin{align*}
+\bra{n'}x\ket{n} = \sqrt{\frac{\hbar}{2m\omega}}\left(\sqrt{n}\delta_{n',n-1} +\sqrt{n+1}\delta_{n',n+1}\right)
+\end{align*}
+
+which is zero when $n = n'$ which means that $\langle x \rangle = 0$
+
+\end{s}
+
+\begin{p}
+Problem 2.15 from Sakurai
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+Problem 2.16 from Sakurai
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+Problem 2.28 from Sakurai
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+Problem 2.29 from Sakurai
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+Problem 2.32 from Sakurai
+\end{p}
+
+\begin{s}
+\end{s}
+
+\end{document}
