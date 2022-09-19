@@ -74,6 +74,46 @@ Problem 2.15 from Sakurai
 \end{p}
 
 \begin{s}
+We were given the state
+
+\begin{align*}
+\ket{\alpha} = \exp\left(\frac{-ipa}{\hbar}\right)\ket{0}
+\end{align*}
+
+\begin{align*}
+\bra{x}\ket{\alpha} =\pi^{-1/4}x_{0}^{1/2} \exp\left(\frac{-ipa}{\hbar}\right)\exp\left(-\frac{1}{2}\left(\frac{x}{x_{0}}\right)^{2}\right)
+\end{align*}
+where $x_{0} = \sqrt{\frac{\hbar}{m\omega}}$. The Hamiltonian operator $\hat{H}$ is independent of time so we have the unitary time evolution operator 
+
+\begin{align*}
+\mathcal{U}(t) = \exp\left(-\frac{i\hat{H}t}{\hbar}\right)
+\end{align*}
+
+Assuming $\ket{\alpha}$ is expressed in the energy basis, this can be alternatively be written as the power series
+
+\begin{align*}
+\mathcal{U}(t) = \sum_{n=0}^{\infty} \frac{\hat{H}^{n}}{n!}\rightarrow \mathcal{U}(t)\ket{\alpha} = \sum_{n=0}^{\infty} \frac{\hat{H}^{n}}{n!}\ket{\alpha}
+\end{align*}
+
+\begin{align*}
+\sum_{n=0}^{\infty} \frac{\alpha^{n}}{n!}\ket{\alpha} = \sum_{n}\exp\left(\frac{-i\alpha_{n}t}{\hbar}\right)\ket{\alpha_{n}}
+\end{align*}
+
+
+The probability that $\ket{\alpha}$ is measured to be in the state $\ket{0}$ is
+
+\begin{align*}
+\bra{0}\ket{\alpha}\bra{\alpha}\ket{0} = \exp\left(\frac{-ipa}{\hbar}\right)\bra{0}\ket{0} \exp\left(\frac{ipa}{\hbar}\right)\bra{0}\ket{0} = 1
+\end{align*}
+
+This probability does not change for $t > 0$. This is clear when we look at the state
+
+\begin{align*}
+\ket{\alpha;t} = \exp\left(-\frac{iE_{0}t}{\hbar}\right)\exp\left(\frac{-ipa}{\hbar}\right)\ket{0}
+\end{align*}
+
+The second exponential is just a complex number and is time independent. The first exponential is just a phase, which is not measurable directly. In other words, when we hit this state with the dual ket $\bra{0}$, the phase goes away and we are left with a time-independent probability density.
+
 \end{s}
 
 \begin{p}
