@@ -171,6 +171,36 @@ Problem 2.28 from Sakurai
 \end{p}
 
 \begin{s}
+
+First of all, the solution is not trivial since $x$ does not commute with the Hamiltonian since $[x,p^{2}] \neq 0$. We are told that
+
+\begin{align*}
+\bra{x}\ket{\alpha; t_{0}} = \delta\left(x-\frac{L}{2}\right)
+\end{align*}
+
+Even though $\ket{\alpha; t_{0}}$ is an eigenstate of $x$, we are not in an eigenstate of $H$. This is just the infinite square well, which has energy eigenstates
+
+\begin{align*}
+\bra{x}\ket{\alpha} = \sqrt{\frac{2}{L}}\sin\left(\frac{n\pi x}{L}\right)
+\end{align*}
+
+Let $\alpha = \pi/L$, the probability of finding a particle in the eigenstate corresponding to $n$ can be written as
+
+\begin{align*}
+|\bra{x}\ket{\alpha}|^{2} &= \sin^{2}\left(n\alpha x + m\alpha x\right)\\
+&= \frac{1-\cos\left(2n\alpha x + 2m\alpha x\right)}{2}\\
+\end{align*}
+
+Since $\ket{\alpha}$ is not an eigenstate of $H$, then the state will evolve in time. We evolve $\ket{\alpha}$ by changing to the energy basis, evolving in time, and changing back to the position representation. 
+
+\begin{align*}
+\mathbb{I}\ket{\psi} &= \int_{0}^{L} dx\ket{x}\bra{x} \left(\sum_{n}c_{n}\;\exp\left(-\frac{i\epsilon_{n}t}{\hbar}\right)\ket{\epsilon_{n}}\right)\\
+&= \sum_{n}c_{n}(0)\;\exp\left(-\frac{i\epsilon_{n}t}{\hbar}\right)\int_{0}^{L} dx\ket{x}\bra{x} \ket{\epsilon_{n}}\\
+&= \sum_{n}c_{n}(0)\;\exp\left(-\frac{i\epsilon_{n}t}{\hbar}\right)\psi_{n}(x)\\
+\end{align*}
+
+
+
 \end{s}
 
 \begin{p}
