@@ -172,34 +172,56 @@ Problem 2.28 from Sakurai
 
 \begin{s}
 
-First of all, the solution is not trivial since $x$ does not commute with the Hamiltonian since $[x,p^{2}] \neq 0$. We are told that
+First of all, the solution is not trivial since $x$ does not commute with the Hamiltonian since $[x,p^{2}] \neq 0$. At $t=t_{0}$ we are in the position eigenstate
 
 \begin{align*}
 \bra{x}\ket{\alpha; t_{0}} = \delta\left(x-\frac{L}{2}\right)
 \end{align*}
 
-Even though $\ket{\alpha; t_{0}}$ is an eigenstate of $x$, we are not in an eigenstate of $H$. This is just the infinite square well, which has energy eigenstates
+Since this is the infinite square well, we have the following energy eigenstates, in the position representation
 
 \begin{align*}
 \bra{x}\ket{\alpha} = \sqrt{\frac{2}{L}}\sin\left(\frac{n\pi x}{L}\right)
 \end{align*}
 
-Let $\alpha = \pi/L$, the probability of finding a particle in the eigenstate corresponding to $n$ can be written as
+Of course $\ket{\alpha; t_{0}}$ is not an eigenstate of $H$, so this state will measurably evolve in time. The state $\ket{\alpha; t_{0}}$ in the energy basis is
 
 \begin{align*}
-|\bra{x}\ket{\alpha}|^{2} &= \sin^{2}\left(n\alpha x + m\alpha x\right)\\
-&= \frac{1-\cos\left(2n\alpha x + 2m\alpha x\right)}{2}\\
+\ket{\beta} &= \sum_{n}\ket{\epsilon_{n}}\bra{\epsilon_{n}}\ket{\alpha;t_{0}}\\
+&=  \sqrt{\frac{2}{L}}\sum_{n}\sin\left(\frac{n\pi}{2}\right)\ket{\epsilon_{n}}
 \end{align*}
 
-Since $\ket{\alpha}$ is not an eigenstate of $H$, then the state will evolve in time. We evolve $\ket{\alpha}$ by changing to the energy basis, evolving in time, and changing back to the position representation. 
+From this, we can show the probability of measuring the particle in energy eigenstate $\ket{\epsilon_{n}}$
 
 \begin{align*}
-\mathbb{I}\ket{\psi} &= \int_{0}^{L} dx\ket{x}\bra{x} \left(\sum_{n}c_{n}\;\exp\left(-\frac{i\epsilon_{n}t}{\hbar}\right)\ket{\epsilon_{n}}\right)\\
-&= \sum_{n}c_{n}(0)\;\exp\left(-\frac{i\epsilon_{n}t}{\hbar}\right)\int_{0}^{L} dx\ket{x}\bra{x} \ket{\epsilon_{n}}\\
-&= \sum_{n}c_{n}(0)\;\exp\left(-\frac{i\epsilon_{n}t}{\hbar}\right)\psi_{n}(x)\\
+\bra{\epsilon_{m}}\ket{\beta} &= \sqrt{\frac{2}{L}}\sum_{n}\sin\left(\frac{n\pi}{2}\right)\bra{\epsilon_{m}}\ket{\epsilon_{n}}\\
+&= \sqrt{\frac{2}{L}}\sum_{n}\sin\left(\frac{n\pi}{2}\right)\delta_{mn}\\
+&= \sqrt{\frac{2}{L}}\sin\left(\frac{m\pi}{2}\right)\\
+\end{align*}
+
+and therefore $|\bra{\epsilon_{m}}\ket{\beta}|^{2} = \sqrt{\frac{2}{L}}\sin^{2}\left(\frac{m\pi}{2}\right)$. The relative probabilities with respect to the ground state are then given by
+
+\begin{align*}
+r_{m+1} = \sin^{2}\left(\frac{(m+1)\pi}{2}\right)\csc^{2}\left(\frac{m\pi}{2}\right)
 \end{align*}
 
 
+Since we know a representation for $\ket{\alpha;t_{0}}$ in the energy basis, we can determine the time evolution of the wavefunction $\bra{x}\ket{\alpha}$
+
+\begin{align*}
+\ket{\alpha;t} &= \mathcal{U}(t)\ket{\beta} \\
+&= \sqrt{\frac{2}{L}}\sum_{n}\exp\left(\frac{-i\epsilon_{n}t}{\hbar}\right)\sin\left(\frac{n\pi}{2}\right)\ket{\epsilon_{n}}
+\end{align*}
+
+which has the position representation (wave function)
+
+\begin{align*}
+\bra{x}\ket{\alpha; t} &= \psi(x,t)\\
+&= \sqrt{\frac{2}{L}}\sum_{n}\exp\left(\frac{-i\epsilon_{n}t}{\hbar}\right)\sin\left(\frac{n\pi}{2}\right)\bra{x}\ket{\epsilon_{n}}\\
+&= \sqrt{\frac{2}{L}}\sum_{n}\exp\left(\frac{-i\epsilon_{n}t}{\hbar}\right)\sin\left(\frac{n\pi}{2}\right)\psi_{n}(x)
+\end{align*}
+
+where $\psi_{n}(x)$ are the energy eigenstates given above.
 
 \end{s}
 
