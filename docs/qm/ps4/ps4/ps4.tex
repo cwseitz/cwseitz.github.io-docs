@@ -121,6 +121,49 @@ Problem 2.16 from Sakurai
 \end{p}
 
 \begin{s}
+
+We will assume the form of the annihilation and creation operators
+
+\begin{align*}
+a &= \sqrt{\frac{m\omega}{2\hbar}}\left(x + \frac{ip}{m\omega}\right)\\
+a^{\dagger} &= \sqrt{\frac{m\omega}{2\hbar}}\left(x - \frac{ip}{m\omega}\right)
+\end{align*}
+
+Adding these equations gives and rearranging we can express $x$ as
+
+\begin{align*}
+x = \sqrt{\frac{\hbar}{2m\omega}}\left(a + a^{\dagger}\right)
+\end{align*}
+
+\begin{align*}
+\bra{m}x\ket{n} &= \bra{m} \sqrt{\frac{\hbar}{2m\omega}}\left(a + a^{\dagger}\right)\ket{n}\\
+&= \sqrt{\frac{\hbar}{2m\omega}} \left(\bra{m}a\ket{n} + \bra{m}a^{\dagger}\ket{n}\right)\\
+&= \sqrt{\frac{\hbar}{2m\omega}} \left(\sqrt{n}\delta_{m,n-1} + \sqrt{n+1}\delta_{m,n+1}\right)\\
+\end{align*}
+
+Subtracting the creation operator from the annihalation operator allows us to write the momentum operator as
+
+\begin{align*}
+p &= i\sqrt{\frac{m\hbar \omega}{2}}\left(a^{\dagger}-a\right)
+\end{align*}
+
+\begin{align*}
+\bra{m}p\ket{n} &= \bra{m}\left(i\sqrt{\frac{m\hbar \omega}{2}}\left(a^{\dagger}-a\right)\right)\ket{n}\\
+&= \left(i\sqrt{\frac{m\hbar \omega}{2}}\left(\bra{m}a^{\dagger}\ket{n}-\bra{m}a\ket{n}\right)\right)\\
+&= i\sqrt{\frac{m\hbar \omega}{2}}\left(\sqrt{n+1}\delta_{m,n+1}-\sqrt{n}\delta_{m,n-1}\right)\\
+\end{align*}
+\begin{align*}
+\bra{m}\{x,p\}\ket{n} &= \bra{m}xp\ket{n} + \bra{m}px\ket{n}\\
+&= \frac{i\hbar}{2}\bra{m}\left((a^{\dagger})^{2}-a^{2}\right)\ket{n} + \frac{i\hbar}{2}\bra{m}\left((a^{\dagger})^{2} + a^{\dagger}a - aa^{\dagger} - a^{2}\right)\ket{n}\\
+&= \frac{i\hbar}{2}\left(\sqrt{n+1}\sqrt{n+2}\delta_{m,n+2} - \sqrt{n}\sqrt{n-1}\delta_{m,n-2}\right)\\
+&+ \frac{i\hbar}{2}(\sqrt{n+1}\sqrt{n+2}\delta_{m,n+2} + \sqrt{n}\sqrt{n-1}\delta_{m,n-2})
+\end{align*}
+\begin{align*}
+\bra{m}x^{2}\ket{n} &= \frac{\hbar}{2m\omega}\bra{m}\left(a^{2} + aa^{\dagger} + a^{\dagger} a + (a^{\dagger})^{2}\right)\ket{n}
+\end{align*}
+\begin{align*}
+\bra{m}p^{2}\ket{n} = -\frac{m\hbar \omega}{2}\bra{m}\left((a^{\dagger})^{2} + a^{\dagger}a - aa^{\dagger}-a^{2}\right)\ket{n}
+\end{align*}
 \end{s}
 
 \begin{p}
