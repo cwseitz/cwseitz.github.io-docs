@@ -230,6 +230,37 @@ Problem 2.29 from Sakurai
 \end{p}
 
 \begin{s}
+
+We are free to choose our zero of potential so we can solve an alternative system where $V(x) = \nu_{0} - \delta(x)\nu_{0}$. We then decompose $\psi(x)$ into two regions $\psi_{I}(x), \psi_{II}(x)$ where 
+
+\begin{equation*}
+\begin{cases}
+I: x<0,\\
+II: x>0,\\
+\end{cases}
+\end{equation*}
+
+We then solve Schrodingers equation in each region. Both regions have constant potential $|\nu_{0}|$
+
+\begin{align*}
+\frac{d\psi_{I}^{2}}{dx^{2}} &= \frac{2m(E-\nu_{0})}{\hbar^{2}}\psi_{I}(x)\\
+\frac{d\psi_{II}^{2}}{dx^{2}} &= \frac{2m(E-\nu_{0})}{\hbar^{2}}\psi_{II}(x)
+\end{align*}
+
+\begin{align*}
+\psi_{I}(x) &= A\exp(\kappa x) + B\exp(-\kappa x)\\
+\psi_{II}(x) &= C\exp(\kappa x) + D\exp(-\kappa x)
+\end{align*}
+
+Taking limits shows that $B = 0$ and $C=0$. From the symmetry of the potential we should have that $\psi'_{I} = -\psi'_{II}$ which is satisfied when $A=D$. This reduces the solution to
+
+\begin{align*}
+\psi_{I}(x) &= A\exp(\kappa x)\\
+\psi_{II}(x) &= A\exp(-\kappa x)
+\end{align*}
+
+Looking back at Schrodinger's equation, we can see that when $E > \nu_{0}$ the solutions are complex exponentials and are unbound but when $E < \nu_{0}$, the solutions are real exponentials and bound. There are an infinite number of bound states since $E$ and therefore $\kappa$ are continuous parameters. When $E$ hits $\nu_{0}$, we have the solutions for a free particle.
+
 \end{s}
 
 \begin{p}
@@ -237,6 +268,30 @@ Problem 2.32 from Sakurai
 \end{p}
 
 \begin{s}
+Let us define 
+
+\begin{align*}
+\psi_{I} &= A\exp(\alpha x)\\
+\psi_{II} &= B\exp(ikx) + C\exp(-ikx)\\
+\psi_{III} &= D\exp(-\alpha x)\\
+\end{align*}
+
+Here $\alpha,k$ are constants. We can enforce continuity in the wavefunction itself at $x = -a$ and $x=+a$
+
+\begin{align*}
+A\exp(-\alpha a) &= B\exp(-ika) + C\exp(ika)\\
+D\exp(-\alpha a) &= B\exp(ika) + C\exp(-ika)\\
+\end{align*}
+
+And we can also enforce continuity in the first-order derivative at these points
+
+\begin{align*}
+\alpha A\exp(-\alpha a) &= ikB\exp(-ika) -ikC\exp(ika)\\
+-\alpha D\exp(-\alpha a) &= ikB\exp(ika) -ikC\exp(-ika)\\
+\end{align*}
+
+Define $z = \exp(ika)(k-i\alpha)$ and we must have $\alpha,k$ such that $z = \pm z^{*}$
+
 \end{s}
 
 \end{document}
