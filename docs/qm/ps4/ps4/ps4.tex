@@ -290,7 +290,64 @@ And we can also enforce continuity in the first-order derivative at these points
 -\alpha D\exp(-\alpha a) &= ikB\exp(ika) -ikC\exp(-ika)\\
 \end{align*}
 
-Define $z = \exp(ika)(k-i\alpha)$ and we must have $\alpha,k$ such that $z = \pm z^{*}$
+This system of four equations can be written in matrix form
+
+\begin{align*}
+\begin{pmatrix}
+e^{-\alpha a} & e^{-ika} & e^{ika} & 0\\
+0 & e^{ika} & e^{-ika} & e^{-\alpha a}\\
+\alpha e^{-\alpha a} & ike^{-ika} & ike^{ika} & 0\\
+0 & ike^{ika} & -ike^{-ika} & -\alpha e^{-\alpha a}\\
+\end{pmatrix}\begin{pmatrix}A\\B\\C\\D\end{pmatrix} = 0
+\end{align*}
+
+According to Mathematica, the determinant is 
+
+\begin{align*}
+\mathcal{D} = \exp(-2a(ik+\alpha))\left(-\exp(4iak)(k-i\alpha)^{2} + (k+i\alpha)^{2}\right)
+\end{align*}
+
+If the determinant is zero, then a solution exists. The determinant $\mathcal{D}$ is zero when
+
+\begin{align*}
+\exp(-2iak)(k+i\alpha)^{2} = \exp(2iak)(k-i\alpha)^{2}
+\end{align*}
+
+Notice that we have just distributed the $\exp(-2ika)$ from the prefactor. If we let $z = \exp(-iak)(k+i\alpha)$ then the above equation just reads $z^{2} = (z^{*})^{2}$ or $z = \pm z^{*}$. 
+
+Considering the purely real solution first, we make the substitutions
+
+\begin{align*}
+\exp(-iak) \rightarrow \frac{\sqrt{k^{2} + \alpha^{2}}}{k+i\alpha}\\
+\exp(iak) \rightarrow \frac{\sqrt{k^{2} + \alpha^{2}}}{k-i\alpha}
+\end{align*}
+
+
+\begin{align*}
+\begin{pmatrix}
+e^{-\alpha a} & \frac{-i\sqrt{k^{2} + \alpha^{2}}}{k+i\alpha} & \frac{\sqrt{k^{2} + \alpha^{2}}}{k-i\alpha} & 0\\
+0 & \frac{\sqrt{k^{2} + \alpha^{2}}}{k-i\alpha} & \frac{-i\sqrt{k^{2} + \alpha^{2}}}{k+i\alpha} & e^{-\alpha a}\\
+\alpha e^{-\alpha a} & ik\frac{-i\sqrt{k^{2} + \alpha^{2}}}{k+i\alpha} & ik\frac{\sqrt{k^{2} + \alpha^{2}}}{k-i\alpha} & 0\\
+0 & ik\frac{\sqrt{k^{2} + \alpha^{2}}}{k-i\alpha} & -ik\frac{-i\sqrt{k^{2} + \alpha^{2}}}{k+i\alpha} & -\alpha e^{-\alpha a}\\
+\end{pmatrix}\begin{pmatrix}A\\B\\C\\D\end{pmatrix} = 0
+\end{align*}
+
+Now considering the purely imaginary solution, we make the substitutions
+
+\begin{align*}
+\exp(-iak) \rightarrow \frac{i\sqrt{k^{2} + \alpha^{2}}}{k+i\alpha}\\
+\exp(iak) \rightarrow \frac{-i\sqrt{k^{2} + \alpha^{2}}}{k-i\alpha}
+\end{align*}
+
+\begin{align*}
+\begin{pmatrix}
+e^{-\alpha a} & \frac{i\sqrt{k^{2} + \alpha^{2}}}{k+i\alpha} & \frac{-i\sqrt{k^{2} + \alpha^{2}}}{k-i\alpha} & 0\\
+0 & \frac{-i\sqrt{k^{2} + \alpha^{2}}}{k-i\alpha} & \frac{i\sqrt{k^{2} + \alpha^{2}}}{k+i\alpha} & e^{-\alpha a}\\
+\alpha e^{-\alpha a} & ik\frac{i\sqrt{k^{2} + \alpha^{2}}}{k+i\alpha} & ik\frac{-i\sqrt{k^{2} + \alpha^{2}}}{k-i\alpha} & 0\\
+0 & ik\frac{-i\sqrt{k^{2} + \alpha^{2}}}{k-i\alpha} & -ik\frac{i\sqrt{k^{2} + \alpha^{2}}}{k+i\alpha} & -\alpha e^{-\alpha a}\\
+\end{pmatrix}\begin{pmatrix}A\\B\\C\\D\end{pmatrix} = 0
+\end{align*}
+
 
 \end{s}
 
