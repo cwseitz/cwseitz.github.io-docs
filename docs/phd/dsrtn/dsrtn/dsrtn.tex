@@ -168,25 +168,17 @@ P(S_{k}) = \mathrm{Poisson}(\lambda_{k})
 \end{equation*}
 
 
-It would be convenient to obtain an analytical expression for $\lambda_{k}$ given the parameters of the point spread function $\theta = (x_0,y_0,\sigma)$. Recall first the appropriate normalization for a Gaussian function in one dimension
-
-\begin{equation*}
-\int_{-\infty}^{\infty}\exp(-\alpha x^{2}) = \sqrt{\frac{\pi}{\alpha}} \rightarrow G(x) = \sqrt{\frac{\alpha}{\pi}}\exp(-\alpha x^{2})
-\end{equation*}
-
-
-For the standard definition of a Gaussian with variance $\sigma^{2}$, $\alpha = \frac{1}{2\sigma^{2}}$. Suppose I pick my origin to be at $(x_{0},y_{0})$, such that pixel coordinates become $x' = x_{0} + \Delta x$ and $y' = y_{0} + \Delta y$ are the coordinates of the top left corner of a pixel
+It would be convenient to obtain an analytical expression for $\lambda_{k}$ given the parameters of the point spread function $\theta = (x_0,y_0,\sigma)$. For the standard definition of a Gaussian with variance $\sigma^{2}$, $\alpha = \frac{1}{2\sigma^{2}}$.
 
 \begin{align*}
-\int_{\mathcal{D}_{k}} q(x,y)dxdy &= \sqrt{\frac{\alpha}{\pi}}\int_{x'}^{x'+\Delta}dx\exp\left(-\alpha x^{2}\right) \sqrt{\frac{\alpha}{\pi}}\int_{y'}^{y' + \Delta}dy\exp\left(-\alpha y^{2}\right)\\
-&=\sqrt{\frac{\alpha}{\pi}}\cdot\frac{1}{2}\left\{\mathrm{erf}((x'+\Delta)\sqrt{\alpha})-\mathrm{erf}(x'\sqrt{\alpha})\right\}\sqrt{\frac{\alpha}{\pi}}\cdot\frac{1}{2}\left\{\mathrm{erf}((y'+\Delta)\sqrt{\alpha})-\mathrm{erf}(y'\sqrt{\alpha})\right\}
+\lambda_{k} &= \frac{\alpha}{\pi}\left(\int_{x_{k}}^{x_{k+1}}\exp\left(-\alpha (x-x_{0})^{2}\right)dx\right)\left(\int_{y_{k}}^{y_{k+1}}\exp\left(-\alpha (y-y_{0})^{2}\right)dy\right)\\
+&=\frac{\alpha}{2\pi}\left(\mathrm{erf}(a_{k+1}\sqrt{\alpha})-\mathrm{erf}(a_{k}\sqrt{\alpha})\right)\left(\mathrm{erf}(b_{k+1}\sqrt{\alpha})-\mathrm{erf}(b_{k}\sqrt{\alpha})\right)
 \end{align*}
 
-The (possibly cropped) detector $\mathcal{D}$ is a $M\times M$ array of square pixels of width $\Delta$ and quantum efficiency $\gamma$. Our goal is to evaluate $\lambda_{k}$ for all $\mathcal{D}_{k} \in \mathcal{D}$ according to the equation above. Therefore, we write the expression for the rate at pixel $k$ with coordinates $(x',y')$
+where $a_{k+1} = x_{k+1}-x_{0}$ and $b_{k+1} = y_{k+1}-y_{0}$
 
-\begin{align}
-\lambda_{k} &= \frac{\gamma\alpha}{4\pi}\left\{\mathrm{erf}((x'+\Delta)\sqrt{\alpha})-\mathrm{erf}(x'\sqrt{\alpha})\right\}\left\{\mathrm{erf}((y'+\Delta)\sqrt{\alpha})-\mathrm{erf}(y'\sqrt{\alpha})\right\}
-\end{align}
+
+
 
 \subsection{Corrupting a Poisson process with white noise}
 
