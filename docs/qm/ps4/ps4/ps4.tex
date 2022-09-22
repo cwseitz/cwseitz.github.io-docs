@@ -41,31 +41,38 @@ Problem 2.14 from Sakurai
 We are given that the state vector is 
 
 \begin{equation*}
-\ket{\alpha} = \exp\left(\frac{-ipa}{\hbar}\right)\ket{0}
+\ket{\alpha; t_{0}} = \exp\left(\frac{-ipa}{\hbar}\right)\ket{0}
 \end{equation*}
 
-The Heisenberg equation of motion reads
+The Heisenberg equation of motion for $x(t)$ reads
 
 \begin{align*}
-\frac{dx}{dt} = \frac{1}{i\hbar}\left[x,H\right] = 0
+x(t) = x(0)\cos(\omega t) + \frac{p(0)}{m}\sin(\omega t)
 \end{align*}
 
-Therefore $x = x_{0}$ for all $t \geq t_{0}$
+Therefore
 
 \begin{align*}
-\langle x \rangle &= \int x_{0} \bra{x}\ket{\alpha}\bra{\alpha}\ket{x}dx\\
-&= \int x \exp\left(\frac{-ipa}{\hbar}\right)\bra{x}\ket{0}\exp\left(\frac{ipa}{\hbar}\right)\bra{0}\ket{x}dx\\
-&= \int x_{0} \;|\bra{x}\ket{0}|^{2}\;dx\\
-&= \int x_{0} \;|\bra{x}\ket{0}|^{2}\;dx\\
+\langle x \rangle &= \bra{\alpha;t_{0}}x(t)\ket{\alpha;t_{0}}\\
+&= \bra{\alpha;t_{0}}\left(x(0)\cos(\omega t) + \frac{p(0)}{m}\sin(\omega t)\right)\ket{\alpha;t_{0}}\\
+&= \bra{0}\exp\left(\frac{ipa}{\hbar}\right)\left(x(0)\cos(\omega t) + \frac{p(0)}{m}\sin(\omega t)\right)\exp\left(\frac{-ipa}{\hbar}\right)\ket{0}\\
+&= \bra{0}\exp\left(\frac{ipa}{\hbar}\right)x(0)\exp\left(-\frac{ipa}{\hbar}\right)\ket{0}\cos(\omega t)\\ 
+&+ \frac{1}{m}\bra{0}\exp\left(\frac{ipa}{\hbar}\right)p(0)\exp\left(\frac{-ipa}{\hbar}\right)\ket{0}\sin(\omega t)
 \end{align*}
 
-We could write out $\bra{x}\ket{0}$, its complex conjugate, and do the integral. Instead recall the general expression for the matrix element of $x$
+We can simplify this last expression by using the Baker-Haussdorf lemma for arbitrary operators $G$ and $A$
 
 \begin{align*}
-\bra{n'}x\ket{n} = \sqrt{\frac{\hbar}{2m\omega}}\left(\sqrt{n}\delta_{n',n-1} +\sqrt{n+1}\delta_{n',n+1}\right)
+\exp(iG\lambda)A\exp(-iG\lambda) = A + i\lambda[G,A] + ...
 \end{align*}
 
-which is zero when $n = n'$ which means that $\langle x \rangle = 0$
+\begin{align*}
+\langle x \rangle &= \bra{0}\exp\left(\frac{ipa}{\hbar}\right)x(0)\exp\left(-\frac{ipa}{\hbar}\right)\ket{0}\cos(\omega t)\\ 
+&+ \frac{1}{m}\bra{0}\exp\left(\frac{ipa}{\hbar}\right)p(0)\exp\left(\frac{-ipa}{\hbar}\right)\ket{0}\sin(\omega t)\\
+&= \bra{0}\left(x + \frac{ia}{\hbar}[p,x]\right)\ket{0}\cos(\omega t)\\ 
+&+ \frac{1}{m}\bra{0}\left(p + \frac{ia}{\hbar}[p,p]\right)\ket{0}\sin(\omega t)\\
+&= \left(\bra{0}x\ket{0} + a\right)\cos(\omega t) = a\cos(\omega t)
+\end{align*}
 
 \end{s}
 
@@ -74,46 +81,32 @@ Problem 2.15 from Sakurai
 \end{p}
 
 \begin{s}
-We were given the state
+
+First note that the state is being translated $x\rightarrow x + a$
+
+\begin{equation*}
+\ket{\alpha; t_{0}} = \exp\left(\frac{-ipa}{\hbar}\right)\ket{0} = \mathcal{J}(a)\ket{0}
+\end{equation*}
+
+where $\mathcal{J}$ is the translation operator. Using that
 
 \begin{align*}
-\ket{\alpha} = \exp\left(\frac{-ipa}{\hbar}\right)\ket{0}
+\bra{x}\ket{0} =\pi^{-1/4}x_{0}^{1/2} \exp\left(-\frac{1}{2}\left(\frac{x}{x_{0}}\right)^{2}\right)
 \end{align*}
+
+we expect to be able to show
 
 \begin{align*}
-\bra{x}\ket{\alpha} =\pi^{-1/4}x_{0}^{1/2} \exp\left(\frac{-ipa}{\hbar}\right)\exp\left(-\frac{1}{2}\left(\frac{x}{x_{0}}\right)^{2}\right)
+\bra{x} \exp\left(\frac{-ipa}{\hbar}\right)\ket{0} &= \bra{x+a}\ket{0}\\
+&= \pi^{-1/4}x_{0}^{1/2}\exp\left(-\frac{1}{2}\left(\frac{x+a}{x_{0}}\right)^{2}\right)
 \end{align*}
-where $x_{0} = \sqrt{\frac{\hbar}{m\omega}}$. The Hamiltonian operator $\hat{H}$ is independent of time so we have the unitary time evolution operator 
+where $x_{0} = \sqrt{\frac{\hbar}{m\omega}}$. The probability that $\ket{\alpha}$ is measured to be in the state $\ket{0}$ is
 
 \begin{align*}
-\mathcal{U}(t) = \exp\left(-\frac{i\hat{H}t}{\hbar}\right)
+\bra{\alpha}\ket{0} &= \pi^{-1/2}x_{0}\int \exp\left(-\frac{1}{2}\left(\frac{x+a}{x_{0}}\right)^{2}\right)\exp\left(-\frac{1}{2}\left(\frac{x}{x_{0}}\right)^{2}\right)dx\\
 \end{align*}
 
-Assuming $\ket{\alpha}$ is expressed in the energy basis, this can be alternatively be written as the power series
-
-\begin{align*}
-\mathcal{U}(t) = \sum_{n=0}^{\infty} \frac{\hat{H}^{n}}{n!}\rightarrow \mathcal{U}(t)\ket{\alpha} = \sum_{n=0}^{\infty} \frac{\hat{H}^{n}}{n!}\ket{\alpha}
-\end{align*}
-
-\begin{align*}
-\sum_{n=0}^{\infty} \frac{\alpha^{n}}{n!}\ket{\alpha} = \sum_{n}\exp\left(\frac{-i\alpha_{n}t}{\hbar}\right)\ket{\alpha_{n}}
-\end{align*}
-
-
-The probability that $\ket{\alpha}$ is measured to be in the state $\ket{0}$ is
-
-\begin{align*}
-\bra{0}\ket{\alpha}\bra{\alpha}\ket{0} = \exp\left(\frac{-ipa}{\hbar}\right)\bra{0}\ket{0} \exp\left(\frac{ipa}{\hbar}\right)\bra{0}\ket{0} = 1
-\end{align*}
-
-This probability does not change for $t > 0$. This is clear when we look at the state
-
-\begin{align*}
-\ket{\alpha;t} = \exp\left(-\frac{iE_{0}t}{\hbar}\right)\exp\left(\frac{-ipa}{\hbar}\right)\ket{0}
-\end{align*}
-
-The second exponential is just a complex number and is time independent. The first exponential is just a phase, which is not measurable directly. In other words, when we hit this state with the dual ket $\bra{0}$, the phase goes away and we are left with a time-independent probability density.
-
+which is an integral of a product of Gaussians.
 \end{s}
 
 \begin{p}
@@ -155,16 +148,34 @@ p &= i\sqrt{\frac{m\hbar \omega}{2}}\left(a^{\dagger}-a\right)
 \begin{align*}
 \bra{m}\{x,p\}\ket{n} &= \bra{m}xp\ket{n} + \bra{m}px\ket{n}\\
 &= \frac{i\hbar}{2}\bra{m}\left((a^{\dagger})^{2}-a^{2}\right)\ket{n} + \frac{i\hbar}{2}\bra{m}\left((a^{\dagger})^{2} + a^{\dagger}a - aa^{\dagger} - a^{2}\right)\ket{n}\\
-&= \frac{i\hbar}{2}\left(\sqrt{n+1}\sqrt{n+2}\delta_{m,n+2} - \sqrt{n}\sqrt{n-1}\delta_{m,n-2}\right)\\
-&+ \frac{i\hbar}{2}(\sqrt{n+1}\sqrt{n+2}\delta_{m,n+2} + \sqrt{n}\sqrt{n-1}\delta_{m,n-2})
+&=  \frac{i\hbar}{2}(\sqrt{n+1}\sqrt{n+2}\delta_{m,n+2} + \sqrt{n}\sqrt{n-1}\delta_{m,n-2})
 \end{align*}
+
+since only the cross terms will survive.
+
 \begin{align*}
-\bra{m}x^{2}\ket{n} &= \frac{\hbar}{2m\omega}\bra{m}\left(a^{2} + aa^{\dagger} + a^{\dagger} a + (a^{\dagger})^{2}\right)\ket{n}
+\bra{m}x^{2}\ket{n} &= \frac{\hbar}{2m\omega}\bra{m}\left(a^{2} + aa^{\dagger} + a^{\dagger} a + (a^{\dagger})^{2}\right)\ket{n}\\
+&= \frac{\hbar}{2m\omega}\left((2n+1)\delta_{mn} + \sqrt{m}\sqrt{n+1}\delta_{m-1,n+1} + \sqrt{m+1}\sqrt{n}\delta_{m+1,n-1}\right)
 \end{align*}
+
 \begin{align*}
-\bra{m}p^{2}\ket{n} = -\frac{m\hbar \omega}{2}\bra{m}\left((a^{\dagger})^{2} + a^{\dagger}a - aa^{\dagger}-a^{2}\right)\ket{n}
+\bra{m}p^{2}\ket{n} &= -\frac{m\hbar \omega}{2}\bra{m}\left(a^{2}- aa^{\dagger} - a^{\dagger}a +(a^{\dagger})^{2}\right)\ket{n}\\
+&= -\frac{m\hbar \omega}{2}\left((2n+1)\delta_{mn} - \sqrt{m}\sqrt{n+1}\delta_{m-1,n+1} - \sqrt{m+1}\sqrt{n}\delta_{m+1,n-1}\right)
 \end{align*}
 \end{s}
+
+To validate the virial theorem we write, 
+
+\begin{align*}
+\frac{1}{m}\langle p^{2}\rangle = m\omega^{2}\langle x^{2}\rangle
+\end{align*}
+
+From the above, we can see that this is satisfied for an energy eigenstate
+
+\begin{align*}
+\frac{1}{m}\langle p^{2}\rangle &= \frac{\hbar \omega}{2}(2n+1)\\
+m\omega^{2}\langle x^{2}\rangle &= m\omega^{2}\frac{\hbar}{2m\omega}(2n+1) = \frac{\hbar \omega}{2}(2n+1)
+\end{align*}
 
 \begin{p}
 Problem 2.28 from Sakurai
@@ -231,35 +242,62 @@ Problem 2.29 from Sakurai
 
 \begin{s}
 
-We are free to choose our zero of potential so we can solve an alternative system where $V(x) = \nu_{0} - \delta(x)\nu_{0}$. We then decompose $\psi(x)$ into two regions $\psi_{I}(x), \psi_{II}(x)$ where 
+For a delta-potential, Schrodinger's equation reads
+
+\begin{align*}
+-\frac{\hbar^{2}}{2m}\frac{d\psi^{2}}{dx^{2}} - \nu_{0}\delta(x)\psi(x) = E\psi(x)
+\end{align*}
+
+We then solve Schrodingers equation in two regions. Let the first region be $x<0$ 
+
+\begin{align*}
+\frac{d\psi_{I}^{2}}{dx^{2}} &= -\frac{2mE}{\hbar^{2}}\psi_{I}(x) = \kappa_{0}^{2}\psi_{I}(x)\\
+\end{align*}
+
+for $\kappa_{0} = \sqrt{-2mE}/\hbar$. If $E <0$, then the general solution is
+
+\begin{align*}
+\psi_{I}(x) &= A\exp(\kappa_{0} x) + B\exp(-\kappa_{0} x)\\
+\end{align*}
+
+We choose $B = 0$ on physical grounds. Now for the second region $x>0$, we have a similar situation, but this time we choose an exponential decay
+
+\begin{align*}
+\psi_{II}(x) &= A\exp(-\kappa_{0} x)\\
+\end{align*}
+
+We have chosen the constant to be the same as the first region, to preserve continuity of $\psi(x)$.
 
 \begin{equation*}
-\begin{cases}
-I: x<0,\\
-II: x>0,\\
+\psi(x) = \begin{cases}
+A\exp(\kappa_{0}x) \;\;x <0 \\
+A\exp(-\kappa_{0}x) \;\; x\geq 0\\
 \end{cases}
 \end{equation*}
 
-We then solve Schrodingers equation in each region. Both regions have constant potential $|\nu_{0}|$
+The constant $A$ is found by enforcing the normalization condition:
 
 \begin{align*}
-\frac{d\psi_{I}^{2}}{dx^{2}} &= \frac{2m(E-\nu_{0})}{\hbar^{2}}\psi_{I}(x)\\
-\frac{d\psi_{II}^{2}}{dx^{2}} &= \frac{2m(E-\nu_{0})}{\hbar^{2}}\psi_{II}(x)
+2A^{2}\int_{-\infty}^{0} \exp(2\kappa_{0}x)dx = 1
 \end{align*}
+
+and it is straightforward to show that $A = \sqrt{\kappa_{0}}$
+
+The energy is $E = -\hbar^{2}\kappa_{0}^{2}/2m$. The usual trick for relating this to the strength of the potential $\nu_{0}$ is to integrate Schrodingers equation 
 
 \begin{align*}
-\psi_{I}(x) &= A\exp(\kappa x) + B\exp(-\kappa x)\\
-\psi_{II}(x) &= C\exp(\kappa x) + D\exp(-\kappa x)
+-\int_{-\epsilon}^{+\epsilon}\frac{\hbar^{2}}{2m}\frac{d\psi^{2}}{dx^{2}}dx - \int_{-\epsilon}^{+\epsilon}\nu_{0}\delta(x)\psi(x)dx = 0
 \end{align*}
 
-Taking limits shows that $B = 0$ and $C=0$. From the symmetry of the potential we should have that $\psi'_{I} = -\psi'_{II}$ which is satisfied when $A=D$. This reduces the solution to
+as $\epsilon \rightarrow 0$. Ignoring the normalization, because it will cancel
 
 \begin{align*}
-\psi_{I}(x) &= A\exp(\kappa x)\\
-\psi_{II}(x) &= A\exp(-\kappa x)
+\bigg|_{-\epsilon}^{+\epsilon}\frac{d\psi}{dx} = -2\kappa_{0} = -\frac{2m\nu_{0}}{\hbar^{2}}\psi(0)
 \end{align*}
 
-Looking back at Schrodinger's equation, we can see that when $E > \nu_{0}$ the solutions are complex exponentials and are unbound but when $E < \nu_{0}$, the solutions are real exponentials and bound. There are an infinite number of bound states since $E$ and therefore $\kappa$ are continuous parameters. When $E$ hits $\nu_{0}$, we have the solutions for a free particle.
+So we find that $\kappa_{0} = \nu_{0}m/\hbar^{2}$ so $E = -m\nu_{0}^{2}/2\hbar^{2}$. This is unique so we just have one bound state. There are of course unbound states when $E > 0$, for which the solutions would be complex exponentials.
+
+
 
 \end{s}
 
