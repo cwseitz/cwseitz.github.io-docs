@@ -174,23 +174,29 @@ It would be convenient to obtain an analytical expression for $\lambda_{k}$ give
 \mathrm{erf}(x) \equiv \frac{2}{\sqrt{\pi}}\int_{0}^{x} \exp(-t^{2})dx
 \end{equation*}
 
-where $t = \frac{x}{\sqrt{2}\sigma}$. Of course, this can be used to construct the integral over an arbitrary interval $[a,b]$
+where $t = \frac{x}{\sqrt{2}\sigma}$. We just need to rescale this so it is appropriate for a standard normal distribution. We need something like
 
 \begin{equation*}
-\mathrm{erf}(b) - \mathrm{erf}(a) = \frac{2}{\sqrt{\pi}}\int_{\frac{a}{\sqrt{2}\sigma}}^{\frac{b}{\sqrt{2}\sigma}} \exp(-t^{2})dt
+F(x) = \frac{1}{\sqrt{2\pi}}\int_{0}^{x} \exp(-t^{2})dx
 \end{equation*}
 
-We use this result to compute the Poisson rate $\lambda_{k}$ at pixel $k$. Start with
+so we rescale the error function by $\beta = 1/2\sqrt{2}$. Of course, this can also be used to construct the integral over an arbitrary interval $[a,b]$
+
+\begin{equation*}
+\mathrm{erf}(b) - \mathrm{erf}(a) = \frac{2\beta}{\sqrt{\pi}}\int_{\frac{a}{\sqrt{2}\sigma}}^{\frac{b}{\sqrt{2}\sigma}} \exp(-t^{2})dt
+\end{equation*}
+
+We use this result to compute the Poisson rate $\lambda_{k}$ at pixel $k$. Now, the Poisso rate is in general given by
 
 \begin{align*}
-\lambda_{k} &= \frac{1}{2\pi\sigma^{2}}\left(\int_{x_{k}}^{x_{k+1}}\exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx\right)\left(\int_{y_{k}}^{y_{k+1}}\exp\left(-\frac{(y-y_{0})^{2}}{2\sigma^{2}}\right)dy\right)\\
+\lambda_{k} &= \frac{1}{2\pi}\left(\int_{x_{k}}^{x_{k+1}}\exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx\right)\left(\int_{y_{k}}^{y_{k+1}}\exp\left(-\frac{(y-y_{0})^{2}}{2\sigma^{2}}\right)dy\right)\\
 \end{align*}
 
-Let $t = (x-x_{0})/\sqrt{2}\sigma$ and $z = (y-y_{0})/\sqrt{2}\sigma$
+Let $t = (x-x_{0})/\sqrt{2}\sigma$ and $z = (y-y_{0})/\sqrt{2}\sigma$ and write constant in terms of $\beta$
 
 \begin{align*}
-\lambda_{k} &= \frac{1}{2\pi\sigma^{2}}\left(\int_{t_{k}}^{t_{k+1}}\exp\left(-t^{2}\right)dx\right)\left(\int_{z_{k}}^{z_{k+1}}\exp\left(-z^{2}\right)dy\right)\\
-&= \frac{2}{\pi^{2}\sigma^{2}}\left[\mathrm{erf}(t_{k+1}) - \mathrm{erf}(t_{k})\right]\left[(\mathrm{erf}(z_{k+1}) - \mathrm{erf}(z_{k})\right]
+\lambda_{k} &= \frac{4\beta^{2}}{\pi}\left(\int_{t_{k}}^{t_{k+1}}\exp\left(-t^{2}\right)dx\right)\left(\int_{z_{k}}^{z_{k+1}}\exp\left(-z^{2}\right)dy\right)\\
+&= \beta^{2}\left[\mathrm{erf}(t_{k+1}) - \mathrm{erf}(t_{k})\right]\left[(\mathrm{erf}(z_{k+1}) - \mathrm{erf}(z_{k})\right]
 \end{align*}
 
 where for example $t_{k} = (x_{k}-x_{0})/\sqrt{2}\sigma$
