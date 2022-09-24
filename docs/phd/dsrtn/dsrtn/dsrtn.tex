@@ -219,6 +219,12 @@ Marginalizing over $S_{k}$ gives the desired distribution over $H_{k}$
 P(H_{k}) = \frac{\exp\left({-\lambda_{k}}\right)}{\sqrt{2\pi}\sigma}\sum_{n=0}^{\infty}\frac{\lambda_{k}^{n}}{n!}\exp\left(-\frac{(H_{k}-g_{k}n-m_{k})^{2}}{2\sigma_{k}^{2}}\right)
 \end{equation}
 
+This expression is difficult to use in practice, due to the infinite sum, so we can leverage the convolution theorem. It is substantially faster to first evaluate the Fourier transform of $P(H_{K}|S_{k})$ and $P(S_{k})$, take their product, and inverse transform to get the desired density function. That is,
+
+\begin{equation}
+P(H_{k}) = \mathcal{F}^{-1}\left[\mathcal{F}\left[P(H_{k}|S_{k})\right]\mathcal{F}\left[P(S_{k})\right]\right]
+\end{equation}
+
 
 \subsection{Fisher information and the Cramer-Rao bound}
 
