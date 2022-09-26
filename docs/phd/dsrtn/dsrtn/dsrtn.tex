@@ -225,6 +225,21 @@ This expression is difficult to use in practice, due to the infinite sum, so we 
 P(H_{k}) = \mathcal{F}^{-1}\left[\mathcal{F}\left[P(H_{k}|S_{k})\right]\mathcal{F}\left[P(S_{k})\right]\right]
 \end{equation}
 
+Dropping the pixel subscripts for the moment, we have
+
+\begin{align*}
+\mathcal{F}\left[P(H|S)\right] &= \int_{-\infty}^{\infty} \exp\left(-\frac{(x-s + o)^{2}}{2\sigma_{w}^{2}}\right)\exp\left(-i\omega x\right)dx\\
+\end{align*}
+
+For the Poisson distribution, we have
+
+\begin{align*}
+\mathcal{F}\left[P(S)\right] &= \int_{-\infty}^{\infty} \frac{\exp\left({-\lambda}\right)\lambda^{x}}{x!}\exp\left(-i\omega x\right)dx\\
+&= \sum_{n=0}^{\infty} \frac{\exp\left({-\lambda}\right)\lambda^{n}}{n!}\exp\left(-i\omega n\right)\\
+&= \exp\left({-\lambda}\right)\sum_{n=0}^{\infty} \frac{\left(\exp\left(i\omega \right)\lambda_{k}\right)^{n}}{n!}\\
+&= \exp\left({\lambda}(\exp(i\omega)-1)\right)
+\end{align*}
+
 
 \subsection{Fisher information and the Cramer-Rao bound}
 
