@@ -219,25 +219,24 @@ Marginalizing over $S_{k}$ gives the desired distribution over $H_{k}$
 P(H_{k}) = \frac{\exp\left({-\lambda_{k}}\right)}{\sqrt{2\pi}\sigma}\sum_{n=0}^{\infty}\frac{\lambda_{k}^{n}}{n!}\exp\left(-\frac{(H_{k}-g_{k}n-m_{k})^{2}}{2\sigma_{k}^{2}}\right)
 \end{equation}
 
-This expression is difficult to use in practice, due to the infinite sum, so we can leverage the convolution theorem. It is substantially faster to first evaluate the Fourier transform of $P(H_{K}|S_{k})$ and $P(S_{k})$, take their product, and inverse transform to get the desired density function. That is,
-
-\begin{equation}
-P(H_{k}) = \mathcal{F}^{-1}\left[\mathcal{F}\left[P(H_{k}|S_{k})\right]\mathcal{F}\left[P(S_{k})\right]\right]
-\end{equation}
-
-Dropping the pixel subscripts for the moment, we have
+This expression is difficult to use in practice, due to the infinite sum, so we can leverage the convolution theorem. It is substantially faster to first evaluate the Fourier transform of $P(H_{K}|S_{k})$ and $P(S_{k})$, take their product, and inverse transform to get the desired density function. Dropping the pixel subscripts for the moment, the Fourier transform of a Gaussian reads
 
 \begin{align*}
-\mathcal{F}\left[P(H|S)\right] &= \int_{-\infty}^{\infty} \exp\left(-\frac{(x-s + o)^{2}}{2\sigma_{w}^{2}}\right)\exp\left(-i\omega x\right)dx\\
+\tilde{P}(W) &= \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}\sigma_{w}}e^{-\frac{(x-\mu)^{2}}{2\sigma_{w}^{2}}}e^{-i\omega x} dx\\
+&= \frac{e^{-\frac{\sigma_{w} ^2 \omega ^2}{2}+i \mu  \omega }}{\sqrt{2 \pi } }
 \end{align*}
 
 For the Poisson distribution, we have
 
 \begin{align*}
-\mathcal{F}\left[P(S)\right] &= \int_{-\infty}^{\infty} \frac{\exp\left({-\lambda}\right)\lambda^{x}}{x!}\exp\left(-i\omega x\right)dx\\
-&= \sum_{n=0}^{\infty} \frac{\exp\left({-\lambda}\right)\lambda^{n}}{n!}\exp\left(-i\omega n\right)\\
-&= \exp\left({-\lambda}\right)\sum_{n=0}^{\infty} \frac{\left(\exp\left(i\omega \right)\lambda_{k}\right)^{n}}{n!}\\
-&= \exp\left({\lambda}(\exp(i\omega)-1)\right)
+\tilde{P}(S) &= \int_{-\infty}^{\infty} \frac{e^{-\lambda}\lambda^{x}}{x!}e^{-i\omega x}dx\\
+&= \sum_{n=0}^{\infty} \frac{e^{-\lambda}\lambda^{n}}{n!}e^{-i\omega n}\\
+&= e^{-\lambda}\sum_{n=0}^{\infty} \frac{\left(e^{i\omega}\lambda\right)^{n}}{n!}\\
+&= e^{{\lambda}(e^{i\omega}-1)}
+\end{align*}
+
+\begin{align*}
+P(H) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} e^{-\frac{\sigma_{w} ^2 \omega ^2}{2}+i \mu  \omega } e^{{\lambda}(e^{i\omega}-1)}e^{-i\omega x} d\omega
 \end{align*}
 
 
