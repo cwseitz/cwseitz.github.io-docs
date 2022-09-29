@@ -268,17 +268,17 @@ Maximizing $\mathcal{L}_{\theta}$ is therefore equivalent to maximizing $\mathca
 
 \begin{align*}
 \frac{\partial \lambda_{k}}{\partial x_{0}} &= \beta^{2}\left(\int_{x_{k}}^{x_{k+1}}\frac{\partial}{\partial x_{0}}\exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx\right)\left[(\mathrm{erf}(z_{k+1}) - \mathrm{erf}(z_{k})\right]\\
-&= \frac{\beta^{2}}{\sigma^{2}}\left(\int_{x_{k}}^{x_{k+1}} (x-x_{0})\exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx\right)\left[(\mathrm{erf}(z_{k+1}) - \mathrm{erf}(z_{k})\right]\\
+&= \frac{\beta^{2}}{\sigma^{2}}\left(\int_{x_{k}}^{x_{k+1}} (x-x_{0})\exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx\right)\left[(\mathrm{erf}(z_{k+1}) - \mathrm{erf}(z_{k})\right]
 \end{align*}
 
 \begin{align*}
-\int_{x_{k}}^{x_{k+1}} x\exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx - x_{0}\int_{x_{k}}^{x_{k+1}} \exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx\\
+\int_{x_{k}}^{x_{k+1}} x\exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx - x_{0}\int_{x_{k}}^{x_{k+1}} \exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx
 \end{align*}
 
 \begin{align*}
-\int_{x_{k}}^{x_{k+1}} x\exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx &= x\int_{x_{k}}^{x_{k+1}} \exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx - \int_{x_{k}}^{x_{k+1}} \exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx
+\int_{x_{k}}^{x_{k+1}} x\exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx &= \sigma\sqrt{2\pi}\;\bigg|_{x_{k}}^{x_{k+1}}x  - \int_{x_{k}}^{x_{k+1}} \exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx\\
+&= \sqrt{2\pi}\sigma\Delta - \mathrm{erf}(t_{k+1}) - \mathrm{erf}(t_{k})
 \end{align*}
-
 
 
 \subsection{Fisher information and the Cramer-Rao bound}
