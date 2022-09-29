@@ -240,7 +240,7 @@ On the other hand for $\lambda >> 1$ we can approximate the Poisson distribution
 
 \begin{align*}
 \mathcal{L}_{\theta,k} &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} e^{-\frac{\sigma_{k} ^2 \omega ^2}{2}+i \mu_{k}  \omega } e^{-\frac{\lambda_{k} \omega ^2}{2}+i \lambda_{k}  \omega }  e^{-i\omega x} d\omega\\
-&= \frac{1}{\sqrt{2\pi}\sqrt{\lambda_{k} + \mu_{k}^{2}}}e^{-\frac{(-x+\mu_{k}+\lambda_{k})^{2}}{2(\lambda_{k}+\mu_{k}^{2})}}
+&= \frac{1}{\sqrt{2\pi(\lambda_{k} + \mu_{k}^{2})}}e^{-\frac{(-x+\mu_{k}+\lambda_{k})^{2}}{2(\lambda_{k}+\mu_{k}^{2})}}
 \end{align*}
 
 We can now return to the original optimization problem 
@@ -250,6 +250,35 @@ We can now return to the original optimization problem
 &= \underset{\theta}{\mathrm{argmax}} \; \prod_{k}\mathcal{L}_{\theta,k}\\
 &= \underset{\theta}{\mathrm{argmax}} \; \sum_{k}\log \mathcal{L}_{\theta,k}
 \end{align*}
+
+\begin{align*}
+\sum_{k}\log \mathcal{L}_{\theta,k} = \sum_{k}-\frac{(-x+\mu_{k}+\lambda_{k})^{2}}{2(\lambda_{k}+\mu_{k}^{2})} -\log\left(\sqrt{2\pi(\lambda_{k} + \mu_{k}^{2})}\right)
+\end{align*}
+
+Maximizing $\mathcal{L}_{\theta}$ is therefore equivalent to maximizing $\mathcal{L}_{\theta,k}$ at every pixel. Taking the derivative of the first term with respect to a parameter $\theta$
+
+\begin{align*}
+&\frac{\partial}{\partial \theta} \left(\frac{(-x+\mu_{k}+\lambda_{k})^{2}}{2(\lambda_{k}+\mu_{k}^{2})} \right)\\
+&= \left(\frac{4(\lambda_{k}+\mu_{k}^{2})(-x+\mu_{k}+\lambda_{k})\frac{\partial \lambda_{k}}{\partial \theta} - 2\frac{\partial \lambda_{k}}{\partial \theta} (-x+\mu_{k}+\lambda_{k})^{2}}{4(\lambda_{k}+\mu_{k}^{2})^{2}} \right)
+\end{align*}
+
+\begin{align*}
+\frac{\partial}{\partial \theta} \log\left(\sqrt{2\pi(\lambda_{k} + \mu_{k}^{2})}\right) &= \frac{1}{2(\lambda_{k} + \mu_{k}^{2})}\frac{\partial \lambda_{k}}{\partial \theta}
+\end{align*}
+
+\begin{align*}
+\frac{\partial \lambda_{k}}{\partial x_{0}} &= \beta^{2}\left(\int_{x_{k}}^{x_{k+1}}\frac{\partial}{\partial x_{0}}\exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx\right)\left[(\mathrm{erf}(z_{k+1}) - \mathrm{erf}(z_{k})\right]\\
+&= \frac{\beta^{2}}{\sigma^{2}}\left(\int_{x_{k}}^{x_{k+1}} (x-x_{0})\exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx\right)\left[(\mathrm{erf}(z_{k+1}) - \mathrm{erf}(z_{k})\right]\\
+\end{align*}
+
+\begin{align*}
+\int_{x_{k}}^{x_{k+1}} x\exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx - x_{0}\int_{x_{k}}^{x_{k+1}} \exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx\\
+\end{align*}
+
+\begin{align*}
+\int_{x_{k}}^{x_{k+1}} x\exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx &= x\int_{x_{k}}^{x_{k+1}} \exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx - \int_{x_{k}}^{x_{k+1}} \exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx
+\end{align*}
+
 
 
 \subsection{Fisher information and the Cramer-Rao bound}
