@@ -9,6 +9,7 @@
 \usepackage{amsmath}
 \usepackage{siunitx}
 \usepackage{physics}
+\usepackage{setspace}
 
 \newtheorem{p}{Problem}
 \usepackage{cancel}
@@ -30,7 +31,29 @@
 \end{p}
 
 \begin{s}
-Both operators are Hermitian, so their eigenvalues are real. The eigenvectors of operator $A$ are
+
+I will use Mathematica to find the eigenvectors and eigenvalues of the operators $A$ and $B$. Omitting the factor of $\lambda$ temporarily
+
+\begin{doublespace}
+\noindent\(\pmb{A=\{\{2,I/\text{Sqrt}[2],0\},\{-I/\text{Sqrt}[2],2,I/\text{Sqrt}[2]\},\{0,-I/\text{Sqrt}[2],2\}\}}\\
+\pmb{\{\text{vals},\text{vecs}\}=\text{Eigensystem}[A];}\\
+\pmb{\text{vecs}}\\
+\pmb{\text{vals}}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\left\{\left\{2,\frac{i}{\sqrt{2}},0\right\},\left\{-\frac{i}{\sqrt{2}},2,\frac{i}{\sqrt{2}}\right\},\left\{0,-\frac{i}{\sqrt{2}},2\right\}\right\}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\left\{\left\{-1,i \sqrt{2},1\right\},\{1,0,1\},\left\{-1,-i \sqrt{2},1\right\}\right\}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\{3,2,1\}\)
+\end{doublespace}
+
+Including the appropriate normalization so $\bra{a_{n}}\ket{a_{n}} = 1$, the eigenvectors are
 
 \begin{equation*}
 \ket{a_{1}} = \frac{1}{2}\left(
@@ -50,7 +73,28 @@ Both operators are Hermitian, so their eigenvalues are real. The eigenvectors of
 \right)
 \end{equation*}
 
-with eigenvalues $3\lambda, 2\lambda, \lambda$, in that order. Notice that $\ket{a_{1}}$ and $\ket{a_{3}}$ are not orthogonal in this basis. The eigenvectors of operator $B$ are
+with eigenvalues $3\lambda, 2\lambda, \lambda$, repspectively. As a side note, see that $\ket{a_{1}}$ and $\ket{a_{3}}$ are not orthogonal in this basis. The eigenvectors of operator $B$ are
+
+\begin{doublespace}
+\noindent\(\pmb{B=\{\{3,\text{Sqrt}[2],0\},\{\text{Sqrt}[2],3,\text{Sqrt}[2]\},\{0,\text{Sqrt}[2],3\}\}}\\
+\pmb{\{\text{vals},\text{vecs}\}=\text{Eigensystem}[B];}\\
+\pmb{\text{vecs}}\\
+\pmb{\text{vals}}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\left\{\left\{3,\sqrt{2},0\right\},\left\{\sqrt{2},3,\sqrt{2}\right\},\left\{0,\sqrt{2},3\right\}\right\}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\left\{\left\{1,\sqrt{2},1\right\},\{-1,0,1\},\left\{1,-\sqrt{2},1\right\}\right\}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\{5,3,1\}\)
+\end{doublespace}
+
+Again, including appropriate normalization factors
 
 \begin{equation*}
 \ket{b_{1}} = \frac{1}{2}\left(
@@ -70,7 +114,10 @@ with eigenvalues $3\lambda, 2\lambda, \lambda$, in that order. Notice that $\ket
 \right)
 \end{equation*}
 
-with eigenvalues $5\lambda, 3\lambda, \lambda$, in that order. If the physicist sends particles in state $\ket{1}$ and we measure $A$, the probability we observe the particle to be in the state $\ket{a_{1}}$, $\ket{a_{2}}$, and $\ket{a_{3}}$ can be found by using the expressions for eigenkets of $A$ above. These probabilities are 
+with eigenvalues $5\lambda, 3\lambda, \lambda$, in that order. 
+
+
+If the physicist sends a pure ensemble in state $\ket{1}$ and we measure $A$, the probability we observe the particle to be in the state $\ket{a_{1}}$, $\ket{a_{2}}$, and $\ket{a_{3}}$ can be found by using the expressions for eigenkets of $A$ above. These probabilities are 
 
 \begin{align*}
 |\bra{a_{1}}\ket{1}|^{2} &= \frac{1}{4}\\
@@ -78,7 +125,7 @@ with eigenvalues $5\lambda, 3\lambda, \lambda$, in that order. If the physicist 
 |\bra{a_{3}}\ket{1}|^{2} &= \frac{1}{4}
 \end{align*}
 
-The values of $A$ that correspond with each beam are given by the eigenvalues of $A$ written above. The relative intensities are just given by the relative probabilities. After the coffee spill, measuring $A$ filters out only the beam corresponding to state $\ket{a_{2}}$. Therefore, these are the only particles that enter the apparatus measuring $B$. So when we measure $B$, the number of beams we get depends on the inner products
+The values of $A$ that correspond with each beam are given by the eigenvalues of $A$ written above. The relative intensities are just given by the relative probabilities. After the coffee spill, measuring $A$ filters out only the beam corresponding to state $\ket{a_{2}}$. Therefore, these are the only particles that enter the apparatus measuring $B$. So when we measure $B$, the number of beams we get depends on the values of
 
 \begin{align*}
 |\bra{b_{1}}\ket{a_{2}}|^{2} &= \frac{1}{2}\\
@@ -144,19 +191,13 @@ We are given the wavefunction
 \psi(r,\phi) = Ae^{-br^{2}}
 \end{align*}
 
-We know that probability current is related to the gradient of the phase of the wavefunction. Regardless of what $A$ is (purely real, imaginary, or complex) it is a constant. The exponential is real if $b$ is real, so the phase of $\psi(r,\phi)$ is the same for all $(r,\phi)$ and therefore the probability current is zero everywhere. For the wavefunction
+We know that probability current is related to the spatial gradient of the phase of the wavefunction. The exponential is real if $b$ is real, so the phase of $\psi(r,\phi)$ is the same for all $(r,\phi)$ and therefore the probability current is zero everywhere. For the wavefunction
 
 \begin{align*}
 \psi(r,\phi) = Ae^{-br^{2}}e^{-im\phi}
 \end{align*}
 
-The phase of the wavefunction is clearly dependent on $\phi$, so there is a probability current.  
-
-\begin{align*}
-\rho(r,\phi) = |A|^{2}e^{-2br^{2}}
-\end{align*}
-
-We can always write the wavefunction in the form:
+The phase of the wavefunction is clearly dependent on $\phi$, so there is a probability current. Recall that we can always write the wavefunction in the form:
 
 \begin{align*}
 \psi(r,\phi) &= \sqrt{\rho(r,\phi)}\exp\left(\frac{iS(r,\phi)}{\hbar}\right)\\
@@ -189,7 +230,7 @@ which makes sense if the particle is localized to some region of space. However,
 \nabla \cdot \bm{j} = \frac{j_{r}}{r} + \frac{\partial j_{r}}{\partial r} \frac{1}{r} + \frac{\partial j_{\phi}}{\partial\phi} = 0
 \end{align*}
 
-This situation might correspond to a particle with spin. Qualitatively, the real and imaginary parts of the wave function are oscillating, but the norm of the wavefunction is preserved.
+This situation might correspond to a particle with spin. This might be analagous to the the case of a eigenstate of linear momentum, where we associate the probability flux with a ``velocity". Presumably this is an eigenfunction of some Hamiltonian, so when we apply time evolution, a probability flux going around a loop makes the real and imaginary parts of the wave function oscillate. Yet, $\rho$ is preserved.
 
 \end{s}
 
