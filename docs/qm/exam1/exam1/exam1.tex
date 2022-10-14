@@ -163,7 +163,7 @@ We can always write the wavefunction in the form:
 &= Ae^{-br^{2}}e^{-im\phi}
 \end{align*}
 
-so $-im\phi = iS/\hbar$. The phase of the wavefunction is then
+so $-im\phi = iS/\hbar$. Expanding $S$ gives
 
 \begin{align*}
 S(r,\phi) = -m\hbar\phi
@@ -173,22 +173,23 @@ The probability flux is related to $S(r,\phi)$ by
 
 \begin{align*}
 \bm{j}(r,\phi) &= \frac{\rho(r,\phi)\nabla S}{m}\\
-&= -\hbar\rho(r,\phi)\hat{\phi}
+&= \frac{\rho}{m}\left(\frac{\partial S}{\partial r}\hat{r} + \frac{1}{r}\frac{\partial S}{\partial \phi}\hat{\phi}\right)\\
+&= -\frac{\hbar\rho}{r}\hat{\phi}
 \end{align*}
 
-However, $\rho(r,\phi)$ is static because of the continuity equation
+In the limit $r\rightarrow\infty$, we can see that 
 
 \begin{align*}
-\frac{\partial \rho}{\partial t} = -\nabla \cdot \bm{j} = 0
+\underset{r\rightarrow\infty}{\mathrm{lim}}\;\bm{j}(r,\phi) &= \underset{r\rightarrow\infty}{\mathrm{lim}}\; -\frac{\hbar\rho}{r}\hat{\phi} = 0
 \end{align*}
 
-since the divergence of $\bm$ is surely zero. In the limit $r\rightarrow\infty$, we can see that 
+which makes sense if the particle is localized to some region of space. However, $\rho(r,\phi)$ is static because
 
 \begin{align*}
-\underset{r\rightarrow\infty}{\mathrm{lim}}\;\bm{j}(r,\phi) &= \underset{r\rightarrow\infty}{\mathrm{lim}}\; -\hbar|A|^{2}e^{-2br^{2}} = 0
+\nabla \cdot \bm{j} = \frac{j_{r}}{r} + \frac{\partial j_{r}}{\partial r} \frac{1}{r} + \frac{\partial j_{\phi}}{\partial\phi} = 0
 \end{align*}
 
-which makes sense if the particle is localized to some region of space. This situation might correspond to a particle with spin.
+This situation might correspond to a particle with spin.
 
 \end{s}
 
