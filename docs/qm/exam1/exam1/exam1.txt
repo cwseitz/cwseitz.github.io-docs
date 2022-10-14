@@ -1,0 +1,9 @@
+A = {{2, I/Sqrt[2], 0}, {-I/Sqrt[2], 2, I/Sqrt[2]}, {0, -I/Sqrt[2], 2}}
+{vals, vecs} = Eigensystem[A];
+vecs
+vals
+
+B = {{3, Sqrt[2], 0}, {Sqrt[2], 3, Sqrt[2]}, {0, Sqrt[2], 3}}
+{vals, vecs} = Eigensystem[B];
+vecs
+vals

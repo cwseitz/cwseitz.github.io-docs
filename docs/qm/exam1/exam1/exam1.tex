@@ -1,0 +1,197 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath} % AMS Math Package
+\usepackage{bm}
+\usepackage{amsthm} % Theorem Formatting
+\usepackage{amssymb}    % Math symbols such as \mathbb
+\usepackage{graphicx} % Allows for eps images
+\usepackage[dvips,letterpaper,margin=1in,bottom=0.7in]{geometry}
+\usepackage{tensor}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{physics}
+
+\newtheorem{p}{Problem}
+\usepackage{cancel}
+\newtheorem*{lem}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{dfn}{Definition}
+ \newenvironment{s}{%\small%
+        \begin{trivlist} \item \textbf{Solution}. }{%
+            \hspace*{\fill} $\blacksquare$\end{trivlist}}%
+
+
+\begin{document}
+
+{\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Exam 1}         }\\[2\baselineskip] % Title
+{ {\bf \fontfamily{cmr}\selectfont Quantum Mechanics}\\ {\textit{\fontfamily{cmr}\selectfont     October 14th, 2022}}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    {\large \textsc{C Seitz}
+\\[1.4\baselineskip] 
+
+\begin{p}
+\end{p}
+
+\begin{s}
+Both operators are Hermitian, so their eigenvalues are real. The eigenvectors of operator $A$ are
+
+\begin{equation*}
+\ket{a_{1}} = \frac{1}{2}\left(
+\begin{array}{ccc}
+ -1 \\i \sqrt{2} \\ 1 \\
+\end{array}
+\right)\;
+\ket{a_{2}} = \frac{1}{\sqrt{2}}\left(
+\begin{array}{ccc}
+ 1 \\ 0 \\ 1 \\
+\end{array}
+\right)\;
+\ket{a_{3}} = \frac{1}{2}\left(
+\begin{array}{ccc}
+ -1 \\ -i \sqrt{2} \\ 1 \\
+\end{array}
+\right)
+\end{equation*}
+
+with eigenvalues $3\lambda, 2\lambda, \lambda$, in that order. Notice that $\ket{a_{1}}$ and $\ket{a_{3}}$ are not orthogonal in this basis. The eigenvectors of operator $B$ are
+
+\begin{equation*}
+\ket{b_{1}} = \frac{1}{2}\left(
+\begin{array}{ccc}
+ 1 \\\sqrt{2} \\ 1 \\
+\end{array}
+\right)\;
+\ket{b_{2}} = \frac{1}{\sqrt{2}}\left(
+\begin{array}{ccc}
+ -1 \\ 0 \\ 1 \\
+\end{array}
+\right)\;
+\ket{b_{3}} = \frac{1}{2}\left(
+\begin{array}{ccc}
+ 1 \\ -\sqrt{2} \\ 1 \\
+\end{array}
+\right)
+\end{equation*}
+
+with eigenvalues $5\lambda, 3\lambda, \lambda$, in that order. If the physicist sends particles in state $\ket{1}$ and we measure $A$, the probability we observe the particle to be in the state $\ket{a_{1}}$, $\ket{a_{2}}$, and $\ket{a_{3}}$ can be found by using the expressions for eigenkets of $A$ above. These probabilities are 
+
+\begin{align*}
+|\bra{a_{1}}\ket{1}|^{2} &= \frac{1}{4}\\
+|\bra{a_{2}}\ket{1}|^{2} &= \frac{1}{2}\\
+|\bra{a_{3}}\ket{1}|^{2} &= \frac{1}{4}
+\end{align*}
+
+The values of $A$ that correspond with each beam are given by the eigenvalues of $A$ written above. The relative intensities are just given by the relative probabilities. After the coffee spill, measuring $A$ filters out only the beam corresponding to state $\ket{a_{2}}$. Therefore, these are the only particles that enter the apparatus measuring $B$. So when we measure $B$, the number of beams we get depends on the inner products
+
+\begin{align*}
+|\bra{b_{1}}\ket{a_{2}}|^{2} &= \frac{1}{2}\\
+|\bra{b_{2}}\ket{a_{2}}|^{2} &= 0\\
+|\bra{b_{3}}\ket{a_{2}}|^{2} &= \frac{1}{2}
+\end{align*}
+
+so there are only two beams. The intensities are equal for these two beams. The values of $B$ that correspond with these two beams are $b_{1}$ and $b_{3}$.
+\end{s}
+
+\begin{p}
+\end{p}
+
+\begin{s}
+We are given the commutation relations between the operators $C$ and $D$ and the Hamiltonian, which suggests we should use the Heisenberg picture. The Heisenberg equations of motion are
+
+\begin{align*}
+\frac{dC}{dt} &= -\frac{1}{i\hbar}[H,C] = \alpha D - \beta C\\
+\frac{dD}{dt} &= -\frac{1}{i\hbar}[H,D] = -\alpha C - \beta D
+\end{align*}
+
+When $\beta = 0$, the system becomes
+
+\begin{align*}
+\frac{dC}{dt} &= -\frac{1}{i\hbar}[H,C] = \alpha D\\
+\frac{dD}{dt} &= -\frac{1}{i\hbar}[H,D] = -\alpha C
+\end{align*}
+
+which has the solution
+
+\begin{align*}
+C(t) &= -c_{0}\cos(\alpha t)\\
+D(t) &= d_{0}\sin(\alpha t)
+\end{align*}
+
+\begin{align*}
+\langle C(t) \rangle &= \bra{\alpha}C(t)\ket{\alpha} \\
+&= -\bra{\alpha}c_{0}\cos(\alpha t)\ket{\alpha}\\
+&= -c_{0}\cos(\alpha t)
+\end{align*}
+
+since $\ket{\alpha}$ is presumed to be normalized.
+
+
+\begin{align*}
+\langle D(t) \rangle &= \bra{\alpha}D(t)\ket{\alpha} \\
+&= -\bra{\alpha}d_{0}\sin(\alpha t)\ket{\alpha}\\
+&= d_{0}\sin(\alpha t)
+\end{align*}
+
+since $\ket{\alpha}$ is again presumed to be normalized. The constants $\alpha$ and $\beta$ must then relate to the angular frequency of $C(t)$ and $D(t)$. Of course, when $\beta = 0$, only $\alpha$ determines the angular frequency of $C(t)$ and $D(t)$.
+
+\end{s}
+
+\begin{p}
+\end{p}
+
+\begin{s}
+
+We are given the wavefunction
+
+\begin{align*}
+\psi(r,\phi) = Ae^{-br^{2}}
+\end{align*}
+
+We know that probability current is related to the gradient of the phase of the wavefunction. Regardless of what $A$ is (purely real, imaginary, or complex) it is a constant. The exponential is real if $b$ is real, so the phase of $\psi(r,\phi)$ is the same for all $(r,\phi)$ and therefore the probability current is zero everywhere. For the wavefunction
+
+\begin{align*}
+\psi(r,\phi) = Ae^{-br^{2}}e^{-im\phi}
+\end{align*}
+
+The phase of the wavefunction is clearly dependent on $\phi$, so there is a probability current.  
+
+\begin{align*}
+\rho(r,\phi) = |A|^{2}e^{-2br^{2}}
+\end{align*}
+
+We can always write the wavefunction in the form:
+
+\begin{align*}
+\psi(r,\phi) &= \sqrt{\rho(r,\phi)}\exp\left(\frac{iS(r,\phi)}{\hbar}\right)\\
+&= Ae^{-br^{2}}e^{-im\phi}
+\end{align*}
+
+so $-im\phi = iS/\hbar$. The phase of the wavefunction is then
+
+\begin{align*}
+S(r,\phi) = -m\hbar\phi
+\end{align*}
+
+The probability flux is related to $S(r,\phi)$ by
+
+\begin{align*}
+\bm{j}(r,\phi) &= \frac{\rho(r,\phi)\nabla S}{m}\\
+&= -\hbar\rho(r,\phi)\hat{\phi}
+\end{align*}
+
+However, $\rho(r,\phi)$ is static because of the continuity equation
+
+\begin{align*}
+\frac{\partial \rho}{\partial t} = -\nabla \cdot \bm{j} = 0
+\end{align*}
+
+since the divergence of $\bm$ is surely zero. In the limit $r\rightarrow\infty$, we can see that 
+
+\begin{align*}
+\underset{r\rightarrow\infty}{\mathrm{lim}}\;\bm{j}(r,\phi) &= \underset{r\rightarrow\infty}{\mathrm{lim}}\; -\hbar|A|^{2}e^{-2br^{2}} = 0
+\end{align*}
+
+which makes sense if the particle is localized to some region of space. This situation might correspond to a particle with spin.
+
+\end{s}
+
+
+
+\end{document}
