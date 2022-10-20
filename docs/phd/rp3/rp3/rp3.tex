@@ -1,0 +1,89 @@
+% Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
+% For more details: https://www.sharelatex.com/learn/Beamer
+
+\documentclass[aspectratio=1610]{beamer}					% Document class
+
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}Interferon-$\gamma$ induction in HeLa cells \hfill\insertshortauthor\hfill\insertpagenumber}}
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage[english]{babel}				% Set language
+\usepackage[utf8x]{inputenc}			% Set encoding
+
+\mode<presentation>						% Set options
+{
+  \usetheme{default}					% Set theme
+  \usecolortheme{default} 				% Set colors
+  \usefonttheme{default}  				% Set font theme
+  \setbeamertemplate{caption}[numbered]	% Set caption to be numbered
+}
+
+% Uncomment this to have the outline at the beginning of each section highlighted.
+%\AtBeginSection[]
+%{
+%  \begin{frame}{Outline}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+\usepackage{graphicx}					% For including figures
+\usepackage{booktabs}					% For table rules
+\usepackage{hyperref}	
+\usepackage{tikz-network}				% For cross-referencing
+\usepackage[absolute,overlay]{textpos}
+\usepackage{bm}
+\usepackage[font=small,labelfont=bf]{caption}				% For cross-referencing
+
+\title{Transcriptional control: from chromatin structure to phase condensates}	% Presentation title
+\author{Clayton W. Seitz}								% Presentation author
+\date{\today}									% Today's date	
+
+\begin{document}
+
+% Title page
+% This page includes the informations defined earlier including title, author/s, affiliation/s and the date
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+% The following is the most frequently used slide types in beamer
+% The slide structure is as follows:
+%
+%\begin{frame}{<slide-title>}
+%	<content>
+%\end{frame}
+
+\begin{frame}{Summary}
+\begin{itemize}
+\item Quick recap
+\item Going deeper into transcriptional control
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{The biological question}
+\begin{figure}
+\includegraphics[width=10cm]{RNAFlow.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Sources of variability in the rate of gene expression}
+\begin{figure}
+\includegraphics[width=15cm]{Sources.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Chromatin Dynamics}
+
+Discuss the Nozaki paper briefly
+
+\end{frame}
+
+\begin{frame}{Chromatin Dynamics}
+
+Include results from tracking experiments
+
+\end{frame}
+
+
+
+\end{document}
