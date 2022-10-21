@@ -4,7 +4,7 @@
 \documentclass[aspectratio=1610]{beamer}					% Document class
 
 \setbeamertemplate{footline}[text line]{%
-  \parbox{\linewidth}{\vspace*{-8pt}Interferon-$\gamma$ induction in HeLa cells \hfill\insertshortauthor\hfill\insertpagenumber}}
+  \parbox{\linewidth}{\vspace*{-8pt}The relationship between chromatin structure and transcriptional dynamics \hfill\insertshortauthor\hfill\insertpagenumber}}
 \setbeamertemplate{navigation symbols}{}
 
 \usepackage[english]{babel}				% Set language
@@ -32,7 +32,7 @@
 \usepackage{bm}
 \usepackage[font=small,labelfont=bf]{caption}				% For cross-referencing
 
-\title{Transcriptional control: from chromatin structure to phase condensates}	% Presentation title
+\title{The relationship between chromatin structure and transcriptional dynamics}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -52,26 +52,19 @@
 %	<content>
 %\end{frame}
 
+
 \begin{frame}{Summary}
 \begin{itemize}
-\item Quick recap
-\item Going deeper into transcriptional control
+\item Preliminary data for GBP5 and GAPDH co-staining
+\item The relationship between chromatin structure and transcription dynamics
 \end{itemize}
 \end{frame}
 
-
-\begin{frame}{The biological question}
+\begin{frame}{RNA flow model for transcription dynamics}
 \begin{figure}
 \includegraphics[width=10cm]{RNAFlow.png}
 \end{figure}
 \end{frame}
-
-\begin{frame}{Sources of variability in the rate of gene expression}
-\begin{figure}
-\includegraphics[width=15cm]{Sources.png}
-\end{figure}
-\end{frame}
-
 
 \begin{frame}{Rare HeLa cell GBP5 expression @ 24h after reinduction with IFN-$\gamma$}
 \begin{figure}
@@ -84,12 +77,26 @@
 \includegraphics[width=14cm]{Detection.png}
 \end{figure}
 \begin{itemize}
-\item Very few ($\sim 1\%$) reinduced cells express GBP5, but those that do express at high levels
+\item \textcolor{red}{Very few ($\sim 1\%$)} reinduced cells express GBP5, but those that do express at high levels (relative to GAPDH)
 \item Waiting on the control to determine if this effect is coupled to IFN-$\gamma$ 
-\item Also going to try in U2OS
+\item RNA flow model may have no meaning (GBP5 transcription is non-ergodic)
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Sources of variability in the rate of gene expression}
+\vspace{0.1in}
+\begin{itemize}
+\item Previous work suggests that IFN-$\gamma$ induces epigenetic changes at the GBP5 locus
+\item If some cells get the epigenetic change and others dont, the model breaks down
+\end{itemize}
 
+\begin{figure}
+\includegraphics[width=13cm]{Sources.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{}
+Paper on epigenetic modifications to chromatin structure
+\end{frame}
 
 \end{document}

@@ -174,10 +174,19 @@ We are asked to derive
 
 \begin{align*}
 \bra{x}L_{z}\ket{\alpha} &= \bra{x}(xp_{y} - yp_{x})\ket{\alpha}\\
-&= -\bra{x}i\hbar(x\frac{\partial}{\partial y} - y\frac{\partial}{\partial x})\ket{\alpha}\\
-&= \left(r\cos\phi\sin\theta\left(\sin\phi\sin\theta\frac{\partial}{\partial r}\right) - r\sin\phi\sin\theta\left(\cos\phi\sin\theta\frac{\partial}{\partial r}\right)\right)\bra{x}\ket{\alpha}\\
-&+  \left(r\cos\phi\sin\theta\left(\frac{1}{r}\cos\theta\sin\phi\right) - r\sin\phi\sin\theta\left(\frac{1}{r}\sin\theta\sin\phi\right)\right)\bra{x}\ket{\alpha}\\
-&+  \left(r\cos\phi\sin\theta\left(-\frac{\sin\phi}{r\sin\theta}\frac{\partial}{\partial\theta}\right) - r\sin\phi\sin\theta\left(\cos\phi\sin\theta\frac{\partial}{\partial r}\right)\right)\bra{x}\ket{\alpha}\\
+&= i\hbar\bra{x}y\frac{\partial}{\partial x}-x\frac{\partial}{\partial y}\ket{\alpha}
+\end{align*}
+
+We need to write these partial derivatives in spherical coordinates to complete the proof. I just looked up the coordinate transformation and made the substitution
+
+\begin{align*}
+\bra{x}L_{z}\ket{\alpha} &= i\hbar\bra{x}y\frac{\partial}{\partial x}-x\frac{\partial}{\partial y}\ket{\alpha}\\
+&= i\hbar \left(y\frac{\partial}{\partial x}\bra{x}\ket{\alpha}-x\frac{\partial}{\partial y}\bra{x}\ket{\alpha}\right)\\
+&= ir\hbar \sin\phi\sin\theta\left(\sin\theta\cos\phi\frac{\partial}{\partial r} + \frac{1}{r}\cos\theta\cos\phi\frac{\partial}{\partial \theta} - \frac{\sin\phi}{r\sin\theta}\frac{\partial}{\partial \phi}\right)\\
+&- ir\hbar \cos\phi\sin\theta\left(\sin\theta\sin\phi\frac{\partial}{\partial r} + \frac{1}{r}\cos\theta\sin\phi\frac{\partial}{\partial \theta} + \frac{\cos\phi}{r\sin\theta}\frac{\partial}{\partial \phi}\right)\\
+&= ir\hbar \sin\phi\sin\theta\left(- \frac{\sin\phi}{r\sin\theta}\frac{\partial}{\partial \theta}\right)- ir\hbar \cos\phi\sin\theta\left(\frac{\cos\phi}{r\sin\theta}\frac{\partial}{\partial \phi}\right)\\
+&= i\hbar \left(-\sin^{2}\phi\frac{\partial}{\partial \phi}\right)- i\hbar \left(\cos^{2}\phi\frac{\partial}{\partial \phi}\right)\\
+&= -i\hbar\frac{\partial}{\partial \phi}
 \end{align*}
 
 \end{s}
@@ -194,19 +203,25 @@ We can write the wavefunction given in spherical coordinates
 \psi(\bm{x}) = \bra{x}\ket{\alpha} = r\left(\cos\phi \sin\theta + \sin\phi\sin\theta + \cos\theta\right)f(r)
 \end{align*}
 
-If this is an eigenfunction of $L^{2}$, then we should be able to write it in terms of the spherical harmonics $Y_{l}^{m}(\theta,\phi)$. We can show that 
+If this is an eigenfunction of $L^{2}$, then we should be able to write it in terms of the spherical harmonics $Y_{l}^{m}(\theta,\phi)$. We can, and it is
 
 \begin{align*}
 \psi(\bm{x}) = \bra{x}\ket{\alpha} = \sqrt{\frac{8\pi}{3}}\left(\frac{Y_{1}^{-1}+Y_{1}^{1}}{2}+\frac{Y_{1}^{-1}-Y_{1}^{1}}{2i} + \frac{3}{\sqrt{2}}Y_{1}^{0}\right)rf(r)
 \end{align*}
 
-So it must be an eigenfunction of $L^{2}$. The probability amplitudes are
+So it must be an eigenfunction of $L^{2}$. Recall that the spherical harmonics form an orthonormal basis, so 
 
 \begin{align*}
-\bra{1,-1}\ket{\alpha} &= \sqrt{\frac{8\pi}{3}}\left(\frac{1}{2}+\frac{1}{2i}\right)
-\bra{1,1}\ket{\alpha} &= \sqrt{\frac{8\pi}{3}}\left(\frac{1}{2}-\frac{1}{2i}\right)
+\bra{l, m}\ket{l, m'} = \int (Y_{l}^{m})^{*}Y_{l}^{m'}d\bm{x} = \delta_{m,m'}
 \end{align*}
 
+The probability amplitudes are then just
+
+\begin{align*}
+\bra{1,-1}\ket{\alpha} &= \int (Y_{1}^{-1})^{*}\psi(\bm{x})d\bm{x} = \sqrt{\frac{8\pi}{3}}\left(\frac{1}{2}+\frac{1}{2i}\right)rf(r)\\
+\bra{1,0}\ket{\alpha} &= \int (Y_{1}^{0})^{*}\psi(\bm{x})d\bm{x} = \sqrt{\frac{8\pi}{3}}\frac{3}{\sqrt{2}}rf(r)\\
+\bra{1,1}\ket{\alpha} &= \int (Y_{1}^{1})^{*}\psi(\bm{x})d\bm{x} = \sqrt{\frac{8\pi}{3}}\left(\frac{1}{2}-\frac{1}{2i}\right)rf(r)\\
+\end{align*}
 
 
 \end{s}
@@ -221,7 +236,8 @@ Problem 3.24 from Sakurai
 \bra{l,m}L_{y}\ket{l,m} &= \frac{1}{2i}\bra{l,m}\left(L_{+}-L_{-}\right)\ket{l,m} = 0
 \end{align*}
 \begin{align*}
-\bra{l,m}L_{x}^{2}\ket{l,m} &= \frac{1}{4}\bra{l,m}\left(L_{+}^{2}+L_{+}L_{-}+L_{-}L_{+}+L_{-}^{2}\right)\ket{l,m}\\
+\bra{l,m}L_{x}^{2}\ket{l,m} &= \bra{l,m}L_{y}^{2}\ket{l,m}\\
+&= \frac{1}{4}\bra{l,m}\left(L_{+}^{2}+L_{+}L_{-}+L_{-}L_{+}+L_{-}^{2}\right)\ket{l,m}\\
 &= \frac{1}{4}\bra{l,m}\left(L_{+}L_{-}+L_{-}L_{+}\right)\ket{l,m}\\
 &= \frac{1}{4}\left(\hbar^{2}l(l+1)-m^{2}\hbar^{2}\right) + \frac{1}{4}\left(\hbar^{2}l(l+1)-m^{2}\hbar^{2}\right) \\
 &= \frac{1}{2}\left(\hbar^{2}l(l+1)-m^{2}\hbar^{2}\right)\\
@@ -234,6 +250,74 @@ Problem 3.38 from Sakurai
 \end{p}
 
 \begin{s}
+
+We are asked to write $J_{y}$ when $j=1$. This was already done in Problem 2 above. The result was
+
+\begin{equation*}
+J_{y} =
+\frac{\hbar}{\sqrt{2}i}\begin{pmatrix}
+0&1&0\\
+-1&0&1\\
+0&-1&0
+\end{pmatrix}\\ 
+\end{equation*}
+
+The problem suggests that we should think about the matrix exponential $\exp(-iJ_{y}\beta/\hbar)$, which is of course
+
+\begin{align*}
+\exp(-iJ_{y}\beta/\hbar) = 1 - \left(iJ_{y}\beta/\hbar\right) + \left(iJ_{y}\beta/\hbar\right)^{2} - \left(iJ_{y}\beta/\hbar\right)^{3} + ...
+\end{align*}
+
+Now notice that
+
+\begin{equation*}
+J_{y}^{2} =
+\frac{-\hbar^{2}}{2}\begin{pmatrix}
+0&1&0\\
+-1&0&1\\
+0&-1&0
+\end{pmatrix}\begin{pmatrix}
+0&1&0\\
+-1&0&1\\
+0&-1&0
+\end{pmatrix}\\ = \frac{-\hbar^{2}}{2}\begin{pmatrix}
+-1&0&1\\
+0&-2&0\\
+1&0&-1
+\end{pmatrix}\\
+\end{equation*}
+
+and if we multiply this by $J_{y}$ we see that, when $j=1$, we have the property that $J_{y}^{3} = -\hbar^{2}J_{y}$. Therefore
+
+\begin{align*}
+\exp(-iJ_{y}\beta/\hbar) &= 1 - \left(iJ_{y}\beta/\hbar\right) + \left(iJ_{y}\beta/\hbar\right)^{2} - \left(iJ_{y}\beta/\hbar\right)^{3} + \left(iJ_{y}\beta/\hbar\right)^{4}+ ...\\
+&= 1 - \left(iJ_{y}\beta/\hbar\right) + J_{y}^{2}\left(i\beta/\hbar\right)^{2}/2! - J_{y}^{3}\left(i\beta/\hbar\right)^{3}/3! + J_{y}^{4}\left(i\beta/\hbar\right)^{4}/4! + ...\\
+&= 1 - \left(iJ_{y}\beta/\hbar\right) + J_{y}^{2}\left(i\beta/\hbar\right)^{2}/2! + \hbar^{2} J_{y}\left(i\beta/\hbar\right)^{3}/3! - \hbar^{2}J_{y}^{2}\left(i\beta/\hbar\right)^{4}/4!+ ...\\
+&= 1 - i\frac{J_{y}}{\hbar}\sum_{n=0}^{\infty}(-1)^{n}\beta^{2n+1}/(2n+1)! - \frac{J_{y}^{2}}{\hbar^{2}}\sum_{m=1}^{\infty}(-1)^{m}\beta^{2m}/(2m)!\\
+&=  1 - i\frac{J_{y}}{\hbar}\sin\beta + \frac{J_{y}^{2}}{\hbar^{2}}(\cos\beta-1)
+\end{align*}
+
+For the third part we just see that 
+
+\begin{align*}
+\exp(-iJ_{y}\beta/\hbar) &= 1 - i\frac{J_{y}}{\hbar}\sin\beta - \frac{J_{y}^{2}}{\hbar^{2}}(1-\cos\beta)\\
+&= 1 - \frac{\sin\beta}{\sqrt{2}}\begin{pmatrix}
+0&1&0\\
+-1&0&1\\
+0&-1&0
+\end{pmatrix} + \frac{1-\cos\beta}{2}\begin{pmatrix}
+-1&0&1\\
+0&-2&0\\
+1&0&-1
+\end{pmatrix}\\
+&= \begin{pmatrix}
+\frac{1+\cos\beta}{2}&\frac{\sin\beta}{\sqrt{2}}&\frac{1-\cos\beta}{2}\\
+-\frac{\sin\beta}{\sqrt{2}}&\cos\beta&\frac{\sin\beta}{\sqrt{2}}\\
+\frac{1-\cos\beta}{2}&-\frac{\sin\beta}{\sqrt{2}}&\frac{1+\cos\beta}{2}
+\end{pmatrix}
+\end{align*}
+
+
 \end{s}
 
 \end{document}
