@@ -1,0 +1,104 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath} % AMS Math Package
+\usepackage{bm}
+\usepackage{amsthm} % Theorem Formatting
+\usepackage{amssymb}    % Math symbols such as \mathbb
+\usepackage{graphicx} % Allows for eps images
+\usepackage[dvips,letterpaper,margin=1in,bottom=0.7in]{geometry}
+\usepackage{tensor}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{physics}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+
+\newcounter{mathematicapage}
+
+\newtheorem{p}{Problem}
+\usepackage{cancel}
+\newtheorem*{lem}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{dfn}{Definition}
+ \newenvironment{s}{%\small%
+        \begin{trivlist} \item \textbf{Solution}. }{%
+            \hspace*{\fill} $\blacksquare$\end{trivlist}}%
+
+
+\begin{document}
+
+ {\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Homework 6}         }\\[2\baselineskip] % Title
+{ {\bf \fontfamily{cmr}\selectfont Quantum Mechanics}\\ {\textit{\fontfamily{cmr}\selectfont     October 28th, 2022}}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    {\large \textsc{C Seitz}
+\\[1.4\baselineskip] 
+
+\begin{p}
+Problem 3.12 from Sakurai
+\end{p}
+
+\begin{s}
+
+In general the ensemble average of an operator $[A]$ is defined as
+
+\begin{align*}
+[A] = \sum_{i}w_{i}\bra{\alpha_{i}}A\ket{\alpha_{i}}
+\end{align*}
+
+where $\sum_{i}w_{i} = 1$
+
+\begin{align*}
+[\sigma_{x}] &= a\bra{+}\sigma_{x}\ket{+} + (1-a)\bra{-;y}\sigma_{x}\ket{-;y}\\
+&= a\bra{+}(\ket{+}\bra{-}+\ket{-}\bra{+})\ket{+} + (1-a)\bra{-;y}(\ket{+}\bra{-}+\ket{-}\bra{+})\ket{-;y}\\
+&= 0
+\end{align*}
+
+\begin{align*}
+[\sigma_{y}] &= a\bra{+}\sigma_{y}\ket{+} + (1-a)\bra{-;y}\sigma_{y}\ket{-;y}\\
+&= ai\bra{+}(\ket{+}\bra{-}-\ket{-}\bra{+})\ket{+} + i(1-a)\bra{-;y}(\ket{+}\bra{-}-\ket{-}\bra{+})\ket{-;y}\\
+&= i(1-a)\bra{-;y}\left(-\frac{i}{\sqrt{2}}\ket{+} - \frac{1}{\sqrt{2}}\ket{-}\right)\\
+&= -i(1-a)\bra{-;y}\ket{+;y} = 0
+\end{align*}
+
+\begin{align*}
+[\sigma_{z}] &= a\bra{+}(\ket{-}\bra{-} - \ket{+}\bra{+})\ket{+} + i(1-a)\bra{-;y}(\ket{-}\bra{-} - \ket{+}\bra{+})\ket{-;y}\\
+&= -a + i(1-a)\bra{-;y}\left(-\frac{i}{\sqrt{2}}\ket{+} - \frac{1}{\sqrt{2}}\ket{-}\right)\\
+\end{align*}
+
+\end{s}
+
+\begin{p}
+Problem 3.13 from Sakurai
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+Problem 3.14 from Sakurai
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+Problem 3.15 from Sakurai
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+Problem 3.16 from Sakurai
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+Problem 3.40 from Sakurai
+\end{p}
+
+\begin{s}
+\end{s}
+
+\end{document}
