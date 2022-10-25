@@ -153,7 +153,7 @@ We can write this out explicitly in the subspace spanned by $\ket{0,1,2}$
 Now recall that $H = \hbar\omega(N+\frac{1}{2})$ which is
 
 \begin{align*}
-H &= \left(\frac{\hbar\omega}{2}\right)\mathbb{I}_{3\times 3} + \begin{pmatrix}
+H &= \left(\frac{\hbar\omega}{2}\right)\mathbb{I}_{3\times 3} + \frac{\hbar\omega}{2}\begin{pmatrix}
 0 & 0 & 0\\
 0 & 1 & 0\\
 0 & 0 & 2
@@ -161,7 +161,7 @@ H &= \left(\frac{\hbar\omega}{2}\right)\mathbb{I}_{3\times 3} + \begin{pmatrix}
 \end{align*}
 
 \begin{align*}
-[H] = \mathrm{Tr}(\rho H) = \hbar\omega\mathrm{Tr}(\rho N + \rho/2) = \hbar\omega\left(\mathrm{Tr}(\rho N) + \mathrm{Tr}(\rho/2)\right) = \frac{17\hbar\omega}{12}
+[H] = \mathrm{Tr}(\rho H) = \frac{\hbar\omega}{2}\mathrm{Tr}(\rho N + \rho) = \frac{\hbar\omega}{2}\left(\mathrm{Tr}(\rho N) + \mathrm{Tr}(\rho)\right)
 \end{align*}
 
 \end{s}
