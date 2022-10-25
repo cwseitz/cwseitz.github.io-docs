@@ -71,6 +71,46 @@ Problem 3.13 from Sakurai
 \end{p}
 
 \begin{s}
+
+The state vector in the $S_{z}$ basis has the form
+\begin{align*}
+\ket{\alpha} = c_{+}\ket{+} + c_{-}\ket{-}
+\end{align*}
+
+First note that
+
+\begin{align*}
+\langle S_{z}\rangle &= |c_{+}|^{2} - |c_{-}|^{2}\;\;\;|c_{+}|^{2} + |c_{-}|^{2} = 1
+\end{align*}
+
+Together, these equations tell us the magnitude of each complex component.
+
+\begin{align*}
+|c_{+}|^{2} = \frac{\langle S_{z}\rangle +1}{2}\;\;\; |c_{-}|^{2} = \frac{1-\langle S_{z}\rangle}{2}
+\end{align*}
+
+
+\begin{align*}
+\langle S_{x}\rangle &= \bra{\alpha}(\ket{+}\bra{-}+\ket{-}\bra{+})(c_{+}\ket{+} + c_{-}\ket{-})\\
+&= \bra{\alpha}(c_{-}\ket{+} + c_{+}\ket{-})\\
+&= (c_{+}^{*}\bra{+} + c_{-}^{*}\bra{-})(c_{-}\ket{+} + c_{+}\ket{-})\\
+&= c_{+}^{*}c_{-} + c_{-}^{*}c_{+}\\
+&= |c_{+}||c_{-}|(e^{i(\theta-\phi)} + e^{i(\phi-\theta)})\\
+&= 2|c_{+}||c_{-}|\cos(\theta-\phi)
+\end{align*}
+
+\begin{align*}
+\langle S_{y}\rangle &= \bra{\alpha}((i\ket{+}\bra{-}-i\ket{-}\bra{+})(c_{+}\ket{+} + c_{-}\ket{-})\\
+&= i\bra{\alpha}(c_{-}\ket{+} - c_{+}\ket{-})\\
+&= i(c_{+}^{*}\bra{+} + c_{-}^{*}\bra{-})(c_{-}\ket{+} - c_{+}\ket{-})\\
+&= c_{+}^{*}c_{-} - c_{-}^{*}c_{+}\\
+&= |c_{+}||c_{-}|(e^{i(\theta-\phi)} - e^{i(\phi-\theta)})\\
+&= 2i|c_{+}||c_{-}|\sin(\theta-\phi)
+\end{align*}
+
+So $\langle S_{x}\rangle$ gives us the phase difference of $c_{+}$ and $c_{-}$. Then the sign of $\langle S_{y} \rangle$ tells us whether $\theta$ or $\phi$ is larger, since sine is odd. This is all we can hope to extract from the expectation values, since multiplying by a global phase $e^{i\delta}\ket{\alpha}$ has no effect on the expectation values.
+
+
 \end{s}
 
 \begin{p}
