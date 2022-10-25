@@ -118,6 +118,52 @@ Problem 3.14 from Sakurai
 \end{p}
 
 \begin{s}
+\begin{align*}
+\rho &= \sum_{i}w_{i}\ket{\psi_{i}}\bra{\psi_{i}}\\
+&= \frac{1}{3}\left(\ket{\alpha}\bra{\alpha} + \ket{\beta}\bra{\beta} + \ket{2}\bra{2}\right)
+\end{align*}
+We can write this out explicitly in the subspace spanned by $\ket{0,1,2}$
+\begin{align*}
+\ket{\alpha}\bra{\alpha} = 
+\frac{1}{2}\begin{pmatrix}
+1 & 1 & 0\\
+1 & 1 & 0\\
+0 & 0 &0
+\end{pmatrix}\;\;\ket{\beta}\bra{\beta} = 
+\frac{1}{2}\begin{pmatrix}
+0 & 0 & 0\\
+0 & 1 & 1 \\
+0 & 1 & 1 
+\end{pmatrix}\;\; \ket{2}\bra{2} = 
+\begin{pmatrix}
+0 & 0 & 0\\
+0 & 0 & 0 \\
+0 & 0 & 1 
+\end{pmatrix}
+\end{align*}
+
+\begin{align*}
+\rho &= \frac{1}{6}\begin{pmatrix}
+1 & 1 & 0\\
+1 & 2 & 1\\
+0 & 1 & 2
+\end{pmatrix}
+\end{align*}
+
+Now recall that $H = \hbar\omega(N+\frac{1}{2})$ which is
+
+\begin{align*}
+H &= \left(\frac{\hbar\omega}{2}\right)\mathbb{I}_{3\times 3} + \begin{pmatrix}
+0 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 2
+\end{pmatrix}
+\end{align*}
+
+\begin{align*}
+[H] = \mathrm{Tr}(\rho H) = \hbar\omega\mathrm{Tr}(\rho N + \rho/2) = \hbar\omega\left(\mathrm{Tr}(\rho N) + \mathrm{Tr}(\rho/2)\right) = \frac{17\hbar\omega}{12}
+\end{align*}
+
 \end{s}
 
 \begin{p}
@@ -125,6 +171,30 @@ Problem 3.15 from Sakurai
 \end{p}
 
 \begin{s}
+\begin{align*}
+\rho(t_{0}) &= \sum_{i}w_{i}\ket{\psi_{i};t_{0}}\bra{\psi_{i};t_{0}}\\
+\end{align*}
+
+In the Schrodinger picture, the coefficients of the state vectors evolve. Therefore,
+
+\begin{align*}
+\rho(t) &= \sum_{i}w_{i}\;\mathcal{U}(t,t_{0})\ket{\psi_{i};t_{0}}\bra{\psi_{i};t_{0}}\mathcal{U}^{\dagger}(t,t_{0})\\
+&= \mathcal{U}(t,t_{0})\left(\sum_{i}w_{i}\ket{\psi_{i};t_{0}}\bra{\psi_{i};t_{0}}\right)\mathcal{U}^{\dagger}(t,t_{0})\\
+&= \mathcal{U}(t,t_{0})\rho(t_{0})\mathcal{U}^{\dagger}(t,t_{0})
+\end{align*}
+
+For a pure ensemble in state $\ket{\psi_{i}}$, the density matrix is 
+
+\begin{equation*}
+\rho(t_{0}) = \ket{\psi_{i};t_{0}}\bra{\psi_{i};t_{0}}
+\end{equation*}
+At a later time, the density matrix is
+\begin{align*}
+\rho(t) &= \mathcal{U}(t,t_{0})\rho(t_{0})\mathcal{U}^{\dagger}(t,t_{0})\\
+&= \mathcal{U}(t,t_{0})\ket{\psi_{i};t_{0}}\bra{\psi_{i};t_{0}}\mathcal{U}^{\dagger}(t,t_{0})\\
+&= \ket{\psi_{i};t_{0}}\bra{\psi_{i};t_{0}}
+\end{align*}
+
 \end{s}
 
 \begin{p}
