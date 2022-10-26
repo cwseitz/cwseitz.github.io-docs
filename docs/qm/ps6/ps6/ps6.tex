@@ -41,28 +41,33 @@ Problem 3.12 from Sakurai
 In general the ensemble average of an operator $[A]$ is defined as
 
 \begin{align*}
-[A] = \sum_{i}w_{i}\bra{\alpha_{i}}A\ket{\alpha_{i}}
+[A] = \mathrm{Tr}(\rho A)
 \end{align*}
 
-where $\sum_{i}w_{i} = 1$
+where $\hat{\rho} = \sum_{i}w_{i}\rho_{i}$ and $\rho_{i} = \ket{\alpha_{i}}\bra{\alpha_{i}}$
 
 \begin{align*}
-[\sigma_{x}] &= a\bra{+}\sigma_{x}\ket{+} + (1-a)\bra{-;y}\sigma_{x}\ket{-;y}\\
-&= a\bra{+}(\ket{+}\bra{-}+\ket{-}\bra{+})\ket{+} + (1-a)\bra{-;y}(\ket{+}\bra{-}+\ket{-}\bra{+})\ket{-;y}\\
-&= 0
-\end{align*}
-
-\begin{align*}
-[\sigma_{y}] &= a\bra{+}\sigma_{y}\ket{+} + (1-a)\bra{-;y}\sigma_{y}\ket{-;y}\\
-&= ai\bra{+}(\ket{+}\bra{-}-\ket{-}\bra{+})\ket{+} + i(1-a)\bra{-;y}(\ket{+}\bra{-}-\ket{-}\bra{+})\ket{-;y}\\
-&= i(1-a)\bra{-;y}\left(-\frac{i}{\sqrt{2}}\ket{+} - \frac{1}{\sqrt{2}}\ket{-}\right)\\
-&= -i(1-a)\bra{-;y}\ket{+;y} = 0
+\hat{\rho} &= a\ket{+}\bra{+} + (1-a)\ket{-;y}\bra{-;y}\\
+&= \frac{1}{2}\begin{pmatrix}2a&0\\0&0 \end{pmatrix} + 
+\frac{1-a}{2}\begin{pmatrix}1&-i\\i&-1 \end{pmatrix}\\
+&= \frac{1}{2}\begin{pmatrix}a+1&-i(1-a)\\i(1-a)&a-1 \end{pmatrix}
 \end{align*}
 
 \begin{align*}
-[\sigma_{z}] &= a\bra{+}(\ket{-}\bra{-} - \ket{+}\bra{+})\ket{+} + i(1-a)\bra{-;y}(\ket{-}\bra{-} - \ket{+}\bra{+})\ket{-;y}\\
-&= -a + i(1-a)\bra{-;y}\left(-\frac{i}{\sqrt{2}}\ket{+} - \frac{1}{\sqrt{2}}\ket{-}\right)\\
+[\sigma_{x}] &= \mathrm{Tr}(\hat{\rho} \sigma_{x})\\
+&= \mathrm{Tr}\left(\frac{1}{2}\begin{pmatrix}i(1-a)&a-1\\a+1&-i(1-a) \end{pmatrix}\right) = 0
 \end{align*}
+
+\begin{align*}
+[\sigma_{y}] &= \mathrm{Tr}(\hat{\rho} \sigma_{x})\\
+&= \mathrm{Tr}\left(\frac{1}{2}\begin{pmatrix}-(1-a)&i(a-1)\\i(a+1)&(1-a) \end{pmatrix}\right) = 0
+\end{align*}
+
+\begin{align*}
+[\sigma_{z}] &= \mathrm{Tr}(\hat{\rho} \sigma_{z})\\
+&= \mathrm{Tr}\left(\frac{1}{2}\begin{pmatrix}a+1&-i(1-a)\\i(1-a)&1-a \end{pmatrix}\right) = 1
+\end{align*}
+
 
 \end{s}
 
