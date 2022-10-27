@@ -48,26 +48,45 @@ where $\hat{\rho} = \sum_{i}w_{i}\rho_{i}$ and $\rho_{i} = \ket{\alpha_{i}}\bra{
 
 \begin{align*}
 \hat{\rho} &= a\ket{+}\bra{+} + (1-a)\ket{-;y}\bra{-;y}\\
-&= \frac{1}{2}\begin{pmatrix}2a&0\\0&0 \end{pmatrix} + 
-\frac{1-a}{2}\begin{pmatrix}1&-i\\i&-1 \end{pmatrix}\\
-&= \frac{1}{2}\begin{pmatrix}a+1&-i(1-a)\\i(1-a)&a-1 \end{pmatrix}
+&= \left(
+\begin{array}{cc}
+ \frac{1-a}{2}+a & \frac{1}{2} i (1-a) \\
+ -\frac{1}{2} i (1-a) & \frac{1-a}{2} \\
+\end{array}
+\right)
 \end{align*}
 
 \begin{align*}
-[\sigma_{x}] &= \mathrm{Tr}(\hat{\rho} \sigma_{x})\\
-&= \mathrm{Tr}\left(\frac{1}{2}\begin{pmatrix}i(1-a)&a-1\\a+1&-i(1-a) \end{pmatrix}\right) = 0
+[S_{x}] &= \mathrm{Tr}(\hat{\rho} S_{x})\\
+&= \frac{\hbar}{2}\mathrm{Tr}\left(\left(
+\begin{array}{cc}
+ \frac{1}{2} i (1-a) & \frac{1-a}{2}+a \\
+ \frac{1-a}{2} & -\frac{1}{2} i (1-a) \\
+\end{array}
+\right)\right) = 0
 \end{align*}
 
 \begin{align*}
-[\sigma_{y}] &= \mathrm{Tr}(\hat{\rho} \sigma_{x})\\
-&= \mathrm{Tr}\left(\frac{1}{2}\begin{pmatrix}-(1-a)&i(a-1)\\i(a+1)&(1-a) \end{pmatrix}\right) = 0
+[S_{y}] &= \mathrm{Tr}(\hat{\rho} S_{x})\\
+&= \frac{\hbar}{2}\mathrm{Tr}\left(\left(
+\begin{array}{cc}
+ \frac{a-1}{2} & -i \left(\frac{1-a}{2}+a\right) \\
+ \frac{1}{2} i (1-a) & \frac{a-1}{2} \\
+\end{array}
+\right)\right) = \frac{\hbar}{2}(a-1)
 \end{align*}
 
 \begin{align*}
-[\sigma_{z}] &= \mathrm{Tr}(\hat{\rho} \sigma_{z})\\
-&= \mathrm{Tr}\left(\frac{1}{2}\begin{pmatrix}a+1&-i(1-a)\\i(1-a)&1-a \end{pmatrix}\right) = 1
+[S_{z}] &= \mathrm{Tr}(\hat{\rho} S_{z})\\
+&= \frac{\hbar}{2}\mathrm{Tr}\left(\left(
+\begin{array}{cc}
+ \frac{1-a}{2}+a & -\frac{1}{2} i (1-a) \\
+ -\frac{1}{2} i (1-a) & \frac{a-1}{2} \\
+\end{array}
+\right)\right) =  \frac{\hbar}{2}a
 \end{align*}
 
+This is what we would expect for the pure ensemble cases $a=1$ and $a=0$.
 
 \end{s}
 
@@ -124,7 +143,7 @@ Problem 3.14 from Sakurai
 
 \begin{s}
 \begin{align*}
-\rho &= \sum_{i}w_{i}\ket{\psi_{i}}\bra{\psi_{i}}\\
+\hat{\rho} &= \sum_{i}w_{i}\ket{\psi_{i}}\bra{\psi_{i}}\\
 &= \frac{1}{3}\left(\ket{\alpha}\bra{\alpha} + \ket{\beta}\bra{\beta} + \ket{2}\bra{2}\right)
 \end{align*}
 We can write this out explicitly in the subspace spanned by $\ket{0,1,2}$
@@ -140,33 +159,35 @@ We can write this out explicitly in the subspace spanned by $\ket{0,1,2}$
 0 & 1 & 1 \\
 0 & 1 & 1 
 \end{pmatrix}\;\; \ket{2}\bra{2} = 
-\begin{pmatrix}
+\frac{1}{2}\begin{pmatrix}
 0 & 0 & 0\\
 0 & 0 & 0 \\
-0 & 0 & 1 
-\end{pmatrix}
-\end{align*}
-
-\begin{align*}
-\rho &= \frac{1}{6}\begin{pmatrix}
-1 & 1 & 0\\
-1 & 2 & 1\\
-0 & 1 & 2
-\end{pmatrix}
-\end{align*}
-
-Now recall that $H = \hbar\omega(N+\frac{1}{2})$ which is
-
-\begin{align*}
-H &= \left(\frac{\hbar\omega}{2}\right)\mathbb{I}_{3\times 3} + \frac{\hbar\omega}{2}\begin{pmatrix}
-0 & 0 & 0\\
-0 & 1 & 0\\
 0 & 0 & 2
 \end{pmatrix}
 \end{align*}
 
 \begin{align*}
-[H] = \mathrm{Tr}(\rho H) = \frac{\hbar\omega}{2}\mathrm{Tr}(\rho N + \rho) = \frac{\hbar\omega}{2}\left(\mathrm{Tr}(\rho N) + \mathrm{Tr}(\rho)\right)
+\hat{\rho} &= \frac{1}{6}\begin{pmatrix}
+1 & 1 & 0\\
+1 & 2 & 1\\
+0 & 1 & 3
+\end{pmatrix}
+\end{align*}
+
+Now recall that $H = \hbar\omega(N+\frac{1}{2})$ which reads
+
+\begin{align*}
+H &= \hbar\omega\begin{pmatrix}
+0 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 2
+\end{pmatrix} + \left(\frac{\hbar\omega}{2}\right)\mathbb{I}_{3\times 3}
+\end{align*}
+
+\begin{align*}
+[H] = \mathrm{Tr}(\rho H) &= \hbar\omega\mathrm{Tr}(\rho N + \rho/2) \\
+&= \hbar\omega\left(\mathrm{Tr}(\rho N) + \mathrm{Tr}(\rho/2)\right)\\
+&= \frac{11}{6}\hbar\omega
 \end{align*}
 
 \end{s}
@@ -221,7 +242,9 @@ The singlet state is
 \ket{\psi} = \frac{1}{\sqrt{2}}(\ket{+-} + \ket{-+})
 \end{align*}
 
-The probability is $1/2$ to obtain $s_{1z} = \hbar/2$. The probability is $1/2$ to obtain $s_{1x} = \hbar/2$ since obtaining $s_{1x} = \hbar/2$ is equiprobable for the two states in the singlet superposition. If observer $B$ has determined that $s_{2z} = \hbar/2$, then observer $A$ must observe $s_{1z} = -\hbar/2$ since the measurement made by $B$ collapses $\ket{\psi}$ to $\ket{-+}$. Furthermore, if observer $B$ has measured $s_{2z} = \hbar/2$, then particle 1 must be in the $\ket{+}$ state which means $s_{1x} = \pm \hbar/2$ with equal probability.
+If $B$ doesn't make a measurement, $B$ will have no effect on $A$'s measurement. So the probability for $A$ to obtain $s_{1z} = \hbar/2$ is of course $1/2$. The probability that $A$ measures $s_{1x} = \hbar/2$ in this state is also $1/2$. This is because obtaining $s_{1x} = \hbar/2$ is equiprobable for the two states in the singlet superposition. 
+
+If observer $B$ has determined that $s_{2z} = \hbar/2$, then observer $A$ must observe $s_{1z} = -\hbar/2$ since the measurement made by $B$ collapses $\ket{\psi}$ to $\ket{-+}$. Furthermore, if observer $B$ has measured $s_{2z} = \hbar/2$, then particle 1 must be in the $\ket{+}$ state (as stated before) which means $s_{1x} = \pm \hbar/2$ with equal probability.
 
 \end{s}
 
