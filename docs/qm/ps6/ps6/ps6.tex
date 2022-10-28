@@ -86,7 +86,7 @@ where $\hat{\rho} = \sum_{i}w_{i}\rho_{i}$ and $\rho_{i} = \ket{\alpha_{i}}\bra{
 \right)\right) =  \frac{\hbar}{2}a
 \end{align*}
 
-This is what we would expect for the pure ensemble cases $a=1$ and $a=0$.
+When $a=1$, we get $[S_{x}] = 0, [S_{y}] = 0, [S_{z}] = \hbar/2$, which makes sense since it is then a pure ensemble in $\ket{+}$. When $a=0$, we get $[S_{x}] = 0, [S_{y}] = -\hbar/2, [S_{z}] = 0$, which makes sense because it is a pure ensemble in $\ket{-;y}$.
 
 \end{s}
 
@@ -123,17 +123,43 @@ Together, these equations tell us the magnitude of each complex component.
 &= 2|c_{+}||c_{-}|\cos(\theta-\phi)
 \end{align*}
 
+Let $\delta = \theta-\phi$, which means $\delta = \cos^{-1}\left(\frac{\langle S_{x}\rangle}{2|c_{+}||c_{-}|}\right)$
+
 \begin{align*}
 \langle S_{y}\rangle &= \bra{\alpha}((i\ket{+}\bra{-}-i\ket{-}\bra{+})(c_{+}\ket{+} + c_{-}\ket{-})\\
 &= i\bra{\alpha}(c_{-}\ket{+} - c_{+}\ket{-})\\
 &= i(c_{+}^{*}\bra{+} + c_{-}^{*}\bra{-})(c_{-}\ket{+} - c_{+}\ket{-})\\
 &= c_{+}^{*}c_{-} - c_{-}^{*}c_{+}\\
 &= |c_{+}||c_{-}|(e^{i(\theta-\phi)} - e^{i(\phi-\theta)})\\
-&= 2i|c_{+}||c_{-}|\sin(\theta-\phi)
+&= 2i|c_{+}||c_{-}|\sin(\theta-\phi)\\
+&= 2i|c_{+}||c_{-}|\sin(\delta)
 \end{align*}
 
-So $\langle S_{x}\rangle$ gives us the phase difference of $c_{+}$ and $c_{-}$. Then the sign of $\langle S_{y} \rangle$ tells us whether $\theta$ or $\phi$ is larger, since sine is odd. This is all we can hope to extract from the expectation values, since multiplying by a global phase $e^{i\delta}\ket{\alpha}$ has no effect on the expectation values.
+So $\langle S_{x}\rangle$ gives us the phase difference of $c_{+}$ and $c_{-}$. Then the sign of $\langle S_{y} \rangle$ tells us the sign of $\delta$, since sine is odd. This is all we can hope to extract from the expectation values, since multiplying by a global phase $e^{i\delta}\ket{\alpha}$ has no effect on the expectation values. To find $\rho$ using $[S_{x}],[S_{y}],[S_{z}]$, first note that
 
+\begin{align*}
+\mathrm{Tr}(\rho) = 
+\mathrm{Tr}\left(\begin{pmatrix}a&b\\c&d\end{pmatrix}\right) = a+d = 0
+\end{align*}
+
+\begin{align*}
+\mathrm{Tr}\left(\rho S_{x}\right) = 
+\frac{\hbar}{2}\mathrm{Tr}\left(\begin{pmatrix}a&b\\c&d\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}\right) = \frac{\hbar}{2}(c + b)
+\end{align*}
+
+
+\begin{align*}
+\mathrm{Tr}\left(\rho S_{y}\right) = 
+\frac{\hbar}{2}\mathrm{Tr}\left(\begin{pmatrix}a&b\\c&d\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}\right) = \frac{i\hbar}{2}(b-c)
+\end{align*}
+
+
+\begin{align*}
+\mathrm{Tr}\left(\rho S_{z}\right) = 
+\frac{\hbar}{2}\mathrm{Tr}\left(\begin{pmatrix}a&b\\c&d\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}\right) = \frac{\hbar}{2}(a-d)
+\end{align*}
+
+which gives us four equations for the four unknown elements of $\rho$.
 
 \end{s}
 
@@ -200,25 +226,17 @@ Problem 3.15 from Sakurai
 \begin{align*}
 \rho(t_{0}) &= \sum_{i}w_{i}\ket{\psi_{i};t_{0}}\bra{\psi_{i};t_{0}}\\
 \end{align*}
-
-In the Schrodinger picture, the coefficients of the state vectors evolve. Therefore,
-
+(a) In the Schrodinger picture, the coefficients of the state vectors evolve. Therefore,
 \begin{align*}
 \rho(t) &= \sum_{i}w_{i}\;\mathcal{U}(t,t_{0})\ket{\psi_{i};t_{0}}\bra{\psi_{i};t_{0}}\mathcal{U}^{\dagger}(t,t_{0})\\
 &= \mathcal{U}(t,t_{0})\left(\sum_{i}w_{i}\ket{\psi_{i};t_{0}}\bra{\psi_{i};t_{0}}\right)\mathcal{U}^{\dagger}(t,t_{0})\\
 &= \mathcal{U}(t,t_{0})\rho(t_{0})\mathcal{U}^{\dagger}(t,t_{0})
 \end{align*}
-
-For a pure ensemble in state $\ket{\psi_{i}}$, the density matrix is 
-
-\begin{equation*}
-\rho(t_{0}) = \ket{\psi_{i};t_{0}}\bra{\psi_{i};t_{0}}
-\end{equation*}
-At a later time, the density matrix is
+(b) Note that this does not mean that the states do not evolve in time. Rather, they must evolve in the same way so that the ensemble remains pure. For example, a magnetic field along $z$ can cause precession of a state prepared in $\ket{S_{n};+}$, but every member of the ensemble evolves identically. We therefore need the more general property that $\rho^{2} = 1$. So we write
 \begin{align*}
-\rho(t) &= \mathcal{U}(t,t_{0})\rho(t_{0})\mathcal{U}^{\dagger}(t,t_{0})\\
-&= \mathcal{U}(t,t_{0})\ket{\psi_{i};t_{0}}\bra{\psi_{i};t_{0}}\mathcal{U}^{\dagger}(t,t_{0})\\
-&= \ket{\psi_{i};t_{0}}\bra{\psi_{i};t_{0}}
+\rho^{2}(t) &= \mathcal{U}(t,t_{0})\rho(t_{0})\mathcal{U}^{\dagger}(t,t_{0})\mathcal{U}(t,t_{0})\rho(t_{0})\mathcal{U}^{\dagger}(t,t_{0})\\
+&= \mathcal{U}(t,t_{0})\rho^{2}(t_{0})\mathcal{U}^{\dagger}(t,t_{0})\\
+&= \mathcal{U}(t,t_{0})\mathcal{U}^{\dagger}(t,t_{0}) = 1
 \end{align*}
 
 \end{s}
@@ -228,7 +246,15 @@ Problem 3.16 from Sakurai
 \end{p}
 
 \begin{s}
-A 3x3 matrix has 9 parameters, but we only need 
+
+We can write a general form of the density matrix
+
+\begin{align*}
+\hat{\rho} = \begin{pmatrix}\alpha&a&b\\a*&\beta&c\\b*&c*&1-\alpha-\beta\end{pmatrix}\\
+\end{align*}
+
+which is due to the fact that the density matrix must have zero trace and must be Hermitian. This matrix has eight real parameters (two along the diagonal and 6 from the three complex numbers).
+
 \end{s}
 
 \begin{p}
@@ -242,7 +268,9 @@ The singlet state is
 \ket{\psi} = \frac{1}{\sqrt{2}}(\ket{+-} + \ket{-+})
 \end{align*}
 
-If $B$ doesn't make a measurement, $B$ will have no effect on $A$'s measurement. So the probability for $A$ to obtain $s_{1z} = \hbar/2$ is of course $1/2$. The probability that $A$ measures $s_{1x} = \hbar/2$ in this state is also $1/2$. This is because obtaining $s_{1x} = \hbar/2$ is equiprobable for the two states in the singlet superposition. 
+If $B$ doesn't make a measurement, $B$ will have no effect on $A$'s measurement. So the probability for $A$ to obtain $s_{1z} = \hbar/2$ is of course $1/2$. 
+
+The probability that $A$ measures $s_{1x} = \hbar/2$ in this state is also $1/2$. This is because obtaining $s_{1x} = \hbar/2$ is equiprobable for the two states in the singlet superposition. 
 
 If observer $B$ has determined that $s_{2z} = \hbar/2$, then observer $A$ must observe $s_{1z} = -\hbar/2$ since the measurement made by $B$ collapses $\ket{\psi}$ to $\ket{-+}$. Furthermore, if observer $B$ has measured $s_{2z} = \hbar/2$, then particle 1 must be in the $\ket{+}$ state (as stated before) which means $s_{1x} = \pm \hbar/2$ with equal probability.
 
