@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{amsmath, fullpage}
+\usepackage{graphicx}
 
 \begin{document}
 
@@ -9,26 +10,28 @@
 \thispagestyle{empty}
 
 
-\section{Introduction}
+\section{Abstract}
 
-Eukaryotic transcription is episodic, consisting of a series of stochastic bursts, resulting in non-Poissonian statistics of gene expression. Classical models of gene regulation explain this bursty behavior by invoking cooperative transcriptional mechanisms and thermodynamic fluctuations. However, recent data suggests that phase-separated condensates, which contain transcription factors amongst other biomolecules, may be important entities in gene regulation. It is thought that condensates interact with and potentially reorganize a three-dimensional chromatin scaffold, to control gene expression and control transcriptional states. Indeed, super-resolution imaging techniques have captured phase separated condensates below the diffraction limit, consisting of enhancer-bound transcription factors and mediator proteins, along with RNA Polymerase II. Yet, the biophysical descriptions of the interaction between transcriptional condensates with the chromatin fiber and the mechanisms by which they evoke bursty gene expression remain mere speculation. Here, we intend to address these outstanding questions by modeling transcriptional condensate formation within a Rouse-like polymer model parameterized by constraints measured in single particle tracking experiments. These models serve to address the stability of transcriptional condensates as a function of their stoichiometry and the relationship between condensate formation and transcriptional bursting by integrating their associated Langevin dynamics with Monte Carlo simulations. 
+Eukaryotic transcription is episodic, consisting of a series of transcriptional bursts, resulting in non-Poissonian gene expression. Bursty transcriptional dynamics are well-exemplified by the transient and amplified expression of pro-inflammatory GBP gene products, a group interferon-inducible GTPases that restrict the replication of intracellular pathogens [XXX]. Classical models of gene regulation explain this bursty behavior by invoking stochastic binding and unbinding of transcription factors, RNA polymerase and mediator proteins. However, recent evidence has emerged that transcription is often controlled by phase-separated aggregates of DNA, RNA, and proteins termed transcriptional condensates. Interestingly, super-enhancer-binding proteins MED1 and BRD4 undergo phase separation in close proximity to all the GBP family gene loci during the immune response [XXX]. The formation of these transcriptional condensates driven by MED1 and BRD4 alongside decreased entropy of the chromatin scaffold have been previously demonstrated with super-resolution microscopy. However, whether coordination of condensate formation and chromatin reorganization act to produce bursty transcriptional dynamics remains unclear. Therefore, here we utilize super-resolution fluorescence microscopy to demonstrate simultaneous (i) loss of disorder in chromatin structure (ii) formation of transcriptional condensates driven by MED1 and BRD4 and (iii) non-Poissonian gene expression. We also explore the properties of transcriptional condensates and their interaction with a Rouse-like chromatin scaffold with Monte Carlo simulations and analytical treatment.
 
-Fine scale chromatin structure at the GBP gene cluster 
+\section{Single molecule localization microscopy}
 
-During the onset of cytokine-induced transcriptional memory, chromatin-associated proteins, modifications of DNA, and histones act in concert to control gene expression and maintain transcriptional states over several generations. This process is well-exemplified by the transient and amplified expression of pro-inflammatory GBP gene products, which have been shown to exhibit cytokine-induced transcriptional memory under the control of cohesin. However, the effects of transcriptional memory on the transcriptional kinetics of GBP genes remain largely unexplored. Here, we characterize the first-order transcriptional kinetics of GBP5 by modeling ensemble snapshots of nascent and mature RNA transcript counts acquired using fluorescence in-situ hybridization. Our model rigorously infers kinetic parameters for a multi-state model of promoter activation, transcription, and mature RNA nuclear export during cytokine induction, and illustrates the kinetic effects of cytokine-induced transcriptional memory. To perform robust parameter inference and prevent overfitting, we utilize a Sequential Monte Carlo (SMC) algorithm to compute the full posterior distribution on the first-order rate constants. Bayesian model selection is then used to interrogate possible modifications to the GBP5 transcriptional state space in HeLa cells primed with interferon-gamma. 
+Most detectors used for imaging have many elements (pixels) so that we can record an image projected onto the detector by a system of lenses. In fluorescence imaging, this is usually a relay consisting of an objective lens and a tube lens to focus the image onto the camera. Due to diffraction, any point emitter, such as a single fluorescent molecule, will be registered as a diffraction limited spot. The profile of that spot is often described as a Gaussian point spread function (Richardson and Wolf)
 
- 
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{dSTORM.png}
+\caption{Stochastic optical reconstruction microscope}
+\end{figure}
 
-\section{Methods}
+\section{Langevin dynamics of a Rouse-like polymer embedded in a transcriptional condensate}
 
- 
-So far we have developed a Bayesian framework for single molecule localization and particle tracking, while using it to characterize the diffusion of single nucleosomes in mammalian nuclei. 
+The formation of these transcriptional condensates driven by MED1 and BRD4 alongside decreased entropy of the chromatin scaffold have been previously demonstrated with super-resolution microscopy. Yet, the biophysical descriptions of the interaction between transcriptional condensates with the chromatin fiber and the mechanisms by which they evoke bursty gene expression remain mere speculation. 
 
- 
+Here, we intend to address these outstanding questions by modeling transcriptional condensate formation within a Rouse-like polymer model parameterized by constraints measured in single particle tracking experiments. These models serve to address the stability of transcriptional condensates as a function of their stoichiometry and the relationship between condensate formation and transcriptional bursting by integrating their associated Langevin dynamics with Monte Carlo simulations. 
 
-A phase separation model for transcriptional control 
 
-These are very difficult to relate experimentally, but we can leverage our knowledge of chromatin fine structure, polymer Langevin dynamics, and a theory of condensates. Transcriptional condensates and promoter switching can be well understood using the stochastic simulation algorithm (Gillespie algorithm). Markovian dynamics of the condensate. Discuss the chemical master equation as a tool \cite{Morrison2021}
+The general properties of ranscriptional condensates can be investigated using the stochastic simulation algorithm [Gillespie].
 
  
 \bibliographystyle{unsrt}
