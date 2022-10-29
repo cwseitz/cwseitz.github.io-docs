@@ -28,53 +28,53 @@ vals = vals[idx]
 # Show the Hamiltonian
 ###########################################
 
-fig, ax = plt.subplots(1,2)
-x = ax[0].imshow(H,cmap='coolwarm')
-y = ax[1].imshow(H[:10,:10],cmap='coolwarm')
-plt.colorbar(x,ax=ax[0])
-plt.colorbar(y,ax=ax[1])
-plt.show()
+fig, ax = plt.subplots(2,2)
+x = ax[0,0].imshow(H,cmap='coolwarm')
+axin1 = ax[0,0].inset_axes([0.575, 0.575, 0.4, 0.4])
+y = axin1.imshow(H[:10,:10],cmap='coolwarm')
+plt.colorbar(x,ax=ax[0,0])
 
 ###########################################
 # Show eigenvectors form an orthonormal set
 ###########################################
 
-fig, ax = plt.subplots(1,3)
-ax[0].imshow(vecs.T, cmap='coolwarm')
-ax[0].set_title(r'$T$')
-ax[1].imshow(vecs, cmap='coolwarm')
-ax[1].set_title(r'$T^{T}$')
-ax[2].imshow(vecs.T @ vecs, cmap='coolwarm')
-ax[2].set_title(r'$T^{T}T$')
-plt.show()
+x = ax[0,1].imshow(vecs.T, cmap='coolwarm')
+plt.colorbar(x,ax=ax[0,1])
+ax[0,1].set_title(r'$T$')
+X = vecs.T @ vecs
+x = ax[1,0].imshow(X, cmap='coolwarm')
+axin1 = ax[1,0].inset_axes([0.575, 0.575, 0.4, 0.4])
+y = axin1.imshow(X[:10,:10],cmap='coolwarm')
+plt.colorbar(x,ax=ax[1,0])
+ax[1,0].set_title(r'$T^{T}T$')
 
 ###########################################
 # Plot the eigenvalues as a function of n
 ###########################################
 
-fig, ax = plt.subplots(1,2)
-ax[0].plot(vals, color='blue')
-ax[0].set_xlabel('n')
-ax[0].set_ylabel(r'$\epsilon_{0,n}$',fontsize=14)
 
+ax[1,1].plot(vals, color='blue')
+ax[1,1].set_xlabel('n')
+ax[1,1].set_ylabel(r'$\epsilon_{0,n}$',fontsize=14)
+ax[1,1].set_aspect(25)
+plt.tight_layout()
+plt.show()
 
 ###########################################
 # Plot a few representative prob dists
 ###########################################
 
+fig, ax = plt.subplots()
 pdf1 = vecs[:,0]**2
 pdf2 = vecs[:,10]**2
 pdf3 = vecs[:,50]**2
 
-ax1 = ax[1].twinx()
-ax1.plot(V,color='black',label='V(x)')
-ax[1].plot(pdf1, color='red',label='m=0')
-ax[1].plot(pdf2, color='blue',label='m=10')
-ax[1].plot(pdf3, color='purple',label='m=50')
-ax[1].set_xlabel('x')
-ax[1].set_ylabel(r'$|\phi_{m,n}|^{2}$',fontsize=14)
-ax1.set_ylabel('V(x)')
-ax[1].legend()
+ax.plot(pdf1, color='red',label='n=0')
+ax.plot(pdf2, color='blue',label='n=10')
+ax.plot(pdf3, color='purple',label='n=50')
+ax.set_xlabel('x')
+ax.set_ylabel(r'$|\phi_{n}|^{2}$',fontsize=14)
+ax.legend(loc='upper right')
 plt.show()
 
 ###########################################
@@ -82,7 +82,7 @@ plt.show()
 ###########################################
 
 U = LA.inv(vecs)
-plt.imshow(U)
+plt.imshow(U,cmap='coolwarm')
 plt.show()
 
 ###########################################
@@ -90,10 +90,13 @@ plt.show()
 ###########################################
 
 Hd = LA.inv(vecs) @ H @ vecs
-fig, ax = plt.subplots(1,2)
-ax[0].imshow(Hd,cmap='coolwarm')
-ax[1].imshow(Hd[:10,:10],cmap='coolwarm')
-plt.show()
+
+fig, ax = plt.subplots(2,2)
+x = ax[0,0].imshow(Hd,cmap='coolwarm')
+axin1 = ax[0,0].inset_axes([0.575, 0.575, 0.4, 0.4])
+y = axin1.imshow(Hd[:10,:10],cmap='coolwarm')
+plt.colorbar(x,ax=ax[0,0])
+
 
 ###########################################
 # Find eigenvectors and eigenvalues of H
@@ -108,27 +111,27 @@ dvals = dvals[idx]
 # Plot the eigenvalues as a function of n
 ###########################################
 
-fig, ax = plt.subplots()
-ax.plot(dvals, color='blue')
-ax.set_xlabel('n')
-ax.set_ylabel(r'$\epsilon_{0,n}$',fontsize=14)
-plt.show()
+x = ax[1,0].imshow(dvecs,cmap='coolwarm')
+ax[0,1].plot(dvals, color='blue')
+ax[0,1].set_xlabel('n')
+ax[0,1].set_ylabel(r'$\epsilon_{n}$',fontsize=14)
+plt.colorbar(x,ax=ax[1,0])
+
 
 ###########################################
 # Plot a few representative prob dists
 ###########################################
 
-pdf1 = dvecs[:,0]**2
-pdf2 = dvecs[:,10]**2
+pdf1 = dvecs[:,10]**2
+pdf2 = dvecs[:,20]**2
 pdf3 = dvecs[:,50]**2
 
-fig, ax = plt.subplots()
-ax.plot(pdf1, color='red',label='m=0')
-ax.plot(pdf2, color='blue',label='m=10')
-ax.plot(pdf3, color='purple',label='m=50')
-ax.set_xlabel('m')
-ax.set_ylabel(r'$|\phi_{m,n}|^{2}$',fontsize=14)
-ax.legend()
+ax[1,1].plot(pdf1, color='red',label='n=10')
+ax[1,1].plot(pdf2, color='blue',label='n=20')
+ax[1,1].plot(pdf3, color='purple',label='n=50')
+ax[1,1].set_xlabel('n')
+ax[1,1].set_ylabel(r'$|\phi_{n}|^{2}$',fontsize=14)
+ax[1,1].legend()
 plt.show()
 
 
