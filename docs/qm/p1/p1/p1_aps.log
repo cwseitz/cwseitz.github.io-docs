@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.8.26)  29 OCT 2022 14:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.8.6)  29 OCT 2022 16:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -250,6 +250,18 @@ LaTeX Warning: Label `fig:method' multiply defined.
 
 LaTeX Warning: Label `fig:method' multiply defined.
 
+
+LaTeX Warning: Label `fig:method' multiply defined.
+
+
+LaTeX Warning: Label `fig:method' multiply defined.
+
+
+LaTeX Warning: Label `fig:method' multiply defined.
+
+
+LaTeX Warning: Label `fig:method' multiply defined.
+
 )
 \openout1 = `p1_aps.aux'.
 
@@ -322,21 +334,65 @@ File: p1_3.png Graphic file (type png)
 <use p1_3.png>
 Package pdftex.def Info: p1_3.png  used on input line 208.
 (pdftex.def)             Requested size: 227.62204pt x 179.63664pt.
+<p1_5.png, id=25, 462.528pt x 330.9966pt>
+File: p1_5.png Graphic file (type png)
+<use p1_5.png>
+Package pdftex.def Info: p1_5.png  used on input line 219.
+(pdftex.def)             Requested size: 284.52756pt x 203.62482pt.
+
+Overfull \hbox (38.52756pt too wide) in paragraph at lines 219--220
+ [][] 
+ []
+
+<p1_6.png, id=26, 267.399pt x 292.6935pt>
+File: p1_6.png Graphic file (type png)
+<use p1_6.png>
+Package pdftex.def Info: p1_6.png  used on input line 226.
+(pdftex.def)             Requested size: 284.52756pt x 311.46841pt.
+
+Overfull \hbox (38.52756pt too wide) in paragraph at lines 226--227
+ [][] 
+ []
+
+<p1_7.png, id=27, 458.9145pt x 242.8272pt>
+File: p1_7.png Graphic file (type png)
+<use p1_7.png>
+Package pdftex.def Info: p1_7.png  used on input line 238.
+(pdftex.def)             Requested size: 284.52756pt x 150.55501pt.
+
+Overfull \hbox (38.52756pt too wide) in paragraph at lines 238--239
+ [][] 
+ []
+
+[2 <./p1_2.png> <./p1_3.png>]
+
+LaTeX Warning: A float is stuck (cannot be placed); try class option [floatfix]
+ on input line 244.
+
+<p1_8.png, id=34, 323.7696pt x 295.5843pt>
+File: p1_8.png Graphic file (type png)
+<use p1_8.png>
+Package pdftex.def Info: p1_8.png  used on input line 247.
+(pdftex.def)             Requested size: 284.52756pt x 259.7722pt.
+
+Overfull \hbox (38.52756pt too wide) in paragraph at lines 247--248
+ [][] 
+ []
 
 No file p1_aps.bbl.
-[2 <./p1_2.png> <./p1_3.png>] (./p1_aps.aux)
+[3 <./p1_5.png> <./p1_6.png>] [4 <./p1_7.png> <./p1_8.png>] (./p1_aps.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 5453 strings out of 478287
- 75406 string characters out of 5849289
- 391350 words of memory out of 5000000
- 23595 multiletter control sequences out of 15000+600000
+ 5493 strings out of 478287
+ 75930 string characters out of 5849290
+ 389350 words of memory out of 5000000
+ 23635 multiletter control sequences out of 15000+600000
  479613 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 69i,10n,77p,571b,338s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 69i,10n,77p,632b,338s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texli
@@ -345,16 +401,17 @@ mf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on p1_aps.pdf (2 pages, 319412 bytes).
+sfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on p1_aps.pdf (4 pages, 489856 bytes).
 PDF statistics:
- 93 PDF objects out of 1000 (max. 8388607)
- 52 compressed objects within 1 object stream
+ 112 PDF objects out of 1000 (max. 8388607)
+ 59 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 
