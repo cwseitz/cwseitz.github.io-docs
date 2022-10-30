@@ -90,8 +90,8 @@ This product is shown in Figure 1c, and we can see that the eigenvectors are ort
 
 \begin{figure}[t!]
 \centering
-\includegraphics[width=15cm]{p1_1}
-\caption{The Hamiltonian matrix for $t=1$}
+\includegraphics[width=15cm]{Figure_1}
+\caption{(A) The Hamiltonian $H_{0}$ (B) Eigenvectors as columns of a matrix (sorted by ascending eigenvalue) (C) Eigenvalue spectrum sorted in ascending order}
 \label{fig:method}
 \end{figure}
 
@@ -101,12 +101,7 @@ This product is shown in Figure 1c, and we can see that the eigenvectors are ort
 \vspace{0.1in}
 \noindent \textbf{(E)} Three example probability distributions are shown in Figure 2
 
-\begin{figure}[t!]
-\centering
-\includegraphics[width=10cm]{p1_2.png}
-\caption{The Hamiltonian matrix for $t=1$}
-\label{fig:method}
-\end{figure}
+
 
 \vspace{0.1in}
 \noindent \textbf{(F)} The standard quantum mechanics problem this corresponds to is the free particle.
@@ -127,8 +122,15 @@ for $k = \frac{\sqrt{2mE}}{\hbar}$. So clearly the energy eigenvalues are $E_{k}
 
 We would expect that the energy eigenvalues in Figure 1d would vary quadratically in $n$; however, the curve has a more sigmoidal shape. Around $n=50$, we can see that the eigenvalues are increasing more linearly because those solutions are actually superpositions of harmonics (See Figure 2, $n=50$ in purple). 
 
+\begin{figure}[t!]
+\centering
+\includegraphics[width=10cm]{Figure_2}
+\caption{Energy eigenkets in the position representation for $n=0,10,50$}
+\label{fig:method}
+\end{figure}
+
 \vspace{0.1in}
-\noindent \textbf{(G)} To understand why there are beats (for example $n=55$), notice that another perfectly valid solution of Schrodinger's equation is
+\noindent \textbf{(G)} To understand why there are beats (for example see $n=50$), notice that another perfectly valid solution of Schrodinger's equation is
 
 
 \begin{align*}
@@ -168,8 +170,8 @@ $\hat{H}$ is shown in Figure 3a, and is diagonal.
 
 \begin{figure}[t!]
 \centering
-\includegraphics[width=15cm]{p1_3}
-\caption{}
+\includegraphics[width=15cm]{Figure_3}
+\caption{(A) The Hamiltonian $H_{0}$ after unitary transformation with $U_{0}$ (B) Eigenvalue spectrum sorted in ascending order (C) Eigenvectors as columns of a matrix (sorted by ascending eigenvalue) (D) Probability densities for a few eigenvectors in the energy basis}
 \label{fig:method}
 \end{figure}
 
@@ -183,8 +185,8 @@ $\hat{H}$ is shown in Figure 3a, and is diagonal.
 
 \begin{figure}[t!]
 \centering
-\includegraphics[width=15cm]{p1_5}
-\caption{}
+\includegraphics[width=15cm]{Figure_4}
+\caption{(A) The Hamiltonain $H$ (B) Eigenvalue spectrum sorted in ascending order (C) Eigenvectors as columns of a matrix (sorted by ascending eigenvalue)}
 \label{fig:method}
 \end{figure}
 
@@ -206,6 +208,12 @@ $\hat{H}$ is shown in Figure 3a, and is diagonal.
 \vspace{0.1in}
 \noindent \textbf{(T)} 
 
+\begin{figure}[t!]
+\centering
+\includegraphics[width=17cm]{Figure_5}
+\caption{Probability densities for a few eigenkets of $H$}
+\label{fig:method}
+\end{figure}
 \vspace{0.1in}
 \noindent \textbf{(U)} The eigenvalue plot for $U_{0}H U_{0}^{-1}$ is the same as for $H$, as they should be. Again, we have changed our representation but nothing physical has changed.
 
@@ -213,31 +221,23 @@ $\hat{H}$ is shown in Figure 3a, and is diagonal.
 \noindent \textbf{(V)} The probability distributions $|\bra{\phi_{0,m}}\ket{\phi_{n}}|^{2}$ for $n=1, 25, 26, 35, 39, 41, 55$ are shown in Figure 7.
 
 \vspace{0.1in}
-\noindent \textbf{(W)} Let $\ket{\phi_{n}}$ be an orthonormal set of eigenkets of $\hat{H}$ and $\ket{\phi_{m}}$ be an orthonormal set of eigenkets of $\hat{H_{0}}$. Then $\sum_{m}\ket{\phi_{m}}\bra{\phi_{m}}\ket{\phi_{n}}$ is the representation of $\ket{\phi_{n}}$ in the $\ket{\phi_{m}}$ basis. It follows that $|\bra{\phi_{m}}\ket{\phi_{n}}|^{2}$ is the norm squared of that representation. Ultimately, we see spikes because for certain $m$, because $\bra{\phi_{n}}\ket{\phi_{n}}$ has greater magnitude.
+\noindent \textbf{(W)} Let $\ket{\phi_{n}}$ be an orthonormal set of energy eigenkets of $\hat{H}$ and $\ket{\phi_{m}}$ be an orthonormal set of eigenkets of $\hat{H_{0}}$. Then $\sum_{m}\ket{\phi_{m}}\bra{\phi_{m}}\ket{\phi_{n}}$ is the representation of $\ket{\phi_{n}}$ in the $\ket{\phi_{m}}$ basis. It follows that $|\bra{\phi_{m}}\ket{\phi_{n}}|^{2}$ is the norm squared of that representation. Ultimately, we see spikes because for certain $m$, because $\bra{\phi_{n}}\ket{\phi_{n}}$ has greater magnitude.
 
 \vspace{0.1in}
-\noindent \textbf{(X)} The matrix of values $\bra{\phi_{n}}\ket{\phi_{n}}$ is shown in Figure 6c.
+\noindent \textbf{(X)} The matrix of values $\bra{\phi_{m}}\ket{\phi_{n}}$ is shown in Figure 6c. Each column of this matrix is an eigenvector $\ket{\phi_{n}}$ in the $\ket{\phi_{m}}$ basis. We can see that the kets $\ket{\phi_{n}}$ are superpositions of the plane wave solutions to the free particle problem. This makes sense, because using Fourier analysis, we should be able to construct arbitrary wavefunctions using a basis consisting of fundamental harmonics.
+
 
 \begin{figure}[t!]
 \centering
-\includegraphics[width=15cm]{p1_6}
-\caption{}
-\label{fig:method}
-\end{figure}
-\clearpage
-
-\begin{figure}[t!]
-\centering
-\includegraphics[width=15cm]{p1_7}
-\caption{Unitary transformation of $H$ using $U_{0}$}
+\includegraphics[width=16cm]{Figure_6}
+\caption{(A) The Hamiltonain after unitary transformation with $U_{0}$ (B) Eigenvalue spectrum sorted in ascending order (C) Eigenvectors as columns of a matrix (sorted by ascending eigenvalue)}
 \label{fig:method}
 \end{figure}
 
-\clearpage
 \begin{figure}[t!]
 \centering
-\includegraphics[width=15cm]{p1_8}
-\caption{Eigenvectors of $H$ in $H_{0}$ eigenvector basis}
+\includegraphics[width=17cm]{Figure_7}
+\caption{Representative probability distributions for eigenvectors of $H$ in $H_{0}$ eigenbasis}
 \label{fig:method}
 \end{figure}
 
