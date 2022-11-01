@@ -1,0 +1,113 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath} % AMS Math Package
+\usepackage{bm}
+\usepackage{amsthm} % Theorem Formatting
+\usepackage{amssymb}    % Math symbols such as \mathbb
+\usepackage{graphicx} % Allows for eps images
+\usepackage[dvips,letterpaper,margin=1in,bottom=0.7in]{geometry}
+\usepackage{tensor}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{physics}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+
+\newcounter{mathematicapage}
+
+\newtheorem{p}{Problem}
+\usepackage{cancel}
+\newtheorem*{lem}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{dfn}{Definition}
+ \newenvironment{s}{%\small%
+        \begin{trivlist} \item \textbf{Solution}. }{%
+            \hspace*{\fill} $\blacksquare$\end{trivlist}}%
+
+
+\begin{document}
+
+ {\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Homework 7}         }\\[2\baselineskip] % Title
+{ {\bf \fontfamily{cmr}\selectfont Quantum Mechanics}\\ {\textit{\fontfamily{cmr}\selectfont     \today}}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    {\large \textsc{C Seitz}
+\\[1.4\baselineskip] 
+
+\begin{p}
+5.1
+\end{p}
+
+\begin{s}
+
+We are concerned here with the new ground state ket $\ket{0}$ in the presence of $H_{1}$ and the new ground state energy shift $\Delta_{0}$. 
+
+\begin{align*}
+\ket{0} = \ket{0^{0}} + \sum_{k\neq 0}\ket{k^{0}}\frac{V_{k0}}{E_{0}^{0}-E_{k}^{0}} + ...
+\end{align*}
+
+\begin{align*}
+\Delta_{0} = V_{00} + \sum_{k\neq 0}\frac{|V_{k0}|^{2}}{E_{0}^{0}-E_{k}^{0}} + ...
+\end{align*}
+
+\begin{align*}
+V_{nk} = b\bra{n^{0}}x\ket{k^{0}} &= b\sqrt{\frac{\hbar}{2m\omega}}\left(\sqrt{k}\delta_{n,k-1} + \sqrt{k+1}\delta_{n,k+1}\right)
+\end{align*}
+
+The lowest nonvanishing order is then $V_{01}$. Therefore 
+
+\begin{align*}
+\Delta_{0} = -\frac{b^{2}\hbar}{2m\omega}\frac{1}{\hbar\omega} = -\frac{b^{2}}{2m\omega^{2}}
+\end{align*}
+
+To solve it exactly, notice that the potential is of the form
+
+\begin{align*}
+V(x) = ax^{2} + bx
+\end{align*}
+
+This function shifts to the left by $b/2$ and has a new minimum at $-b/a$. Also, any multiplicative constant $\epsilon$ of the potential can just be absorbed into $\omega$, such that $E_{n} = \hbar\omega\sqrt{\epsilon}(n+\frac{1}{2})$. Importantly, this implies that the energy differences for various $n$, remain the same. Therefore, we can conclude that 
+
+\begin{align*}
+\Delta = -\frac{b}{2a} = -\frac{b}{2m\omega^{2}}
+\end{align*}
+
+which is exactly what we got with second-order perturbation theory.
+
+
+\end{s}
+
+\begin{p}
+5.2
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+5.5
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+5.7
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+5.12a
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+5.24
+\end{p}
+
+\begin{s}
+\end{s}
+
+\end{document}
