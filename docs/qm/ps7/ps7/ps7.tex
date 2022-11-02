@@ -61,16 +61,22 @@ The lowest nonvanishing order is then $V_{01}$. Therefore
 To solve it exactly, notice that the potential is of the form
 
 \begin{align*}
-V(x) = ax^{2} + bx
+V_{1}(x) = ax^{2} + bx
 \end{align*}
 
-This function shifts to the left by $b/2$ and has a new minimum at $-b/a$. Also, any multiplicative constant $\epsilon$ of the potential can just be absorbed into $\omega$, such that $E_{n} = \hbar\omega\sqrt{\epsilon}(n+\frac{1}{2})$. Therefore, we can conclude that 
+The new potential shifts to the left by $b/2$, has a new minimum at $-b/2a$, and the gradient has changed:
+
+\begin{align*}
+V'(x) = 2ax \rightarrow V_{1}'(x) = 2ax + b
+\end{align*}
+
+This change in the gradient will not change the energy differences w.r.t. the original problem (why?) so we have really just shifted the equilibrium point down by $-b/2m\omega^{2}$.
 
 \begin{align*}
 \Delta = -\frac{b}{2a} = -\frac{b}{2m\omega^{2}}
 \end{align*}
 
-which is exactly what we got with second-order perturbation theory.
+which is exactly what we got with perturbation theory.
 
 
 \end{s}
@@ -80,6 +86,24 @@ which is exactly what we got with second-order perturbation theory.
 \end{p}
 
 \begin{s}
+The perturbation Hamiltonian is 
+
+\begin{align*}
+H_{1} = \frac{Vx}{L}
+\end{align*}
+
+\begin{align*}
+V_{nk} = \bra{n^{0}}H_{1}\ket{k^{0}} &= \frac{V}{L}\bra{n^{0}}x\ket{k^{0}} \\
+&= \frac{V}{L}\int_{0}^{L} x \sin\left(\frac{n\pi x}{L}\right)\sin\left(\frac{k\pi x}{L}\right)dx
+\end{align*}
+
+
+\begin{align*}
+\Delta_{0} = V_{00} + \sum_{k\neq 0}\frac{|V_{k0}|^{2}}{E_{0}^{0}-E_{k}^{0}} + ...
+\end{align*}
+
+
+
 \end{s}
 
 \begin{p}
