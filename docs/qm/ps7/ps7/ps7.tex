@@ -111,6 +111,21 @@ V_{nk} = \bra{n^{0}}H_{1}\ket{k^{0}} &= \frac{V}{L}\bra{n^{0}}x\ket{k^{0}} \\
 \end{p}
 
 \begin{s}
+What we are asked to find is $|\bra{n^{0}}\ket{n}|^{2}$. Up to order $\lambda^{2}$, we have
+
+\begin{align*}
+\ket{n} &= \ket{n^{0}} + \lambda\sum_{k\neq n}\ket{k^{0}}\frac{V_{kn}}{E_{n}^{0}-E_{k}^{0}} + \lambda^{2}(\sum_{k\neq n}\sum_{k\neq l}\frac{V_{kl}V_{ln}\ket{k^{0}}}{(E_{n}^{0}-E_{k}^{0})(E_{n}^{0}-E_{l}^{0})}\\
+&- \sum_{k\neq n}\frac{V_{nn}V_{kn}\ket{k^{0}}}{(E_{n}^{0}-E_{k}^{0})^{2}})
+\end{align*}
+
+Therefore,
+
+\begin{align*}
+\bra{n^{0}}\ket{n} &= 1 + \lambda^{2}\sum_{k\neq n}\sum_{k\neq l}\frac{V_{kl}V_{ln}}{(E_{n}^{0}-E_{k}^{0})(E_{n}^{0}-E_{l}^{0})}\delta_{nk}\\
+\end{align*} 
+
+
+
 \end{s}
 
 \begin{p}
