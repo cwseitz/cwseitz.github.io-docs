@@ -267,18 +267,51 @@ which has three solutions $\lambda = 0,\pm\alpha$. So the degeneracy is broken.
 \end{p}
 
 \begin{s}
+
+We have seen before that we can either express the state in the basis of $\bm{J}^{2},\bm{L}^{2},\bm{S}^{2},J_z$ or $\bm{L}^{2},\bm{S}^{2},L_z,S_z$. In the former, our perturbation Hamiltonian $V$ reads
+
 \begin{align*}
 V = \frac{A}{2\hbar^{2}}\left(\bm{J}^{2}-\bm{L}^{2}-\bm{S}^{2}\right) + \frac{B}{\hbar}\left(J_z + S_z\right)
 \end{align*} 
 
-We have two states for $l=0$ of form $\ket{lsjm}$
+The only hiccup of this representation is that $S_z$ is not diagonal in the $\ket{lsjm}$ basis, so we will have to specify those matrix elements explicitly. For an arbitrary state $\ket{lsjm}$
+
+\begin{align*}
+\bra{lsjm}V\ket{lsjm} &= \bra{lsjm}\frac{A}{2\hbar^{2}}\left(\bm{J}^{2}-\bm{L}^{2}-\bm{S}^{2}\right) + \frac{B}{\hbar}\left(J_z + S_z\right)\ket{lsjm}\\
+&= \frac{A}{2}\left(j(j+1)-l(l+1)-s(s+1)\right) + Bm + B\bra{lsjm}S_{z}\ket{lsjm}
+\end{align*} 
+
+We can write these states alternatively as
+
+\begin{align*}
+\ket{j=l\pm \frac{1}{2},m} &= \pm\sqrt{\frac{l\pm m +\frac{1}{2}}{2l+1}}\ket{m_{l} = m-\frac{1}{2}, m_{s}=\frac{1}{2}} \\
+&+ \sqrt{\frac{l\mp m +\frac{1}{2}}{2l+1}}\ket{m_{l} = m+\frac{1}{2}, m_{s}=-\frac{1}{2}}
+\end{align*} 
+
+which means that
+
+\begin{align*}
+\bra{j=l\pm \frac{1}{2},m}S_{z}\ket{j=l\pm \frac{1}{2},m} &= \frac{\hbar}{2}(|c_{+}|^{2}-|c_{-}|^{2})\\
+&= \frac{\hbar}{2}\frac{1}{2l+1}\left(\left(l\pm m+\frac{1}{2}\right)-\left(l\mp m+\frac{1}{2}\right)\right) \\
+&= \pm \frac{m\hbar}{2l+1}
+\end{align*} 
+
+So we can write down the general matrix element as
+
+\begin{align*}
+\bra{lsjm}V\ket{lsjm} &= \bra{lsjm}\frac{A}{2\hbar^{2}}\left(\bm{J}^{2}-\bm{L}^{2}-\bm{S}^{2}\right) + \frac{B}{\hbar}\left(J_z + S_z\right)\ket{lsjm}\\
+&= \frac{A}{2}\left(j(j+1)-l(l+1)-s(s+1)\right) + Bm \pm B\frac{m}{2l+1}\\
+&= \frac{A}{2}\left(j(j+1)-l(l+1)-s(s+1)\right) + Bm\left(1 \pm \frac{1}{2l+1}\right)\\
+\end{align*} 
+
+Now, let's write out the 8 states. We have two states for $l=0$ of form $\ket{lsjm}$
 
 \begin{align*}
 \ket{0, \frac{1}{2}, \frac{1}{2}, \frac{1}{2}},
 \ket{0, \frac{1}{2}, \frac{1}{2}, -\frac{1}{2}}
 \end{align*} 
 
-and six states for $l=1$ 
+There are also six states for $l=1$ 
 
 \begin{align*}
 \ket{1, \frac{1}{2}, \frac{3}{2}, \frac{3}{2}},
@@ -289,14 +322,7 @@ and six states for $l=1$
 \ket{1, \frac{1}{2}, \frac{3}{2}, -\frac{1}{2}}
 \end{align*} 
 
-For an arbitrary state $\ket{lsjm}$
-
-\begin{align*}
-\bra{lsjm}V\ket{lsjm} &= \bra{lsjm}\frac{A}{2\hbar^{2}}\left(\bm{J}^{2}-\bm{L}^{2}-\bm{S}^{2}\right) + \frac{B}{\hbar}\left(J_z + S_z\right)\ket{lsjm}\\
-&= \frac{A}{2}\left(j(j+1)+l(l+1)+s(s+1)\right) + B(m+s)
-\end{align*} 
-
-Suppose we group together the $l=0$ states into a 2x2 matrix
+We are given the hint that two matrices will not be diagonal. We can spot Suppose we group together the $l=0$ states into a 2x2 matrix
 
 \begin{align*}
 V_{1} &= \begin{pmatrix}
