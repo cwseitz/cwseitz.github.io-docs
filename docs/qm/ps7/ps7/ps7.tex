@@ -38,18 +38,18 @@
 
 \begin{s}
 
-We are concerned here with the new ground state ket $\ket{0}$ in the presence of $H_{1}$ and the new ground state energy shift $\Delta_{0}$. 
+We are concerned here with the new ground state ket $\ket{0}$ and the new ground state energy shift $\Delta_{0}$ in the presence of perturbation $V=bx$. 
 
 \begin{align*}
-\ket{0} = \ket{0^{0}} + \sum_{k\neq 0}\ket{k^{0}}\frac{V_{k0}}{E_{0}^{0}-E_{k}^{0}} + ...
+\ket{0} = \ket{0^{0}} + \sum_{j\neq 0}\ket{j^{0}}\frac{V_{j0}}{E_{0}^{0}-E_{j}^{0}} + ...
 \end{align*}
 
 \begin{align*}
-\Delta_{0} = V_{00} + \sum_{k\neq 0}\frac{|V_{k0}|^{2}}{E_{0}^{0}-E_{k}^{0}} + ...
+\Delta_{0} = V_{00} + \sum_{j\neq 0}\frac{|V_{j0}|^{2}}{E_{0}^{0}-E_{j}^{0}} + ...
 \end{align*}
 
 \begin{align*}
-V_{nk} = b\bra{n^{0}}x\ket{k^{0}} &= b\sqrt{\frac{\hbar}{2m\omega}}\left(\sqrt{k}\delta_{n,k-1} + \sqrt{k+1}\delta_{n,k+1}\right)
+V_{nk} = b\bra{i^{0}}x\ket{j^{0}} &= b\sqrt{\frac{\hbar}{2m\omega}}\left(\sqrt{j}\delta_{i,j-1} + \sqrt{j+1}\delta_{i,j+1}\right)
 \end{align*}
 
 The lowest nonvanishing order is then $V_{01}$. Therefore 
@@ -64,20 +64,13 @@ To solve it exactly, notice that the potential is of the form
 V_{1}(x) = ax^{2} + bx
 \end{align*}
 
-The new potential shifts to the left by $b/2$, has a new minimum at $-b/2a$, and the gradient has changed:
-
-\begin{align*}
-V'(x) = 2ax \rightarrow V_{1}'(x) = 2ax + b
-\end{align*}
-
-This change in the gradient will not change the energy differences w.r.t. the original problem (why?) so we have really just shifted the equilibrium point down by $-b/2m\omega^{2}$.
+The new potential shifts to the left by $b/2$, has a new minimum at $-b/2a$. So it is really just the original problem, we just have to make a change of coordinates and shift the equilibrium point down by $-b/2m\omega^{2}$. Therefore,
 
 \begin{align*}
 \Delta = -\frac{b}{2a} = -\frac{b}{2m\omega^{2}}
 \end{align*}
 
 which is exactly what we got with perturbation theory.
-
 
 \end{s}
 
@@ -86,23 +79,27 @@ which is exactly what we got with perturbation theory.
 \end{p}
 
 \begin{s}
-The perturbation Hamiltonian is 
+
+In general, the first order shift in the energy levels $i$ is
 
 \begin{align*}
-H_{1} = \frac{Vx}{L}
+\Delta_{i} = V_{ii} = \bra{i^{0}}V\ket{i^{0}}
 \end{align*}
 
-\begin{align*}
-V_{nk} = \bra{n^{0}}H_{1}\ket{k^{0}} &= \frac{V}{L}\bra{n^{0}}x\ket{k^{0}} \\
-&= \frac{V}{L}\int_{0}^{L} x \sin\left(\frac{n\pi x}{L}\right)\sin\left(\frac{k\pi x}{L}\right)dx
-\end{align*}
+Furthermore, the perturbation Hamiltonian is 
 
 
 \begin{align*}
-\Delta_{0} = V_{00} + \sum_{k\neq 0}\frac{|V_{k0}|^{2}}{E_{0}^{0}-E_{k}^{0}} + ...
+V = \frac{V_{0}x}{L}
 \end{align*}
 
+So we just need to identify the matrix elements along the diagonal of this matrix:
 
+\begin{align*}
+V_{ii} = \bra{i^{0}}V\ket{i^{0}} &= \frac{V_{0}}{L}\bra{i^{0}}x\ket{i^{0}} \\
+&= \frac{V_{0}}{L}\frac{2}{L}\int_{0}^{L} x \sin^{2}\left(\frac{n\pi x}{L}\right)dx\\
+&= \frac{V_{0}}{L}
+\end{align*}
 
 \end{s}
 
@@ -111,20 +108,26 @@ V_{nk} = \bra{n^{0}}H_{1}\ket{k^{0}} &= \frac{V}{L}\bra{n^{0}}x\ket{k^{0}} \\
 \end{p}
 
 \begin{s}
-What we are asked to find is $|\bra{n^{0}}\ket{n}|^{2}/|\bra{n^{0}}\ket{n}|^{2}$. Up to order $\lambda^{2}$, we have
+
+Up to order $\lambda^{2}$, we have
 
 \begin{align*}
-\ket{n} &= \ket{n^{0}} + \lambda\sum_{k\neq n}\ket{k^{0}}\frac{V_{kn}}{E_{n}^{0}-E_{k}^{0}} + \lambda^{2}(\sum_{k\neq n}\sum_{k\neq l}\frac{V_{kl}V_{ln}\ket{k^{0}}}{(E_{n}^{0}-E_{k}^{0})(E_{n}^{0}-E_{l}^{0})}\\
-&- \sum_{k\neq n}\frac{V_{nn}V_{kn}\ket{k^{0}}}{(E_{n}^{0}-E_{k}^{0})^{2}})
+\ket{i} &= \ket{i^{0}} + \lambda\sum_{j\neq i}\frac{V_{ij}}{E_{i}^{0}-E_{j}^{0}}\ket{j^{0}} \\
+&+ \lambda^{2}\left(\sum_{j\neq i}\sum_{l\neq i}\frac{V_{jl}V_{li}\ket{j^{0}}}{(E_{i}^{0}-E_{j}^{0})(E_{i}^{0}-E_{l}^{0})}-\sum_{j\neq i}\frac{V_{ii}V_{ji}\ket{j^{0}}}{(E_{i}^{0}-E_{j}^{0})^{2}}) \right)
 \end{align*}
 
-Therefore,
+Now recall that we chose the normalization $\bra{i^{0}}\ket{i} = 1$ (which can be seen from the above equation), so what we have to calculate is $|\bra{i^{0}}\ket{i}|^{2}/|\bra{i}\ket{i}|^{2}$
 
 \begin{align*}
-\bra{n^{0}}\ket{n} &= 1 + \lambda^{2}\sum_{k\neq n}\sum_{k\neq l}\frac{V_{kl}V_{ln}}{(E_{n}^{0}-E_{k}^{0})(E_{n}^{0}-E_{l}^{0})}\delta_{nk}\\
+\bra{i}\ket{i} &= 1 + \lambda^{2}\left(\sum_{j\neq i}\frac{V_{ij}^{*}}{E_{i}^{0}-E_{j}^{0}}\bra{j^{0}}\right)\left(\sum_{j\neq i}\frac{V_{ij}}{E_{i}^{0}-E_{j}^{0}}\ket{j^{0}}\right)\\
+&= 1 + \lambda^{2}\sum_{j\neq i}\frac{V_{ij}^{*}V_{ij}}{\left(E_{i}^{0}-E_{j}^{0}\right)^{2}} 
 \end{align*} 
 
+So the probability is just
 
+\begin{align*}
+|\bra{i^{0}}\ket{i}|^{2}/|\bra{i}\ket{i}|^{2} = \left(1 + 2\lambda^{2}\sum_{j\neq i}\frac{V_{ij}^{*}V_{ij}}{\left(E_{i}^{0}-E_{j}^{0}\right)^{2}} \right)^{-1} + \mathcal{O}(\lambda^{3})
+\end{align*} 
 
 \end{s}
 
@@ -148,39 +151,47 @@ H_{0}\ket{n, m} &= (H_{x}+H_{y})\ket{n,m}\\
 &= \hbar\omega(n + m + 1)
 \end{align*}
 
-So the energies of the three lowest states are $\hbar\omega, 2\hbar\omega, 3\hbar\omega$. There is a degeneracy - two unique $\ket{n,m}$ have the same eigenvalue for the first excited state. For example $\ket{0,1}$ and $\ket{1,0}$ have the same energy. Now, the perturbation Hamiltonian is 
+So the energies of the three lowest states are $\hbar\omega, 2\hbar\omega, 3\hbar\omega$. There is a degeneracy - two unique $\ket{n,m}$ have the same eigenvalue for the first excited state. For example $\ket{0,1}$ and $\ket{1,0}$ have the same energy. Now, we are given the perturbation
 
 \begin{align*}
-H_{0} = H_{x} + H_{y} + \delta m\omega^{2}xy
+V = \delta m\omega^{2}xy
 \end{align*}
 
-First, to zeroth order, the energy eigenkets will not change because the diagonal of $V$ will always be zero. This should be clear from the following calculations. For the ground state, recall
+and we need to find a general matrix representation in the unperturbed $\ket{n,m}$ basis. I will use a shorthand:
 
 \begin{align*}
-V_{nk} = \bra{n^{0}}x\ket{k^{0}} &= \sqrt{\frac{\hbar}{2m\omega}}\left(\sqrt{k}\delta_{n,k-1} + \sqrt{k+1}\delta_{n,k+1}\right)
+V_{ij} &= \delta m\omega^{2}\bra{i}xy\ket{j}\\
+&= \delta m\omega^{2}\bra{i_{x}}x\ket{j_{x}}\bra{i_{y}}y\ket{j_{y}}\\
+&= \delta\frac{\hbar\omega}{2}\left(\sqrt{j_{x}}\delta_{i_{x},j_{x}-1} + \sqrt{j_{x}+1}\delta_{i_{x},j_{x}+1}\right)\left(\sqrt{j_{y}}\delta_{i_{y},j_{y}-1} + \sqrt{j_{y}+1}\delta_{i_{y},j_{y}+1}\right)
 \end{align*}
 
-Therefore,
+First, we consider the ground state. To first order,
 
 \begin{align*}
-V_{0k} &= \delta m\omega^{2}\bra{0,0} xy \ket{n,m}\\
-&= \frac{\hbar}{2m\omega}\delta m\omega^{2}\bra{n,m}\ket{1,1}\\
+\Delta_{i} &= V_{ii} = 0
 \end{align*}
 
-and $\bra{0,0}\ket{1,1} = 0$ so $V_{00}$ is zero (I have just used that $x$ can be written in terms of $a_{x}$ and $a_{x}^{\dagger}$ and the same for $y$). To first order, $V_{(n,m),0}$ must all be zero due to orthogonality. So there is no first order shift for the ground state.
 
-\noindent For the first excited state,
-
+This can be seen from the above equation, where the matrix elements of $V_{ij}$ are always zero when $i=j$. For the first exicted state, there is a degeneracy, so we need to diagonalize $V$ in the $\ket{1,0}$, $\ket{0,1}$ subspace. The matrix is
 
 \begin{align*}
-V_{1k} &= \delta m\omega^{2}\bra{0,1} xy \ket{n,m}\\
-&= \frac{\hbar}{2m\omega}\delta m\omega^{2}\sqrt{2}\\
+V' &= \begin{pmatrix}
+\bra{0,1}V\ket{0,1} & \bra{0,1}V\ket{1,0}\\
+\bra{1,0}V\ket{0,1} & \bra{1,0}V\ket{1,0}
+\end{pmatrix}\\
+&= \delta\frac{\hbar\omega}{2}\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix}
 \end{align*}
+
+which is a familiar matrix, so we can immediately write
 
 \begin{align*}
-\Delta_{1} = \frac{V_{1k}^{2}}{2\hbar\omega} + \frac{V_{1k}^{2}}{\hbar\omega}
+\Delta_{1}^{1} = \pm \delta\frac{\hbar\omega}{2}
 \end{align*}
 
+and the eigenvectors are $\frac{1}{\sqrt{2}}\left(\ket{0,1}\pm\ket{1,0}\right)$
 
 
 \end{s}
@@ -190,6 +201,65 @@ V_{1k} &= \delta m\omega^{2}\bra{0,1} xy \ket{n,m}\\
 \end{p}
 
 \begin{s}
+
+We need to find the eigenvectors of $V$ in the degenerate subspace. If they are all independent, then the three-fold degeneracy is lifted. I will suppress the quantum numbers $n$ and $m_{s}$ for brevity
+
+\begin{align*}
+V &= \begin{pmatrix}
+\bra{1,-1}V\ket{1,-1} & \bra{1,-1}V\ket{1,0} & \bra{1,-1}V\ket{1,1}\\
+\bra{1,0}V\ket{1,-1} & \bra{1,0}V\ket{1,0} & \bra{1,0}V\ket{1,1}\\
+\bra{1,1}V\ket{1,-1} & \bra{1,1}V\ket{1,0}& \bra{1,1}V\ket{1,1}
+\end{pmatrix}\\
+\end{align*}
+
+It is immediately obvious that the elements along the diagonal must be zero, by symmetry. Also, the matrix is Hermitian (which can be verified by inspecting the spherical harmonics $Y_{l}^{m}(\theta,\phi)$. Therefore, we just need to find $\bra{1,-1}V\ket{1,0}$, $\bra{1,-1}V\ket{1,1}$ and $\bra{1,0}V\ket{1,1}$. Write,
+
+\begin{align*}
+\bra{1,-1}x^{2}\ket{1,0} &= \int r^{2}\sin^{2}\theta\cos^{2}\phi Y_{1}^{-1}(\theta,\phi)Y_{1}^{0}(\theta,\phi)rdrd\theta d\phi\\
+&\propto \int r^{2}\sin^{2}\theta\cos^{2}\phi \sin\theta e^{i\phi}\cos\theta rdrd\theta d\phi = 0
+\end{align*}
+
+due to the $\theta$ integral. It is similar for $\langle y^{2} \rangle$ - the integral over $\theta$ is again zero and $\bra{1,-1}V\ket{1,0} = 0$. Moving on,
+
+\begin{align*}
+\bra{1,0}x^{2}\ket{1,1} &= \int r^{2}\sin^{2}\theta\cos^{2}\phi Y_{1}^{0}(\theta,\phi)Y_{1}^{1}(\theta,\phi)rdrd\theta d\phi\\
+&\propto \int r^{2}\sin^{2}\theta\cos^{2}\phi \sin\theta e^{-i\phi}\cos\theta rdrd\theta d\phi = 0
+\end{align*}
+
+So it is basically the same as before and $\bra{1,0}V\ket{1,1} = 0$. Finally, 
+
+\begin{align*}
+\bra{1,-1}x^{2}\ket{1,1} &= \int r^{2}\sin^{2}\theta\cos^{2}\phi Y_{1}^{-1}(\theta,\phi)Y_{1}^{1}(\theta,\phi)rdrd\theta d\phi\\
+&\propto \int r^{3}\sin^{4}\theta\cos^{2}\phi drd\theta d\phi
+\end{align*}
+
+\begin{align*}
+\bra{1,-1}y^{2}\ket{1,1} &= \int r^{2}\sin^{2}\theta\cos^{2}\phi Y_{1}^{-1}(\theta,\phi)Y_{1}^{1}(\theta,\phi)rdrd\theta d\phi\\
+&\propto \int r^{3}\sin^{2}\theta\cos^{4}\phi drd\theta d\phi
+\end{align*}
+
+We are not asked to work this integral out in detail, but it is nonzero and we will ultimately get a matrix like
+
+\begin{align*}
+V &= \begin{pmatrix}
+0 & 0 & \alpha\\
+0 & 0 & 0\\
+\alpha & 0& 0
+\end{pmatrix}
+\end{align*}
+
+since $\alpha$ is real. Finally, 
+
+\begin{align*}
+\mathrm{det}(V-\lambda I) = \mathrm{det}\begin{pmatrix}
+-\lambda & 0 & \alpha\\
+0 & -\lambda & 0\\
+\alpha & 0& -\lambda
+\end{pmatrix} = -\lambda^{3} + \lambda\alpha^{2} = 0
+\end{align*}
+
+which has three solutions $\lambda = 0,\pm\alpha$. So the degeneracy is broken.
+
 \end{s}
 
 \begin{p}
@@ -197,6 +267,44 @@ V_{1k} &= \delta m\omega^{2}\bra{0,1} xy \ket{n,m}\\
 \end{p}
 
 \begin{s}
+\begin{align*}
+V = \frac{A}{2\hbar^{2}}\left(\bm{J}^{2}-\bm{L}^{2}-\bm{S}^{2}\right) + \frac{B}{\hbar}\left(J_z + S_z\right)
+\end{align*} 
+
+We have two states for $l=0$ of form $\ket{lsjm}$
+
+\begin{align*}
+\ket{0, \frac{1}{2}, \frac{1}{2}, \frac{1}{2}},
+\ket{0, \frac{1}{2}, \frac{1}{2}, -\frac{1}{2}}
+\end{align*} 
+
+and six states for $l=1$ 
+
+\begin{align*}
+\ket{1, \frac{1}{2}, \frac{3}{2}, \frac{3}{2}},
+\ket{1, \frac{1}{2}, \frac{3}{2}, -\frac{3}{2}},
+\ket{1, \frac{1}{2}, \frac{1}{2}, \frac{1}{2}},
+\ket{1, \frac{1}{2}, \frac{3}{2}, \frac{1}{2}},
+\ket{1, \frac{1}{2}, \frac{1}{2}, -\frac{1}{2}},
+\ket{1, \frac{1}{2}, \frac{3}{2}, -\frac{1}{2}}
+\end{align*} 
+
+For an arbitrary state $\ket{lsjm}$
+
+\begin{align*}
+\bra{lsjm}V\ket{lsjm} &= \bra{lsjm}\frac{A}{2\hbar^{2}}\left(\bm{J}^{2}-\bm{L}^{2}-\bm{S}^{2}\right) + \frac{B}{\hbar}\left(J_z + S_z\right)\ket{lsjm}\\
+&= \frac{A}{2}\left(j(j+1)+l(l+1)+s(s+1)\right) + B(m+s)
+\end{align*} 
+
+Suppose we group together the $l=0$ states into a 2x2 matrix
+
+\begin{align*}
+V_{1} &= \begin{pmatrix}
+\frac{3A}{4} + B& 0\\
+0 & \frac{3A}{4}\\
+\end{pmatrix}
+\end{align*}
+
 \end{s}
 
 \end{document}
