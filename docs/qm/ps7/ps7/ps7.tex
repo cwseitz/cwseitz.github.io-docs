@@ -111,7 +111,7 @@ V_{nk} = \bra{n^{0}}H_{1}\ket{k^{0}} &= \frac{V}{L}\bra{n^{0}}x\ket{k^{0}} \\
 \end{p}
 
 \begin{s}
-What we are asked to find is $|\bra{n^{0}}\ket{n}|^{2}$. Up to order $\lambda^{2}$, we have
+What we are asked to find is $|\bra{n^{0}}\ket{n}|^{2}/|\bra{n^{0}}\ket{n}|^{2}$. Up to order $\lambda^{2}$, we have
 
 \begin{align*}
 \ket{n} &= \ket{n^{0}} + \lambda\sum_{k\neq n}\ket{k^{0}}\frac{V_{kn}}{E_{n}^{0}-E_{k}^{0}} + \lambda^{2}(\sum_{k\neq n}\sum_{k\neq l}\frac{V_{kl}V_{ln}\ket{k^{0}}}{(E_{n}^{0}-E_{k}^{0})(E_{n}^{0}-E_{l}^{0})}\\
@@ -133,6 +133,56 @@ Therefore,
 \end{p}
 
 \begin{s}
+
+We can write this Hamiltonian as 
+\begin{align*}
+H_{0} = H_{x} + H_{y}
+\end{align*}
+
+Given some state $\ket{n, m}$, where $H_{x}$ acts on $\ket{n}$ and $H_{y}$ acts on $\ket{m}$. 
+
+\begin{align*}
+H_{0}\ket{n, m} &= (H_{x}+H_{y})\ket{n,m}\\
+&= (E_{x}^{n}+E_{y}^{m})\ket{n,m}\\
+&= \hbar\omega\left(n+\frac{1}{2} + m + \frac{1}{2}\right)\\
+&= \hbar\omega(n + m + 1)
+\end{align*}
+
+So the energies of the three lowest states are $\hbar\omega, 2\hbar\omega, 3\hbar\omega$. There is a degeneracy - two unique $\ket{n,m}$ have the same eigenvalue for the first excited state. For example $\ket{0,1}$ and $\ket{1,0}$ have the same energy. Now, the perturbation Hamiltonian is 
+
+\begin{align*}
+H_{0} = H_{x} + H_{y} + \delta m\omega^{2}xy
+\end{align*}
+
+First, to zeroth order, the energy eigenkets will not change because the diagonal of $V$ will always be zero. This should be clear from the following calculations. For the ground state, recall
+
+\begin{align*}
+V_{nk} = \bra{n^{0}}x\ket{k^{0}} &= \sqrt{\frac{\hbar}{2m\omega}}\left(\sqrt{k}\delta_{n,k-1} + \sqrt{k+1}\delta_{n,k+1}\right)
+\end{align*}
+
+Therefore,
+
+\begin{align*}
+V_{0k} &= \delta m\omega^{2}\bra{0,0} xy \ket{n,m}\\
+&= \frac{\hbar}{2m\omega}\delta m\omega^{2}\bra{n,m}\ket{1,1}\\
+\end{align*}
+
+and $\bra{0,0}\ket{1,1} = 0$ so $V_{00}$ is zero (I have just used that $x$ can be written in terms of $a_{x}$ and $a_{x}^{\dagger}$ and the same for $y$). To first order, $V_{(n,m),0}$ must all be zero due to orthogonality. So there is no first order shift for the ground state.
+
+\noindent For the first excited state,
+
+
+\begin{align*}
+V_{1k} &= \delta m\omega^{2}\bra{0,1} xy \ket{n,m}\\
+&= \frac{\hbar}{2m\omega}\delta m\omega^{2}\sqrt{2}\\
+\end{align*}
+
+\begin{align*}
+\Delta_{1} = \frac{V_{1k}^{2}}{2\hbar\omega} + \frac{V_{1k}^{2}}{\hbar\omega}
+\end{align*}
+
+
+
 \end{s}
 
 \begin{p}
