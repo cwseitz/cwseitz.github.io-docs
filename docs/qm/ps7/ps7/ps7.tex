@@ -296,7 +296,7 @@ which means that
 &= \pm \frac{m\hbar}{2l+1}
 \end{align*} 
 
-So we can write down the general matrix element as
+So we can add in the contribution of $S_z$ to the diagonal matrix element:
 
 \begin{align*}
 \bra{lsjm}V\ket{lsjm} &= \bra{lsjm}\frac{A}{2\hbar^{2}}\left(\bm{J}^{2}-\bm{L}^{2}-\bm{S}^{2}\right) + \frac{B}{\hbar}\left(J_z + S_z\right)\ket{lsjm}\\
@@ -304,32 +304,53 @@ So we can write down the general matrix element as
 &= \frac{A}{2}\left(j(j+1)-l(l+1)-s(s+1)\right) + Bm\left(1 \pm \frac{1}{2l+1}\right)\\
 \end{align*} 
 
-Now, let's write out the 8 states. We have two states for $l=0$ of form $\ket{lsjm}$
+Now, we need to determine which pairs $\ket{lsjm},\ket{l's'j'm'}$ will give off diagonal matrix elements i.e., $\bra{lsjm}S_{z}\ket{l's'j'm'} \neq 0$. Notice these expressions do not include $j$, so probably the matrix element is nonzero is when $m= m'$, $j\neq j'$ but $l=l'$. These considerations suggest the non-diagonal 2x2 matrices includes states
 
 \begin{align*}
-\ket{0, \frac{1}{2}, \frac{1}{2}, \frac{1}{2}},
-\ket{0, \frac{1}{2}, \frac{1}{2}, -\frac{1}{2}}
-\end{align*} 
-
-There are also six states for $l=1$ 
-
-\begin{align*}
-\ket{1, \frac{1}{2}, \frac{3}{2}, \frac{3}{2}},
-\ket{1, \frac{1}{2}, \frac{3}{2}, -\frac{3}{2}},
-\ket{1, \frac{1}{2}, \frac{1}{2}, \frac{1}{2}},
-\ket{1, \frac{1}{2}, \frac{3}{2}, \frac{1}{2}},
 \ket{1, \frac{1}{2}, \frac{1}{2}, -\frac{1}{2}},
 \ket{1, \frac{1}{2}, \frac{3}{2}, -\frac{1}{2}}
 \end{align*} 
 
-We are given the hint that two matrices will not be diagonal. We can spot Suppose we group together the $l=0$ states into a 2x2 matrix
+and 
 
 \begin{align*}
-V_{1} &= \begin{pmatrix}
-\frac{3A}{4} + B& 0\\
-0 & \frac{3A}{4}\\
-\end{pmatrix}
+\ket{1, \frac{1}{2}, \frac{1}{2}, \frac{1}{2}},
+\ket{1, \frac{1}{2}, \frac{3}{2}, \frac{1}{2}},
+\end{align*} 
+
+and the rest of the states are
+
+\begin{align*}
+\ket{0, \frac{1}{2}, \frac{1}{2}, \frac{1}{2}},
+\ket{0, \frac{1}{2}, \frac{1}{2}, -\frac{1}{2}}
+\ket{1, \frac{1}{2}, \frac{3}{2}, \frac{3}{2}},
+\ket{1, \frac{1}{2}, \frac{3}{2}, -\frac{3}{2}},
 \end{align*}
+
+The values of the off-diagonal matrix elements have to be $\frac{B}{\hbar}\bra{lsjm}S_z\ket{lsj'm}$.
+
+\begin{align*}
+\frac{B}{\hbar}\bra{j=l\mp \frac{1}{2},m}S_z\ket{j=l\pm \frac{1}{2},m} = \left(\mp\sqrt{\frac{l\mp m +\frac{1}{2}}{2l+1}}\bra{\alpha} 
++ \sqrt{\frac{l\pm m +\frac{1}{2}}{2l+1}}\bra{\beta}\right)\\
+\left(\pm\frac{\hbar}{2}\sqrt{\frac{l\pm m +\frac{1}{2}}{2l+1}}\ket{\alpha} 
+- \frac{\hbar}{2}\sqrt{\frac{l\mp m +\frac{1}{2}}{2l+1}}\ket{\beta}\right)\\
+= \frac{B}{\hbar}\left(-\frac{\hbar}{2}\sqrt{\frac{l\mp m +\frac{1}{2}}{2l+1}}\sqrt{\frac{l\pm m +\frac{1}{2}}{2l+1}} - \frac{\hbar}{2}\sqrt{\frac{l\pm m +\frac{1}{2}}{2l+1}}\sqrt{\frac{l\pm m +\frac{1}{2}}{2l+1}}\right)\\
+= -\frac{B}{2l+1}\sqrt{(l\mp m +\frac{1}{2})(l\pm m +\frac{1}{2})}
+\end{align*} 
+
+For the states that are already diagonal in the perturbation (the third group of states given above), the first order energy shift is just the corresponding diagonal matrix element. Using our expression above 
+
+\begin{align*}
+\Delta_{0,\frac{1}{2},\pm\frac{1}{2}} = \bra{lsjm}V\ket{lsjm} = \pm B
+\end{align*}
+
+where the $\pm$ comes from the sign of $m$. For the second pair, $j\neq s$ so this one includes an $A$ term:
+
+\begin{align*}
+\Delta_{0,\frac{3}{2},\pm\frac{3}{2}} = \bra{lsjm}V\ket{lsjm} = \frac{3A}{2} \pm 3B
+\end{align*}
+
+The other first order shifts are given by the determinants 
 
 \end{s}
 
