@@ -1,0 +1,117 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath} % AMS Math Package
+\usepackage{bm}
+\usepackage{amsthm} % Theorem Formatting
+\usepackage{amssymb}    % Math symbols such as \mathbb
+\usepackage{graphicx} % Allows for eps images
+\usepackage[dvips,letterpaper,margin=1in,bottom=0.7in]{geometry}
+\usepackage{tensor}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{physics}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+
+\newcounter{mathematicapage}
+
+\newtheorem{p}{Problem}
+\usepackage{cancel}
+\newtheorem*{lem}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{dfn}{Definition}
+ \newenvironment{s}{%\small%
+        \begin{trivlist} \item \textbf{Solution}. }{%
+            \hspace*{\fill} $\blacksquare$\end{trivlist}}%
+
+
+\begin{document}
+
+ {\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Homework 8}         }\\[2\baselineskip] % Title
+{ {\bf \fontfamily{cmr}\selectfont Quantum Mechanics}\\ {\textit{\fontfamily{cmr}\selectfont     \today}}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    {\large \textsc{C Seitz}
+\\[1.4\baselineskip] 
+
+\begin{p}
+5.27
+\end{p}
+
+\begin{s}
+\begin{equation*}
+\frac{\bra{\tilde{0}}H\ket{\tilde{0}}}{\bra{\tilde{0}}\ket{\tilde{0}}} \geq E_{0}
+\end{equation*}
+
+The denominator is easy to compute
+
+\begin{equation*}
+2\int_{-\infty}^{0}e^{\beta x}dx = \frac{1}{\beta}
+\end{equation*}
+
+The numerator 
+
+\begin{align*}
+\bra{\tilde{0}}H\ket{\tilde{0}} &= \int_{-\infty}^{\infty}\psi^{*}(x)H\psi(x)dx\\
+&= \int_{-\infty}^{0}\psi^{*}(x)H\psi(x)dx + \int_{0}^{\infty}\psi^{*}(x)H\psi(x)dx
+\end{align*}
+
+\begin{align*}
+\int_{-\infty}^{0}\psi^{*}(x)H\psi(x)dx &= \int_{-\infty}^{0}-e^{\beta x}\frac{\hbar^{2}}{2m}\frac{\partial^{2}}{\partial x^{2}}e^{\beta x} + \frac{1}{2}m\omega^{2}x^{2}e^{2\beta x}dx\\
+&= \int_{-\infty}^{0}e^{2\beta x}\left(\frac{1}{2}m\omega^{2}x^{2}-\frac{\hbar^{2}\beta^{2}}{2m}\right)dx\\
+&= \Big|_{-\infty}^{0}\frac{1}{2}m\omega^{2}\frac{e^{2\beta x}(1 - 2\beta x + 2\beta^2 x^2)}{4 \beta^3} - e^{2\beta x}\frac{\hbar^{2}\beta}{4m}\\
+&= \frac{1}{2}m\omega^{2}\frac{1}{4 \beta^3} - \frac{\hbar^{2}\beta}{4m}
+\end{align*}
+
+\begin{align*}
+\int_{0}^{\infty}\psi^{*}(x)H\psi(x)dx &= \int_{0}^{\infty}-e^{-\beta x}\frac{\hbar^{2}}{2m}\frac{\partial^{2}}{\partial x^{2}}e^{-\beta x} + \frac{1}{2}m\omega^{2}x^{2}e^{-2\beta x}dx\\
+&= \int_{0}^{\infty}e^{-2\beta x}\left(\frac{1}{2}m\omega^{2}x^{2}-\frac{\hbar^{2}\beta^{2}}{2m}\right)dx\\
+&= \Big|_{0}^{\infty}\frac{1}{2}m\omega^{2}\frac{e^{-2\beta x}(1 + 2\beta x + 2\beta^2 x^2)}{4 \beta^3} - e^{-2\beta x}\frac{\hbar^{2}\beta}{4m}\\
+&= \frac{1}{2}m\omega^{2}\frac{1}{4 \beta^3} - \frac{\hbar^{2}\beta}{4m}
+\end{align*}
+
+\begin{align*}
+\bar{H} = \frac{\bra{\tilde{0}}H\ket{\tilde{0}}}{\bra{\tilde{0}}\ket{\tilde{0}}} = \frac{m\omega^{2}}{4\beta^{2}} - \frac{\hbar^{2}\beta^{2}}{2m}
+\end{align*}
+
+\begin{align*}
+\frac{d\bar{H}}{d\beta} =  -\frac{m\omega^{2}}{4\beta} - \frac{\hbar^{2}\beta}{m} = 0
+\end{align*}
+
+
+\end{s}
+
+\begin{p}
+5.29
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+5.30
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+5.32
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+5.35
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+5.36
+\end{p}
+
+\begin{s}
+\end{s}
+
+\end{document}
