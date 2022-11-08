@@ -341,16 +341,42 @@ The values of the off-diagonal matrix elements have to be $\frac{B}{\hbar}\bra{l
 For the states that are already diagonal in the perturbation (the third group of states given above), the first order energy shift is just the corresponding diagonal matrix element. Using our expression above 
 
 \begin{align*}
-\Delta_{0,\frac{1}{2},\pm\frac{1}{2}} = \bra{lsjm}V\ket{lsjm} = \pm B
+\Delta_{0,\frac{1}{2},\pm\frac{1}{2}} = \pm B
 \end{align*}
 
 where the $\pm$ comes from the sign of $m$. For the second pair, $j\neq s$ so this one includes an $A$ term:
 
 \begin{align*}
-\Delta_{0,\frac{3}{2},\pm\frac{3}{2}} = \bra{lsjm}V\ket{lsjm} = \frac{3A}{2} \pm 3B
+\Delta_{0,\frac{3}{2},\pm\frac{3}{2}} = \frac{3A}{2} \pm 3B
 \end{align*}
 
-The other first order shifts are given by the determinants 
+The other diagonal elements for the $l=1$ states are
+
+\begin{align*}
+\bra{1,\frac{1}{2},\pm\frac{1}{2}}V\ket{1,\frac{1}{2},\pm\frac{1}{2}} = -\frac{3A}{2} - \frac{B}{3}
+\end{align*}
+
+\begin{align*}
+\bra{1,\frac{3}{2},\pm\frac{1}{2}}V\ket{1,\frac{3}{2},\pm\frac{1}{2}} = - \frac{B}{3}
+\end{align*}
+
+The off diagonal elements are
+
+\begin{align*}
+\bra{1,\frac{1}{2},\pm\frac{1}{2}}V\ket{1,\frac{3}{2},\pm\frac{1}{2}} = -\frac{B}{3}\sqrt{(\frac{3}{2}\mp \frac{1}{2})(\frac{3}{2}\pm \frac{1}{2})}
+\end{align*}
+
+\begin{align*}
+\bra{1,\frac{3}{2},\pm\frac{1}{2}}V\ket{1,\frac{1}{2},\pm\frac{1}{2}} = -\frac{B}{3}\sqrt{(\frac{3}{2}\mp \frac{1}{2})(\frac{3}{2}\pm \frac{1}{2})}
+\end{align*}
+
+Then you just need to set $\pm$ to $+$, and solve the characteristic equation for the eigenvalues, set $\pm$ to $-$, and solve that characteristic equation as well. The two sets of eigenvalues are the first-order shifts in the energies for those states.
+
+...
+
+
+
+
 
 \end{s}
 
