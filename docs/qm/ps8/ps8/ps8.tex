@@ -76,7 +76,6 @@ The numerator
 \frac{d\bar{H}}{d\beta} =  -\frac{m\omega^{2}}{4\beta} - \frac{\hbar^{2}\beta}{m} = 0
 \end{align*}
 
-
 \end{s}
 
 \begin{p}
@@ -84,6 +83,40 @@ The numerator
 \end{p}
 
 \begin{s}
+
+We have the full time-dependent Hamiltonian
+
+\begin{align*}
+H(t) = H_{0} + F_{0}x\cos\omega t
+\end{align*}
+
+We are told that we are in the ground state $\ket{0}$ and we are after the expectation value $\langle x \rangle$ as a function of time. Write,
+
+\begin{align*}
+i\hbar\dot{c_{n}}(t) &= \sum_{m}V_{nm}e^{i\omega_{nm}t}c_{m}(t)
+\end{align*}
+
+for $\omega_{nm} = (E_{n}-E_{m})/\hbar$.
+
+\begin{align*}
+V_{nm} &= F_{0}\cos\omega t\bra{n}x\ket{m}\\
+&= \frac{F_{0}\cos\omega t}{2}\sqrt{\frac{\hbar}{2m\omega_{0}}}\left(\sqrt{n+1}\delta_{m,n-1} + \sqrt{n}\delta_{m,n+1}\right)
+\end{align*}
+
+We also know that
+
+\begin{align*}
+i\hbar\dot{c_{n}}(t) &= \sum_{m}V_{nm}e^{i\omega_{nm}t}c_{m}(t)\\
+\end{align*}
+
+But the initial condition says that $\ket{\psi(0)} = \ket{0}$, so the only term of the summation that survives has $m=n+1$
+
+\begin{align*}
+i\hbar\dot{c_{n}}(t) &= V_{n0}e^{i\omega_{n0}t}c_{0}(t)\\
+&= \frac{F_{0}\cos\omega t}{2}\sqrt{\frac{\hbar}{2m\omega_{0}}}e^{in\hbar\omega_{0}t}c_{0}(t)
+\end{align*}
+
+
 \end{s}
 
 \begin{p}
