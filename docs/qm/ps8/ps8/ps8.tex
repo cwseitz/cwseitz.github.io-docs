@@ -100,7 +100,7 @@ for $\omega_{nm} = (E_{n}-E_{m})/\hbar$.
 
 \begin{align*}
 V_{nm} &= F_{0}\cos\omega t\bra{n}x\ket{m}\\
-&= \frac{F_{0}\cos\omega t}{2}\sqrt{\frac{\hbar}{2m\omega_{0}}}\left(\sqrt{n+1}\delta_{m,n-1} + \sqrt{n}\delta_{m,n+1}\right)
+&= F_{0}\cos\omega t\sqrt{\frac{\hbar}{2m\omega_{0}}}\left(\sqrt{n+1}\delta_{m,n-1} + \sqrt{n}\delta_{m,n+1}\right)
 \end{align*}
 
 But the initial condition says that $\ket{\psi(0)} = \ket{0}$, so $n=0$ and the only term of the summation that survives has $m=1$. Therefore,
@@ -113,14 +113,17 @@ i\hbar\dot{c_{1}}(t) &= V_{10}e^{i\omega_{0}t}c_{0}(t)\\
 Solving for $c_{1}(t)$, 
 
 \begin{align*}
-c_{1}(t) &= \frac{F_{0}}{2}\sqrt{\frac{\hbar}{2m\omega_{0}}}\int_{0}^{t}e^{i\omega_{0}t}\cos\omega t dt
+c_{1}(t) &= -\frac{i}{\hbar}F_{0}\sqrt{\frac{\hbar}{2m\omega_{0}}}\int_{0}^{t}e^{i\omega_{0}t}\cos\omega t dt\\
+&= -\frac{i}{2\hbar}F_{0}\sqrt{\frac{\hbar}{2m\omega_{0}}}\left(\frac{e^{i(\omega_{0}+\omega)t}-1}{\omega_{0}+\omega}+\frac{e^{i(\omega_{0}-\omega)t}-1}{\omega_{0}-\omega}\right)
 \end{align*}
 
-The expectation value $\langle x \rangle$ is just
+Now, to compute $\langle x \rangle$, we can express the $x$ operator in the interaction picture (or, equivalently, convert the $\ket{\tilde{\psi(t)}}$ back to $\ket{\psi(t)}$).
 
 \begin{align*}
 \langle x \rangle &= \bra{\psi(t)} x \ket{\psi(t)} \\
-&= \left(\bra{0}c_{0} + \bra{1}c_{1}(t)\right)\frac{a+a^{\dagger}}{2}\left(c_{0}\ket{0} + c_{1}(t)\ket{1}\right)
+&= \bra{\tilde{\psi(t)}}e^{iH_{0}t/\hbar} x e^{-iH_{0}t/\hbar}\ket{\tilde{\psi(t)}}\\
+&= \sqrt{\frac{\hbar}{2m\omega_{0}}}\left(\bra{0}c_{0}^{*}e^{i\omega_{0}t/2} + \bra{1}e^{3i\omega_{0}t/2}c_{1}^{*}(t)\right)(a+a^{\dagger})\left(e^{-i\omega_{0}t/2}c_{0}\ket{0} + e^{-3i\omega_{0}t/2}c_{1}(t)\ket{1}\right)\\
+&= \sqrt{\frac{\hbar}{2m\omega_{0}}}\left(c_{1}(t)e^{-i\omega_{0}t} + c_{1}^{*}(t)e^{i\omega_{0}t}\right)
 \end{align*}
 
 \end{s}
