@@ -90,7 +90,7 @@ We have the full time-dependent Hamiltonian
 H(t) = H_{0} + F_{0}x\cos\omega t
 \end{align*}
 
-We are told that we are in the ground state $\ket{0}$ and we are after the expectation value $\langle x \rangle$ as a function of time. Write,
+We need to find $\ket{\psi(t)}$, which amounts to finding the expansion coefficients $c_{n}(t)$. In the interaction picture, we have that
 
 \begin{align*}
 i\hbar\dot{c_{n}}(t) &= \sum_{m}V_{nm}e^{i\omega_{nm}t}c_{m}(t)
@@ -103,19 +103,25 @@ V_{nm} &= F_{0}\cos\omega t\bra{n}x\ket{m}\\
 &= \frac{F_{0}\cos\omega t}{2}\sqrt{\frac{\hbar}{2m\omega_{0}}}\left(\sqrt{n+1}\delta_{m,n-1} + \sqrt{n}\delta_{m,n+1}\right)
 \end{align*}
 
-We also know that
+But the initial condition says that $\ket{\psi(0)} = \ket{0}$, so $n=0$ and the only term of the summation that survives has $m=1$. Therefore,
 
 \begin{align*}
-i\hbar\dot{c_{n}}(t) &= \sum_{m}V_{nm}e^{i\omega_{nm}t}c_{m}(t)\\
+i\hbar\dot{c_{1}}(t) &= V_{10}e^{i\omega_{0}t}c_{0}(t)\\
+&= \frac{F_{0}\cos\omega t}{2}\sqrt{\frac{\hbar}{2m\omega_{0}}}e^{i\omega_{0}t}c_{0}(t)
 \end{align*}
 
-But the initial condition says that $\ket{\psi(0)} = \ket{0}$, so the only term of the summation that survives has $m=n+1$
+Solving for $c_{1}(t)$, 
 
 \begin{align*}
-i\hbar\dot{c_{n}}(t) &= V_{n0}e^{i\omega_{n0}t}c_{0}(t)\\
-&= \frac{F_{0}\cos\omega t}{2}\sqrt{\frac{\hbar}{2m\omega_{0}}}e^{in\hbar\omega_{0}t}c_{0}(t)
+c_{1}(t) &= \frac{F_{0}}{2}\sqrt{\frac{\hbar}{2m\omega_{0}}}\int_{0}^{t}e^{i\omega_{0}t}\cos\omega t dt
 \end{align*}
 
+The expectation value $\langle x \rangle$ is just
+
+\begin{align*}
+\langle x \rangle &= \bra{\psi(t)} x \ket{\psi(t)} \\
+&= \left(\bra{0}c_{0} + \bra{1}c_{1}(t)\right)\frac{a+a^{\dagger}}{2}\left(c_{0}\ket{0} + c_{1}(t)\ket{1}\right)
+\end{align*}
 
 \end{s}
 
