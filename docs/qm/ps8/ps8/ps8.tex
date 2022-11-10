@@ -107,7 +107,7 @@ But the initial condition says that $\ket{\psi(0)} = \ket{0}$, so $n=0$ and the 
 
 \begin{align*}
 i\hbar\dot{c_{1}}(t) &= V_{10}e^{i\omega_{0}t}c_{0}(t)\\
-&= \frac{F_{0}\cos\omega t}{2}\sqrt{\frac{\hbar}{2m\omega_{0}}}e^{i\omega_{0}t}c_{0}(t)
+&= F_{0}\cos\omega t\sqrt{\frac{\hbar}{2m\omega_{0}}}e^{i\omega_{0}t}c_{0}(t)
 \end{align*}
 
 Solving for $c_{1}(t)$, 
@@ -133,6 +133,27 @@ Now, to compute $\langle x \rangle$, we can express the $x$ operator in the inte
 \end{p}
 
 \begin{s}
+The potential is 
+
+\begin{equation*}
+V(x,t) = xF_{0}e^{-t/\tau}
+\end{equation*}
+
+This is very similar to the previous problem, just with a different time-dependence to the potential. Write,
+
+\begin{align*}
+c_{1}(t) &= -\frac{i}{\hbar}F_{0}\sqrt{\frac{\hbar}{2m\omega_{0}}}\int_{0}^{t}e^{i\omega_{0}t}e^{-t/\tau} dt\\
+&= -\frac{i}{2\hbar}F_{0}\sqrt{\frac{\hbar}{2m\omega_{0}}}\frac{\left(e^{(i\omega_{0}-1/\tau)t}-1\right)}{(i\omega_{0}-1/\tau)t}
+\end{align*}
+
+The probability of finding the particle in the first excited state is
+
+\begin{align*}
+|c_{1}(t)|^{2} =
+\end{align*}
+
+which is clearly independent of time. This is expected since the force is transient. We cannot find higher order states because, as was shown in the previous problem, $c_{n}(0) = 0$ and $\dot{c_{n}}(t) = 0$ for all $n > 1$. 
+
 \end{s}
 
 \begin{p}
