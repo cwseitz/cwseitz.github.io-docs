@@ -160,7 +160,39 @@ which is clearly independent of time. This is expected since the force is transi
 5.32
 \end{p}
 
-\begin{s}
+\begin{s}$c_{n}(t)$
+
+We need to find $\ket{\psi(t)}$, which amounts to finding the expansion coefficients $c_{0}(t)$ and $c_{1}(t)$. In the interaction picture, we have that
+
+\begin{align*}
+i\hbar\dot{c_{n}}(t) &= \sum_{m}V_{nm}e^{i\omega_{nm}t}c_{m}(t)
+\end{align*}
+
+We were given $V(t)$, so we already know the $V_{nm}$. The differential equations for $c_{0}(t)$ and $c_{1}(t)$ are
+
+\begin{align*}
+i\hbar\dot{c_{0}}(t) = \sum_{m}V_{nm}e^{i\omega_{nm}t}c_{m}(t) = \lambda e^{i\omega_{01}t}\cos\omega t c_{1}(t)
+\end{align*}
+
+\begin{align*}
+i\hbar\dot{c_{1}}(t) = \sum_{m}V_{nm}e^{i\omega_{nm}t}c_{m}(t) = \lambda e^{-i\omega_{10}t}\cos\omega t c_{0}(t)
+\end{align*}
+
+So we have the coupled set of differential equations
+
+\begin{align*}
+\dot{c_{0}}(t) &= -\frac{i\lambda}{\hbar}c_{1}(t) e^{i\omega_{10}t}\cos\omega t \\
+\dot{c_{1}}(t) &= -\frac{i\lambda}{\hbar}c_{0}(t) e^{-i\omega_{10}t}\cos\omega t 
+\end{align*}
+
+
+subject to the initial conditions $c_{0}(0) = 1$ and $c_{1}(0) = 0$. The probability the system is found in the state $\ket{1}$ is
+
+\begin{align*}
+|\bra{\psi(t)}\ket{1}|^{2} = |c_{1}(t)|^{2}
+\end{align*}
+
+
 \end{s}
 
 \begin{p}
