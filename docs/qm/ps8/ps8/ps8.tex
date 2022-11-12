@@ -192,7 +192,6 @@ subject to the initial conditions $c_{0}(0) = 1$ and $c_{1}(0) = 0$. The probabi
 |\bra{\psi(t)}\ket{1}|^{2} = |c_{1}(t)|^{2}
 \end{align*}
 
-
 \end{s}
 
 \begin{p}
@@ -200,6 +199,36 @@ subject to the initial conditions $c_{0}(0) = 1$ and $c_{1}(0) = 0$. The probabi
 \end{p}
 
 \begin{s}
+
+The electric potential in the capacitor is
+
+\begin{align*}
+V(z,t) = \int_{0}^{z} E_{0}e^{-t/\tau} dz = zE_{0}e^{-t/\tau}
+\end{align*}
+
+We are asked to find the probability of finding the hydrogen atom in the states $\ket{2,1,\pm 1}, \ket{2,1,0}$, given the initial state $\ket{1,0,0}$. As usual, we make use of the interaction picture
+
+\begin{align*}
+i\hbar\dot{c_{n}}(t) &= \sum_{m}V_{nm}e^{i\omega_{nm}t}c_{m}(t)
+\end{align*}
+
+But need to find the matrix element $V_{nm} = \bra{nlm}V\ket{n'l'm'}$. These matrix elements are constrained by the selection rules for transitions of the hydrogen atom. It is well-known that the matrix element $\bra{nlm}z\ket{n'l'm'}$ is nonzero only when $m'=m$ and $l' = l \pm 1$. Therefore, we don't need to calculate the probability of a transition to $\ket{2,1,\pm 1}$, because it is impossible. However, a transition to state $\ket{2,1,0}$ is possible and we write
+
+\begin{align*}
+i\hbar\dot{c_{210}}(t) &= E_{0}e^{-t/\tau}\bra{1,0,0}z\ket{2,1,0}e^{i\omega t}c_{100}(t)
+\end{align*}
+
+where $\omega = (E_{210}-E_{1,0,0})/\hbar$.
+
+For the $2s$ state $\ket{2,0,0}$, the same selection rules apply, so we only need to find
+
+\begin{align*}
+i\hbar\dot{c_{210}}(t) &= E_{0}e^{-t/\tau}\bra{2,0,0}z\ket{2,1,0}c_{200}(t)
+\end{align*}
+
+where the exponential is $1$ because the two states are degenerate in energy thus $\omega = (E_{210}-E_{2,0,0})/\hbar = 0$.
+
+
 \end{s}
 
 \begin{p}
