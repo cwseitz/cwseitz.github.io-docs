@@ -227,8 +227,6 @@ i\hbar\dot{c_{210}}(t) &= E_{0}e^{-t/\tau}\bra{2,0,0}z\ket{2,1,0}c_{200}(t)
 \end{align*}
 
 where the exponential is $1$ because the two states are degenerate in energy thus $\omega = (E_{210}-E_{2,0,0})/\hbar = 0$.
-
-
 \end{s}
 
 \begin{p}
@@ -236,6 +234,47 @@ where the exponential is $1$ because the two states are degenerate in energy thu
 \end{p}
 
 \begin{s}
+
+We were given the Hamiltonian 
+
+\begin{align*}
+H = \beta \left(S_{1}\cdot S_{2}\right)
+\end{align*}
+
+where $\beta = 4\Delta/\hbar^{2}$. We would like to use Schrodinger's equation to write out the time evolution; however, it isn't immediately clearly what the eigenkets of $H$ are. Recall,
+
+\begin{align*}
+S_{1}\cdot S_{2} = \frac{1}{2}\left(J^{2} - S_{1}^{2} - S_{2}^{2}\right)
+\end{align*}
+
+where $J = S_{1} + S_{2}$. Consider a test ket $\ket{\alpha}$
+
+\begin{align*}
+H\ket{\alpha} = \beta\left(S_{1}\cdot S_{2}\right)\ket{\alpha} = \frac{\beta}{2}\left(J^{2} - S_{1}^{2} - S_{2}^{2}\right)\ket{\alpha}
+\end{align*}
+
+There must exist simultaneous eigenkets of all three operators since $S_{1}$ and $S_{2}$ commute. The Hilbert space dimension is 4, so we need 4 kets. Those kets are the three triplet states and the singlet state:
+
+\begin{align*}
+\ket{1,1} &= \ket{++}\\ 
+\ket{1,0} &= \frac{1}{\sqrt{2}}\left(\ket{+-} + \ket{-+}\right)\\
+\ket{1,-1} &= \ket{--}\\
+\ket{0,0} &= \frac{1}{\sqrt{2}}\left(\ket{+-} - \ket{-+}\right)\\ 
+\end{align*}
+
+Also note that the energies of the triplet states and singlet state are $\hbar^{2}/4$ and $-3\hbar^{2}/4$, respectively (which gives energy eigenvalues of $\Delta$ and $-3\Delta$). Now, to find the time evolution of the system prepared in $\ket{\psi(0)} = \ket{+-}$, we can write this state in that basis
+
+\begin{align*}
+\ket{\psi(0)} = \frac{1}{\sqrt{2}}\left(\ket{1,0} + \ket{0,0}\right)
+\end{align*}
+
+\begin{align*}
+\ket{\psi(t)} &= e^{-i\hat{H}t/\hbar}\ket{\psi(0)}\\
+&= \frac{1}{\sqrt{2}}\left(e^{-i\Delta t/\hbar}\ket{1,0} + e^{i3\Delta t/\hbar}\ket{0,0}\right)
+\end{align*}
+
+The probabilities immediately follow from this result:
+
 \end{s}
 
 \end{document}
