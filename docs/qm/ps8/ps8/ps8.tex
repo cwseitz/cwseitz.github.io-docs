@@ -131,8 +131,12 @@ Now, to compute $\langle x \rangle$, we can express the $x$ operator in the inte
 \langle x \rangle &= \bra{\psi(t)} x \ket{\psi(t)} \\
 &= \bra{\tilde{\psi(t)}}e^{iH_{0}t/\hbar} x e^{-iH_{0}t/\hbar}\ket{\tilde{\psi(t)}}\\
 &= \sqrt{\frac{\hbar}{2m\omega_{0}}}\left(\bra{0}c_{0}^{*}e^{i\omega_{0}t/2} + \bra{1}e^{3i\omega_{0}t/2}c_{1}^{*}(t)\right)(a+a^{\dagger})\left(e^{-i\omega_{0}t/2}c_{0}\ket{0} + e^{-3i\omega_{0}t/2}c_{1}(t)\ket{1}\right)\\
-&= \sqrt{\frac{\hbar}{2m\omega_{0}}}\left(c_{1}(t)e^{-i\omega_{0}t} + c_{1}^{*}(t)e^{i\omega_{0}t}\right)
+&= \sqrt{\frac{\hbar}{2m\omega_{0}}}\left(c_{1}(t)e^{-i\omega_{0}t} + c_{1}^{*}(t)e^{i\omega_{0}t}\right)\\
+&= -\frac{F_{0}}{4m\omega_{0}}\left(\left(\frac{e^{i(\omega_{0}+\omega)t}-1}{\omega_{0}+\omega}+\frac{e^{i(\omega_{0}-\omega)t}-1}{\omega_{0}-\omega}\right)e^{-i\omega_{0}t}  \left(\frac{e^{i(\omega_{0}+\omega)t}-1}{\omega_{0}+\omega}+\frac{e^{i(\omega_{0}-\omega)t}-1}{\omega_{0}-\omega}\right)e^{i\omega_{0}t}\right)\\
+&= -\frac{F_{0}}{m}\frac{\cos\omega t - \cos\omega_{0}t}{\omega_{0}^{2}-\omega^{2}}
 \end{align*}
+
+Time dependent perturbation theory clearly breaks down for $\omega \sim \omega_{0}$, as it can be seen there is a resonance there according to our expression for $\langle x\rangle$. The expectation value blows up, which cannot have physical significance.
 
 \end{s}
 
@@ -144,23 +148,23 @@ Now, to compute $\langle x \rangle$, we can express the $x$ operator in the inte
 The potential is 
 
 \begin{equation*}
-V(x,t) = xF_{0}e^{-t/\tau}
+V(x,t) = -xF_{0}e^{-t/\tau}
 \end{equation*}
 
 This is very similar to the previous problem, just with a different time-dependence to the potential. Write,
 
 \begin{align*}
-c_{1}(t) &= -\frac{i}{\hbar}F_{0}\sqrt{\frac{\hbar}{2m\omega_{0}}}\int_{0}^{t}e^{i\omega_{0}t}e^{-t/\tau} dt\\
-&= -\frac{i}{2\hbar}F_{0}\sqrt{\frac{\hbar}{2m\omega_{0}}}\frac{\left(e^{(i\omega_{0}-1/\tau)t}-1\right)}{(i\omega_{0}-1/\tau)t}
+c_{1}(t) &= \frac{i}{\hbar}F_{0}\sqrt{\frac{\hbar}{2m\omega_{0}}}\int_{0}^{t}e^{i\omega_{0}t}e^{-t/\tau} dt\\
+&= \frac{i}{\hbar}F_{0}\sqrt{\frac{\hbar}{2m\omega_{0}}}\frac{\left(e^{(i\omega_{0}-1/\tau)t}-1\right)}{(i\omega_{0}-1/\tau)}
 \end{align*}
 
-The probability of finding the particle in the first excited state is
+The probability of finding the particle in the first excited state is thus
 
 \begin{align*}
-|c_{1}(t)|^{2} =
+|c_{1}(t)|^{2} = \frac{F_{0}^{2}}{2m\omega_{0}}\left(\frac{1- 2e^{-t/\tau} \cos\omega_{0}t + e^{-2t/\tau}}{\omega_{0}^{2}+(1/\tau)^{2}}\right)
 \end{align*}
 
-which is clearly independent of time. This is expected since the force is transient. We cannot find higher order states because, as was shown in the previous problem, $c_{n}(0) = 0$ and $\dot{c_{n}}(t) = 0$ for all $n > 1$. 
+Taking the limit $t\rightarrow\infty$, the exponentials vanish and we get something independent of time. This is expected since the force is transient. We cannot find higher states to first order because, as was shown in the previous problem, $c_{n}(0) = 0$ and $\dot{c_{n}}(t) = 0$ for all $n > 1$. 
 
 \end{s}
 
@@ -176,28 +180,23 @@ We need to find $\ket{\psi(t)}$, which amounts to finding the expansion coeffici
 i\hbar\dot{c_{n}}(t) &= \sum_{m}V_{nm}e^{i\omega_{nm}t}c_{m}(t)
 \end{align*}
 
-We were given $V(t)$, so we already know the $V_{nm}$. The differential equations for $c_{0}(t)$ and $c_{1}(t)$ are
+We were given $V(t)$, so we already know the $V_{nm}$. The differential equation $c_{1}(t)$ is
 
 \begin{align*}
-i\hbar\dot{c_{0}}(t) = \sum_{m}V_{nm}e^{i\omega_{nm}t}c_{m}(t) = \lambda e^{i\omega_{01}t}\cos\omega t c_{1}(t)
-\end{align*}
-
-\begin{align*}
-i\hbar\dot{c_{1}}(t) = \sum_{m}V_{nm}e^{i\omega_{nm}t}c_{m}(t) = \lambda e^{-i\omega_{10}t}\cos\omega t c_{0}(t)
+i\hbar\dot{c_{1}}(t) = \sum_{m}V_{nm}e^{i\omega_{nm}t}c_{m}(t) = \lambda e^{-i\omega_{0}t}\cos\omega t 
 \end{align*}
 
 So we have the coupled set of differential equations
 
 \begin{align*}
-\dot{c_{0}}(t) &= -\frac{i\lambda}{\hbar}c_{1}(t) e^{i\omega_{10}t}\cos\omega t \\
-\dot{c_{1}}(t) &= -\frac{i\lambda}{\hbar}c_{0}(t) e^{-i\omega_{10}t}\cos\omega t 
+c_{1}(t) &= -\frac{i\lambda}{\hbar}\int_{0}^{t} e^{-i\omega_{0}t}\cos\omega t \\
+&= -\frac{i\lambda}{\hbar}\left(\frac{e^{i(\omega_{0}+\omega)t}-1}{\omega_{0}+\omega}+\frac{e^{i(\omega_{0}-\omega)t}-1}{\omega_{0}-\omega}\right)
 \end{align*}
 
-
-subject to the initial conditions $c_{0}(0) = 1$ and $c_{1}(0) = 0$. The probability the system is found in the state $\ket{1}$ is
+The probability the system is found in the state $\ket{1}$ is
 
 \begin{align*}
-|\bra{\psi(t)}\ket{1}|^{2} = |c_{1}(t)|^{2}
+|c_{1}(t)|^{2} = -\frac{\lambda}{\hbar}
 \end{align*}
 
 \end{s}
@@ -211,30 +210,46 @@ subject to the initial conditions $c_{0}(0) = 1$ and $c_{1}(0) = 0$. The probabi
 The electric potential in the capacitor is
 
 \begin{align*}
-V(z,t) = \int_{0}^{z} E_{0}e^{-t/\tau} dz = zE_{0}e^{-t/\tau}
+V(z,t) = \int_{0}^{z} E_{0}e^{-t/\tau} dz = -zeE_{0}e^{-t/\tau}
 \end{align*}
 
-We are asked to find the probability of finding the hydrogen atom in the states $\ket{2,1,\pm 1}, \ket{2,1,0}$, given the initial state $\ket{1,0,0}$. As usual, we make use of the interaction picture
+We are asked to find the probability of finding the hydrogen atom in the states $\ket{21\pm 1}, \ket{210}$, given the initial state $\ket{100}$. As usual, we make use of the interaction picture
 
 \begin{align*}
 i\hbar\dot{c_{n}}(t) &= \sum_{m}V_{nm}e^{i\omega_{nm}t}c_{m}(t)
 \end{align*}
 
-But need to find the matrix element $V_{nm} = \bra{nlm}V\ket{n'l'm'}$. These matrix elements are constrained by the selection rules for transitions of the hydrogen atom. It is well-known that the matrix element $\bra{nlm}z\ket{n'l'm'}$ is nonzero only when $m'=m$ and $l' = l \pm 1$. Therefore, we don't need to calculate the probability of a transition to $\ket{2,1,\pm 1}$, because it is impossible. However, a transition to state $\ket{2,1,0}$ is possible and we write
+But need to find the matrix element $V_{nm} = \bra{nlm}V\ket{n'l'm'}$. These matrix elements are constrained by the selection rules for transitions of the hydrogen atom. It is well-known that the matrix element $\bra{nlm}z\ket{n'l'm'}$ is nonzero only when $m'=m$ and $l' = l \pm 1$. Therefore, we don't need to calculate the probability of a transition to $\ket{21\pm 1}$, because it is impossible. However, a transition to state $\ket{210}$ is possible and we write
 
 \begin{align*}
-i\hbar\dot{c_{210}}(t) &= E_{0}e^{-t/\tau}\bra{1,0,0}z\ket{2,1,0}e^{i\omega t}c_{100}(t)
+i\hbar\dot{c_{210}}(t) &= -eE_{0}e^{-t/\tau}\bra{100}z\ket{210}e^{i\omega t}\\
 \end{align*}
 
-where $\omega = (E_{210}-E_{1,0,0})/\hbar$.
-
-For the $2s$ state $\ket{2,0,0}$, the same selection rules apply, so we only need to find
+That matrix element is well known. Call it $\gamma = \bra{100}z\ket{210} = (128\sqrt{2}/243)a_{0}$
 
 \begin{align*}
-i\hbar\dot{c_{210}}(t) &= E_{0}e^{-t/\tau}\bra{2,0,0}z\ket{2,1,0}c_{200}(t)
+c_{210}(t) &= \frac{i\gamma}{\hbar} eE_{0}\int_{0}^{t} e^{(i\omega-1/\tau)t}dt\\
+&= \frac{i\gamma}{\hbar} eE_{0}\frac{e^{(i\omega-1/\tau)t}}{(i\omega-1/\tau)}
 \end{align*}
 
-where the exponential is $1$ because the two states are degenerate in energy thus $\omega = (E_{210}-E_{2,0,0})/\hbar = 0$.
+and the probability follows from basically the same algebra as problem 3
+
+\begin{align*}
+|c_{210}(t)|^{2} &= \frac{\gamma^{2} e^{2}E_{0}^{2}}{\hbar^{2}}\left(\frac{1- 2e^{-t/\tau} \cos\omega t + e^{-2t/\tau}}{\omega^{2}+(1/\tau)^{2}}\right)
+\end{align*}
+
+where $\omega = (E_{210}-E_{100})/\hbar$. For the $2s$ state $\ket{200}$, the same selection rules apply, so the only differences are in the value of $\omega=0$ (due to the degeneracy) and the matrix element $\gamma$. 
+
+\begin{align*}
+|c_{210}(t)|^{2} &= \frac{(\gamma ')^{2} e^{2}E_{0}^{2}}{\hbar^{2}}\left(\frac{1- 2e^{-t/\tau}  + e^{-2t/\tau}}{1+(1/\tau)^{2}}\right)
+\end{align*}
+
+In the limit $\tau\rightarrow \infty$, the field is $E_{0}$, so we get that
+
+\begin{align*}
+|c_{210}(t)|^{2} &= \frac{2\gamma^{2} e^{2}E_{0}^{2}}{\omega^{2}\hbar^{2}}\left(1- \cos\omega t \right)
+\end{align*}
+
 \end{s}
 
 \begin{p}
