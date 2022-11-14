@@ -51,30 +51,38 @@ The numerator
 
 \begin{align*}
 \bra{\tilde{0}}H\ket{\tilde{0}} &= \int_{-\infty}^{\infty}\psi^{*}(x)H\psi(x)dx\\
-&= \int_{-\infty}^{0}\psi^{*}(x)H\psi(x)dx + \int_{0}^{\infty}\psi^{*}(x)H\psi(x)dx
+&= 2\int_{0}^{\infty}\psi^{*}(x)H\psi(x)dx - \frac{\hbar^{2}}{2m}\;\underset{\epsilon \rightarrow 0}{\mathrm{lim}}\int_{-\epsilon}^{\epsilon}dx e^{-\beta|x|}\frac{\partial^{2}}{\partial x^{2}}e^{-\beta|x|}
 \end{align*}
 
-\begin{align*}
-\int_{-\infty}^{0}\psi^{*}(x)H\psi(x)dx &= \int_{-\infty}^{0}-e^{\beta x}\frac{\hbar^{2}}{2m}\frac{\partial^{2}}{\partial x^{2}}e^{\beta x} + \frac{1}{2}m\omega^{2}x^{2}e^{2\beta x}dx\\
-&= \int_{-\infty}^{0}e^{2\beta x}\left(\frac{1}{2}m\omega^{2}x^{2}-\frac{\hbar^{2}\beta^{2}}{2m}\right)dx\\
-&= \Big|_{-\infty}^{0}\frac{1}{2}m\omega^{2}\frac{e^{2\beta x}(1 - 2\beta x + 2\beta^2 x^2)}{4 \beta^3} - e^{2\beta x}\frac{\hbar^{2}\beta}{4m}\\
-&= \frac{1}{2}m\omega^{2}\frac{1}{4 \beta^3} - \frac{\hbar^{2}\beta}{4m}
-\end{align*}
+The first integral is relatively straighforward:
 
 \begin{align*}
 \int_{0}^{\infty}\psi^{*}(x)H\psi(x)dx &= \int_{0}^{\infty}-e^{-\beta x}\frac{\hbar^{2}}{2m}\frac{\partial^{2}}{\partial x^{2}}e^{-\beta x} + \frac{1}{2}m\omega^{2}x^{2}e^{-2\beta x}dx\\
 &= \int_{0}^{\infty}e^{-2\beta x}\left(\frac{1}{2}m\omega^{2}x^{2}-\frac{\hbar^{2}\beta^{2}}{2m}\right)dx\\
 &= \Big|_{0}^{\infty}\frac{1}{2}m\omega^{2}\frac{e^{-2\beta x}(1 + 2\beta x + 2\beta^2 x^2)}{4 \beta^3} - e^{-2\beta x}\frac{\hbar^{2}\beta}{4m}\\
-&= \frac{1}{2}m\omega^{2}\frac{1}{4 \beta^3} - \frac{\hbar^{2}\beta}{4m}
+&= \frac{m\omega^{2}}{8 \beta^3} - \frac{\hbar^{2}\beta}{4m}
 \end{align*}
 
-\begin{align*}
-\bar{H} = \frac{\bra{\tilde{0}}H\ket{\tilde{0}}}{\bra{\tilde{0}}\ket{\tilde{0}}} = \frac{m\omega^{2}}{4\beta^{2}} - \frac{\hbar^{2}\beta^{2}}{2m}
-\end{align*}
+The second is 
 
 \begin{align*}
-\frac{d\bar{H}}{d\beta} =  -\frac{m\omega^{2}}{4\beta} - \frac{\hbar^{2}\beta}{m} = 0
+\underset{\epsilon \rightarrow 0}{\mathrm{lim}}\int_{-\epsilon}^{\epsilon}dx e^{-\beta|x|}\frac{\partial^{2}}{\partial x^{2}}e^{-\beta|x|} = \Big|_{-\epsilon}^{+\epsilon}
+\frac{\partial}{\partial x}e^{-\beta|x|} = -2\beta
 \end{align*}
+
+Putting it all together gives
+
+\begin{align*}
+\bar{H} = \frac{\bra{\tilde{0}}H\ket{\tilde{0}}}{\bra{\tilde{0}}\ket{\tilde{0}}} = \frac{m\omega^{2}}{4 \beta^2} + \frac{\hbar^{2}\beta}{2m}
+\end{align*}
+
+We then minimize $\bar{H}$ w.r.t. $\beta$
+
+\begin{align*}
+\frac{d\bar{H}}{d\beta} =  -\frac{m\omega^{2}}{4\beta} + \frac{\hbar^{2}\beta}{m} = 0
+\end{align*}
+
+and $\beta^{*} = \sqrt{m^{2}\beta^{2}/4\hbar^{2}}$
 
 \end{s}
 
@@ -241,7 +249,7 @@ We were given the Hamiltonian
 H = \beta \left(S_{1}\cdot S_{2}\right)
 \end{align*}
 
-where $\beta = 4\Delta/\hbar^{2}$. We would like to use Schrodinger's equation to write out the time evolution; however, it isn't immediately clearly what the eigenkets of $H$ are. Recall,
+where $\beta = 4\Delta/\hbar^{2}$. We would like to use Schrodinger's equation to write out the time evolution; however, it isn't immediately clear what the eigenkets of $H$ are. Recall,
 
 \begin{align*}
 S_{1}\cdot S_{2} = \frac{1}{2}\left(J^{2} - S_{1}^{2} - S_{2}^{2}\right)
@@ -273,7 +281,24 @@ Also note that the energies of the triplet states and singlet state are $\hbar^{
 &= \frac{1}{\sqrt{2}}\left(e^{-i\Delta t/\hbar}\ket{1,0} + e^{i3\Delta t/\hbar}\ket{0,0}\right)
 \end{align*}
 
-The probabilities immediately follow from this result:
+The probabilities immediately follow from this result. Those corresponding to $\ket{--}$ and $\ket{++}$ are zero. The others are:
+
+\begin{align*}
+|\bra{+-}\ket{\psi(t)}|^{2} &= \frac{1}{4}\left(e^{-i\Delta t/\hbar} + e^{i3\Delta t/\hbar}\right)\left(e^{i\Delta t/\hbar} + e^{-i3\Delta t/\hbar}\right)\\
+&= \frac{1+ e^{-4i\Delta t / \hbar} + e^{4i\Delta t / \hbar}}{2}\\
+&= \frac{1+\cos\frac{4\Delta t}{\hbar}}{2}
+\end{align*}
+
+\begin{align*}
+|\bra{-+}\ket{\psi(t)}|^{2} &= \frac{1}{4}\left(e^{-i\Delta t/\hbar} - e^{i3\Delta t/\hbar}\right)\left(e^{i\Delta t/\hbar} - e^{-i3\Delta t/\hbar}\right)\\
+&= \frac{1 - e^{-4i\Delta t / \hbar} - e^{4i\Delta t / \hbar}}{2}\\
+&= \frac{1-\cos\frac{4\Delta t}{\hbar}}{2}
+\end{align*}
+
+
+To solve this problem using time-dependent perturbation theory, we will need the matrix element for our Hamiltonian. We should use the 
+
+
 
 \end{s}
 
