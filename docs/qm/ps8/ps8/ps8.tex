@@ -122,7 +122,7 @@ Solving for $c_{1}(t)$,
 
 \begin{align*}
 c_{1}(t) &= -\frac{i}{\hbar}F_{0}\sqrt{\frac{\hbar}{2m\omega_{0}}}\int_{0}^{t}e^{i\omega_{0}t}\cos\omega t dt\\
-&= -\frac{i}{2\hbar}F_{0}\sqrt{\frac{\hbar}{2m\omega_{0}}}\left(\frac{e^{i(\omega_{0}+\omega)t}-1}{\omega_{0}+\omega}+\frac{e^{i(\omega_{0}-\omega)t}-1}{\omega_{0}-\omega}\right)
+&= -\frac{1}{2\hbar}F_{0}\sqrt{\frac{\hbar}{2m\omega_{0}}}\left(\frac{e^{i(\omega_{0}+\omega)t}-1}{\omega_{0}+\omega}+\frac{e^{i(\omega_{0}-\omega)t}-1}{\omega_{0}-\omega}\right)
 \end{align*}
 
 Now, to compute $\langle x \rangle$, we can express the $x$ operator in the interaction picture (or, equivalently, convert the $\ket{\tilde{\psi(t)}}$ back to $\ket{\psi(t)}$).
@@ -183,20 +183,22 @@ i\hbar\dot{c_{n}}(t) &= \sum_{m}V_{nm}e^{i\omega_{nm}t}c_{m}(t)
 We were given $V(t)$, so we already know the $V_{nm}$. The differential equation $c_{1}(t)$ is
 
 \begin{align*}
-i\hbar\dot{c_{1}}(t) = \sum_{m}V_{nm}e^{i\omega_{nm}t}c_{m}(t) = \lambda e^{-i\omega_{0}t}\cos\omega t 
+i\hbar\dot{c_{1}}(t) = \sum_{m}V_{nm}e^{i\omega_{nm}t}c_{m}(t) = \lambda e^{i\omega_{0}t}\cos\omega t 
 \end{align*}
 
-So we have the coupled set of differential equations
+Integrating in time, we get
 
 \begin{align*}
-c_{1}(t) &= -\frac{i\lambda}{\hbar}\int_{0}^{t} e^{-i\omega_{0}t}\cos\omega t \\
-&= -\frac{i\lambda}{\hbar}\left(\frac{e^{i(\omega_{0}+\omega)t}-1}{\omega_{0}+\omega}+\frac{e^{i(\omega_{0}-\omega)t}-1}{\omega_{0}-\omega}\right)
+c_{1}(t) &= -\frac{i\lambda}{\hbar}\int_{0}^{t} e^{i\omega_{0}t}\cos\omega t \\
+&= -\frac{i\lambda}{\hbar}\int_{0}^{t} e^{i\omega_{0}t}\left(e^{i\omega t} + e^{-i\omega t}\right)dt \\
+&= -\frac{\lambda}{\hbar}\left(\frac{e^{i(\omega_{0}+\omega)t}-1}{\omega_{0}+\omega}+\frac{e^{i(\omega_{0}-\omega)t}-1}{\omega_{0}-\omega}\right)
 \end{align*}
 
-The probability the system is found in the state $\ket{1}$ is
+Thus the probability the system is found in the state $\ket{1}$ is
 
 \begin{align*}
-|c_{1}(t)|^{2} = -\frac{\lambda}{\hbar}
+|c_{1}(t)|^{2} &= \frac{\lambda^{2}}{\hbar^{2}}\left(\frac{e^{-i(\omega_{0}+\omega)t}-1}{\omega_{0}+\omega}+\frac{e^{-i(\omega_{0}-\omega)t}-1}{\omega_{0}-\omega}\right)\left(\frac{e^{i(\omega_{0}+\omega)t}-1}{\omega_{0}+\omega}+\frac{e^{i(\omega_{0}-\omega)t}-1}{\omega_{0}-\omega}\right)\\
+&= \frac{\lambda^{2}}{\hbar^{2}}\left(\frac{\sin^{2}(\omega_{0}+\omega)}{2(\omega_{0}+\omega)^{2}}+\frac{\sin^{2}(\omega_{0}-\omega)}{2(\omega_{0}-\omega)^{2}}+\frac{\cos\omega t(\cos\omega t - \cos\omega_{0}t)}{(\omega_{0}-\omega)^{2}}\right)
 \end{align*}
 
 \end{s}
