@@ -44,7 +44,7 @@
 The denominator is easy to compute
 
 \begin{equation*}
-2\int_{-\infty}^{0}e^{\beta x}dx = \frac{1}{\beta}
+2\int_{-\infty}^{0}e^{\beta x}dx = \frac{2}{\beta}
 \end{equation*}
 
 The numerator 
@@ -79,10 +79,12 @@ Putting it all together gives
 We then minimize $\bar{H}$ w.r.t. $\beta$
 
 \begin{align*}
-\frac{d\bar{H}}{d\beta} =  -\frac{m\omega^{2}}{4\beta} + \frac{\hbar^{2}\beta}{m} = 0
+\frac{d\bar{H}}{d\beta} =  -\frac{m\omega^{2}}{2\beta^{3}} + \frac{\hbar^{2}\beta}{m} = 0
 \end{align*}
 
-and $\beta^{*} = \sqrt{m^{2}\beta^{2}/4\hbar^{2}}$
+\begin{align*}
+\frac{m^{2}\omega^{2}}{2\hbar^{2}} = \beta^{4}
+\end{align*}
 
 \end{s}
 
@@ -313,8 +315,50 @@ The probabilities immediately follow from this result. Those corresponding to $\
 \end{align*}
 
 
-To solve this problem using time-dependent perturbation theory, we will need the matrix element for our Hamiltonian. We should use the 
+To solve this problem using time-dependent perturbation theory, we will need the matrix elements for our Hamiltonian. We can immediately write the diagonal Hamiltonian in the basis of singlet and triplet states
 
+\begin{align*}
+H' =
+\Delta\begin{pmatrix}
+1 & 0 & 0 & 0\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & -3\\
+\end{pmatrix}
+\end{align*}
+
+Then we just change basis with the matrix
+
+\begin{align*}
+\mathcal{U} =
+\begin{pmatrix}
+1 & 0 & 0 & 0\\
+0 & 1/\sqrt{2} & 0 & 1/\sqrt{2}\\
+0 & 0 & 0 & 1\\
+0 & 1/\sqrt{2} & 0 & -1/\sqrt{2}\\
+\end{pmatrix}
+\end{align*}
+
+\begin{align*}
+H = \mathcal{U}H' = 
+\Delta\begin{pmatrix}
+1 & 0 & 0 & 0\\
+0 & 1/\sqrt{2} & 0 & -3/\sqrt{2}\\
+0 & 0 & 0 & 0\\
+0 & 1/\sqrt{2} & 0 & 3/\sqrt{2}\\
+\end{pmatrix}
+\end{align*}
+
+For the probability corresponding to $\ket{-+}$ we need the fourth row
+
+\begin{align*}
+i\hbar\dot{c}_{-+}(t) &= \sum_{m}\bra{-+}H\ket{m}e^{i\omega_{nm}t}c_{m}\\
+&= \frac{1}{2}\left(\Delta e^{i(0)t} + 3\Delta e^{i(0) t}\right)
+\end{align*}
+
+\begin{align*}
+c_{-+}(t) = -\frac{i}{2\hbar}4\Delta\int_{0}^{t} dt = -\frac{2i \Delta t}{\hbar}
+\end{align*}
 
 
 \end{s}
