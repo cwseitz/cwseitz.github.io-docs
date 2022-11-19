@@ -97,32 +97,39 @@ We are after the ensemble expectation values $[x^{n}]$ and $[p^{n}]$. In general
 [A] = \sum_{n}w_{n}\bra{\alpha_{n}}A\ket{\alpha_{n}}
 \end{align*}
 
-If the entire ensemble is prepared in the state $\ket{\alpha_{+}}$, then $[x^{n}]$ and $[p^{n}]$ are
+First, we should show 
+
+\begin{align*}
+(a + a^{\dagger})^{n}\ket{0} &= \sum_{k=0}^{n}{n\choose k}a^{k}(a^{\dagger})^{n-k}\ket{0}\\
+&= \sum_{k=0}^{n}{n\choose k}a^{k}\sqrt{(n-k)!}\ket{n-k}\\
+&= \sum_{k=0}^{n}{n\choose k}\frac{(n-k)!}{\sqrt{(n-2k)!}}\ket{n-2k}\\
+\end{align*}
+
+\begin{align*}
+(a + a^{\dagger})^{n}\ket{1} &= \sum_{k=0}^{n}{n\choose k}a^{k}(a^{\dagger})^{n-k}\ket{1}\\
+&= \sum_{k=0}^{n}{n\choose k}a^{k}\sqrt{(n-k+1)!}\ket{n-k+1}\\
+&= \sum_{k=0}^{n}{n\choose k}\frac{(n-k+1)!}{\sqrt{(n-2k+1)!}}\ket{n-2k+1}\\
+\end{align*}
+
+For $(a-a^{\dagger})^{n}$ we just replace $(a^{\dagger})^{n-k} \rightarrow (-1)^{n-k}(a^{\dagger})^{n-k}$ in the sum.
 
 \begin{align*}
 [x^{n}] &= \bra{\alpha_{+}}x^{n}\ket{\alpha_{+}}\\
 &= \frac{1}{2}\left(\bra{0}+ \bra{1}\right)x^{n}\left(\ket{0}+ \ket{1}\right)\\
-&= \sqrt{\frac{\hbar}{8m\omega}}\left(\bra{0}+ \bra{1}\right)\left(a+a^{\dagger}\right)^{n}\left(\ket{0}+ \ket{1}\right)\\
+&= \frac{1}{2}\left(\frac{\hbar}{2m\omega}\right)^{\frac{n}{2}}\left(\bra{0}+ \bra{1}\right)\left(a+a^{\dagger}\right)^{n}\left(\ket{0}+ \ket{1}\right)\\
+&= \frac{1}{2}\left(\frac{\hbar}{2m\omega}\right)^{\frac{n}{2}}\left(\bra{0}+ \bra{1}\right)\\
+&\left( \sum_{k=0}^{n}{n\choose k}\left(\frac{(n-k)!}{\sqrt{(n-2k)!}}\ket{n-2k}+\frac{(n-k+1)!}{\sqrt{(n-2k+1)!}}\ket{n-2k+1}\right)\right)\\
+&= \frac{1}{2}\left(\frac{\hbar}{2m\omega}\right)^{\frac{n}{2}}
 \end{align*}
-
 
 \begin{align*}
-[A] = \mathrm{Tr}(\rho A)
+[p^{n}] &= \bra{\alpha_{+}}p^{n}\ket{\alpha_{+}}\\
+&= \frac{1}{2}\left(\bra{0}+ \bra{1}\right)p^{n}\left(\ket{0}+ \ket{1}\right)\\
+&= (-i)^{n}\frac{1}{2}\left(\frac{m\hbar\omega}{2}\right)^{\frac{n}{2}}\left(\bra{0}+ \bra{1}\right)\left(a-a^{\dagger}\right)^{n}\left(\ket{0}+ \ket{1}\right)\\
+&= (-i)^{n}\frac{1}{2}\left(\frac{m\hbar\omega}{2}\right)^{\frac{n}{2}}\left(\bra{0}+ \bra{1}\right)\left(\ket{1}-\ket{0}\right)\\
+&= 0
 \end{align*}
 
-where $\rho$ is the density matrix
-
-\begin{align*}
-\rho = \sum_{n}w_{n}\ket{\alpha_{n}}\bra{\alpha_{n}}
-\end{align*}
-
-If the entire ensemble is prepared in the state $\ket{\alpha_{+}}$, 
-
-\begin{align*}
-\rho &= \ket{\alpha_{+}}\bra{\alpha_{+}}\\
-&= \frac{1}{2}\left(\ket{0}+ \ket{1}\right)\left(\bra{0}+ \bra{1}\right)\\
-&= \frac{1}{2}\left(\ket{0}\bra{0} + \ket{0}\bra{1} + \ket{1}\bra{0} + \ket{1}\bra{1}\right)
-\end{align*}
 
 
 \end{s}
