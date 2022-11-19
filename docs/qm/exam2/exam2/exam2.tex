@@ -62,7 +62,13 @@ which is easy to solve, and we get the first order shifts $\Delta_{\alpha}^{(1)}
 \end{pmatrix} = 0
 \end{align*}
 
-It is pretty much the same matrix, so $\Delta_{\beta}^{(1)} = \pm 4$. For the first order correction to the nondegnerate ket $\ket{3^{(0)}}$, we use nondegenerate perturbation theory to first order
+It is pretty much the same matrix, so $\Delta_{\beta}^{(1)} = \pm 4$. For the first order correction to the energy of $\ket{3^{0}}$, we have
+
+\begin{align*}
+\Delta_{3}^{(1)} &= \lambda\bra{3}V\ket{3} = \lambda
+\end{align*}
+
+Although to second order it is pretty much the same since $\lambda << \epsilon$
 
 \begin{align*}
 \Delta_{3}^{(1)} &= \lambda V_{33} + \lambda^{2}\sum_{j\neq 3}\frac{|V_{j3}|^{2}}{E_{3}^{(0)}-E_{j}^{(0)}}\\
@@ -73,8 +79,8 @@ It is pretty much the same matrix, so $\Delta_{\beta}^{(1)} = \pm 4$. For the fi
 To get the corrections to the ground state eigenvector, we can again use nondegenerate perturbation theory 
 
 \begin{align*}
-\ket{3^{(1)}} &= \lambda\ket{3^{(0)}} + \lambda^{2}\sum_{j\neq 3}\ket{j^{(0)}}\frac{V_{j3}}{E_{3}^{(0)}-E_{j}^{(0)}}\\
-&= \lambda\ket{3^{(0)}} + \frac{\lambda^{2}}{\epsilon}\left(\ket{2^{(0)}}+\ket{4^{(0)}}\right)
+\ket{3^{(1)}} &= \ket{3^{(0)}} + \lambda\sum_{j\neq 3}\ket{j^{(0)}}\frac{V_{j3}}{E_{3}^{(0)}-E_{j}^{(0)}}\\
+&= \ket{3^{(0)}} + \frac{\lambda}{\epsilon}\left(\ket{2^{(0)}}+\ket{4^{(0)}}\right)
 \end{align*}
 
 In the limit $\lambda \rightarrow 0$, the perturbed eigenvectors are the ``good" linear combinations. To find them we need to find the eigenvectors of the submatrices $V_{\mathcal{A}}$ and $V_{\mathcal{B}}$, which are both just multiples of the the $\hat{S}_n$ operator. We know those eigenvectors already
@@ -95,7 +101,9 @@ In the limit $\lambda \rightarrow 0$, the perturbed eigenvectors are the ``good"
 \ket{4^{(1)}} = \sin\frac{\theta}{2}\ket{2^{(0)}} - \cos\frac{\theta}{2}e^{i\phi}\ket{4^{(0)}}
 \end{align*}
 
-
+\begin{align*}
+\ket{3^{(1)}} = \ket{3^{(0)}}
+\end{align*}
 
 \end{s}
 
@@ -214,6 +222,44 @@ Now we go through all of the moments for momentum. Let $c = \sqrt{\frac{m\hbar\o
 &= \frac{(-i)^{n}c^{n}}{2}(\bra{0}(a-a^{\dagger})^{n}\ket{0} + \bra{0}(a-a^{\dagger})^{n}\ket{1}\\
 &+ \bra{1}(a-a^{\dagger})^{n}\ket{0} + \bra{1}(a-a^{\dagger})^{n}\ket{1})
 \end{align*}
+
+We can see that if $n$ is odd, the cross terms will always cancel. So we only need to be concerned with even $n$. Also this will be real as long as $n$ is even, $(-i)^{n}$ will alternate in sign as we ascend even values of $n$, but the minus signs will always occur together, making it always positive:
+
+$$
+[p^{n}] =
+\begin{cases}
+c^{n}{n\choose n/2}(n/2)!, \;\;n \;\mathrm{even} \\
+0, \;\;n \;\mathrm{odd} \\
+\end{cases}
+$$
+
+It is easy to see that the result is the same for $\ket{\beta_{+}}$. Now for $\ket{\alpha_{-}}$, we again always get zero for odd $n$. So just for even $n$, 
+
+\begin{align*}
+\bra{\alpha_-}p^{n}\ket{\alpha_-} &= \frac{(-i)^{n}c^{n}}{2}\left(\bra{0} - \bra{1}\right)(a-a^{\dagger})^{n}\left(\ket{0} - \ket{1}\right)\\
+&= \frac{(-i)^{n}c^{n}}{2}(\bra{0}(a-a^{\dagger})^{n}\ket{0} + \bra{1}(a-a^{\dagger})^{n}\ket{1})
+\end{align*}
+
+
+$$
+[p^{n}] =
+\begin{cases}
+c^{n}{n\choose n/2}(n/2)!, \;\;n \;\mathrm{even} \\
+0, \;\;n \;\mathrm{odd} \\
+\end{cases}
+$$
+
+and the result is identical for a pure ensemble of $\ket{\beta_{-}}$. In summary, if we have a mixed ensemble of $\ket{\alpha_{+}}$ and $\ket{\alpha_{-}}$, we will get 
+
+$$
+[p^{n}] =
+\begin{cases}
+c^{n}{n\choose n/2}(n/2)!, \;\;n \;\mathrm{even} \\
+0, \;\;n \;\mathrm{odd} \\
+\end{cases}
+$$
+
+and the same for the mixed ensemble of $\ket{\beta_{+}}$ and $\ket{\beta_{-}}$.
 
 \end{s}
 
