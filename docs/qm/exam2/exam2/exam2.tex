@@ -114,22 +114,58 @@ First, we should show
 For $(a-a^{\dagger})^{n}$ we just replace $(a^{\dagger})^{n-k} \rightarrow (-1)^{n-k}(a^{\dagger})^{n-k}$ in the sum.
 
 \begin{align*}
-[x^{n}] &= \bra{\alpha_{+}}x^{n}\ket{\alpha_{+}}\\
-&= \frac{1}{2}\left(\bra{0}+ \bra{1}\right)x^{n}\left(\ket{0}+ \ket{1}\right)\\
-&= \frac{1}{2}\left(\frac{\hbar}{2m\omega}\right)^{\frac{n}{2}}\left(\bra{0}+ \bra{1}\right)\left(a+a^{\dagger}\right)^{n}\left(\ket{0}+ \ket{1}\right)\\
-&= \frac{1}{2}\left(\frac{\hbar}{2m\omega}\right)^{\frac{n}{2}}\left(\bra{0}+ \bra{1}\right)\\
-&\left( \sum_{k=0}^{n}{n\choose k}\left(\frac{(n-k)!}{\sqrt{(n-2k)!}}\ket{n-2k}+\frac{(n-k+1)!}{\sqrt{(n-2k+1)!}}\ket{n-2k+1}\right)\right)\\
-&= \frac{1}{2}\left(\frac{\hbar}{2m\omega}\right)^{\frac{n}{2}}
+\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{+}} = \sum_{k=0}^{n}{n\choose k}\left(\frac{(n-k)!}{\sqrt{(n-2k)!}}\ket{n-2k}+\frac{(n-k+1)!}{\sqrt{(n-2k+1)!}}\ket{n-2k+1}\right)\\
 \end{align*}
+
+Hitting this with a bra $\bra{0}$ will select terms of the sum that satisfy $k = n/2$ (which only occurs for even $n$) or $k = (n+1)/2$ (which occurs for odd $n$). On the other hand, hitting this with a bra $\bra{1}$ will select terms of the sum that satisfy $k = (n-1)/2$ (odd $n$) or $k = n/2$ (even $n$). 
+
+First, consider even $n$, 
 
 \begin{align*}
-[p^{n}] &= \bra{\alpha_{+}}p^{n}\ket{\alpha_{+}}\\
-&= \frac{1}{2}\left(\bra{0}+ \bra{1}\right)p^{n}\left(\ket{0}+ \ket{1}\right)\\
-&= (-i)^{n}\frac{1}{2}\left(\frac{m\hbar\omega}{2}\right)^{\frac{n}{2}}\left(\bra{0}+ \bra{1}\right)\left(a-a^{\dagger}\right)^{n}\left(\ket{0}+ \ket{1}\right)\\
-&= (-i)^{n}\frac{1}{2}\left(\frac{m\hbar\omega}{2}\right)^{\frac{n}{2}}\left(\bra{0}+ \bra{1}\right)\left(\ket{1}-\ket{0}\right)\\
-&= 0
+\bra{0}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{+}} = {n\choose n/2}\left(\frac{n}{2}\right)!\\
+\bra{1}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{+}} = {n\choose n/2}\left(\frac{n}{2}\right)!
 \end{align*}
 
+For odd $n$, 
+
+\begin{align*}
+\bra{0}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{+}} = {n\choose (n+1)/2}\left(\frac{(n-1)}{2}\right)!\\
+\bra{1}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{+}} = {n\choose (n+1)/2}\left(\frac{(n+3)}{2}\right)!
+\end{align*}
+
+I will refer to these implicitly from here on.
+
+\begin{align*}
+[x^{n}] &= \bra{\alpha_{+}}x^{n}\ket{\alpha_{+}}\\
+&= \frac{1}{2}\left(\frac{\hbar}{2m\omega}\right)^{\frac{n}{2}}\left(\bra{0}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{+}} + \bra{1}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{+}}\right)\\
+\end{align*}
+
+For the $\ket{\beta_+}$ ensemble, the only difference is the factor of $i$ in front of the $\ket{1}$ ket, but the result is the same as the $\ket{\alpha_{+}}$ ensemble
+
+\begin{align*}
+[x^{n}] &= \bra{\beta_{+}}x^{n}\ket{\beta_{+}}\\
+&= \frac{1}{2}\left(\frac{\hbar}{2m\omega}\right)^{\frac{n}{2}}\left(\bra{0}\left(a+a^{\dagger}\right)^{n}\ket{\beta_{+}} + \bra{1}\left(a+a^{\dagger}\right)^{n}\ket{\beta_{+}}\right)\\
+\end{align*}
+
+For the mixture of $\ket{\alpha_+}$ and $\ket{\alpha_-}$
+
+\begin{align*}
+[x^{n}] &= \frac{1}{2}\left(\bra{\alpha_{+}}x^{n}\ket{\alpha_{+}}+\bra{\alpha_{-}}x^{n}\ket{\alpha_{-}}\right)\\
+\end{align*}
+
+To find the second term we need the odd and even cases again,
+
+\begin{align*}
+\bra{0}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{-}} = {n\choose n/2}\left(\frac{n}{2}\right)!\\
+\bra{1}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{-}} = {n\choose n/2}\left(\frac{n}{2}\right)!
+\end{align*}
+
+For odd $n$, 
+
+\begin{align*}
+\bra{0}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{-}} = -{n\choose (n+1)/2}\left(\frac{(n-1)}{2}\right)!\\
+\bra{1}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{-}} = -{n\choose (n+1)/2}\left(\frac{(n+3)}{2}\right)!
+\end{align*}
 
 
 \end{s}

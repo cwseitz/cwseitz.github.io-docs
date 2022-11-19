@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.8.6)  18 NOV 2022 21:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.8.6)  19 NOV 2022 00:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -363,19 +363,24 @@ Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
 (amsmath)                 on input line 106.
 
-[2] [3]
-<cb-table.png, id=25, 278.03876pt x 229.85875pt>
+[2]
+Overfull \hbox (30.3879pt too wide) detected at line 118
+[]
+ []
+
+[3] [4]
+<cb-table.png, id=28, 278.03876pt x 229.85875pt>
 File: cb-table.png Graphic file (type png)
 <use cb-table.png>
-Package pdftex.def Info: cb-table.png  used on input line 161.
+Package pdftex.def Info: cb-table.png  used on input line 197.
 (pdftex.def)             Requested size: 208.52855pt x 172.39362pt.
- [4] [5 <./cb-table.png>]
-<cb-table-2.png, id=35, 268.00125pt x 232.87pt>
+ [5] [6 <./cb-table.png>]
+<cb-table-2.png, id=38, 268.00125pt x 232.87pt>
 File: cb-table-2.png Graphic file (type png)
 <use cb-table-2.png>
-Package pdftex.def Info: cb-table-2.png  used on input line 219.
+Package pdftex.def Info: cb-table-2.png  used on input line 255.
 (pdftex.def)             Requested size: 201.00043pt x 174.65205pt.
- [6] [7 <./cb-table-2.png>] (./exam2.aux) )
+ [7] [8 <./cb-table-2.png>] (./exam2.aux) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 27 ({)
@@ -383,7 +388,7 @@ Package pdftex.def Info: cb-table-2.png  used on input line 219.
 Here is how much of TeX's memory you used:
  8108 strings out of 478287
  171786 string characters out of 5849290
- 455476 words of memory out of 5000000
+ 454476 words of memory out of 5000000
  26213 multiletter control sequences out of 15000+600000
  483634 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -402,10 +407,10 @@ amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/sym
 bols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symb
 ols/msbm10.pfb>
-Output written on exam2.pdf (7 pages, 180817 bytes).
+Output written on exam2.pdf (8 pages, 182833 bytes).
 PDF statistics:
- 103 PDF objects out of 1000 (max. 8388607)
- 61 compressed objects within 1 object stream
+ 106 PDF objects out of 1000 (max. 8388607)
+ 63 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
