@@ -109,84 +109,115 @@ In the limit $\lambda \rightarrow 0$, the perturbed eigenvectors are the ``good"
 \end{p}
 
 \begin{s}
-We are after the ensemble expectation values $[x^{n}]$ and $[p^{n}]$. In general, 
+
+I will start by going through all of the moments for position. Let $c = \sqrt{\frac{\hbar}{2m\omega}}$
 
 \begin{align*}
-[A] = \sum_{n}w_{n}\bra{\alpha_{n}}A\ket{\alpha_{n}}
+\bra{\alpha_+}x^{n}\ket{\alpha_+} &= \frac{c^{n}}{2}\left(\bra{0} + \bra{1}\right)(a+a^{\dagger})^{n}\left(\ket{0} + \ket{1}\right)\\
+&= \frac{c^{n}}{2}(\bra{0}(a+a^{\dagger})^{n}\ket{0} + \bra{0}(a+a^{\dagger})^{n}\ket{1}\\
+&+ \bra{1}(a+a^{\dagger})^{n}\ket{0} + \bra{1}(a+a^{\dagger})^{n}\ket{1})
 \end{align*}
 
-First, we should show 
+for a yet unspecified constant $c$. We know that $(a+a^{\dagger})^{n}$ is just a binomial expansion. The first and last terms survive only for terms in the expansion where the power of $a$ is the same as $a^\dagger$ which happens only when $n$ is even. The second term survives when the power of $a$ is one less than $a^\dagger$ and vice versa for the third term. For even $n$, we can write
 
 \begin{align*}
-(a + a^{\dagger})^{n}\ket{0} &= \sum_{k=0}^{n}{n\choose k}a^{k}(a^{\dagger})^{n-k}\ket{0}\\
-&= \sum_{k=0}^{n}{n\choose k}a^{k}\sqrt{(n-k)!}\ket{n-k}\\
-&= \sum_{k=0}^{n}{n\choose k}\frac{(n-k)!}{\sqrt{(n-2k)!}}\ket{n-2k}\\
+(a)^{n/2}(a^{\dagger})^{n/2}\ket{0} &= (n/2)!\ket{0}\\
+(a)^{n/2}(a^{\dagger})^{n/2}\ket{1} &= (n/2)!\ket{1}
 \end{align*}
+
+For odd values of $n$, we write
 
 \begin{align*}
-(a + a^{\dagger})^{n}\ket{1} &= \sum_{k=0}^{n}{n\choose k}a^{k}(a^{\dagger})^{n-k}\ket{1}\\
-&= \sum_{k=0}^{n}{n\choose k}a^{k}\sqrt{(n-k+1)!}\ket{n-k+1}\\
-&= \sum_{k=0}^{n}{n\choose k}\frac{(n-k+1)!}{\sqrt{(n-2k+1)!}}\ket{n-2k+1}\\
+(a)^{\frac{n-1}{2}}(a^{\dagger})^{\frac{n+1}{2}}\ket{0} &= \sqrt{\frac{n+1}{2}!}\sqrt{\frac{n-1}{2}!}\ket{0}\\
+(a)^{\frac{n+1}{2}}(a^{\dagger})^{\frac{n-1}{2}}\ket{1} &= \sqrt{\frac{n+1}{2}!}\sqrt{\frac{n-1}{2}!}\ket{1}\\
 \end{align*}
 
-For $(a-a^{\dagger})^{n}$ we just replace $(a^{\dagger})^{n-k} \rightarrow (-1)^{n-k}(a^{\dagger})^{n-k}$ in the sum.
+Putting it together and using the appropriate binomial coefficients, we get
+
+$$
+\bra{\alpha_+}x^{n}\ket{\alpha_+}=
+\begin{cases}
+c^{n}{n\choose n/2}(n/2)!, \;\;n \;\mathrm{even} \\
+c^{n}{n\choose (n+1)/2}\sqrt{\frac{n+1}{2}!}\sqrt{\frac{n-1}{2}!}, \;\;n \;\mathrm{odd} \\
+\end{cases}
+$$
+
+For the pure ensemble of $\ket{\beta_{+}}$, we have
 
 \begin{align*}
-\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{+}} = \sum_{k=0}^{n}{n\choose k}\left(\frac{(n-k)!}{\sqrt{(n-2k)!}}\ket{n-2k}+\frac{(n-k+1)!}{\sqrt{(n-2k+1)!}}\ket{n-2k+1}\right)\\
+\bra{\beta_+}x^{n}\ket{\beta_+} &= \frac{c^{n}}{2}\left(\bra{0} - i\bra{1}\right)(a+a^{\dagger})^{n}\left(\ket{0} + i\ket{1}\right)\\
+&= \frac{c^{n}}{2}(\bra{0}(a+a^{\dagger})^{n}\ket{0} + i\bra{0}(a+a^{\dagger})^{n}\ket{1}\\
+&- i\bra{1}(a+a^{\dagger})^{n}\ket{0} + \bra{1}(a+a^{\dagger})^{n}\ket{1})\\
+&= \frac{c^{n}}{2}(\bra{0}(a+a^{\dagger})^{n}\ket{0} + \bra{1}(a+a^{\dagger})^{n}\ket{1})
 \end{align*}
 
-Hitting this with a bra $\bra{0}$ will select terms of the sum that satisfy $k = n/2$ (which only occurs for even $n$) or $k = (n+1)/2$ (which occurs for odd $n$). On the other hand, hitting this with a bra $\bra{1}$ will select terms of the sum that satisfy $k = (n-1)/2$ (odd $n$) or $k = n/2$ (even $n$). 
+$$
+\bra{\beta_+}x^{n}\ket{\beta_+}=
+\begin{cases}
+c^{n}{n\choose n/2}(n/2)!, \;\;n \;\mathrm{even} \\
+0, \;\;n \;\mathrm{odd} \\
+\end{cases}
+$$
 
-First, consider even $n$, 
+so this is only nonzero for even $n$. For an ensemble of $\ket{\alpha_{-}}$, it is a similar situation 
 
 \begin{align*}
-\bra{0}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{+}} = {n\choose n/2}\left(\frac{n}{2}\right)!\\
-\bra{1}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{+}} = {n\choose n/2}\left(\frac{n}{2}\right)!
+\bra{\alpha_-}x^{n}\ket{\alpha_-} &= \frac{c^{n}}{2}(\bra{0}(a+a^{\dagger})^{n}\ket{0} + \bra{1}(a+a^{\dagger})^{n}\ket{1})
 \end{align*}
 
-For odd $n$, 
+$$
+\bra{\alpha_-}x^{n}\ket{\alpha_-}=
+\begin{cases}
+c^{n}{n\choose n/2}(n/2)!, \;\;n \;\mathrm{even} \\
+0, \;\;n \;\mathrm{odd} \\
+\end{cases}
+$$
+
+and for $\ket{\beta_{-}}$, we get
 
 \begin{align*}
-\bra{0}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{+}} = {n\choose (n+1)/2}\left(\frac{(n-1)}{2}\right)!\\
-\bra{1}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{+}} = {n\choose (n+1)/2}\left(\frac{(n+3)}{2}\right)!
+\bra{\beta_-}x^{n}\ket{\beta_-} &= \frac{c^{n}}{2}(\bra{0}(a+a^{\dagger})^{n}\ket{0} + \bra{1}(a+a^{\dagger})^{n}\ket{1})
 \end{align*}
 
-I will refer to these implicitly from here on.
+$$
+\bra{\beta_-}x^{n}\ket{\beta_-}=
+\begin{cases}
+c^{n}{n\choose n/2}(n/2)!, \;\;n \;\mathrm{even} \\
+0, \;\;n \;\mathrm{odd} \\
+\end{cases}
+$$
+
+For a mixed ensemble of $\ket{\alpha_{+}}$ and $\ket{\alpha_{-}}$, 
+
+$$
+[x^{n}] =
+\begin{cases}
+c^{n}{n\choose n/2}(n/2)!, \;\;n \;\mathrm{even} \\
+\frac{1}{2}c^{n}{n\choose (n+1)/2}\sqrt{\frac{n+1}{2}!}\sqrt{\frac{n-1}{2}!}, \;\;n \;\mathrm{odd} \\
+\end{cases}
+$$
+
+and for a mixed ensemble of $\ket{\beta_{+}}$ and $\ket{\beta_{-}}$, 
+
+$$
+[x^{n}] =
+\begin{cases}
+c^{n}{n\choose n/2}(n/2)!, \;\;n \;\mathrm{even} \\
+0, \;\;n \;\mathrm{odd} \\
+\end{cases}
+$$
+
+Now we go through all of the moments for momentum. Let $c = \sqrt{\frac{m\hbar\omega}{2}}$
 
 \begin{align*}
-[x^{n}] &= \bra{\alpha_{+}}x^{n}\ket{\alpha_{+}}\\
-&= \frac{1}{2}\left(\frac{\hbar}{2m\omega}\right)^{\frac{n}{2}}\left(\bra{0}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{+}} + \bra{1}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{+}}\right)\\
+\bra{\alpha_+}p^{n}\ket{\alpha_+} &= \frac{(-i)^{n}c^{n}}{2}\left(\bra{0} + \bra{1}\right)(a-a^{\dagger})^{n}\left(\ket{0} + \ket{1}\right)\\
+&= \frac{(-i)^{n}c^{n}}{2}(\bra{0}(a-a^{\dagger})^{n}\ket{0} + \bra{0}(a-a^{\dagger})^{n}\ket{1}\\
+&+ \bra{1}(a-a^{\dagger})^{n}\ket{0} + \bra{1}(a-a^{\dagger})^{n}\ket{1})
 \end{align*}
-
-For the $\ket{\beta_+}$ ensemble, the only difference is the factor of $i$ in front of the $\ket{1}$ ket, but the result is the same as the $\ket{\alpha_{+}}$ ensemble
-
-\begin{align*}
-[x^{n}] &= \bra{\beta_{+}}x^{n}\ket{\beta_{+}}\\
-&= \frac{1}{2}\left(\frac{\hbar}{2m\omega}\right)^{\frac{n}{2}}\left(\bra{0}\left(a+a^{\dagger}\right)^{n}\ket{\beta_{+}} + \bra{1}\left(a+a^{\dagger}\right)^{n}\ket{\beta_{+}}\right)\\
-\end{align*}
-
-For the mixture of $\ket{\alpha_+}$ and $\ket{\alpha_-}$
-
-\begin{align*}
-[x^{n}] &= \frac{1}{2}\left(\bra{\alpha_{+}}x^{n}\ket{\alpha_{+}}+\bra{\alpha_{-}}x^{n}\ket{\alpha_{-}}\right)\\
-\end{align*}
-
-To find the second term we need the odd and even cases again,
-
-\begin{align*}
-\bra{0}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{-}} = {n\choose n/2}\left(\frac{n}{2}\right)!\\
-\bra{1}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{-}} = {n\choose n/2}\left(\frac{n}{2}\right)!
-\end{align*}
-
-For odd $n$, 
-
-\begin{align*}
-\bra{0}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{-}} = -{n\choose (n+1)/2}\left(\frac{(n-1)}{2}\right)!\\
-\bra{1}\left(a+a^{\dagger}\right)^{n}\ket{\alpha_{-}} = -{n\choose (n+1)/2}\left(\frac{(n+3)}{2}\right)!
-\end{align*}
-
 
 \end{s}
+
+
 
 \begin{p}
 \end{p}
