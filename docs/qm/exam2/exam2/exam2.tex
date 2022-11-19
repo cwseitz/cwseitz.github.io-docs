@@ -77,7 +77,25 @@ To get the corrections to the ground state eigenvector, we can again use nondege
 &= \lambda\ket{3^{(0)}} + \frac{\lambda^{2}}{\epsilon}\left(\ket{2^{(0)}}+\ket{4^{(0)}}\right)
 \end{align*}
 
-In the limit $\lambda \rightarrow 0$, the eigenvectors are the ``good" linear combinations. To find them we need to find the eigenvectors of the submatrices $V_{\mathcal{A}}$ and $V_{\mathcal{B}}$. 
+In the limit $\lambda \rightarrow 0$, the perturbed eigenvectors are the ``good" linear combinations. To find them we need to find the eigenvectors of the submatrices $V_{\mathcal{A}}$ and $V_{\mathcal{B}}$, which are both just multiples of the the $\hat{S}_n$ operator. We know those eigenvectors already
+
+\begin{align*}
+\ket{0^{(1)}} = \cos\frac{\theta}{2}\ket{0^{(0)}} + \sin\frac{\theta}{2}e^{i\phi}\ket{1^{(0)}}
+\end{align*}
+
+\begin{align*}
+\ket{1^{(1)}} = \sin\frac{\theta}{2}\ket{0^{(0)}} - \cos\frac{\theta}{2}e^{i\phi}\ket{1^{(0)}}
+\end{align*}
+
+\begin{align*}
+\ket{2^{(1)}} = \cos\frac{\theta}{2}\ket{2^{(0)}} + \sin\frac{\theta}{2}e^{i\phi}\ket{4^{(0)}}
+\end{align*}
+
+\begin{align*}
+\ket{4^{(1)}} = \sin\frac{\theta}{2}\ket{2^{(0)}} - \cos\frac{\theta}{2}e^{i\phi}\ket{4^{(0)}}
+\end{align*}
+
+
 
 \end{s}
 
