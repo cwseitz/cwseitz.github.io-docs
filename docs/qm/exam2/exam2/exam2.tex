@@ -41,7 +41,7 @@ Some of the states have the same energy, so we will need to use degenerate pertu
 The first order correction is given by
 
 \begin{align*}
-V\ket{\alpha} = \sum_{n\in \mathcal{A}}\bra{n}\ket{\alpha}(H-H_{0})\ket{n} = \Delta_{\alpha}^{(1)}\ket{\alpha}
+V_{\mathcal{A}}\ket{\alpha} = \sum_{n\in \mathcal{A}}\bra{n}\ket{\alpha}(H-H_{0})\ket{n} = \Delta_{\alpha}^{(1)}\ket{\alpha}
 \end{align*}
 
 We therefore need to find the eigenvectors and eigenvalues of the matrix
@@ -113,6 +113,13 @@ In the limit $\lambda \rightarrow 0$, the perturbed eigenvectors are the ``good"
 \ket{\alpha_{\pm}} &= \frac{1}{\sqrt{2}}\left(\ket{0}\pm \ket{1}\right)\\
 \ket{\beta_{\pm}} &= \frac{1}{\sqrt{2}}\left(\ket{0}\pm i\ket{1}\right)
 \end{align*}
+
+The ensemble expectation value for an operator $A$ is
+
+\begin{align*}
+[A] = \sum_{i}w_{i}\bra{\psi}A\ket{\psi}
+\end{align*}
+
 
 \end{p}
 
@@ -279,13 +286,17 @@ In this two particle system, we have $j_{1} = 1$ and $j_{2} = 2$. We are told th
 &= 4\hbar^{2}
 \end{align*}
 
-We cannot directly compute the expectation values of $J_x, J_y, J_z$ in this basis, because $\ket{j_1, j_2, m_1, m_2}$ are not eigenkets of $J_x, J_y, J_z$. But can change basis:
+We cannot directly compute the expectation values of $J_x, J_y, J_z$ in this basis, because $\ket{j_1, j_2, m_1, m_2}$ are not eigenkets of $J_x, J_y, J_z$. But we can change basis:
 
 \begin{align*}
 \ket{j_1, j_2, m_1, m_2} = \sum_{m_1,m_2} \ket{j_1,j_2; jm}\bra{j_1,j_2; jm}\ket{j_{1}, j_{2}; m_{1},m_{2}}
 \end{align*}
 
-We need to determine $\bra{j_1,j_2; jm}\ket{j_{1}, j_{2}; m_{1},m_{2}}$ which are the Clebsch-Gordon coefficients.
+We need to find $\bra{j_1,j_2; jm}\ket{j_{1}, j_{2}; m_{1},m_{2}}$ which are the Clebsch-Gordon coefficients. I've included the appropriate table in Figure 1. The expansion is
+
+\begin{align*}
+\ket{1,2;-1,2} = \sqrt{\frac{3}{5}}\ket{1,2;1 1} + \sqrt{\frac{1}{3}}\ket{1,2;2 1} + \sqrt{\frac{1}{15}}\ket{1,2;3 1}
+\end{align*}
 
 \begin{figure}
 \centering
@@ -293,11 +304,6 @@ We need to determine $\bra{j_1,j_2; jm}\ket{j_{1}, j_{2}; m_{1},m_{2}}$ which ar
 \caption{Clebsch-Gordon coefficients for $j_{1} = 1$, $j_{2} = 2$, $m=1$}
 \end{figure}
 
-Noting that $m = m_1 + m_2 = 1$, we find
-
-\begin{align*}
-\ket{1,2;-1,2} = \sqrt{\frac{3}{5}}\ket{1,2;1 1} + \sqrt{\frac{1}{3}}\ket{1,2;2 1} + \sqrt{\frac{1}{15}}\ket{1,2;3 1}
-\end{align*}
 
 The expectation value $\langle J_z \rangle$ is then
 
@@ -319,7 +325,7 @@ as we should expect. For $J_x, J_y$,
 
 and $\langle J_{y} \rangle = 0$ since neither $J_+$ nor $J_-$ connects two $\ket{j_1,j_2;jm}$ states.
 
-Now, if we measure the total angular momentum and obtain the largest possible value, then we are in the state $\ket{1,2;31}$ in the $\ket{j_1,j_2;jm}$ basis. However, to compute $J_{1z}$ and $J_{2z}$ we need to transform this back to the $\ket{j_1, j_2, m_1, m_2}$ basis. Looking up the coefficients, we get
+Now, if we measure the total angular momentum and obtain the largest possible value, then we are in the state $\ket{1,2;31}$ in the $\ket{j_1,j_2;jm}$ basis. However, to compute $J_{1z}$ and $J_{2z}$ we need to transform this back to the $\ket{j_1, j_2, m_1, m_2}$ basis. The coefficients are in the first column of the table and we get
 
 \begin{align*}
 \ket{1,2;31} = \left(\sqrt{\frac{1}{15}}\ket{1,2;-12} + \sqrt{\frac{2}{5}}\ket{1,2;10} + \sqrt{\frac{8}{15}}\ket{1,2;01}\right)
@@ -351,7 +357,7 @@ The probability that $J_{1z}$ and $J_{2z}$ never change from their original valu
 \caption{Clebsch-Gordon coefficients for $j_{1} = 1$, $j_{2} = 1$ and $m=0$}
 \end{figure}
 
-If we instead measure the smallest possible value, we are in state $\ket{1,2;11}$. The third particle being added has $j_{3} = 1$ and $m_{3} = -1$. We can consider the first two particles as a single composite particle in state $\ket{jm} = \ket{11}$. We now have two particles with $j = 1$. Taking $m_{1} = 1$ and $m_{2} = -1$ and reading off the table above, the probabilities are
+If we instead measure the smallest possible value, we are in state $\ket{1,2;11}$. The third particle being added has $j_{3} = 1$ and $m_{3} = -1$. We can consider the first two particles as a single composite particle in state $\ket{jm} = \ket{11}$. We now have two particles with $j = 1$. Taking $m_{1} = 1$ and $m_{2} = -1$ and reading off the table in Figure 2, the probabilities are
 
 $$
 \mathbf{Pr}(j)=

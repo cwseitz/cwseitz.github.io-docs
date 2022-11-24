@@ -1,0 +1,105 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath} % AMS Math Package
+\usepackage{bm}
+\usepackage{amsthm} % Theorem Formatting
+\usepackage{amssymb}    % Math symbols such as \mathbb
+\usepackage{graphicx} % Allows for eps images
+\usepackage[dvips,letterpaper,margin=1in,bottom=0.7in]{geometry}
+\usepackage{tensor}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{physics}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+
+\newcounter{mathematicapage}
+
+\newtheorem{p}{Problem}
+\usepackage{cancel}
+\newtheorem*{lem}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{dfn}{Definition}
+ \newenvironment{s}{%\small%
+        \begin{trivlist} \item \textbf{Solution}. }{%
+            \hspace*{\fill} $\blacksquare$\end{trivlist}}%
+
+
+\begin{document}
+
+ {\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Homework 9}         }\\[2\baselineskip] % Title
+{ {\bf \fontfamily{cmr}\selectfont Quantum Mechanics}\\ {\textit{\fontfamily{cmr}\selectfont     \today}}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    {\large \textsc{C Seitz}
+\\[1.4\baselineskip] 
+
+\begin{p}
+4.1
+\end{p}
+
+\begin{s}
+
+\end{s}
+
+\begin{p}
+4.2
+\end{p}
+
+\begin{s}
+
+\end{s}
+
+\begin{p}
+4.3
+\end{p}
+
+\begin{s}
+If two operators $A$ and $B$ anticommute, then
+
+\begin{align*}
+AB\ket{\psi} = -BA\ket{\psi}
+\end{align*}
+
+We are told they have common eigenvectors ket $\ket{\psi}$, so
+
+\begin{align*}
+ab\ket{\psi} = -ba\ket{\psi}
+\end{align*}
+
+In words, the product of eigenvalues changes sign when the order of operators flips. If we take one of the operators to be the parity operator and the other to be the momentum operator. Let $A = \pi$ and $B = \hat{p}:$
+
+\begin{align*}
+\pi\hat{p}\ket{\psi} &= -\hat{p}\pi\ket{\psi}\\
+p\pi\ket{\psi} &= -\hat{p}\ket{-\psi} \\
+p\ket{-\psi} &= p\ket{-\psi} 
+\end{align*} 
+
+because the momentum operator is odd under parity. The product of eigenvalues changed sign, but the eigenvalue of the parity operator is unity.
+
+
+\end{s}
+
+\begin{p}
+4.4
+\end{p}
+
+\begin{s}
+
+\end{s}
+
+\begin{p}
+4.5
+\end{p}
+
+\begin{s}
+
+\end{s}
+
+\begin{p}
+4.6
+\end{p}
+
+\begin{s}
+
+\end{s}
+
+\end{document}
