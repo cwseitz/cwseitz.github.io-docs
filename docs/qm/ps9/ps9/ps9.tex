@@ -46,6 +46,28 @@
 
 \begin{s}
 
+Two unique translation operators $\mathcal{T}$ and $\mathcal{T}'$ commute because
+
+\begin{align*}
+\mathcal{T}\mathcal{T'} = \exp\left(-\frac{i}{\hbar}(d\cdot p + d'\cdot p)\right)
+\end{align*}
+
+which is clearly the same if we swap the order, due to the exponential property. It is similar for rotations:
+
+\begin{align*}
+\mathcal{D}\mathcal{D'} = \exp\left(-\frac{i}{\hbar}(\phi n\cdot J + \phi' n'\cdot J')\right)
+\end{align*}
+
+For the translation operator and parity operator
+
+\begin{align*}
+\mathcal{T}\pi\ket{\bm{x}} &= \ket{\bm{-x}+d}\\
+\pi\mathcal{T}\ket{\bm{x}} &= \ket{-\bm{x}-d}
+\end{align*}
+
+so they do not commute. However, parity and rotations commute
+
+
 \end{s}
 
 \begin{p}
@@ -83,6 +105,27 @@ because the momentum operator is odd under parity. The product of eigenvalues ch
 \end{p}
 
 \begin{s}
+
+\begin{align*}
+\mathcal{Y}_{l=0}^{j=1/2,m=1/2} = Y_{0}^{0}(\theta,\phi)\chi_{+}
+\end{align*}
+
+Rotating the spin gives
+
+\begin{align*}
+(\sigma\cdot r)\mathcal{Y}_{l=0}^{j=1/2,m=1/2} &= Y_{0}^{0}(\theta,\phi)(\sigma\cdot r)\chi_{+}\\
+&= Y_{0}^{0}(\theta,\phi)r(\cos\theta\chi_{+} + \sin\theta e^{i\phi}\chi_{-})\\
+&= r\left(\sqrt{3}Y_{1}^{0}\chi_{+} - \sqrt{\frac{2}{3}}Y_{1}^{1}\chi_{-}\right)\\
+&= -r\mathcal{Y}_{l=1}^{j=1/2,m=1/2}
+\end{align*}
+
+which makes sense because, under space inversion, 
+
+\begin{align*}
+\pi^{-1}(\sigma\cdot r)\pi = -(\sigma\cdot r)
+\end{align*}
+
+
 
 \end{s}
 
