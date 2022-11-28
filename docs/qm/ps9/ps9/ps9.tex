@@ -125,8 +125,6 @@ which makes sense because, under space inversion,
 \pi^{-1}(\sigma\cdot r)\pi = -(\sigma\cdot r)
 \end{align*}
 
-
-
 \end{s}
 
 \begin{p}
@@ -142,6 +140,44 @@ which makes sense because, under space inversion,
 \end{p}
 
 \begin{s}
+The symmetric state $\ket{S}$ is a sum of sines and cosines in the classically allowed region and $\cosh (x)$ in the classically forbidden region. The antisymmetric state $\ket{A}$ is similar, but has $\sinh (x)$ in the classically forbidden region. 
+
+\begin{align*}
+\psi_S = \begin{cases}
+  B\sin(kx)  \;\;a < |x| < a+b\\
+  C\cosh(x) \;\; |x| < a
+\end{cases}
+\end{align*}
+
+Continuity of the symmetric wavefunction at $x = a$ requires
+
+\begin{align*}
+B\sin(kx) = C\cosh(\kappa x)
+\end{align*}
+
+and continuity of the first derivative of the symmetric wavefunction at $x = a$ requires
+
+\begin{align*}
+kB\cos(kx) = \kappa C\sinh(\kappa x)
+\end{align*}
+
+\begin{align*}
+\psi_A = \begin{cases}
+  B\sin(kx)  \;\;a < |x| < a+b\\
+  C\sinh(x) \;\; |x| < a
+\end{cases}
+\end{align*}
+
+\begin{align*}
+B\sin(kx) = C\sinh(\kappa x)
+\end{align*}
+
+and continuity of the first derivative of the symmetric wavefunction at $x = a$ requires
+
+\begin{align*}
+kB\cos(kx) = \kappa C\cosh(\kappa x)
+\end{align*}
+
 
 \end{s}
 
