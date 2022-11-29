@@ -38,6 +38,22 @@
 
 \begin{s}
 
+We just have to solve Schrodinger's equation for each individual particle
+
+\begin{align*}
+-\frac{\hbar^{2}}{2m}\nabla^{2}\psi(\bm{x}) = E\psi(\bm{x})
+\end{align*}
+
+which has eigenvalues
+
+\begin{align*}
+E = \frac{\hbar^{2}\pi^{2}}{2mL^{2}}(n_{x}^{2} + n_{y}^{2} + n_{z}^{2}) = E_{0}(n_{x}^{2} + n_{y}^{2} + n_{z}^{2})
+\end{align*}
+
+Denote $n_{ij}$ the $i$th dimension for particle $j$. For the three particle system: the lowest energy level has $n_{ij}=1$ and $E = 9E_{0}$. The second lowest energy levels for the whole system have one of $n_{ij} = 2$ and has energy $E = 12E_{0}$. The third lowest has two $n_{ij}=2$. The energy is then $E = 16E_{0}$. The degeneracies are 0, 9, and 36 respectively or 0, 72, 288 if we account for spin. 
+
+For the three particle system: the lowest energy level has $n_{ij}=1$ and $E = 16E_{0}$. The second lowest energy level for the whole system has one of $n_{ij} = 2$ and has energy $E = 19E_{0}$. The third lowest has two $n_{ij}=2$. The energy is then $E = 22E_{0}$. The degeneracies are 0, 16, and 120 respectively or 0, 256, 1920 if we account for spin.
+
 \end{s}
 
 \begin{p}
@@ -132,6 +148,25 @@ which makes sense because, under space inversion,
 \end{p}
 
 \begin{s}
+We need to consider the first order corrections to the basis kets $\ket{nljm}$
+
+\begin{align*}
+\ket{nljm} = \ket{nljm^{0}} + \sum_{n'l'j'm'\neq nljm}\ket{n'l'j'm'^{0}}\frac{V_{j}}{E_{0}^{0}-E_{j}^{0}} + ...
+\end{align*}
+
+for
+
+\begin{align*}
+C_{n'l'j'm'} = \frac{V_{j}}{E_{0}^{0}-E_{j}^{0}} = \frac{\bra{nljm}V\ket{n'l'j'm'}}{E_{0}^{0}-E_{j}^{0}}
+\end{align*}
+
+The matrix element of the perturbation is 
+
+\begin{align*}
+\bra{nljm}V\ket{n'l'j'm'} = \lambda \bra{nljm}\delta^{(3)}(\bm{x})\bm{S}\cdot \bm{p}\ket{n'l'j'm'} + \lambda \bra{nljm}\bm{S}\cdot \bm{p}\delta^{(3)}(\bm{x})\ket{n'l'j'm'}
+\end{align*}
+
+which is zero unless $\bm{S}\cdot \bm{p}\ket{n'l'j'm'}$ and $\bm{S}\cdot \bm{p}\ket{nljm}$ are the same, meaning they have the same parity. 
 
 \end{s}
 
