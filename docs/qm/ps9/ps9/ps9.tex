@@ -68,7 +68,7 @@ Two unique translation operators $\mathcal{T}$ and $\mathcal{T}'$ commute becaus
 \mathcal{T}\mathcal{T'} = \exp\left(-\frac{i}{\hbar}(d\cdot p + d'\cdot p)\right)
 \end{align*}
 
-which is clearly the same if we swap the order, due to the exponential property. It is similar for rotations:
+which is clearly the same if we swap the order. It is similar for rotations:
 
 \begin{align*}
 \mathcal{D}\mathcal{D'} = \exp\left(-\frac{i}{\hbar}(\phi n\cdot J + \phi' n'\cdot J')\right)
@@ -81,7 +81,12 @@ For the translation operator and parity operator
 \pi\mathcal{T}\ket{\bm{x}} &= \ket{-\bm{x}-d}
 \end{align*}
 
-so they do not commute. However, parity and rotations commute
+so they do not commute. However, parity and rotations commute:
+
+\begin{align*}
+\mathcal{D}\pi\ket{\bm{x}} &= \mathcal{D}\ket{-\bm{x}} = \ket{-\bm{x}'}\\
+\pi\mathcal{D}\ket{\bm{x}} &= \pi\ket{\bm{x}'}= \ket{-\bm{x}'}
+\end{align*}
 
 
 \end{s}
@@ -111,7 +116,7 @@ p\pi\ket{\psi} &= -\hat{p}\ket{-\psi} \\
 p\ket{-\psi} &= p\ket{-\psi} 
 \end{align*} 
 
-because the momentum operator is odd under parity. The product of eigenvalues changed sign, but the eigenvalue of the parity operator is unity.
+because the momentum operator is odd under parity.
 
 
 \end{s}
