@@ -70,7 +70,6 @@ So we just need to prove that the given transformation gives this result, which 
 -i\sigma_{2}\chi^{*}(\hat{n}) = -i\begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}\cos\frac{\theta}{2} \\ \sin\frac{\theta}{2}e^{-i\gamma}\end{pmatrix} = \begin{pmatrix}-\sin\frac{\theta}{2}e^{-i\gamma} \\ \cos\frac{\theta}{2} \end{pmatrix}
 \end{align*}
 
-
 \end{s}
 
 \begin{p}
@@ -78,6 +77,22 @@ So we just need to prove that the given transformation gives this result, which 
 \end{p}
 
 \begin{s}
+
+First note that 
+
+\begin{align*}
+H\Theta\ket{n} = \Theta H \ket{n} = E_{n}\Theta \ket{n}
+\end{align*}
+
+so $\ket{n}$ and $\Theta\ket{n}$ have the same energy. If the states are nondegenerate then $\ket{n}$ and $\Theta\ket{n}$ represent the same state. Their wavefunctions are then the same:
+
+
+\begin{align*}
+\bra{x'}\ket{n} = \bra{n}\ket{x'}^{*}
+\end{align*}
+
+which occurs if they are real, or have a phase difference independent of x. For this reason the wavefunction $\psi = e^{ip\cdot x/\hbar}$ does not violate time reversal invariance, because it is degenerate with $e^{ip\cdot x/\hbar}$.
+
 \end{s}
 
 \begin{p}
