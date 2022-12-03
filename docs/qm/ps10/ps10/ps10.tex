@@ -1,0 +1,112 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath} % AMS Math Package
+\usepackage{bm}
+\usepackage{amsthm} % Theorem Formatting
+\usepackage{amssymb}    % Math symbols such as \mathbb
+\usepackage{graphicx} % Allows for eps images
+\usepackage[dvips,letterpaper,margin=1in,bottom=0.7in]{geometry}
+\usepackage{tensor}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{physics}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+
+\newcounter{mathematicapage}
+
+\newtheorem{p}{Problem}
+\usepackage{cancel}
+\newtheorem*{lem}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{dfn}{Definition}
+ \newenvironment{s}{%\small%
+        \begin{trivlist} \item \textbf{Solution}. }{%
+            \hspace*{\fill} $\blacksquare$\end{trivlist}}%
+
+
+\begin{document}
+
+ {\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Homework 10}         }\\[2\baselineskip] % Title
+{ {\bf \fontfamily{cmr}\selectfont Quantum Mechanics}\\ {\textit{\fontfamily{cmr}\selectfont     \today}}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    {\large \textsc{C Seitz}
+\\[1.4\baselineskip] 
+
+\begin{p}
+4.7
+\end{p}
+
+\begin{s}
+
+The wave function in three dimensions for a free particle ($V=0$), is
+
+\begin{align*}
+\psi(\bm{x},t) &= u(\bm{x})e^{-iE_{n}t/\hbar}\\
+\psi^{*}(\bm{x},-t) &= u^{*}(\bm{x})e^{-iE_{n}t/\hbar}\\
+\end{align*}
+
+where $u(\bm{x}) = e^{i\vec{p}\cdot \vec{k}}$. Note that the phase remains unchanged under complex conjugation and time reversal. Now if we reverse the direction of momentum i.e. $\ket{p}\rightarrow \ket{p'}$ for $\vec{p}\cdot\vec{p'} = -1$,
+
+\begin{align*}
+\psi'(\bm{x},t) &= u'(\bm{x})e^{-iE_{n}t/\hbar}\\
+\end{align*}
+
+Notice that $u'(\bm{x}) = e^{-i\vec{p'}\cdot \vec{k}} = u^{*}(\bm{x})$. Therefore $\psi'(\bm{x},t) = \psi^{*}(\bm{x},-t)$
+
+
+\begin{align*}
+\chi_{+}(\hat{n}) = \begin{pmatrix}\cos\frac{\theta}{2} \\ \sin\frac{\theta}{2}e^{i\gamma}\end{pmatrix}
+\end{align*}
+
+It is also known that
+
+\begin{align*}
+\chi_{-}(\hat{n}) = \begin{pmatrix}-\sin\frac{\theta}{2}e^{-i\gamma} \\ \cos\frac{\theta}{2} \end{pmatrix}
+\end{align*}
+
+So we just need to prove that the given transformation gives this result, which it does
+
+\begin{align*}
+-i\sigma_{2}\chi^{*}(\hat{n}) = -i\begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}\cos\frac{\theta}{2} \\ \sin\frac{\theta}{2}e^{-i\gamma}\end{pmatrix} = \begin{pmatrix}-\sin\frac{\theta}{2}e^{-i\gamma} \\ \cos\frac{\theta}{2} \end{pmatrix}
+\end{align*}
+
+
+\end{s}
+
+\begin{p}
+4.8
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+4.9
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+4.10
+\end{p}
+
+\begin{s}
+\end{s}
+
+
+\begin{p}
+4.11
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+4.12
+\end{p}
+
+\begin{s}
+\end{s}
+
+\end{document}
