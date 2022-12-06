@@ -114,7 +114,7 @@ which occurs if they are real, or have a phase difference independent of x. For 
 
 \begin{s}
 
-We first prove that
+We first try to prove that
 
 \begin{align*}
 \Theta\ket{j,m} = e^{i\delta}(-1)^{m}\ket{j,-m}
@@ -155,13 +155,15 @@ Since the Hamiltonian is time reversal invariant, then energy eigenkets transfor
 &= -\bra{\alpha}\bm{L}\ket{\alpha}
 \end{align*}
 
-This is only satisfied when $\langle \bm{L}\rangle = 0$. If the wavefunction is expanded as
+This is only satisfied when $\langle \bm{L}\rangle = 0$. We know that when the Hamiltonian is invariant under time-reversal, the eigenkets must be real.
 
 \begin{align*}
-\sum_{l}\sum_{m}F_{lm}(r)Y_{l}^{m}(\theta,\phi)
+\psi(r,\theta,\phi) &= \sum_{l,m}F_{lm}(r)Y_{l}^{m}(\theta,\phi)\\
+&\rightarrow e^{i\delta}\sum_{l,m}F_{lm}^{*}(r)(Y_{l}^{m}(\theta,\phi))^{*}\\
+&= e^{i\delta} \sum_{l,m}F_{lm}^{*}(r)(-1)^{m}Y_{l}^{m}(\theta,\phi)
 \end{align*}
 
-We know that when the Hamiltonian is invariant under time-reversal, the eigenkets must be real. Therefore, the phase restriction must satisfy the equality $F_{lm}(r)Y_{l}^{m}(\theta,\phi) = F_{lm}^{*}(r)(Y_{l}^{m}(\theta,\phi))^{*}$.
+which means that $F_{lm}(r) = e^{-i\delta}(-1)^{m}F_{lm}^{*}(r)$
 
 \end{s}
 
