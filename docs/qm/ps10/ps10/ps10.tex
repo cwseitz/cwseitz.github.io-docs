@@ -113,11 +113,30 @@ which occurs if they are real, or have a phase difference independent of x. For 
 \end{p}
 
 \begin{s}
-This is because, for the spherical harmonics, $(Y_{l}^{m}(\theta,\phi))^{*} = (-1)^{m}Y_{l}^{-m}(\theta,\phi)$. Therefore, 
+
+We first prove that
 
 \begin{align*}
-\Theta\ket{j,m} = e^{i\delta}(-1)^{m}\ket{j,m}
+\Theta\ket{j,m} = e^{i\delta}(-1)^{m}\ket{j,-m}
 \end{align*}
+
+Consider acting on $\ket{j,m}$ with $J_{z}$:
+
+\begin{align*}
+J_{z}\Theta\ket{j,m} = -\Theta J_{z}\ket{j,m} = -m \left(\Theta\ket{j,m}\right)
+\end{align*}
+
+so clearly $\Theta\ket{j,m}$ behaves like $\ket{j,-m}$. The $e^{i\delta}$ part is there because we can always include an arbitrary phase. 
+
+
+\begin{align*}
+\Theta \mathcal{D}(R) \Theta^{-1} &= \Theta\left(1-i\frac{J\cdot \hat{n}}{\hbar}\right) \Theta^{-1}\\
+&= \left(1+i\frac{\Theta J\Theta^{-1}\cdot \hat{n}}{\hbar}\right) \\
+&= \left(1-i\frac{J\cdot \hat{n}}{\hbar}\right) = \mathcal{D}(R)
+\end{align*}
+
+so the time reversed state is just $\mathcal{D}(R)\Theta\ket{j,m}$.
+
 
 \end{s}
 
