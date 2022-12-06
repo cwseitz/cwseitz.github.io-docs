@@ -64,7 +64,7 @@ It is also known that
 \chi_{-}(\hat{n}) = \begin{pmatrix}-\sin\frac{\theta}{2}e^{-i\gamma} \\ \cos\frac{\theta}{2} \end{pmatrix}
 \end{align*}
 
-So we just need to prove that the given transformation gives this result, which it does
+So we just need to show that the given transformation gives this result:
 
 \begin{align*}
 -i\sigma_{2}\chi^{*}(\hat{n}) = -i\begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}\cos\frac{\theta}{2} \\ \sin\frac{\theta}{2}e^{-i\gamma}\end{pmatrix} = \begin{pmatrix}-\sin\frac{\theta}{2}e^{-i\gamma} \\ \cos\frac{\theta}{2} \end{pmatrix}
@@ -113,6 +113,12 @@ which occurs if they are real, or have a phase difference independent of x. For 
 \end{p}
 
 \begin{s}
+This is because, for the spherical harmonics, $(Y_{l}^{m}(\theta,\phi))^{*} = (-1)^{m}Y_{l}^{-m}(\theta,\phi)$. Therefore, 
+
+\begin{align*}
+\Theta\ket{j,m} = e^{i\delta}(-1)^{m}\ket{j,m}
+\end{align*}
+
 \end{s}
 
 
@@ -122,15 +128,15 @@ which occurs if they are real, or have a phase difference independent of x. For 
 
 \begin{s}
 
-For energy eigenkets $\ket{\alpha}$,
+Since the Hamiltonian is time reversal invariant, then energy eigenkets transform as $\Theta\ket{\alpha} = e^{i\delta}\ket{\alpha}$, 
 
 \begin{align*}
 \langle \bm{L}\rangle &= \bra{\alpha}\bm{L}\ket{\alpha} \\
-&= \bra{\tilde{\alpha}}\Theta\bm{L}\Theta^{-1}\ket{\tilde{\alpha}}\\
-&= -\bra{\tilde{\alpha}}\bm{L}\ket{\tilde{\alpha}}
+&= e^{i\delta}e^{-i\delta}\bra{\alpha}\Theta\bm{L}\Theta^{-1}\ket{\alpha}\\
+&= -\bra{\alpha}\bm{L}\ket{\alpha}
 \end{align*}
 
-But the Hamiltonian is invariant under time-reversal, so this is only satisfied when $\langle \bm{L}\rangle = 0$. If the wavefunction is expanded as
+This is only satisfied when $\langle \bm{L}\rangle = 0$. If the wavefunction is expanded as
 
 \begin{align*}
 \sum_{l}\sum_{m}F_{lm}(r)Y_{l}^{m}(\theta,\phi)
@@ -145,6 +151,37 @@ We know that when the Hamiltonian is invariant under time-reversal, the eigenket
 \end{p}
 
 \begin{s}
+
+We were given the Hamiltonian:
+
+\begin{align*}
+H = AS_{z}^{2} + B(S_{x}^{2} - S_{y}^{2})
+\end{align*}
+
+This Hamiltonian must be invariant under time reversal because these are all scalar values which are invariant e.g, $\Theta S_{x}^{2}\Theta^{-1} = S_{x}^{2}\Theta\Theta^{-1} = S_{x}^{2}$ and $A$ and $B$ are real. The explicit matrix representation is
+
+\begin{align*}
+H = \hbar^{2}\begin{pmatrix}A&0&B\\0&0&0\\B&0&A\end{pmatrix}
+\end{align*}
+
+which according to Mathematica has the following eigenvectors
+
+
+\begin{align*}
+\ket{E_{1}} &= (\ket{+1}+\ket{-1})/\sqrt{2}\\
+\ket{E_{-1}} &= (\ket{+1}-\ket{-1})/\sqrt{2}\\
+\ket{E_{0}} &= \ket{0}\\
+\end{align*}
+
+with eigenvalues $\hbar^{2}(A+B), \hbar^{2}(A-B), 0$ respectively. These eigenvectors transform in the following way under time reversal:
+
+\begin{align*}
+\Theta\ket{E_{1}} &= (\Theta\ket{+1}+\Theta\ket{-1})/\sqrt{2} = -(\ket{+1}+\ket{-1})/\sqrt{2}\\
+\Theta\ket{E_{-1}} &= (\Theta\ket{+1}-\Theta\ket{-1})/\sqrt{2} = -(\ket{+1}-\ket{-1})/\sqrt{2}\\
+\Theta\ket{E_{0}} &= (-1)^{0}\ket{E_{0}} = \ket{E_{0}}\\
+\end{align*}
+
+
 \end{s}
 
 \end{document}
