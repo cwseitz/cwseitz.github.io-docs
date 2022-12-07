@@ -5,9 +5,9 @@ from fdtd import FDTDSolver
 
 dir = '/home/cwseitz/Desktop/temp/'
 Nx = 100
-Nt = 100000
+Nt = 500000
 t = 1
-dt = 0.1
+dt = 0.01
 
 ######################
 # Infinite square well
