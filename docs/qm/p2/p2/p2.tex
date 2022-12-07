@@ -111,6 +111,26 @@ where $V_{ni} = \bra{n}V\ket{i}$.
 |c_{n}^{(1)}(t)|^{2} &= \frac{4|V_{ni}|^{2}}{|E_{n}-E_{i}|^{2}}\sin^{2}\left(\frac{(E_{n}-E_{i})t}{2\hbar}\right)
 \end{align*}
 
+\noindent \textbf{(I)} To find the wavefunction $\bra{i}\ket{\alpha(\tau)}$ analytically, we need to solve the differential equation 
+
+\begin{align*}
+i\hbar\dot{c_{n}}(t) &= \sum_{m}V_{nm}e^{i\omega_{nm}t}c_{m}(t)
+\end{align*}
+
+where the initial conditions are set such that $c_{n}(0) = \delta_{n1}$. This gives us the time-evolution of the wavefunction in the energy basis. Given all the $c_{n}(t)$'s we can consruction an energy superposition 
+
+\begin{align*}
+\ket{\beta(t)} = \sum_{n}c_{n}(t)\ket{E_{n}}
+\end{align*}
+
+So then we need to apply the unitary transformation
+
+\begin{align*}
+\ket{\beta(t)} \rightarrow U\ket{\beta(t)}
+\end{align*}
+
+to the position basis in order to obtain the wavefunction $\bra{i}\ket{\alpha(\tau)}$. To ensure we have the correct normalization we can just divide expansion coefficients by $Z = \sum_{n}|c_{n}|^{2}$.
+
 
 \clearpage
 \begin{lstlisting}
