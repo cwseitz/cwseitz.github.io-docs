@@ -61,7 +61,7 @@ class FDTDSolver:
 
 dir = '/home/cwseitz/Desktop/temp/'
 Nx = 100
-Nt = 50000
+Nt = 5000
 t = 1
 dt = 0.1
 
@@ -83,7 +83,7 @@ H += np.diag(-t*np.ones((Nx-1,)),k=-1) #lower diagonal
 
 vals, vecs = LA.eig(H)
 idx = np.argsort(vals)
-vecs = vecs[:,idx]
+vecs1 = vecs[:,idx]
 vals1 = vals[idx]
 
 #################################################
@@ -118,7 +118,7 @@ H += np.diag(-t*np.ones((Nx-1,)),k=-1) #lower diagonal
 
 vals, vecs = LA.eig(H)
 idx = np.argsort(vals)
-vecs = vecs[:,idx]
+vecs2 = vecs[:,idx]
 vals2 = vals[idx]
 
 #################################################
@@ -154,16 +154,39 @@ ax[2].legend(fontsize=8)
 plt.tight_layout()
 plt.show()
 
+######################################
+# Define the perturbation Hamiltonian
+######################################
+
+Vl = 2
+Vr = 2
+V = np.zeros((Nx,Nt))
+V[:30,:] = Vl
+V[70:,:] = Vr
+#V = np.pad(V, ((1,1),(0,0)))
+
+#############################################
+# Transform the perturbation to energy basis
+#############################################
+
+Hp = np.zeros((Nx,Nx))
+Hp += np.diag(V[:,0],k=0) #main diagonal
+U0 = LA.inv(vecs1) #unitary operator
+Hp_e = U0 @ Hp @ LA.inv(U0) #perturbation in energy basis
+fig, ax = plt.subplots(1,2)
+ax[0].imshow(Hp,cmap='coolwarm')
+ax[1].imshow(Hp_e,cmap='coolwarm')
+plt.show()
+
+#############################################
+# Compute transition probability for n=1,2,3
+#############################################
+
 ##################################################################
 # Simulate time evolution in a time-dependent finite square well
 ##################################################################
 
-# Vl = 2
-# Vr = 2
-# V = np.zeros((Nx,Nt))
-# V[:30,:] = Vl
-# V[70:,:] = Vr
-# V = np.pad(V, ((1,1),(0,0)))
+
 # time = np.arange(0,Nt,1)*dt
 # tau = 0
 # lam = 0.1

@@ -87,6 +87,31 @@ We can work in a coordinate system centered on zero, and write
 \end{align*}
 
 where $\beta = \bra{0}x\ket{1} = \bra{1}x\ket{0}$ (because $x$ is Hermitian) and $\omega = (E_1-E_0)/\hbar$. The angular frequency is higher for the finite square well because there is a large energy gap between the first excited state and the ground state (see the differential in the eigenvalue spectrum in Figure 1c).
+
+\section{Part 2}
+
+We are using the time-dependent Hamiltonian
+
+\begin{align*}
+H(x,t) = H_{0}(x) + \lambda(1-e^{-t/\tau})V(x)
+\end{align*}
+
+where $V(x)$ is the finite square well potential. We are assuming that $\tau\rightarrow\infty$ so the potentially turns on exactly at $t=0$, giving a constant perturbation. Notice that $V$ is going to be needed in energy basis, so we will need to transform $V$ using the unitary operator (the $\ket{i}$ basis to the $\ket{\epsilon_{n}}$ basis).
+
+
+\noindent \textbf{(H)} We are after $P_{n}(t) = |c_{n}^{(1)}(t)|^{2}$ for $n=1,2,3$. In the text, we are given
+
+\begin{align*}
+c_{n}^{(1)}(t) &= -\frac{i}{\hbar}V_{ni}\int_{0}^{t}e^{i\omega_{ni}t}dt\\
+&= \frac{V_{ni}}{E_{n}-E_{i}}(1-e^{i\omega_{ni}t})
+\end{align*}
+
+where $V_{ni} = \bra{n}V\ket{i}$. 
+\begin{align*}
+|c_{n}^{(1)}(t)|^{2} &= \frac{4|V_{ni}|^{2}}{|E_{n}-E_{i}|^{2}}\sin^{2}\left(\frac{(E_{n}-E_{i})t}{2\hbar}\right)
+\end{align*}
+
+
 \clearpage
 \begin{lstlisting}
 
