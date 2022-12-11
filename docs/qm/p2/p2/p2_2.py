@@ -5,9 +5,9 @@ from fdtd import FDTDSolver
 
 dir = '/home/cwseitz/Desktop/temp/'
 Nx = 100
-Nt = 200000
+Nt = 500000
 eta = 1 #hopping parameter
-dtau = 0.01
+dtau = 0.1
 
 ######################
 # Infinite square well
@@ -38,6 +38,7 @@ V = np.zeros((Nx,Nt))
 V[:30,:] = Vl
 V[70:,:] = Vr
 lam = 5 * 10**-4
+V[:,0] = 0
 V *= lam
 
 #############################################
@@ -80,7 +81,7 @@ plt.show()
 ##################################################################
 
 V = np.pad(V, ((1,1),(0,0)))
-psi_r0 = vecs1[:,0] #pure ground state
+psi_r0 = -1*vecs1[:,0] #pure ground state
 psi_i0 = np.zeros_like(psi_r0)
 solver = FDTDSolver(Nx,Nt,V,psi_r0,psi_i0,dir,plot_iter_num=2000,plot=True,dt=dtau,H=H+Hp)
 solver.forward()
