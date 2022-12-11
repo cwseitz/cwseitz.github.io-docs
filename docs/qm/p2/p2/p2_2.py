@@ -95,7 +95,7 @@ tau = np.arange(0,Nt)*dtau
 fig, ax = plt.subplots(1,2)
 ax[0].plot(tau[1:],np.real(solver.Etau)[1:],color='red',label=r'$E_{0}+\Delta E$')
 ax[0].plot(tau[1:],E0*np.ones_like(solver.Etau)[1:],color='black',label=r'$E_{0}$')
-ax[0].set_ylabel('Energy')
+ax[0].set_ylabel(r'$\langle H\rangle$')
 ax[0].set_xlabel(r'$\tau$')
 ax[1].plot(tau,X_avg,color='black')
 ax[1].set_xlabel(r'$\tau$')
