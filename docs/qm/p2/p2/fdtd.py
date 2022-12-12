@@ -41,7 +41,7 @@ class FDTDSolver:
     def plot_iter(self,t):
         fig, ax = plt.subplots()
         ax1 = ax.twinx()
-        ax.set_ylim([-0.5,0.5])
+        ax.set_ylim([-0.1,0.1])
         ax1.set_ylim([-2*self.V.max(),2*self.V.max()])
         ax.plot(self.psi_r,color='red',label=r'$\psi_{R}$')
         ax.plot(self.psi_i,color='blue',label=r'$\psi_{I}$')
@@ -68,15 +68,14 @@ class FDTDSolver:
                     self.c1*(self.psi_r[n+1] - 2*self.psi_r[n] + self.psi_r[n-1])\
                     - self.c2*self.V[n,t]*self.psi_r[n]
     def forward(self):
-        #self.plot_init_()
         if self.plot:
             self.plot_iter(0)
         for t in range(1,self.Nt):
             if self.H is not None:
                 self.compute_energy(t)
             print(f'Time step: {t}')
-            self.update_r(t)
             self.update_i(t)
+            self.update_r(t)
             self.prob[:,t] = self.psi_r[1:-1]**2 + self.psi_i[1:-1]**2
             if t % self.plot_iter_num == 0:
                 if self.plot:
