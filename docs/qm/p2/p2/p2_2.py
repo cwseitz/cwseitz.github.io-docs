@@ -2,10 +2,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 from numpy import linalg as LA
 from fdtd import FDTDSolver
+from plt2array import plt2array
+from skimage.io import imsave
 
 dir = '/home/cwseitz/Desktop/temp/'
 Nx = 100
-Nt = 50000
+Nt = 100000
 eta = 1 #hopping parameter
 dtau = 0.1
 
@@ -48,9 +50,9 @@ Hp = np.zeros((Nx,Nx)) #perturbation Hamiltonian
 Hp += np.diag(V[:,0],k=0) #main diagonal
 U0 = LA.inv(vecs1) #unitary operator
 Hp_e = U0 @ Hp @ LA.inv(U0) #perturbation in energy basis
-P_0n = Hp_e[0,1:]**2
 E0 = vals1[0]
-P_0n /= (vals1[1:]-E0)**2
+E1 = vals1[1]
+E2 = vals1[2]
 
 #############################################
 # Compute transition probability for n=1,2,3
@@ -60,74 +62,71 @@ tau = np.arange(0,Nt)*dtau
 v_11 = Hp_e[0,0]
 v_12 = Hp_e[0,1]
 v_13 = Hp_e[0,2]
-c_11_msq = (tau*v_11)**2
-c_12_msq = ((4*v_12**2)/((vals1[1]-vals1[0]))**2)*np.sin(tau*(vals1[1]-vals1[0])/2)**2
-c_13_msq = ((4*v_13**2)/((vals1[2]-vals1[0]))**2)*np.sin(tau*(vals1[2]-vals1[0])/2)**2
-Z = c_11_msq + c_12_msq + c_13_msq
-c_11_msq /= Z
-c_12_msq /= Z
-c_13_msq /= Z
-Ebar = c_11_msq*vals1[0] + c_12_msq*vals1[1] + c_13_msq*vals1[2]
+c_1 = 1  - 1j*v_11*tau
+omega_12 = vals1[1]-vals1[0]
+c_2 = (v_12/omega_12)*(1-np.exp(1j*omega_12*tau))
+omega_13 = vals1[2]-vals1[0]
+c_3 = (v_13/omega_13)*(1-np.exp(1j*omega_13*tau))
 
-fig, ax = plt.subplots(1,3,figsize=(7,2))
-ax[0].plot(tau,c_11_msq,color='red',label=r'$|c_{11}|^{2}$')
-ax[1].plot(tau,c_12_msq,color='blue',label=r'$|c_{12}|^{2}$')
-ax[2].plot(tau,c_13_msq,color='purple',label=r'$|c_{13}|^{2}$')
-ax[0].set_xlabel(r'$\tau$')
-ax[1].set_xlabel(r'$\tau$')
-ax[2].set_xlabel(r'$\tau$')
-ax[0].set_ylabel(r'$P(1\rightarrow 1)$')
-ax[1].set_ylabel(r'$P(1\rightarrow 2)$')
-ax[2].set_ylabel(r'$P(1\rightarrow 3)$')
+fig, ax = plt.subplots(2,3,figsize=(9,2))
+ax[0,0].plot(tau,np.real(c_1),color='red',label='Re')
+ax[0,0].plot(tau,np.imag(c_1),color='blue',label='Im')
+ax[0,0].set_ylabel(r'$c_{1}$')
+ax1 = ax[1,0]
+ax1.plot(tau, (c_1-1)*np.conj(c_1-1),color='purple')
+ax1.set_ylabel(r'$|c_{1}|^{2}$')
+ax[0,1].plot(tau,np.real(c_2),color='red',label='Re')
+ax[0,1].plot(tau,np.imag(c_2),color='blue',label='Im')
+ax[0,1].set_ylabel(r'$c_{2}$')
+ax2 = ax[1,1]
+ax2.plot(tau, c_2*np.conj(c_2),color='purple')
+ax2.set_ylabel(r'$|c_{2}|^{2}$')
+ax[0,2].plot(tau,np.real(c_3),color='red',label='Re')
+ax[0,2].plot(tau,np.imag(c_3),color='blue',label='Im')
+ax[0,2].set_ylabel(r'$c_{3}$')
+ax3 = ax[1,2]
+ax3.plot(tau, c_3*np.conj(c_3),color='purple')
+ax3.set_ylabel(r'$|c_{3}|^{2}$')
 plt.tight_layout()
 plt.show()
 
-##################################################################
-# Simulate time evolution for a time dependent Hamiltonian
-##################################################################
-
-
-V = np.pad(V, ((1,1),(0,0)))
-psi_r0 = -1*vecs1[:,0] #pure ground state
-psi_i0 = np.zeros_like(psi_r0)
-solver = FDTDSolver(Nx,Nt,V,psi_r0,psi_i0,dir,plot_iter_num=5000,plot=True,dt=dtau,H=H+Hp)
-solver.forward()
-
-
-##################################################################
+########################################
 # Construct time evolution analytically
-##################################################################
+########################################
 
 probt = np.zeros((Nx,Nt))
 probt[:,0] = vecs1[:,0]**2
-print(np.sum(probt[:,0]))
+Ht = np.zeros((Nt,))
+Ht[0] = E0
 for t in range(1,Nt):
-    psi = c_11_msq[t]*vecs1[:,0] + c_12_msq[t]*vecs1[:,1] + c_13_msq[t]*vecs1[:,2]
-    probt[:,t] = (psi**2)/np.sum(psi**2)
-p1 = probt[:,1]*np.arange(0,Nx)
+    psi = c_1[t]*vecs1[:,0] + c_2[t]*vecs1[:,1] + c_3[t]*vecs1[:,2]
+    prob = np.conj(psi)*psi
+    A = np.sum(prob)
+    prob = prob/A
+    probt[:,t] = prob
+    Z = c_1[t]*np.conj(c_1[t]) + c_2[t]*np.conj(c_2[t]) + c_3[t]*np.conj(c_3[t])
+    Ht[t] = c_1[t]*np.conj(c_1[t])*E0 + c_2[t]*np.conj(c_2[t])*E1 + c_3[t]*np.conj(c_3[t])*E2
+    Ht[t] = Ht[t]/Z
+    if t % 1000 == 0:
+        fig, ax = plt.subplots()
+        ax.plot(prob,color='black')
+        ax.set_ylim([0,0.05])
+        ax.set_xlabel('x')
+        ax.set_ylabel(r'$|\psi|^{2}$')
+        rgb_array = plt2array(fig)
+        imsave(dir+f'{t}_sim.tif',rgb_array)
+        plt.close()
+
 X_avg = probt.T * np.arange(0,Nx)
 X_avg = np.sum(X_avg,axis=1)
-X_avg[0] = 50
 fig, ax = plt.subplots(1,2)
-ax[0].plot(tau,X_avg[0:],color='black')
+ax[0].plot(tau,X_avg,color='black')
 ax[0].set_xlabel(r'$\tau$')
 ax[0].set_ylabel(r'$\langle x/L\rangle$')
-ax[1].plot(tau,Ebar,color='black')
+ax[1].plot(tau,Ht,color='black')
 ax[1].set_xlabel(r'$\tau$')
 ax[1].set_ylabel(r'$\langle H \rangle$')
-plt.tight_layout()
-plt.show()
-
-##################################################################
-# Position/Energy expectation value for time-dependent Hamiltonian
-##################################################################
-
-X_avg = solver.prob.T * np.arange(0,Nx)
-X_avg = np.sum(X_avg,axis=1)
-tau = np.arange(0,Nt)*dtau
-fig, ax = plt.subplots()
-ax.plot(tau,X_avg,color='black')
-ax.set_xlabel(r'$\tau$')
-ax.set_ylabel(r'$\langle x/L\rangle$')
+ax[1].hlines(E0,xmin=0,xmax=tau.max(),color='blue',label=r'$E_{0}$')
+plt.legend()
 plt.tight_layout()
 plt.show()

@@ -70,9 +70,13 @@
 {\large \textsc{C Seitz}
 \\[1.4\baselineskip] 
 
+
+\section{Part 1}
+
+
 \section{Finite Differences Method}
 
-For all time-dependent problems e.g., superposition states or time-dependent potentials, I use the finite difference in the time domain (FDTD) method to solve Schrodinger's equation. The algorithm is well-known, so I will just sketch the major result I use here. The idea is the break up the time-dependent Schrodinger equation into coupled differential equations for the real and imaginary parts of the wavefunction. 
+For the first part of the project, I use the finite difference in the time domain (FDTD) method to solve Schrodinger's equation. The algorithm is well-known, so I will just sketch the major result I use here. The idea is the break up the time-dependent Schrodinger equation into coupled differential equations for the real and imaginary parts of the wavefunction. 
 
 Let $\ell$ be a discrete spatial coordinate and $m,n$ index time for the real $\psi_{R}(\ell)$ and imaginary $\psi_{I}(\ell)$ parts of the wavefunction, respectively. The update equations are
 
@@ -85,8 +89,6 @@ Let $\ell$ be a discrete spatial coordinate and $m,n$ index time for the real $\
 \end{align*}
 
 where $\tau = t/\hbar$ and $\eta = \frac{\hbar^{2}}{2m\Delta x^{2}}$ (and we set $\eta=1$) is the hopping parameter. You solve the system numerically by alternatively updating the real and imaginary wavefunctions in time. Suppose the initial state is $\ket{\alpha} = \frac{1}{\sqrt{2}}\left(\ket{0} + \ket{1}\right)$ where $\ket{0}$ and $\ket{1}$ are the ground state and first excited state for the infinite square well. Then we find the position representation $\bra{i}\ket{0}$ and $\bra{i}\ket{1}$ by solving the time-independent Schrodinger equation as in Project 1. We then can construct $\bra{i}\ket{\alpha}$, which is purely real, and assign this as the initial condition $\psi_{R}^{0}(\ell)$.
-
-\section{Part 1}
 
 \subsection{Answers}
 
@@ -121,9 +123,9 @@ The angular frequency will be higher for the finite square well because $\Delta 
 \section{Part 2}
 
 \begin{figure}
-\includegraphics[scale=1]{Figure_2.png}
+\includegraphics[scale=1.4]{Figure_2.png}
 \centering
-\caption{Transition probability $P(1\rightarrow 1) = |c_{1}(t)|^{2}$ (left) computed with Equation 2, $P(1\rightarrow 2) = |c_{2}(t)|^{2}$ (middle), and $P(1\rightarrow 3) = |c_{3}(t)|^{2}$ (right), both computed with Equation 1. Expansion coefficients were renormalized at each time step. $d\tau = 0.1, N_{t} = 5\times 10^{4}$}
+\caption{Left column: First order $c_{1}(t)$, transition probability $P(1\rightarrow 1) = |c_{1}^{(1)}(t)|^{2}$. Middle column: $c_{2}(t)$ and $P(1\rightarrow 2) = |c_{2}^{(1)}(t)|^{2}$. Right column: $c_{3}(t)$ and $P(1\rightarrow 3) = |c_{3}^{(1)}(t)|^{2}$. $d\tau = 0.1, N_{t} = 1\times 10^{5}$}
 \end{figure}
 
 
@@ -146,9 +148,9 @@ where $V(x)$ is the finite square well potential. We are assuming that $\tau\rig
 \noindent \textbf{(H)}
 
 \begin{figure}
-\includegraphics[scale=1]{Figure_3.png}
+\includegraphics[scale=1.5]{Figure_3.png}
 \centering
-\caption{Analytical calculation of the expectation value of position (left) and energy (right)}
+\caption{Expectation value of position (left) and energy (right) after turning on the perturbation}
 \end{figure}
 
 Now, we are told that we start in the ground state of $H_{0}$, which is the Hamiltonian for an infinite square well, i.e. $\ket{\psi(0} = \ket{i} = \ket{1}$. recall that in time-dependent first order perturbation theory, Schrodinger's equation becomes
@@ -169,46 +171,53 @@ To first order, the transition probabilities $P(i\rightarrow n) = |c_{n}^{(1)}(t
 
 \begin{align*}
 c_{n}^{(1)}(t) &= -\frac{i}{\hbar}\int_{0}^{t}V_{ni} e^{i\omega_{ni}t}dt\\
-&= \frac{V_{ni}}{E_{n}-E_{i}}(1-e^{i\omega_{ni}t})
 \end{align*}
 
-Therefore,
+For states with $E_{n}\neq E_{i}$, 
 
+\begin{align*}
+c_{n}(t) &\approx \delta_{ni} + \frac{V_{ni}}{E_{n}-E_{i}}(1-e^{i\omega_{ni}t})
+\end{align*}
+and
 \begin{align}
 P(i\rightarrow n) &= \frac{4|V_{ni}|^{2}}{|E_{n}-E_{i}|^{2}}\sin^{2}\left(\frac{(E_{n}-E_{i})t}{2\hbar}\right)
 \end{align}
 
-Clearly the transition probability oscillates but the amplitude of this oscillation is small provided the magnitude of the transition matrix element $V_{ni}$ of the perturbation is small compared to the unperturbed energy difference between the initial and final states. However, if $E_{n} = E_{i}$, the transition probability grows quadratically in time
+and for states with $E_{n}=E_{i}$, 
 
+\begin{align*}
+c_{n}(t) &\approx \delta_{ni} - \frac{iV_{ni}}{\hbar}t
+\end{align*}
+
+and 
 
 \begin{align}
 P(i\rightarrow n) &= |V_{ni}|^{2}t^{2}
 \end{align}
 
-\noindent \textbf{(I)} To compute the wavefunction $\bra{i}\ket{\alpha(\tau)}$ we need both the magnitude and phase of the first order corrections to the expansion coefficients: 
+To summarize, the transition probability oscillates but the amplitude of this oscillation is small provided the magnitude of the transition matrix element $V_{ni}$ of the perturbation is small compared to the unperturbed energy difference between the initial and final states. However, if $E_{n} = E_{i}$, the transition probability grows quadratically in time
+
+\noindent \textbf{(I)} To compute the wavefunction $\bra{i}\ket{\alpha(\tau)}$ we need both the magnitude and phase of the first order corrections to the expansion coefficients. Using those, we can directly construct the superposition:
 
 \begin{align*}
-c_{n}(t) &\approx c_{n}^{(0)}(t) + \lambda c_{n}^{(1)}(t)\\
-&= \delta_{ni} + \frac{V_{ni}}{E_{n}-E_{i}}(1-e^{i\omega_{ni}t})
-\end{align*}
-
-We can ensure that $\bra{i}\ket{\alpha(\tau)}$ is normalized by dividing the coefficients by $\sum_{n}|c_{n}(\tau)|^{2}$ at each $\tau$.
+\bra{i}\ket{\alpha(\tau)} = c_{1}(t)\psi_{1}(\ell) + c_{2}(t)\psi_{2}(\ell) + c_{3}(t)\psi_{3}(\ell)
+\end{align*}The equations to find $c_{n}(t)$ were given in part $(H)$. We ensure that $\bra{i}\ket{\alpha(\tau)}$ is normalized for all $\tau$ by dividing the wavefunction by $\sqrt{\sum_{i}\bra{i}\ket{\alpha(\tau)}}$
 
 
 \noindent \textbf{(J)} I wasn't able to get this part to work correctly with my FDTD method, so my animation is generated by computing the coefficients from part (I) directly and constructing the superposition:
 
 \begin{align*}
-\bra{i}\ket{\alpha(\tau)} = c_{1}(t)\psi_{1}(\ell) + c_{2}(t)\psi_{2}(\ell) + c_{3}(t)\psi_{3}(\ell)
+\bra{i}\ket{\alpha(\tau)} = \frac{c_{1}(t)\psi_{1}(\ell) + c_{2}(t)\psi_{2}(\ell) + c_{3}(t)\psi_{3}(\ell)}{\sqrt{A}}
 \end{align*}
 
-where $\psi_{n}(\ell)$ are orthonormal.
+for $A = \sum_{i}|\bra{i}\ket{\alpha}|^{2}$.
 
-\noindent \textbf{(K)} As $\tau\rightarrow \infty$ we should have the wavefunction approach that of the ground state i.e, $\bra{i}\ket{\alpha(\tau)}\rightarrow \bra{i}\ket{1}$, because as you can see in Figure 2, the transition probability $P(1\rightarrow 1)$ grows quadratically in time while the other transition probabilities oscillate sinusoidally. 
+\noindent \textbf{(K)} As $\tau\rightarrow \infty$ we should have the wavefunction approach that of the ground state, because as you can see in Figure 2, the transition probability $P(1\rightarrow 1)$ grows quadratically in time while the other transition probabilities oscillate sinusoidally. 
 \\
 \noindent \textbf{(L)} The expectation value $\langle x/L\rangle$ is plotted as a function of time in Figure 3. When the potential is turned on, the particle goes from a stationary state to a superposition and then slowly back to a stationary state for the same reason as in (K).\\
 \noindent \textbf{(M)}The expectation value $\langle H\rangle$ is plotted as a function of time in Figure 3.\\
-\noindent \textbf{(N)} Energy does not need to be conserved by the uncertainty principle for energy and time $\Delta E\Delta t \geq \hbar/2$ which in this case is $\Delta E\Delta \tau \geq 1/2$. Since time is a parameter in nonrelativistic quantum mechanics, energy conservation can be violated over short time scales. \\
-\noindent \textbf{(O)} At long times $\langle H_{0} \rangle = E_{0}$, so no energy is transferred to the system\\
+\noindent \textbf{(N)} The true energy, $H_{0} + V$ is conserved. It is only because we are considering the dynamics in terms of the unperturbed system, using the unperturbed energy defined by $H_{0}$, that we can speak of energy non-conservation from the unperturbed point of view \\
+\noindent \textbf{(O)} At long times $\langle H \rangle \rightarrow E_{0}$\\
 
 
 
@@ -407,15 +416,17 @@ plt.show()
 \end{lstlisting}
 
 
-\begin{lstlisting}
+\begin{lstlisting}]
 import numpy as np
 import matplotlib.pyplot as plt
 from numpy import linalg as LA
 from fdtd import FDTDSolver
+from plt2array import plt2array
+from skimage.io import imsave
 
 dir = '/home/cwseitz/Desktop/temp/'
 Nx = 100
-Nt = 50000
+Nt = 100000
 eta = 1 #hopping parameter
 dtau = 0.1
 
@@ -458,9 +469,9 @@ Hp = np.zeros((Nx,Nx)) #perturbation Hamiltonian
 Hp += np.diag(V[:,0],k=0) #main diagonal
 U0 = LA.inv(vecs1) #unitary operator
 Hp_e = U0 @ Hp @ LA.inv(U0) #perturbation in energy basis
-P_0n = Hp_e[0,1:]**2
 E0 = vals1[0]
-P_0n /= (vals1[1:]-E0)**2
+E1 = vals1[1]
+E2 = vals1[2]
 
 #############################################
 # Compute transition probability for n=1,2,3
@@ -470,77 +481,73 @@ tau = np.arange(0,Nt)*dtau
 v_11 = Hp_e[0,0]
 v_12 = Hp_e[0,1]
 v_13 = Hp_e[0,2]
-c_11_msq = (tau*v_11)**2
-c_12_msq = ((4*v_12**2)/((vals1[1]-vals1[0]))**2)*np.sin(tau*(vals1[1]-vals1[0])/2)**2
-c_13_msq = ((4*v_13**2)/((vals1[2]-vals1[0]))**2)*np.sin(tau*(vals1[2]-vals1[0])/2)**2
-Z = c_11_msq + c_12_msq + c_13_msq
-c_11_msq /= Z
-c_12_msq /= Z
-c_13_msq /= Z
-Ebar = c_11_msq*vals1[0] + c_12_msq*vals1[1] + c_13_msq*vals1[2]
+c_1 = 1  - 1j*v_11*tau
+omega_12 = vals1[1]-vals1[0]
+c_2 = (v_12/omega_12)*(1-np.exp(1j*omega_12*tau))
+omega_13 = vals1[2]-vals1[0]
+c_3 = (v_13/omega_13)*(1-np.exp(1j*omega_13*tau))
 
-fig, ax = plt.subplots(1,3,figsize=(7,2))
-ax[0].plot(tau,c_11_msq,color='red',label=r'$|c_{11}|^{2}$')
-ax[1].plot(tau,c_12_msq,color='blue',label=r'$|c_{12}|^{2}$')
-ax[2].plot(tau,c_13_msq,color='purple',label=r'$|c_{13}|^{2}$')
-ax[0].set_xlabel(r'$\tau$')
-ax[1].set_xlabel(r'$\tau$')
-ax[2].set_xlabel(r'$\tau$')
-ax[0].set_ylabel(r'$P(1\rightarrow 1)$')
-ax[1].set_ylabel(r'$P(1\rightarrow 2)$')
-ax[2].set_ylabel(r'$P(1\rightarrow 3)$')
+fig, ax = plt.subplots(2,3,figsize=(9,2))
+ax[0,0].plot(tau,np.real(c_1),color='red',label='Re')
+ax[0,0].plot(tau,np.imag(c_1),color='blue',label='Im')
+ax[0,0].set_ylabel(r'$c_{1}$')
+ax1 = ax[1,0]
+ax1.plot(tau, c_1*np.conj(c_1),color='purple')
+ax1.set_ylabel(r'$|c_{1}|^{2}$')
+ax[0,1].plot(tau,np.real(c_2),color='red',label='Re')
+ax[0,1].plot(tau,np.imag(c_2),color='blue',label='Im')
+ax[0,1].set_ylabel(r'$c_{2}$')
+ax2 = ax[1,1]
+ax2.plot(tau, c_2*np.conj(c_2),color='purple')
+ax2.set_ylabel(r'$|c_{2}|^{2}$')
+ax[0,2].plot(tau,np.real(c_3),color='red',label='Re')
+ax[0,2].plot(tau,np.imag(c_3),color='blue',label='Im')
+ax[0,2].set_ylabel(r'$c_{3}$')
+ax3 = ax[1,2]
+ax3.plot(tau, c_3*np.conj(c_3),color='purple')
+ax3.set_ylabel(r'$|c_{3}|^{2}$')
 plt.tight_layout()
 plt.show()
 
-##################################################################
-# Simulate time evolution for a time dependent Hamiltonian
-##################################################################
-
-
-V = np.pad(V, ((1,1),(0,0)))
-psi_r0 = -1*vecs1[:,0] #pure ground state
-psi_i0 = np.zeros_like(psi_r0)
-solver = FDTDSolver(Nx,Nt,V,psi_r0,psi_i0,dir,plot_iter_num=5000,plot=True,dt=dtau,H=H+Hp)
-solver.forward()
-
-
-##################################################################
+########################################
 # Construct time evolution analytically
-##################################################################
+########################################
 
 probt = np.zeros((Nx,Nt))
 probt[:,0] = vecs1[:,0]**2
-print(np.sum(probt[:,0]))
+Ht = np.zeros((Nt,))
+Ht[0] = E0
 for t in range(1,Nt):
-    psi = c_11_msq[t]*vecs1[:,0] + c_12_msq[t]*vecs1[:,1] + c_13_msq[t]*vecs1[:,2]
-    probt[:,t] = (psi**2)/np.sum(psi**2)
-p1 = probt[:,1]*np.arange(0,Nx)
+    psi = c_1[t]*vecs1[:,0] + c_2[t]*vecs1[:,1] + c_3[t]*vecs1[:,2]
+    prob = np.conj(psi)*psi
+    A = np.sum(prob)
+    prob = prob/A
+    probt[:,t] = prob
+    Z = c_1[t]*np.conj(c_1[t]) + c_2[t]*np.conj(c_2[t]) + c_3[t]*np.conj(c_3[t])
+    Ht[t] = c_1[t]*np.conj(c_1[t])*E0 + c_2[t]*np.conj(c_2[t])*E1 + c_3[t]*np.conj(c_3[t])*E2
+    Ht[t] = Ht[t]/Z
+    if t % 1000 == 0:
+        fig, ax = plt.subplots()
+        ax.plot(prob)
+        ax.set_ylim([0,0.2])
+        rgb_array = plt2array(fig)
+        imsave(dir+f'{t}_sim.tif',rgb_array)
+        plt.close()
+
 X_avg = probt.T * np.arange(0,Nx)
 X_avg = np.sum(X_avg,axis=1)
-X_avg[0] = 50
 fig, ax = plt.subplots(1,2)
-ax[0].plot(tau,X_avg[0:],color='black')
+ax[0].plot(tau,X_avg,color='black')
 ax[0].set_xlabel(r'$\tau$')
 ax[0].set_ylabel(r'$\langle x/L\rangle$')
-ax[1].plot(tau,Ebar,color='black')
+ax[1].plot(tau,Ht,color='black')
 ax[1].set_xlabel(r'$\tau$')
 ax[1].set_ylabel(r'$\langle H \rangle$')
+ax[1].hlines(E0,xmin=0,xmax=tau.max(),color='blue',label=r'$E_{0}$')
+plt.legend()
 plt.tight_layout()
 plt.show()
 
-##################################################################
-# Position/Energy expectation value for time-dependent Hamiltonian
-##################################################################
-
-X_avg = solver.prob.T * np.arange(0,Nx)
-X_avg = np.sum(X_avg,axis=1)
-tau = np.arange(0,Nt)*dtau
-fig, ax = plt.subplots()
-ax.plot(tau,X_avg,color='black')
-ax.set_xlabel(r'$\tau$')
-ax.set_ylabel(r'$\langle x/L\rangle$')
-plt.tight_layout()
-plt.show()
 \end{lstlisting}
 
 \end{document}
