@@ -1,0 +1,168 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath} % AMS Math Package
+\usepackage{bm}
+\usepackage{amsthm} % Theorem Formatting
+\usepackage{amssymb}    % Math symbols such as \mathbb
+\usepackage{graphicx} % Allows for eps images
+\usepackage[dvips,letterpaper,margin=1in,bottom=0.7in]{geometry}
+\usepackage{tensor}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{physics}
+\usepackage{setspace}
+
+\newtheorem{p}{Problem}
+\usepackage{cancel}
+\newtheorem*{lem}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{dfn}{Definition}
+ \newenvironment{s}{%\small%
+        \begin{trivlist} \item \textbf{Solution}. }{%
+            \hspace*{\fill} $\blacksquare$\end{trivlist}}%
+
+
+\begin{document}
+
+{\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Exam 3}         }\\[2\baselineskip] % Title
+{ {\bf \fontfamily{cmr}\selectfont Quantum Mechanics}\\ {\textit{\fontfamily{cmr}\selectfont     \today}}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    {\large \textsc{C Seitz}
+\\[1.4\baselineskip] 
+
+\begin{p}
+\end{p}
+
+\begin{s}
+
+First note that because the potential has the symmetry $V(x,y)=V(-x,-y)$ and there is no degeneracy, the Hamiltonian and parity operator commute. Therefore, they have simultaneous eigenkets (energy eigenkets have definite parity). Using non-degenerate perturbation theory, the first order energy shifts are the diagonal matrix elements
+
+\begin{align*}
+\Delta_{n} = V_{nn}
+\end{align*}
+
+\begin{align*}
+V_{nn} = qE_{0}\bra{n}\bm{x}\cdot\hat{n}\ket{n} = qE_{0}\left(\bra{n}x\ket{n}+\bra{n}y\ket{n}\right)
+\end{align*}
+
+Because the position operator is odd under parity, it can only connect energy eigenstates of opposite parity. 
+Thus, $\bra{n}\hat{x}\ket{n} = 0$ and $\bra{n}\hat{y}\ket{n} = 0$ and there can be no first order shift. Higher order energy shifts are given by
+
+\begin{align*}
+\Delta_{n} = V_{nn} + \sum_{j\neq n}\frac{|V_{jn}|^{2}}{E_{n}^{0}-E_{j}^{0}} + ...
+\end{align*}
+
+From this we can see that there can be energy shifts, with contributions to the shift coming from states with opposite parity to $\ket{n}$. If the potential is reshaped to be preserved under rotations by $\pi/2$, then we can also rotate the solutions by $\pi/2$ to get another solution with the same energy. In other words, the system becomes degenerate and the argument above does not apply. We cannot guarantee that the eigenstates of the Hamiltonian have definite parity.
+
+
+\end{s}
+
+\begin{p}
+\end{p}
+
+\begin{s}
+
+\begin{align*}
+H &= H_{0} + V(t)\\
+&= \omega S_{z} + \theta(t)\omega' S_{x}
+\end{align*}
+
+We expect that the spin will precess about the new field from our work with the Heisenberg picture. The new field has components along $x$ and along $z$ so $\langle S_{x}\rangle$ and $\langle S_{z}\rangle$ should be nonzero while $\langle S_{y}\rangle$ should be zero. Recall in the interaction picture, we have
+
+\begin{align*}
+i\hbar\frac{\partial}{\partial t}\ket{\psi}_{I} = V_{I}\ket{\psi}_{I}
+\end{align*}
+
+where we have seen before, in the Heisenberg picture, that
+
+\begin{align*}
+V_{I} &= e^{iH_{0}t/\hbar}V e^{iH_{0}t/\hbar}\\
+&= e^{i\omega S_{z}t/\hbar} \omega'S_{x} e^{-i\omega S_{z}t/\hbar}\\
+&= \omega'\left(S_{x}\cos\omega t -S_{y}\sin\omega t\right)
+\end{align*}
+
+Writing this out in explicit matrix form gives
+
+\begin{align*}
+V_{I} = \omega'\begin{pmatrix}0&e^{-i\omega t}\\e^{i\omega t} & 0\end{pmatrix}
+\end{align*}
+
+which we can now use to solve the system of differential equations
+
+\begin{align*}
+i\hbar\frac{d}{dt}c_{n}(t) = \sum_{m}V_{nm}e^{i\omega_{nm}t}c_{m}(t)
+\end{align*}
+
+We have the system
+
+\begin{align*}
+i\hbar\frac{d}{dt}c_{+}(t) &= 0\\
+i\hbar\frac{d}{dt}c_{-}(t) &= \omega' e^{i(\omega+\omega_{0}) t}
+\end{align*}
+
+where $\omega_{0} = (E_{+}-E_{-})/\hbar$
+
+\begin{align*}
+c_{-}(t) &= -\frac{i}{\hbar}\int_{0}^{t}e^{i(\omega+\omega_{0})t'}dt'\\
+&= -\frac{1}{\hbar(\omega+\omega_{0})}e^{i(\omega+\omega_{0})t}
+\end{align*}
+
+The normalization factor is
+
+\begin{align*}
+Z = |c_{+}|^{2} + |c_{-}|^{2} = 1 + \frac{1}{\hbar^{2}(\omega+\omega_{0})^{2}}
+\end{align*}
+
+\begin{align*}
+\langle S_{z}\rangle &= \frac{\hbar}{2Z}\left(|c_{+}|^{2} - |c_{-}|^{2}\right)\\
+&= \frac{\hbar}{2Z}\left(1 - \frac{1}{\hbar^{2}(\omega+\omega_{0})^{2}}\right)
+\end{align*}
+
+We have $S_{x}^{2} = S_{y}^{2} = \frac{\hbar^{2}}{4}I$ so
+
+\begin{align*}
+\langle S_{\perp}^{2}\rangle &= \langle S_{x}^{2}\rangle + \langle S_{y}^{2}\rangle\\
+&= \frac{\hbar^{2}}{2}\bra{\alpha (t)}\ket{\alpha(t)}\\
+&= Z\frac{\hbar^{2}}{2}
+\end{align*}
+
+These are both constant in time, because the spin is just precessing around a new direction determined by $\omega$ and $\omega'$. We now consider two spin-1 particles
+
+\begin{align*}
+H &= H_{0} + V(t)\\
+&= \omega \left(S_{1z}+S_{2z}\right) + \theta(t)\omega' \left(S_{1x}+S_{2x}\right)
+\end{align*}
+
+As before, we write the perturbation in the interaction picture
+
+\begin{align*}
+V_{I} &= e^{iH_{0}t/\hbar}(V_{1}+V_{2}) e^{iH_{0}t/\hbar}\\
+&= e^{i\omega (S_{1z}+S_{2z})t/\hbar} \omega' \left(S_{1x}+S_{2x}\right) e^{-i\omega (S_{1z}+S_{2z})t/\hbar}\\
+&= \omega'\left(S_{1x}\cos\omega t -S_{1y}\sin\omega t\right)+\omega'\left(S_{2x}\cos\omega t -S_{2y}\sin\omega t\right)
+\end{align*}
+
+
+
+\end{s}
+
+\begin{p}
+\end{p}
+
+\begin{s}
+
+First recall that,
+
+\begin{align*}
+L\cdot S = J^{2} - L^{2} - S^{2}
+\end{align*}
+
+Now we are told that we start in the $\ket{j_{1},j_{2}; jm} = \ket{1,\frac{1}{2}}$
+
+\begin{align*}
+V_{ni} &= \bra{1,-\frac{1}{2}}V\ket{0,+\frac{1}{2}}\\
+&= \bra{1,-\frac{1}{2}}L\cdot S\ket{0,+\frac{1}{2}}\\
+&= \bra{1,-\frac{1}{2}}J^{2}\ket{0,+\frac{1}{2}} - \bra{1,-\frac{1}{2}}L^{2}\ket{0,+\frac{1}{2}} - \bra{1,-\frac{1}{2}}S^{2}\ket{0,+\frac{1}{2}}
+\end{align*}
+
+However, in the $\ket{j_{1},j_{2}; jm}$ basis, all of these operators are diagonal. Therefore $V_{ni} = 0$ and in turn these states cannot be coupled and the probability of a transition to $\ket{0,+\frac{1}{2}}$ is zero.
+
+\end{s}
+
+\end{document}

@@ -55,112 +55,96 @@ Eukaryotic transcription is episodic, consisting of a series of transcriptional 
 
 \chapter{Single molecule localization microscopy}
 
-
-\section{Stochastic optical reconstruction microscopy}
-
-\section{PSF engineering in single molecule localization microscopy}
+\section{Point spread functions in single molecule localization microscopy}
 
 Born and Wolf's approximation, Lateral and axial point spread functions, Potentially double helix point spread functions for 3D storm
-
-\subsection{Fisher information theory for parameter estimation in single molecule microscopy}
-
-\section{Bounding parameter uncertainty in single molecule localization}
-
-\subsection{Point spread functions in widefield microscopy}
 
 Most detectors used for imaging have many elements (pixels) so that we can record an image projected onto the detector by a system of lenses. In fluorescence imaging, this is usually a relay consisting of an objective lens and a tube lens to focus the image onto the camera. Due to diffraction, any point emitter, such as a single fluorescent molecule, will be registered as a diffraction limited spot. The profile of that spot is often described as a Gaussian point spread function (Richardson and Wolf)
 
 \begin{equation}
-\mathrm{PSF}(x,y) = \frac{1}{2\pi\sigma^{2}}\exp\left(-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}\right)
+\mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}}
 \end{equation}
 
-where $(x_0,y_0)$ defines the coordinates of a single fluorescent molecule on a detector $\mathcal{D}$. 
+which has units of $[W/m^{2}]$.
 
 \begin{figure}[t!]
 \centering
 \includegraphics[width=150mm]{psf-1}
-\caption{Cartoon of a excitatory-inhibitory neural network receving a time-dependent feedforward current $F(t)$, feedback current $R(t)$, and synaptic noise $\xi(t)$. Excitatory neurons are shown in red and inhibitory neurons shown in blue. Synaptic current is drawn to be instantaneous and syanptic weights $J_{ij}$ are not functions of time. Feedforward inputs could be weighted Poisson processes where $F$ defines the rates, for example.}
 \end{figure}
 
 \begin{figure}[t!]
 \centering
 \includegraphics[width=150mm]{psf-2}
-\caption{Cartoon of a excitatory-inhibitory neural network receving a time-dependent feedforward current $F(t)$, feedback current $R(t)$, and synaptic noise $\xi(t)$. Excitatory neurons are shown in red and inhibitory neurons shown in blue. Synaptic current is drawn to be instantaneous and syanptic weights $J_{ij}$ are not functions of time. Feedforward inputs could be weighted Poisson processes where $F$ defines the rates, for example.}
 \end{figure}
 
+\begin{figure}[t!]
+\centering
+\includegraphics[width=150mm]{dSTORM}
+\end{figure}
 
-\subsection{Maximum a posteriori estimation of PSF parameters}
+\subsection{The physics of semiconductor cameras}
 
-Maximum a posteriori estimation of parameters
+Modern cameras used in light microscopy, such as scientific complementary metal oxide semiconductor (sCMOS) cameras, are ultimately powered by the photoelectric effect. This occurs when electrons within the material absorb energy from the photons and have enough energy to escape their bonds and become ejected from the material. The materials used in camera sensors are typically semiconductors such as silicon or gallium
+
+In essence, an image captured by a camera can be loosely thought of as histogram of photon arrivals and a discretized form of the density $\mathrm{PSF}(x,y)$ over an integration time $\tau$. If $\mathrm{PSF}(x,y)$ can be approximated as constant in time, the value at a pixel approaches an integral of this density over the pixel:
+
+\begin{equation}
+\mu_{k} = \lambda_{k}\tau = \frac{\eta\tau}{\hbar\omega}\int G(x,y)dA
+\end{equation}
+
+The parameter $\eta$ is called the \emph{quantum efficiency}, and without loss of generality, we will assume $\eta = 1$. The variable $\lambda_{k}$ at a pixel $k$ defines the probability of observing a photon per unit time and the \emph{true signal} is Poisson: $S_{k} \sim P(\lambda_{k})$. We say that the detection process is \emph{shot-noise limited} when Poisson noise dominates. It would be convenient to obtain an analytical expression for $\lambda_{k}$ given the parameters of the point spread function $\theta = (x_0,y_0,\sigma)$. Since the 2D Gaussian is symmetric, it is separable, and we can write
+
+\begin{align*}
+\lambda_{k} &= \frac{1}{2\pi\sigma^{2}}\left(\int_{x_{k}}^{x_{k+1}}e^{-\frac{(x-x_{0})^{2}}{2\sigma^{2}}}dx\right)\left(\int_{y_{k}}^{y_{k+1}}e^{-\frac{(y-y_{0})^{2}}{2\sigma^{2}}}dy\right)
+\end{align*}
+
+We can then express the Gaussian integrals over a pixel by making use of the following property of the error function
+
+\begin{equation*}
+\frac{1}{\sqrt{2\pi}\sigma}\int_{a}^{b} e^{\frac{-(x-\mu)^{2}}{2\sigma^{2}}} = \frac{1}{2}\left(\mathrm{erf}\left(\frac{b-\mu}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{a-\mu}{\sqrt{2}\sigma}\right)\right)
+\end{equation*}
+
+Suppose the particle is known to be located at $(x_{0},y_{0})$ and some square pixel $k$ is centered on coordinates $(x,y)$ and has a width $a$. Then $\lambda_{k}$ at this pixel is
+
+\begin{align*}
+\lambda_{k} &= \frac{1}{4}\left(\mathrm{erf}\left(\frac{x+a/2-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{x-a/2-x_{0}}{\sqrt{2}\sigma}\right)\right)\\
+&\cdot \left(\mathrm{erf}\left(\frac{y+a/2-y_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{y-y/2-y_{0}}{\sqrt{2}\sigma}\right)\right)
+\end{align*}
+
+However this noise model is incomplete, because detectors often suffer from dark noise (thermal noise). We define another r.v. $W_{k}$ which represents Gaussian dark noise associated with pixel $k$. Unless otherwise specified we will always assume that $W_{k} \sim \mathcal{N}(m_{k},\sigma_{w,k}^{2})$. We represent our corrupted signal as another random variable $H_{k} = S_{k} + W_{k}$. The r.v. $S_{k}$ has units of photons $[\mathrm{p}]$, while $H_{k}$ and $W_{k}$ have units of photoelectrons $[e^{-}]$.  is the gain of the detector element $g_{k}\; [e^{-}\mathrm{p}^{-1}]$. A fundamental result in probability theory is that the distribution of $H_{k}$ is the convolution of the distributions of $S_{k}$ and $W_{k}$,
+
+\begin{align*}
+P(H_{k}) &= P(S_{k})\circledast P(W_{k})\\
+&= A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
+\end{align*}
+
+Importantly, the variance of the thermal noise does not scale with increasing number of photons. In practice, this expression is difficult to work with, so we look for an analytical approximation. For sufficiently large $\mu_{k}$, the Poisson distribution is well-approximated by a normal distribution $P(\mu_{k}) \approx \mathcal{N}(\mu_{k},\mu_{k})$. Under the conditions that this approximation is valid, $P(H_{k})$ is easily calculated, because the sum of two Gaussian variables is another Gaussian variable:
+
+\begin{equation*}
+P(H_{k}) \approx \mathcal{N}(\mu_{k}+o_{k}, \mu_{k}+\sigma_{k}^{2})
+\end{equation*}
+
+
+
+
+\subsection{Maximum likelihood estimation of PSF parameters}
+
+Maximum likelihood estimation is a special case of maximum a posteriori estimation where our prior on the parameter values is uniform.
 
 \begin{align*}
 \theta^{*}_{\mathrm{MAP}} &= \underset{\theta}{\mathrm{argmax}} \;P(\theta|\mathcal{X})\\
-&= \underset{\theta}{\mathrm{argmax}} \;\frac{\mathcal{L}_{\theta}\pi(\theta)}{\int_{\theta}\mathcal{L}_{\theta}\pi(\theta)}
+&= \underset{\theta}{\mathrm{argmax}} \; \mathcal{L}(\theta|\mathcal{X})\pi(\theta)
 \end{align*}
 
 
-where $\mathcal{L}_{\theta} = \mathcal{L}(\theta|\mathcal{X})$ is the likelihood function and $\pi(\theta)$ a prior on the parameters. Furthermore, we will assume that $\pi(\theta)$ is a uniform distribution. An image captured by a camera can be loosely thought of as histogram of photon arrivals and a discretized form of the density $\mathrm{PSF}(x,y)$ over an integration time $\tau$. If $\mathrm{PSF}(x,y)$ can be approximated as constant in time ($\tau << 1$), the value at a pixel approaches an integral of this density over the pixel:
-
-\begin{equation}
-\lambda_{k} = \gamma\cdot\int_{\mathcal{D}_{k}} q(x,y)dxdy
-\end{equation}
-
-Put another way, the variable $\lambda_{k}$ at a pixel $k$ defines the probability of observing a photon per unit time and therefore we can define the number of photons arriving at each pixel as a random variable
-
-\begin{equation*}
-P(S_{k}) = \mathrm{Poisson}(\lambda_{k})
-\end{equation*}
-
-
-It would be convenient to obtain an analytical expression for $\lambda_{k}$ given the parameters of the point spread function $\theta = (x_0,y_0,\sigma)$. This can be done by making use of the error function
-
-\begin{equation*}
-\mathrm{erf}(x) \equiv \frac{2}{\sqrt{\pi}}\int_{0}^{x} \exp(-t^{2})dx
-\end{equation*}
-
-where $t = \frac{x}{\sqrt{2}\sigma}$. We just need to rescale this so it is appropriate for a standard normal distribution. We need something like
-
-\begin{equation*}
-F(x) = \frac{1}{\sqrt{2\pi}}\int_{0}^{x} \exp(-t^{2})dx
-\end{equation*}
-
-so we rescale the error function by $\beta = 1/2\sqrt{2}$. Of course, this can also be used to construct the integral over an arbitrary interval $[a,b]$
-
-\begin{equation*}
-\mathrm{erf}(b) - \mathrm{erf}(a) = \frac{2\beta}{\sqrt{\pi}}\int_{\frac{a}{\sqrt{2}\sigma}}^{\frac{b}{\sqrt{2}\sigma}} \exp(-t^{2})dt
-\end{equation*}
-
-We use this result to compute the Poisson rate $\lambda_{k}$ at pixel $k$. Now, the Poisso rate is in general given by
+where $\mathcal{L}$ denotes the likelihood function (posterior probability of the parameters) and $\pi(\theta)$ a prior on the parameters. Under the constraint that $\pi(\theta)$ is a uniform distribution, we are dealing with maximum likelihood estimation
 
 \begin{align*}
-\lambda_{k} &= \frac{1}{2\pi}\left(\int_{x_{k}}^{x_{k+1}}\exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx\right)\left(\int_{y_{k}}^{y_{k+1}}\exp\left(-\frac{(y-y_{0})^{2}}{2\sigma^{2}}\right)dy\right)\\
+\theta^{*}_{\mathrm{MLE}} &= \underset{\theta}{\mathrm{argmax}} \;\mathcal{L}(\theta|\mathcal{X})\\
+&= \underset{\theta}{\mathrm{argmin}} \; -\ell(\theta|\mathcal{X})
 \end{align*}
 
-Let $t = (x-x_{0})/\sqrt{2}\sigma$ and $z = (y-y_{0})/\sqrt{2}\sigma$ and write constant in terms of $\beta$
-
-\begin{align*}
-\lambda_{k} &= \frac{4\beta^{2}}{\pi}\left(\int_{t_{k}}^{t_{k+1}}\exp\left(-t^{2}\right)dx\right)\left(\int_{z_{k}}^{z_{k+1}}\exp\left(-z^{2}\right)dy\right)\\
-&= \beta^{2}\left[\mathrm{erf}(t_{k+1}) - \mathrm{erf}(t_{k})\right]\left[(\mathrm{erf}(z_{k+1}) - \mathrm{erf}(z_{k})\right]
-\end{align*}
-
-where for example $t_{k} = (x_{k}-x_{0})/\sqrt{2}\sigma$
-
-
-Detectors often suffer from dark noise (thermal noise) and there may also be a background signal. Considering the former first, we define another r.v. $W_{k}$ which represents Gaussian dark noise associated with pixel $k$. Unless otherwise specified we will always assume that $W_{k} \sim \mathcal{N}(m_{k},\sigma_{w,k}^{2})$. We represent our corrupted signal as another random variable $H_{k}$. As a side note, we define $S_{k}$ to have units of photons $[\mathrm{p}]$, while $H_{k}$ has units of photoelectrons $[e^{-}]$. The conversion factor between the two is the gain of the detector element $g_{k}\; [e^{-}\mathrm{p}^{-1}]$.
-
-Dropping the pixel subscripts for the moment, the Fourier transform of a normal distribution $\mathcal{N}(\mu,\sigma_{w}^{2})$, or its characteristic function reads
-
-\begin{align*}
-\tilde{P}(W) &= \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}\sigma_{w}}e^{-\frac{(x-\mu)^{2}}{2\sigma_{w}^{2}}}e^{-i\omega x} dx\\
-&= \frac{e^{-\frac{\sigma_{w} ^2 \omega ^2}{2}+i \mu  \omega }}{\sqrt{2 \pi } }
-\end{align*}
-
-On the other hand for $\lambda >> 1$ we can approximate the Poisson distribution as a normal distribution $\mathcal{N}(\lambda, \sqrt{\lambda})$ on countable support. We can then then write the likelihood function $\mathcal{L}_{\theta,k}$ as the inverse Fourier transform of the product of these two characteristic functions
-
-\begin{align*}
-\mathcal{L}_{\theta,k} &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} e^{-\frac{\sigma_{k} ^2 \omega ^2}{2}+i \mu_{k}  \omega } e^{-\frac{\lambda_{k} \omega ^2}{2}+i \lambda_{k}  \omega }  e^{-i\omega x} d\omega\\
-&= \frac{1}{\sqrt{2\pi(\lambda_{k} + \mu_{k}^{2})}}e^{-\frac{(-x+\mu_{k}+\lambda_{k})^{2}}{2(\lambda_{k}+\mu_{k}^{2})}}
-\end{align*}
+where $\ell$ is the log-likelihood. 
 
 We can now return to the original optimization problem 
 
@@ -168,35 +152,6 @@ We can now return to the original optimization problem
 \theta^{*}_{\mathrm{MAP}} &= \underset{\theta}{\mathrm{argmax}} \;\ \pi(\theta)\mathcal{L}_{\theta}\\
 &= \underset{\theta}{\mathrm{argmax}} \; \prod_{k}\mathcal{L}_{\theta,k}\\
 &= \underset{\theta}{\mathrm{argmax}} \; \sum_{k}\log \mathcal{L}_{\theta,k}
-\end{align*}
-
-\begin{align*}
-\sum_{k}\log \mathcal{L}_{\theta,k} = \sum_{k}-\frac{(-x+\mu_{k}+\lambda_{k})^{2}}{2(\lambda_{k}+\mu_{k}^{2})} -\log\left(\sqrt{2\pi(\lambda_{k} + \mu_{k}^{2})}\right)
-\end{align*}
-
-Maximizing $\mathcal{L}_{\theta}$ is therefore equivalent to maximizing $\mathcal{L}_{\theta,k}$ at every pixel. Taking the derivative of the first term with respect to a parameter $\theta$
-
-\begin{align*}
-&\frac{\partial}{\partial \theta} \left(\frac{(-x+\mu_{k}+\lambda_{k})^{2}}{2(\lambda_{k}+\mu_{k}^{2})} \right)\\
-&= \left(\frac{4(\lambda_{k}+\mu_{k}^{2})(-x+\mu_{k}+\lambda_{k})\frac{\partial \lambda_{k}}{\partial \theta} - 2\frac{\partial \lambda_{k}}{\partial \theta} (-x+\mu_{k}+\lambda_{k})^{2}}{4(\lambda_{k}+\mu_{k}^{2})^{2}} \right)
-\end{align*}
-
-\begin{align*}
-\frac{\partial}{\partial \theta} \log\left(\sqrt{2\pi(\lambda_{k} + \mu_{k}^{2})}\right) &= \frac{1}{2(\lambda_{k} + \mu_{k}^{2})}\frac{\partial \lambda_{k}}{\partial \theta}
-\end{align*}
-
-\begin{align*}
-\frac{\partial \lambda_{k}}{\partial x_{0}} &= \beta^{2}\left(\int_{x_{k}}^{x_{k+1}}\frac{\partial}{\partial x_{0}}\exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx\right)\left[(\mathrm{erf}(z_{k+1}) - \mathrm{erf}(z_{k})\right]\\
-&= \frac{\beta^{2}}{\sigma^{2}}\left(\int_{x_{k}}^{x_{k+1}} (x-x_{0})\exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx\right)\left[(\mathrm{erf}(z_{k+1}) - \mathrm{erf}(z_{k})\right]
-\end{align*}
-
-\begin{align*}
-\int_{x_{k}}^{x_{k+1}} x\exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx - x_{0}\int_{x_{k}}^{x_{k+1}} \exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx
-\end{align*}
-
-\begin{align*}
-\int_{x_{k}}^{x_{k+1}} x\exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx &= \sigma\sqrt{2\pi}\;\bigg|_{x_{k}}^{x_{k+1}}x  - \int_{x_{k}}^{x_{k+1}} \exp\left(-\frac{(x-x_{0})^{2}}{2\sigma^{2}}\right)dx\\
-&= \sqrt{2\pi}\sigma\Delta - \mathrm{erf}(t_{k+1}) - \mathrm{erf}(t_{k})
 \end{align*}
 
 
