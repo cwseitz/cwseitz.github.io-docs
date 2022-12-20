@@ -62,7 +62,7 @@ Gaussian approximation. Lateral and axial point spread functions, Potentially do
 Most detectors used for imaging have many elements (pixels) so that we can record an image projected onto the detector by a system of lenses. In fluorescence imaging, this is usually a relay consisting of an objective lens and a tube lens to focus the image onto the camera. Due to diffraction, any point emitter, such as a single fluorescent molecule, will be registered as a diffraction limited spot. The profile of that spot is often described as a Gaussian point spread function (Richardson and Wolf)
 
 \begin{equation}
-\mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}}
+\mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}} + B_0
 \end{equation}
 
 which has units of $[W/m^{2}]$.
@@ -92,7 +92,7 @@ In essence, an image captured by a camera can be loosely thought of as histogram
 \mu_{k} = \lambda_{k}\tau = \frac{\eta\tau}{\hbar\omega}\int G(x,y)dA
 \end{equation}
 
-The parameter $\eta$ is called the \emph{quantum efficiency}, and without loss of generality, we will assume $\eta = 1$. The variable $\lambda_{k}$ at a pixel $k$ defines the probability of observing a photon per unit time and the \emph{true signal} is Poisson: $S_{k} \sim P(\lambda_{k})$. We say that the detection process is \emph{shot-noise limited} when Poisson noise dominates. It would be convenient to obtain an analytical expression for $\lambda_{k}$ given the parameters of the point spread function $\theta = (x_0,y_0,\sigma)$. Since the 2D Gaussian is symmetric, it is separable, and we can write
+The parameter $\eta$ is called the \emph{quantum efficiency}, and without loss of generality, we will assume $\eta = 1$. The variable $\lambda_{k}$ at a pixel $k$ defines the probability of observing a photon per unit time and the \emph{true signal} is Poisson: $S_{k} \sim P(\lambda_{k})$. In this model, notice that $S_{k}$ may represent multiple sources e.g., fluorescence from a single molecule plus a background source as shown in (1.1). Furthermore, we say that the detection process is \emph{shot-noise limited} when Poisson noise dominates. It would be convenient to obtain an analytical expression for $\lambda_{k}$ given the parameters of the point spread function $\theta = (x_0,y_0,\sigma)$. Since the 2D Gaussian is symmetric, it is separable, and we can write
 
 \begin{align*}
 \lambda_{k} &= \frac{1}{2\pi\sigma^{2}}\left(\int_{x_{k}}^{x_{k+1}}e^{-\frac{(x-x_{0})^{2}}{2\sigma^{2}}}dx\right)\left(\int_{y_{k}}^{y_{k+1}}e^{-\frac{(y-y_{0})^{2}}{2\sigma^{2}}}dy\right)
@@ -116,7 +116,9 @@ Suppose the particle is known to be located at $(x_{0},y_{0})$ and some square p
 &\cdot \left(\mathrm{erf}\left(\frac{y+a/2-y_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{y-y/2-y_{0}}{\sqrt{2}\sigma}\right)\right)
 \end{align*}
 
-However this noise model is incomplete, because detectors often suffer from dark noise (thermal noise). We define another r.v. $W_{k}$ which represents Gaussian dark noise associated with pixel $k$. Unless otherwise specified we will always assume that $W_{k} \sim \mathcal{N}(m_{k},\sigma_{w,k}^{2})$. We represent our corrupted signal as another random variable $H_{k} = S_{k} + W_{k}$. The r.v. $S_{k}$ has units of photons $[\mathrm{p}]$, while $H_{k}$ and $W_{k}$ have units of photoelectrons $[e^{-}]$.  is the gain of the detector element $g_{k}\; [e^{-}\mathrm{p}^{-1}]$. A fundamental result in probability theory is that the distribution of $H_{k}$ is the convolution of the distributions of $S_{k}$ and $W_{k}$,
+However this noise model is incomplete, because detectors often suffer from dark noise and readout noise. The former is due to statistical fluctuations in the photoelectron count due to thermal fluctuations. The latter is noise introduced by the amplifier circuit during the coversion of photoelectron charge to a voltage. Here, we use the Hamamatsu ORCA v3 CMOS camera, which is air cooled to -10C and has very low dark noise - around 0.06 electrons/pixel/second - and can be safely ignored for low exposure times. Readout noise has been often neglected in localization algorithms because its presence in EMCCD cameras is small enough that it can be ignored within the tolerances of the localization precision. In the case of sCMOS cameras, however, the readout noise of each pixel is significantly higher and, in addition, every pixel has its own noise and gain characteristic with dramatic pixel-to-pixel variations.
+
+Readout noise is not negligible, and is represented as a random variable $W_{k}$ which is \textit{a statistical fluctuation of the number of photoelectrons during the amplification process}. Unless otherwise specified we will always assume that $W_{k} \sim \mathcal{N}(o_{k},\sigma_{k}^{2})$. The corrupted number of photoelectrons after amplification is another random variable $H_{k} = S_{k} + W_{k}$. A fundamental result in probability theory is that the distribution of $H_{k}$ is the convolution of the distributions of $S_{k}$ and $W_{k}$,
 
 \begin{align*}
 P(H_{k}) &= P(S_{k})\circledast P(W_{k})\\
