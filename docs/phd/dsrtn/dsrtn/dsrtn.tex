@@ -121,42 +121,62 @@ However this noise model is incomplete, because detectors often suffer from dark
 Readout noise is not negligible, and is represented as a random variable $W_{k}$ which is \textit{a statistical fluctuation of the number of ADU during the amplification process}. It is important to note that we cannot measure the contribution by readout noise $W_{k}$ before amplification and therefore it must be expressed in units of $\mathrm{ADU}$. This is in contrast to the Poisson variable $S_{k}$, which \emph{can} be expressed in units of photoelectrons, because we are able to estimate the emission rate of the fluorophore analytically and we know the quantum efficiency $\eta$. The number of photoelectrons $S_{k}$ is  multiplied by a gain factor $g_{k}$ which has units of $[\mathrm{ADU}/e^{-}]$, which generally must be measured for each pixel. For $W_{k}$, the gain factor is implied. Here, we will always assume that readout noise is Gaussian with some pixel-specific offset $o_{k}$ and variance $\sigma_{k}^{2}$ i.e. $W_{k} \sim \mathcal{N}(o_{k},\sigma_{k}^{2})$. Ultimately we write out distributions of the variable we observe $H_{k}$ which has units of $\mathrm{ADU}$ and is a sum of shot noise and readout noise. A fundamental result in probability theory is that the distribution of $H_{k}$ is the convolution of the distributions of $S_{k}$ and $W_{k}$,
 
 \begin{align*}
-P(H_{k}) &= P(S_{k})\circledast P(W_{k})\\
+P(H_{k}|\theta) &= P(S_{k})\circledast P(W_{k})\\
 &= A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
 \end{align*}
 
 In practice, this expression is difficult to work with, so we look for an analytical approximation. For sufficiently large $\mu_{k}$, the Poisson distribution is well-approximated by a normal distribution $P(\mu_{k}) \approx \mathcal{N}(\mu_{k},\mu_{k})$. Under the conditions that this approximation is valid, $P(H_{k})$ is easily calculated, because the sum of two Gaussian variables is another Gaussian variable:
 
-\begin{equation*}
-P(H_{k}) \approx \mathcal{N}(\mu_{k}+o_{k}, \mu_{k}+\sigma_{k}^{2})
-\end{equation*}
+\begin{equation}
+P(H_{k}|\theta) \approx \frac{1}{\sqrt{2\pi(\lambda_{k}\tau+\sigma_{k}^{2})}}e^{-\frac{(H_{k}-\lambda_{k}\tau-o_{k})}{2(\lambda_{k}\tau+\sigma_{k}^{2})}}
+\end{equation}
 
-
-\subsection{Bayesian Inference of PSF parameters and the Cramer-Rao bound}
-
-Suppose we are given samples from a model distribution with unknown parameters. This model defines a joint likelihood of the samples at each point in $\theta$ space, formally the posterior $P(X|\theta)$. We may then ask - does the likelihood of the data vary as we vary the parameters? If the likelihood surface is flat, all parameter sets would be equally likely and the data does not appear to carry much information about the parameters. Perhaps our model is complete nonsense, and the data simply cant carry substantial information about the parameters. Moreover, if the surface has a number of bumps or inflection points, then we expect that maybe some parameter sets are more likely that others. Fisher information, relates this ``bumpiness" of the likelihood surface to a precise metric of \emph{information} carried by the data about the parameters, and is measured by computing the variance the second derivative of the log-likelihood over the parameter space\\
-
-
-The log-likelihood of an image under parameters $\theta$, assuming each pixel is an independent random variable, reads
+Assuming each pixel is an independent random variable, then the likelihood of the dataset (or equivalently the joint distribution on pixels) is simply a product $\mathcal{L}(H|\theta) = \prod_{k}P(H_{k}|\theta)$. Now suppose we are given a sample from $\mathcal{L}(H|\theta)$ with unknown $\theta$. A general task in Bayesian inference is to determine $\theta$ from the data under the model $\mathcal{M}$. We may then ask - does the likelihood $\mathcal{L}$ vary as we vary the parameters? If the likelihood is flat, all parameter sets are equally likely and the data does not appear to carry much information about the parameters. Moreover, if $\mathcal{L}$ has a number of bumps or inflection points, then we expect that maybe some parameter sets are more likely that others. The ``bumpiness" of the likelihood surface is called the Fisher information. The Fisher information matrix $\mathbf{I}(\theta)$ can be directly related to the curvature of the KL-Divergence over the parameter space
 
 \begin{align*}
-\ell(H|\theta) = \log\prod_{k}^{M^{2}} P(H_{k}|\theta) = \sum_{k=1}^{M^{2}} \ell (H_{k}|\theta)
+\nabla^2_{\theta'} D_{KL}[\mathcal{L}(H|\theta) \parallel \mathcal{L}(H|\theta')] 
+&= - \nabla_{\theta'} \int \mathcal{L}(H|\theta) \nabla_{\theta'}  \log \mathcal{L}(H|\theta') \, dH \\ 
+&= - \int \mathcal{L}(H|\theta) \nabla^2_{\theta'}  \log \mathcal{L}(H|\theta') \, dH \\
+&= - \mathbb{E}_{\theta}[\nabla^2_{\theta'} \log \mathcal{L}(H|\theta')] \\
+&= \mathbf{I}(\theta)
 \end{align*}
 
-This is fairly simple when the likelihood is Gaussian
-
-
-\begin{equation*}
-\ell(H|\theta) = \frac{1}{2}\sum_{k} \log 2\pi\sigma_{k}^{2} + \frac{(H_{k}-\mu_{k})^{2}}{\sigma_{k}^{2}}
-\end{equation*}
-
-and the Fisher information matrix is
+Luckily, we can directly compute the Hessian matrix of the log-likelihood $\nabla^2_{\theta'} \log \mathcal{L}(H|\theta')$. Moreover, from the expression above, we can see that it is convenient to work with the negative log-likelihood $\ell(H|\theta)$.
 
 \begin{align*}
-I_{ij}(\theta) &= \underset{\theta}{\mathbb{E}}\left(\frac{\partial\ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right)
+\nabla^2_{\theta'} \log \mathcal{L}(H|\theta') =
+\begin{pmatrix}\frac{\partial^{2}\ell}{\partial x_{0}^{2}} & \frac{\partial\ell}{\partial x_{0}}\frac{\partial\ell}{\partial y_{0}} \\
+\frac{\partial\ell}{\partial y_{0}}\frac{\partial\ell}{\partial x_{0}} &\frac{\partial^{2}\ell}{\partial y_{0}^{2}} 
+\end{pmatrix}
 \end{align*}
 
-Maximum likelihood estimation is a special case of maximum a posteriori estimation where our prior on the parameter values is uniform.
+We begin by expanding $\ell(H|\theta)$:
+
+\begin{align*}
+\ell(H|\theta) &= \sum_{k} \ell(H_{k}|\theta) \\
+&= \sum_{k} \log\sqrt{2\pi(\lambda_{k}\tau+\sigma_{k}^{2})}+\frac{(H_{k}-\lambda_{k}\tau-o_{k})}{2(\lambda_{k}\tau+\sigma_{k}^{2})}
+\end{align*}
+
+The Hessian can be constructed by differentiating this sum. The first order derivative w.r.t an arbitrary parameter is
+
+\begin{align*}
+\frac{\partial\ell(H|\theta)}{\partial \theta} &=  \sum_{k} \frac{\partial\ell_{k}(H_{k}|\theta)}{\partial \theta}\\
+&= \sum_{k}\frac{\partial\ell_{k}(H_{k}|\theta)}{\partial \theta}\frac{\partial\lambda_{k}}{\partial \theta}
+\end{align*}
+
+and it is straightforward to show that 
+
+\begin{align*}
+\frac{\partial\ell_{k}}{\partial \lambda_{k}} = -\frac{(h-\lambda_{k} -\mu )^2}{2 \left(\lambda_{k} +\rho ^2\right)^2}-\frac{h-\lambda_{k} -\mu }{\lambda_{k} +\rho ^2}+\frac{1}{2 \left(\lambda_{k} +\rho ^2\right)}
+\end{align*}
+
+For $\theta = x_{0}$, we have
+
+\begin{align*}
+\frac{\partial\ell}{\partial x_{0}} = \frac{\tau\lambda_{y}}{2}\sum_{k} \frac{\partial\ell_{k}}{\partial \lambda_{k}}\left(\frac{\sqrt{\frac{2}{\pi }} e^{-\frac{\left(-\frac{a}{2}+x_{k}-\text{x0}\right)^2}{2 \sigma ^2}}}{\sigma }-\frac{\sqrt{\frac{2}{\pi }} e^{-\frac{\left(\frac{a}{2}+x_{k}-\text{x0}\right)^2}{2 \sigma ^2}}}{\sigma }\right)
+\end{align*}
+
+
 
 \begin{align*}
 \theta^{*}_{\mathrm{MAP}} &= \underset{\theta}{\mathrm{argmax}} \;P(\theta|\mathcal{X})\\
