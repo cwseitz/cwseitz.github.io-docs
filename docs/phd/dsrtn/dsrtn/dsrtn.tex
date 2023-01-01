@@ -141,65 +141,43 @@ Assuming each pixel is an independent random variable, then the likelihood of th
 &= \mathbf{I}(\theta)
 \end{align*}
 
-Luckily, we can directly compute the Hessian matrix of the log-likelihood $\nabla^2_{\theta'} \log \mathcal{L}(H|\theta')$. Moreover, from the expression above, we can see that it is convenient to work with the negative log-likelihood $\ell(H|\theta)$.
+
+The Fisher Information matrix depends on the parametrization chosen, and, in general, if we rewrite our model in terms of some other parameter $\eta$, then by the vector chain rule $\nabla_{\theta} = J^{T}\nabla_{\eta}J$ where $J$ denotes the Jacobian matrix with components $J_{ij} = \partial \eta_{i}/\partial \theta_{j}$. The Fisher information becomes $I(\theta) = J^{T}I(\eta)J$.
+
+\subsection{Gaussian case}
+
+If the pixels are just Gaussian variables, the joint distribution $\mathcal{L}$ is really just a multivariate normal distribution:
 
 \begin{align*}
-\nabla^2_{\theta'} \log \mathcal{L}(H|\theta') =
-\begin{pmatrix}\frac{\partial^{2}\ell}{\partial x_{0}^{2}} & \frac{\partial\ell}{\partial x_{0}}\frac{\partial\ell}{\partial y_{0}} \\
-\frac{\partial\ell}{\partial y_{0}}\frac{\partial\ell}{\partial x_{0}} &\frac{\partial^{2}\ell}{\partial y_{0}^{2}} 
-\end{pmatrix}
+\mathcal{L}(H_{1},H_{2},...,H_{n}) = \frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}\exp-\frac{1}{2}(H-\mu)^{T}\Sigma^{-1}(H-\mu)
 \end{align*}
 
-We begin by expanding $\ell(H|\theta)$:
+The Fisher information matrix when we are dealing with the multivariate normal distribution with parameters $(\mu,\Sigma)$ which are themselves functions of another vector of parameters $\bm{\theta}$ has been well-studied (Malago and Pestone; 2015)
 
 \begin{align*}
-\ell(H|\theta) &= \sum_{k} \ell(H_{k}|\theta) \\
-&= \sum_{k} \log\sqrt{2\pi(\lambda_{k}\tau+\sigma_{k}^{2})}+\frac{(H_{k}-\lambda_{k}\tau-o_{k})}{2(\lambda_{k}\tau+\sigma_{k}^{2})}
+  I_{m,n} =
+  \frac{\partial\mu^\textsf{T}}{\partial\theta_m}\Sigma^{-1}
+  \frac{\partial\mu}{\partial\theta_n} +
+  \frac{1}{2}\operatorname{tr}\left(
+    \Sigma^{-1}\frac{\partial\Sigma}{\partial\theta_m}
+    \Sigma^{-1}\frac{\partial\Sigma}{\partial\theta_n}
+  \right),
 \end{align*}
 
-The Hessian can be constructed by differentiating this sum. The first order derivative w.r.t an arbitrary parameter is
+which (I think) can be derived from using the note on reparameterization above. 
+
+In this context, the mean vector is $\mu = o + \lambda\tau$ and the covariance matrix is diagonal: $\mathrm{diag}(\Sigma) = \lambda\tau + \sigma^{2}$. But we can always standarize each variable by subtracting out $o$ and divide by $\sigma$ for a particular pixel. Let $\mu = \lambda\tau$
 
 \begin{align*}
-\frac{\partial\ell(H|\theta)}{\partial \theta} &=  \sum_{k} \frac{\partial\ell_{k}(H_{k}|\theta)}{\partial \theta}\\
-&= \sum_{k}\frac{\partial\ell_{k}(H_{k}|\theta)}{\partial \theta}\frac{\partial\lambda_{k}}{\partial \theta}
+\frac{\partial\mu}{\partial x_{0}} = \tau\lambda_{y}\left(\frac{\sqrt{\frac{2}{\pi }} e^{-\frac{\left(-\frac{a}{2}+x_{k}-\text{x0}\right)^2}{2 \sigma ^2}}}{\sigma }-\frac{\sqrt{\frac{2}{\pi }} e^{-\frac{\left(\frac{a}{2}+x_{k}-\text{x0}\right)^2}{2 \sigma ^2}}}{\sigma }\right)
 \end{align*}
 
-and it is straightforward to show that 
+\subsection{Poisson case}
 
-\begin{align*}
-\frac{\partial\ell_{k}}{\partial \lambda_{k}} = -\frac{(h-\lambda_{k} -\mu )^2}{2 \left(\lambda_{k} +\rho ^2\right)^2}-\frac{h-\lambda_{k} -\mu }{\lambda_{k} +\rho ^2}+\frac{1}{2 \left(\lambda_{k} +\rho ^2\right)}
-\end{align*}
-
-For $\theta = x_{0}$, we have
-
-\begin{align*}
-\frac{\partial\ell}{\partial x_{0}} = \frac{\tau\lambda_{y}}{2}\sum_{k} \frac{\partial\ell_{k}}{\partial \lambda_{k}}\left(\frac{\sqrt{\frac{2}{\pi }} e^{-\frac{\left(-\frac{a}{2}+x_{k}-\text{x0}\right)^2}{2 \sigma ^2}}}{\sigma }-\frac{\sqrt{\frac{2}{\pi }} e^{-\frac{\left(\frac{a}{2}+x_{k}-\text{x0}\right)^2}{2 \sigma ^2}}}{\sigma }\right)
-\end{align*}
+But we can always standarize each variable by subtracting out $o$ and divide by $\sigma$ for a particular pixel (which can be directly measured). Then each pixel is a Poisson random variable.
 
 
 
-\begin{align*}
-\theta^{*}_{\mathrm{MAP}} &= \underset{\theta}{\mathrm{argmax}} \;P(\theta|\mathcal{X})\\
-&= \underset{\theta}{\mathrm{argmax}} \; \mathcal{L}(\theta|\mathcal{X})\pi(\theta)
-\end{align*}
-
-
-where $\mathcal{L}$ denotes the likelihood function (posterior probability of the parameters) and $\pi(\theta)$ a prior on the parameters. Under the constraint that $\pi(\theta)$ is a uniform distribution, we are dealing with maximum likelihood estimation
-
-\begin{align*}
-\theta^{*}_{\mathrm{MLE}} &= \underset{\theta}{\mathrm{argmax}} \;\mathcal{L}(\theta|\mathcal{X})\\
-&= \underset{\theta}{\mathrm{argmin}} \; -\ell(\theta|\mathcal{X})
-\end{align*}
-
-where $\ell$ is the log-likelihood. 
-
-We can now return to the original optimization problem 
-
-\begin{align*}
-\theta^{*}_{\mathrm{MAP}} &= \underset{\theta}{\mathrm{argmax}} \;\ \pi(\theta)\mathcal{L}_{\theta}\\
-&= \underset{\theta}{\mathrm{argmax}} \; \prod_{k}\mathcal{L}_{\theta,k}\\
-&= \underset{\theta}{\mathrm{argmax}} \; \sum_{k}\log \mathcal{L}_{\theta,k}
-\end{align*}
 
 
 \chapter{Statistical mechanics of gene regulation}
