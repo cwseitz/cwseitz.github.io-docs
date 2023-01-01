@@ -109,12 +109,19 @@ We can then express the Gaussian integrals over a pixel by making use of the fol
 \frac{1}{\sqrt{2\pi}\sigma}\int_{a}^{b} e^{\frac{-(x-\mu)^{2}}{2\sigma^{2}}} = \frac{1}{2}\left(\mathrm{erf}\left(\frac{b-\mu}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{a-\mu}{\sqrt{2}\sigma}\right)\right)
 \end{equation*}
 
-Suppose the particle is known to be located at $(x_{0},y_{0})$ and some square pixel $k$ is centered on coordinates $(x,y)$ and has a width $a$. Then $\lambda_{k}$ at this pixel is
+Suppose the particle is known to be located at $(x_{0},y_{0})$ and some square pixel $k$ is centered on coordinates $(x,y)$ and has a width $a$. Then $\mu{k}$ at this pixel is
+
+\begin{equation}
+\mu(x_{k},y_{k}) = \mu_{x}(x_{k})\mu_{y}(y_{k})
+\end{equation}
+
+where
 
 \begin{align*}
-\lambda_{k} &= \frac{1}{4}\left(\mathrm{erf}\left(\frac{x+a/2-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{x-a/2-x_{0}}{\sqrt{2}\sigma}\right)\right)\\
-&\cdot \left(\mathrm{erf}\left(\frac{y+a/2-y_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{y-y/2-y_{0}}{\sqrt{2}\sigma}\right)\right)
+\mu_{x}(x_{k}) &= \frac{\tau}{2}\left(\mathrm{erf}\left(\frac{x+a/2-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{x-a/2-x_{0}}{\sqrt{2}\sigma}\right)\right)\\
+\mu_{y}(y_{k}) &= \frac{\tau}{2}\left(\mathrm{erf}\left(\frac{y+a/2-y_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{y-y/2-y_{0}}{\sqrt{2}\sigma}\right)\right)
 \end{align*}
+
 
 However this noise model is incomplete, because detectors often suffer from dark noise, which may refer to readout noise or dark current, and contributes to a nonzero signal even in the absence of incident light. Dark current is due to statistical fluctuations in the photoelectron count due to thermal fluctuations. Readout noise is introduced by the amplifier circuit during the coversion of photoelectron charge to a voltage. Here, we use the Hamamatsu ORCA v3 CMOS camera, which is air cooled to -10C and has very low dark current - around 0.06 electrons/pixel/second - and can be safely ignored for low exposure times. Readout noise has been often neglected in localization algorithms because its presence in EMCCD cameras is small enough that it can be ignored within the tolerances of the localization precision. In the case of sCMOS cameras, however, the readout noise of each pixel is significantly higher and, in addition, every pixel has its own noise and gain characteristic with dramatic pixel-to-pixel variations.
 
@@ -131,7 +138,7 @@ In practice, this expression is difficult to work with, so we look for an analyt
 P(H_{k}|\theta) \approx \frac{1}{\sqrt{2\pi(\lambda_{k}\tau+\sigma_{k}^{2})}}e^{-\frac{(H_{k}-\lambda_{k}\tau-o_{k})}{2(\lambda_{k}\tau+\sigma_{k}^{2})}}
 \end{equation}
 
-Assuming each pixel is an independent random variable, then the likelihood of the dataset (or equivalently the joint distribution on pixels) is simply a product $\mathcal{L}(H|\theta) = \prod_{k}P(H_{k}|\theta)$. Now suppose we are given a sample from $\mathcal{L}(H|\theta)$ with unknown $\theta$. A general task in Bayesian inference is to determine $\theta$ from the data under the model $\mathcal{M}$. We may then ask - does the likelihood $\mathcal{L}$ vary as we vary the parameters? If the likelihood is flat, all parameter sets are equally likely and the data does not appear to carry much information about the parameters. Moreover, if $\mathcal{L}$ has a number of bumps or inflection points, then we expect that maybe some parameter sets are more likely that others. The ``bumpiness" of the likelihood surface is called the Fisher information. The Fisher information matrix $\mathbf{I}(\theta)$ can be directly related to the curvature of the KL-Divergence over the parameter space
+Assuming each pixel is an independent random variable, then the likelihood of the dataset (or equivalently the joint distribution on pixels) is simply a product $\mathcal{L}(H|\theta) = \prod_{k}P(H_{k}|\theta)$. Now suppose we are given a sample from $\mathcal{L}(H|\theta)$ with unknown $\theta$. A general task in Bayesian inference is to determine $\theta$ from the data under the model $\mathcal{M}$. We may then ask - does the likelihood $\mathcal{L}$ vary as we vary the parameters? If the likelihood is flat, all parameter sets are equally likely and the data does not appear to carry much information about the parameters. Moreover, if $\mathcal{L}$ has a number of bumps or inflection points, then we expect that maybe some parameter sets are more likely that others. The ``bumpiness" of the likelihood surface is called the Fisher information - a fundmantal concept in information geometry. The Fisher information matrix $I(\theta)$ can be directly related to the curvature of the KL-Divergence over the parameter space
 
 \begin{align*}
 \nabla^2_{\theta'} D_{KL}[\mathcal{L}(H|\theta) \parallel \mathcal{L}(H|\theta')] 
@@ -142,10 +149,39 @@ Assuming each pixel is an independent random variable, then the likelihood of th
 \end{align*}
 
 
-The Fisher Information matrix depends on the parametrization chosen, and, in general, if we rewrite our model in terms of some other parameter $\eta$, then by the vector chain rule $\nabla_{\theta} = J^{T}\nabla_{\eta}J$ where $J$ denotes the Jacobian matrix with components $J_{ij} = \partial \eta_{i}/\partial \theta_{j}$. The Fisher information becomes $I(\theta) = J^{T}I(\eta)J$.
+We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space. To be clear, the score is a function of the \emph{data}, not the parameters. It is a measure of sensitivity of the likelihood to changes in the parameters. Of course, the Fisher information matrix also depends on the parameterization chosen. The effect of a change of variables on the Fisher Information can be seen by inspecting how the Hessian transforms under a nonlinear coordinate transformation. Looking at (1.4), the likelihood is a composite function so we need the chain-rule for Hessian matrices. In general, a matrix element of the Hessian for a composite function $y = f(u(x))$ is given by Faà di Bruno's formula for higher-order derivatives 
+
+\begin{equation}
+\frac{\partial^2 y}{\partial x_i \partial x_j} = \sum_k \left(\frac{\partial y}{\partial u_k}\frac{\partial^2 u_k}{\partial x_i \partial x_j}\right) + \sum_{k, \ell} \left(\frac{\partial^2 y}{\partial u_k \partial u_\ell}\frac{\partial u_k}{\partial x_i}\frac{\partial u_\ell}{\partial x_j}\right)
+\end{equation}
+
+where $J$ denotes the Jacobian matrix with components $J_{ij} = \partial \eta_{i}/\partial \theta_{j}$. The Fisher Information is nothing but the expectation of the Hessian, so
+
+
+
+
+This is an important observation in this context, because we can efficiently rewrite the Fisher information for position parameters in terms of the Fisher information for single pixel rate parameters.
+
+\subsection{Fisher information for Poisson random variables}
+
+Suppose we think of a set of image pixels as a family of independent Poisson random variables each with rate $\mu_{k}$. The joint distribution is simply
+
+\begin{align*}
+\mathcal{L}(n_{1},n_{2},...,n_{N}) = \prod_{k} \frac{e^{-\mu_{k}}\mu^{n}}{n!}
+\end{align*}
+
+But the $\mu_{k}$'s are determined by the parmeterization of the point spread function, as we have shown in (1.3). Indeed, (1.3) is the differentiable function that we need to construct the Jacobian matrix and relate the Fisher information matrices for the two parameterizations - either in terms of $\theta = (x_{0},y_{0}) $ or $\mu = (\mu_{1}, \mu_{2}, ..., \mu_{n})$.  
+
+\begin{align*}
+J_{1i} &= \mu_{y}(x_{i},y_{i})\sqrt{\frac{2}{\pi\sigma^{2}}}\left(e^{-\frac{\left(-\frac{a}{2}+x_{k}-\text{x0}\right)^2}{2 \sigma ^2}}-e^{-\frac{\left(\frac{a}{2}+x_{k}-\text{x0}\right)^2}{2 \sigma ^2}}\right)\\
+J_{2i} &= \mu_{y}(x_{i},y_{i})\sqrt{\frac{2}{\pi\sigma^{2}}}\left(e^{-\frac{\left(-\frac{a}{2}+y_{k}-\text{y0}\right)^2}{2 \sigma ^2}}-e^{-\frac{\left(\frac{a}{2}+y_{k}-\text{y0}\right)^2}{2 \sigma ^2}}\right)
+\end{align*}
+
+Obviously $I(\mu)$ alone does not respect the structure of $\mu(x_{k},y_{k})$. That is, any parameter vector $\mu = (\mu_{1}, \mu_{2}, ..., \mu_{n})$ would suffice to explain the data. The matrix transformation should, however, respect the structure of $\mu(x_{k},y_{k})$ - constraining us to some finite volume of the parameter space. We can be sure this does this occur by expanding (1.5):
+
+
 
 \subsection{Gaussian case}
-
 If the pixels are just Gaussian variables, the joint distribution $\mathcal{L}$ is really just a multivariate normal distribution:
 
 \begin{align*}
@@ -154,27 +190,9 @@ If the pixels are just Gaussian variables, the joint distribution $\mathcal{L}$ 
 
 The Fisher information matrix when we are dealing with the multivariate normal distribution with parameters $(\mu,\Sigma)$ which are themselves functions of another vector of parameters $\bm{\theta}$ has been well-studied (Malago and Pestone; 2015)
 
-\begin{align*}
-  I_{m,n} =
-  \frac{\partial\mu^\textsf{T}}{\partial\theta_m}\Sigma^{-1}
-  \frac{\partial\mu}{\partial\theta_n} +
-  \frac{1}{2}\operatorname{tr}\left(
-    \Sigma^{-1}\frac{\partial\Sigma}{\partial\theta_m}
-    \Sigma^{-1}\frac{\partial\Sigma}{\partial\theta_n}
-  \right),
-\end{align*}
 
-which (I think) can be derived from using the note on reparameterization above. 
 
-In this context, the mean vector is $\mu = o + \lambda\tau$ and the covariance matrix is diagonal: $\mathrm{diag}(\Sigma) = \lambda\tau + \sigma^{2}$. But we can always standarize each variable by subtracting out $o$ and divide by $\sigma$ for a particular pixel. Let $\mu = \lambda\tau$
 
-\begin{align*}
-\frac{\partial\mu}{\partial x_{0}} = \tau\lambda_{y}\left(\frac{\sqrt{\frac{2}{\pi }} e^{-\frac{\left(-\frac{a}{2}+x_{k}-\text{x0}\right)^2}{2 \sigma ^2}}}{\sigma }-\frac{\sqrt{\frac{2}{\pi }} e^{-\frac{\left(\frac{a}{2}+x_{k}-\text{x0}\right)^2}{2 \sigma ^2}}}{\sigma }\right)
-\end{align*}
-
-\subsection{Poisson case}
-
-But we can always standarize each variable by subtracting out $o$ and divide by $\sigma$ for a particular pixel (which can be directly measured). Then each pixel is a Poisson random variable.
 
 
 
