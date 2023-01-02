@@ -4,7 +4,7 @@
 \documentclass[aspectratio=1610]{beamer}					% Document class
 
 \setbeamertemplate{footline}[text line]{%
-  \parbox{\linewidth}{\vspace*{-8pt}Interferon-$\gamma$ induction of GBP5 in HeLa cells \hfill\insertshortauthor\hfill\insertpagenumber}}
+  \parbox{\linewidth}{\vspace*{-8pt}Semi-automated mRNA counting in single cells \hfill\insertshortauthor\hfill\insertpagenumber}}
 \setbeamertemplate{navigation symbols}{}
 
 \usepackage[english]{babel}				% Set language
@@ -32,7 +32,7 @@
 \usepackage{bm}
 \usepackage[font=small,labelfont=bf]{caption}				% For cross-referencing
 
-\title{Interferon-$\gamma$ induction of GBP5 in HeLa cells}	% Presentation title
+\title{Semi-automated mRNA counting in single cells}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -62,48 +62,48 @@
 \end{itemize}
 \end{frame}
 
+\begingroup
+\setbeamertemplate{footline}{}
+\begin{frame}{Single-cell RNA-seq identifies GBP5 as a memorized gene}
+\begin{figure}
+\includegraphics[width=11cm]{figure-3.png}
+\end{figure}
+Siwek et al. \textit{Activation of Clustered IFNg Target Genes...}. Molecular Cell 2020
+\end{frame}
+\endgroup
+
+
+
+\begin{frame}{Imaging approach}
+\begin{center}
+\includegraphics[width=0.3\textwidth]{Wells.png}
+\end{center}
+\end{frame}
 
 \begin{frame}{Training a semantic segmentation with cross-entropy loss (log loss)}
 \vspace{0.1in}
-BBBC039: 200 images, 160 train + 40 validation, 256\;x\;256 random crop
+100 256\;x\;256 images, 80 train + 20 validation, 
 
 \begin{center}
-\includegraphics[width=0.8\textwidth]{weights.png}
+\includegraphics[width=1\textwidth]{Softmax.png}
 \end{center}
 
-We train a 3-channel semantic segmentation model with \textbf{weighted} cross-entropy loss:
+We train a 3-class semantic segmentation model with cross-entropy loss:
 
 \begin{equation*}
-\mathcal{L} = \sum_{i,j} w_{ij}\log p_{ij}(\tilde{x}) = \sum_{i,j} w_{ij}\log \frac{\exp(-s_{ij}(\tilde{x}))}{\sum_{x\in\chi} \exp(-s_{ij}(\tilde{x}))}
+\mathcal{L} = \sum_{i,j} \log p_{ij}(\tilde{x}) = \sum_{i,j} \log \frac{\exp(-s_{ij}(\tilde{x}))}{\sum_{x\in\chi} \exp(-s_{ij}(\tilde{x}))}
 \end{equation*}
 
 $p_{ij}$ is the probability the model assigns a pixel to the true class $\tilde{x} \in \{\textrm{a}, \textrm{b}, \textrm{c}\}$
 
 \end{frame}
 
-\begin{frame}{Training on BBBC039 U2OS Nuclei}
-
-\begin{center}
-\includegraphics[width=0.85\textwidth]{input-train.png}
-\includegraphics[width=0.85\textwidth]{target-train.png}
-\includegraphics[width=0.85\textwidth]{output-train.png}
-\end{center}
-
-\end{frame}
-
-\begin{frame}{Training on BBBC039 U2OS Nuclei}
+\begin{frame}{Training on HeLa GAPDH channel}
 Learning rate $\eta=0.01$, Batch-size $B=5$ (32 train iterations, 8 validation)
 \begin{center}
 \includegraphics[width=0.85\textwidth]{metrics.png}
 \end{center}
 
-\end{frame}
-
-\begin{frame}{Training on HeLa GAPDH channel}
-
-\end{frame}
-
-\begin{frame}{Cell segmentation using UNET implementation in PyTorch}
 \end{frame}
 
 \begin{frame}{Spot calling using Fisher information filter}
