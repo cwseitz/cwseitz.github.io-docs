@@ -149,18 +149,15 @@ Assuming each pixel is an independent random variable, then the likelihood of th
 \end{align*}
 
 
-We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space. To be clear, the score is a function of the \emph{data}, not the parameters. It is a measure of sensitivity of the likelihood to changes in the parameters. Of course, the Fisher information matrix also depends on the parameterization chosen. The effect of a change of variables on the Fisher Information can be seen by inspecting how the Hessian transforms under a nonlinear coordinate transformation. Looking at (1.4), the likelihood is a composite function so we need the chain-rule for Hessian matrices. In general, a matrix element of the Hessian for a composite function $y = f(u(x))$ is given by Faà di Bruno's formula for higher-order derivatives 
+We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space. To be clear, the score is a function of the \emph{data}, not the parameters. It is a measure of sensitivity of the likelihood to changes in the parameters. Of course, the Fisher information matrix also depends on the parameterization chosen. The effect of a change of variables on the Fisher Information can be seen by inspecting how the Hessian transforms under a nonlinear coordinate transformation. Looking at (1.4), the likelihood is a composite function so we need the chain-rule for Hessian matrices. In general, a matrix element of the Hessian for a composite function $\ell = f(u(\theta))$ is given by Faà di Bruno's formula for higher-order derivatives 
 
-\begin{equation}
-\frac{\partial^2 y}{\partial x_i \partial x_j} = \sum_k \left(\frac{\partial y}{\partial u_k}\frac{\partial^2 u_k}{\partial x_i \partial x_j}\right) + \sum_{k, \ell} \left(\frac{\partial^2 y}{\partial u_k \partial u_\ell}\frac{\partial u_k}{\partial x_i}\frac{\partial u_\ell}{\partial x_j}\right)
-\end{equation}
+\begin{align*}
+\frac{\partial^2 \ell}{\partial \theta_i \partial \theta_j} &= \sum_m \left(\frac{\partial \ell}{\partial \mu_m}\frac{\partial^2 \mu_m}{\partial \theta_i \partial \theta_j}\right) + \sum_{m,n} \left(\frac{\partial^2 \ell}{\partial \mu_m \partial \mu_n}\frac{\partial \mu_m}{\partial \theta_i}\frac{\partial \mu_n}{\partial \theta_j}\right)\\
+&= \sum_m \left(J_{m}^{\ell}H_{ijm}^{\mu}\right) + \sum_{m,n} \left(H_{mn}^{\ell}J_{im}^{\mu}J_{jn}^{\mu}\right)\\
+&= J_{m}^{\ell}\cdot H_{ijm}^{\mu} + 
+\end{align*}
 
-where $J$ denotes the Jacobian matrix with components $J_{ij} = \partial \eta_{i}/\partial \theta_{j}$. The Fisher Information is nothing but the expectation of the Hessian, so
-
-
-
-
-This is an important observation in this context, because we can efficiently rewrite the Fisher information for position parameters in terms of the Fisher information for single pixel rate parameters.
+where the Jacobian $J^{\ell}$ is a vector, $H^{\mu}$ is a tensor, $H^{\ell}$ is just another Hessian matrix and the Jacobian $J^{\mu}$ is a matrix. The first sum is just a dot product of vectors and the second term 
 
 \subsection{Fisher information for Poisson random variables}
 
