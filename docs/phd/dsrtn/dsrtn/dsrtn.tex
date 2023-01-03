@@ -152,9 +152,11 @@ Assuming each pixel is an independent random variable, then the likelihood of th
 We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space. To be clear, the score is a function of the \emph{data}, not the parameters. It is a measure of sensitivity of the likelihood to changes in the parameters. Of course, the Fisher information matrix also depends on the parameterization chosen. The effect of a change of variables on the Fisher Information can be seen by inspecting how the Hessian transforms under a nonlinear coordinate transformation. Looking at (1.4), the likelihood is a composite function so we need the chain-rule for Hessian matrices. In general, a matrix element of the Hessian for a composite function $\ell = f(u(\theta))$ is given by Faà di Bruno's formula for higher-order derivatives 
 
 \begin{align*}
-\frac{\partial^2 \ell}{\partial \theta_i \partial \theta_j} &= \sum_m \left(\frac{\partial \ell}{\partial \mu_m}\frac{\partial^2 \mu_m}{\partial \theta_i \partial \theta_j}\right) + \sum_{m,n} \left(\frac{\partial^2 \ell}{\partial \mu_m \partial \mu_n}\frac{\partial \mu_m}{\partial \theta_i}\frac{\partial \mu_n}{\partial \theta_j}\right)
+\frac{\partial^2 \ell}{\partial \theta_i \partial \theta_j} &= \sum_m \left(\frac{\partial \ell}{\partial \mu_m}\frac{\partial^2 \mu_m}{\partial \theta_i \partial \theta_j}\right) + \sum_{m,n} \left(\frac{\partial^2 \ell}{\partial \mu_m \partial \mu_n}\frac{\partial \mu_m}{\partial \theta_i}\frac{\partial \mu_n}{\partial \theta_j}\right)\\
+&= \sum_m \left(\frac{\partial \ell}{\partial \mu_m}\frac{\partial^2 \mu_m}{\partial \theta_i \partial \theta_j}\right) + \sum_{m} \left(\frac{\partial^2 \ell}{\partial \mu_m^{2}}\frac{\partial \mu_m}{\partial \theta_i}\frac{\partial \mu_m}{\partial \theta_j}\right)
 \end{align*}
 
+due to the independence of each random variable.
 
 \subsection{Fisher information for Poisson random variables}
 
@@ -173,18 +175,18 @@ Therefore, the log-likelihood is
 The Jacobian in the first sum consists of two elements:
 
 \begin{align*}
-\frac{\partial \mu_{k}}{\partial x_{0}} &= \mu_{y}(x_{i},y_{i})\sqrt{\frac{2}{\pi\sigma^{2}}}\left(e^{-\frac{\left(-\frac{a}{2}+x_{k}-\text{x0}\right)^2}{2 \sigma ^2}}-e^{-\frac{\left(\frac{a}{2}+x_{k}-\text{x0}\right)^2}{2 \sigma ^2}}\right)\\
-\frac{\partial \mu_{k}}{\partial y_{0}} &= \mu_{x}(x_{i},y_{i})\sqrt{\frac{2}{\pi\sigma^{2}}}\left(e^{-\frac{\left(-\frac{a}{2}+y_{k}-\text{y0}\right)^2}{2 \sigma ^2}}-e^{-\frac{\left(\frac{a}{2}+y_{k}-\text{y0}\right)^2}{2 \sigma ^2}}\right)
+\frac{\partial \mu_{k}(x_{i},y_{i})}{\partial x_{0}} &= \mu_{y}(x_{i},y_{i})\sqrt{\frac{2}{\pi\sigma^{2}}}\left(e^{-\frac{\left(-\frac{a}{2}+x_{k}-\text{x0}\right)^2}{2 \sigma ^2}}-e^{-\frac{\left(\frac{a}{2}+x_{k}-\text{x0}\right)^2}{2 \sigma ^2}}\right)\\
+\frac{\partial \mu_{k}(x_{i},y_{i})}{\partial y_{0}} &= \mu_{x}(x_{i},y_{i})\sqrt{\frac{2}{\pi\sigma^{2}}}\left(e^{-\frac{\left(-\frac{a}{2}+y_{k}-\text{y0}\right)^2}{2 \sigma ^2}}-e^{-\frac{\left(\frac{a}{2}+y_{k}-\text{y0}\right)^2}{2 \sigma ^2}}\right)
 \end{align*}
 
 The four elements of the Hessian matrix in the first sum is
 
 \begin{align*}
-\frac{\partial \mu_{k}^{2}}{\partial x_{0}^{2}} &= \mu_{y}(x_{i},y_{i})\frac{\tau}{4}\left(\frac{\sqrt{\frac{2}{\pi }} \left(-\frac{a}{2}+x-\text{x0}\right) e^{-\frac{\left(-\frac{a}{2}+x-\text{x0}\right)^2}{2 \sigma ^2}}}{\sigma ^3}-\frac{\sqrt{\frac{2}{\pi }} \left(\frac{a}{2}+x-\text{x0}\right) e^{-\frac{\left(\frac{a}{2}+x-\text{x0}\right)^2}{2 \sigma ^2}}}{\sigma ^3}\right)
+\frac{\partial \mu_{k}^{2}}{\partial x_{0}^{2}} &= \mu_{y}(x_{i},y_{i})\left(\frac{\sqrt{\frac{2}{\pi }} \left(-\frac{a}{2}+x-\text{x0}\right) e^{-\frac{\left(-\frac{a}{2}+x-\text{x0}\right)^2}{2 \sigma ^2}}}{\sigma ^3}-\frac{\sqrt{\frac{2}{\pi }} \left(\frac{a}{2}+x-\text{x0}\right) e^{-\frac{\left(\frac{a}{2}+x-\text{x0}\right)^2}{2 \sigma ^2}}}{\sigma ^3}\right)
 \end{align*}
 
 \begin{align*}
-\frac{\partial \mu_{k}^{2}}{\partial y_{0}^{2}} &= \mu_{x}(x_{i},y_{i})\frac{\tau}{4}\left(\frac{\sqrt{\frac{2}{\pi }} \left(-\frac{a}{2}+y-\text{y0}\right) e^{-\frac{\left(-\frac{a}{2}+y-\text{y0}\right)^2}{2 \sigma ^2}}}{\sigma ^3}-\frac{\sqrt{\frac{2}{\pi }} \left(\frac{a}{2}+y-\text{y0}\right) e^{-\frac{\left(\frac{a}{2}+y-\text{y0}\right)^2}{2 \sigma ^2}}}{\sigma ^3}\right)
+\frac{\partial \mu_{k}^{2}}{\partial y_{0}^{2}} &= \mu_{x}(x_{i},y_{i})\left(\frac{\sqrt{\frac{2}{\pi }} \left(-\frac{a}{2}+y-\text{y0}\right) e^{-\frac{\left(-\frac{a}{2}+y-\text{y0}\right)^2}{2 \sigma ^2}}}{\sigma ^3}-\frac{\sqrt{\frac{2}{\pi }} \left(\frac{a}{2}+y-\text{y0}\right) e^{-\frac{\left(\frac{a}{2}+y-\text{y0}\right)^2}{2 \sigma ^2}}}{\sigma ^3}\right)
 \end{align*}
 
 \begin{align*}
@@ -195,14 +197,14 @@ The four elements of the Hessian matrix in the first sum is
 The element of the Jacobian in the first sum is
 
 \begin{align*}
-\frac{\partial\ell}{\partial\mu_{k}} = n_{k}/\mu_{k} - 1
+\frac{\partial\ell}{\partial\mu_{k}} = n_{k}/\mu_{k}(x_{i},y_{i}) - 1
 \end{align*}
 
 
 The Hessian matrix element in the second sum is
 
 \begin{align*}
-\frac{\partial^{2}\ell}{\partial\mu_{k}^{2}} = -n_{k}/\mu_{k}^{2} 
+\frac{\partial^{2}\ell}{\partial\mu_{k}^{2}} = -n_{k}/\mu_{k}(x_{i},y_{i})^{2} 
 \end{align*}
 
 
