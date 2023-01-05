@@ -1,10 +1,11 @@
 % Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
 % For more details: https://www.sharelatex.com/learn/Beamer
 
-\documentclass[aspectratio=1610]{beamer}					% Document class
+\documentclass{beamer}					% Document class
+\geometry{papersize={13cm,15cm}}
 
 \setbeamertemplate{footline}[text line]{%
-  \parbox{\linewidth}{\vspace*{-8pt}Semi-automated mRNA counting in single cells \hfill\insertshortauthor\hfill\insertpagenumber}}
+  \parbox{\linewidth}{\vspace*{-8pt}Interferon-$\gamma$ induction of GBP5 in HeLa cells \hfill\insertshortauthor\hfill\insertpagenumber}}
 \setbeamertemplate{navigation symbols}{}
 
 \usepackage[english]{babel}				% Set language
@@ -32,7 +33,7 @@
 \usepackage{bm}
 \usepackage[font=small,labelfont=bf]{caption}				% For cross-referencing
 
-\title{Interferon-$\gamma$ induction of GBP5 expression in HeLa cells}	% Presentation title
+\title{Interferon-$\gamma$ induction of GBP5 in HeLa cells}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -55,18 +56,23 @@
 \begingroup
 \setbeamertemplate{footline}{}
 \begin{frame}{Single-cell RNA-seq identifies GBP5 as a memorized gene}
-\begin{figure}
-\includegraphics[width=11cm]{figure-3.png}
-\end{figure}
+\begin{center}
+\includegraphics[width=1\textwidth]{Memory.png}
+\end{center}
+\begin{center}
+\includegraphics[width=1\textwidth]{Seq.png}
+\end{center}
 Siwek et al. \textit{Activation of Clustered IFNg Target Genes...}. Molecular Cell 2020
 \end{frame}
 \endgroup
 
 \begin{frame}{GBP5 imaging approach}
 High-throughput 3D acquisition of DAPI + FISH probes for GAPDH, GBP5 mRNA in Hela cells on \#1.5 chambered coverglass, 60x oil
+
 \begin{center}
-\includegraphics[width=1.0\textwidth]{Tiles.png}
+\includegraphics[width=1\textwidth]{Stains.png}
 \end{center}
+
 But as usual, segmentation is the rate-limiting step
 \end{frame}
 
@@ -78,6 +84,10 @@ But as usual, segmentation is the rate-limiting step
 \includegraphics[width=1\textwidth]{Softmax.png}
 \end{center}
 
+\begin{center}
+\includegraphics[width=1\textwidth]{Loss.png}
+\end{center}
+
 We train a 3-class semantic segmentation model with cross-entropy loss:
 
 \begin{equation*}
@@ -86,6 +96,13 @@ We train a 3-class semantic segmentation model with cross-entropy loss:
 
 $p_{ij}$ is the probability the model assigns a pixel to the true class $\tilde{x} \in \{\textrm{a}, \textrm{b}, \textrm{c}\}$
 
+\end{frame}
+
+\begin{frame}
+
+\begin{center}
+\includegraphics[width=1\textwidth]{Result.png}
+\end{center}
 \end{frame}
 
 
