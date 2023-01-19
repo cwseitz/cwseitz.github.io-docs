@@ -1,0 +1,79 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath} % AMS Math Package
+\usepackage{bm}
+\usepackage{amsthm} % Theorem Formatting
+\usepackage{amssymb}    % Math symbols such as \mathbb
+\usepackage{graphicx} % Allows for eps images
+\usepackage[dvips,letterpaper,margin=1in,bottom=0.7in]{geometry}
+\usepackage{tensor}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{physics}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+
+\newcounter{mathematicapage}
+
+\newtheorem{p}{Problem}
+\usepackage{cancel}
+\newtheorem*{lem}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{dfn}{Definition}
+ \newenvironment{s}{%\small%
+        \begin{trivlist} \item \textbf{Solution}. }{%
+            \hspace*{\fill} $\blacksquare$\end{trivlist}}%
+
+
+\begin{document}
+
+ {\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Homework 11}         }\\[2\baselineskip] % Title
+{ {\bf \fontfamily{cmr}\selectfont Quantum Mechanics}\\ {\textit{\fontfamily{cmr}\selectfont     \today}}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    {\large \textsc{C Seitz}
+\\[1.4\baselineskip] 
+
+
+\begin{p}
+No-cloning theorem
+\end{p}
+
+\begin{s}
+Assume we have a unitary copying operator $U$ and two quantum states $\ket{\phi}$ and $\ket{\psi}$. Suppose this unknown copying operator $U$ could transform $\ket{s}$ to either $\ket{\phi}$ or $\ket{\psi}$.
+
+\begin{align*}
+\ket{\psi} \otimes \ket{s} \overset{U}{\rightarrow} \ket{\psi} \otimes \ket{\psi}\\
+\ket{\phi} \otimes \ket{s} \overset{U}{\rightarrow} \ket{\phi} \otimes \ket{\phi}
+\end{align*}
+
+If $U$ is unitary, then it preserves inner products, so
+
+\begin{align*}
+(\bra{\psi} \otimes \bra{s})(\ket{\phi} \otimes \ket{s}) &= \bra{\psi}\ket{\phi} \otimes \bra{s}\ket{s} = \bra{\psi}\ket{\phi}
+\end{align*}
+
+After the copying transformation, we have
+
+\begin{align*}
+(\bra{\psi} \otimes \bra{\psi})(\ket{\phi} \otimes \ket{\phi}) &= \bra{\psi}\ket{\phi}\otimes\bra{\psi}\ket{\phi}\\
+&= (\bra{\psi}\ket{\phi})^{2}
+\end{align*}
+
+We demanded that the inner product be preserved, so these two results must be equivalent. However, there is only a solution when $\ket{\psi} = \ket{\phi}$ or $\bra{\psi}\ket{\phi} = 0$. Therefore, the copying circuit only works for orthogonal states, and not a general ket.
+
+\end{s}
+
+\begin{p}
+Calculations from section 1.3.7
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+Carry out calculations from 1.4.3-1.4.4
+\end{p}
+
+\begin{s}
+\end{s}
+
+\end{document}
