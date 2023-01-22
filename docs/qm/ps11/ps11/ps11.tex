@@ -35,7 +35,7 @@
 
 
 \begin{p}
-1.3.5 Calculations, No-cloning theorem
+No-cloning theorem
 \end{p}
 
 \begin{s}
@@ -64,7 +64,7 @@ We demanded that the inner product be preserved, so these two results must be eq
 \end{s}
 
 \begin{p}
-1.3.7 Calculations, Quantum Teleportation
+Quantum Teleportation
 \end{p}
 
 \begin{s}
@@ -84,8 +84,8 @@ Alice then sends this state through a CNOT gate, where the qubit $\ket{\psi}$ is
 Then the first qubit is sent through a Hadamard gate. As a minor detour, the Hadamard gate, does
 
 \begin{align*}
-\ket{0} &\rightarrow (\ket{0} + \ket{1})/\sqrt{2}\\
-\ket{1} &\rightarrow (\ket{0} - \ket{1})/\sqrt{2}
+\ket{0} &\rightarrow (\ket{0} + \ket{1})/\sqrt{2} = \ket{+}\\
+\ket{1} &\rightarrow (\ket{0} - \ket{1})/\sqrt{2} = \ket{-}
 \end{align*}
 
 Therefore, the effect on $\ket{\psi_1}$ is:
@@ -108,7 +108,7 @@ Deutsch Algorithm, Deutch-Josza Algorithm
 
 \begin{s}
 
-Suppose we have some boolean function $f: \{0,1\} \rightarrow \{0,1\}$. Deutch's algorithm can determine whether the function $f$ is constant or balanced exponentially faster than a classical computer. If $f$ is constant then $f(0) = f(1)$; however, if $f$ is balanced then $f(0)\neq f(1)$. For example, $f(0) = 1$ and $f(1) = 0$ is a balanced function. A classical computer would need to evaluate $f(0)$ and $f(1)$ separately, but a quantum computer can leverage quantum parallelism to compute both $f(0)$ and $f(1)$ at the same time.
+Suppose we have some boolean function $f: \{0,1\} \rightarrow \{0,1\}$. Deutch's algorithm can determine whether the function $f$ is constant or balanced exponentially faster than a classical computer. If $f$ is constant then $f(0) = f(1)$; however, if $f$ is balanced then $f(0)\neq f(1)$.
 
 \vspace{0.1in}
 
@@ -119,7 +119,7 @@ We start with the two qubits prepared in state $\ket{\psi_{0}} = \ket{0}\ket{1}$
 &= \frac{1}{2}\left(\ket{0}\ket{0} - \ket{0}\ket{1} + \ket{1}\ket{0} - \ket{1}\ket{1}\right)
 \end{align*}
 
-The state then goes through an oracle, which implements the unitary transformation $\ket{\alpha}\ket{\beta} \rightarrow \ket{\alpha}\ket{\beta\oplus f(\alpha)}$. Note that $\oplus$ is addition modulo two, which is essentially an XOR operation. Thus, after transformation, the state is
+The state then goes through an oracle $U_{f}$, which implements the transformation $\ket{\alpha}\ket{\beta} \rightarrow \ket{\alpha}\ket{\beta\oplus f(\alpha)}$. Note that $\oplus$ is addition modulo two, which is essentially an XOR operation. Thus, after transformation, the state is
 
 \begin{align*}
 \ket{\psi_{2}} &=  \frac{1}{2}\left(\ket{0}\ket{0\oplus f(0)} - \ket{0}\ket{1\oplus f(0)} + \ket{1}\ket{0\oplus f(1)} - \ket{1}\ket{1\oplus f(1)}\right)\\
@@ -132,38 +132,52 @@ Then we Hadamard transform the first qubit:
 
 \begin{align*}
 \ket{\psi_{3}} &=  \frac{1}{2}\left((-1)^{f(0)}(\ket{0}+\ket{1})(\ket{0}-\ket{1}) + (-1)^{f(1)}(\ket{0}-\ket{1})(\ket{0}-\ket{1})\right)\\
-&= ((-1)^{f(0)} + (-1)^{f(1)})(\ket{00} - \ket{01}) + ((-1)^{f(0)} - (-1)^{f(1)})(\ket{10} - \ket{11})
+&= \frac{1}{2}((-1)^{f(0)} + (-1)^{f(1)})(\ket{00} - \ket{01}) + ((-1)^{f(0)} - (-1)^{f(1)})(\ket{10} - \ket{11})
 \end{align*}
 
 Writing it in this way makes it clear how we determine if the function is constant or balanced. If it is constant($f(0)=f(1)$) then the the second term vanishes. So, if we measure the first qubit, it will be in state $\ket{0}$. However, if it is balanced ($f(0)\neq f(1)$), then the first term vanishes and the first qubit will be measured in state $\ket{1}$.
 
 \vspace{0.1in}
 
-This algorithm generalizes to the case where the function $f: \{0,1\}^{n}\rightarrow \{0,1\}$. This is where the power of quantum computing really shines. Clasically, (if $f$ can be constant or balanced and nothing else), we would need $2^{n-1} + 1$ function calls. But a quantum computer can do this in a single function call. First, note that the Hadamard transform on a bit string $\ket{\alpha}$ of length $n$ is 
+This algorithm generalizes to the case where the function $f: \{0,1\}^{n}\rightarrow \{0,1\}$. This is where the power of quantum computing really shines. Clasically, (if $f$ can be constant or balanced and nothing else), we would need $2^{n-1} + 1$ function calls. But a quantum computer can do this in a single function call. Similar to before, we have $\ket{\psi_{0}} = \ket{0}^{\otimes n}\ket{1}$. We Hadamard transform like before, but note that when we Hadamard transform a bit string of length $n$, we transform each bit individually. Our $n$-bit string is all zeros so we get 
 
 \begin{align*}
-H\ket{\alpha} = \left(\frac{\ket{0}+\ket{1}}{2}\right)^{\otimes n}
+H^{\otimes n}\ket{0,0...,0} = \ket{+}^{\otimes n} = \frac{1}{\sqrt{2^{n}}}\sum_{\alpha\in{0,1}^{n}}\ket{\alpha}
 \end{align*}
 
-For brevity, I will now also adopt the notation where $H\ket{0} = \ket{+}$ and $H\ket{1} = \ket{-}$. We have,
+Thus
 
 \begin{align*}
-\ket{\psi_{1}} &= \left(\frac{\ket{0}+\ket{1}}{2}\right)^{\otimes n}\otimes \ket{-} = \frac{1}{2^{n/2}} \sum_{\alpha\in\{0,1\}^{n}} \ket{\alpha}\otimes \ket{-}
+\ket{\psi_{1}} &= \frac{1}{\sqrt{2^{n}}}\sum_{\alpha\in{0,1}^{n}}\ket{\alpha}\otimes\ket{-}
 \end{align*}
 
-Looking at the last line from $\ket{\psi_{2}}$ in Deutsch's algorithm above, we can see that the effect of the oracle $U$ is efficiently summarized as:
+Looking at the last line from $\ket{\psi_{2}}$ in Deutsch's algorithm above, we can see that the effect of the oracle $U_{f}$ is efficiently summarized as:
 
 \begin{align*}
-U\ket{\alpha}\ket{1} = \frac{1}{2^{n/2}}\sum_{\alpha\in\{0,1\}} (-1)^{f(\alpha)}\ket{\alpha}\ket{-}
+U_{f}\ket{\psi_{1}} = \frac{1}{\sqrt{2^{n}}}\sum_{\alpha\in\{0,1\}} (-1)^{f(\alpha)}\ket{\alpha}\otimes\ket{-}
 \end{align*}
 
 Therefore, for the $n$-bit case, we get
 
 \begin{align*}
-\ket{\psi_{2}} &= \frac{1}{2^{n/2}} \sum_{\alpha\in\{0,1\}^{n}} (-1)^{f(\alpha)}\ket{\alpha}\otimes \ket{-}
+\ket{\psi_{2}} &= \frac{1}{\sqrt{2^{n}}} \sum_{\alpha\in\{0,1\}^{n}} (-1)^{f(\alpha)}\ket{\alpha}\otimes \ket{-}
 \end{align*}
 
+We Hadamard transform the first qubit again, but $\alpha$ can be mixtures of 0's and 1's so its a bit more complicated
 
+\begin{align*}
+\ket{\psi_{3}} &= \frac{1}{\sqrt{2^{n}}} \sum_{\alpha\in\{0,1\}^{n}} (-1)^{f(\alpha)}H^{\otimes n}\ket{\alpha}\otimes \ket{-}\\
+&= \frac{1}{\sqrt{2^{n}}} \sum_{\alpha\in\{0,1\}^{n}} (-1)^{f(\alpha)} \left(\frac{1}{\sqrt{2^{n}}}\sum_{x\in\{0,1\}^{n}} (-1)^{\alpha\cdot x}\ket{x}\right) \otimes \ket{-}\\
+&= \frac{1}{2^{n}}\sum_{\alpha\in\{0,1\}^{n}}\sum_{x\in\{0,1\}^{n}}(-1)^{f(\alpha)}(-1)^{\alpha\cdot x}\ket{x}\otimes \ket{-}\
+\end{align*}
+
+where $\alpha\cdot x = \alpha_{0}x_{0} \oplus \alpha_{1}x_{1} \oplus ...$. A bit of rearranging (and dropping the second qubit because it doesn't matter) gives 
+
+\begin{align*}
+\ket{\psi_{3}} &= \sum_{x\in\{0,1\}^{n}}\left(\frac{1}{2^{n}}\sum_{\alpha\in\{0,1\}^{n}}(-1)^{f(\alpha)}(-1)^{\alpha\cdot x}\right)\ket{x}\
+\end{align*}
+
+The term in parentheses is the expansion coefficient for state $\ket{x}$. It turns out that if $f$ is constant, then this expansion coefficient is $\pm 1$ for $x=\ket{0}^{\otimes n}$ and zero for all other $x$. However, if $f$ is balanced, the sum over $\alpha$ is more complex (but presumably it is not zero). It's difficult to say exactly how it would look, but we can say that it depends on what $f(\alpha)$ actually is. Ultimately, we would measure some state other than $x=\ket{0}^{\otimes n}$ when $f$ is balanced, because the sum over $\alpha$ would be zero for that state.
 
 \end{s}
 
