@@ -9,6 +9,7 @@
 \usepackage{amsmath}
 \usepackage{siunitx}
 \usepackage{physics}
+\usepackage{algorithm}
 \usepackage{amsmath, amssymb, graphics, setspace}
 
 \newcommand{\mathsym}[1]{{}}
@@ -28,7 +29,7 @@
 
 \begin{document}
 
- {\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Homework 11}         }\\[2\baselineskip] % Title
+ {\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Homework 1}         }\\[2\baselineskip] % Title
 { {\bf \fontfamily{cmr}\selectfont Quantum Mechanics}\\ {\textit{\fontfamily{cmr}\selectfont     \today}}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    {\large \textsc{C Seitz}
 \\[1.4\baselineskip] 
 
@@ -102,10 +103,68 @@ Therefore, if Alice measures her two qubits, say in state $\ket{00}$, she can co
 \end{s}
 
 \begin{p}
-1.4.3-1.4.4 Calculations, Deutsch Algorithms
+Deutsch Algorithm, Deutch-Josza Algorithm
 \end{p}
 
 \begin{s}
+
+Suppose we have some boolean function $f: \{0,1\} \rightarrow \{0,1\}$. Deutch's algorithm can determine whether the function $f$ is constant or balanced exponentially faster than a classical computer. If $f$ is constant then $f(0) = f(1)$; however, if $f$ is balanced then $f(0)\neq f(1)$. For example, $f(0) = 1$ and $f(1) = 0$ is a balanced function. A classical computer would need to evaluate $f(0)$ and $f(1)$ separately, but a quantum computer can leverage quantum parallelism to compute both $f(0)$ and $f(1)$ at the same time.
+
+\vspace{0.1in}
+
+We start with the two qubits prepared in state $\ket{\psi_{0}} = \ket{0}\ket{1}$. Each qubit is Hadamard transformed to give
+
+\begin{align*}
+\ket{\psi_{1}} &= \frac{1}{2}\left(\ket{0} + \ket{1}\right)\left(\ket{0}-\ket{1}\right)\\
+&= \frac{1}{2}\left(\ket{0}\ket{0} - \ket{0}\ket{1} + \ket{1}\ket{0} - \ket{1}\ket{1}\right)
+\end{align*}
+
+The state then goes through an oracle, which implements the unitary transformation $\ket{\alpha}\ket{\beta} \rightarrow \ket{\alpha}\ket{\beta\oplus f(\alpha)}$. Note that $\oplus$ is addition modulo two, which is essentially an XOR operation. Thus, after transformation, the state is
+
+\begin{align*}
+\ket{\psi_{2}} &=  \frac{1}{2}\left(\ket{0}\ket{0\oplus f(0)} - \ket{0}\ket{1\oplus f(0)} + \ket{1}\ket{0\oplus f(1)} - \ket{1}\ket{1\oplus f(1)}\right)\\
+&= \frac{1}{2}\left(\ket{0}(\ket{0\oplus f(0)}-\ket{1\oplus f(0)}) + \ket{1}(\ket{0\oplus f(1)}-\ket{1\oplus f(1)})\right)\\
+&= \frac{1}{2}\left((-1)^{f(0)}\ket{0}(\ket{0}-\ket{1}) + (-1)^{f(1)}\ket{1}(\ket{0}-\ket{1})\right)\\
+\end{align*}
+
+Then we Hadamard transform the first qubit:
+
+
+\begin{align*}
+\ket{\psi_{3}} &=  \frac{1}{2}\left((-1)^{f(0)}(\ket{0}+\ket{1})(\ket{0}-\ket{1}) + (-1)^{f(1)}(\ket{0}-\ket{1})(\ket{0}-\ket{1})\right)\\
+&= ((-1)^{f(0)} + (-1)^{f(1)})(\ket{00} - \ket{01}) + ((-1)^{f(0)} - (-1)^{f(1)})(\ket{10} - \ket{11})
+\end{align*}
+
+Writing it in this way makes it clear how we determine if the function is constant or balanced. If it is constant($f(0)=f(1)$) then the the second term vanishes. So, if we measure the first qubit, it will be in state $\ket{0}$. However, if it is balanced ($f(0)\neq f(1)$), then the first term vanishes and the first qubit will be measured in state $\ket{1}$.
+
+\vspace{0.1in}
+
+This algorithm generalizes to the case where the function $f: \{0,1\}^{n}\rightarrow \{0,1\}$. This is where the power of quantum computing really shines. Clasically, (if $f$ can be constant or balanced and nothing else), we would need $2^{n-1} + 1$ function calls. But a quantum computer can do this in a single function call. First, note that the Hadamard transform on a bit string $\ket{\alpha}$ of length $n$ is 
+
+\begin{align*}
+H\ket{\alpha} = \left(\frac{\ket{0}+\ket{1}}{2}\right)^{\otimes n}
+\end{align*}
+
+For brevity, I will now also adopt the notation where $H\ket{0} = \ket{+}$ and $H\ket{1} = \ket{-}$. We have,
+
+\begin{align*}
+\ket{\psi_{1}} &= \left(\frac{\ket{0}+\ket{1}}{2}\right)^{\otimes n}\otimes \ket{-} = \frac{1}{2^{n/2}} \sum_{\alpha\in\{0,1\}^{n}} \ket{\alpha}\otimes \ket{-}
+\end{align*}
+
+Looking at the last line from $\ket{\psi_{2}}$ in Deutsch's algorithm above, we can see that the effect of the oracle $U$ is efficiently summarized as:
+
+\begin{align*}
+U\ket{\alpha}\ket{1} = \frac{1}{2^{n/2}}\sum_{\alpha\in\{0,1\}} (-1)^{f(\alpha)}\ket{\alpha}\ket{-}
+\end{align*}
+
+Therefore, for the $n$-bit case, we get
+
+\begin{align*}
+\ket{\psi_{2}} &= \frac{1}{2^{n/2}} \sum_{\alpha\in\{0,1\}^{n}} (-1)^{f(\alpha)}\ket{\alpha}\otimes \ket{-}
+\end{align*}
+
+
+
 \end{s}
 
 \end{document}
