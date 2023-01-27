@@ -1,0 +1,147 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath} % AMS Math Package
+\usepackage{bm}
+\usepackage{amsthm} % Theorem Formatting
+\usepackage{amssymb}    % Math symbols such as \mathbb
+\usepackage{graphicx} % Allows for eps images
+\usepackage[dvips,letterpaper,margin=1in,bottom=0.7in]{geometry}
+\usepackage{tensor}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{physics}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+
+\newcounter{mathematicapage}
+
+\newtheorem{p}{Problem}
+\usepackage{cancel}
+\newtheorem*{lem}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{dfn}{Definition}
+ \newenvironment{s}{%\small%
+        \begin{trivlist} \item \textbf{Solution}. }{%
+            \hspace*{\fill} $\blacksquare$\end{trivlist}}%
+
+
+\begin{document}
+
+ {\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Homework 2}         }\\[2\baselineskip] % Title
+{ {\bf \fontfamily{cmr}\selectfont Quantum Mechanics}\\ {\textit{\fontfamily{cmr}\selectfont     \today}}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    {\large \textsc{C Seitz}
+\\[1.4\baselineskip] 
+
+
+\begin{p}
+2.2
+\end{p}
+
+\begin{s}
+
+In general, the matrix representation of $A$ in a basis $\ket{i},\ket{j}$ is such that the matrix element is $A_{ij} = \bra{i}A\ket{j}$. Therefore, in the input basis, the matrix representation of $A$ is 
+
+\begin{equation*}
+A = \begin{pmatrix}\bra{0}A\ket{0}&\bra{0}A\ket{1}\\
+\bra{1}A\ket{0}&\bra{1}A\ket{1}\end{pmatrix}= \begin{pmatrix}0&1\\1&0\end{pmatrix}
+\end{equation*}
+
+In the output basis
+
+\begin{equation*}
+A = \begin{pmatrix}\bra{0}A\ket{0}&\bra{0}A\ket{1}\\
+\bra{1}A\ket{0}&\bra{1}A\ket{1}\end{pmatrix}= \begin{pmatrix}1&0\\0&1\end{pmatrix}
+\end{equation*}
+
+We can choose a different basis, say $\ket{+} = \frac{1}{\sqrt{2}}(\ket{0} + \ket{1}), \ket{-} = \frac{1}{\sqrt{2}}(\ket{0} - \ket{1})$.
+
+\begin{equation*}
+U = \frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 & 1\\
+1 & -1
+\end{pmatrix}
+\end{equation*}
+
+In this basis $A$ takes the form:
+
+\begin{equation*}
+A' = UA = \frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 & -1\\
+1 & 1
+\end{pmatrix}
+\end{equation*}
+
+\end{s}
+
+
+\begin{p}
+2.9
+\end{p}
+
+\begin{s}
+
+\begin{align*}
+\sigma_{z} &= \ket{1}\bra{1} - \ket{0}\bra{0}\\
+\sigma_{x} &= \ket{1}\bra{0} + \ket{0}\bra{1}\\
+\sigma_{y} &=  i\ket{0}\bra{1} - i\ket{1}\bra{0}
+\end{align*}
+
+\end{s}
+
+\begin{p}
+2.12
+\end{p}
+
+\begin{s}
+A matrix is diagonalizable if and only if the algebraic multiplicity equals the geometric multiplicity of each eigenvalue. It is easy to show that the characteristic equation here is $(1-\lambda)^{2} = 0$ which only has one solution.
+
+
+\end{s}
+\begin{p}
+2.17
+\end{p}
+\begin{s}
+
+If $H$ is normal, it must be diagonalizable and has the eigendecomposition
+
+\begin{equation*}
+H = U\Lambda U^{\dagger}
+\end{equation*}
+
+where $U$ is some unitary matrix. The conjugate transpose is
+
+\begin{equation*}
+H^{\dagger} = U^{\dagger}\Lambda^{\dagger} U
+\end{equation*}
+
+If $H = H^{\dagger}$, and $\Lambda$ is diagonal, then
+
+\begin{equation*}
+U^{\dagger}\Lambda^{\dagger} U = U\Lambda U^{\dagger}
+\end{equation*}
+
+which means $\Lambda = \Lambda^{\dagger}$ i.e. the eigenvalues are real. Furthermore, if $\Lambda$ is diagonal and purely real, then clearly $H = H^{\dagger}$.
+
+\end{s}
+\begin{p}
+2.18
+\end{p}
+
+\begin{s}
+For a unitary matrix $U^{\dagger}U = I$, so for an eigenvector $\ket{\alpha}$,
+\begin{equation*}
+\bra{\alpha}U^{\dagger}U\ket{\alpha} = \bra{\alpha}I\ket{\alpha} = 1
+\end{equation*}
+and $\bra{\alpha}U^{\dagger}U\ket{\alpha} = \lambda^{*}\lambda$, so $\lambda^{*}\lambda = 1$.
+\end{s}
+
+\begin{p}
+2.24
+\end{p}
+
+\begin{s}
+\end{s}
+
+\end{document}
