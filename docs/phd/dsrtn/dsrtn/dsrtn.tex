@@ -308,6 +308,56 @@ P(\bm{\omega}, t) = \exp(\mathcal{J}(\bm{\omega}))
 
 This matrix exponential is intractable for large $|\Omega|$. However, in the Finite State Projection algorithm, it is possible to truncate the state space $\Omega \rightarrow \tilde{\Omega}$ and obtain good estimates $\tilde{P}(\bm{\omega}, t)$ with some certificate of accuracy.
 
+\subsection{Variational Bayes}
+
+Variational inference attempts to approximate the true posterior distribution $p(\theta|x)$ with a variational distribution $q(\theta)$, which we assume to be Gaussian. We try to minimize the KL-divergence between the variational distribution and the true posterior:
+
+\begin{align*}
+D_{\mathrm{KL}}(q(\theta)||p(\theta|x)) &= \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)}{p(\theta|x)}\right)\\
+&=  \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)p(x)}{p(\theta,x)}\right)\\
+&=  \log p(x) + \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)}{p(x|\theta)p(\theta)}\right)\\
+&= \log p(x) + \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)\\
+&= \log p(x) + H(q) -\underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log p(x|\theta) + \log p(\theta) \right)
+\end{align*}
+
+Clearly the KL-divergence is minimized by minimizing this expectation. It is common to define the evdience lower bound (ELBO).
+
+\begin{align*}
+\mathcal{L}(x,\theta) = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
+\end{align*}
+
+It is name such because
+
+\begin{equation*}
+\log p(x) = D_{\mathrm{KL}}(q(\theta)||p(\theta|x)) + \mathcal{L}(x,\theta) \geq \mathcal{L}(x,\theta)
+\end{equation*}
+
+The ELBO can be minimized when the variational distribution is easy to sample from, for example a multivariate normal distribution and when the likelihood is tractable. The gradients of the ELBO
+
+\begin{align*}
+\nabla_{\Phi}\mathcal{L}(x,\theta) = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
+\end{align*}
+
+multivariate Gaussian distribution:
+
+$p(x|\mu,\Sigma) = \frac{1}{(2\pi)^{k/2}|\Sigma|^{1/2}}\exp\left(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)\right)$
+
+Where:
+
+$x$ is a k-dimensional random variable
+$\mu$ is the mean vector
+$\Sigma$ is the covariance matrix
+$k$ is the dimension of $x$
+And the gradient with respect to mean:
+
+$\frac{\partial}{\partial \mu} \log p(x|\mu,\Sigma) = -\Sigma^{-1}(x-\mu)$
+
+And the gradient with respect to covariance matrix:
+
+$\frac{\partial}{\partial \Sigma} \log p(x|\mu,\Sigma) = -\frac{1}{2}\Sigma^{-1}+\frac{1}{2}\Sigma^{-1}(x-\mu)(x-\mu)^T\Sigma^{-1}$
+
+You can use these equations to calculate the gradient of the log-multivariate Gaussian distribution with respect to the mean and covariance matrix.
+
 \subsection{Sequential tempered Markov Chain Monte Carlo}
 
 
