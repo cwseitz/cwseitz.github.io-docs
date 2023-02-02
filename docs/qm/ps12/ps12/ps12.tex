@@ -144,4 +144,149 @@ and $\bra{\alpha}U^{\dagger}U\ket{\alpha} = \lambda^{*}\lambda$, so $\lambda^{*}
 \begin{s}
 \end{s}
 
+\begin{p}
+Grahm-Schmidt
+\end{p}
+
+\begin{s}
+It suffices to show that the following matrix has nonzero determinant:
+
+\begin{equation*}
+A = 
+\begin{pmatrix}
+1 & 1 & 1\\
+0 & 1 & 1\\
+-1 & 0 & 1
+\end{pmatrix}
+\end{equation*}
+
+And it is straightforward to show that
+
+\begin{equation*}
+\mathrm{det}(A) = 1
+\end{equation*}
+
+Therefore these vectors are indeed linearly independent, but not orthogonal. We can make them orthogonal using the Gram-Schmidt procedure. Let $\ket{0},\ket{1},\ket{2}$ be our non-orthogonal basis vectors.
+
+\begin{align*}
+\ket{v_{k+1}} \propto \ket{w_{k+1}} - \sum_{i=1}^{k} \bra{v_i}\ket{w_{k+1}}\ket{v_{i}}
+\end{align*}
+
+\begin{align*}
+\ket{0'} &= \ket{0}\\
+\ket{1'} &= \ket{1} - \bra{0'}\ket{1}\ket{0'}\\
+\ket{2'} &= \ket{2} - \bra{0'}\ket{2}\ket{0'} - \bra{1'}\ket{2}\ket{1'}
+\end{align*}
+
+\end{s}
+
+\begin{p}
+Normal matrix parameterization
+\end{p}
+
+\begin{s}
+
+Consider first
+
+\begin{align*}
+AA^{\dagger} &= (a_{0}\mathbb{I} + \mathbf{a}\cdot\sigma)(a_{0}^{*}\mathbb{I} + \mathbf{a}^{*}\cdot\sigma^{\dagger})\\
+&= |a_{0}|^{2} + a_{0}(\mathbf{a}^{*}\cdot\sigma^{\dagger}) + a_{0}^{*}(\mathbf{a}\cdot\sigma) + 
+\end{align*}
+
+\end{s}
+
+\begin{p}
+2.26
+\end{p}
+
+\begin{s}
+Writing out $\ket{\psi}^{\otimes 2}$ explicitly, we have
+\begin{align*}
+\ket{\psi}^{\otimes 2} = \frac{1}{2}\left(\ket{00}+\ket{01}+\ket{10}+\ket{11}\right)
+\end{align*}
+or in terms of tensor products we have
+\begin{align*}
+\ket{\psi}^{\otimes 2} = \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix}\otimes \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix} = \frac{1}{2}\begin{pmatrix}1\\1\\1\\1\end{pmatrix}
+\end{align*}
+
+
+Writing out $\ket{\psi}^{\otimes 3}$ explicitly, we have
+\begin{align*}
+\ket{\psi}^{\otimes 3} = \frac{1}{2^{3/2}}\left(\ket{000}+\ket{001}+\ket{100}+\ket{010} + \ket{101} + \ket{111} + \ket{110} + \ket{011}\right)
+\end{align*}
+or in terms of tensor products we have
+\begin{align*}
+\ket{\psi}^{\otimes 3} = \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix}\otimes \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix}\otimes \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix} = \frac{1}{2^{3/2}}\begin{pmatrix}1\\1\\1\\1\\1\\1\\1\\1\end{pmatrix}
+\end{align*}
+\end{s}
+
+\begin{p}
+2.27
+\end{p}
+
+\begin{s}
+\begin{align*}
+X\otimes Z =
+\begin{pmatrix}
+0&0&1&0\\
+0&0&0&-1\\
+1&0&0&0\\
+0 &-1&0&0
+\end{pmatrix}
+\end{align*}
+\begin{align*}
+I\otimes X =
+\begin{pmatrix}
+0&1&0&0\\
+1&0&0&0\\
+0&0&0&1\\
+0&0&1&0
+\end{pmatrix}
+\end{align*}
+\begin{align*}
+X\otimes I =
+\begin{pmatrix}
+0&0&1&0\\
+0&0&0&1\\
+1&0&0&0\\
+0&1&0&0
+\end{pmatrix}
+\end{align*}
+
+Clearly from this last result, the tensor product does not necessarily commute.
+
+\end{s}
+
+\begin{p}
+2.33
+\end{p}
+
+\begin{s}
+
+\end{s}
+
+\begin{p}
+2.34
+\end{p}
+
+\begin{s}
+
+\end{s}
+
+\begin{p}
+2.35
+\end{p}
+
+\begin{s}
+
+\end{s}
+
+\begin{p}
+2.39
+\end{p}
+
+\begin{s}
+
+\end{s}
+
 \end{document}
