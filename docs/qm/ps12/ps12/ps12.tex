@@ -279,6 +279,14 @@ Clearly from this last result, the tensor product does not necessarily commute.
 
 \begin{s}
 
+First recall that since the Pauli matrices are involutory $\left(\vec{a}\cdot \vec{\sigma}\right)^{k}  = \left(\vec{a}\cdot \vec{\sigma}\right)$
+
+\begin{align*}
+\exp(i\theta\vec{a}\cdot \vec{\sigma}) &= \sum_{k=0}^{\infty}\frac{1}{k!}\left(i\theta\vec{a}\cdot \vec{\sigma}\right)^{k}\\
+&=  \sum_{k=0}^{\infty}\frac{(i\theta)^{k}}{k!}\left(\vec{a}\cdot \vec{\sigma}\right)^{k}\\
+&= \sum_{k \;odd}^{\infty}\frac{(-1)^{k}\theta^{k}}{k!}\left(\vec{a}\cdot \vec{\sigma}\right)^{k} + i\sum_{k \;even}^{\infty}\frac{(-1)^{k}(\theta)^{k}}{k!}\left(\vec{a}\cdot \vec{\sigma}\right)^{k}\\
+&= \cos\theta I + i\sin\theta(\vec{a}\cdot\vec{\sigma})
+\end{align*}
 \end{s}
 
 \begin{p}
