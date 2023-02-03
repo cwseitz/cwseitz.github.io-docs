@@ -39,7 +39,7 @@
 
 \begin{s}
 
-In general, the matrix representation of $A$ in a basis $\ket{i},\ket{j}$ is such that the matrix element is $A_{ij} = \bra{i}A\ket{j}$. Therefore, in the input basis, the matrix representation of $A$ is 
+The matrix representation of $A$ is 
 
 \begin{equation*}
 A = \begin{pmatrix}\bra{0}A\ket{0}&\bra{0}A\ket{1}\\
@@ -166,17 +166,40 @@ And it is straightforward to show that
 \mathrm{det}(A) = 1
 \end{equation*}
 
-Therefore these vectors are indeed linearly independent, but not orthogonal. We can make them orthogonal using the Gram-Schmidt procedure. Let $\ket{0},\ket{1},\ket{2}$ be our non-orthogonal basis vectors.
+Therefore these vectors are indeed linearly independent, but not orthogonal. We can make them orthogonal using the Graham-Schmidt procedure. Let $\ket{0},\ket{1},\ket{2}$ be our non-orthogonal basis vectors.
 
 \begin{align*}
-\ket{v_{k+1}} \propto \ket{w_{k+1}} - \sum_{i=1}^{k} \bra{v_i}\ket{w_{k+1}}\ket{v_{i}}
+\ket{0'} &= \ket{0}
 \end{align*}
 
+For the second basis vector we have
+
 \begin{align*}
-\ket{0'} &= \ket{0}\\
-\ket{1'} &= \ket{1} - \bra{0'}\ket{1}\ket{0'}\\
-\ket{2'} &= \ket{2} - \bra{0'}\ket{2}\ket{0'} - \bra{1'}\ket{2}\ket{1'}
+\ket{1'} &\propto \ket{1} - \bra{0'}\ket{1}\ket{0}\\
+&= \ket{1} - \ket{0}\\
 \end{align*}
+
+and with the appropriate normalization we get 
+
+\begin{align*}
+\ket{1'} &= \frac{1}{\sqrt{2}}\begin{pmatrix}0\\1\\-1\end{pmatrix}\\
+\end{align*}
+
+
+For the third basis vector we have
+
+\begin{align*}
+\ket{2'} &\propto \ket{2} - \bra{0}\ket{2}\ket{0} - \bra{1'}\ket{2}\ket{1'}\\
+&= \ket{2}
+\end{align*}
+
+and with the appropriate normalization we get 
+
+\begin{align*}
+\ket{2'} &= \frac{1}{\sqrt{3}}\begin{pmatrix}1\\1\\1\end{pmatrix}\\
+\end{align*}
+
+The physical interpretation of this relative to the standard basis for $\mathbb{R}^{3}$ is that we rotated the standard basis $\phi = -\pi/4$ and $\theta = \pi/4$.
 
 \end{s}
 
@@ -186,12 +209,22 @@ Normal matrix parameterization
 
 \begin{s}
 
-Consider first
+
 
 \begin{align*}
-AA^{\dagger} &= (a_{0}\mathbb{I} + \mathbf{a}\cdot\sigma)(a_{0}^{*}\mathbb{I} + \mathbf{a}^{*}\cdot\sigma^{\dagger})\\
-&= |a_{0}|^{2} + a_{0}(\mathbf{a}^{*}\cdot\sigma^{\dagger}) + a_{0}^{*}(\mathbf{a}\cdot\sigma) + 
+(a\cdot\sigma)(a^{*}\cdot\sigma) &= (a^{*}\cdot\sigma)(a\cdot\sigma)\\
+&\Rightarrow a\cdot a^* + i (a\cross a^{*})\cdot \sigma = a^{*}\cdot a + i (a^*\cross a)\cdot \sigma\\
+&\Rightarrow (a\cross a^{*})\cdot \sigma = (a^*\cross a)\cdot \sigma\\
+&\Rightarrow (a\cross a^{*}) = (a^*\cross a)
 \end{align*}
+
+which occurs when $a=a^{*}$ and the vector is strictly real. If this is satistied, the operator is normal, and has a spectral decomposition:
+
+\begin{align*}
+A &= \lambda_{1}\ket{\lambda_{1}}\bra{\lambda_{1}} + \lambda_{2}\ket{\lambda_{2}}\bra{\lambda_{2}}\\
+&= \lambda_{1}P_{1} + \lambda_{2}P_{2}
+\end{align*}
+
 
 \end{s}
 
@@ -262,6 +295,40 @@ Clearly from this last result, the tensor product does not necessarily commute.
 \end{p}
 
 \begin{s}
+Consider the outer product representation of the Hadamard gate
+
+\begin{align*}
+H &= \frac{1}{\sqrt{2}}\left(\ket{0}\bra{0} + \ket{0}\bra{1} + \ket{1}\bra{0} - \ket{1}\bra{1}\right)\\
+&= \frac{1}{\sqrt{2}}\sum_{x,y}(-1)^{x\cdot y} \ket{x}\bra{y}
+\end{align*}
+
+To see how this generalizes, consider:
+
+\begin{align*}
+\ket{0}\bra{0} \otimes \ket{0}\bra{0} &= (\ket{0}\otimes\ket{0})(\bra{0}\otimes\bra{0})\\
+&= \ket{00}\otimes\bra{00}
+\end{align*}
+
+This is generally true of the tensor product, so multiplying sums like the one above $n$ times will give a similar expression for vectors $\bm{x}$ and $\bm{y}$: 
+
+\begin{align*}
+H^{\otimes n} &= \frac{1}{\sqrt{2}}\sum_{\bm{x},\bm{y}}(-1)^{\bm{x}\cdot \bm{y}} \ket{\bm{x}}\bra{\bm{y}}
+\end{align*}
+
+For $n=2$, we just need to evaluate this sum for all possible binary strings of length 2 and add them up according to this scheme, which gives
+
+\begin{align*}
+H^{\otimes 2} &= \frac{1}{2}
+\begin{pmatrix}
+1&1&1&1\\
+1&-1&1&-1\\
+1&1&-1&-1\\
+1&-1&-1&1
+\end{pmatrix}
+\end{align*}
+
+
+
 
 \end{s}
 
@@ -270,6 +337,44 @@ Clearly from this last result, the tensor product does not necessarily commute.
 \end{p}
 
 \begin{s}
+We can compute these functions of matrices if we have its spectral decomposition. For an arbitrary matrix $A$, with spectral decomposition, the square root of $A$ is simply
+
+\begin{equation*}
+\sqrt{A} = \sum_{n}\sqrt{\lambda_{n}}\ket{\lambda_{n}}\bra{\lambda_{n}}
+\end{equation*}
+
+and its logarithm is
+
+\begin{equation*}
+\log{A} = \sum_{n}\log{\lambda_{n}}\ket{\lambda_{n}}\bra{\lambda_{n}}
+\end{equation*}
+
+Therefore we start by finding the eigendecomposition of the matrix. The characteristic equation is 
+
+\begin{equation*}
+\lambda^{2} - 8\lambda  + 7 = 0
+\end{equation*}
+
+so the two eigenvalues are $\lambda_{1} = 1$, $\lambda_{2} = 7$. The eigenvectors are:
+
+\begin{equation*}
+\ket{\lambda_{1}} = \frac{1}{\sqrt{2}}\begin{pmatrix}1\\-1\end{pmatrix}, \ket{\lambda_{2}} = \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix} 
+\end{equation*}
+
+Thus for its square root we get
+
+\begin{align*}
+\sqrt{A} &= \sum_{n}\sqrt{\lambda_{n}}\ket{\lambda_{n}}\bra{\lambda_{n}}\\
+&= \ket{\lambda_{1}}\bra{\lambda_{1}} + \sqrt{7}\ket{\lambda_{2}}\bra{\lambda_{2}}\\
+&= \frac{1}{2}\begin{pmatrix}1+\sqrt{7}&-1+\sqrt{7}\\-1+\sqrt{7}&1+\sqrt{7}\end{pmatrix}
+\end{align*}
+
+and the logarithm is 
+
+\begin{align*}
+\log{A} &= \log{7}\ket{\lambda_{2}}\bra{\lambda_{2}}\\
+&= \frac{\log 7}{2}\begin{pmatrix}1&1\\1&1\end{pmatrix}
+\end{align*}
 
 \end{s}
 
@@ -279,7 +384,7 @@ Clearly from this last result, the tensor product does not necessarily commute.
 
 \begin{s}
 
-First recall that since the Pauli matrices are involutory $\left(\vec{a}\cdot \vec{\sigma}\right)^{k}  = \left(\vec{a}\cdot \vec{\sigma}\right)$
+First recall that $\left(\vec{a}\cdot \vec{\sigma}\right)^{k}$ is identity for even $k$ and is just $\left(\vec{a}\cdot \vec{\sigma}\right)$ for odd $k$.
 
 \begin{align*}
 \exp(i\theta\vec{a}\cdot \vec{\sigma}) &= \sum_{k=0}^{\infty}\frac{1}{k!}\left(i\theta\vec{a}\cdot \vec{\sigma}\right)^{k}\\
