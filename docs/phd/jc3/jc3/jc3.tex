@@ -1,0 +1,99 @@
+% Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
+% For more details: https://www.sharelatex.com/learn/Beamer
+
+\documentclass{beamer}			% Document class
+\geometry{papersize={13cm,15cm}}
+
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}Super-Resolution Imaging of Heterogeneous Groups of Nucleosomes \hfill\insertshortauthor\hfill\insertpagenumber}}
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage[english]{babel}				% Set language
+\usepackage[utf8x]{inputenc}			% Set encoding
+
+\mode<presentation>						% Set options
+{
+  \usetheme{default}					% Set theme
+  \usecolortheme{default} 				% Set colors
+  \usefonttheme{default}  				% Set font theme
+  \setbeamertemplate{caption}[numbered]	% Set caption to be numbered
+}
+
+% Uncomment this to have the outline at the beginning of each section highlighted.
+%\AtBeginSection[]
+%{
+%  \begin{frame}{Outline}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+\usepackage{graphicx}					% For including figures
+\usepackage{booktabs}					% For table rules
+\usepackage{hyperref}	
+\usepackage{tikz-network}				% For cross-referencing
+\usepackage[absolute,overlay]{textpos}
+\usepackage{bm}
+\usepackage[font=small,labelfont=bf]{caption}				% For cross-referencing
+
+\title{Super-Resolution Imaging of Heterogeneous Groups of Nucleosomes}	% Presentation title
+\author{Clayton W. Seitz}								% Presentation author
+\date{\today}									% Today's date	
+
+\begin{document}
+
+% Title page
+% This page includes the informations defined earlier including title, author/s, affiliation/s and the date
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+% The following is the most frequently used slide types in beamer
+% The slide structure is as follows:
+%
+%\begin{frame}{<slide-title>}
+%	<content>
+%\end{frame}
+
+
+\begin{frame}{Figure 1. Nucleosomes Are Arranged in Discrete Nanodomains in Interphase Nuclei of Human Somatic Cells}
+\begin{figure}
+\includegraphics[width=9cm]{Figure-1.jpg}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Figure 2. Nucleosomes Are Arranged in Discrete Nanodomains in Interphase Nuclei of Mouse Embryonic Stem Cells}
+\begin{figure}
+\includegraphics[width=9cm]{Figure-2.jpg}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Figure 3. The Number of Nucleosomes Inside Clutches Correlates with Cellular State}
+\begin{figure}
+\includegraphics[width=10cm]{Figure-3.jpg}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Figure 4. Clutch Size Correlates with Pluripotency Grade in Human-Induced Pluripotent Stem Cells Clones}
+\begin{figure}
+\includegraphics[width=10cm]{Figure-4.jpg}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Figure 5. The Linker Histone H1 Increases in Large Clutches and These Correlate with Heterochromatin Markers}
+\begin{figure}
+\includegraphics[width=9cm]{Figure-5.jpg}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Figure 6. RNA Polymerase II Associates with the Small Clutches}
+\begin{figure}
+\includegraphics[width=9cm]{Figure-6.jpg}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Figure 7. Computer Simulations of Nucleosome Occupancy}
+\begin{figure}
+\includegraphics[width=9cm]{Figure-7.jpg}
+\end{figure}
+\end{frame}
+
+\end{document}
