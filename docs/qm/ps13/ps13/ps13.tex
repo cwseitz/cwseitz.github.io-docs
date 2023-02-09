@@ -111,6 +111,33 @@ Problem 2.54
 \end{p}
 
 \begin{s}
+Since the two operators commute, they are simultaneously diagonalizable. Consider the following spectral decompositions
+
+\begin{equation*}
+A = \sum_{n}a_{n}\ket{n}\bra{n}
+\end{equation*}
+
+\begin{equation*}
+B = \sum_{n}b_{n}\ket{n}\bra{n}
+\end{equation*}
+
+Therefore, it must be true that
+
+\begin{equation*}
+A+B = \sum_{n}(a_{n}+b_{n})\ket{n}\bra{n}
+\end{equation*}
+
+Now these matrices are Hermitian so their eigenvectors are orthogonal, and the product of matrix exponentials is just
+
+\begin{align*}
+\exp(A)\exp(B) &= \left(\sum_{n}\exp(a_{n})\ket{n}\bra{n}\right)\left(\sum_{m}\exp(b_{m})\ket{m}\bra{m}\right)\\
+&= \sum_{m,n} \delta_{mn}\exp(a_{n})\exp(b_{m})\ket{n}\bra{m}\\
+&= \sum_{n}\exp(a_{n})\exp(b_{n})\ket{n}\bra{n}\\
+&= \sum_{n}\exp(a_{n}+b_{n})\ket{n}\bra{n}\\
+&= \exp(A+B)
+\end{align*}
+
+
 \end{s}
 
 \begin{p}
@@ -118,6 +145,17 @@ Problem 2.55
 \end{p}
 
 \begin{s}
+
+\begin{align*}
+UU^{\dagger} &= \exp\left(\frac{-iH(t_2-t_1)}{\hbar}\right)\exp\left(\frac{iH(t_2-t_1)}{\hbar}\right)\\
+&= \left(\sum_{n} \exp(\frac{-i E_{n}(t_2-t_1)}{\hbar})\ket{n}\bra{n}\right)\left(\sum_{m} \exp(\frac{i E_{m}(t_2-t_1)}{\hbar})\ket{m}\bra{m}\right)\\
+&= \sum_{m,n}\delta_{mn}\ket{n}\bra{m}\\
+&= \sum_{n}\ket{n}\bra{n} = I
+\end{align*}
+
+where $H$ is a Hermitian operator. 
+
+
 \end{s}
 
 \begin{p}
@@ -125,6 +163,21 @@ Problem 2.56
 \end{p}
 
 \begin{s}
+
+$U$ is unitary so its eigenvalues $u_{n}$ have unit norm, which means
+
+\begin{equation*}
+K = -i\log(U) = -i\sum_{n}\log(u_{n})\ket{n}\bra{n} = \sum_{n}\theta \ket{n}\bra{n}
+\end{equation*}
+
+since
+
+\begin{equation*}
+\log(u_{n}) = \log(|u_{n}|e^{i\theta}) = \log(|u_{n}|) + i\theta = i\theta
+\end{equation*}
+
+Therefore, $K = K^{\dagger}$ since $\theta\in\mathbb{R}$.
+
 \end{s}
 
 \begin{p}
