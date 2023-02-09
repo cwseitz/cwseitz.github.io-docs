@@ -185,6 +185,25 @@ Problem 2.57
 \end{p}
 
 \begin{s}
+
+
+\begin{align*}
+L_{l}\ket{\alpha} = \frac{\ell\ket{l}}{|\ell|}
+\end{align*}
+
+\begin{align*}
+M_{m}\frac{\ell\ket{l}}{|\ell|} = \frac{m\ell}{|m||\ell|}\ket{m}
+\end{align*}
+
+which is equivalent to
+
+\begin{align*}
+N_{m\ell}\ket{\alpha} &= M_{m}L_{\ell}\ket{\alpha}\\
+&= \frac{\ket{m}\bra{m}\ket{\ell}\bra{\ell}}{|m||\ell|}\ket{\alpha}\\
+&= \frac{\ell\ket{m}\bra{m}}{|m||\ell|}\ket{\ell}\\
+&= \frac{m\ell}{|m||\ell|}\ket{m}
+\end{align*}
+
 \end{s}
 
 \begin{p}
@@ -192,6 +211,20 @@ Problem 2.58
 \end{p}
 
 \begin{s}
+
+Since the system is in an eigenstate of $M$ with eigenvalue $m$, the average will be $m$
+
+\begin{align*}
+\langle M\rangle = \bra{m}M\ket{m} = \bra{m}m\ket{m} = m
+\end{align*}
+
+The variance must then be zero
+
+\begin{align*}
+\left(\Delta M\right)^{2} &= \langle M^{2} \rangle - \langle M\rangle^{2}\\
+&= m^{2} - m^{2} = 0
+\end{align*}
+
 \end{s}
 
 \begin{p}
@@ -199,6 +232,18 @@ Problem 2.59
 \end{p}
 
 \begin{s}
+
+\begin{align*}
+\bra{0}X\ket{0} = \bra{0}\ket{1} = 0
+\end{align*}
+
+\begin{align*}
+\left(\Delta X\right)^{2} &= \langle X^{2} \rangle - \langle X\rangle^{2}\\
+&= \langle X^{2} \rangle \\
+&= \bra{0}X^{2}\ket{0}\\
+&= 1
+\end{align*}
+
 \end{s}
 
 \begin{p}
@@ -206,6 +251,24 @@ Problem 2.60
 \end{p}
 
 \begin{s}
+
+\begin{align*}
+\vec{v}\cdot \sigma =
+\begin{pmatrix}
+v_{z} & v_{x} - iv_{y}\\
+v_{x}+iv_{y} & -v_{z}
+\end{pmatrix}
+\end{align*}
+
+The corresponding characteristic equation is
+
+\begin{align*}
+\lambda^{2} - (v_{z}^{2} + v_{y}^{2} + v_{x}^{2}) = 0
+\end{align*}
+
+If $\vec{v}$ is normalized then $\lambda = \pm 1$.
+
+
 \end{s}
 \begin{p}
 Problem 2.61
