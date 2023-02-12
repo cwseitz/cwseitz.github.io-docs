@@ -220,11 +220,6 @@ The Fisher information matrix when we are dealing with the multivariate normal d
 
 
 
-
-
-
-
-
 \chapter{Statistical mechanics of gene regulation}
 
 \section{Introduction}
@@ -362,6 +357,68 @@ You can use these equations to calculate the gradient of the log-multivariate Ga
 
 
 \chapter{IFN-$\gamma$ induced transcriptional bursts}
+
+The mean of the distribution obeys the following system of ODEs
+
+\begin{align*}
+\dot{x} &= \frac{k_{1} (1-x)}{1+(\frac{y}{K})^{n}} - k_{2}x\\
+\dot{y} &= k_{3} x - k_{4} y
+\end{align*}
+
+which has fixed point at $(x^{*},y^{*})$
+
+\begin{align*}
+\frac{k_{1} (1-x^{*})}{1+(\frac{y^{*}}{K})^{n}} - k_{2}x^{*} = 0\\
+k_{3} x^{*} - k_{4} y^{*} = 0
+\end{align*}
+
+First, we'll solve for x*:
+
+\frac{k_{1} (1-x^{})}{1+(\frac{y^{}}{K})^{n}} - k_{2}x^{*} = 0
+
+We can simplify the denominator of the fraction by substituting y* in terms of x*:
+
+\frac{k_{1} (1-x^{})}{1+(\frac{K}{k_{3} x^{} / k_{4}})^{n}} - k_{2}x^{*} = 0
+
+Next, we'll solve for x* by rearranging the equation:
+
+k_{2}x^{} - \frac{k_{1} (1-x^{})}{1+(\frac{K}{k_{3} x^{*} / k_{4}})^{n}} = 0
+
+We can then simplify the denominator again:
+
+k_{2}x^{} - \frac{k_{1} (1-x^{})}{1+(\frac{Kk_{4}}{k_{3} x^{*}})^{n}} = 0
+
+Finally, we'll solve for x* by multiplying both sides by the denominator:
+
+k_{2}x^{} (1+(\frac{Kk_{4}}{k_{3} x^{}})^{n}) - k_{1} (1-x^{*}) = 0
+
+Expanding the left side, we have:
+
+k_{2}x^{} + k_{2}x^{n}(\frac{Kk_{4}}{k_{3} x^{}})^{n} - k_{1} (1-x^{}) = 0
+
+And rearranging, we have:
+
+x^{n}(\frac{Kk_{4}}{k_{3}})^{n} + (k_{2} - k_{1})x^{} - k_{1} = 0
+
+This is a nonlinear algebraic equation in the form of a polynomial, and it can be solved numerically using root-finding algorithms, such as the Newton-Raphson method.
+
+Next, we'll solve for y*:
+
+k_{3} x^{} - k_{4} y^{} = 0
+
+Solving for y*, we have:
+
+y^{} = \frac{k_{3} x^{}}{k_{4}}
+
+This equation gives us the value of y* in terms of x*. Note that we have found only one fixed point for this system, as finding multiple fixed points would require solving for more than one solution to the polynomial equation for x*.
+
+This solution can be written in LaTeX as follows:
+
+\begin{cases}
+x^{n}(\frac{Kk_{4}}{k_{3}})^{n} + (k_{2} - k_{1})x^{} - k_{1} = 0\
+y^{} = \frac{k_{3} x^{}}{k_{4}}
+\end{cases}
+
 
 
 \begin{appendices}

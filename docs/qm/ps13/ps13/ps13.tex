@@ -38,6 +38,15 @@ Problem 2.48
 \end{p}
 
 \begin{s}
+
+The polar decomposition of a matrix is $A = UJ = KU$ where $U$ is a unitary operator and $J,K$ are positive operators that satisfy $J = \sqrt{A^{\dagger}A}$ and $K = \sqrt{AA^{\dagger}}$. If $P$ is itself a positive matrix we can immediately say that its polar decomposition is $P = IP = PI$. If the matrix to decompose is unitary then of course $UU^{\dagger} = U^{\dagger}U = I$ so its decomposition is itself. If the matrix to decompose is Hermitian, then $H = H^{\dagger}$ and 
+
+\begin{equation*}
+J = K = \sqrt{H^{2}} = \sqrt{\sum_{i}\lambda_{i}^{2}\ket{i}\bra{i}} = \sum_{i}|\lambda_{i}|\ket{i}\bra{i}
+\end{equation*}
+
+and its polar decomposition is therefore $U\sum_{i}|\lambda_{i}|\ket{i}\bra{i}$ or $\sum_{i}|\lambda_{i}|\ket{i}\bra{i}U$.
+
 \end{s}
 
 \begin{p}
@@ -45,6 +54,28 @@ Problem 2.49
 \end{p}
 
 \begin{s}
+
+The polar decomposition is $A = UJ$. The spectral decomposition of $J$ is 
+
+\begin{equation*}
+J = \sqrt{\sum_{i}\lambda_{i}\lambda_{i}^{*}\ket{i}\bra{i}} = \sum_{i}|\lambda_{i}|\ket{i}\bra{i}
+\end{equation*}
+
+For the unitary matrix $U$, we have
+
+\begin{equation*}
+U = \sum_{j}\lambda_{j}\ket{j}\bra{j}
+\end{equation*}
+
+Therefore the product $UJ$ reads
+
+\begin{align*}
+UJ &= \left(\sum_{j}\lambda_{j}\ket{j}\bra{j}\right)\left(\sum_{i}|\lambda_{i}|\ket{i}\bra{i}\right)\\
+&= \sum_{ij} |\lambda_{i}|\lambda_{j}\ket{i}\bra{i}\ket{j}\bra{j}
+\end{align*}
+
+
+
 \end{s}
 
 \begin{p}
@@ -52,6 +83,21 @@ Problem 2.50
 \end{p}
 
 \begin{s}
+
+\begin{align*}
+A = \begin{pmatrix}1&0\\1&1\end{pmatrix}
+\end{align*}
+
+First, consider
+
+\begin{equation*}
+A^{\dagger}A = \begin{pmatrix}2&1\\1&1\end{pmatrix}\;\;\; AA^{\dagger} = \begin{pmatrix}1&1\\1&2\end{pmatrix}
+\end{equation*}
+
+\begin{align*}
+J = \sqrt{A^{\dagger}A} = 
+\end{align*}
+
 \end{s}
 
 \begin{p}
