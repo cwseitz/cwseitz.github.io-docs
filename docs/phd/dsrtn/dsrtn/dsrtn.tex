@@ -358,66 +358,36 @@ You can use these equations to calculate the gradient of the log-multivariate Ga
 
 \chapter{IFN-$\gamma$ induced transcriptional bursts}
 
-The mean of the distribution obeys the following system of ODEs
+We can define the following system of ODEs for a autorepressive gene circuit
+
+\begin{align}
+\frac{\mathrm{d}m}{\mathrm{d}t} &= \frac{\beta_{m}}{1 + (p/k)^n} - \gamma_m m,\\[1em]
+\frac{\mathrm{d}r}{\mathrm{d}t} &= \beta_{r} m - \gamma_r r,\\[1em]
+\frac{\mathrm{d}p}{\mathrm{d}t} &= \beta_{p} r - \gamma_{p} p,
+\end{align}
+
+We can greatly reduce the number of parameters by nondimensionalizing the system. To that end, we define a characteristic time scale $t_{0}$ and characteristic "length" scales for each variable: $m_{0}, r_{0}, p_{0}$. The choice of these characteristic scale will become apparent after writing the nondimensionalized ODEs out for a general case. The derivatives transform as
+
+\begin{equation*}
+\frac{dm}{dt} \rightarrow \frac{m_{0}}{t_{0}}\frac{dm'}{d\tau}, \;\;\; \frac{dr}{dt} \rightarrow \frac{r_{0}}{t_{0}}\frac{dr'}{d\tau},  \;\;\; \frac{dp}{dt} \rightarrow \frac{p_{0}}{t_{0}}\frac{dp'}{d\tau} 
+\end{equation*}
+
+Our general system of nondimensionalized ODEs reads:
+
 
 \begin{align*}
-\dot{x} &= \frac{k_{1} (1-x)}{1+(\frac{y}{K})^{n}} - k_{2}x\\
-\dot{y} &= k_{3} x - k_{4} y
+\frac{\mathrm{d}m'}{\mathrm{d}\tau} &= \frac{t_0\beta_{m}}{m_0(1 + (p_{0}p'/k)^n)} - \gamma_m t_{0}m'\\
+\frac{\mathrm{d}r'}{\mathrm{d}\tau} &= \frac{\beta_{r} t_{0}m_{0} m'}{r_0} - \gamma_r t_{0}r'\\
+\frac{\mathrm{d}p'}{\mathrm{d}\tau} &= \frac{\beta_{p} t_{0}r_{0} r'}{p_{0}} - \gamma_{p} t_{0} p'
 \end{align*}
 
-which has fixed point at $(x^{*},y^{*})$
+Define the characteristic scales as: $t_{0} = 1/\gamma_{m}$, $m_{0}=\gamma_{m}^{2}k/\beta_{r}\beta_{p}$, $r_{0} = \gamma_{m}k/\beta_{p}$, and $p_{0} = k$. Making these substitutions, we have
 
 \begin{align*}
-\frac{k_{1} (1-x^{*})}{1+(\frac{y^{*}}{K})^{n}} - k_{2}x^{*} = 0\\
-k_{3} x^{*} - k_{4} y^{*} = 0
+\frac{\mathrm{d}m'}{\mathrm{d}\tau} &= \frac{\beta}{(1 + (p')^n)} - m'\\
+\frac{\mathrm{d}r'}{\mathrm{d}\tau} &= m' - \frac{\gamma_{r}}{\gamma_{m}}r'\\
+\frac{\mathrm{d}p'}{\mathrm{d}\tau} &= r' - \gamma p'
 \end{align*}
-
-First, we'll solve for x*:
-
-\frac{k_{1} (1-x^{})}{1+(\frac{y^{}}{K})^{n}} - k_{2}x^{*} = 0
-
-We can simplify the denominator of the fraction by substituting y* in terms of x*:
-
-\frac{k_{1} (1-x^{})}{1+(\frac{K}{k_{3} x^{} / k_{4}})^{n}} - k_{2}x^{*} = 0
-
-Next, we'll solve for x* by rearranging the equation:
-
-k_{2}x^{} - \frac{k_{1} (1-x^{})}{1+(\frac{K}{k_{3} x^{*} / k_{4}})^{n}} = 0
-
-We can then simplify the denominator again:
-
-k_{2}x^{} - \frac{k_{1} (1-x^{})}{1+(\frac{Kk_{4}}{k_{3} x^{*}})^{n}} = 0
-
-Finally, we'll solve for x* by multiplying both sides by the denominator:
-
-k_{2}x^{} (1+(\frac{Kk_{4}}{k_{3} x^{}})^{n}) - k_{1} (1-x^{*}) = 0
-
-Expanding the left side, we have:
-
-k_{2}x^{} + k_{2}x^{n}(\frac{Kk_{4}}{k_{3} x^{}})^{n} - k_{1} (1-x^{}) = 0
-
-And rearranging, we have:
-
-x^{n}(\frac{Kk_{4}}{k_{3}})^{n} + (k_{2} - k_{1})x^{} - k_{1} = 0
-
-This is a nonlinear algebraic equation in the form of a polynomial, and it can be solved numerically using root-finding algorithms, such as the Newton-Raphson method.
-
-Next, we'll solve for y*:
-
-k_{3} x^{} - k_{4} y^{} = 0
-
-Solving for y*, we have:
-
-y^{} = \frac{k_{3} x^{}}{k_{4}}
-
-This equation gives us the value of y* in terms of x*. Note that we have found only one fixed point for this system, as finding multiple fixed points would require solving for more than one solution to the polynomial equation for x*.
-
-This solution can be written in LaTeX as follows:
-
-\begin{cases}
-x^{n}(\frac{Kk_{4}}{k_{3}})^{n} + (k_{2} - k_{1})x^{} - k_{1} = 0\
-y^{} = \frac{k_{3} x^{}}{k_{4}}
-\end{cases}
 
 
 
