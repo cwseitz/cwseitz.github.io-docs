@@ -389,6 +389,29 @@ Define the characteristic scales as: $t_{0} = 1/\gamma_{m}$, $m_{0}=\gamma_{m}^{
 \frac{\mathrm{d}p'}{\mathrm{d}\tau} &= r' - \gamma p'
 \end{align*}
 
+\subsection{Telegraph model of gene expression}
+
+We will begin by writing the the system of ODEs describing the dynamics of the first moment
+
+\begin{align}
+\frac{\mathrm{d}m}{\mathrm{d}t} &= \beta_{m}(1-m) - \gamma_m m\\
+\frac{\mathrm{d}r}{\mathrm{d}t} &= \beta_{r} m - \gamma_r r\\
+\end{align}
+
+This system has 4 parameters, making it difficult to directly visualize interesting relationships between parameterization and dynamics. Therefore, we will nondimensionalize this system
+
+\begin{align}
+\frac{\mathrm{d}m'}{\mathrm{d}t} &= \frac{t_0}{m_0}\beta_{m} - \frac{t_0}{m_0}\beta_{m}m_{0}m' - \frac{t_0}{m_0}\gamma_m m_{0}m'\\
+\frac{\mathrm{d}r'}{\mathrm{d}t} &= \frac{t_0}{m_0}\beta_{r} m_{0}m' - \frac{t_0}{m_0}\gamma_r r_{0}r'\\
+\end{align}
+
+Let $t_{0} = 1/\gamma_{m}$, $m_{0} = \beta_{m}/\gamma_{m}$, $r_{0} = \beta_{m}\beta_{r}/\gamma_{m}^{2}$, $\gamma = \gamma_{r}/\gamma_{m}$, $\beta = \beta_{m}/\gamma_{m}$, and we have
+
+\begin{align}
+\frac{\mathrm{d}m'}{\mathrm{d}t} &= 1 - \beta m' - m'\\
+\frac{\mathrm{d}r'}{\mathrm{d}t} &= m' - \gamma r'\\
+\end{align}
+
 
 
 \begin{appendices}
