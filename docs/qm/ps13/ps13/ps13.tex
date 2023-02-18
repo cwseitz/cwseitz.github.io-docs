@@ -299,20 +299,37 @@ Problem 2.60
 \begin{s}
 
 \begin{align*}
-\vec{v}\cdot \sigma =
+\vec{v}\cdot \sigma &=
 \begin{pmatrix}
 v_{z} & v_{x} - iv_{y}\\
 v_{x}+iv_{y} & -v_{z}
-\end{pmatrix}
+\end{pmatrix}\\
+ &= v_{z}\left(\ket{0}\bra{0} - \ket{1}\bra{1}\right) + \left(v_{1}-iv_{2}\right)\ket{0}\bra{1} + \left(v_{1}+iv_{2}\right)\ket{1}\bra{0}
 \end{align*}
 
-The corresponding characteristic equation is
+from the outer product representations of $\sigma_x,\sigma_y,\sigma_z$. The corresponding characteristic equation is
 
 \begin{align*}
 \lambda^{2} - (v_{z}^{2} + v_{y}^{2} + v_{x}^{2}) = 0
 \end{align*}
 
-If $\vec{v}$ is normalized then $\lambda = \pm 1$.
+If $\vec{v}$ is normalized then $\lambda = \pm 1$. We now show that the projectors onto the respective eigenspaces are $P_{\pm} = \left(I\pm \vec{v}\cdot\sigma\right)/2$. Let $\ket{\pm}$ be the eigenvectors of $\vec{v}\cdot\sigma$ with eigenvalues $\pm 1$, respectively.
+
+\begin{align*}
+P_{+} &= \ket{+}\bra{+}\\
+&=\frac{\ket{+}\bra{+} + \ket{-}\bra{-} + \ket{+}\bra{+} - \ket{-}\bra{-}}{2}\\ 
+&= \frac{I+\vec{v}\cdot\sigma}{2}
+\end{align*}
+
+
+since by spectral decomposition we know that  $\vec{v}\cdot\sigma = \ket{+}\bra{+} - \ket{-}\bra{-}$. Of course, we also have that 
+
+\begin{align*}
+P_{-} &= \ket{-}\bra{-}\\
+&=\frac{\ket{+}\bra{+} + \ket{-}\bra{-} - \ket{+}\bra{+} + \ket{-}\bra{-}}{2}\\ 
+&= \frac{I-\vec{v}\cdot\sigma}{2}
+\end{align*}
+
 
 
 \end{s}
@@ -321,6 +338,24 @@ Problem 2.61
 \end{p}
 
 \begin{s}
+
+Let $\ket{0}$ and $\ket{1}$ be the eigenvectors of $\sigma_{z}$.
+
+\begin{align*}
+p(+) &= \bra{0} P_{+}\ket{0}\\
+&= \bra{0} \frac{I + \vec{v}\cdot\sigma}{2}\ket{0}\\
+&= \frac{1}{2}\left(1 + \bra{0}\left(v_{3}\left(\ket{0}\bra{0} - \ket{1}\bra{1}\right) + \left(v_{1}-iv_{2}\right)\ket{0}\bra{1} + \left(v_{1}+iv_{2}\right)\ket{1}\bra{0}\right)\ket{0}\right)\\
+&= \frac{1}{2}\left(1 + v_{3}\right)
+\end{align*}
+
+The state of the system must be then in the eigenvector $\ket{+}$ of $\vec{v}\cdot\sigma$ with eigenvalue $+1$. This can be conveniently obtained by applying the measurement operator $P_{+}$, which was obtained in the last problem: 
+
+
+\begin{align*} 
+P_{+}\ket{0} &= \frac{I+\vec{v}\cdot\sigma}{2}\ket{0}\\
+&= \frac{1}{2}\left(\ket{0} + (v_{3} + v_{1} + iv_{2}\ket{1}\right)
+\end{align*}
+
 \end{s}
 
 
