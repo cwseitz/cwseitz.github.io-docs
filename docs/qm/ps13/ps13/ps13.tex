@@ -342,18 +342,25 @@ Problem 2.61
 Let $\ket{0}$ and $\ket{1}$ be the eigenvectors of $\sigma_{z}$.
 
 \begin{align*}
-p(+) &= \bra{0} P_{+}\ket{0}\\
+p(+) &= |c_{+}|^{2}\\
+&= \bra{0} P_{+}\ket{0}\\
 &= \bra{0} \frac{I + \vec{v}\cdot\sigma}{2}\ket{0}\\
 &= \frac{1}{2}\left(1 + \bra{0}\left(v_{3}\left(\ket{0}\bra{0} - \ket{1}\bra{1}\right) + \left(v_{1}-iv_{2}\right)\ket{0}\bra{1} + \left(v_{1}+iv_{2}\right)\ket{1}\bra{0}\right)\ket{0}\right)\\
 &= \frac{1}{2}\left(1 + v_{3}\right)
 \end{align*}
 
-The state of the system must be then in the eigenvector $\ket{+}$ of $\vec{v}\cdot\sigma$ with eigenvalue $+1$. This can be conveniently obtained by applying the measurement operator $P_{+}$, which was obtained in the last problem: 
+The state of the system must be then in the eigenvector $\ket{+}$ of $\vec{v}\cdot\sigma$ with eigenvalue $+1$. This can be conveniently obtained by applying the measurement operator $P_{+}$, which was obtained in the last problem. Consider,
 
 
 \begin{align*} 
 P_{+}\ket{0} &= \frac{I+\vec{v}\cdot\sigma}{2}\ket{0}\\
-&= \frac{1}{2}\left(\ket{0} + (v_{3} + v_{1} + iv_{2}\ket{1}\right)
+&= \frac{1}{2}\left((1+v_{3})\ket{0} + (v_{1} + iv_{2})\ket{1}\right)
+\end{align*}
+
+Then applying the appropriate normalization, we get
+
+\begin{align*} 
+\ket{+} =  \frac{1}{2\sqrt{(1+v_{3})/2}}\left((1+v_{3})\ket{0} + (v_{1} + iv_{2})\ket{1}\right)
 \end{align*}
 
 \end{s}
