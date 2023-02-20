@@ -47,6 +47,75 @@ J = K = \sqrt{H^{2}} = \sqrt{\sum_{i}\lambda_{i}^{2}\ket{i}\bra{i}} = \sum_{i}|\
 
 and its polar decomposition is therefore $U\sum_{i}|\lambda_{i}|\ket{i}\bra{i}$ or $\sum_{i}|\lambda_{i}|\ket{i}\bra{i}U$.
 
+\vspace{0.2in}
+
+I will give some examples which demonstrate these properties, but are not very computationally intensive. The examples for positive matrices are the 2 x 2 matrix
+
+\begin{align*}
+A = \begin{pmatrix}3& 1\\ 1& 2\end{pmatrix}\;\;\; B = A = \begin{pmatrix}5&1&1&1\end{pmatrix}
+\end{align*}
+
+
+An example of a 2 x 2 Hermitian matrix is the Hamiltonian
+
+\begin{align*}
+H = -\gamma\sigma_{z}B_{0}
+\end{align*}
+
+The matrix $J$ is
+
+\begin{align*}
+J = K = \gamma B_{0} \left(\ket{+}\bra{+} + \ket{-}\bra{-}\right) = \gamma B_{0}I
+\end{align*}
+
+Clearly for both right and left polar decompositions we have $U = \sigma_{z}$. A 2 x 2 unitary example can be seen from the time-evolution corresponding to this Hamiltonian 
+
+
+\begin{align*}
+U &= e^{-iHt} \\
+&= e^{i\omega t}\ket{+}\bra{+} + e^{-i\omega t}\ket{-}\bra{-}\\
+&= \begin{pmatrix}e^{i\omega t} & 0 \\ 0 & e^{-i\omega t}\end{pmatrix}
+\end{align*}
+
+where $\omega = -\gamma B_{0}$. Obviously $J = \sqrt{U^{\dagger}U} = I$.  A 4 x 4 example is:
+
+\begin{align*}
+H = \gamma \left(\sigma_{1z}\otimes\sigma_{2z}\right)
+\end{align*}
+
+Written out explicitly, it is
+
+\begin{align*}
+H = 
+\gamma \begin{pmatrix}
+1 & 0 & 0 & 0\\
+0 & -1 & 0 & 0\\
+0 & 0 & -1 & 0\\
+0 & 0 & 0 & 1
+\end{pmatrix}
+\end{align*}
+
+The matrix $J$ is
+
+\begin{align*}
+J = K = \gamma (\ket{++}\bra{++} + \ket{+-}\bra{+-} \\
++ \ket{-+}\bra{-+} + \ket{--}\bra{--}) = \gamma I
+\end{align*}
+
+and in this case we have that $U = \sigma_{1z}\otimes\sigma_{2z}$, which can by easily checked to be unitary. We can again give the unitary example by considering time evolution
+
+\begin{align*}
+U &= e^{-iHt}\\
+ &= \begin{pmatrix}
+e^{i\gamma t} & 0 & 0 & 0\\
+0 & e^{-i\gamma t} & 0 & 0\\
+0 & 0 & e^{-i\gamma t} & 0\\
+0 & 0 & 0 & e^{i\gamma t}
+\end{pmatrix}
+\end{align*}
+
+and again we can see that $\sqrt{U^{\dagger}U} = I$.
+
 \end{s}
 
 \begin{p}
@@ -94,9 +163,42 @@ First, consider
 A^{\dagger}A = \begin{pmatrix}2&1\\1&1\end{pmatrix}\;\;\; AA^{\dagger} = \begin{pmatrix}1&1\\1&2\end{pmatrix}
 \end{equation*}
 
+Let
+
 \begin{align*}
-J = \sqrt{A^{\dagger}A} = 
+J &= \sqrt{j_{1}}\ket{j_{1}}\bra{j_{1}} + \sqrt{j_{2}}\ket{j_{2}}\bra{j_{2}}\\
 \end{align*}
+
+where, for example, $\ket{j_{1}}$ is the first eigenvector of $A^{\dagger}A$. According to Mathematica, $\ket{j_{1}} = \frac{1+\sqrt{5}}{2}\ket{0} + \ket{1}$, and $\ket{j_{2}} = \frac{1-\sqrt{5}}{2}\ket{0} + \ket{1}$, in the standard basis. The eigenvalues are $j_{1} = \frac{3+\sqrt{5}}{2}$ and $j_{2} = \frac{3-\sqrt{5}}{2}$. We can then write normalized eigenvectors as
+
+\begin{align*}
+\ket{j_{1}} = \frac{1}{\sqrt{1 + (1+\sqrt{5})^{2}}}\left((1+\sqrt{5})\ket{0} + 2\ket{1}\right)
+\end{align*}
+
+\begin{align*}
+\ket{j_{2}} = \frac{1}{\sqrt{1 + (1-\sqrt{5})^{2}}}\left((1-\sqrt{5})\ket{0} + 2\ket{1}\right)
+\end{align*}
+
+Putting it all together we find that 
+
+\begin{align*}
+J = \frac{1}{\sqrt{5}}\begin{pmatrix}3&1\\1&2\end{pmatrix}
+\end{align*}
+
+The matrix $U$ is then found by solving $U = AJ^{-1}$. Mathematica says: 
+
+\begin{align*}
+U = \frac{1}{\sqrt{5}}\begin{pmatrix}2&-1\\1&2\end{pmatrix}
+\end{align*}
+
+The matrix $K$ is found in a similar fashion: 
+
+\begin{align*}
+K = AU^{-1} = \frac{1}{\sqrt{5}}\begin{pmatrix}2&1\\1&3\end{pmatrix}
+\end{align*}
+
+
+
 
 \end{s}
 
