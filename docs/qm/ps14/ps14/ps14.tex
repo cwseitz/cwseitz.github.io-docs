@@ -1,0 +1,113 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath} % AMS Math Package
+\usepackage{bm}
+\usepackage{amsthm} % Theorem Formatting
+\usepackage{amssymb}    % Math symbols such as \mathbb
+\usepackage{graphicx} % Allows for eps images
+\usepackage[dvips,letterpaper,margin=1in,bottom=0.7in]{geometry}
+\usepackage{tensor}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{physics}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+
+\newcounter{mathematicapage}
+
+\newtheorem{p}{Problem}
+\usepackage{cancel}
+\newtheorem*{lem}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{dfn}{Definition}
+ \newenvironment{s}{%\small%
+        \begin{trivlist} \item \textbf{Solution}. }{%
+            \hspace*{\fill} $\blacksquare$\end{trivlist}}%
+
+
+\begin{document}
+
+ {\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  Homework 4}         }\\[2\baselineskip] % Title
+{ {\bf \fontfamily{cmr}\selectfont Quantum Mechanics}\\ {\textit{\fontfamily{cmr}\selectfont     \today}}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    {\large \textsc{C Seitz}
+\\[1.4\baselineskip] 
+
+
+\begin{p}
+Problem 2.65
+\end{p}
+
+\begin{s}
+Let us call these states $\ket{\alpha}$ and $\ket{\beta}$:
+
+
+\begin{align*}
+\ket{\alpha} &= \frac{\ket{0} + \ket{1}}{\sqrt{2}}\\
+\ket{\beta} &= \frac{\ket{0} - \ket{1}}{\sqrt{2}}
+\end{align*}
+
+
+If we choose a non-orthogonal basis, such as
+
+\begin{align*}
+\ket{e_{1}} = \ket{0}\;\; \ket{e_{2}} = \frac{\ket{0} + \ket{1}}{\sqrt{2}}
+\end{align*}
+
+These states have the following representation in this new basis
+
+\begin{align*}
+\ket{\alpha'} &= \left(\ket{e_{1}}\bra{e_{1}} + \ket{e_{2}}\bra{e_{2}}\right)\ket{\alpha}\\
+&= \frac{1}{\sqrt{2}}\ket{e_{1}} + \ket{e_{2}}
+\end{align*}
+
+\begin{align*}
+\ket{\beta'} &= \left(\ket{e_{1}}\bra{e_{1}} + \ket{e_{2}}\bra{e_{2}}\right)\ket{\beta}\\
+&= \frac{1}{\sqrt{2}}\ket{e_{1}}
+\end{align*}
+
+The norm is not preserved, because the change of basis matrix $\ket{e_{1}}\bra{e_{1}} + \ket{e_{2}}\bra{e_{2}}$ was not unitary. But it is clear that these states differ neither by a global or relative phase.
+
+\end{s}
+
+\begin{p}
+Problem 2.66
+\end{p}
+
+\begin{s}
+
+\begin{align*}
+\bra{\alpha}X_{1}Z_{2}\ket{\alpha} &= \frac{1}{2}(\bra{00}+\bra{11}) X_{1}Z_{2} (\ket{00} + \ket{11})\\
+&= \frac{1}{2}(\bra{00}+\bra{11})(\ket{10} - \ket{01}) = 0
+\end{align*}
+
+\end{s}
+
+\begin{p}
+Problem 2.71
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+Problem 2.72
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+Problem 2.75
+\end{p}
+
+\begin{s}
+\end{s}
+
+\begin{p}
+Problem 2.79
+\end{p}
+
+\begin{s}
+\end{s}
+
+\end{document}
