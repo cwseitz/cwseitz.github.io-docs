@@ -87,6 +87,17 @@ Problem 2.71
 \end{p}
 
 \begin{s}
+
+\begin{align*}
+\mathrm{Tr} (\rho^{2}) &= \sum_{k}\bra{k}\left(\sum_{i}p_{i}\ket{\alpha_{i}}\bra{\alpha_{i}}\right)\left(\sum_{j}p_{j}\ket{\alpha_{j}}\bra{\alpha_{j}}\right)\ket{k}\\
+&= \left(\sum_{ijk}p_{i}p_{j}\bra{k}\ket{\alpha_{i}}\bra{\alpha_{i}}\ket{\alpha_{j}}\bra{\alpha_{j}}\ket{k}\right)\\
+&= \sum_{ij} p_{i}p_{j} |\bra{\alpha_{i}}\ket{\alpha_{j}}|^{2} \\
+&= \sum_{i}p_{i}^{2} \leq 1
+\end{align*}
+
+
+if $\ket{\alpha_{i}}$ and $\ket{\alpha_{j}}$ are orthonormal.
+
 \end{s}
 
 \begin{p}
@@ -94,6 +105,16 @@ Problem 2.72
 \end{p}
 
 \begin{s}
+
+The Pauli matrices form a valid basis for 2x2 matrices. The Bloch vector representation for $\rho = I/2$ is $\vec{r} = 0$. 
+
+\begin{align*}
+\mathrm{Tr}(\rho^{2}) &= \mathrm{Tr}\left(\frac{I + 2(\vec{r}\cdot\sigma) + (\vec{r}\cdot\sigma)^{2}}{4}\right)\\
+&= \frac{1}{2} + \frac{||\vec{r}||^{2}}{2} = 1
+\end{align*}
+
+which occurs when $||\vec{r}||^{2} = 1$. This is just algebra once we notice that the trace of $\vec{r}\cdot\sigma$ is zero and the trace of $(\vec{r}\cdot\sigma)^{2} = 2(r_{x}^{2} + r_{y}^{2} + r_{z}^{2})$ (the cross terms cancel since the anticommutator $\{\sigma_{i},\sigma{j}\} = \delta_{ij}$)
+
 \end{s}
 
 \begin{p}
