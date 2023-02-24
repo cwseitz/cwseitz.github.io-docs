@@ -13,7 +13,7 @@
 \usepackage{bm}
 
 %% Use these commands to set biographic information for the title page:
-\title{The statistical mechanics of transcriptional control}
+\title{Coupling transcriptional dynamics and DNA structure with single molecule localization microscopy}
 \author{Clayton W. Seitz}
 \department{Department of Physics}
 \division{Physical Sciences}
@@ -217,25 +217,13 @@ If the pixels are just Gaussian variables, the joint distribution $\mathcal{L}$ 
 
 The Fisher information matrix when we are dealing with the multivariate normal distribution with parameters $(\mu,\Sigma)$ which are themselves functions of another vector of parameters $\bm{\theta}$ has been well-studied (Malago and Pestone; 2015)
 
+\chapter{Inferring DNA structure from super-resolution microscopy images}
 
+\chapter{Discrete modeling of transcriptional kinetics}
 
+\section{The ergodic theorem}
 
-\chapter{Statistical mechanics of gene regulation}
-
-\section{Introduction}
-
-\section{Transcriptional bursts and chromatin architecture}
-
-\section{Transcriptional condensates: a phase separation model for transcriptional control}
-
-Heavily influenced by Young's group at MIT
-
-
-\section{Brief introduction to polymer dynamics}
-
-\section{Statistical mechanics of transcriptional condensates}
-
-\section{The chemical master equation and finite state projection}
+\section{The chemical master equation}
 
 The central assumption underlying a Markov process, is the memoryless property
 
@@ -353,10 +341,7 @@ $\frac{\partial}{\partial \Sigma} \log p(x|\mu,\Sigma) = -\frac{1}{2}\Sigma^{-1}
 
 You can use these equations to calculate the gradient of the log-multivariate Gaussian distribution with respect to the mean and covariance matrix.
 
-\subsection{Sequential tempered Markov Chain Monte Carlo}
-
-
-\chapter{IFN-$\gamma$ induced transcriptional bursts}
+\section{IFN-$\gamma$ induced transcriptional bursts}
 
 We can define the following system of ODEs for a autorepressive gene circuit
 
@@ -411,7 +396,6 @@ Let $t_{0} = 1/\gamma_{m}$, $m_{0} = \beta_{m}/\gamma_{m}$, $r_{0} = \beta_{m}\b
 \frac{\mathrm{d}m'}{\mathrm{d}t} &= 1 - \beta m' - m'\\
 \frac{\mathrm{d}r'}{\mathrm{d}t} &= m' - \gamma r'\\
 \end{align}
-
 
 
 \begin{appendices}
