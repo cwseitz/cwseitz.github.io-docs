@@ -149,14 +149,14 @@ Assuming each pixel is an independent random variable, then the likelihood of th
 \end{align*}
 
 
-We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space. To be clear, the score is a function of the \emph{data}, not the parameters. It is a measure of sensitivity of the likelihood to changes in the parameters. Of course, the Fisher information matrix also depends on the parameterization chosen. The effect of a change of variables on the Fisher Information can be seen by inspecting how the Hessian transforms under a nonlinear coordinate transformation. Looking at (1.4), the likelihood is a composite function so we need the chain-rule for Hessian matrices. In general, a matrix element of the Hessian for a composite function $\ell = f(u(\theta))$ is given by Faà di Bruno's formula for higher-order derivatives 
+We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space. To be clear, the score is a function of the \emph{data}, not the parameters. It is a measure of sensitivity of the likelihood to changes in the parameters. Of course, the Fisher information matrix also depends on the parameterization chosen. Looking at (1.4), the likelihood is a hierarchical function that maps a vector space $\Theta$ to a vector space $\Lambda$ to a scalar value. Formally, we define $T: \Theta \rightarrow \Lambda$ and $W: \Lambda \rightarrow \mathbb{R}$. The parameter vector $(x_{0},y_{0},\sigma)\in \Theta$, the Poisson rate vector $\bm{\mu} \in \Lambda$ and $\mathcal{L} \in \mathbb{R}$. To get the Hessian, we need the chain-rule for Hessian matrices, which is given by
 
 \begin{align*}
 \frac{\partial^2 \ell}{\partial \theta_i \partial \theta_j} &= \sum_m \left(\frac{\partial \ell}{\partial \mu_m}\frac{\partial^2 \mu_m}{\partial \theta_i \partial \theta_j}\right) + \sum_{m,n} \left(\frac{\partial^2 \ell}{\partial \mu_m \partial \mu_n}\frac{\partial \mu_m}{\partial \theta_i}\frac{\partial \mu_n}{\partial \theta_j}\right)\\
 &= \sum_m \left(\frac{\partial \ell}{\partial \mu_m}\frac{\partial^2 \mu_m}{\partial \theta_i \partial \theta_j}\right) + \sum_{m} \left(\frac{\partial^2 \ell}{\partial \mu_m^{2}}\frac{\partial \mu_m}{\partial \theta_i}\frac{\partial \mu_m}{\partial \theta_j}\right)
 \end{align*}
 
-due to the independence of each random variable.
+Given the functional form of $\mathcal{L}$, evaulating these 5 derivatives will give an analytical expression for the Hessian. Let's first consider the case where the likelihood is Poisson.
 
 \subsection{Fisher information for Poisson random variables}
 
@@ -291,57 +291,9 @@ P(\bm{\omega}, t) = \exp(\mathcal{J}(\bm{\omega}))
 
 This matrix exponential is intractable for large $|\Omega|$. However, in the Finite State Projection algorithm, it is possible to truncate the state space $\Omega \rightarrow \tilde{\Omega}$ and obtain good estimates $\tilde{P}(\bm{\omega}, t)$ with some certificate of accuracy.
 
-\subsection{Variational Bayes}
 
-Variational inference attempts to approximate the true posterior distribution $p(\theta|x)$ with a variational distribution $q(\theta)$, which we assume to be Gaussian. We try to minimize the KL-divergence between the variational distribution and the true posterior:
 
-\begin{align*}
-D_{\mathrm{KL}}(q(\theta)||p(\theta|x)) &= \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)}{p(\theta|x)}\right)\\
-&=  \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)p(x)}{p(\theta,x)}\right)\\
-&=  \log p(x) + \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)}{p(x|\theta)p(\theta)}\right)\\
-&= \log p(x) + \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)\\
-&= \log p(x) + H(q) -\underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log p(x|\theta) + \log p(\theta) \right)
-\end{align*}
-
-Clearly the KL-divergence is minimized by minimizing this expectation. It is common to define the evdience lower bound (ELBO).
-
-\begin{align*}
-\mathcal{L}(x,\theta) = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
-\end{align*}
-
-It is name such because
-
-\begin{equation*}
-\log p(x) = D_{\mathrm{KL}}(q(\theta)||p(\theta|x)) + \mathcal{L}(x,\theta) \geq \mathcal{L}(x,\theta)
-\end{equation*}
-
-The ELBO can be minimized when the variational distribution is easy to sample from, for example a multivariate normal distribution and when the likelihood is tractable. The gradients of the ELBO
-
-\begin{align*}
-\nabla_{\Phi}\mathcal{L}(x,\theta) = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
-\end{align*}
-
-multivariate Gaussian distribution:
-
-$p(x|\mu,\Sigma) = \frac{1}{(2\pi)^{k/2}|\Sigma|^{1/2}}\exp\left(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)\right)$
-
-Where:
-
-$x$ is a k-dimensional random variable
-$\mu$ is the mean vector
-$\Sigma$ is the covariance matrix
-$k$ is the dimension of $x$
-And the gradient with respect to mean:
-
-$\frac{\partial}{\partial \mu} \log p(x|\mu,\Sigma) = -\Sigma^{-1}(x-\mu)$
-
-And the gradient with respect to covariance matrix:
-
-$\frac{\partial}{\partial \Sigma} \log p(x|\mu,\Sigma) = -\frac{1}{2}\Sigma^{-1}+\frac{1}{2}\Sigma^{-1}(x-\mu)(x-\mu)^T\Sigma^{-1}$
-
-You can use these equations to calculate the gradient of the log-multivariate Gaussian distribution with respect to the mean and covariance matrix.
-
-\section{IFN-$\gamma$ induced transcriptional bursts}
+\section{ODE model for the ensemble average}
 
 We can define the following system of ODEs for a autorepressive gene circuit
 
@@ -400,6 +352,56 @@ Let $t_{0} = 1/\gamma_{m}$, $m_{0} = \beta_{m}/\gamma_{m}$, $r_{0} = \beta_{m}\b
 
 \begin{appendices}
 \chapter{Derivation of the Fokker Planck Equation}
+
+\subsection{Variational Bayes}
+
+Variational inference attempts to approximate the true posterior distribution $p(\theta|x)$ with a variational distribution $q(\theta)$, which we assume to be Gaussian. We try to minimize the KL-divergence between the variational distribution and the true posterior:
+
+\begin{align*}
+D_{\mathrm{KL}}(q(\theta)||p(\theta|x)) &= \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)}{p(\theta|x)}\right)\\
+&=  \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)p(x)}{p(\theta,x)}\right)\\
+&=  \log p(x) + \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)}{p(x|\theta)p(\theta)}\right)\\
+&= \log p(x) + \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)\\
+&= \log p(x) + H(q) -\underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log p(x|\theta) + \log p(\theta) \right)
+\end{align*}
+
+Clearly the KL-divergence is minimized by minimizing this expectation. It is common to define the evdience lower bound (ELBO).
+
+\begin{align*}
+\mathcal{L}(x,\theta) = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
+\end{align*}
+
+It is name such because
+
+\begin{equation*}
+\log p(x) = D_{\mathrm{KL}}(q(\theta)||p(\theta|x)) + \mathcal{L}(x,\theta) \geq \mathcal{L}(x,\theta)
+\end{equation*}
+
+The ELBO can be minimized when the variational distribution is easy to sample from, for example a multivariate normal distribution and when the likelihood is tractable. The gradients of the ELBO
+
+\begin{align*}
+\nabla_{\Phi}\mathcal{L}(x,\theta) = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
+\end{align*}
+
+multivariate Gaussian distribution:
+
+$p(x|\mu,\Sigma) = \frac{1}{(2\pi)^{k/2}|\Sigma|^{1/2}}\exp\left(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)\right)$
+
+Where:
+
+$x$ is a k-dimensional random variable
+$\mu$ is the mean vector
+$\Sigma$ is the covariance matrix
+$k$ is the dimension of $x$
+And the gradient with respect to mean:
+
+$\frac{\partial}{\partial \mu} \log p(x|\mu,\Sigma) = -\Sigma^{-1}(x-\mu)$
+
+And the gradient with respect to covariance matrix:
+
+$\frac{\partial}{\partial \Sigma} \log p(x|\mu,\Sigma) = -\frac{1}{2}\Sigma^{-1}+\frac{1}{2}\Sigma^{-1}(x-\mu)(x-\mu)^T\Sigma^{-1}$
+
+You can use these equations to calculate the gradient of the log-multivariate Gaussian distribution with respect to the mean and covariance matrix.
 
 \subsection{Kramers-Moyal Expansion}
 
