@@ -149,14 +149,20 @@ Assuming each pixel is an independent random variable, then the likelihood of th
 \end{align*}
 
 
-We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space. To be clear, the score is a function of the \emph{data}, not the parameters. It is a measure of sensitivity of the likelihood to changes in the parameters. Of course, the Fisher information matrix also depends on the parameterization chosen. Looking at (1.4), the likelihood is a hierarchical function that maps a vector space $\Theta$ to a vector space $\Lambda$ to a scalar value. Formally, we define $T: \Theta \rightarrow \Lambda$ and $W: \Lambda \rightarrow \mathbb{R}$. The parameter vector $(x_{0},y_{0},\sigma)\in \Theta$, the Poisson rate vector $\bm{\mu} \in \Lambda$ and $\mathcal{L} \in \mathbb{R}$. To get the Hessian, we need the chain-rule for Hessian matrices, which is given by
+We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space. To be clear, the score is a function of the \emph{data}, not the parameters. It is a measure of sensitivity of the likelihood to changes in the parameters. Of course, the Fisher information matrix also depends on the parameterization chosen. Looking at (1.4), the likelihood is a hierarchical function that maps a vector space $\Theta$ to a vector space $\Lambda$ to a scalar value. Formally, we define $T: \Theta \rightarrow \Lambda$ and $W: \Lambda \rightarrow \mathbb{R}$. The parameter vector $(x_{0},y_{0},\sigma)\in \Theta$, the Poisson rate vector $\bm{\lambda} \in \Lambda$ and $\mathcal{L} \in \mathbb{R}$. To get the Hessian, we need the chain-rule for Hessian matrices.
+
 
 \begin{align*}
-\frac{\partial^2 \ell}{\partial \theta_i \partial \theta_j} &= \sum_m \left(\frac{\partial \ell}{\partial \mu_m}\frac{\partial^2 \mu_m}{\partial \theta_i \partial \theta_j}\right) + \sum_{m,n} \left(\frac{\partial^2 \ell}{\partial \mu_m \partial \mu_n}\frac{\partial \mu_m}{\partial \theta_i}\frac{\partial \mu_n}{\partial \theta_j}\right)\\
-&= \sum_m \left(\frac{\partial \ell}{\partial \mu_m}\frac{\partial^2 \mu_m}{\partial \theta_i \partial \theta_j}\right) + \sum_{m} \left(\frac{\partial^2 \ell}{\partial \mu_m^{2}}\frac{\partial \mu_m}{\partial \theta_i}\frac{\partial \mu_m}{\partial \theta_j}\right)
+\mathbf{H}_{(L,\theta)} = \mathbf{J}_{(\lambda,\theta)}^{T} \mathbf{H}_{(L,\lambda)} \mathbf{J}_{(\lambda,\theta)} + (J_{(L,\lambda)}\otimes I_{n})\mathbf{H}_{(\lambda,\theta)}
 \end{align*}
 
-Given the functional form of $\mathcal{L}$, evaulating these 5 derivatives will give an analytical expression for the Hessian. Let's first consider the case where the likelihood is Poisson.
+In the second term of the equation, we have a Kronecker product between the Jacobian matrix of the likelihood with respect to the parameters of the hierarchical model ($J_{(L,\lambda)}$) and the $n\times n$ identity matrix ($I_n$), denoted as $J_{(L,\lambda)}\otimes I_n$. This Kronecker product gives a diagonal matrix where the elements along the diagonal are the elements of the vector $J_{(L,\lambda)}$. This provides a concise way of summarizing the operation:
+
+\begin{align*}
+((J_{(L,\lambda)}\otimes I_{n})\mathbf{H}_{(\lambda,\theta)})_{ij} = \sum_{k}\mathbf{J}_{(L,\lambda)}^{ij}\mathbf{H}_{(\lambda,\theta)}^{ijk}
+\end{align*}
+
+Note that we sum over the last index to get a 3 x 3 matrix, which is not directly obvious in the compact notation.
 
 \subsection{Fisher information for Poisson random variables}
 
