@@ -122,6 +122,26 @@ Problem 2.75
 \end{p}
 
 \begin{s}
+
+The bell states are
+
+\begin{align*}
+\ket{\phi^{+}} &= \frac{1}{\sqrt{2}}\left(\ket{00} + \ket{11}\right)\\
+\ket{\phi^{-}} &= \frac{1}{\sqrt{2}}\left(\ket{00} - \ket{11}\right)\\
+\ket{\psi^{+}} &= \frac{1}{\sqrt{2}}\left(\ket{01} + \ket{10}\right)\\
+\ket{\psi^{-}} &= \frac{1}{\sqrt{2}}\left(\ket{01} - \ket{10}\right)
+\end{align*}
+
+For each state, we can trace out either the first or second qubit. 
+
+\begin{align*}
+\mathrm{tr}_{1}(\ket{\phi^{+}}\bra{\phi^{+}}) &= \frac{\mathrm{tr}_{1}\ket{00}\bra{00} + \mathrm{tr}_{1}\ket{00}\bra{11} + \mathrm{tr}_{1}\ket{11}\bra{00} + \mathrm{tr}_{1}\ket{11}\bra{11}}{2}\\
+&= \frac{\bra{0}\ket{0}\ket{0}\bra{0} + \bra{0}\ket{1}\ket{0}\bra{1} + \bra{1}\ket{0}\ket{1}\bra{0} + \bra{1}\ket{1}\ket{1}\bra{1}}{2}\\
+&= \frac{\ket{0}\bra{0} + \ket{1}\bra{1}}{2}
+\end{align*}
+
+In fact we get this same result when we trace out either qubit for any of the Bell states. Applying either partial trace to the cross terms always gives zero. 
+
 \end{s}
 
 \begin{p}
@@ -129,6 +149,66 @@ Problem 2.79
 \end{p}
 
 \begin{s}
+
+For $\ket{\psi} = \frac{\ket{00} + \ket{11}}{\sqrt{2}}$, we have
+
+\begin{align*}
+\ket{\psi} = \sum_{jk} a_{jk}\ket{j}\ket{k}\;\; a = \frac{1}{\sqrt{2}}\begin{pmatrix}1 & 0\\ 0 & 1\end{pmatrix}
+\end{align*}
+
+The matrix $a$ is already diagonal, so the unitary matrices in the SVD will be identity matrices. Therefore, 
+
+\begin{align*}
+\ket{i_{A}} = \ket{0}_{A}, \ket{1}_{A} \;\;\; \ket{i_{B}} = \ket{0}_{B}, \ket{1}_{B} \;\;\; \lambda_{i} = \frac{1}{\sqrt{2}}
+\end{align*}
+
+
+\begin{align*}
+\ket{\psi} = \frac{1}{\sqrt{2}}\left(\ket{0}_{A}\ket{0}_{B} + \ket{1}_{A}\ket{1}_{B}\right)
+\end{align*}
+
+For $\ket{\psi} = \frac{\ket{00} + \ket{01} + \ket{10} + \ket{11}}{2}$, we have the SVD
+
+\begin{align*}
+a = \frac{1}{2}\begin{pmatrix}1 & 1\\ 1& 1\end{pmatrix} = \left(
+\begin{array}{cc}
+ -\frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} \\
+ -\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\
+\end{array}
+\right)\left(
+\begin{array}{cc}
+ 1 & 0 \\
+ 0 & 0 \\
+\end{array}
+\right)
+\left(
+\begin{array}{cc}
+ -\frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} \\
+ -\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\
+\end{array}
+\right)
+\end{align*}
+
+\begin{align*}
+\ket{i_{A}} = -\frac{1}{\sqrt{2}}(\ket{0}+\ket{1}), \frac{1}{\sqrt{2}}(\ket{1} - \ket{0})
+\end{align*}
+
+\begin{align*}
+\ket{i_{B}} = \frac{1}{\sqrt{2}}(\ket{1}-\ket{0}), \frac{1}{\sqrt{2}}(\ket{1} - \ket{0})
+\end{align*}
+
+
+\begin{align*}
+\ket{\psi} = -\frac{1}{2}\left(\ket{0} + \ket{1}\right)\left(\ket{0} + \ket{1}\right)
+\end{align*}
+
+
+For $\ket{\psi} = \frac{\ket{00} + \ket{01} + \ket{10}}{\sqrt{3}}$, we have the SVD
+
+\begin{align*}
+a = \frac{1}{\sqrt{3}}\begin{pmatrix}1 & 1 \\ 1 & 0\end{pmatrix}
+\end{align*}
+
 \end{s}
 
 \end{document}
