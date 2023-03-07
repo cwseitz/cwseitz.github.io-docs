@@ -81,7 +81,7 @@ which is the desired result.
 \end{s}
 
 \begin{p}
-Problem 4.17
+Problem 4.16
 \end{p}
 
 \begin{s}
@@ -110,6 +110,62 @@ Problem 4.17
 \begin{s}
 
 \end{s}
+
+\begin{p}
+Problem 4.18
+\end{p}
+
+\begin{s}
+The controlled-Z gate acts in the following way on the basis kets
+
+\begin{align*}
+CZ\ket{00} &= \ket{00}\\
+CZ\ket{01} &= \ket{01}\\
+CZ\ket{10} &= \ket{10}\\
+CZ\ket{11} &= -\ket{11}
+\end{align*}
+
+For $\ket{01}$ and $\ket{10}$, the result is the same, so the controlled-Z operator shown is the same at least with respect to those states. Then we see that the result on $\ket{11}$ is just a global phase, so we can safely conclude the same operator works, regardless of which qubit is the control. 
+
+\end{s}
+
+
+\begin{p}
+Problem 4.19
+\end{p}
+
+\begin{s}
+
+The density matrix is
+
+\begin{equation*}
+\rho = \sum_{i}p_{i}\ket{\psi_{i}}\bra{\psi_{i}}
+\end{equation*}
+
+We can see how the gate transforms the density matrix by just considering how it acts on the most general state $\ket{\psi_{i}} = \alpha_{i}\ket{00} + \beta_{i}\ket{01} + \gamma_{i}\ket{10} + \delta_{i}\ket{11}$.
+
+\begin{equation*}
+\mathrm{CNOT} = \ket{00}\bra{00} + \ket{01}\bra{01} + \ket{11}\bra{10} + \ket{10}\bra{11}
+\end{equation*}
+
+It is straightforward to see that
+
+\begin{align*}
+\mathrm{CNOT}\ket{\psi_{i}}\bra{\psi_{i}} &= \left(\alpha_{i}\ket{00} + \beta_{i}\ket{01} + \gamma_{i}\ket{11} + \delta_{i}\ket{10}\right)\\
+&* \left(\alpha_{i}^{*}\bra{00} + \beta_{i}^{*}\bra{01} + \gamma_{i}^{*}\bra{10} + \delta_{i}^{*}\bra{11}\right)\\
+&=
+\begin{pmatrix}
+|\alpha_{i}|^{2} & \alpha_{i}\beta_{i}^{*} & \alpha_{i}\gamma_{i}^{*} & \alpha_{i}\delta_{i}^{*} \\
+\beta_{i}\alpha_{i}^{*} & |\beta_{i}|^{2} & \beta_{i}\gamma_{i}^{*} & \beta_{i}\delta_{i}^{*} \\
+\delta_{i}\alpha_{i}^{*} & \delta_{i}\beta_{i}^{*} & \delta_{i}\gamma_{i}^{*} & |\delta_{i}|^{2} \\
+\gamma_{i}\alpha_{i}^{*} & \gamma_{i}\beta_{i}^{*} & |\gamma_{i}|^{2} & \gamma_{i}\delta_{i}^{*} 
+\end{pmatrix}
+\end{align*}
+
+
+
+\end{s}
+
 
 
 \end{document}
