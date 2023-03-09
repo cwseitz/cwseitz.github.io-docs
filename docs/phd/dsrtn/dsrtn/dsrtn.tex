@@ -55,53 +55,27 @@ Eukaryotic transcription is episodic, consisting of a series of transcriptional 
 
 \chapter{Single molecule localization microscopy}
 
-\section{Point spread functions in single molecule localization microscopy}
+\section{Gaussian point spread functions in single molecule localization microscopy}
 
-Gaussian approximation. Lateral and axial point spread functions, Potentially double helix point spread functions for 3D storm
-
-Most detectors used for imaging have many elements (pixels) so that we can record an image projected onto the detector by a system of lenses. In fluorescence imaging, this is usually a relay consisting of an objective lens and a tube lens to focus the image onto the camera. Due to diffraction, any point emitter, such as a single fluorescent molecule, will be registered as a diffraction limited spot. The profile of that spot is often described as a Gaussian point spread function (Richardson and Wolf)
+Most detectors used for imaging have many elements (pixels) so that we can record an image projected onto the detector by a system of lenses. In fluorescence imaging, this is usually a relay consisting of an objective lens and a tube lens to focus the image onto the camera. Due to diffraction, any point emitter, such as a single fluorescent molecule, will be registered as a diffraction limited spot. The profile of that spot is often described as a Gaussian point spread function
 
 \begin{equation}
 \mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}} + B_0
 \end{equation}
 
-which has units of $[W/m^{2}]$.
 
-\begin{figure}[t!]
-\centering
-\includegraphics[width=150mm]{psf-1}
-\end{figure}
-
-\begin{figure}[t!]
-\centering
-\includegraphics[width=150mm]{psf-2}
-\end{figure}
-
-\begin{figure}[t!]
-\centering
-\includegraphics[width=150mm]{dSTORM}
-\end{figure}
-
-\subsection{The physics of semiconductor cameras}
-
-Modern cameras used in light microscopy, such as scientific complementary metal oxide semiconductor (sCMOS) cameras, are ultimately powered by the photoelectric effect. This occurs when electrons within the material absorb energy from the photons and have enough energy to escape their bonds and become ejected from the material. The materials used in camera sensors are typically semiconductors such as silicon or gallium
-
-In essence, an image captured by a camera can be loosely thought of as histogram of photon arrivals and a discretized form of the density $\mathrm{PSF}(x,y)$ over an integration time $\tau$. If $\mathrm{PSF}(x,y)$ can be approximated as constant in time, the value at a pixel approaches an integral of this density over the pixel:
+Modern cameras used in light microscopy, such as scientific complementary metal oxide semiconductor (sCMOS) cameras, are powered by the photoelectric effect. Electrons within each pixel, called photoelectrons, absorb enough energy from incoming photons to be promoted to the conduction band to give electrical current which can be detected. Integration of photoelectrons during the exposure time results in a monochrome image captured by a camera. The image of a single point particle, such as a fluorescent molecule, can be thought of as two-dimensional histogram of photon arrivals and a discretized form of the classical intensity profile $\mathrm{G}(x,y)$. The value at a pixel approaches an integral of this density over the pixel:
 
 \begin{equation}
-\mu_{k} = \lambda_{k}\tau = \frac{\eta\tau}{\hbar\omega}\int G(x,y)dA
+\mu_{k} = I_{0}\lambda_{k} = I_{0}\int_{\mathrm{pixel}} G(x,y)dxdy
 \end{equation}
 
-The parameter $\eta$ is called the \emph{quantum efficiency}, and without loss of generality, we will assume $\eta = 1$. The variable $\lambda_{k}$ at a pixel $k$ defines the probability of observing a photon per unit time and the \emph{true signal} is Poisson: $S_{k} \sim P(\lambda_{k})$. In this model, notice that $S_{k}$ may represent multiple sources e.g., fluorescence from a single molecule plus a background source as shown in (1.1). Furthermore, we say that the detection process is \emph{shot-noise limited} when Poisson noise dominates. It would be convenient to obtain an analytical expression for $\lambda_{k}$ given the parameters of the point spread function $\theta = (x_0,y_0,\sigma)$. Since the 2D Gaussian is symmetric, it is separable, and we can write
+where $I_{0} = \eta N_{0}\Delta t$. The parameter $\eta$ is the quantum efficiency and $\Delta t$ is the exposure time. $N_{0}$ represents the number of photons emitted per unit time, which may be itself a Poisson random variable; however, this is inconsequential since it is a fixed value for a single image of a fluorescent molecule. The value of the integral $\lambda_{k}$ at a pixel $k$ defines the fraction of $I_{0}$ photons observed at that pixel during the camera exposure. Since the 2D Gaussian in (1.1) has cylindrical symmetry, it is separable, and we can write
 
 \begin{align*}
 \lambda_{k} &= \frac{1}{2\pi\sigma^{2}}\left(\int_{x_{k}}^{x_{k+1}}e^{-\frac{(x-x_{0})^{2}}{2\sigma^{2}}}dx\right)\left(\int_{y_{k}}^{y_{k+1}}e^{-\frac{(y-y_{0})^{2}}{2\sigma^{2}}}dy\right)
 \end{align*}
 
-\begin{figure}[t!]
-\centering
-\includegraphics[width=150mm]{noise-model}
-\end{figure}
 
 We can then express the Gaussian integrals over a pixel by making use of the following property of the error function
 
@@ -109,34 +83,54 @@ We can then express the Gaussian integrals over a pixel by making use of the fol
 \frac{1}{\sqrt{2\pi}\sigma}\int_{a}^{b} e^{\frac{-(x-\mu)^{2}}{2\sigma^{2}}} = \frac{1}{2}\left(\mathrm{erf}\left(\frac{b-\mu}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{a-\mu}{\sqrt{2}\sigma}\right)\right)
 \end{equation*}
 
-Suppose the particle is known to be located at $(x_{0},y_{0})$ and some square pixel $k$ is centered on coordinates $(x,y)$ and has a width $a$. Then $\mu{k}$ at this pixel is
+Now, suppose the particle is known to be located at $(x_{0},y_{0})$ and some square pixel $k$ is centered on coordinates $(x,y)$ and has a width $a$. Then $\lambda_{k}$ at this pixel is
 
 \begin{equation}
-\mu(x_{k},y_{k}) = \mu_{x}(x_{k})\mu_{y}(y_{k})
+\lambda_{k}(x,y) = \lambda_{x}(x)\lambda_{y}(y)
 \end{equation}
 
 where
 
 \begin{align*}
-\mu_{x}(x_{k}) &= \frac{\tau}{2}\left(\mathrm{erf}\left(\frac{x+a/2-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{x-a/2-x_{0}}{\sqrt{2}\sigma}\right)\right)\\
-\mu_{y}(y_{k}) &= \frac{\tau}{2}\left(\mathrm{erf}\left(\frac{y+a/2-y_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{y-y/2-y_{0}}{\sqrt{2}\sigma}\right)\right)
+\lambda_{x}(x) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{x+a/2-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{x-a/2-x_{0}}{\sqrt{2}\sigma}\right)\right)\\
+\lambda_{y}(y) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{y+a/2-y_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{y-y/2-y_{0}}{\sqrt{2}\sigma}\right)\right)
 \end{align*}
 
+We are now prepared to write the shot-noise limited signal, which is a vector with units of phototelectrons
 
-However this noise model is incomplete, because detectors often suffer from dark noise, which may refer to readout noise or dark current, and contributes to a nonzero signal even in the absence of incident light. Dark current is due to statistical fluctuations in the photoelectron count due to thermal fluctuations. Readout noise is introduced by the amplifier circuit during the coversion of photoelectron charge to a voltage. Here, we use the Hamamatsu ORCA v3 CMOS camera, which is air cooled to -10C and has very low dark current - around 0.06 electrons/pixel/second - and can be safely ignored for low exposure times. Readout noise has been often neglected in localization algorithms because its presence in EMCCD cameras is small enough that it can be ignored within the tolerances of the localization precision. In the case of sCMOS cameras, however, the readout noise of each pixel is significantly higher and, in addition, every pixel has its own noise and gain characteristic with dramatic pixel-to-pixel variations.
+\begin{equation}
+\vec{S} = \left[\mathrm{Poisson}(\lambda_{1}), \mathrm{Poisson}(\lambda_{2}), ..., \mathrm{Poisson}(\lambda_{N})\right]
+\end{equation}
 
-Readout noise is not negligible, and is represented as a random variable $W_{k}$ which is \textit{a statistical fluctuation of the number of ADU during the amplification process}. It is important to note that we cannot measure the contribution by readout noise $W_{k}$ before amplification and therefore it must be expressed in units of $\mathrm{ADU}$. This is in contrast to the Poisson variable $S_{k}$, which \emph{can} be expressed in units of photoelectrons, because we are able to estimate the emission rate of the fluorophore analytically and we know the quantum efficiency $\eta$. The number of photoelectrons $S_{k}$ is  multiplied by a gain factor $g_{k}$ which has units of $[\mathrm{ADU}/e^{-}]$, which generally must be measured for each pixel. For $W_{k}$, the gain factor is implied. Here, we will always assume that readout noise is Gaussian with some pixel-specific offset $o_{k}$ and variance $\sigma_{k}^{2}$ i.e. $W_{k} \sim \mathcal{N}(o_{k},\sigma_{k}^{2})$. Ultimately we write out distributions of the variable we observe $H_{k}$ which has units of $\mathrm{ADU}$ and is a sum of shot noise and readout noise. A fundamental result in probability theory is that the distribution of $H_{k}$ is the convolution of the distributions of $S_{k}$ and $W_{k}$,
+
+However this noise model is incomplete, because detectors often suffer from dark noise, which may refer to readout noise or dark current, and contributes to a nonzero signal even in the absence of incident light. Dark current is due to statistical fluctuations in the photoelectron count due to thermal fluctuations. Readout noise is introduced by the amplifier circuit during the coversion of photoelectron charge to a voltage. Here, we use the Hamamatsu ORCA v3 CMOS camera, which is air cooled to -10C and has very low dark current - around 0.06 electrons/pixel/second - and can therefore be safely ignored for exposure times on the order of milliseconds. Readout noise has been often neglected in localization algorithms because its presence in EMCCD cameras is small enough that it can be ignored within the tolerances of the localization precision. In the case of sCMOS cameras, however, the readout noise of each pixel is significantly higher and, in addition, every pixel has its own noise and gain characteristic sometimes with dramatic pixel-to-pixel variations.
+
+On the other hand, readout noise is not negligible, and must represented as a vector-valued random variable. It is important to note that we cannot measure the contribution by readout noise before amplification and therefore it must be expressed in units of $\mathrm{ADU}$. This is in contrast to $\vec{S}$, which can be expressed in units of photoelectrons, because these statistical fluctuations can be predicted to be Poisson by quantum mechanics. The number of photoelectrons $S_{k}$ is  multiplied by a gain factor $g_{k}$ which has units of $[\mathrm{ADU}/e^{-}]$, which generally must be measured for each pixel. Here, we will always assume that readout noise per pixel $\xi_{k}$ is Gaussian with some pixel-specific offset $o_{k}$ and variance $\sigma_{k}^{2}$. 
+
+We will now define a vector which represents the image we measure, in units of ADU: 
+
+\begin{equation}
+\vec{H} = \vec{S} + \vec{\xi}
+\end{equation}
+
+What we are after is the joint distribution $P(\vec{H})$. A fundamental result in probability theory is that the distribution of $H_{k}$ is the convolution of the distributions of $S_{k}$ and $\xi_{k}$,
 
 \begin{align*}
-P(H_{k}|\theta) &= P(S_{k})\circledast P(W_{k})\\
+P(H_{k}|\theta) &= P(S_{k})\circledast P(xi_{k})\\
 &= A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
 \end{align*}
 
-In practice, this expression is difficult to work with, so we look for an analytical approximation. For sufficiently large $\mu_{k}$, the Poisson distribution is well-approximated by a normal distribution $P(\mu_{k}) \approx \mathcal{N}(\mu_{k},\mu_{k})$. Under the conditions that this approximation is valid, $P(H_{k})$ is easily calculated, because the sum of two Gaussian variables is another Gaussian variable:
+In practice, this expression is difficult to work with, so we look for an analytical approximation. In the following analysis we use a Poisson approximation of (1.6) - insert Komogonov distance argument from nanoscopy paper. In the Poisson approximation, the model log-likelihood is surprisingly simple
 
-\begin{equation}
-P(H_{k}|\theta) \approx \frac{1}{\sqrt{2\pi(\lambda_{k}\tau+\sigma_{k}^{2})}}e^{-\frac{(H_{k}-\lambda_{k}\tau-o_{k})}{2(\lambda_{k}\tau+\sigma_{k}^{2})}}
-\end{equation}
+\begin{align*}
+\ell(\vec{H}) &= \log \prod_{k} \frac{e^{-\mu_{k}}\mu_{k}^{n}}{n!}\\
+&= \sum_{k} n_{k}\log\mu_{k} - \log n_{k}! - \mu_{k}
+\end{align*}
+
+
+
+
+\subsection{The Cramer-Rao lower bound}
 
 Assuming each pixel is an independent random variable, then the likelihood of the dataset (or equivalently the joint distribution on pixels) is simply a product $\mathcal{L}(H|\theta) = \prod_{k}P(H_{k}|\theta)$. Now suppose we are given a sample from $\mathcal{L}(H|\theta)$ with unknown $\theta$. A general task in Bayesian inference is to determine $\theta$ from the data under the model $\mathcal{M}$. We may then ask - does the likelihood $\mathcal{L}$ vary as we vary the parameters? If the likelihood is flat, all parameter sets are equally likely and the data does not appear to carry much information about the parameters. Moreover, if $\mathcal{L}$ has a number of bumps or inflection points, then we expect that maybe some parameter sets are more likely that others. The ``bumpiness" of the likelihood surface is called the Fisher information - a fundmantal concept in information geometry. The Fisher information matrix $I(\theta)$ can be directly related to the curvature of the KL-Divergence over the parameter space
 
@@ -164,68 +158,6 @@ In the second term of the equation, we have a Kronecker product between the Jaco
 
 Note that we sum over the last index to get a 3 x 3 matrix, which is not directly obvious in the compact notation.
 
-\subsection{Fisher information for Poisson random variables}
-
-Suppose we think of a set of image pixels as a family of independent Poisson random variables each with rate $\mu_{k}$. The joint distribution is simply
-
-\begin{align*}
-\mathcal{L}(n_{1},n_{2},...,n_{N}) = \prod_{k} \frac{e^{-\mu_{k}}\mu_{k}^{n}}{n!}
-\end{align*}
-
-Therefore, the log-likelihood is
-
-\begin{align*}
-\ell(n_{1},n_{2},...,n_{N}) = \sum_{k} n_{k}\log\mu_{k} - \log n_{k}! - \mu_{k}
-\end{align*}
-
-The Jacobian in the first sum consists of two elements:
-
-\begin{align*}
-\frac{\partial \mu_{k}(x_{i},y_{i})}{\partial x_{0}} &= \mu_{y}(x_{i},y_{i})\sqrt{\frac{2}{\pi\sigma^{2}}}\left(e^{-\frac{\left(-\frac{a}{2}+x_{k}-\text{x0}\right)^2}{2 \sigma ^2}}-e^{-\frac{\left(\frac{a}{2}+x_{k}-\text{x0}\right)^2}{2 \sigma ^2}}\right)\\
-\frac{\partial \mu_{k}(x_{i},y_{i})}{\partial y_{0}} &= \mu_{x}(x_{i},y_{i})\sqrt{\frac{2}{\pi\sigma^{2}}}\left(e^{-\frac{\left(-\frac{a}{2}+y_{k}-\text{y0}\right)^2}{2 \sigma ^2}}-e^{-\frac{\left(\frac{a}{2}+y_{k}-\text{y0}\right)^2}{2 \sigma ^2}}\right)
-\end{align*}
-
-The four elements of the Hessian matrix in the first sum is
-
-\begin{align*}
-\frac{\partial \mu_{k}^{2}}{\partial x_{0}^{2}} &= \mu_{y}(x_{i},y_{i})\left(\frac{\sqrt{\frac{2}{\pi }} \left(-\frac{a}{2}+x-\text{x0}\right) e^{-\frac{\left(-\frac{a}{2}+x-\text{x0}\right)^2}{2 \sigma ^2}}}{\sigma ^3}-\frac{\sqrt{\frac{2}{\pi }} \left(\frac{a}{2}+x-\text{x0}\right) e^{-\frac{\left(\frac{a}{2}+x-\text{x0}\right)^2}{2 \sigma ^2}}}{\sigma ^3}\right)
-\end{align*}
-
-\begin{align*}
-\frac{\partial \mu_{k}^{2}}{\partial y_{0}^{2}} &= \mu_{x}(x_{i},y_{i})\left(\frac{\sqrt{\frac{2}{\pi }} \left(-\frac{a}{2}+y-\text{y0}\right) e^{-\frac{\left(-\frac{a}{2}+y-\text{y0}\right)^2}{2 \sigma ^2}}}{\sigma ^3}-\frac{\sqrt{\frac{2}{\pi }} \left(\frac{a}{2}+y-\text{y0}\right) e^{-\frac{\left(\frac{a}{2}+y-\text{y0}\right)^2}{2 \sigma ^2}}}{\sigma ^3}\right)
-\end{align*}
-
-\begin{align*}
-\frac{\partial \mu_{k}^{2}}{\partial x_{0}\partial y_{0}} &= \frac{\partial \mu_{k}^{2}}{\partial x_{0}\partial y_{0}} \\
-&= \frac{\tau}{4}\left(\frac{\sqrt{\frac{2}{\pi }} e^{-\frac{\left(-\frac{a}{2}+x-\text{x0}\right)^2}{2 \sigma ^2}}}{\sigma }-\frac{\sqrt{\frac{2}{\pi }} e^{-\frac{\left(\frac{a}{2}+x-\text{x0}\right)^2}{2 \sigma ^2}}}{\sigma }\right) \left(\frac{\sqrt{\frac{2}{\pi }} e^{-\frac{\left(-\frac{a}{2}+y-\text{y0}\right)^2}{2 \sigma ^2}}}{\sigma }-\frac{\sqrt{\frac{2}{\pi }} e^{-\frac{\left(\frac{a}{2}+y-\text{y0}\right)^2}{2 \sigma ^2}}}{\sigma }\right)
-\end{align*}
-
-The element of the Jacobian in the first sum is
-
-\begin{align*}
-\frac{\partial\ell}{\partial\mu_{k}} = n_{k}/\mu_{k}(x_{i},y_{i}) - 1
-\end{align*}
-
-
-The Hessian matrix element in the second sum is
-
-\begin{align*}
-\frac{\partial^{2}\ell}{\partial\mu_{k}^{2}} = -n_{k}/\mu_{k}(x_{i},y_{i})^{2} 
-\end{align*}
-
-\begin{equation*}
-
-\end{equation*}
-
-
-\subsection{Gaussian case}
-If the pixels are just Gaussian variables, the joint distribution $\mathcal{L}$ is really just a multivariate normal distribution:
-
-\begin{align*}
-\mathcal{L}(H_{1},H_{2},...,H_{n}) = \frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}\exp-\frac{1}{2}(H-\mu)^{T}\Sigma^{-1}(H-\mu)
-\end{align*}
-
-The Fisher information matrix when we are dealing with the multivariate normal distribution with parameters $(\mu,\Sigma)$ which are themselves functions of another vector of parameters $\bm{\theta}$ has been well-studied (Malago and Pestone; 2015)
 
 \chapter{Inferring DNA structure from super-resolution microscopy images}
 
