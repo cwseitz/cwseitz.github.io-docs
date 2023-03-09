@@ -128,32 +128,30 @@ In practice, this expression is difficult to work with, so we look for an analyt
 \end{align*}
 
 
-
-
 \subsection{The Cramer-Rao lower bound}
 
-Assuming each pixel is an independent random variable, then the likelihood of the dataset (or equivalently the joint distribution on pixels) is simply a product $\mathcal{L}(H|\theta) = \prod_{k}P(H_{k}|\theta)$. Now suppose we are given a sample from $\mathcal{L}(H|\theta)$ with unknown $\theta$. A general task in Bayesian inference is to determine $\theta$ from the data under the model $\mathcal{M}$. We may then ask - does the likelihood $\mathcal{L}$ vary as we vary the parameters? If the likelihood is flat, all parameter sets are equally likely and the data does not appear to carry much information about the parameters. Moreover, if $\mathcal{L}$ has a number of bumps or inflection points, then we expect that maybe some parameter sets are more likely that others. The ``bumpiness" of the likelihood surface is called the Fisher information - a fundmantal concept in information geometry. The Fisher information matrix $I(\theta)$ can be directly related to the curvature of the KL-Divergence over the parameter space
+A general task in Bayesian inference is to determine $\theta$ from the data under the model $\mathcal{M}_{\theta}$. We may then ask - does the log-likelihood $\ell$ vary as we vary the parameters? If the likelihood is flat, all parameter sets are equally likely and the data does not appear to carry much information about the parameters. Moreover, if $\ell$ has a number of bumps or inflection points, then we expect that maybe some parameter sets are more likely that others. The ``bumpiness" of the likelihood surface is called the Fisher information - a fundmantal concept in information geometry. The Fisher information matrix $I(\theta)$ can be directly related to the curvature of the KL-Divergence over the parameter space
 
 \begin{align*}
-\nabla^2_{\theta'} D_{KL}[\mathcal{L}(H|\theta) \parallel \mathcal{L}(H|\theta')] 
-&= - \nabla_{\theta'} \int \mathcal{L}(H|\theta) \nabla_{\theta'}  \log \mathcal{L}(H|\theta') \, dH \\ 
-&= - \int \mathcal{L}(H|\theta) \nabla^2_{\theta'}  \log \mathcal{L}(H|\theta') \, dH \\
-&= - \mathbb{E}_{\theta}[\nabla^2_{\theta'} \log \mathcal{L}(H|\theta')] \\
-&= \mathbf{I}(\theta)
+\nabla^2_{\theta'} D_{KL}[\ell(H|\theta) \parallel \ell(H|\theta')] 
+&= - \nabla_{\theta'} \int \ell(H|\theta) \nabla_{\theta'}  \log \ell(H|\theta') \, dH \\ 
+&= - \int \ell(H|\theta) \nabla^2_{\theta'}  \log \ell(H|\theta') \, dH \\
+&= - \mathbb{E}_{\theta}[\nabla^2_{\theta'} \log \ell(H|\theta')] \\
+&= I(\theta)
 \end{align*}
 
 
-We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space. To be clear, the score is a function of the \emph{data}, not the parameters. It is a measure of sensitivity of the likelihood to changes in the parameters. Of course, the Fisher information matrix also depends on the parameterization chosen. Looking at (1.4), the likelihood is a hierarchical function that maps a vector space $\Theta$ to a vector space $\Lambda$ to a scalar value. Formally, we define $T: \Theta \rightarrow \Lambda$ and $W: \Lambda \rightarrow \mathbb{R}$. The parameter vector $(x_{0},y_{0},\sigma)\in \Theta$, the Poisson rate vector $\bm{\lambda} \in \Lambda$ and $\mathcal{L} \in \mathbb{R}$. To get the Hessian, we need the chain-rule for Hessian matrices.
+We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space. To be clear, the score is a function of the \emph{data}, not the parameters. It is a measure of sensitivity of the likelihood to changes in the parameters. Of course, the Fisher information matrix also depends on the parameterization chosen. Looking at (1.4), the likelihood is a hierarchical function that maps a vector space $\Theta$ to a vector space $\Lambda$ to a scalar value. Formally, we define $T: \Theta \rightarrow \Lambda$ and $W: \Lambda \rightarrow \mathbb{R}$. The parameter vector $(x_{0},y_{0},\sigma, N_{0})\in \Theta$, the Poisson rate vector $\vec{\lambda} \in \Lambda$ and $\ell \in \mathbb{R}$. To get the Hessian, we need the chain-rule for Hessian matrices.
 
 
 \begin{align*}
-\mathbf{H}_{(L,\theta)} = \mathbf{J}_{(\lambda,\theta)}^{T} \mathbf{H}_{(L,\lambda)} \mathbf{J}_{(\lambda,\theta)} + (J_{(L,\lambda)}\otimes I_{n})\mathbf{H}_{(\lambda,\theta)}
+\hat{H}_{(\ell,\theta)} = \hat{J}_{(\lambda,\theta)}^{T} \hat{H}_{(\ell,\lambda)} \hat{J}_{(\lambda,\theta)} + (J_{(\ell,\lambda)}\otimes I_{n})\hat{H}_{(\lambda,\theta)}
 \end{align*}
 
 In the second term of the equation, we have a Kronecker product between the Jacobian matrix of the likelihood with respect to the parameters of the hierarchical model ($J_{(L,\lambda)}$) and the $n\times n$ identity matrix ($I_n$), denoted as $J_{(L,\lambda)}\otimes I_n$. This Kronecker product gives a diagonal matrix where the elements along the diagonal are the elements of the vector $J_{(L,\lambda)}$. This provides a concise way of summarizing the operation:
 
 \begin{align*}
-((J_{(L,\lambda)}\otimes I_{n})\mathbf{H}_{(\lambda,\theta)})_{ij} = \sum_{k}\mathbf{J}_{(L,\lambda)}^{ij}\mathbf{H}_{(\lambda,\theta)}^{ijk}
+((J_{(L,\lambda)}\otimes I_{n})\hat{H}_{(\lambda,\theta)})_{ij} = \sum_{k}\hat{J}_{(L,\lambda)}^{ij}\hat{H}_{(\lambda,\theta)}^{ijk}
 \end{align*}
 
 Note that we sum over the last index to get a 3 x 3 matrix, which is not directly obvious in the compact notation.
@@ -310,19 +308,19 @@ D_{\mathrm{KL}}(q(\theta)||p(\theta|x)) &= \underset{{\theta \sim q(\theta)}}{\m
 Clearly the KL-divergence is minimized by minimizing this expectation. It is common to define the evdience lower bound (ELBO).
 
 \begin{align*}
-\mathcal{L}(x,\theta) = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
+\ell(x,\theta) = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
 \end{align*}
 
 It is name such because
 
 \begin{equation*}
-\log p(x) = D_{\mathrm{KL}}(q(\theta)||p(\theta|x)) + \mathcal{L}(x,\theta) \geq \mathcal{L}(x,\theta)
+\log p(x) = D_{\mathrm{KL}}(q(\theta)||p(\theta|x)) + \ell(x,\theta) \geq \ell(x,\theta)
 \end{equation*}
 
 The ELBO can be minimized when the variational distribution is easy to sample from, for example a multivariate normal distribution and when the likelihood is tractable. The gradients of the ELBO
 
 \begin{align*}
-\nabla_{\Phi}\mathcal{L}(x,\theta) = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
+\nabla_{\Phi}\ell(x,\theta) = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
 \end{align*}
 
 multivariate Gaussian distribution:
@@ -411,7 +409,7 @@ where $M_{n}$ is the $n$th moment of the transition density. In the diffusion ap
 We can additionally define the term in parentheses as a differential operator acting on $P(x,t)$
 
 \begin{align}
-\hat{\mathcal{L}}_{FP} = \left(-\frac{\partial}{\partial x}M^{(1)}(t) + \frac{1}{2}\frac{\partial^{2}}{\partial x^{2}}M^{(2)}(t)\right)
+\hat{\ell}_{FP} = \left(-\frac{\partial}{\partial x}M^{(1)}(t) + \frac{1}{2}\frac{\partial^{2}}{\partial x^{2}}M^{(2)}(t)\right)
 \end{align}
 
 It is common to additionally define the probability current $J(x,t)$ as 
