@@ -223,5 +223,45 @@ So in this case, we can see that target qubit is unchanged while the control qub
 
 \end{s}
 
+\begin{p}
+Problem 4.24
+\end{p}
+
+\begin{s}
+
+I first want to show how to write the CNOT gate in terms of tensor products, when the control and target qubits are adjacent and non-adjacent in significance, in a three qubit circuit. Let $\mathrm{CNOT}_{12}$ represent a gate where 1 is the control and 2 is the target. When the qubits are adjacent, it is straightforward:
+
+\begin{align*}
+\mathrm{CNOT}_{12} = \mathrm{CNOT}\otimes I_{3}
+\end{align*}
+
+However, $\mathrm{CNOT}_{13}$ must be written in a different way
+
+\begin{align*}
+\mathrm{CNOT}_{13} = \ket{0}\bra{0}\otimes I_{2}\otimes I_{3} + \ket{1}\bra{1}\otimes I_{2}\otimes X_{3}
+\end{align*}
+
+
+For the Tofolli gate, there are ten unique gates used. I will not write their matrix representation explicitly since they are all 8x8 matrices, but their tensor product representation in the order the are applied is
+
+\begin{align*}
+U_{1} &= T_1 \otimes S_2 \otimes I_3\\
+U_{2} &= \mathrm{CNOT}_{12}\otimes I_{3}\\
+U_{3} &= I_{1} \otimes T_{2}^{\dagger} \otimes I_3\\
+U_{4} &= \mathrm{CNOT}_{12}\otimes H_{3}\\
+U_{5} &= I_1 \otimes T_{2}^{\dagger} \otimes T_3\\
+U_{6} &= \ket{0}\bra{0}\otimes I_{2}\otimes I_{3} + \ket{1}\bra{1}\otimes I_{2}\otimes X_{3}\\
+U_{7} &= I_1 \otimes I_2 \otimes T_3^{\dagger}\\
+U_{8} &= I_{1}\otimes \mathrm{CNOT}_{23}\\
+U_{9} &= I_1 \otimes I_2 \otimes T_3^{\dagger}\\
+U_{10} &= I_1 \otimes I_2 \otimes H_3
+\end{align*}
+
+
+
+\end{s}
+
+
+
 
 \end{document}
