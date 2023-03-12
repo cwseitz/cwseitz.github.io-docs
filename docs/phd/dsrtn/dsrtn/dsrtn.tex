@@ -157,13 +157,7 @@ In the second term of the equation, we have a Kronecker product between the Jaco
 Note that we sum over the last index to get a 3 x 3 matrix, which is not directly obvious in the compact notation.
 
 
-\chapter{Inferring DNA structure from super-resolution microscopy images}
-
-\chapter{Discrete modeling of transcriptional kinetics}
-
-\section{The ergodic theorem}
-
-\section{The chemical master equation}
+\section{Photoswitching dynamics of JF646}
 
 The central assumption underlying a Markov process, is the memoryless property
 
@@ -231,9 +225,52 @@ P(\bm{\omega}, t) = \exp(\mathcal{J}(\bm{\omega}))
 
 This matrix exponential is intractable for large $|\Omega|$. However, in the Finite State Projection algorithm, it is possible to truncate the state space $\Omega \rightarrow \tilde{\Omega}$ and obtain good estimates $\tilde{P}(\bm{\omega}, t)$ with some certificate of accuracy.
 
+\subsection{Lifetime of the ON and OFF states}
+
+Alongside the solution to the master equation $P_{\mathrm{ON}}(t)$ and $P_{\mathrm{OFF}}(t)$, we are often interested in lifetime of the ON and OFF states and how these lifetimes change according to experimental parameters. In fact, the distribution over the ON and OFF state lifetimes gives a convenient frequentist mechanism for estimating the rate constants of a photoswitching model. To see this, consider the two-state model where $\alpha_{12}(t) = k_{12}(t)dt$ and $\alpha_{21}(t) = k_{21}(t)dt$ are the propensity of transitions from on to off and off to on, respectively. Suppose the system begins in the ON state, 
+
+\begin{align*}
+P(\mathrm{ON} \geq t \; | \;\mathrm{ON}) &= \underset{n\rightarrow\infty}{\mathrm{lim}}\left(1-k_{12}dt\right)^{n}\\
+&= \underset{n\rightarrow\infty}{\mathrm{lim}}\left(1-\frac{k_{12}t}{n}\right)^{n}\\
+&= e^{-k_{12}t}
+\end{align*}
+
+This is the cumulative density function for the lifetime of the ON state. Notice that we are given that the system is in the ON state at $t=0$, and all we want to know is the lifetime of that state, so we need not consider the transition rates back to the ON state: $k_{j1}$. The probability density of the lifetime of the ON state is: 
+
+\begin{align*}
+f_{\mathrm{ON}}(t) = -\frac{dP(\mathrm{ON} \geq t)}{dt} = k_{12}e^{-k_{12}t}
+\end{align*}
+
+Therefore one possible way of inferring the rate constant $k_{12}$ is by fitting the observed lifetime distribution with an exponential distribution with $k_{12}$ as a free parameter. However, for the OFF state, it has been previously shown that a single rate constant may not fit the data accurately and the introduction of multiple rate constants representing multiple dark states are necessary. Common photoswitching models include three OFF states: the triplet state, dark state, and long-lived dark state and rate constants between these two states.
+
+\begin{align*}
+P(\mathrm{OFF} \geq t\; | \; \mathrm{OFF}) = P_{\mathrm{T}}(t) + P_{\mathrm{D}}(t) + P_{\mathrm{LLD}}(t)
+\end{align*}
+
+where we have the system of equations for transitions within the OFF state
+
+\begin{align*}
+\frac{dP_{\mathrm{T}}(t)}{dt} &= -k_{21}P_{\mathrm{T}}(t) - k_{23}P_{\mathrm{T}}(t)\\
+\frac{dP_{\mathrm{D}}(t)}{dt} &= P_{\mathrm{T}}(t)k_{23}-k_{31}P_{\mathrm{D}}(t) - k_{34}P_{\mathrm{D}}(t)\\
+\frac{dP_{\mathrm{LLD}}(t)}{dt} &= k_{34}P_{\mathrm{D}}(t) - k_{41}P_{\mathrm{LLD}}(t)
+\end{align*}
+
+This system can be solved analytically by Laplace transformation. Similar to the ON state, 
+
+\begin{align*}
+f_{\mathrm{OFF}}(t) = -\frac{dP(\mathrm{OFF} \geq t)}{dt} = \sum_{i}a_{i}\lambda_{i}e^{-\lambda_{i}t}
+\end{align*}
 
 
-\section{ODE model for the ensemble average}
+
+\chapter{Inferring DNA structure from super-resolution microscopy images}
+
+
+
+\begin{appendices}
+
+
+\subsection{ODE model for the ensemble average}
 
 We can define the following system of ODEs for a autorepressive gene circuit
 
@@ -290,9 +327,6 @@ Let $t_{0} = 1/\gamma_{m}$, $m_{0} = \beta_{m}/\gamma_{m}$, $r_{0} = \beta_{m}\b
 \end{align}
 
 
-\begin{appendices}
-\chapter{Derivation of the Fokker Planck Equation}
-
 \subsection{Variational Bayes}
 
 Variational inference attempts to approximate the true posterior distribution $p(\theta|x)$ with a variational distribution $q(\theta)$, which we assume to be Gaussian. We try to minimize the KL-divergence between the variational distribution and the true posterior:
@@ -323,25 +357,6 @@ The ELBO can be minimized when the variational distribution is easy to sample fr
 \nabla_{\Phi}\ell(x,\theta) = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
 \end{align*}
 
-multivariate Gaussian distribution:
-
-$p(x|\mu,\Sigma) = \frac{1}{(2\pi)^{k/2}|\Sigma|^{1/2}}\exp\left(-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)\right)$
-
-Where:
-
-$x$ is a k-dimensional random variable
-$\mu$ is the mean vector
-$\Sigma$ is the covariance matrix
-$k$ is the dimension of $x$
-And the gradient with respect to mean:
-
-$\frac{\partial}{\partial \mu} \log p(x|\mu,\Sigma) = -\Sigma^{-1}(x-\mu)$
-
-And the gradient with respect to covariance matrix:
-
-$\frac{\partial}{\partial \Sigma} \log p(x|\mu,\Sigma) = -\frac{1}{2}\Sigma^{-1}+\frac{1}{2}\Sigma^{-1}(x-\mu)(x-\mu)^T\Sigma^{-1}$
-
-You can use these equations to calculate the gradient of the log-multivariate Gaussian distribution with respect to the mean and covariance matrix.
 
 \subsection{Kramers-Moyal Expansion}
 
