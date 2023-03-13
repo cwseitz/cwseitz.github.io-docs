@@ -1,0 +1,78 @@
+% Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
+% For more details: https://www.sharelatex.com/learn/Beamer
+
+%\documentclass{beamer}					% Document class
+% Aspect ratio
+\documentclass[aspectratio=169]{beamer}
+
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}Single molecule localization microscopy \hfill\insertshortauthor\hfill\insertpagenumber}}
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage[english]{babel}				% Set language
+\usepackage[utf8x]{inputenc}			% Set encoding
+
+\mode<presentation>						% Set options
+{
+  \usetheme{default}					% Set theme
+  \usecolortheme{default} 				% Set colors
+  \usefonttheme{default}  				% Set font theme
+  \setbeamertemplate{caption}[numbered]	% Set caption to be numbered
+}
+
+% Uncomment this to have the outline at the beginning of each section highlighted.
+%\AtBeginSection[]
+%{
+%  \begin{frame}{Outline}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+\usepackage{graphicx}					% For including figures
+\usepackage{booktabs}					% For table rules
+\usepackage{hyperref}	
+\usepackage{tikz-network}				% For cross-referencing
+\usepackage[absolute,overlay]{textpos}
+\usepackage{bm}
+\usepackage[font=small,labelfont=bf]{caption}				% For cross-referencing
+
+\title{Single molecule localization microscopy}	% Presentation title
+\author{Clayton W. Seitz}								% Presentation author
+\date{\today}									% Today's date	
+
+\begin{document}
+
+% Title page
+% This page includes the informations defined earlier including title, author/s, affiliation/s and the date
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Direction stochastic optical reconstruction microscopy}
+\end{frame}
+
+\begin{frame}{Photoswitchable organic dyes}
+\end{frame}
+
+\begin{frame}{A model of photoswitching between ON and OFF states}
+\end{frame}
+
+\begin{frame}{Quantifying and optimizing single-molecule switching}
+\end{frame}
+
+\begin{frame}{PSF model and pixel-wise gain measurements}
+\end{frame}
+
+\begin{frame}{Pixel-wise readout noise measurements}
+\end{frame}
+
+\begin{frame}{The Fisher information metric and Cramer-Rao bound}
+\end{frame}
+
+\begin{frame}{Monte Carlo estimation of the Cramer-Rao Bound}
+Start with $\theta_{\mathrm{MLE}}$, use MCMC to explore the parameter space. How to ensure $\theta_{\mathrm{MLE}}$ is a good starting point? Or should I start at the true parameters?
+\end{frame}
+
+\begin{frame}{Experimental determinants of localization accuracy}
+\end{frame}
+
+
+\end{document}
