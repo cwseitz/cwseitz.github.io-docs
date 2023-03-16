@@ -13,7 +13,7 @@
 \usepackage{bm}
 
 %% Use these commands to set biographic information for the title page:
-\title{Coupling transcriptional dynamics and DNA structure with single molecule localization microscopy}
+\title{Phase transitions of DNA-protein condensates during the immune response}
 \author{Clayton W. Seitz}
 \department{Department of Physics}
 \division{Physical Sciences}
@@ -67,7 +67,7 @@ Most detectors used for imaging have many elements (pixels) so that we can recor
 Modern cameras used in light microscopy, such as scientific complementary metal oxide semiconductor (sCMOS) cameras, are powered by the photoelectric effect. Electrons within each pixel, called photoelectrons, absorb enough energy from incoming photons to be promoted to the conduction band to give electrical current which can be detected. Integration of photoelectrons during the exposure time results in a monochrome image captured by a camera. The image of a single point particle, such as a fluorescent molecule, can be thought of as two-dimensional histogram of photon arrivals and a discretized form of the classical intensity profile $\mathrm{G}(x,y)$. The value at a pixel approaches an integral of this density over the pixel:
 
 \begin{equation}
-\mu_{k} = I_{0}\lambda_{k} = I_{0}\int_{\mathrm{pixel}} G(x,y)dxdy
+\mu_{k} = I_{0}\lambda_{k} + B_{0} = I_{0}\int_{\mathrm{pixel}} G(x,y)dxdy + B_{0}
 \end{equation}
 
 where $I_{0} = \eta N_{0}\Delta t$. The parameter $\eta$ is the quantum efficiency and $\Delta t$ is the exposure time. $N_{0}$ represents the number of photons emitted per unit time, which may be itself a Poisson random variable; however, this is inconsequential since it is a fixed value for a single image of a fluorescent molecule. The value of the integral $\lambda_{k}$ at a pixel $k$ defines the fraction of $I_{0}$ photons observed at that pixel during the camera exposure. Since the 2D Gaussian in (1.1) has cylindrical symmetry, it is separable, and we can write
@@ -124,9 +124,16 @@ In practice, this expression is difficult to work with, so we look for an analyt
 
 \begin{align*}
 \ell(\vec{H}) &= \log \prod_{k} \frac{e^{-\mu_{k}}\mu_{k}^{n}}{n!}\\
-&= \sum_{k} n_{k}\log\mu_{k} - \log n_{k}! - \mu_{k}
+&= \sum_{k} n_{k}\log\mu_{k} - \log n_{k}! - \mu_{k}\\
+&= \sum_{k} n_{k}\log\left(I_{0}\lambda_{k} + B_{0}\right) - \log n_{k}! - I_{0}\lambda_{k} - B_{0}
 \end{align*}
 
+Note that
+
+\begin{align*}
+\frac{\partial\ell}{\partial\lambda_{k}} &= \frac{n_{k}I_{0}}{I_{0}\lambda_{k} + B_{0}} - I_{0}\\
+\frac{\partial^{2}\ell}{\partial\lambda_{k}^{2}} &= -\frac{n_{k}I_{0}^2}{(I_{0}\lambda_{k} + B_{0})^2}
+\end{align*}
 
 \subsection{The Cramer-Rao lower bound}
 
