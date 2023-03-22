@@ -1,0 +1,97 @@
+% Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
+% For more details: https://www.sharelatex.com/learn/Beamer
+
+\documentclass[aspectratio=1610]{beamer}					% Document class
+
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}Bell's Inequality \hfill\insertshortauthor\hfill\insertpagenumber}}
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage[english]{babel}				% Set language
+\usepackage[utf8x]{inputenc}			% Set encoding
+
+\mode<presentation>						% Set options
+{
+  \usetheme{default}					% Set theme
+  \usecolortheme{default} 				% Set colors
+  \usefonttheme{default}  				% Set font theme
+  \setbeamertemplate{caption}[numbered]	% Set caption to be numbered
+}
+
+% Uncomment this to have the outline at the beginning of each section highlighted.
+%\AtBeginSection[]
+%{
+%  \begin{frame}{Outline}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+\usepackage{graphicx}					% For including figures
+\usepackage{booktabs}					% For table rules
+\usepackage{hyperref}	
+\usepackage{tikz-network}				% For cross-referencing
+\usepackage[absolute,overlay]{textpos}
+\usepackage{bm}
+\usepackage[font=small,labelfont=bf]{caption}				% For cross-referencing
+\usepackage{physics}
+
+\title{Bell's Inequality}	% Presentation title
+\author{Clayton W. Seitz}								% Presentation author
+\date{\today}									% Today's date	
+
+\begin{document}
+
+% Title page
+% This page includes the informations defined earlier including title, author/s, affiliation/s and the date
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Bell's inequality (classical)}
+
+\end{frame}
+
+\begin{frame}{Tsirelson's inequality (quantum)}
+
+\end{frame}
+
+\begin{frame}{Expectation of QS and RS}
+
+\begin{align*}
+\langle QS \rangle &= \bra{\psi}QS\ket{\psi}\\
+&= -\frac{1}{2^{3/2}}\left(\bra{01} - \bra{10}\right) \left(Z_{1}Z_{2}+Z_{1}X_{2}\right)\left(\ket{01} - \ket{10}\right)\\
+&= -\frac{1}{2^{3/2}}\left(\bra{01}Z_{1}Z_{2}\ket{01} + \bra{10}Z_{1}Z_{2}\ket{10}\right)\\
+&= \frac{2}{2^{3/2}} = \frac{1}{\sqrt{2}}
+\end{align*}
+
+\begin{align*}
+\langle RS \rangle &= \bra{\psi}RS\ket{\psi}\\
+&= -\frac{1}{2^{3/2}}\left(\bra{01} - \bra{10}\right) \left(X_{1}Z_{2}+X_{1}X_{2}\right)\left(\ket{01} - \ket{10}\right)\\
+&= \frac{1}{2^{3/2}}\left(\bra{01}X_{1}X_{2}\ket{10} + \bra{10}X_{1}X_{2}\ket{01}\right)\\
+&= \frac{2}{2^{3/2}} = \frac{1}{\sqrt{2}}
+\end{align*}
+
+\end{frame}
+
+\begin{frame}{Expectation of QT and RT}
+
+\begin{align*}
+\langle QT \rangle &= \bra{\psi}QT\ket{\psi}\\
+&= \frac{1}{2^{3/2}}\left(\bra{01} - \bra{10}\right) \left(Z_{1}Z_{2}-Z_{1}X_{2}\right)\left(\ket{01} - \ket{10}\right)\\
+&= -\frac{1}{2^{3/2}}\left(\bra{01}Z_{1}Z_{2}\ket{01} + \bra{10}Z_{1}Z_{2}\ket{10}\right)\\
+&= \frac{2}{2^{3/2}} = \frac{1}{\sqrt{2}}
+\end{align*}
+
+\begin{align*}
+\langle RT \rangle &= \bra{\psi}RT\ket{\psi}\\
+&= -\frac{1}{2^{3/2}}\left(\bra{01} - \bra{10}\right) \left(X_{1}Z_{2}+X_{1}X_{2}\right)\left(\ket{01} - \ket{10}\right)\\
+&= \frac{1}{2^{3/2}}\left(\bra{01}X_{1}X_{2}\ket{10} + \bra{10}X_{1}X_{2}\ket{01}\right)\\
+&= \frac{2}{2^{3/2}} = \frac{1}{\sqrt{2}}
+\end{align*}
+
+\end{frame}
+
+\begin{frame}{Why do Bell states saturate the bound?}
+Quantum information theory stuff (chapter 12)
+Von Neumann entropy, density matrix, etc
+\end{frame}
+
+\end{document}
