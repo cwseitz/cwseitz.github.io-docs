@@ -116,11 +116,26 @@ We will now define a vector which represents the image we measure, in units of A
 What we are after is the joint distribution $P(\vec{H})$. A fundamental result in probability theory is that the distribution of $H_{k}$ is the convolution of the distributions of $S_{k}$ and $\xi_{k}$,
 
 \begin{align*}
-P(H_{k}|\theta) &= P(S_{k})\circledast P(xi_{k})\\
+P(H_{k}|\theta) &= P(S_{k})\circledast P(\xi_{k})\\
 &= A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
 \end{align*}
 
-In practice, this expression is difficult to work with, so we look for an analytical approximation. In the following analysis we use a Poisson approximation of (1.6) - insert Komogonov distance argument from nanoscopy paper. In the Poisson approximation, the model log-likelihood is surprisingly simple
+where $P(\xi_{k}) = \mathcal{N}(o_{k},\sigma_{k}^{2})$ and $P(S_{k}) = \mathrm{Poisson}(g_{k}\mu_{k})$. In practice, this expression is difficult to work with, so we look for an approximation. Notice that 
+
+\begin{align*}
+\xi_{k} - o_{k} + \sigma_{k}^{2} \sim \mathcal{N}(\sigma_{k}^{2},\sigma_{k}^{2}) \approx \mathrm{Poisson}(\sigma_{k}^{2})
+\end{align*}
+
+which is a valid approximation in the limit of large $\sigma_{k}^{2}$. Therefore, we can write the distribution over $H_{k}$ as
+
+\begin{align*}
+P(H_{k}- o_{k} + \sigma_{k}^{2}) &= P(S_{k} + \xi_{k} - o_{k} + \sigma_{k}^{2})\\
+&= P(S_{k}) \circledast P(\xi_{k}- o_{k} + \sigma_{k}^{2})\\
+&= \mathrm{Poisson}\left(g_{k}\mu_{k} - o_{k} + \sigma_{k}^{2}\right)
+\end{align*}
+
+
+since the convolution of two Poisson distributions is Poisson. In the Poisson approximation, the model log-likelihood is surprisingly simple
 
 \begin{align*}
 \ell(\vec{H}) &= \log \prod_{k} \frac{e^{-\mu_{k}}\mu_{k}^{n}}{n!}\\
