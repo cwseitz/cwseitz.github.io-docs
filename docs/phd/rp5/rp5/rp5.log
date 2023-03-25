@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.8.26)  25 MAR 2023 16:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.8.6)  25 MAR 2023 19:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -686,9 +686,9 @@ Language: english 2017/06/06 v3.3r English support from the babel system
 Package babel Info: Hyphen rules for 'canadian' set to \l@english
 (babel)             (\language0). Reported on input line 102.
 Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
-(babel)             (\language13). Reported on input line 105.
+(babel)             (\language15). Reported on input line 105.
 Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
-(babel)             (\language13). Reported on input line 108.
+(babel)             (\language15). Reported on input line 108.
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2021/02/14 v1.3d Input encoding file
@@ -1275,45 +1275,56 @@ thkerncmss.
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-<Figure-1.png, id=22, 1084.05pt x 794.97pt>
+<figure-5-6.png, id=22, 654.445pt x 480.79625pt>
+File: figure-5-6.png Graphic file (type png)
+<use figure-5-6.png>
+Package pdftex.def Info: figure-5-6.png  used on input line 64.
+(pdftex.def)             Requested size: 227.62204pt x 167.22476pt.
+<figure-5-2.png, id=24, 879.285pt x 522.95375pt>
+File: figure-5-2.png Graphic file (type png)
+<use figure-5-2.png>
+Package pdftex.def Info: figure-5-2.png  used on input line 64.
+(pdftex.def)             Requested size: 256.0748pt x 152.29904pt.
+ [2
+
+ <./figure-5-6.png> <./figure-5-2.png>]
+<Figure-1.png, id=33, 1084.05pt x 794.97pt>
 File: Figure-1.png Graphic file (type png)
 <use Figure-1.png>
-Package pdftex.def Info: Figure-1.png  used on input line 68.
+Package pdftex.def Info: Figure-1.png  used on input line 78.
 (pdftex.def)             Requested size: 327.20668pt x 239.94847pt.
 
-Overfull \hbox (14.22635pt too wide) in paragraph at lines 68--68
+Overfull \hbox (14.22635pt too wide) in paragraph at lines 78--78
  [] 
  []
 
-[2
+[3
 
  <./Figure-1.png>]
-<Figure-2.png, id=31, 654.5253pt x 540.5796pt>
+<Figure-2.png, id=41, 654.5253pt x 540.5796pt>
 File: Figure-2.png Graphic file (type png)
 <use Figure-2.png>
-Package pdftex.def Info: Figure-2.png  used on input line 81.
+Package pdftex.def Info: Figure-2.png  used on input line 91.
 (pdftex.def)             Requested size: 312.9803pt x 258.50192pt.
- [3
-
- <./Figure-2.png>]
-<Figure-3.png, id=38, 560.5743pt x 853.5087pt>
-File: Figure-3.png Graphic file (type png)
-<use Figure-3.png>
-Package pdftex.def Info: Figure-3.png  used on input line 87.
-(pdftex.def)             Requested size: 227.62204pt x 346.56775pt.
  [4
 
- <./Figure-3.png>]
-<Figure-4.png, id=45, 654.5253pt x 711.3777pt>
-File: Figure-4.png Graphic file (type png)
-<use Figure-4.png>
-Package pdftex.def Info: Figure-4.png  used on input line 93.
-(pdftex.def)             Requested size: 284.52756pt x 309.25142pt.
+ <./Figure-2.png>]
+<Figure-3.png, id=48, 560.5743pt x 853.5087pt>
+File: Figure-3.png Graphic file (type png)
+<use Figure-3.png>
+Package pdftex.def Info: Figure-3.png  used on input line 97.
+(pdftex.def)             Requested size: 227.62204pt x 346.56775pt.
  [5
 
- <./Figure-4.png>] [6
+ <./Figure-3.png>]
+<Figure-4.png, id=55, 654.5253pt x 711.3777pt>
+File: Figure-4.png Graphic file (type png)
+<use Figure-4.png>
+Package pdftex.def Info: Figure-4.png  used on input line 108.
+(pdftex.def)             Requested size: 270.30118pt x 293.78342pt.
+ [6
 
-]
+ <./Figure-4.png>]
 \tf@nav=\write7
 \openout7 = `rp5.nav'.
 
@@ -1328,21 +1339,22 @@ Package rerunfilecheck Info: File `rp5.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 31829 strings out of 478287
- 631629 string characters out of 5849289
+ 31847 strings out of 478287
+ 631929 string characters out of 5849290
  936570 words of memory out of 5000000
- 49334 multiletter control sequences out of 15000+600000
- 483924 words of font info for 73 fonts, out of 8000000 for 9000
+ 49349 multiletter control sequences out of 15000+600000
+ 484280 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,14n,122p,415b,406s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 128i,14n,122p,415b,405s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on rp5.pdf (6 pages, 11119474 bytes).
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on rp5.pdf (6 pages, 11532604 bytes).
 PDF statistics:
- 80 PDF objects out of 1000 (max. 8388607)
- 49 compressed objects within 1 object stream
+ 89 PDF objects out of 1000 (max. 8388607)
+ 52 compressed objects within 1 object stream
  13 named destinations out of 1000 (max. 500000)
- 63 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 73 words of extra memory for PDF output out of 10000 (max. 10000000)
 
