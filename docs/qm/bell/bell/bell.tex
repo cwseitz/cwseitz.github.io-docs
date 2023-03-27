@@ -57,8 +57,8 @@ Define 4 spin operators along arbitrary directions $Q = \vec{q}\cdot\sigma, R = 
 
 \vspace{0.2in}
 
-Alice: $Q,R = \pm 1$
-Bob: $S, T = \pm 1$
+Alice: $Q,R$
+Bob: $S, T$
 
 \vspace{0.1in}
 Combination of correlations between Alice and Bobs measurements are bounded according to the CHSH inequality
@@ -89,47 +89,69 @@ Let $\vec{q} = (0,0,1), \vec{r} = (1,0,0), \vec{s} = (-\frac{1}{\sqrt{2}},0,-\fr
 \end{align*}
 
 \begin{align*}
-\langle \vec{q}\cdot\sigma\otimes\vec{s}\cdot\sigma\rangle &= 
-\frac{1}{\sqrt{2}}
+\vec{r}\cdot\sigma\otimes\vec{s}\cdot\sigma = 
 \begin{pmatrix}
-\alpha^{*} &
-\beta^{*}&
-\gamma^{*}&
-\delta^{*}
-\end{pmatrix}\begin{pmatrix}
--1 & -1 & 0 & 0\\
--1 & 1 & 0 & 0\\
-0 & 0 & 1 & 1 \\
-0 & 0 & 1 & -1
+0 & \vec{s}\cdot\sigma\\
+\vec{s}\cdot\sigma & 0
+\end{pmatrix} = 
+\frac{1}{\sqrt{2}}\begin{pmatrix}
+0 & 0 & -1 & -1\\
+0 & 0 & -1 & 1\\
+-1 & -1 & 0 & 0 \\
+-1 & 1 & 0 & 0
 \end{pmatrix}
+\end{align*}
+
+
+\begin{align*}
+\vec{r}\cdot\sigma\otimes\vec{t}\cdot\sigma = 
 \begin{pmatrix}
-\alpha\\
-\beta\\
-\gamma\\
-\delta
-\end{pmatrix}\\
-&= \frac{1}{\sqrt{2}}\left(-\alpha^{*}(\alpha+\beta) + \beta^{*}(\beta-\alpha) + \gamma^{*}(\gamma+\delta) + \delta^{*}(\gamma-\delta)\right)
+0 & \vec{t}\cdot\sigma \\
+\vec{t}\cdot\sigma & 0
+\end{pmatrix} = 
+\frac{1}{\sqrt{2}}\begin{pmatrix}
+0 & 0 & 1 & -1\\
+0 & 0 & -1 & -1\\
+1 & -1 & 0 & 0 \\
+-1 & -1 & 0 & 0
+\end{pmatrix}
+\end{align*}
+
+
+
+\end{frame}
+
+\begin{frame}{Calculating expectations}
+
+
+\begin{align*}
+\vec{q}\cdot\sigma\otimes\vec{t}\cdot\sigma = 
+\begin{pmatrix}
+\vec{t}\cdot\sigma & 0\\
+0 & -\vec{t}\cdot\sigma
+\end{pmatrix} = 
+\frac{1}{\sqrt{2}}\begin{pmatrix}
+1 & -1 & 0 & 0\\
+-1 & -1 & 0 & 0\\
+0 & 0 & -1 & 1 \\
+0 & 0 & 1 & 1
+\end{pmatrix}
+\end{align*}
+
+
+\begin{align*}
+\langle \vec{q}\cdot\sigma\otimes\vec{s}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(-\alpha^{*}(\alpha+\beta) + \beta^{*}(\beta-\alpha) + \gamma^{*}(\gamma+\delta) + \delta^{*}(\gamma-\delta)\right)\\
+\langle \vec{r}\cdot\sigma\otimes\vec{s}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(-\alpha^{*}(\gamma+\delta) + \beta^{*}(\delta-\gamma) - \gamma^{*}(\alpha + \beta) + \delta^{*}(\beta-\alpha)\right)\\
+\langle \vec{r}\cdot\sigma\otimes\vec{t}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(\alpha^{*}(\gamma-\delta) - \beta^{*}(\delta+\gamma) + \gamma^{*}(\alpha - \beta) - \delta^{*}(\beta+\alpha)\right)\\
+\langle \vec{q}\cdot\sigma\otimes\vec{t}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(\alpha^{*}(\alpha-\beta) - \beta^{*}(\beta+\alpha) + \gamma^{*}(\delta-\delta) + \delta^{*}(\gamma+\delta)\right)
 \end{align*}
 
 
 \end{frame}
 
 \begin{frame}{Entanglement entropy of a two-qubit system}
+Von Neumann entropy of a pure state is zero and cannot distinguish between entangled and separable pure states
 
-Suppose the system is in a pure state
-
-\begin{align*}
-\ket{\psi} = \alpha\ket{00} + \beta\ket{01} + \gamma\ket{10} + \delta\ket{11}
-\end{align*}
-
-\begin{align*}
-\rho_{AB} = \ket{\psi}\bra{\psi} = 
-\end{align*}
-
-
-\begin{align*}
-\rho_{A} = \mathrm{Tr}_{B}(\rho_{AB}) = 
-\end{align*}
 
 \end{frame}
 
