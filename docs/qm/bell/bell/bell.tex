@@ -67,30 +67,49 @@ Combination of correlations between Alice and Bobs measurements are bounded acco
 E(Q\otimes S) + E(R\otimes S) + E(R\otimes T) - E(Q\otimes T) \leq 2
 \end{align*}
 
-Exceeding this upper bound violates locality
+Let $\vec{q} = (0,0,1), \vec{r} = (1,0,0), \vec{s} = (-\frac{1}{\sqrt{2}},0,-\frac{1}{\sqrt{2}}), \vec{t} = (-\frac{1}{\sqrt{2}},0,\frac{1}{\sqrt{2}})$
 
 \end{frame}
 
 \begin{frame}{Calculating expectations}
 
-Let $\vec{q} = (0,0,1), \vec{r} = (1,0,0), \vec{s} = (-\frac{1}{\sqrt{2}},0,-\frac{1}{\sqrt{2}}), \vec{t} = (-\frac{1}{\sqrt{2}},0,\frac{1}{\sqrt{2}})$
-
-Take an arbitrary state
 
 \begin{align*}
-\ket{\psi} = \alpha\ket{00} + \beta\ket{01} + \gamma\ket{10} + \delta\ket{11}
+\vec{q}\cdot\sigma\otimes\vec{s}\cdot\sigma = 
+\begin{pmatrix}
+\vec{s}\cdot\sigma & 0 \\
+0 & -\vec{s}\cdot\sigma
+\end{pmatrix} = 
+\frac{1}{\sqrt{2}}\begin{pmatrix}
+-1 & -1 & 0 & 0\\
+-1 & 1 & 0 & 0\\
+0 & 0 & 1 & 1 \\
+0 & 0 & 1 & -1
+\end{pmatrix}
 \end{align*}
-
 
 \begin{align*}
-\langle AB \rangle &= \langle \psi | A \otimes B | \psi \rangle \\
-&= (\alpha^* \langle 00 | + \beta^* \langle 01 | + \gamma^* \langle 10 | + \delta^* \langle 11 |) \otimes (\vec{a} \cdot \vec{\sigma}) \otimes (\vec{b} \cdot \vec{\sigma}) \otimes (|00 \rangle \langle 00| + |01 \rangle \langle 01| + |10 \rangle \langle 10| + |11 \rangle \langle 11|) \\
-&\quad \times (\alpha |00\rangle + \beta |01\rangle + \gamma |10\rangle + \delta |11\rangle) \\
-&= \alpha^* \beta (\vec{a} \cdot \vec{\sigma}){01} (\vec{b} \cdot \vec{\sigma}){10} + \alpha^* \gamma (\vec{a} \cdot \vec{\sigma}){00} (\vec{b} \cdot \vec{\sigma}){00} \\
-&\quad + \beta^* \delta (\vec{a} \cdot \vec{\sigma}){11} (\vec{b} \cdot \vec{\sigma}){01} + \gamma^* \delta (\vec{a} \cdot \vec{\sigma}){10} (\vec{b} \cdot \vec{\sigma}){11}
+\langle \vec{q}\cdot\sigma\otimes\vec{s}\cdot\sigma\rangle &= 
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+\alpha^{*} &
+\beta^{*}&
+\gamma^{*}&
+\delta^{*}
+\end{pmatrix}\begin{pmatrix}
+-1 & -1 & 0 & 0\\
+-1 & 1 & 0 & 0\\
+0 & 0 & 1 & 1 \\
+0 & 0 & 1 & -1
+\end{pmatrix}
+\begin{pmatrix}
+\alpha\\
+\beta\\
+\gamma\\
+\delta
+\end{pmatrix}\\
+&= \frac{1}{\sqrt{2}}\left(-\alpha^{*}(\alpha+\beta) + \beta^{*}(\beta-\alpha) + \gamma^{*}(\gamma+\delta) + \delta^{*}(\gamma-\delta)\right)
 \end{align*}
-
-where $(\vec{a} \cdot \vec{\sigma})_{ij}$ denotes the $ij$-th element of the matrix $\vec{a} \cdot \vec{\sigma}$.
 
 
 \end{frame}
