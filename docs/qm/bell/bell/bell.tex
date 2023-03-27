@@ -45,54 +45,73 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{Bell's inequality (classical)}
+\begin{frame}{}
+
+Basically I want to relate the expansion coefficients of the two-qubit pure state to the degree of entanglement using entanglement entropy. Then, I want to demonstrate that entangled states can violate Bell's inequality (but I'm not sure if this is exactly correct or under what conditions). Finally, I want to show maximally entangled states that saturate the Tsirelson bound.
 
 \end{frame}
 
-\begin{frame}{Tsirelson's inequality (quantum)}
+\begin{frame}{CHSH Inequality}
+
+Define 4 spin operators along arbitrary directions $Q = \vec{q}\cdot\sigma, R = \vec{r}\cdot\sigma, S = \vec{s}\cdot\sigma, T = \vec{t}\cdot\sigma$.
+
+\vspace{0.2in}
+
+Alice: $Q,R = \pm 1$
+Bob: $S, T = \pm 1$
+
+\vspace{0.1in}
+Combination of correlations between Alice and Bobs measurements are bounded according to the CHSH inequality
+
+\begin{align*}
+E(Q\otimes S) + E(R\otimes S) + E(R\otimes T) - E(Q\otimes T) \leq 2
+\end{align*}
+
+Exceeding this upper bound violates locality
 
 \end{frame}
 
-\begin{frame}{Expectation of QS and RS}
+\begin{frame}{Calculating expectations}
+
+Let $\vec{q} = (0,0,1), \vec{r} = (1,0,0), \vec{s} = (-\frac{1}{\sqrt{2}},0,-\frac{1}{\sqrt{2}}), \vec{t} = (-\frac{1}{\sqrt{2}},0,\frac{1}{\sqrt{2}})$
+
+Take an arbitrary state
 
 \begin{align*}
-\langle QS \rangle &= \bra{\psi}QS\ket{\psi}\\
-&= -\frac{1}{2^{3/2}}\left(\bra{01} - \bra{10}\right) \left(Z_{1}Z_{2}+Z_{1}X_{2}\right)\left(\ket{01} - \ket{10}\right)\\
-&= -\frac{1}{2^{3/2}}\left(\bra{01}Z_{1}Z_{2}\ket{01} + \bra{10}Z_{1}Z_{2}\ket{10}\right)\\
-&= \frac{2}{2^{3/2}} = \frac{1}{\sqrt{2}}
+\ket{\psi} = \alpha\ket{00} + \beta\ket{01} + \gamma\ket{10} + \delta\ket{11}
 \end{align*}
 
+
 \begin{align*}
-\langle RS \rangle &= \bra{\psi}RS\ket{\psi}\\
-&= -\frac{1}{2^{3/2}}\left(\bra{01} - \bra{10}\right) \left(X_{1}Z_{2}+X_{1}X_{2}\right)\left(\ket{01} - \ket{10}\right)\\
-&= \frac{1}{2^{3/2}}\left(\bra{01}X_{1}X_{2}\ket{10} + \bra{10}X_{1}X_{2}\ket{01}\right)\\
-&= \frac{2}{2^{3/2}} = \frac{1}{\sqrt{2}}
+\langle AB \rangle &= \langle \psi | A \otimes B | \psi \rangle \\
+&= (\alpha^* \langle 00 | + \beta^* \langle 01 | + \gamma^* \langle 10 | + \delta^* \langle 11 |) \otimes (\vec{a} \cdot \vec{\sigma}) \otimes (\vec{b} \cdot \vec{\sigma}) \otimes (|00 \rangle \langle 00| + |01 \rangle \langle 01| + |10 \rangle \langle 10| + |11 \rangle \langle 11|) \\
+&\quad \times (\alpha |00\rangle + \beta |01\rangle + \gamma |10\rangle + \delta |11\rangle) \\
+&= \alpha^* \beta (\vec{a} \cdot \vec{\sigma}){01} (\vec{b} \cdot \vec{\sigma}){10} + \alpha^* \gamma (\vec{a} \cdot \vec{\sigma}){00} (\vec{b} \cdot \vec{\sigma}){00} \\
+&\quad + \beta^* \delta (\vec{a} \cdot \vec{\sigma}){11} (\vec{b} \cdot \vec{\sigma}){01} + \gamma^* \delta (\vec{a} \cdot \vec{\sigma}){10} (\vec{b} \cdot \vec{\sigma}){11}
 \end{align*}
+
+where $(\vec{a} \cdot \vec{\sigma})_{ij}$ denotes the $ij$-th element of the matrix $\vec{a} \cdot \vec{\sigma}$.
+
 
 \end{frame}
 
-\begin{frame}{Expectation of QT and RT}
+\begin{frame}{Entanglement entropy of a two-qubit system}
+
+Suppose the system is in a pure state
 
 \begin{align*}
-\langle QT \rangle &= \bra{\psi}QT\ket{\psi}\\
-&= \frac{1}{2^{3/2}}\left(\bra{01} - \bra{10}\right) \left(Z_{1}Z_{2}-Z_{1}X_{2}\right)\left(\ket{01} - \ket{10}\right)\\
-&= -\frac{1}{2^{3/2}}\left(\bra{01}Z_{1}Z_{2}\ket{01} + \bra{10}Z_{1}Z_{2}\ket{10}\right)\\
-&= \frac{2}{2^{3/2}} = \frac{1}{\sqrt{2}}
+\ket{\psi} = \alpha\ket{00} + \beta\ket{01} + \gamma\ket{10} + \delta\ket{11}
 \end{align*}
 
 \begin{align*}
-\langle RT \rangle &= \bra{\psi}RT\ket{\psi}\\
-&= -\frac{1}{2^{3/2}}\left(\bra{01} - \bra{10}\right) \left(X_{1}Z_{2}+X_{1}X_{2}\right)\left(\ket{01} - \ket{10}\right)\\
-&= \frac{1}{2^{3/2}}\left(\bra{01}X_{1}X_{2}\ket{10} + \bra{10}X_{1}X_{2}\ket{01}\right)\\
-&= \frac{2}{2^{3/2}} = \frac{1}{\sqrt{2}}
+\rho_{AB} = \ket{\psi}\bra{\psi} = 
 \end{align*}
 
-\end{frame}
 
-\begin{frame}{Why do Bell states saturate the bound?}
 \begin{align*}
-S(\rho) = -\mathrm{Tr}(\rho\log\rho)
+\rho_{A} = \mathrm{Tr}_{B}(\rho_{AB}) = 
 \end{align*}
+
 \end{frame}
 
 \end{document}
