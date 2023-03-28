@@ -129,15 +129,16 @@ where $P(\xi_{k}) = \mathcal{N}(o_{k},\sigma_{k}^{2})$ and $P(S_{k}) = \mathrm{P
 Since $H_{k} = S_{k} + \xi_{k}$, we transform $H_{k}' = H_{k} - o_{k} + \sigma_{k}^{2}$, which is distributed according to 
 
 \begin{align*}
-H_{k}' \sim \mathrm{Poisson}(g_{k}\mu_{k} + \sigma_{k}^{2})
+H_{k}' \sim \mathrm{Poisson}(\mu_{k}')
 \end{align*}
 
-since the the convolution of two Poisson distributions is Poisson. Under this approximation, the model negative log-likelihood is
+where $\mu_{k}' = g_{k}\mu_{k} + \sigma_{k}^{2}$. This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson. Under this approximation, the model negative log-likelihood is
 
 \begin{align*}
-\ell(\vec{H}) &= -\log \prod_{k} \frac{e^{-\left(g_{k}\mu_{k} + \sigma_{k}^{2}\right)}\left(g_{k}\mu_{k} + \sigma_{k}^{2}\right)^{n_{k}}}{n_{k}!}\\
-&= \sum_{k}  \log n_{k}! + g_{k}\mu_{k} + \sigma_{k}^{2} - n_{k}\log\left(g_{k}\mu_{k} + \sigma_{k}^{2}\right)
+\ell(\vec{H}) &= -\log \prod_{k} \frac{e^{-\left(\mu_{k}'\right)}\left(\mu_{k}'\right)^{n_{k}}}{n_{k}!}\\
+&= \sum_{k}  \log n_{k}! + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
 \end{align*}
+
 
 
 \subsection{The Cramer-Rao lower bound}

@@ -46,33 +46,86 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{Direction stochastic optical reconstruction microscopy}
+
+\begin{frame}{sCMOS noise model}
+
+The Poisson rate parameter for a single pixel is 
+\begin{equation*}
+\mu_{k} = \eta\Delta t(N_{0}\lambda_{k} + B_{0}) 
+\end{equation*}
+where $\Delta t$ is the camera exposure time and $N_{0}$ and $B_{0}$ are the fluorophore and background emission rates respectively. 
+\begin{equation*}
+\lambda_{k} = \int_{\mathrm{pixel}}G(x,y)dxdy
+\end{equation*}
+where the 2D function $G(x,y)$ is a normalized Gaussian density over the pixel array
+\begin{equation*}
+\mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}}
+\end{equation*}
 \end{frame}
 
-\begin{frame}{Photoswitchable organic dyes}
+\begin{frame}{How to compute $\lambda_{k}$ at each pixel}
+
+We can replace this integral with error functions:
+
+\begin{align*}
+\lambda_{x}(x) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{x+a/2-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{x-a/2-x_{0}}{\sqrt{2}\sigma}\right)\right)\\
+\lambda_{y}(y) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{y+a/2-y_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{y-y/2-y_{0}}{\sqrt{2}\sigma}\right)\right)
+\end{align*}
+
+\begin{equation*}
+\lambda_{k}(x,y) = \lambda_{x}(x)\lambda_{y}(y)
+\end{equation*}
+The \emph{true signal} is then
+\begin{equation*}
+\vec{S} = \left[\mathrm{Poisson}(\lambda_{1}), \mathrm{Poisson}(\lambda_{2}), ..., \mathrm{Poisson}(\lambda_{N})\right]
+\end{equation*}
+
 \end{frame}
 
-\begin{frame}{A model of photoswitching between ON and OFF states}
+\begin{frame}{Poisson approximation of pixel values}
+
+However, due to readout noise, we measure
+
+\begin{equation*}
+\vec{H} = \vec{S} + \vec{\xi}
+\end{equation*}
+The distribution of $H_{k}$ is the convolution:
+\begin{align*}
+P(H_{k}|\theta) &= P(S_{k})\circledast P(\xi_{k})\\
+&= A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
+\end{align*}
+where $P(\xi_{k}) = \mathcal{N}(o_{k},\sigma_{k}^{2})$ and $P(S_{k}) = \mathrm{Poisson}(g_{k}\mu_{k})$. In practice, this expression is difficult to work with, so we look for an approximation. Notice that 
+
+\begin{align*}
+\xi_{k} - o_{k} + \sigma_{k}^{2} \sim \mathcal{N}(\sigma_{k}^{2},\sigma_{k}^{2}) \approx \mathrm{Poisson}(\sigma_{k}^{2})
+\end{align*}
+
 \end{frame}
 
-\begin{frame}{Quantifying and optimizing single-molecule switching}
+\begin{frame}{The model log likelihood and Hessian matrix}
+Since $H_{k} = S_{k} + \xi_{k}$, we transform $H_{k}' = H_{k} - o_{k} + \sigma_{k}^{2}$, which is distributed according to 
+
+\begin{align*}
+H_{k}' \sim \mathrm{Poisson}(\mu_{k}')\;\;\;\mu_{k}' = g_{k}\mu_{k} + \sigma_{k}^{2}
+\end{align*}
+Since each Poisson r.v. is independent, the negative log likelihood reads
+\begin{align*}
+\ell(\vec{H}) &= -\log \prod_{k} \frac{e^{-\left(\mu_{k}'\right)}\left(\mu_{k}'\right)^{n_{k}}}{n_{k}!}\\
+&= \sum_{k}  \log n_{k}! + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
+\end{align*}
+
 \end{frame}
 
-\begin{frame}{PSF model and pixel-wise gain measurements}
+\begin{frame}{The model log likelihood and Hessian matrix}
+
+Fortunately, we can compute the Hessian of the negative log likelihood using the chain-rule for Hessian matrices.
+
+\begin{align*}
+\hat{H}_{(\ell,\theta)} = \hat{J}_{(\lambda,\theta)}^{T} \hat{H}_{(\ell,\lambda)} \hat{J}_{(\lambda,\theta)} + (J_{(\ell,\lambda)}\otimes I_{n})\hat{H}_{(\lambda,\theta)}
+\end{align*}
+By calculating $\hat{H}_{(l,\theta)}$ at $\theta_{\mathrm{MLE}}$, we can get an estimate of the observed information matrix. To do that $J_{(\lambda,\theta)}$ and $H_{(\lambda,\theta)}$ are best left to symbolic calculators. 
 \end{frame}
 
-\begin{frame}{Pixel-wise readout noise measurements}
-\end{frame}
-
-\begin{frame}{The Fisher information metric and Cramer-Rao bound}
-\end{frame}
-
-\begin{frame}{Monte Carlo estimation of the Cramer-Rao Bound}
-Start with $\theta_{\mathrm{MLE}}$, use MCMC to explore the parameter space. How to ensure $\theta_{\mathrm{MLE}}$ is a good starting point? Or should I start at the true parameters?
-\end{frame}
-
-\begin{frame}{Experimental determinants of localization accuracy}
-\end{frame}
 
 
 \end{document}
