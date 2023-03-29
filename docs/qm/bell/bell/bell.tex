@@ -45,10 +45,8 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{}
-
-Basically I want to relate the expansion coefficients of the two-qubit pure state to the degree of entanglement using entanglement entropy. Then, I want to demonstrate that entangled states can violate Bell's inequality (but I'm not sure if this is exactly correct or under what conditions). Finally, I want to show maximally entangled states that saturate the Tsirelson bound.
-
+\begin{frame}
+All I want to do is demonstrate one state ($\ket{\phi^{+}}$) that (1) has nonzero entropy of entanglement and (2) can break Bell's inequality
 \end{frame}
 
 \begin{frame}{CHSH Inequality}
@@ -64,7 +62,13 @@ Bob: $S, T$
 Combination of correlations between Alice and Bobs measurements are bounded according to the CHSH inequality
 
 \begin{align*}
-E(Q\otimes S) + E(R\otimes S) + E(R\otimes T) - E(Q\otimes T) \leq 2
+E(QS) + E(RS) + E(RT) - E(QT) \leq 2
+\end{align*}
+
+and its quantum counterpart:
+
+\begin{align*}
+E(Q\otimes S) + E(R\otimes S) + E(R\otimes T) - E(Q\otimes T) \leq 2\sqrt{2}
 \end{align*}
 
 Let $\vec{q} = (0,0,1), \vec{r} = (1,0,0), \vec{s} = (-\frac{1}{\sqrt{2}},0,-\frac{1}{\sqrt{2}}), \vec{t} = (-\frac{1}{\sqrt{2}},0,\frac{1}{\sqrt{2}})$
@@ -149,9 +153,23 @@ Let $\vec{q} = (0,0,1), \vec{r} = (1,0,0), \vec{s} = (-\frac{1}{\sqrt{2}},0,-\fr
 
 \end{frame}
 
-\begin{frame}{Entanglement entropy of a two-qubit system}
+\begin{frame}{Reduced density matrices}
 
-Assume $\rho_{AB}$ is a pure state but not necessarily separable.
+\begin{align*}
+\mathrm{Tr}_{A}(\rho_{AB}) &= \sum_{ijkl} \rho_{ij}^{kl} \mathrm{Tr}_{A}(\ket{i}\bra{k}) \otimes \ket{j}\bra{l}\\
+&= \sum_{i} \left(\sum_{jl} \rho_{ij}^{il} \ket{j}\bra{l}\right)\\
+&= (\rho_{00}^{00}+\rho_{10}^{10})\ket{0}\bra{0} + (\rho_{00}^{01}+\rho_{10}^{11})\ket{0}\bra{1} + (\rho_{01}^{00}+\rho_{11}^{10})\ket{1}\bra{0} + (\rho_{01}^{01}+\rho_{11}^{11})\ket{1}\bra{1}
+\end{align*}
+
+\begin{align*}
+\mathrm{Tr}_{B}(\rho_{AB}) &= \sum_{ijkl} \rho_{ij}^{kl} \ket{i}\bra{k} \otimes \mathrm{Tr}_{B}(\ket{j}\bra{l})\\
+&= \sum_{j} \left(\sum_{ik} \rho_{ij}^{kj} \ket{i}\bra{k}\right)\\
+&= (\rho_{00}^{00}+\rho_{01}^{01})\ket{0}\bra{0} + (\rho_{00}^{10}+\rho_{01}^{11})\ket{0}\bra{1} + (\rho_{10}^{00}+\rho_{11}^{01})\ket{1}\bra{0} + (\rho_{10}^{10}+\rho_{11}^{11})\ket{1}\bra{1}
+\end{align*}
+
+\end{frame}
+
+\begin{frame}{Reduced density matrices}
 
 \begin{align*}
 \rho_{AB} &=\begin{pmatrix}
@@ -162,6 +180,80 @@ Assume $\rho_{AB}$ is a pure state but not necessarily separable.
 \end{pmatrix}
 \end{align*}
 
+\begin{align*}
+\mathrm{Tr}_{A}(\rho_{AB}) &=
+\begin{pmatrix}
+\rho_{00}^{00}+\rho_{10}^{10} & \rho_{00}^{01}+\rho_{10}^{11}\\
+\rho_{01}^{00}+\rho_{11}^{10} & \rho_{01}^{01}+\rho_{11}^{11}
+\end{pmatrix}
+= \begin{pmatrix}
+|\alpha|^{2} + |\gamma|^{2} & \alpha\beta^{*} + \gamma\delta^{*}\\
+\beta\alpha^{*} + \delta\gamma^{*} & |\beta|^{2} + |\delta|^{2}
+\end{pmatrix}
+\end{align*}
+
+\begin{align*}
+\mathrm{Tr}_{B}(\rho_{AB}) &=
+\begin{pmatrix}
+\rho_{00}^{00}+\rho_{01}^{01} & \rho_{00}^{10}+\rho_{01}^{11}\\
+\rho_{10}^{00}+\rho_{11}^{01} & \rho_{10}^{10}+\rho_{11}^{11}
+\end{pmatrix}
+= \begin{pmatrix}
+|\alpha|^{2} + |\beta|^{2} & \alpha\gamma^{*} + \beta\delta^{*}\\
+\gamma\alpha^{*} + \delta\beta^{*} & |\gamma|^{2} + |\delta|^{2}
+\end{pmatrix}
+\end{align*}
+
+\end{frame}
+
+\begin{frame}{Entanglement entropy of $\ket{\phi^{+}}$}
+
+\begin{align*}
+S(\rho) = -\mathrm{Tr}(\rho\log\rho) = -\sum_{x}\lambda_{x}\log\lambda_{x}
+\end{align*}
+
+where $\lambda_{x}$ are the eigenvalues of $\rho$. Let $\ket{\phi^{+}} = \frac{\ket{00} + \ket{11}}{\sqrt{2}}$
+
+\begin{align*}
+\rho_{AB} = 
+\begin{pmatrix}
+1 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+1 & 0 & 0 & 1
+\end{pmatrix}
+\end{align*}
+
+which only has one nonzero eigenvalue $\lambda = 2$. Therefore $S(\rho) = 1$.
+
+\begin{align*}
+\rho_{A} = \frac{1}{2}\begin{pmatrix}
+1 & 0\\
+0 & 1\\
+\end{pmatrix}\;\;\;\;
+\rho_{B} = \frac{1}{2}\begin{pmatrix}
+1 & 0\\
+0 & 1\\
+\end{pmatrix}\;\;\; S(\rho_{A}) = S(\rho_{B}) = 0  
+\end{align*}
+
+
+\end{frame}
+
+\begin{frame}{Correlation functions for $\ket{\phi^{+}}$}
+
+$\ket{\phi^{+}} = \frac{\ket{00} + \ket{11}}{\sqrt{2}}$
+
+\begin{align*}
+\langle \vec{q}\cdot\sigma\otimes\vec{s}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(-\alpha^{*}(\alpha+\beta) + \beta^{*}(\beta-\alpha) + \gamma^{*}(\gamma+\delta) + \delta^{*}(\gamma-\delta)\right) = -\frac{1}{\sqrt{2}}\\
+\langle \vec{r}\cdot\sigma\otimes\vec{s}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(-\alpha^{*}(\gamma+\delta) + \beta^{*}(\delta-\gamma) - \gamma^{*}(\alpha + \beta) + \delta^{*}(\beta-\alpha)\right)= -\frac{1}{\sqrt{2}}\\
+\langle \vec{r}\cdot\sigma\otimes\vec{t}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(\alpha^{*}(\gamma-\delta) - \beta^{*}(\delta+\gamma) + \gamma^{*}(\alpha - \beta) - \delta^{*}(\beta+\alpha)\right)= -\frac{1}{\sqrt{2}}\\
+\langle \vec{q}\cdot\sigma\otimes\vec{t}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(\alpha^{*}(\alpha-\beta) - \beta^{*}(\beta+\alpha) + \gamma^{*}(\delta-\delta) + \delta^{*}(\gamma+\delta)\right)= \frac{1}{\sqrt{2}}
+\end{align*}
+
+\begin{align*}
+E(Q\otimes S) + E(R\otimes S) + E(R\otimes T) - E(Q\otimes T) = -2\sqrt{2}
+\end{align*}
 
 
 \end{frame}
