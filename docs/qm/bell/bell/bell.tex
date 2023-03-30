@@ -45,13 +45,7 @@
   \titlepage
 \end{frame}
 
-\begin{frame}
-All I want to do is demonstrate one state ($\ket{\phi^{+}}$) that (1) has nonzero entropy of entanglement and (2) can break Bell's inequality
-\end{frame}
-
-\begin{frame}{CHSH Inequality}
-
-Define 4 spin operators along arbitrary directions $Q = \vec{q}\cdot\sigma, R = \vec{r}\cdot\sigma, S = \vec{s}\cdot\sigma, T = \vec{t}\cdot\sigma$.
+\begin{frame}{Bell's Inequality}
 
 \vspace{0.2in}
 
@@ -59,19 +53,21 @@ Alice: $Q,R$
 Bob: $S, T$
 
 \vspace{0.1in}
-Combination of correlations between Alice and Bobs measurements are bounded according to the CHSH inequality
+Classical observables distributed according to $P(Q,R,S,T)$. Combination of correlations between Alice and Bobs measurements are bounded according to the CHSH inequality
 
 \begin{align*}
-E(QS) + E(RS) + E(RT) - E(QT) \leq 2
+|E(QS) + E(RS) + E(RT) - E(QT)| \leq 2
 \end{align*}
 
-and its quantum counterpart:
-
-\begin{align*}
-E(Q\otimes S) + E(R\otimes S) + E(R\otimes T) - E(Q\otimes T) \leq 2\sqrt{2}
-\end{align*}
+For the quantum version, define 4 spin operators along arbitrary directions $Q = \vec{q}\cdot\sigma, R = \vec{r}\cdot\sigma, S = \vec{s}\cdot\sigma, T = \vec{t}\cdot\sigma$.
 
 Let $\vec{q} = (0,0,1), \vec{r} = (1,0,0), \vec{s} = (-\frac{1}{\sqrt{2}},0,-\frac{1}{\sqrt{2}}), \vec{t} = (-\frac{1}{\sqrt{2}},0,\frac{1}{\sqrt{2}})$
+
+\begin{align*}
+|\langle Q\otimes S\rangle + \langle R\otimes S\rangle  + \langle R\otimes T\rangle  - \langle Q\otimes T\rangle|  \leq 2\sqrt{2}
+\end{align*}
+
+
 
 \end{frame}
 
@@ -153,7 +149,18 @@ Let $\vec{q} = (0,0,1), \vec{r} = (1,0,0), \vec{s} = (-\frac{1}{\sqrt{2}},0,-\fr
 
 \end{frame}
 
-\begin{frame}{Reduced density matrices}
+\begin{frame}{Full density matrix}
+\begin{align*}
+\rho_{AB} &=\begin{pmatrix}
+|\alpha|^{2} & \alpha\beta^{*} & \alpha\gamma^{*} & \alpha\delta^{*} \\
+\beta\alpha^{*} & |\beta|^{2} & \beta\gamma^{*} & \beta\delta^{*} \\
+\gamma\alpha^{*} & \gamma\beta^{*} & |\gamma|^{2} & \gamma\delta^{*} \\
+\delta\alpha^{*} & \delta\beta^{*} & \delta\gamma^{*} & |\delta|^{2}
+\end{pmatrix}
+\end{align*}
+\end{frame}
+
+\begin{frame}{Partial traces}
 
 \begin{align*}
 \mathrm{Tr}_{A}(\rho_{AB}) &= \sum_{ijkl} \rho_{ij}^{kl} \mathrm{Tr}_{A}(\ket{i}\bra{k}) \otimes \ket{j}\bra{l}\\
@@ -170,15 +177,6 @@ Let $\vec{q} = (0,0,1), \vec{r} = (1,0,0), \vec{s} = (-\frac{1}{\sqrt{2}},0,-\fr
 \end{frame}
 
 \begin{frame}{Reduced density matrices}
-
-\begin{align*}
-\rho_{AB} &=\begin{pmatrix}
-|\alpha|^{2} & \alpha\beta^{*} & \alpha\gamma^{*} & \alpha\delta^{*} \\
-\beta\alpha^{*} & |\beta|^{2} & \beta\gamma^{*} & \beta\delta^{*} \\
-\gamma\alpha^{*} & \gamma\beta^{*} & |\gamma|^{2} & \gamma\delta^{*} \\
-\delta\alpha^{*} & \delta\beta^{*} & \delta\gamma^{*} & |\delta|^{2}
-\end{pmatrix}
-\end{align*}
 
 \begin{align*}
 \mathrm{Tr}_{A}(\rho_{AB}) &=
@@ -252,7 +250,7 @@ $\ket{\phi^{+}} = \frac{\ket{00} + \ket{11}}{\sqrt{2}}$
 \end{align*}
 
 \begin{align*}
-E(Q\otimes S) + E(R\otimes S) + E(R\otimes T) - E(Q\otimes T) = -2\sqrt{2}
+|\langle Q\otimes S\rangle + \langle R\otimes S\rangle  + \langle R\otimes T\rangle  - \langle Q\otimes T\rangle|  = 2\sqrt{2}
 \end{align*}
 
 
