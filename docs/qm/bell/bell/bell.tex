@@ -176,7 +176,7 @@ Let $\vec{q} = (0,0,1), \vec{r} = (1,0,0), \vec{s} = (-\frac{1}{\sqrt{2}},0,-\fr
 
 \end{frame}
 
-\begin{frame}{Reduced density matrices}
+\begin{frame}{Reduced density matrices for an arbitrary state}
 
 \begin{align*}
 \mathrm{Tr}_{A}(\rho_{AB}) &=
@@ -204,6 +204,30 @@ Let $\vec{q} = (0,0,1), \vec{r} = (1,0,0), \vec{s} = (-\frac{1}{\sqrt{2}},0,-\fr
 
 \end{frame}
 
+\begin{frame}{Definition of entanglement entropy}
+
+\begin{align*}
+S(\rho) = -\mathrm{Tr}(\rho\log\rho) = -\sum_{x}\lambda_{x}\log\lambda_{x}
+\end{align*}
+
+for eigenvalues $\lambda_{x}$ of $\rho$. The entropy of entanglement is
+
+\begin{align*}
+\Delta S = S(\rho) - S(\rho_{A}) - S(\rho_{B})
+\end{align*}
+
+This tells us: do the reduced states $\rho_{A}$ and $\rho_{B}$ contain all the information in $\rho_{AB}$? Maybe analagous to the Shannon entropy
+
+\begin{align*}
+H(X,Y) = H(X) + H(Y|X) \leq H(X) + H(Y)
+\end{align*}
+
+\begin{align*}
+\epsilon = H(Y) - H(Y|X)
+\end{align*}
+
+\end{frame}
+
 \begin{frame}{Entanglement entropy of $\ket{\phi^{+}}$}
 
 \begin{align*}
@@ -225,16 +249,42 @@ where $\lambda_{x}$ are the eigenvalues of $\rho$. Let $\ket{\phi^{+}} = \frac{\
 which only has one nonzero eigenvalue $\lambda = 2$. Therefore $S(\rho) = 1$.
 
 \begin{align*}
-\rho_{A} = \frac{1}{2}\begin{pmatrix}
+\rho_{A} = \rho_{B} = \frac{1}{2}\begin{pmatrix}
 1 & 0\\
 0 & 1\\
-\end{pmatrix}\;\;\;\;
-\rho_{B} = \frac{1}{2}\begin{pmatrix}
-1 & 0\\
-0 & 1\\
-\end{pmatrix}\;\;\; S(\rho_{A}) = S(\rho_{B}) = 0  
+\end{pmatrix}
+\;\;\; S(\rho_{A}) = S(\rho_{B}) = 0  \;\; \Delta S = 1
 \end{align*}
 
+\end{frame}
+
+\begin{frame}{Entanglement entropy of $\ket{00}$}
+
+Let $\psi = \ket{00}$
+
+\begin{align*}
+\rho_{AB} = 
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix}
+\end{align*}
+
+which only has one nonzero eigenvalue $\lambda = 1$. Therefore $S(\rho) = 0$.
+
+\begin{align*}
+\rho_{A} = \rho_{B} = \begin{pmatrix}
+1 & 0\\
+0 & 0\\
+\end{pmatrix}
+\;\;\; \lambda = 1
+\end{align*}
+Therefore,
+\begin{align*}
+S(\rho_{A}) = S(\rho_{B}) = 0  \;\; \Delta S = 0
+\end{align*}
 
 \end{frame}
 
