@@ -126,6 +126,18 @@ Fortunately, we can compute the Hessian of the negative log likelihood using the
 By calculating $\hat{H}_{(l,\theta)}$ at $\theta_{\mathrm{MLE}}$, we can get an estimate of the observed information matrix. To do that $J_{(\lambda,\theta)}$ and $H_{(\lambda,\theta)}$ are best left to symbolic calculators. 
 \end{frame}
 
+\begin{frame}{Localization using a deep generative model}
 
+Define particle coordinates as a latent variable $\bm{z}$. Variational autoencoders use neural networks to represent $P_{\Theta}(z|h)$ and $P_{\Phi}(h|z)$.
+
+\begin{align*}
+D_{\mathrm{KL}}(q(\theta)||p(\theta|x)) &= \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)}{p(\theta|x)}\right)\\
+&=  \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)p(x)}{p(\theta,x)}\right)\\
+&=  \log p(x) + \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)}{p(x|\theta)p(\theta)}\right)\\
+&= \log p(x) + \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)\\
+&= \log p(x) + H(q) -\underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log p(x|\theta) + \log p(\theta) \right)
+\end{align*}
+
+\end{frame}
 
 \end{document}
