@@ -126,8 +126,19 @@ Fortunately, we can compute the Hessian of the negative log likelihood using the
 By calculating $\hat{H}_{(l,\theta)}$ at $\theta_{\mathrm{MLE}}$, we can get an estimate of the observed information matrix. To do that $J_{(\lambda,\theta)}$ and $H_{(\lambda,\theta)}$ are best left to symbolic calculators. 
 \end{frame}
 
-\begin{frame}{Generalizing to a variable number of particles: The Dirichlet Process}
-When the number of particles becomes a variable, the number of particles in our model becomes a variable
+\begin{frame}{Generalizing to a variable number of particles}
+
+\begin{align*}
+P(k,\theta | H) = \frac{P(X|k,\{\theta\}_{i=1}^{k})P(\theta|k)P(k)}{P(H)}
+\end{align*}
+
+where $P(k)$ is a hyperprior. One option is to use the Dirichlet process
+
+\begin{align*}
+P(k,\{\theta\}_{i=1}^{k} | H) &= \frac{P(H|k,\{\theta\}_{i=1}^{k})DP(\alpha,P(\theta|k))}{P(H)}
+\end{align*}
+
+
  
 \end{frame}
 
