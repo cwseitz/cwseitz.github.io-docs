@@ -328,6 +328,15 @@ This system can be solved analytically by Laplace transformation. Similar to the
 f_{\mathrm{OFF}}(t) = -\frac{dP(\mathrm{OFF} \geq t)}{dt} = \sum_{i}a_{i}\lambda_{i}e^{-\lambda_{i}t}
 \end{align*}
 
+\subsection{A Hidden Markov Model with Stick-Breaking Prior}
+
+\begin{align*}
+\vec{\mu}(t) = \eta\Delta t\left(\vec{\lambda}_{\theta}N_{\phi}(t) + B_{0}(t)\right)
+\end{align*}
+
+\begin{align*}
+P(\vec{H}_{t}|\theta,\phi) = \prod_{k} \frac{e^{-\left(\mu_{k,t}\right)}\left(\mu_{k,t}\right)^{n_{k,t}}}{n_{k,t}!}
+\end{align*}
 
 
 \chapter{Phase transitions of DNA-protein condensates}
