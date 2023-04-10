@@ -206,24 +206,22 @@ Let $\vec{q} = (0,0,1), \vec{r} = (1,0,0), \vec{s} = (-\frac{1}{\sqrt{2}},0,-\fr
 
 \begin{frame}{Definition of entanglement entropy}
 
+The Von Neumann entropy is
+
 \begin{align*}
 S(\rho) = -\mathrm{Tr}(\rho\log\rho) = -\sum_{x}\lambda_{x}\log\lambda_{x}
 \end{align*}
 
-for eigenvalues $\lambda_{x}$ of $\rho$. The entropy of entanglement is
+for eigenvalues $\lambda_{x}$ of $\rho$. This tells us: do the reduced states $\rho_{A}$ and $\rho_{B}$ contain all the information in $\rho_{AB}$? Maybe analagous to the mutual information
+
+\begin{align*}
+I(X;Y) = H(X) + H(Y) - H(X,Y) \geq 0
+\end{align*}
+
+So a possible measurement of entanglement is
 
 \begin{align*}
 \Delta S = S(\rho) - S(\rho_{A}) - S(\rho_{B})
-\end{align*}
-
-This tells us: do the reduced states $\rho_{A}$ and $\rho_{B}$ contain all the information in $\rho_{AB}$? Maybe analagous to the Shannon entropy
-
-\begin{align*}
-H(X,Y) = H(X) + H(Y|X) \leq H(X) + H(Y)
-\end{align*}
-
-\begin{align*}
-\epsilon = H(Y) - H(Y|X)
 \end{align*}
 
 \end{frame}

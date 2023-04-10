@@ -330,21 +330,45 @@ f_{\mathrm{OFF}}(t) = -\frac{dP(\mathrm{OFF} \geq t)}{dt} = \sum_{i}a_{i}\lambda
 
 \subsection{A Hidden Markov Random Field Model with Stick-Breaking Prior}
 
-\begin{align*}
-\vec{\mu}(t) = \eta\Delta t\left(\vec{\lambda}_{\theta}N_{\phi}(t) + B_{0}(t)\right)
-\end{align*}
+We would like to perform inference on the number of particles in the time-series as well as their respective positions and switching rate constants. Therefore, we construct the full posterior for these bundled parameters $\Theta$ given the image sequence $\bm{H}$.
+
 
 \begin{align*}
-P(\vec{H}_{t}|\theta,\phi) = \prod_{k} \frac{e^{-\left(\mu_{k,t}\right)}\left(\mu_{k,t}\right)^{n_{k,t}}}{n_{k,t}!}
+P(\Theta|\bm{H}) = \frac{P(\Theta)\prod_{t}P(H_{t}|\Theta)}{P(H)}
 \end{align*}
 
-An MRF can model the Gaussian point spread function (PSF) by using a pairwise potential that encourages neighboring pixels to have similar intensities.
+where $\Theta = (\vec{k},\theta)$
+To account for the unknown hidden state $X_{t}$, we need to marginalize over it. We can use the law of total probability to do this:
 
-In the case of a Gaussian PSF, neighboring pixels are likely to have similar intensities because the PSF is a smooth function that decreases in intensity as distance from the center of the PSF increases. This means that neighboring pixels are likely to be affected by similar amounts of light from the fluorescent particle, resulting in similar intensity values.
+\begin{align*}
+P(H_{t}|\bm{\Theta}) &= \sum_{\bm{X}} P(H_{t},\bm{X}|\bm{\Theta}) \\
+&= \sum_{\bm{X}} P(H_{t}|\bm{X},\bm{\Theta})P(\bm{X}|\bm{\Theta})
+\end{align*}
 
-The pairwise potential in the MRF can be defined using a Gaussian function that depends on the distance between neighboring pixels. Specifically, the pairwise potential encourages neighboring pixels to have similar intensities by penalizing large differences between their intensities. The strength of the penalty is controlled by a parameter that determines the width of the Gaussian function.
+where $\bm{\Theta}$ denotes the set of all model parameters, and we have used the conditional independence assumptions of the HMM to factorize $P(H_{t},\bm{X}|\bm{\Theta})$ into $P(H_{t}|\bm{X},\bm{\Theta})$ and $P(\bm{X}|\bm{\Theta})$. $P(H_{t}|\bm{X},\bm{\Theta})$ is the likelihood function of the observed data $H_t$ given the hidden state $X_t$ and the model parameters $\bm{\Theta}$, which is a Poisson distribution with rate parameter that depends on $X_t$ as we discussed earlier. $P(\bm{X}|\bm{\Theta})$ is the prior distribution over the hidden state sequence given the model parameters $\bm{\Theta}$, which is determined by the transition probabilities and the initial state probabilities of the HMM. Once we have expanded $P(H_{t}|\bm{\Theta})$ in terms of the hidden state sequence, we can substitute it into the numerator of Bayes rule to obtain the posterior distribution over the hidden state sequence and the model parameters.
 
-By incorporating this pairwise potential into the MRF, the model can effectively capture the local spatial structure of the Gaussian PSF. The joint HMM-MRF model can then use this information to infer the number of fluorescent particles and their spatial locations in the image.
+\begin{align*}
+P(\Theta|\bm{H}) = \frac{\mathrm{Dir}(\Theta|a,b)\prod_{t}\sum_{\bm{X}} P(H_{t}|\bm{X},\bm{\Theta})P(\bm{X}|\bm{\Theta})}{P(H)}
+\end{align*}
+
+Now, notice that in our approximation the likelihood $P(H_{t}|\bm{X},\bm{\Theta})$ is just a multivariate Poisson process. Also, the spatial structure of the image imposes constraints on the conditional dependence structure of $P(H_{t}|\bm{X},\bm{\Theta})$. The distribution will factor according to a Markov random field which enforces locality of correlations. One option is to adopt the Potts model with Gaussian weights
+
+\begin{align*}
+\psi(H_{i},H_{j}) = W_{ij}\exp\left(-\beta\delta_{ij}\right)
+\end{align*}
+
+where $W_{ij} = \exp\left(-d_{ij}^{2}/\sigma^{2}\right)$. 
+
+\begin{align*}
+U(H) = \sum_{c\in\mathcal{C}}\psi_{c}(H_{c})\rightarrow P(H)\ = \frac{1}{Z}\exp\left(-U(H)\right)
+\end{align*}
+
+In order to incorporate spatial dependence into the covariance structure of the multivariate Poisson process, we can use the following factorization:
+
+\begin{align*}
+H_{t}|\bm{X},\bm{\Theta} \sim \mathrm{Poisson}
+\end{align*}
+
 
 
 \chapter{Phase transitions of DNA-protein condensates}
