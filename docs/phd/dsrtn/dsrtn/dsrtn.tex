@@ -328,7 +328,7 @@ This system can be solved analytically by Laplace transformation. Similar to the
 f_{\mathrm{OFF}}(t) = -\frac{dP(\mathrm{OFF} \geq t)}{dt} = \sum_{i}a_{i}\lambda_{i}e^{-\lambda_{i}t}
 \end{align*}
 
-\subsection{A Hidden Markov Model with Stick-Breaking Prior}
+\subsection{A Hidden Markov Random Field Model with Stick-Breaking Prior}
 
 \begin{align*}
 \vec{\mu}(t) = \eta\Delta t\left(\vec{\lambda}_{\theta}N_{\phi}(t) + B_{0}(t)\right)
@@ -337,6 +337,14 @@ f_{\mathrm{OFF}}(t) = -\frac{dP(\mathrm{OFF} \geq t)}{dt} = \sum_{i}a_{i}\lambda
 \begin{align*}
 P(\vec{H}_{t}|\theta,\phi) = \prod_{k} \frac{e^{-\left(\mu_{k,t}\right)}\left(\mu_{k,t}\right)^{n_{k,t}}}{n_{k,t}!}
 \end{align*}
+
+An MRF can model the Gaussian point spread function (PSF) by using a pairwise potential that encourages neighboring pixels to have similar intensities.
+
+In the case of a Gaussian PSF, neighboring pixels are likely to have similar intensities because the PSF is a smooth function that decreases in intensity as distance from the center of the PSF increases. This means that neighboring pixels are likely to be affected by similar amounts of light from the fluorescent particle, resulting in similar intensity values.
+
+The pairwise potential in the MRF can be defined using a Gaussian function that depends on the distance between neighboring pixels. Specifically, the pairwise potential encourages neighboring pixels to have similar intensities by penalizing large differences between their intensities. The strength of the penalty is controlled by a parameter that determines the width of the Gaussian function.
+
+By incorporating this pairwise potential into the MRF, the model can effectively capture the local spatial structure of the Gaussian PSF. The joint HMM-MRF model can then use this information to infer the number of fluorescent particles and their spatial locations in the image.
 
 
 \chapter{Phase transitions of DNA-protein condensates}
