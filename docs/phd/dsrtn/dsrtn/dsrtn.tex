@@ -140,148 +140,7 @@ where $\mu_{k}' = g_{k}\mu_{k} + \sigma_{k}^{2}$. This result can be seen from t
 \end{align*}
 
 
-
-\subsection{The Cramer-Rao lower bound}
-
-A general task in Bayesian inference is to determine $\theta$ from the data under the model $\mathcal{M}_{\theta}$. We may then ask - does the log-likelihood $\ell$ vary as we vary the parameters? If the likelihood is flat, all parameter sets are equally likely and the data does not appear to carry much information about the parameters. Moreover, if $\ell$ has a number of bumps or inflection points, then we expect that maybe some parameter sets are more likely that others. The ``bumpiness" of the likelihood surface is called the Fisher information - a fundmantal concept in information geometry. The Fisher information matrix $I(\theta)$ can be directly related to the curvature of the KL-Divergence over the parameter space
-
-\begin{align*}
-\nabla^2_{\theta'} D_{KL}[\ell(H|\theta) \parallel \ell(H|\theta')] 
-&= - \nabla_{\theta'} \int \ell(H|\theta) \nabla_{\theta'}  \log \ell(H|\theta') \, dH \\ 
-&= - \int \ell(H|\theta) \nabla^2_{\theta'}  \log \ell(H|\theta') \, dH \\
-&= - \mathbb{E}_{\theta}[\nabla^2_{\theta'} \log \ell(H|\theta')] \\
-&= I(\theta)
-\end{align*}
-
-
-We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space. To be clear, the score is a function of the \emph{data}, not the parameters. It is a measure of sensitivity of the likelihood to changes in the parameters. Of course, the Fisher information matrix also depends on the parameterization chosen. Looking at (1.4), the likelihood is a hierarchical function that maps a vector space $\Theta$ to a vector space $\Lambda$ to a scalar value. Formally, we define $T: \Theta \rightarrow \Lambda$ and $W: \Lambda \rightarrow \mathbb{R}$. The parameter vector $(x_{0},y_{0},\sigma, N_{0})\in \Theta$, the Poisson rate vector $\vec{\lambda} \in \Lambda$ and $\ell \in \mathbb{R}$. To get the Hessian, we need the chain-rule for Hessian matrices.
-
-
-\begin{align*}
-\hat{H}_{(\ell,\theta)} = \hat{J}_{(\lambda,\theta)}^{T} \hat{H}_{(\ell,\lambda)} \hat{J}_{(\lambda,\theta)} + (J_{(\ell,\lambda)}\otimes I_{n})\hat{H}_{(\lambda,\theta)}
-\end{align*}
-
-In the second term of the equation, we have a Kronecker product between the Jacobian matrix of the likelihood with respect to the parameters of the hierarchical model ($J_{(L,\lambda)}$) and the $n\times n$ identity matrix ($I_n$), denoted as $J_{(L,\lambda)}\otimes I_n$. This Kronecker product gives a diagonal matrix where the elements along the diagonal are the elements of the vector $J_{(L,\lambda)}$. This provides a concise way of summarizing the operation:
-
-\begin{align*}
-((J_{(L,\lambda)}\otimes I_{n})\hat{H}_{(\lambda,\theta)})_{ij} = \sum_{k}\hat{J}_{(L,\lambda)}^{ij}\hat{H}_{(\lambda,\theta)}^{ijk}
-\end{align*}
-
-Note that we sum over the last index to get a 3 x 3 matrix, which is not directly obvious in the compact notation.
-
-
-
-\subsection{A Hidden Markov Model for super-resolution time-series}
-
-We would like to perform inference on the number of particles in the time-series as well as their respective positions and switching rate constants. Here, I will take a bottom up approach and describe how a time-series is generated in order to construct the full posterior for these bundled parameters $\Theta$ given the image sequence. Consider first $K$ emitters cycling through the four-state Markov process presented in the previous section. The photon emission rate in each of the four states is given by $\vec{s} = \left(\mu_{0},0,0,0\right)$. If we know the hidden state $X_{t}$ at some time $t$, then $\vec{N}(t) \sim \mathrm{Poisson}(X_{t}\vec{s})$. As shown previously, the rate at each pixel must be
-
-\begin{equation*}
-\vec{\mu}_{t}(x_{i},y_{i}) = \eta\Delta t\left(\lambda_{\theta}(x_{i},y_{i})\vec{N}_{t,i} + \vec{B}_{t}(x_{i},y_{i})\right)
-\end{equation*}
-
-The image we then observe $H_{t}$ is given by sampling from the distribution in (1.6) or its Poisson approximation. To now see how we infer $\Theta = (\vec{k},\theta)$ from the image sequence $\vec{H}$, we write the posterior on $\Theta$ according to Bayes rule
-
-\begin{align*}
-P(\Theta|\vec{H}) = \frac{P(\Theta)\prod_{t}P(H_{t}|\Theta)}{P(\vec{H})}
-\end{align*}
-
-Let us first address the likelihood function. To account for the unknown hidden state $X_{t}$, we need to marginalize over it. We can use the law of total probability to do this:
-
-\begin{align*}
-P(H_{t}|\Theta) &= \sum_{\vec{X}} P(H_{t},\vec{X}|\Theta)
-\end{align*}
-
-However, it is reasonable to assume that the joint distribution over a single frame will factor into neighborhoods: $P(H) = \prod_{\mathcal{N}}P(\mathcal{N})$ due to locality in the image. The distribution on each neighborhood $\mathcal{N}$ is
-
-\begin{equation*}
-P(\mathcal{N}) = \sum_{X}P(\mathcal{N},X) = \sum_{x}P(\mathcal{N}|X=x)P(X=x)\\
-\end{equation*}
-
-Furthermore, we know that each neighborhood should only depend on a small subset of $X$, so we can define $Y$ as the partition of $X$ that it depends on and $Z$ the partition it does not. This implies that $P(\mathcal{N}|X) = P(\mathcal{N}|Y,Z) = P(\mathcal{N}|Y)$. Therefore,
-
-
-\begin{equation*}
-P(\mathcal{N}) = \sum_{x}P(\mathcal{N}|Y=y)P(X=x)\\
-\end{equation*}
-
-This will simplify even further if we note that we can group terms since $P(\mathcal{N}|Y)$ is constant over states which share the same substate $y$
-
-\begin{align*}
-P(\mathcal{N}) &= \sum_{x}P(\mathcal{N}|Y=y)P(X=x)\\
-&= P(\mathcal{N}|Y=y_{1})\sum_{x}P(X=x) +  P(\mathcal{N}|Y=y_{2})\sum_{x}P(X=x) + ... \\
-&=  \sum_{y}P(\mathcal{N}|Y=y)
-\end{align*}
-
-Thus we have shown that each neighborhood can be considered independently of every other and we only need to sum over the subspace spanned defined by $Y$.
-
-
-\subsection{Generalizations to time-series data}
-
-\subsection{Bayesian nonparametric prior}
-
-
-
-
-\subsection{Vanilla Variational Bayes}
-
-We now describe a Bayesian inference method for the parameters $\theta$ from experiment and simulated data. In previous sections, we have given a a formal probabilistic description of the entire SMLM measurement process along with fundamental lower bound on parameter uncertainty. With this in hand, we can now describe practical methods for inferring parameters from data and assess their ability to reach these bounds.  In our framework, at each time point a measurement is made $\vec{H}_{t}$, which can be used to infer a matrix of parameters $\bm{\theta}_{t} = (\bm{x_{0}},\bm{y_{0}},\bm{\sigma},\bm{B_{0}},\bm{N_{0}})_{t}$. Occasionally, we will refer to parameter matrices $\theta_{t}$ at each time point as latent variables which give rise to the noisy low resolution images which constitute the measured data $\vec{H}$. A complete description of the generative model in the Bayesian framework includes the prior distribution $P(\theta)$ which describes the spatial distribution and temporal dynamics of fluorophores, and the likelihood $P(\vec{H}|\theta)$ - a distribution of images generated by the microscope for a given configuration of fluorophores. According to Bayes rule, the posterior on $\theta$ can be constructed as
-
-\begin{align}
-P(\theta|\vec{H}) = \frac{P(\vec{H}|\theta)P(\theta)}{\int P(\vec{H}|\theta)P(\theta) d\theta}
-\end{align}
-
-Note this likelihood was formalized in terms of the point spread function and the measurement noise of the camera in (1.7). There are several methods for finding the posterior, for example Markov Chain Monte Carlo (MCMC) or variational methods. Variational inference attempts to approximate the true posterior distribution $p(\theta|x)$ with a variational distribution $q(\theta)$, which is often a model distribution which can be easily sampled from e.g., a multivariate Gaussian. To fit the variational distribution, we can try to minimize the KL-divergence between the variational distribution and the true posterior:
-
-\begin{align*}
-D_{\mathrm{KL}}(q(\theta)||p(\theta|x)) &= \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)}{p(\theta|x)}\right)\\
-&=  \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)p(x)}{p(\theta,x)}\right)\\
-&=  \log p(x) + \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)}{p(x|\theta)p(\theta)}\right)\\
-&= \log p(x) + \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)\\
-&= \log p(x) + H(q) -\underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log p(x|\theta) + \log p(\theta) \right)
-\end{align*}
-
-Clearly the KL-divergence is minimized by minimizing this expectation. It is common to define the evidence lower bound (ELBO).
-
-\begin{align}
-\ell(x,\theta) = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
-\end{align}
-
-which gets its name from the fact that
-
-\begin{equation*}
-\log p(x) = D_{\mathrm{KL}}(q(\theta)||p(\theta|x)) + \ell(x,\theta) \geq \ell(x,\theta)
-\end{equation*}
-
-Of great practical interest are the gradients of the ELBO
-
-\begin{align*}
-\nabla_{\Phi}\ell(x,\theta) = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
-\end{align*}
-
-The quality of our parameter estimation will undoubtedly depend on our choice for the variational distribution. In some contexts, the posterior is approximated as a multivariate Gaussian, which is valid when the posterior has this relatively simple structure and higher order moments vanish. However, in general, the posterior is not Gaussian and more flexible variational distributions must be used. Deep neural networks are advantageous in this case, as they are known to be able to represent very complex high-dimensional distributions. 
-
-
-
-\chapter{Phase transitions of DNA-protein condensates}
-
-Metropolis-Hastings algorithms are commonly used to sample from the configurational space of polymers, in order to generate a set of conformations that can be used to study polymer properties such as their equilibrium structure, thermodynamics, and response to external fields. This method is particularly useful when studying the equilibrium properties of polymers, where the system is in thermal equilibrium and can be described by a Boltzmann distribution. Examples of Metropolis-Hastings algorithms that have been used for polymer simulations include the pivot algorithm, the reptation algorithm, and the configurational-bias Monte Carlo algorithm.
-
-On the other hand, Langevin dynamics simulations can be used to study the non-equilibrium dynamics of polymers, where the system is driven out of thermal equilibrium by external forces, such as shear or electric fields. Langevin dynamics simulations can also incorporate more realistic models of the environment, such as solvent effects or hydrodynamic interactions, which can affect the behavior of the polymer. This method is particularly useful when studying the dynamics of polymers in complex environments, where the system is far from equilibrium and the dynamics cannot be described by a simple Boltzmann distribution. Examples of Langevin dynamics simulations that have been used for polymer simulations include the Brownian dynamics method and the dissipative particle dynamics method.
-
-In summary, both Metropolis-Hastings algorithms and Langevin dynamics simulations can be used to study polymer dynamics, but they are used for different purposes. Metropolis-Hastings algorithms are typically used to study the equilibrium properties of polymers, while Langevin dynamics simulations are used to study the non-equilibrium dynamics of polymers.
-
-
-The main difference between solving the Langevin equation and Newton's equations of motion is the addition of the stochastic force term in the Langevin equation. This term models the effect of thermal fluctuations and can lead to a more realistic description of the dynamics of the system. In contrast, Newton's equations of motion assume a deterministic behavior of the system without any stochasticity.
-
-Another difference is that Langevin dynamics simulations are particularly useful for simulating systems in contact with a heat bath, which is not possible with Newton's equations of motion alone. In the case of Langevin dynamics, the friction coefficient gamma models the effect of the heat bath on the system and allows for the simulation of both thermal and non-thermal forces that affect the dynamics of the system.
-
-
-
-
-\begin{appendices}
-
-
-\section{Photoswitching dynamics of JF646}
+\subsection{Markovian photoswitching dynamics}
 
 The central assumption underlying a Markov process, is the memoryless property
 
@@ -348,6 +207,149 @@ P(\bm{\omega}, t) = \exp(\mathcal{J}(\bm{\omega}))
 \end{equation*}
 
 This matrix exponential is intractable for large $|\Omega|$. However, in the Finite State Projection algorithm, it is possible to truncate the state space $\Omega \rightarrow \tilde{\Omega}$ and obtain good estimates $\tilde{P}(\bm{\omega}, t)$ with some certificate of accuracy.
+
+\subsection{The Cramer-Rao lower bound}
+
+A general task in Bayesian inference is to determine $\theta$ from the data under the model $\mathcal{M}_{\theta}$. We may then ask - does the log-likelihood $\ell$ vary as we vary the parameters? If the likelihood is flat, all parameter sets are equally likely and the data does not appear to carry much information about the parameters. Moreover, if $\ell$ has a number of bumps or inflection points, then we expect that maybe some parameter sets are more likely that others. The ``bumpiness" of the likelihood surface is called the Fisher information - a fundmantal concept in information geometry. The Fisher information matrix $I(\theta)$ can be directly related to the curvature of the KL-Divergence over the parameter space
+
+\begin{align*}
+\nabla^2_{\theta'} D_{KL}[\ell(H|\theta) \parallel \ell(H|\theta')] 
+&= - \nabla_{\theta'} \int \ell(H|\theta) \nabla_{\theta'}  \log \ell(H|\theta') \, dH \\ 
+&= - \int \ell(H|\theta) \nabla^2_{\theta'}  \log \ell(H|\theta') \, dH \\
+&= - \mathbb{E}_{\theta}[\nabla^2_{\theta'} \log \ell(H|\theta')] \\
+&= I(\theta)
+\end{align*}
+
+
+We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space. To be clear, the score is a function of the \emph{data}, not the parameters. It is a measure of sensitivity of the likelihood to changes in the parameters. Of course, the Fisher information matrix also depends on the parameterization chosen. Looking at (1.4), the likelihood is a hierarchical function that maps a vector space $\Theta$ to a vector space $\Lambda$ to a scalar value. Formally, we define $T: \Theta \rightarrow \Lambda$ and $W: \Lambda \rightarrow \mathbb{R}$. The parameter vector $(x_{0},y_{0},\sigma, N_{0})\in \Theta$, the Poisson rate vector $\vec{\lambda} \in \Lambda$ and $\ell \in \mathbb{R}$. To get the Hessian, we need the chain-rule for Hessian matrices.
+
+
+\begin{align*}
+\hat{H}_{(\ell,\theta)} = \hat{J}_{(\lambda,\theta)}^{T} \hat{H}_{(\ell,\lambda)} \hat{J}_{(\lambda,\theta)} + (J_{(\ell,\lambda)}\otimes I_{n})\hat{H}_{(\lambda,\theta)}
+\end{align*}
+
+In the second term of the equation, we have a Kronecker product between the Jacobian matrix of the likelihood with respect to the parameters of the hierarchical model ($J_{(L,\lambda)}$) and the $n\times n$ identity matrix ($I_n$), denoted as $J_{(L,\lambda)}\otimes I_n$. This Kronecker product gives a diagonal matrix where the elements along the diagonal are the elements of the vector $J_{(L,\lambda)}$.
+
+\subsection{Bayesian reconstruction from SMLM time series}
+
+We now address the problem of inferring photoswitching constants and fluorophore locations from SMLM times series $\vec{H}$. In the Bayesian framework, we write the posterior on $\Theta$ according to Bayes rule
+
+\begin{align*}
+P(\Theta|\vec{H}) = \frac{P(\Theta)P(\vec{H}|\Theta)}{P(\vec{H})}
+\end{align*}
+
+Let us first address the likelihood function. Markovian photoswitching in SMLM experiments presents us with an unknown hidden state $X_{t}$. To get $P(\vec{H}|\Theta)$, we need to integrate out the hidden state
+
+\begin{align*}
+P(\vec{H}|\Theta) &= \sum_{\vec{X}} P(\vec{H},\vec{X}|\Theta) = \sum_{\vec{X}} P(\vec{H}|\vec{X},\Theta)P(\vec{X}|\Theta)
+\end{align*}
+
+This is a daunting sum over an enormous state space $\vec{X}$ and the time-dependence of $P(\vec{X}|\Theta)$ is not at all obvious. Forgetting the time-dependence for a moment, it is reasonable to assume that the joint distribution over a single frame will factor into image neighborhoods: $P(H) = \prod_{\mathcal{N}}P(\mathcal{N})$ due to locality. The distribution on each neighborhood $\mathcal{N}$ has a similar form
+
+\begin{equation*}
+P(\mathcal{N}|\Theta) = \sum_{X}P(\mathcal{N},X|\Theta) = \sum_{x}P(\mathcal{N}|X=x,\Theta)P(X=x|\Theta)\\
+\end{equation*}
+
+Furthermore, we know that each neighborhood should only depend on a small subset of $X$, so we can define $Y$ as the partition of $X$ that it depends on and $Z$ the partition it does not. This implies that $P(\mathcal{N}|X) = P(\mathcal{N}|Y,Z) = P(\mathcal{N}|Y)$. Therefore,
+
+
+\begin{equation*}
+P(\mathcal{N}|\Theta) = \sum_{x}P(\mathcal{N}|Y=y,\Theta)P(X=x|\Theta)\\
+\end{equation*}
+
+This will simplify even further if we note that we can group terms since $P(\mathcal{N}|Y)$ is constant over states which share the same substate $y$. Dropping the model parameters for brevity,
+
+\begin{align*}
+P(\mathcal{N}) &= \sum_{x}P(\mathcal{N}|Y=y)P(X=x)\\
+&= P(\mathcal{N}|Y=y_{1})\sum_{x}P(X=x) +  P(\mathcal{N}|Y=y_{2})\sum_{x}P(X=x) + ... \\
+&=  \sum_{y}P(\mathcal{N}|Y=y)
+\end{align*}
+
+Thus we have shown that each neighborhood can be considered independently of every other and we only need to sum over the subspace spanned defined by $Y$. Remembering that we actually need a likelihood over times series  $P(\vec{H}|\Theta)$, we write
+
+\begin{equation*}
+P(\mathcal{N}; t) = \sum_{y}P(\mathcal{N}|Y_{t}=y)P(Y;t)
+\end{equation*}
+
+The probabilities over the hidden subspace $P(Y;t)$ as a function of time are given by the solution to the photoswitching master equation given in the previous section
+
+\begin{equation*}
+P(Y; t) = \exp(\mathcal{J}(Y))
+\end{equation*}
+
+and $P(\mathcal{N}|Y_{t}=y)$ is just (1.6) with different notation. If we know how $P(Y;t)$ evolves then $N_{t}$ is a doubly stochastic Poisson process with a fluctuating rate $r_{t}$ i.e., $N_{t} \sim \mathrm{Poisson}(r_{t})$. Effectively, the rate at each pixel becomes
+
+\begin{equation*}
+\vec{\mu}_{t}(x_{i},y_{i}) = \eta\Delta t\left(\lambda_{\theta}(x_{i},y_{i})\vec{N}_{t,i} + \vec{B}_{t}(x_{i},y_{i})\right)
+\end{equation*}
+
+
+
+
+\subsection{Bayesian nonparametric prior}
+
+
+
+
+\subsection{Vanilla Variational Bayes}
+
+We now describe a Bayesian inference method for the parameters $\theta$ from experiment and simulated data. In previous sections, we have given a a formal probabilistic description of the entire SMLM measurement process along with fundamental lower bound on parameter uncertainty. With this in hand, we can now describe practical methods for inferring parameters from data and assess their ability to reach these bounds.  In our framework, at each time point a measurement is made $\vec{H}_{t}$, which can be used to infer a matrix of parameters $\bm{\theta}_{t} = (\bm{x_{0}},\bm{y_{0}},\bm{\sigma},\bm{B_{0}},\bm{N_{0}})_{t}$. Occasionally, we will refer to parameter matrices $\theta_{t}$ at each time point as latent variables which give rise to the noisy low resolution images which constitute the measured data $\vec{H}$. A complete description of the generative model in the Bayesian framework includes the prior distribution $P(\theta)$ which describes the spatial distribution and temporal dynamics of fluorophores, and the likelihood $P(\vec{H}|\theta)$ - a distribution of images generated by the microscope for a given configuration of fluorophores. According to Bayes rule, the posterior on $\theta$ can be constructed as
+
+\begin{align}
+P(\theta|\vec{H}) = \frac{P(\vec{H}|\theta)P(\theta)}{\int P(\vec{H}|\theta)P(\theta) d\theta}
+\end{align}
+
+Note this likelihood was formalized in terms of the point spread function and the measurement noise of the camera in (1.7). There are several methods for finding the posterior, for example Markov Chain Monte Carlo (MCMC) or variational methods. Variational inference attempts to approximate the true posterior distribution $p(\theta|x)$ with a variational distribution $q(\theta)$, which is often a model distribution which can be easily sampled from e.g., a multivariate Gaussian. To fit the variational distribution, we can try to minimize the KL-divergence between the variational distribution and the true posterior:
+
+\begin{align*}
+D_{\mathrm{KL}}(q(\theta)||p(\theta|x)) &= \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)}{p(\theta|x)}\right)\\
+&=  \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)p(x)}{p(\theta,x)}\right)\\
+&=  \log p(x) + \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)}{p(x|\theta)p(\theta)}\right)\\
+&= \log p(x) + \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)\\
+&= \log p(x) + H(q) -\underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log p(x|\theta) + \log p(\theta) \right)
+\end{align*}
+
+Clearly the KL-divergence is minimized by minimizing this expectation. It is common to define the evidence lower bound (ELBO).
+
+\begin{align}
+\ell(x,\theta) = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
+\end{align}
+
+which gets its name from the fact that
+
+\begin{equation*}
+\log p(x) = D_{\mathrm{KL}}(q(\theta)||p(\theta|x)) + \ell(x,\theta) \geq \ell(x,\theta)
+\end{equation*}
+
+Of great practical interest are the gradients of the ELBO
+
+\begin{align*}
+\nabla_{\Phi}\ell(x,\theta) = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
+\end{align*}
+
+The quality of our parameter estimation will undoubtedly depend on our choice for the variational distribution. In some contexts, the posterior is approximated as a multivariate Gaussian, which is valid when the posterior has this relatively simple structure and higher order moments vanish. However, in general, the posterior is not Gaussian and more flexible variational distributions must be used. Deep neural networks are advantageous in this case, as they are known to be able to represent very complex high-dimensional distributions. 
+
+
+
+\chapter{Phase transitions of DNA-protein condensates}
+
+Metropolis-Hastings algorithms are commonly used to sample from the configurational space of polymers, in order to generate a set of conformations that can be used to study polymer properties such as their equilibrium structure, thermodynamics, and response to external fields. This method is particularly useful when studying the equilibrium properties of polymers, where the system is in thermal equilibrium and can be described by a Boltzmann distribution. Examples of Metropolis-Hastings algorithms that have been used for polymer simulations include the pivot algorithm, the reptation algorithm, and the configurational-bias Monte Carlo algorithm.
+
+On the other hand, Langevin dynamics simulations can be used to study the non-equilibrium dynamics of polymers, where the system is driven out of thermal equilibrium by external forces, such as shear or electric fields. Langevin dynamics simulations can also incorporate more realistic models of the environment, such as solvent effects or hydrodynamic interactions, which can affect the behavior of the polymer. This method is particularly useful when studying the dynamics of polymers in complex environments, where the system is far from equilibrium and the dynamics cannot be described by a simple Boltzmann distribution. Examples of Langevin dynamics simulations that have been used for polymer simulations include the Brownian dynamics method and the dissipative particle dynamics method.
+
+In summary, both Metropolis-Hastings algorithms and Langevin dynamics simulations can be used to study polymer dynamics, but they are used for different purposes. Metropolis-Hastings algorithms are typically used to study the equilibrium properties of polymers, while Langevin dynamics simulations are used to study the non-equilibrium dynamics of polymers.
+
+
+The main difference between solving the Langevin equation and Newton's equations of motion is the addition of the stochastic force term in the Langevin equation. This term models the effect of thermal fluctuations and can lead to a more realistic description of the dynamics of the system. In contrast, Newton's equations of motion assume a deterministic behavior of the system without any stochasticity.
+
+Another difference is that Langevin dynamics simulations are particularly useful for simulating systems in contact with a heat bath, which is not possible with Newton's equations of motion alone. In the case of Langevin dynamics, the friction coefficient gamma models the effect of the heat bath on the system and allows for the simulation of both thermal and non-thermal forces that affect the dynamics of the system.
+
+
+
+
+\begin{appendices}
+
+
 
 \subsection{Lifetime of the ON and OFF states}
 
