@@ -192,21 +192,35 @@ P(H_{t}|\Theta) &= \sum_{\vec{X}} P(H_{t},\vec{X}|\Theta) \\
 &= \sum_{\vec{X}} P(H_{t}|\vec{X},\Theta)P(\vec{X}|\Theta)
 \end{align*}
 
-Therefore, 
+
+where we have used the conditional independence assumptions of the HMM to factorize $P(H_{t},\vec{X}|\Theta)$ into $P(H_{t}|X,\Theta)$ and $P(\vec{X}|\Theta)$. Therefore, the likelihood reads
+
+\begin{align}
+P(\vec{H}|\Theta) &= \prod_{t} \sum_{\vec{X}_{t}} P(H_{t}|\vec{X}_{t},\Theta)P(\vec{X}_{t}|\Theta)
+\end{align}
+
+At first glance, this likelihood appears intractable due to the enormous size of the state space of $\vec{X}$. However, barring background-induced correlations, pixels are conditionally independent given the hidden state, while locality suggests that each pixel is only dependent on a small subset of the hidden state $X$. Dropping the time index for clarity,
 
 \begin{align*}
-P(H_{t}|\Theta) &= \prod_{t} \sum_{\vec{X}} P(H_{t}|\vec{X},\Theta)P(\vec{X}|\Theta)
+P(H|X) &= P(H_{1}|X)P(H_{2}|X)...P(H_{K}|X) \\
+&= P(H_{1}|X_{c_{1}})P(H_{2}|X_{c_{2}})...P(H_{K}|X_{c_{K}})\\
+&= \prod_{k}P(H_{k}|X_{c_{k}})
 \end{align*}
 
+where $X_{c_{k}}$ denotes a small subset of $X$. Thus we can rewrite the likelihood as
 
+\begin{align}
+P(\vec{H}|\Theta) &= \prod_{t} \sum_{X_{c_{k}}} \prod_{k}P(H_{k}|X_{c_{k}})P(X_{c_{k}}|\Theta)
+\end{align}
 
-where we have used the conditional independence assumptions of the HMM to factorize $P(H_{t},\vec{X}|\Theta)$ into $P(H_{t}|X,\Theta)$ and $P(\vec{X}|\Theta)$. The sum above is typically intractable - a problem which we will address in the next section. $P(H_{t}|\vec{X},\Theta)$ is the likelihood function of the observed data $H_t$ given the hidden state $X_t$ and the model parameters $\Theta$, which is a Poisson distribution with rate parameter that depends on $X_t$. $P(\vec{X}|\Theta)$ will be determined by the transition probabilities and the initial state probabilities of the HMM. 
+We now see that the summation only needs to be evaluated over the state space of $X_{c_{k}}$ which consists of at most a few hidden variables (emitters), making the likelihood tractable. Again, $P(H_{k}|X_{c_{k}},\Theta)$ is just a Poisson distribution according to our approximation in (1.6).
 
-\begin{align*}
+\begin{align}
 \log P(H_t|\vec{X},\Theta) \rightarrow \log P(H_t|\vec{X},\Theta) - \lambda \sum_{i,j} w_{ij} \left| H_{t,i} - H_{t-1,j} \right|,
-\end{align*}
+\end{align}
 
 where $\lambda$ is a hyperparameter that controls the strength of the penalty, $w_{ij}$ are the pairwise weights between neighboring pixels $i$ and $j$, and $H_{t,i}$ and $H_{t-1,j}$ are the intensities of pixel $i$ at time $t$ and pixel $j$ at time $t-1$, respectively. The sum is taken over all pairs of neighboring pixels in the image.
+
 
 \subsection{Incorporating a Dirichlet stick-breaking prior}
 
