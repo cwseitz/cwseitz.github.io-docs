@@ -199,28 +199,35 @@ where we have used the conditional independence assumptions of the HMM to factor
 P(\vec{H}|\Theta) &= \prod_{t} \sum_{\vec{X}_{t}} P(H_{t}|\vec{X}_{t},\Theta)P(\vec{X}_{t}|\Theta)
 \end{align}
 
-At first glance, this likelihood appears intractable due to the enormous size of the state space of $\vec{X}$. However, barring background-induced correlations, pixels are conditionally independent given the hidden state, while locality suggests that each pixel is only dependent on a small subset of the hidden state $X$. Dropping the time index for clarity,
+At first glance, this likelihood appears intractable due to the enormous size of the state space of $\vec{X}$. However, barring background-induced correlations, pixels are conditionally independent given the hidden state, while locality suggests that each pixel is only dependent on a small subset of the hidden state $X$. Suppose we assume that the joint distribution over a single frame will factor into neighborhoods: $P(H) = \prod_{\mathcal{N}}P(\mathcal{N})$.
 
 \begin{align*}
-P(H|X) &= P(H_{1}|X)P(H_{2}|X)...P(H_{K}|X) \\
-&= P(H_{1}|X_{c_{1}})P(H_{2}|X_{c_{2}})...P(H_{K}|X_{c_{K}})\\
-&= \prod_{k}P(H_{k}|X_{c_{k}})
+P(\mathcal{N}) &= \sum_{X}P(\mathcal{N},X)\\
+&= \sum_{X}P(\mathcal{N}|X)P(X)\\
 \end{align*}
 
-where $X_{c_{k}}$ denotes a small subset of $X$. Thus we can rewrite the likelihood as
+\begin{align*}
+P(\mathcal{N}|X) &= P(\mathcal{N}_{1}|X)P(\mathcal{N}_{2}|X)...P(\mathcal{N}_{K}|X) \\
+&= P(\mathcal{N}_{1}|X_{c_{1}})P(\mathcal{N}_{2}|X_{c_{2}})...P(\mathcal{N}_{K}|X_{c_{K}})\\
+&= \prod_{k}P(\mathcal{N}_{k}|X_{c_{k}})
+\end{align*}
 
-\begin{align}
-P(\vec{H}|\Theta) &= \prod_{t} \sum_{X_{c_{k}}} \prod_{k}P(H_{k}|X_{c_{k}})P(X_{c_{k}}|\Theta)
-\end{align}
+Therefore,
 
-We now see that the summation only needs to be evaluated over the state space of $X_{c_{k}}$ which consists of at most a few hidden variables (emitters), making the likelihood tractable. Again, $P(H_{k}|X_{c_{k}},\Theta)$ is just a Poisson distribution according to our approximation in (1.6).
+\begin{align*}
+P(\mathcal{N}) &= \sum_{X}P(X)\prod_{k}P(\mathcal{N}_{k}|X_{c_{k}})\\
+&= \sum_{X}\prod_{i}P(X_{i})\prod_{k}P(\mathcal{N}_{k}|X_{c_{k}})\\
+\end{align*}
 
-\begin{align}
-\log P(H_t|\vec{X},\Theta) \rightarrow \log P(H_t|\vec{X},\Theta) - \lambda \sum_{i,j} w_{ij} \left| H_{t,i} - H_{t-1,j} \right|,
-\end{align}
+Now notice that $P(\mathcal{N}_{k}|X_{c_{k}})$ will be constant over the terms of the sum where $X_{c_{k}}$ is constant. Therefore, we can rewrite the summation as
 
-where $\lambda$ is a hyperparameter that controls the strength of the penalty, $w_{ij}$ are the pairwise weights between neighboring pixels $i$ and $j$, and $H_{t,i}$ and $H_{t-1,j}$ are the intensities of pixel $i$ at time $t$ and pixel $j$ at time $t-1$, respectively. The sum is taken over all pairs of neighboring pixels in the image.
+\begin{align*}
+P(\mathcal{N}) &= \sum_{X}\prod_{i}P(X_{i})\prod_{k}P(\mathcal{N}_{k}|X_{c_{k}})\\
+&= \sum_{Y}\left(\prod_{k}P(\mathcal{N}_{k}|X_{c_{k}})\sum_{X} \prod_{i}P(X_{i})\right)\\
+&= \sum_{Y}\prod_{k}P(\mathcal{N}_{k}|X_{c_{k}})
+\end{align*}
 
+where $Y$ is a unique state in the subspace $X_{c_{k}}$.
 
 \subsection{Incorporating a Dirichlet stick-breaking prior}
 
