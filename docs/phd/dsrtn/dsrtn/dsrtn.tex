@@ -282,6 +282,21 @@ The imaging procedure requires taking a series of successive frames. Frame $n$ i
 Y_{n} = \mathbbm{1}_{[\delta,\Delta)}\left(\int_{n\Delta}^{(n+1)\Delta} \mathbbm{1}_{1} (X(t)) dt\right)
 \end{equation*}
 
+Another alternative is to consider the number of photons that were collected during the interval $\Delta$ as a doubly stochastic Poisson process (Cox process)
+
+\begin{equation*}
+Y_{n} \sim \mathrm{Poisson}\left(r_{0}\Delta t\right)
+\end{equation*}
+
+where $\Delta_{t}$ is itself a random variable. Further, the distribution on $\Delta t$ will depend on the hidden state of the system before integration begins $X_{t}$. 
+
+\begin{equation*}
+\Delta t = \int_{n\Delta}^{(n+1)\Delta} \mathbbm{1}_{1} (X(t)) dt \;\;\;\;\;
+\Delta t \sim P(\Delta t | X_{t} = i) 
+\end{equation*}
+
+where $P(\Delta t | X_{t} = i) $ will be an exponential distribution with parameters dependent on the starting state. 
+
 \section{Bayesian reconstruction from SMLM time series}
 
 
