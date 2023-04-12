@@ -11,6 +11,7 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage{url}
 \usepackage{bm}
+\usepackage{bbm}
 
 %% Use these commands to set biographic information for the title page:
 \title{Phase transitions of DNA-protein condensates during the immune response}
@@ -52,6 +53,8 @@ Eukaryotic transcription is episodic, consisting of a series of transcriptional 
 \clearpage
 
 \mainmatter
+
+\chapter{Literature Review and Theoretical Foundations}
 
 \chapter{Single molecule localization microscopy}
 
@@ -140,74 +143,6 @@ where $\mu_{k}' = g_{k}\mu_{k} + \sigma_{k}^{2}$. This result can be seen from t
 \end{align*}
 
 
-\subsection{Markovian photoswitching dynamics}
-
-The central assumption underlying a Markov process, is the memoryless property
-
-\begin{equation*}
-P(X_{t}|X_{t-1}, X_{t-2}, ..., X_{t-N}) = P(X_{t}|X_{t-1})
-\end{equation*}
-
-A single Markov chain is the set of states $\bm{X} = \{X_{1},X_{2},...,X_{N}\}$. Such a set can be generated provided that $P(X_{t}|X_{t-1})$ is known. To capture $P(X_{t}|X_{t-1})$ for all possible pairs $X_{t}$ and $X_{t-1}$, we define a square transition matrix $T\in \mathcal{R}^{N\times N}$ where $N = |\Omega|$. As such, the elements of $T$ represent the probability of a transition from a state $\omega_{j}$ to $\omega_{i}$ in a unit time
-
-\begin{equation*}
-T_{ij} = \mathrm{Pr}\left(X_{t}=\omega_{i}, | \;X_{t-1}=\omega_{j}\right)
-\end{equation*}
-
-Under these definitions, the row $T_{i}$ represents the present time, and is a conditional  probability distribution $P(\omega | X_{t-1} = \omega_{j})$ which requires that
-
-\begin{equation*}
-\sum_{j}T_{ij} = \sum_{j} P(X_{t} = \omega_{j} | X_{t-1} = \omega_{i}) = 1
-\end{equation*}
-
-The matrix $T$ is not necessarily symmetric $T_{ij} \neq T_{ji}$. One should note that the columns $T_{j}$ \emph{do not} define a probability distribution $P(X_{t} = \omega_{i} | X_{t-1} = \omega_{j})$ and therefore do not necessarily sum to unity. The probability $P(X_{t} = \omega_{i} | X_{t-1} = \omega_{j})$ has no meaning in this context, since we have defined the rows to represent a probability of the future given the present. We simply sample $X_{t} \sim P(X_{t} = \omega_{j} | X_{t-1} = \omega_{i})$, assign $i=j$, and repeat. It directly follows from the fundamental rules of probability, the first order dynamics for a \textbf{particular} state $\omega_{i}$: $P(\omega_{i},t)$ is given by
-
-\begin{equation}
-P(\omega_{i},t+dt) = P(\omega_{i},t) + \mathcal{J}_{i}dt
-\end{equation}
-
-The net probability current $\mathcal{J}_{i}$ must be 
-
-\begin{equation*}
-\mathcal{J}_{i} = \sum_{i}T_{ij}P(\omega_{j},t) - \sum_{j}T_{ij}P(\omega_{i},t)\\
-\end{equation*}
-
-The first is a sum on a column and the second a sum on a row. This can be simplified further by noticing that the normalization condition implies
-
-\begin{align*}
-T_{ij} &= 1 - \sum_{j}T_{ij}(1-\delta_{ij})\\
-&= 1 - \sum_{j}T_{ij} + \sum_{j}T_{ij}\delta_{ij}
-\end{align*}
-
-
-\begin{align*}
-\mathcal{J}_{i} &= \sum_{i}T_{ij}P(\omega_{j},t) - \sum_{j}T_{ij}P(\omega_{i},t)\\
-&= \sum_{i}\left(1 - \sum_{j}T_{ij} + \sum_{j}T_{ij}\delta_{ij}\right)P(\omega_{j},t) - \sum_{j}T_{ij}P(\omega_{i},t)\\
-&= |\Omega| - |\Omega| + \sum_{i}\sum_{j}T_{ij}P(\omega_{j},t)\delta_{ij} - \sum_{j}T_{ij}P(\omega_{i},t)\\
-&= \sum_{j}T_{ji}P(\omega_{j},t) - T_{ij}P(\omega_{i},t)\\
-\end{align*}
-
-Notice that the Kronecker delta effectively just swaps the index. Taking the limit of (1.1), we arrive at the \textbf{master equation}
-
-
-\begin{equation*}
-\frac{\partial P(\omega_{i})}{\partial t} = \sum_{j}T_{ji}P(\omega_{j},t) - T_{ij}P(\omega_{i},t)
-\end{equation*}
-
-It is common to then define an operator $\bm{W}$ s.t. $W_{ij} = T_{ij}$ and $W_{ii} = -\sum_{j}T_{ij}$ 
-
-\begin{align*}
-\frac{dP(\omega_{i})}{dt} = \sum_{j}W_{ij}P(\omega_{j}) \rightarrow \frac{dP(\bm{\omega})}{dt} = \mathcal{J}(\bm{\omega}) = \mathbf{W}P(\bm{\omega})
-\end{align*}
-
-This operator form has a solution in terms of a matrix exponential
-
-\begin{equation*}
-P(\bm{\omega}, t) = \exp(\mathcal{J}(\bm{\omega}))
-\end{equation*}
-
-This matrix exponential is intractable for large $|\Omega|$. However, in the Finite State Projection algorithm, it is possible to truncate the state space $\Omega \rightarrow \tilde{\Omega}$ and obtain good estimates $\tilde{P}(\bm{\omega}, t)$ with some certificate of accuracy.
-
 \subsection{The Cramer-Rao lower bound}
 
 A general task in Bayesian inference is to determine $\theta$ from the data under the model $\mathcal{M}_{\theta}$. We may then ask - does the log-likelihood $\ell$ vary as we vary the parameters? If the likelihood is flat, all parameter sets are equally likely and the data does not appear to carry much information about the parameters. Moreover, if $\ell$ has a number of bumps or inflection points, then we expect that maybe some parameter sets are more likely that others. The ``bumpiness" of the likelihood surface is called the Fisher information - a fundmantal concept in information geometry. The Fisher information matrix $I(\theta)$ can be directly related to the curvature of the KL-Divergence over the parameter space
@@ -230,7 +165,125 @@ We often call the Hessian matrix the \emph{score}. The Fisher information is the
 
 In the second term of the equation, we have a Kronecker product between the Jacobian matrix of the likelihood with respect to the parameters of the hierarchical model ($J_{(L,\lambda)}$) and the $n\times n$ identity matrix ($I_n$), denoted as $J_{(L,\lambda)}\otimes I_n$. This Kronecker product gives a diagonal matrix where the elements along the diagonal are the elements of the vector $J_{(L,\lambda)}$.
 
-\subsection{Bayesian reconstruction from SMLM time series}
+
+\section{Markovian photoswitching dynamics}
+
+The true photo-switching behavior of the fluorophore is a continuous time stochastic phenomenon. However, an experimenter can only ever observe a discretized manifestation of this
+by imaging the fluorophore in a sequence of frames. These frames are regarded as a set of
+sequential exposures of the fluorophore and the observed discrete time signal indicates whether
+the fluorophore has been observed in a particular frame. It is the continuous time process on
+which we wish to draw inference based on the observed discrete-time process indicating whether
+the fluorophore was observed in a frame. In this section we first present the continuous time
+Markov model of the true (hidden) photo-switching behavior, and then derive the observed
+discrete time signal, together with key results on its statistical properties.
+
+
+We model the photoswitching behavior of a fluorophore as a continuous time Markov process. It is a stochastic process, which satisfies the Markov property
+
+\begin{equation*}
+P(X_{t}|X_{t-1}, X_{t-2}, ..., X_{t-N}) = P(X_{t}|X_{t-1})
+\end{equation*}
+
+We consider a general model for $X(t)$ that can accommodate the numerous mechanisms of photo-switching utilized in standard SMLM approaches such as (F)PALM and (d)STORM. Specifically, this model consists of a photon emitting (On) state $1$, $m+1$ non photon emitting (dark/temporary off) states $0_0$, $0_1$, $\ldots$, $0_m$, where $m \in \mathbb{Z}{\geq 0}$, and a photobleached (absorbing/permanently off) state $2$. In order to accommodate for the $m = 0$ case when we have a single dark state, we use the notational convention that state $0_0 \equiv 0$. The model, allows for transitions from state $1$ to the multiple dark states (from a photochemical perspective, these can include triplet, redox and quenched states). These dark states are typically accessed via the first dark state $0$ (reached as a result of inter-system crossing of the excited $S1$ electron to the triplet $T1$ state). Further dark states $0_{i+1}$, $i = 0, \ldots, m-1$, are accessible by previous dark states $0_i$ (by, for example, the successive additions of electrons forming radical anions (Van de Linde et al., 2010)). We allow the On state $1$ to be accessible by any dark state and we consider the most general model in which the absorption state $2$ is accessible from any combination of other states (Vogelsang et al., 2010; Van de Linde and Sauer, 2014; Ha and Tinnefeld, 2012).
+
+To capture $P(X_{t}|X_{t-1})$ for all possible pairs $X_{t}$ and $X_{t-1}$, we define a square generator matrix $G\in \mathcal{R}^{N\times N}$ where $N$ denotes the number of states. As such, the elements of $G$ represent the probability of a transition from a state $\omega_{j}$ to $\omega_{i}$ in an infinitesimal time interval
+
+\begin{equation*}
+G_{ij} = \mathrm{Pr}\left(X(t+dt)=\omega_{i}, | \;X(t)=\omega_{j}\right)
+\end{equation*}
+
+Let the state space for the process $X(t)$ be $\Omega = \{0_{0},0_{1},0_{2},1,2\}$. The generator matrix for such a process reads
+
+\begin{equation*}
+G = 
+\begin{pmatrix}
+\lambda_{00} & \lambda_{0 0_{1}} & 0 & \lambda_{01} & \mu_{0}\\
+0 & \lambda_{0_{1}0_{1}} & \lambda_{0_{1}0_{2}} & \lambda_{0_{1}1} & \mu_{1}\\
+0 & 0 & \lambda_{0_{2}0_{2}} & \lambda_{0_{2}1} & \mu_{2}\\
+\lambda_{10} & 0 & 0 & \lambda_{11} & \mu_{0}\\
+0 & 0 & 0 & 0 & 0
+\end{pmatrix}
+\end{equation*}
+
+Of considerable practical interest is using the matrix $G$ to determine the probability the system is in a particular state at a time $t$. This can be achieved by solving the master equation:
+
+\begin{equation*}
+\frac{\partial P(\omega_{i})}{\partial t} = \sum_{j}G_{ji}P(\omega_{j},t) - G_{ij}P(\omega_{i},t)
+\end{equation*}
+
+Our notational convention is the $G_{ij}$ is a transition $i\rightarrow j$ while $G_{ji}$ is $j\rightarrow i$. The above equation and its solution is very powerful in this context and in the broader context of non-equilibrium dynamics, so I will devote a short section to its derivation. The reader can safely skip this section if time is scarce.
+
+\subsection{Brief derivation of the master equation}
+
+Each row of the generator matrix $G_{i}$ represents the a conditional probability distribution on the future state given the present state $P(\omega | X(t) = \omega_{j})$:
+
+\begin{equation*}
+\sum_{j}G_{ij} = \sum_{j} P(X(t+dt) = \omega_{j} | X(t) = \omega_{i}) = 1
+\end{equation*}
+
+The generator is not necessarily symmetric. Also, one should note that the columns $G_{j}$ \emph{do not} define a probability distribution and do not necessarily sum to unity. The columns of $G$ have no meaning in this context, since we have defined the rows to represent a probability of the future given the present. The first order dynamics for a particular state $\omega_{i}$ is given by
+
+
+\begin{equation*}
+P(\omega_{i},t+dt) = P(\omega_{i},t) + \mathcal{J}_{i}dt
+\end{equation*}
+
+where the probability current $\mathcal{J}_{i}$ must be the net probability flux into the state $\omega_{i}$
+
+\begin{equation*}
+\mathcal{J}_{i} = \sum_{i}G_{ij}P(\omega_{j},t) - \sum_{j}G_{ij}P(\omega_{i},t)\\
+\end{equation*}
+
+The first is a sum on a column (in) and the second a sum on a row (out). This can be simplified further by noticing that the normalization condition implies
+
+\begin{equation*}
+G_{ij} = 1 - \sum_{j}G_{ij}(1-\delta_{ij}) = 1 - \sum_{j}G_{ij} + \sum_{j}G_{ij}\delta_{ij}
+\end{equation*}
+
+Inserting this into the probability current gives
+
+\begin{align*}
+\mathcal{J}_{i} &= \sum_{i}G_{ij}P(\omega_{j},t) - \sum_{j}G_{ij}P(\omega_{i},t)\\
+&= \sum_{i}\left(1 - \sum_{j}G_{ij} + \sum_{j}G_{ij}\delta_{ij}\right)P(\omega_{j},t) - \sum_{j}G_{ij}P(\omega_{i},t)\\
+&= |\Omega| - |\Omega| + \sum_{i}\sum_{j}G_{ij}P(\omega_{j},t)\delta_{ij} - \sum_{j}G_{ij}P(\omega_{i},t)\\
+&= \sum_{j}G_{ji}P(\omega_{j},t) - G_{ij}P(\omega_{i},t)
+\end{align*}
+
+which is RHS of the master equation. Notice that the Kronecker delta effectively just swaps the index. 
+
+\subsection{Solving the master equation}
+
+The master equation is a first order differential equation and its solution is straightforward when the dimensionality of the state space is small. The solution is found easily by massaging the master equation into something that has a simple exponential solution. Define a matrix $W$ s.t. $W_{ij} = T_{ij}$ and $W_{ii} = -\sum_{j\neq i}G_{ij}$. This operator acts on $P(\omega)$ and gives a vector of probability currents $\dot{P}(\omega,t) = \mathcal{J}(\bm{\omega}) = W P(\bm{\omega})$. 
+
+\begin{equation*}
+P(\bm{\omega}, t) = \exp(W P(\omega))
+\end{equation*}
+
+The matrix $W$ for the 4-state system presented before reads
+
+\begin{equation*}
+W = 
+\begin{pmatrix}
+-\sigma_{0} & \lambda_{0 0_{1}} & 0 & \lambda_{01} & \mu_{0}\\
+0 & -\sigma_{0_{1}} & \lambda_{0_{1}0_{2}} & \lambda_{0_{1}1} & \mu_{1}\\
+0 & 0 & -\sigma_{0_{2}} & \lambda_{0_{2}1} & \mu_{2}\\
+\lambda_{10} & 0 & 0 & -\sigma_{1} & \mu_{0}\\
+0 & 0 & 0 & 0 & 0
+\end{pmatrix}
+\end{equation*}
+
+where we have introduced shorthands $\sigma = -\sum_{j\neq i}G_{ij}$.
+
+\subsection{The discrete time observation process}
+
+The imaging procedure requires taking a series of successive frames. Frame $n$ is formed by taking an exposure over the time interval $[n\Delta, (n+1)\Delta)$, where $n\in\mathbb{Z}{\geq0}$. The constant $\Delta$ corresponds to the exposure time for a single frame, also known as the frame length. We define the discrete time observed process ${Y_n: n \in \mathbb{Z}{\geq0}}$, with state space $S_Y={0,1}$, as $Y_n=1$ if the fluorophore (characterized by ${X(t)}$) is observed in frame $n$ and equal to $0$ otherwise. For the fluorophore to be observed in the time interval $[n\Delta, (n+1)\Delta)$, it must be in the On state $1$ for a minimum time of $\delta\in[0,\Delta)$. The value of $\delta$ is unknown and is a result of background noise and the imaging system's limited sensitivity. We note that if ${X(t)}$ exhibits multiple jumps to state $1$ within a frame, then a sufficient condition for observing the fluorophore is that the total time spent in the On state exceeds $\delta$. The $\delta=0$ case is the idealistic scenario of a noiseless system and perfect sensitivity such that the fluorophore is detected if it enters the On state for any non-zero amount of time during the exposure time $\Delta$.
+
+\begin{equation*}
+Y_{n} = \mathbbm{1}_{[\delta,\Delta)}\left(\int_{n\Delta}^{(n+1)\Delta} \mathbbm{1}_{1} (X(t)) dt\right)
+\end{equation*}
+
+\section{Bayesian reconstruction from SMLM time series}
+
 
 We now address the problem of inferring photoswitching constants and fluorophore locations from SMLM times series $\vec{H}$. In the Bayesian framework, we write the posterior on $\Theta$ according to Bayes rule
 
@@ -284,12 +337,7 @@ and $P(\mathcal{N}|Y_{t}=y)$ is just (1.6) with different notation. If we know h
 \end{equation*}
 
 
-
-
 \subsection{Bayesian nonparametric prior}
-
-
-
 
 \subsection{Vanilla Variational Bayes}
 
