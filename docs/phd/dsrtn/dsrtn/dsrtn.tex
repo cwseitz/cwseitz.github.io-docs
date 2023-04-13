@@ -340,27 +340,7 @@ P(\mathcal{N}) &= \sum_{x}P(\mathcal{N}|Y=y)P(X=x)\\
 &=  \sum_{y}P(\mathcal{N}|Y=y)
 \end{align*}
 
-Thus we have shown that each neighborhood can be considered independently of every other and we only need to sum over the subspace spanned defined by $Y$. Remembering that we actually need a likelihood over times series  $P(\vec{H}|\Theta)$, we write
-
-\begin{equation*}
-P(\mathcal{N}; t) = \sum_{y}P(\mathcal{N}|Y_{t}=y)P(Y;t)
-\end{equation*}
-
-The probabilities over the hidden subspace $P(Y;t)$ as a function of time are given by the solution to the photoswitching master equation given in the previous section
-
-\begin{equation*}
-P(Y; t) = \exp(\mathcal{J}(Y))
-\end{equation*}
-
-and $P(\mathcal{N}|Y_{t}=y)$ is just (1.6) with different notation. If we know how $P(Y;t)$ evolves then $N_{t}$ is a doubly stochastic Poisson process with a fluctuating rate $r_{t}$ i.e., $N_{t} \sim \mathrm{Poisson}(r_{t})$. Effectively, the rate at each pixel becomes
-
-\begin{equation*}
-\vec{\mu}_{t}(x_{i},y_{i}) = \eta\Delta t\left(\lambda_{\theta}(x_{i},y_{i})\vec{N}_{t,i} + \vec{B}_{t}(x_{i},y_{i})\right)
-\end{equation*}
-
-\subsection{Deconvolution of overlapping emitters}
-
-We begin by hypothesizing that pairwise and higher order temporal correlation structure of a pixel neighborhood $\mathcal{N}$ over the series of frames $Y_{n}$ which satisfy 
+Thus we have shown that each neighborhood can be considered independently of every other and we only need to sum over the subspace spanned defined by $Y$. Remembering that we actually need a likelihood over times series  $P(\vec{H}|\Theta)$, we hypothesize that pairwise and higher order temporal correlation structure of a pixel neighborhood $\mathcal{N}$ over the series of frames $Y_{n}$ which satisfy 
 
 \begin{equation*}
 Y_{n} = \mathbbm{1}_{[\delta,\Delta)}\left(\int_{n\Delta}^{(n+1)\Delta} \mathbbm{1}_{1} (X(t)) dt\right)
@@ -371,6 +351,11 @@ can be included in the likelihood function $P(\vec{H}|\Theta)$. The hope is that
 To include temporal correlations in the likelihood function, we examine covariance of pixel values within the neighborhood over time. $P(\vec{Y}|\Theta)$. As a simple example, consider a white-noise time series, where each frame is drawn $Y_{t}\sim \mathcal{N}(\mu,\Sigma)$ and the covariance matrix $\Sigma$ has a block diagonal structure. Note that samples are assumed to be drawn iid over time - a valid assumption when (at least one empty frame exists between localizations? Not sure if I can make some 'memory loss' argument here). The likelihood on any given time series is thus $P(\vec{Y}|\mu,\Sigma) = \prod_{t}P(Y_{t}|\mu,\Sigma)$. Deconvolution of emitters can potentially be achieved by a clustering algorithm on the covariance matrix. Practical complications include covariance that is induced by background noise shared by multiple pixels. In addition, measured covariance used for the clustering process should be constrained by the spatial structure of the point spread function with an MRF. We can also consider the multivariate Poisson process with pairwise or higher order correlations constrained by the MRF. 
 
 I could determine if using the Hessian of the time series likelihood is different from the Hessian of static likelihood function. I would expect that also implies a Posterior with a lower entropy. 
+
+
+\begin{equation*}
+\vec{\mu}_{t}(x_{i},y_{i}) = \eta\Delta t\left(\lambda_{\theta}(x_{i},y_{i})\vec{N}_{t,i} + \vec{B}_{t}(x_{i},y_{i})\right)
+\end{equation*}
 
 
 \subsection{Bayesian nonparametric prior}
