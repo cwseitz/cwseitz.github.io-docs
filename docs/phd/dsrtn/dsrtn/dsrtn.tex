@@ -58,6 +58,13 @@ Eukaryotic transcription is episodic, consisting of a series of transcriptional 
 
 \chapter{Single molecule localization microscopy}
 
+
+This principle of SMLM is at the same time one of its primary limitations: the need for sparse activation leads to long acquisition times and expensive autofocusing equipment to actively correct for sample drift. This results in low throughput, poor time resolution when imaging dynamic processes, low labeling densities and a reduced choice of fluorophores. In addition, the need for sparse activation requires laborious optimization of dSTORM buffers containing oxygen scavenging systems and/or oxygen purging techniques. In response to these problems, a host software tools for SMLM have emerged, which permit the acquisition of emitters at higher densities. (Speiser 2021). In the multi-emitter setting, PSFs are no longer well-separated but may overlap, adding additional uncertainty into the localization process. Existing algorithms have explicitly modeled the point spread function as a mixture of single molecule PSFs or have utilized deep learning-based tools to estimate the parameters of each PSF embedded in the mixture.  
+
+Due to overlap, conventional detection strategies may undercount the emitters in a local neighborhood in some frames, localization uncertainty can increase for overlapping emitters, and some localizations may be missed entirely. These complications make conventional detection strategies inappropriate for reconstruction of super-resolution images from time-series. Perhaps most importantly, overlapping emitters can result in additional localization uncertainty, rendering discernment between the arrival of a new particle and a poorly localized existing one difficult. This issue poses a major bottleneck to super-resolution imaging acqusitions. Additional uncertainty can be partially alleviated by using pairwise or higher-order temporal correlations within a pixel neighborhood to deconvolve individual emitters. A similar idea is employed in super-resolution optical fluctuation imaging (SOFI) - a post-processing technique that uses image cumulants to deconvolve emitters. 
+
+Existing correlation-based techniques have been succesful in reaching XXX resolution; however, they are not easily integrated into a Bayesian workflow. The Bayesian philosophy is an important one, as it guards against overfitting of poorly designed models to experimental observations. Furthermore, combining Bayesian inference methods and information theoretic ones, we can begin to ask questions like: can we (even in principle) reduce our uncertainty in localization parameters using time-series data? That is, does a time series $\vec{H}$ carry any \emph{information} that an estimator $\mathcal{E}$ can use to infer the number of fluorophores and their coordinates more precisely? The success of optical fluctuation methods suggests they can; however, the information content of time-series on particle localization and methods for its efficient extraction remain largely unexplored. 
+
 \section{A generative model for single molecule localization microscopy}
 
 Most detectors used for imaging have many elements (pixels) so that we can record an image projected onto the detector by a system of lenses. In fluorescence imaging, this is usually a relay consisting of an objective lens and a tube lens to focus the image onto the camera. Due to diffraction, any point emitter, such as a single fluorescent molecule, will be registered as a diffraction limited spot. The profile of that spot is often described as a Gaussian point spread function
@@ -350,6 +357,20 @@ and $P(\mathcal{N}|Y_{t}=y)$ is just (1.6) with different notation. If we know h
 \begin{equation*}
 \vec{\mu}_{t}(x_{i},y_{i}) = \eta\Delta t\left(\lambda_{\theta}(x_{i},y_{i})\vec{N}_{t,i} + \vec{B}_{t}(x_{i},y_{i})\right)
 \end{equation*}
+
+\subsection{Deconvolution of overlapping emitters}
+
+We begin by hypothesizing that pairwise and higher order temporal correlation structure of a pixel neighborhood $\mathcal{N}$ over the series of frames $Y_{n}$ which satisfy 
+
+\begin{equation*}
+Y_{n} = \mathbbm{1}_{[\delta,\Delta)}\left(\int_{n\Delta}^{(n+1)\Delta} \mathbbm{1}_{1} (X(t)) dt\right)
+\end{equation*}
+
+can be included in the likelihood function $P(\vec{H}|\Theta)$. The hope is that included temporal correlations in the likelihood function will reduce the entropy of the posterior $P(\Theta|\vec{H})$. Recall that in a static image we bounded our uncertainty from below using the inverse of the Fisher information matrix. 
+
+To include temporal correlations in the likelihood function, we examine covariance of pixel values within the neighborhood over time. $P(\vec{Y}|\Theta)$. As a simple example, consider a white-noise time series, where each frame is drawn $Y_{t}\sim \mathcal{N}(\mu,\Sigma)$ and the covariance matrix $\Sigma$ has a block diagonal structure. Note that samples are assumed to be drawn iid over time - a valid assumption when (at least one empty frame exists between localizations? Not sure if I can make some 'memory loss' argument here). The likelihood on any given time series is thus $P(\vec{Y}|\mu,\Sigma) = \prod_{t}P(Y_{t}|\mu,\Sigma)$. Deconvolution of emitters can potentially be achieved by a clustering algorithm on the covariance matrix. Practical complications include covariance that is induced by background noise shared by multiple pixels. In addition, measured covariance used for the clustering process should be constrained by the spatial structure of the point spread function with an MRF. We can also consider the multivariate Poisson process with pairwise or higher order correlations constrained by the MRF. 
+
+I could determine if using the Hessian of the time series likelihood is different from the Hessian of static likelihood function. I would expect that also implies a Posterior with a lower entropy. 
 
 
 \subsection{Bayesian nonparametric prior}
