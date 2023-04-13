@@ -1,0 +1,71 @@
+% Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
+% For more details: https://www.sharelatex.com/learn/Beamer
+
+\documentclass[aspectratio=1610]{beamer}					% Document class
+
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}Bell's Inequality \hfill\insertshortauthor\hfill\insertpagenumber}}
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage[english]{babel}				% Set language
+\usepackage[utf8x]{inputenc}			% Set encoding
+
+\mode<presentation>						% Set options
+{
+  \usetheme{default}					% Set theme
+  \usecolortheme{default} 				% Set colors
+  \usefonttheme{default}  				% Set font theme
+  \setbeamertemplate{caption}[numbered]	% Set caption to be numbered
+}
+
+% Uncomment this to have the outline at the beginning of each section highlighted.
+%\AtBeginSection[]
+%{
+%  \begin{frame}{Outline}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+\usepackage{graphicx}					% For including figures
+\usepackage{booktabs}					% For table rules
+\usepackage{hyperref}	
+\usepackage{tikz-network}				% For cross-referencing
+\usepackage[absolute,overlay]{textpos}
+\usepackage{bm}
+\usepackage[font=small,labelfont=bf]{caption}				% For cross-referencing
+\usepackage{physics}
+
+\title{The Quantum Fourier Transform}	% Presentation title
+\author{Clayton W. Seitz}								% Presentation author
+\date{\today}									% Today's date	
+
+\begin{document}
+
+% Title page
+% This page includes the informations defined earlier including title, author/s, affiliation/s and the date
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Introduction}
+
+Classical discrete Fourier transform maps a vector $\vec{x}\in \mathbb{C}^{N}$ to another vector $\vec{y}\in\mathbb{C}^{N}$, with elements
+
+\begin{equation*}
+y_{k} = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x_{n}\omega_{N}^{-nk}
+\end{equation*}
+
+where $\omega_{N} = e^{2\pi i/N}$. $\vec{x}$ is expanded in a basis for $\mathbb{C}^{N}$\\
+\vspace{0.1in}
+The quantum fourier transform (QFT) does exactly the same thing but the vector is now interpreted as a quantum state $\ket{\psi}=\sum_{n}\psi_{n}\ket{n}$ in a Hilbert space $\mathcal{H}$. 
+
+\begin{equation*}
+\mathrm{QFT}: \ket{c_{n}} \rightarrow \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}c_{n}\omega_{N}^{-nk}
+\end{equation*}
+
+
+\end{frame}
+
+\begin{frame}{The QFT as a unitary transformation}
+
+\end{frame}
+
+\end{document}
