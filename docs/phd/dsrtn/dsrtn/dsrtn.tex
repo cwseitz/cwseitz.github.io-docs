@@ -281,7 +281,7 @@ W =
 
 where we have introduced shorthands $\sigma = -\sum_{j\neq i}G_{ij}$.
 
-\subsection{The discrete time observation process}
+\subsection{A hidden Markov model of photoswitching dynamics}
 
 The imaging procedure requires taking a series of successive frames. Frame $n$ is formed by taking an exposure over the time interval $[n\Delta, (n+1)\Delta)$, where $n\in\mathbb{Z}{\geq0}$. The constant $\Delta$ corresponds to the exposure time for a single frame, also known as the frame length. We define the discrete time observed process ${Y_n: n \in \mathbb{Z}{\geq0}}$, with state space $S_Y={0,1}$, as $Y_n=1$ if the fluorophore (characterized by ${X(t)}$) is observed in frame $n$ and equal to $0$ otherwise. For the fluorophore to be observed in the time interval $[n\Delta, (n+1)\Delta)$, it must be in the On state $1$ for a minimum time of $\delta\in[0,\Delta)$. The value of $\delta$ is unknown and is a result of background noise and the imaging system's limited sensitivity. We note that if ${X(t)}$ exhibits multiple jumps to state $1$ within a frame, then a sufficient condition for observing the fluorophore is that the total time spent in the On state exceeds $\delta$. The $\delta=0$ case is the idealistic scenario of a noiseless system and perfect sensitivity such that the fluorophore is detected if it enters the On state for any non-zero amount of time during the exposure time $\Delta$.
 
