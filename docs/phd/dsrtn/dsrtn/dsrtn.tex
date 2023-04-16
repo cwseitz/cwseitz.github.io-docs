@@ -173,6 +173,62 @@ We often call the Hessian matrix the \emph{score}. The Fisher information is the
 In the second term of the equation, we have a Kronecker product between the Jacobian matrix of the likelihood with respect to the parameters of the hierarchical model ($J_{(L,\lambda)}$) and the $n\times n$ identity matrix ($I_n$), denoted as $J_{(L,\lambda)}\otimes I_n$. This Kronecker product gives a diagonal matrix where the elements along the diagonal are the elements of the vector $J_{(L,\lambda)}$.
 
 
+\section{Bayesian reconstruction from SMLM time series}
+
+
+We now address the problem of inferring photoswitching constants and fluorophore locations from SMLM times series $\vec{H}$. In the Bayesian framework, we write the posterior on $\Theta$ according to Bayes rule
+
+\begin{align*}
+P(\Theta|\vec{H}) = \frac{P(\Theta)P(\vec{H}|\Theta)}{P(\vec{H})}
+\end{align*}
+
+Let us first address the likelihood function. Markovian photoswitching in SMLM experiments presents us with an unknown hidden state $X_{t}$. To get $P(\vec{H}|\Theta)$, we need to integrate out the hidden state
+
+\begin{align*}
+P(\vec{H}|\Theta) &= \sum_{\vec{X}} P(\vec{H},\vec{X}|\Theta) = \sum_{\vec{X}} P(\vec{H}|\vec{X},\Theta)P(\vec{X}|\Theta)
+\end{align*}
+
+\begin{align*}
+P(\vec{H}|\Theta) &= \sum_{\vec{X}} P(\vec{H},\vec{X}|\Theta) = \sum_{\vec{X}} P(\vec{H}|\vec{X},\Theta)P(\vec{X}|\Theta)
+\end{align*}
+
+This is a daunting sum over an enormous state space $\vec{X}$. However, it is reasonable to assume that the joint distribution over a single frame will factor into image neighborhoods: $P(H) = \prod_{\mathcal{N}}P(\mathcal{N})$ due to locality. The neighborhood assignment $S$ can be absorbed into the parameter set and included as part of the inference problem. One way to do this is to treat the assignment of pixels to neighborhoods as a latent variable and jointly infer the neighborhood assignments and the particle coordinates. Specifically, we define a joint posterior distribution over the particle coordinates and the neighborhood assignments, given the observed image data. 
+
+\begin{align*}
+P(\Theta,S|\vec{H}) = \frac{P(S)P(\Theta)P(\vec{H}|\Theta,S)}{P(\vec{H})}
+\end{align*}
+
+The likelihood now reads
+
+\begin{align*}
+P(\vec{H}|\Theta,S) &= \prod_{\mathcal{N}}P(\mathcal{N}|\Theta,S) \\
+&= \prod_{\mathcal{N}}\sum_{X}P(\mathcal{N},X|\Theta) \\
+&= \prod_{\mathcal{N}}\sum_{x}P(\mathcal{N}|X=x,\Theta)P(X=x|\Theta)
+\end{align*}
+
+To make this sum more tractable, we note that each neighborhood should be conditionally dependent on a small subset of $X$, so we can define $Y$ as the partition of $X$ that it depends on and $Z$ the partition it does not. This implies that $P(\mathcal{N}|X) = P(\mathcal{N}|Y,Z) = P(\mathcal{N}|Y)$. Therefore,
+
+
+\begin{equation*}
+P(\mathcal{N}|\Theta) = \sum_{x}P(\mathcal{N}|Y=y,\Theta)P(X=x|\Theta)\\
+\end{equation*}
+
+This will simplify even further if we note that we can group terms since $P(\mathcal{N}|Y)$ is constant over states which share the same substate $y$. Dropping the model parameters for brevity,
+
+\begin{align*}
+P(\mathcal{N}) &= \sum_{x}P(\mathcal{N}|Y=y)P(X=x)\\
+&= P(\mathcal{N}|Y=y_{1})\sum_{x}P(X=x) +  P(\mathcal{N}|Y=y_{2})\sum_{x}P(X=x) + ... \\
+&=  \sum_{y}P(\mathcal{N}|Y=y)
+\end{align*}
+
+To summarize, the tractable likelihood of a time-series is given by
+
+\begin{equation}
+P(\vec{H}|\Theta,S) = \prod_{\mathcal{N}}\sum_{Y}P(\mathcal{N},Y|\Theta,S)
+\end{equation}
+
+This is a very important result, given that $P(\mathcal{N},Y|\Theta,S)$ is closely related to the transmission probability defined in (Patel 2019). Computation of $P(\mathcal{N},Y|\Theta,S)$ is a complex problem, requiring detailed models of the photoswitching process in continuous time, and discrete-time measurements.
+
 \section{Markovian photoswitching dynamics}
 
 The true photo-switching behavior of the fluorophore is a continuous time stochastic phenomenon. However, an experimenter can only ever observe a discretized manifestation of this
@@ -303,73 +359,6 @@ where $\Delta_{t}$ is itself a random variable. Further, the distribution on $\D
 \end{equation*}
 
 where $P(\Delta t | X_{t} = i) $ will be an exponential distribution with parameters dependent on the starting state. 
-
-\section{Bayesian reconstruction from SMLM time series}
-
-
-We now address the problem of inferring photoswitching constants and fluorophore locations from SMLM times series $\vec{H}$. In the Bayesian framework, we write the posterior on $\Theta$ according to Bayes rule
-
-\begin{align*}
-P(\Theta|\vec{H}) = \frac{P(\Theta)P(\vec{H}|\Theta)}{P(\vec{H})}
-\end{align*}
-
-Let us first address the likelihood function. Markovian photoswitching in SMLM experiments presents us with an unknown hidden state $X_{t}$. To get $P(\vec{H}|\Theta)$, we need to integrate out the hidden state
-
-\begin{align*}
-P(\vec{H}|\Theta) &= \sum_{\vec{X}} P(\vec{H},\vec{X}|\Theta) = \sum_{\vec{X}} P(\vec{H}|\vec{X},\Theta)P(\vec{X}|\Theta)
-\end{align*}
-
-\begin{align*}
-P(\vec{H}|\Theta) &= \sum_{\vec{X}} P(\vec{H},\vec{X}|\Theta) = \sum_{\vec{X}} P(\vec{H}|\vec{X},\Theta)P(\vec{X}|\Theta)
-\end{align*}
-
-This is a daunting sum over an enormous state space $\vec{X}$. However, it is reasonable to assume that the joint distribution over a single frame will factor into image neighborhoods: $P(H) = \prod_{\mathcal{N}}P(\mathcal{N})$ due to locality. The neighborhood assignment $S$ can be absorbed into the parameter set and included as part of the inference problem. One way to do this is to treat the assignment of pixels to neighborhoods as a latent variable and jointly infer the neighborhood assignments and the particle coordinates. Specifically, we define a joint posterior distribution over the particle coordinates and the neighborhood assignments, given the observed image data. 
-
-\begin{align*}
-P(\Theta,S|\vec{H}) = \frac{P(S)P(\Theta)P(\vec{H}|\Theta,S)}{P(\vec{H})}
-\end{align*}
-
-The likelihood now reads
-
-\begin{align*}
-P(\vec{H}|\Theta,S) &= \prod_{\mathcal{N}}P(\mathcal{N}|\Theta,S) \\
-&= \prod_{\mathcal{N}}\sum_{X}P(\mathcal{N},X|\Theta) \\
-&= \prod_{\mathcal{N}}\sum_{x}P(\mathcal{N}|X=x,\Theta)P(X=x|\Theta)
-\end{align*}
-
-To make this sum more tractable, we note that each neighborhood should be conditionally dependent on a small subset of $X$, so we can define $Y$ as the partition of $X$ that it depends on and $Z$ the partition it does not. This implies that $P(\mathcal{N}|X) = P(\mathcal{N}|Y,Z) = P(\mathcal{N}|Y)$. Therefore,
-
-
-\begin{equation*}
-P(\mathcal{N}|\Theta) = \sum_{x}P(\mathcal{N}|Y=y,\Theta)P(X=x|\Theta)\\
-\end{equation*}
-
-This will simplify even further if we note that we can group terms since $P(\mathcal{N}|Y)$ is constant over states which share the same substate $y$. Dropping the model parameters for brevity,
-
-\begin{align*}
-P(\mathcal{N}) &= \sum_{x}P(\mathcal{N}|Y=y)P(X=x)\\
-&= P(\mathcal{N}|Y=y_{1})\sum_{x}P(X=x) +  P(\mathcal{N}|Y=y_{2})\sum_{x}P(X=x) + ... \\
-&=  \sum_{y}P(\mathcal{N}|Y=y)
-\end{align*}
-
-To summarize, the tractable likelihood of a time-series is given by
-
-\begin{equation}
-P(\vec{H}|\Theta,S) = \prod_{\mathcal{N}}\sum_{Y}P(\mathcal{N},Y|\Theta,S)
-\end{equation}
-
-This is a very important result, given that $P(\mathcal{N},Y|\Theta,S)$ is closely related to the transmission probability defined in (Patel 2019). By accounting for not only whether or not a particle was detected, but explicitly modeling photon counts, and correctly accounting for the spread of emitted photons over the neighborhood, (2.8) can be computed.
-
-As a simple example, consider a white-noise time series, where each frame is drawn $Y_{t}\sim \mathcal{N}(\mu,\Sigma)$ and the covariance matrix $\Sigma$ has a block diagonal structure. Note that samples are assumed to be drawn iid over time - a valid assumption when (at least one empty frame exists between localizations? Not sure if I can make some 'memory loss' argument here). The likelihood on any given time series is thus $P(\vec{Y}|\mu,\Sigma) = \prod_{t}P(Y_{t}|\mu,\Sigma)$. Deconvolution of emitters can potentially be achieved by a clustering algorithm on the covariance matrix. Practical complications include covariance that is induced by background noise shared by multiple pixels. In addition, measured covariance used for the clustering process should be constrained by the spatial structure of the point spread function with an MRF. We can also consider the multivariate Poisson process with pairwise or higher order correlations constrained by the MRF. 
-
-I could determine if using the Hessian of the time series likelihood is different from the Hessian of static likelihood function. I would expect that also implies a Posterior with a lower entropy. 
-
-
-\begin{equation*}
-\vec{\mu}_{t}(x_{i},y_{i}) = \eta\Delta t\left(\lambda_{\theta}(x_{i},y_{i})\vec{N}_{t,i} + \vec{B}_{t}(x_{i},y_{i})\right)
-\end{equation*}
-
-\subsection{The Multivariate Poisson Process}
 
 
 
