@@ -360,7 +360,29 @@ where $\Delta_{t}$ is itself a random variable. Further, the distribution on $\D
 
 where $P(\Delta t | X_{t} = i) $ will be an exponential distribution with parameters dependent on the starting state. 
 
+\subsection{Deriving the transmission matrices}
 
+We now cover a general method for calculating $P(\mathcal{N},Y|\Theta,S)$. Following (Patel 2019), we write down the joint probability of a transition from state $i$ to state $j$ during an interval $\Delta$ and the observation $Y_{n}=\ell$. 
+
+\begin{align*}
+b_{ij,\Delta}^{\ell} &= \mathbb{P}(Y_{n}=\ell,X(\Delta)=j|X(0)=i)\\
+&= \sum_{k}q_{ij}(k,\Delta)\xi_{ij}(\ell,k,\Delta)
+\end{align*}
+
+where we have made the following definitions
+
+\begin{align*}
+q_{ij}(k,\Delta) &= \mathbb{P}(N(\Delta)=k,X(\Delta)=j|X(0)=i)\\
+\xi_{ij}(\ell,k,\Delta)  &= \mathbb{P}(Y_{n}=\ell|N(\Delta)=k,X(\Delta)=j,X(0)=i)
+\end{align*}
+
+We focus first on $q_{ij}(k,\Delta)$, which represents the probability distribution over $k$ transitions of type $ij$ occuring in the interval $\Delta$. This is analagous to considering the time-evolution of the probability mass over states in our solution of the master equation. However, here we instead find the time-evolution of the probability mass over the number of transitions $k$ of a certain type $q_{ij}$, and then integrate out the variable $k$. As an example, the distribution over $k$ for transition of type $q_{i0}$ (from $i\rightarrow 0$), is determined by the distribution over the number of $i\rightarrow 1$ transitions and the rate of a $1\rightarrow 0$ transition. 
+
+\begin{align*}
+q_{i0}(k,t+\Delta t) = (1-\sigma_{0}\Delta t)q_{i0}(k,t) + \lambda_{10}q_{i1}(k,t)\Delta t + \mathcal{O}(\Delta t)
+\end{align*}
+
+The negative contribution represents the distribution over the number of transitions $i\rightarrow 0$ that have already occured by time $t$ and will leave the $0$ state in the interval $\Delta t$. The full coupled system of differential equations reads
 
 
 \subsection{Bayesian nonparametric prior}
