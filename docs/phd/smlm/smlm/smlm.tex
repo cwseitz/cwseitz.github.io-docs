@@ -91,6 +91,7 @@
 \item Define ratio of OFF and ON state lifetimes as $r=\tau_{OFF} /\tau_{ON}$​
 \item High values of r assure a low number of fluorophores in the ON state​
 \item Low $r$ values ensure precise localization, but acquisitions are slow
+\item Long acqusitions are undesirable due to sample drift
 \end{itemize}
 \vspace{0.2in}
 Params for a single molecule are $\theta = (x_{0},y_{0})$
@@ -100,9 +101,10 @@ What we call lateral ``resolution" in SMLM is the lowest possible uncertainty in
 
 \end{frame}
 
-\begin{frame}{The state of the art (in 2021)}
+\begin{frame}{Current state of the art for dense localization in 3D (astigmatism)}
+DECODE uses a deep generative model to localize dense fluorophores
 \begin{figure}
-\includegraphics[scale=0.3]{Figure-6}
+\includegraphics[scale=0.33]{Figure-8}
 \end{figure}
 \textit{Deep learning enables fast and dense single-molecule localization with high accuracy}
 \end{frame}
