@@ -46,6 +46,76 @@
   \titlepage
 \end{frame}
 
+\begin{frame}[plain]
+  \centering
+  \Large A (Very) Brief Summary of SMLM
+\end{frame}
+
+
+\begin{frame}{General principle of single molecle localization microscopy (SMLM)}
+
+\begin{figure}
+\includegraphics[scale=0.4]{Figure-1}
+\end{figure}
+\textit{Patel et al. A hidden Markov model approach to characterizing the photo-switching behavior of fluorophores. Annals of Applied Statistics 2019}
+\end{frame}
+
+\begin{frame}{SMLM in the time domain}
+
+\begin{figure}
+\includegraphics[scale=0.325]{Figure-3}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{Photoswitching is a continuous time Markov process (CTMC)}
+
+\begin{figure}
+\includegraphics[scale=0.325]{Figure-2}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}{The OFF state lifetime depends on laser power (Alexa-647, WFM)}
+
+\begin{figure}
+\includegraphics[scale=0.2]{Figure-4}
+\end{figure}
+\textit{Quantifying and Optimizing Single-Molecule Switching Nanoscopy at High Speeds}
+\end{frame}
+
+
+\begin{frame}{Resolution is dependent on photoswitching kinetics}
+
+\begin{itemize}
+\item Define ratio of OFF and ON state lifetimes as $r=\tau_{OFF} /\tau_{ON}$​
+\item High values of r assure a low number of fluorophores in the ON state​
+\item Low $r$ values ensure precise localization, but acquisitions are slow
+\end{itemize}
+\vspace{0.2in}
+Params for a single molecule are $\theta = (x_{0},y_{0})$
+\vspace{0.1in}
+What we call lateral ``resolution" in SMLM is the lowest possible uncertainty in $\theta$, given a perfect estimator (The Cramer-Rao lower bound)
+
+
+\end{frame}
+
+\begin{frame}{The state of the art (in 2021)}
+\begin{figure}
+\includegraphics[scale=0.3]{Figure-6}
+\end{figure}
+\textit{Deep learning enables fast and dense single-molecule localization with high accuracy}
+\end{frame}
+
+
+
+\begin{frame}[plain]
+  \centering
+  \Large Mathematical Details
+\end{frame}
+
+
+
 
 \begin{frame}{sCMOS noise model}
 
@@ -126,20 +196,5 @@ Fortunately, we can compute the Hessian of the negative log likelihood using the
 By calculating $\hat{H}_{(l,\theta)}$ at $\theta_{\mathrm{MLE}}$, we can get an estimate of the observed information matrix. To do that $J_{(\lambda,\theta)}$ and $H_{(\lambda,\theta)}$ are best left to symbolic calculators. 
 \end{frame}
 
-\begin{frame}{Generalizing to a variable number of particles}
-
-\begin{align*}
-P(k,\theta | H) = \frac{P(X|k,\{\theta\}_{i=1}^{k})P(\theta|k)P(k)}{P(H)}
-\end{align*}
-
-where $P(k)$ is a hyperprior. One option is to use the Dirichlet process
-
-\begin{align*}
-P(k,\{\theta\}_{i=1}^{k} | H) &= \frac{P(H|k,\{\theta\}_{i=1}^{k})DP(\alpha,P(\theta|k))}{P(H)}
-\end{align*}
-
-
- 
-\end{frame}
 
 \end{document}
