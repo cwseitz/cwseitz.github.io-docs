@@ -176,7 +176,7 @@ In the second term of the equation, we have a Kronecker product between the Jaco
 \section{MAP estimation from SMLM time series}
 
 
-We now address the problem of inferring photoswitching constants and fluorophore locations from SMLM times series $\vec{H}$. In the Bayesian framework, we write the posterior on $\Theta$ according to Bayes rule. We define the following hierarchical Bayesian model
+We now address the problem of inferring photoswitching constants and fluorophore locations from SMLM time series $\bm{H}$. In the Bayesian framework, we write the posterior on $\Theta$ according to Bayes rule. We define the following hierarchical Bayesian model
 
 \begin{align*}
 \Theta &\sim P(\Theta)\\
@@ -190,13 +190,13 @@ with the following posterior distribution
 P(\Theta,S|\bm{H}) = \frac{P(\bm{H}|\Theta,S)P(S|\Theta)P(\Theta)}{P(\bm{H})}
 \end{align*}
 
-Let us first address the likelihood function. It is reasonable to propose that the joint distribution over a frame will factor into image neighborhoods due to locality. Therefore, we define the \emph{pixel assignment} $S$ such that $S(x,y)$ is assigned a label designating the fluorophore or combination of fluorophores collected photons were emitted by. The probability of an assignment given the particle locations is definite i.e., $P(S|\Theta) = \delta(S)$ where each pixel is attributed a \emph{labeling set}
+Let us first address the likelihood function. It is reasonable to propose that the joint distribution over a frame will factor into image neighborhoods due to locality. Therefore, we define the \emph{pixel assignment} $\bm{S}$ such that $\bm{S}(x,y)$ is assigned a label designating the fluorophore or combination of fluorophores collected photons were emitted by. The probability of an assignment given the particle locations is definite i.e., $P(S|\Theta) = \delta(S)$ where each pixel is attributed a \emph{labeling set}
 
 \begin{equation*}
-S(x,y) =  \{\mathbbm{1}\left(\lambda_{n}(x,y) > \epsilon\right)\}_{n=1}^{N}
+\bm{S}(x,y) =  \{\mathbbm{1}\left(\lambda_{n}(x,y) > \epsilon\right)\}_{n=1}^{N}
 \end{equation*}
  
-for some minimum rate tolerance $\epsilon << 1$. The neighborhood assignment $S$ can be absorbed into the parameter set and included as part of the inference problem. We can now see that the neighborhood $\mathcal{N}_{k} = \{H_{1},...,H_{N}\}$ per particle includes all pixels which detected photons from fluorophore $k$. When conditioned on $S$, the likelihood will factor into several smaller joint distributions. That is,
+for some minimum rate tolerance $\epsilon << 1$. The neighborhood assignment $S$ can be absorbed into the parameter set and included as part of the inference problem. We can now see that the neighborhood $\bm{N}_{k} = \{H_{1},...,H_{N}\}$ per particle includes all pixels which detected photons from fluorophore $k$. When conditioned on $S$, the likelihood will factor into several smaller joint distributions. That is,
 
 \begin{align*}
 P(\bm{H}|\Theta,S) &= \prod_{k}P(\bm{N}_{k}|\Theta,S)
