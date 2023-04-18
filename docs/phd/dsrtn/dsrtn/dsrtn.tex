@@ -200,18 +200,24 @@ P(\vec{H}|\Theta) &= \sum_{\vec{X}} P(\vec{H},\vec{X}|\Theta) = \sum_{\vec{X}} P
 P(\vec{H}|\Theta) &= \sum_{\vec{X}} P(\vec{H},\vec{X}|\Theta) = \sum_{\vec{X}} P(\vec{H}|\vec{X},\Theta)P(\vec{X}|\Theta)
 \end{align*}
 
-This is a daunting sum over an enormous state space $\vec{X}$. However, it is reasonable to assume that the joint distribution over a single frame will factor into image neighborhoods: $P(H) = \prod_{\mathcal{N}}P(\mathcal{N})$ due to locality. We define the \emph{pixel assignment} $S$ such that $S(x,y)$ is assigned a label designating the fluorophore or combination of fluorophores collected photons were emitted by. The probability of an assignment given the particle locations is definite i.e., $P(S|\Theta) = \delta(S)$ where each pixel is attributed a \emph{labeling set}
+This is a daunting sum over an enormous state space $\vec{X}$. However, it is reasonable to propose that the joint distribution over a frame will factor into image neighborhoods due to locality. Therefore, we define the \emph{pixel assignment} $S$ such that $S(x,y)$ is assigned a label designating the fluorophore or combination of fluorophores collected photons were emitted by. The probability of an assignment given the particle locations is definite i.e., $P(S|\Theta) = \delta(S)$ where each pixel is attributed a \emph{labeling set}
 
 \begin{equation*}
 S(x,y) =  \{\mathbbm{1}\left(\lambda_{n}(x,y) > \epsilon\right)\}_{n=1}^{N}
 \end{equation*}
  
-for some minimum rate tolerance $\epsilon << 1$. The neighborhood assignment $S$ can be absorbed into the parameter set and included as part of the inference problem. Moreover, the likelihood is
+for some minimum rate tolerance $\epsilon << 1$. The neighborhood assignment $S$ can be absorbed into the parameter set and included as part of the inference problem. We can now see that the neighborhood $\mathcal{N}_{k} = \{H_{1},...,H_{N}\}$ per particle includes all pixels which detected photons from fluorophore $k$. When conditioned on $S$, the likelihood will factor into several smaller joint distributions. For example,
 
 \begin{align*}
-P(\vec{H}|\Theta,S) &= \prod_{\mathcal{N}}P(\mathcal{N}|\Theta,S) \\
-&= \prod_{\mathcal{N}}\sum_{X}P(\mathcal{N},X|\Theta) \\
-&= \prod_{\mathcal{N}}\sum_{x}P(\mathcal{N}|X=x,\Theta)P(X=x|\Theta)
+P(\vec{H}|\Theta,S) &= P(\mathcal{N}_{1},\mathcal{N}_{2})P(\mathcal{N}_{3}) .... P(\mathcal{N}_{n-1},\mathcal{N})
+\end{align*}
+
+Additionally, we can incorporate the hidden state
+
+\begin{align*}
+P(\vec{H}|\Theta,S) &= \prod_{k}P(\mathcal{N}_{k}|\Theta,S) \\
+&= \prod_{k}\sum_{X}P(\mathcal{N}_{k},X|\Theta,S) \\
+&= \prod_{k}\sum_{x}P(\mathcal{N}_{k}|X=x,\Theta,S)P(X=x|\Theta,S)
 \end{align*}
 
 To make this sum more tractable, we leverage the conditional independence structure embedded in $S$. That is, $S$ implies that each neighborhood $\mathcal{N}_{S}$ depends only on a small subset of $X$, so we can define $Y$ as the partition of $X$ that it depends on and $Z$ the partition it does not. This implies that $P(\mathcal{N}|X) = P(\mathcal{N}|Y,Z) = P(\mathcal{N}|Y)$. Therefore,
