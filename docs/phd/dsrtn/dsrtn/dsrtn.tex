@@ -176,10 +176,18 @@ In the second term of the equation, we have a Kronecker product between the Jaco
 \section{Bayesian reconstruction from SMLM time series}
 
 
-We now address the problem of inferring photoswitching constants and fluorophore locations from SMLM times series $\vec{H}$. In the Bayesian framework, we write the posterior on $\Theta$ according to Bayes rule
+We now address the problem of inferring photoswitching constants and fluorophore locations from SMLM times series $\vec{H}$. In the Bayesian framework, we write the posterior on $\Theta$ according to Bayes rule. We define the following hierarchical Bayesian model
 
 \begin{align*}
-P(\Theta|\vec{H}) = \frac{P(\Theta)P(\vec{H}|\Theta)}{P(\vec{H})}
+\Theta &\sim P(\Theta)\\
+S|\Theta &\sim P(S|\Theta)\\
+\vec{H}|\Theta,S &\sim P(\vec{H}|\Theta,S)
+\end{align*}
+
+with the following posterior distribution
+
+\begin{align*}
+P(\Theta,S|\vec{H}) = \frac{P(\vec{H}|\Theta,S)P(S|\Theta)P(\Theta)}{P(\vec{H})}
 \end{align*}
 
 Let us first address the likelihood function. Markovian photoswitching in SMLM experiments presents us with an unknown hidden state $X_{t}$. To get $P(\vec{H}|\Theta)$, we need to integrate out the hidden state
@@ -192,13 +200,13 @@ P(\vec{H}|\Theta) &= \sum_{\vec{X}} P(\vec{H},\vec{X}|\Theta) = \sum_{\vec{X}} P
 P(\vec{H}|\Theta) &= \sum_{\vec{X}} P(\vec{H},\vec{X}|\Theta) = \sum_{\vec{X}} P(\vec{H}|\vec{X},\Theta)P(\vec{X}|\Theta)
 \end{align*}
 
-This is a daunting sum over an enormous state space $\vec{X}$. However, it is reasonable to assume that the joint distribution over a single frame will factor into image neighborhoods: $P(H) = \prod_{\mathcal{N}}P(\mathcal{N})$ due to locality. The neighborhood assignment $S$ can be absorbed into the parameter set and included as part of the inference problem. One way to do this is to treat the assignment of pixels to neighborhoods as a latent variable and jointly infer the neighborhood assignments and the particle coordinates. Specifically, we define a joint posterior distribution over the particle coordinates and the neighborhood assignments, given the observed image data. 
+This is a daunting sum over an enormous state space $\vec{X}$. However, it is reasonable to assume that the joint distribution over a single frame will factor into image neighborhoods: $P(H) = \prod_{\mathcal{N}}P(\mathcal{N})$ due to locality. We define the \emph{pixel assignment} $S$ such that $S(x,y)$ is assigned a label designating the fluorophore or combination of fluorophores collected photons were emitted by. The probability of an assignment given the particle locations is definite i.e., $P(S|\Theta) = \delta(S)$ where each pixel is attributed a \emph{labeling set}
 
-\begin{align*}
-P(\Theta,S|\vec{H}) = \frac{P(S)P(\Theta)P(\vec{H}|\Theta,S)}{P(\vec{H})}
-\end{align*}
-
-The likelihood now reads
+\begin{equation*}
+S(x,y) =  \{\mathbbm{1}\left(\lambda_{n}(x,y) > \epsilon\right)\}_{n=1}^{N}
+\end{equation*}
+ 
+for some minimum rate tolerance $\epsilon << 1$. The neighborhood assignment $S$ can be absorbed into the parameter set and included as part of the inference problem. Moreover, the likelihood is
 
 \begin{align*}
 P(\vec{H}|\Theta,S) &= \prod_{\mathcal{N}}P(\mathcal{N}|\Theta,S) \\
@@ -206,8 +214,7 @@ P(\vec{H}|\Theta,S) &= \prod_{\mathcal{N}}P(\mathcal{N}|\Theta,S) \\
 &= \prod_{\mathcal{N}}\sum_{x}P(\mathcal{N}|X=x,\Theta)P(X=x|\Theta)
 \end{align*}
 
-To make this sum more tractable, we note that each neighborhood should be conditionally dependent on a small subset of $X$, so we can define $Y$ as the partition of $X$ that it depends on and $Z$ the partition it does not. This implies that $P(\mathcal{N}|X) = P(\mathcal{N}|Y,Z) = P(\mathcal{N}|Y)$. Therefore,
-
+To make this sum more tractable, we leverage the conditional independence structure embedded in $S$. That is, $S$ implies that each neighborhood $\mathcal{N}_{S}$ depends only on a small subset of $X$, so we can define $Y$ as the partition of $X$ that it depends on and $Z$ the partition it does not. This implies that $P(\mathcal{N}|X) = P(\mathcal{N}|Y,Z) = P(\mathcal{N}|Y)$. Therefore,
 
 \begin{equation*}
 P(\mathcal{N}|\Theta) = \sum_{x}P(\mathcal{N}|Y=y,\Theta)P(X=x|\Theta)\\
