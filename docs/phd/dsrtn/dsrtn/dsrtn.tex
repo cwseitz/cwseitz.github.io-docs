@@ -209,10 +209,10 @@ S(x,y) =  \{\mathbbm{1}\left(\lambda_{n}(x,y) > \epsilon\right)\}_{n=1}^{N}
 for some minimum rate tolerance $\epsilon << 1$. The neighborhood assignment $S$ can be absorbed into the parameter set and included as part of the inference problem. We can now see that the neighborhood $\mathcal{N}_{k} = \{H_{1},...,H_{N}\}$ per particle includes all pixels which detected photons from fluorophore $k$. When conditioned on $S$, the likelihood will factor into several smaller joint distributions. For example,
 
 \begin{align*}
-P(\vec{H}|\Theta,S) &= P(\mathcal{N}_{1},\mathcal{N}_{2})P(\mathcal{N}_{3}) .... P(\mathcal{N}_{n-1},\mathcal{N})
+P(\vec{H}|\Theta,S) &= \prod_{k}P(\mathcal{N}_{k})
 \end{align*}
 
-Additionally, we can incorporate the hidden state
+Notice that each neighborhood $\mathcal{N}_{k}$ is not guaranteed to contain only one fluorophore. Indeed, it may contain multiple, and those that contain multiple have a neighborhood assignment $S_{\mathcal{N}}$ with at least one pixel that contains more than one label. Allowing this multiplicity makes it possible to factor the joint distribution over images while drastically simplifying marginalization of the hidden state and preserving the spatial structure of the image. To see this, we write
 
 \begin{align*}
 P(\vec{H}|\Theta,S) &= \prod_{k}P(\mathcal{N}_{k}|\Theta,S) \\
@@ -220,7 +220,7 @@ P(\vec{H}|\Theta,S) &= \prod_{k}P(\mathcal{N}_{k}|\Theta,S) \\
 &= \prod_{k}\sum_{x}P(\mathcal{N}_{k}|X=x,\Theta,S)P(X=x|\Theta,S)
 \end{align*}
 
-To make this sum more tractable, we leverage the conditional independence structure embedded in $S$. That is, $S$ implies that each neighborhood $\mathcal{N}_{S}$ depends only on a small subset of $X$, so we can define $Y$ as the partition of $X$ that it depends on and $Z$ the partition it does not. This implies that $P(\mathcal{N}|X) = P(\mathcal{N}|Y,Z) = P(\mathcal{N}|Y)$. Therefore,
+To make this sum more tractable, we now leverage the conditional independence structure embedded in $S$. That is, $S$ implies that each neighborhood $\mathcal{N}_{k}$ depends only on a small subset of $X$, so we can define $Y$ as the partition of $X$ that it depends on and $Z$ the partition it does not. This implies that $P(\mathcal{N}|X) = P(\mathcal{N}|Y,Z) = P(\mathcal{N}|Y)$. Therefore,
 
 \begin{equation*}
 P(\mathcal{N}|\Theta) = \sum_{x}P(\mathcal{N}|Y=y,\Theta)P(X=x|\Theta)\\
