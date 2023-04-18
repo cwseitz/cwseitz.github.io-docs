@@ -173,7 +173,7 @@ We often call the Hessian matrix the \emph{score}. The Fisher information is the
 In the second term of the equation, we have a Kronecker product between the Jacobian matrix of the likelihood with respect to the parameters of the hierarchical model ($J_{(L,\lambda)}$) and the $n\times n$ identity matrix ($I_n$), denoted as $J_{(L,\lambda)}\otimes I_n$. This Kronecker product gives a diagonal matrix where the elements along the diagonal are the elements of the vector $J_{(L,\lambda)}$.
 
 
-\section{Bayesian reconstruction from SMLM time series}
+\section{MAP estimation from SMLM time series}
 
 
 We now address the problem of inferring photoswitching constants and fluorophore locations from SMLM times series $\vec{H}$. In the Bayesian framework, we write the posterior on $\Theta$ according to Bayes rule. We define the following hierarchical Bayesian model
@@ -181,66 +181,49 @@ We now address the problem of inferring photoswitching constants and fluorophore
 \begin{align*}
 \Theta &\sim P(\Theta)\\
 S|\Theta &\sim P(S|\Theta)\\
-\vec{H}|\Theta,S &\sim P(\vec{H}|\Theta,S)
+\bm{H}|\Theta,S &\sim P(\bm{H}|\Theta,S)
 \end{align*}
 
 with the following posterior distribution
 
 \begin{align*}
-P(\Theta,S|\vec{H}) = \frac{P(\vec{H}|\Theta,S)P(S|\Theta)P(\Theta)}{P(\vec{H})}
+P(\Theta,S|\bm{H}) = \frac{P(\bm{H}|\Theta,S)P(S|\Theta)P(\Theta)}{P(\bm{H})}
 \end{align*}
 
-Let us first address the likelihood function. Markovian photoswitching in SMLM experiments presents us with an unknown hidden state $X_{t}$. To get $P(\vec{H}|\Theta)$, we need to integrate out the hidden state
-
-\begin{align*}
-P(\vec{H}|\Theta) &= \sum_{\vec{X}} P(\vec{H},\vec{X}|\Theta) = \sum_{\vec{X}} P(\vec{H}|\vec{X},\Theta)P(\vec{X}|\Theta)
-\end{align*}
-
-\begin{align*}
-P(\vec{H}|\Theta) &= \sum_{\vec{X}} P(\vec{H},\vec{X}|\Theta) = \sum_{\vec{X}} P(\vec{H}|\vec{X},\Theta)P(\vec{X}|\Theta)
-\end{align*}
-
-This is a daunting sum over an enormous state space $\vec{X}$. However, it is reasonable to propose that the joint distribution over a frame will factor into image neighborhoods due to locality. Therefore, we define the \emph{pixel assignment} $S$ such that $S(x,y)$ is assigned a label designating the fluorophore or combination of fluorophores collected photons were emitted by. The probability of an assignment given the particle locations is definite i.e., $P(S|\Theta) = \delta(S)$ where each pixel is attributed a \emph{labeling set}
+Let us first address the likelihood function. It is reasonable to propose that the joint distribution over a frame will factor into image neighborhoods due to locality. Therefore, we define the \emph{pixel assignment} $S$ such that $S(x,y)$ is assigned a label designating the fluorophore or combination of fluorophores collected photons were emitted by. The probability of an assignment given the particle locations is definite i.e., $P(S|\Theta) = \delta(S)$ where each pixel is attributed a \emph{labeling set}
 
 \begin{equation*}
 S(x,y) =  \{\mathbbm{1}\left(\lambda_{n}(x,y) > \epsilon\right)\}_{n=1}^{N}
 \end{equation*}
  
-for some minimum rate tolerance $\epsilon << 1$. The neighborhood assignment $S$ can be absorbed into the parameter set and included as part of the inference problem. We can now see that the neighborhood $\mathcal{N}_{k} = \{H_{1},...,H_{N}\}$ per particle includes all pixels which detected photons from fluorophore $k$. When conditioned on $S$, the likelihood will factor into several smaller joint distributions. For example,
+for some minimum rate tolerance $\epsilon << 1$. The neighborhood assignment $S$ can be absorbed into the parameter set and included as part of the inference problem. We can now see that the neighborhood $\mathcal{N}_{k} = \{H_{1},...,H_{N}\}$ per particle includes all pixels which detected photons from fluorophore $k$. When conditioned on $S$, the likelihood will factor into several smaller joint distributions. That is,
 
 \begin{align*}
-P(\vec{H}|\Theta,S) &= \prod_{k}P(\mathcal{N}_{k})
+P(\bm{H}|\Theta,S) &= \prod_{k}P(\bm{N}_{k}|\Theta,S)
 \end{align*}
 
-Notice that each neighborhood $\mathcal{N}_{k}$ is not guaranteed to contain only one fluorophore. Indeed, it may contain multiple, and those that contain multiple have a neighborhood assignment $S_{\mathcal{N}}$ with at least one pixel that contains more than one label. Allowing this multiplicity makes it possible to factor the joint distribution over images while drastically simplifying marginalization of the hidden state and preserving the spatial structure of the image. To see this, we write
+The probability $P(\bm{N}_{k}|\Theta,S)$ can be computed using the forward-backward algorithm. However, that calculation will simplify considerably if we notice that the sequence $\bm{N}_{k}$ is only dependent on a small part of the hidden state.
+
+\subsection{Neighborhood sequence probabilities depend only on a small partition of the hidden state}
+
+Before using the forward-backward algorithm to compute the probability of a neighborhood sequence $P(\bm{N}_{k}|\Theta,S)$, we want to simplify the problem by removing the hidden state subspace that $\bm{N}_{k}$ is not dependent on. This property is given by the locality implied in $S$
 
 \begin{align*}
-P(\vec{H}|\Theta,S) &= \prod_{k}P(\mathcal{N}_{k}|\Theta,S) \\
-&= \prod_{k}\sum_{X}P(\mathcal{N}_{k},X|\Theta,S) \\
-&= \prod_{k}\sum_{x}P(\mathcal{N}_{k}|X=x,\Theta,S)P(X=x|\Theta,S)
+P(\bm{N}_{k}|\Theta,S) &= \sum_{\bm{X}}P(\bm{N}_{k},\bm{X}|\Theta,S) \\
+&= \sum_{\bm{X}}P(\bm{N}_{k}|\bm{X},\Theta,S)P(\bm{X}|\Theta,S)
 \end{align*}
 
-To make this sum more tractable, we now leverage the conditional independence structure embedded in $S$. That is, $S$ implies that each neighborhood $\mathcal{N}_{k}$ depends only on a small subset of $X$, so we can define $Y$ as the partition of $X$ that it depends on and $Z$ the partition it does not. This implies that $P(\mathcal{N}|X) = P(\mathcal{N}|Y,Z) = P(\mathcal{N}|Y)$. Therefore,
-
-\begin{equation*}
-P(\mathcal{N}|\Theta) = \sum_{x}P(\mathcal{N}|Y=y,\Theta)P(X=x|\Theta)\\
-\end{equation*}
-
-This will simplify even further if we note that we can group terms since $P(\mathcal{N}|Y)$ is constant over states which share the same substate $y$. Dropping the model parameters for brevity,
+We now leverage the conditional independence structure embedded in $S$. That is, $S$ implies that each neighborhood sequence  $\bm{N}_{k}$ depends only on a small subset of $\bm{X}$, so we can define $\bm{Y}$ as the partition of sequence $\bm{X}$ that it depends on and $\bm{Z}$ the partition it does not. This implies that $P(\bm{N}_{k}|\bm{X},\Theta,S) = P(\bm{N}_{k}|\bm{Y},\Theta,S)$. Therefore,
 
 \begin{align*}
-P(\mathcal{N}) &= \sum_{x}P(\mathcal{N}|Y=y)P(X=x)\\
-&= P(\mathcal{N}|Y=y_{1})\sum_{x}P(X=x) +  P(\mathcal{N}|Y=y_{2})\sum_{x}P(X=x) + ... \\
-&=  \sum_{y}P(\mathcal{N}|Y=y)
+P(\bm{N}_{k}|\Theta,S) &= \sum_{\bm{Z}}\sum_{\bm{Y}}P(\bm{N}_{k}|\bm{Y},\bm{Z},\Theta)P(\bm{Y},\bm{Z}|\Theta)\\
+&= \sum_{\bm{Z}}P(\bm{Z}|\Theta)\sum_{\bm{Y}}P(\bm{N}_{k}|\bm{Y},\bm{Z},\Theta)P(\bm{Y}|\bm{Z},\Theta)\\
+&= \sum_{\bm{Y}}P(\bm{N}_{k}|\bm{Y},\Theta)P(\bm{Y}|\Theta)\\
 \end{align*}
 
-To summarize, the tractable likelihood of a time-series is given by
+\subsection{The forward-backward algorithm}
 
-\begin{equation}
-P(\vec{H}|\Theta,S) = \prod_{\mathcal{N}}\sum_{Y}P(\mathcal{N},Y|\Theta,S)
-\end{equation}
-
-This is a very important result, given that $P(\mathcal{N},Y|\Theta,S)$ is closely related to the transmission probability defined in (Patel 2019). Computation of $P(\mathcal{N},Y|\Theta,S)$ is a complex problem, requiring detailed models of the photoswitching process in continuous time, and discrete-time measurements.
+Now that we have proven that we only need a small parition of the hidden state to compute the probability of a neighborhood sequence $P(\bm{N}_{k}|\Theta,S)$ we can move on to the forward-backward algorithm.
 
 \section{Markovian photoswitching dynamics}
 
