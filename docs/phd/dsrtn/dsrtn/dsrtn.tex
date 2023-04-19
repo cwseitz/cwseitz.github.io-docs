@@ -73,6 +73,9 @@ Most detectors used for imaging have many elements (pixels) so that we can recor
 \mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}} + B_0
 \end{equation}
 
+\begin{figure}
+\includegraphics[scale=0.525]{Figure-0.png}
+\end{figure}
 
 Modern cameras used in light microscopy, such as scientific complementary metal oxide semiconductor (sCMOS) cameras, are powered by the photoelectric effect. Electrons within each pixel, called photoelectrons, absorb enough energy from incoming photons to be promoted to the conduction band to give electrical current which can be detected. Integration of photoelectrons during the exposure time results in a monochrome image captured by a camera. The image of a single point particle, such as a fluorescent molecule, can be thought of as two-dimensional histogram of photon arrivals and a discretized form of the classical intensity profile $\mathrm{G}(x,y)$. The value at a pixel approaches an integral of this density over the pixel:
 
@@ -212,6 +215,12 @@ Before using the forward-backward algorithm to compute the probability of a neig
 P(\bm{N}_{k}|\Theta,S) &= \sum_{\bm{X}}P(\bm{N}_{k},\bm{X}|\Theta,S) \\
 &= \sum_{\bm{X}}P(\bm{N}_{k}|\bm{X},\Theta,S)P(\bm{X}|\Theta,S)
 \end{align*}
+
+
+\begin{figure}
+\includegraphics[scale=0.325]{Schematic.png}
+\caption{(A) Generative path (violet) and likelihood computation (blue) for a single pixel neighborhood (outlined in green). During inference, the pixels are labeled according to which fluorophore(s) they count photons from, simplifying the likelihood computation. (B) Continuous-time Markov chain (CTMC) model used both for synthetic data generation (simulated via SSA), and inference of photoswitching kinetics with PSHMM module}
+\end{figure}
 
 We now leverage the conditional independence structure embedded in $S$. That is, $S$ implies that each neighborhood sequence  $\bm{N}_{k}$ depends only on a small subset of $\bm{X}$, so we can define $\bm{Y}$ as the partition of sequence $\bm{X}$ that it depends on and $\bm{Z}$ the partition it does not. This implies that $P(\bm{N}_{k}|\bm{X},\Theta,S) = P(\bm{N}_{k}|\bm{Y},\Theta,S)$. Therefore,
 
