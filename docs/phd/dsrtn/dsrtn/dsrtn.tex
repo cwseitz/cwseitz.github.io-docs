@@ -178,6 +178,8 @@ In the second term of the equation, we have a Kronecker product between the Jaco
 
 \section{MAP estimation from SMLM time series}
 
+\textcolor{red}{I am going to approach the deconvolution problem first using the Dirichlet process scheme. This will involve defining a prior over the plane consisting of 2D Gaussian modes centered on the raw detection coordinates. Then for each mode, we sample from a Dirichlet process to give the number of fluorophores in that cluster. Then we draw the position of each fluorophore from the 2D Gaussian mode and calculate the likelihood of the entire image given all the coordinate pairs. The number of particles is given by the sum of the draw from each DP. My second thought is that I boost the deconvolution with temporal fluctuations if clusters are observed multiple times. Inference of photoswitching constants will be done separately after localization, and it will need to be based on the segmentation of the image in Figure (2.1) directly computed using inferred particle coordinates}
+
 
 We now address the problem of inferring photoswitching constants and fluorophore locations from SMLM time series $\bm{H}$. In the Bayesian framework, we write the posterior on $\Theta$ according to Bayes rule. We define the following hierarchical Bayesian model
 
