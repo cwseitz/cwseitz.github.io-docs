@@ -454,19 +454,18 @@ We can treat $\log p(x)$ as a constant here, so the KL-divergence is minimized b
 Let $\theta = (\theta_{1},...,\theta_{K})$ and $\theta_{k} = (x_{k},y_{k})$ be the particle coordinates or ``cluster centers". 
 
 \begin{align*}
-\nabla_{\theta}\mathrm{ELBO} = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\nabla_{\theta}\log q(\theta) - \nabla_{\theta}\log p(x|\theta)\right)
+\nabla_{\phi}\mathrm{ELBO} &= - \nabla_{\phi}\left(\underset{{\theta \sim q_{\phi}(\theta)}}{\mathbb{E}}\left(\log q_{\phi}(\theta) - \log p(x|\theta)\right)\right)\\
+&= \nabla_{\phi}\int_{\theta}q_{\phi}(\theta)\log p(x|\theta)d\theta-\nabla_{\phi}\int_{\theta}q_{\phi}(\theta)\log q_{\phi}(\theta)d\theta\\
+&= \int_{\theta}\nabla_{\phi}q_{\phi}(\theta)\log p(x|\theta)d\theta-\nabla_{\phi}H(q_{\phi}(\theta))
 \end{align*}
 
-To compute the gradients of the ELBO, we recall the following pair of equations from the previous section on the multi-emitter regime
+where $H(q_{\phi}(\theta))$ is the differential entropy of the variational posterior. If the variational posterior is simple, like a multivariate Gaussian, gradients of the differential entropy can be computed analytically. However, the first term is intractable and often must be estimated using Monte Carlo methods
 
-\begin{align*}
-\mu_{k}' &= g_{k}\eta\Delta\left(\sum_{j}N_{j}\lambda_{\theta_{j}}(x_{k},y_{k}) + B_{0}\right)+ \sigma_{k}^{2}\\
-\ell(\vec{H}|\theta) &= \sum_{k}  \log n_{k}! + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
-\end{align*}
+\begin{equation*}
+\int_{\theta}\nabla_{\phi}q_{\phi}(\theta)\log p(x|\theta)d\theta \approx \underset{{\theta \sim q_{\phi}(\theta)}}{\mathbb{E}}\nabla_{\phi}q_{\phi}(\theta)\log p(x|\theta)
+\end{equation*}
 
-The gradients are given by the chain rule $\frac{\partial \ell}{\partial\theta_{j}} = \frac{\partial \ell}{\partial\mu_{j}}\frac{\partial \mu}{\partial\theta_{j}}$
-
-
+The reparameterization trick works by transforming the random variable $\theta$ in the variational distribution $q_\phi(\theta)$ into a new random variable $\epsilon$ with a fixed distribution $p(\epsilon)$, such that $\theta = g_\phi(\epsilon)$ for some differentiable function $g_\phi$. Then, we can write:
 
 
 \chapter{Phase transitions of DNA-protein condensates}
