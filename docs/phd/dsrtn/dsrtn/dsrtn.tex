@@ -83,7 +83,13 @@ Modern cameras used in light microscopy, such as scientific complementary metal 
 \mu_{k} = I_{0}\lambda_{k} = I_{0}\int_{\mathrm{pixel}} G(x,y)dxdy
 \end{equation}
 
-where $I_{0} = \eta N_{0}\Delta t$. The parameter $\eta$ is the quantum efficiency and $\Delta t$ is the exposure time. $N_{0}$ represents the number of photons emitted per unit time, which may be itself a Poisson random variable; however, this is inconsequential since it is a fixed value for a single image of a fluorescent molecule. The value of the integral $\lambda_{k}$ at a pixel $k$ defines the fraction of $I_{0}$ photons observed at that pixel during the camera exposure. Since the 2D Gaussian in (1.1) has cylindrical symmetry, it is separable, and we can write
+where $I_{0} = \eta N_{0}\Delta$. The parameter $\eta$ is the quantum efficiency and $\Delta$ is the exposure time. $N_{0}$ represents the number of photons emitted per unit time, which may be itself a Poisson random variable; however, this is inconsequential since it is a fixed value for a single image of a fluorescent molecule. If the background signal is not negligible, then we can generalize (2.2) above to
+
+\begin{equation}
+\mu_{k} = \eta\Delta\left(N_{0}\lambda_{k} + B_{0}\right)
+\end{equation}
+
+where $B_{0}$ is the rate that background photons arrive at pixel $k$. The value of the integral $\lambda_{k}$ at a pixel $k$ defines the fraction of $N_{0}$ photons that arrive at pixel $k$ during the camera exposure. Since the 2D Gaussian in (1.1) has cylindrical symmetry, it is separable, and we can write
 
 \begin{align*}
 \lambda_{k} &= \frac{1}{2\pi\sigma^{2}}\left(\int_{x_{k}}^{x_{k+1}}e^{-\frac{(x-x_{0})^{2}}{2\sigma^{2}}}dx\right)\left(\int_{y_{k}}^{y_{k+1}}e^{-\frac{(y-y_{0})^{2}}{2\sigma^{2}}}dy\right)
@@ -112,15 +118,13 @@ where
 We are now prepared to write the shot-noise limited signal, which is a vector with units of phototelectrons
 
 \begin{equation}
-\vec{S} = \left[\mathrm{Poisson}(\lambda_{1}), \mathrm{Poisson}(\lambda_{2}), ..., \mathrm{Poisson}(\lambda_{N})\right]
+\vec{S} = \left[\mathrm{Poisson}(\mu_{1}), \mathrm{Poisson}(\mu_{2}), ..., \mathrm{Poisson}(\mu_{N})\right]
 \end{equation}
 
 
 However this noise model is incomplete, because detectors often suffer from dark noise, which may refer to readout noise or dark current, and contributes to a nonzero signal even in the absence of incident light. Dark current is due to statistical fluctuations in the photoelectron count due to thermal fluctuations. Readout noise is introduced by the amplifier circuit during the coversion of photoelectron charge to a voltage. Here, we use the Hamamatsu ORCA v3 CMOS camera, which is air cooled to -10C and has very low dark current - around 0.06 electrons/pixel/second - and can therefore be safely ignored for exposure times on the order of milliseconds. Readout noise has been often neglected in localization algorithms because its presence in EMCCD cameras is small enough that it can be ignored within the tolerances of the localization precision. In the case of sCMOS cameras, however, the readout noise of each pixel is significantly higher and, in addition, every pixel has its own noise and gain characteristic sometimes with dramatic pixel-to-pixel variations.
 
-On the other hand, readout noise is not negligible, and must represented as a vector-valued random variable. It is important to note that we cannot measure the contribution by readout noise before amplification and therefore it must be expressed in units of $\mathrm{ADU}$. This is in contrast to $\vec{S}$, which can be expressed in units of photoelectrons, because these statistical fluctuations can be predicted to be Poisson by quantum mechanics. The number of photoelectrons $S_{k}$ is  multiplied by a gain factor $g_{k}$ which has units of $[\mathrm{ADU}/e^{-}]$, which generally must be measured for each pixel. Here, we will always assume that readout noise per pixel $\xi_{k}$ is Gaussian with some pixel-specific offset $o_{k}$ and variance $\sigma_{k}^{2}$. 
-
-We will now define a vector which represents the image we measure, in units of ADU: 
+It is important to note that we cannot measure the contribution by readout noise before amplification and therefore it must be expressed in units of $\mathrm{ADU}$. This is in contrast to $\vec{S}$, which can be expressed in units of photoelectrons, because these statistical fluctuations can be predicted to be Poisson by quantum mechanics. Furthermore, the number of photoelectrons $S_{k}$ is  multiplied by a gain factor $g_{k}$ which has units of $[\mathrm{ADU}/e^{-}]$, which generally must be measured for each pixel. Here, we will always assume that readout noise per pixel $\xi_{k}$ is Gaussian with some pixel-specific offset $o_{k}$ and variance $\sigma_{k}^{2}$. We will also assume that gain factors and pixel noise characteristics are constants and do not scale with the signal level $S_{k}$. Therefore our measurement, in units of ADU, is: 
 
 \begin{equation}
 \vec{H} = \vec{S} + \vec{\xi}
@@ -147,11 +151,29 @@ H_{k}' \sim \mathrm{Poisson}(\mu_{k}')
 
 where $\mu_{k}' = g_{k}\mu_{k} + \sigma_{k}^{2}$. This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson. Under this approximation, the model negative log-likelihood is
 
-\begin{align*}
+\begin{align}
 \ell(\vec{H}) &= -\log \prod_{k} \frac{e^{-\left(\mu_{k}'\right)}\left(\mu_{k}'\right)^{n_{k}}}{n_{k}!}\\
 &= \sum_{k}  \log n_{k}! + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
+\end{align}
+
+
+\subsection{The multi-emitter regime}
+
+The multi-emitter case is a straightforward extension of the single emitter case. Since noise is signal-independent, we write
+
+
+\begin{equation}
+\vec{H} = \sum_{k=1}^{K}\vec{S}_{k} + \vec{\xi}
+\end{equation}
+
+Since the sum of independent Poisson variables is itself a Poisson variable with a rate equal to the sum over rates of the individual processes, we can immediately write
+
+\begin{align*}
+H_{k}' &\sim \mathrm{Poisson}(\mu_{k}')\\
+\mu_{k}' &= g_{k}\eta\Delta\left(\sum_{j}N_{j}\lambda_{\theta_{j}}(x_{k},y_{k}) + B_{0}\right)+ \sigma_{k}^{2}
 \end{align*}
 
+and of course we still have a negative log-likelihood that is identical to (2.9).
 
 \subsection{The Cramer-Rao lower bound}
 
@@ -177,9 +199,6 @@ In the second term of the equation, we have a Kronecker product between the Jaco
 
 
 \section{MAP estimation from SMLM time series}
-
-\textcolor{red}{I am going to approach the deconvolution problem first using the Dirichlet process scheme. This will involve defining a prior over the plane consisting of 2D Gaussian modes centered on the raw detection coordinates. Then for each mode, we sample from a Dirichlet process to give the number of fluorophores in that cluster. Then we draw the position of each fluorophore from the 2D Gaussian mode and calculate the likelihood of the entire image given all the coordinate pairs. The number of particles is given by the sum of the draw from each DP. My second thought is that I boost the deconvolution with temporal fluctuations if clusters are observed multiple times. Inference of photoswitching constants will be done separately after localization, and it will need to be based on the segmentation of the image in Figure (2.1) directly computed using inferred particle coordinates}
-
 
 We now address the problem of inferring photoswitching constants and fluorophore locations from SMLM time series $\bm{H}$. In the Bayesian framework, we write the posterior on $\Theta$ according to Bayes rule. We define the following hierarchical Bayesian model
 
@@ -424,28 +443,29 @@ D_{\mathrm{KL}}(q(\theta)||p(\theta|x)) &= \underset{{\theta \sim q(\theta)}}{\m
 &=  \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)p(x)}{p(\theta,x)}\right)\\
 &=  \log p(x) + \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)}{p(x|\theta)p(\theta)}\right)\\
 &= \log p(x) + \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)\\
-&= \log p(x) + H(q) -\underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log p(x|\theta) + \log p(\theta) \right)
 \end{align*}
 
-Clearly the KL-divergence is minimized by minimizing this expectation. It is common to define the evidence lower bound (ELBO).
+We can treat $\log p(x)$ as a constant here, so the KL-divergence is minimized by minimizing this expectation. Equivalently, we can maximize its negative, which is often called the evidence lower bound (ELBO).
 
 \begin{align}
-\ell(x,\theta) = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
+\mathrm{ELBO} = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
 \end{align}
 
-which gets its name from the fact that
-
-\begin{equation*}
-\log p(x) = D_{\mathrm{KL}}(q(\theta)||p(\theta|x)) + \ell(x,\theta) \geq \ell(x,\theta)
-\end{equation*}
-
-Of great practical interest are the gradients of the ELBO
+Let $\theta = (\theta_{1},...,\theta_{K})$ and $\theta_{k} = (x_{k},y_{k})$ be the particle coordinates or ``cluster centers". 
 
 \begin{align*}
-\nabla_{\Phi}\ell(x,\theta) = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
+\nabla_{\theta}\mathrm{ELBO} = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\nabla_{\theta}\log q(\theta) - \nabla_{\theta}\log p(x|\theta)\right)
 \end{align*}
 
-The quality of our parameter estimation will undoubtedly depend on our choice for the variational distribution. In some contexts, the posterior is approximated as a multivariate Gaussian, which is valid when the posterior has this relatively simple structure and higher order moments vanish. However, in general, the posterior is not Gaussian and more flexible variational distributions must be used. Deep neural networks are advantageous in this case, as they are known to be able to represent very complex high-dimensional distributions. 
+To compute the gradients of the ELBO, we recall the following pair of equations from the previous section on the multi-emitter regime
+
+\begin{align*}
+\mu_{k}' &= g_{k}\eta\Delta\left(\sum_{j}N_{j}\lambda_{\theta_{j}}(x_{k},y_{k}) + B_{0}\right)+ \sigma_{k}^{2}\\
+\ell(\vec{H}|\theta) &= \sum_{k}  \log n_{k}! + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
+\end{align*}
+
+The gradients are given by the chain rule $\frac{\partial \ell}{\partial\theta_{j}} = \frac{\partial \ell}{\partial\mu_{j}}\frac{\partial \mu}{\partial\theta_{j}}$
+
 
 
 
