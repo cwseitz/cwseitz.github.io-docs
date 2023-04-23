@@ -47,45 +47,79 @@
 
 \begin{frame}{Introduction}
 
-Classical discrete Fourier transform maps a vector $\vec{x}\in \mathbb{C}^{N}$ to another vector $\vec{y}\in\mathbb{C}^{N}$, with elements
+Dimension of $n$-qubit Hilbert space $N=2^{n}$\\
+\vspace{0.2in}
+The quantum fourier transform (QFT) transforms a quantum state $\ket{\psi}\rightarrow\ket{\phi}$ via the transformation of basis states:
 
 \begin{equation*}
-y_{k} = \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}x_{n}\omega_{N}^{-nk}
+\mathrm{QFT}\ket{j} = \frac{1}{2^{n/2}}\sum_{k=1}^{2^{n}}e^{2\pi ijk/2^{n}}\ket{k}
 \end{equation*}
 
-where $\omega_{N} = e^{2\pi i/N}$. $\vec{x}$ is expanded in a basis for $\mathbb{C}^{N}$\\
-\vspace{0.1in}
-The quantum fourier transform (QFT) does exactly the same thing but the vector is now interpreted as a quantum state $\ket{\psi}=\sum_{n}\psi_{n}\ket{n}$ in a Hilbert space $\mathcal{H}$. 
+Equivalently, on the state $\ket{\psi}=\sum_{j}\psi_{j}\ket{j}$ reads
 
 \begin{equation*}
-\mathrm{QFT}: \ket{c_{n}} \rightarrow \frac{1}{\sqrt{N}}\sum_{n=0}^{N-1}c_{n}\omega_{N}^{-nk}
+\mathrm{QFT}\ket{\psi} = \ket{\phi} = \frac{1}{2^{n/2}}\sum_{j=1}^{2^{n}}\psi_{j}\left(\sum_{k=1}^{2^{n}}e^{2\pi ijk/2^{n}}\ket{k}\right)
 \end{equation*}
 
+which turns out to be a unitary transformation
 
 \end{frame}
 
 \begin{frame}{Product representation of the QFT}
 
+Computational basis ket $\ket{j} = \ket{j_{1}j_{2}...j_{n}}$\\
+\vspace{0.1in}
+Fourier basis ket $\ket{k} = \ket{k_{1}k_{2}...k_{n}}$\\
+\vspace{0.1in}
+Converting $k$ to binary: $k = \sum_{l}k_{l}2^{l}$ \\
+\vspace{0.1in}
+Also, note that $\ket{k} = \ket{k_{1}k_{2}...k_{n}} = \bigotimes_{l=1}^{n}\ket{k_{l}}$
+
 \end{frame}
 
-\begin{frame}{The QFT as a unitary transformation}
+\begin{frame}{Product representation of the QFT}
 
-Suppose we have the $N$ qubit state 
-
-\begin{equation*}
-\ket{\psi} = \sum_{x\in\{0,1\}^{N}}\alpha_{x}\ket{x}
-\end{equation*}
-
-where $\ket{x}$ are basis states. By definition, 
 
 \begin{align*}
-\mathrm{QFT}\ket{x} &= \frac{1}{\sqrt{N}}\sum_{k=0}^{N-1}e^{2\pi ijk/N}\ket{k}
+\mathrm{QFT}\ket{j} &= \frac{1}{2^{n/2}}\sum_{k=0}^{2^{n}-1}e^{2\pi ijk/2^{n}}\ket{k}\\
+&= \frac{1}{2^{n/2}}\sum_{k=0}^{2^{n}-1}e^{2\pi ij\sum_{l}k_{l}2^{-l}}\bigotimes_{l=1}^{n}\ket{k_{l}}\\
+&= \frac{1}{2^{n/2}}\sum_{k=0}^{2^{n}-1}\bigotimes_{l=1}^{n}e^{2\pi ij k_{l}2^{-l}}\ket{k_{l}}\\
+&= \frac{1}{2^{n/2}}\bigotimes_{l=1}^{n}\sum_{k_{l}=0}^{1}e^{2\pi ij k_{l}2^{-l}}\ket{k_{l}}\\
+&= \frac{1}{2^{n/2}}\bigotimes_{l=1}^{n}\left(\ket{0}+e^{2\pi ij 2^{-l}}\ket{1}\right)\
 \end{align*}
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Phase estimation of a unitary operator}
+
+An important module in many quantum algorithms that uses QFT\\
+\vspace{0.1in}
+Consider an eigenvector $\ket{u}$ of a Unitary operator $U$. Its eigenvalue can be written as $u = e^{2\pi i\theta}$
+
+\begin{equation*}
+U\ket{u} = u\ket{u} = e^{2\pi i\theta}\ket{u}
+\end{equation*}
 
 \end{frame}
+
+\begin{frame}{Basic group theory}
+A \textbf{group} is a non-empty set and an operation that combines any two elements of the set to produce a third element of the set, in such a way that the operation is associative, an identity element exists and every element has an inverse\\
+Example: the integers $\mathbb{Z}$ form a group\\
+\vspace{0.2in}
+A \textbf{subgroup} $H$ of a group $G$ also satisfies the basic axioms but is a subset\\
+\vspace{0.2in}
+A \textbf{coset} is a subset 
+\end{frame}
+
+\begin{frame}{Hidden subgroup problem (HSP)}
+From Nielsen and Chuang: \\
+\vspace{0.2in}
+Let $f$ be a function from a finitely generated group $G$ to a finite set $X$ such that
+$f$ is constant on the cosets of a subgroup $K$, and distinct on each coset. Given a
+quantum black box for performing the unitary transform $U$ for $g \in G$, $h \in X$, and $\oplus$ an appropriately chosen binary operation on $X$, find a generating set for $K$.\\
+\vspace{0.2in}
+We can see how period finding is determining the subgroup over which $f$ is constant
+\end{frame}
+
 
 \end{document}
