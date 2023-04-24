@@ -83,7 +83,33 @@ We can change (1) measurement axes or (2) the two-qubit state we prepare $\ket{\
 \end{itemize}
 
 
+\end{frame}
 
+\begin{frame}{Choosing Alice and Bob's measurement axes}
+
+Problem 2.3 in the book
+
+\begin{align*}
+(Q\otimes S + R\otimes S  + R\otimes T  - Q\otimes T)^{2} = 4I + [Q,R]\otimes [S,T]
+\end{align*}
+
+
+
+\end{frame}
+
+\begin{frame}{Choosing Alice and Bob's measurement axes}
+
+Using that $(\sigma\cdot a)(\sigma\cdot b) = a\cdot b + i\sigma\cdot(a\times b)$
+
+\begin{align*}
+[Q,R] &= i\sigma\cdot(\vec{q}\times\vec{r} - \vec{r}\times\vec{q})\\
+&= 2i\sigma\cdot(\vec{q}\times\vec{r})\\
+\end{align*}
+
+\begin{align*}
+[S,T] &= i\sigma\cdot(\vec{s}\times\vec{t} - \vec{t}\times\vec{s})\\
+&= 2i\sigma\cdot(\vec{s}\times\vec{t})\\
+\end{align*}
 
 \end{frame}
 
