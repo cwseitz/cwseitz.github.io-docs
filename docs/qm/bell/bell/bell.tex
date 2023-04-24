@@ -74,26 +74,40 @@ The book uses $\vec{q} = (0,0,1), \vec{r} = (1,0,0), \vec{s} = (-\frac{1}{\sqrt{
 
 \begin{frame}{Questions}
 
-We can change (1) measurement axes or (2) the two-qubit state we prepare $\ket{\psi}$\\
-\vspace{0.2in}
 \begin{itemize}
-\item How does changing measurement axes change the LHS for a given $\ket{\psi}$
-\item What does it have to do with the state $\ket{\psi}$ we prepare?
-\item Do more highly entangled states saturate the bound? How do we quantify entanglement?
+\item If I fix Q,R,S,T which states saturate the bound?
+\item If I fix the state which Q,R,S,T saturate the bound?
 \end{itemize}
+\vspace{0.2in}
+Hard problem, because of the dimensionality of the Hilbert space $\ket{\psi}$ lives in
+\end{frame}
 
+\begin{frame}{Simplifications}
 
+Specifying $Q,R,S,T$ requires 12 real parameters. Assume $\vec{q},\vec{r},\vec{s},\vec{t}$ live in a plane (8 parameters)\\
+\vspace{0.2in}
+Assume $\vec{q},\vec{r}$ and $\vec{s},\vec{t}$ are orthogonal (3 parameters)\\
+\vspace{0.2in}
+Now pick a set of reasonable pure states $\ket{\psi}$ possibly with different degrees of entanglement\\
+\vspace{0.2in}
+Easier question:  How does the Tsirelson bound vary accross states with different degrees of entanglement?
 \end{frame}
 
 \begin{frame}{Choosing Alice and Bob's measurement axes}
 
-Problem 2.3 in the book
+Solution to Problem 2.3 in the book:
 
 \begin{align*}
 (Q\otimes S + R\otimes S  + R\otimes T  - Q\otimes T)^{2} = 4I + [Q,R]\otimes [S,T]
 \end{align*}
 
+\begin{align*}
+\langle(Q\otimes S + R\otimes S  + R\otimes T  - Q\otimes T)\rangle^{2} &\leq \langle(Q\otimes S + R\otimes S  + R\otimes T  - Q\otimes T)^{2}\rangle \\
+&= \langle 4I + [Q,R]\otimes [S,T]\rangle \\
+&= 4 + \langle [Q,R]\otimes [S,T]\rangle
+\end{align*}
 
+for fixed $Q,R,S,T$.
 
 \end{frame}
 
@@ -101,108 +115,23 @@ Problem 2.3 in the book
 
 Using that $(\sigma\cdot a)(\sigma\cdot b) = a\cdot b + i\sigma\cdot(a\times b)$
 
-\begin{align*}
-[Q,R] &= i\sigma\cdot(\vec{q}\times\vec{r} - \vec{r}\times\vec{q})\\
-&= 2i\sigma\cdot(\vec{q}\times\vec{r})\\
-\end{align*}
+\begin{equation*}
+[A,B] = i\sigma\cdot(\vec{a}\times\vec{b} - \vec{b}\times\vec{a}) = 2i\sigma\cdot(\vec{a}\times\vec{b})
+\end{equation*}
+
+Let $\vec{n} = \vec{q}\times\vec{r}$ and $\vec{m} = \vec{s}\times\vec{t}$. Per our constraint, we could have $\vec{n} = \vec{m} = \hat{z}$.
 
 \begin{align*}
-[S,T] &= i\sigma\cdot(\vec{s}\times\vec{t} - \vec{t}\times\vec{s})\\
-&= 2i\sigma\cdot(\vec{s}\times\vec{t})\\
+\langle [Q,R]\otimes [S,T]\rangle &= -4\bra{\psi}\sigma\cdot\vec{n}\otimes\sigma\cdot\vec{m}\ket{\psi}\\
+&= -4\bra{\psi}\sigma\cdot\hat{z}\otimes\sigma\cdot\hat{z}\ket{\psi}\\
+&= -4\bra{\psi}\sigma_{1z}\otimes\sigma_{2z}\ket{\psi}
 \end{align*}
+
+which is very easy to compute
 
 \end{frame}
 
-\begin{frame}{Calculating expectations}
-
-
-\begin{align*}
-\vec{q}\cdot\sigma\otimes\vec{s}\cdot\sigma = 
-\begin{pmatrix}
-\vec{s}\cdot\sigma & 0 \\
-0 & -\vec{s}\cdot\sigma
-\end{pmatrix} = 
-\frac{1}{\sqrt{2}}\begin{pmatrix}
--1 & -1 & 0 & 0\\
--1 & 1 & 0 & 0\\
-0 & 0 & 1 & 1 \\
-0 & 0 & 1 & -1
-\end{pmatrix}
-\end{align*}
-
-\begin{align*}
-\vec{r}\cdot\sigma\otimes\vec{s}\cdot\sigma = 
-\begin{pmatrix}
-0 & \vec{s}\cdot\sigma\\
-\vec{s}\cdot\sigma & 0
-\end{pmatrix} = 
-\frac{1}{\sqrt{2}}\begin{pmatrix}
-0 & 0 & -1 & -1\\
-0 & 0 & -1 & 1\\
--1 & -1 & 0 & 0 \\
--1 & 1 & 0 & 0
-\end{pmatrix}
-\end{align*}
-
-
-\begin{align*}
-\vec{r}\cdot\sigma\otimes\vec{t}\cdot\sigma = 
-\begin{pmatrix}
-0 & \vec{t}\cdot\sigma \\
-\vec{t}\cdot\sigma & 0
-\end{pmatrix} = 
-\frac{1}{\sqrt{2}}\begin{pmatrix}
-0 & 0 & 1 & -1\\
-0 & 0 & -1 & -1\\
-1 & -1 & 0 & 0 \\
--1 & -1 & 0 & 0
-\end{pmatrix}
-\end{align*}
-
-
-
-\end{frame}
-
-\begin{frame}{Calculating expectations}
-
-
-\begin{align*}
-\vec{q}\cdot\sigma\otimes\vec{t}\cdot\sigma = 
-\begin{pmatrix}
-\vec{t}\cdot\sigma & 0\\
-0 & -\vec{t}\cdot\sigma
-\end{pmatrix} = 
-\frac{1}{\sqrt{2}}\begin{pmatrix}
-1 & -1 & 0 & 0\\
--1 & -1 & 0 & 0\\
-0 & 0 & -1 & 1 \\
-0 & 0 & 1 & 1
-\end{pmatrix}
-\end{align*}
-
-
-\begin{align*}
-\langle \vec{q}\cdot\sigma\otimes\vec{s}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(-\alpha^{*}(\alpha+\beta) + \beta^{*}(\beta-\alpha) + \gamma^{*}(\gamma+\delta) + \delta^{*}(\gamma-\delta)\right)\\
-\langle \vec{r}\cdot\sigma\otimes\vec{s}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(-\alpha^{*}(\gamma+\delta) + \beta^{*}(\delta-\gamma) - \gamma^{*}(\alpha + \beta) + \delta^{*}(\beta-\alpha)\right)\\
-\langle \vec{r}\cdot\sigma\otimes\vec{t}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(\alpha^{*}(\gamma-\delta) - \beta^{*}(\delta+\gamma) + \gamma^{*}(\alpha - \beta) - \delta^{*}(\beta+\alpha)\right)\\
-\langle \vec{q}\cdot\sigma\otimes\vec{t}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(\alpha^{*}(\alpha-\beta) - \beta^{*}(\beta+\alpha) + \gamma^{*}(\delta-\delta) + \delta^{*}(\gamma+\delta)\right)
-\end{align*}
-
-
-\end{frame}
-
-\begin{frame}{Full density matrix}
-\begin{align*}
-\rho_{AB} &=\begin{pmatrix}
-|\alpha|^{2} & \alpha\beta^{*} & \alpha\gamma^{*} & \alpha\delta^{*} \\
-\beta\alpha^{*} & |\beta|^{2} & \beta\gamma^{*} & \beta\delta^{*} \\
-\gamma\alpha^{*} & \gamma\beta^{*} & |\gamma|^{2} & \gamma\delta^{*} \\
-\delta\alpha^{*} & \delta\beta^{*} & \delta\gamma^{*} & |\delta|^{2}
-\end{pmatrix}
-\end{align*}
-\end{frame}
-
-\begin{frame}{Partial traces}
+\begin{frame}{Quantifying entanglement: partial traces}
 
 \begin{align*}
 \mathrm{Tr}_{A}(\rho_{AB}) &= \sum_{ijkl} \rho_{ij}^{kl} \mathrm{Tr}_{A}(\ket{i}\bra{k}) \otimes \ket{j}\bra{l}\\
@@ -254,94 +183,12 @@ The Von Neumann entropy is
 S(\rho) = -\mathrm{Tr}(\rho\log\rho) = -\sum_{x}\lambda_{x}\log\lambda_{x}
 \end{align*}
 
-for eigenvalues $\lambda_{x}$ of $\rho$. This tells us: do the reduced states $\rho_{A}$ and $\rho_{B}$ contain all the information in $\rho_{AB}$? Maybe analagous to the mutual information
-
-\begin{align*}
-I(X;Y) = H(X) + H(Y) - H(X,Y) \geq 0
-\end{align*}
-
-So a possible measurement of entanglement is
-
-\begin{align*}
-\Delta S = S(\rho) - S(\rho_{A}) - S(\rho_{B})
-\end{align*}
+for eigenvalues $\lambda_{x}$ of $\rho$. This tells us: do the reduced states $\rho_{A}$ and $\rho_{B}$ contain all the information in $\rho_{AB}$?
 
 \end{frame}
 
-\begin{frame}{Entanglement entropy of $\ket{\phi^{+}}$}
+\begin{frame}{Generating random quantum states}
 
-\begin{align*}
-S(\rho) = -\mathrm{Tr}(\rho\log\rho) = -\sum_{x}\lambda_{x}\log\lambda_{x}
-\end{align*}
-
-where $\lambda_{x}$ are the eigenvalues of $\rho$. Let $\ket{\phi^{+}} = \frac{\ket{00} + \ket{11}}{\sqrt{2}}$
-
-\begin{align*}
-\rho_{AB} = 
-\begin{pmatrix}
-1 & 0 & 0 & 1 \\
-0 & 0 & 0 & 0 \\
-0 & 0 & 0 & 0 \\
-1 & 0 & 0 & 1
-\end{pmatrix}
-\end{align*}
-
-which only has one nonzero eigenvalue $\lambda = 2$. Therefore $S(\rho) = 1$.
-
-\begin{align*}
-\rho_{A} = \rho_{B} = \frac{1}{2}\begin{pmatrix}
-1 & 0\\
-0 & 1\\
-\end{pmatrix}
-\;\;\; S(\rho_{A}) = S(\rho_{B}) = 0  \;\; \Delta S = 1
-\end{align*}
-
-\end{frame}
-
-\begin{frame}{Entanglement entropy of $\ket{00}$}
-
-Let $\psi = \ket{00}$
-
-\begin{align*}
-\rho_{AB} = 
-\begin{pmatrix}
-1 & 0 & 0 & 0 \\
-0 & 0 & 0 & 0 \\
-0 & 0 & 0 & 0 \\
-0 & 0 & 0 & 0
-\end{pmatrix}
-\end{align*}
-
-which only has one nonzero eigenvalue $\lambda = 1$. Therefore $S(\rho) = 0$.
-
-\begin{align*}
-\rho_{A} = \rho_{B} = \begin{pmatrix}
-1 & 0\\
-0 & 0\\
-\end{pmatrix}
-\;\;\; \lambda = 1
-\end{align*}
-Therefore,
-\begin{align*}
-S(\rho_{A}) = S(\rho_{B}) = 0  \;\; \Delta S = 0
-\end{align*}
-
-\end{frame}
-
-\begin{frame}{Correlation functions for $\ket{\phi^{+}}$}
-
-$\ket{\phi^{+}} = \frac{\ket{00} + \ket{11}}{\sqrt{2}}$
-
-\begin{align*}
-\langle \vec{q}\cdot\sigma\otimes\vec{s}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(-\alpha^{*}(\alpha+\beta) + \beta^{*}(\beta-\alpha) + \gamma^{*}(\gamma+\delta) + \delta^{*}(\gamma-\delta)\right) = -\frac{1}{\sqrt{2}}\\
-\langle \vec{r}\cdot\sigma\otimes\vec{s}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(-\alpha^{*}(\gamma+\delta) + \beta^{*}(\delta-\gamma) - \gamma^{*}(\alpha + \beta) + \delta^{*}(\beta-\alpha)\right)= -\frac{1}{\sqrt{2}}\\
-\langle \vec{r}\cdot\sigma\otimes\vec{t}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(\alpha^{*}(\gamma-\delta) - \beta^{*}(\delta+\gamma) + \gamma^{*}(\alpha - \beta) - \delta^{*}(\beta+\alpha)\right)= -\frac{1}{\sqrt{2}}\\
-\langle \vec{q}\cdot\sigma\otimes\vec{t}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(\alpha^{*}(\alpha-\beta) - \beta^{*}(\beta+\alpha) + \gamma^{*}(\delta-\delta) + \delta^{*}(\gamma+\delta)\right)= \frac{1}{\sqrt{2}}
-\end{align*}
-
-\begin{align*}
-|\langle Q\otimes S\rangle + \langle R\otimes S\rangle  + \langle R\otimes T\rangle  - \langle Q\otimes T\rangle|  = 2\sqrt{2}
-\end{align*}
 
 
 \end{frame}
