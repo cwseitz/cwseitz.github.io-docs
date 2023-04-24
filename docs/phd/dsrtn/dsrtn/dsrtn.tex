@@ -157,23 +157,6 @@ where $\mu_{k}' = g_{k}\mu_{k} + \sigma_{k}^{2}$. This result can be seen from t
 \end{align}
 
 
-\subsection{The multi-emitter regime}
-
-The multi-emitter case is a straightforward extension of the single emitter case. Since noise is signal-independent, we write
-
-
-\begin{equation}
-\vec{H} = \sum_{k=1}^{K}\vec{S}_{k} + \vec{\xi}
-\end{equation}
-
-Since the sum of independent Poisson variables is itself a Poisson variable with a rate equal to the sum over rates of the individual processes, we can immediately write
-
-\begin{align*}
-H_{k}' &\sim \mathrm{Poisson}(\mu_{k}')\\
-\mu_{k}' &= g_{k}\eta\Delta\left(\sum_{j}N_{j}\lambda_{\theta_{j}}(x_{k},y_{k}) + B_{0}\right)+ \sigma_{k}^{2}
-\end{align*}
-
-and of course we still have a negative log-likelihood that is identical to (2.9).
 
 \subsection{The Cramer-Rao lower bound}
 
@@ -191,12 +174,36 @@ A general task in Bayesian inference is to determine $\theta$ from the data unde
 We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space. To be clear, the score is a function of the \emph{data}, not the parameters. It is a measure of sensitivity of the likelihood to changes in the parameters. Of course, the Fisher information matrix also depends on the parameterization chosen. Looking at (1.4), the likelihood is a hierarchical function that maps a vector space $\Theta$ to a vector space $\Lambda$ to a scalar value. Formally, we define $T: \Theta \rightarrow \Lambda$ and $W: \Lambda \rightarrow \mathbb{R}$. The parameter vector $(x_{0},y_{0},\sigma, N_{0})\in \Theta$, the Poisson rate vector $\vec{\lambda} \in \Lambda$ and $\ell \in \mathbb{R}$. To get the Hessian, we need the chain-rule for Hessian matrices.
 
 
-\begin{align*}
-\hat{H}_{(\ell,\theta)} = \hat{J}_{(\lambda,\theta)}^{T} \hat{H}_{(\ell,\lambda)} \hat{J}_{(\lambda,\theta)} + (J_{(\ell,\lambda)}\otimes I_{n})\hat{H}_{(\lambda,\theta)}
-\end{align*}
+\begin{equation*}
+H_{(\ell,\theta)} = J_{(\mu,\theta)}^{T} H_{(\ell,\mu)} J_{(\mu,\theta)} + (J_{(\ell,\mu)}\otimes I_{n})H_{(\mu,\theta)}
+\end{equation*}
+
+which we will from now on abbreviate as 
+
+\begin{equation}
+\bm{H} = J_{2}^{T} H_{1} J_{2} + (J_{1}\otimes I_{n})H_{2}
+\end{equation}
+
 
 In the second term of the equation, we have a Kronecker product between the Jacobian matrix of the likelihood with respect to the parameters of the hierarchical model ($J_{(L,\lambda)}$) and the $n\times n$ identity matrix ($I_n$), denoted as $J_{(L,\lambda)}\otimes I_n$. This Kronecker product gives a diagonal matrix where the elements along the diagonal are the elements of the vector $J_{(L,\lambda)}$.
 
+\subsection{The multi-emitter regime}
+
+The multi-emitter case is a straightforward extension of the single emitter case. Since noise is signal-independent, we write
+
+
+\begin{equation}
+\vec{H} = \sum_{k=1}^{K}\vec{S}_{k} + \vec{\xi}
+\end{equation}
+
+Since the sum of independent Poisson variables is itself a Poisson variable with a rate equal to the sum over rates of the individual processes, we can immediately write
+
+\begin{align*}
+H_{k}' &\sim \mathrm{Poisson}(\mu_{k}')\\
+\mu_{k}' &= g_{k}\eta\Delta\left(\sum_{j=1}^{K}N_{j}\lambda_{\theta_{j}}(x_{k},y_{k}) + B_{0}\right)+ \sigma_{k}^{2}
+\end{align*}
+
+Suppose we have $K$ particles within the field of view. Assuming that $\sigma$ is not fixed, we then have $4K$ total parameters and the Hessian matrix becomes a $4K\times 4K$ matrix. To compute that matrix, notice that $J_{1}$ and $H_{1}$ have not changed relative to the single emitter case. However, $J_{2}$ and $H_{2}$ need to be expanded to contain gradients of $\vec{\mu}$ w.r.t all $4K$ parameters. This is not hard, since a taking gradients w.r.t a parameter for particle $j$ call it $\theta_{j}$ will delete all terms in the sum except the $j$th term. This suggests that $H_{2}$ is block diagonal, which one block per particle. The structure of $J_{2}$ is also straightforward, we just add a row for each particle, and columns $4j$ to $4(j+1)$ are populated with the necessary gradients for that particle.
 
 \section{MAP estimation from SMLM time series}
 
