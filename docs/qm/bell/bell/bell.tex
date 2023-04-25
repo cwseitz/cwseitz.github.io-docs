@@ -71,29 +71,16 @@ The book uses $\vec{q} = (0,0,1), \vec{r} = (1,0,0), \vec{s} = (-\frac{1}{\sqrt{
 
 \end{frame}
 
-
-\begin{frame}{Questions}
-
-\begin{itemize}
-\item If I fix Q,R,S,T which states saturate the bound?
-\item If I fix the state which Q,R,S,T saturate the bound?
-\end{itemize}
+\begin{frame}{Assumptions and objectives}
+As in the book, 
+Assume $\vec{q},\vec{r}$ and $\vec{s},\vec{t}$ are orthogonal and all $\vec{q},\vec{r},\vec{s},\vec{t}$ live in a plane (say x-z)\\
 \vspace{0.2in}
-Hard problem, because of the dimensionality of the Hilbert space $\ket{\psi}$ lives in
+Now draw a set of pure states $\ket{\psi}$ possibly with different degrees of entanglement\\
+\vspace{0.2in}
+Question:  How does the Tsirelson bound vary across states with different degrees of entanglement?
 \end{frame}
 
-\begin{frame}{Simplifications}
-
-Specifying $Q,R,S,T$ requires 12 real parameters. Assume $\vec{q},\vec{r},\vec{s},\vec{t}$ live in a plane (8 parameters)\\
-\vspace{0.2in}
-Assume $\vec{q},\vec{r}$ and $\vec{s},\vec{t}$ are orthogonal (3 parameters)\\
-\vspace{0.2in}
-Now pick a set of reasonable pure states $\ket{\psi}$ possibly with different degrees of entanglement\\
-\vspace{0.2in}
-Easier question:  How does the Tsirelson bound vary accross states with different degrees of entanglement?
-\end{frame}
-
-\begin{frame}{Choosing Alice and Bob's measurement axes}
+\begin{frame}{The Tsirelson bound}
 
 Solution to Problem 2.3 in the book:
 
@@ -111,7 +98,7 @@ for fixed $Q,R,S,T$.
 
 \end{frame}
 
-\begin{frame}{Choosing Alice and Bob's measurement axes}
+\begin{frame}{The Tsirelson bound}
 
 Using that $(\sigma\cdot a)(\sigma\cdot b) = a\cdot b + i\sigma\cdot(a\times b)$
 
@@ -119,15 +106,17 @@ Using that $(\sigma\cdot a)(\sigma\cdot b) = a\cdot b + i\sigma\cdot(a\times b)$
 [A,B] = i\sigma\cdot(\vec{a}\times\vec{b} - \vec{b}\times\vec{a}) = 2i\sigma\cdot(\vec{a}\times\vec{b})
 \end{equation*}
 
-Let $\vec{n} = \vec{q}\times\vec{r}$ and $\vec{m} = \vec{s}\times\vec{t}$. Per our constraint, we could have $\vec{n} = \vec{m} = \hat{z}$.
+Let $\vec{n} = \vec{q}\times\vec{r}$ and $\vec{m} = \vec{s}\times\vec{t}$. Per our constraints, we could have $\vec{n} = \vec{m} = \hat{y}$.
 
 \begin{align*}
 \langle [Q,R]\otimes [S,T]\rangle &= -4\bra{\psi}\sigma\cdot\vec{n}\otimes\sigma\cdot\vec{m}\ket{\psi}\\
 &= -4\bra{\psi}\sigma\cdot\hat{z}\otimes\sigma\cdot\hat{z}\ket{\psi}\\
-&= -4\bra{\psi}\sigma_{1z}\otimes\sigma_{2z}\ket{\psi}
+&= -4\bra{\psi}\sigma_{1y}\otimes\sigma_{2y}\ket{\psi}
 \end{align*}
 
-which is very easy to compute
+\begin{align*}
+\langle(Q\otimes S + R\otimes S  + R\otimes T  - Q\otimes T)\rangle \leq 2\sqrt{1-\bra{\psi}\sigma_{1y}\otimes\sigma_{2y}\ket{\psi}}
+\end{align*}
 
 \end{frame}
 
@@ -177,20 +166,38 @@ which is very easy to compute
 
 \begin{frame}{Definition of entanglement entropy}
 
-The Von Neumann entropy is
+The entanglement entropy of a bipartite system is the Von Neumann entropy of either reduced density matrix (it doesn't matter which one we choose)
 
 \begin{align*}
-S(\rho) = -\mathrm{Tr}(\rho\log\rho) = -\sum_{x}\lambda_{x}\log\lambda_{x}
+S(\rho_{A}) = -\mathrm{Tr}(\rho_{A}\log\rho_{A}) = -\sum_{x}\lambda_{x}\log\lambda_{x}
 \end{align*}
 
-for eigenvalues $\lambda_{x}$ of $\rho$. This tells us: do the reduced states $\rho_{A}$ and $\rho_{B}$ contain all the information in $\rho_{AB}$?
+for eigenvalues $\lambda_{x}$ of $\rho_{A}$. This tells us: do the reduced states $\rho_{A}$ and $\rho_{B}$ contain all the \emph{information} in $\rho_{AB}$?
 
 \end{frame}
 
-\begin{frame}{Generating random quantum states}
+\begin{frame}{Entanglement entropy and Tsirelson's bound}
 
+Sanity check:\\
+\vspace{0.2in}
+Draw random reals $a,b,c,d,e,f,g,h\sim U([0,1]^{8})$\\
+\vspace{0.2in}
+Construct $\ket{\psi} = (a+ib)\ket{00} + (c+id)\ket{01} + (e+if)\ket{10} + (g+ih)\ket{11}$\\
+\vspace{0.2in}
+Normalize $\ket{\psi} \rightarrow \frac{\ket{\psi}}{\sum_{n}|c_{n}|^{2}}$\\
+\vspace{0.2in}
+Compute $S(\rho_{A})$ and $2\sqrt{1-\bra{\psi}\sigma_{1y}\otimes\sigma_{2y}\ket{\psi}}$
+\end{frame}
 
+\begin{frame}{Entanglement entropy and Tsirelson's bound}
+
+\begin{figure}
+\includegraphics[scale=0.65]{bell.png}
+\end{figure}
 
 \end{frame}
+
+
+
 
 \end{document}
