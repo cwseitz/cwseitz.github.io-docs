@@ -87,7 +87,7 @@ Solution to Problem 2.3 in the book:
 \begin{align*}
 (Q\otimes S + R\otimes S  + R\otimes T  - Q\otimes T)^{2} = 4I + [Q,R]\otimes [S,T]
 \end{align*}
-
+Jensen's inequality:
 \begin{align*}
 \langle(Q\otimes S + R\otimes S  + R\otimes T  - Q\otimes T)\rangle^{2} &\leq \langle(Q\otimes S + R\otimes S  + R\otimes T  - Q\otimes T)^{2}\rangle \\
 &= \langle 4I + [Q,R]\otimes [S,T]\rangle \\
@@ -100,7 +100,7 @@ for fixed $Q,R,S,T$.
 
 \begin{frame}{The Tsirelson bound}
 
-Using that $(\sigma\cdot a)(\sigma\cdot b) = a\cdot b + i\sigma\cdot(a\times b)$
+Using that $(\sigma\cdot \vec{a})(\sigma\cdot \vec{b}) = \vec{a}\cdot \vec{b} + i\sigma\cdot(\vec{a}\times \vec{b})$
 
 \begin{equation*}
 [A,B] = i\sigma\cdot(\vec{a}\times\vec{b} - \vec{b}\times\vec{a}) = 2i\sigma\cdot(\vec{a}\times\vec{b})
@@ -110,7 +110,7 @@ Let $\vec{n} = \vec{q}\times\vec{r}$ and $\vec{m} = \vec{s}\times\vec{t}$. Per o
 
 \begin{align*}
 \langle [Q,R]\otimes [S,T]\rangle &= -4\bra{\psi}\sigma\cdot\vec{n}\otimes\sigma\cdot\vec{m}\ket{\psi}\\
-&= -4\bra{\psi}\sigma\cdot\hat{z}\otimes\sigma\cdot\hat{z}\ket{\psi}\\
+&= -4\bra{\psi}\sigma\cdot\hat{y}\otimes\sigma\cdot\hat{y}\ket{\psi}\\
 &= -4\bra{\psi}\sigma_{1y}\otimes\sigma_{2y}\ket{\psi}
 \end{align*}
 
