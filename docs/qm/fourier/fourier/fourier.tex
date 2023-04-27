@@ -33,7 +33,7 @@
 \usepackage[font=small,labelfont=bf]{caption}				% For cross-referencing
 \usepackage{physics}
 
-\title{The Quantum Fourier Transform}	% Presentation title
+\title{The Abelian Hidden Subgroup Problem}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -102,24 +102,43 @@ U\ket{u} = u\ket{u} = e^{2\pi i\theta}\ket{u}
 
 \end{frame}
 
-\begin{frame}{Basic group theory}
-A \textbf{group} is a non-empty set and an operation that combines any two elements of the set to produce a third element of the set, in such a way that the operation is associative, an identity element exists and every element has an inverse\\
-Example: the integers $\mathbb{Z}$ form a group\\
+\begin{frame}{The Hidden Subgroup Problem}
+Let $G$ be a group and $X$ a finite set and $f:G\rightarrow X$ a function that \emph{hides} a subgroup $H\leq G$. The problem is to determine a generating set for $H$\\
 \vspace{0.2in}
-A \textbf{subgroup} $H$ of a group $G$ also satisfies the basic axioms but is a subset\\
+
+\textbf{Simon's problem}. Given a 2-1 function $f:\{0,1\}^{n}\rightarrow \{0,1\}^{n}$ such that there is a secret string $s\in\{0,1\}^{n}$ where $f(x) = f(y)$ if and only if $x\oplus y = s$. Equivalently $f(x) = f(y) = f(x\oplus y)$ which gives the periodicity of $f$\\
 \vspace{0.2in}
-A \textbf{coset} is a subset 
+The function $f$ is a black box. Clasically you would solve the problem by drawing pairs $x,y$ and checking if $f(x) = f(y)$. If they match, you can obviously retrieve $s = x\oplus y$\\
+\vspace{0.2in}
+Clasically the problem scales as $\mathcal{O}(2^{n/2})$ but we Simon designed a quantum algorithm that scales as $\mathcal{O}(n)$.
+
 \end{frame}
 
-\begin{frame}{Hidden subgroup problem (HSP)}
-From Nielsen and Chuang: \\
-\vspace{0.2in}
-Let $f$ be a function from a finitely generated group $G$ to a finite set $X$ such that
-$f$ is constant on the cosets of a subgroup $K$, and distinct on each coset. Given a
-quantum black box for performing the unitary transform $U$ for $g \in G$, $h \in X$, and $\oplus$ an appropriately chosen binary operation on $X$, find a generating set for $K$.\\
-\vspace{0.2in}
-We can see how period finding is determining the subgroup over which $f$ is constant
+\begin{frame}{The standard solution to the HSP}
+The first register in Simon's algorithm is a uniform superposition over all possible input strings $x$. The second register are ancillary bits that will store $f(x)$. We assume we have some oracle function $U_{f}$ which will compute and store $f(x)$ in the ancillary bits
+
+\begin{equation*}
+\ket{\psi} = H^{\otimes n}\ket{0^{n}} = \frac{1}{2^{n/2}}\sum_{x\in\{0,1\}^{n}}\ket{x}
+\end{equation*}
+
+As in the standard solution, the oracle function then does
+
+\begin{equation*}
+O_{f}(\ket{\psi}\ket{0^{m}}) = \frac{1}{2^{n/2}}\sum_{x\in\{0,1\}^{n}}\ket{x}\ket{f(x)}
+\end{equation*}
+
+Then we measure the second register which collapses the system to a superposition of the two inputs that map to our measured output $\ket{f(a)}$
+
+\begin{equation*}
+\frac{1}{2^{n/2}}\sum_{x\in\{0,1\}^{n}}\ket{x}\ket{f(x)} \rightarrow \left(\ket{a}+\ket{a\oplus s}\right)\otimes \ket{f(a)}
+\end{equation*}
+
 \end{frame}
 
+\begin{frame}{The standard solution to the HSP}
+
+Essentially when we measure the second register we end up with an equal superposition of $x$ and $x\oplus s$. But how do we use that superposition to actually find $s$?
+
+\end{frame}
 
 \end{document}
