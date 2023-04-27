@@ -45,7 +45,7 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{CHSH and Tsirelson's Inequalities}
+\begin{frame}{CHSH Inequality}
 
 \vspace{0.2in}
 
@@ -53,36 +53,37 @@ Alice: $Q,R$
 Bob: $S, T$
 
 \vspace{0.1in}
-Classical observables distributed according to $P(Q,R,S,T)$. Combination of correlations between Alice and Bobs measurements are bounded according to the CHSH inequality
+Classical observables described by the joint distribution $P(Q,R,S,T)$. Combination of correlations between Alice and Bobs measurements are bounded according to the CHSH inequality
 
 \begin{align*}
 |E(QS) + E(RS) + E(RT) - E(QT)| \leq 2
 \end{align*}
 
+\end{frame}
+
+\begin{frame}{Tsirelson's Inequality}
+
+Quantum mechanics breaks the CHSH inequality\\
+\vspace{0.2in}
+
 For the quantum version, define 4 spin operators along arbitrary directions $Q = \vec{q}\cdot\sigma, R = \vec{r}\cdot\sigma, S = \vec{s}\cdot\sigma, T = \vec{t}\cdot\sigma$.
 
-The book uses $\vec{q} = (0,0,1), \vec{r} = (1,0,0), \vec{s} = (-\frac{1}{\sqrt{2}},0,-\frac{1}{\sqrt{2}}), \vec{t} = (-\frac{1}{\sqrt{2}},0,\frac{1}{\sqrt{2}})$
+The book uses $\vec{q} = (0,0,1), \vec{r} = (1,0,0), \vec{s} = (-\frac{1}{\sqrt{2}},0,-\frac{1}{\sqrt{2}}), \vec{t} = (-\frac{1}{\sqrt{2}},0,\frac{1}{\sqrt{2}})$\\
+
+\vspace{0.2in}
+One can prove that (and I do this partially on the next slide)
 
 \begin{align*}
 |\langle Q\otimes S\rangle + \langle R\otimes S\rangle  + \langle R\otimes T\rangle  - \langle Q\otimes T\rangle|  \leq 2\sqrt{2}
 \end{align*}
 
+Clearly this exceeds the CHSH bound by a factor of $\sqrt{2}$.
 
-
-\end{frame}
-
-\begin{frame}{Assumptions and objectives}
-As in the book, 
-Assume $\vec{q},\vec{r}$ and $\vec{s},\vec{t}$ are orthogonal and all $\vec{q},\vec{r},\vec{s},\vec{t}$ live in a plane (say x-z)\\
-\vspace{0.2in}
-Now draw a set of pure states $\ket{\psi}$ possibly with different degrees of entanglement\\
-\vspace{0.2in}
-Question:  How does the Tsirelson bound vary across states with different degrees of entanglement?
 \end{frame}
 
 \begin{frame}{The Tsirelson bound}
 
-Solution to Problem 2.3 in the book:
+I will start from the solution to Problem 2.3 in the book:
 
 \begin{align*}
 (Q\otimes S + R\otimes S  + R\otimes T  - Q\otimes T)^{2} = 4I + [Q,R]\otimes [S,T]
@@ -94,9 +95,19 @@ Jensen's inequality:
 &= 4 + \langle [Q,R]\otimes [S,T]\rangle
 \end{align*}
 
-for fixed $Q,R,S,T$.
+This gives us a very general bound on the LHS for possible $Q,R,S,T,\ket{\psi}$; however, we may still want to know how $\langle(Q\otimes S + R\otimes S  + R\otimes T  - Q\otimes T)\rangle$ depends on the $\ket{\psi}$ we pick.
 
 \end{frame}
+
+\begin{frame}{Assumptions and objectives}
+As in the book, 
+Assume $\vec{q},\vec{r}$ and $\vec{s},\vec{t}$ are orthogonal and all $\vec{q},\vec{r},\vec{s},\vec{t}$ live in a plane (say x-z)\\
+\vspace{0.2in}
+Now draw a set of pure states $\ket{\psi}$ possibly with different degrees of entanglement\\
+\vspace{0.2in}
+Question:  How does the correlation function vary across states with different degrees of entanglement?
+\end{frame}
+
 
 \begin{frame}{The Tsirelson bound}
 
