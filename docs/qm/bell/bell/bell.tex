@@ -45,7 +45,7 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{CHSH Inequality}
+\begin{frame}{CHSH and Tsirelson's Inequalities}
 
 \vspace{0.2in}
 
@@ -53,83 +53,107 @@ Alice: $Q,R$
 Bob: $S, T$
 
 \vspace{0.1in}
-Classical observables described by the joint distribution $P(Q,R,S,T)$. Combination of correlations between Alice and Bobs measurements are bounded according to the CHSH inequality
+Classical observables distributed according to $P(Q,R,S,T)$. Combination of correlations between Alice and Bobs measurements are bounded according to the CHSH inequality
 
 \begin{align*}
 |E(QS) + E(RS) + E(RT) - E(QT)| \leq 2
 \end{align*}
 
-\end{frame}
-
-\begin{frame}{Tsirelson's Inequality}
-
-Quantum mechanics breaks the CHSH inequality\\
-\vspace{0.2in}
-
 For the quantum version, define 4 spin operators along arbitrary directions $Q = \vec{q}\cdot\sigma, R = \vec{r}\cdot\sigma, S = \vec{s}\cdot\sigma, T = \vec{t}\cdot\sigma$.
-
-The book uses $\vec{q} = (0,0,1), \vec{r} = (1,0,0), \vec{s} = (-\frac{1}{\sqrt{2}},0,-\frac{1}{\sqrt{2}}), \vec{t} = (-\frac{1}{\sqrt{2}},0,\frac{1}{\sqrt{2}})$\\
-
-\vspace{0.2in}
-One can prove that (and I do this partially on the next slide)
 
 \begin{align*}
 |\langle Q\otimes S\rangle + \langle R\otimes S\rangle  + \langle R\otimes T\rangle  - \langle Q\otimes T\rangle|  \leq 2\sqrt{2}
 \end{align*}
 
-Clearly this exceeds the CHSH bound by a factor of $\sqrt{2}$.
+
 
 \end{frame}
 
 \begin{frame}{The Tsirelson bound}
 
-I will start from the solution to Problem 2.3 in the book:
+Solution to Problem 2.3 in the book:
 
 \begin{align*}
 (Q\otimes S + R\otimes S  + R\otimes T  - Q\otimes T)^{2} = 4I + [Q,R]\otimes [S,T]
 \end{align*}
-Jensen's inequality:
+which can be used to derive
 \begin{align*}
 \langle(Q\otimes S + R\otimes S  + R\otimes T  - Q\otimes T)\rangle^{2} &\leq \langle(Q\otimes S + R\otimes S  + R\otimes T  - Q\otimes T)^{2}\rangle \\
 &= \langle 4I + [Q,R]\otimes [S,T]\rangle \\
 &= 4 + \langle [Q,R]\otimes [S,T]\rangle
 \end{align*}
 
-This gives us a very general bound on the LHS for possible $Q,R,S,T,\ket{\psi}$; however, we may still want to know how $\langle(Q\otimes S + R\otimes S  + R\otimes T  - Q\otimes T)\rangle$ depends on the $\ket{\psi}$ we pick.
+for fixed $Q,R,S,T$.
 
 \end{frame}
 
-\begin{frame}{Assumptions and objectives}
-As in the book, 
-Assume $\vec{q},\vec{r}$ and $\vec{s},\vec{t}$ are orthogonal and all $\vec{q},\vec{r},\vec{s},\vec{t}$ live in a plane (say x-z)\\
-\vspace{0.2in}
-Now draw a set of pure states $\ket{\psi}$ possibly with different degrees of entanglement\\
-\vspace{0.2in}
-Question:  How does the correlation function vary across states with different degrees of entanglement?
-\end{frame}
-
-
-\begin{frame}{The Tsirelson bound}
-
-Using that $(\sigma\cdot \vec{a})(\sigma\cdot \vec{b}) = \vec{a}\cdot \vec{b} + i\sigma\cdot(\vec{a}\times \vec{b})$
-
-\begin{equation*}
-[A,B] = i\sigma\cdot(\vec{a}\times\vec{b} - \vec{b}\times\vec{a}) = 2i\sigma\cdot(\vec{a}\times\vec{b})
-\end{equation*}
-
-Let $\vec{n} = \vec{q}\times\vec{r}$ and $\vec{m} = \vec{s}\times\vec{t}$. Per our constraints, we could have $\vec{n} = \vec{m} = \hat{y}$.
-
+\begin{frame}
+The book uses $\vec{q} = (0,0,1), \vec{r} = (1,0,0), \vec{s} = (-\frac{1}{\sqrt{2}},0,-\frac{1}{\sqrt{2}}), \vec{t} = (-\frac{1}{\sqrt{2}},0,\frac{1}{\sqrt{2}})$
 \begin{align*}
-\langle [Q,R]\otimes [S,T]\rangle &= -4\bra{\psi}\sigma\cdot\vec{n}\otimes\sigma\cdot\vec{m}\ket{\psi}\\
-&= -4\bra{\psi}\sigma\cdot\hat{y}\otimes\sigma\cdot\hat{y}\ket{\psi}\\
-&= -4\bra{\psi}\sigma_{1y}\otimes\sigma_{2y}\ket{\psi}
+\vec{r}\cdot\sigma\otimes\vec{s}\cdot\sigma = 
+\begin{pmatrix}
+0 & \vec{s}\cdot\sigma\\
+\vec{s}\cdot\sigma & 0
+\end{pmatrix} = 
+\frac{1}{\sqrt{2}}\begin{pmatrix}
+0 & 0 & -1 & -1\\
+0 & 0 & -1 & 1\\
+-1 & -1 & 0 & 0 \\
+-1 & 1 & 0 & 0
+\end{pmatrix}
 \end{align*}
 
 \begin{align*}
-\langle(Q\otimes S + R\otimes S  + R\otimes T  - Q\otimes T)\rangle \leq 2\sqrt{1-\bra{\psi}\sigma_{1y}\otimes\sigma_{2y}\ket{\psi}}
+\vec{r}\cdot\sigma\otimes\vec{t}\cdot\sigma = 
+\begin{pmatrix}
+0 & \vec{t}\cdot\sigma \\
+\vec{t}\cdot\sigma & 0
+\end{pmatrix} = 
+\frac{1}{\sqrt{2}}\begin{pmatrix}
+0 & 0 & 1 & -1\\
+0 & 0 & -1 & -1\\
+1 & -1 & 0 & 0 \\
+-1 & -1 & 0 & 0
+\end{pmatrix}
 \end{align*}
 
+\begin{align*}
+\vec{q}\cdot\sigma\otimes\vec{t}\cdot\sigma = 
+\begin{pmatrix}
+\vec{t}\cdot\sigma & 0\\
+0 & -\vec{t}\cdot\sigma
+\end{pmatrix} = 
+\frac{1}{\sqrt{2}}\begin{pmatrix}
+1 & -1 & 0 & 0\\
+-1 & -1 & 0 & 0\\
+0 & 0 & -1 & 1 \\
+0 & 0 & 1 & 1
+\end{pmatrix}
+\end{align*}
 \end{frame}
+
+\begin{frame}
+\begin{align*}
+\vec{q}\cdot\sigma\otimes\vec{s}\cdot\sigma = 
+\begin{pmatrix}
+\vec{s}\cdot\sigma & 0 \\
+0 & -\vec{s}\cdot\sigma
+\end{pmatrix} = 
+\frac{1}{\sqrt{2}}\begin{pmatrix}
+-1 & -1 & 0 & 0\\
+-1 & 1 & 0 & 0\\
+0 & 0 & 1 & 1 \\
+0 & 0 & 1 & -1
+\end{pmatrix}
+\end{align*}
+\begin{align*}
+\langle \vec{q}\cdot\sigma\otimes\vec{s}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(-\alpha^{*}(\alpha+\beta) + \beta^{*}(\beta-\alpha) + \gamma^{*}(\gamma+\delta) + \delta^{*}(\gamma-\delta)\right)\\
+\langle \vec{r}\cdot\sigma\otimes\vec{s}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(-\alpha^{*}(\gamma+\delta) + \beta^{*}(\delta-\gamma) - \gamma^{*}(\alpha + \beta) + \delta^{*}(\beta-\alpha)\right)\\
+\langle \vec{r}\cdot\sigma\otimes\vec{t}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(\alpha^{*}(\gamma-\delta) - \beta^{*}(\delta+\gamma) + \gamma^{*}(\alpha - \beta) - \delta^{*}(\beta+\alpha)\right)\\
+\langle \vec{q}\cdot\sigma\otimes\vec{t}\cdot\sigma\rangle &= \frac{1}{\sqrt{2}}\left(\alpha^{*}(\alpha-\beta) - \beta^{*}(\beta+\alpha) + \gamma^{*}(\delta-\delta) + \delta^{*}(\gamma+\delta)\right)
+\end{align*}
+\end{frame}
+
 
 \begin{frame}{Quantifying entanglement: partial traces}
 
@@ -197,16 +221,9 @@ Construct $\ket{\psi} = (a+ib)\ket{00} + (c+id)\ket{01} + (e+if)\ket{10} + (g+ih
 \vspace{0.2in}
 Normalize $\ket{\psi} \rightarrow \frac{\ket{\psi}}{\sum_{n}|c_{n}|^{2}}$\\
 \vspace{0.2in}
-Compute $S(\rho_{A})$ and $2\sqrt{1-\bra{\psi}\sigma_{1y}\otimes\sigma_{2y}\ket{\psi}}$
+Compute $S(\rho_{A})$ and $\bra{\psi}(Q\otimes S + R\otimes S  + R\otimes T  - Q\otimes T)\ket{\psi}$
 \end{frame}
 
-\begin{frame}{Entanglement entropy and Tsirelson's bound}
-
-\begin{figure}
-\includegraphics[scale=0.65]{bell.png}
-\end{figure}
-
-\end{frame}
 
 
 
