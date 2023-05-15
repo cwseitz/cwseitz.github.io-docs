@@ -71,7 +71,7 @@ In the second register we use ancillary bits that will store $f(x)$\\
 
 We assume we have some oracle function $U_{f}$ which will compute and store $f(x)$ in register 2
 \begin{equation*}
-O_{f}(\ket{\psi}\ket{0^{m}}) = \frac{1}{2^{n/2}}\sum_{x\in\{0,1\}^{n}}\ket{x}\ket{f(x)}
+O_{f}(\ket{\psi}\ket{0^{n}}) = \frac{1}{2^{n/2}}\sum_{x\in\{0,1\}^{n}}\ket{x}\ket{f(x)}
 \end{equation*}
 
 
@@ -88,51 +88,13 @@ This collapses the system to a superposition of the two inputs that map to our m
 \frac{1}{2^{n/2}}\sum_{x\in\{0,1\}^{n}}\ket{x}\ket{f(x)} \rightarrow \left(\ket{a}+\ket{a\oplus s}\right)\otimes \ket{f(a)}
 \end{equation*}
 \vspace{0.1in}
-To find $s$, we need to use Fourier sampling
-\end{frame}
-
-\begin{frame}{Introduction}
-
-Dimension of $n$-qubit Hilbert space $N=2^{n}$\\
-\vspace{0.2in}
-The quantum fourier transform (QFT) transforms a quantum state $\ket{\psi}\rightarrow\ket{\phi}$ via the transformation of basis states:
+Then, we can Fourier transform the first register
 
 \begin{equation*}
-\mathrm{QFT}\ket{j} = \frac{1}{2^{n/2}}\sum_{k=1}^{2^{n}}e^{2\pi ijk/2^{n}}\ket{k}
+\sum_{\gamma}\gamma\ket{\gamma}\otimes \ket{f(a)}
 \end{equation*}
 
-Equivalently, on the state $\ket{\psi}=\sum_{j}\psi_{j}\ket{j}$ reads
-
-\begin{equation*}
-\mathrm{QFT}\ket{\psi} = \ket{\phi} = \frac{1}{2^{n/2}}\sum_{j=1}^{2^{n}}\psi_{j}\left(\sum_{k=1}^{2^{n}}e^{2\pi ijk/2^{n}}\ket{k}\right)
-\end{equation*}
-
-which turns out to be a unitary transformation
-
-\end{frame}
-
-\begin{frame}{Product representation of the QFT}
-
-Computational basis ket $\ket{j} = \ket{j_{1}j_{2}...j_{n}}$\\
-\vspace{0.1in}
-Fourier basis ket $\ket{k} = \ket{k_{1}k_{2}...k_{n}}$\\
-\vspace{0.1in}
-Converting $k$ to binary: $k = \sum_{l}k_{l}2^{l}$ \\
-\vspace{0.1in}
-Also, note that $\ket{k} = \ket{k_{1}k_{2}...k_{n}} = \bigotimes_{l=1}^{n}\ket{k_{l}}$
-
-\end{frame}
-
-\begin{frame}{Product representation of the QFT}
-
-
-\begin{align*}
-\mathrm{QFT}\ket{j} &= \frac{1}{2^{n/2}}\sum_{k=0}^{2^{n}-1}e^{2\pi ijk/2^{n}}\ket{k}\\
-&= \frac{1}{2^{n/2}}\sum_{k=0}^{2^{n}-1}e^{2\pi ij\sum_{l}k_{l}2^{-l}}\bigotimes_{l=1}^{n}\ket{k_{l}}\\
-&= \frac{1}{2^{n/2}}\sum_{k=0}^{2^{n}-1}\bigotimes_{l=1}^{n}e^{2\pi ij k_{l}2^{-l}}\ket{k_{l}}\\
-&= \frac{1}{2^{n/2}}\bigotimes_{l=1}^{n}\sum_{k_{l}=0}^{1}e^{2\pi ij k_{l}2^{-l}}\ket{k_{l}}\\
-&= \frac{1}{2^{n/2}}\bigotimes_{l=1}^{n}\left(\ket{0}+e^{2\pi ij 2^{-l}}\ket{1}\right)\
-\end{align*}
+If we measure the first register we get $\gamma$ with probability $|\gamma|^{2}$.
 
 \end{frame}
 

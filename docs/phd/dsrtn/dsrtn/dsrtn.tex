@@ -59,18 +59,24 @@ Eukaryotic transcription is episodic, consisting of a series of transcriptional 
 \chapter{Single molecule localization microscopy}
 
 
-This principle of SMLM is at the same time one of its primary limitations: the need for sparse activation leads to long acquisition times and expensive autofocusing equipment to actively correct for sample drift. This results in low throughput, poor time resolution when imaging dynamic processes, low labeling densities and a reduced choice of fluorophores. In addition, the need for sparse activation requires laborious optimization of dSTORM buffers containing oxygen scavenging systems and/or oxygen purging techniques. In response to these problems, a host software tools for SMLM have emerged, which permit the acquisition of emitters at higher densities. (Speiser 2021). In the multi-emitter setting, PSFs are no longer well-separated but may overlap, adding additional uncertainty into the localization process. Existing algorithms have explicitly modeled the point spread function as a mixture of single molecule PSFs or have utilized deep learning-based tools to estimate the parameters of each PSF embedded in the mixture.  
+Single molecule localization microscopy (SMLM) is a type of super-resolution microscopy that allows the imaging of fluorescently-labeled molecules with high precision, well beyond the diffraction limit of light. SMLM techniques such as direct stochastic optical reconstruction microscopy (dSTORM), photoactivated localization microscopy (PALM), and related methods rely on the precise localization of single molecules by resolving them in time rather than space. By combining the precise localization of many individual molecules, SMLM can generate images with resolution down to a few nanometers. SMLM has been used in a variety of applications, including the imaging of subcellular structures such as synapses, mitochondria, and cytoskeletal elements, as well as the study of protein-protein interactions, molecular dynamics, and other biological processes at the nanoscale level.
+
+Despite its successs and gaining popularity, the basic principle of SMLM is one of its primary limitations: the need for sparse activation leads to long acquisition times and expensive autofocusing equipment to actively correct for sample drift. This results in low throughput, poor time resolution when imaging dynamic processes, low labeling densities and a reduced choice of fluorophores. In addition, the need for sparse activation requires laborious optimization of dSTORM buffers containing oxygen scavenging systems and/or oxygen purging techniques. In response to these problems, a host software tools for SMLM have emerged, which permit the acquisition of emitters at higher densities. (Speiser 2021). In the multi-emitter setting, PSFs are no longer well-separated but may overlap, adding additional 1uncertainty into the localization process. Existing algorithms have explicitly modeled the point spread function as a mixture of single molecule PSFs or have utilized deep learning-based tools to estimate the parameters of each PSF embedded in the mixture.  
 
 Due to overlap, conventional detection strategies may undercount the emitters in a local neighborhood in some frames, localization uncertainty can increase for overlapping emitters, and some localizations may be missed entirely. These complications make conventional detection strategies inappropriate for reconstruction of super-resolution images from time-series. Perhaps most importantly, overlapping emitters can result in additional localization uncertainty, rendering discernment between the arrival of a new particle and a poorly localized existing one difficult. This issue poses a major bottleneck to super-resolution imaging acqusitions. Additional uncertainty can be partially alleviated by using pairwise or higher-order temporal correlations within a pixel neighborhood to deconvolve individual emitters. A similar idea is employed in super-resolution optical fluctuation imaging (SOFI) - a post-processing technique that uses image cumulants to deconvolve emitters. 
 
-Existing correlation-based techniques have been succesful in reaching XXX resolution; however, they are not easily integrated into a Bayesian workflow. The Bayesian philosophy is an important one, as it guards against overfitting of poorly designed models to experimental observations. Furthermore, combining Bayesian inference methods and information theoretic ones, we can begin to ask questions like: can we (even in principle) reduce our uncertainty in localization parameters using time-series data? That is, does a time series $\vec{H}$ carry any \emph{information} that an estimator $\mathcal{E}$ can use to infer the number of fluorophores and their coordinates more precisely? The success of optical fluctuation methods suggests they can; however, the information content of time-series on particle localization and methods for its efficient extraction remain largely unexplored. 
+\subsection{Localization microscopy as Bayesian inference}
 
-\section{A generative model for single molecule localization microscopy}
+We adopt a common Fisher information theoretic view of localization microscopy, which provides a rigorous statistical framework for bounding our uncertainty in SMLM measurements. This involves defining a Cramer-Rao lower bound on the uncertainty in the localization parameters - typically lateral or lateral and axial coordinates of each of $K$ emitters in the field of view. Many models estimate the CRLB using point spread functions in continuous space; however, the spatial binning process  results in loss of information during photon detection, which, in turn, can inflate our uncertainty. Therefore, in the remainder of this chapter, I develop and utilize a \emph{generative image model} rather than using calculus on continuous spaces to compute uncertainties. In addition, I will show that, in the isolated emitter regime, the posterior distribution is well approximated by a multivariate normal distribution around the maximum likelihood estimate (MLE). Armed with this Bayesian approach, we pose the question: can we (even in principle) reduce our uncertainty in localization parameters using temporal fluctuations? That is, does a time series $\vec{H}$ carry any \emph{information} that an estimator $\mathcal{E}$ can use to infer the number of fluorophores and their coordinates more precisely?
 
-Most detectors used for imaging have many elements (pixels) so that we can record an image projected onto the detector by a system of lenses. In fluorescence imaging, this is usually a relay consisting of an objective lens and a tube lens to focus the image onto the camera. Due to diffraction, any point emitter, such as a single fluorescent molecule, will be registered as a diffraction limited spot. The profile of that spot is often described as a Gaussian point spread function
+\section{Generative models for single molecule localization microscopy}
+
+\subsection{Symmetric Gaussian point spread function}
+
+Most detectors used for imaging have many elements (pixels) so that we can record an image projected onto the detector by a system of lenses. Due to diffraction, any point emitter, such as a single fluorescent molecule, will be registered as a diffraction limited spot. It is common to describe the point spread function as a two-dimensional symmetric Gaussian:
 
 \begin{equation}
-\mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}} + B_0
+\mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}} + B(x,y)
 \end{equation}
 
 \begin{figure}
@@ -114,6 +120,26 @@ where
 \lambda_{x}(x) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{x+a/2-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{x-a/2-x_{0}}{\sqrt{2}\sigma}\right)\right)\\
 \lambda_{y}(y) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{y+a/2-y_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{y-y/2-y_{0}}{\sqrt{2}\sigma}\right)\right)
 \end{align*}
+
+\subsection{Astigmatic Gaussian point spread function}
+
+In 2D SMLM simulations, a 2D PSF  model  with  a z-dependent  isotropic  width $\sigma$ can  be  used. For 3D, we could use that the isotropic Gaussian point spread function has a FWHM $\sigma$ which is dependent on the axial coordinate. However, it can be shown that the error around the focus is very large and negative and positive defocus cannot be distinguished given the symmetric dependence in $z$.  Therefore, for 3D SMLM, a simple approach is to introduce astigmatism into the detection path using a weak ($f\approx 10\mathrm{m}$) cylindrical lens. This gives an anisotropic Gaussian point spread function which is elongated perpendicular to the optical axis, depending on the axial ($z$) position of the fluorescent emitter. Nevertheless, this point spread function remains very simple:
+
+\begin{equation}
+\mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}}{2\sigma_{x}^{2}}+\frac{(y-y_{0})^{2}}{{2\sigma_{y}^{2}}}} + B(x,y)
+\end{equation}
+
+The pixel dependent rates directly follow from our analysis of the istropic case, adjusting for the elongation in $x$ or $y$
+
+\begin{align*}
+\lambda_{x}(x) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{x+a/2-x_{0}}{\sqrt{2}\sigma_{x}}\right) -\mathrm{erf}\left(\frac{x-a/2-x_{0}}{\sqrt{2}\sigma_{x}}\right)\right)\\
+\lambda_{y}(y) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{y+a/2-y_{0}}{\sqrt{2}\sigma_{y}}\right) -\mathrm{erf}\left(\frac{y-y/2-y_{0}}{\sqrt{2}\sigma_{y}}\right)\right)
+\end{align*}
+
+What remains to be shown here is the relationship between $\sigma_{x}$, $\sigma_{y}$ and the axial position $z$. 
+
+
+\subsection{Shot noise and readout noise}
 
 We are now prepared to write the shot-noise limited signal, which is a vector with units of phototelectrons
 
