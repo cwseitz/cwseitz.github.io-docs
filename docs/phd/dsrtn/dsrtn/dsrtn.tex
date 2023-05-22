@@ -270,12 +270,6 @@ P(\bm{N}_{k}|\Theta,S) &= \sum_{\bm{X}}P(\bm{N}_{k},\bm{X}|\Theta,S) \\
 &= \sum_{\bm{X}}P(\bm{N}_{k}|\bm{X},\Theta,S)P(\bm{X}|\Theta,S)
 \end{align*}
 
-
-\begin{figure}
-\includegraphics[scale=0.325]{Schematic.png}
-\caption{(A) Generative path (violet) and likelihood computation (blue) for a single pixel neighborhood (outlined in green). During inference, the pixels are labeled according to which fluorophore(s) they count photons from, simplifying the likelihood computation. (B) Continuous-time Markov chain (CTMC) model used both for synthetic data generation (simulated via SSA), and inference of photoswitching kinetics with PSHMM module}
-\end{figure}
-
 We now leverage the conditional independence structure embedded in $S$. That is, $S$ implies that each neighborhood sequence  $\bm{N}_{k}$ depends only on a small subset of $\bm{X}$, so we can define $\bm{Y}$ as the partition of sequence $\bm{X}$ that it depends on and $\bm{Z}$ the partition it does not. This implies that $P(\bm{N}_{k}|\bm{X},\Theta,S) = P(\bm{N}_{k}|\bm{Y},\Theta,S)$. Therefore,
 
 \begin{align*}
