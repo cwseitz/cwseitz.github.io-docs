@@ -46,93 +46,80 @@
   \titlepage
 \end{frame}
 
-\begin{frame}[plain]
-  \centering
-  \Large A (Very) Brief Summary of SMLM
-\end{frame}
-
-
-\begin{frame}{General principle of single molecle localization microscopy (SMLM)}
-
-\begin{figure}
-\includegraphics[scale=0.4]{Figure-1}
-\end{figure}
-\textit{Patel et al. A hidden Markov model approach to characterizing the photo-switching behavior of fluorophores. Annals of Applied Statistics 2019}
-\end{frame}
-
-\begin{frame}{SMLM in the time domain}
-
-\begin{figure}
-\includegraphics[scale=0.325]{Figure-3}
-\end{figure}
-
-\end{frame}
-
-\begin{frame}{Photoswitching is a continuous time Markov process (CTMC)}
-
-\begin{figure}
-\includegraphics[scale=0.325]{Figure-2}
-\end{figure}
-
-\end{frame}
-
-\begin{frame}{The OFF state lifetime depends on laser power (Alexa-647, WFM)}
-
-\begin{figure}
-\includegraphics[scale=0.2]{Figure-4}
-\end{figure}
-\textit{Quantifying and Optimizing Single-Molecule Switching Nanoscopy at High Speeds}
-\end{frame}
-
-
-\begin{frame}{Resolution is dependent on photoswitching kinetics}
-
-\begin{itemize}
-\item Define ratio of OFF and ON state lifetimes as $r=\tau_{OFF} /\tau_{ON}$​
-\item High values of r assure a low number of fluorophores in the ON state​
-\item Low $r$ values ensure precise localization, but acquisitions are slow
-\item Long acqusitions are undesirable due to sample drift
-\end{itemize}
-\vspace{0.2in}
-Params for a single molecule are $\theta = (x_{0},y_{0})$
-\vspace{0.1in}
-What we call lateral ``resolution" in SMLM is the lowest possible uncertainty in $\theta$, given a perfect estimator (The Cramer-Rao lower bound)
-
-
-\end{frame}
-
-\begin{frame}{Current state of the art for dense localization in 3D (astigmatism)}
-DECODE uses a deep generative model to localize dense fluorophores
-\begin{figure}
-\includegraphics[scale=0.33]{Figure-8}
-\end{figure}
-\textit{Deep learning enables fast and dense single-molecule localization with high accuracy}
-\end{frame}
-
-
-
-\begin{frame}[plain]
-  \centering
-  \Large Mathematical Details
-\end{frame}
-
-
-
-
-\begin{frame}{sCMOS noise model}
-
-The Poisson rate parameter for a single pixel is 
+\begin{frame}{Photoswitching as a Markov jump process}
 \begin{equation*}
-\mu_{k} = \eta\Delta t(N_{0}\lambda_{k} + B_{0}) 
+G_{ij} = \mathrm{Pr}\left(X(t+dt)=\omega_{i}, | \;X(t)=\omega_{j}\right)
 \end{equation*}
-where $\Delta t$ is the camera exposure time and $N_{0}$ and $B_{0}$ are the fluorophore and background emission rates respectively. 
+
+Let the state space for the process $X(t)$ be $\Omega = \{0_{0},0_{1},0_{2},1,2\}$. The generator matrix for such a process reads
+
+\begin{equation*}
+G = 
+\begin{pmatrix}
+\lambda_{00} & \lambda_{0 0_{1}} & 0 & \lambda_{01} & \mu_{0}\\
+0 & \lambda_{0_{1}0_{1}} & \lambda_{0_{1}0_{2}} & \lambda_{0_{1}1} & \mu_{1}\\
+0 & 0 & \lambda_{0_{2}0_{2}} & \lambda_{0_{2}1} & \mu_{2}\\
+\lambda_{10} & 0 & 0 & \lambda_{11} & \mu_{0}\\
+0 & 0 & 0 & 0 & 0
+\end{pmatrix}
+\end{equation*}
+\end{frame}
+
+\begin{frame}{Photoswitching as a Markov jump process}
+\begin{equation*}
+\frac{\partial P(\omega_{i})}{\partial t} = \sum_{j}G_{ji}P(\omega_{j},t) - G_{ij}P(\omega_{i},t)
+\end{equation*}
+\begin{equation*}
+P(\bm{\omega}, t) = \exp(W P(\omega))
+\end{equation*}
+
+The matrix $W$ for the 4-state system presented before reads
+
+\begin{equation*}
+W = 
+\begin{pmatrix}
+-\sigma_{0} & \lambda_{0 0_{1}} & 0 & \lambda_{01} & \mu_{0}\\
+0 & -\sigma_{0_{1}} & \lambda_{0_{1}0_{2}} & \lambda_{0_{1}1} & \mu_{1}\\
+0 & 0 & -\sigma_{0_{2}} & \lambda_{0_{2}1} & \mu_{2}\\
+\lambda_{10} & 0 & 0 & -\sigma_{1} & \mu_{0}\\
+0 & 0 & 0 & 0 & 0
+\end{pmatrix}
+\end{equation*}
+
+\end{frame}
+
+
+\begin{frame}{Integrated isotropic gaussian point spread function}
+
+Let $G(x,y)$ be a normalized isotropic Gaussian density over the pixel array
+\begin{equation}
+\mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}}
+\end{equation}
+Let's presume (correctly) that pixel gray levels are a Poisson r.v. with expected value
+\begin{equation}
+\mu_{k} = \eta\Delta t(N_{0}\lambda_{k} + B_{0}) 
+\end{equation}
+where $\Delta t$ is the camera exposure time and $N_{0}$ and $B_{0}$ are the fluorophore and background emission rates respectively. Eq (1) and (2) are related by
 \begin{equation*}
 \lambda_{k} = \int_{\mathrm{pixel}}G(x,y)dxdy
 \end{equation*}
-where the 2D function $G(x,y)$ is a normalized Gaussian density over the pixel array
-\begin{equation*}
-\mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}}
-\end{equation*}
+
+\end{frame}
+
+\begin{frame}{Integrated anisotropic gaussian point spread function (astigmatism)}
+Let $G(x,y)$ be a normalized anisotropic Gaussian density over the pixel array
+
+\begin{equation}
+\mathrm{G}(x,y) = \frac{1}{2\pi\sigma_{x}(z)\sigma_{y}(z)}e^{-\frac{(x-x_{0})^{2}}{2\sigma_{x}(z)^{2}}+\frac{(y-y_{0})^{2}}{2\sigma_{y}(z)^{2}}}
+\end{equation}
+
+A fairly simple model for $\sigma_{x}(z)$ and $\sigma_{y}(z)$ is
+
+\begin{align*}
+\sigma_{x}(z) &= \sigma_{0} + \alpha(z+z_{min})^{2}\\
+\sigma_{y}(z) &= \sigma_{0} + \beta(z-z_{min})^{2}
+\end{align*}
+
 \end{frame}
 
 \begin{frame}{How to compute $\lambda_{k}$ at each pixel}
@@ -183,20 +170,21 @@ H_{k}' \sim \mathrm{Poisson}(\mu_{k}')\;\;\;\mu_{k}' = g_{k}\mu_{k} + \sigma_{k}
 Since each Poisson r.v. is independent, the negative log likelihood reads
 \begin{align*}
 \ell(\vec{H}) &= -\log \prod_{k} \frac{e^{-\left(\mu_{k}'\right)}\left(\mu_{k}'\right)^{n_{k}}}{n_{k}!}\\
-&= \sum_{k}  \log n_{k}! + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
+&= \sum_{k}  \log n_{k}! + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)\\
+&\approx \sum_{k}  n_{k}\log n_{k} + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
 \end{align*}
 
 \end{frame}
 
-\begin{frame}{The model log likelihood and Hessian matrix}
-
-Fortunately, we can compute the Hessian of the negative log likelihood using the chain-rule for Hessian matrices.
-
-\begin{align*}
-\hat{H}_{(\ell,\theta)} = \hat{J}_{(\lambda,\theta)}^{T} \hat{H}_{(\ell,\lambda)} \hat{J}_{(\lambda,\theta)} + (J_{(\ell,\lambda)}\otimes I_{n})\hat{H}_{(\lambda,\theta)}
-\end{align*}
-By calculating $\hat{H}_{(l,\theta)}$ at $\theta_{\mathrm{MLE}}$, we can get an estimate of the observed information matrix. To do that $J_{(\lambda,\theta)}$ and $H_{(\lambda,\theta)}$ are best left to symbolic calculators. 
+\begin{frame}{Localization with maximum likelihood estimation (MLE)}
+A slew of gradient calculations
 \end{frame}
+
+\begin{frame}{Bayesian localization with stochastic gradient langevin dynamics}
+$$dw = - \nabla L(w) dt + \epsilon \sqrt{\eta dt}, \quad \epsilon \sim \mathcal N(0, \sigma^2), \eta \propto dt$$
+Our goal is to sample from the stationary distribution of the above SDE. To do that, we will use Stochastic Gradient Langevin Dynamics (SGLD), an algorithm commonly used to sample from the parameter's posterior -- this is unlike MLE, whose goal is to simply minimize the objective $L$, which can be seen as finding the modes of the parameter's posterior
+\end{frame}
+
 
 
 \end{document}
