@@ -6,7 +6,7 @@
 \documentclass[aspectratio=169]{beamer}
 
 \setbeamertemplate{footline}[text line]{%
-  \parbox{\linewidth}{\vspace*{-8pt}Single molecule localization microscopy \hfill\insertshortauthor\hfill\insertpagenumber}}
+  \parbox{\linewidth}{\vspace*{-8pt}\hfill\insertshortauthor\hfill\insertpagenumber}}
 \setbeamertemplate{navigation symbols}{}
 
 \usepackage[english]{babel}				% Set language
@@ -34,7 +34,7 @@
 \usepackage{bm}
 \usepackage[font=small,labelfont=bf]{caption}				% For cross-referencing
 
-\title{Single molecule localization microscopy}	% Presentation title
+\title{Some theory for single molecule localization microscopy}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -92,58 +92,64 @@ W =
 \begin{frame}{Integrated isotropic gaussian point spread function}
 
 Let $G(x,y)$ be a normalized isotropic Gaussian density over the pixel array
-\begin{equation}
-\mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}}
-\end{equation}
-Let's presume (correctly) that pixel gray levels are a Poisson r.v. with expected value
-\begin{equation}
-\mu_{k} = \eta\Delta t(N_{0}\lambda_{k} + B_{0}) 
-\end{equation}
-where $\Delta t$ is the camera exposure time and $N_{0}$ and $B_{0}$ are the fluorophore and background emission rates respectively. Eq (1) and (2) are related by
 \begin{equation*}
-\lambda_{k} = \int_{\mathrm{pixel}}G(x,y)dxdy
+\mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}}
+\end{equation*}
+We can integrate this continuous density over pixels. Let $(x_{k},y_{k})$ be the center of $k$
+\begin{equation*}
+\lambda_{k} = \int_{x_{k}-\frac{1}{2}}^{x_{k}+\frac{1}{2}}G(x)dx \int_{y_{k}-\frac{1}{2}}^{y_{k}+\frac{1}{2}} G(y)dy
+\end{equation*}
+which gives the probability a photon arrives at pixel $k$ per unit time
+\end{frame}
+
+\begin{frame}
+
+It is not hard to show that this integral is simply a difference of error functions:
+
+\begin{align*}
+\lambda_{k}(x) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma}\right)\right)\\
+\lambda_{k}(y) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma}\right)\right)
+\end{align*}
+
+The shot-noise limited signal is then
+\begin{equation*}
+\vec{S} = \left[\mathrm{Poisson}(\lambda_{1}), \mathrm{Poisson}(\lambda_{2}), ..., \mathrm{Poisson}(\lambda_{K})\right]
 \end{equation*}
 
 \end{frame}
+
 
 \begin{frame}{Integrated anisotropic gaussian point spread function (astigmatism)}
 Let $G(x,y)$ be a normalized anisotropic Gaussian density over the pixel array
 
 \begin{equation}
-\mathrm{G}(x,y) = \frac{1}{2\pi\sigma_{x}(z)\sigma_{y}(z)}e^{-\frac{(x-x_{0})^{2}}{2\sigma_{x}(z)^{2}}+\frac{(y-y_{0})^{2}}{2\sigma_{y}(z)^{2}}}
+\mathrm{G}(x,y) = \frac{1}{2\pi\sigma_{x}(z)\sigma_{y}(z)}e^{-\frac{(x-x_{0})^{2}}{2\sigma_{x}(z_{0})^{2}}+\frac{(y-y_{0})^{2}}{2\sigma_{y}(z_{0})^{2}}}
 \end{equation}
 
-A fairly simple model for $\sigma_{x}(z)$ and $\sigma_{y}(z)$ is
+A fairly simple model for $\sigma_{x}(z_{0})$ and $\sigma_{y}(z_{0})$ is
 
 \begin{align*}
-\sigma_{x}(z) &= \sigma_{0} + \alpha(z+z_{min})^{2}\\
-\sigma_{y}(z) &= \sigma_{0} + \beta(z-z_{min})^{2}
+\sigma_{x}(z_{0}) &= \sigma_{0} + \alpha(z_{0}+z_{min})^{2}\\
+\sigma_{y}(z_{0}) &= \sigma_{0} + \beta(z_{0}-z_{min})^{2}
 \end{align*}
 
 \end{frame}
 
-\begin{frame}{How to compute $\lambda_{k}$ at each pixel}
+\begin{frame}
 
-We can replace this integral with error functions:
+In this case, we only need to make a small adjustment to the isotropic $\lambda_{k}$
 
 \begin{align*}
-\lambda_{x}(x) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{x+a/2-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{x-a/2-x_{0}}{\sqrt{2}\sigma}\right)\right)\\
-\lambda_{y}(y) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{y+a/2-y_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{y-y/2-y_{0}}{\sqrt{2}\sigma}\right)\right)
+\lambda_{k}(x) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right)\right)\\
+\lambda_{k}(y) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right)\right)
 \end{align*}
-For multiple emitters
-\begin{equation*}
-\lambda(x,y) = \sum_{n}\lambda_{n,x}(x)\lambda_{n,y}(y)
-\end{equation*}
-The \emph{true signal} is then
-\begin{equation*}
-\vec{S} = \left[\mathrm{Poisson}(\lambda_{1}), \mathrm{Poisson}(\lambda_{2}), ..., \mathrm{Poisson}(\lambda_{N})\right]
-\end{equation*}
 
 \end{frame}
 
-\begin{frame}{Poisson approximation of pixel values}
 
-However, due to readout noise, we measure
+\begin{frame}{Readout noise}
+
+Due to readout noise, we measure
 
 \begin{equation*}
 \vec{H} = \vec{S} + \vec{\xi}
@@ -161,7 +167,7 @@ where $P(\xi_{k}) = \mathcal{N}(o_{k},\sigma_{k}^{2})$ and $P(S_{k}) = \mathrm{P
 
 \end{frame}
 
-\begin{frame}{The model log likelihood and Hessian matrix}
+\begin{frame}{The model log likelihood}
 Since $H_{k} = S_{k} + \xi_{k}$, we transform $H_{k}' = H_{k} - o_{k} + \sigma_{k}^{2}$, which is distributed according to 
 
 \begin{align*}
@@ -176,8 +182,44 @@ Since each Poisson r.v. is independent, the negative log likelihood reads
 
 \end{frame}
 
-\begin{frame}{Localization with maximum likelihood estimation (MLE)}
-A slew of gradient calculations
+\begin{frame}{The Cramer-Rao bound}
+
+On the previous slide, we defined the log-likelihood $\ell(\vec{H}|\theta)$. From this we can compute the Fisher information matrix $I(\theta)$
+
+\begin{align*}
+\frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  x_{k}\log x_{k} + \mu_{k}' - x_{k}\log\left(\mu_{k}'\right)\\
+&= \sum_{k} \frac{\partial \mu_{k}'}{\partial\theta_{i}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)
+\end{align*}
+
+\begin{equation*}
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)^{2}\right) = \sum_{k}\frac{1}{\mu_{k}'}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}}
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{The Cramer-Rao bound}
+To compute the bound, it turns out all we need is the Jacobian $J_{\mu}$
+
+\begin{equation*}
+J = \left(\frac{\partial \mu_{k}}{\partial x_{0}},\frac{\partial \mu_{k}}{\partial y_{0}},\frac{\partial \mu_{k}}{\partial z_{0}},\frac{\partial \mu_{k}}{\partial \sigma_{x}},\frac{\partial \mu_{k}}{\partial \sigma_{y}},\frac{\partial \mu_{k}}{\partial \sigma_{0}}\right)
+\end{equation*}
+
+Let's first compute gradients for spatial coordinates. Define $\beta_{k} = g_{k}\gamma\Delta t N_{0}$
+
+\begin{equation*}
+J_{x_{0}} = \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_{0}} \;\; J_{y_{0}} = \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial y_{0}}\;\;\; J_{z_{0}}  = \frac{\partial \mu_{k}'}{\partial \sigma_{x}}\frac{\partial \sigma_{x}}{\partial z_{0}} + \frac{\partial \mu_{k}'}{\partial \sigma_{y}}\frac{\partial \sigma_{y}}{\partial z_{0}}
+\end{equation*}
+
+
+\end{frame}
+
+\begin{frame}{The Cramer-Rao bound}
+
+\begin{align*}
+J_{x_{0}} &= \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_{0}} \\
+&= \beta_{k}\lambda_{y}
+\end{align*}
+
 \end{frame}
 
 \begin{frame}{Bayesian localization with stochastic gradient langevin dynamics}
