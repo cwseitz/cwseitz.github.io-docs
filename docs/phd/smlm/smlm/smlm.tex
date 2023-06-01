@@ -104,7 +104,7 @@ which gives the probability a photon arrives at pixel $k$ per unit time
 
 \begin{frame}
 
-It is not hard to show that this integral is simply a difference of error functions:
+Recall that $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}\int_{0}^{t}e^{-t^{2}}dt$ 
 
 \begin{align*}
 \lambda_{k}(x) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma}\right)\right)\\
@@ -215,10 +215,45 @@ J_{x_{0}} = \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_{0}} \;\;
 
 \begin{frame}{The Cramer-Rao bound}
 
+Again $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}\int_{0}^{t}e^{-t^{2}}dt$, so
+
 \begin{align*}
 J_{x_{0}} &= \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_{0}} \\
-&= \beta_{k}\lambda_{y}
+&= \frac{\beta_{k}\lambda_{y}}{2}\frac{\partial}{\partial x_{0}}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right)\right)\\
+&= \frac{\beta_{k}\lambda_{y}}{\sqrt{2\pi}\sigma_{x}}\left(\mathrm{exp}\left(\frac{(x_{k}-\frac{1}{2}-x_{0})^{2}}{2\sigma_{x}^{2}}\right) -\mathrm{exp}\left(\frac{(x_{k}+\frac{1}{2}-x_{0})^{2}}{2\sigma_{x}^{2}}\right)\right)
 \end{align*}
+
+\end{frame}
+
+\begin{frame}{The Cramer-Rao bound}
+
+\begin{align*}
+J_{y_{0}} &= \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial y_{0}} \\
+&= \frac{\beta_{k}\lambda_{x}}{2}\frac{\partial}{\partial y_{0}}\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right)\right)\\
+&= \frac{\beta_{k}\lambda_{x}}{\sqrt{2\pi}\sigma_{y}}\left(\mathrm{exp}\left(\frac{(y_{k}-\frac{1}{2}-y_{0})^{2}}{2\sigma_{y}^{2}}\right) -\mathrm{exp}\left(\frac{(y_{k}+\frac{1}{2}-y_{0})^{2}}{2\sigma_{y}^{2}}\right)\right)
+\end{align*}
+
+\end{frame}
+
+\begin{frame}{The Cramer-Rao bound}
+
+\begin{align*}
+J_{\sigma_{x}} &= \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial \sigma_{x}} \\
+&= \frac{\beta_{k}\lambda_{y}}{2}\frac{\partial}{\partial \sigma_{x}}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right)\right)\\
+\end{align*}
+
+
+
+\end{frame}
+
+\begin{frame}{The Cramer-Rao bound}
+
+\begin{align*}
+J_{\sigma_{y}} &= \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial \sigma_{y}} \\
+&= \frac{\beta_{k}\lambda_{x}}{2}\frac{\partial}{\partial \sigma_{y}}\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right)\right)\\
+\end{align*}
+
+
 
 \end{frame}
 
