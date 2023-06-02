@@ -204,7 +204,7 @@ To compute the bound, it turns out all we need is the Jacobian $J_{\mu}$
 J = \left(\frac{\partial \mu_{k}}{\partial x_{0}},\frac{\partial \mu_{k}}{\partial y_{0}},\frac{\partial \mu_{k}}{\partial z_{0}},\frac{\partial \mu_{k}}{\partial \sigma_{x}},\frac{\partial \mu_{k}}{\partial \sigma_{y}},\frac{\partial \mu_{k}}{\partial \sigma_{0}}\right)
 \end{equation*}
 
-Let's first compute gradients for spatial coordinates. Define $\beta_{k} = g_{k}\gamma\Delta t N_{0}$
+Let's first compute gradients for spatial coordinates. Define $\beta_{k} = g_{k}\gamma\Delta t N_{0}$ such that $\mu_{k}' = \beta_{k}\lambda_{k}$
 
 \begin{equation*}
 J_{x_{0}} = \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_{0}} \;\; J_{y_{0}} = \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial y_{0}}\;\;\; J_{z_{0}}  = \frac{\partial \mu_{k}'}{\partial \sigma_{x}}\frac{\partial \sigma_{x}}{\partial z_{0}} + \frac{\partial \mu_{k}'}{\partial \sigma_{y}}\frac{\partial \sigma_{y}}{\partial z_{0}}
@@ -214,8 +214,6 @@ J_{x_{0}} = \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_{0}} \;\;
 \end{frame}
 
 \begin{frame}{The Cramer-Rao bound}
-
-Again $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}\int_{0}^{t}e^{-t^{2}}dt$, so
 
 \begin{align*}
 J_{x_{0}} &= \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_{0}} \\
@@ -240,6 +238,7 @@ J_{y_{0}} &= \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial y_{0}} \\
 \begin{align*}
 J_{\sigma_{x}} &= \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial \sigma_{x}} \\
 &= \frac{\beta_{k}\lambda_{y}}{2}\frac{\partial}{\partial \sigma_{x}}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right)\right)\\
+&= \frac{\beta_{k}\lambda_{y}}{\sqrt{2\pi}}\left(\frac{\left(x-x_{0}-\frac{1}{2}\right) e^{-\frac{\left(x-x_{0}-\frac{1}{2}\right)^2}{2 \sigma_{x} ^2}}}{\sigma_{x} ^2}-\frac{ \left(x-x_{0}+\frac{1}{2}\right) e^{-\frac{\left(x-x_{0}+\frac{1}{2}\right)^2}{2 \sigma_{x} ^2}}}{\sigma_{x} ^2}\right)
 \end{align*}
 
 
@@ -251,8 +250,21 @@ J_{\sigma_{x}} &= \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial \sigm
 \begin{align*}
 J_{\sigma_{y}} &= \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial \sigma_{y}} \\
 &= \frac{\beta_{k}\lambda_{x}}{2}\frac{\partial}{\partial \sigma_{y}}\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right)\right)\\
+&= \frac{\beta_{k}\lambda_{x}}{\sqrt{2\pi}}\left(\frac{\left(y-y_{0}-\frac{1}{2}\right) e^{-\frac{\left(y-y_{0}-\frac{1}{2}\right)^2}{2 \sigma_{y} ^2}}}{\sigma_{y} ^2}-\frac{ \left(y-y_{0}+\frac{1}{2}\right) e^{-\frac{\left(y-y_{0}+\frac{1}{2}\right)^2}{2 \sigma_{y} ^2}}}{\sigma_{y} ^2}\right)
 \end{align*}
 
+\end{frame}
+
+\begin{frame}{The Cramer-Rao bound}
+
+\begin{align*}
+\sigma_{x}(z_{0}) &= \sigma_{0} + \alpha(z_{0}+z_{min})^{2}\\
+\sigma_{y}(z_{0}) &= \sigma_{0} + \beta(z_{0}-z_{min})^{2}
+\end{align*}
+
+\begin{equation*}
+\frac{\partial\sigma_{x}}{\partial z_{0}} = 2\alpha(z_{0}+z_{min})\;\;\; \frac{\partial\sigma_{y}}{\partial z_{0}} = 2\beta(z_{0}-z_{min})
+\end{equation*}
 
 
 \end{frame}

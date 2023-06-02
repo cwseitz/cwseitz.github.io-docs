@@ -65,81 +65,10 @@ Despite its successs and gaining popularity, the basic principle of SMLM is one 
 
 Due to overlap, conventional detection strategies may undercount the emitters in a local neighborhood in some frames, localization uncertainty can increase for overlapping emitters, and some localizations may be missed entirely. These complications make conventional detection strategies inappropriate for reconstruction of super-resolution images from time-series. Perhaps most importantly, overlapping emitters can result in additional localization uncertainty, rendering discernment between the arrival of a new particle and a poorly localized existing one difficult. This issue poses a major bottleneck to super-resolution imaging acqusitions. Additional uncertainty can be partially alleviated by using pairwise or higher-order temporal correlations within a pixel neighborhood to deconvolve individual emitters. A similar idea is employed in super-resolution optical fluctuation imaging (SOFI) - a post-processing technique that uses image cumulants to deconvolve emitters. 
 
-\subsection{Localization microscopy as Bayesian inference}
-
-We adopt a common Fisher information theoretic view of localization microscopy, which provides a rigorous statistical framework for bounding our uncertainty in SMLM measurements. This involves defining a Cramer-Rao lower bound on the uncertainty in the localization parameters - typically lateral or lateral and axial coordinates of each of $K$ emitters in the field of view. Many models estimate the CRLB using point spread functions in continuous space; however, the spatial binning process  results in loss of information during photon detection, which, in turn, can inflate our uncertainty. Therefore, in the remainder of this chapter, I develop and utilize a \emph{generative image model} rather than using calculus on continuous spaces to compute uncertainties. In addition, I will show that, in the isolated emitter regime, the posterior distribution is well approximated by a multivariate normal distribution around the maximum likelihood estimate (MLE). Armed with this Bayesian approach, we pose the question: can we (even in principle) reduce our uncertainty in localization parameters using temporal fluctuations? That is, does a time series $\vec{H}$ carry any \emph{information} that an estimator $\mathcal{E}$ can use to infer the number of fluorophores and their coordinates more precisely?
 
 \section{Generative models for single molecule localization microscopy}
 
-\subsection{Symmetric Gaussian point spread function}
-
-Most detectors used for imaging have many elements (pixels) so that we can record an image projected onto the detector by a system of lenses. Due to diffraction, any point emitter, such as a single fluorescent molecule, will be registered as a diffraction limited spot. It is common to describe the point spread function as a two-dimensional symmetric Gaussian:
-
-\begin{equation}
-\mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}} + B(x,y)
-\end{equation}
-
-\begin{figure}
-\includegraphics[scale=0.525]{Figure-0.png}
-\end{figure}
-
-Modern cameras used in light microscopy, such as scientific complementary metal oxide semiconductor (sCMOS) cameras, are powered by the photoelectric effect. Electrons within each pixel, called photoelectrons, absorb enough energy from incoming photons to be promoted to the conduction band to give electrical current which can be detected. Integration of photoelectrons during the exposure time results in a monochrome image captured by a camera. The image of a single point particle, such as a fluorescent molecule, can be thought of as two-dimensional histogram of photon arrivals and a discretized form of the classical intensity profile $\mathrm{G}(x,y)$. The value at a pixel approaches an integral of this density over the pixel:
-
-\begin{equation}
-\mu_{k} = I_{0}\lambda_{k} = I_{0}\int_{\mathrm{pixel}} G(x,y)dxdy
-\end{equation}
-
-where $I_{0} = \eta N_{0}\Delta$. The parameter $\eta$ is the quantum efficiency and $\Delta$ is the exposure time. $N_{0}$ represents the number of photons emitted per unit time, which may be itself a Poisson random variable; however, this is inconsequential since it is a fixed value for a single image of a fluorescent molecule. If the background signal is not negligible, then we can generalize (2.2) above to
-
-\begin{equation}
-\mu_{k} = \eta\Delta\left(N_{0}\lambda_{k} + B_{0}\right)
-\end{equation}
-
-where $B_{0}$ is the rate that background photons arrive at pixel $k$. The value of the integral $\lambda_{k}$ at a pixel $k$ defines the fraction of $N_{0}$ photons that arrive at pixel $k$ during the camera exposure. Since the 2D Gaussian in (1.1) has cylindrical symmetry, it is separable, and we can write
-
-\begin{align*}
-\lambda_{k} &= \frac{1}{2\pi\sigma^{2}}\left(\int_{x_{k}}^{x_{k+1}}e^{-\frac{(x-x_{0})^{2}}{2\sigma^{2}}}dx\right)\left(\int_{y_{k}}^{y_{k+1}}e^{-\frac{(y-y_{0})^{2}}{2\sigma^{2}}}dy\right)
-\end{align*}
-
-
-We can then express the Gaussian integrals over a pixel by making use of the following property of the error function
-
-\begin{equation*}
-\frac{1}{\sqrt{2\pi}\sigma}\int_{a}^{b} e^{\frac{-(x-\mu)^{2}}{2\sigma^{2}}} = \frac{1}{2}\left(\mathrm{erf}\left(\frac{b-\mu}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{a-\mu}{\sqrt{2}\sigma}\right)\right)
-\end{equation*}
-
-Now, suppose the particle is known to be located at $(x_{0},y_{0})$ and some square pixel $k$ is centered on coordinates $(x,y)$ and has a width $a$. Then $\lambda_{k}$ at this pixel is
-
-\begin{equation}
-\lambda_{k}(x,y) = \lambda_{x}(x)\lambda_{y}(y)
-\end{equation}
-
-where
-
-\begin{align*}
-\lambda_{x}(x) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{x+a/2-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{x-a/2-x_{0}}{\sqrt{2}\sigma}\right)\right)\\
-\lambda_{y}(y) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{y+a/2-y_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{y-y/2-y_{0}}{\sqrt{2}\sigma}\right)\right)
-\end{align*}
-
-\subsection{Astigmatic Gaussian point spread function}
-
-In 2D SMLM simulations, a 2D PSF  model  with  a z-dependent  isotropic  width $\sigma$ can  be  used. For 3D, we could use that the isotropic Gaussian point spread function has a FWHM $\sigma$ which is dependent on the axial coordinate. However, it can be shown that the error around the focus is very large and negative and positive defocus cannot be distinguished given the symmetric dependence in $z$.  Therefore, for 3D SMLM, a simple approach is to introduce astigmatism into the detection path using a weak ($f\approx 10\mathrm{m}$) cylindrical lens. This gives an anisotropic Gaussian point spread function which is elongated perpendicular to the optical axis, depending on the axial ($z$) position of the fluorescent emitter. Nevertheless, this point spread function remains very simple:
-
-\begin{equation}
-\mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}}{2\sigma_{x}^{2}}+\frac{(y-y_{0})^{2}}{{2\sigma_{y}^{2}}}} + B(x,y)
-\end{equation}
-
-The pixel dependent rates directly follow from our analysis of the istropic case, adjusting for the elongation in $x$ or $y$
-
-\begin{align*}
-\lambda_{x}(x) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{x+a/2-x_{0}}{\sqrt{2}\sigma_{x}}\right) -\mathrm{erf}\left(\frac{x-a/2-x_{0}}{\sqrt{2}\sigma_{x}}\right)\right)\\
-\lambda_{y}(y) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{y+a/2-y_{0}}{\sqrt{2}\sigma_{y}}\right) -\mathrm{erf}\left(\frac{y-y/2-y_{0}}{\sqrt{2}\sigma_{y}}\right)\right)
-\end{align*}
-
-What remains to be shown here is the relationship between $\sigma_{x}$, $\sigma_{y}$ and the axial position $z$. 
-
-
-\subsection{Shot noise and readout noise}
+\subsection{Statistics of sCMOS cameras}
 
 We are now prepared to write the shot-noise limited signal, which is a vector with units of phototelectrons
 
@@ -175,18 +104,81 @@ Since $H_{k} = S_{k} + \xi_{k}$, we transform $H_{k}' = H_{k} - o_{k} + \sigma_{
 H_{k}' \sim \mathrm{Poisson}(\mu_{k}')
 \end{align*}
 
-where $\mu_{k}' = g_{k}\mu_{k} + \sigma_{k}^{2}$. This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson. Under this approximation, the model negative log-likelihood is
+where $\mu_{k}' = g_{k}\mu_{k} + \sigma_{k}^{2}$. This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson.
+
+\subsection{Integrated isotropic Gaussian point spread function}
+
+Due to diffraction, any point emitter, such as a single fluorescent molecule, will be registered as a diffraction limited spot. It is common to describe the point spread function as a two-dimensional isotropic Gaussian:
+
+\begin{equation*}
+\mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}}
+\end{equation*}
+
+Modern cameras used in light microscopy, such as scientific complementary metal oxide semiconductor (sCMOS) cameras, are powered by the photoelectric effect. Electrons within each pixel, called photoelectrons, absorb enough energy from incoming photons to be promoted to the conduction band to give electrical current which can be detected. Integration of photoelectrons during the exposure time results in a monochrome image captured by a camera. The image of a single point particle, such as a fluorescent molecule, can be thought of as two-dimensional histogram of photon arrivals and a discretized form of the classical intensity profile $\mathrm{G}(x,y)$. The value at a pixel approaches an integral of this density over the pixel:
+
+\begin{equation}
+\mu_{k} = i_{0}\lambda_{k} = i_{0}\int_{\mathrm{pixel}} G(x,y)dxdy
+\end{equation}
+
+Let $(x_{k},y_{k})$ be the center of pixel $k$. If a fluorescent molecule is located at $(x_{0},y_{0})$, the probability of a photon arriving at pixel $k$ per unit time reads
+
+\begin{equation*}
+\lambda_{k} = \int_{x_{k}-\frac{1}{2}}^{x_{k}+\frac{1}{2}}G(x-x_{0})dx \int_{y_{k}-\frac{1}{2}}^{y_{k}+\frac{1}{2}} G(y-y_{0})dy
+\end{equation*}
+
+
+where $i_{0} = g_{k}\eta N_{0}\Delta$. The parameter $\eta$ is the quantum efficiency and $\Delta$ is the exposure time. $N_{0}$ represents the number of photons emitted per unit time, which may be itself a Poisson random variable; however, this is inconsequential since it is a fixed value for a single image of a fluorescent molecule. We can then express the Gaussian integrals over a pixel by making use of the following property of the error function
+
+\begin{equation*}
+\frac{1}{\sqrt{2\pi}\sigma}\int_{a}^{b} e^{\frac{-(x-\mu)^{2}}{2\sigma^{2}}} = \frac{1}{2}\left(\mathrm{erf}\left(\frac{b-\mu}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{a-\mu}{\sqrt{2}\sigma}\right)\right)
+\end{equation*}
+
+This gives a convenient expression for the fraction of photons which arrive at a pixel $k$
+
+\begin{align*}
+\lambda_{k}(x) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma}\right)\right)\\
+\lambda_{k}(y) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma}\right)\right)
+\end{align*}
+
+\subsection{Integrated astigmatic Gaussian point spread function}
+
+In 2D SMLM simulations, a 2D PSF  model  with  a z-dependent  isotropic  width $\sigma$ can  be  used. For 3D, we could use that the isotropic Gaussian point spread function has a FWHM $\sigma$ which is dependent on the axial coordinate. However, it can be shown that the error around the focus is very large and negative and positive defocus cannot be distinguished given the symmetric dependence in $z$.  Therefore, for 3D SMLM, a cost-effective approach is to introduce astigmatism into the detection path using a weak ($f\approx 10\mathrm{m}$) cylindrical lens. This gives an anisotropic Gaussian point spread function which is elongated perpendicular to the optical axis, depending on the axial ($z$) position of the fluorescent emitter. A fairly simple model for $\sigma_{x}(z_{0})$ and $\sigma_{y}(z_{0})$ upon defocus of a fluorescent molecule might be
+
+\begin{align*}
+\sigma_{x}(z_{0}) &= \sigma_{0} + \alpha(z_{0}+z_{min})^{2}\\
+\sigma_{y}(z_{0}) &= \sigma_{0} + \beta(z_{0}-z_{min})^{2}
+\end{align*}
+
+with the following continuous density over the pixel array
+
+\begin{equation}
+\mathrm{G}(x,y) = \frac{1}{2\pi\sigma_{x}(z)\sigma_{y}(z)}e^{-\frac{(x-x_{0})^{2}}{2\sigma_{x}(z_{0})^{2}}+\frac{(y-y_{0})^{2}}{2\sigma_{y}(z_{0})^{2}}}
+\end{equation}
+
+
+In this case, we only need to make a small adjustment to the isotropic $\lambda_{k}$
+
+\begin{align*}
+\lambda_{k}(x) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right)\right)\\
+\lambda_{k}(y) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right)\right)
+\end{align*}
+
+\subsection{Localization microscopy as Bayesian inference}
+
+Armed with a model for image formation, we adopt the Bayesian view of localization microscopy, which provides a rigorous statistical framework for bounding our uncertainty in localization microscopy measurements. This involves defining a lower bound on the uncertainty in the localization parameters - typically lateral or lateral and axial coordinates of each of $K$ emitters in the field of view. Some authors have estimated this lower bound using point spread functions in continuous space; however, the spatial binning process results in a loss of information during photon detection, which, in turn, can inflate our uncertainty. Therefore, in the remainder of this chapter, I make use of our generative image model rather than using calculus on continuous spaces to compute uncertainties. We begin with Bayes rule:
 
 \begin{align}
-\ell(\vec{H}) &= -\log \prod_{k} \frac{e^{-\left(\mu_{k}'\right)}\left(\mu_{k}'\right)^{n_{k}}}{n_{k}!}\\
+P(\theta|\vec{H}) = \frac{P(\vec{H}|\theta)P(\theta)}{\int P(\vec{H}|\theta)P(\theta) d\theta}
+\end{align}
+
+Under the Poisson approximation, the model negative log-likelihood is
+
+\begin{align}
+\ell(\vec{H}|\theta) &= -\log \prod_{k} \frac{e^{-\left(\mu_{k}'\right)}\left(\mu_{k}'\right)^{n_{k}}}{n_{k}!}\\
 &= \sum_{k}  \log n_{k}! + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
 \end{align}
 
-
-
-\subsection{The Cramer-Rao lower bound}
-
-A general task in Bayesian inference is to determine $\theta$ from the data under the model $\mathcal{M}_{\theta}$. We may then ask - does the log-likelihood $\ell$ vary as we vary the parameters? If the likelihood is flat, all parameter sets are equally likely and the data does not appear to carry much information about the parameters. Moreover, if $\ell$ has a number of bumps or inflection points, then we expect that maybe some parameter sets are more likely that others. The ``bumpiness" of the likelihood surface is called the Fisher information - a fundmantal concept in information geometry. The Fisher information matrix $I(\theta)$ can be directly related to the curvature of the KL-Divergence over the parameter space
+Clearly our task in Bayesian inference is to transform our prior knowledge about $\theta$ into a posterior distribution, using the observed data. However, when the log-likelihood is easy to compute (as it is here), we may ask: how much information does the data actually carry about parameters of our model? If the likelihood of the dataset is roughly constant for any parameter set we choose, we might expect our model cannot explain our observations. In other words, the data does not appear to carry much information about the parameters. After all, our posterior is being shaped in part by this likelihood. On the other hand, if $\ell$ has a number of bumps or inflection points, then we expect that maybe some parameter sets make our observed data more likely. The ``bumpiness" of the likelihood surface is called the Fisher information - a fundmantal metric in information geometry. The Fisher information matrix $I(\theta)$ can be directly related to the curvature of the KL-Divergence over the parameter space
 
 \begin{align*}
 \nabla^2_{\theta'} D_{KL}[\ell(H|\theta) \parallel \ell(H|\theta')] 
@@ -204,83 +196,52 @@ We often call the Hessian matrix the \emph{score}. The Fisher information is the
 H_{(\ell,\theta)} = J_{(\mu,\theta)}^{T} H_{(\ell,\mu)} J_{(\mu,\theta)} + (J_{(\ell,\mu)}\otimes I_{n})H_{(\mu,\theta)}
 \end{equation*}
 
-which we will from now on abbreviate as 
-
-\begin{equation}
-\bm{H} = J_{2}^{T} H_{1} J_{2} + (J_{1}\otimes I_{n})H_{2}
-\end{equation}
-
-
-In the second term of the equation, we have a Kronecker product between the Jacobian matrix of the likelihood with respect to the parameters of the hierarchical model ($J_{(L,\lambda)}$) and the $n\times n$ identity matrix ($I_n$), denoted as $J_{(L,\lambda)}\otimes I_n$. This Kronecker product gives a diagonal matrix where the elements along the diagonal are the elements of the vector $J_{(L,\lambda)}$.
-
-\subsection{The multi-emitter regime}
-
-The multi-emitter case is a straightforward extension of the single emitter case. Since noise is signal-independent, we write
-
-
-\begin{equation}
-\vec{H} = \sum_{k=1}^{K}\vec{S}_{k} + \vec{\xi}
-\end{equation}
-
-Since the sum of independent Poisson variables is itself a Poisson variable with a rate equal to the sum over rates of the individual processes, we can immediately write
 
 \begin{align*}
-H_{k}' &\sim \mathrm{Poisson}(\mu_{k}')\\
-\mu_{k}' &= g_{k}\eta\Delta\left(\sum_{j=1}^{K}N_{j}\lambda_{\theta_{j}}(x_{k},y_{k}) + B_{0}\right)+ \sigma_{k}^{2}
+\frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  x_{k}\log x_{k} + \mu_{k}' - x_{k}\log\left(\mu_{k}'\right)\\
+&= \sum_{k} \frac{\partial \mu_{k}'}{\partial\theta_{i}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)
 \end{align*}
-
-Suppose we have $K$ particles within the field of view. Assuming that $\sigma$ is not fixed, we then have $4K$ total parameters and the Hessian matrix becomes a $4K\times 4K$ matrix. To compute that matrix, notice that $J_{1}$ and $H_{1}$ have not changed relative to the single emitter case. However, $J_{2}$ and $H_{2}$ need to be expanded to contain gradients of $\vec{\mu}$ w.r.t all $4K$ parameters. This is not hard, since a taking gradients w.r.t a parameter for particle $j$ call it $\theta_{j}$ will delete all terms in the sum except the $j$th term. This suggests that $H_{2}$ is block diagonal, which one block per particle. The structure of $J_{2}$ is also straightforward, we just add a row for each particle, and columns $4j$ to $4(j+1)$ are populated with the necessary gradients for that particle.
-
-\section{MAP estimation from SMLM time series}
-
-We now address the problem of inferring photoswitching constants and fluorophore locations from SMLM time series $\bm{H}$. In the Bayesian framework, we write the posterior on $\Theta$ according to Bayes rule. We define the following hierarchical Bayesian model
-
-\begin{align*}
-\Theta &\sim P(\Theta)\\
-S|\Theta &\sim P(S|\Theta)\\
-\bm{H}|\Theta,S &\sim P(\bm{H}|\Theta,S)
-\end{align*}
-
-with the following posterior distribution
-
-\begin{align*}
-P(\Theta,S|\bm{H}) = \frac{P(\bm{H}|\Theta,S)P(S|\Theta)P(\Theta)}{P(\bm{H})}
-\end{align*}
-
-Let us first address the likelihood function. It is reasonable to propose that the joint distribution over a frame will factor into image neighborhoods due to locality. Therefore, we define the \emph{pixel assignment} $\bm{S}$ such that $\bm{S}(x,y)$ is assigned a label designating the fluorophore or combination of fluorophores collected photons were emitted by. The probability of an assignment given the particle locations is definite i.e., $P(S|\Theta) = \delta(S)$ where each pixel is attributed a \emph{labeling set}
 
 \begin{equation*}
-\bm{S}(x,y) =  \{\mathbbm{1}\left(\lambda_{n}(x,y) > \epsilon\right)\}_{n=1}^{N}
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)^{2}\right) = \sum_{k}\frac{1}{\mu_{k}'}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}}
 \end{equation*}
- 
-for some minimum rate tolerance $\epsilon << 1$. The neighborhood assignment $S$ can be absorbed into the parameter set and included as part of the inference problem. We can now see that the neighborhood $\bm{N}_{k} = \{H_{1},...,H_{N}\}$ per particle includes all pixels which detected photons from fluorophore $k$. When conditioned on $S$, the likelihood will factor into several smaller joint distributions. That is,
+
+To compute the bound, it turns out all we need is the jacobian $\frac{\partial \mu_{k}'}{\partial\theta_{j}} $ . We will derive the gradients for the integrated astigmatic Gaussian, since it is the more general case. As before, define $i_{0} = g_{k}\gamma\Delta t N_{0}$ such that $\mu_{k}' = i_{0}\lambda_{k}$
+
+\begin{equation*}
+J_{x_{0}} = \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_{0}} \;\; J_{y_{0}} = \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial y_{0}}\;\;\; J_{z_{0}}  = \frac{\partial \mu_{k}'}{\partial \sigma_{x}}\frac{\partial \sigma_{x}}{\partial z_{0}} + \frac{\partial \mu_{k}'}{\partial \sigma_{y}}\frac{\partial \sigma_{y}}{\partial z_{0}}
+\end{equation*}
 
 \begin{align*}
-P(\bm{H}|\Theta,S) &= \prod_{k}P(\bm{N}_{k}|\Theta,S)
+J_{x_{0}} &= \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_{0}} \\
+&= \frac{\beta_{k}\lambda_{y}}{2}\frac{\partial}{\partial x_{0}}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right)\right)\\
+&= \frac{\beta_{k}\lambda_{y}}{\sqrt{2\pi}\sigma_{x}}\left(\mathrm{exp}\left(\frac{(x_{k}-\frac{1}{2}-x_{0})^{2}}{2\sigma_{x}^{2}}\right) -\mathrm{exp}\left(\frac{(x_{k}+\frac{1}{2}-x_{0})^{2}}{2\sigma_{x}^{2}}\right)\right)
 \end{align*}
-
-The probability $P(\bm{N}_{k}|\Theta,S)$ can be computed using the forward-backward algorithm. However, that calculation will simplify considerably if we notice that the sequence $\bm{N}_{k}$ is only dependent on a small part of the hidden state.
-
-\subsection{Neighborhood sequence probabilities depend only on a small partition of the hidden state}
-
-Before using the forward-backward algorithm to compute the probability of a neighborhood sequence $P(\bm{N}_{k}|\Theta,S)$, we want to simplify the problem by removing the hidden state subspace that $\bm{N}_{k}$ is not dependent on. This property is given by the locality implied in $S$
 
 \begin{align*}
-P(\bm{N}_{k}|\Theta,S) &= \sum_{\bm{X}}P(\bm{N}_{k},\bm{X}|\Theta,S) \\
-&= \sum_{\bm{X}}P(\bm{N}_{k}|\bm{X},\Theta,S)P(\bm{X}|\Theta,S)
+J_{y_{0}} &= \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial y_{0}} \\
+&= \frac{\beta_{k}\lambda_{x}}{2}\frac{\partial}{\partial y_{0}}\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right)\right)\\
+&= \frac{\beta_{k}\lambda_{x}}{\sqrt{2\pi}\sigma_{y}}\left(\mathrm{exp}\left(\frac{(y_{k}-\frac{1}{2}-y_{0})^{2}}{2\sigma_{y}^{2}}\right) -\mathrm{exp}\left(\frac{(y_{k}+\frac{1}{2}-y_{0})^{2}}{2\sigma_{y}^{2}}\right)\right)
 \end{align*}
-
-We now leverage the conditional independence structure embedded in $S$. That is, $S$ implies that each neighborhood sequence  $\bm{N}_{k}$ depends only on a small subset of $\bm{X}$, so we can define $\bm{Y}$ as the partition of sequence $\bm{X}$ that it depends on and $\bm{Z}$ the partition it does not. This implies that $P(\bm{N}_{k}|\bm{X},\Theta,S) = P(\bm{N}_{k}|\bm{Y},\Theta,S)$. Therefore,
 
 \begin{align*}
-P(\bm{N}_{k}|\Theta,S) &= \sum_{\bm{Z}}\sum_{\bm{Y}}P(\bm{N}_{k}|\bm{Y},\bm{Z},\Theta)P(\bm{Y},\bm{Z}|\Theta)\\
-&= \sum_{\bm{Z}}P(\bm{Z}|\Theta)\sum_{\bm{Y}}P(\bm{N}_{k}|\bm{Y},\bm{Z},\Theta)P(\bm{Y}|\bm{Z},\Theta)\\
-&= \sum_{\bm{Y}}P(\bm{N}_{k}|\bm{Y},\Theta)P(\bm{Y}|\Theta)\\
+J_{\sigma_{x}} &= \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial \sigma_{x}} \\
+&= \frac{\beta_{k}\lambda_{y}}{2}\frac{\partial}{\partial \sigma_{x}}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right)\right)\\
+&= \frac{\beta_{k}\lambda_{y}}{\sqrt{2\pi}}\left(\frac{\left(x-x_{0}-\frac{1}{2}\right) e^{-\frac{\left(x-x_{0}-\frac{1}{2}\right)^2}{2 \sigma_{x} ^2}}}{\sigma_{x} ^2}-\frac{ \left(x-x_{0}+\frac{1}{2}\right) e^{-\frac{\left(x-x_{0}+\frac{1}{2}\right)^2}{2 \sigma_{x} ^2}}}{\sigma_{x} ^2}\right)
 \end{align*}
 
-\subsection{The forward-backward algorithm}
+\begin{align*}
+J_{\sigma_{y}} &= \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial \sigma_{y}} \\
+&= \frac{\beta_{k}\lambda_{x}}{2}\frac{\partial}{\partial \sigma_{y}}\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right)\right)\\
+&= \frac{\beta_{k}\lambda_{x}}{\sqrt{2\pi}}\left(\frac{\left(y-y_{0}-\frac{1}{2}\right) e^{-\frac{\left(y-y_{0}-\frac{1}{2}\right)^2}{2 \sigma_{y} ^2}}}{\sigma_{y} ^2}-\frac{ \left(y-y_{0}+\frac{1}{2}\right) e^{-\frac{\left(y-y_{0}+\frac{1}{2}\right)^2}{2 \sigma_{y} ^2}}}{\sigma_{y} ^2}\right)
+\end{align*}
 
-Now that we have proven that we only need a small parition of the hidden state to compute the probability of a neighborhood sequence $P(\bm{N}_{k}|\Theta,S)$ we can move on to the forward-backward algorithm.
+
+\subsection{Gradient-Based Bayesian inference for single molecule localization}
+
+Bayesian inference methods such as Markov Chain Monte Carlo (MCMC) are notoriously slow and difficult to tune. Alternatives based on Langevin dynamics can be used when gradients of the likelihood are readily available. This methods use gradient information to guide an optimizer through the parameter space as well as stochastic terms to prevent the optimizer from becoming trapped in local minima. Indeed, when gradients are available, one can reformulate Bayesian inference as sampling from the stationary distribution of a stochastic differential equation. To do that, we will use Stochastic Gradient Langevin Dynamics (SGLD), an algorithm commonly used to sample from the parameter's posterior -- this is unlike MLE, whose goal is to simply minimize the objective $L$, which can be seen as finding the modes of the parameter's posterior
+
+$$dw = - \nabla L(w) dt + \epsilon \sqrt{\eta dt}, \quad \epsilon \sim \mathcal N(0, \sigma^2), \eta \propto dt$$
 
 \section{Markovian photoswitching dynamics}
 
@@ -438,6 +399,10 @@ q_{i0}(k,t+\Delta t) = (1-\sigma_{0}\Delta t)q_{i0}(k,t) + \lambda_{10}q_{i1}(k,
 The negative contribution represents the distribution over the number of transitions $i\rightarrow 0$ that have already occured by time $t$ and will leave the $0$ state in the interval $\Delta t$. The full coupled system of differential equations reads
 
 
+
+\chapter{Three-dimensional clustering of DNA-protein condensates}
+
+
 \subsection{Bayesian nonparametric prior}
 
 In parametric modeling, it is assumed that data can be represented by models using a fixed, finite number
@@ -454,6 +419,25 @@ by treating k itself as a random variable. A prior is defined over an infinite d
 inference is done to select the number of parameters. Such models have infinite capacity, in that they include
 an infinite number of parameters a priori; however, given finite data, only a finite set of these parameters
 will be used. Unused parameters will be integrated out.
+
+
+Metropolis-Hastings algorithms are commonly used to sample from the configurational space of polymers, in order to generate a set of conformations that can be used to study polymer properties such as their equilibrium structure, thermodynamics, and response to external fields. This method is particularly useful when studying the equilibrium properties of polymers, where the system is in thermal equilibrium and can be described by a Boltzmann distribution. Examples of Metropolis-Hastings algorithms that have been used for polymer simulations include the pivot algorithm, the reptation algorithm, and the configurational-bias Monte Carlo algorithm.
+
+On the other hand, Langevin dynamics simulations can be used to study the non-equilibrium dynamics of polymers, where the system is driven out of thermal equilibrium by external forces, such as shear or electric fields. Langevin dynamics simulations can also incorporate more realistic models of the environment, such as solvent effects or hydrodynamic interactions, which can affect the behavior of the polymer. This method is particularly useful when studying the dynamics of polymers in complex environments, where the system is far from equilibrium and the dynamics cannot be described by a simple Boltzmann distribution. Examples of Langevin dynamics simulations that have been used for polymer simulations include the Brownian dynamics method and the dissipative particle dynamics method.
+
+In summary, both Metropolis-Hastings algorithms and Langevin dynamics simulations can be used to study polymer dynamics, but they are used for different purposes. Metropolis-Hastings algorithms are typically used to study the equilibrium properties of polymers, while Langevin dynamics simulations are used to study the non-equilibrium dynamics of polymers.
+
+
+The main difference between solving the Langevin equation and Newton's equations of motion is the addition of the stochastic force term in the Langevin equation. This term models the effect of thermal fluctuations and can lead to a more realistic description of the dynamics of the system. In contrast, Newton's equations of motion assume a deterministic behavior of the system without any stochasticity.
+
+Another difference is that Langevin dynamics simulations are particularly useful for simulating systems in contact with a heat bath, which is not possible with Newton's equations of motion alone. In the case of Langevin dynamics, the friction coefficient gamma models the effect of the heat bath on the system and allows for the simulation of both thermal and non-thermal forces that affect the dynamics of the system.
+
+
+
+
+\begin{appendices}
+
+
 
 \subsection{Vanilla Variational Bayes}
 
@@ -491,26 +475,6 @@ where $H(q_{\phi}(\theta))$ is the differential entropy of the variational poste
 \begin{equation*}
 \int_{\theta}\nabla_{\phi}q_{\phi}(\theta)\log p(x|\theta)d\theta \approx \underset{{\theta \sim q_{\phi}(\theta)}}{\mathbb{E}}\nabla_{\phi}q_{\phi}(\theta)\log p(x|\theta)
 \end{equation*}
-
-
-\chapter{Phase transitions of DNA-protein condensates}
-
-Metropolis-Hastings algorithms are commonly used to sample from the configurational space of polymers, in order to generate a set of conformations that can be used to study polymer properties such as their equilibrium structure, thermodynamics, and response to external fields. This method is particularly useful when studying the equilibrium properties of polymers, where the system is in thermal equilibrium and can be described by a Boltzmann distribution. Examples of Metropolis-Hastings algorithms that have been used for polymer simulations include the pivot algorithm, the reptation algorithm, and the configurational-bias Monte Carlo algorithm.
-
-On the other hand, Langevin dynamics simulations can be used to study the non-equilibrium dynamics of polymers, where the system is driven out of thermal equilibrium by external forces, such as shear or electric fields. Langevin dynamics simulations can also incorporate more realistic models of the environment, such as solvent effects or hydrodynamic interactions, which can affect the behavior of the polymer. This method is particularly useful when studying the dynamics of polymers in complex environments, where the system is far from equilibrium and the dynamics cannot be described by a simple Boltzmann distribution. Examples of Langevin dynamics simulations that have been used for polymer simulations include the Brownian dynamics method and the dissipative particle dynamics method.
-
-In summary, both Metropolis-Hastings algorithms and Langevin dynamics simulations can be used to study polymer dynamics, but they are used for different purposes. Metropolis-Hastings algorithms are typically used to study the equilibrium properties of polymers, while Langevin dynamics simulations are used to study the non-equilibrium dynamics of polymers.
-
-
-The main difference between solving the Langevin equation and Newton's equations of motion is the addition of the stochastic force term in the Langevin equation. This term models the effect of thermal fluctuations and can lead to a more realistic description of the dynamics of the system. In contrast, Newton's equations of motion assume a deterministic behavior of the system without any stochasticity.
-
-Another difference is that Langevin dynamics simulations are particularly useful for simulating systems in contact with a heat bath, which is not possible with Newton's equations of motion alone. In the case of Langevin dynamics, the friction coefficient gamma models the effect of the heat bath on the system and allows for the simulation of both thermal and non-thermal forces that affect the dynamics of the system.
-
-
-
-
-\begin{appendices}
-
 
 
 \subsection{Lifetime of the ON and OFF states}
