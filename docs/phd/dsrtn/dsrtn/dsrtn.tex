@@ -189,13 +189,7 @@ Clearly our task in Bayesian inference is to transform our prior knowledge about
 \end{align*}
 
 
-We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space. To be clear, the score is a function of the \emph{data}, not the parameters. It is a measure of sensitivity of the likelihood to changes in the parameters. Of course, the Fisher information matrix also depends on the parameterization chosen. Looking at (1.4), the likelihood is a hierarchical function that maps a vector space $\Theta$ to a vector space $\Lambda$ to a scalar value. Formally, we define $T: \Theta \rightarrow \Lambda$ and $W: \Lambda \rightarrow \mathbb{R}$. The parameter vector $(x_{0},y_{0},\sigma, N_{0})\in \Theta$, the Poisson rate vector $\vec{\lambda} \in \Lambda$ and $\ell \in \mathbb{R}$. To get the Hessian, we need the chain-rule for Hessian matrices.
-
-
-\begin{equation*}
-H_{(\ell,\theta)} = J_{(\mu,\theta)}^{T} H_{(\ell,\mu)} J_{(\mu,\theta)} + (J_{(\ell,\mu)}\otimes I_{n})H_{(\mu,\theta)}
-\end{equation*}
-
+We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space.
 
 \begin{align*}
 \frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  x_{k}\log x_{k} + \mu_{k}' - x_{k}\log\left(\mu_{k}'\right)\\
@@ -236,6 +230,15 @@ J_{\sigma_{y}} &= \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial \sigm
 &= \frac{\beta_{k}\lambda_{x}}{\sqrt{2\pi}}\left(\frac{\left(y-y_{0}-\frac{1}{2}\right) e^{-\frac{\left(y-y_{0}-\frac{1}{2}\right)^2}{2 \sigma_{y} ^2}}}{\sigma_{y} ^2}-\frac{ \left(y-y_{0}+\frac{1}{2}\right) e^{-\frac{\left(y-y_{0}+\frac{1}{2}\right)^2}{2 \sigma_{y} ^2}}}{\sigma_{y} ^2}\right)
 \end{align*}
 
+
+\subsection{A Newton-Raphson method for single molecule localization}
+
+Newton-Raphson can be advantageous compared to gradient-descent by taking advantage of second-order derivatives when they are available. However, computing second-order derivatives can be cumbersome, and often intractable in a number of machine-learning contexts. Luckily, computing the Hessian matrix for (2.9) is tractable, and is actually quite simple when one takes advantage of the chain rule for Hessian matrices (Smith et al 2010). Looking at (2.9), the likelihood is a hierarchical function that maps a vector space $\Theta$ to a vector space $\Lambda$ to a scalar value. Formally, we define $T: \Theta \rightarrow \Lambda$ and $W: \Lambda \rightarrow \mathbb{R}$. The parameter vector $(x_{0},y_{0},z_{0}, \sigma_{0}, N_{0})\in \Theta$, the Poisson rate vector $\vec{\lambda} \in \Lambda$ and $\ell \in \mathbb{R}$. To get the Hessian, we need the chain-rule for Hessian matrices, which can be quickly computed in terms of the Jacobian and Hessian of $T$ and $W$.
+
+
+\begin{equation*}
+H_{(\ell,\theta)} = J_{(\mu,\theta)}^{T} H_{(\ell,\mu)} J_{(\mu,\theta)} + (J_{(\ell,\mu)}\otimes I_{n})H_{(\mu,\theta)}
+\end{equation*}
 
 \subsection{Gradient-Based Bayesian inference for single molecule localization}
 
