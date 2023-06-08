@@ -177,29 +177,17 @@ Under the Poisson approximation, the model negative log-likelihood is
 &= \sum_{k}  \log n_{k}! + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
 \end{align}
 
-Clearly our task in Bayesian inference is to transform our prior knowledge about $\theta$ into a posterior distribution, using the observed data. However, when the log-likelihood is easy to compute (as it is here), we may ask: how much information does the data actually carry about parameters of our model? If the likelihood of the dataset is roughly constant for any parameter set we choose, we might expect our model cannot explain our observations. In other words, the data does not appear to carry much information about the parameters. After all, our posterior is being shaped in part by this likelihood. On the other hand, if $\ell$ has a number of bumps or inflection points, then we expect that maybe some parameter sets make our observed data more likely. The ``bumpiness" of the likelihood surface is called the Fisher information - a fundmantal metric in information geometry. The Fisher information matrix $I(\theta)$ can be directly related to the curvature of the KL-Divergence over the parameter space
+Clearly our task in Bayesian inference is to transform our prior knowledge about $\theta$ into a posterior distribution, using the observed data. However, when the log-likelihood is easy to compute (as it is here), we may ask: how much information does the data actually carry about parameters of our model? If the likelihood of the dataset is roughly constant for any parameter set we choose, we might expect our model cannot explain our observations. In other words, the data does not appear to carry much information about the parameters. After all, our posterior is being shaped in part by this likelihood. On the other hand, if $\ell$ has a number of bumps or inflection points, then we expect that maybe some parameter sets make our observed data more likely. The ``bumpiness" of the likelihood surface is called the Fisher information - a fundmantal metric in information geometry. 
 
-\begin{align*}
-\nabla^2_{\theta'} D_{KL}[\ell(H|\theta) \parallel \ell(H|\theta')] 
-&= - \nabla_{\theta'} \int \ell(H|\theta) \nabla_{\theta'}  \log \ell(H|\theta') \, dH \\ 
-&= - \int \ell(H|\theta) \nabla^2_{\theta'}  \log \ell(H|\theta') \, dH \\
-&= - \mathbb{E}_{\theta}[\nabla^2_{\theta'} \log \ell(H|\theta')] \\
-&= I(\theta)
-\end{align*}
+\subsection{Maximum likelihood estimation for the astigmatic gaussian}
 
-
-We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space.
-
-\begin{align*}
-\frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  x_{k}\log x_{k} + \mu_{k}' - x_{k}\log\left(\mu_{k}'\right)\\
-&= \sum_{k} \frac{\partial \mu_{k}'}{\partial\theta_{i}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)
-\end{align*}
+We approximate the log-likelihood function to second order in terms of the Jacobian and Hessian matrices. 
 
 \begin{equation*}
-I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)^{2}\right) = \sum_{k}\frac{1}{\mu_{k}'}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}}
+\ell(\vec{H}|\theta) = \ell(0) + J_{\ell}\theta + \frac{1}{2}\theta^{T}H_{\ell}(0)\theta + ...
 \end{equation*}
 
-To compute the bound, it turns out all we need is the jacobian $\frac{\partial \mu_{k}'}{\partial\theta_{j}} $ . We will derive the gradients for the integrated astigmatic Gaussian, since it is the more general case. As before, define $i_{0} = g_{k}\gamma\Delta t N_{0}$ such that $\mu_{k}' = i_{0}\lambda_{k}$
+We will make use of both of these in the following sections, so we derive their analytical form now. We will derive the gradients for the integrated astigmatic Gaussian, since it is the more general case. As before, define $i_{0} = g_{k}\gamma\Delta t N_{0}$ such that $\mu_{k}' = i_{0}\lambda_{k}$
 
 \begin{equation*}
 J_{x_{0}} = \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_{0}} \;\; J_{y_{0}} = \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial y_{0}}\;\;\; J_{z_{0}}  = \frac{\partial \mu_{k}'}{\partial \sigma_{x}}\frac{\partial \sigma_{x}}{\partial z_{0}} + \frac{\partial \mu_{k}'}{\partial \sigma_{y}}\frac{\partial \sigma_{y}}{\partial z_{0}}
@@ -229,24 +217,75 @@ J_{\sigma_{y}} &= \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial \sigm
 &= \frac{\beta_{k}\lambda_{x}}{\sqrt{2\pi}}\left(\frac{\left(y-y_{0}-\frac{1}{2}\right) e^{-\frac{\left(y-y_{0}-\frac{1}{2}\right)^2}{2 \sigma_{y} ^2}}}{\sigma_{y} ^2}-\frac{ \left(y-y_{0}+\frac{1}{2}\right) e^{-\frac{\left(y-y_{0}+\frac{1}{2}\right)^2}{2 \sigma_{y} ^2}}}{\sigma_{y} ^2}\right)
 \end{align*}
 
-
-\subsection{A Newton-Raphson method for single molecule localization}
-
-Newton-Raphson can be advantageous compared to gradient-descent by taking advantage of second-order derivatives when they are available. However, computing second-order derivatives can be cumbersome, and often intractable in a number of machine-learning contexts. Luckily, computing the Hessian matrix for (2.9) is tractable, and is actually quite simple when one takes advantage of the chain rule for Hessian matrices. Looking at (2.9), the likelihood is a hierarchical function that maps a vector space $\Theta$ to a vector space $\Lambda$ to a scalar value. Formally, we define $T: \Theta \rightarrow \Lambda$ and $W: \Lambda \rightarrow \mathbb{R}$. The parameter vector $(x_{0},y_{0},z_{0}, \sigma_{0}, N_{0})\in \Theta$, the Poisson rate vector $\vec{\lambda} \in \Lambda$ and $\ell \in \mathbb{R}$. To get the Hessian, we need the chain-rule for Hessian matrices, which can be quickly computed in terms of the jacobian and hessian of $T$ and $W$.
+Luckily, computing the Hessian matrix for (2.9) is tractable, and is actually quite simple when one takes advantage of the chain rule for Hessian matrices. Looking at (2.9), the likelihood is a hierarchical function that maps a vector space $\Theta$ to a vector space $\Lambda$ to a scalar value. Formally, we define $T: \Theta \rightarrow \Lambda$ and $W: \Lambda \rightarrow \mathbb{R}$. The parameter vector $(x_{0},y_{0},z_{0}, \sigma_{0}, N_{0})\in \Theta$, the Poisson rate vector $\vec{\lambda} \in \Lambda$ and $\ell \in \mathbb{R}$. Note that we choose to optimize $\sigma_{x}$ and $\sigma_{y}$ directly and compute $z_{0}$ to simplify the computation of the Hessian. To get the Hessian, we need the chain-rule for Hessian matrices, which can be quickly computed in terms of the jacobian and hessian of $T$ and $W$.
 
 
 \begin{equation*}
 H_{\ell} = J_{\mu}^{T} H_{\ell} J_{\mu} + (J_{\ell}\otimes I_{n})H_{\mu}
 \end{equation*}
 
-where we have used $J_{\mu}$ to represent the jacobian of $T$ and $J_{\ell}$ for the jacobian of $W$. Similar notation is used for the corresponding Hessian matrices. We have already computed $J_{\mu}$ and now for $J_{\ell}$ and $H_{\ell}$ we write
+where we have used $J_{\mu}$ to represent the jacobian of $T$ and $J_{\ell}$ for the jacobian of $W$. Similar notation is used for the corresponding Hessian matrices. 
+In the 3D case, the Hessian matrix is not directly separable since $\mu \propto \lambda_{x}(x_{0},\sigma_{0},\sigma_{x})\lambda_{y}(y_{0},\sigma_{0},\sigma_{y})$. To see this, an abstract representation of the Hessian reads 
+
+\begin{align*}
+H_{\mu} = 
+\begin{pmatrix}
+\frac{\partial^2 \mu}{\partial x_0^2} & \frac{\partial^2 \mu}{\partial x_0 \partial \sigma_x} & \frac{\partial^2 \mu}{\partial x_0 \partial \sigma_0} & \frac{\partial\mu}{\partial x_0}\frac{\partial \mu}{\partial y_0} & \frac{\partial \mu}{\partial x_0} \frac{\partial \mu}{\partial \sigma_y} \\
+\frac{\partial^2 \mu}{\partial \sigma_x \partial x_0} & \frac{\partial^2 \mu}{\partial \sigma_x^2} & \frac{\partial^2 \mu}{\partial \sigma_x \partial \sigma_0} & \frac{\partial \mu}{\partial \sigma_x}\frac{\partial\mu}{\partial y_{0}} & \frac{\partial \mu}{\partial \sigma_x} \frac{\partial \mu}{\partial \sigma_y} \\
+\frac{\partial^2 \mu}{\partial \sigma_0 \partial x_0} & \frac{\partial^2 \mu}{\partial \sigma_0 \partial \sigma_x} & \frac{\partial^2 \mu}{\partial \sigma_0^2} & \frac{\partial^2 \mu}{\partial \sigma_0 \partial y_0} & \frac{\partial^{2} \mu}{\partial \sigma_0\partial \sigma_{y}} \\
+\frac{\partial \mu}{\partial y_0}\frac{\partial \mu}{\partial x_0} & \frac{\partial \mu}{\partial y_0}\frac{\partial \mu}{\partial \sigma_x} & \frac{\partial^2 \mu}{\partial y_0 \partial \sigma_0} & \frac{\partial^2 \mu}{\partial y_0^2} & \frac{\partial^{2} \mu}{\partial y_0\partial\sigma_{y}} \\
+\frac{\partial \mu}{\partial \sigma_y} \frac{\partial \mu}{\partial x_0} & \frac{\partial \mu}{\partial \sigma_y} \frac{\partial \mu}{\partial \sigma_x} & \frac{\partial^{2} \mu}{\partial \sigma_y \sigma_{0}} & \frac{\partial^{2} \mu}{\partial \sigma_y\partial y_{0}} & \frac{\partial^2 \mu}{\partial \sigma_y^2}
+\end{pmatrix}
+\end{align*}
+
+\subsection{A Newton-Raphson method for maximum likelhood estimation}
+
+Newton-Raphson can be advantageous compared to gradient-descent by taking advantage of second-order derivatives when they are available. However, computing second-order derivatives can be cumbersome, and often intractable in a number of machine-learning contexts.  We have already computed $J_{\mu}$ and now for $J_{\ell}$ and $H_{\ell}$ we write
 
 \begin{align*}
 \frac{\partial\ell}{\partial \mu_{k}} &= 1 - \frac{n_{k}}{\mu_{k}}\\
 \frac{\partial^{2}\ell}{\partial \mu_{k}^{2}} &= 1 + \frac{n_{k}}{\mu_{k}^{2}}
 \end{align*}
 
-respectively. Computing $H_{\mu}$ is a bit more involved. 
+
+\subsection{The Fisher information metric}
+
+The Fisher information matrix $I(\theta)$ can be directly related to the curvature of the KL-Divergence over the parameter space
+
+\begin{align*}
+\nabla^2_{\theta'} D_{KL}[\ell(H|\theta) \parallel \ell(H|\theta')] 
+&= - \nabla_{\theta'} \int \ell(H|\theta) \nabla_{\theta'}  \log \ell(H|\theta') \, dH \\ 
+&= - \int \ell(H|\theta) \nabla^2_{\theta'}  \log \ell(H|\theta') \, dH \\
+&= - \mathbb{E}_{\theta}[\nabla^2_{\theta'} \log \ell(H|\theta')] \\
+&= I(\theta)
+\end{align*}
+
+
+We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space. 
+
+\subsection{Fisher information for 2D integrated gaussian}
+
+For the 2D integrated gaussian point spread function, the Hessian only contains separable second order derivatives, so the Fisher information matrix takes on a convenient form
+
+\begin{equation}
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) 
+\end{equation}
+
+For an arbitrary parameter then we have
+
+\begin{align*}
+\frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  x_{k}\log x_{k} + \mu_{k}' - x_{k}\log\left(\mu_{k}'\right)\\
+&= \sum_{k} \frac{\partial \mu_{k}'}{\partial\theta_{i}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)
+\end{align*}
+
+\begin{equation*}
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)^{2}\right) = \sum_{k}\frac{1}{\mu_{k}'}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}}
+\end{equation*}
+
+To compute the bound, it turns out all we need is the jacobian $\frac{\partial \mu_{k}'}{\partial\theta_{j}} $ . 
+\subsection{Fisher information for 3D integrated gaussian}
+
+
 
 
 \subsection{Gradient-Based Bayesian inference for single molecule localization}
