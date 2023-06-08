@@ -418,7 +418,7 @@ The negative contribution represents the distribution over the number of transit
 \chapter{Three-dimensional clustering of DNA-protein condensates}
 
 
-\subsection{Bayesian nonparametric prior}
+\subsection{A brief note on Bayesian nonparametrics}
 
 In parametric modeling, it is assumed that data can be represented by models using a fixed, finite number
 of parameters. Examples of parametric models include clusters of K Gaussians and polynomial regression
@@ -426,6 +426,7 @@ models. In many problems, determining the number of parameters a priori is diffi
 the number of clusters in a cluster model, the number of segments in an image segmentation problem, the
 number of chains in a hidden Markov model, or the number of topics in a topic modelling problem before
 the data is seen can be problematic.
+
 In nonparametric modeling, the number of parameters is not fixed, and often grows with the sample size.
 Kernel density estimation is an example of a nonparametric model. In Bayesian nonparametrics, the number
 of parameters is itself considered to be a random variable. One example is to do clustering with k-means (or
@@ -435,6 +436,7 @@ inference is done to select the number of parameters. Such models have infinite 
 an infinite number of parameters a priori; however, given finite data, only a finite set of these parameters
 will be used. Unused parameters will be integrated out.
 
+\subsection{Physical analysis of BRD4-MED1 clusters}
 
 Metropolis-Hastings algorithms are commonly used to sample from the configurational space of polymers, in order to generate a set of conformations that can be used to study polymer properties such as their equilibrium structure, thermodynamics, and response to external fields. This method is particularly useful when studying the equilibrium properties of polymers, where the system is in thermal equilibrium and can be described by a Boltzmann distribution. Examples of Metropolis-Hastings algorithms that have been used for polymer simulations include the pivot algorithm, the reptation algorithm, and the configurational-bias Monte Carlo algorithm.
 
@@ -446,8 +448,6 @@ In summary, both Metropolis-Hastings algorithms and Langevin dynamics simulation
 The main difference between solving the Langevin equation and Newton's equations of motion is the addition of the stochastic force term in the Langevin equation. This term models the effect of thermal fluctuations and can lead to a more realistic description of the dynamics of the system. In contrast, Newton's equations of motion assume a deterministic behavior of the system without any stochasticity.
 
 Another difference is that Langevin dynamics simulations are particularly useful for simulating systems in contact with a heat bath, which is not possible with Newton's equations of motion alone. In the case of Langevin dynamics, the friction coefficient gamma models the effect of the heat bath on the system and allows for the simulation of both thermal and non-thermal forces that affect the dynamics of the system.
-
-
 
 
 \begin{appendices}
