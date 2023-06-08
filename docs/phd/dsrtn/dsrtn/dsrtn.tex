@@ -233,12 +233,22 @@ J_{\sigma_{y}} &= \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial \sigm
 
 \subsection{A Newton-Raphson method for single molecule localization}
 
-Newton-Raphson can be advantageous compared to gradient-descent by taking advantage of second-order derivatives when they are available. However, computing second-order derivatives can be cumbersome, and often intractable in a number of machine-learning contexts. Luckily, computing the Hessian matrix for (2.9) is tractable, and is actually quite simple when one takes advantage of the chain rule for Hessian matrices (Smith et al 2010). Looking at (2.9), the likelihood is a hierarchical function that maps a vector space $\Theta$ to a vector space $\Lambda$ to a scalar value. Formally, we define $T: \Theta \rightarrow \Lambda$ and $W: \Lambda \rightarrow \mathbb{R}$. The parameter vector $(x_{0},y_{0},z_{0}, \sigma_{0}, N_{0})\in \Theta$, the Poisson rate vector $\vec{\lambda} \in \Lambda$ and $\ell \in \mathbb{R}$. To get the Hessian, we need the chain-rule for Hessian matrices, which can be quickly computed in terms of the Jacobian and Hessian of $T$ and $W$.
+Newton-Raphson can be advantageous compared to gradient-descent by taking advantage of second-order derivatives when they are available. However, computing second-order derivatives can be cumbersome, and often intractable in a number of machine-learning contexts. Luckily, computing the Hessian matrix for (2.9) is tractable, and is actually quite simple when one takes advantage of the chain rule for Hessian matrices. Looking at (2.9), the likelihood is a hierarchical function that maps a vector space $\Theta$ to a vector space $\Lambda$ to a scalar value. Formally, we define $T: \Theta \rightarrow \Lambda$ and $W: \Lambda \rightarrow \mathbb{R}$. The parameter vector $(x_{0},y_{0},z_{0}, \sigma_{0}, N_{0})\in \Theta$, the Poisson rate vector $\vec{\lambda} \in \Lambda$ and $\ell \in \mathbb{R}$. To get the Hessian, we need the chain-rule for Hessian matrices, which can be quickly computed in terms of the jacobian and hessian of $T$ and $W$.
 
 
 \begin{equation*}
-H_{(\ell,\theta)} = J_{(\mu,\theta)}^{T} H_{(\ell,\mu)} J_{(\mu,\theta)} + (J_{(\ell,\mu)}\otimes I_{n})H_{(\mu,\theta)}
+H_{\ell} = J_{\mu}^{T} H_{\ell} J_{\mu} + (J_{\ell}\otimes I_{n})H_{\mu}
 \end{equation*}
+
+where we have used $J_{\mu}$ to represent the jacobian of $T$ and $J_{\ell}$ for the jacobian of $W$. Similar notation is used for the corresponding Hessian matrices. We have already computed $J_{\mu}$ and now for $J_{\ell}$ and $H_{\ell}$ we write
+
+\begin{align*}
+\frac{\partial\ell}{\partial \mu_{k}} &= 1 - \frac{n_{k}}{\mu_{k}}\\
+\frac{\partial^{2}\ell}{\partial \mu_{k}^{2}} &= 1 + \frac{n_{k}}{\mu_{k}^{2}}
+\end{align*}
+
+respectively. Computing $H_{\mu}$ is a bit more involved. 
+
 
 \subsection{Gradient-Based Bayesian inference for single molecule localization}
 
