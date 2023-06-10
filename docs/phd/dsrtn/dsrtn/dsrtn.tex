@@ -184,10 +184,16 @@ Clearly our task in Bayesian inference is to transform our prior knowledge about
 We approximate the log-likelihood function to second order in terms of the Jacobian and Hessian matrices. 
 
 \begin{equation*}
-\ell(\vec{H}|\theta) = \ell(0) + J_{\ell}\theta + \frac{1}{2}\theta^{T}H_{\ell}(0)\theta + ...
+\ell(\theta + \Delta\theta) \approx \ell(\theta) + \nabla\ell^{T}\Delta\theta + \frac{1}{2}\theta^{T}H\theta
 \end{equation*}
 
-We will make use of both of these in the following sections, so we derive their analytical form now. We will derive the gradients for the integrated astigmatic Gaussian, since it is the more general case. As before, define $i_{0} = g_{k}\gamma\Delta t N_{0}$ such that $\mu_{k}' = i_{0}\lambda_{k}$
+and 
+
+\begin{equation*}
+\nabla\ell(\theta + \Delta\theta) = \nabla\ell(\theta) + H\Delta\theta = 0
+\end{equation*}
+
+and so $\Delta\theta = -H^{-1}\nabla\ell(\theta)$. We will make use of both of these in the following sections, so we derive their analytical form now. We will derive the gradients for the integrated astigmatic Gaussian, since it is the more general case. As before, define $i_{0} = g_{k}\gamma\Delta t N_{0}$ such that $\mu_{k}' = i_{0}\lambda_{k}$
 
 \begin{equation*}
 J_{x_{0}} = \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_{0}} \;\; J_{y_{0}} = \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial y_{0}}\;\;\; J_{z_{0}}  = \frac{\partial \mu_{k}'}{\partial \sigma_{x}}\frac{\partial \sigma_{x}}{\partial z_{0}} + \frac{\partial \mu_{k}'}{\partial \sigma_{y}}\frac{\partial \sigma_{y}}{\partial z_{0}}
@@ -283,14 +289,10 @@ I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{
 \end{equation*}
 
 To compute the bound, it turns out all we need is the jacobian $\frac{\partial \mu_{k}'}{\partial\theta_{j}} $ . 
+
 \subsection{Fisher information for 3D integrated gaussian}
 
-
-
-
-\subsection{Gradient-Based Bayesian inference for single molecule localization}
-
-Bayesian inference methods such as Markov Chain Monte Carlo (MCMC) are notoriously slow and difficult to tune. Alternatives based on Langevin dynamics can be used when gradients of the likelihood are readily available. This methods use gradient information to guide an optimizer through the parameter space as well as stochastic terms to prevent the optimizer from becoming trapped in local minima. Indeed, when gradients are available, one can reformulate Bayesian inference as sampling from the stationary distribution of a stochastic differential equation. To do that, we will use Stochastic Gradient Langevin Dynamics (SGLD), an algorithm commonly used to sample from the parameter's posterior -- this is unlike MLE, whose goal is to simply minimize the objective $L$, which can be seen as finding the modes of the parameter's posterior
+Estimating the Fisher information matrix in the 3D case is more challenging, since it cannot be written in the form of (1.10). A reasonable option is to turn to Monte Carlo methods to estimate the expectation. Classic Markov Chain Monte Carlo (MCMC) techniques like Metropolis-Hastings or Hamiltonian Monte Carlo could be used, but are notoriously slow and difficult to tune. Alternatives based on Langevin dynamics can be used when gradients of the likelihood are readily available. This class of methods use gradient information to guide an optimizer through the parameter space as well as stochastic terms to prevent the optimizer from becoming trapped in local modes. After burn-in Langevin dynamics can be interpreted as sampling from a stationary distribution, which in our case is the posterior distribution on PSF model parameters. Therefore, we will use Stochastic Gradient Langevin Dynamics (SGLD), an algorithm commonly used to sample from the parameter's posterior. By drawing samples, we can simultaneously estimate the Fisher information matrix (by computing the Hessian at each sample) while obtaining estimates of parameter uncertainty by computing the variance of a batch of samples.
 
 $$dw = - \nabla L(w) dt + \epsilon \sqrt{\eta dt}, \quad \epsilon \sim \mathcal N(0, \sigma^2), \eta \propto dt$$
 
