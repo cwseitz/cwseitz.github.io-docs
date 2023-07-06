@@ -33,7 +33,7 @@
 \usepackage{bm}
 \usepackage[font=small,labelfont=bf]{caption}				% For cross-referencing
 
-\title{Probing phase transitions of DNA-protein condensates using single molecule localization microscopy}	% Presentation title
+\title{Bridging Mesoscale Nucleosome Organization and Dynamics with Super Resolution Microscopy}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -83,16 +83,10 @@
 Formulate the basic research question and introduce the approach using major results from section 3
 \end{frame}
 
-\begin{frame}{Widefield/HILO fluorescence microscope}
-
-\end{frame}
 
 \begin{frame}
 \frametitle{Direct stochastic optical reconstruction microscopy}
 
-
-  
-  
 \end{frame}
 
 \begin{frame}
@@ -200,11 +194,6 @@ The diffusion samples from the posterior $P(\theta|\vec{H})$ as $t\rightarrow\in
 
 \end{frame}
 
-\begin{frame}{Two-dimensional reconstruction of H2B in interphase Hela nuclei}
-
-
-\end{frame}
-
 \begin{frame}{Estimator precision is dependent on imaging conditions}
 
 We have shown how localization precision is affected by SNR, which is affected by the frame rate. However, localization precision is also independently determined by the density, which is affected by photoswitching rate constants. True density is unknown apriori, so, as a rule, we strive for the lowest density possible for a fixed set of rate constants. Lateral precision is less sensitive to SNR, so it is probably possible with our setup. 
@@ -217,64 +206,48 @@ To determine if 3D is possible even in principle, we should
 
 \begin{itemize}
 \item Measure the rate constants from isolated JF646 molecules in the cytoplasm
-\item Measure density recovered in 2D experiments
 \item Simulate 3D from a recovered 2D structure and determine under which conditions satisfactory precision and Jaccard index are met
 \end{itemize}
 \end{frame}
 
 
+\begin{frame}{Deep learning enables accurate 3D localization and single molecule tracking}
+Precise localization in dense images is intractable
+\begin{equation*}
+\mathcal{L} = \sum_{i,j} \log p_{ij}(\tilde{x}) = \sum_{i,j} \log \frac{\exp(-s_{ij}(\tilde{x}))}{\sum_{x\in\chi} \exp(-s_{ij}(\tilde{x}))}
+\end{equation*}
 
-
-
-\begin{frame}{Estimating uncertainty with gradient-based MCMC}
-Uncertainty as a function of incident photon count - or is this the same as estimator precision?
-\end{frame}
-
-\begin{frame}{A deep learning framework for localization microscopy}
-Precise localization in dense regimes is intractable
+$p_{ij}$ is the probability the model assigns a pixel to the true class $\tilde{x} \in \{0,1\}$
 
 \end{frame}
 
-\begin{frame}{A deep learning framework for localization microscopy}
-\end{frame}
-
-\begin{frame}{Deep learning enables ultra-dense imaging for fast reconstruction}
-
-\end{frame}
-
-
-\begin{frame}{A Bayesian clustering algorithm on high density}
-Number of clusters is unknown apriori - Bayesian nonparametrics
-\end{frame}
-
-\begin{frame}{Bayesian clustering algorithms on high density data}
-\begin{figure}
-\includegraphics[width=11cm]{Cluster.png}
-\end{figure}
-\end{frame}
 
 \begin{frame}
 \frametitle{}
 \centering
-\Large \textbf{\textcolor{blue}{Nucleosome organization in MED1-BRD4 transcriptional condensates}}
+\Large \textbf{\textcolor{blue}{Mesoscale nucleosome organization and dynamics}}
 \end{frame}
 
-\begin{frame}{Inducing GBP5 gene expression with Inteferon-$\gamma$}
+
+\begin{frame}{Dirichlet process Gaussian mixture model (DPGMM)}
 \end{frame}
 
-\begin{frame}{Colocalization of nascent GBP5 mRNA with phase separation markers}
+\begin{frame}{GMM cluster analysis of H2B}
+Number of clusters is unknown apriori - Bayesian nonparametrics
 \end{frame}
 
-\begin{frame}{Colocalization of nascent GBP5 mRNA with phase separation markers}
+\begin{frame}{Mesoscale nucleosome organization and dynamics}
 \end{frame}
 
-\begin{frame}{Costaining of H2B/BRD4/MED1 in interphase Hela cells}
+\begin{frame}{Mesoscale nucleosome organization and dynamics}
 \end{frame}
 
-\begin{frame}{Cluster analysis of H2B at putative transcriptional condensates}
+\begin{frame}{BRD4 associates with the small clusters}
+Besag's L-Function
 \end{frame}
 
-\begin{frame}{Physical cluster analysis of H2B at putative transcriptional condensates}
+\begin{frame}{Besag's L-Function and 3D diffusion}
 \end{frame}
+
 
 \end{document}
