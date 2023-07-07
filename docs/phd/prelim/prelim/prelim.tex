@@ -200,13 +200,21 @@ We have shown how localization precision is affected by SNR, which is affected b
 
 \end{frame}
 
-\begin{frame}{Is 3D reconstruction even possible in our current conditions?}
-To determine if 3D is possible even in principle, we should 
+\begin{frame}
+Pointillist SMLM data is quantified with Ripley's K-function $K(r)$, which counts events within a radius $r$. For $K(\sigma) > 0$, SMLM data can be crowded for some $\vec{k}$. Suppose a particular fluorophore is ON for a sufficient amount of time during $\Delta$ to be detected. Now on average $\langle\xi\rangle \lambda$ signal photons are collected and $\langle\xi\rangle \lambda p_{\mathrm{ON}}K(\sigma)$ "background" photons will be collected where $\xi\sim P(\xi|\vec{k})$. $P$ might be a beta-distribution or normal approximating binomial for $N\rightarrow\infty$. Define $\zeta = 1/p_{\mathrm{ON}}K(\sigma)$ which we attempt to maximize with $K(\sigma)$ fixed and under the constraint that $p_{\mathrm{ON}}$ also achieves a desirable SR frame duration e.g., 1 second\\
+\vspace{0.2in}
+The lifetime distribution of the ON state is trivial. We can use the probability current to get the lifetime of the OFF state
 
-\begin{itemize}
-\item Measure the rate constants from isolated JF646 molecules in the cytoplasm
-\item Simulate 3D from a recovered 2D structure and determine under which conditions satisfactory precision and Jaccard index are met
-\end{itemize}
+\begin{equation*}
+J(t) = P(0)Ge^{Gt}\;\; h_{\mathrm{OFF}}(t_{n}) \approx \epsilon J(t_{n})
+\end{equation*}
+Thus we have the optimization problem
+\begin{equation*}
+\mathcal{L} = \zeta(\vec{k}) + \lambda(t(\vec{k})-\Delta_{\mathrm{SR}})^{2}
+\end{equation*}
+
+where $\Delta_{\mathrm{SR}}$ is the desired SR frame length. $t(\vec{k}; N)$ is the amount of time to collect $N$ molecules.
+
 \end{frame}
 
 
