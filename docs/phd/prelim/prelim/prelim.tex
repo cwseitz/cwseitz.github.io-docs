@@ -193,34 +193,23 @@ The diffusion samples from the posterior $P(\theta|\vec{H})$ as $t\rightarrow\in
 
 \end{frame}
 
-\begin{frame}{Estimator precision is dependent on imaging conditions}
+\begin{frame}{Resolution is dependent on photoswitching kinetics}
 
-Pointillist SMLM data is quantified with Ripley's K-function $K(r)$, which counts events within a radius $r$. For $K(\sigma) > 0$, SMLM data can be crowded for some $\vec{k}$. On average 
+The number of molecules within the diffraction limit is $K\left(\frac{\lambda}{2\mathrm{NA}}\right)$. If $\alpha$ is the \emph{detection probability}, then $\alpha K\left(\frac{\lambda}{2\mathrm{NA}}\right)$ are detected, on average. We want to minimize
 
 \begin{equation*}
-N_{s} = \lambda\langle\xi\rangle\;\;\; N_{b} = \lambda\langle\xi\rangle p_{\mathrm{ON}}K(\sigma)
+\mathcal{L} = \alpha K\left(\frac{\lambda}{2\mathrm{NA}}\right) + \gamma\left(\Delta_{\mathrm{SR}}+\frac{2N}{\log(1-\alpha)}\right)^{2}
 \end{equation*}
 
-where $\xi\sim P(\xi|\vec{k})$. $P$ might be a beta-distribution or normal approximating binomial for $N\rightarrow\infty$. Define $\zeta = 1/p_{\mathrm{ON}}K(\sigma)$ which we attempt to maximize with $K(\sigma)$ fixed and under the constraint that $p_{\mathrm{ON}}$ also achieves a desirable SR frame duration e.g., 1 second
+The second term contains $\frac{2N}{\log(1-\alpha)}$, which is the minimum number of frames needed to detect 99 percent of N molecules (which can be obtained from the geometric distribution). If we assume a two-state generator, then
+
+\begin{equation*}
+P(t) = P(0)e^{Gt}
+\end{equation*}
+
+and $G\pi = 0$ gives $\pi = (\alpha,\beta) = \frac{1}{k}\left(k_{12},k_{21}\right)$ where $k=k_{12}+k_{21}$.
 
 \end{frame}
-
-\begin{frame}
-
-The lifetime distribution of the ON state is trivial. We can use the probability current to get the lifetime of the OFF state
-
-\begin{equation*}
-J(t) = P(0)Ge^{Gt}\;\; h_{\mathrm{OFF}}(t_{n}) \approx \epsilon J(t_{n})
-\end{equation*}
-Thus we have the optimization problem
-\begin{equation*}
-\mathcal{L} = \zeta(\vec{k}) + \lambda(t(\vec{k})-\Delta_{\mathrm{SR}})^{2}
-\end{equation*}
-
-where $\Delta_{\mathrm{SR}}$ is the desired SR frame length. $t(\vec{k}; N)$ is the amount of time to collect $N$ molecules.
-
-\end{frame}
-
 
 \begin{frame}{Deep learning enables accurate 3D localization and single molecule tracking}
 
