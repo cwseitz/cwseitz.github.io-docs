@@ -14,7 +14,7 @@
 \usepackage{bbm}
 
 %% Use these commands to set biographic information for the title page:
-\title{Phase transitions of DNA-protein condensates during the immune response}
+\title{Visualizing nucleosome cluster dynamics with dense single molecule localization microscopy}
 \author{Clayton W. Seitz}
 \department{Department of Physics}
 \division{Physical Sciences}
@@ -54,8 +54,13 @@
 
 \mainmatter
 
+\chapter{Introduction}
 
-\chapter{Single molecule localization microscopy}
+\chapter{Literature Review}
+
+\chapter{Materials and Methods}
+
+\section{Single molecule localization microscopy}
 
 
 Single molecule localization microscopy (SMLM) is a type of super-resolution microscopy that allows the imaging of fluorescently-labeled molecules with high precision, well beyond the diffraction limit of light. SMLM techniques such as direct stochastic optical reconstruction microscopy (dSTORM), photoactivated localization microscopy (PALM), and related methods rely on the precise localization of single molecules by resolving them in time rather than space. By combining the precise localization of many individual molecules, SMLM can generate images with resolution down to a few nanometers. SMLM has been used in a variety of applications, including the imaging of subcellular structures such as synapses, mitochondria, and cytoskeletal elements, as well as the study of protein-protein interactions, molecular dynamics, and other biological processes at the nanoscale level.
@@ -64,8 +69,6 @@ Despite its successs and gaining popularity, the basic principle of SMLM is one 
 
 Due to overlap, conventional detection strategies may undercount the emitters in a local neighborhood in some frames, localization uncertainty can increase for overlapping emitters, and some localizations may be missed entirely. These complications make conventional detection strategies inappropriate for reconstruction of super-resolution images from time-series. Perhaps most importantly, overlapping emitters can result in additional localization uncertainty, rendering discernment between the arrival of a new particle and a poorly localized existing one difficult. This issue poses a major bottleneck to super-resolution imaging acqusitions. Additional uncertainty can be partially alleviated by using pairwise or higher-order temporal correlations within a pixel neighborhood to deconvolve individual emitters. A similar idea is employed in super-resolution optical fluctuation imaging (SOFI) - a post-processing technique that uses image cumulants to deconvolve emitters. 
 
-
-\section{Generative models for single molecule localization microscopy}
 
 \subsection{Statistics of sCMOS cameras}
 
@@ -143,10 +146,9 @@ This gives a convenient expression for the fraction of photons which arrive at a
 
 In 2D SMLM simulations, a 2D PSF  model  with  a z-dependent  isotropic  width $\sigma$ can  be  used. For 3D, we could use that the isotropic Gaussian point spread function has a FWHM $\sigma$ which is dependent on the axial coordinate. However, it can be shown that the error around the focus is very large and negative and positive defocus cannot be distinguished given the symmetric dependence in $z$.  Therefore, for 3D SMLM, a cost-effective approach is to introduce astigmatism into the detection path using a weak ($f\approx 10\mathrm{m}$) cylindrical lens. This gives an anisotropic Gaussian point spread function which is elongated perpendicular to the optical axis, depending on the axial ($z$) position of the fluorescent emitter. A fairly simple model for $\sigma_{x}(z_{0})$ and $\sigma_{y}(z_{0})$ upon defocus of a fluorescent molecule might be
 
-\begin{align*}
-\sigma_{x}(z_{0}) &= \sigma_{0} + \alpha(z_{0}+z_{min})^{2}\\
-\sigma_{y}(z_{0}) &= \sigma_{0} + \beta(z_{0}-z_{min})^{2}
-\end{align*}
+\begin{equation*}
+\sigma_{x}(z_{0}) = \sigma_{0} + \alpha(z_{0}+z_{min})^{2}\;\;\;\; \sigma_{y}(z_{0}) = \sigma_{0} + \beta(z_{0}-z_{min})^{2}
+\end{equation*}
 
 with the following continuous density over the pixel array
 
@@ -154,13 +156,6 @@ with the following continuous density over the pixel array
 \mathrm{G}(x,y) = \frac{1}{2\pi\sigma_{x}(z)\sigma_{y}(z)}e^{-\frac{(x-x_{0})^{2}}{2\sigma_{x}(z_{0})^{2}}+\frac{(y-y_{0})^{2}}{2\sigma_{y}(z_{0})^{2}}}
 \end{equation}
 
-
-In this case, we only need to make a small adjustment to the isotropic $\lambda_{k}$
-
-\begin{align*}
-\lambda_{k}(x) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right)\right)\\
-\lambda_{k}(y) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right)\right)
-\end{align*}
 
 \subsection{Localization microscopy as Bayesian inference}
 
@@ -179,7 +174,218 @@ Under the Poisson approximation, the model negative log-likelihood is
 
 Clearly our task in Bayesian inference is to transform our prior knowledge about $\theta$ into a posterior distribution, using the observed data. However, when the log-likelihood is easy to compute (as it is here), we may ask: how much information does the data actually carry about parameters of our model? If the likelihood of the dataset is roughly constant for any parameter set we choose, we might expect our model cannot explain our observations. In other words, the data does not appear to carry much information about the parameters. After all, our posterior is being shaped in part by this likelihood. On the other hand, if $\ell$ has a number of bumps or inflection points, then we expect that maybe some parameter sets make our observed data more likely. The ``bumpiness" of the likelihood surface is called the Fisher information - a fundmantal metric in information geometry. 
 
-\subsection{Maximum likelihood estimation for the astigmatic gaussian}
+
+\subsection{The Fisher information metric}
+
+The Fisher information matrix $I(\theta)$ can be directly related to the curvature of the KL-Divergence over the parameter space
+
+\begin{align*}
+\nabla^2_{\theta'} D_{KL}[\ell(H|\theta) \parallel \ell(H|\theta')] 
+&= - \nabla_{\theta'} \int \ell(H|\theta) \nabla_{\theta'}  \log \ell(H|\theta') \, dH \\ 
+&= - \int \ell(H|\theta) \nabla^2_{\theta'}  \log \ell(H|\theta') \, dH \\
+&= - \mathbb{E}_{\theta}[\nabla^2_{\theta'} \log \ell(H|\theta')] \\
+&= I(\theta)
+\end{align*}
+
+
+We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space. 
+
+
+\subsection{Fisher information for the 3D integrated gaussian}
+
+Estimating the Fisher information matrix in the 3D case is more challenging, since it cannot be written in the form of (1.10). A reasonable option is to turn to Monte Carlo methods to estimate the expectation. Classic Markov Chain Monte Carlo (MCMC) techniques like Metropolis-Hastings or Hamiltonian Monte Carlo could be used, but are notoriously slow and difficult to tune. Alternatives based on Langevin dynamics can be used when gradients of the likelihood are readily available. This class of methods use gradient information to guide an optimizer through the parameter space as well as stochastic terms to prevent the optimizer from becoming trapped in local modes. After burn-in Langevin dynamics can be interpreted as sampling from a stationary distribution, which in our case is the posterior distribution on PSF model parameters. Therefore, we will use Stochastic Gradient Langevin Dynamics (SGLD), an algorithm commonly used to sample from the parameter's posterior. By drawing samples, we can simultaneously estimate the Fisher information matrix (by computing the Hessian at each sample) while obtaining estimates of parameter uncertainty by computing the variance of a batch of samples.
+
+
+\section{Markovian photoswitching dynamics}
+
+The number of molecules within the diffraction limit is $K\left(\frac{\lambda}{2\mathrm{NA}}\right)$. If $\alpha$ is the \emph{detection probability}, then $\alpha K\left(\frac{\lambda}{2\mathrm{NA}}\right)$ are detected, on average. We want to minimize
+
+\begin{equation*}
+\mathcal{L} = \alpha K\left(\frac{\lambda}{2\mathrm{NA}}\right) + \gamma\left(\Delta_{\mathrm{SR}}+\frac{2N}{\log(1-\alpha)}\right)^{2}
+\end{equation*}
+
+The second term contains $\frac{2N}{\log(1-\alpha)}$, which is the minimum number of frames needed to detect 99 percent of N molecules (which can be obtained from the geometric distribution). If we assume a two-state generator, then
+
+\begin{equation*}
+P(t) = P(0)e^{Gt}
+\end{equation*}
+
+and $G\pi = 0$ gives $\pi = (\alpha,\beta) = \frac{1}{k}\left(k_{12},k_{21}\right)$ where $k=k_{12}+k_{21}$.
+
+
+The true photo-switching behavior of the fluorophore is a continuous time stochastic phenomenon. However, an experimenter can only ever observe a discretized manifestation of this
+by imaging the fluorophore in a sequence of frames. These frames are regarded as a set of
+sequential exposures of the fluorophore and the observed discrete time signal indicates whether
+the fluorophore has been observed in a particular frame. It is the continuous time process on
+which we wish to draw inference based on the observed discrete-time process indicating whether
+the fluorophore was observed in a frame. In this section we first present the continuous time
+Markov model of the true (hidden) photo-switching behavior, and then derive the observed
+discrete time signal, together with key results on its statistical properties.
+
+
+We model the photoswitching behavior of a fluorophore as a continuous time Markov process. It is a stochastic process, which satisfies the Markov property
+
+\begin{equation*}
+P(X_{t}|X_{t-1}, X_{t-2}, ..., X_{t-N}) = P(X_{t}|X_{t-1})
+\end{equation*}
+
+We consider a general model for $X(t)$ that can accommodate the numerous mechanisms of photo-switching utilized in standard SMLM approaches such as (F)PALM and (d)STORM. Specifically, this model consists of a photon emitting (On) state $1$, $m+1$ non photon emitting (dark/temporary off) states $0_0$, $0_1$, $\ldots$, $0_m$, where $m \in \mathbb{Z}{\geq 0}$, and a photobleached (absorbing/permanently off) state $2$. In order to accommodate for the $m = 0$ case when we have a single dark state, we use the notational convention that state $0_0 \equiv 0$. The model, allows for transitions from state $1$ to the multiple dark states (from a photochemical perspective, these can include triplet, redox and quenched states). These dark states are typically accessed via the first dark state $0$ (reached as a result of inter-system crossing of the excited $S1$ electron to the triplet $T1$ state). Further dark states $0_{i+1}$, $i = 0, \ldots, m-1$, are accessible by previous dark states $0_i$ (by, for example, the successive additions of electrons forming radical anions (Van de Linde et al., 2010)). We allow the On state $1$ to be accessible by any dark state and we consider the most general model in which the absorption state $2$ is accessible from any combination of other states (Vogelsang et al., 2010; Van de Linde and Sauer, 2014; Ha and Tinnefeld, 2012).
+
+To capture $P(X_{t}|X_{t-1})$ for all possible pairs $X_{t}$ and $X_{t-1}$, we define a square generator matrix $G\in \mathcal{R}^{N\times N}$ where $N$ denotes the number of states. As such, the elements of $G$ represent the probability of a transition from a state $\omega_{j}$ to $\omega_{i}$ in an infinitesimal time interval
+
+\begin{equation*}
+G_{ij} = \mathrm{Pr}\left(X(t+dt)=\omega_{i}, | \;X(t)=\omega_{j}\right)
+\end{equation*}
+
+Let the state space for the process $X(t)$ be $\Omega = \{0_{0},0_{1},0_{2},1,2\}$. The generator matrix for such a process reads
+
+\begin{equation*}
+G = 
+\begin{pmatrix}
+\lambda_{00} & \lambda_{0 0_{1}} & 0 & \lambda_{01} & \mu_{0}\\
+0 & \lambda_{0_{1}0_{1}} & \lambda_{0_{1}0_{2}} & \lambda_{0_{1}1} & \mu_{1}\\
+0 & 0 & \lambda_{0_{2}0_{2}} & \lambda_{0_{2}1} & \mu_{2}\\
+\lambda_{10} & 0 & 0 & \lambda_{11} & \mu_{0}\\
+0 & 0 & 0 & 0 & 0
+\end{pmatrix}
+\end{equation*}
+
+Of considerable practical interest is using the matrix $G$ to determine the probability the system is in a particular state at a time $t$. This can be achieved by solving the master equation:
+
+\begin{equation*}
+\frac{\partial P(\omega_{i})}{\partial t} = \sum_{j}G_{ji}P(\omega_{j},t) - G_{ij}P(\omega_{i},t)
+\end{equation*}
+
+Our notational convention is the $G_{ij}$ is a transition $i\rightarrow j$ while $G_{ji}$ is $j\rightarrow i$. The above equation and its solution is very powerful in this context and in the broader context of non-equilibrium dynamics, so I will devote a short section to its derivation. The reader can safely skip this section if time is scarce.
+
+
+\subsection{Solving the master equation}
+
+The master equation is a first order differential equation and its solution is straightforward when the dimensionality of the state space is small. The solution is found easily by massaging the master equation into something that has a simple exponential solution. Define a matrix $W$ s.t. $W_{ij} = T_{ij}$ and $W_{ii} = -\sum_{j\neq i}G_{ij}$. This operator acts on $P(\omega)$ and gives a vector of probability currents $\dot{P}(\omega,t) = \mathcal{J}(\bm{\omega}) = W P(\bm{\omega})$. 
+
+\begin{equation*}
+P(\bm{\omega}, t) = \exp(W P(\omega))
+\end{equation*}
+
+The matrix $W$ for the 4-state system presented before reads
+
+\begin{equation*}
+W = 
+\begin{pmatrix}
+-\sigma_{0} & \lambda_{0 0_{1}} & 0 & \lambda_{01} & \mu_{0}\\
+0 & -\sigma_{0_{1}} & \lambda_{0_{1}0_{2}} & \lambda_{0_{1}1} & \mu_{1}\\
+0 & 0 & -\sigma_{0_{2}} & \lambda_{0_{2}1} & \mu_{2}\\
+\lambda_{10} & 0 & 0 & -\sigma_{1} & \mu_{0}\\
+0 & 0 & 0 & 0 & 0
+\end{pmatrix}
+\end{equation*}
+
+where we have introduced shorthands $\sigma = -\sum_{j\neq i}G_{ij}$.
+
+\subsection{Modeling photoswitching dynamics}
+
+The imaging procedure requires taking a series of successive frames. Frame $n$ is formed by taking an exposure over the time interval $[n\Delta, (n+1)\Delta)$, where $n\in\mathbb{Z}{\geq0}$. The constant $\Delta$ corresponds to the exposure time for a single frame, also known as the frame length. We define the discrete time observed process ${Y_n: n \in \mathbb{Z}{\geq0}}$, with state space $S_Y={0,1}$, as $Y_n=1$ if the fluorophore (characterized by ${X(t)}$) is observed in frame $n$ and equal to $0$ otherwise. For the fluorophore to be observed in the time interval $[n\Delta, (n+1)\Delta)$, it must be in the On state $1$ for a minimum time of $\delta\in[0,\Delta)$. The value of $\delta$ is unknown and is a result of background noise and the imaging system's limited sensitivity. We note that if ${X(t)}$ exhibits multiple jumps to state $1$ within a frame, then a sufficient condition for observing the fluorophore is that the total time spent in the On state exceeds $\delta$. The $\delta=0$ case is the idealistic scenario of a noiseless system and perfect sensitivity such that the fluorophore is detected if it enters the On state for any non-zero amount of time during the exposure time $\Delta$.
+
+\begin{equation*}
+Y_{n} = \mathbbm{1}_{[\delta,\Delta)}\left(\int_{n\Delta}^{(n+1)\Delta} \mathbbm{1}_{1} (X(t)) dt\right)
+\end{equation*}
+
+Further, the distribution on $\Delta t$ will depend on the hidden state of the system before integration begins.
+
+\begin{equation*}
+\Delta t = \int_{n\Delta}^{(n+1)\Delta} \mathbbm{1}_{1} (X(t)) dt \;\;\;\;\;
+\Delta t \sim P(\Delta t | X_{t} = i) 
+\end{equation*}
+
+where $P(\Delta t | X_{t} = i) $ will be an exponential distribution with parameters dependent on the starting state. Following (Patel 2019), we write down the joint probability of a transition from state $i$ to state $j$ during an interval $\Delta$ and the observation $Y_{n}=\ell$. 
+
+\begin{align*}
+b_{ij,\Delta}^{\ell} &= \mathbb{P}(Y_{n}=\ell,X(\Delta)=j|X(0)=i)\\
+&= \sum_{k}q_{ij}(k,\Delta)\xi_{ij}(\ell,k,\Delta)
+\end{align*}
+
+where we have made the following definitions
+
+\begin{align*}
+q_{ij}(k,\Delta) &= \mathbb{P}(N(\Delta)=k,X(\Delta)=j|X(0)=i)\\
+\xi_{ij}(\ell,k,\Delta)  &= \mathbb{P}(Y_{n}=\ell|N(\Delta)=k,X(\Delta)=j,X(0)=i)
+\end{align*}
+
+We focus first on $q_{ij}(k,\Delta)$, which represents the probability distribution over $k$ transitions of type $ij$ occuring in the interval $\Delta$. This is analagous to considering the time-evolution of the probability mass over states in our solution of the master equation. However, here we instead find the time-evolution of the probability mass over the number of transitions $k$ of a certain type $q_{ij}$, and then integrate out the variable $k$. As an example, the distribution over $k$ for transition of type $q_{i0}$ (from $i\rightarrow 0$), is determined by the distribution over the number of $i\rightarrow 1$ transitions and the rate of a $1\rightarrow 0$ transition over a finite time interval $\Delta t$
+
+\begin{align*}
+q_{i0}(k,t+\Delta t) = (1-\sigma_{0}\Delta t)q_{i0}(k,t) + \lambda_{10}q_{i1}(k,t)\Delta t + \mathcal{O}(\Delta t)
+\end{align*}
+
+The negative contribution represents the distribution over the number of transitions $i\rightarrow 0$ that have already occured by time $t$ and will leave the $0$ state in the interval $\Delta t$. The full coupled system of differential equations reads
+
+
+\section{A deep learning framework for super-resolution microscopy}
+
+\section{Bayesian clustering of chromatin nanodomains}
+
+\subsection{A Brief Note on Bayesian Nonparametrics}
+
+In parametric modeling, it is assumed that data can be represented by models using a fixed, finite number
+of parameters. Examples of parametric models include clusters of K Gaussians and polynomial regression
+models. In many problems, determining the number of parameters a priori is difficult; for example, selecting
+the number of clusters in a cluster model, the number of segments in an image segmentation problem, the
+number of chains in a hidden Markov model, or the number of topics in a topic modelling problem before
+the data is seen can be problematic.
+
+In nonparametric modeling, the number of parameters is not fixed, and often grows with the sample size.
+Kernel density estimation is an example of a nonparametric model. In Bayesian nonparametrics, the number
+of parameters is itself considered to be a random variable. One example is to do clustering with k-means (or
+mixture of Gassuians) while the number of clusters k is unknown. Bayesian inference addresses this problem
+by treating k itself as a random variable. A prior is defined over an infinite dimensional model space, and
+inference is done to select the number of parameters. Such models have infinite capacity, in that they include
+an infinite number of parameters a priori; however, given finite data, only a finite set of these parameters
+will be used. Unused parameters will be integrated out.
+
+
+\subsection{Variational Bayes}
+
+A complete description of the generative model in the Bayesian framework includes the prior distribution $P(\theta)$ which describes the spatial distribution and temporal dynamics of fluorophores, and the likelihood $P(\vec{H}|\theta)$ - a distribution of images generated by the microscope for a given configuration of fluorophores. According to Bayes rule, the posterior on $\theta$ can be constructed as
+
+\begin{align}
+P(\theta|\vec{H}) = \frac{P(\vec{H}|\theta)P(\theta)}{\int P(\vec{H}|\theta)P(\theta) d\theta}
+\end{align}
+
+The posterior $P(\theta|\vec{H})$ is commonly approximated using Markov Chain Monte Carlo (MCMC) methods. MCMC is asymptotically exact, but can be slow and hyperparameters can be difficult to tune. On the other hand, variational inference (VI) attempts to approximate the true posterior distribution $p(\theta|x)$ with a variational distribution $q(\theta)$, which is often a model distribution which can be easily sampled from e.g., a multivariate Gaussian. One method to fit the variational distribution is to minimize the KL-divergence between the variational distribution and the true posterior:
+
+\begin{align*}
+D_{\mathrm{KL}}(q(\theta)||p(\theta|x)) &= \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)}{p(\theta|x)}\right)\\
+&=  \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)p(x)}{p(\theta,x)}\right)\\
+&=  \log p(x) + \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)}{p(x|\theta)p(\theta)}\right)\\
+&= \log p(x) + \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)\\
+\end{align*}
+
+We can treat $\log p(x)$ as a constant here, so the KL-divergence is minimized by minimizing this expectation. Equivalently, we can maximize its negative, which is often called the evidence lower bound (ELBO).
+
+\begin{align}
+\mathrm{ELBO} = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
+\end{align}
+
+Let $\theta = (\theta_{1},...,\theta_{K})$ and $\theta_{k} = (x_{k},y_{k})$ be the pointillist coordinates
+
+\begin{align*}
+\nabla_{\phi}\mathrm{ELBO} &= - \nabla_{\phi}\left(\underset{{\theta \sim q_{\phi}(\theta)}}{\mathbb{E}}\left(\log q_{\phi}(\theta) - \log p(x|\theta)\right)\right)\\
+&= \nabla_{\phi}\int_{\theta}q_{\phi}(\theta)\log p(x|\theta)d\theta-\nabla_{\phi}\int_{\theta}q_{\phi}(\theta)\log q_{\phi}(\theta)d\theta\\
+&= \int_{\theta}\nabla_{\phi}q_{\phi}(\theta)\log p(x|\theta)d\theta-\nabla_{\phi}H(q_{\phi}(\theta))
+\end{align*}
+
+where $H(q_{\phi}(\theta))$ is the differential entropy of the variational posterior. If the variational posterior is simple, like a multivariate Gaussian, gradients of the differential entropy can be computed analytically. However, the first term is intractable and often must be estimated using Monte Carlo methods
+
+\begin{equation*}
+\int_{\theta}\nabla_{\phi}q_{\phi}(\theta)\log p(x|\theta)d\theta \approx \underset{{\theta \sim q_{\phi}(\theta)}}{\mathbb{E}}\nabla_{\phi}q_{\phi}(\theta)\log p(x|\theta)
+\end{equation*}
+
+
+\chapter{Results}
+
+\chapter{Discussion}
+
+\begin{appendices}
 
 We approximate the log-likelihood function to second order in terms of the Jacobian and Hessian matrices. 
 
@@ -233,117 +439,11 @@ H_{\ell} = J_{\mu}^{T} H_{\ell} J_{\mu} + (J_{\ell}\otimes I_{n})H_{\mu}
 where we have used $J_{\mu}$ to represent the jacobian of $T$ and $J_{\ell}$ for the jacobian of $W$. Similar notation is used for the corresponding Hessian matrices. 
 In the 3D case, the Hessian matrix is not directly separable since $\mu \propto \lambda_{x}(x_{0},\sigma_{0},\sigma_{x})\lambda_{y}(y_{0},\sigma_{0},\sigma_{y})$. To see this, an abstract representation of the Hessian reads 
 
-\begin{align*}
-H_{\mu} = 
-\begin{pmatrix}
-\frac{\partial^2 \mu}{\partial x_0^2} & \frac{\partial^2 \mu}{\partial x_0 \partial \sigma_x} & \frac{\partial^2 \mu}{\partial x_0 \partial \sigma_0} & \frac{\partial\mu}{\partial x_0}\frac{\partial \mu}{\partial y_0} & \frac{\partial \mu}{\partial x_0} \frac{\partial \mu}{\partial \sigma_y} \\
-\frac{\partial^2 \mu}{\partial \sigma_x \partial x_0} & \frac{\partial^2 \mu}{\partial \sigma_x^2} & \frac{\partial^2 \mu}{\partial \sigma_x \partial \sigma_0} & \frac{\partial \mu}{\partial \sigma_x}\frac{\partial\mu}{\partial y_{0}} & \frac{\partial \mu}{\partial \sigma_x} \frac{\partial \mu}{\partial \sigma_y} \\
-\frac{\partial^2 \mu}{\partial \sigma_0 \partial x_0} & \frac{\partial^2 \mu}{\partial \sigma_0 \partial \sigma_x} & \frac{\partial^2 \mu}{\partial \sigma_0^2} & \frac{\partial^2 \mu}{\partial \sigma_0 \partial y_0} & \frac{\partial^{2} \mu}{\partial \sigma_0\partial \sigma_{y}} \\
-\frac{\partial \mu}{\partial y_0}\frac{\partial \mu}{\partial x_0} & \frac{\partial \mu}{\partial y_0}\frac{\partial \mu}{\partial \sigma_x} & \frac{\partial^2 \mu}{\partial y_0 \partial \sigma_0} & \frac{\partial^2 \mu}{\partial y_0^2} & \frac{\partial^{2} \mu}{\partial y_0\partial\sigma_{y}} \\
-\frac{\partial \mu}{\partial \sigma_y} \frac{\partial \mu}{\partial x_0} & \frac{\partial \mu}{\partial \sigma_y} \frac{\partial \mu}{\partial \sigma_x} & \frac{\partial^{2} \mu}{\partial \sigma_y \sigma_{0}} & \frac{\partial^{2} \mu}{\partial \sigma_y\partial y_{0}} & \frac{\partial^2 \mu}{\partial \sigma_y^2}
-\end{pmatrix}
-\end{align*}
-
 \subsection{A Newton-Raphson method for maximum likelhood estimation}
 
-Newton-Raphson can be advantageous compared to gradient-descent by taking advantage of second-order derivatives when they are available. However, computing second-order derivatives can be cumbersome, and often intractable in a number of machine-learning contexts.  We have already computed $J_{\mu}$ and now for $J_{\ell}$ and $H_{\ell}$ we write
-
-\begin{align*}
-\frac{\partial\ell}{\partial \mu_{k}} &= 1 - \frac{n_{k}}{\mu_{k}}\\
-\frac{\partial^{2}\ell}{\partial \mu_{k}^{2}} &= 1 + \frac{n_{k}}{\mu_{k}^{2}}
-\end{align*}
+Newton-Raphson can be advantageous compared to gradient-descent by taking advantage of second-order derivatives when they are available. However, computing second-order derivatives can be cumbersome, and often intractable in a number of machine-learning contexts.  
 
 
-\subsection{The Fisher information metric}
-
-The Fisher information matrix $I(\theta)$ can be directly related to the curvature of the KL-Divergence over the parameter space
-
-\begin{align*}
-\nabla^2_{\theta'} D_{KL}[\ell(H|\theta) \parallel \ell(H|\theta')] 
-&= - \nabla_{\theta'} \int \ell(H|\theta) \nabla_{\theta'}  \log \ell(H|\theta') \, dH \\ 
-&= - \int \ell(H|\theta) \nabla^2_{\theta'}  \log \ell(H|\theta') \, dH \\
-&= - \mathbb{E}_{\theta}[\nabla^2_{\theta'} \log \ell(H|\theta')] \\
-&= I(\theta)
-\end{align*}
-
-
-We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space. 
-
-\subsection{Fisher information for 2D integrated gaussian}
-
-For the 2D integrated gaussian point spread function, the Hessian only contains separable second order derivatives, so the Fisher information matrix takes on a convenient form
-
-\begin{equation}
-I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) 
-\end{equation}
-
-For an arbitrary parameter then we have
-
-\begin{align*}
-\frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  x_{k}\log x_{k} + \mu_{k}' - x_{k}\log\left(\mu_{k}'\right)\\
-&= \sum_{k} \frac{\partial \mu_{k}'}{\partial\theta_{i}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)
-\end{align*}
-
-\begin{equation*}
-I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)^{2}\right) = \sum_{k}\frac{1}{\mu_{k}'}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}}
-\end{equation*}
-
-To compute the bound, it turns out all we need is the jacobian $\frac{\partial \mu_{k}'}{\partial\theta_{j}} $ . 
-
-\subsection{Fisher information for 3D integrated gaussian}
-
-Estimating the Fisher information matrix in the 3D case is more challenging, since it cannot be written in the form of (1.10). A reasonable option is to turn to Monte Carlo methods to estimate the expectation. Classic Markov Chain Monte Carlo (MCMC) techniques like Metropolis-Hastings or Hamiltonian Monte Carlo could be used, but are notoriously slow and difficult to tune. Alternatives based on Langevin dynamics can be used when gradients of the likelihood are readily available. This class of methods use gradient information to guide an optimizer through the parameter space as well as stochastic terms to prevent the optimizer from becoming trapped in local modes. After burn-in Langevin dynamics can be interpreted as sampling from a stationary distribution, which in our case is the posterior distribution on PSF model parameters. Therefore, we will use Stochastic Gradient Langevin Dynamics (SGLD), an algorithm commonly used to sample from the parameter's posterior. By drawing samples, we can simultaneously estimate the Fisher information matrix (by computing the Hessian at each sample) while obtaining estimates of parameter uncertainty by computing the variance of a batch of samples.
-
-$$dw = - \nabla L(w) dt + \epsilon \sqrt{\eta dt}, \quad \epsilon \sim \mathcal N(0, \sigma^2), \eta \propto dt$$
-
-\subsection{Fourier shell correlation for 3D super-resolution microscopy}
-
-\section{Markovian photoswitching dynamics}
-
-The true photo-switching behavior of the fluorophore is a continuous time stochastic phenomenon. However, an experimenter can only ever observe a discretized manifestation of this
-by imaging the fluorophore in a sequence of frames. These frames are regarded as a set of
-sequential exposures of the fluorophore and the observed discrete time signal indicates whether
-the fluorophore has been observed in a particular frame. It is the continuous time process on
-which we wish to draw inference based on the observed discrete-time process indicating whether
-the fluorophore was observed in a frame. In this section we first present the continuous time
-Markov model of the true (hidden) photo-switching behavior, and then derive the observed
-discrete time signal, together with key results on its statistical properties.
-
-
-We model the photoswitching behavior of a fluorophore as a continuous time Markov process. It is a stochastic process, which satisfies the Markov property
-
-\begin{equation*}
-P(X_{t}|X_{t-1}, X_{t-2}, ..., X_{t-N}) = P(X_{t}|X_{t-1})
-\end{equation*}
-
-We consider a general model for $X(t)$ that can accommodate the numerous mechanisms of photo-switching utilized in standard SMLM approaches such as (F)PALM and (d)STORM. Specifically, this model consists of a photon emitting (On) state $1$, $m+1$ non photon emitting (dark/temporary off) states $0_0$, $0_1$, $\ldots$, $0_m$, where $m \in \mathbb{Z}{\geq 0}$, and a photobleached (absorbing/permanently off) state $2$. In order to accommodate for the $m = 0$ case when we have a single dark state, we use the notational convention that state $0_0 \equiv 0$. The model, allows for transitions from state $1$ to the multiple dark states (from a photochemical perspective, these can include triplet, redox and quenched states). These dark states are typically accessed via the first dark state $0$ (reached as a result of inter-system crossing of the excited $S1$ electron to the triplet $T1$ state). Further dark states $0_{i+1}$, $i = 0, \ldots, m-1$, are accessible by previous dark states $0_i$ (by, for example, the successive additions of electrons forming radical anions (Van de Linde et al., 2010)). We allow the On state $1$ to be accessible by any dark state and we consider the most general model in which the absorption state $2$ is accessible from any combination of other states (Vogelsang et al., 2010; Van de Linde and Sauer, 2014; Ha and Tinnefeld, 2012).
-
-To capture $P(X_{t}|X_{t-1})$ for all possible pairs $X_{t}$ and $X_{t-1}$, we define a square generator matrix $G\in \mathcal{R}^{N\times N}$ where $N$ denotes the number of states. As such, the elements of $G$ represent the probability of a transition from a state $\omega_{j}$ to $\omega_{i}$ in an infinitesimal time interval
-
-\begin{equation*}
-G_{ij} = \mathrm{Pr}\left(X(t+dt)=\omega_{i}, | \;X(t)=\omega_{j}\right)
-\end{equation*}
-
-Let the state space for the process $X(t)$ be $\Omega = \{0_{0},0_{1},0_{2},1,2\}$. The generator matrix for such a process reads
-
-\begin{equation*}
-G = 
-\begin{pmatrix}
-\lambda_{00} & \lambda_{0 0_{1}} & 0 & \lambda_{01} & \mu_{0}\\
-0 & \lambda_{0_{1}0_{1}} & \lambda_{0_{1}0_{2}} & \lambda_{0_{1}1} & \mu_{1}\\
-0 & 0 & \lambda_{0_{2}0_{2}} & \lambda_{0_{2}1} & \mu_{2}\\
-\lambda_{10} & 0 & 0 & \lambda_{11} & \mu_{0}\\
-0 & 0 & 0 & 0 & 0
-\end{pmatrix}
-\end{equation*}
-
-Of considerable practical interest is using the matrix $G$ to determine the probability the system is in a particular state at a time $t$. This can be achieved by solving the master equation:
-
-\begin{equation*}
-\frac{\partial P(\omega_{i})}{\partial t} = \sum_{j}G_{ji}P(\omega_{j},t) - G_{ij}P(\omega_{i},t)
-\end{equation*}
-
-Our notational convention is the $G_{ij}$ is a transition $i\rightarrow j$ while $G_{ji}$ is $j\rightarrow i$. The above equation and its solution is very powerful in this context and in the broader context of non-equilibrium dynamics, so I will devote a short section to its derivation. The reader can safely skip this section if time is scarce.
 
 \subsection{Brief derivation of the master equation}
 
@@ -383,252 +483,26 @@ Inserting this into the probability current gives
 
 which is RHS of the master equation. Notice that the Kronecker delta effectively just swaps the index. 
 
-\subsection{Solving the master equation}
+\subsection{Fisher information for 2D integrated gaussian}
 
-The master equation is a first order differential equation and its solution is straightforward when the dimensionality of the state space is small. The solution is found easily by massaging the master equation into something that has a simple exponential solution. Define a matrix $W$ s.t. $W_{ij} = T_{ij}$ and $W_{ii} = -\sum_{j\neq i}G_{ij}$. This operator acts on $P(\omega)$ and gives a vector of probability currents $\dot{P}(\omega,t) = \mathcal{J}(\bm{\omega}) = W P(\bm{\omega})$. 
+For the 2D integrated gaussian point spread function, the Hessian only contains separable second order derivatives, so the Fisher information matrix takes on a convenient form
+
+\begin{equation}
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) 
+\end{equation}
+
+For an arbitrary parameter then we have
+
+\begin{align*}
+\frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  x_{k}\log x_{k} + \mu_{k}' - x_{k}\log\left(\mu_{k}'\right)\\
+&= \sum_{k} \frac{\partial \mu_{k}'}{\partial\theta_{i}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)
+\end{align*}
 
 \begin{equation*}
-P(\bm{\omega}, t) = \exp(W P(\omega))
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)^{2}\right) = \sum_{k}\frac{1}{\mu_{k}'}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}}
 \end{equation*}
 
-The matrix $W$ for the 4-state system presented before reads
-
-\begin{equation*}
-W = 
-\begin{pmatrix}
--\sigma_{0} & \lambda_{0 0_{1}} & 0 & \lambda_{01} & \mu_{0}\\
-0 & -\sigma_{0_{1}} & \lambda_{0_{1}0_{2}} & \lambda_{0_{1}1} & \mu_{1}\\
-0 & 0 & -\sigma_{0_{2}} & \lambda_{0_{2}1} & \mu_{2}\\
-\lambda_{10} & 0 & 0 & -\sigma_{1} & \mu_{0}\\
-0 & 0 & 0 & 0 & 0
-\end{pmatrix}
-\end{equation*}
-
-where we have introduced shorthands $\sigma = -\sum_{j\neq i}G_{ij}$.
-
-\subsection{A hidden Markov model of photoswitching dynamics}
-
-The imaging procedure requires taking a series of successive frames. Frame $n$ is formed by taking an exposure over the time interval $[n\Delta, (n+1)\Delta)$, where $n\in\mathbb{Z}{\geq0}$. The constant $\Delta$ corresponds to the exposure time for a single frame, also known as the frame length. We define the discrete time observed process ${Y_n: n \in \mathbb{Z}{\geq0}}$, with state space $S_Y={0,1}$, as $Y_n=1$ if the fluorophore (characterized by ${X(t)}$) is observed in frame $n$ and equal to $0$ otherwise. For the fluorophore to be observed in the time interval $[n\Delta, (n+1)\Delta)$, it must be in the On state $1$ for a minimum time of $\delta\in[0,\Delta)$. The value of $\delta$ is unknown and is a result of background noise and the imaging system's limited sensitivity. We note that if ${X(t)}$ exhibits multiple jumps to state $1$ within a frame, then a sufficient condition for observing the fluorophore is that the total time spent in the On state exceeds $\delta$. The $\delta=0$ case is the idealistic scenario of a noiseless system and perfect sensitivity such that the fluorophore is detected if it enters the On state for any non-zero amount of time during the exposure time $\Delta$.
-
-\begin{equation*}
-Y_{n} = \mathbbm{1}_{[\delta,\Delta)}\left(\int_{n\Delta}^{(n+1)\Delta} \mathbbm{1}_{1} (X(t)) dt\right)
-\end{equation*}
-
-Another alternative is to consider the number of photons that were collected during the interval $\Delta$ as a doubly stochastic Poisson process (Cox process)
-
-\begin{equation*}
-Y_{n} \sim \mathrm{Poisson}\left(r_{0}\Delta t\right)
-\end{equation*}
-
-where $\Delta_{t}$ is itself a random variable. Further, the distribution on $\Delta t$ will depend on the hidden state of the system before integration begins $X_{t}$. 
-
-\begin{equation*}
-\Delta t = \int_{n\Delta}^{(n+1)\Delta} \mathbbm{1}_{1} (X(t)) dt \;\;\;\;\;
-\Delta t \sim P(\Delta t | X_{t} = i) 
-\end{equation*}
-
-where $P(\Delta t | X_{t} = i) $ will be an exponential distribution with parameters dependent on the starting state. 
-
-\subsection{Deriving the transmission matrices}
-
-We now cover a general method for calculating $P(\mathcal{N},Y|\Theta,S)$. Following (Patel 2019), we write down the joint probability of a transition from state $i$ to state $j$ during an interval $\Delta$ and the observation $Y_{n}=\ell$. 
-
-\begin{align*}
-b_{ij,\Delta}^{\ell} &= \mathbb{P}(Y_{n}=\ell,X(\Delta)=j|X(0)=i)\\
-&= \sum_{k}q_{ij}(k,\Delta)\xi_{ij}(\ell,k,\Delta)
-\end{align*}
-
-where we have made the following definitions
-
-\begin{align*}
-q_{ij}(k,\Delta) &= \mathbb{P}(N(\Delta)=k,X(\Delta)=j|X(0)=i)\\
-\xi_{ij}(\ell,k,\Delta)  &= \mathbb{P}(Y_{n}=\ell|N(\Delta)=k,X(\Delta)=j,X(0)=i)
-\end{align*}
-
-We focus first on $q_{ij}(k,\Delta)$, which represents the probability distribution over $k$ transitions of type $ij$ occuring in the interval $\Delta$. This is analagous to considering the time-evolution of the probability mass over states in our solution of the master equation. However, here we instead find the time-evolution of the probability mass over the number of transitions $k$ of a certain type $q_{ij}$, and then integrate out the variable $k$. As an example, the distribution over $k$ for transition of type $q_{i0}$ (from $i\rightarrow 0$), is determined by the distribution over the number of $i\rightarrow 1$ transitions and the rate of a $1\rightarrow 0$ transition over a finite time interval $\Delta t$
-
-\begin{align*}
-q_{i0}(k,t+\Delta t) = (1-\sigma_{0}\Delta t)q_{i0}(k,t) + \lambda_{10}q_{i1}(k,t)\Delta t + \mathcal{O}(\Delta t)
-\end{align*}
-
-The negative contribution represents the distribution over the number of transitions $i\rightarrow 0$ that have already occured by time $t$ and will leave the $0$ state in the interval $\Delta t$. The full coupled system of differential equations reads
-
-
-\chapter{A deep learning framework for super-resolution microscopy}
-
-\chapter{Three-dimensional clustering of DNA-protein condensates}
-
-
-\subsection{A brief note on Bayesian nonparametrics}
-
-In parametric modeling, it is assumed that data can be represented by models using a fixed, finite number
-of parameters. Examples of parametric models include clusters of K Gaussians and polynomial regression
-models. In many problems, determining the number of parameters a priori is difficult; for example, selecting
-the number of clusters in a cluster model, the number of segments in an image segmentation problem, the
-number of chains in a hidden Markov model, or the number of topics in a topic modelling problem before
-the data is seen can be problematic.
-
-In nonparametric modeling, the number of parameters is not fixed, and often grows with the sample size.
-Kernel density estimation is an example of a nonparametric model. In Bayesian nonparametrics, the number
-of parameters is itself considered to be a random variable. One example is to do clustering with k-means (or
-mixture of Gassuians) while the number of clusters k is unknown. Bayesian inference addresses this problem
-by treating k itself as a random variable. A prior is defined over an infinite dimensional model space, and
-inference is done to select the number of parameters. Such models have infinite capacity, in that they include
-an infinite number of parameters a priori; however, given finite data, only a finite set of these parameters
-will be used. Unused parameters will be integrated out.
-
-\subsection{Physical analysis of BRD4-MED1 clusters}
-
-Metropolis-Hastings algorithms are commonly used to sample from the configurational space of polymers, in order to generate a set of conformations that can be used to study polymer properties such as their equilibrium structure, thermodynamics, and response to external fields. This method is particularly useful when studying the equilibrium properties of polymers, where the system is in thermal equilibrium and can be described by a Boltzmann distribution. Examples of Metropolis-Hastings algorithms that have been used for polymer simulations include the pivot algorithm, the reptation algorithm, and the configurational-bias Monte Carlo algorithm.
-
-On the other hand, Langevin dynamics simulations can be used to study the non-equilibrium dynamics of polymers, where the system is driven out of thermal equilibrium by external forces, such as shear or electric fields. Langevin dynamics simulations can also incorporate more realistic models of the environment, such as solvent effects or hydrodynamic interactions, which can affect the behavior of the polymer. This method is particularly useful when studying the dynamics of polymers in complex environments, where the system is far from equilibrium and the dynamics cannot be described by a simple Boltzmann distribution. Examples of Langevin dynamics simulations that have been used for polymer simulations include the Brownian dynamics method and the dissipative particle dynamics method.
-
-In summary, both Metropolis-Hastings algorithms and Langevin dynamics simulations can be used to study polymer dynamics, but they are used for different purposes. Metropolis-Hastings algorithms are typically used to study the equilibrium properties of polymers, while Langevin dynamics simulations are used to study the non-equilibrium dynamics of polymers.
-
-
-The main difference between solving the Langevin equation and Newton's equations of motion is the addition of the stochastic force term in the Langevin equation. This term models the effect of thermal fluctuations and can lead to a more realistic description of the dynamics of the system. In contrast, Newton's equations of motion assume a deterministic behavior of the system without any stochasticity.
-
-Another difference is that Langevin dynamics simulations are particularly useful for simulating systems in contact with a heat bath, which is not possible with Newton's equations of motion alone. In the case of Langevin dynamics, the friction coefficient gamma models the effect of the heat bath on the system and allows for the simulation of both thermal and non-thermal forces that affect the dynamics of the system.
-
-
-\begin{appendices}
-
-
-
-\subsection{Vanilla Variational Bayes}
-
-We now describe a Bayesian inference method for the parameters $\theta$ from experiment and simulated data. In previous sections, we have given a a formal probabilistic description of the entire SMLM measurement process along with fundamental lower bound on parameter uncertainty. With this in hand, we can now describe practical methods for inferring parameters from data and assess their ability to reach these bounds.  In our framework, at each time point a measurement is made $\vec{H}_{t}$, which can be used to infer a matrix of parameters $\bm{\theta}_{t} = (\bm{x_{0}},\bm{y_{0}},\bm{\sigma},\bm{B_{0}},\bm{N_{0}})_{t}$. Occasionally, we will refer to parameter matrices $\theta_{t}$ at each time point as latent variables which give rise to the noisy low resolution images which constitute the measured data $\vec{H}$. A complete description of the generative model in the Bayesian framework includes the prior distribution $P(\theta)$ which describes the spatial distribution and temporal dynamics of fluorophores, and the likelihood $P(\vec{H}|\theta)$ - a distribution of images generated by the microscope for a given configuration of fluorophores. According to Bayes rule, the posterior on $\theta$ can be constructed as
-
-\begin{align}
-P(\theta|\vec{H}) = \frac{P(\vec{H}|\theta)P(\theta)}{\int P(\vec{H}|\theta)P(\theta) d\theta}
-\end{align}
-
-Note this likelihood was formalized in terms of the point spread function and the measurement noise of the camera in (1.7). There are several methods for finding the posterior, for example Markov Chain Monte Carlo (MCMC) or variational methods. Variational inference attempts to approximate the true posterior distribution $p(\theta|x)$ with a variational distribution $q(\theta)$, which is often a model distribution which can be easily sampled from e.g., a multivariate Gaussian. To fit the variational distribution, we can try to minimize the KL-divergence between the variational distribution and the true posterior:
-
-\begin{align*}
-D_{\mathrm{KL}}(q(\theta)||p(\theta|x)) &= \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)}{p(\theta|x)}\right)\\
-&=  \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)p(x)}{p(\theta,x)}\right)\\
-&=  \log p(x) + \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log\frac{q(\theta)}{p(x|\theta)p(\theta)}\right)\\
-&= \log p(x) + \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)\\
-\end{align*}
-
-We can treat $\log p(x)$ as a constant here, so the KL-divergence is minimized by minimizing this expectation. Equivalently, we can maximize its negative, which is often called the evidence lower bound (ELBO).
-
-\begin{align}
-\mathrm{ELBO} = - \underset{{\theta \sim q(\theta)}}{\mathbb{E}}\left(\log q(\theta) - \log p(x|\theta) - \log p(\theta) \right)
-\end{align}
-
-Let $\theta = (\theta_{1},...,\theta_{K})$ and $\theta_{k} = (x_{k},y_{k})$ be the particle coordinates or ``cluster centers". 
-
-\begin{align*}
-\nabla_{\phi}\mathrm{ELBO} &= - \nabla_{\phi}\left(\underset{{\theta \sim q_{\phi}(\theta)}}{\mathbb{E}}\left(\log q_{\phi}(\theta) - \log p(x|\theta)\right)\right)\\
-&= \nabla_{\phi}\int_{\theta}q_{\phi}(\theta)\log p(x|\theta)d\theta-\nabla_{\phi}\int_{\theta}q_{\phi}(\theta)\log q_{\phi}(\theta)d\theta\\
-&= \int_{\theta}\nabla_{\phi}q_{\phi}(\theta)\log p(x|\theta)d\theta-\nabla_{\phi}H(q_{\phi}(\theta))
-\end{align*}
-
-where $H(q_{\phi}(\theta))$ is the differential entropy of the variational posterior. If the variational posterior is simple, like a multivariate Gaussian, gradients of the differential entropy can be computed analytically. However, the first term is intractable and often must be estimated using Monte Carlo methods
-
-\begin{equation*}
-\int_{\theta}\nabla_{\phi}q_{\phi}(\theta)\log p(x|\theta)d\theta \approx \underset{{\theta \sim q_{\phi}(\theta)}}{\mathbb{E}}\nabla_{\phi}q_{\phi}(\theta)\log p(x|\theta)
-\end{equation*}
-
-
-\subsection{Lifetime of the ON and OFF states}
-
-Alongside the solution to the master equation $P_{\mathrm{ON}}(t)$ and $P_{\mathrm{OFF}}(t)$, we are often interested in lifetime of the ON and OFF states and how these lifetimes change according to experimental parameters. In fact, the distribution over the ON and OFF state lifetimes gives a convenient frequentist mechanism for estimating the rate constants of a photoswitching model. To see this, consider the two-state model where $\alpha_{12}(t) = k_{12}(t)dt$ and $\alpha_{21}(t) = k_{21}(t)dt$ are the propensity of transitions from on to off and off to on, respectively. Suppose the system begins in the ON state, 
-
-\begin{align*}
-P(\mathrm{ON} \geq t \; | \;\mathrm{ON}) &= \underset{n\rightarrow\infty}{\mathrm{lim}}\left(1-k_{12}dt\right)^{n}\\
-&= \underset{n\rightarrow\infty}{\mathrm{lim}}\left(1-\frac{k_{12}t}{n}\right)^{n}\\
-&= e^{-k_{12}t}
-\end{align*}
-
-This is the cumulative density function for the lifetime of the ON state. Notice that we are given that the system is in the ON state at $t=0$, and all we want to know is the lifetime of that state, so we need not consider the transition rates back to the ON state: $k_{j1}$. The probability density of the lifetime of the ON state is: 
-
-\begin{align*}
-f_{\mathrm{ON}}(t) = -\frac{dP(\mathrm{ON} \geq t)}{dt} = k_{12}e^{-k_{12}t}
-\end{align*}
-
-Therefore one possible way of inferring the rate constant $k_{12}$ is by fitting the observed lifetime distribution with an exponential distribution with $k_{12}$ as a free parameter. However, for the OFF state, it has been previously shown that a single rate constant may not fit the data accurately and the introduction of multiple rate constants representing multiple dark states are necessary. Common photoswitching models include three OFF states: the triplet state, dark state, and long-lived dark state and rate constants between these two states.
-
-\begin{align*}
-P(\mathrm{OFF} \geq t\; | \; \mathrm{OFF}) = P_{\mathrm{T}}(t) + P_{\mathrm{D}}(t) + P_{\mathrm{LLD}}(t)
-\end{align*}
-
-where we have the system of equations for transitions within the OFF state
-
-\begin{align*}
-\frac{dP_{\mathrm{T}}(t)}{dt} &= -k_{21}P_{\mathrm{T}}(t) - k_{23}P_{\mathrm{T}}(t)\\
-\frac{dP_{\mathrm{D}}(t)}{dt} &= P_{\mathrm{T}}(t)k_{23}-k_{31}P_{\mathrm{D}}(t) - k_{34}P_{\mathrm{D}}(t)\\
-\frac{dP_{\mathrm{LLD}}(t)}{dt} &= k_{34}P_{\mathrm{D}}(t) - k_{41}P_{\mathrm{LLD}}(t)
-\end{align*}
-
-This system can be solved analytically by Laplace transformation. Similar to the ON state, 
-
-\begin{align*}
-f_{\mathrm{OFF}}(t) = -\frac{dP(\mathrm{OFF} \geq t)}{dt} = \sum_{i}a_{i}\lambda_{i}e^{-\lambda_{i}t}
-\end{align*}
-
-
-\subsection{ODE model for the ensemble average}
-
-We can define the following system of ODEs for a autorepressive gene circuit
-
-\begin{align}
-\frac{\mathrm{d}m}{\mathrm{d}t} &= \frac{\beta_{m}}{1 + (p/k)^n} - \gamma_m m,\\[1em]
-\frac{\mathrm{d}r}{\mathrm{d}t} &= \beta_{r} m - \gamma_r r,\\[1em]
-\frac{\mathrm{d}p}{\mathrm{d}t} &= \beta_{p} r - \gamma_{p} p,
-\end{align}
-
-We can greatly reduce the number of parameters by nondimensionalizing the system. To that end, we define a characteristic time scale $t_{0}$ and characteristic "length" scales for each variable: $m_{0}, r_{0}, p_{0}$. The choice of these characteristic scale will become apparent after writing the nondimensionalized ODEs out for a general case. The derivatives transform as
-
-\begin{equation*}
-\frac{dm}{dt} \rightarrow \frac{m_{0}}{t_{0}}\frac{dm'}{d\tau}, \;\;\; \frac{dr}{dt} \rightarrow \frac{r_{0}}{t_{0}}\frac{dr'}{d\tau},  \;\;\; \frac{dp}{dt} \rightarrow \frac{p_{0}}{t_{0}}\frac{dp'}{d\tau} 
-\end{equation*}
-
-Our general system of nondimensionalized ODEs reads:
-
-
-\begin{align*}
-\frac{\mathrm{d}m'}{\mathrm{d}\tau} &= \frac{t_0\beta_{m}}{m_0(1 + (p_{0}p'/k)^n)} - \gamma_m t_{0}m'\\
-\frac{\mathrm{d}r'}{\mathrm{d}\tau} &= \frac{\beta_{r} t_{0}m_{0} m'}{r_0} - \gamma_r t_{0}r'\\
-\frac{\mathrm{d}p'}{\mathrm{d}\tau} &= \frac{\beta_{p} t_{0}r_{0} r'}{p_{0}} - \gamma_{p} t_{0} p'
-\end{align*}
-
-Define the characteristic scales as: $t_{0} = 1/\gamma_{m}$, $m_{0}=\gamma_{m}^{2}k/\beta_{r}\beta_{p}$, $r_{0} = \gamma_{m}k/\beta_{p}$, and $p_{0} = k$. Making these substitutions, we have
-
-\begin{align*}
-\frac{\mathrm{d}m'}{\mathrm{d}\tau} &= \frac{\beta}{(1 + (p')^n)} - m'\\
-\frac{\mathrm{d}r'}{\mathrm{d}\tau} &= m' - \frac{\gamma_{r}}{\gamma_{m}}r'\\
-\frac{\mathrm{d}p'}{\mathrm{d}\tau} &= r' - \gamma p'
-\end{align*}
-
-\subsection{Telegraph model of gene expression}
-
-We will begin by writing the the system of ODEs describing the dynamics of the first moment
-
-\begin{align}
-\frac{\mathrm{d}m}{\mathrm{d}t} &= \beta_{m}(1-m) - \gamma_m m\\
-\frac{\mathrm{d}r}{\mathrm{d}t} &= \beta_{r} m - \gamma_r r\\
-\end{align}
-
-This system has 4 parameters, making it difficult to directly visualize interesting relationships between parameterization and dynamics. Therefore, we will nondimensionalize this system
-
-\begin{align}
-\frac{\mathrm{d}m'}{\mathrm{d}t} &= \frac{t_0}{m_0}\beta_{m} - \frac{t_0}{m_0}\beta_{m}m_{0}m' - \frac{t_0}{m_0}\gamma_m m_{0}m'\\
-\frac{\mathrm{d}r'}{\mathrm{d}t} &= \frac{t_0}{m_0}\beta_{r} m_{0}m' - \frac{t_0}{m_0}\gamma_r r_{0}r'\\
-\end{align}
-
-Let $t_{0} = 1/\gamma_{m}$, $m_{0} = \beta_{m}/\gamma_{m}$, $r_{0} = \beta_{m}\beta_{r}/\gamma_{m}^{2}$, $\gamma = \gamma_{r}/\gamma_{m}$, $\beta = \beta_{m}/\gamma_{m}$, and we have
-
-\begin{align}
-\frac{\mathrm{d}m'}{\mathrm{d}t} &= 1 - \beta m' - m'\\
-\frac{\mathrm{d}r'}{\mathrm{d}t} &= m' - \gamma r'\\
-\end{align}
-
-
-
-
+To compute the bound, it turns out all we need is the jacobian $\frac{\partial \mu_{k}'}{\partial\theta_{j}} $ . 
 
 \end{appendices}
 
