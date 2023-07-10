@@ -195,14 +195,18 @@ The diffusion samples from the posterior $P(\theta|\vec{H})$ as $t\rightarrow\in
 
 \begin{frame}{Estimator precision is dependent on imaging conditions}
 
-We have shown how localization precision is affected by SNR, which is affected by the frame rate. However, localization precision is also independently determined by the density, which is affected by photoswitching rate constants. True density is unknown apriori, so, as a rule, we strive for the lowest density possible for a fixed set of rate constants. Lateral precision is less sensitive to SNR, so it is probably possible with our setup. 
+Pointillist SMLM data is quantified with Ripley's K-function $K(r)$, which counts events within a radius $r$. For $K(\sigma) > 0$, SMLM data can be crowded for some $\vec{k}$. On average 
 
+\begin{equation*}
+N_{s} = \lambda\langle\xi\rangle\;\;\; N_{b} = \lambda\langle\xi\rangle p_{\mathrm{ON}}K(\sigma)
+\end{equation*}
+
+where $\xi\sim P(\xi|\vec{k})$. $P$ might be a beta-distribution or normal approximating binomial for $N\rightarrow\infty$. Define $\zeta = 1/p_{\mathrm{ON}}K(\sigma)$ which we attempt to maximize with $K(\sigma)$ fixed and under the constraint that $p_{\mathrm{ON}}$ also achieves a desirable SR frame duration e.g., 1 second
 
 \end{frame}
 
 \begin{frame}
-Pointillist SMLM data is quantified with Ripley's K-function $K(r)$, which counts events within a radius $r$. For $K(\sigma) > 0$, SMLM data can be crowded for some $\vec{k}$. Suppose a particular fluorophore is ON for a sufficient amount of time during $\Delta$ to be detected. Now on average $\langle\xi\rangle \lambda$ signal photons are collected and $\langle\xi\rangle \lambda p_{\mathrm{ON}}K(\sigma)$ "background" photons will be collected where $\xi\sim P(\xi|\vec{k})$. $P$ might be a beta-distribution or normal approximating binomial for $N\rightarrow\infty$. Define $\zeta = 1/p_{\mathrm{ON}}K(\sigma)$ which we attempt to maximize with $K(\sigma)$ fixed and under the constraint that $p_{\mathrm{ON}}$ also achieves a desirable SR frame duration e.g., 1 second\\
-\vspace{0.2in}
+
 The lifetime distribution of the ON state is trivial. We can use the probability current to get the lifetime of the OFF state
 
 \begin{equation*}
@@ -219,12 +223,6 @@ where $\Delta_{\mathrm{SR}}$ is the desired SR frame length. $t(\vec{k}; N)$ is 
 
 
 \begin{frame}{Deep learning enables accurate 3D localization and single molecule tracking}
-Precise localization in dense images is intractable
-\begin{equation*}
-\mathcal{L} = \sum_{i,j} \log p_{ij}(\tilde{x}) = \sum_{i,j} \log \frac{\exp(-s_{ij}(\tilde{x}))}{\sum_{x\in\chi} \exp(-s_{ij}(\tilde{x}))}
-\end{equation*}
-
-$p_{ij}$ is the probability the model assigns a pixel to the true class $\tilde{x} \in \{0,1\}$
 
 \end{frame}
 
