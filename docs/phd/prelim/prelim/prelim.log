@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.1)  10 JUL 2023 22:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.5.30)  11 JUL 2023 02:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -686,9 +686,9 @@ Language: english 2017/06/06 v3.3r English support from the babel system
 Package babel Info: Hyphen rules for 'canadian' set to \l@english
 (babel)             (\language0). Reported on input line 102.
 Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
-(babel)             (\language24). Reported on input line 105.
+(babel)             (\language48). Reported on input line 105.
 Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
-(babel)             (\language24). Reported on input line 108.
+(babel)             (\language48). Reported on input line 108.
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2021/02/14 v1.3d Input encoding file
@@ -1285,84 +1285,67 @@ thkerncmss.
 ] [6
 
 ]
-<Setup.png, id=50, 1117.17375pt x 440.64626pt>
-File: Setup.png Graphic file (type png)
-<use Setup.png>
-Package pdftex.def Info: Setup.png  used on input line 99.
-(pdftex.def)             Requested size: 369.88585pt x 145.89108pt.
-
 [7
 
- <./Setup.png>]
-<Localization.png, id=59, 952.55875pt x 579.16376pt>
-File: Localization.png Graphic file (type png)
-<use Localization.png>
-Package pdftex.def Info: Localization.png  used on input line 108.
-(pdftex.def)             Requested size: 369.88582pt x 224.89201pt.
+]
+<Setup.png, id=55, 1117.17375pt x 440.64626pt>
+File: Setup.png Graphic file (type png)
+<use Setup.png>
+Package pdftex.def Info: Setup.png  used on input line 106.
+(pdftex.def)             Requested size: 369.88585pt x 145.89108pt.
  [8
 
- <./Localization.png>]
-<Images.png, id=66, 840.9819pt x 508.0581pt>
-File: Images.png Graphic file (type png)
-<use Images.png>
-Package pdftex.def Info: Images.png  used on input line 114.
-(pdftex.def)             Requested size: 369.88582pt x 223.45322pt.
+ <./Setup.png>]
+<Localization.png, id=63, 952.55875pt x 579.16376pt>
+File: Localization.png Graphic file (type png)
+<use Localization.png>
+Package pdftex.def Info: Localization.png  used on input line 115.
+(pdftex.def)             Requested size: 369.88582pt x 224.89201pt.
  [9
 
- <./Images.png>]
-<Astigmatism.png, id=73, 569.0058pt x 463.7325pt>
-File: Astigmatism.png Graphic file (type png)
-<use Astigmatism.png>
-Package pdftex.def Info: Astigmatism.png  used on input line 120.
-(pdftex.def)             Requested size: 284.52756pt x 231.8869pt.
- [10
-
- <./Astigmatism.png>]
-<Noise-Maps.png, id=80, 510.2262pt x 267.399pt>
+ <./Localization.png>]
+<Noise-Maps.png, id=70, 510.2262pt x 267.399pt>
 File: Noise-Maps.png Graphic file (type png)
 <use Noise-Maps.png>
-Package pdftex.def Info: Noise-Maps.png  used on input line 129.
+Package pdftex.def Info: Noise-Maps.png  used on input line 124.
 (pdftex.def)             Requested size: 341.43306pt x 178.94014pt.
- [11
+ [10
 
  <./Noise-Maps.png>]
-<Model.png, id=93, 613.29124pt x 299.1175pt>
+<Model.png, id=83, 613.29124pt x 299.1175pt>
 File: Model.png Graphic file (type png)
 <use Model.png>
-Package pdftex.def Info: Model.png  used on input line 157.
+Package pdftex.def Info: Model.png  used on input line 152.
 (pdftex.def)             Requested size: 227.62204pt x 111.01404pt.
 
-Overfull \hbox (83.63487pt too wide) detected at line 157
+Overfull \hbox (83.63487pt too wide) detected at line 152
 []
  []
 
-[12
+[11
 
  <./Model.png>]
-<Kolmogorov.png, id=105, 325.215pt x 144.54pt>
+<Kolmogorov.png, id=95, 325.215pt x 144.54pt>
 File: Kolmogorov.png Graphic file (type png)
 <use Kolmogorov.png>
-Package pdftex.def Info: Kolmogorov.png  used on input line 170.
+Package pdftex.def Info: Kolmogorov.png  used on input line 165.
 (pdftex.def)             Requested size: 284.52756pt x 126.46555pt.
- [13
+ [12
 
  <./Kolmogorov.png>]
-<Errors.png, id=113, 492.84125pt x 195.73125pt>
+<Errors.png, id=102, 492.84125pt x 195.73125pt>
 File: Errors.png Graphic file (type png)
 <use Errors.png>
-Package pdftex.def Info: Errors.png  used on input line 180.
+Package pdftex.def Info: Errors.png  used on input line 174.
 (pdftex.def)             Requested size: 284.52756pt x 113.00452pt.
- [14
+ [13
 
- <./Errors.png>]
-<SGLD.png, id=120, 433.62pt x 216.81pt>
-File: SGLD.png Graphic file (type png)
-<use SGLD.png>
-Package pdftex.def Info: SGLD.png  used on input line 189.
-(pdftex.def)             Requested size: 312.9803pt x 156.49675pt.
- [15
+ <./Errors.png>] [14
 
- <./SGLD.png>] [16
+] [15
+
+]
+[16
 
 ] [17
 
@@ -1375,12 +1358,6 @@ Package pdftex.def Info: SGLD.png  used on input line 189.
 ] [21
 
 ] [22
-
-] [23
-
-] [24
-
-] [25
 
 ]
 \tf@nav=\write7
@@ -1397,11 +1374,11 @@ Package rerunfilecheck Info: File `prelim.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 31957 strings out of 478287
- 633323 string characters out of 5849290
- 940499 words of memory out of 5000000
- 49415 multiletter control sequences out of 15000+600000
- 485174 words of font info for 77 fonts, out of 8000000 for 9000
+ 31920 strings out of 478287
+ 632852 string characters out of 5849289
+ 940497 words of memory out of 5000000
+ 49388 multiletter control sequences out of 15000+600000
+ 484880 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,14n,122p,418b,380s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
@@ -1413,16 +1390,16 @@ fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi
-8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on prelim.pdf (25 pages, 3838281 bytes).
+/cm/cmssi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mssi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on prelim.pdf (22 pages, 861621 bytes).
 PDF statistics:
- 262 PDF objects out of 1000 (max. 8388607)
- 176 compressed objects within 2 object streams
- 51 named destinations out of 1000 (max. 500000)
- 88 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 239 PDF objects out of 1000 (max. 8388607)
+ 162 compressed objects within 2 object streams
+ 45 named destinations out of 1000 (max. 500000)
+ 73 words of extra memory for PDF output out of 10000 (max. 10000000)
 

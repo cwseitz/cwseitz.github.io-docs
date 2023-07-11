@@ -57,7 +57,7 @@
 \begin{frame}
 \frametitle{}
 \centering
-\Large \textbf{\textcolor{blue}{Introduction and Approach}}
+\Large \textcolor{black}{Introduction}
 \end{frame}
 
 
@@ -83,6 +83,13 @@
 Formulate the basic research question and introduce the approach using major results from section 3
 \end{frame}
 
+\begin{frame}
+\frametitle{}
+\centering
+\Large \textcolor{black}{Methods}
+\end{frame}
+
+
 
 \begin{frame}
 \frametitle{Direct stochastic optical reconstruction microscopy}
@@ -107,18 +114,6 @@ Formulate the basic research question and introduce the approach using major res
   
 \end{frame}
 
-\begin{frame}{Super-Resolution imaging of H2B in living Hela cells}
-\begin{figure}
-\includegraphics[width=13cm]{Images.png}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Point spread function engineering for three-dimensional imaging}
-\begin{figure}
-\includegraphics[width=10cm]{Astigmatism.png}
-\end{figure}
-\end{frame}
-
 
 \begin{frame}{Readout noise of sCMOS cameras}
 Hamamatsu ORCA v3 CMOS, air cooled to -10C
@@ -137,10 +132,10 @@ Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\
 
 \begin{textblock*}{2cm}(1cm,2.5cm)
 \begin{align*}
-\mu_{k} &= g_{k}\textcolor{red}{\eta} \textcolor{yellow}{N_{0}}\textcolor{blue}{\Delta}\int_{\mathrm{pixel}} G(x,y)dA\\
+\mu_{k} &= g_{k}\textcolor{red}{\eta} \textcolor{cyan}{N_{0}}\textcolor{blue}{\Delta}\int_{\mathrm{pixel}} G(x,y)dA\\
 \\
 \textcolor{red}{\eta} &- \mathrm{quantum\; efficiency}\\
-\textcolor{yellow}{N_{0}} &- \mathrm{emission\; rate}\\
+\textcolor{cyan}{N_{0}} &- \mathrm{emission\; rate}\\
 \textcolor{blue}{\Delta} &- \mathrm{exposure\; time}
 \end{align*}
 \end{textblock*}
@@ -175,39 +170,22 @@ Using the approximation we can write
 \end{figure}
 \begin{itemize}
 \item MLE can approach the CRLB on simulated isolated emitter data
-\item MLE does not generalize well to dense time-series
 \end{itemize}
-\end{frame}
-
-\begin{frame}{Estimating uncertainty with gradient-based MCMC}
-Stochastic gradient langevin dynamics (SGLD): $$dw = - \nabla \ell(\theta) dt + \epsilon \sqrt{\eta dt}, \quad \epsilon \sim \mathcal N(0, \sigma^2), \eta \propto dt$$
-\begin{figure}
-\includegraphics[width=11cm]{SGLD.png}
-\end{figure}
-The diffusion samples from the posterior $P(\theta|\vec{H})$ as $t\rightarrow\infty$
-
-\end{frame}
-
-\begin{frame}{Photoswitching kinetics of Janelia-Fluor 646 in thiol buffer}
-
-
 \end{frame}
 
 \begin{frame}{Resolution is dependent on photoswitching kinetics}
 
-The number of molecules within the diffraction limit is $K\left(\frac{\lambda}{2\mathrm{NA}}\right)$. If $\alpha$ is the \emph{detection probability}, then $\alpha K\left(\frac{\lambda}{2\mathrm{NA}}\right)$ are detected, on average. We want to minimize
+Define $\alpha$ as the \emph{detection probability} with threshold $\delta << \Delta$
 
 \begin{equation*}
-\mathcal{L} = \alpha K\left(\frac{\lambda}{2\mathrm{NA}}\right) + \gamma\left(\Delta_{\mathrm{SR}}+\frac{2N}{\log(1-\alpha)}\right)^{2}
+\alpha = \int_{\delta}^{\Delta}\left(\sum_{n=0}^{\infty}Q(N=n)\psi(t|n;\vec{k})\right)dt \approx \underset{t\sim P}{\mathbb{E}}\left(\mathbb{I}[t > \delta]\right)
 \end{equation*}
 
-The second term contains $\frac{2N}{\log(1-\alpha)}$, which is the minimum number of frames needed to detect 99 percent of N molecules (which can be obtained from the geometric distribution). If we assume a two-state generator, then
+The number of molecules within the diffraction limit is $K\left(\frac{\lambda}{2\mathrm{NA}}\right)$. then $\alpha K\left(\frac{\lambda}{2\mathrm{NA}}\right)$ are detected, on average. Higher density gives more errors but decreases the SR frame duration $\Delta_{SR}$. Thus we define
 
 \begin{equation*}
-\alpha = \int_{\delta}^{\Delta}\left(\sum_{n=0}^{\infty}Q(N=n)\psi(t|n;\vec{k})\right)dt
+D = \alpha K\left(\frac{\lambda}{2\mathrm{NA}}\right)\;\; T = \left(\Delta_{SR}+\frac{2N}{\log(1-\alpha)}\right)^{2}
 \end{equation*}
-
-which is very hard to compute in terms of $\vec{k}$, so we generally resort to Monte Carlo estimates of $\alpha$.
 
 \end{frame}
 
@@ -216,15 +194,15 @@ which is very hard to compute in terms of $\vec{k}$, so we generally resort to M
 \end{frame}
 
 
+\begin{frame}{Dirichlet process Gaussian mixture model (DPGMM)}
+\end{frame}
+
 \begin{frame}
 \frametitle{}
 \centering
-\Large \textbf{\textcolor{blue}{Mesoscale nucleosome organization and dynamics}}
+\Large \textcolor{black}{Results}
 \end{frame}
 
-
-\begin{frame}{Dirichlet process Gaussian mixture model (DPGMM)}
-\end{frame}
 
 \begin{frame}{GMM cluster analysis of H2B}
 Number of clusters is unknown apriori - Bayesian nonparametrics
