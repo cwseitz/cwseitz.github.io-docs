@@ -204,10 +204,10 @@ The number of molecules within the diffraction limit is $K\left(\frac{\lambda}{2
 The second term contains $\frac{2N}{\log(1-\alpha)}$, which is the minimum number of frames needed to detect 99 percent of N molecules (which can be obtained from the geometric distribution). If we assume a two-state generator, then
 
 \begin{equation*}
-P(t) = P(0)e^{Gt}
+\alpha = \int_{\delta}^{\Delta}\left(\sum_{n=0}^{\infty}Q(N=n)\psi(t|n;\vec{k})\right)dt
 \end{equation*}
 
-and $G\pi = 0$ gives $\pi = (\alpha,\beta) = \frac{1}{k}\left(k_{12},k_{21}\right)$ where $k=k_{12}+k_{21}$.
+which is very hard to compute in terms of $\vec{k}$, so we generally resort to Monte Carlo estimates of $\alpha$.
 
 \end{frame}
 
