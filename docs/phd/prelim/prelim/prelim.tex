@@ -63,8 +63,8 @@
 
 \begin{frame}{TO DO}
 \begin{itemize}
-\item $\alpha$-distribution, acquisition time scaling with $\alpha$
-\item Deep learning approach for dense 2D and sparse 3D localization (see example figure)
+\item $\alpha$-distribution
+\item Deep learning approach for dense 2D and sparse 3D localization (see example figure), but incorporate $\alpha$ parameter
 \item Tuning the GMM and cluster statistics
 \item Caged diffusion dynamics (Singh 2018, Ashwin 2019)
 \end{itemize}
@@ -161,6 +161,12 @@ Using the approximation we can write
 \end{itemize}
 \end{frame}
 
+\begin{frame}{The metastable OFF state can be maintained with high laser power}
+\begin{textblock*}{14cm}(0.5cm,1.3cm)
+\includegraphics[width=14cm]{Laser.png}
+\end{textblock*}
+\end{frame}
+
 \begin{frame}{Resolution is dependent on photoswitching kinetics}
 
 \begin{textblock*}{4cm}(0.5cm,1cm)
@@ -184,17 +190,19 @@ Using the approximation we can write
 
 \begin{frame}{Resolution is dependent on photoswitching kinetics}
 
-Define $\alpha$ as the \emph{detection probability} with threshold $\delta << \Delta$
+A molecule is considered "detected" in principle if the measured ADU signal satisfies $\tilde{s} =\mu\tau \geq \delta$ where $\delta$ is a number of photons which satisfy a criterion on localization accuracy.
 
 \begin{equation*}
-\alpha = \int_{\delta}^{\Delta}\left(\sum_{n=0}^{\infty}Q(N=n)\psi(t|n;\vec{k})\right)dt \approx \underset{t\sim P}{\mathbb{E}}\left(\mathbb{I}[t > \delta]\right)
+\alpha = \int_{\delta}^{\Delta}\left(\sum_{n=0}^{\infty}Q(N=n)\psi(\tau|n;\vec{k})\right)d\tau \approx \underset{\tau\sim P(\tau)}{\mathbb{E}}\left(\mathbb{I}[\tau > \delta]\right)
 \end{equation*}
 
-The number of molecules within the diffraction limit is $K\left(\frac{\lambda}{2\mathrm{NA}}\right)$. then $\alpha K\left(\frac{\lambda}{2\mathrm{NA}}\right)$ are detected, on average. Higher density gives more errors but decreases the SR frame duration $\Delta_{SR}$. Thus we define
+$P(\tau)$ is usually obtained by Monte Carlo simulation. This is useful for computing density measures and the total acqusition time:
 
 \begin{equation*}
 D = \alpha K\left(\frac{\lambda}{2\mathrm{NA}}\right)\;\; T = \left(\Delta_{SR}+\frac{2N}{\log(1-\alpha)}\right)^{2}
 \end{equation*}
+
+For actually inferring $k_{1},k_{2}$, we need a measure of distance between $P(\tilde{s})$ and $P(s|k_{1},k_{2})$ for many $k_{1},k_{2}$ pairs. Luckily we only need to compute $P(s|k_{1},k_{2})$ once, and we can then perform a grid search
 
 \end{frame}
 

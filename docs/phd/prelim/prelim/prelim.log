@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.5.30)  14 JUL 2023 02:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.8)  14 JUL 2023 14:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -686,9 +686,9 @@ Language: english 2017/06/06 v3.3r English support from the babel system
 Package babel Info: Hyphen rules for 'canadian' set to \l@english
 (babel)             (\language0). Reported on input line 102.
 Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
-(babel)             (\language48). Reported on input line 105.
+(babel)             (\language49). Reported on input line 105.
 Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
-(babel)             (\language48). Reported on input line 108.
+(babel)             (\language49). Reported on input line 108.
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2021/02/14 v1.3d Input encoding file
@@ -1336,55 +1336,61 @@ Package pdftex.def Info: Errors.png  used on input line 162.
  [11
 
  <./Errors.png>]
-<STORM.png, id=98, 216.81pt x 289.08pt>
+<Laser.png, id=98, 1392.20125pt x 789.95125pt>
+File: Laser.png Graphic file (type png)
+<use Laser.png>
+Package pdftex.def Info: Laser.png  used on input line 168.
+(pdftex.def)             Requested size: 398.33858pt x 226.01836pt.
+ [12
+
+ <./Laser.png (PNG copy)>]
+<STORM.png, id=104, 216.81pt x 289.08pt>
 File: STORM.png Graphic file (type png)
 <use STORM.png>
-Package pdftex.def Info: STORM.png  used on input line 182.
+Package pdftex.def Info: STORM.png  used on input line 188.
 (pdftex.def)             Requested size: 113.81102pt x 151.74721pt.
-<Spatstat.png, id=99, 648.92438pt x 368.1253pt>
+<Spatstat.png, id=105, 648.92438pt x 368.1253pt>
 File: Spatstat.png Graphic file (type png)
 <use Spatstat.png>
-Package pdftex.def Info: Spatstat.png  used on input line 182.
+Package pdftex.def Info: Spatstat.png  used on input line 188.
 (pdftex.def)             Requested size: 284.52756pt x 161.4083pt.
 
-Overfull \hbox (56.90552pt too wide) in paragraph at lines 182--182
+Overfull \hbox (56.90552pt too wide) in paragraph at lines 188--188
  [] 
  []
 
-[12
+[13
 
- <./STORM.png> <./Spatstat.png (PNG copy)>] [13
+ <./STORM.png> <./Spatstat.png (PNG copy)>] [14
 
 ]
-<Jaccard.png, id=114, 1293.83376pt x 743.77875pt>
+<Jaccard.png, id=119, 1293.83376pt x 743.77875pt>
 File: Jaccard.png Graphic file (type png)
 <use Jaccard.png>
-Package pdftex.def Info: Jaccard.png  used on input line 205.
+Package pdftex.def Info: Jaccard.png  used on input line 213.
 (pdftex.def)             Requested size: 341.43306pt x 196.27194pt.
- [14
+ [15
 
  <./Jaccard.png>]
-[15
+[16
 
 ]
-<Dirichlet.png, id=126, 349.0641pt x 127.1952pt>
+<Dirichlet.png, id=131, 349.0641pt x 127.1952pt>
 File: Dirichlet.png Graphic file (type png)
 <use Dirichlet.png>
-Package pdftex.def Info: Dirichlet.png  used on input line 218.
+Package pdftex.def Info: Dirichlet.png  used on input line 226.
 (pdftex.def)             Requested size: 284.52756pt x 103.67772pt.
- [16
-
- <./Dirichlet.png>]
-<GMM.png, id=133, 453.8556pt x 224.7597pt>
-File: GMM.png Graphic file (type png)
-<use GMM.png>
-Package pdftex.def Info: GMM.png  used on input line 224.
-(pdftex.def)             Requested size: 369.88582pt x 183.17924pt.
  [17
 
- <./GMM.png>] [18
+ <./Dirichlet.png>]
+<GMM.png, id=138, 453.8556pt x 224.7597pt>
+File: GMM.png Graphic file (type png)
+<use GMM.png>
+Package pdftex.def Info: GMM.png  used on input line 232.
+(pdftex.def)             Requested size: 369.88582pt x 183.17924pt.
+ [18
 
-] [19
+ <./GMM.png>] [19
 
 ] [20
 
@@ -1393,6 +1399,8 @@ Package pdftex.def Info: GMM.png  used on input line 224.
 ] [22
 
 ] [23
+
+] [24
 
 ]
 \tf@nav=\write7
@@ -1410,11 +1418,11 @@ Package rerunfilecheck Info: File `prelim.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 31961 strings out of 478287
- 633422 string characters out of 5849289
- 940497 words of memory out of 5000000
- 49422 multiletter control sequences out of 15000+600000
- 484880 words of font info for 76 fonts, out of 8000000 for 9000
+ 31970 strings out of 478287
+ 633525 string characters out of 5849290
+ 940498 words of memory out of 5000000
+ 49429 multiletter control sequences out of 15000+600000
+ 484524 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,14n,122p,418b,380s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
@@ -1432,10 +1440,10 @@ pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on prelim.pdf (23 pages, 1340540 bytes).
+Output written on prelim.pdf (24 pages, 2112917 bytes).
 PDF statistics:
- 253 PDF objects out of 1000 (max. 8388607)
- 166 compressed objects within 2 object streams
- 47 named destinations out of 1000 (max. 500000)
- 98 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 257 PDF objects out of 1000 (max. 8388607)
+ 169 compressed objects within 2 object streams
+ 49 named destinations out of 1000 (max. 500000)
+ 103 words of extra memory for PDF output out of 10000 (max. 10000000)
 
