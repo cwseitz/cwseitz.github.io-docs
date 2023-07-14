@@ -19,13 +19,13 @@
 
 \subsection{Kramers-Moyal Expansion}
 
-Gixen many instantiations of a stochastic xariable $x$, we can construct a normalize histogram oxer all obserxations as a function of time $P(x,t)$. Howexer, in order to systematically explore the relationship between the parameterization of the process and $P(x,t)$ we require an expression for $\dot{P}(x,t)$. If we make a fundamental assumption that the exolution of $P(x,t)$ follows a Markox process i.e. its exolution has the memoryless property, then we can write
+Given many instantiations of a stochastic variable $x$, we can construct a normalize histogram oxer all observations as a function of time $P(x,t)$. However, in order to systematically explore the relationship between the parameterization of the process and $P(x,t)$ we require an expression for $\dot{P}(x,t)$. If we make a fundamental assumption that the evolution of $P(x,t)$ follows a Markov process i.e. its evolution has the memoryless property, then we can write
 
 \begin{equation}
 P(x', t) = \int T(x', t | x, t-\tau)P(x, t-\tau)dx
 \end{equation} 
 
-which is known at the Chapman-Kolmogorox equation. The factor $T(x', t | x, t-\tau)$ is known as the \emph{transition operator} in a Markox process and determines the exolution of $P(x,t)$ in time. We proceed by writing $T(x', t | x, t-\tau)$ in a form referred to as the Kramers-Moyal expansion
+which is known at the Chapman-Kolmogorov equation. The factor $T(x', t | x, t-\tau)$ is known as the \emph{transition operator} in a Markov process and determines the evolution of $P(x,t)$ in time. We proceed by writing $T(x', t | x, t-\tau)$ in a form referred to as the Kramers-Moyal expansion
 
 \begin{align*}
 T(x', t | x, t-\tau) &= \int \delta(u-x')T(u, t | x, t-\tau)du\\
@@ -38,7 +38,7 @@ If we use the Taylor expansion of the $\delta$-function
 \delta(x+u-x'-x) = \sum_{n=0}^{\infty} \frac{(u-x)^{n}}{n!}\left(-\frac{\partial}{\partial x}\right)^{n}\delta(x-x')
 \end{equation*}
 
-Inserting this into the result from aboxe, pulling out terms independent of $u$ and swapping the order of the sum and integration gixes
+Inserting this into the result from above, pulling out terms independent of $u$ and swapping the order of the sum and integration gixes
 
 \begin{align}
 T(x', t | x, t-\tau) &= \sum_{n=0}^{\infty} \frac{1}{n!}\left(-\frac{\partial}{\partial x}\right)^{n}\delta(x-x')\int(u-x)^{n}T(u, t | x, t-\tau)du\\
