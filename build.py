@@ -20,7 +20,7 @@ def build_site():
     index.write('index.html')
 
     #Build project listing page
-    projects = ['fdl/', 'info/', 'sm/', 'bio/', 'phd/', 'qm/']
+    projects = ['fdl/', 'info/', 'pm/', 'sm/', 'bio/', 'phd/', 'qm/']
 
     for project in projects:
 
