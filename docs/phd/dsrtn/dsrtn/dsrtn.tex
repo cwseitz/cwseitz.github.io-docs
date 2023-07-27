@@ -157,13 +157,13 @@ with the following continuous density over the pixel array
 \end{equation}
 
 
-\subsection{Localization microscopy as Bayesian inference}
+\subsection{Localization microscopy as frequentist inference}
 
-Armed with a model for image formation, we adopt the Bayesian view of localization microscopy, which provides a rigorous statistical framework for bounding our uncertainty in localization microscopy measurements. This involves defining a lower bound on the uncertainty in the localization parameters - typically lateral or lateral and axial coordinates of each of $K$ emitters in the field of view. Some authors have estimated this lower bound using point spread functions in continuous space; however, the spatial binning process results in a loss of information during photon detection, which, in turn, can inflate our uncertainty. Therefore, in the remainder of this chapter, I make use of our generative image model rather than using calculus on continuous spaces to compute uncertainties. We begin with Bayes rule:
+According to our image formation, molecules really do have an exact location in space. In pratice, this is only an approximation since molecules diffuse at physiological temperatures, and our exposure time would need to tend to zero for this to be exactly true. If we suppose that we can collect a sufficient amount of photons in a short enough time, the physical nature of the system suggests a frequentist inference procedure for localization. A natural choice is maximum likelihood estimation. 
 
-\begin{align}
-P(\theta|\vec{H}) = \frac{P(\vec{H}|\theta)P(\theta)}{\int P(\vec{H}|\theta)P(\theta) d\theta}
-\end{align}
+\begin{equation*}
+\theta_{\mathrm{MLE}} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\theta)= \underset{\theta}{\mathrm{argmin}}-\sum_{k}\log P(H_{k}|\theta)
+\end{equation*}
 
 Under the Poisson approximation, the model negative log-likelihood is
 
@@ -172,10 +172,7 @@ Under the Poisson approximation, the model negative log-likelihood is
 &= \sum_{k}  \log n_{k}! + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
 \end{align}
 
-Clearly our task in Bayesian inference is to transform our prior knowledge about $\theta$ into a posterior distribution, using the observed data. However, when the log-likelihood is easy to compute (as it is here), we may ask: how much information does the data actually carry about parameters of our model? If the likelihood of the dataset is roughly constant for any parameter set we choose, we might expect our model cannot explain our observations. In other words, the data does not appear to carry much information about the parameters. After all, our posterior is being shaped in part by this likelihood. On the other hand, if $\ell$ has a number of bumps or inflection points, then we expect that maybe some parameter sets make our observed data more likely. The ``bumpiness" of the likelihood surface is called the Fisher information - a fundmantal metric in information geometry. 
-
-
-\subsection{The Fisher information metric}
+When the log-likelihood is easy to compute, as it is under this approximation, we may ask: how much information does the data actually carry about parameters of our model? If the likelihood of the dataset is roughly constant for any parameter set we choose, we might expect our model cannot explain our observations. In other words, the data does not appear to carry much information about the parameters. After all, our posterior is being shaped in part by this likelihood. On the other hand, if $\ell$ has a number of bumps or inflection points, then we expect that maybe some parameter sets make our observed data more likely. The ``bumpiness" of the likelihood surface is called the Fisher information - a fundamental metric in information geometry. 
 
 In frequentist statistics, the Fisher information matrix $I(\theta)$ can be directly related to the curvature of the KL-Divergence over the parameter space
 
@@ -190,10 +187,11 @@ In frequentist statistics, the Fisher information matrix $I(\theta)$ can be dire
 
 We often call the Hessian matrix the \emph{score}. The Fisher information is the result of averaging the score over the parameter space. 
 
+When calculating localization uncertainties in this setting, we must assume that the likelihood function is well-approximated by a quadratic form around the MLE (i.e., the asymptotic normality of MLE), which may not hold in general. In order to calculate uncertainties in the molecular coordinates, in can be convenient to switch to the Bayesian point of view, where we know have to write the full posterior distribution, specifying a prior.
 
-\subsection{Fisher information for the 3D integrated gaussian}
-
-Estimating the Fisher information matrix in the 3D case is more challenging, since it cannot be written in the form of (1.10). A reasonable option is to turn to Monte Carlo methods to estimate the expectation. Classic Markov Chain Monte Carlo (MCMC) techniques like Metropolis-Hastings or Hamiltonian Monte Carlo could be used, but are notoriously slow and difficult to tune. Alternatives based on Langevin dynamics can be used when gradients of the likelihood are readily available. This class of methods use gradient information to guide an optimizer through the parameter space as well as stochastic terms to prevent the optimizer from becoming trapped in local modes. After burn-in Langevin dynamics can be interpreted as sampling from a stationary distribution, which in our case is the posterior distribution on PSF model parameters. Therefore, we will use Stochastic Gradient Langevin Dynamics (SGLD), an algorithm commonly used to sample from the parameter's posterior. By drawing samples, we can simultaneously estimate the Fisher information matrix (by computing the Hessian at each sample) while obtaining estimates of parameter uncertainty by computing the variance of a batch of samples.
+\begin{align}
+P(\theta|\vec{H}) = \frac{P(\vec{H}|\theta)P(\theta)}{\int P(\vec{H}|\theta)P(\theta) d\theta}
+\end{align}
 
 
 \section{Markovian photoswitching dynamics}
