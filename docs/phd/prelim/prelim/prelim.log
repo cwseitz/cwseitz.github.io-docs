@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.8)  27 JUL 2023 14:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.5.30)  1 AUG 2023 00:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -686,9 +686,9 @@ Language: english 2017/06/06 v3.3r English support from the babel system
 Package babel Info: Hyphen rules for 'canadian' set to \l@english
 (babel)             (\language0). Reported on input line 102.
 Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
-(babel)             (\language49). Reported on input line 105.
+(babel)             (\language48). Reported on input line 105.
 Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
-(babel)             (\language49). Reported on input line 108.
+(babel)             (\language48). Reported on input line 108.
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2021/02/14 v1.3d Input encoding file
@@ -1330,55 +1330,62 @@ Package pdftex.def Info: Astigmatism.png  used on input line 151.
  [11
 
  <./Astigmatism.png>]
-<Architecture.png, id=95, 1035.87pt x 427.5975pt>
-File: Architecture.png Graphic file (type png)
-<use Architecture.png>
-Package pdftex.def Info: Architecture.png  used on input line 157.
-(pdftex.def)             Requested size: 369.88582pt x 152.68878pt.
+<MCMC/Figure_1.png, id=95, 186.4566pt x 192.9609pt>
+File: MCMC/Figure_1.png Graphic file (type png)
+<use MCMC/Figure_1.png>
+Package pdftex.def Info: MCMC/Figure_1.png  used on input line 169.
+(pdftex.def)             Requested size: 113.81102pt x 117.78252pt.
+<MCMC/Figure_2.png, id=96, 216.81pt x 144.54pt>
+File: MCMC/Figure_2.png Graphic file (type png)
+<use MCMC/Figure_2.png>
+Package pdftex.def Info: MCMC/Figure_2.png  used on input line 169.
+(pdftex.def)             Requested size: 113.81102pt x 75.8736pt.
+<MCMC/Figure_3.png, id=97, 505.89pt x 361.35pt>
+File: MCMC/Figure_3.png Graphic file (type png)
+<use MCMC/Figure_3.png>
+Package pdftex.def Info: MCMC/Figure_3.png  used on input line 169.
+(pdftex.def)             Requested size: 256.0748pt x 182.91313pt.
  [12
 
- <./Architecture.png>] [13
+ <./MCMC/Figure_1.png> <./MCMC/Figure_2.png> <./MCMC/Figure_3.png>]
+<Architecture.png, id=107, 1035.87pt x 427.5975pt>
+File: Architecture.png Graphic file (type png)
+<use Architecture.png>
+Package pdftex.def Info: Architecture.png  used on input line 175.
+(pdftex.def)             Requested size: 369.88582pt x 152.68878pt.
+ [13
+
+ <./Architecture.png>] [14
 
 ]
-<Laser.png, id=108, 1392.20125pt x 789.95125pt>
+<Laser.png, id=120, 1392.20125pt x 789.95125pt>
 File: Laser.png Graphic file (type png)
 <use Laser.png>
-Package pdftex.def Info: Laser.png  used on input line 167.
+Package pdftex.def Info: Laser.png  used on input line 185.
 (pdftex.def)             Requested size: 398.33858pt x 226.01836pt.
- [14
+ [15
 
  <./Laser.png (PNG copy)>]
-<STORM.png, id=114, 216.81pt x 289.08pt>
-File: STORM.png Graphic file (type png)
-<use STORM.png>
-Package pdftex.def Info: STORM.png  used on input line 187.
-(pdftex.def)             Requested size: 113.81102pt x 151.74721pt.
-<Spatstat.png, id=115, 648.92438pt x 368.1253pt>
-File: Spatstat.png Graphic file (type png)
-<use Spatstat.png>
-Package pdftex.def Info: Spatstat.png  used on input line 187.
-(pdftex.def)             Requested size: 284.52756pt x 161.4083pt.
+<Cluster.png, id=126, 462.528pt x 346.896pt>
+File: Cluster.png Graphic file (type png)
+<use Cluster.png>
+Package pdftex.def Info: Cluster.png  used on input line 193.
+(pdftex.def)             Requested size: 284.52756pt x 213.40593pt.
+ [16
 
-Overfull \hbox (56.90552pt too wide) in paragraph at lines 187--187
- [] 
- []
-
-[15
-
- <./STORM.png> <./Spatstat.png (PNG copy)>] [16
+ <./Cluster.png>] [17
 
 ]
-<Jaccard.png, id=129, 1293.83376pt x 743.77875pt>
+<Jaccard.png, id=139, 1293.83376pt x 743.77875pt>
 File: Jaccard.png Graphic file (type png)
 <use Jaccard.png>
-Package pdftex.def Info: Jaccard.png  used on input line 212.
+Package pdftex.def Info: Jaccard.png  used on input line 218.
 (pdftex.def)             Requested size: 341.43306pt x 196.27194pt.
- [17
+ [18
 
- <./Jaccard.png>]
-[18
+ <./Jaccard.png>] [19
 
-] [19
+] [20
 
 ]
 \tf@nav=\write7
@@ -1395,10 +1402,10 @@ Package rerunfilecheck Info: File `prelim.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 31934 strings out of 478287
- 633167 string characters out of 5849290
- 940522 words of memory out of 5000000
- 49405 multiletter control sequences out of 15000+600000
+ 31955 strings out of 478287
+ 633557 string characters out of 5849289
+ 940520 words of memory out of 5000000
+ 49421 multiletter control sequences out of 15000+600000
  484524 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,14n,122p,418b,380s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1417,10 +1424,10 @@ pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on prelim.pdf (19 pages, 3059994 bytes).
+Output written on prelim.pdf (20 pages, 3107127 bytes).
 PDF statistics:
- 226 PDF objects out of 1000 (max. 8388607)
- 147 compressed objects within 2 object streams
- 39 named destinations out of 1000 (max. 500000)
- 93 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 236 PDF objects out of 1000 (max. 8388607)
+ 151 compressed objects within 2 object streams
+ 41 named destinations out of 1000 (max. 500000)
+ 103 words of extra memory for PDF output out of 10000 (max. 10000000)
 
