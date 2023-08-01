@@ -71,7 +71,14 @@
 \Large \textcolor{black}{Methods}
 \end{frame}
 
+\begin{frame}
+\frametitle{High throughput widefield microscopy}
 
+\begin{figure}
+\includegraphics[width=12cm]{Figure-1.png}
+\end{figure}
+  
+\end{frame}
 
 \begin{frame}
 \frametitle{Direct stochastic optical reconstruction microscopy}
@@ -94,13 +101,6 @@
 \end{frame}
 
 
-\begin{frame}{Readout noise of sCMOS cameras}
-Hamamatsu ORCA v3 CMOS, air cooled to -10C
-\begin{figure}
-\includegraphics[width=12cm]{Noise-Maps.png}
-\end{figure}
-Measured signal: $H_{k} = S_{k} + \xi_{k}$, $S_{k}\sim \mathrm{Poisson(\mu_{k})}, \xi_{k}\sim \mathcal{N}(o_{k},\sigma_{k}^{2})$
-\end{frame}
 
 \begin{frame}{Maximum likelihood localization of an isolated fluorescent emitter}
 Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\theta)= \underset{\theta}{\mathrm{argmin}}-\sum_{k}\log P(H_{k}|\theta)$
@@ -130,6 +130,13 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 
 \end{frame}
 
+\begin{frame}{Readout noise of sCMOS cameras}
+Hamamatsu ORCA v3 CMOS, air cooled to -10C
+\begin{figure}
+\includegraphics[width=12cm]{Noise-Maps.png}
+\end{figure}
+Measured signal: $H_{k} = S_{k} + \xi_{k}$, $S_{k}\sim \mathrm{Poisson(\mu_{k})}, \xi_{k}\sim \mathcal{N}(o_{k},\sigma_{k}^{2})$
+\end{frame}
 
 \begin{frame}{Quality of the Poisson approximation depends on SNR}
 $P(H_{k}|\theta)\approx \mathrm{Poisson}(\mu_{k}+\sigma_{k}^{2})$ for $N_{0} > 500$ asssuming $\Delta=100$ms 
@@ -224,8 +231,13 @@ For actually inferring $k_{1},k_{2}$, we need a measure of distance between $P(\
 \Large \textcolor{black}{Results}
 \end{frame}
 
-\begin{frame}{Diffusion of H2B-JF549 depends on local nucleosome organization}
-
+\begin{frame}{Validaton of JQ1 efficacy for BRD4 inhibition in Hela cells}
+\begin{textblock*}{6cm}(1.0cm,2.0cm)
+\includegraphics[width=6cm]{GBP5-RT-qPCR-crop.png}
+\end{textblock*}
+\begin{textblock*}{6cm}(7.0cm,2.0cm)
+\includegraphics[width=6cm]{GBP5-JQ1-KD-crop.png}
+\end{textblock*}
 \end{frame}
 
 
