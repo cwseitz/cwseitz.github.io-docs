@@ -62,11 +62,15 @@
 
 \begin{frame}{Summary}
 \begin{itemize}
-\item We study the organization of nucleosomes in living cells, and I am interested in the role of BRD4 protein on chromatin packing
-\item We study chromatin structure using SMLM, which can increase lateral resolution by one order of magnitude in living cells. This technique permits super-resolution of chromatin structure and single molecule tracking to probe the physical properties of chromatin nanodomins
-\item In general, the uncertainty of a statistical estimator determines the resolution limit (Cramer-Rao lower bound). Deep learning based localization methods can approach this bound in the limit, faster than maximum likelihood estimation
-\item SMLM achieves the highest resolution of SR methods, but requires sparse labeling of nuclear proteins, which in turn reuces the overall throughput and time resolution
-\item Therefore, we look to other alternatives for resolution enhancement which combine the power of deep methods e.g., ANNA-PALM, with the physical constraints of image autocorrelation based techniques e.g., SOFI/SACDj
+\item We study the organization of nucleosomes in living cells, and I am interested in the impact of BRD4 phase separation (fusion/fission) on chromatin packing
+\item We study chromatin structure using SMLM, which can increase lateral resolution by one order of magnitude in living cells compared to standard widefield microscpy
+\item  SMLM enables simultaneous super-resolution of chromatin structure and single molecule tracking to probe the physical properties of chromatin nanodomins
+
+\item In general, the uncertainty of a statistical estimator in SMLM determines the resolution limit (Cramer-Rao lower bound). \item Deep learning can generalize SMLM to three dimensions, particularly in sparsely labeled regimes
+
+\item SMLM achieves the highest resolution of SR methods; however, there is a fundamental tradeoff between spatial and temporal resolution (Shroff et al)
+
+\item Therefore, we look to other alternatives for resolution enhancement which combine the power of deep image translation methods e.g., ANNA-PALM
 \end{itemize}
 \end{frame}
 
@@ -77,19 +81,7 @@
 \Large \textcolor{black}{Methods}
 \end{frame}
 
-\begin{frame}
-\frametitle{High throughput widefield microscopy}
 
-\begin{figure}
-\includegraphics[width=12cm]{Figure-1.png}
-\end{figure}
-  
-\end{frame}
-
-\begin{frame}
-\frametitle{Direct stochastic optical reconstruction microscopy}
-
-\end{frame}
 
 \begin{frame}
 \frametitle{Direct stochastic optical reconstruction microscopy}
@@ -100,11 +92,6 @@
   
 \end{frame}
 
-\begin{frame}
-\frametitle{Direct stochastic optical reconstruction microscopy}
-
-  
-\end{frame}
 
 
 
@@ -178,14 +165,18 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 
 
 
-\begin{frame}{Deep learning beats MLE at 2D and 3D localization}
+\begin{frame}{Deep learning can generalize precise SMLM to three dimensions}
 \begin{figure}
 \includegraphics[width=13cm]{Architecture.png}
 \end{figure}
 \end{frame}
 
-\begin{frame}{Deep learning beats MLE at 2D and 3D localization}
+\begin{frame}{Deep learning can generalize precise SMLM to three dimensions}
+\begin{figure}
+\includegraphics[width=12cm]{Jaccard.png}
+\end{figure}
 \end{frame}
+
 
 
 \begin{frame}{The metastable OFF state can be maintained with high laser power}
@@ -200,6 +191,15 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \includegraphics[width=\textwidth]{Cluster.png}
 \end{textblock*}
 
+\end{frame}
+
+
+\begin{frame}{The tradeoff between spatial and temporal resolution in SMLM}
+\begin{figure}
+\includegraphics[width=11cm]{Shroff.png}
+\end{figure}
+\textit{Shroff et al. Live-cell photoactivated localization microscopy of
+nanoscale adhesion dynamics. Nature Methods.}
 \end{frame}
 
 
@@ -219,12 +219,6 @@ D = \alpha K\left(\frac{\lambda}{2\mathrm{NA}}\right)\;\; T = \left(\Delta_{SR}+
 
 For actually inferring $k_{1},k_{2}$, we need a measure of distance between $P(\tilde{s})$ and $P(s|k_{1},k_{2})$ for many $k_{1},k_{2}$ pairs. Luckily we only need to compute $P(s|k_{1},k_{2})$ once, and we can then perform a grid search
 
-\end{frame}
-
-\begin{frame}{Resolution is dependent on photoswitching kinetics}
-\begin{figure}
-\includegraphics[width=12cm]{Jaccard.png}
-\end{figure}
 \end{frame}
 
 
