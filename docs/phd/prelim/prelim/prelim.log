@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.8)  3 AUG 2023 14:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.1)  4 AUG 2023 02:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -686,9 +686,9 @@ Language: english 2017/06/06 v3.3r English support from the babel system
 Package babel Info: Hyphen rules for 'canadian' set to \l@english
 (babel)             (\language0). Reported on input line 102.
 Package babel Info: Hyphen rules for 'australian' set to \l@ukenglish
-(babel)             (\language49). Reported on input line 105.
+(babel)             (\language24). Reported on input line 105.
 Package babel Info: Hyphen rules for 'newzealand' set to \l@ukenglish
-(babel)             (\language49). Reported on input line 108.
+(babel)             (\language24). Reported on input line 108.
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2021/02/14 v1.3d Input encoding file
@@ -1318,97 +1318,89 @@ Overfull \hbox (83.63487pt too wide) detected at line 137
 [9
 
  <./Model.png>]
-<Noise-Maps.png, id=82, 510.2262pt x 267.399pt>
-File: Noise-Maps.png Graphic file (type png)
-<use Noise-Maps.png>
-Package pdftex.def Info: Noise-Maps.png  used on input line 145.
-(pdftex.def)             Requested size: 341.43306pt x 178.94014pt.
+<Noise.png, id=82, 674.2791pt x 286.9119pt>
+File: Noise.png Graphic file (type png)
+<use Noise.png>
+Package pdftex.def Info: Noise.png  used on input line 149.
+(pdftex.def)             Requested size: 369.88582pt x 157.39487pt.
  [10
 
- <./Noise-Maps.png>]
-<Kolmogorov.png, id=89, 325.215pt x 144.54pt>
-File: Kolmogorov.png Graphic file (type png)
-<use Kolmogorov.png>
-Package pdftex.def Info: Kolmogorov.png  used on input line 157.
-(pdftex.def)             Requested size: 284.52756pt x 126.46555pt.
+ <./Noise.png>]
+<MCMC/Figure_1.png, id=89, 186.4566pt x 192.9609pt>
+File: MCMC/Figure_1.png Graphic file (type png)
+<use MCMC/Figure_1.png>
+Package pdftex.def Info: MCMC/Figure_1.png  used on input line 167.
+(pdftex.def)             Requested size: 113.81102pt x 117.78252pt.
+<MCMC/Figure_2.png, id=90, 216.81pt x 144.54pt>
+File: MCMC/Figure_2.png Graphic file (type png)
+<use MCMC/Figure_2.png>
+Package pdftex.def Info: MCMC/Figure_2.png  used on input line 167.
+(pdftex.def)             Requested size: 113.81102pt x 75.8736pt.
+<MCMC/Figure_3.png, id=91, 505.89pt x 361.35pt>
+File: MCMC/Figure_3.png Graphic file (type png)
+<use MCMC/Figure_3.png>
+Package pdftex.def Info: MCMC/Figure_3.png  used on input line 167.
+(pdftex.def)             Requested size: 256.0748pt x 182.91313pt.
  [11
 
- <./Kolmogorov.png>]
-<Astigmatism.png, id=96, 626.5809pt x 398.6895pt>
+ <./MCMC/Figure_1.png> <./MCMC/Figure_2.png> <./MCMC/Figure_3.png>]
+<Astigmatism.png, id=100, 626.5809pt x 398.6895pt>
 File: Astigmatism.png Graphic file (type png)
 <use Astigmatism.png>
-Package pdftex.def Info: Astigmatism.png  used on input line 164.
-(pdftex.def)             Requested size: 369.88582pt x 235.3586pt.
+Package pdftex.def Info: Astigmatism.png  used on input line 177.
+(pdftex.def)             Requested size: 312.9803pt x 199.14958pt.
  [12
 
  <./Astigmatism.png>]
-<MCMC/Figure_1.png, id=103, 186.4566pt x 192.9609pt>
-File: MCMC/Figure_1.png Graphic file (type png)
-<use MCMC/Figure_1.png>
-Package pdftex.def Info: MCMC/Figure_1.png  used on input line 182.
-(pdftex.def)             Requested size: 113.81102pt x 117.78252pt.
-<MCMC/Figure_2.png, id=104, 216.81pt x 144.54pt>
-File: MCMC/Figure_2.png Graphic file (type png)
-<use MCMC/Figure_2.png>
-Package pdftex.def Info: MCMC/Figure_2.png  used on input line 182.
-(pdftex.def)             Requested size: 113.81102pt x 75.8736pt.
-<MCMC/Figure_3.png, id=105, 505.89pt x 361.35pt>
-File: MCMC/Figure_3.png Graphic file (type png)
-<use MCMC/Figure_3.png>
-Package pdftex.def Info: MCMC/Figure_3.png  used on input line 182.
-(pdftex.def)             Requested size: 256.0748pt x 182.91313pt.
- [13
-
- <./MCMC/Figure_1.png> <./MCMC/Figure_2.png> <./MCMC/Figure_3.png>]
-<Architecture.png, id=115, 1035.87pt x 427.5975pt>
+<Architecture.png, id=107, 1035.87pt x 427.5975pt>
 File: Architecture.png Graphic file (type png)
 <use Architecture.png>
-Package pdftex.def Info: Architecture.png  used on input line 188.
+Package pdftex.def Info: Architecture.png  used on input line 185.
 (pdftex.def)             Requested size: 369.88582pt x 152.68878pt.
- [14
+ [13
 
- <./Architecture.png>] [15
+ <./Architecture.png>] [14
 
 ]
-<Laser.png, id=127, 1392.20125pt x 789.95125pt>
+<Laser.png, id=120, 1392.20125pt x 789.95125pt>
 File: Laser.png Graphic file (type png)
 <use Laser.png>
-Package pdftex.def Info: Laser.png  used on input line 198.
+Package pdftex.def Info: Laser.png  used on input line 195.
 (pdftex.def)             Requested size: 398.33858pt x 226.01836pt.
- [16
+ [15
 
  <./Laser.png (PNG copy)>]
-<Cluster.png, id=133, 462.528pt x 346.896pt>
+<Cluster.png, id=126, 462.528pt x 346.896pt>
 File: Cluster.png Graphic file (type png)
 <use Cluster.png>
-Package pdftex.def Info: Cluster.png  used on input line 206.
+Package pdftex.def Info: Cluster.png  used on input line 203.
 (pdftex.def)             Requested size: 284.52756pt x 213.40593pt.
- [17
+ [16
 
- <./Cluster.png>] [18
+ <./Cluster.png>] [17
 
 ]
-<Jaccard.png, id=146, 1293.83376pt x 743.77875pt>
+<Jaccard.png, id=139, 1293.83376pt x 743.77875pt>
 File: Jaccard.png Graphic file (type png)
 <use Jaccard.png>
-Package pdftex.def Info: Jaccard.png  used on input line 231.
+Package pdftex.def Info: Jaccard.png  used on input line 228.
 (pdftex.def)             Requested size: 341.43306pt x 196.27194pt.
- [19
+ [18
 
- <./Jaccard.png>] [20
+ <./Jaccard.png>] [19
 
 ]
-<GBP5-RT-qPCR-crop.png, id=159, 989.6975pt x 724.7075pt>
+<GBP5-RT-qPCR-crop.png, id=152, 989.6975pt x 724.7075pt>
 File: GBP5-RT-qPCR-crop.png Graphic file (type png)
 <use GBP5-RT-qPCR-crop.png>
-Package pdftex.def Info: GBP5-RT-qPCR-crop.png  used on input line 247.
+Package pdftex.def Info: GBP5-RT-qPCR-crop.png  used on input line 244.
 (pdftex.def)             Requested size: 170.71652pt x 125.00111pt.
-<GBP5-JQ1-KD-crop.png, id=160, 834.11626pt x 744.7825pt>
+<GBP5-JQ1-KD-crop.png, id=153, 834.11626pt x 744.7825pt>
 File: GBP5-JQ1-KD-crop.png Graphic file (type png)
 <use GBP5-JQ1-KD-crop.png>
-Package pdftex.def Info: GBP5-JQ1-KD-crop.png  used on input line 247.
+Package pdftex.def Info: GBP5-JQ1-KD-crop.png  used on input line 244.
 (pdftex.def)             Requested size: 170.71652pt x 152.43138pt.
- [21
+ [20
 
  <./GBP5-RT-qPCR-crop.png (PNG copy)> <./GBP5-JQ1-KD-crop.png (PNG copy)>]
 \tf@nav=\write7
@@ -1425,10 +1417,10 @@ Package rerunfilecheck Info: File `prelim.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 31980 strings out of 478287
- 634056 string characters out of 5849290
+ 31969 strings out of 478287
+ 633857 string characters out of 5849290
  940522 words of memory out of 5000000
- 49441 multiletter control sequences out of 15000+600000
+ 49433 multiletter control sequences out of 15000+600000
  484524 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,14n,122p,418b,380s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1447,10 +1439,10 @@ pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on prelim.pdf (21 pages, 7942323 bytes).
+Output written on prelim.pdf (20 pages, 7949249 bytes).
 PDF statistics:
- 246 PDF objects out of 1000 (max. 8388607)
- 156 compressed objects within 2 object streams
- 43 named destinations out of 1000 (max. 500000)
- 118 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 238 PDF objects out of 1000 (max. 8388607)
+ 151 compressed objects within 2 object streams
+ 41 named destinations out of 1000 (max. 500000)
+ 113 words of extra memory for PDF output out of 10000 (max. 10000000)
 

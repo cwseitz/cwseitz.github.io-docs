@@ -136,31 +136,16 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 
 \end{frame}
 
-\begin{frame}{Readout noise of sCMOS cameras}
-Hamamatsu ORCA v3 CMOS, air cooled to -10C
-\begin{figure}
-\includegraphics[width=12cm]{Noise-Maps.png}
-\end{figure}
-Measured signal: $H_{k} = S_{k} + \xi_{k}$, $S_{k}\sim \mathrm{Poisson(\mu_{k})}, \xi_{k}\sim \mathcal{N}(o_{k},\sigma_{k}^{2})$
-\end{frame}
+\begin{frame}{A Poisson approximation at moderate SNR simplifies SMLM}
 
-\begin{frame}{Quality of the Poisson approximation depends on SNR}
-$P(H_{k}|\theta)\approx \mathrm{Poisson}(\mu_{k}+\sigma_{k}^{2})$ for $N_{0} > 500$ asssuming $\Delta=100$ms 
 \begin{figure}
-\includegraphics[width=10cm]{Kolmogorov.png}
+\includegraphics[width=13cm]{Noise.png}
 \end{figure}
-Using the approximation we can write
+
 \begin{equation*}
 \ell(\vec{H}|\theta) = -\log \prod_{k} \frac{e^{-\left(\mu_{k}'\right)}\left(\mu_{k}'\right)^{n_{k}}}{n_{k}!} = \sum_{k}  \log n_{k}! + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
 \end{equation*}
 
-\end{frame}
-
-
-\begin{frame}{Estimator precision sets the resolution limit in localization microscopy}
-\begin{figure}
-\includegraphics[width=13cm]{Astigmatism.png}
-\end{figure}
 \end{frame}
 
 \begin{frame}{Estimator precision sets the resolution limit in localization microscopy}
@@ -181,6 +166,18 @@ Using the approximation we can write
 \end{textblock*}
 \end{frame}
 
+
+\begin{frame}{Estimator precision sets the resolution limit in localization microscopy}
+\begin{figure}
+\includegraphics[width=11cm]{Astigmatism.png}
+\end{figure}
+\begin{itemize}
+\item A weak cylindrical lens breaks the axial symmetry of the PSF
+\end{itemize}
+\end{frame}
+
+
+
 \begin{frame}{Deep learning beats MLE at 2D and 3D localization}
 \begin{figure}
 \includegraphics[width=13cm]{Architecture.png}
@@ -197,7 +194,7 @@ Using the approximation we can write
 \end{textblock*}
 \end{frame}
 
-\begin{frame}{Resolution is dependent on photoswitching kinetics}
+\begin{frame}{Chromatin nanodomains in a live Hela cell nucleus}
 
 \begin{textblock*}{10cm}(0.5cm,1cm)
 \includegraphics[width=\textwidth]{Cluster.png}
