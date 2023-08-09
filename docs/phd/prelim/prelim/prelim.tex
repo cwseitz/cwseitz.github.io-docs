@@ -198,13 +198,32 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \begin{textblock*}{13cm}(0.5cm,8.25cm)
 \begin{itemize}
 \item Density estimation using 30x30nm bins
-\item Bayesian information criteriion (BIC) used to reduce the effect of multiple blinking, assuming 10nm lateral uncertainty
+\item Bayesian information criterion (BIC) used to reduce the effect of multiple blinking, assuming 10nm lateral uncertainty
 \end{itemize}
 \end{textblock*}
 
 \end{frame}
 
-\begin{frame}{Caged nucleosomes are Brownian harmonic oscillators}
+\begin{frame}{Diffusion increases localization uncertainty in live-cell SMLM}
+
+Nucleosome diffusion has been modeled in various potentials:
+\vspace{0.1in}
+\begin{itemize}
+\item Bead model: $V(r_{ij}) = \epsilon_{0}(r_{0}/r_{ij})^{12}-\epsilon_{ij}(r_{0}/r_{ij})^{6}$ (Ashwin 2019)
+\item Harmonic: $V(\vec{\Delta r}) = \frac{1}{2}k|\vec{\Delta r}|^{2}$ (XXX)
+\end{itemize}
+\vspace{0.1in}
+The latter is attractive because the stationary distribution of Brownian motion in a Harmonic potential is known:
+
+
+\begin{equation*}
+\partial_{t}P(r) = \hat{\mathcal{L}}_{FP}P(r); \hat{\mathcal{L}}_{FP} = \hat{\mathcal{L}}_{FP} = \left(-\frac{\partial}{\partial x}M^{(1)}(t) + \frac{1}{2}\frac{\partial^{2}}{\partial x^{2}}M^{(2)}(t)\right)
+\end{equation*}
+
+
+\begin{equation*}
+x',t'|x,t = \mathcal{N}(\mu,\Sigma)
+\end{equation*}
 
 \end{frame}
 
