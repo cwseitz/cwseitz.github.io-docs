@@ -95,12 +95,14 @@
 \end{frame}
 
 \begin{frame}{The OFF state of JF646 can be maintained with high laser power}
-\begin{textblock*}{12cm}(1.5cm,1.3cm)
-\includegraphics[width=12cm]{Laser.png}
+\begin{textblock*}{11cm}(1.5cm,1.3cm)
+\includegraphics[width=11cm]{Laser.png}
 \end{textblock*}
-\begin{textblock*}{12cm}(0.5cm,8.5cm)
+\begin{textblock*}{\textwidth}(0.5cm,8.0cm)
 \begin{itemize}
-\item We use rhodamine derivatives JF549 and JF646 HaloTag ligands to label H2B protein in transiently transfected H2B-HaloTag Hela cells
+\item SMLM is desirable for SR due to very high res and no scanning (STED)
+\item Less control over photophysical state, but high throughput
+\item High power compensates for dense labeling
 \end{itemize}
 \end{textblock*}
 \end{frame}
@@ -186,17 +188,34 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \end{frame}
 
 
+\begin{frame}{The tradeoff between spatial and temporal resolution in SMLM}
+\begin{figure}
+\includegraphics[width=10cm]{Shroff.png}
+\end{figure}
+\textit{Shroff et al. Live-cell photoactivated localization microscopy of
+nanoscale adhesion dynamics. Nature Methods.}
+\end{frame}
 
-\begin{frame}{Deep learning can generalize precise SMLM to three dimensions}
+
+\begin{frame}{The tradeoff between spatial and temporal resolution in SMLM}
 \begin{figure}
 \includegraphics[width=13cm]{Architecture.png}
 \end{figure}
+\begin{itemize}
+\item ANNA-PALM (Ouyang 2018) use prior information to generate SR images from fewer localizations
+\item DECODE (Speiser 2021) and DeepSTORM3D (Nehme 2020) instead process dense images to increase localizations per unit time
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Deep learning can generalize precise SMLM to three dimensions}
 \begin{figure}
 \includegraphics[width=12cm]{Jaccard.png}
 \end{figure}
+Several methods have been designed to break the time-resolution barrier
+\begin{itemize}
+\item Density estimation using 30x30nm bins
+\item Bayesian information criterion (BIC) used to reduce the effect of multiple blinking, assuming 10nm lateral uncertainty
+\end{itemize}
 \end{frame}
 
 
@@ -237,16 +256,6 @@ x',t'|x,t = \mathcal{N}(\mu,\Sigma)
 \end{equation*}
 
 \end{frame}
-
-
-\begin{frame}{The tradeoff between spatial and temporal resolution in SMLM}
-\begin{figure}
-\includegraphics[width=11cm]{Shroff.png}
-\end{figure}
-\textit{Shroff et al. Live-cell photoactivated localization microscopy of
-nanoscale adhesion dynamics. Nature Methods.}
-\end{frame}
-
 
 \begin{frame}{Resolution is dependent on photoswitching kinetics}
 
