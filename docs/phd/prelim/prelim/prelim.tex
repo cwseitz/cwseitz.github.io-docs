@@ -159,19 +159,29 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \end{textblock*}
 \begin{textblock*}{13cm}(0.5cm,8cm)
 \begin{itemize}
-\item Localization uncertainty can be quantified with Metropolis-Hastings MCMC
-\item MCMC is asymptotically exact, but slow
+\item Variance of the posterior $P(\theta|\vec{H})$ is a suitable particle filter
+\item We assume uniform priors on coordinates
 \end{itemize}
 \end{textblock*}
 \end{frame}
 
-
-\begin{frame}{Estimator precision sets the resolution limit in localization microscopy}
+\begin{frame}{Estimator precision sets the resolution limit in 2D}
 \begin{figure}
 \includegraphics[width=11cm]{Astigmatism.png}
 \end{figure}
 \begin{itemize}
-\item A weak cylindrical lens breaks the axial symmetry of the PSF
+\item RMSE of is a quality metric of a localization estimator
+\item The RMSE is bounded from below by the CRLB
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Estimator precision sets the resolution limit in 3D}
+\begin{figure}
+\includegraphics[width=11cm]{Astigmatism.png}
+\end{figure}
+\begin{itemize}
+\item A weak ($f=10$m) cylindrical lens breaks the axial symmetry of the PSF
 \end{itemize}
 \end{frame}
 
