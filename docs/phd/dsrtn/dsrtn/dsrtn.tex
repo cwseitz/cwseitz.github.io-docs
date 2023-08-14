@@ -318,6 +318,21 @@ q_{i0}(k,t+\Delta t) = (1-\sigma_{0}\Delta t)q_{i0}(k,t) + \lambda_{10}q_{i1}(k,
 The negative contribution represents the distribution over the number of transitions $i\rightarrow 0$ that have already occured by time $t$ and will leave the $0$ state in the interval $\Delta t$. The full coupled system of differential equations reads
 
 
+A molecule is considered "detected" in principle if the measured ADU signal satisfies $\tilde{s} =\mu\tau \geq \delta$ where $\delta$ is a number of photons which satisfy a criterion on localization accuracy.
+
+\begin{equation*}
+\alpha = \int_{\delta}^{\Delta}\left(\sum_{n=0}^{\infty}Q(N=n)\psi(\tau|n;\vec{k})\right)d\tau \approx \underset{\tau\sim P(\tau)}{\mathbb{E}}\left(\mathbb{I}[\tau > \delta]\right)
+\end{equation*}
+
+$P(\tau)$ is usually obtained by Monte Carlo simulation. This is useful for computing density measures and the total acqusition time:
+
+\begin{equation*}
+D = \alpha K\left(\frac{\lambda}{2\mathrm{NA}}\right)\;\; T = \left(\Delta_{SR}+\frac{2N}{\log(1-\alpha)}\right)^{2}
+\end{equation*}
+
+For actually inferring $k_{1},k_{2}$, we need a measure of distance between $P(\tilde{s})$ and $P(s|k_{1},k_{2})$ for many $k_{1},k_{2}$ pairs. Luckily we only need to compute $P(s|k_{1},k_{2})$ once, and we can then perform a grid search
+
+
 \section{A deep learning framework for super-resolution microscopy}
 
 \section{Bayesian clustering of chromatin nanodomains}

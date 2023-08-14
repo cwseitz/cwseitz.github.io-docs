@@ -60,23 +60,19 @@
 \Large \textcolor{black}{Introduction}
 \end{frame}
 
-\begin{frame}{Summary}
+
+\begin{frame}{The textbook view of histone acetylation}
+\begin{figure}
+\includegraphics[width=13cm]{Histones.png}
+\end{figure}
+\textit{Graff et al. Histone acetylation: molecular
+mnemonics on the chromatin}
+\vspace{0.1in}
 \begin{itemize}
-\item We study the organization of nucleosomes in living cells, and I am interested in the impact of BRD4 phase separation (fusion/fission) on chromatin packing, as previous work has shown chromatin nanodomains are highly dynamic structures (Barth 2020)
-\item We study chromatin structure using SMLM, which can increase lateral resolution by one order of magnitude in living cells compared to standard widefield microscpy
-\item  SMLM enables simultaneous super-resolution of chromatin structure and single molecule tracking to probe the physical properties of chromatin nanodomins
-
-\item In general, the uncertainty of a statistical estimator in SMLM determines the resolution limit (Cramer-Rao lower bound). \item Deep learning can generalize SMLM to three dimensions, particularly in sparsely labeled regimes
-
-\item SMLM achieves the highest resolution of SR methods; however, there is a fundamental tradeoff between spatial and temporal resolution (Shroff et al)
-
-\item Therefore, we look to other alternatives for resolution enhancement which combine the power of deep image translation methods e.g., ANNA-PALM
+\item I am interested in the impact of BRD4 protein on chromatin structure
+\item Previous work has shown BRD4 is associated with histone acetylation
+\item Live cell super-resolution imaging is a useful tool
 \end{itemize}
-\end{frame}
-
-
-\begin{frame}{The textbook view of histone modifications}
-
 \end{frame}
 
 \begin{frame}{(+)-JQ1 in complex with BRD4 protein}
@@ -113,9 +109,7 @@
 \end{textblock*}
 \begin{textblock*}{\textwidth}(0.5cm,8.0cm)
 \begin{itemize}
-\item SMLM is desirable for SR due to very high res and no scanning (STED)
-\item Less control over photophysical state, but high throughput
-\item High power compensates for dense labeling
+\item High power maintains the OFF state, potentially by promoting triplet state formation
 \end{itemize}
 \end{textblock*}
 \end{frame}
@@ -133,7 +127,7 @@ Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\
 \mu_{k} &= g_{k}\textcolor{red}{\eta} \textcolor{cyan}{N_{0}}\textcolor{blue}{\Delta}\int_{\mathrm{pixel}} G(x,y)dA\\
 \\
 \textcolor{red}{\eta} &- \mathrm{quantum\; efficiency}\\
-\textcolor{cyan}{N_{0}} &- \mathrm{emission\; rate}\\
+\textcolor{cyan}{N_{0}} &- \mathrm{photon\; count}\\
 \textcolor{blue}{\Delta} &- \mathrm{exposure\; time}
 \end{align*}
 \end{textblock*}
@@ -180,14 +174,34 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \end{textblock*}
 \end{frame}
 
-\begin{frame}{Estimator precision sets the resolution limit in 2D}
-\begin{figure}
-\includegraphics[width=11cm]{QD-Cal2D.png}
-\end{figure}
+
+\begin{frame}{The tradeoff between spatial and temporal resolution in SMLM}
+\begin{textblock*}{10cm}(2.25cm,1.25cm)
+\includegraphics[width=10cm]{Shroff.png}
+\end{textblock*}
+\begin{textblock*}{\textwidth}(0.5cm,8.0cm)
+\begin{itemize}
+\item SMLM is desirable for SR due to very high res and no scanning (e.g., STED)
+\item Less control over photophysical state, but high throughput
+\end{itemize}
+\end{textblock*}
+\end{frame}
+
+\begin{frame}{Deep learning enables dense localization in two-dimensions}
+\begin{textblock*}{13cm}(1.25cm,1.5cm)
+\includegraphics[width=13cm]{PSF2D.png}
+\end{textblock*}
+\begin{textblock*}{13cm}(1.25cm,8cm)
+\begin{itemize}
+\item $K(\lambda/2\mathrm{NA})$ is Ripley's K function at the diffraction limit
+\item Convolutional neural networks (CNNs) approach the CRLB (gray) at high photon counts and generalize to the dense regime
+\end{itemize}
+\end{textblock*}
+
 \end{frame}
 
 
-\begin{frame}{Estimator precision sets the resolution limit in 3D}
+\begin{frame}{Astigmatism based three dimensional imaging}
 \begin{figure}
 \includegraphics[width=11cm]{Astigmatism.png}
 \end{figure}
@@ -196,23 +210,6 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \end{itemize}
 \end{frame}
 
-
-\begin{frame}{The tradeoff between spatial and temporal resolution in SMLM}
-\begin{textblock*}{11cm}(1.75cm,1.5cm)
-\includegraphics[width=11cm]{Shroff.png}
-\end{textblock*}
-\end{frame}
-
-
-\begin{frame}{The tradeoff between spatial and temporal resolution in SMLM}
-\begin{figure}
-\includegraphics[width=13cm]{Architecture.png}
-\end{figure}
-\begin{itemize}
-\item ANNA-PALM (Ouyang 2018) use prior information to generate SR images from fewer localizations
-\item DECODE (Speiser 2021) and DeepSTORM3D (Nehme 2020) instead process dense images to increase localizations per unit time
-\end{itemize}
-\end{frame}
 
 \begin{frame}{Deep learning can generalize precise SMLM to three dimensions}
 \begin{figure}
@@ -264,23 +261,6 @@ x',t'|x,t = \mathcal{N}(\mu,\Sigma)
 
 \end{frame}
 
-\begin{frame}{Resolution is dependent on photoswitching kinetics}
-
-A molecule is considered "detected" in principle if the measured ADU signal satisfies $\tilde{s} =\mu\tau \geq \delta$ where $\delta$ is a number of photons which satisfy a criterion on localization accuracy.
-
-\begin{equation*}
-\alpha = \int_{\delta}^{\Delta}\left(\sum_{n=0}^{\infty}Q(N=n)\psi(\tau|n;\vec{k})\right)d\tau \approx \underset{\tau\sim P(\tau)}{\mathbb{E}}\left(\mathbb{I}[\tau > \delta]\right)
-\end{equation*}
-
-$P(\tau)$ is usually obtained by Monte Carlo simulation. This is useful for computing density measures and the total acqusition time:
-
-\begin{equation*}
-D = \alpha K\left(\frac{\lambda}{2\mathrm{NA}}\right)\;\; T = \left(\Delta_{SR}+\frac{2N}{\log(1-\alpha)}\right)^{2}
-\end{equation*}
-
-For actually inferring $k_{1},k_{2}$, we need a measure of distance between $P(\tilde{s})$ and $P(s|k_{1},k_{2})$ for many $k_{1},k_{2}$ pairs. Luckily we only need to compute $P(s|k_{1},k_{2})$ once, and we can then perform a grid search
-
-\end{frame}
 
 \begin{frame}{Validaton of JQ1 efficacy for BRD4 inhibition in Hela cells}
 \begin{figure}
