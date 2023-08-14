@@ -204,7 +204,7 @@ The CRLB is a frequentist
 \end{textblock*}
 \begin{textblock*}{13cm}(1.25cm,8cm)
 \begin{itemize}
-\item $K(\lambda/2\mathrm{NA})$ is Ripley's K function at the diffraction limit
+\item $K(\lambda/2\mathrm{NA})$ is Ripley's K function at the diffraction limit ($\lambda=640\mathrm{nm}$)
 \item Convolutional neural networks (CNNs) approach the CRLB (gray) at high photon counts and generalize to the dense regime
 \end{itemize}
 \end{textblock*}
@@ -222,14 +222,14 @@ The CRLB is a frequentist
 \end{frame}
 
 
-\begin{frame}{Deep learning can generalize precise SMLM to three dimensions}
+\begin{frame}{Astigmatism based three dimensional imaging}
 \begin{figure}
-\includegraphics[width=12cm]{Jaccard.png}
+\includegraphics[width=13cm]{PSF3D.png}
 \end{figure}
-Several methods have been designed to break the time-resolution barrier
 \begin{itemize}
-\item Density estimation using 30x30nm bins
-\item Bayesian information criterion (BIC) used to reduce the effect of multiple blinking, assuming 10nm lateral uncertainty
+\item $z_{0}\sim U([-0.4,0.4])$ um
+\item 3D imaging requires long exposure and sparse emitters for MLE
+\item Deep methods may be a suitable choice in future work
 \end{itemize}
 \end{frame}
 
@@ -243,7 +243,7 @@ Several methods have been designed to break the time-resolution barrier
 \begin{textblock*}{13cm}(0.5cm,8.25cm)
 \begin{itemize}
 \item Density estimation using 30x30nm bins
-\item Bayesian information criterion (BIC) used to reduce the effect of multiple blinking, assuming 10nm lateral uncertainty
+\item BIC used to reduce the effect of multiple blinking, assuming 10nm lateral uncertainty
 \end{itemize}
 \end{textblock*}
 
@@ -279,20 +279,32 @@ x',t'|x,t = \mathcal{N}(\mu,\Sigma)
 \textit{Filippakopoulos. Selective inhibition of BET bromodomains. Nature Communications}
 \end{frame}
 
-\begin{frame}{Validaton of JQ1 efficacy for BRD4 inhibition in Hela cells}
+\begin{frame}{Induction of a BRD4-controlled gene with cytokine treatment}
 \begin{figure}
 \includegraphics[width=11cm]{Figure-2.png}
 \end{figure}
+\begin{itemize}
+\item GBP5 transcription is regulated by BRD4 (Lin 2022)
+\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Validaton of JQ1 efficacy for BRD4 inhibition in Hela cells}
-\begin{textblock*}{6cm}(1.0cm,2.0cm)
+\begin{textblock*}{6cm}(1.0cm,1.75cm)
 \includegraphics[width=6cm]{GBP5-RT-qPCR-crop.png}
 \end{textblock*}
-\begin{textblock*}{6cm}(7.0cm,2.0cm)
+\begin{textblock*}{6cm}(7.0cm,1.75cm)
 \includegraphics[width=6cm]{GBP5-JQ1-KD-crop.png}
 \end{textblock*}
+
+\begin{textblock*}{13cm}(1.0cm,7.5cm)
+\begin{itemize}
+\item RT-qPCR quantified using $2^{-\Delta\Delta C_{t}}$ method using GAPDH as a reference gene
+\item *:$P \leq 0.1$, **:$P \leq 0.01$
+\end{itemize}
+\end{textblock*}
+
+
 \end{frame}
 
 
