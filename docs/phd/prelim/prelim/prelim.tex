@@ -75,13 +75,6 @@ mnemonics on the chromatin}
 \end{itemize}
 \end{frame}
 
-\begin{frame}{(+)-JQ1 in complex with BRD4 protein}
-\begin{figure}
-\includegraphics[width=8cm]{JQ1.png}
-\end{figure}
-\textit{Filippakopoulos. Selective inhibition of BET bromodomains. Nature Communications}
-\end{frame}
-
 \begin{frame}
 \frametitle{Instrumentation for super-resolution and high throughput microscopy}
 
@@ -151,12 +144,12 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 
 \begin{itemize}
 \item $P(H_{k}-o_{k}|\theta) = \mathrm{Poisson}(\mu_{k}+\sigma_{k}^{2}|\theta)$ for pixel offset $o_{k}$ noise variance $\sigma_{k}^{2}$
-\item Cramer-Rao lower bound (CRLB) in 2D can be computed analytically for Poisson log-likelihood $\ell$ (Smith 2010, Huang 2013)
+\item Fisher information and Cramer-Rao lower bound (CRLB) can be computed analytically for Poisson log-likelihood $\ell$ (Smith 2010, Huang 2013)
 \end{itemize} 
  
 \end{frame}
 
-\begin{frame}{Localization precision sets the resolution limit in localization microscopy}
+\begin{frame}{Estimator precision sets the resolution limit in localization microscopy}
 \begin{textblock*}{4cm}(1.0cm,1.0cm)
 \includegraphics[width=4cm]{MCMC/Figure_1.png}
 \end{textblock*}
@@ -172,6 +165,24 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \item We assume uniform priors on coordinates
 \end{itemize}
 \end{textblock*}
+\end{frame}
+
+\begin{frame}{Computing the CRLB for static errors in two dimensions}
+Fisher information (separable case): \begin{equation}
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) 
+\end{equation}
+
+Let $\mu_{k}' = \mu_{k} + \sigma_{k}^{2}$. For an arbitrary parameter,
+
+\begin{align*}
+\frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  x_{k}\log x_{k} + \mu_{k}' - x_{k}\log\left(\mu_{k}'\right)\\
+&= \sum_{k} \frac{\partial \mu_{k}'}{\partial\theta_{i}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)
+\end{align*}
+
+\begin{equation*}
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)^{2}\right) = \sum_{k}\frac{1}{\mu_{k}'}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}}
+\end{equation*}
+The CRLB is a frequentist 
 \end{frame}
 
 
@@ -261,6 +272,12 @@ x',t'|x,t = \mathcal{N}(\mu,\Sigma)
 
 \end{frame}
 
+\begin{frame}{(+)-JQ1 in complex with BRD4 protein}
+\begin{figure}
+\includegraphics[width=8cm]{JQ1.png}
+\end{figure}
+\textit{Filippakopoulos. Selective inhibition of BET bromodomains. Nature Communications}
+\end{frame}
 
 \begin{frame}{Validaton of JQ1 efficacy for BRD4 inhibition in Hela cells}
 \begin{figure}
