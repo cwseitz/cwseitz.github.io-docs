@@ -206,6 +206,16 @@ The CRLB is a frequentist
 \includegraphics[width=2.5cm]{Laser-Crop.png}
 \end{textblock*}
 
+\begin{textblock*}{\textwidth}(1cm,7.5cm)
+
+Localization is cast as semantic segmentation of the high resolution tensor:
+
+\begin{equation*}
+\mathcal{L} = \sum_{i,j} \log p_{ij}(\tilde{x}) = \sum_{i,j} \log \frac{\exp(-s_{ij}(\tilde{x}))}{\sum_{x\in\chi} \exp(-s_{ij}(\tilde{x}))}
+\end{equation*}
+
+\end{textblock*}
+
 \end{frame}
 
 \begin{frame}{Deep learning enables dense localization in two-dimensions}
