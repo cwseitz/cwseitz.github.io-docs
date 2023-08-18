@@ -48,7 +48,7 @@
 
 \abstract
 
-Single-molecule localization-based super-resolution microscopy techniques, such as direct stochastic optical reconstruction microscopy (dSTORM), can be used to produce a pointillist representation of nucleosome organization at diffraction-unlimited precision. Direct STORM approaches leverage the deactivation of fluorescent tags, followed by spontaneous or photoinduced reactivation, to achieve super-resolution reconstructions of nuclear proteins and nucleic acids. This basic principle remains one of the method's primary limitations - standard analysis algorithms require tight control of activation and reactivation to maintain sparse emitters, which limits both imaging speed and labeling density. Here, we present a dSTORM strategy for fast reconstruction of H2B organization in living cells by complementing high duty-cycle blinking of chemical dyes with a localization algorithm trained on high density time-series. By reducing the super-resolution frame rate, we can directly visualize XXX-induced nucleosome reorganization, while quantifying the composition of chromatin nanodomains during reorganization. 
+Single-molecule localization-based super-resolution microscopy techniques, such as direct stochastic optical reconstruction microscopy (dSTORM), can be used to produce a pointillist representation of nucleosome organization at diffraction-unlimited precision. Direct STORM approaches leverage the deactivation of fluorescent tags, followed by spontaneous or photoinduced reactivation, to achieve super-resolution reconstructions of nuclear proteins and nucleic acids. This basic principle remains one of the method's primary limitations - standard analysis algorithms require tight control of activation and reactivation to maintain sparse emitters, presenting a tradeoff between imaging speed and labeling density. Here, we present a dSTORM strategy for fast reconstruction of nucleosome organization in living cells by complementing high duty-cycle blinking of rhodamine-derived dyes with a novel localization algorithm based on deep generative modeling. Previous approaches to breaking the time resolution barrier in SMLM learn prior information about cellular structures using generative models and predict super-resolution images based on sparse localizations, or interpolate and transform dense images into a localization map. However, cellular structures such as chromatin are dynamic and intrinsically heterogeneous; therefore, structures cannot necessarily be known apriori. Furthermore, localization maps are parametric and non-probabilistic, making them highly application specific, and difficult to use. We propose an alternative method based on directly modeling the distribution of high resolution images conditioned on a low resolution image. By performing high density localization, we can directly visualize 1,6 Hexanediol induced chromatin reorganization over minute time scales.
 
 
 \clearpage
@@ -59,7 +59,14 @@ Single-molecule localization-based super-resolution microscopy techniques, such 
 
 \section{Introduction}
 
-\subsection{Dense single molecule localization microscopy}
+\subsection{Photoswitchable rhodamine derivatives for super-resolution microscopy}
+
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=14cm]{Rhodamines.png}
+\end{center}
+\end{figure}
 
 Single molecule localization microscopy (SMLM) relies on the temporal resolution of fluorophores in the sample whose spatially overlapping point spread functions would otherwise render them unresolvable at the detector. SMLM techniques remain desirable for super-resolution imaging of many cellular structures, due to their cost-effective implementation and photon-count limited resolution (Schermelleh 2019). Common strategies for the temporal separation of molecules involve intramolecular rearrangements to switch from dark to fluorescent states or the exploitation of non-emitting molecular radicals. For live cell super-resolution of chromatin nanodomains, the HaloTag fusion protein and its associated JF549-HaloTag and JF646-HaloTag ligands have surfaced as indispensable tools (Grimm 2015). H2B is a suitable choice, since it is one of the histones with fewer tail modifications and functional variants with known function (Kamakaka 2005). Reduced rhodamine derivates like JF549 and JF646 can be quenched by oxidative processes or form dark radical species, which absorb strongly around 400 nm, a property that can be exploited to drive the fluorophore back to its ground state. Long dark state lifetimes are commonly used in STORM imaging, while quenching results in higher duty cycle and increased rates of photobleaching due to irreversible oxidative damage of important functional groups. Nevertheless, high duty cycle SMLM can greatly reduce acquisition times and increase labeling density while permitting the recording of some dynamic processes (Speiser 2021).  
 
@@ -78,8 +85,15 @@ Despite its successs and gaining popularity, the basic principle of SMLM is one 
 
 Due to overlap, conventional detection strategies may undercount the emitters in a local neighborhood in some frames, localization uncertainty can increase for overlapping emitters, and some localizations may be missed entirely. These complications make conventional detection strategies inappropriate for reconstruction of super-resolution images from time-series. Perhaps most importantly, overlapping emitters can result in additional localization uncertainty, rendering discernment between the arrival of a new particle and a poorly localized existing one difficult. This issue poses a major bottleneck to super-resolution imaging acqusitions. Additional uncertainty can be partially alleviated by using pairwise or higher-order temporal correlations within a pixel neighborhood to deconvolve individual emitters. A similar idea is employed in super-resolution optical fluctuation imaging (SOFI) - a post-processing technique that uses image cumulants to deconvolve emitters. 
 
+\subsection{Efficient computation of the Cramer-Rao lower bound}
 
-\subsection{Statistics of sCMOS cameras}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{Noise.png}
+\end{center}
+\end{figure}
+
 
 We are now prepared to write the shot-noise limited signal, which is a vector with units of phototelectrons
 
@@ -117,7 +131,7 @@ H_{k}' \sim \mathrm{Poisson}(\mu_{k}')
 
 where $\mu_{k}' = g_{k}\mu_{k} + \sigma_{k}^{2}$. This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson.
 
-\subsection{Integrated isotropic Gaussian point spread function}
+\subsubsection{Integrated isotropic Gaussian point spread function}
 
 Due to diffraction, any point emitter, such as a single fluorescent molecule, will be registered as a diffraction limited spot. It is common to describe the point spread function as a two-dimensional isotropic Gaussian:
 
@@ -151,7 +165,7 @@ This gives a convenient expression for the fraction of photons which arrive at a
 \lambda_{k}(y) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma}\right)\right)
 \end{align*}
 
-\subsection{Integrated astigmatic Gaussian point spread function}
+\subsubsection{Integrated astigmatic Gaussian point spread function}
 
 In 2D SMLM simulations, a 2D PSF  model  with  a z-dependent  isotropic  width $\sigma$ can  be  used. For 3D, we could use that the isotropic Gaussian point spread function has a FWHM $\sigma$ which is dependent on the axial coordinate. However, it can be shown that the error around the focus is very large and negative and positive defocus cannot be distinguished given the symmetric dependence in $z$.  Therefore, for 3D SMLM, a cost-effective approach is to introduce astigmatism into the detection path using a weak ($f\approx 10\mathrm{m}$) cylindrical lens. This gives an anisotropic Gaussian point spread function which is elongated perpendicular to the optical axis, depending on the axial ($z$) position of the fluorescent emitter. A fairly simple model for $\sigma_{x}(z_{0})$ and $\sigma_{y}(z_{0})$ upon defocus of a fluorescent molecule might be
 
@@ -166,7 +180,7 @@ with the following continuous density over the pixel array
 \end{equation}
 
 
-\subsection{Localization microscopy as frequentist inference}
+\subsubsection{Localization microscopy as frequentist inference}
 
 According to our image formation, molecules really do have an exact location in space. In pratice, this is only an approximation since molecules diffuse at physiological temperatures, and our exposure time would need to tend to zero for this to be exactly true. If we suppose that we can collect a sufficient amount of photons in a short enough time, the physical nature of the system suggests a frequentist inference procedure for localization. A natural choice is maximum likelihood estimation. 
 
@@ -186,37 +200,27 @@ When the log-likelihood is easy to compute, as it is under this approximation, w
 n order to calculate uncertainties in the molecular coordinates, in can be convenient to switch to the Bayesian point of view, where we know have to write the full posterior distribution, specifying a prior.
 
 
-\section{Markovian photoswitching dynamics}
+\section{Deep generative modeling with non-equilibrium thermodynamics}
 
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{PSF2D.png}
+\end{center}
+\end{figure}
 
-The true photo-switching behavior of the fluorophore is a continuous time stochastic phenomenon. However, an experimenter can only ever observe a discretized manifestation of this
-by imaging the fluorophore in a sequence of frames. These frames are regarded as a set of
-sequential exposures of the fluorophore and the observed discrete time signal indicates whether
-the fluorophore has been observed in a particular frame. It is the continuous time process on
-which we wish to draw inference based on the observed discrete-time process indicating whether
-the fluorophore was observed in a frame. In this section we first present the continuous time
-Markov model of the true (hidden) photo-switching behavior, and then derive the observed
-discrete time signal, together with key results on its statistical properties.
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{Astigmatism.png}
+\end{center}
+\end{figure}
 
+\section{Visualizing nucleosome cluster dynamics in BRD4 condensates}
 
-We model the photoswitching behavior of a fluorophore as a continuous time Markov process. It is a stochastic process, which satisfies the Markov property
-
-\begin{equation*}
-P(X_{t}|X_{t-1}, X_{t-2}, ..., X_{t-N}) = P(X_{t}|X_{t-1})
-\end{equation*}
-
-
-\begin{equation*}
-\frac{\partial P(\omega_{i})}{\partial t} = \sum_{j}G_{ji}P(\omega_{j},t) - G_{ij}P(\omega_{i},t)
-\end{equation*}
-
-Our notational convention is the $G_{ij}$ is a transition $i\rightarrow j$ while $G_{ji}$ is $j\rightarrow i$. The above equation and its solution is very powerful in this context and in the broader context of non-equilibrium dynamics, so I will devote a short section to its derivation. 
-
-The master equation is a first order differential equation and its solution is straightforward when the dimensionality of the state space is small. The solution is found easily by massaging the master equation into something that has a simple exponential solution. Define a matrix $W$ s.t. $W_{ij} = T_{ij}$ and $W_{ii} = -\sum_{j\neq i}G_{ij}$. This operator acts on $P(\omega)$ and gives a vector of probability currents $\dot{P}(\omega,t) = \mathcal{J}(\bm{\omega}) = W P(\bm{\omega})$. 
-
-\begin{equation*}
-P(\bm{\omega}, t) = \exp(W P(\omega))
-\end{equation*}
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{Cluster.png}
+\end{center}
+\end{figure}
 
 
 \end{document}
