@@ -260,10 +260,11 @@ Localization is cast as semantic segmentation of the high resolution tensor:
 \includegraphics[width=\textwidth]{Cluster.png}
 \end{textblock*}
 
-\begin{textblock*}{13cm}(0.5cm,8.25cm)
+\begin{textblock*}{13cm}(0.5cm,8.0cm)
 \begin{itemize}
 \item Density estimation using 30x30nm bins
-\item BIC used to reduce the effect of multiple blinking, assuming 10nm lateral uncertainty
+\item Closest pairs are merged one at a time, until we minimized the BIC
+\item Data likelihood is computed under a Gaussian Mixture Model (GMM)
 \end{itemize}
 \end{textblock*}
 
