@@ -59,7 +59,7 @@ Single-molecule localization-based super-resolution microscopy techniques, such 
 
 \section{Introduction}
 
-Single molecule localization microscopy (SMLM) relies on the temporal resolution of fluorophores in the sample whose spatially overlapping point spread functions would otherwise render them unresolvable at the detector. SMLM techniques, such as stochastic optical reconstruction microsscopy (STORM) and photoactivatable localization microscopy (PALM) remain desirable for super-resolution imaging of many cellular structures, due to their cost-effective implementation and photon-count limited resolution (Schermelleh 2019). Common strategies for the temporal separation of molecules involve transient intramolecular rearrangements to switch from dark to fluorescent states or the exploitation of non-emitting molecular radicals. Reduced rhodamine derivates in particular can be quenched by oxidative processes or form dark radical species, which absorb strongly around 400 nm, a property that can be exploited to drive the fluorophore back to its ground state. Long dark state lifetimes are commonly used in STORM imaging, while quenching results in a higher duty cycle and increased rates of photobleaching due to irreversible oxidative damage of important functional groups. Nevertheless, high duty cycle SMLM can greatly reduce acquisition times and increase labeling density while permitting the recording of some dynamic processes (Speiser 2021). Fluorescent labeling density has been known to pose a major bottleneck to super-resolution imaging acqusitions. Static uncertainty due to molecular crowding can be partially amelioriated by using pairwise or higher-order temporal correlations within a pixel neighborhood to deconvolve individual emitters (Dertinger 2009). Other approaches such as stimulated emission and depletion (STED) imaging bring control over the photophysical state of a chosen subset of the sample, yet the need for laser scanning prevents widespread application in live-cell studies. Therefore, in certain applications, the spatial resolution and paralellism of SMLM techniques remain unparalleled.
+Single molecule localization microscopy (SMLM) relies on the temporal resolution of fluorophores in the sample whose spatially overlapping point spread functions would otherwise render them unresolvable at the detector. SMLM techniques, such as stochastic optical reconstruction microsscopy (STORM) and photoactivatable localization microscopy (PALM) remain desirable for super-resolution imaging of many cellular structures, due to their cost-effective implementation and photon-count limited resolution (Schermelleh 2019). Common strategies for the temporal separation of molecules involve transient intramolecular rearrangements to switch from dark to fluorescent states or the exploitation of non-emitting molecular radicals. Reduced rhodamine derivates in particular can be quenched by oxidative processes or form dark radical species, which absorb strongly around 400 nm, a property that can be exploited to drive the fluorophore back to its ground state. Long dark state lifetimes are commonly used in STORM imaging, while quenching results in a higher duty cycle and increased rates of photobleaching due to irreversible oxidative damage of important functional groups. Nevertheless, high duty cycle SMLM can greatly reduce acquisition times and increase labeling density while permitting the recording of some dynamic processes (Speiser 2021). Fluorescent labeling density has been known to pose a major bottleneck to super-resolution imaging acqusitions. Static uncertainty due to molecular crowding can be partially amelioriated by using pairwise or higher-order temporal correlations within a pixel neighborhood, known as stochastic optical fluctuation imaging (Dertinger 2009). Other approaches such as stimulated emission and depletion (STED) imaging bring control over the photophysical state of a chosen subset of the sample, yet the need for laser scanning prevents widespread application in live-cell studies. Therefore, in certain applications, the spatial resolution and paralellism of SMLM techniques remain unparalleled.
 
 
 \subsection{Photoswitchable rhodamine derivatives for super-resolution microscopy}
@@ -74,8 +74,9 @@ Single molecule localization microscopy (SMLM) relies on the temporal resolution
 
 
 
-\subsection{Efficient computation of the Cramer-Rao lower bound}
+\subsection{Estimator precision sets the resolution limit in localization microscopy}
 
+Complementary Metal-Oxide-Semiconductor (CMOS) cameras have noise sources intrinsic to their operation, such as shot noise and readout noise. The former phenomenon can describe a superposition of processes; namely, the fluctuations of the number of photons due to the quantum nature of light, and the random conversion of photons into photoelectrons within the semiconductor material with a quantum efficiency below unity. Here we will often refer to the photon count $N_{0}$, which has a determined value, rather than being described by statistically. The \emph{measured} photon count, however, is well-described by a Poisson process as variance of counts is equal to the mean (Schottky 1918). A shot-noise limited image is then described as a family of Poisson variables, with units of photoelectrons
 
 \begin{figure}
 \begin{center}
@@ -84,16 +85,13 @@ Single molecule localization microscopy (SMLM) relies on the temporal resolution
 \end{figure}
 
 
-We are now prepared to write the shot-noise limited signal, which is a vector with units of phototelectrons
+
 
 \begin{equation}
 \vec{S} = \left[\mathrm{Poisson}(\mu_{1}), \mathrm{Poisson}(\mu_{2}), ..., \mathrm{Poisson}(\mu_{N})\right]
 \end{equation}
 
-
-However this noise model is incomplete, because detectors often suffer from dark noise, which may refer to readout noise or dark current, and contributes to a nonzero signal even in the absence of incident light. Dark current is due to statistical fluctuations in the photoelectron count due to thermal fluctuations. Readout noise is introduced by the amplifier circuit during the coversion of photoelectron charge to a voltage. Here, we use the Hamamatsu ORCA v3 CMOS camera, which is air cooled to -10C and has very low dark current - around 0.06 electrons/pixel/second - and can therefore be safely ignored for exposure times on the order of milliseconds. Readout noise has been often neglected in localization algorithms because its presence in EMCCD cameras is small enough that it can be ignored within the tolerances of the localization precision. In the case of sCMOS cameras, however, the readout noise of each pixel is significantly higher and, in addition, every pixel has its own noise and gain characteristic sometimes with dramatic pixel-to-pixel variations.
-
-It is important to note that we cannot measure the contribution by readout noise before amplification and therefore it must be expressed in units of $\mathrm{ADU}$. This is in contrast to $\vec{S}$, which can be expressed in units of photoelectrons, because these statistical fluctuations can be predicted to be Poisson by quantum mechanics. Furthermore, the number of photoelectrons $S_{k}$ is  multiplied by a gain factor $g_{k}$ which has units of $[\mathrm{ADU}/e^{-}]$, which generally must be measured for each pixel. Here, we will always assume that readout noise per pixel $\xi_{k}$ is Gaussian with some pixel-specific offset $o_{k}$ and variance $\sigma_{k}^{2}$. We will also assume that gain factors and pixel noise characteristics are constants and do not scale with the signal level $S_{k}$. Therefore our measurement, in units of ADU, is: 
+Since CMOS sensors also suffer from other noise sources, which may refer to so-called readout noise or dark current, there can be a nonzero signal even in the absence of incident light. Dark current is due to statistical fluctuations in the photoelectron count within a semiconductor material in thermal equilibrium. Fortunately, these additional noise sources are governed by the central limit theorem, and can be efficiently summarized as the component of the noise which exhibits a Gaussian distribution. Readout noise has been often neglected in localization algorithms because its presence in EMCCD cameras is small enough that it can be ignored within the tolerances of the localization precision. In the case of high speed sCMOS cameras, however, the readout noise of each pixel is significantly higher and, in addition, every pixel has its own noise and gain characteristic sometimes with dramatic pixel-to-pixel variations. The number of photoelectrons $S_{k}$ is  multiplied by a gain factor $g_{k}$ which has units of $[\mathrm{ADU}/e^{-}]$, which generally must be measured for each pixel. Here, we will always assume that readout noise per pixel $\xi_{k}$ is Gaussian with some pixel-specific offset $o_{k}$ and variance $\sigma_{k}^{2}$. Ultimately, we have a Poisson component of the noise, which scales with the signal level and a Gaussian component, which does not. Therefore, our measurement is: 
 
 \begin{equation}
 \vec{H} = \vec{S} + \vec{\xi}
@@ -122,13 +120,13 @@ where $\mu_{k}' = g_{k}\mu_{k} + \sigma_{k}^{2}$. This result can be seen from t
 
 \subsubsection{Integrated isotropic Gaussian point spread function}
 
-Due to diffraction, any point emitter, such as a single fluorescent molecule, will be registered as a diffraction limited spot. It is common to describe the point spread function as a two-dimensional isotropic Gaussian:
+Due to diffraction, any point emitter, such as a single fluorescent molecule, will appear at the image plane as a diffraction limited spot. For the sake of simplicity, it is common to describe the point spread function as a two-dimensional isotropic Gaussian (Zhang 2007):
 
 \begin{equation*}
 \mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}}
 \end{equation*}
 
-Modern cameras used in light microscopy, such as scientific complementary metal oxide semiconductor (sCMOS) cameras, are powered by the photoelectric effect. Electrons within each pixel, called photoelectrons, absorb enough energy from incoming photons to be promoted to the conduction band to give electrical current which can be detected. Integration of photoelectrons during the exposure time results in a monochrome image captured by a camera. The image of a single point particle, such as a fluorescent molecule, can be thought of as two-dimensional histogram of photon arrivals and a discretized form of the classical intensity profile $\mathrm{G}(x,y)$. The value at a pixel approaches an integral of this density over the pixel:
+The image of a fluorescent molecule capture by the objective lens, can be thought of as two-dimensional histogram of photon arrivals and a discretized form of the classical intensity profile $\mathrm{G}(x,y)$. The value at a pixel approaches an integral of this density over the pixel:
 
 \begin{equation}
 \mu_{k} = i_{0}\lambda_{k} = i_{0}\int_{\mathrm{pixel}} G(x,y)dxdy
@@ -141,7 +139,7 @@ Let $(x_{k},y_{k})$ be the center of pixel $k$. If a fluorescent molecule is loc
 \end{equation*}
 
 \vspace{0.2in}
-where $i_{0} = g_{k}\eta N_{0}\Delta$. The parameter $\eta$ is the quantum efficiency and $\Delta$ is the exposure time. $N_{0}$ represents the number of photons emitted per unit time, which may be itself a Poisson random variable; however, this is inconsequential since it is a fixed value for a single image of a fluorescent molecule. We can then express the Gaussian integrals over a pixel by making use of the following property of the error function
+where $i_{0} = g_{k}\eta N_{0}\Delta$. The parameter $\eta$ is the quantum efficiency and $\Delta$ is the exposure time. $N_{0}$ represents the number of photons emitted per unit time. We can then express the Gaussian integrals over a pixel by making use of the following property of the error function
 
 \begin{equation*}
 \frac{1}{\sqrt{2\pi}\sigma}\int_{a}^{b} e^{\frac{-(x-\mu)^{2}}{2\sigma^{2}}} = \frac{1}{2}\left(\mathrm{erf}\left(\frac{b-\mu}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{a-\mu}{\sqrt{2}\sigma}\right)\right)
@@ -156,7 +154,7 @@ This gives a convenient expression for the fraction of photons which arrive at a
 
 \subsubsection{Integrated astigmatic Gaussian point spread function}
 
-In 2D SMLM simulations, a 2D PSF  model  with  a z-dependent  isotropic  width $\sigma$ can  be  used. For 3D, we could use that the isotropic Gaussian point spread function has a FWHM $\sigma$ which is dependent on the axial coordinate. However, it can be shown that the error around the focus is very large and negative and positive defocus cannot be distinguished given the symmetric dependence in $z$.  Therefore, for 3D SMLM, a cost-effective approach is to introduce astigmatism into the detection path using a weak ($f\approx 10\mathrm{m}$) cylindrical lens. This gives an anisotropic Gaussian point spread function which is elongated perpendicular to the optical axis, depending on the axial ($z$) position of the fluorescent emitter. Axial anisotropy can be complex, but is often well described by a polynomial function of the axial displacement $z_{0}$
+In order to generalize our model to three-dimensions, we could use that the isotropic Gaussian point spread function has a variance which is dependent on the axial coordinate (Figure 3B). However, it has been shown that the error around the focus can be large, while negative and positive defocus cannot be distinguished given the symmetric dependence in $z$ (Holtzer 2007). Therefore, for 3D microscopy, a rather simple approach is to introduce astigmatism into the detection path using a weak cylindrical lens (Huang 2008). In effect, this breaks the axial symmetry of the PSF and gives an anisotropic Gaussian which is elongated perpendicular to the optical axis. Localization proceeds by measuring this anisotropy and inverting a model of its axial dependence. This axial anisotropy can be complex, but is often well described by a polynomial function of the axial displacement $z_{0}$
 
 \begin{equation*}
 \sigma_{x}(z_{0}) = \sum_{n}a_{n}z_{0}^{n}\;\;\;\; \sigma_{y}(z_{0}) = \sum_{n}b_{n}z_{0}^{n}
@@ -183,10 +181,6 @@ Under the Poisson approximation, the model negative log-likelihood is
 \ell(\vec{H}|\theta) &= -\log \prod_{k} \frac{e^{-\left(\mu_{k}'\right)}\left(\mu_{k}'\right)^{n_{k}}}{n_{k}!}\\
 &= \sum_{k}  \log n_{k}! + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
 \end{align}
-
-When the log-likelihood is easy to compute, as it is under this approximation, we may ask: how much information does the data actually carry about parameters of our model? If the likelihood of the dataset is roughly constant for any parameter set we choose, we might expect our model cannot explain our observations. In other words, the data does not appear to carry much information about the parameters. After all, our posterior is being shaped in part by this likelihood. On the other hand, if $\ell$ has a number of bumps or inflection points, then we expect that maybe some parameter sets make our observed data more likely. The ``bumpiness" of the likelihood surface is called the Fisher information - a fundamental metric in information geometry. 
-
-n order to calculate uncertainties in the molecular coordinates, in can be convenient to switch to the Bayesian point of view, where we know have to write the full posterior distribution, specifying a prior.
 
 
 \section{Deep generative modeling with non-equilibrium thermodynamics}
