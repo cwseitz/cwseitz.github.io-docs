@@ -91,7 +91,7 @@ Complementary Metal-Oxide-Semiconductor (CMOS) cameras have noise sources intrin
 \vec{S} = \left[\mathrm{Poisson}(\mu_{1}), \mathrm{Poisson}(\mu_{2}), ..., \mathrm{Poisson}(\mu_{N})\right]
 \end{equation}
 
-Since CMOS sensors also suffer from other noise sources, which may refer to so-called readout noise or dark current, there can be a nonzero signal even in the absence of incident light. Dark current is due to statistical fluctuations in the photoelectron count within a semiconductor material in thermal equilibrium. Fortunately, these additional noise sources are governed by the central limit theorem, and can be efficiently summarized as the component of the noise which exhibits a Gaussian distribution. Readout noise has been often neglected in localization algorithms because its presence in EMCCD cameras is small enough that it can be ignored within the tolerances of the localization precision. In the case of high speed sCMOS cameras, however, the readout noise of each pixel is significantly higher and, in addition, every pixel has its own noise and gain characteristic sometimes with dramatic pixel-to-pixel variations. The number of photoelectrons $S_{k}$ is  multiplied by a gain factor $g_{k}$ which has units of $[\mathrm{ADU}/e^{-}]$, which generally must be measured for each pixel. Here, we will always assume that readout noise per pixel $\xi_{k}$ is Gaussian with some pixel-specific offset $o_{k}$ and variance $\sigma_{k}^{2}$. Ultimately, we have a Poisson component of the noise, which scales with the signal level and a Gaussian component, which does not. Therefore, our measurement is: 
+CMOS sensors also suffer from other noise sources, such as readout noise or dark current, resulting in a nonzero signal even in the absence of incident light. Dark current is due to statistical fluctuations in the photoelectron count within a semiconductor material in thermal equilibrium. Fortunately, these additional noise sources are governed by the central limit theorem, and can be efficiently summarized as the component of the noise which exhibits a Gaussian distribution. Readout noise has been often neglected in localization algorithms because its presence in EMCCD cameras is small enough that it can be ignored within the tolerances of the localization precision. In the case of high speed sCMOS cameras, however, the readout noise of each pixel is significantly higher and, in addition, every pixel has its own noise and gain characteristic sometimes with dramatic pixel-to-pixel variations. Therefore, accurate localization necessisitates models which incorporate detailed sensor properties. For each pixel, the number of photoelectrons $S_{k}$ is  multiplied by a gain factor $g_{k}$ which has units of $[\mathrm{ADU}/e^{-}]$, which generally must be measured. The readout noise per pixel $\xi_{k}$ is Gaussian with some pixel-specific offset $o_{k}$ and variance $\sigma_{k}^{2}$ (Huang 2013). Ultimately, we have a Poisson component of the noise, which scales with the signal level and a Gaussian component, which does not. Therefore, in a single exposure, we measure: 
 
 \begin{equation}
 \vec{H} = \vec{S} + \vec{\xi}
@@ -118,7 +118,52 @@ H_{k}' \sim \mathrm{Poisson}(\mu_{k}')
 
 where $\mu_{k}' = g_{k}\mu_{k} + \sigma_{k}^{2}$. This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson.
 
+
+\subsubsection{Inference in localization microscopy}
+
+According to our image formation, molecules really do have an exact location in space. In pratice, this is only an approximation since molecules diffuse at physiological temperatures, and our exposure time would need to tend to zero for this to be exactly true. If we suppose that we can collect a sufficient amount of photons in a short enough time, such that a definite position exists, the following optimization problem is defined
+
+\begin{equation*}
+\theta_{\mathrm{MLE}} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\theta)= \underset{\theta}{\mathrm{argmin}}-\sum_{k}\log P(H_{k}|\theta)
+\end{equation*}
+
+
+where $\theta_{\mathrm{MLE}}$ represents the maximum likelihood coordinates of a fluorescent molecule. Maximum likelihood estimation (MLE) is a natural choice, since optimization of coordinates under a Poisson likelihood is tractable. Under the Poisson approximation, the model negative log-likelihood is
+
+\begin{align}
+\ell(\vec{H}|\theta) &= -\log \prod_{k} \frac{e^{-\left(\mu_{k}'\right)}\left(\mu_{k}'\right)^{n_{k}}}{n_{k}!}\\
+&= \sum_{k}  \log n_{k}! + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
+\end{align}
+
+First order derivatives of the above sum can often be computed analytically, depending on the spatial function $\mu$. The Poisson approximation is also convenient for computing the Cramer-Rao lower bound, which bounds the uncertainty of a statistical estimator from below:
+
+\begin{equation}
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) 
+\end{equation}
+
+Let $\mu_{k}' = \mu_{k} + \sigma_{k}^{2}$. \clearpage
+
+For an arbitrary parameter $\theta_{i}$, we take the first order derivative
+
+\begin{align*}
+\frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  x_{k}\log x_{k} + \mu_{k}' - x_{k}\log\left(\mu_{k}'\right)\\
+&= \sum_{k} \frac{\partial \mu_{k}'}{\partial\theta_{i}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)
+\end{align*}
+
+\begin{equation*}
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)^{2}\right) = \sum_{k}\frac{1}{\mu_{k}'}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}}
+\end{equation*}
+
+The Cramer-Rao lower bound on parameter unceratainty is then just $\mathrm{CRLB} = \sqrt{I^{-1}}$
+
 \subsubsection{Integrated isotropic Gaussian point spread function}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{PSF2D.png}
+\end{center}
+\caption{Performance of algorithms for two-dimensional localization (A) Lateral root mean squared error of maximum likelihood estimator (MLE) and a convolutional neural network (CNN) with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$. (B) XZ and YZ orthogonal projections of the point spread function of a single quantum dot coated on a 1.5 glass coverslip with 60X oil immersion objective}
+\end{figure}
 
 Due to diffraction, any point emitter, such as a single fluorescent molecule, will appear at the image plane as a diffraction limited spot. For the sake of simplicity, it is common to describe the point spread function as a two-dimensional isotropic Gaussian (Zhang 2007):
 
@@ -126,7 +171,7 @@ Due to diffraction, any point emitter, such as a single fluorescent molecule, wi
 \mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}}
 \end{equation*}
 
-The image of a fluorescent molecule capture by the objective lens, can be thought of as two-dimensional histogram of photon arrivals and a discretized form of the classical intensity profile $\mathrm{G}(x,y)$. The value at a pixel approaches an integral of this density over the pixel:
+The image of a fluorescent molecule captured by the objective lens, can be thought of as two-dimensional histogram of photon arrivals and a discretized form of the classical intensity profile $\mathrm{G}(x,y)$. The value at a pixel approaches an integral of this density over the pixel:
 
 \begin{equation}
 \mu_{k} = i_{0}\lambda_{k} = i_{0}\int_{\mathrm{pixel}} G(x,y)dxdy
@@ -148,11 +193,16 @@ where $i_{0} = g_{k}\eta N_{0}\Delta$. The parameter $\eta$ is the quantum effic
 This gives a convenient expression for the fraction of photons which arrive at a pixel $k$
 
 \begin{align*}
-\lambda_{k}(x) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma}\right)\right)\\
-\lambda_{k}(y) &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma}\right)\right)
+\lambda_{k} = \frac{1}{4}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma}\right)\right)\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma}\right)\right)\\
 \end{align*}
 
 \subsubsection{Integrated astigmatic Gaussian point spread function}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{Astigmatism.png}
+\end{center}
+\end{figure}
 
 In order to generalize our model to three-dimensions, we could use that the isotropic Gaussian point spread function has a variance which is dependent on the axial coordinate (Figure 3B). However, it has been shown that the error around the focus can be large, while negative and positive defocus cannot be distinguished given the symmetric dependence in $z$ (Holtzer 2007). Therefore, for 3D microscopy, a rather simple approach is to introduce astigmatism into the detection path using a weak cylindrical lens (Huang 2008). In effect, this breaks the axial symmetry of the PSF and gives an anisotropic Gaussian which is elongated perpendicular to the optical axis. Localization proceeds by measuring this anisotropy and inverting a model of its axial dependence. This axial anisotropy can be complex, but is often well described by a polynomial function of the axial displacement $z_{0}$
 
@@ -167,35 +217,8 @@ with the following continuous density over the pixel array
 \end{equation}
 
 
-\subsubsection{Localization microscopy as frequentist inference}
-
-According to our image formation, molecules really do have an exact location in space. In pratice, this is only an approximation since molecules diffuse at physiological temperatures, and our exposure time would need to tend to zero for this to be exactly true. If we suppose that we can collect a sufficient amount of photons in a short enough time, the physical nature of the system suggests a frequentist inference procedure for localization. A natural choice is maximum likelihood estimation. 
-
-\begin{equation*}
-\theta_{\mathrm{MLE}} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\theta)= \underset{\theta}{\mathrm{argmin}}-\sum_{k}\log P(H_{k}|\theta)
-\end{equation*}
-
-Under the Poisson approximation, the model negative log-likelihood is
-
-\begin{align}
-\ell(\vec{H}|\theta) &= -\log \prod_{k} \frac{e^{-\left(\mu_{k}'\right)}\left(\mu_{k}'\right)^{n_{k}}}{n_{k}!}\\
-&= \sum_{k}  \log n_{k}! + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
-\end{align}
-
-
 \section{Deep generative modeling with non-equilibrium thermodynamics}
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=16cm]{PSF2D.png}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=16cm]{Astigmatism.png}
-\end{center}
-\end{figure}
 
 \section{Visualizing nucleosome cluster dynamics in BRD4 condensates}
 
