@@ -218,41 +218,21 @@ Localization is cast as semantic segmentation of the high resolution tensor:
 
 \end{frame}
 
-\begin{frame}{Deep generative modeling with nonequilibrium thermodynamics}
-\begin{figure}
-\includegraphics[width=12cm]{Diffusion.png}
-\end{figure}
-\end{frame}
-
-
-\begin{frame}{Deep generative modeling with nonequilibrium thermodynamics}
-\begin{figure}
-\includegraphics[width=10cm]{Swiss.png}
-\end{figure}
-\begin{itemize}
-\item The data distribution is gradually converted into a analytically tractable distributon e.g., Gaussian
-\item Repeated application of a Markov transition kernel destroys data structure
-\item Use deep neural networks to learn to "reverse time"
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Deep generative modeling with nonequilibrium thermodynamics}
-\begin{figure}
-\includegraphics[width=10cm]{Swiss.png}
-\end{figure}
-\begin{equation*}
-\pi(\bm{y}) = \int d\bm{y}'T_{\pi}(\bm{y}|\bm{y}';\beta)\pi(\bm{y}')
-\end{equation*}
-\end{frame}
-
-
 
 \begin{frame}{Estimator precision sets the resolution limit in localization microscopy}
 
-\begin{textblock*}{13cm}(1.25cm,1.5cm)
-\includegraphics[width=13cm]{PSF2D.png}
+\begin{textblock*}{18cm}(1.25cm,1.5cm)
+\includegraphics[width=10cm]{PSF2D.png}
 \end{textblock*}
-\begin{textblock*}{13cm}(1.25cm,8cm)
+
+\end{frame}
+
+\begin{frame}{Estimator precision sets the resolution limit in localization microscopy}
+
+\begin{textblock*}{10cm}(1.25cm,1.5cm)
+\includegraphics[width=13cm]{PSF2D-Crop.png}
+\end{textblock*}
+\begin{textblock*}{13cm}(1.25cm,7cm)
 \begin{itemize}
 \item $K(\lambda/2\mathrm{NA})$ is Ripley's K function at the diffraction limit ($\lambda=640\mathrm{nm}$)
 \item Convolutional neural networks (CNNs) approach the CRLB (gray) at high photon counts and generalize to the dense regime
@@ -300,28 +280,6 @@ Localization is cast as semantic segmentation of the high resolution tensor:
 
 \end{frame}
 
-\begin{frame}{Diffusion increases localization uncertainty in live-cell SMLM}
-
-Nucleosome diffusion has been modeled in various potentials:
-\vspace{0.1in}
-\begin{itemize}
-\item Bead model: $V(r_{ij}) = \epsilon_{0}(r_{0}/r_{ij})^{12}-\epsilon_{ij}(r_{0}/r_{ij})^{6}$ (Ashwin 2019)
-\item Harmonic: $V(\vec{\Delta r}) = \frac{1}{2}k|\vec{\Delta r}|^{2}$ (XXX)
-\end{itemize}
-\vspace{0.1in}
-The latter is attractive because the stationary distribution of Brownian motion in a harmonic potential is known:
-
-
-\begin{equation*}
-\partial_{t}P(r) = \hat{\mathcal{L}}_{FP}P(r); \hat{\mathcal{L}}_{FP} = \hat{\mathcal{L}}_{FP} = \left(-\frac{\partial}{\partial x}M^{(1)}(t) + \frac{1}{2}\frac{\partial^{2}}{\partial x^{2}}M^{(2)}(t)\right)
-\end{equation*}
-
-
-\begin{equation*}
-x',t'|x,t = \mathcal{N}(\mu,\Sigma)
-\end{equation*}
-
-\end{frame}
 
 \begin{frame}{A phase separation model for transcriptional control}
 \begin{figure}
@@ -344,6 +302,12 @@ x',t'|x,t = \mathcal{N}(\mu,\Sigma)
 \textit{Filippakopoulos. Selective inhibition of BET bromodomains. Nature Communications}
 A bromodomain is an approximately 110 amino acid protein domain that recognizes acetylated lysine residues
 BRD4 recognizes H3K14ac
+\end{frame}
+
+\begin{frame}
+\frametitle{}
+\centering
+\Large \textcolor{black}{Results and Future Aims}
 \end{frame}
 
 \begin{frame}{Induction of a BRD4-controlled gene with cytokine treatment}
@@ -380,6 +344,24 @@ Fixed cell results
 
 \begin{frame}{}
 Proposed two and three color imaging experiments
+\end{frame}
+
+\begin{frame}{Deep generative modeling with nonequilibrium thermodynamics}
+\begin{figure}
+\includegraphics[width=12cm]{Diffusion.png}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Deep generative modeling with nonequilibrium thermodynamics}
+\begin{figure}
+\includegraphics[width=12cm]{DiffusionSwiss.png}
+\end{figure}
+\begin{itemize}
+\item The data distribution is gradually converted into a analytically tractable distributon e.g., Gaussian
+\item Repeated application of a Markov transition kernel destroys data structure
+\item Use deep neural networks to learn to "reverse time"
+\end{itemize}
 \end{frame}
 
 
