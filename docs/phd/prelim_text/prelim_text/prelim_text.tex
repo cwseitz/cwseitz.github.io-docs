@@ -30,11 +30,11 @@
 \begin{document}
 %% Basic setup commands
 % If you don't want a title page comment out the next line and uncomment the line after it:
-\maketitle
+%\maketitle
 %\omittitle
 
 % These lines can be commented out to disable the copyright/dedication/epigraph pages
-\makecopyright
+%\makecopyright
 %\makededication
 
 
@@ -48,7 +48,7 @@
 
 \abstract
 
-Single-molecule localization-based super-resolution microscopy techniques, such as direct stochastic optical reconstruction microscopy (dSTORM), can be used to produce a pointillist representation of nucleosome organization at diffraction-unlimited precision. Direct STORM approaches leverage the deactivation of fluorescent tags, followed by spontaneous or photoinduced reactivation, to achieve super-resolution reconstructions of nuclear proteins and nucleic acids. This basic principle remains one of the method's primary limitations - standard analysis algorithms require tight control of activation and reactivation to maintain sparse emitters, presenting a tradeoff between imaging speed and labeling density. Here, we present a dSTORM strategy for fast reconstruction of nucleosome organization in living cells by complementing high duty-cycle blinking of rhodamine-derived dyes with a novel localization algorithm based on deep generative modeling. Previous approaches to breaking the time resolution barrier in SMLM learn prior information about cellular structures using generative models and predict super-resolution images based on sparse localizations, or interpolate and transform dense images into a localization map. However, cellular structures such as chromatin are dynamic and intrinsically heterogeneous; therefore, structures cannot necessarily be known apriori. Furthermore, localization maps are parametric and non-probabilistic, making them highly application specific, and difficult to use. We propose an alternative method based on directly modeling the distribution of high resolution images conditioned on a low resolution image. By performing high density localization, we can directly visualize 1,6 Hexanediol induced chromatin reorganization over minute time scales.
+Single-molecule localization-based super-resolution microscopy techniques, such as direct stochastic optical reconstruction microscopy (dSTORM), can be used to produce a pointillist representation of nucleosome organization at diffraction-unlimited precision. Direct STORM approaches leverage the deactivation of fluorescent tags, followed by spontaneous or photoinduced reactivation, to achieve super-resolution reconstructions of nuclear proteins and nucleic acids. This basic principle remains one of the method's primary limitations - standard analysis algorithms require tight control of activation and reactivation to maintain sparse emitters, presenting a tradeoff between imaging speed and labeling density. Here, we present a dSTORM strategy for fast reconstruction of nucleosome organization in living cells by complementing high duty-cycle blinking of rhodamine-derived dyes with a novel localization algorithm based on deep generative modeling. Previous approaches to breaking the time resolution barrier in SMLM learn prior information about cellular structures using generative models and predict super-resolution images based on sparse localizations, or interpolate and transform dense images into a localization map. However, cellular structures such as chromatin are dynamic and intrinsically heterogeneous; therefore, structures cannot necessarily be known apriori. Furthermore, localization maps are parametric and often non-probabilistic, making them highly application specific, and difficult to use. We propose an alternative method based on directly modeling the distribution of high resolution images conditioned on a low resolution image. By performing high density localization, we can directly visualize 1,6 Hexanediol induced chromatin reorganization over minute time scales.
 
 
 \clearpage
@@ -61,37 +61,32 @@ Single-molecule localization-based super-resolution microscopy techniques, such 
 
 Single molecule localization microscopy (SMLM) relies on the temporal resolution of fluorophores in the sample whose spatially overlapping point spread functions would otherwise render them unresolvable at the detector. SMLM techniques, such as stochastic optical reconstruction microsscopy (STORM) and photoactivatable localization microscopy (PALM) remain desirable for super-resolution imaging of many cellular structures, due to their cost-effective implementation and photon-count limited resolution (Schermelleh 2019). Common strategies for the temporal separation of molecules involve transient intramolecular rearrangements to switch from dark to fluorescent states or the exploitation of non-emitting molecular radicals. Reduced rhodamine derivates in particular can be quenched by oxidative processes or form dark radical species, which absorb strongly around 400 nm, a property that can be exploited to drive the fluorophore back to its ground state. Long dark state lifetimes are commonly used in STORM imaging, while quenching results in a higher duty cycle and increased rates of photobleaching due to irreversible oxidative damage of important functional groups. Nevertheless, high duty cycle SMLM can greatly reduce acquisition times and increase labeling density while permitting the recording of some dynamic processes (Speiser 2021). Fluorescent labeling density has been known to pose a major bottleneck to super-resolution imaging acqusitions. Static uncertainty due to molecular crowding can be partially amelioriated by using pairwise or higher-order temporal correlations within a pixel neighborhood, known as stochastic optical fluctuation imaging (Dertinger 2009). Other approaches such as stimulated emission and depletion (STED) imaging bring control over the photophysical state of a chosen subset of the sample, yet the need for laser scanning prevents widespread application in live-cell studies. Therefore, in certain applications, the spatial resolution and paralellism of SMLM techniques remain unparalleled.
 
-
-\subsection{Photoswitchable rhodamine derivatives for super-resolution microscopy}
-
-
+\clearpage
 \begin{figure}
 \begin{center}
-\includegraphics[width=14cm]{Rhodamines.png}
+\includegraphics[width=16cm]{Cluster.png}
 \end{center}
+\caption{Super-resolution reconstruction of nucleosome organization in a living Hela cell nucleus. (A) Density representation of nucleosome organization using 30nm x 30nm bins (B) Pointillist representation of nucleosome organization (C) Localization filtering procedure based on Bayesian information criterion}
 \end{figure}
-
-
 
 
 \subsection{Estimator precision sets the resolution limit in localization microscopy}
 
-Complementary Metal-Oxide-Semiconductor (CMOS) cameras have noise sources intrinsic to their operation, such as shot noise and readout noise. The former phenomenon can describe a superposition of processes; namely, the fluctuations of the number of photons due to the quantum nature of light, and the random conversion of photons into photoelectrons within the semiconductor material with a quantum efficiency below unity. Here we will often refer to the photon count $N_{0}$, which has a determined value, rather than being described by statistically. The \emph{measured} photon count, however, is well-described by a Poisson process as variance of counts is equal to the mean (Schottky 1918). A shot-noise limited image is then described as a family of Poisson variables, with units of photoelectrons
+Complementary Metal-Oxide-Semiconductor (CMOS) cameras have noise sources intrinsic to their operation, such as shot noise and readout noise. The former phenomenon can describe a superposition of processes; namely, the fluctuations of the number of photons due to the quantum nature of light, and the random conversion of photons into photoelectrons within the semiconductor material with a quantum efficiency below unity. Here we will often refer to the photon count $N_{0}$, which has a determined value, rather than being described by statistically. The \emph{measured} photon count, however, is well-described by a Poisson process (Schottky 1918). A shot-noise limited image is then described as a family of Poisson variables, with units of photoelectrons
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=16cm]{Noise.png}
 \end{center}
+\caption{Noise characterization of Hamamatsu ORCA-Flash 4 sCMOS sensor. (A) Offset for zero incident photons (B) Variance for zero incident photons (C) Cumulative mass function for the convolution distribution and its Poisson approximation for rate parameter $\mu_{k} = 500$ counts (D) Komogonov distance measured as a function of rate parameter $\mu_{k}$}
 \end{figure}
-
-
 
 
 \begin{equation}
 \vec{S} = \left[\mathrm{Poisson}(\mu_{1}), \mathrm{Poisson}(\mu_{2}), ..., \mathrm{Poisson}(\mu_{N})\right]
 \end{equation}
 
-CMOS sensors also suffer from other noise sources, such as readout noise or dark current, resulting in a nonzero signal even in the absence of incident light. Dark current is due to statistical fluctuations in the photoelectron count within a semiconductor material in thermal equilibrium. Fortunately, these additional noise sources are governed by the central limit theorem, and can be efficiently summarized as the component of the noise which exhibits a Gaussian distribution. Readout noise has been often neglected in localization algorithms because its presence in EMCCD cameras is small enough that it can be ignored within the tolerances of the localization precision. In the case of high speed sCMOS cameras, however, the readout noise of each pixel is significantly higher and, in addition, every pixel has its own noise and gain characteristic sometimes with dramatic pixel-to-pixel variations. Therefore, accurate localization necessisitates models which incorporate detailed sensor properties. For each pixel, the number of photoelectrons $S_{k}$ is  multiplied by a gain factor $g_{k}$ which has units of $[\mathrm{ADU}/e^{-}]$, which generally must be measured. The readout noise per pixel $\xi_{k}$ is Gaussian with some pixel-specific offset $o_{k}$ and variance $\sigma_{k}^{2}$ (Huang 2013). Ultimately, we have a Poisson component of the noise, which scales with the signal level and a Gaussian component, which does not. Therefore, in a single exposure, we measure: 
+CMOS sensors also suffer from other noise sources, such as readout noise or dark current, resulting in a nonzero signal even in the absence of incident light. Dark current is due to statistical fluctuations in the photoelectron count within a semiconductor material in thermal equilibrium. Fortunately, these additional noise sources are governed by the central limit theorem, and can be efficiently summarized as the component of the noise which exhibits a Gaussian distribution. Readout noise has been often neglected in localization algorithms because its presence in EMCCD cameras is small enough that it can be ignored within the tolerances of the localization precision. In the case of high speed sCMOS cameras, however, the readout noise of each pixel is significantly higher and, in addition, every pixel has its own noise and gain characteristic sometimes with dramatic pixel-to-pixel variations. Therefore, accurate localization necessisitates models which incorporate detailed sensor properties. For each pixel, the number of photoelectrons $S_{k}$ is  multiplied by a gain factor $g_{k}$ which has units of $[\mathrm{ADU}/e^{-}]$, which generally must be measured. The readout noise per pixel $\xi_{k}$ is Gaussian with some pixel-specific offset $o_{k}$ (Figure 1.2a) and variance $\sigma_{k}^{2}$ (Figure 1.2B). Ultimately, we have a Poisson component of the noise, which scales with the signal level and a Gaussian component, which does not. Therefore, in a single exposure, we measure: 
 
 \begin{equation}
 \vec{H} = \vec{S} + \vec{\xi}
@@ -104,22 +99,22 @@ P(H_{k}|\theta) &= P(S_{k})\circledast P(\xi_{k})\\
 &= A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
 \end{align}
 
-where $P(\xi_{k}) = \mathcal{N}(o_{k},\sigma_{k}^{2})$ and $P(S_{k}) = \mathrm{Poisson}(g_{k}\mu_{k})$. In practice, this expression is difficult to work with, so we look for an approximation. Notice that 
+where $P(\xi_{k}) = \mathcal{N}(o_{k},\sigma_{k}^{2})$ and $P(S_{k}) = \mathrm{Poisson}(g_{k}\mu_{k})$ and $A$ is some normalization constant (Huang 2013). In practice, this expression is difficult to work with, so we look for an approximation. Notice that 
 
-\begin{align*}
+\begin{equation*}
 \xi_{k} - o_{k} + \sigma_{k}^{2} \sim \mathcal{N}(\sigma_{k}^{2},\sigma_{k}^{2}) \approx \mathrm{Poisson}(\sigma_{k}^{2})
-\end{align*}
+\end{equation*}
 
 Since $H_{k} = S_{k} + \xi_{k}$, we transform $H_{k}' = H_{k} - o_{k} + \sigma_{k}^{2}$, which is distributed according to 
 
-\begin{align*}
+\begin{equation*}
 H_{k}' \sim \mathrm{Poisson}(\mu_{k}')
-\end{align*}
+\end{equation*}
 
-where $\mu_{k}' = g_{k}\mu_{k} + \sigma_{k}^{2}$. This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson.
+where $\mu_{k}' = g_{k}\mu_{k} + \sigma_{k}^{2}$. This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson. The quality of this approximation will degrade with decreasing signal level, since the Poisson distribution does not retain its Gaussian shape at low expected counts. Nevertheless, the quality of the approximation appears to increase exponentially with the expected count, as measured by the Komogonov distance between the convolution distribution (1.3) and its Poisson approximation (Figure 1.2c).
 
 
-\subsubsection{Inference in localization microscopy}
+\subsection{Inference in localization microscopy}
 
 According to our image formation, molecules really do have an exact location in space. In pratice, this is only an approximation since molecules diffuse at physiological temperatures, and our exposure time would need to tend to zero for this to be exactly true. If we suppose that we can collect a sufficient amount of photons in a short enough time, such that a definite position exists, the following optimization problem is defined
 
@@ -135,47 +130,39 @@ where $\theta_{\mathrm{MLE}}$ represents the maximum likelihood coordinates of a
 &= \sum_{k}  \log n_{k}! + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
 \end{align}
 
-First order derivatives of the above sum can often be computed analytically, depending on the spatial function $\mu$. The Poisson approximation is also convenient for computing the Cramer-Rao lower bound, which bounds the uncertainty of a statistical estimator from below:
+First order derivatives of the above sum can often be computed analytically, depending on the spatial function $\mu$. The Poisson approximation is also convenient for computing the Cramer-Rao lower bound, which bounds the uncertainty of a statistical estimator from below. This calculation was first written down in (Smith 2010), so we simply write the major result here
+
 
 \begin{equation}
-I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) 
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) = \sum_{k}\frac{1}{\mu_{k}'}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}} 
 \end{equation}
 
-Let $\mu_{k}' = \mu_{k} + \sigma_{k}^{2}$. \clearpage
+The Cramer-Rao lower bound on parameter unceratainty is then $\mathrm{CRLB} = \sqrt{I^{-1}}$.
 
-For an arbitrary parameter $\theta_{i}$, we take the first order derivative
+ 
+\subsection{Integrated isotropic and anisotropic Gaussian point spread functions}
 
-\begin{align*}
-\frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  x_{k}\log x_{k} + \mu_{k}' - x_{k}\log\left(\mu_{k}'\right)\\
-&= \sum_{k} \frac{\partial \mu_{k}'}{\partial\theta_{i}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)
-\end{align*}
 
-\begin{equation*}
-I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)^{2}\right) = \sum_{k}\frac{1}{\mu_{k}'}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}}
-\end{equation*}
-
-The Cramer-Rao lower bound on parameter unceratainty is then just $\mathrm{CRLB} = \sqrt{I^{-1}}$
-
-\subsubsection{Integrated isotropic Gaussian point spread function}
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=16cm]{PSF2D.png}
-\end{center}
-\caption{Performance of algorithms for two-dimensional localization (A) Lateral root mean squared error of maximum likelihood estimator (MLE) and a convolutional neural network (CNN) with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$. (B) XZ and YZ orthogonal projections of the point spread function of a single quantum dot coated on a 1.5 glass coverslip with 60X oil immersion objective}
-\end{figure}
-
-Due to diffraction, any point emitter, such as a single fluorescent molecule, will appear at the image plane as a diffraction limited spot. For the sake of simplicity, it is common to describe the point spread function as a two-dimensional isotropic Gaussian (Zhang 2007):
+Due to diffraction, any point emitter, such as a single fluorescent molecule, will appear at the image plane as a diffraction limited spot. The diffraction limit $d = \lambda / 2\mathrm{NA}$ was first written down by Abbe, derived as the minimum separation between two objects such that they can still be optically resolved. For the sake of simplicity, it is common to describe the point spread function (PSF) as a two-dimensional isotropic Gaussian (Zhang 2007). This is an approximation to the more rigorous models given by Richards and Wolf (1959) or Gibson and Lanni (1989). 
 
 \begin{equation*}
 \mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}}
 \end{equation*}
 
-The image of a fluorescent molecule captured by the objective lens, can be thought of as two-dimensional histogram of photon arrivals and a discretized form of the classical intensity profile $\mathrm{G}(x,y)$. The value at a pixel approaches an integral of this density over the pixel:
+The chracteristic width $\sigma$ of the PSF typically depends on the numerical aperture of the objective lens and The image of a fluorescent molecule captured by the objective lens, can be thought of as two-dimensional histogram of photon arrivals and a discretized form of the classical intensity profile $\mathrm{G}(x,y)$. The value at a pixel approaches an integral of this density over the pixel:
 
 \begin{equation}
 \mu_{k} = i_{0}\lambda_{k} = i_{0}\int_{\mathrm{pixel}} G(x,y)dxdy
 \end{equation}
+
+\clearpage
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{PSF2D.png}
+\end{center}
+\caption{Convolutional neural networks outperform MLE in dense and low-signal cases (A) Lateral and axial point spread functions for high ($\sim$1.25) and low ($\sim$0.8) numerical aperture (NA). (B) Convolutional neural network architecture used for localization. A monochrome image is convolved and upsampled to generate a localization map, which is post-processed to produce a vector of coordinates. (C) Lateral root mean squared error of maximum likelihood estimator (MLE) and a convolutional neural network (CNN) with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$ for high NA. }
+\end{figure}
+
 
 Let $(x_{k},y_{k})$ be the center of pixel $k$. If a fluorescent molecule is located at $(x_{0},y_{0})$, the probability of a photon arriving at pixel $k$ per unit time reads
 
@@ -183,7 +170,6 @@ Let $(x_{k},y_{k})$ be the center of pixel $k$. If a fluorescent molecule is loc
 \lambda_{k} = \int_{x_{k}-\frac{1}{2}}^{x_{k}+\frac{1}{2}}G(x-x_{0})dx \int_{y_{k}-\frac{1}{2}}^{y_{k}+\frac{1}{2}} G(y-y_{0})dy
 \end{equation*}
 
-\vspace{0.2in}
 where $i_{0} = g_{k}\eta N_{0}\Delta$. The parameter $\eta$ is the quantum efficiency and $\Delta$ is the exposure time. $N_{0}$ represents the number of photons emitted per unit time. We can then express the Gaussian integrals over a pixel by making use of the following property of the error function
 
 \begin{equation*}
@@ -196,15 +182,19 @@ This gives a convenient expression for the fraction of photons which arrive at a
 \lambda_{k} = \frac{1}{4}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma}\right)\right)\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma}\right)\right)\\
 \end{align*}
 
-\subsubsection{Integrated astigmatic Gaussian point spread function}
-
+\clearpage
 \begin{figure}
 \begin{center}
 \includegraphics[width=16cm]{Astigmatism.png}
 \end{center}
+\caption{(A) Simplified lens relay for astigmatic imaging of a fluorescent emitter using a weak cylindrical lens ($f$=10m), taken from (Huang 2008). (B) Lateral and axial point spread function of a single quantum dot on a 1.5 glass coverslip for high ($\sim$1.25) and low ($\sim$0.8) numerical aperture (NA). (C) Polynomial fit of the standard deviation of the lateral point spread function along orthogonal axes (left) Root mean squared error (RMSE) of lateral coordinates as a function of the axial coordinate, using simulated images fit with MLE (middle). RMSE of the axial coordinate, using simulated images fit with MLE (right)}
 \end{figure}
 
-In order to generalize our model to three-dimensions, we could use that the isotropic Gaussian point spread function has a variance which is dependent on the axial coordinate (Figure 3B). However, it has been shown that the error around the focus can be large, while negative and positive defocus cannot be distinguished given the symmetric dependence in $z$ (Holtzer 2007). Therefore, for 3D microscopy, a rather simple approach is to introduce astigmatism into the detection path using a weak cylindrical lens (Huang 2008). In effect, this breaks the axial symmetry of the PSF and gives an anisotropic Gaussian which is elongated perpendicular to the optical axis. Localization proceeds by measuring this anisotropy and inverting a model of its axial dependence. This axial anisotropy can be complex, but is often well described by a polynomial function of the axial displacement $z_{0}$
+
+Under this model, one can relate the expected counts at each pixel to the underlying molecular coordinates and optimize (1.6). Two major factors contribute to localization errors in this process: (i) the noise characteristics of sCMOS cameras at low-signal to noise ratio (SNR) and (ii) crowding of molecules within a diffraction limited region. Maxmimum likelihood estimation is a sufficient estimator for sparse molecules and high signal levels, retaining localization errors from 30-40nm for isolated molecules (Figure 1.3a). However, particularly in dense regimes ($K(\lambda/2\mathrm{NA}) > 1$), MLE performance tends to degrade requiring more sophisticated localization methods, such as convolutional neural networks (CNNs). Indeed, CNNs can approach the Cramer-Rao lower bound at high signal levels, and retain a RMSE near 20nm for $K(\lambda/2\mathrm{NA}) \leq 5$, at high signal levels (Figure 1.3a). 
+
+
+In order to generalize our model to three-dimensions, we could use that the lateral point spread function has a weak dependence on the axial coordinate (Figure 1.3a). However, it has been shown that the error around the focus can be large, while negative and positive defocus cannot be distinguished given the symmetric dependence in $z$ (Holtzer 2007). Instead, we choose to introduce astigmatism into the detection path using a weak cylindrical lens (Huang 2008). In effect, this breaks the axial symmetry of the PSF and gives an anisotropic Gaussian which is elongated perpendicular to the optical axis. Localization proceeds by measuring this anisotropy and inverting a model of its axial dependence. This axial anisotropy can be complex, but is often well described by a polynomial function of the axial displacement $z_{0}$
 
 \begin{equation*}
 \sigma_{x}(z_{0}) = \sum_{n}a_{n}z_{0}^{n}\;\;\;\; \sigma_{y}(z_{0}) = \sum_{n}b_{n}z_{0}^{n}
@@ -217,25 +207,55 @@ with the following continuous density over the pixel array
 \end{equation}
 
 
-\section{Deep generative modeling with non-equilibrium thermodynamics}
 
+\subsection{Enhancing image resolution with deep generative modeling}
 
-\section{Visualizing nucleosome cluster dynamics in BRD4 condensates}
-
-For live cell super-resolution of chromatin nanodomains, the HaloTag fusion protein and its associated JF549-HaloTag and JF646-HaloTag ligands have surfaced as indispensable tools (Grimm 2015). H2B is a suitable choice, since it is one of the histones with fewer tail modifications and functional variants with known function (Kamakaka 2005).
-
-Super-resolved nucleosome organization has been studied extensively in various epigenomic states to reveal segregated nanoclusters, dispersed nanodomains, and compact large aggregates  8–10 . Nucleosomes assemble into heterogeneous clusters of variable sizes, interspersed with nucleosome-depleted regions (Ricci 2015). Histone modiﬁcations regulate the packaging of nucleosomes into a higher-order chromatin structure to inﬂuence the accessibility of genomic DNA to transcription machinery. Higher-order chromatin structure is implicated in a number of cellular processes including gene regulation (Hnisz 2017; Sabari 2018; Boija 2018), DNA damage and repair (Locatelli 2022), as well as cell differentiation and immune activation (Lin 2022). However, identification of key determinants of nucleosome organization at super-resolution remains limited by a lack of live cell and high frame-rate SMLM techniques. Direct visualization of dynamic nucleosome organization over a time scale of hours could provide new insights into the role of higher order chromatin organization in a variety of cellular functions.  
-
-Here, we provide an approach to fast reconstruction of nucleosome organization in living cells. Previous approaches to live cell imaging of chromatin nanodomains only provide ensemble snapshots of chromatin structure due to slow acquisition times (Nozaki 2017). By leveraging the long dark state lifetime of JF646 at moderate laser power, we reconstruct a map of H2B organization in living Hela cells, without sacrificing considerable resolution. Resolution in SMLM is more nuanced and scales with the signal to noise ratio (SNR) and the geometry of the underlying biological structure. Therefore, we develop an image formation model which accounts for sCMOS noise characteristics, molecular density as measured with Ripley’s K-function (Ripley 1977), and a two-state photoswitching model. The sCMOS camera architecture results in every pixel having a unique noise characteristic, and the noise variances of individual pixels can reach thousands of analog-to-digital units squared (Huang 2013). This localization problem is exacerbated in dense scenarios where localization precision and detection accuracy diminish for high duty cycle photoswitching, resulting in significant deviations from the Cramer-Rao lower bound (Speiser 2021). We circumvent these challenges by combining high duty cycle dSTORM with a convolutional neural network (CNN) architecture for fast and accurate single molecule localization (Speiser 2021, Nehme 2020). 
-
-To visualize dynamics of nucleosome organization in interphase nuclei, we recorded dSTORM time-series using oblique illumination microscopy to illuminate a thin area within a single nucleus (Tokunga 2008; Nozaki 2017). By leveraging high duty cycle SMLM and model-based localization algorithms, we efficiently utilize the photon budget and capture super-resolution movies of HaloTag-H2B over long time scales. Our approach complements the short lifetime non-fluorescent state of a HaloTag ligand in a reducing environment with a localization algorithm trained on simulated dense SMLM time-series (iterative Richardson-Lucy deconvolution with the point spread function and maximum likelihood fitting). The method is extended further by two-color labeling to reveal the respective partitions of fast and slow-diffusing H2B in relation to the structure of chromatin nanodomains.  
-
-
+\clearpage
 \begin{figure}
 \begin{center}
-\includegraphics[width=16cm]{Cluster.png}
+\includegraphics[width=14cm]{Diffusion.png}
 \end{center}
+\caption{}
 \end{figure}
+
+\subsection{Application: visualizing nucleosome cluster dynamics in BRD4 condensates}
+
+\clearpage
+\begin{figure}
+\begin{center}
+\includegraphics[width=14cm]{Rhodamines.png}
+\end{center}
+\caption{Photophysics of tetramethylrhodamine (TMR) and its derivatives Janelia-Fluor (JF)549 and JF646. Maximum absorption occurs at 549nm or 646nm respectively and return to the ground state can occur via twisted internal charge transfer or inter-system crossing.}
+\end{figure}
+
+The nucleosome is the fundamental structural unit of DNA packaging in eukaryotic cells. It consists of approximately 146 base pairs (bp) of DNA wrapped in 1.67 left-handed superhelical turns around a histone octamer, consisting of 2 copies each of the core histones H2A, H2B, H3, and H4. (Luger 1997). Super-resolved nucleosome organization has been studied extensively in various epigenomic states to reveal segregated nanoclusters, dispersed nanodomains, and compact large aggregates  8–10 . Nucleosomes assemble into heterogeneous clusters of variable sizes, interspersed with nucleosome-depleted regions (Ricci 2015). Histone modiﬁcations regulate the packaging of nucleosomes into a higher-order chromatin structure to inﬂuence the accessibility of genomic DNA to transcription machinery. Higher-order chromatin structure is implicated in a number of cellular processes including gene regulation (Hnisz 2017; Sabari 2018; Boija 2018), DNA damage and repair (Locatelli 2022), as well as cell differentiation and immune activation (Lin 2022).
+
+
+Histones can be decorated with various post-translational modifications such as acetylation, methylation, phosphorylation, and ubiquination. The recruitment of proteins and complexes with specific enzymatic activities is now a well-accepted dogma of how modifications mediate their function. In this way, modifications can influence transcription of genes, and many other DNA processes such as repair, replication and recombination (Bannister and Kouzarides, 2011). Here, we study live-cell dynamics of nucleosome organization, with a particular focus on bromodomain protein 4 (BRD4) protein, a major tandem-bromodomain-containing transcriptional regulator. BRD4 plays an important role in diverse cellular functions such as transcription, replication, epigenetic regulation, and DNA repair, and has been implicated in cancer and autoimmune diseases. BRD4 acetylates H3 K122, a residue critical for nucleosome stability, resulting in nucleosome eviction and chromatin decompaction (Devaiah 2016). It functions as a scaffold for transcription factors at promoters and super-enhancers. Importantly, the intrinsically disordered regions (IDRs) of BRD4 are thought to facilitate its phase separation with coactivators such as MED1. Indeed, the IDRs of MED1 and BRD4 from phase separated liquid droplets in-vitro, which could be disrupted after addition of 1,6 Hexanediol (Sabari 2018).  
+
+\clearpage
+\begin{figure}
+\begin{center}
+\includegraphics[width=14cm]{Histones.png}
+\end{center}
+\caption{}
+\end{figure}
+
+Phase separation of chromatin and chromatin-associated proteins can be achieved in minutes, making it a suitable system for application for live cell super-resolution of chromatin structural dynamics (Itoh 2021). Previous approaches to studying the dynamics of chromatin nanodomains only provide ensemble snapshots of chromatin structure due to slow acquisition times (Nozaki 2017). Ensemble snapshots are a convenient choice in this context, yet biological systems are highly heterogeneous, and this precludes the observation of chromatin structure and residency of various chromatin modifiers. HaloTag fusion protein and its associated JF549-HaloTag and JF646-HaloTag ligands have surfaced as indispensable tools (Grimm 2015). H2B is a suitable choice, since it is one of the histones with fewer tail modifications and functional variants with known function (Kamakaka 2005).
+
+
+
+\clearpage
+\begin{figure}
+\begin{center}
+\includegraphics[width=14cm]{Setup.png}
+\end{center}
+\caption{Fluorescence microscopy setup for super-resolution and three-dimensional single molecule tracking. (A) Laser engine and two-path optical relay for selectable EPI with beam expansion (widefield) or HILO illumination based around the ASI RAMM modular system (B) Custom Olympus IX83 build with removable cylindrical lens for three-dimensional single molecule tracking or HILO illumination}
+\end{figure}
+
+Here, we use the HaloTag system, a modified haloalkane dehalogenase designed to covalently bind to synthetic ligands  (Los 2008). The HaloTag protein is fused to H2B, either through transfection and clonal selection, or by transient transfection. The HaloTag is bound by a rhodomine-derived fluorescent ligands, JF549 or JF646, in order to (Grimm 2015). For super-resolution or three-dimensional single molecule tracking, we use oblique illumination microscopy to illuminate a thin area within a single nucleus (Tokunga 2008; Nozaki 2017). In dSTORM microscopy, the dark state lifetime of a fluorescent molecule can be tuned with illumination intensity (van de Linde 2011). This permits simultaneous single molecule tracking of H2B-JF549 and H2B-JF646 over several minutes. 
+
+\section{Specific Aims} 
 
 
 \end{document}
