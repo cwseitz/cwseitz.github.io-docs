@@ -328,13 +328,29 @@ Localization is cast as semantic segmentation of the high resolution tensor:
 \end{frame}
 
 
-\begin{frame}{Chromatin nanodomains in a living Hela cell nucleus at 37C}
+\begin{frame}{Chromatin nanodomains in a living Hela cell nucleus}
 
 \begin{textblock*}{13cm}(0.5cm,1.5cm)
 \includegraphics[width=\textwidth]{Cluster.png}
 \end{textblock*}
 
 \begin{textblock*}{13cm}(0.5cm,8.0cm)
+\begin{itemize}
+\item Density estimation using 30x30nm bins
+\item Closest pairs are merged one at a time, until we minimized the BIC
+\item Data likelihood is computed under a Gaussian Mixture Model (GMM)
+\end{itemize}
+\end{textblock*}
+
+\end{frame}
+
+\begin{frame}{Chromatin nanodomains in a living Hela cell nucleus}
+
+\begin{textblock*}{13cm}(0.5cm,1.5cm)
+\includegraphics[width=\textwidth]{Cluster2.png}
+\end{textblock*}
+
+\begin{textblock*}{13cm}(0.5cm,6.0cm)
 \begin{itemize}
 \item Density estimation using 30x30nm bins
 \item Closest pairs are merged one at a time, until we minimized the BIC
