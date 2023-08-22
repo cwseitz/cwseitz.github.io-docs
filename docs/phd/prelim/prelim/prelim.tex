@@ -55,9 +55,13 @@
 
 
 \begin{frame}
-\frametitle{}
-\centering
-\Large \textcolor{black}{Introduction}
+\begin{itemize}
+\item Overview of biological system and some literature review
+\item Open questions in that system
+\item A novel method to study that system
+\item Major results so far
+\item Future goals and perspectives
+\end{itemize}
 \end{frame}
 
 
@@ -75,36 +79,78 @@ mnemonics on the chromatin}
 \end{itemize}
 \end{frame}
 
+\begin{frame}{A phase separation model for transcriptional control}
+\begin{figure}
+\includegraphics[width=10cm]{Super1.png}
+\end{figure}
+\textit{Hnisz et al. A phase separation model of transcriptional control. Cell 2017}
+\end{frame}
+
+\begin{frame}{A phase separation model for transcriptional control}
+\begin{figure}
+\includegraphics[width=11cm]{Super2.png}
+\end{figure}
+\textit{Hnisz et al. A phase separation model of transcriptional control. Cell 2017}
+\end{frame}
+
+\begin{frame}{(+)-JQ1 in complex with BRD4 protein}
+\begin{figure}
+\includegraphics[width=6cm]{JQ1.png}
+\end{figure}
+\textit{Filippakopoulos. Selective inhibition of BET bromodomains. Nature Communications}
+A bromodomain is an approximately 110 amino acid protein domain that recognizes acetylated lysine residues
+BRD4 recognizes H3K14ac
+\end{frame}
+
+\begin{frame}{Induction of a BRD4-controlled gene with cytokine treatment}
+\begin{figure}
+\includegraphics[width=11cm]{Figure-2.png}
+\end{figure}
+\begin{itemize}
+\item GBP5 transcription is regulated by BRD4 (Lin 2022)
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Validaton of JQ1 efficacy for BRD4 inhibition in Hela cells}
+\begin{textblock*}{6cm}(1.0cm,1.75cm)
+\includegraphics[width=6cm]{GBP5-RT-qPCR-crop.png}
+\end{textblock*}
+\begin{textblock*}{6cm}(7.0cm,1.75cm)
+\includegraphics[width=6cm]{GBP5-JQ1-KD-crop.png}
+\end{textblock*}
+
+\begin{textblock*}{13cm}(1.0cm,7.5cm)
+\begin{itemize}
+\item RT-qPCR quantified using $2^{-\Delta\Delta C_{t}}$ method using GAPDH as a reference gene
+\item *:$P \leq 0.1$, **:$P \leq 0.01$
+\end{itemize}
+\end{textblock*}
+
+
+\end{frame}
+
 \begin{frame}
-\frametitle{Instrumentation for super-resolution and high throughput microscopy}
+\frametitle{Instrumentation for single molecule localization microscopy}
 
 \begin{figure}
 \includegraphics[width=12cm]{Setup.png}
 \end{figure}
-  
+
 \end{frame}
 
-\begin{frame}
-\frametitle{The photophysics of rhodamines}
+\begin{frame}{A Poisson approximation at moderate SNR simplifies SMLM}
 
 \begin{figure}
-\includegraphics[width=10cm]{Rhodamines.png}
+\includegraphics[width=13cm]{Noise.png}
 \end{figure}
-\begin{itemize}
-\item  Reduction of the T1 state yields a dark, long-lived, and stable radical state
-\item The reducing agent is usually a primary thiol like cysteamine (MEA)
-\end{itemize}
-\end{frame}
 
-\begin{frame}{The OFF state of JF646 can be maintained with high laser power}
-\begin{textblock*}{11cm}(1.5cm,1.3cm)
-\includegraphics[width=11cm]{Laser.png}
-\end{textblock*}
-\begin{textblock*}{\textwidth}(0.5cm,8.0cm)
-\begin{itemize}
-\item High power maintains the OFF state, potentially by promoting triplet state formation
-\end{itemize}
-\end{textblock*}
+\begin{equation*}
+P(H_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
+\end{equation*}
+
+$P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\mathrm{SNR}$)
+ 
 \end{frame}
 
 
@@ -128,26 +174,13 @@ Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\
 
 \vspace{2in}
 
-\begin{equation*}
-P(H_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
-\end{equation*}
-\\
-$P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\mathrm{SNR}$)
-
-\end{frame}
-
-\begin{frame}{A Poisson approximation at moderate SNR simplifies SMLM}
-
-\begin{figure}
-\includegraphics[width=13cm]{Noise.png}
-\end{figure}
-
 \begin{itemize}
-\item $P(H_{k}-o_{k}|\theta) = \mathrm{Poisson}(\mu_{k}+\sigma_{k}^{2}|\theta)$ for pixel offset $o_{k}$ noise variance $\sigma_{k}^{2}$
 \item Fisher information and Cramer-Rao lower bound (CRLB) can be computed analytically for Poisson log-likelihood $\ell$ (Smith 2010, Huang 2013)
 \end{itemize} 
- 
+
 \end{frame}
+
+
 
 \begin{frame}{Estimator precision sets the resolution limit in localization microscopy}
 \begin{textblock*}{4cm}(1.0cm,1.0cm)
@@ -185,6 +218,28 @@ I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{
 The CRLB is a frequentist 
 \end{frame}
 
+\begin{frame}
+\frametitle{Direct STORM: The photophysics of rhodamines}
+
+\begin{figure}
+\includegraphics[width=10cm]{Rhodamines.png}
+\end{figure}
+\begin{itemize}
+\item  Reduction of the T1 state yields a dark, long-lived, and stable radical state
+\item The reducing agent is usually a primary thiol like cysteamine (MEA)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The OFF state of JF646 can be maintained with high laser power}
+\begin{textblock*}{11cm}(1.5cm,1.3cm)
+\includegraphics[width=11cm]{Laser.png}
+\end{textblock*}
+\begin{textblock*}{\textwidth}(0.5cm,8.0cm)
+\begin{itemize}
+\item High power maintains the OFF state, potentially by promoting triplet state formation
+\end{itemize}
+\end{textblock*}
+\end{frame}
 
 \begin{frame}{The tradeoff between spatial and temporal resolution in SMLM}
 \begin{textblock*}{10cm}(2.25cm,1.25cm)
@@ -197,6 +252,9 @@ The CRLB is a frequentist
 \end{itemize}
 \end{textblock*}
 \end{frame}
+
+
+
 
 \begin{frame}{Deep learning enables dense localization in two-dimensions}
 \begin{textblock*}{10cm}(4.25cm,1.25cm)
@@ -281,28 +339,7 @@ Localization is cast as semantic segmentation of the high resolution tensor:
 \end{frame}
 
 
-\begin{frame}{A phase separation model for transcriptional control}
-\begin{figure}
-\includegraphics[width=10cm]{Super1.png}
-\end{figure}
-\textit{Hnisz et al. A phase separation model of transcriptional control. Cell 2017}
-\end{frame}
 
-\begin{frame}{A phase separation model for transcriptional control}
-\begin{figure}
-\includegraphics[width=11cm]{Super2.png}
-\end{figure}
-\textit{Hnisz et al. A phase separation model of transcriptional control. Cell 2017}
-\end{frame}
-
-\begin{frame}{(+)-JQ1 in complex with BRD4 protein}
-\begin{figure}
-\includegraphics[width=6cm]{JQ1.png}
-\end{figure}
-\textit{Filippakopoulos. Selective inhibition of BET bromodomains. Nature Communications}
-A bromodomain is an approximately 110 amino acid protein domain that recognizes acetylated lysine residues
-BRD4 recognizes H3K14ac
-\end{frame}
 
 \begin{frame}
 \frametitle{}
@@ -310,33 +347,6 @@ BRD4 recognizes H3K14ac
 \Large \textcolor{black}{Results and Future Aims}
 \end{frame}
 
-\begin{frame}{Induction of a BRD4-controlled gene with cytokine treatment}
-\begin{figure}
-\includegraphics[width=11cm]{Figure-2.png}
-\end{figure}
-\begin{itemize}
-\item GBP5 transcription is regulated by BRD4 (Lin 2022)
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Validaton of JQ1 efficacy for BRD4 inhibition in Hela cells}
-\begin{textblock*}{6cm}(1.0cm,1.75cm)
-\includegraphics[width=6cm]{GBP5-RT-qPCR-crop.png}
-\end{textblock*}
-\begin{textblock*}{6cm}(7.0cm,1.75cm)
-\includegraphics[width=6cm]{GBP5-JQ1-KD-crop.png}
-\end{textblock*}
-
-\begin{textblock*}{13cm}(1.0cm,7.5cm)
-\begin{itemize}
-\item RT-qPCR quantified using $2^{-\Delta\Delta C_{t}}$ method using GAPDH as a reference gene
-\item *:$P \leq 0.1$, **:$P \leq 0.01$
-\end{itemize}
-\end{textblock*}
-
-
-\end{frame}
 
 \begin{frame}{Dissolving BRD4 condensates with 1,6 Hexanediol}
 Fixed cell results
