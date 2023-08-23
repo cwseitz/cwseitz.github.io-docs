@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.8)  22 AUG 2023 16:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.5.30)  22 AUG 2023 20:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -317,7 +317,13 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 1.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-))
+)
+Overfull \hbox (4.37485pt too wide) in paragraph at lines 9--9
+ [][] []\OT1/cmr/m/n/12 Visualizing nu-cle-o-some clus-ter dy-nam-ics in BRD4 c
+on-den-sates at super- 
+ []
+
+)
 \tf@toc=\write3
 \openout3 = `prelim_text.toc'.
 
@@ -326,74 +332,75 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
 
-] [1
-
-
 ]
-<Rhodamines.png, id=15, 1236.62pt x 841.1425pt>
+Overfull \hbox (4.05676pt too wide) in paragraph at lines 67--68
+[]\OT1/cmr/m/n/12 Fluorescent la-bel-ing den-sity has been known to pose a ma-j
+or bot-tle-neck to super-resolution
+ []
+
+<Rhodamines.png, id=11, 1236.62pt x 841.1425pt>
 File: Rhodamines.png Graphic file (type png)
 <use Rhodamines.png>
-Package pdftex.def Info: Rhodamines.png  used on input line 69.
+Package pdftex.def Info: Rhodamines.png  used on input line 71.
 (pdftex.def)             Requested size: 398.33858pt x 270.9423pt.
-<Noise.png, id=16, 674.2791pt x 286.9119pt>
+[1
+
+
+] [2 <./Rhodamines.png (PNG copy)>]
+<Noise.png, id=19, 674.2791pt x 286.9119pt>
 File: Noise.png Graphic file (type png)
 <use Noise.png>
-Package pdftex.def Info: Noise.png  used on input line 81.
+Package pdftex.def Info: Noise.png  used on input line 86.
 (pdftex.def)             Requested size: 455.24408pt x 193.71407pt.
- [2
-
- <./Rhodamines.png (PNG copy)>]
-[3 <./Noise.png>] [4]
-<PSF2D.png, id=37, 532.1481pt x 435.3063pt>
+ [3] [4 <./Noise.png>] [5]
+<PSF2D.png, id=41, 532.1481pt x 435.3063pt>
 File: PSF2D.png Graphic file (type png)
 <use PSF2D.png>
-Package pdftex.def Info: PSF2D.png  used on input line 139.
+Package pdftex.def Info: PSF2D.png  used on input line 144.
 (pdftex.def)             Requested size: 455.24408pt x 372.40993pt.
- [5] [6 <./PSF2D.png>] [7]
-<Astigmatism.png, id=49, 611.6451pt x 409.2891pt>
+ [6] [7 <./PSF2D.png>] [8]
+<Astigmatism.png, id=52, 611.6451pt x 409.2891pt>
 File: Astigmatism.png Graphic file (type png)
 <use Astigmatism.png>
-Package pdftex.def Info: Astigmatism.png  used on input line 172.
+Package pdftex.def Info: Astigmatism.png  used on input line 177.
 (pdftex.def)             Requested size: 455.24408pt x 304.63658pt.
 
-Overfull \hbox (31.25975pt too wide) detected at line 180
+Overfull \hbox (31.25975pt too wide) detected at line 185
 []
  []
 
-[8
+[9
 
- <./Astigmatism.png>] [9] [10]
-<ClusterFull.png, id=60, 526.3665pt x 426.8748pt>
+ <./Astigmatism.png>] [10] [11]
+<ClusterFull.png, id=64, 526.3665pt x 426.8748pt>
 File: ClusterFull.png Graphic file (type png)
 <use ClusterFull.png>
-Package pdftex.def Info: ClusterFull.png  used on input line 201.
+Package pdftex.def Info: ClusterFull.png  used on input line 209.
 (pdftex.def)             Requested size: 455.24408pt x 369.20905pt.
- [11
-
-] [12 <./ClusterFull.png>]
-<GBP5.png, id=69, 1567.7772pt x 1522.2471pt>
+ [12] [13 <./ClusterFull.png>]
+<GBP5.png, id=72, 1567.7772pt x 1522.2471pt>
 File: GBP5.png Graphic file (type png)
 <use GBP5.png>
-Package pdftex.def Info: GBP5.png  used on input line 212.
+Package pdftex.def Info: GBP5.png  used on input line 220.
 (pdftex.def)             Requested size: 455.24408pt x 442.02104pt.
- [13 <./GBP5.png>]
-<Setup.png, id=74, 827.9733pt x 595.7457pt>
+ [14 <./GBP5.png>]
+<Setup.png, id=77, 827.9733pt x 595.7457pt>
 File: Setup.png Graphic file (type png)
 <use Setup.png>
-Package pdftex.def Info: Setup.png  used on input line 221.
+Package pdftex.def Info: Setup.png  used on input line 229.
 (pdftex.def)             Requested size: 398.33858pt x 286.60919pt.
- [14
+ [15
 
 
- <./Setup.png>] [15] [16] [17] (./prelim_text.aux) ) 
+ <./Setup.png>] [16] [17] [18] (./prelim_text.aux) ) 
 Here is how much of TeX's memory you used:
  5738 strings out of 478287
- 90125 string characters out of 5849290
+ 90125 string characters out of 5849289
  385179 words of memory out of 5000000
  23863 multiletter control sequences out of 15000+600000
  476819 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 70i,11n,76p,2079b,315s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 70i,11n,76p,1671b,315s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/ty
@@ -406,10 +413,10 @@ msfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on prelim_text.pdf (19 pages, 21575985 bytes).
+Output written on prelim_text.pdf (20 pages, 21579872 bytes).
 PDF statistics:
- 140 PDF objects out of 1000 (max. 8388607)
- 81 compressed objects within 1 object stream
+ 143 PDF objects out of 1000 (max. 8388607)
+ 83 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  36 words of extra memory for PDF output out of 10000 (max. 10000000)
 
