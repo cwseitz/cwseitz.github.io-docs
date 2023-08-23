@@ -80,7 +80,9 @@ Fluorescent labeling density has been known to pose a major bottleneck to super-
 \end{figure}
 
 
-Furthermore, the spatial resolution and relative simplicity of SMLM techniques remains unmatched, inciting an effort to increase the time resolution of STORM and PALM methods. Previous approaches to breaking the time resolution barrier in SMLM fall into two main categories: generative models and dense localization methods. Generative methods learn prior information about cellular structures from super-resolution images, which is used to predict super-resolution images based on sparse localizations or widefield images (Ouyang 2018; Barth 2020; Chen 2023). Other approaches use convolional neural networks to interpolate and transform dense images into a localization map (Nehme 2020; Speiser 2021). Here, we adapt the latter methodology, as biological structures such as chromatin are dynamic and intrinsically heterogeneous; therefore, structures cannot necessarily be known apriori, and deep generative models can hallucinate image artifacts. In any case, dense localization remains a hard problem and is highly application specific, and the following paragraphs will develop a method from first principles for precision super-resolution imaging of nucleosomes
+Furthermore, the spatial resolution and relative simplicity of SMLM techniques remains unmatched, inciting an effort to increase the time resolution of STORM and PALM methods. Previous approaches to breaking the time resolution barrier in SMLM fall into two main categories: generative models and dense localization methods. Generative methods learn prior information about cellular structures from super-resolution images, which is used to predict super-resolution images based on sparse localizations or widefield images (Ouyang 2018; Barth 2020; Chen 2023). Other approaches use convolional neural networks to interpolate and transform dense images into a localization map (Nehme 2020; Speiser 2021). Here, we adapt the latter methodology, as biological structures such as chromatin are dynamic and intrinsically heterogeneous; therefore, structures cannot necessarily be known apriori, and deep generative models can hallucinate image artifacts. In any case, dense localization remains a hard problem and is highly application specific, and the following paragraphs will develop a method from first principles for precision super-resolution imaging of nucleosomes. 
+
+Briefly mention new methods like MINFLUX which create prior information and take a Bayesian localization approach
 
 
 \subsection{Estimator precision sets the resolution limit in localization microscopy}
@@ -247,12 +249,48 @@ where $\theta_{\mathrm{MLE}}$ represents the maximum likelihood coordinates of a
 \end{align}
 
 First order derivatives of the above sum can often be computed analytically, depending on the spatial function $\mu$. The Poisson approximation is also convenient for computing the Fisher information matrix for $\theta_{\mathrm{MLE}}$ and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta_{\mathrm{MLE}}$, from below (Chao 2016).
+Fisher information (separable case): \begin{equation}
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) 
+\end{equation}
+
+Let $\mu_{k}' = \mu_{k} + \sigma_{k}^{2}$. For an arbitrary parameter,
+
+\begin{align*}
+\frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  x_{k}\log x_{k} + \mu_{k}' - x_{k}\log\left(\mu_{k}'\right)\\
+&= \sum_{k} \frac{\partial \mu_{k}'}{\partial\theta_{i}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)
+\end{align*}
+
+\begin{equation*}
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)^{2}\right) = \sum_{k}\frac{1}{\mu_{k}'}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}}
+\end{equation*}
 
 \subsection{Dense localization with convolutional neural networks}
 
 \subsection{Uncertainty quantification with Markov Chain Monte Carlo}
 
+To filter out suspicious localizations, we used Metropolis-Hastings Markov Chain Monte Carlo (MCMC) to estimate the posterior marginals on coordinates. MCMC is asymptotically exact, which is not guaranteed by variational methods which may rely on a Laplace approximation around the MLE. Metropolis-Hastings is run for 3000 iterations, the first half is discarded as burn-in. A proposal $\theta' = \theta + \xi$ was generated with $\xi\sim \mathcal{N}(0,\sigma^{2}I)$ where $\sigma^{2}=0.01$. The acceptance probability is
+
+\begin{equation*}
+\alpha = e^{\beta(\ell(\theta)-\ell(\theta'))}
+\end{equation*}
+
+with $\beta=5$ to achieve a target acceptance rate of $0.3$. 
+
 \subsection{Gaussian mixture model for correcting localization artifacts}
+
+In high duty cycle SMLM, the sample molecule can be localized several times throughout an imaging acqusition. We take a probabilistic approach, motivated by Occam's razor, assuming stationary conditions in the sample. The localization data is used to construct a Gaussian mixture model (Bishop 2006) with one Gaussian mode per localization, parameterized by posterior variances. These can be computed with MCMC, but for simplicity we replace them by the expected variance $\Sigma_{0}$. We then compute the distance matrix $D_{ij}$ between all localizations and iteratively selects the nearest pair of coordinates and fuses them by replacement with their average position: $\mu_{1},\mu_{2}\rightarrow \mu=\frac{\mu_{1}+\mu_{2}}{2}$ and covariance $\Sigma_{0}$. After each fusion, we compute the Bayesian information criterion (BIC): 
+
+\begin{equation*}
+\mathrm{BIC} = k\ln(n) - 2\ln (\mathcal{L})
+\end{equation*}
+
+where $n$ is the number of localizations, $k=2n$ is the number of parameters in the GMM, and $\mathcal{L}$ is the data likelihood. We compute the model log-likelihood
+
+\begin{equation*}
+\ell(\theta|\bm{r}) = \sum_{n}\pi_{n}\mathcal{N}(\bm{r}_{n},\Sigma_{0})
+\end{equation*}
+
+Iteration then proceeds to minimize the BIC.
 
 \section{Supplemental Information}
 
