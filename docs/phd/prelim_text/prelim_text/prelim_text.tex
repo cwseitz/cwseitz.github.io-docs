@@ -201,6 +201,8 @@ Cells were washed and lysis buffer added (RIPA buffer: PMSF: protease inhibitor 
 
 After transient transfection, H2B-Halotag Hela cells were incubated with 50pM JF646 HaloTag ligand overnight, washed three times with PBS, and fixed with formaldehyde. Fixed Hela cells were imaged in a dSTORM photoswitching buffer containing 100mM MEA, 50 ug/ml Glucose Oxidase, and 3.4 mg/ml Catalase (Sigma). Buffer pH was adjusted to ~8 using HCl. Movies were collected using a custom Olympus IX83 microscope body equipped with an Olympus 60X 1.25NA oil-immersion objective. Images were projected onto an ORCA-Fusion sCMOS camera (Hamamatsu). The microscope was controlled using Micromanager software. HaloTag-JF646 molecules were illuminated with a 640nm laser held at 20mW (measured at the back focal plane of the objective).  5000 frames were captured at 100fps. Three-dimensional astigmatism time-series were captured by placing a cylindrical lens with 10m focal length (Optical Technologies) in the emission path of the microscope.  
 
+Registration of movies was perform with StackReg rigid body registration. 
+
 \subsection{Maximum likelihood estimation of molecular coordinates}
 
 For each pixel, the number of photoelectrons $S_{k}$ is  multiplied by a gain factor $g_{k} \;[\mathrm{ADU}/e^{-}]$, which generally must be measured during calibration. The readout noise per pixel $\xi_{k}$ is Gaussian with some pixel-specific offset $o_{k}$ (Figure 2a) and variance $\sigma_{k}^{2}$ (Figure 2b). Ultimately, we have a Poisson component of the noise, which scales with the signal level and a Gaussian component, which does not. Therefore, in a single exposure, we measure: 
@@ -249,6 +251,8 @@ First order derivatives of the above sum can often be computed analytically, dep
 \subsection{Dense localization with convolutional neural networks}
 
 \subsection{Uncertainty quantification with Markov Chain Monte Carlo}
+
+\subsection{Gaussian mixture model for correcting localization artifacts}
 
 \section{Supplemental Information}
 
