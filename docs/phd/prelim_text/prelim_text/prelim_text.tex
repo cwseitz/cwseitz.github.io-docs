@@ -143,7 +143,7 @@ First order derivatives of the above sum can often be computed analytically, dep
 \begin{center}
 \includegraphics[width=16cm]{PSF2D.png}
 \end{center}
-\caption{Convolutional neural networks outperform MLE in dense and low-signal cases (A) Lateral and axial point spread functions for high ($\sim$1.25) and low ($\sim$0.8) numerical aperture (NA). (B) Convolutional neural network architecture used for localization. A monochrome image is convolved and upsampled to generate a localization map, which is post-processed to produce a vector of coordinates. (C) Lateral root mean squared error of maximum likelihood estimator (MLE) and a convolutional neural network (CNN) with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$ for high NA. }
+\caption{Convolutional neural networks outperform MLE in dense and low-signal cases (A) Lateral and axial point spread functions for high ($\sim$1.25) and low ($\sim$0.8) numerical aperture (NA). (B) Convolutional neural network architecture used for localization. A monochrome image is convolved and upsampled to generate a localization map, which is post-processed to produce a vector of coordinates. (C) Lateral root mean squared error of maximum likelihood estimator (MLE) and a convolutional neural network (CNN) with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$ for high NA. Error samples = $10^{3}$}
 \end{figure}
 
 
@@ -165,20 +165,25 @@ The chracteristic width $\sigma$ of the PSF typically depends on the numerical a
 
 Let $(x_{k},y_{k})$ be the center of pixel $k$. If a fluorescent molecule is located at $(x_{0},y_{0})$, the probability of a photon arriving at pixel $k$ per unit time reads
 
-\begin{equation*}
+\begin{align*}
 \lambda_{k} = \int_{x_{k}-\frac{1}{2}}^{x_{k}+\frac{1}{2}}G(x-x_{0})dx \int_{y_{k}-\frac{1}{2}}^{y_{k}+\frac{1}{2}} G(y-y_{0})dy
-\end{equation*}
+\end{align*}
 
 where $i_{0} = g_{k}\eta N_{0}\Delta$. The parameter $\eta$ is the quantum efficiency and $\Delta$ is the exposure time. $N_{0}$ represents the number of photons emitted per unit time. We can then express the Gaussian integrals over a pixel by making use of the error function, giving a convenient expression for the fraction of photons which arrive at a pixel $k$
 
-\clearpage
 \begin{figure}
 \begin{center}
 \includegraphics[width=16cm]{Astigmatism.png}
 \end{center}
-\caption{(A) Simplified lens relay for astigmatic imaging of a fluorescent emitter using a weak cylindrical lens ($f$=10m). (B) Lateral and axial point spread function of a single quantum dot on a 1.5 glass coverslip for high ($\sim$1.25) and low ($\sim$0.8) numerical aperture (NA). (C) Polynomial fit of the standard deviation of the lateral point spread function along orthogonal axes (left) Root mean squared error (RMSE) of lateral coordinates as a function of the axial coordinate, using simulated images fit with MLE (middle). RMSE of the axial coordinate, using simulated images fit with MLE (right)}
+\caption{Axial precision for three-dimensional localization at ideal SNR (A) Simplified lens relay for astigmatic imaging of a fluorescent emitter using a weak cylindrical lens ($f$=10m). (B) Lateral and axial point spread function of a single quantum dot on a 1.5 glass coverslip for high ($\sim$1.25) and low ($\sim$0.8) numerical aperture (NA). (C) Polynomial fit of the standard deviation of the lateral point spread function along orthogonal axes (left) Root mean squared error (RMSE) of lateral coordinates as a function of the axial coordinate, using simulated images fit with MLE (middle). RMSE of the axial coordinate, using simulated images fit with MLE (right). Error samples = $10^{3}$}
 \end{figure}
 
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{PSF3D.png}
+\end{center}
+\caption{Dependence of axial and lateral precision on SNR and molecular density. (upper row) Lateral and axial root mean squared errors (RMSE) at varying signal levels (lower row) Lateral and axial RMSE for varying molecule counts within a diffraction limit radius for $10^{3}$ photon counts. Error samples = $10^{3}$}
+\end{figure}
 
 \begin{align*}
 \lambda_{k} = \frac{1}{4}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma}\right)\right)\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma}\right)\right)\\
@@ -214,7 +219,7 @@ Histones can be decorated with various post-translational modifications such as 
 
 Phase separation of chromatin and chromatin-associated proteins can be achieved in minutes, making it a suitable system for application for live cell super-resolution of chromatin structural dynamics (Itoh 2021). Previous approaches to studying the dynamics of chromatin nanodomains only provide ensemble snapshots of chromatin structure due to slow acquisition times (Nozaki 2017). Ensemble snapshots are a convenient choice in this context, yet biological systems are highly heterogeneous, and this precludes the observation of chromatin structure and residency of various chromatin modifiers. HaloTag fusion protein and its associated JF549-HaloTag and JF646-HaloTag ligands have surfaced as indispensable tools (Grimm 2015). H2B is a suitable choice, since it is one of the histones with fewer tail modifications and functional variants with known function (Kamakaka 2005).
 
-\clearpage
+
 \begin{figure}
 \begin{center}
 \includegraphics[width=16cm]{GBP5.png}
@@ -223,7 +228,7 @@ Phase separation of chromatin and chromatin-associated proteins can be achieved 
 \end{figure}
 
 
-\clearpage
+
 \begin{figure}
 \begin{center}
 \includegraphics[width=14cm]{Setup.png}
