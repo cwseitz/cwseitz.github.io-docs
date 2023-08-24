@@ -75,18 +75,18 @@ Fluorescent labeling density has been known to pose a major bottleneck to super-
 \begin{center}
 \includegraphics[width=14cm]{Rhodamines.png}
 \end{center}
-\caption{Photophysics of tetramethylrhodamine (TMR) and its derivatives JF549 and JF646. Maximum absorption occurs at 549nm or 646nm respectively and return to the ground state can occur via twisted internal charge transfer or inter-system crossing (Grimm 2021).}
+\caption{\textbf{Photophysics of tetramethylrhodamine (TMR) and its derivatives JF549 and JF646}. Maximum absorption occurs at 549nm or 646nm respectively and return to the ground state can occur via twisted internal charge transfer or inter-system crossing (Grimm 2021).}
 \end{figure}
 
 
-Furthermore, the spatial resolution and relative simplicity of SMLM techniques remains unmatched, inciting an effort to increase the time resolution of STORM and PALM methods. Recent work on integration of Bayesian priors with modulation enhanced SMLM (meSMLM) has generalized localization microscopy to a Bayesian setting, reducing spatial resolution below 1 nanometer (Kalisvaart 2022). Previous approaches to breaking the time resolution barrier in SMLM fall into two main categories: generative models and dense localization methods. Generative methods learn prior information about cellular structures from super-resolution images, which is used to predict super-resolution images based on sparse localizations or widefield images (Ouyang 2018; Barth 2020; Chen 2023). Other approaches use convolutional neural networks to interpolate and transform dense images into a localization map (Nehme 2020; Speiser 2021). Here, we adapt the latter methodology, as biological structures such as chromatin are dynamic and intrinsically heterogeneous; therefore, structures cannot necessarily be known apriori, and deep generative models can hallucinate image artifacts. 
+Furthermore, the spatial resolution and relative simplicity of SMLM techniques remains unmatched, inciting an effort to increase the time resolution of STORM and PALM methods. The resolution of SMLM methods is limited only by the variance of a statistical estimator of molecular coordinates (Chen 2016). When we refer to localization error or uncertainty in this work, we are referring to aleatoric or systematic uncertainty, due to imperfections gradient-based estimators or convolutional networks. The posterior distribution on molecular coordinates can be computed using Markov Chain Monte Carlo techniques, but this is used sparingly for particle filtering, due to limited computational resources (Figure 7). Interestingly, recent work on integration of Bayesian priors with modulation enhanced SMLM (meSMLM) has generalized localization microscopy to a Bayesian setting, reducing spatial resolution below 1 nanometer (Kalisvaart 2022). Previous approaches to breaking the time resolution barrier in SMLM fall into two main categories: generative models and dense localization methods. Generative methods learn prior information about cellular structures from super-resolution images, which is used to predict super-resolution images based on sparse localizations or widefield images (Ouyang 2018; Barth 2020; Chen 2023). Other approaches use convolutional neural networks to interpolate and transform dense images into a localization map (Nehme 2020; Speiser 2021). Here, we adapt the latter methodology, as biological structures such as chromatin are dynamic and intrinsically heterogeneous; therefore, structures cannot necessarily be known apriori, and deep generative models can hallucinate image artifacts. 
 
 
 \section{Results}
 
 \subsection{Dense two-dimensional and sparse three-dimensional SMLM}
 
-Two major factors contribute to localization errors in SMLM: (i) the noise characteristics of CMOS cameras and (ii) crowding of molecules within a diffraction limited region. Maxmimum likelihood estimation is frequently used for isolated molecules and high signal levels, retaining localization errors from 30-40nm (Figure 3c). However, MLE performance tends to degrade in low SNR and dense regimes ($K(\lambda/2\mathrm{NA}) > 1$), requiring more sophisticated localization methods, such as convolutional neural networks (CNNs). CNNs have been widely adopted for imaging processing tasks in fluorescence microscopy (Weigert 2018; Ronneberger 2015). Here, we employ a localization CNN architecture based on DeepSTORM3D and consists of three main modules: the first consisting of successive dilated convolutions, followed by an upsampling module to increase the lateral resolution by a factor of 4. The third and last module adds additional convolutional blocks to refine localization estimates. This architecture can also be used for three-dimensional localization and thus the final output has $n_{z}$ channels. Of course, for two-dimensional localization $n_{z}=1$. The final output is followed by an element-wise HardTanh (Maas 2013). A post-processing function $F_{PP}$ uses a user-defined threshold to produce a matrix of coordinates. We find the performance of this architecture on simulated images surpasses MLE, and approaches the Cramer-Rao lower bound at high signal levels, retaining a RMSE near 20nm for $K(\lambda/2\mathrm{NA}) \leq 5$, at high signal levels (Figure 3c). 
+Two major factors contribute to localization errors in SMLM: (i) the noise characteristics of CMOS cameras and (ii) crowding of molecules within a diffraction limited region. Maxmimum likelihood estimation is frequently used for isolated molecules and high signal levels, retaining localization errors from 30-40nm (Figure 3c). However, MLE performance tends to degrade in low SNR and dense regimes ($K(\lambda/2\mathrm{NA}) > 1$), requiring more sophisticated localization methods, such as convolutional neural networks (CNNs). CNNs have been widely adopted for imaging processing tasks in fluorescence microscopy (Weigert 2018; Ronneberger 2015). We employ a convolutional neural network based on DeepSTORM3D (Nehme 2020), which successively upsamples a monochrome image and outputs a localization map, which can be post-processed to produce molecular coordinates (Figure 2b).  We demonstrate that our architecture can outperform maximum likelhood estimation for all signal levels and molecular densities tested (Figure 2c).
 
 
 To generalize our imaging setup to three-dimensions, we could use that the lateral point spread function has a weak dependence on the axial coordinate (Figure 3a). However, it has been shown that the error around the focus can be large, while negative and positive defocus cannot be distinguished given the symmetric dependence in $z$ (Holtzer 2007). Instead, we choose to introduce astigmatism into the detection path using a weak cylindrical lens (Figure 4a). In effect, this breaks the axial symmetry of the PSF and gives an anisotropic Gaussian which is elongated perpendicular to the optical axis. Localization proceeds by measuring this anisotropy and inverting a model of its axial dependence. At high numerical aperture, a strong dependence of the anisotropy to axial displacement potentially provides more precise three-dimensional localization (Figure 4b).  This axial anisotropy can be complex, but is often well described by a polynomial function of the axial displacement $z_{0}$ (Smith 2010). Unfortunately, astigmatic imaging increases the width of the point spread function significantly, exacerbating localization errors by molecular crowding and low signal to noise ratio. Therefore, we report error statistics for maximum likelihood based methods only, and leave three-dimensional localization with CNNs to future work. As one might expect, at ideal SNR, we show that axial dependence of localization error bears a strong similarity to the axial dependence of the PSF width (Figure 4c). Lateral RMSE can be maintained below 40nm for the anisotropic PSF for $K(\lambda/2\mathrm{NA}) \leq 5$; however, the Jaccard index tends to rapidly degrade at higher molecular densities, making MLE an unsuitable estimator for dense three-dimensional imaging (Figure 5). However, three-dimensional tracking with sparse emitters remains a good application of this method.
@@ -95,7 +95,7 @@ To generalize our imaging setup to three-dimensions, we could use that the later
 \begin{center}
 \includegraphics[width=14cm]{PSF2D.png}
 \end{center}
-\caption{Convolutional neural networks outperform MLE in dense and low-signal cases (A) Lateral and axial point spread functions for high ($\sim$1.25) and low ($\sim$0.8) numerical aperture (NA). (B) Convolutional neural network architecture used for localization. A monochrome image is convolved and upsampled to generate a localization map, which is post-processed to produce a vector of coordinates. (C) Lateral root mean squared error of maximum likelihood estimator (MLE) and a convolutional neural network (CNN) with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$ for high NA. Error samples = $10^{3}$}
+\caption{\textbf{Convolutional neural networks outperform MLE in dense and low-signal cases} (A) Lateral and axial point spread functions for high ($\sim$1.25) and low ($\sim$0.8) numerical aperture (NA). (B) Convolutional neural network architecture used for localization. A monochrome image is convolved and upsampled to generate a localization map, which is post-processed to produce a vector of coordinates. (C) Lateral root mean squared error of maximum likelihood estimator (MLE) and a convolutional neural network (CNN) with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$ for high NA. Error samples = $10^{3}$}
 \end{figure}
 
 
@@ -104,7 +104,7 @@ To generalize our imaging setup to three-dimensions, we could use that the later
 \begin{center}
 \includegraphics[width=14cm]{Astigmatism.png}
 \end{center}
-\caption{Axial precision for three-dimensional localization at ideal SNR (A) Simplified lens relay for astigmatic imaging of a fluorescent emitter using a weak cylindrical lens ($f$=10m). (B) Lateral and axial point spread function of a single quantum dot on a 1.5 glass coverslip for high ($\sim$1.25) and low ($\sim$0.8) numerical aperture (NA). (C) Polynomial fit of the standard deviation of the lateral point spread function along orthogonal axes (left) Root mean squared error (RMSE) of lateral coordinates as a function of the axial coordinate, using simulated images fit with MLE (middle). RMSE of the axial coordinate, using simulated images fit with MLE (right). Error samples = $10^{3}$}
+\caption{\textbf{Axial precision for three-dimensional localization at ideal SNR} (A) Simplified lens relay for astigmatic imaging of a fluorescent emitter using a weak cylindrical lens ($f$=10m). (B) Lateral and axial point spread function of a single quantum dot on a 1.5 glass coverslip for high ($\sim$1.25) and low ($\sim$0.8) numerical aperture (NA). (C) Polynomial fit of the standard deviation of the lateral point spread function along orthogonal axes (left) Root mean squared error (RMSE) of lateral coordinates as a function of the axial coordinate, using simulated images fit with MLE (middle). RMSE of the axial coordinate, using simulated images fit with MLE (right). Error samples = $10^{3}$}
 \end{figure}
 
 \subsection{Visualizing nucleosome cluster dynamics in BRD4 condensates at super-resolution}
@@ -115,21 +115,23 @@ Phase separation of chromatin and chromatin-associated proteins can be achieved 
 \begin{center}
 \includegraphics[width=16cm]{ClusterFull.png}
 \end{center}
-\caption{Super-resolution reconstruction of nucleosome organization in a living Hela cell nucleus. (A) Density representation of nucleosome organization using 30nm x 30nm bins and a pointillist representation of nucleosome organization (B) Ripley's K function, Bayesian information criterion (BIC), and log likelihood for a Gaussian mixture model of pointillist localization data of three randomly selected regions of interest (C) Localization accumulation over five seconds of imaging time (500 frames) and clustering with DBSCAN for a randomly selected region of interest}
+\caption{\textbf{Super-resolution reconstruction of nucleosome organization in a living Hela cell nucleus}. (A) Density representation of nucleosome organization using 30nm x 30nm bins and a pointillist representation of nucleosome organization (B) Ripley's K function, Bayesian information criterion (BIC), and log likelihood for a Gaussian mixture model of pointillist localization data of three randomly selected regions of interest. Dashed line drawn at the diffraction limit (C) Localization accumulation over five seconds of imaging time (500 frames) and clustering with DBSCAN for a randomly selected region of interest}
 \end{figure}
 
 Here, we use the HaloTag system, a modified haloalkane dehalogenase designed to covalently bind to synthetic ligands  (Los 2008). The HaloTag protein is fused to H2B, either through transfection and clonal selection, or by transient transfection. The HaloTag is bound by a rhodomine-derived fluorescent ligands, JF549 or JF646, in order to (Grimm 2015). For super-resolution or three-dimensional single molecule tracking, we use oblique illumination microscopy to illuminate a thin area within a single nucleus (Tokunga 2008; Nozaki 2017). In dSTORM microscopy, the dark state lifetime of a fluorescent molecule can be tuned with illumination intensity (van de Linde 2011). This permits simultaneous single molecule tracking of H2B-JF549 and H2B-JF646 over several minutes. 
-
-\subsection{Inhibition of a BRD4-controlled gene with JQ1}
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=16cm]{GBP5.png}
 \end{center}
-\caption{\textbf{Validation of induction of target gene GBP5 and JQ1 inhibition}. (A) Putative GBP5 transcription sites at the specified time points following IFN-$\gamma$ exposure. (B,C) High resolution zoom of GBP5 in-situ hybridization 8 hours folowing IFN-$\gamma$ exposure (D) Induction of GBP5 expression in Hela cells following IFN-$\gamma$ exposure, measured with RT-qPCR (E) Knockdown of GBP5 expression 8 hours folowing IFN-$\gamma$ exposure with 1uM JQ1 treatment (** P < 0.01) (F) Western blot of GBP5 protein expression following IFN-$\gamma$ exposure}
+\caption{\textbf{Inhibition of a super-enhanced gene with JQ1}. (A) Putative GBP5 transcription sites at the specified time points following IFN-$\gamma$ exposure. (B,C) High resolution zoom of GBP5 in-situ hybridization 8 hours folowing IFN-$\gamma$ exposure (D) Induction of GBP5 expression in Hela cells following IFN-$\gamma$ exposure, measured with RT-qPCR (E) Knockdown of GBP5 expression 8 hours folowing IFN-$\gamma$ exposure with 1uM JQ1 treatment ($** P < 0.01$) (F) Western blot of GBP5 protein expression following IFN-$\gamma$ exposure (G) BRD4 immunofluorescence 9h after first exposure to (+)JQ1 (H) Ratio of BRD4 puncta count 9h after JQ1 exposure relative to control ($** P < 0.001$)}
 \end{figure}
 
-\clearpage
+\subsection{Inhibition of a super-enhanced gene with JQ1}
+
+The guanylate binding protein (GBP) gene cluster codes for a family of interferon-gamma inducible GTPases. A recent study has confirmed phase separation in the GBP gene family region by co-staining of BRD4 and MED1 marker protein with the GBP gene family region, after infection of macrophages with \emph{Mycobacterium tuberculosis} (Lin 2022). This result is a strong indication that the GBPs gene region tends to relocate into a phase-separated condensate containing BRD4 to efficiently initiate the immune response program. Leveraging this striking result, we used this system to (i) confirm the efficacy of JQ1 treatment on GBP5 knockdown after interferon-gamma induction and (ii) determine the effects of JQ1 exposure on BRD4 immunofluorescence signal in Hela nuclei. Fluorescence in-situ hybridization (FISH) demonstrated the formation of GBP5 positive puncta in Hela nuclei after interferon-gamma exposure (Figure 5A-C,F) and mRNA expression over several hours (Figure 5D.) Relief of GBP5 expression was observed by incubating Hela cells for 8h with both interferon-gamma and JQ1 (Figure 5E). BRD4 puncta are abundant in Hela nuclei and exposure of JQ1 for 9h showed a reduction in puncta counts to approximately 70 percent relative to control.
+
+
 \section{Future Aims}
 
 \subsection{Specific Aim 1: Measure nucleosome cluster dynamics in living cells}
@@ -158,27 +160,23 @@ JQ1 is a relatively slow acting small molecule drug. Therefore, we propose fixed
 
 \section{Materials and Methods}
 
-\subsection{Cell lines, cell culture conditions, and transfection}
+\subsection{Cell culture, transfection, and treatments}
 
-Hela cells were cultured in DMEM supplemented with 10  percent  fetal bovine serum (Gibco) at 37C, 5  percent  CO2 in a humidified incubator. Cultures were tested routinely for mycoplasma contamination; all tests were negative. For super-resolution experiments, cells were seeded in a 35mm FluoroDish (WPI), and transiently transfected with pBREBACK-H2BHalo plasmid (Addgene plasmid 91564) using Lipofectamine 3000 (ThermoFisher). 
-
-\subsection{Interferon priming and other chemical treatments}
-
-For immune activation, cells were incubated with 50ng/ml Interferon-gamma (Gibco), diluted in fresh DMEM. BRD4 inhibition experiments were carried out using 1uM JQ1 (Chemie Tek).  
+Hela cells were cultured in DMEM supplemented with 10 percent fetal bovine serum (Gibco) at 37C, 5  percent  CO2 in a humidified incubator. For super-resolution experiments, cells were seeded in a 35mm FluoroDish (WPI), and transiently transfected with pBREBACK-H2BHalo plasmid (Addgene plasmid 91564) using Lipofectamine 3000 (ThermoFisher). For immune activation, cells were incubated with 50ng/ml Interferon-gamma (Gibco), diluted in fresh DMEM. BRD4 inhibition with JQ1 (Chemie Tek) was carried out using specified concentrations and incubation time in fresh DMEM.  
 
 \subsection{RNA fluorescence in-situ hybridization}
 
 Cells were seeded in 8-well chamber slides with 1.5 glass coverslip bottom (Ibidi). GBP5 expression was induced with 50ng/ml Interferon-gamma, followed by fixation. Stellaris RNA FISH Wash Buffer A (Biosearch Technologies, Inc., SMF-WA1-60), 10  percent  Deionized Formamide (EMD Millipore, S4117) in RNase-free water (Life Technologies, AM9932) for 5 min at RT. Cells were hybridized with 90  percent  Stellaris RNA FISH Hybridization Buffer (Biosearch Technologies, SMF-HB1-10), 10  percent  Deionized Formamide, 12.5 µM Stellaris RNA FISH probes designed to hybridize introns of the . Hybridization was performed in a humidified chamber at 37C. Cells were then washed with Wash Buffer A for 30 min at 37°C and nuclei were stained with 15ng/ml DAPI in Wash Buffer A for 5 min at RT. After one 5-min was with Stellaris RNA FISH Wash Buffer B (Biosearch Technologies, SMF-WB1-20) at RT. Images were acquired as 10x10 grids on an ASI RAMM widefield microscope with 60X 1.4NA Nikon oil-immersion objective using Micromanager acquisition software and a Hammamatsu ORCA-Flash4.0v3 camera.  
 
-RNA FISH probes were designed and generated by Biosearch Technologies Stellaris RNA FISH to target exons of GBP5. See Table 1 for the sequences of RNA-FISH probes.  
+RNA FISH probes were designed and generated by Biosearch Technologies Stellaris RNA FISH to target exons of GBP5. 
 
 \subsection{Immunofluorescence}
 
-Cells grown in chamber slides or 35mm dishes were permeabilized with 0.3  percent  (v/v) Triton-X100 (Sigma-Aldrich) in PBS and blocked for 1h in 5  percent  (w/v) nonfat dry milk at 4C. Cells were incubated overnight at 4C using primary antibody anti-BRD4 (Cell Signaling, clone E2A7X; 1:1000). Secondary antibodies for BRD4 (Cell Signaling Anti-Rabbit igG-Alexa488, 1:1000). 
+Cells grown in chamber slides or 35mm dishes and permeabilized with 0.3  percent  (v/v) Triton-X100 (Sigma-Aldrich) in PBS and blocked for 1h in 5  percent  (w/v) nonfat dry milk at 4C. Cells were incubated overnight at 4C using primary antibody anti-BRD4 (Cell Signaling, clone E2A7X; 1:1000). Secondary antibodies for BRD4 (Cell Signaling Anti-Rabbit igG-Alexa488, 1:1000). 
 
 \subsection{Quantitative reverse transcription polymerase chain reaction}
 
-GBP5 induction was validated with RT-qPCR, using the TaqMan gene expression assay. Relative mRNA levels were computed using the delta-delta Ct method (Schmittgen 2008). 
+GBP5 induction was validated with RT-qPCR, using the TaqMan gene expression assay. Cell culture followed standard procedure, followed by homogenization with lysis buffer with 2-mercaptoethanol (Bio-Rad). Suspension was vortexed and transferred into a clean RNase-free tube. The homogenate was centrifuged at 12,000g for 2 minutes. RNA was purified using PureLink RNA Mini Kit (Invitrogen) and stored on ice. Reverse transcription was carried out using the iScript Advanced cDNA Synthesis Kit (Bio-Rad).Taqman probes were designed against GAPDH and GBP5 genes, and RT-qPCR was run in a 96 well plate on a qPCR machine (Applied Biosystems). Relative RNA level of GBP5 to GAPDH were computed using the delta-delta Ct method (Schmittgen 2008). 
 
 \subsection{Immunoblotting}
 
@@ -251,6 +249,8 @@ I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{
 
 \subsection{Dense localization with convolutional neural networks}
 
+We employ a localization CNN architecture based on DeepSTORM3D which consists of three main modules. The first module consists of successive dilated convolutions, followed by an upsampling module to increase the lateral resolution by a factor of 4. The third and last module adds additional convolutional blocks to refine localization estimates. This architecture can also be used for three-dimensional localization and thus the final output has $n_{z}$ channels. The final output is followed by an element-wise HardTanh (Maas 2013). A post-processing function $F_{PP}$ uses a user-defined threshold to produce a matrix of coordinates. We find the performance of this architecture on simulated images surpasses MLE, and approaches the Cramer-Rao lower bound at high signal levels, retaining a RMSE near 20nm for $K(\lambda/2\mathrm{NA}) \leq 5$, at high signal levels (Figure 3c). 
+
 \subsection{Uncertainty quantification with Markov Chain Monte Carlo}
 
 To filter out suspicious localizations, we used Metropolis-Hastings Markov Chain Monte Carlo (MCMC) to estimate the posterior marginals on coordinates. MCMC is asymptotically exact, which is not guaranteed by variational methods which may rely on a Laplace approximation around the MLE. Metropolis-Hastings is run for 3000 iterations, the first half is discarded as burn-in. A proposal $\theta' = \theta + \xi$ was generated with $\xi\sim \mathcal{N}(0,\sigma^{2}I)$ where $\sigma^{2}=0.01$. The acceptance probability is
@@ -283,23 +283,32 @@ Iteration then proceeds to minimize the BIC.
 \begin{center}
 \includegraphics[width=16cm]{Noise.png}
 \end{center}
-\caption{Noise characterization of Hamamatsu ORCA-Flash 4 CMOS sensor. (A) Offset for zero incident photons (B) Variance for zero incident photons (C) Cumulative mass function for the convolution distribution and its Poisson approximation for rate parameter $\mu_{k} = 500$ counts (D) Komogonov distance measured as a function of rate parameter $\mu_{k}$}
+\caption{\textbf{Noise characterization of Hamamatsu ORCA-Flash 4 CMOS sensor}. (A) Offset for zero incident photons (B) Variance for zero incident photons (C) Cumulative mass function for the convolution distribution and its Poisson approximation for rate parameter $\mu_{k} = 500$ counts (D) Komogonov distance measured as a function of rate parameter $\mu_{k}$}
 \end{figure}
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=14cm]{Setup.png}
+\includegraphics[width=16cm]{MCMC.png}
+\end{center}
+\caption{\textbf{Computing epistemic uncertanties with Metropolis-Hastings}. (top left) Simulated point spread function for $N_{0}=10^{3}$ photons with a red x at $x_{\mathrm{MLE}}$ and $y_{\mathrm{MLE}}$ (bottom left) Acceptance rate of Markov chain (middle) Markov chains sampling from the posterior distribution on molecule coordinates in 3D, with the maximum likelihood estimation in dashed blue (right) Estimated posterior marginals on the localization parameters with their respective uncertanties}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{Setup.png}
 \end{center}
 
 
-\caption{Fluorescence microscopy setup for super-resolution and three-dimensional single molecule tracking. (A) Laser engine and two-path optical relay for selectable EPI with beam expansion (widefield) or HILO illumination based around the ASI RAMM modular system (B) Custom Olympus IX83 build with removable cylindrical lens for three-dimensional single molecule tracking or HILO illumination}
+\caption{\textbf{Fluorescence microscopy setup for super-resolution and three-dimensional single molecule tracking}. (A) Laser engine and two-path optical relay for selectable EPI with beam expansion (widefield) or HILO illumination based around the ASI RAMM modular system (B) Custom Olympus IX83 build with removable cylindrical lens for three-dimensional single molecule tracking or HILO illumination}
 \end{figure}
+
+
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=16cm]{PSF3D.png}
 \end{center}
-\caption{Dependence of axial and lateral precision on SNR and molecular density. (upper row) Lateral and axial root mean squared errors (RMSE) at varying signal levels (lower row) Lateral and axial RMSE for varying molecule counts within a diffraction limit radius for $10^{3}$ photon counts. Error samples = $10^{3}$}
+\caption{\textbf{Dependence of axial and lateral precision on SNR and molecular density}. (upper row) Lateral and axial root mean squared errors (RMSE) at varying signal levels (lower row) Lateral and axial RMSE for varying molecule counts within a diffraction limit radius for $10^{3}$ photon counts. Error samples = $10^{3}$}
 \end{figure}
 
 
@@ -343,8 +352,19 @@ where $i_{0} = g_{k}\eta N_{0}\Delta$. The parameter $\eta$ is the quantum effic
 \lambda_{k} = \frac{1}{4}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma}\right)\right)\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma}\right)\right)\\
 \end{align*}
 
-This result is the workhorse of much of the remaining analyses, allowing us to efficiently simulate images of single molecules and benchmark localization algorithms. It is also straightforward to generalize this result when $G$ is an anisotropic Gaussian, which is studied in (Figure 4).
+It is also straightforward to generalize this result when $G$ is an anisotropic Gaussian, by replacing $\sigma$ with either $\sigma_{x}$ or $\sigma_{y}$.
 
+
+
+\makebibliography
+
+\section{References}
+\noindent [1] Buesing et al. \textit{Neural dynamics as sampling: A model for stochastic computation in recurrent networks of spiking neurons}.           PLoS Computational Biology 2011.
+\newline
+\noindent [2] Azouz et al. \textit{Cellular Mechanisms Contributing to Response Variability of Cortical Neurons In Vivo}. Journal of Neuroscience. 1999.
+\newline
+\noindent [3] Vreeswijk et al. \textit{Chaotic Balanced State in a Model of Cortical Circuits}. Neural Computation. 1998.
+\newline
 
 \end{document}
 
