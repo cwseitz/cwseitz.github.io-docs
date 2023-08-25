@@ -60,13 +60,8 @@
 	\begin{titlepage}
 		\begin{center}
 			\rule{0in}{0.55in} % Artificial extra [old=0.95in] margin. Why not vspace?
-			THE UNIVERSITY OF CHICAGO\\
-			\vspace{0.8in}
 			\MakeUppercase{\@title}\\
 			\vspace{0.8in}
-			A THESIS SUBMITTED TO\\
-			THE FACULTY OF THE DIVISION OF THE \MakeUppercase{\@division}\\
-			IN CANDIDACY FOR THE DEGREE OF\\
 			\MakeUppercase{\@degree}\\
 			\ \\
 			\MakeUppercase{\@department}\\
@@ -74,7 +69,6 @@
 			BY\\
 			\MakeUppercase{\@author}\\
 			\vspace{0.8in}
-			CHICAGO, ILLINOIS\\
 			\MakeUppercase{\@date}
 			\vspace*{0.45in}
 		\end{center}

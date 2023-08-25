@@ -14,12 +14,12 @@
 \usepackage{bbm}
 
 %% Use these commands to set biographic information for the title page:
-\title{Visualizing nucleosome cluster dynamics with stochastic optical reconstruction microscopy}
+\title{Visualizing nucleosome cluster dynamics with direct stochastic optical reconstruction microscopy}
 \author{Clayton W. Seitz}
 \department{Department of Physics}
-\division{Physical Sciences}
-\degree{Doctor of Philosophy}
-\date{Spring 20XX}
+\division{Preliminary Examination}
+\degree{PhD Preliminary Examination}
+\date{Fall 2023}
 
 %% Use these commands to set a dedication and epigraph text
 
@@ -30,7 +30,7 @@
 \begin{document}
 %% Basic setup commands
 % If you don't want a title page comment out the next line and uncomment the line after it:
-%\maketitle
+\maketitle
 %\omittitle
 
 % These lines can be commented out to disable the copyright/dedication/epigraph pages
@@ -40,7 +40,6 @@
 
 %% Make the various tables of contents
 \tableofcontents
-%\listoffigures
 %\listoftables
 
 %\acknowledgments
@@ -48,7 +47,7 @@
 
 \abstract
 
-Single-molecule localization microscopy (SMLM) techniques, such as direct stochastic optical reconstruction microscopy (dSTORM), can be used to produce a pointillist representation of nucleosome organization at diffraction-unlimited precision. Direct STORM approaches leverage the deactivation of fluorescent tags, followed by spontaneous or photoinduced reactivation, which can be used to achieve super-resolution reconstructions of nuclear proteins and nucleic acids. This basic principle remains one of the method's primary limitations - standard SMLM fitting routines require tight control of activation and reactivation to maintain sparse emitters, presenting a tradeoff between imaging speed and labeling density. Here, we present a dSTORM strategy for fast reconstruction of nucleosome organization in living cells by complementing high duty-cycle blinking of rhodamine-derived dyes with a localization algorithm based on deep neural networks. By performing high density localization and two-color imaging, we intend to directly visualize nucleosome cluster dynamics and chromatin mobility following BRD4 inhibition with small molecule drugs JQ1 and 1,6 Hexanediol.
+Single-molecule localization microscopy (SMLM) techniques, such as direct stochastic optical reconstruction microscopy (dSTORM), can be used to produce a pointillist representation of nucleosome organization at diffraction-unlimited precision. Direct STORM approaches leverage the deactivation of standard fluorescent tags, followed by spontaneous or photoinduced reactivation, which can be used to achieve super-resolution reconstructions of nuclear proteins and nucleic acids. This basic principle remains one of the method's primary limitations - standard SMLM fitting routines require tight control of activation and reactivation to maintain sparse emitters, presenting a tradeoff between imaging speed and labeling density. Here, we present a dSTORM strategy for fast reconstruction of nucleosome organization in living cells by complementing high duty-cycle blinking of rhodamine-derived dyes with a localization algorithm based on deep neural networks. Our strategy permits live cell imaging of nucleosome nanodomains, permitting physical analysis of their composition and evolution during biophysical processes such as phase separation. By performing high density localization and multi-color imaging, we intend to directly visualize nucleosome cluster dynamics and chromatin mobility following BRD4 inhibition with small molecule drugs JQ1 and 1,6 Hexanediol.
 
 
 \clearpage
@@ -63,13 +62,12 @@ Single-molecule localization microscopy (SMLM) techniques, such as direct stocha
 
 The nucleosome is the fundamental structural unit of DNA packaging in eukaryotic cells. It consists of approximately 146 base pairs (bp) of DNA wrapped in 1.67 left-handed superhelical turns around a histone octamer, consisting of 2 copies each of the core histones H2A, H2B, H3, and H4. (Luger 1997). Super-resolved nucleosome organization has been studied extensively in various epigenomic states to reveal segregated nanoclusters, dispersed nanodomains, and compact large aggregates. Nucleosomes assemble into heterogeneous clusters of variable sizes, interspersed with nucleosome-depleted regions (Ricci 2015). Histones can be decorated with various post-translational modifications such as acetylation, methylation, phosphorylation, and ubiquination. The recruitment of proteins and complexes with specific enzymatic activities is now a well-accepted dogma of how modifications mediate their function. Histone modifications can influence transcription of genes, and many other DNA processes such as repair, replication and recombination (Bannister and Kouzarides, 2011). 
 
-Here, we study live-cell dynamics of nucleosome organization, with a particular focus on bromodomain protein 4 (BRD4) protein, a major tandem-bromodomain-containing transcriptional regulator. BRD4 plays an important role in diverse cellular functions such as transcription, replication, epigenetic regulation, and DNA repair, and has been implicated in cancer and autoimmune diseases. BRD4 acetylates Lysine 122 on H3 (H3K122), a residue critical for nucleosome stability, resulting in nucleosome eviction and chromatin decompaction (Devaiah 2016). Moreover, BRD4 functions as a scaffold for transcription factors at promoters and super-enhancers. The intrinsically disordered regions (IDRs) of BRD4 are thought to facilitate its phase separation with coactivators such as MED1. The phase separation properties of BRD4 have been well-studied in several cell lines (Han 2020), and in the context of super-enhancers (Sabari 2018). However, the effects of BRD4 on nucleosome organization in mammalian cells remains unclear. 
+Here, we study live-cell dynamics of nucleosome organization, with a particular focus on the structure of biomolecular condensates containing bromodomain protein 4 (BRD4) protein, a major tandem-bromodomain-containing transcriptional regulator. BRD4 plays an important role in diverse cellular functions such as transcription, replication, epigenetic regulation, and DNA repair, and has been implicated in cancer and autoimmune diseases. BRD4 acetylates Lysine 122 on H3 (H3K122), a residue critical for nucleosome stability, resulting in nucleosome eviction and chromatin decompaction (Devaiah 2016). The intrinsically disordered regions (IDRs) of BRD4 are thought to facilitate its phase separation with coactivators such as MED1. The phase separation properties of BRD4 have been well-studied in several cell lines (Han 2020), and in the context of super-enhancers (Sabari 2018). Selection bromodomain inhibitors, such as JQ1 are often employed to displace BRD4 protein from chromatin (Filippakopoulos 2010). 1,6-hexanediol (1,6-HD), an aliphatic alcohol, can inhibit weak hydrophobic protein-protein interactions required for the droplet formation (droplet melting activity) and is widely used to elucidate the formation process of nuclear bodies (Duster 2021). However, the effects of BRD4, and phase separation at large, on the spatial structure of nucleosome nanodomains remains unclear. We envision a complementary approach, consisting of specific and non-specific inhibition of BRD4-containing condensates in fixed cell ensembles and fast inhibition of phase separation in living cells with 1,6 Hexanediol. Previous approaches to studying the dynamics of chromatin nanodomains only provide ensemble snapshots of chromatin structure, possibly due to slow acquisition times (Nozaki 2017). 
+
 
 \subsection{Single molecule localization microscopy}
 
-Single molecule localization microscopy (SMLM) relies on the temporal resolution of fluorophores in the sample whose spatially overlapping point spread functions would otherwise render them unresolvable at the detector. SMLM techniques, such as stochastic optical reconstruction microsscopy (STORM) and photoactivatable localization microscopy (PALM) remain desirable for super-resolution imaging of many cellular structures, due to their cost-effective implementation and photon-count limited resolution (Schermelleh 2019). Common strategies for the temporal separation of molecules involve transient intramolecular rearrangements to switch from dark to fluorescent states or the exploitation of non-emitting molecular radicals. For direct STORM, rhodamine derivatives can undergo intersystem crossing to a triplet state, which can reduced by thiols to form a dark radical species. The dark state can then be quenched by oxidative processes, driving the fluorophore back to its ground state (Figure 1). Long dark state lifetimes are commonly used in STORM imaging, while quenching results in higher duty cycle photoswitching and increased rates of photobleaching due to irreversible oxidative damage of important functional groups. Long dark state lifetimes are frequently achieved by using an oxygen scavenging buffer containing glucose oxidase, catalase, and others. 
-
-Fluorescent labeling density has been known to pose a major bottleneck to super-resolution imaging acqusitions. Static uncertainty due to molecular crowding can be partially amelioriated by using pairwise or higher-order temporal correlations within a pixel neighborhood, known as stochastic optical fluctuation imaging (Dertinger 2009). Other approaches such as stimulated emission and depletion (STED) imaging bring control over the photophysical state of a chosen subset of the sample, yet the need for laser scanning prevents widespread application in live-cell studies. 
+Single molecule localization microscopy (SMLM) relies on the temporal resolution of fluorophores in the sample whose spatially overlapping point spread functions would otherwise render them unresolvable at the detector. SMLM techniques, such as stochastic optical reconstruction microsscopy (STORM) and photo-activated localization microscopy (PALM) remain desirable for super-resolution imaging of many cellular structures, due to their cost-effective implementation and photon-count limited resolution (Schermelleh 2019). Common strategies for the temporal separation of molecules involve transient intramolecular rearrangements to switch from dark to fluorescent states or the exploitation of non-emitting molecular radicals. For direct STORM, rhodamine derivatives can undergo intersystem crossing to a triplet state, which can be reduced by thiols to form a dark radical species. The dark state can then be quenched by oxidative processes, driving the fluorophore back to its ground state (Figure 1). Long dark state lifetimes are commonly used in STORM imaging, while quenching results in higher duty cycle photoswitching and increased rates of photobleaching due to irreversible oxidative damage of important functional groups. Long dark state lifetimes are frequently achieved by using an oxygen scavenging buffer containing glucose oxidase, catalase, and others. 
 
 \begin{figure}
 \begin{center}
@@ -78,24 +76,21 @@ Fluorescent labeling density has been known to pose a major bottleneck to super-
 \caption{\textbf{Photophysics of tetramethylrhodamine (TMR) and its derivatives JF549 and JF646}. Maximum absorption occurs at 549nm or 646nm respectively and return to the ground state can occur via twisted internal charge transfer or inter-system crossing (Grimm 2021).}
 \end{figure}
 
-
-Furthermore, the spatial resolution and relative simplicity of SMLM techniques remains unmatched, inciting an effort to increase the time resolution of STORM and PALM methods. The resolution of SMLM methods is limited only by the variance of a statistical estimator of molecular coordinates (Chen 2016). When we refer to localization error or uncertainty in this work, we are referring to aleatoric or systematic uncertainty, due to imperfections gradient-based estimators or convolutional networks. The posterior distribution on molecular coordinates can be computed using Markov Chain Monte Carlo techniques, but this is used sparingly for particle filtering, due to limited computational resources (Figure 7). Interestingly, recent work on integration of Bayesian priors with modulation enhanced SMLM (meSMLM) has generalized localization microscopy to a Bayesian setting, reducing spatial resolution below 1 nanometer (Kalisvaart 2022). Previous approaches to breaking the time resolution barrier in SMLM fall into two main categories: generative models and dense localization methods. Generative methods learn prior information about cellular structures from super-resolution images, which is used to predict super-resolution images based on sparse localizations or widefield images (Ouyang 2018; Barth 2020; Chen 2023). Other approaches use convolutional neural networks to interpolate and transform dense images into a localization map (Nehme 2020; Speiser 2021). Here, we adapt the latter methodology, as biological structures such as chromatin are dynamic and intrinsically heterogeneous; therefore, structures cannot necessarily be known apriori, and deep generative models can hallucinate image artifacts. 
-
+Fluorescent labeling density has been known to pose a major bottleneck to super-resolution imaging acqusitions. Static uncertainty due to molecular crowding can be partially amelioriated by using pairwise or higher-order temporal correlations within a pixel neighborhood, known as stochastic optical fluctuation imaging (Dertinger 2009). Other approaches such as stimulated emission and depletion (STED) imaging bring control over the photophysical state of a chosen subset of the sample, yet the need for laser scanning prevents widespread application in live-cell studies. Furthermore, the spatial resolution and relative simplicity of SMLM techniques remains unmatched, inciting an effort to increase the time resolution of STORM and PALM methods. The resolution of SMLM methods is limited only by the variance of a statistical estimator of molecular coordinates (Chao 2016). When we refer to localization error or uncertainty in this work, we are referring to aleatoric or systematic uncertainty, due to imperfections gradient-based estimators or convolutional networks. The posterior distribution on molecular coordinates can be computed using Markov Chain Monte Carlo techniques, but this is used sparingly for particle filtering, due to limited computational resources (Figure 7). Interestingly, recent work on integration of Bayesian priors with modulation enhanced SMLM (meSMLM) has generalized localization microscopy to a Bayesian setting, reducing spatial resolution below 1 nanometer (Kalisvaart 2022). In the time domain, previous approaches to improving resolution in SMLM fall into two main categories: generative models and dense localization methods. Generative methods learn prior information about cellular structures from super-resolution images, which is used to predict super-resolution images based on sparse localizations or widefield images (Ouyang 2018; Barth 2020; Chen 2023). Other approaches use convolutional neural networks to interpolate and transform dense images into a localization map (Nehme 2020; Speiser 2021). Here, we adapt the latter methodology, as biological structures such as chromatin are dynamic and intrinsically heterogeneous; therefore, structures cannot necessarily be known apriori, and deep generative models can hallucinate image artifacts. 
 
 \section{Results}
 
 \subsection{Dense two-dimensional and sparse three-dimensional SMLM}
 
-Two major factors contribute to localization errors in SMLM: (i) the noise characteristics of CMOS cameras and (ii) crowding of molecules within a diffraction limited region. Maxmimum likelihood estimation is frequently used for isolated molecules and high signal levels, retaining localization errors from 30-40nm (Figure 3c). However, MLE performance tends to degrade in low SNR and dense regimes ($K(\lambda/2\mathrm{NA}) > 1$), requiring more sophisticated localization methods, such as convolutional neural networks (CNNs). CNNs have been widely adopted for imaging processing tasks in fluorescence microscopy (Weigert 2018; Ronneberger 2015). We employ a convolutional neural network based on DeepSTORM3D (Nehme 2020), which successively upsamples a monochrome image and outputs a localization map, which can be post-processed to produce molecular coordinates (Figure 2b).  We demonstrate that our architecture can outperform maximum likelhood estimation for all signal levels and molecular densities tested (Figure 2c).
+Two major factors contribute to localization errors in SMLM: (i) the noise characteristics of CMOS cameras and (ii) crowding of molecules within a diffraction limited region. Maxmimum likelihood estimation is frequently used for isolated molecules and high signal levels, retaining localization errors from 30-40nm (Figure 3c). However, MLE performance tends to degrade in low SNR and dense regimes ($K(\lambda/2\mathrm{NA}) > 1$), requiring more sophisticated localization methods, such as convolutional neural networks (CNNs). We employ a convolutional neural network, which successively upsamples a monochrome image and outputs a localization map, which can be post-processed to produce molecular coordinates (Figure 2b).  We demonstrate that this architecture can outperform maximum likelhood estimation for all signal levels and molecular densities tested (Figure 2c).
 
-
-To generalize our imaging setup to three-dimensions, we could use that the lateral point spread function has a weak dependence on the axial coordinate (Figure 3a). However, it has been shown that the error around the focus can be large, while negative and positive defocus cannot be distinguished given the symmetric dependence in $z$ (Holtzer 2007). Instead, we choose to introduce astigmatism into the detection path using a weak cylindrical lens (Figure 4a). In effect, this breaks the axial symmetry of the PSF and gives an anisotropic Gaussian which is elongated perpendicular to the optical axis. Localization proceeds by measuring this anisotropy and inverting a model of its axial dependence. At high numerical aperture, a strong dependence of the anisotropy to axial displacement potentially provides more precise three-dimensional localization (Figure 4b).  This axial anisotropy can be complex, but is often well described by a polynomial function of the axial displacement $z_{0}$ (Smith 2010). Unfortunately, astigmatic imaging increases the width of the point spread function significantly, exacerbating localization errors by molecular crowding and low signal to noise ratio. Therefore, we report error statistics for maximum likelihood based methods only, and leave three-dimensional localization with CNNs to future work. As one might expect, at ideal SNR, we show that axial dependence of localization error bears a strong similarity to the axial dependence of the PSF width (Figure 4c). Lateral RMSE can be maintained below 40nm for the anisotropic PSF for $K(\lambda/2\mathrm{NA}) \leq 5$; however, the Jaccard index tends to rapidly degrade at higher molecular densities, making MLE an unsuitable estimator for dense three-dimensional imaging (Figure 5). However, three-dimensional tracking with sparse emitters remains a good application of this method.
+To generalize our imaging setup to three-dimensions, we could use that the lateral point spread function has a weak dependence on the axial coordinate (Figure 3a). However, it has been shown that the error around the focus can be large, while negative and positive defocus cannot be distinguished given the symmetric dependence in $z$ (Holtzer 2007). Instead, we choose to introduce astigmatism into the detection path using a weak cylindrical lens (Figure 4a). In effect, this breaks the axial symmetry of the PSF and gives an anisotropic Gaussian which is elongated perpendicular to the optical axis. Localization proceeds by measuring this anisotropy and inverting a model of its axial dependence. At high numerical aperture, a strong dependence of the anisotropy to axial displacement potentially provides more precise three-dimensional localization (Figure 4b). In general, the axial anisotropy can be complex, but is often well described by a polynomial function of the axial displacement (Smith 2010). Unfortunately, astigmatic imaging increases the width of the point spread function significantly, exacerbating localization errors by molecular crowding and low signal to noise ratio. Therefore, we report error statistics for maximum likelihood based methods only, and leave three-dimensional localization with CNNs to future work. As one might expect, at ideal SNR, we show that axial dependence of localization error bears a strong similarity to the axial dependence of the PSF width (Figure 4c). Lateral RMSE can be maintained below 40nm for the anisotropic PSF for $K(\lambda/2\mathrm{NA}) \leq 5$; however, the Jaccard index tends to rapidly degrade at higher molecular densities, making MLE an unsuitable estimator for dense three-dimensional imaging (Figure 5). Three-dimensional single molecule tracking with sparse emitters remains a good application of this method, and will be used in future work.
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=14cm]{PSF2D.png}
 \end{center}
-\caption{\textbf{Convolutional neural networks outperform MLE in dense and low-signal cases} (A) Lateral and axial point spread functions for high ($\sim$1.25) and low ($\sim$0.8) numerical aperture (NA). (B) Convolutional neural network architecture used for localization. A monochrome image is convolved and upsampled to generate a localization map, which is post-processed to produce a vector of coordinates. (C) Lateral root mean squared error of maximum likelihood estimator (MLE) and a convolutional neural network (CNN) with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$ for high NA. Error samples = $10^{3}$}
+\caption{\textbf{Convolutional neural networks outperform MLE in dense and low-signal cases} (A) Lateral and axial point spread functions for high ($\sim$1.25) and low ($\sim$0.8) numerical aperture (NA). (B) Convolutional neural network architecture used for localization. A monochrome image is convolved and upsampled to generate a localization map, which is post-processed to produce a vector of coordinates. (C) Lateral root mean squared error of maximum likelihood estimator (MLE) and a convolutional neural network (CNN) with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$ for high NA. The Cramer-Rao lower bound on lateral uncertainty is shown in gray. Error samples = $10^{3}$}
 \end{figure}
 
 
@@ -109,7 +104,7 @@ To generalize our imaging setup to three-dimensions, we could use that the later
 
 \subsection{Visualizing nucleosome cluster dynamics in at super-resolution}
 
-Phase separation of chromatin and chromatin-associated proteins can be achieved in minutes, making it a suitable system for application for live cell super-resolution of chromatin structural dynamics (Itoh 2021). Previous approaches to studying the dynamics of chromatin nanodomains only provide ensemble snapshots of chromatin structure due to slow acquisition times (Nozaki 2017). Ensemble snapshots are a convenient choice in this context, yet biological systems are highly heterogeneous, and this precludes the observation of chromatin structure and residency of various chromatin modifiers. HaloTag fusion protein and its associated JF549-HaloTag and JF646-HaloTag ligands have surfaced as indispensable tools (Grimm 2015). H2B is a suitable choice, since it is one of the histones with fewer tail modifications and functional variants with known function (Kamakaka 2005).
+
 
 \begin{figure}
 \begin{center}
@@ -118,7 +113,7 @@ Phase separation of chromatin and chromatin-associated proteins can be achieved 
 \caption{\textbf{Super-resolution reconstruction of nucleosome organization in a living Hela cell nucleus}. (A) Density representation of nucleosome organization using 30nm x 30nm bins and a pointillist representation of nucleosome organization (B) Ripley's K function, Bayesian information criterion (BIC), and log likelihood for a Gaussian mixture model of pointillist localization data of three randomly selected regions of interest. Dashed line drawn at the diffraction limit (C) Localization accumulation over five seconds of imaging time (500 frames) and clustering with DBSCAN for a randomly selected region of interest}
 \end{figure}
 
-Here, we use the HaloTag system, a modified haloalkane dehalogenase designed to covalently bind to synthetic ligands  (Los 2008). The HaloTag protein is fused to H2B, either through transfection and clonal selection, or by transient transfection. The HaloTag is bound by a rhodomine-derived fluorescent ligands, JF549 or JF646, in order to (Grimm 2015). For super-resolution or three-dimensional single molecule tracking, we use oblique illumination microscopy to illuminate a thin area within a single nucleus (Tokunga 2008; Nozaki 2017). In dSTORM microscopy, the dark state lifetime of a fluorescent molecule can be tuned with illumination intensity (van de Linde 2011). This permits simultaneous single molecule tracking of H2B-JF549 and H2B-JF646 over several minutes. 
+Here, we use the HaloTag system, a modified haloalkane dehalogenase designed to covalently bind to synthetic ligands  (Los 2008). The HaloTag protein is fused to H2B, either through transfection and clonal selection, or by transient transfection. The HaloTag is bound by a rhodomine-derived fluorescent ligands, JF549 or JF646, in order to (Grimm 2015). For super-resolution or three-dimensional single molecule tracking, we use oblique illumination microscopy to illuminate a thin area within a single nucleus (Tokunga 2008; Nozaki 2017). 
 
 \begin{figure}
 \begin{center}
@@ -129,8 +124,8 @@ Here, we use the HaloTag system, a modified haloalkane dehalogenase designed to 
 
 \subsection{Inhibition of a super-enhanced gene with JQ1}
 
-The guanylate binding protein (GBP) gene cluster codes for a family of interferon-gamma inducible GTPases. A recent study has confirmed phase separation in the GBP gene family region by co-staining of BRD4 and MED1 marker protein with the GBP gene family region, after infection of macrophages with \emph{Mycobacterium tuberculosis} (Lin 2022). This result is a strong indication that the GBPs gene region tends to relocate into a phase-separated condensate containing BRD4 to efficiently initiate the immune response program. Leveraging this striking result, we used this system to (i) confirm the efficacy of JQ1 treatment on GBP5 knockdown after interferon-gamma induction and (ii) determine the effects of JQ1 exposure on BRD4 immunofluorescence signal in Hela nuclei. Fluorescence in-situ hybridization (FISH) demonstrated the formation of GBP5 positive puncta in Hela nuclei after interferon-gamma exposure (Figure 5A-C,F) and mRNA expression over several hours (Figure 5D.) Relief of GBP5 expression was observed by incubating Hela cells for 8h with both interferon-gamma and JQ1 (Figure 5E). BRD4 puncta are abundant in Hela nuclei and exposure of JQ1 for 9h showed a reduction in puncta counts to approximately 70 percent relative to control.
 
+The guanylate binding protein (GBP) gene cluster codes for a family of interferon-gamma inducible GTPases. A recent study has confirmed phase separation in the GBP gene family region by co-staining of BRD4 and MED1 marker protein with the GBP gene family region, after infection of macrophages with \emph{Mycobacterium tuberculosis} (Lin 2022). This result is a strong indication that the GBPs gene region tends to relocate into a phase-separated condensate containing BRD4 to efficiently initiate the immune response program. Leveraging previous work on the GBP gene cluster, we (i) confirm the efficacy of JQ1 treatment on GBP5 knockdown after interferon-gamma induction and (ii) determine the effects of JQ1 exposure on BRD4 immunofluorescence signal in Hela nuclei. Fluorescence in-situ hybridization (FISH) demonstrated the formation of GBP5 positive puncta in Hela nuclei after interferon-gamma exposure (Figure 5A-C,F) and mRNA expression over several hours (Figure 5D.) Relief of GBP5 expression was observed by incubating Hela cells for 8h with both interferon-gamma and JQ1 (Figure 5E). BRD4 puncta are abundant in Hela nuclei and exposure of JQ1 for 9h showed a reduction in puncta counts to approximately 70 percent relative to control.
 
 \section{Future Aims}
 
@@ -142,21 +137,21 @@ So far, super-resolved nucleosome clustering has been predominantly studied in f
 
 \subsubsection{Experimental Approach}
 
-To perform this experiment, we have optimized simutaneous two-color labeling of H2B-HaloTag with JF549 and JF646. We maintain sparse labeling of H2B with JF549 using 10pM concentration and a short incubation time of 1 hour. The purpose of using JF549 is two fold: (i) single molecule tracking can be performed on sparsely labeled samples with lower laser power than used in dSTORM (ii) Low laser power allows us to use this channel for autofocusing of the sample and performing cyclical imaging of the same living cell, with lesser photodamage. Moreover, we maintain dense labeling of H2B-HaloTag with JF646 for super-resolution imaging of nucleosome clusters. Experiments will be carried out on a live cell microscope based on an Olympus IX83.
+To perform this experiment, we have previously optimized simutaneous two-color labeling of H2B-HaloTag with JF549 and JF646. We maintain sparse labeling of H2B with JF549 using 10pM concentration and a short incubation time of 1 hour. The purpose of using JF549 is two fold: (i) Three-dimensional single molecule tracking can be performed on sparsely labeled samples with lower laser power than used in dSTORM (ii) Low laser power allows us to use this channel for autofocusing of the sample and performing cyclical imaging of the same living cell, with reduced photodamage. Moreover, we maintain dense labeling of H2B-HaloTag with JF646 for super-resolution imaging of nucleosome clusters. Experiments will be carried out on a live cell microscope based on an Olympus IX83.
 
 
-\subsection{Specific Aim 2: Compare the effects of JQ1 and 1,6 Hexanediol exposure on BRD4 residency in Hela nuclei}
+\subsection{Specific Aim 2: Determine effects of JQ1 and 1,6 Hexanediol exposure on nucleosome organization}
 
 
 \subsubsection{Rationale and hypothesis}
 
-Our previous results have validated the efficacy of JQ1 in inhibiting the expression of BRD4-controlled gene GBP5. This result is consistent with previous colocalization studies of the GBP locus with MED1 and BRD4 and identification of the GBP super enhancer (Lin 2022). JQ1 is a cell permeable small molecule that binds competitively to the acetyl-lysine binding cavity of BRD4, displacing BRD4 from chromatin (Fillappakopoulos 2010). BRD4 is known to play a role in nucleosome eviction as well as phase separation in nuclear bodies; however, it remains unclear the primary effects of BRD4 on nucleosome organization. JQ1 does indeed inhibit an array of genes, including GBP5 (Hogg 2017), but has had an insigificant effect on overall BRD4 residency in C33A nuclei (Han 2020). Therefore, it appears that the epigenetic role of BRD4 is more nuanced. For example, super-enhancers are far more sensitive to drugs blocking the binding of BRD4 to acetylated chromatin (Chapuy 2013; Loven 2013; Hnisz 2017). We hypothesize that large BRD4 aggregates are more susceptible to JQ1, while small aggregates can be dissolved with phase separation inhibitors, but not BET inhibitors alone.
+Our previous results have validated the efficacy of JQ1 in inhibiting the expression of BRD4-controlled gene GBP5. This result is consistent with previous colocalization studies of the GBP locus with MED1 and BRD4 and identification of the GBP super enhancer (Lin 2022). JQ1 is a cell permeable small molecule that binds competitively to the acetyl-lysine binding cavity of BRD4, displacing BRD4 from chromatin (Fillappakopoulos 2010). BRD4 is known to play a role in nucleosome eviction as well as phase separation in nuclear bodies; however, it remains unclear the primary effects of BRD4 on nucleosome organization. JQ1 does indeed inhibit an array of genes, including GBP5 (Hogg 2017), but has had only a small effect on overall BRD4 residency in C33A nuclei (Han 2020). Therefore, it appears that the epigenetic role of BRD4 is more nuanced. For example, super-enhancers are far more sensitive to drugs blocking the binding of BRD4 to acetylated chromatin (Chapuy 2013; Loven 2013; Hnisz 2017). We hypothesize that large BRD4 aggregates are more susceptible to JQ1, while small aggregates can be dissolved with phase separation inhibitors, but not BET inhibitors alone.
 
-1,6-hexanediol (1,6-HD), an aliphatic alcohol, can inhibit weak hydrophobic protein-protein interactions required for the droplet formation (droplet melting activity) and is widely used to elucidate the formation process of nuclear bodies. 1,6 Hexanediol is widely used as a control to dissolve phase separated assemblies in cells (Duster 2021). Exposure can rapidly induce broad reorganization of chromatin, providing a useful control for directly observing nucleosome cluster dynamics in mammalian cells. Nevertheless, changes in chromatin architecture following dissolution of epigentic proteins such as BRD4 (Sabari 2018) can be difficult to decouple from induced changes in chromatin structure itself. Previous studies have demonstrated in fixed cells that nucleosome clusters are rapidly immobilized and condensed after exposure to 1,6 Hexanediol (Itoh 2021). However, nucleosome organization is highly irregular and heterogeneous (Ricci 2015), making ensemble statistics inappropriate for making strong conclusions in fast perturbation experiments. 
+1,6 Hexanediol exposure can rapidly induce broad reorganization of chromatin, providing a useful control for directly observing nucleosome cluster dynamics in mammalian cells. Nevertheless, changes in chromatin architecture following non-specific drugs can be difficult to decouple from induced changes in chromatin structure itself. Previous studies have demonstrated in fixed cells that nucleosome clusters are rapidly immobilized and condensed after exposure to 1,6 Hexanediol (Itoh 2021). However, nucleosome organization is highly irregular, heterogeneous, and dynamic, making ensemble statistics inappropriate for making strong conclusions in fast perturbation experiments. 
 
 \subsubsection{Experimental Approach}
 
-JQ1 is a relatively slow acting small molecule drug. Therefore, we propose fixed cell experiments to validate its effect on BRD4 residency in the nucleus 2h, 4h, and 8h after exposure to 20uM JQ1. In fixed cell ensembles, we will measure size distributions of BRD4 clusters in control versus JQ1 treated cells. Later, we will transiently transfect BRD4-GFP fusion protein into Hela cells followed by three-color live cell imaging of BRD4, H2B-JF549, and H2B-JF646 following initial exposure to 1-5 percent 1,6 Hexanediol. Cells will be exposed to Hexanediol on the microscope stage, followed by cyclic super-resolution imaging. This phase wil be used to determine the effects of Hexanediol exposure on BRD4 residency in the nucleus and differential effects of Hexanediol on BRD4-positive and BRD4-negative chromatin nanodomains. 
+JQ1 is a relatively slow acting small molecule drug. Therefore, we propose fixed cell experiments to validate its effect on BRD4 residency in the nucleus 2h, 4h, and 8h after exposure to ~20uM JQ1. In fixed cell ensembles, we will measure size distributions of BRD4 clusters in control versus JQ1 treated cells. Later, we will transiently transfect BRD4-GFP fusion protein into Hela cells followed by three-color live cell imaging of BRD4, H2B-JF549, and H2B-JF646 following initial exposure to 1-5 percent 1,6 Hexanediol. Cells will be exposed to Hexanediol on the microscope stage, followed by cyclic super-resolution imaging. This phase wil be used to determine the effects of Hexanediol exposure on BRD4 residency in the nucleus and differential effects of Hexanediol on BRD4-positive and BRD4-negative chromatin nanodomains. 
 
 \section{Materials and Methods}
 
@@ -176,7 +171,7 @@ Cells grown in chamber slides or 35mm dishes and permeabilized with 0.3  percent
 
 \subsection{Quantitative reverse transcription polymerase chain reaction}
 
-GBP5 induction was validated with RT-qPCR, using the TaqMan gene expression assay. Cell culture followed standard procedure, followed by homogenization with lysis buffer with 2-mercaptoethanol (Bio-Rad). Suspension was vortexed and transferred into a clean RNase-free tube. The homogenate was centrifuged at 12,000g for 2 minutes. RNA was purified using PureLink RNA Mini Kit (Invitrogen) and stored on ice. Reverse transcription was carried out using the iScript Advanced cDNA Synthesis Kit (Bio-Rad).Taqman probes were designed against GAPDH and GBP5 genes, and RT-qPCR was run in a 96 well plate on a qPCR machine (Applied Biosystems). Relative RNA level of GBP5 to GAPDH were computed using the delta-delta Ct method (Schmittgen 2008). 
+GBP5 induction was validated with RT-qPCR, using the TaqMan gene expression assay. Cell culture followed standard procedure, followed by homogenization with lysis buffer with 2-mercaptoethanol (Bio-Rad). Suspension was vortexed and transferred into a clean RNase-free tube. The homogenate was centrifuged at 12,000g for 2 minutes. RNA was purified using PureLink RNA Mini Kit (Invitrogen) and stored on ice. Reverse transcription was carried out using the iScript Advanced cDNA Synthesis Kit (Bio-Rad).Taqman probes were designed against GAPDH and GBP5 genes, and RT-qPCR was run in a 96 well plate on a qPCR machine (Applied Biosystems). Relative RNA level of GBP5 to GAPDH were computed using the $\Delta\Delta C_{t}$ method (Schmittgen 2008). 
 
 \subsection{Immunoblotting}
 
@@ -184,11 +179,9 @@ Cells were washed and lysis buffer added (RIPA buffer: PMSF: protease inhibitor 
 
 \subsection{Super-resolution imaging of nucleosome nanodomains}
 
-After transient transfection, H2B-Halotag Hela cells were incubated with 50pM JF646 HaloTag ligand overnight, washed three times with PBS, and fixed with formaldehyde. Fixed Hela cells were imaged in a dSTORM photoswitching buffer containing 100mM MEA, 50 ug/ml Glucose Oxidase, and 3.4 mg/ml Catalase (Sigma). Buffer pH was adjusted to ~8 using HCl. Movies were collected using a custom Olympus IX83 microscope body equipped with an Olympus 60X 1.25NA oil-immersion objective. Images were projected onto an ORCA-Fusion sCMOS camera (Hamamatsu). The microscope was controlled using Micromanager software. HaloTag-JF646 molecules were illuminated with a 640nm laser held at 20mW (measured at the back focal plane of the objective).  5000 frames were captured at 100fps. Three-dimensional astigmatism time-series were captured by placing a cylindrical lens with 10m focal length (Optical Technologies) in the emission path of the microscope.  
+After transient transfection, H2B-Halotag Hela cells were incubated with JF646 HaloTag ligand overnight. Living Hela cells were imaged in a dSTORM photoswitching buffer containing 100mM MEA, 50 ug/ml Glucose Oxidase, and 3.4 mg/ml Catalase (Sigma). Buffer pH was adjusted to ~8 using HCl. Movies were collected using a custom Olympus IX83 microscope body equipped with an Olympus 60X 1.25NA oil-immersion objective. Images were projected onto an ORCA-Fusion sCMOS camera (Hamamatsu). The microscope was controlled using Micromanager software. JF646 molecules were illuminated with a 640nm laser held at 20mW, as measured at the back focal plane of the objective.  Frames were captured at 100fps. Registration of movies was perform with StackReg rigid body registration. 
 
-Registration of movies was perform with StackReg rigid body registration. 
-
-\subsection{Maximum likelihood estimation of molecular coordinates}
+\subsection{Sparse localization with maximum likelihood estimation}
 
 For each pixel, the number of photoelectrons $S_{k}$ is  multiplied by a gain factor $g_{k} \;[\mathrm{ADU}/e^{-}]$, which generally must be measured during calibration. The readout noise per pixel $\xi_{k}$ is Gaussian with some pixel-specific offset $o_{k}$ (Figure 2a) and variance $\sigma_{k}^{2}$ (Figure 2b). Ultimately, we have a Poisson component of the noise, which scales with the signal level and a Gaussian component, which does not. Therefore, in a single exposure, we measure: 
 
@@ -259,7 +252,7 @@ To filter out suspicious localizations, we used Metropolis-Hastings Markov Chain
 \alpha = e^{\beta(\ell(\theta)-\ell(\theta'))}
 \end{equation*}
 
-with $\beta=5$ to achieve a target acceptance rate of $0.3$. 
+with $\beta=5$ to achieve a target acceptance rate of $0.3$. Localizations with uncertiainty exceeding 50nm are removed from the dataset.
 
 \subsection{Gaussian mixture model for correcting localization artifacts}
 
@@ -326,8 +319,7 @@ CMOS sensors also suffer from other noise sources, such as readout noise or dark
 
 \subsection{Integrated isotropic and anisotropic Gaussian point spread functions}
 
-
-Due to diffraction, any point emitter, such as a single fluorescent molecule, will appear at the image plane as a diffraction limited spot. The diffraction limit $d = \lambda / 2\mathrm{NA}$ was first written down by Abbe, derived as the minimum separation between two objects such that they can still be optically resolved. For the sake of simplicity, it is common to describe the point spread function (PSF) as a two-dimensional isotropic Gaussian (Zhang 2007). This is an approximation to the more rigorous models given by Richards and Wolf (1959) or Gibson and Lanni (1989). 
+For the sake of simplicity, it is common to describe the point spread function (PSF) as a two-dimensional isotropic Gaussian (Zhang 2007). This is an approximation to the more rigorous models given by Richards and Wolf (1959) or Gibson and Lanni (1989). 
 
 \begin{equation*}
 \mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}}
@@ -356,15 +348,75 @@ It is also straightforward to generalize this result when $G$ is an anisotropic 
 
 
 
-\makebibliography
-
 \section{References}
-\noindent [1] Buesing et al. \textit{Neural dynamics as sampling: A model for stochastic computation in recurrent networks of spiking neurons}.           PLoS Computational Biology 2011.
+
+\noindent [1] Schermelleh, L. et al. Super-resolution microscopy demystified. Nature Cell Biology vol. 21 72–84 (2019). 
 \newline
-\noindent [2] Azouz et al. \textit{Cellular Mechanisms Contributing to Response Variability of Cortical Neurons In Vivo}. Journal of Neuroscience. 1999.
+\noindent [2] Speiser, A. et al. Deep learning enables fast and dense single-molecule localization with high accuracy. Nat Methods 18, 1082–1090 (2021).
 \newline
-\noindent [3] Vreeswijk et al. \textit{Chaotic Balanced State in a Model of Cortical Circuits}. Neural Computation. 1998.
+\noindent [3] Barth, R., Bystricky, K. Shaban, H. A. Coupling chromatin structure and dynamics by live super-resolution imaging. Sci. Adv vol. 6 (2020). 
 \newline
+\noindent [4] Chen, R. et al. Single-frame deep-learning super-resolution microscopy for intracellular dynamics imaging. Nat Commun 14, (2023). 
+\newline
+\noindent [5] Dertinger, T., Colyer, R., Iyer, G., Weiss, S. Enderlein, J. Fast, background-free, 3D super-resolution optical fluctuation imaging (SOFI). PNAS
+\newline
+\noindent [6] Richards, B. Wolf, E. Electromagnetic Diffraction in Optical Systems. II. Structure of the Image Field in an Aplanatic System. Source: Proceedings of the Royal Society of London. Series A, Mathematical and Physical Sciences vol. 253 (1959). 
+\newline
+\noindent [7] Devaiah, B. N. et al. BRD4 is a histone acetyltransferase that evicts nucleosomes from chromatin. Nat Struct Mol Biol 23, 540–548 (2016). 
+\newline
+\noindent [8] Ouyang, W., Aristov, A., Lelek, M., Hao, X. Zimmer, C. Deep learning massively accelerates super-resolution localization microscopy. Nat Biotechnol 36, 460–468 (2018). 
+\newline
+\noindent [9] Filippakopoulos, P. et al. Selective inhibition of BET bromodomains. Nature 468, 1067–1073 (2010). 
+\newline
+\noindent [10] Chao, J., Sally Ward, E. Ober, R. J. Fisher information theory for parameter estimation in single molecule microscopy: tutorial. Journal of the Optical Society of America A 33, B36 (2016). 
+\newline
+\noindent [10] Grimm, J. B. et al. A General Method to Improve Fluorophores Using Deuterated Auxochromes. JACS Au 1, 690–696 (2021). 
+\newline
+\noindent [12] Nehme, E. et al. DeepSTORM3D: dense 3D localization microscopy and PSF design by deep learning. Nat Methods 17, 734–740 (2020). 
+\newline
+\noindent [13] Itoh, Y. et al. 1,6-hexanediol rapidly immobilizes and condenses chromatin in living human cells. Life Sci Alliance 4, (2021). 
+\newline
+\noindent [14] Han, X. et al. Roles of the BRD4 short isoform in phase separation and active gene transcription. Nat Struct Mol Biol 27, 333–341 (2020). 
+\newline
+\noindent [15] Tokunaga, M., Imamoto, N. Sakata-Sogawa, K. Highly inclined thin illumination enables clear single-molecule imaging in cells. Nat Methods 5, (2007). 
+\newline
+\noindent [16] Kalisvaart, D. et al. Precision in iterative modulation enhanced single-molecule localization microscopy. Biophys J 121, 2279–2289 (2022). 
+\newline
+\noindent [17] Zhang, B., Zerubia, J. Olivo-Marin, J.-C. Gaussian approximations of fluorescence microscope point-spread function models. (2007). 
+\newline
+\noindent [18] Los, G. V. et al. HaloTag: A novel protein labeling technology for cell imaging and protein analysis. ACS Chem Biol 3, 373–382 (2008). 
+\newline
+\noindent [19] Bannister, A. J. Kouzarides, T. Regulation of chromatin by histone modifications. Cell Research vol. 21 381–395 (2011). 
+\newline
+\noindent [20] Singh, R., Ghosh, D. Adhikari, R. Fast Bayesian inference of the multivariate Ornstein-Uhlenbeck process. Phys Rev E 98, (2018). 
+\newline
+\noindent [21] Holtzer, L., Meckel, T. Schmidt, T. Nanometric three-dimensional tracking of individual quantum dots in cells. Appl Phys Lett 90, (2007). 
+\newline
+\noindent [22] Ricci, M. A., Manzo, C., García-Parajo, M. F., Lakadamyali, M. Cosma, M. P. Chromatin fibers are formed by heterogeneous groups of nucleosomes in vivo. Cell 160, 1145–1158 (2015). 
+\newline
+\noindent [23] Hogg, S. J. et al. BET-Bromodomain Inhibitors Engage the Host Immune System and Regulate Expression of the Immune Checkpoint Ligand PD-L1. Cell Rep 18, 2162–2174 (2017). 
+\newline
+\noindent [24] Smith, C. S., Joseph, N., Rieger, B. Lidke, K. A. Fast, single-molecule localization that achieves theoretically minimum uncertainty. Nat Methods 7, 373–375 (2010). 
+\newline
+\noindent [25] Sabari, B. R. et al. Coactivator condensation at super-enhancers links phase separation and gene control. Science (1979) 361, (2018). 
+\newline
+\noindent [26] Linde, S. Van De et al. Direct stochastic optical reconstruction microscopy with standard fluorescent probes. Nat Protoc 6, 991–1009 (2011). 
+\newline
+\noindent [27] Huang, F. et al. Video-rate nanoscopy using sCMOS camera-specific single-molecule localization algorithms. Nat Methods 10, 653–658 (2013). 
+\newline
+\noindent [28] Ashwin, S. S., Nozaki, T., Maeshima, K. Sasai, M. Organization of fast and slow chromatin revealed by single-nucleosome dynamics. Proc Natl Acad Sci U S A 116, 19939–19944 (2019). 
+\newline
+\noindent [29] Hnisz, D., Shrinivas, K., Young, R. A., Chakraborty, A. K. Sharp, P. A. A Phase Separation Model for Transcriptional Control. Cell vol. 169 13–23 (2017). 
+\newline
+\noindent [30] Grimm, J. B. et al. A general method to improve fluorophores for live-cell and single-molecule microscopy. Nat Methods 12, 244–250 (2015). 
+\newline
+\noindent [31] Nozaki, T. et al. Dynamic Organization of Chromatin Domains Revealed by Super-Resolution Live-Cell Imaging. Mol Cell 67, 282-293.e7 (2017). 
+\newline
+\noindent [32] Xu, J. et al. Super-Resolution Imaging of Higher-Order Chromatin Structures at Different Epigenomic States in Single Mammalian Cells. Cell Rep 24, 873–882 (2018). 
+\newline
+\noindent [33] Boettiger, A. N. et al. Super-resolution imaging reveals distinct chromatin folding for different epigenetic states. Nature 529, 418–422 (2016). 
+\newline
+\noindent [34] Nozaki, T. et al. Dynamic Organization of Chromatin Domains Revealed by Super-Resolution Live-Cell Imaging. Mol Cell 67, 282-293.e7 (2017). 
 
 \end{document}
 
