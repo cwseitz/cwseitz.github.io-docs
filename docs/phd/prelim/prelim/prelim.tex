@@ -222,7 +222,7 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \end{frame}
 
 
-\begin{frame}{Estimator precision sets the resolution limit in localization microscopy}
+\begin{frame}{Estimator precision in localization microscopy}
 \begin{textblock*}{4cm}(1.0cm,1.0cm)
 \includegraphics[width=4cm]{MCMC/Figure_1.png}
 \end{textblock*}
@@ -245,10 +245,10 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \begin{textblock*}{13cm}(1cm,1.25cm)
 \begin{itemize}
 \item We can view dSTORM as sampling from a density
-\item This is why we use Gaussian kernel density estimation (KDE)
+\item Reduced localizations increases time-resolution but degrades spatial resolution
 \end{itemize}
 \end{textblock*}
-\begin{textblock*}{13cm}(1cm,2.75cm)
+\begin{textblock*}{13cm}(1cm,3.0cm)
 \includegraphics[width=13cm]{FRC.png}
 \end{textblock*}
 \begin{textblock*}{8cm}(3cm,7.5cm)
@@ -260,7 +260,12 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 
 \begin{frame}{Fourier ring correlation links spatial and temporal resolution}
 \includegraphics[width=12cm]{Spatial.png}
-\textit{Nieuwenhuizen et al. Measuring image resolution in optical nanoscopy. Nature Methods 2013}
+\textit{Nieuwenhuizen et al. Measuring image resolution in optical nanoscopy. Nature Methods 2013}\\
+\begin{itemize}
+\item Maintaining constant resolution with increasing uncertainty requires increasing density
+\item However, localization uncertainty is not independent of labeling density
+\end{itemize}
+
 \end{frame}
 
 
