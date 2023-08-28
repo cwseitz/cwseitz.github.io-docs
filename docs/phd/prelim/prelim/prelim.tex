@@ -83,8 +83,8 @@
 \begin{textblock*}{14cm}(0.5cm,7.5cm)
 \begin{itemize}
 \item Super-enhanced genes are regulated by large molecular assemblies
-\item BRD4 is an interesting target since specific and non-specific inhibitors exist
-\item Nucleosome organization is poorly characterized at super-enhancers
+\item Nucleosome clustering is poorly characterized at super-enhancers
+\item We study nucleosome clustering dynamics using super-resolution microscopy
 \end{itemize}
 \end{textblock*}
 
@@ -105,10 +105,11 @@
 \begin{textblock*}{\textwidth}(1.0cm,7.5cm)
 \textit{Filippakopoulos. Selective inhibition of BET bromodomains. Nature }
 
-\begin{textblock*}{14cm}(0.5cm,8.25cm)
+\begin{textblock*}{14cm}(0.5cm,8.1cm)
 \begin{itemize}
-\item BRD4 has disordered domains which are thought to promote phase separation
-\item Non-specific phase separation inhibitors exist
+\item BRD4 is an interesting target since specific and non-specific inhibitors exist
+\item BET mimics including +JQ1 prevent binding of BRD4 to acetylated histones
+\item BRD4 can also phase separate in multivalent protein complexes
 \end{itemize}
 \end{textblock*}
 
@@ -122,9 +123,10 @@
 \begin{figure}
 \includegraphics[width=13cm]{GBP5-1.png}
 \end{figure}
+Blue - DAPI (binds DNA minor groove)
 \begin{itemize}
-\item Blue - DAPI (binds DNA minor groove)
-\item White arrows highlight putative GBP5 transcription sites
+\item Guanylate binding proteins (GBPs) are a family of GTPases induced by IFN-$\gamma$
+\item BRD4 is directly involved in GBP gene expression
 \end{itemize}
 \end{frame}
 
@@ -145,23 +147,40 @@
 \includegraphics[width=12cm]{Setup.png}
 \end{figure}
 
+\begin{itemize}
+\item Selectable widefield and oblique illumination
+\item Widefield useful for high throughput 
+\item Oblique method illuminates a thin section of nuclei
+\end{itemize}
+
 \end{frame}
 
-\begin{frame}{A Poisson approximation at moderate SNR simplifies SMLM}
+\begin{frame}{Dense labeling of histone H2B in fixed cells at RT}
+\begin{textblock*}{11cm}(2.0cm,1.3cm)
+\includegraphics[width=11cm]{Laser.png}
+\end{textblock*}
+\begin{textblock*}{\textwidth}(0.5cm,8.0cm)
+\begin{itemize}
+\item Dense labeling of H2B-Halotag w/ fluorescent ligand JF646
+\item Reducing buffer is usually a primary thiol like cysteamine (MEA)
+\item Photoswitching of JF646 allows us to beat the diffraction limit
+\end{itemize}
+\end{textblock*}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Direct STORM: The photophysics of rhodamines}
 
 \begin{figure}
-\includegraphics[width=13cm]{Noise.png}
+\includegraphics[width=10cm]{Rhodamines.png}
 \end{figure}
-
-\begin{equation*}
-P(H_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
-\end{equation*}
-
-$P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\mathrm{SNR}$)
- 
+\begin{itemize}
+\item  Reduction of the T1 state yields a dark, long-lived, and stable radical state
+\end{itemize}
 \end{frame}
 
-\begin{comment}
+
 \begin{frame}{Maximum likelihood localization of an isolated fluorescent emitter}
 Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\theta)= \underset{\theta}{\mathrm{argmin}}-\sum_{k}\log P(H_{k}|\theta)$
 
@@ -179,8 +198,6 @@ Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\
 \end{align*}
 \end{textblock*}
 
-
-
 \vspace{2in}
 
 \begin{itemize}
@@ -188,7 +205,22 @@ Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\
 \end{itemize} 
 
 \end{frame}
-\end{comment}
+
+
+\begin{frame}{A Poisson approximation at moderate SNR simplifies SMLM}
+
+\begin{figure}
+\includegraphics[width=13cm]{Noise.png}
+\end{figure}
+
+\begin{equation*}
+P(H_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
+\end{equation*}
+
+$P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\mathrm{SNR}$)
+ 
+\end{frame}
+
 
 \begin{frame}{Estimator precision sets the resolution limit in localization microscopy}
 \begin{textblock*}{4cm}(1.0cm,1.0cm)
@@ -202,40 +234,10 @@ Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\
 \end{textblock*}
 \begin{textblock*}{13cm}(0.5cm,8cm)
 \begin{itemize}
-\item Variance of the posterior $P(\theta|\vec{H})$ is a useful particle filter
-\item We assume uniform priors on coordinates
+\item SMLM techniques are diffraction unlimited
+\item This makes them desirable for super-resolution, but they are slow
 \end{itemize}
 \end{textblock*}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Direct STORM: The photophysics of rhodamines}
-
-\begin{figure}
-\includegraphics[width=10cm]{Rhodamines.png}
-\end{figure}
-\begin{itemize}
-\item  Reduction of the T1 state yields a dark, long-lived, and stable radical state
-\item The reducing agent is usually a primary thiol like cysteamine (MEA)
-\end{itemize}
-\end{frame}
-
-\begin{frame}{The OFF state of JF646 can be maintained with high laser power}
-\begin{textblock*}{11cm}(2.0cm,1.3cm)
-\includegraphics[width=11cm]{Laser.png}
-\end{textblock*}
-\begin{textblock*}{\textwidth}(0.5cm,8.0cm)
-\begin{itemize}
-\item Laser power controls the OFF state lifetime
-\item Dense labeling is possible for a stable OFF state
-\end{itemize}
-\end{textblock*}
-\end{frame}
-
-\begin{frame}{Fourier ring correlation links spatial and temporal resolution}
-\includegraphics[width=12cm]{Spatial.png}
-\textit{Nieuwenhuizen et al. Measuring image resolution in optical nanoscopy. Nature Methods 2013}
 \end{frame}
 
 
@@ -256,6 +258,12 @@ Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\
 \end{textblock*}
 \end{frame}
 
+\begin{frame}{Fourier ring correlation links spatial and temporal resolution}
+\includegraphics[width=12cm]{Spatial.png}
+\textit{Nieuwenhuizen et al. Measuring image resolution in optical nanoscopy. Nature Methods 2013}
+\end{frame}
+
+
 \begin{frame}{Deep learning enables dense localization in two-dimensions}
 \begin{textblock*}{10cm}(4.25cm,1.25cm)
 \includegraphics[width=10cm]{DeepSTORM.png}
@@ -267,10 +275,6 @@ Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\
 \begin{textblock*}{\textwidth}(1cm,7.5cm)
 
 Localization is cast as semantic segmentation of the high resolution tensor:
-
-\begin{equation*}
-\mathcal{L} = \sum_{i,j} \log p_{ij}(\tilde{x}) = \sum_{i,j} \log \frac{\exp(-s_{ij}(\tilde{x}))}{\sum_{x\in\chi} \exp(-s_{ij}(\tilde{x}))}
-\end{equation*}
 
 \end{textblock*}
 
@@ -293,28 +297,6 @@ Localization is cast as semantic segmentation of the high resolution tensor:
 \end{frame}
 
 
-\begin{frame}{Astigmatism based three dimensional imaging}
-\begin{figure}
-\includegraphics[width=11cm]{Astigmatism.png}
-\end{figure}
-\begin{itemize}
-\item A weak ($f=10$m) cylindrical lens breaks the axial symmetry of the PSF
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Astigmatism based three dimensional imaging}
-\begin{figure}
-\includegraphics[width=13cm]{PSF3D.png}
-\end{figure}
-\begin{itemize}
-\item $z_{0}\sim U([-0.4,0.4])$ um
-\item 3D imaging requires long exposure and sparse emitters for MLE
-\item Deep methods may be a suitable choice in future work
-\end{itemize}
-\end{frame}
-
-
 \begin{frame}{Chromatin nanodomains in a living Hela cell nucleus}
 
 \begin{textblock*}{13cm}(0.5cm,1.5cm)
@@ -331,7 +313,29 @@ Localization is cast as semantic segmentation of the high resolution tensor:
 
 \end{frame}
 
-\begin{frame}{Chromatin nanodomains in a living Hela cell nucleus}
+\begin{comment}
+\begin{frame}{Astigmatism based three dimensional imaging}
+\begin{figure}
+\includegraphics[width=13cm]{PSF3D.png}
+\end{figure}
+\begin{itemize}
+\item $z_{0}\sim U([-0.4,0.4])$ um
+\item 3D imaging requires long exposure and sparse emitters for MLE
+\item Deep methods may be a suitable choice in future work
+\end{itemize}
+\end{frame}
+\end{comment}
+
+\begin{frame}{Astigmatism based three dimensional imaging}
+\begin{figure}
+\includegraphics[width=11cm]{Astigmatism.png}
+\end{figure}
+\begin{itemize}
+\item A weak ($f=10$m) cylindrical lens breaks the axial symmetry of the PSF
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Future Aims}
 
 \begin{textblock*}{13cm}(0.5cm,1.5cm)
 \includegraphics[width=\textwidth]{Cluster2.png}
@@ -340,23 +344,25 @@ Localization is cast as semantic segmentation of the high resolution tensor:
 \begin{textblock*}{13cm}(0.5cm,6.0cm)
 \end{textblock*}
 
-\end{frame}
-
-\begin{frame}{Future Aims}
-
-\begin{textblock*}{9cm}(0.5cm,1.5cm)
+\begin{textblock*}{9cm}(0.5cm,6cm)
 \begin{itemize}
 \item Integrate 2D SMLM and 2D/3D single molecule tracking (Brownian dynamics in a potential)
-\item Determine suitable metrics for measuring dynamics of the KDE
-\item Publish
+\item Determine suitable metrics for measuring cluster dynamics
+\item Perform fixed and live cell SR experiments on specific and non-specific inhibition of BRD4
 \end{itemize}
 \end{textblock*}
 
-\begin{textblock*}{3cm}(11.0cm,1.5cm)
+
+\begin{textblock*}{3cm}(10.0cm,6cm)
 \includegraphics[width=3cm]{Composite.png}
 \end{textblock*}
 
+
 \end{frame}
+
+
+
+
 
 
 \end{document}
