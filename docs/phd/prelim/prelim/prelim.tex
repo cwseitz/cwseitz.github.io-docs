@@ -32,6 +32,7 @@
 \usepackage[absolute,overlay]{textpos}
 \usepackage{bm}
 \usepackage[font=small,labelfont=bf]{caption}				% For cross-referencing
+\usepackage{comment}
 
 \title{Visualizing nucleosome cluster dynamics with dense single molecule localization microscopy}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
@@ -65,33 +66,31 @@
 \end{frame}
 
 
-\begin{frame}{The textbook view of histone acetylation}
-\begin{figure}
-\includegraphics[width=13cm]{Histones.png}
-\end{figure}
-\textit{Graff et al. Histone acetylation: molecular
-mnemonics on the chromatin}
-\vspace{0.1in}
+\begin{frame}{A phase separation model for transcriptional control}
+
+\begin{textblock*}{6cm}(0.5cm,1.5cm)
+\includegraphics[width=6cm]{Super1.png}
+\end{textblock*}
+
+\begin{textblock*}{6cm}(6.75cm,1.5cm)
+\includegraphics[width=7.4cm]{Super2.png}
+\end{textblock*}
+
+\begin{textblock*}{14cm}(0.5cm,6.5cm)
+\textit{Hnisz et al. A phase separation model of transcriptional control. Cell 2017}
+\end{textblock*}
+
+\begin{textblock*}{14cm}(0.5cm,7.5cm)
 \begin{itemize}
-\item I am interested in the impact of BRD4 protein on chromatin structure
-\item Previous work has shown BRD4 is associated with histone acetylation
-\item Live cell super-resolution imaging is a useful tool
+\item Super-enhanced genes are regulated by large molecular assemblies
+\item BRD4 is an interesting target since specific and non-specific inhibitors exist
+\item Nucleosome organization is poorly characterized at super-enhancers
 \end{itemize}
+\end{textblock*}
+
 \end{frame}
 
-\begin{frame}{A phase separation model for transcriptional control}
-\begin{figure}
-\includegraphics[width=10cm]{Super1.png}
-\end{figure}
-\textit{Hnisz et al. A phase separation model of transcriptional control. Cell 2017}
-\end{frame}
 
-\begin{frame}{A phase separation model for transcriptional control}
-\begin{figure}
-\includegraphics[width=11cm]{Super2.png}
-\end{figure}
-\textit{Hnisz et al. A phase separation model of transcriptional control. Cell 2017}
-\end{frame}
 
 \begin{frame}{(+)-JQ1 in complex with BRD4 protein}
 
@@ -103,37 +102,40 @@ mnemonics on the chromatin}
 \includegraphics[width=8cm]{BRD4-Inhibition.png}
 \end{textblock*}
 
-\begin{textblock*}{\textwidth}(1.0cm,8cm)
-\textit{Filippakopoulos. Selective inhibition of BET bromodomains. Nature Communications}
+\begin{textblock*}{\textwidth}(1.0cm,7.5cm)
+\textit{Filippakopoulos. Selective inhibition of BET bromodomains. Nature }
+
+\begin{textblock*}{14cm}(0.5cm,8.25cm)
+\begin{itemize}
+\item BRD4 has disordered domains which are thought to promote phase separation
+\item Non-specific phase separation inhibitors exist
+\end{itemize}
+\end{textblock*}
 
 \end{textblock*}
 
 
 \end{frame}
 
-\begin{frame}{Validaton of JQ1 efficacy for BRD4 inhibition in Hela cells}
 
+\begin{frame}{Inhibition of a super-enhanced gene with JQ1}
 \begin{figure}
-\includegraphics[width=12cm]{Figure-5.png}
+\includegraphics[width=13cm]{GBP5-1.png}
 \end{figure}
-
 \begin{itemize}
-\item RT-qPCR quantified using $2^{-\Delta\Delta C_{t}}$ method using GAPDH as a reference gene
+\item Blue - DAPI (binds DNA minor groove)
+\item White arrows highlight putative GBP5 transcription sites
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Inhibition of a super-enhanced gene with JQ1}
+\begin{figure}
+\includegraphics[width=12cm]{GBP5-2.png}
+\end{figure}
+\begin{itemize}
 \item *:$P \leq 0.1$, **:$P \leq 0.01$
 \end{itemize}
-
 \end{frame}
-
-\begin{frame}{Induction of a BRD4-controlled gene with cytokine treatment}
-\begin{figure}
-\includegraphics[width=11cm]{Figure-2.png}
-\end{figure}
-\begin{itemize}
-\item GBP5 transcription is regulated by BRD4 (Lin 2022)
-\end{itemize}
-\end{frame}
-
-
 
 
 \begin{frame}
@@ -159,7 +161,7 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
  
 \end{frame}
 
-
+\begin{comment}
 \begin{frame}{Maximum likelihood localization of an isolated fluorescent emitter}
 Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\theta)= \underset{\theta}{\mathrm{argmin}}-\sum_{k}\log P(H_{k}|\theta)$
 
@@ -178,6 +180,7 @@ Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\
 \end{textblock*}
 
 
+
 \vspace{2in}
 
 \begin{itemize}
@@ -185,8 +188,7 @@ Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\
 \end{itemize} 
 
 \end{frame}
-
-
+\end{comment}
 
 \begin{frame}{Estimator precision sets the resolution limit in localization microscopy}
 \begin{textblock*}{4cm}(1.0cm,1.0cm)
@@ -206,23 +208,6 @@ Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\
 \end{textblock*}
 \end{frame}
 
-\begin{frame}{Computing the CRLB for static errors in two dimensions}
-Fisher information (separable case): \begin{equation}
-I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) 
-\end{equation}
-
-Let $\mu_{k}' = \mu_{k} + \sigma_{k}^{2}$. For an arbitrary parameter,
-
-\begin{align*}
-\frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  x_{k}\log x_{k} + \mu_{k}' - x_{k}\log\left(\mu_{k}'\right)\\
-&= \sum_{k} \frac{\partial \mu_{k}'}{\partial\theta_{i}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)
-\end{align*}
-
-\begin{equation*}
-I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)^{2}\right) = \sum_{k}\frac{1}{\mu_{k}'}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}}
-\end{equation*}
-The CRLB is a frequentist 
-\end{frame}
 
 \begin{frame}
 \frametitle{Direct STORM: The photophysics of rhodamines}
@@ -242,23 +227,27 @@ The CRLB is a frequentist
 \end{textblock*}
 \begin{textblock*}{\textwidth}(0.5cm,8.0cm)
 \begin{itemize}
-\item High power maintains the OFF state, potentially by promoting triplet state formation
+\item Moderate laser power maintains the OFF state
 \end{itemize}
 \end{textblock*}
 \end{frame}
 
-\begin{frame}{The tradeoff between spatial and temporal resolution in SMLM}
-\begin{textblock*}{10cm}(2.25cm,1.25cm)
-\includegraphics[width=10cm]{Shroff.png}
-\end{textblock*}
-\begin{textblock*}{\textwidth}(0.5cm,8.0cm)
-\begin{itemize}
-\item SMLM is desirable for SR due to very high res and no scanning (e.g., STED)
-\item Less control over photophysical state, but high throughput
-\end{itemize}
-\end{textblock*}
+\begin{frame}{Fourier ring correlation links spatial and temporal resolution}
+\includegraphics[width=12cm]{Spatial.png}
+\textit{Nieuwenhuizen et al. Measuring image resolution in optical nanoscopy. Nature Methods 2013}
 \end{frame}
 
+
+\begin{frame}{Fourier ring correlation links spatial and temporal resolution}
+\begin{textblock*}{13cm}(1cm,2cm)
+\includegraphics[width=13cm]{FRC.png}
+\end{textblock*}
+\begin{textblock*}{8cm}(3cm,7cm)
+\begin{equation*}
+\mathrm{FRC}(q) = \frac{\sum_{\vec{q}\in\mathrm{circle}}\tilde{f_{1}}(\vec{q})\tilde{f_{2}}(\vec{q})^{*}}{\sqrt{\sum_{\vec{q}\in\mathrm{circle}}|f_{1}(\vec{q})|^{2}}\sqrt{\sum_{\vec{q}\in\mathrm{circle}}|f_{2}}(\vec{q})|^{2}}
+\end{equation*}
+\end{textblock*}
+\end{frame}
 
 
 
@@ -283,13 +272,6 @@ Localization is cast as semantic segmentation of the high resolution tensor:
 \end{frame}
 
 
-\begin{frame}{Estimator precision sets the resolution limit in localization microscopy}
-
-\begin{textblock*}{18cm}(1.25cm,1.5cm)
-\includegraphics[width=10cm]{PSF2D.png}
-\end{textblock*}
-
-\end{frame}
 
 \begin{frame}{Estimator precision sets the resolution limit in localization microscopy}
 
@@ -336,9 +318,9 @@ Localization is cast as semantic segmentation of the high resolution tensor:
 
 \begin{textblock*}{13cm}(0.5cm,8.0cm)
 \begin{itemize}
-\item Density estimation using 30x30nm bins
-\item Closest pairs are merged one at a time, until we minimized the BIC
-\item Data likelihood is computed under a Gaussian Mixture Model (GMM)
+\item Isotropic Gaussian KDE using 30x30nm bins
+\item Closest pairs are fused one at a time, until we minimized the BIC
+\item Likelihood is computed under a Gaussian Mixture Model (GMM)
 \end{itemize}
 \end{textblock*}
 
@@ -351,51 +333,24 @@ Localization is cast as semantic segmentation of the high resolution tensor:
 \end{textblock*}
 
 \begin{textblock*}{13cm}(0.5cm,6.0cm)
-\begin{itemize}
-\item Density estimation using 30x30nm bins
-\item Closest pairs are merged one at a time, until we minimized the BIC
-\item Data likelihood is computed under a Gaussian Mixture Model (GMM)
-\end{itemize}
 \end{textblock*}
 
 \end{frame}
 
+\begin{frame}{Future Aims}
 
-
-
-\begin{frame}
-\frametitle{}
-\centering
-\Large \textcolor{black}{Results and Future Aims}
-\end{frame}
-
-
-\begin{frame}{Dissolving BRD4 condensates with JQ1 and 1,6 Hexanediol}
-\begin{figure}
-\includegraphics[width=5cm]{BRD4-JQ1.png}
-\end{figure}
-\end{frame}
-
-\begin{frame}{}
-Proposed two and three color imaging experiments
-\end{frame}
-
-\begin{frame}{Deep generative modeling with nonequilibrium thermodynamics}
-\begin{figure}
-\includegraphics[width=12cm]{Diffusion.png}
-\end{figure}
-\end{frame}
-
-
-\begin{frame}{Deep generative modeling with nonequilibrium thermodynamics}
-\begin{figure}
-\includegraphics[width=12cm]{DiffusionSwiss.png}
-\end{figure}
+\begin{textblock*}{9cm}(0.5cm,1.5cm)
 \begin{itemize}
-\item The data distribution is gradually converted into a analytically tractable distributon e.g., Gaussian
-\item Repeated application of a Markov transition kernel destroys data structure
-\item Use deep neural networks to learn to "reverse time"
+\item Integrate 2D SMLM and 2D/3D single molecule tracking (Brownian dynamics in a potential)
+\item Determine suitable metrics for measuring dynamics of the KDE
+\item Publish
 \end{itemize}
+\end{textblock*}
+
+\begin{textblock*}{3cm}(11.0cm,1.5cm)
+\includegraphics[width=3cm]{Composite.png}
+\end{textblock*}
+
 \end{frame}
 
 
