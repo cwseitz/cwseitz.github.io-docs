@@ -222,12 +222,13 @@ Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\
 \end{frame}
 
 \begin{frame}{The OFF state of JF646 can be maintained with high laser power}
-\begin{textblock*}{11cm}(1.5cm,1.3cm)
+\begin{textblock*}{11cm}(2.0cm,1.3cm)
 \includegraphics[width=11cm]{Laser.png}
 \end{textblock*}
 \begin{textblock*}{\textwidth}(0.5cm,8.0cm)
 \begin{itemize}
-\item Moderate laser power maintains the OFF state
+\item Laser power controls the OFF state lifetime
+\item Dense labeling is possible for a stable OFF state
 \end{itemize}
 \end{textblock*}
 \end{frame}
@@ -239,17 +240,21 @@ Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\
 
 
 \begin{frame}{Fourier ring correlation links spatial and temporal resolution}
-\begin{textblock*}{13cm}(1cm,2cm)
+\begin{textblock*}{13cm}(1cm,1.25cm)
+\begin{itemize}
+\item We can view dSTORM as sampling from a density
+\item This is why we use Gaussian kernel density estimation (KDE)
+\end{itemize}
+\end{textblock*}
+\begin{textblock*}{13cm}(1cm,2.75cm)
 \includegraphics[width=13cm]{FRC.png}
 \end{textblock*}
-\begin{textblock*}{8cm}(3cm,7cm)
+\begin{textblock*}{8cm}(3cm,7.5cm)
 \begin{equation*}
 \mathrm{FRC}(q) = \frac{\sum_{\vec{q}\in\mathrm{circle}}\tilde{f_{1}}(\vec{q})\tilde{f_{2}}(\vec{q})^{*}}{\sqrt{\sum_{\vec{q}\in\mathrm{circle}}|f_{1}(\vec{q})|^{2}}\sqrt{\sum_{\vec{q}\in\mathrm{circle}}|f_{2}}(\vec{q})|^{2}}
 \end{equation*}
 \end{textblock*}
 \end{frame}
-
-
 
 \begin{frame}{Deep learning enables dense localization in two-dimensions}
 \begin{textblock*}{10cm}(4.25cm,1.25cm)
@@ -281,7 +286,7 @@ Localization is cast as semantic segmentation of the high resolution tensor:
 \begin{textblock*}{13cm}(1.25cm,7cm)
 \begin{itemize}
 \item $K(\lambda/2\mathrm{NA})$ is Ripley's K function at the diffraction limit ($\lambda=640\mathrm{nm}$)
-\item Convolutional neural networks (CNNs) approach the CRLB (gray) at high photon counts and generalize to the dense regime
+\item Convolutional neural networks (CNNs) approach the Cramer-Rao lower bound (gray)
 \end{itemize}
 \end{textblock*}
 
