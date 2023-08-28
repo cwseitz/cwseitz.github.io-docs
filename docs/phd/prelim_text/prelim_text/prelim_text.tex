@@ -270,6 +270,16 @@ where $n$ is the number of localizations, $k=2n$ is the number of parameters in 
 
 Iteration then proceeds to minimize the BIC.
 
+\subsection{Fourier Ring Correlation}
+
+Following (Nieuwenhuizen 2013), a pair of subsets is drawn from the full list of localizations, and isotropic Gaussian kernel density estimation is performed. The Fourier Ring Correlation is calculated as a function of the ring radius $q$ for two images $f_{1}$ and $f_{2}$
+
+\begin{equation*}
+\mathrm{FRC}(q) = \frac{\sum_{\vec{q}\in\mathrm{circle}}\tilde{f_{1}}(\vec{q})\tilde{f_{2}}(\vec{q})^{*}}{\sqrt{\sum_{\vec{q}\in\mathrm{circle}}|f_{1}(\vec{q})|^{2}}\sqrt{\sum_{\vec{q}\in\mathrm{circle}}|f_{2}}(\vec{q})|^{2}}
+\end{equation*}
+
+where $\tilde{f_{1}}$ is the discrete Fourier transform of $f_{1}$.
+
 \section{Supplemental Information}
 
 \begin{figure}
@@ -302,6 +312,13 @@ Iteration then proceeds to minimize the BIC.
 \includegraphics[width=16cm]{PSF3D.png}
 \end{center}
 \caption{\textbf{Dependence of axial and lateral precision on SNR and molecular density}. (upper row) Lateral and axial root mean squared errors (RMSE) at varying signal levels (lower row) Lateral and axial RMSE for varying molecule counts within a diffraction limit radius for $10^{3}$ photon counts. Error samples = $10^{3}$}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{FRC.png}
+\end{center}
+\caption{\textbf{Fourier ring correlation links spatial and temporal resolution}. A pair of subsets is drawn from the full list of localizations, and isotropic Gaussian kernel density estimation is performed. The Fourier Ring Correlation is calculated for the pair and plotted as a function of spatial frequency.}
 \end{figure}
 
 
@@ -345,7 +362,6 @@ where $i_{0} = g_{k}\eta N_{0}\Delta$. The parameter $\eta$ is the quantum effic
 \end{align*}
 
 It is also straightforward to generalize this result when $G$ is an anisotropic Gaussian, by replacing $\sigma$ with either $\sigma_{x}$ or $\sigma_{y}$.
-
 
 
 \section{References}
@@ -417,7 +433,7 @@ It is also straightforward to generalize this result when $G$ is an anisotropic 
 \noindent [33] Boettiger, A. N. et al. Super-resolution imaging reveals distinct chromatin folding for different epigenetic states. Nature 529, 418–422 (2016). 
 \newline
 \noindent [34] Nozaki, T. et al. Dynamic Organization of Chromatin Domains Revealed by Super-Resolution Live-Cell Imaging. Mol Cell 67, 282-293.e7 (2017). 
-
+\noindent [35] Nieuwenhuizen, R et al. Measuring image resolution in optical nanoscopy. Nature Methods 10. 557-562 (2013). 
 \end{document}
 
 
