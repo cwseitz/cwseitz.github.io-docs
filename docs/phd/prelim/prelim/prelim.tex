@@ -38,6 +38,16 @@
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
+\setbeamertemplate{footline}{
+    \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=3ex,dp=1.5ex,leftskip=2ex,rightskip=2ex]{page footer}%
+        \usebeamerfont{title in head/foot}%
+        \insertshorttitle \hfill
+            \insertsection \hfill
+        \insertframenumber{} / \inserttotalframenumber
+    \end{beamercolorbox}}%
+}
+
 \begin{document}
 
 % Title page
@@ -45,6 +55,11 @@
 \begin{frame}
   \titlepage
 \end{frame}
+
+\begin{frame}{Outline}
+    \tableofcontents
+\end{frame}
+
 
 
 % The following is the most frequently used slide types in beamer
@@ -55,17 +70,7 @@
 %\end{frame}
 
 
-\begin{frame}
-\begin{itemize}
-\item Overview of biological system and some literature review
-\item Open questions in that system
-\item A novel method to study that system
-\item Major results so far
-\item Future goals and perspectives
-\end{itemize}
-\end{frame}
-
-
+\section{A phase separation model for transcriptional control}
 \begin{frame}{A phase separation model for transcriptional control}
 
 \begin{textblock*}{6cm}(0.5cm,1.5cm)
@@ -109,7 +114,6 @@
 \begin{itemize}
 \item BRD4 is an interesting target since specific and non-specific inhibitors exist
 \item BET mimics including +JQ1 prevent binding of BRD4 to acetylated histones
-\item BRD4 can also phase separate in multivalent protein complexes
 \end{itemize}
 \end{textblock*}
 
@@ -139,7 +143,7 @@ Blue - DAPI (binds DNA minor groove)
 \end{itemize}
 \end{frame}
 
-
+\section{Super resolution imaging with \textit{d}STORM}
 \begin{frame}
 \frametitle{Instrumentation for single molecule localization microscopy}
 
@@ -201,7 +205,7 @@ Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\
 \vspace{2in}
 
 \begin{itemize}
-\item Fisher information and Cramer-Rao lower bound (CRLB) can be computed analytically for Poisson log-likelihood $\ell$ (Smith 2010, Huang 2013)
+\item Likelihood function can be directly optimized with gradient descent
 \end{itemize} 
 
 \end{frame}
@@ -240,7 +244,7 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \end{textblock*}
 \end{frame}
 
-
+\section{The time resolution of \textit{d}STORM}
 \begin{frame}{Fourier ring correlation links spatial and temporal resolution}
 \begin{textblock*}{13cm}(1cm,1.25cm)
 \begin{itemize}
@@ -268,7 +272,7 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 
 \end{frame}
 
-
+\section{Dense localization with deep learning}
 \begin{frame}{Deep learning enables dense localization in two-dimensions}
 \begin{textblock*}{10cm}(4.25cm,1.25cm)
 \includegraphics[width=10cm]{DeepSTORM.png}
@@ -301,7 +305,7 @@ Localization is cast as semantic segmentation of the high resolution tensor:
 
 \end{frame}
 
-
+\section{Results and future aims}
 \begin{frame}{Chromatin nanodomains in a living Hela cell nucleus}
 
 \begin{textblock*}{13cm}(0.5cm,1.5cm)
@@ -349,7 +353,7 @@ Localization is cast as semantic segmentation of the high resolution tensor:
 \begin{textblock*}{13cm}(0.5cm,6.0cm)
 \end{textblock*}
 
-\begin{textblock*}{9cm}(0.5cm,6cm)
+\begin{textblock*}{\textwidth}(0.5cm,6cm)
 \begin{itemize}
 \item Integrate 2D SMLM and 2D/3D single molecule tracking (Brownian dynamics in a potential)
 \item Determine suitable metrics for measuring cluster dynamics
@@ -357,10 +361,6 @@ Localization is cast as semantic segmentation of the high resolution tensor:
 \end{itemize}
 \end{textblock*}
 
-
-\begin{textblock*}{3cm}(10.0cm,6cm)
-\includegraphics[width=3cm]{Composite.png}
-\end{textblock*}
 
 
 \end{frame}
