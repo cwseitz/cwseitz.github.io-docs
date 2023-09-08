@@ -189,6 +189,122 @@ We often call the Hessian matrix the \emph{score}. The Fisher information is the
 
 \section{The Fokker-Planck Equation}
 
+The Fokker-Planck equation is a central tool in non-equilibrium statistical mechanics, analagous to the master equation for discrete systems. It allows us to determine the time evolution of probability densities over continuous state spaces. Important examples in biophysics are the phase space of a particle or the membrane potential of a nerve cell.
+
+Suppose we have a random variable $\bm{x}$ and its joint distribution $P(\bm{x},t)$, which is not necessarily stationary. Define a vector field $\vec{J}(\bm{x},t)$ which is the probability current, which we will specify in a moment. The Fokker-Planck equation is by starting with a continuity equation for probability 
+
+\begin{align*}
+\frac{d}{dt}\int_{V_{0}} P(\bm{x},t)dV &= \int_{S}P(\bm{x},t)(\vec{J}\cdot\hat{n})dS\\
+&= -\int_{V_{0}}P(\bm{x},t)(\nabla\cdot \vec{J})dV
+\end{align*}
+
+Clearly this implies that
+
+\begin{equation*}
+\frac{dP(\bm{x},t)}{dt} = -\left(\nabla\cdot \vec{J}\right)P(\bm{x},t)
+\end{equation*}
+
+We often call the divergence term, the Fokker-Planck operator $\mathcal{L}_{FP}=-\nabla\cdot \vec{J}$. A more rigorous derivation is given in the appendix, which tells us that, to second order
+
+\begin{equation*}
+J(x_{i},t)  = \left(M_{i}^{(1)}(t) - \sum_{j}\frac{\partial}{\partial x_{j}}M_{ij}^{(2)}(t) \right)P(\bm{x},t)
+\end{equation*}
+
+where $M_{i}^{n}(t)$ is the $n$th moment of a transition kernel $T(x_{i}',t'|x_{i},t)$ for variable $i$. The first moment is essentially just the deterministic part of the Langevin dynamics. The second and higher moments will depend on these higher moments in the stochastic forcing terms.
+
+\section{The Langevin Equation}
+
+Consider a familiar Langevin dynamics on phase space $\bm{x} = (x,v)$, where a particle in a potential $V(x)$ experiences a viscous drag force and stochastic forcing $\xi(t)$ where $\xi(t)\sim\mathcal{N}(\mu,\sigma^{2})$ and $\langle \xi(t)\xi(t+\tau)\rangle = \delta(t-\tau)$. 
+
+\begin{align*}
+\dot{x} &= v\\
+\dot{v} &= -\frac{\gamma}{m}v + \frac{1}{m}F(x) + \frac{1}{m}\xi(t)
+\end{align*}
+
+The moments of the transition kernel must be
+
+\begin{equation*}
+M_{x}^{(1)} = v  \;\; M_{v}^{(1)} = -\frac{\gamma}{m}v + \frac{1}{m}F(x) + \mu \;\; M_{v}^{(v)} = \sigma^{2}
+\end{equation*}
+
+To simplify the notation let us define $\nabla\cdot \vec{J} = \frac{\partial J_{x}}{\partial x} + \frac{\partial J_{x}}{\partial v}= \mathcal{L}_{x} + \mathcal{L}_{v} = \mathcal{L}_{FP}$. This gives the full Fokker-Planck equation $\frac{dP(\bm{x},t)}{dt} = -\mathcal{L}_{FP}P(\bm{x},t)$. 
+
+\begin{align*}
+\mathcal{L}_{x}P(\bm{x},t) &= \frac{\partial}{\partial x}\left(vP(\bm{x},t)\right)\\
+\mathcal{L}_{v}P(\bm{x},t) &= \frac{\partial}{\partial v}\left(-\frac{\gamma}{m}v + \frac{1}{m}F(x)\right)P(\bm{x},t) + \sigma^{2}\frac{\partial^{2}}{\partial v^{2}}P(\bm{x},t)
+\end{align*}
+
+
+\chapter{Deep learning for localization microscopy}
+
+
+\begin{appendices}
+
+\subsection{Details of the Gaussian PSF}
+
+We will derive the gradients for the integrated astigmatic Gaussian, since it is the more general case. As before, define $i_{0} = g_{k}\gamma\Delta t N_{0}$ such that $\mu_{k}' = i_{0}\lambda_{k}$
+
+\begin{equation*}
+J_{x_{0}} = \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_{0}} \;\; J_{y_{0}} = \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial y_{0}}\;\;\; J_{z_{0}}  = \frac{\partial \mu_{k}'}{\partial \sigma_{x}}\frac{\partial \sigma_{x}}{\partial z_{0}} + \frac{\partial \mu_{k}'}{\partial \sigma_{y}}\frac{\partial \sigma_{y}}{\partial z_{0}}
+\end{equation*}
+
+\begin{align*}
+J_{x_{0}} &= \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_{0}} \\
+&= \frac{\beta_{k}\lambda_{y}}{2}\frac{\partial}{\partial x_{0}}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right)\right)\\
+&= \frac{\beta_{k}\lambda_{y}}{\sqrt{2\pi}\sigma_{x}}\left(\mathrm{exp}\left(\frac{(x_{k}-\frac{1}{2}-x_{0})^{2}}{2\sigma_{x}^{2}}\right) -\mathrm{exp}\left(\frac{(x_{k}+\frac{1}{2}-x_{0})^{2}}{2\sigma_{x}^{2}}\right)\right)
+\end{align*}
+
+\begin{align*}
+J_{y_{0}} &= \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial y_{0}} \\
+&= \frac{\beta_{k}\lambda_{x}}{2}\frac{\partial}{\partial y_{0}}\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right)\right)\\
+&= \frac{\beta_{k}\lambda_{x}}{\sqrt{2\pi}\sigma_{y}}\left(\mathrm{exp}\left(\frac{(y_{k}-\frac{1}{2}-y_{0})^{2}}{2\sigma_{y}^{2}}\right) -\mathrm{exp}\left(\frac{(y_{k}+\frac{1}{2}-y_{0})^{2}}{2\sigma_{y}^{2}}\right)\right)
+\end{align*}
+
+\begin{align*}
+J_{\sigma_{x}} &= \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial \sigma_{x}} \\
+&= \frac{\beta_{k}\lambda_{y}}{2}\frac{\partial}{\partial \sigma_{x}}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right)\right)\\
+&= \frac{\beta_{k}\lambda_{y}}{\sqrt{2\pi}}\left(\frac{\left(x-x_{0}-\frac{1}{2}\right) e^{-\frac{\left(x-x_{0}-\frac{1}{2}\right)^2}{2 \sigma_{x} ^2}}}{\sigma_{x} ^2}-\frac{ \left(x-x_{0}+\frac{1}{2}\right) e^{-\frac{\left(x-x_{0}+\frac{1}{2}\right)^2}{2 \sigma_{x} ^2}}}{\sigma_{x} ^2}\right)
+\end{align*}
+
+\begin{align*}
+J_{\sigma_{y}} &= \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial \sigma_{y}} \\
+&= \frac{\beta_{k}\lambda_{x}}{2}\frac{\partial}{\partial \sigma_{y}}\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right)\right)\\
+&= \frac{\beta_{k}\lambda_{x}}{\sqrt{2\pi}}\left(\frac{\left(y-y_{0}-\frac{1}{2}\right) e^{-\frac{\left(y-y_{0}-\frac{1}{2}\right)^2}{2 \sigma_{y} ^2}}}{\sigma_{y} ^2}-\frac{ \left(y-y_{0}+\frac{1}{2}\right) e^{-\frac{\left(y-y_{0}+\frac{1}{2}\right)^2}{2 \sigma_{y} ^2}}}{\sigma_{y} ^2}\right)
+\end{align*}
+
+Luckily, computing the Hessian matrix for (2.9) is tractable, and is actually quite simple when one takes advantage of the chain rule for Hessian matrices. Looking at (2.9), the likelihood is a hierarchical function that maps a vector space $\Theta$ to a vector space $\Lambda$ to a scalar value. Formally, we define $T: \Theta \rightarrow \Lambda$ and $W: \Lambda \rightarrow \mathbb{R}$. The parameter vector $(x_{0},y_{0},z_{0}, \sigma_{0}, N_{0})\in \Theta$, the Poisson rate vector $\vec{\lambda} \in \Lambda$ and $\ell \in \mathbb{R}$. Note that we choose to optimize $\sigma_{x}$ and $\sigma_{y}$ directly and compute $z_{0}$ to simplify the computation of the Hessian. To get the Hessian, we need the chain-rule for Hessian matrices, which can be quickly computed in terms of the jacobian and hessian of $T$ and $W$.
+
+
+\begin{equation*}
+H_{\ell} = J_{\mu}^{T} H_{\ell} J_{\mu} + (J_{\ell}\otimes I_{n})H_{\mu}
+\end{equation*}
+
+where we have used $J_{\mu}$ to represent the jacobian of $T$ and $J_{\ell}$ for the jacobian of $W$. Similar notation is used for the corresponding Hessian matrices. 
+In the 3D case, the Hessian matrix is not directly separable since $\mu \propto \lambda_{x}(x_{0},\sigma_{0},\sigma_{x})\lambda_{y}(y_{0},\sigma_{0},\sigma_{y})$. To see this, an abstract representation of the Hessian reads 
+
+
+\subsection{Fisher information for 2D integrated gaussian}
+
+For the 2D integrated gaussian point spread function, the Hessian only contains separable second order derivatives, so the Fisher information matrix takes on a convenient form
+
+\begin{equation}
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) 
+\end{equation}
+
+For an arbitrary parameter then we have
+
+\begin{align*}
+\frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  x_{k}\log x_{k} + \mu_{k}' - x_{k}\log\left(\mu_{k}'\right)\\
+&= \sum_{k} \frac{\partial \mu_{k}'}{\partial\theta_{i}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)
+\end{align*}
+
+\begin{equation*}
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)^{2}\right) = \sum_{k}\frac{1}{\mu_{k}'}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}}
+\end{equation*}
+
+To compute the bound, it turns out all we need is the jacobian $\frac{\partial \mu_{k}'}{\partial\theta_{j}} $.
+
+
 \subsection{Kramers-Moyal Expansion}
 
 Given many instantiations of a stochastic variable $x$, we can construct a normalize histogram oxer all observations as a function of time $P(x,t)$. However, in order to systematically explore the relationship between the parameterization of the process and $P(x,t)$ we require an expression for $\dot{P}(x,t)$. If we make a fundamental assumption that the evolution of $P(x,t)$ follows a Markov process i.e. its evolution has the memoryless property, then we can write
@@ -290,75 +406,6 @@ The full Fokker-Planck equation then reads
 \frac{\partial P(\vec{x},t)}{\partial t}  &= \vec{\nabla} \cdot J(\vec{x},t)\\
 &= \sum_{i=1}^{N}\left(-\frac{\partial}{\partial x_{i}}M_{i}^{(1)}(t) + \sum_{j=1}^{N} \frac{\partial^{2}}{\partial x_{i}\partial x_{j}}M_{ij}^{(2)}(t)\right)P(\vec{x},t)
 \end{align}
-
-\chapter{Deep learning for localization microscopy}
-
-
-\begin{appendices}
-
-\subsection{Details of the Gaussian PSF}
-
-We will derive the gradients for the integrated astigmatic Gaussian, since it is the more general case. As before, define $i_{0} = g_{k}\gamma\Delta t N_{0}$ such that $\mu_{k}' = i_{0}\lambda_{k}$
-
-\begin{equation*}
-J_{x_{0}} = \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_{0}} \;\; J_{y_{0}} = \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial y_{0}}\;\;\; J_{z_{0}}  = \frac{\partial \mu_{k}'}{\partial \sigma_{x}}\frac{\partial \sigma_{x}}{\partial z_{0}} + \frac{\partial \mu_{k}'}{\partial \sigma_{y}}\frac{\partial \sigma_{y}}{\partial z_{0}}
-\end{equation*}
-
-\begin{align*}
-J_{x_{0}} &= \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_{0}} \\
-&= \frac{\beta_{k}\lambda_{y}}{2}\frac{\partial}{\partial x_{0}}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right)\right)\\
-&= \frac{\beta_{k}\lambda_{y}}{\sqrt{2\pi}\sigma_{x}}\left(\mathrm{exp}\left(\frac{(x_{k}-\frac{1}{2}-x_{0})^{2}}{2\sigma_{x}^{2}}\right) -\mathrm{exp}\left(\frac{(x_{k}+\frac{1}{2}-x_{0})^{2}}{2\sigma_{x}^{2}}\right)\right)
-\end{align*}
-
-\begin{align*}
-J_{y_{0}} &= \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial y_{0}} \\
-&= \frac{\beta_{k}\lambda_{x}}{2}\frac{\partial}{\partial y_{0}}\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right)\right)\\
-&= \frac{\beta_{k}\lambda_{x}}{\sqrt{2\pi}\sigma_{y}}\left(\mathrm{exp}\left(\frac{(y_{k}-\frac{1}{2}-y_{0})^{2}}{2\sigma_{y}^{2}}\right) -\mathrm{exp}\left(\frac{(y_{k}+\frac{1}{2}-y_{0})^{2}}{2\sigma_{y}^{2}}\right)\right)
-\end{align*}
-
-\begin{align*}
-J_{\sigma_{x}} &= \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial \sigma_{x}} \\
-&= \frac{\beta_{k}\lambda_{y}}{2}\frac{\partial}{\partial \sigma_{x}}\left(\mathrm{erf}\left(\frac{x_{k}+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right) -\mathrm{erf}\left(\frac{x_{k}-\frac{1}{2}-x_{0}}{\sqrt{2}\sigma_{x}}\right)\right)\\
-&= \frac{\beta_{k}\lambda_{y}}{\sqrt{2\pi}}\left(\frac{\left(x-x_{0}-\frac{1}{2}\right) e^{-\frac{\left(x-x_{0}-\frac{1}{2}\right)^2}{2 \sigma_{x} ^2}}}{\sigma_{x} ^2}-\frac{ \left(x-x_{0}+\frac{1}{2}\right) e^{-\frac{\left(x-x_{0}+\frac{1}{2}\right)^2}{2 \sigma_{x} ^2}}}{\sigma_{x} ^2}\right)
-\end{align*}
-
-\begin{align*}
-J_{\sigma_{y}} &= \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial \sigma_{y}} \\
-&= \frac{\beta_{k}\lambda_{x}}{2}\frac{\partial}{\partial \sigma_{y}}\left(\mathrm{erf}\left(\frac{y_{k}+\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right) -\mathrm{erf}\left(\frac{y_{k}-\frac{1}{2}-y_{0}}{\sqrt{2}\sigma_{y}}\right)\right)\\
-&= \frac{\beta_{k}\lambda_{x}}{\sqrt{2\pi}}\left(\frac{\left(y-y_{0}-\frac{1}{2}\right) e^{-\frac{\left(y-y_{0}-\frac{1}{2}\right)^2}{2 \sigma_{y} ^2}}}{\sigma_{y} ^2}-\frac{ \left(y-y_{0}+\frac{1}{2}\right) e^{-\frac{\left(y-y_{0}+\frac{1}{2}\right)^2}{2 \sigma_{y} ^2}}}{\sigma_{y} ^2}\right)
-\end{align*}
-
-Luckily, computing the Hessian matrix for (2.9) is tractable, and is actually quite simple when one takes advantage of the chain rule for Hessian matrices. Looking at (2.9), the likelihood is a hierarchical function that maps a vector space $\Theta$ to a vector space $\Lambda$ to a scalar value. Formally, we define $T: \Theta \rightarrow \Lambda$ and $W: \Lambda \rightarrow \mathbb{R}$. The parameter vector $(x_{0},y_{0},z_{0}, \sigma_{0}, N_{0})\in \Theta$, the Poisson rate vector $\vec{\lambda} \in \Lambda$ and $\ell \in \mathbb{R}$. Note that we choose to optimize $\sigma_{x}$ and $\sigma_{y}$ directly and compute $z_{0}$ to simplify the computation of the Hessian. To get the Hessian, we need the chain-rule for Hessian matrices, which can be quickly computed in terms of the jacobian and hessian of $T$ and $W$.
-
-
-\begin{equation*}
-H_{\ell} = J_{\mu}^{T} H_{\ell} J_{\mu} + (J_{\ell}\otimes I_{n})H_{\mu}
-\end{equation*}
-
-where we have used $J_{\mu}$ to represent the jacobian of $T$ and $J_{\ell}$ for the jacobian of $W$. Similar notation is used for the corresponding Hessian matrices. 
-In the 3D case, the Hessian matrix is not directly separable since $\mu \propto \lambda_{x}(x_{0},\sigma_{0},\sigma_{x})\lambda_{y}(y_{0},\sigma_{0},\sigma_{y})$. To see this, an abstract representation of the Hessian reads 
-
-
-\subsection{Fisher information for 2D integrated gaussian}
-
-For the 2D integrated gaussian point spread function, the Hessian only contains separable second order derivatives, so the Fisher information matrix takes on a convenient form
-
-\begin{equation}
-I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) 
-\end{equation}
-
-For an arbitrary parameter then we have
-
-\begin{align*}
-\frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  x_{k}\log x_{k} + \mu_{k}' - x_{k}\log\left(\mu_{k}'\right)\\
-&= \sum_{k} \frac{\partial \mu_{k}'}{\partial\theta_{i}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)
-\end{align*}
-
-\begin{equation*}
-I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)^{2}\right) = \sum_{k}\frac{1}{\mu_{k}'}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}}
-\end{equation*}
-
-To compute the bound, it turns out all we need is the jacobian $\frac{\partial \mu_{k}'}{\partial\theta_{j}} $.
 
 
 \subsection{A Brief Note on Bayesian Nonparametrics}
