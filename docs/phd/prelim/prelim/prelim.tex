@@ -70,71 +70,21 @@
 %\end{frame}
 
 
-\section{A phase separation model for transcriptional control}
-\begin{frame}{A phase separation model for transcriptional control}
 
-\begin{textblock*}{13cm}(1.0cm,1.5cm)
-\includegraphics[width=13cm]{BRD4-Condensate.png}
-\end{textblock*}
-
-
-\begin{textblock*}{14cm}(0.5cm,7.0cm)
-\begin{itemize}
-\item Super-enhanced genes are regulated by large molecular assemblies
-\item We study nucleosome clustering dynamics using super-resolution microscopy
-\end{itemize}
-\end{textblock*}
-
-\end{frame}
-
-
-\begin{frame}{(+)-JQ1 in complex with BRD4 protein}
-
-\begin{textblock*}{6cm}(1.0cm,1.5cm)
-\includegraphics[width=6cm]{JQ1_Complex.png}
-\end{textblock*}
-
-\begin{textblock*}{8cm}(7.5cm,1.75cm)
-\includegraphics[width=8cm]{BRD4-Inhibition.png}
-\end{textblock*}
-
-\begin{textblock*}{\textwidth}(1.0cm,7.5cm)
-\textit{Filippakopoulos. Selective inhibition of BET bromodomains. Nature }
-
-\begin{textblock*}{14cm}(0.5cm,8.1cm)
-\begin{itemize}
-\item BRD4 is an interesting target since specific and non-specific inhibitors exist
-\item BET mimics including +JQ1 prevent binding of BRD4 to acetylated histones
-\end{itemize}
-\end{textblock*}
-
-\end{textblock*}
-
-
-\end{frame}
-
-
-\begin{frame}{Inhibition of a super-enhanced gene with JQ1}
-\begin{figure}
-\includegraphics[width=13cm]{GBP5-1.png}
-\end{figure}
-Blue - DAPI (binds DNA minor groove)
-\begin{itemize}
-\item Guanylate binding proteins (GBPs) are a family of GTPases induced by IFN-$\gamma$
-\item BRD4 is directly involved in GBP gene expression
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Inhibition of a super-enhanced gene with JQ1}
-\begin{figure}
-\includegraphics[width=12cm]{GBP5-2.png}
-\end{figure}
-\begin{itemize}
-\item *:$P \leq 0.1$, **:$P \leq 0.01$
-\end{itemize}
-\end{frame}
 
 \section{Super resolution imaging with \textit{d}STORM}
+
+\begin{frame}
+\frametitle{Direct stochastic optical reconstruction microscopy}
+
+\begin{figure}
+\includegraphics[width=13cm]{Concept.png}
+\end{figure}
+
+
+\end{frame}
+
+
 \begin{frame}
 \frametitle{Instrumentation for single molecule localization microscopy}
 
@@ -305,7 +255,6 @@ Localization is cast as semantic segmentation of the high resolution tensor:
 \begin{textblock*}{13cm}(0.5cm,8.0cm)
 \begin{itemize}
 \item Isotropic Gaussian KDE using 30x30nm bins
-\item Closest pairs are fused one at a time, until we minimized the BIC
 \item Likelihood is computed under a Gaussian Mixture Model (GMM)
 \end{itemize}
 \end{textblock*}
@@ -355,13 +304,68 @@ Localization is cast as semantic segmentation of the high resolution tensor:
 
 \end{frame}
 
-\begin{frame}{Coarse grained chromatin dynamics}
-\begin{textblock*}{13cm}(0.5cm,1.5cm)
-\includegraphics[width=\textwidth]{Bleo.png}
+\section{Phase separation of chromatin}
+\begin{frame}{Chromatin has an intrinsic ability to undergo phase separation}
+
+\begin{textblock*}{10cm}(2.25cm,1.5cm)
+\includegraphics[width=10cm]{ChromatinLLPS.png}
+\end{textblock*}
+
+
+\begin{textblock*}{14cm}(0.5cm,7.5cm)
+\begin{itemize}
+\item Super-enhanced genes are regulated by large molecular assemblies
+\item We study nucleosome clustering dynamics using super-resolution microscopy
+\end{itemize}
 \end{textblock*}
 
 \end{frame}
 
 
+\begin{frame}{(+)-JQ1 in complex with BRD4 protein}
+
+\begin{textblock*}{6cm}(1.0cm,1.5cm)
+\includegraphics[width=6cm]{JQ1_Complex.png}
+\end{textblock*}
+
+\begin{textblock*}{8cm}(7.5cm,1.75cm)
+\includegraphics[width=8cm]{BRD4-Inhibition.png}
+\end{textblock*}
+
+\begin{textblock*}{\textwidth}(1.0cm,7.5cm)
+\textit{Filippakopoulos. Selective inhibition of BET bromodomains. Nature }
+
+\begin{textblock*}{14cm}(0.5cm,8.1cm)
+\begin{itemize}
+\item BRD4 is an interesting target since specific and non-specific inhibitors exist
+\item BET mimics including +JQ1 prevent binding of BRD4 to acetylated histones
+\end{itemize}
+\end{textblock*}
+
+\end{textblock*}
+
+
+\end{frame}
+
+
+\begin{frame}{Inhibition of a super-enhanced gene with JQ1}
+\begin{figure}
+\includegraphics[width=13cm]{GBP5-1.png}
+\end{figure}
+Blue - DAPI (binds DNA minor groove)
+\begin{itemize}
+\item Guanylate binding proteins (GBPs) are a family of GTPases induced by IFN-$\gamma$
+\item BRD4 is directly involved in GBP gene expression
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Inhibition of a super-enhanced gene with JQ1}
+\begin{figure}
+\includegraphics[width=12cm]{GBP5-2.png}
+\end{figure}
+\begin{itemize}
+\item *:$P \leq 0.1$, **:$P \leq 0.01$
+\end{itemize}
+\end{frame}
 
 \end{document}
