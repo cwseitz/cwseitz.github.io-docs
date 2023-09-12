@@ -210,7 +210,22 @@ We often call the divergence term, the Fokker-Planck operator $\mathcal{L}_{FP}=
 J(x_{i},t)  = \left(M_{i}^{(1)}(t) - \sum_{j}\frac{\partial}{\partial x_{j}}M_{ij}^{(2)}(t) \right)P(\bm{x},t)
 \end{equation*}
 
-where $M_{i}^{n}(t)$ is the $n$th moment of a transition kernel $T(x_{i}',t'|x_{i},t)$ for variable $i$. The first moment is essentially just the deterministic part of the Langevin dynamics. The second and higher moments will depend on these higher moments in the stochastic forcing terms.
+where $M_{i}^{n}(t)$ is the $n$th moment of a transition kernel $T(x_{i}',t'|x_{i},t)$ for variable $i$. The first moment is essentially just the deterministic part of the Langevin dynamics. The second and higher moments will depend on these higher moments in the stochastic forcing terms. As proven more completely in the appendix, the full multi-dimensional Fokker-Planck equation reads
+
+\begin{align}
+\frac{\partial P(\vec{x},t)}{\partial t}  &= \vec{\nabla} \cdot J(\vec{x},t)\\
+&= \sum_{i=1}^{N}\left(-\frac{\partial}{\partial x_{i}}M_{i}^{(1)}(t) + \sum_{j=1}^{N} \frac{\partial^{2}}{\partial x_{i}\partial x_{j}}M_{ij}^{(2)}(t)\right)P(\vec{x},t)
+\end{align}
+
+If we make a further constraint that the moments of the transition operator are stationary $M_{i}^{(1)}(t) = \Upsilon_{ij}$ and $M_{ij}^{(2)}(t) = D_{ij}$ 
+
+\begin{align}
+\frac{\partial P(\vec{x},t)}{\partial t}  &= \sum_{ij}\left(\Upsilon_{ij}\frac{\partial}{\partial x_{i}} + D_{ij}\frac{\partial^{2}}{\partial x_{i}\partial x_{j}}\right)P(\vec{x},t)
+\end{align}
+
+\begin{equation*}
+D = \begin{pmatrix}0&0 \\ 0& \gamma k_{B}T/m \end{pmatrix}\;\;\Upsilon = \begin{pmatrix}0 & -1\\ 0 & \gamma\end{pmatrix}
+\end{equation*}
 
 \section{Free Brownian particle}
 
