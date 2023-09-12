@@ -212,7 +212,30 @@ J(x_{i},t)  = \left(M_{i}^{(1)}(t) - \sum_{j}\frac{\partial}{\partial x_{j}}M_{i
 
 where $M_{i}^{n}(t)$ is the $n$th moment of a transition kernel $T(x_{i}',t'|x_{i},t)$ for variable $i$. The first moment is essentially just the deterministic part of the Langevin dynamics. The second and higher moments will depend on these higher moments in the stochastic forcing terms.
 
-\section{The Langevin Equation}
+\section{Free Brownian particle}
+
+Consider a familiar Langevin dynamics on phase space $\bm{x} = (x,v)$, where a free particle ($V(x)=0\; \forall x$) experiences a viscous drag force and stochastic forcing $\xi(t)$ where $\xi(t)\sim\mathcal{N}(\mu,\sigma^{2})$ and $\langle \xi(t)\xi(t+\tau)\rangle = \delta(t-\tau)$. 
+
+\begin{align*}
+\dot{x} &= v\\
+\dot{v} &= -\frac{\gamma}{m}v + \frac{1}{m}\xi(t)
+\end{align*}
+
+The moments of the transition kernel must be
+
+\begin{equation*}
+M_{x}^{(1)} = v  \;\; M_{v}^{(1)} = -\frac{\gamma}{m}v + \mu \;\; M_{v}^{(v)} = \sigma^{2}
+\end{equation*}
+
+To simplify the notation let us define $\nabla\cdot \vec{J} = \frac{\partial J_{x}}{\partial x} + \frac{\partial J_{x}}{\partial v}= \mathcal{L}_{x} + \mathcal{L}_{v} = \mathcal{L}_{FP}$. This gives the full Fokker-Planck equation $\frac{dP(\bm{x},t)}{dt} = -\mathcal{L}_{FP}P(\bm{x},t)$. 
+
+\begin{align*}
+\mathcal{L}_{x}P(\bm{x},t) &= \frac{\partial}{\partial x}\left(vP(\bm{x},t)\right)\\
+\mathcal{L}_{v}P(\bm{x},t) &= \frac{\partial}{\partial v}\left(-\frac{\gamma}{m}v + \frac{1}{m}F(x)\right)P(\bm{x},t) + \sigma^{2}\frac{\partial^{2}}{\partial v^{2}}P(\bm{x},t)
+\end{align*}
+
+
+\section{The Brownian Harmonic oscillator}
 
 Consider a familiar Langevin dynamics on phase space $\bm{x} = (x,v)$, where a particle in a potential $V(x)$ experiences a viscous drag force and stochastic forcing $\xi(t)$ where $\xi(t)\sim\mathcal{N}(\mu,\sigma^{2})$ and $\langle \xi(t)\xi(t+\tau)\rangle = \delta(t-\tau)$. 
 
