@@ -339,4 +339,19 @@ Blue - DAPI (binds DNA minor groove)
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Generative model for SPAD array data}
+\begin{equation*}
+F \sim \mathrm{DP}(\alpha,F_{0})\;\;\bm{\theta}|F \sim F\;\;X|\bm{\theta} \sim \mathcal{L}(X|\bm{\theta}) 
+\end{equation*}
+\begin{itemize}
+\item $\mathrm{DP}(\alpha,F_{0})$ is a distribution over distributions
+\item $F$ is a prior on the model parameters and $\bm{\theta}$ are the parameters (coordinates of molecules)
+\item Likelihood $\mathcal{L}$ can be chosen to use total photon counts or explicitly model the point process
+\end{itemize}
+\begin{equation*}
+\mathcal{L}(X|\theta) = \prod_{n}\left(\sum_{k=1}^{K}\mu_{k}(r_{n}|\theta_{k})\right)\delta t^{n}
+\end{equation*}
+However, nearby molecules may emit at the same time, and this would lost in the summation of total counts ($g^{2}(0)$?)
+\end{frame}
+
 \end{document}
