@@ -72,61 +72,9 @@
 
 
 
-\section{Super resolution imaging with \textit{d}STORM}
+\section{Single molecule localization microscopy}
 
-\begin{frame}
-\frametitle{Direct stochastic optical reconstruction microscopy}
-
-\begin{figure}
-\includegraphics[width=13cm]{Concept.png}
-\end{figure}
-
-
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Instrumentation for single molecule localization microscopy}
-
-\begin{figure}
-\includegraphics[width=12cm]{Setup.png}
-\end{figure}
-
-\begin{itemize}
-\item Selectable widefield and oblique illumination
-\item Widefield useful for high throughput 
-\item Oblique method illuminates a thin section of nuclei
-\end{itemize}
-
-\end{frame}
-
-\begin{frame}{Dense labeling of histone H2B in fixed cells at RT}
-\begin{textblock*}{11cm}(2.0cm,1.3cm)
-\includegraphics[width=11cm]{Laser.png}
-\end{textblock*}
-\begin{textblock*}{\textwidth}(0.5cm,8.0cm)
-\begin{itemize}
-\item Dense labeling of H2B-Halotag w/ fluorescent ligand JF646
-\item Reducing buffer is usually a primary thiol like cysteamine (MEA)
-\item Photoswitching of JF646 allows us to beat the diffraction limit
-\end{itemize}
-\end{textblock*}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Direct STORM: The photophysics of rhodamines}
-
-\begin{figure}
-\includegraphics[width=10cm]{Rhodamines.png}
-\end{figure}
-\begin{itemize}
-\item  Reduction of the T1 state yields a dark, long-lived, and stable radical state
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Maximum likelihood localization of an isolated fluorescent emitter}
+\begin{frame}{Single molecule localization microscopy}
 Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\theta)= \underset{\theta}{\mathrm{argmin}}-\sum_{k}\log P(H_{k}|\theta)$
 
 \begin{textblock*}{8cm}(6.5cm,2.5cm)
@@ -146,12 +94,83 @@ Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\
 \vspace{2in}
 
 \begin{itemize}
-\item Likelihood function can be directly optimized with gradient descent
-\end{itemize} 
+\item SMLM techniques are diffraction unlimited
+\item This makes them desirable for super-resolution, but they are slow
+\end{itemize}
 
 \end{frame}
 
+\begin{frame}{Estimator precision in localization microscopy}
+\begin{textblock*}{4cm}(1.0cm,1.0cm)
+\includegraphics[width=4cm]{MCMC/Figure_1.png}
+\end{textblock*}
+\begin{textblock*}{4cm}(1.0cm,5cm)
+\includegraphics[width=4cm]{MCMC/Figure_2.png}
+\end{textblock*}
+\begin{textblock*}{9cm}(5cm,1.0cm)
+\includegraphics[width=9cm]{MCMC/Figure_3.png}
+\end{textblock*}
+\begin{textblock*}{13cm}(0.5cm,8cm)
 
+\end{textblock*}
+\end{frame}
+
+\begin{frame}
+\frametitle{Super resolution with photoswitching of rhodamines}
+
+\begin{figure}
+\includegraphics[width=10cm]{Rhodamines.png}
+\end{figure}
+\begin{itemize}
+\item  Reduction of the T1 state yields a dark, long-lived, and stable radical state
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Direct stochastic optical reconstruction microscopy}
+
+\begin{figure}
+\includegraphics[width=13cm]{Concept.png}
+\end{figure}
+
+\end{frame}
+
+\begin{comment}
+\begin{frame}
+\frametitle{Instrumentation for single molecule localization microscopy}
+
+\begin{figure}
+\includegraphics[width=12cm]{Setup.png}
+\end{figure}
+
+\begin{itemize}
+\item Selectable widefield and oblique illumination
+\item Widefield useful for high throughput 
+\item Oblique method illuminates a thin section of nuclei
+\end{itemize}
+
+\end{frame}
+\end{comment}
+
+\begin{comment}
+\begin{frame}{Dense labeling of histone H2B in fixed cells at RT}
+\begin{textblock*}{11cm}(2.0cm,1.3cm)
+\includegraphics[width=11cm]{Laser.png}
+\end{textblock*}
+\begin{textblock*}{\textwidth}(0.5cm,8.0cm)
+\begin{itemize}
+\item Dense labeling of H2B-Halotag w/ fluorescent ligand JF646
+\item Reducing buffer is usually a primary thiol like cysteamine (MEA)
+\item Photoswitching of JF646 allows us to beat the diffraction limit
+\end{itemize}
+\end{textblock*}
+\end{frame}
+\end{comment}
+
+
+\begin{comment}
 \begin{frame}{A Poisson approximation at moderate SNR simplifies SMLM}
 
 \begin{figure}
@@ -165,25 +184,8 @@ P(H_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{
 $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\mathrm{SNR}$)
  
 \end{frame}
+\end{comment}
 
-
-\begin{frame}{Estimator precision in localization microscopy}
-\begin{textblock*}{4cm}(1.0cm,1.0cm)
-\includegraphics[width=4cm]{MCMC/Figure_1.png}
-\end{textblock*}
-\begin{textblock*}{4cm}(1.0cm,5cm)
-\includegraphics[width=4cm]{MCMC/Figure_2.png}
-\end{textblock*}
-\begin{textblock*}{9cm}(5cm,1.0cm)
-\includegraphics[width=9cm]{MCMC/Figure_3.png}
-\end{textblock*}
-\begin{textblock*}{13cm}(0.5cm,8cm)
-\begin{itemize}
-\item SMLM techniques are diffraction unlimited
-\item This makes them desirable for super-resolution, but they are slow
-\end{itemize}
-\end{textblock*}
-\end{frame}
 
 \section{The time resolution of \textit{d}STORM}
 \begin{frame}{Fourier ring correlation links spatial and temporal resolution}
@@ -339,19 +341,5 @@ Blue - DAPI (binds DNA minor groove)
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Generative model for SPAD array data}
-\begin{equation*}
-F \sim \mathrm{DP}(\alpha,F_{0})\;\;\bm{\theta}|F \sim F\;\;X|\bm{\theta} \sim \mathcal{L}(X|\bm{\theta}) 
-\end{equation*}
-\begin{itemize}
-\item $\mathrm{DP}(\alpha,F_{0})$ is a distribution over distributions
-\item $F$ is a prior on the model parameters and $\bm{\theta}$ are the parameters (coordinates of molecules)
-\item Likelihood $\mathcal{L}$ can be chosen to use total photon counts or explicitly model the point process
-\end{itemize}
-\begin{equation*}
-\mathcal{L}(X|\theta) = \prod_{n}\left(\sum_{k=1}^{K}\mu_{k}(r_{n}|\theta_{k})\right)\delta t^{n}
-\end{equation*}
-However, nearby molecules may emit at the same time, and this would lost in the summation of total counts ($g^{2}(0)$?)
-\end{frame}
 
 \end{document}
