@@ -250,8 +250,20 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 
 \begin{frame}{Next generation SMLM with photon counting cameras}
 
+SOFI techniques conventionally compute autocorrelation functions $G_{ii}^{2}(\bm{r},\tau)$
 
+SOFI images are usually $G^{2}_{ii}(\bm{r},0)$ for each pixel, for long integration times
 
+It is reasonable that $G_{ij}^{2}(\bm{r}_{i},\bm{r}_{j},\tau)$ contains information about molecular positions
+
+\begin{figure}
+\includegraphics[width=10cm]{G2.png}
+\end{figure}
+
+For single photon counts, I don't think $G_{ij}^{2}(\bm{r}_{i},\bm{r}_{j},0)$  contains this information (peaks in $G_{ij}^{2}$ at nonzero lag is evidence for position)
+Cross-cumulants may be more appropriate (Girsault 2016), which comes with virtual pixels
+May also need pulsed excitation synced with the SPAD camera (can guarantee single photon per molecule per frame)
+Higher order correlations e.g., $G_{ijk}^{3}(\bm{r}_{i},\bm{r}_{j},\bm{r}_{k},0)$ might be useful (deep nets?)
 
 \end{frame}
 
