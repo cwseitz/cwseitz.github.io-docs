@@ -248,6 +248,7 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 
 \end{frame}
 
+\begin{comment}
 \begin{frame}{Next generation SMLM with photon counting cameras}
 
 SOFI techniques conventionally compute autocorrelation functions $G_{ii}^{2}(\bm{r},\tau)$
@@ -267,6 +268,9 @@ Higher order correlations might give stronger localization results, but could be
 
 \end{frame}
 
+\end{comment}
+
+\begin{comment}
 \begin{frame}
 Now I'm not so sure that the shape of $G_{ij}^{2}$ contains information on position. Translating a molecule along the axes changes the intensity of the individual processes, and I don't believe $G_{ij}^{2}$ is sensitive to the intensity of the processes.
 Imagine a molecule emits $N$ photons. As the molecule approaches the neighboring pixel, more photons hit the neighboring pixel, but the delay between consecutive photons hitting pixel 2 and pixel 1 is unchanged. 
@@ -274,6 +278,29 @@ Imagine a molecule emits $N$ photons. As the molecule approaches the neighboring
 However, the intensity information and the anticorrelation of the processes are complementary. The degree of anticorrelated-ness of the various pairs determines how we can "group the pixels". Intensities then could then be used in a full generative model for the data.
 
 A molecule at position $\theta$ will result in anticorrelated neighboring pixels. Perhaps $G_{ij}^{2}(\bm{r}_{i},\bm{r}_{j},0)$ can be use to determine how anti-correlated the pixels are. Then, we use this value to create the "virtual pixels". Then define a likelihood function on the pixels+virtual pixels given the coordinates. 
+
+\end{frame}
+\end{comment}
+
+\begin{frame}{Enhanced SMLM with fluorescence antibunching}
+
+If the emission from a single molecule represents a sub-Poisson process, then the detection process is also sub-Poisson, with a reduced rate. 
+
+Consider point processes $n_{i}(t)$ and $n_{j}(t)$. The second order coherence function reads
+
+\begin{equation*}
+g^{2}_{ij}(\tau) = \frac{\langle n_{i}(t+\tau)n_{j}(t)\rangle}{\langle n_{i}(t)\rangle\langle n_{j}(t)\rangle}
+\end{equation*}
+
+$n_{i}(t)$ and $n_{j}(t)$ are parameterized by $\theta$. Suppose they are Poisson processes, with rates that can be computed from $\theta$ e.g., $\mu_{i} = f(\theta)$ and $\mu_{j} = g(\theta)$. Then, 
+
+\begin{equation*}
+g^{2}_{ij}(0) = \frac{\langle n_{i}(t)n_{j}(t)\rangle}{\mu_{i}\mu_{j}} = 1
+\end{equation*}
+
+However, when they are sub-Poisson processes, then $\langle n_{i}(t)n_{j}(t)\rangle \leq \langle n_{i}(t)\rangle\langle n_{j}(t)\rangle$. Why?
+
+The presence of multiple emitters in the local region makes photons appear more ``bunched" w.r.t these two detector elements $i$ and $j$, and therefore $g^{2}_{ij}(0) > 0$. I expect we can use $g^{2}_{ij}(0)$ over 3x3 neighborhoods of pixels where $i$ the center pixel.
 
 \end{frame}
 
