@@ -267,6 +267,16 @@ Higher order correlations might give stronger localization results, but could be
 
 \end{frame}
 
+\begin{frame}
+Now I'm not so sure that the shape of $G_{ij}^{2}$ contains information on position. Translating a molecule along the axes changes the intensity of the individual processes, and I don't believe $G_{ij}^{2}$ is sensitive to the intensity of the processes.
+Imagine a molecule emits $N$ photons. As the molecule approaches the neighboring pixel, more photons hit the neighboring pixel, but the delay between consecutive photons hitting pixel 2 and pixel 1 is unchanged. 
+
+However, the intensity information and the anticorrelation of the processes are complementary. The degree of anticorrelated-ness of the various pairs determines how we can "group the pixels". Intensities then could then be used in a full generative model for the data.
+
+A molecule at position $\theta$ will result in anticorrelated neighboring pixels. Perhaps $G_{ij}^{2}(\bm{r}_{i},\bm{r}_{j},0)$ can be use to determine how anti-correlated the pixels are. Then, we use this value to create the "virtual pixels". Then define a likelihood function on the pixels+virtual pixels given the coordinates. 
+
+\end{frame}
+
 \begin{comment}
 \begin{frame}{Chemical fixation changes the appearance of nucleosome clustering}
 \begin{textblock*}{12cm}(1.5cm,1.75cm)
