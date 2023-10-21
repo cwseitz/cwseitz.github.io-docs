@@ -304,6 +304,21 @@ The presence of multiple emitters in the local region makes photons appear more 
 
 \end{frame}
 
+\begin{frame}{Enhanced SMLM with fluorescence antibunching}
+
+We require an estimate of emitter locations $\theta^{*}$ to approximate 
+
+\begin{itemize}
+\item The number of photons collected in each pixel \\
+\item The second order coherence of photon counts in a pixel with its neighbors 
+\end{itemize}
+
+Defining a likelihood on the entire time series is intractable. In intensity-based imaging, we would just analyze the sum of photon counts over time. However, the number of emitters is unknown \emph{a priori}, which is part of the problem we are trying to solve. Instead we approximate the maximum likelihood estimate by a stochastic \emph{online parameter estimation} procedure. I imagine emitters are added, if there is not reasonable probability that a photon was emitted by an existing one.
+
+We are able to compute the likelihood of the time summed data and pairwise coherence calculations as the time series and optimization proceed.
+
+\end{frame}
+
 \begin{comment}
 \begin{frame}{Chemical fixation changes the appearance of nucleosome clustering}
 \begin{textblock*}{12cm}(1.5cm,1.75cm)
@@ -390,16 +405,12 @@ The presence of multiple emitters in the local region makes photons appear more 
 \end{frame}
 
 \begin{frame}{BET inhibitors reduce nucleosome-BRD4 interactions in BRD4 condensates}
-
 \end{frame}
 
 \begin{frame}{BET inhibitors promote disordered BRD4 condensates }
-
 \end{frame}
 
-\begin{frame}{Langevin dynamics of BRD4 condensates​}
 
-\end{frame}
 
 
 
