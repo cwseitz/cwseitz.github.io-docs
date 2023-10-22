@@ -34,7 +34,7 @@
 \usepackage[font=small,labelfont=bf]{caption}				% For cross-referencing
 \usepackage{comment}
 
-\title{Visualizing nucleosome cluster dynamics with dense single molecule localization microscopy}	% Presentation title
+\title{Visualizing chromatin organization with time resolved single molecule localization microscopy}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -95,6 +95,7 @@ Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\
 
 \begin{itemize}
 \item SMLM techniques are diffraction unlimited
+\item Exposures are typically ten to hundreds of ms
 \item SMLM techniques are suitable for \textbf{super-resolution} (SR) and \textbf{single molecule tracking} (SMT)
 \end{itemize}
 
@@ -248,6 +249,8 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 
 \end{frame}
 
+\section{Dense localization by fluorescence antibunching}
+
 \begin{comment}
 \begin{frame}{Next generation SMLM with photon counting cameras}
 
@@ -282,7 +285,7 @@ A molecule at position $\theta$ will result in anticorrelated neighboring pixels
 \end{frame}
 \end{comment}
 
-\begin{frame}{Enhanced SMLM with fluorescence antibunching}
+\begin{frame}{Dense localization by fluorescence antibunching}
 
 If the emission from a single molecule represents a sub-Poisson process, then the detection process is also sub-Poisson, with a reduced rate. 
 
@@ -304,7 +307,7 @@ The presence of multiple emitters in the local region makes photons appear more 
 
 \end{frame}
 
-\begin{frame}{Enhanced SMLM with fluorescence antibunching}
+\begin{frame}{Dense localization with fluorescence antibunching}
 
 We require an estimate of emitter locations $\theta^{*}$ to approximate 
 
@@ -317,6 +320,13 @@ Defining a likelihood on the entire time series is intractable. In intensity-bas
 
 We are able to compute the likelihood of the time summed data and pairwise coherence calculations as the time series and optimization proceed.
 
+\end{frame}
+
+\begin{frame}{Dense localization by fluorescence antibunching}
+\begin{textblock*}{12cm}(1.5cm,1.0cm)
+\includegraphics[width=12cm]{Quantum.png}
+\textit{Andrew Forbes and Valeria Rodriguez-Fajardo. Super-resolution with quantum light. Nature Photonics 2019.}
+\end{textblock*}
 \end{frame}
 
 \begin{comment}
@@ -336,7 +346,7 @@ We are able to compute the likelihood of the time summed data and pairwise coher
 \end{itemize}
 \end{frame}
 
-\section{The nucleosome as a Brownian harmonic oscillator}
+\section{The nucleosome: lost in phase space}
 
 \begin{comment}
 \begin{frame}{Astigmatism based three dimensional imaging}
@@ -351,6 +361,7 @@ We are able to compute the likelihood of the time summed data and pairwise coher
 \end{frame}
 \end{comment}
 
+\begin{comment}
 \begin{frame}{Astigmatism based three dimensional imaging}
 \begin{figure}
 \includegraphics[width=11cm]{Astigmatism.png}
@@ -359,7 +370,7 @@ We are able to compute the likelihood of the time summed data and pairwise coher
 \item A weak ($f=10$m) cylindrical lens breaks the axial symmetry of the PSF
 \end{itemize}
 \end{frame}
-
+\end{comment}
 
 
 \section{Phase separation of chromatin}
@@ -409,8 +420,6 @@ We are able to compute the likelihood of the time summed data and pairwise coher
 
 \begin{frame}{BET inhibitors promote disordered BRD4 condensates }
 \end{frame}
-
-
 
 
 
