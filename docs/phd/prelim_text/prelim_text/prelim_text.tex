@@ -86,6 +86,8 @@ The nucleosome is the fundamental unit of chromatin, which forms the basic scaff
 
 Here, we apply super-resolution techniques to study live-cell dynamics of nucleosome organization, with a particular focus on the structure of biomolecular condensates containing bromodomain protein 4 (BRD4) protein, a major tandem-bromodomain-containing transcriptional regulator. BRD4 plays an important role in diverse cellular functions such as transcription, replication, epigenetic regulation, and DNA repair, and has been implicated in cancer and autoimmune diseases. BRD4 acetylates Lysine 122 on H3 (H3K122), a residue critical for nucleosome stability, resulting in nucleosome eviction and chromatin decompaction (Devaiah 2016). The intrinsically disordered regions (IDRs) of BRD4 are thought to facilitate its phase separation with coactivators such as MED1. The phase separation properties of BRD4 have been well-studied in several cell lines (Han 2020), and in the context of super-enhancers (Sabari 2018).
 
+\textcolor{red}{Need to add more information that we have found about BRD4 from current slide deck}
+
 Selective bromodomain inhibitors, such as JQ1 are often employed to displace BRD4 protein from chromatin (Filippakopoulos 2010). 1,6-hexanediol (1,6-HD), an aliphatic alcohol, can inhibit weak hydrophobic protein-protein interactions required for the droplet formation (droplet melting activity) and is widely used to elucidate the formation process of nuclear bodies (Duster 2021). However, the effects of BRD4, and phase separation at large, on the spatial structure of nucleosome nanodomains remains unclear. We envision a complementary approach, consisting of specific and non-specific inhibition of BRD4-containing condensates using small molecle drugs, to study the role of BRD4 in chromatin organization. Previous approaches to studying the dynamics of chromatin nanodomains only provide ensemble snapshots of chromatin structure, possibly due to slow acquisition times (Nozaki 2017). 
 
 
@@ -101,20 +103,20 @@ To generalize our imaging setup to three-dimensions, we could use that the later
 \begin{center}
 \includegraphics[width=14cm]{PSF2D.png}
 \end{center}
-\caption{\textbf{Convolutional neural networks outperform MLE in dense and low-signal cases using sCMOS} (A) Lateral and axial point spread functions of a single quantum dot at high ($\sim$1.25) and low ($\sim$0.8) numerical aperture (NA). (B) DeepSTORM3D convolutional neural network architecture used for localization. A monochrome image is convolved and upsampled to generate a localization map, which is post-processed to produce a vector of coordinates. (C) Lateral root mean squared error of maximum likelihood estimator (MLE) and a convolutional neural network (CNN) with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$ for high NA. The Cramer-Rao lower bound on lateral uncertainty is shown in gray. Error samples = $10^{3}$}
+\caption{\textbf{Dense localization with deep learning} (A) Lateral and axial point spread functions of a single quantum dot at high ($\sim$1.25) and low ($\sim$0.8) numerical aperture (NA). (B) DeepSTORM3D convolutional neural network architecture used for localization. A monochrome image is convolved and upsampled to generate a localization map, which is post-processed to produce a vector of coordinates. (C) Lateral root mean squared error of maximum likelihood estimator (MLE) and a convolutional neural network (CNN) with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$ for high NA. The Cramer-Rao lower bound on lateral uncertainty is shown in gray. Error samples = $10^{3}$}
 \end{figure}
 
 \begin{figure}
 \begin{center}
 \end{center}
-\caption{\textbf{Spatial photon correlations improve performance of MLE estimators}}
+\caption{\textbf{Dense localization by fluorescence antibunching}}
 \end{figure}
 
 \subsection{Visualizing nucleosome clusters in at super-resolution}
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=16cm]{ClusterFull.png}
+\includegraphics[width=16cm]{BRD4-SR.png}
 \end{center}
 \caption{\textbf{Super-resolution reconstruction of nucleosome organization in a living Hela cell nucleus}. (A) Density representation of nucleosome organization using 30nm x 30nm bins and a pointillist representation of nucleosome organization (B) Ripley's K function, Bayesian information criterion (BIC), and log likelihood for a Gaussian mixture model of pointillist localization data of three randomly selected regions of interest. Dashed line drawn at the diffraction limit (C) Localization accumulation over five seconds of imaging time (500 frames) and clustering with DBSCAN for a randomly selected region of interest}
 \end{figure}
@@ -153,27 +155,6 @@ JQ1 is a relatively slow acting small molecule drug. Therefore, we propose fixed
 
 \section{Materials and Methods}
 
-\subsection{Cell culture, transfection, and treatments}
-
-Hela cells were cultured in DMEM supplemented with 10 percent fetal bovine serum (Gibco) at 37C, 5  percent  CO2 in a humidified incubator. For super-resolution experiments, cells were seeded in a 35mm FluoroDish (WPI), and transiently transfected with pBREBACK-H2BHalo plasmid (Addgene plasmid 91564) using Lipofectamine 3000 (ThermoFisher). For immune activation, cells were incubated with 50ng/ml Interferon-gamma (Gibco), diluted in fresh DMEM. BRD4 inhibition with JQ1 (Chemie Tek) was carried out using specified concentrations and incubation time in fresh DMEM.  
-
-\subsection{RNA fluorescence in-situ hybridization}
-
-Cells were seeded in 8-well chamber slides with 1.5 glass coverslip bottom (Ibidi). GBP5 expression was induced with 50ng/ml Interferon-gamma, followed by fixation. Stellaris RNA FISH Wash Buffer A (Biosearch Technologies, Inc., SMF-WA1-60), 10  percent  Deionized Formamide (EMD Millipore, S4117) in RNase-free water (Life Technologies, AM9932) for 5 min at RT. Cells were hybridized with 90  percent  Stellaris RNA FISH Hybridization Buffer (Biosearch Technologies, SMF-HB1-10), 10  percent  Deionized Formamide, 12.5 µM Stellaris RNA FISH probes designed to hybridize introns of the . Hybridization was performed in a humidified chamber at 37C. Cells were then washed with Wash Buffer A for 30 min at 37°C and nuclei were stained with 15ng/ml DAPI in Wash Buffer A for 5 min at RT. After one 5-min was with Stellaris RNA FISH Wash Buffer B (Biosearch Technologies, SMF-WB1-20) at RT. Images were acquired as 10x10 grids on an ASI RAMM widefield microscope with 60X 1.4NA Nikon oil-immersion objective using Micromanager acquisition software and a Hammamatsu ORCA-Flash4.0v3 camera.  
-
-RNA FISH probes were designed and generated by Biosearch Technologies Stellaris RNA FISH to target exons of GBP5. 
-
-\subsection{Immunofluorescence}
-
-Cells grown in chamber slides or 35mm dishes and permeabilized with 0.3  percent  (v/v) Triton-X100 (Sigma-Aldrich) in PBS and blocked for 1h in 5  percent  (w/v) nonfat dry milk at 4C. Cells were incubated overnight at 4C using primary antibody anti-BRD4 (Cell Signaling, clone E2A7X; 1:1000). Secondary antibodies for BRD4 (Cell Signaling Anti-Rabbit igG-Alexa488, 1:1000). 
-
-\subsection{Quantitative reverse transcription polymerase chain reaction}
-
-GBP5 induction was validated with RT-qPCR, using the TaqMan gene expression assay. Cell culture followed standard procedure, followed by homogenization with lysis buffer with 2-mercaptoethanol (Bio-Rad). Suspension was vortexed and transferred into a clean RNase-free tube. The homogenate was centrifuged at 12,000g for 2 minutes. RNA was purified using PureLink RNA Mini Kit (Invitrogen) and stored on ice. Reverse transcription was carried out using the iScript Advanced cDNA Synthesis Kit (Bio-Rad).Taqman probes were designed against GAPDH and GBP5 genes, and RT-qPCR was run in a 96 well plate on a qPCR machine (Applied Biosystems). Relative RNA level of GBP5 to GAPDH were computed using the $\Delta\Delta C_{t}$ method (Schmittgen 2008). 
-
-\subsection{Immunoblotting}
-
-Cells were washed and lysis buffer added (RIPA buffer: PMSF: protease inhibitor cocktail: orthovanadate=100:1:1:1). Cells were then scraped and sonicated for 15 seconds using an ultrasonic homogenizer. Lysate was centrifuged at high speed (13200r/min) for 10-15 minutes at 4C to pellet the cellular debris. Total protein concentration was determined by a BCA Protein Assay Kit (Pierce). For electrophoresis, protein samples were prepared according to a protein-loading ratio of 3:1. Sample was mixed and heated at 95℃ for 5 min, followed by vortex and centrifuge. After running the gel, it was removed from the cassette and assembled inside the Trans-Blot Turbo Transfer System cassette. Transfer was run at 2.5A for 7min. Sample was then blocked using 5  percent  skim milk blocking solution prepared with PBST. Primary GBP5 antibody was diluted with PBST (1:1000) and incubated at 4C overnight. The secondary antibody was diluted with PBST (1:2000) and placed on a rocker and incubate at RT for 45min. Western blots on PVDF membranes were scanned using the Odyssey fluorescence scanning system software. 
 
 \subsection{Super-resolution imaging of nucleosome nanodomains}
 
@@ -242,6 +223,10 @@ I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{
 
 We employ a localization CNN architecture based on DeepSTORM3D which consists of three main modules. The first module consists of successive dilated convolutions, followed by an upsampling module to increase the lateral resolution by a factor of 4. The third and last module adds additional convolutional blocks to refine localization estimates. This architecture can also be used for three-dimensional localization and thus the final output has $n_{z}$ channels. The final output is followed by an element-wise HardTanh (Maas 2013). A post-processing function $F_{PP}$ uses a user-defined threshold to produce a matrix of coordinates. We find the performance of this architecture on simulated images surpasses MLE, and approaches the Cramer-Rao lower bound at high signal levels, retaining a RMSE near 20nm for $K(\lambda/2\mathrm{NA}) \leq 5$, at high signal levels (Figure 3c). 
 
+\subsection{Dense localization by fluorescence antibunching}
+
+\subsection{Computation of Ripley's L-function}
+
 %\subsection{Uncertainty quantification with Markov Chain Monte Carlo}
 %To filter out suspicious localizations, we used Metropolis-Hastings Markov Chain Monte Carlo (MCMC) to estimate the posterior %marginals on coordinates. MCMC is asymptotically exact, which is not guaranteed by variational methods which may rely on a Laplace %approximation around the MLE. Metropolis-Hastings is run for 3000 iterations, the first half is discarded as burn-in. A proposal $%\theta' = \theta + \xi$ was generated with $\xi\sim \mathcal{N}(0,\sigma^{2}I)$ where $\sigma^{2}=0.01$. The acceptance probability is%
 %\begin{equation*}
@@ -275,13 +260,36 @@ Following (Nieuwenhuizen 2013), a pair of subsets is drawn from the full list of
 
 where $\tilde{f_{1}}$ is the discrete Fourier transform of $f_{1}$.
 
+
+\subsection{Cell culture, transfection, and treatments}
+
+Hela cells were cultured in DMEM supplemented with 10 percent fetal bovine serum (Gibco) at 37C, 5  percent  CO2 in a humidified incubator. For super-resolution experiments, cells were seeded in a 35mm FluoroDish (WPI), and transiently transfected with pBREBACK-H2BHalo plasmid (Addgene plasmid 91564) using Lipofectamine 3000 (ThermoFisher). For immune activation, cells were incubated with 50ng/ml Interferon-gamma (Gibco), diluted in fresh DMEM. BRD4 inhibition with JQ1 (Chemie Tek) was carried out using specified concentrations and incubation time in fresh DMEM.  
+
+\subsection{RNA fluorescence in-situ hybridization}
+
+Cells were seeded in 8-well chamber slides with 1.5 glass coverslip bottom (Ibidi). GBP5 expression was induced with 50ng/ml Interferon-gamma, followed by fixation. Stellaris RNA FISH Wash Buffer A (Biosearch Technologies, Inc., SMF-WA1-60), 10  percent  Deionized Formamide (EMD Millipore, S4117) in RNase-free water (Life Technologies, AM9932) for 5 min at RT. Cells were hybridized with 90  percent  Stellaris RNA FISH Hybridization Buffer (Biosearch Technologies, SMF-HB1-10), 10  percent  Deionized Formamide, 12.5 µM Stellaris RNA FISH probes designed to hybridize introns of the . Hybridization was performed in a humidified chamber at 37C. Cells were then washed with Wash Buffer A for 30 min at 37°C and nuclei were stained with 15ng/ml DAPI in Wash Buffer A for 5 min at RT. After one 5-min was with Stellaris RNA FISH Wash Buffer B (Biosearch Technologies, SMF-WB1-20) at RT. Images were acquired as 10x10 grids on an ASI RAMM widefield microscope with 60X 1.4NA Nikon oil-immersion objective using Micromanager acquisition software and a Hammamatsu ORCA-Flash4.0v3 camera.  
+
+RNA FISH probes were designed and generated by Biosearch Technologies Stellaris RNA FISH to target exons of GBP5. 
+
+\subsection{Immunofluorescence}
+
+Cells grown in chamber slides or 35mm dishes and permeabilized with 0.3  percent  (v/v) Triton-X100 (Sigma-Aldrich) in PBS and blocked for 1h in 5  percent  (w/v) nonfat dry milk at 4C. Cells were incubated overnight at 4C using primary antibody anti-BRD4 (Cell Signaling, clone E2A7X; 1:1000). Secondary antibodies for BRD4 (Cell Signaling Anti-Rabbit igG-Alexa488, 1:1000). 
+
+\subsection{Quantitative reverse transcription polymerase chain reaction}
+
+GBP5 induction was validated with RT-qPCR, using the TaqMan gene expression assay. Cell culture followed standard procedure, followed by homogenization with lysis buffer with 2-mercaptoethanol (Bio-Rad). Suspension was vortexed and transferred into a clean RNase-free tube. The homogenate was centrifuged at 12,000g for 2 minutes. RNA was purified using PureLink RNA Mini Kit (Invitrogen) and stored on ice. Reverse transcription was carried out using the iScript Advanced cDNA Synthesis Kit (Bio-Rad).Taqman probes were designed against GAPDH and GBP5 genes, and RT-qPCR was run in a 96 well plate on a qPCR machine (Applied Biosystems). Relative RNA level of GBP5 to GAPDH were computed using the $\Delta\Delta C_{t}$ method (Schmittgen 2008). 
+
+\subsection{Immunoblotting}
+
+Cells were washed and lysis buffer added (RIPA buffer: PMSF: protease inhibitor cocktail: orthovanadate=100:1:1:1). Cells were then scraped and sonicated for 15 seconds using an ultrasonic homogenizer. Lysate was centrifuged at high speed (13200r/min) for 10-15 minutes at 4C to pellet the cellular debris. Total protein concentration was determined by a BCA Protein Assay Kit (Pierce). For electrophoresis, protein samples were prepared according to a protein-loading ratio of 3:1. Sample was mixed and heated at 95℃ for 5 min, followed by vortex and centrifuge. After running the gel, it was removed from the cassette and assembled inside the Trans-Blot Turbo Transfer System cassette. Transfer was run at 2.5A for 7min. Sample was then blocked using 5  percent  skim milk blocking solution prepared with PBST. Primary GBP5 antibody was diluted with PBST (1:1000) and incubated at 4C overnight. The secondary antibody was diluted with PBST (1:2000) and placed on a rocker and incubate at RT for 45min. Western blots on PVDF membranes were scanned using the Odyssey fluorescence scanning system software. 
+
 \section{Supplemental Information}
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=16cm]{GBP5.png}
 \end{center}
-\caption{\textbf{Inhibition of a super-enhanced gene with JQ1}. (A) Putative GBP5 transcription sites at the specified time points following IFN-$\gamma$ exposure. (B,C) High resolution zoom of GBP5 in-situ hybridization 8 hours folowing IFN-$\gamma$ exposure (D) Induction of GBP5 expression in Hela cells following IFN-$\gamma$ exposure, measured with RT-qPCR (E) Knockdown of GBP5 expression 8 hours folowing IFN-$\gamma$ exposure with 1uM JQ1 treatment ($n=3$,$** P < 0.01$) (F) Western blot of GBP5 protein expression following IFN-$\gamma$ exposure (G) BRD4 immunofluorescence 9h after first exposure to (+)JQ1 (H) Ratio of BRD4 puncta count 9h after JQ1 exposure relative to control ($n=108$,$** P < 0.001$)}
+\caption{\textbf{Inhibition of a BRD4-controlled gene with JQ1}. (A) Putative GBP5 transcription sites at the specified time points following IFN-$\gamma$ exposure. (B,C) High resolution zoom of GBP5 in-situ hybridization 8 hours folowing IFN-$\gamma$ exposure (D) Induction of GBP5 expression in Hela cells following IFN-$\gamma$ exposure, measured with RT-qPCR (E) Knockdown of GBP5 expression 8 hours folowing IFN-$\gamma$ exposure with 1uM JQ1 treatment ($n=3$,$** P < 0.01$) (F) Western blot of GBP5 protein expression following IFN-$\gamma$ exposure (G) BRD4 immunofluorescence 9h after first exposure to (+)JQ1 (H) Ratio of BRD4 puncta count 9h after JQ1 exposure relative to control ($n=108$,$** P < 0.001$)}
 \end{figure}
 
 
@@ -291,6 +299,14 @@ where $\tilde{f_{1}}$ is the discrete Fourier transform of $f_{1}$.
 %\end{center}
 %\caption{\textbf{Axial precision for three-dimensional localization at ideal SNR} (A) Simplified lens relay for astigmatic imaging of %a fluorescent emitter using a weak cylindrical lens ($f$=10m). (B) Lateral and axial point spread function of a single quantum dot on %a 1.5 glass coverslip for high ($\sim$1.25) and low ($\sim$0.8) numerical aperture (NA). (C) Polynomial fit of the standard deviation %of the lateral point spread function along orthogonal axes (left) Root mean squared error (RMSE) of lateral coordinates as a function %of the axial coordinate, using simulated images fit with MLE (middle). RMSE of the axial coordinate, using simulated images fit with %MLE (right). Error samples = $10^{3}$}
 %\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=13cm]{FRC.png}
+\end{center}
+\caption{\textbf{Fourier ring correlation links spatial and temporal resolution}. A pair of subsets is drawn from the full list of localizations, and isotropic Gaussian kernel density estimation is performed. The Fourier Ring Correlation is calculated for the pair and plotted as a function of spatial frequency.}
+\end{figure}
+
 
 \begin{figure}
 \begin{center}
@@ -313,14 +329,6 @@ where $\tilde{f_{1}}$ is the discrete Fourier transform of $f_{1}$.
 %\end{center}
 %\caption{\textbf{Dependence of axial and lateral precision on SNR and molecular density}. (upper row) Lateral and axial root mean %squared errors (RMSE) at varying signal levels (lower row) Lateral and axial RMSE for varying molecule counts within a diffraction %limit radius for $10^{3}$ photon counts. Error samples = $10^{3}$}
 %\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=13cm]{FRC.png}
-\end{center}
-\caption{\textbf{Fourier ring correlation links spatial and temporal resolution}. A pair of subsets is drawn from the full list of localizations, and isotropic Gaussian kernel density estimation is performed. The Fourier Ring Correlation is calculated for the pair and plotted as a function of spatial frequency.}
-\end{figure}
-
 
 \subsection{Estimator precision sets the resolution limit in localization microscopy}
 
