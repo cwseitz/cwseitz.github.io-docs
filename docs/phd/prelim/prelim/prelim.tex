@@ -141,7 +141,18 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \end{itemize}
 \end{frame}
 
-
+\begin{frame}{Dense labeling of histone H2B in fixed cells at RT}
+\begin{textblock*}{11cm}(2.0cm,1.3cm)
+\includegraphics[width=11cm]{Laser.png}
+\end{textblock*}
+\begin{textblock*}{\textwidth}(0.5cm,8.0cm)
+\begin{itemize}
+\item Dense labeling of H2B-Halotag w/ fluorescent ligand JF646
+\item Reducing buffer is usually a primary thiol like cysteamine (MEA)
+\item Photoswitching of JF646 allows us to beat the diffraction limit
+\end{itemize}
+\end{textblock*}
+\end{frame}
 
 \begin{frame}
 \frametitle{Direct stochastic optical reconstruction microscopy}
@@ -173,22 +184,6 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 
 \end{frame}
 \end{comment}
-
-\begin{comment}
-\begin{frame}{Dense labeling of histone H2B in fixed cells at RT}
-\begin{textblock*}{11cm}(2.0cm,1.3cm)
-\includegraphics[width=11cm]{Laser.png}
-\end{textblock*}
-\begin{textblock*}{\textwidth}(0.5cm,8.0cm)
-\begin{itemize}
-\item Dense labeling of H2B-Halotag w/ fluorescent ligand JF646
-\item Reducing buffer is usually a primary thiol like cysteamine (MEA)
-\item Photoswitching of JF646 allows us to beat the diffraction limit
-\end{itemize}
-\end{textblock*}
-\end{frame}
-\end{comment}
-
 
 
 \section{The time resolution of \textit{d}STORM}
@@ -285,6 +280,7 @@ A molecule at position $\theta$ will result in anticorrelated neighboring pixels
 \end{frame}
 \end{comment}
 
+\begin{comment}
 \begin{frame}{Dense localization by fluorescence antibunching}
 
 If the emission from a single molecule represents a sub-Poisson process, then the detection process is also sub-Poisson, with a reduced rate. 
@@ -306,7 +302,9 @@ However, when they are sub-Poisson processes, then $\langle n_{i}(t)n_{j}(t)\ran
 The presence of multiple emitters in the local region makes photons appear more ``bunched" w.r.t these two detector elements $i$ and $j$, and therefore $g^{2}_{ij}(0) > 0$. I expect we can use $g^{2}_{ij}(0)$ over 3x3 neighborhoods of pixels where $i$ the center pixel.
 
 \end{frame}
+\end{comment}
 
+\begin{comment}
 \begin{frame}{Dense localization with fluorescence antibunching}
 
 We require an estimate of emitter locations $\theta^{*}$ to approximate 
@@ -319,6 +317,28 @@ We require an estimate of emitter locations $\theta^{*}$ to approximate
 Defining a likelihood on the entire time series is intractable. In intensity-based imaging, we would just analyze the sum of photon counts over time. However, the number of emitters is unknown \emph{a priori}, which is part of the problem we are trying to solve. Instead we approximate the maximum likelihood estimate by a stochastic \emph{online parameter estimation} procedure. I imagine emitters are added, if there is not reasonable probability that a photon was emitted by an existing one.
 
 We are able to compute the likelihood of the time summed data and pairwise coherence calculations as the time series and optimization proceed.
+
+\end{frame}
+\end{comment}
+
+\begin{frame}{Dense localization with fluorescence antibunching}
+\begin{itemize}
+\item Pixels represent independent categorical variables, where the category is the number of photons collected
+\item Define tensors $\Omega,\Theta,\Upsilon,\Phi$ as horizontal adjacent, vertical adjacent, right diagonal and left diagonal pixel pairs
+\end{itemize}
+Suppose pixel $i$ collects $n_{i}$ photons and pixel $j$ collects $n_{j}$ photons. Call this pair $n$. We have,
+
+\begin{equation*}
+\Omega_{n} = P(X_{i}=n_{i},X_{j}=n_{j}) = \left[\sum_{\alpha}\left(\prod_{n}p_{i}^{\alpha_{n}}(1-p_{i})^{\alpha_{n}})\right)\right]\left[\sum_{\beta}\left(\prod_{n}p_{i}^{\beta_{n}}(1-p_{i})^{\beta_{n}})\right)\right]
+\end{equation*}
+
+where $\alpha,\beta$ are binary strings indicating which emitters contribute to the count. $\Omega_{n}$ has the dimension of the state space of $(X_{i},X_{j})$. Clearly,
+
+\begin{equation*}
+\langle X_{i}X_{j} \rangle = \sum_{x_{i},x_{j}}x_{i}x_{j}\Omega_{n}
+\end{equation*}
+
+It still isn't clear how to map $n\rightarrow (i,j)$ to make this computationally efficient
 
 \end{frame}
 
