@@ -323,23 +323,26 @@ We are able to compute the likelihood of the time summed data and pairwise coher
 
 \begin{frame}{Dense localization with fluorescence antibunching}
 \begin{itemize}
-\item Pixels represent independent categorical variables, where the category is the number of photons collected
 \item Define tensors $\Omega,\Theta,\Upsilon,\Phi$ as horizontal adjacent, vertical adjacent, right diagonal and left diagonal pixel pairs
 \end{itemize}
-Suppose pixel $i$ collects $n_{i}$ photons and pixel $j$ collects $n_{j}$ photons. Call this pair $n$. We have,
+Suppose pixel $i$ collects $N_{i}$ photons and pixel $j$ collects $N_{j}$ photons. Index pair $(i,j)$ by $k$. We have,
 
 \begin{equation*}
-\Omega_{n} = P(X_{i}=n_{i},X_{j}=n_{j}) = \left[\sum_{\alpha}\left(\prod_{n}p_{i}^{\alpha_{n}}(1-p_{i})^{\alpha_{n}})\right)\right]\left[\sum_{\beta}\left(\prod_{n}p_{i}^{\beta_{n}}(1-p_{i})^{\beta_{n}})\right)\right]
+\Omega_{k} = \left[\sum_{\alpha}\left(\prod_{n}p_{i}^{\alpha_{n}}(1-p_{i})^{1-\alpha_{n}})\right)\right]\left[\sum_{\beta}\left(\prod_{n}p_{i}^{\beta_{n}}(1-p_{i})^{1-\beta_{n}})\right)\right]
 \end{equation*}
 
-where $\alpha,\beta$ are binary strings indicating which emitters contribute to the count. $\Omega_{n}$ has the dimension of the state space of $(X_{i},X_{j})$. Clearly,
+where $\alpha,\beta$ are binary strings indicating which emitters contribute to the count. $\Omega_{k}$ has the dimension of the state space of $(X_{i},X_{j})$. Clearly,
 
 \begin{equation*}
-\langle X_{i}X_{j} \rangle = \sum_{x_{i},x_{j}}x_{i}x_{j}\Omega_{n}
+\sum_{n}\alpha_{n} = N_{i}\;\; \sum_{n}\beta_{n} = N_{j}\;\;\langle X_{i}X_{j} \rangle = \sum_{x_{i},x_{j}}x_{i}x_{j}\Omega_{n}
 \end{equation*}
 
-It still isn't clear how to map $n\rightarrow (i,j)$ to make this computationally efficient
+Also note we can store a matrix $P$ with elements $p_{ij} = \eta p_{0} \Delta E_{x}(x_{j})\Delta E_{y}(y_{j})$ (probability emitter $j$ emits a photon detected by pixel $i$)
 
+\end{frame}
+
+\begin{frame}{Dense localization with fluorescence antibunching}
+For 10-100 molecules, the summation is probably tractable. You can just generate a matrix where the rows are possible binary strings (this is just the identity matrix for binary images). Raise each row to row $i$ of $P$, take product over columns - this gives $\prod_{n}p_{i}^{\alpha_{n}}(1-p_{i})^{1-\alpha_{n}}$, then sum over rows to get $P(X_{i}=N_{i})$. You have to do this multiple times in a loop, depending on the support $N$ you choose. You will get a matrix with columns $P(X_{i})$ (may need to normalize). Finally, you need a clever way of manipulating this matrix to compute $\Omega,\Theta,\Upsilon,\Phi$. The ordering should be the same as a flattened image, so you should reshape it into an image with depth. Then use some indexing rules to get $\Omega,\Theta,\Upsilon,\Phi$ separately. 
 \end{frame}
 
 \begin{frame}{Dense localization by fluorescence antibunching}
