@@ -101,7 +101,7 @@ Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\
 
 \end{frame}
 
-\begin{frame}{A Poisson approximation at moderate SNR simplifies SMLM}
+\begin{frame}{Classical emission statistics of fluorescent markers}
 
 \begin{figure}
 \includegraphics[width=13cm]{Noise.png}
@@ -323,19 +323,24 @@ We are able to compute the likelihood of the time summed data and pairwise coher
 
 \begin{frame}{Dense localization with fluorescence antibunching}
 
-Suppose pixel $i$ collects $N_{i}$ photons and pixel $j$ collects $N_{j}$ photons. Index pair $(i,j)$ by $k$. Since pixels are independent
+We need to compute the joint distribution $P(X_{i},X_{j})$. We compute $P(X_{i}=N_{i},X_{j}=N_{j})$ by considering now microstates $\alpha_{i},\alpha_{j}$, which are binary vectors, s.t. $\sum\alpha_{i}=N_{i}$ and $\sum\alpha_{j}=N_{j}$ and have $\alpha_{i}\;\mathrm{AND}\;\alpha_{j}=0$
 
 \begin{align*}
-P(X_{i}=N_{i},X_{j}=N_{j}) &=P(X_{i}=N_{i})P(X_{j}=N_{j})\\
-&=  \left[\sum_{\alpha}\left(\prod_{n}p_{i}^{\alpha_{n}}(1-p_{i})^{1-\alpha_{n}})\right)\right]\left[\sum_{\beta}\left(\prod_{n}p_{i}^{\beta_{n}}(1-p_{i})^{1-\beta_{n}})\right)\right]
+P(X_{i}=N_{i},X_{j}=N_{j}) &\propto \sum_{\alpha,\beta\in \mathcal{A}\otimes \mathcal{B}}\prod_{n}\bm{p}_{i}^{\alpha}\bm{p}_{j}^{\beta}
 \end{align*}
 
-where $\alpha,\beta$ are binary strings indicating which emitters contribute to the count. $\Omega_{k}$ has the dimension of the state space of $(X_{i},X_{j})$. Clearly,$\sum_{n}\alpha_{n} = N_{i}$ and $\sum_{n}\beta_{n} = N_{j}$. Also, due to independence
+But now consider
 
 \begin{equation*}
-\langle X_{i}X_{j} \rangle = \langle X_{i}\rangle\langle X_{j} \rangle 
+\langle X_{i}X_{j} \rangle = \sum_{(N_{i},N_{j})} N_{i}N_{j}P(X_{i}=N_{i},X_{j}=N_{j})
 \end{equation*}
 
+Antibunching now becomes apparent. If only a single emitter exists (and we have designed $\alpha$'s correctly) then this expectation must be zero for all $(i,j)$.
+
+\end{frame}
+
+\begin{frame}
+This time, you will have to iterate over the 2d state space (it is still pretty small), each time computing $B$ which is a $2\times M\times \times {{M}\choose{N_{i}}}{{M}\choose{N_{j}}}$ where $M$ is the number of emitters. Then you can make some minor adjustments to the existing vectorized code to get the probability at each state space element. This gives you the probability over the state space for every possible pair, which can be used to compute $\langle X_{i}X_{j}\rangle$ for every pair.
 \end{frame}
 
 
