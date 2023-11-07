@@ -91,15 +91,32 @@
 \end{frame}
 
 \begin{frame}{Single molecule localization microscopy}
-Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\theta)= \underset{\theta}{\mathrm{argmin}}-\sum_{k}\log P(H_{k}|\theta)$
+\begin{textblock*}{8cm}(1.0cm,1.5cm)
+\includegraphics[width=\textwidth]{dSTORM}
+\end{textblock*}
+\begin{textblock*}{4.71cm}(9.5cm,1.5cm)
+\includegraphics[width=\textwidth]{Sample}
+\end{textblock*}
+\begin{textblock*}{\textwidth}(1.0cm,7.5cm)
+\begin{itemize}
+\item SMLM techniques are diffraction-unlimited
+\item Photoswitching enables resolution of emitters in time rather than space
+\end{itemize}
+\end{textblock*}
+\end{frame}
 
-\begin{textblock*}{8cm}(6.5cm,2.5cm)
+\begin{frame}{Single molecule localization microscopy}
+
+Modeling the point spread function permits sub-pixel localization 
+
+\begin{textblock*}{8cm}(6.5cm,2.0cm)
 \includegraphics[width=\textwidth]{Model.png}
 \end{textblock*}
 
-\begin{textblock*}{2cm}(1cm,2.5cm)
+\begin{textblock*}{2cm}(1cm,2.0cm)
 \begin{align*}
-\mu_{k} &= g_{k}\textcolor{red}{\eta} \textcolor{cyan}{N_{0}}\textcolor{blue}{\Delta}\int_{\mathrm{pixel}} G(x,y)dA\\
+\mu_{k} &= i_{0}\int_{\mathrm{k}}h_{\theta}(x_{0},y_{0})dxdy\\
+i_{0} &= g_{k}\textcolor{red}{\eta} \textcolor{cyan}{N_{0}}\textcolor{blue}{\Delta} 
 \\
 \textcolor{red}{\eta} &- \mathrm{quantum\; efficiency}\\
 \textcolor{cyan}{N_{0}} &- \mathrm{photon\; count}\\
@@ -109,15 +126,19 @@ Localization: $\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\
 
 \vspace{2in}
 
-\begin{itemize}
-\item SMLM techniques are diffraction unlimited
-\item Exposures are typically ten to hundreds of ms
-\item SMLM techniques are suitable for \textbf{super-resolution} (SR) and \textbf{single molecule tracking} (SMT)
-\end{itemize}
+Long $\textcolor{blue}{\Delta} \rightarrow$ pixels are iid:
+
+\begin{equation*}
+\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\theta)= \underset{\theta}{\mathrm{argmin}}-\sum_{k}\log P(H_{k}|\theta)
+\end{equation*}
+
+What is $P(H_{k}|\theta)$?
 
 \end{frame}
 
 \begin{frame}{Classical emission statistics of fluorescent markers}
+
+Long integration times $\Delta \rightarrow$ intensity fluctuations are Poisson
 
 \begin{figure}
 \includegraphics[width=13cm]{Noise.png}
@@ -131,7 +152,7 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
  
 \end{frame}
 
-\begin{frame}{Estimator precision in localization microscopy}
+\begin{frame}{Estimator precision determines resolution in localization microscopy}
 \begin{textblock*}{4cm}(1.0cm,1.0cm)
 \includegraphics[width=4cm]{MCMC/Figure_1.png}
 \end{textblock*}
@@ -142,10 +163,14 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \includegraphics[width=9cm]{MCMC/Figure_3.png}
 \end{textblock*}
 \begin{textblock*}{13cm}(0.5cm,8cm)
-
+\begin{itemize}
+\item One can derive a lower bound on the variance of a statistical estimator of the coordinates $\theta$
+\end{itemize}
 \end{textblock*}
+
 \end{frame}
 
+\begin{comment}
 \begin{frame}
 \frametitle{Super resolution with photoswitching of rhodamines}
 
@@ -156,6 +181,7 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \item  Reduction of the T1 state yields a dark, long-lived, and stable radical state
 \end{itemize}
 \end{frame}
+\end{comment}
 
 \begin{frame}{Dense labeling of histone H2B in fixed cells at RT}
 \begin{textblock*}{11cm}(2.0cm,1.3cm)
@@ -170,6 +196,7 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \end{textblock*}
 \end{frame}
 
+\begin{comment}
 \begin{frame}
 \frametitle{Direct stochastic optical reconstruction microscopy}
 
@@ -183,6 +210,7 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \end{itemize}
 
 \end{frame}
+\end{comment}
 
 \begin{comment}
 \begin{frame}
