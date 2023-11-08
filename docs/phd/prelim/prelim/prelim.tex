@@ -48,6 +48,17 @@
     \end{beamercolorbox}}%
 }
 
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
 \begin{document}
 
 % Title page
@@ -89,6 +100,7 @@
 \end{textblock*}
 
 \end{frame}
+
 
 \begin{frame}{Single molecule localization microscopy}
 \begin{textblock*}{8cm}(1.0cm,1.5cm)
@@ -212,25 +224,8 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \end{frame}
 \end{comment}
 
-\begin{comment}
-\begin{frame}
-\frametitle{Instrumentation for single molecule localization microscopy}
 
-\begin{figure}
-\includegraphics[width=12cm]{Setup.png}
-\end{figure}
-
-\begin{itemize}
-\item Selectable widefield and oblique illumination
-\item Widefield useful for high throughput 
-\item Oblique method illuminates a thin section of nuclei
-\end{itemize}
-
-\end{frame}
-\end{comment}
-
-
-\section{The time resolution of \textit{d}STORM}
+\subsection{The time resolution of \textit{d}STORM}
 \begin{frame}{Dense localization increases time resolution}
 \begin{textblock*}{13cm}(1cm,1.25cm)
 \begin{itemize}
@@ -257,22 +252,26 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 
 \end{frame}
 
-\section{Dense localization with deep learning}
+\subsection{Dense localization with deep learning}
 
-\begin{frame}{Estimator precision sets the resolution limit in localization microscopy}
+\begin{frame}{Dense localization with deep learning}
 
 \begin{textblock*}{10cm}(1.25cm,1.5cm)
+\begin{itemize}
+\item Define $Z$ as a high resolution binary image: $Z_{k} = 1$ if pixel $k$ contains an emitter
+\item We can model $P_{\Psi}(Z)$ with a convolutional neural network $\Psi$
+\end{itemize}
 \includegraphics[width=13cm]{PSF2D-Crop.png}
 \end{textblock*}
-\begin{textblock*}{13cm}(1.25cm,7cm)
+\begin{textblock*}{13cm}(1.25cm,8.2cm)
 \begin{itemize}
-\item $K(\lambda/2\mathrm{NA})$ is Ripley's K function at the diffraction limit ($\lambda=640\mathrm{nm}$)
 \item Convolutional neural networks (CNNs) approach the Cramer-Rao lower bound (gray)
 \end{itemize}
 \end{textblock*}
 
 \end{frame}
 
+\begin{comment}
 \begin{frame}{Chromatin nanodomains in a living Hela cell nucleus}
 
 \begin{textblock*}{13cm}(0.5cm,1.5cm)
@@ -287,8 +286,9 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \end{textblock*}
 
 \end{frame}
+\end{comment}
 
-\section{Dense localization by fluorescence antibunching}
+\subsection{Dense localization by fluorescence antibunching}
 
 \begin{comment}
 \begin{frame}{Next generation SMLM with photon counting cameras}
@@ -365,7 +365,13 @@ We are able to compute the likelihood of the time summed data and pairwise coher
 \end{frame}
 \end{comment}
 
-\begin{frame}{Future work: dense localization with fluorescence antibunching}
+\begin{frame}{Dense localization with a photon counting camera}
+\begin{figure}
+\includegraphics[width=\textwidth]{Counting.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Dense localization with fluorescence antibunching}
 
 We need to compute the joint distribution $P(X_{i},X_{j})$. We compute $P(X_{i}=N_{i},X_{j}=N_{j})$ by considering now microstates $\alpha_{i},\alpha_{j}$, which are binary vectors, s.t. $\sum\alpha_{i}=N_{i}$ and $\sum\alpha_{j}=N_{j}$ and have $\alpha_{i}\;\mathrm{AND}\;\alpha_{j}=0$
 
@@ -391,15 +397,6 @@ Antibunching now becomes apparent. If only a single emitter exists (and we have 
 \end{textblock*}
 \end{frame}
 \end{comment}
-
-\begin{frame}{Inhibition of a super-enhanced gene with JQ1}
-\begin{figure}
-\includegraphics[width=12cm]{GBP5-2.png}
-\end{figure}
-\begin{itemize}
-\item *:$P \leq 0.1$, **:$P \leq 0.01$
-\end{itemize}
-\end{frame}
 
 \begin{comment}
 \begin{frame}{Astigmatism based three dimensional imaging}
@@ -427,6 +424,23 @@ Antibunching now becomes apparent. If only a single emitter exists (and we have 
 
 
 \section{Phase separation of chromatin}
+
+\begin{frame}{Genome organization and single molecule localization microscopy}
+\begin{textblock*}{10cm}(1.0cm,1.5cm)
+\includegraphics[width=\textwidth]{Nucleosome}
+\end{textblock*}
+\begin{textblock*}{4.71cm}(9.5cm,1.5cm)
+\includegraphics[width=\textwidth]{Sample}
+\end{textblock*}
+\begin{textblock*}{\textwidth}(1.0cm,7.5cm)
+\begin{itemize}
+\item Genome has a hierarchical structure, fundamental unit is the nucleosome
+\item We study chromatin organization by localizing fluorescently tagged nucleosomes
+\end{itemize}
+\end{textblock*}
+
+\end{frame}
+
 \begin{frame}{Chromatin has an intrinsic ability to undergo phase separation}
 
 \begin{textblock*}{10cm}(2.25cm,1.5cm)
@@ -443,7 +457,7 @@ Antibunching now becomes apparent. If only a single emitter exists (and we have 
 
 \end{frame}
 
-
+\begin{comment}
 \begin{frame}{(+)-JQ1 in complex with BRD4 protein}
 
 \begin{textblock*}{6cm}(1.0cm,1.5cm)
@@ -467,6 +481,7 @@ Antibunching now becomes apparent. If only a single emitter exists (and we have 
 \end{textblock*}
 
 \end{frame}
+\end{comment}
 
 \begin{frame}{BET inhibitors reduce nucleosome-BRD4 interactions in BRD4 condensates}
 \end{frame}
@@ -488,6 +503,15 @@ Blue - DAPI (binds DNA minor groove)
 \end{itemize}
 \end{frame}
 \end{comment}
+
+\begin{frame}{Inhibition of a super-enhanced gene with JQ1}
+\begin{figure}
+\includegraphics[width=12cm]{GBP5-2.png}
+\end{figure}
+\begin{itemize}
+\item *:$P \leq 0.1$, **:$P \leq 0.01$
+\end{itemize}
+\end{frame}
 
 
 \end{document}
