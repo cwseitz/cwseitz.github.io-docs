@@ -97,6 +97,11 @@ Here, we apply super-resolution techniques to study live-cell dynamics of nucleo
 
 \textcolor{red}{Need to add more information that we have found about BRD4 from current slide deck}
 
+\begin{figure}
+\includegraphics[width=\textwidth]{PSF2D.png}
+\caption{\textbf{Deep networks outperform MLE in dense localization}} (A) DeepSTORM3D architecture with 612K trainable parameters used for localization. (B-E) Lateral root mean squared error of MLE and CNN estimators with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$.
+\end{figure}
+
 Selective bromodomain inhibitors, such as JQ1 are often employed to displace BRD4 protein from chromatin (Filippakopoulos 2010). 1,6-hexanediol (1,6-HD), an aliphatic alcohol, can inhibit weak hydrophobic protein-protein interactions required for the droplet formation (droplet melting activity) and is widely used to elucidate the formation process of nuclear bodies (Duster 2021). However, the effects of BRD4, and phase separation at large, on the spatial structure of nucleosome nanodomains remains unclear. We envision a complementary approach, consisting of specific and non-specific inhibition of BRD4-containing condensates using small molecle drugs, to study the role of BRD4 in chromatin organization. Previous approaches to studying the dynamics of chromatin nanodomains only provide ensemble snapshots of chromatin structure, possibly due to slow acquisition times (Nozaki 2017). 
 
 
@@ -106,12 +111,7 @@ Selective bromodomain inhibitors, such as JQ1 are often employed to displace BRD
 
 Two major factors contribute to localization errors in SMLM: (i) the noise characteristics of CMOS cameras and (ii) crowding of molecules within a diffraction limited region. Maxmimum likelihood estimation (MLE) is frequently used for isolated molecules and high signal levels, retaining localization errors from 30-40nm (Figure 3c). However, MLE performance tends to degrade in low SNR and dense regimes where the number of emitters within the diffraction limit is greater than one ($K(\lambda/2\mathrm{NA}) > 1$). We employ a convolutional neural network DeepSTORM3D, which successively upsamples a monochrome image and outputs a localization map, which can be post-processed to produce molecular coordinates (Figure 2b).  We demonstrate that this architecture can outperform maximum likelhood estimation for all signal levels and molecular densities tested (Figure 2c).
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=14cm]{PSF2D-Crop.png}
-\end{center}
-\caption{\textbf{Dense localization with deep learning} (A) Lateral and axial point spread functions of a single quantum dot at high ($\sim$1.25) and low ($\sim$0.8) numerical aperture (NA). (B) DeepSTORM3D convolutional neural network architecture used for localization. A monochrome image is convolved and upsampled to generate a localization map, which is post-processed to produce a vector of coordinates. (C) Lateral root mean squared error of maximum likelihood estimator (MLE) and a convolutional neural network (CNN) with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$ for high NA. The Cramer-Rao lower bound on lateral uncertainty is shown in gray. Error samples = $10^{3}$}
-\end{figure}
+
 
 
 \begin{figure}

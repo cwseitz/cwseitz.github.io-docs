@@ -256,16 +256,12 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 
 \begin{frame}{Dense localization with deep learning}
 
-\begin{textblock*}{10cm}(1.25cm,1.5cm)
-\begin{itemize}
-\item Define $Z$ as a high resolution binary image: $Z_{k} = 1$ if pixel $k$ contains an emitter
-\item We can model $P_{\Psi}(Z)$ with a convolutional neural network $\Psi$
-\end{itemize}
-\includegraphics[width=13cm]{PSF2D-Crop.png}
+\begin{textblock*}{10cm}(1cm,1.25cm)
+\includegraphics[width=13cm]{PSF2D.png}
 \end{textblock*}
-\begin{textblock*}{13cm}(1.25cm,8.2cm)
+\begin{textblock*}{12cm}(1.25cm,8.6cm)
 \begin{itemize}
-\item Convolutional neural networks (CNNs) approach the Cramer-Rao lower bound (gray)
+\item We can model $P_{\Psi}(Z)$ with a convolutional neural network $\Psi$
 \end{itemize}
 \end{textblock*}
 
@@ -441,6 +437,7 @@ Antibunching now becomes apparent. If only a single emitter exists (and we have 
 
 \end{frame}
 
+\begin{comment}
 \begin{frame}{Chromatin has an intrinsic ability to undergo phase separation}
 
 \begin{textblock*}{10cm}(2.25cm,1.5cm)
@@ -456,6 +453,16 @@ Antibunching now becomes apparent. If only a single emitter exists (and we have 
 \end{textblock*}
 
 \end{frame}
+\end{comment}
+
+\begin{frame}{BRD4 condensates exhibit LLPS properties}
+\begin{textblock*}{14cm}(0.5cm,1cm)
+\begin{figure}
+\includegraphics[width=14cm]{Fission.png}
+\end{figure}
+\end{textblock*}
+\end{frame}
+
 
 \begin{comment}
 \begin{frame}{(+)-JQ1 in complex with BRD4 protein}
@@ -484,11 +491,10 @@ Antibunching now becomes apparent. If only a single emitter exists (and we have 
 \end{comment}
 
 \begin{frame}{BET inhibitors reduce nucleosome-BRD4 interactions in BRD4 condensates}
+\begin{figure}
+\includegraphics[width=13cm]{BRD4-Results.png}
+\end{figure}
 \end{frame}
-
-\begin{frame}{BET inhibitors promote disordered BRD4 condensates }
-\end{frame}
-
 
 
 \begin{comment}
