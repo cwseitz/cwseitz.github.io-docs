@@ -154,22 +154,6 @@ What is $P(H_{k}|\theta)$?
 
 \end{frame}
 
-\begin{frame}{Classical emission statistics of fluorescent markers}
-
-Long integration times $\Delta \rightarrow$ intensity fluctuations are Poisson
-
-\begin{figure}
-\includegraphics[width=13cm]{Noise.png}
-\end{figure}
-
-\begin{equation*}
-P(H_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
-\end{equation*}
-
-$P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\mathrm{SNR}$)
- 
-\end{frame}
-
 \begin{frame}{Estimator precision determines resolution in localization microscopy}
 \begin{textblock*}{4cm}(1.0cm,1.0cm)
 \includegraphics[width=4cm]{MCMC/Figure_1.png}
@@ -200,19 +184,6 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \end{itemize}
 \end{frame}
 \end{comment}
-
-\begin{frame}{Dense labeling of histone H2B in fixed cells at RT}
-\begin{textblock*}{11cm}(2.0cm,1.3cm)
-\includegraphics[width=11cm]{Laser.png}
-\end{textblock*}
-\begin{textblock*}{\textwidth}(0.5cm,8.0cm)
-\begin{itemize}
-\item Dense labeling of H2B-Halotag w/ fluorescent ligand JF646
-\item Reducing buffer is usually a primary thiol like cysteamine (MEA)
-\item Photoswitching of JF646 allows us to beat the diffraction limit
-\end{itemize}
-\end{textblock*}
-\end{frame}
 
 \begin{comment}
 \begin{frame}
@@ -258,7 +229,35 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 
 \end{frame}
 
-\subsection{Dense localization with deep learning}
+\section{A novel approach to dense localization microscopy}
+
+\begin{frame}{Classical emission statistics of fluorescent markers}
+
+Long integration times $\Delta \rightarrow$ intensity fluctuations are Poisson
+
+\begin{figure}
+\includegraphics[width=13cm]{Noise.png}
+\end{figure}
+
+\begin{equation*}
+P(H_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
+\end{equation*}
+
+$P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\mathrm{SNR}$)
+ 
+\end{frame}
+
+\begin{frame}{Counting fluorescent molecules with a photon counting camera}
+\begin{figure}
+\includegraphics[width=\textwidth]{Counting.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}{A hidden markov model for counting fluorescent molecules}
+\begin{figure}
+\includegraphics[width=\textwidth]{HMM.png}
+\end{figure}
+\end{frame}
 
 \begin{frame}{Dense localization with deep learning}
 
@@ -367,12 +366,8 @@ We are able to compute the likelihood of the time summed data and pairwise coher
 \end{frame}
 \end{comment}
 
-\begin{frame}{Dense localization with a photon counting camera}
-\begin{figure}
-\includegraphics[width=\textwidth]{Counting.png}
-\end{figure}
-\end{frame}
 
+\begin{comment}
 \begin{frame}{Dense localization with fluorescence antibunching}
 
 We need to compute the joint distribution $P(X_{i},X_{j})$. We compute $P(X_{i}=N_{i},X_{j}=N_{j})$ by considering now microstates $\alpha_{i},\alpha_{j}$, which are binary vectors, s.t. $\sum\alpha_{i}=N_{i}$ and $\sum\alpha_{j}=N_{j}$ and have $\alpha_{i}\;\mathrm{AND}\;\alpha_{j}=0$
@@ -390,6 +385,7 @@ But now consider
 Antibunching now becomes apparent. If only a single emitter exists (and we have designed $\alpha$'s correctly) then this expectation must be zero for all $(i,j)$.
 
 \end{frame}
+\end{comment}
 
 
 \begin{comment}
@@ -441,6 +437,19 @@ Antibunching now becomes apparent. If only a single emitter exists (and we have 
 \end{itemize}
 \end{textblock*}
 
+\end{frame}
+
+\begin{frame}{Dense labeling of histone H2B in fixed cells at RT}
+\begin{textblock*}{11cm}(2.0cm,1.3cm)
+\includegraphics[width=11cm]{Laser.png}
+\end{textblock*}
+\begin{textblock*}{\textwidth}(0.5cm,8.0cm)
+\begin{itemize}
+\item Dense labeling of H2B-Halotag w/ fluorescent ligand JF646
+\item Reducing buffer is usually a primary thiol like cysteamine (MEA)
+\item Photoswitching of JF646 allows us to beat the diffraction limit
+\end{itemize}
+\end{textblock*}
 \end{frame}
 
 \begin{comment}
