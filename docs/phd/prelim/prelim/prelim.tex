@@ -85,7 +85,7 @@
 
 \section{Single molecule localization microscopy}
 
-\begin{frame}{Genome organization and single molecule localization microscopy}
+\begin{frame}{Genome organization and super resolution imaging}
 \begin{textblock*}{10cm}(1.0cm,1.5cm)
 \includegraphics[width=\textwidth]{Nucleosome}
 \end{textblock*}
@@ -102,9 +102,11 @@
 \end{frame}
 
 \begin{frame}{Single molecule localization microscopy}
-\begin{textblock*}{13cm}(1.0cm,1.5cm)
 \includegraphics[width=\textwidth]{Apps}
-\end{textblock*}
+\begin{itemize}
+\item Chromatin structure is dynamic and undergoes \textbf{phase separation}
+$\rightarrow$ We are pushing the limits of SMLM for time-resolution
+\end{itemize}
 \end{frame}
 
 
@@ -231,6 +233,20 @@ What is $P(H_{k}|\theta)$?
 
 \section{A novel approach to dense localization microscopy}
 
+\begin{frame}{DeepSTORM: An early approach to dense SMLM with deep learning}
+
+\begin{textblock*}{10cm}(1cm,1.25cm)
+\includegraphics[width=13cm]{PSF2D.png}
+\end{textblock*}
+\begin{textblock*}{12cm}(1.25cm,8.6cm)
+\begin{itemize}
+\item We can model $P_{\Psi}(Z)$ with a convolutional neural network $\Psi$
+\end{itemize}
+\end{textblock*}
+
+\end{frame}
+
+
 \begin{frame}{Classical emission statistics of fluorescent markers}
 
 Long integration times $\Delta \rightarrow$ intensity fluctuations are Poisson
@@ -253,24 +269,43 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \end{figure}
 \end{frame}
 
+\begin{comment}
 \begin{frame}{A hidden markov model for counting fluorescent molecules}
 \begin{figure}
 \includegraphics[width=\textwidth]{HMM.png}
 \end{figure}
 \end{frame}
+\end{comment}
 
-\begin{frame}{Dense localization with deep learning}
+\begin{frame}
+Suppose we have a model $\mathcal{M} = (S,T)$ with a spatial part $S$ and temporal part $T$. We want to compare different models, based on the ratio $P(\mathcal{M}_{1}|D)/P(\mathcal{M}_{2}|D)$.
 
-\begin{textblock*}{10cm}(1cm,1.25cm)
-\includegraphics[width=13cm]{PSF2D.png}
-\end{textblock*}
-\begin{textblock*}{12cm}(1.25cm,8.6cm)
-\begin{itemize}
-\item We can model $P_{\Psi}(Z)$ with a convolutional neural network $\Psi$
-\end{itemize}
-\end{textblock*}
+\begin{equation*}
+\frac{P(\mathcal{M}_{1}|D)}{P(\mathcal{M}_{2}|D)} = \frac{P(D|\mathcal{M}_{1})P(\mathcal{M}_{1})}{P(D|\mathcal{M}_{2})P(\mathcal{M}_{2})}
+\end{equation*}
+
+Therefore, we need to find $P(D|\mathcal{M}_{n})$. If we assume the two model components are independent
+
+\begin{equation*}
+P(D|\mathcal{M}_{n}) = P(D|S_{n})P(D|T_{n})
+\end{equation*}
+
+We can use the HDP-HMM model to integrate out $\theta$ with MCMC:
+
+\begin{equation*}
+P(D|T_{n}) = \int P(D,\theta | T_{n}) d\theta
+\end{equation*}
+
+Then we use a Langevin Monte Carlo (LMC) sampler for the spatial model
+
+\begin{equation*}
+P(D|S_{n}) = \int P(D,\phi | S_{n}) d\phi
+\end{equation*}
+
+Both of these sampling methods also provide the MAP estimates of the parameters $\theta,\phi$.
 
 \end{frame}
+
 
 \begin{comment}
 \begin{frame}{Chromatin nanodomains in a living Hela cell nucleus}
