@@ -112,14 +112,22 @@ Selective bromodomain inhibitors, such as JQ1 are often employed to displace BRD
 Two major factors contribute to localization errors in SMLM: (i) the noise characteristics of CMOS cameras and (ii) crowding of molecules within a diffraction limited region. Maxmimum likelihood estimation (MLE) is frequently used for isolated molecules and high signal levels, retaining localization errors from 30-40nm (Figure 3c). However, MLE performance tends to degrade in low SNR and dense regimes where the number of emitters within the diffraction limit is greater than one ($K(\lambda/2\mathrm{NA}) > 1$). We employ a convolutional neural network DeepSTORM3D, which successively upsamples a monochrome image and outputs a localization map, which can be post-processed to produce molecular coordinates (Figure 2b).  We demonstrate that this architecture can outperform maximum likelhood estimation for all signal levels and molecular densities tested (Figure 2c).
 
 
-
-
+\begin{comment}
 \begin{figure}
 \begin{center}
 \includegraphics[width=13cm]{Counting.png}
 \end{center}
 \caption{\textbf{Dense localization with a factorial hidden Markov model} (A) Lateral and axial point spread functions of a single quantum dot at high ($\sim$1.25) and low ($\sim$0.8) numerical aperture (NA). (B) DeepSTORM3D convolutional neural network architecture used for localization. A monochrome image is convolved and upsampled to generate a localization map, which is post-processed to produce a vector of coordinates. (C) Lateral root mean squared error of maximum likelihood estimator (MLE) and a convolutional neural network (CNN) with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$ for high NA. The Cramer-Rao lower bound on lateral uncertainty is shown in gray. Error samples = $10^{3}$}
 \end{figure}
+\end{comment}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=15cm]{QD-Counting.png}
+\end{center}
+\caption{\textbf{Counting quantum dots with a SPAD camera}}
+\end{figure}
+
 
 To generalize our imaging setup to three-dimensions, we could use that the lateral point spread function has a weak dependence on the axial coordinate (Figure 3a). However, it has been shown that the error around the focus can be large, while negative and positive defocus cannot be distinguished given the symmetric dependence in $z$ (Holtzer 2007). Instead, we choose to introduce astigmatism into the detection path using a weak cylindrical lens (Figure 4a). In effect, this breaks the axial symmetry of the PSF and gives an anisotropic Gaussian which is elongated perpendicular to the optical axis. Localization proceeds by measuring this anisotropy and inverting a model of its axial dependence. At high numerical aperture, a strong dependence of the anisotropy to axial displacement potentially provides more precise three-dimensional localization (Figure 4b). In general, the axial anisotropy can be complex, but is often well described by a polynomial function of the axial displacement (Smith 2010). Unfortunately, astigmatic imaging increases the width of the point spread function significantly, exacerbating localization errors by molecular crowding and low signal to noise ratio. Therefore, we report error statistics for maximum likelihood based methods only, and leave three-dimensional localization with CNNs to future work. As one might expect, at ideal SNR, we show that axial dependence of localization error bears a strong similarity to the axial dependence of the PSF width (Figure 4c). Lateral RMSE can be maintained below 40nm for the anisotropic PSF for $K(\lambda/2\mathrm{NA}) \leq 5$; however, the Jaccard index tends to rapidly degrade at higher molecular densities, making MLE an unsuitable estimator for dense three-dimensional imaging (Figure 5). Three-dimensional single molecule tracking with sparse emitters remains a good application of this method, and will be used in future work.
 
@@ -144,28 +152,31 @@ The guanylate binding protein (GBP) gene cluster codes for a family of interfero
 
 \section{Future Aims}
 
-\subsection{Specific Aim 1: Measure nucleosome cluster dynamics in living cells}
+\subsection{Specific Aim 1: Integrate deep models with counting algorithms for precise time-resolved SMLM}
 
 \subsubsection{Rationale and hypothesis}
 
-So far, super-resolved nucleosome clustering has been predominantly studied in fixed cells (Nozaki 2017; Itoh 2021). Live cell studies are limited by the low time resolution of SMLM and have so far relied on reconstruction of nucleosome reorganization by transforming widefield images with convolutional neural networks. Using this techinque, it has been reported that nucleosome clusters reorganize on millisecond to second time scales (Barth 2020).  Therefore, we seek to apply our method to validate this result with fast two-color dSTORM microscopy on second time scales. 
+
 
 \subsubsection{Experimental Approach}
 
-To perform this experiment, we have previously optimized simutaneous two-color labeling of H2B-HaloTag with JF549 and JF646. We maintain sparse labeling of H2B with JF549 using 10pM concentration and a short incubation time of 1 hour. The purpose of using JF549 is two fold: (i) Three-dimensional single molecule tracking can be performed on sparsely labeled samples with lower laser power than used in dSTORM (ii) Low laser power allows us to use this channel for autofocusing of the sample and performing cyclical imaging of the same living cell, with reduced photodamage. Moreover, we maintain dense labeling of H2B-HaloTag with JF646 for super-resolution imaging of nucleosome clusters. Experiments will be carried out on a live cell microscope based on an Olympus IX83.
 
 
-\subsection{Specific Aim 2: Determine effects of JQ1 and 1,6 Hexanediol exposure on nucleosome organization}
+\subsection{Specific Aim 2: Determine a role of chromatin architecture in BRD4 phase separation}
 
 \subsubsection{Rationale and hypothesis}
 
-Our previous results have validated the efficacy of JQ1 in inhibiting the expression of BRD4-controlled gene GBP5. This result is consistent with previous colocalization studies of the GBP locus with MED1 and BRD4 and identification of the GBP super enhancer (Lin 2022). JQ1 is a cell permeable small molecule that binds competitively to the acetyl-lysine binding cavity of BRD4, displacing BRD4 from chromatin (Fillappakopoulos 2010). BRD4 is known to play a role in nucleosome eviction as well as phase separation in nuclear bodies; however, it remains unclear the primary effects of BRD4 on nucleosome organization. JQ1 does indeed inhibit an array of genes, including GBP5 (Hogg 2017), but has had only a small effect on overall BRD4 residency in C33A nuclei (Han 2020). Therefore, it appears that the epigenetic role of BRD4 is more nuanced. For example, super-enhancers are far more sensitive to drugs blocking the binding of BRD4 to acetylated chromatin (Chapuy 2013; Loven 2013; Hnisz 2017). We hypothesize that large BRD4 aggregates are more susceptible to JQ1, while small aggregates can be dissolved with phase separation inhibitors, but not BET inhibitors alone.
+We seek to define the role of nucleosome organization in the formation and stability of phase separated transcriptional condensate in mammalian nuclei. We perturb phase separated transcriptional condensates both globally with non-specific agents such as 1,6 Hexanediol as well as specific inhibitors targeting BRD4 - a critical component of transcriptional condensates. It is likely that the chromatin reading function of BRD4 is proceeded by recruitment of additional cofactors and chromatin reorganization. As it is already well-known that BRD4 can directly bind to acetylated histones, perturbation of BRD4 functions will provide a more complete picture of how BRD4-positive 
+
+
+JQ1 does indeed inhibit an array of genes, including GBP5 (Hogg 2017), but has had only a small effect on overall BRD4 residency in C33A nuclei (Han 2020). Therefore, it appears that the epigenetic role of BRD4 is more nuanced. For example, super-enhancers are far more sensitive to drugs blocking the binding of BRD4 to acetylated chromatin (Chapuy 2013; Loven 2013; Hnisz 2017). We hypothesize that large BRD4 aggregates are more susceptible to JQ1, while small aggregates can be dissolved with phase separation inhibitors, but not BET inhibitors alone.
 
 1,6 Hexanediol exposure can rapidly induce broad reorganization of chromatin, providing a useful control for directly observing nucleosome cluster dynamics in mammalian cells. Nevertheless, changes in chromatin architecture following non-specific drugs can be difficult to decouple from induced changes in chromatin structure itself. Previous studies have demonstrated in fixed cells that nucleosome clusters are rapidly immobilized and condensed after exposure to 1,6 Hexanediol (Itoh 2021). However, nucleosome organization is highly irregular, heterogeneous, and dynamic, making ensemble statistics inappropriate for making strong conclusions in fast perturbation experiments. 
 
 \subsubsection{Experimental Approach}
 
-JQ1 is a relatively slow acting small molecule drug. Therefore, we propose fixed cell experiments to validate its effect on BRD4 residency in the nucleus 2h, 4h, and 8h after exposure to ~20uM JQ1. In fixed cell ensembles, we will measure size distributions of BRD4 clusters in control versus JQ1 treated cells. Later, we will transiently transfect BRD4-GFP fusion protein into Hela cells followed by three-color live cell imaging of BRD4, H2B-JF549, and H2B-JF646 following initial exposure to 1-5 percent 1,6 Hexanediol. Cells will be exposed to Hexanediol on the microscope stage, followed by cyclic super-resolution imaging. This phase wil be used to determine the effects of Hexanediol exposure on BRD4 residency in the nucleus and differential effects of Hexanediol on BRD4-positive and BRD4-negative chromatin nanodomains. 
+The chromatin binding modules of BRD4 suggest that phase separated transcriptional condensates in the nucleus are, in part, dependent on nucleosome-BRD4 binding interactions. We propose live-cell super-resolution experiments to determine the nature of the interaction between BRD4 and the chromatin architecture in the formation of BRD4-condensates. To do this, we have first designed siRNAs to knockdown expression of BRD4 protein in HeLa cells, which will determine the effect of global BRD4 loss on chromatin architecture. We will then express wild type and BRD4 mutant plasmids which have mutated Bromodomains. Other experiments may involve mutating the intrinsically disordered regions (IDRs) of BRD4 to impair the phase separation abilities of BRD4. 
+
 
 \section{Materials and Methods}
 
@@ -331,6 +342,13 @@ Cells were washed and lysis buffer added (RIPA buffer: PMSF: protease inhibitor 
 \includegraphics[width=16cm]{MCMC.png}
 \end{center}
 \caption{\textbf{Computing epistemic uncertanties with Metropolis-Hastings}. (top left) Simulated point spread function for $N_{0}=10^{3}$ photons with a red x at $x_{\mathrm{MLE}}$ and $y_{\mathrm{MLE}}$ (bottom left) Acceptance rate of Markov chain (middle) Markov chains sampling from the posterior distribution on molecule coordinates in 3D, with the maximum likelihood estimation in dashed blue (right) Estimated posterior marginals on the localization parameters with their respective uncertanties}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{HMM.png}
+\end{center}
+\caption{\textbf{Graphical representation of Hidden Markov Model (HMM) for counting QDs} See main text for full description}
 \end{figure}
 
 
