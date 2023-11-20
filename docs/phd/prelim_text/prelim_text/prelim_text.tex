@@ -88,6 +88,12 @@ Isolated fluorescent emitters exhibit fluorescence antibunching, which means tha
 
 \subsection{Super-resolution of nucleosome-BRD4 interactions in living cells}
 
+\begin{figure}
+\includegraphics[width=\textwidth]{PSF2D.png}
+\caption{\textbf{Deep networks outperform MLE in dense localization}} (A) DeepSTORM3D architecture with 612K trainable parameters used for localization. (B-E) Lateral root mean squared error of MLE and CNN estimators with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$.
+\end{figure}
+
+
 Super-resolution imaging with intensity information alone remains a highly valuable technique, and we demonstrate this by live cell super-resolution imaging of nucleusome-BRD4 interactions in transcriptional condensates in the nucleus. The nucleosome is the fundamental unit of chromatin, which forms the basic scaffold for a variety of biomolecular processes in a cell nucleus. Super-resolved nucleosome organization has been studied extensively in various epigenomic states to reveal segregated nanoclusters, dispersed nanodomains, and compact large aggregates. Nucleosomes assemble into heterogeneous clusters of variable sizes, interspersed with nucleosome-depleted regions (Ricci 2015). Histones can be decorated with various post-translational modifications such as acetylation, methylation, phosphorylation, and ubiquination. The recruitment of proteins and complexes with specific enzymatic activities is now a well-accepted dogma of how modifications mediate their function. Histone modifications can influence transcription of genes, and many other DNA processes such as repair, replication and recombination (Bannister and Kouzarides, 2011). 
 
 Here, study spatial nucleosome organization in living cells, with a particular focus on the structure of biomolecular condensates containing bromodomain protein 4 (BRD4) protein, a major tandem-bromodomain-containing transcriptional regulator. BRD4 plays an important role in diverse cellular functions such as transcription, replication, epigenetic regulation, and DNA repair, and has been implicated in cancer and autoimmune diseases. BRD4 acetylates Lysine 122 on H3 (H3K122), a residue critical for nucleosome stability, resulting in nucleosome eviction and chromatin decompaction (Devaiah 2016). The intrinsically disordered regions (IDRs) of BRD4 are thought to facilitate its phase separation with coactivators such as MED1. The phase separation properties of BRD4 have been well-studied in several cell lines (Han 2020), and in the context of super-enhancers (Sabari 2018).
@@ -97,16 +103,30 @@ Selective bromodomain inhibitors, such as JQ1 are often employed to displace BRD
 
 \section{Results}
 
+\begin{figure}
+\begin{center}
+\includegraphics[width=15cm]{QD-Counting.png}
+\end{center}
+\caption{\textbf{Counting quantum dots with a Hidden Markov Model}}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{BRD4-Results.png}
+\end{center}
+\caption{\textbf{BRD4 is involved in the maintenance chromatin structure}. (A) Density representation of nucleosome organization using 30nm x 30nm bins and a pointillist representation of nucleosome organization (B) Ripley's K function, Bayesian information criterion (BIC), and log likelihood for a Gaussian mixture model of pointillist localization data of three randomly selected regions of interest. Dashed line drawn at the diffraction limit (C) Localization accumulation over five seconds of imaging time (500 frames) and clustering with DBSCAN for a randomly selected region of interest}
+\end{figure}
+
 \subsection{Deep networks outperform MLE in dense localization}
 
 Two major factors contribute to localization errors in SMLM: (i) the noise characteristics of CMOS cameras and (ii) crowding of molecules within a diffraction limited region. Maxmimum likelihood estimation (MLE) is frequently used for isolated molecules and high signal levels, retaining localization errors from 30-40nm (Figure 3c). However, MLE performance tends to degrade in low SNR and dense regimes where the number of emitters within the diffraction limit is greater than one ($K(\lambda/2\mathrm{NA}) > 1$). We employ a convolutional neural network called DeepSTORM, which successively upsamples a monochrome image and outputs a localization map, which can be post-processed to produce molecular coordinates (Figure 2b).  We demonstrate that this architecture can outperform maximum likelhood estimation for all signal levels and molecular densities tested (Figure 2c).
 
-\begin{figure}
-\includegraphics[width=\textwidth]{PSF2D.png}
-\caption{\textbf{Deep networks outperform MLE in dense localization}} (A) DeepSTORM3D architecture with 612K trainable parameters used for localization. (B-E) Lateral root mean squared error of MLE and CNN estimators with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$.
-\end{figure}
+
+
 
 \subsection{Counting quantum dots with a Hidden Markov Model}
+
+Dense aggregates of proteins and nucleic acids with molecular spacing below the diffraction limit are commonplace in the nucleus, creating the need for accurate counting techniques. The ability to accurately count fluorescent emitters using photon statistics has been so far limited to confocal microscopy setups, which are not typically used when imaging dynamics in living cells. As a proof of principle, we imaged organic quantum dots which are a nanocrystal from 15-20nm in size. These nanocrystals are composed of a CdSe semiconductor core, ZnS semiconductor shell, and an amphiphilic polymer coating is applied to confer water solubility and additional functionalization with antibodies, oligonucleotides, etc (Figure 4B). We imaged quantum dots coated on a glass coverslip with a SPAD camera at 1 MHz, and applied our HMM to photon counts from both isolated emitters as well as dense aggregates (Figure 4A,D). Our data indicates that a Poisson HMM models the data well, as measured by the log-likelihood of the sequence of photon counts and distribution of emissions over time (Figure 4E,F). Model selection is carried out purely based on log-likelihood of the sequence.
 
 
 \begin{comment}
@@ -118,12 +138,6 @@ Two major factors contribute to localization errors in SMLM: (i) the noise chara
 \end{figure}
 \end{comment}
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=15cm]{QD-Counting.png}
-\end{center}
-\caption{\textbf{Counting quantum dots with a Hidden Markov Model}}
-\end{figure}
 
 \begin{comment}
 To generalize our imaging setup to three-dimensions, we could use that the lateral point spread function has a weak dependence on the axial coordinate (Figure 3a). However, it has been shown that the error around the focus can be large, while negative and positive defocus cannot be distinguished given the symmetric dependence in $z$ (Holtzer 2007). Instead, we choose to introduce astigmatism into the detection path using a weak cylindrical lens (Figure 4a). In effect, this breaks the axial symmetry of the PSF and gives an anisotropic Gaussian which is elongated perpendicular to the optical axis. Localization proceeds by measuring this anisotropy and inverting a model of its axial dependence. At high numerical aperture, a strong dependence of the anisotropy to axial displacement potentially provides more precise three-dimensional localization (Figure 4b). In general, the axial anisotropy can be complex, but is often well described by a polynomial function of the axial displacement (Smith 2010). Unfortunately, astigmatic imaging increases the width of the point spread function significantly, exacerbating localization errors by molecular crowding and low signal to noise ratio. Therefore, we report error statistics for maximum likelihood based methods only, and leave three-dimensional localization with CNNs to future work. As one might expect, at ideal SNR, we show that axial dependence of localization error bears a strong similarity to the axial dependence of the PSF width (Figure 4c). Lateral RMSE can be maintained below 40nm for the anisotropic PSF for $K(\lambda/2\mathrm{NA}) \leq 5$; however, the Jaccard index tends to rapidly degrade at higher molecular densities, making MLE an unsuitable estimator for dense three-dimensional imaging (Figure 5). Three-dimensional single molecule tracking with sparse emitters remains a good application of this method, and will be used in future work.
@@ -132,14 +146,8 @@ To generalize our imaging setup to three-dimensions, we could use that the later
 
 \subsection{Super-resolution of nucleosome-BRD4 interactions in living cells}
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=16cm]{BRD4-Results.png}
-\end{center}
-\caption{\textbf{BRD4 is involved in the maintenance chromatin structure}. (A) Density representation of nucleosome organization using 30nm x 30nm bins and a pointillist representation of nucleosome organization (B) Ripley's K function, Bayesian information criterion (BIC), and log likelihood for a Gaussian mixture model of pointillist localization data of three randomly selected regions of interest. Dashed line drawn at the diffraction limit (C) Localization accumulation over five seconds of imaging time (500 frames) and clustering with DBSCAN for a randomly selected region of interest}
-\end{figure}
 
-Here, we use the HaloTag system, a modified haloalkane dehalogenase designed to covalently bind to synthetic ligands  (Los 2008). The HaloTag protein is fused to H2B, either through transfection and clonal selection, or by transient transfection. The HaloTag is bound by a rhodomine-derived fluorescent ligands, JF549 or JF646, in order to (Grimm 2015). For super-resolution or three-dimensional single molecule tracking, we use oblique illumination microscopy to illuminate a thin area within a single nucleus (Tokunga 2008; Nozaki 2017). 
+Here, we use the HaloTag system, a modified haloalkane dehalogenase designed to covalently bind to synthetic ligands  (Los 2008). The HaloTag protein is fused to H2B and is then bound by a rhodomine-derived fluorescent ligands, JF549 or JF646 (Grimm 2015). Two-color imaging of H2B-JF646 and BRD4-GFP showed that BRD4-GFP is present in nucleosome depleted regions, and that BRD4-GFP makes direct contact with the chromatin scaffold (Figure 5C). Exposure of cells to 1,6 Hexanediol promoted an increase in nucleosome cluster sizes, while JQ1 exposure significantly condensed nucleosome clusters (Figure 5D). 
 
 \begin{comment}
 \subsection{Inhibition of a super-enhanced gene with JQ1}
@@ -148,19 +156,25 @@ Here, we use the HaloTag system, a modified haloalkane dehalogenase designed to 
 The guanylate binding protein (GBP) gene cluster codes for a family of interferon-gamma inducible GTPases. A recent study has confirmed phase separation in the GBP gene family region by co-staining of BRD4 and MED1 marker protein with the GBP gene family region, after infection of macrophages with \emph{Mycobacterium tuberculosis} (Lin 2022). This result is a strong indication that the GBPs gene region tends to relocate into a phase-separated condensate containing BRD4 to efficiently initiate the immune response program. Leveraging previous work on the GBP gene cluster, we (i) confirm the efficacy of JQ1 treatment on GBP5 knockdown after interferon-gamma induction and (ii) determine the effects of JQ1 exposure on BRD4 immunofluorescence signal in Hela nuclei. Fluorescence in-situ hybridization (FISH) demonstrated the formation of GBP5 positive puncta in Hela nuclei after interferon-gamma exposure (Figure 5A-C,F) and mRNA expression over several hours (Figure 5D.) Relief of GBP5 expression was observed by incubating Hela cells for 8h with both interferon-gamma and JQ1 (Figure 5E). BRD4 puncta are abundant in Hela nuclei and exposure of JQ1 for 9h showed a reduction in puncta counts to approximately 70 percent relative to control.
 \end{comment}
 
-\section{Future Aims}
+\section{Discussion and Future Aims}
 
 \subsection{Specific Aim 1: Integrate deep models with counting algorithms for enhanced SMLM}
 
 \subsubsection{Rationale and hypothesis}
 
-\subsubsection{Experimental Approach}
+We have demonstrated that deep learning algorithms can outperform standard maximum likelihood estimators in low SNR and high density regimes, indicating this is a suitable first step in our SMLM pipeline. In addition, our HMM appears to accurately model the photon detection process. The application of Bayesian methods to prevent overfitting with HMMs is common, and Hierarchical Dirichlet Prior HMM or HDP-HMM may be an appropriate choice in future work. 
+
+\subsubsection{Computational Approach}
+
+Exploration of the high dimensional parameter space in dense STORM is fundamentally intractable. Therefore, the DeepSTORM architecture will be adopted to a probabilistic setting by modifying the output by adding a softmax layer. The arbitrary threshold for Bernoulli probabilities at each pixel conventionally used in DeepSTORM will be removed, and the maximum a posteriori (MAP) number of localizations will be selected from the probability map. Localization uncertainties can then be computed with a Langevin Monte Carlo routine, for fast Bayesian inference. 
 
 \subsection{Specific Aim 2: Determine a role of chromatin architecture in phase separation}
 
 \subsubsection{Rationale and hypothesis}
 
-We seek to define the role of nucleosome organization in the formation and stability of phase separated transcriptional condensate in mammalian nuclei. We perturb phase separated transcriptional condensates both globally with non-specific agents such as 1,6 Hexanediol as well as specific inhibitors targeting BRD4 - a critical component of transcriptional condensates. Previous efforts suggest that the acetylated histone reading function of BRD4 is proceeded by recruitment of additional cofactors and chromatin reorganization. Therefore, perturbation of BRD4 functions will provide a more complete picture of how BRD4-positive nuclear bodies interact with the chromatin scaffold. Our preliminary data suggests that transcriptional condensates in the nucleus may be stabilized by interactions with neighboring nucleosome clusters. Given that transcriptional condensates associate with accessible DNA, we expect that their depletion by specific inhibition of BRD4 functions will lead to chromatin condensation. Moreover, we expect the action of specific antagonists against BRD4 or its expression will have a distinct effect compared to 1,6 Hexanediol, which may act on the chromatin scaffold directly (Itoh 2021). 
+We have demonstrated by two-color live cell super resolution imaging of H2B and BRD4-GFP that BRD4-GFP protein is present in nucleosome depleted regions in the nucleus. The increase in cluster sizes upon exposure to 1,6 Hexanediol suggests that nucleosome nanodomains may merge after non-specific inhibition of phase separation, while the average spacing of nucleosomes remains. The significant condensation after exposure to JQ1 suggests that BRD4 may be involved in the maintenance of the degree of chromatin condensation, but does not affect the average sizes of nucleosome clusters. Although BRD4-GFP is clearly present in NDRs, there is a significant overlap of H2B and BRD4 signals, leading us to conclude that BRD4 may permeate some nucleosome-dense regions as well. Ultimately, results of treatment of HeLa cells with non-specific and specific phase separation inhibitors suggest that further study into the mechanism of BRD4-specific inhibition with BRD4 silencing and mutation would provide valuable insights into the role of the chromatin scaffold in the formation of transcriptional condensates.
+
+Previous efforts suggest that the acetylated histone reading function of BRD4 is proceeded by recruitment of additional cofactors and chromatin reorganization. Therefore, additional perturbations to BRD4 functions will provide a more complete picture of how BRD4-positive nuclear bodies interact with the chromatin scaffold. Our preliminary data suggests that transcriptional condensates in the nucleus may be stabilized by interactions with neighboring nucleosome clusters. Given that transcriptional condensates associate with accessible DNA, we expect that their depletion by specific inhibition of BRD4 functions will lead to chromatin condensation. Moreover, we expect the action of specific antagonists against BRD4 or its expression will have a distinct effect compared to 1,6 Hexanediol, which may act on the chromatin scaffold directly (Itoh 2021). 
 
 
 \subsubsection{Experimental Approach}
