@@ -26,7 +26,7 @@
 
 \epigraph{Epigraph}
 
-
+\renewcommand{\thesection}{\arabic{section}}
 
 \begin{document}
 %% Basic setup commands
@@ -86,12 +86,11 @@ Within the broader domain of super-resolution imaging, innovations in single pho
 
 Isolated fluorescent emitters exhibit fluorescence antibunching, which means that fluorescence emission has sub-Poisson photon statistics. This property of fluorescence emission from a single emitter has been previously applied to counting fluorescent molecules in the spot of a confocal microscope (Ta 2010). Molecular counting with photon statistics has a fairly simple motivation: a photon emitted by a fluorescence molecule can only be detected once. Coincidence of photons at multiple detector elements provides evidence that two or more molecules are present in the imaged region. Using high speed cameras, we are able to directly model the total photon counts in a region of interest using a Hidden Markov Model (HMM). Under this formalism, the number of active fluorescent molecules in the ROI is modeled as a Markovian stochastic process, which is then measured according to the emission distribution of the HMM. Using model selection techniques, one can obtain estimates of the number of fluorescent emitters in the ROI by providing prior information about their emission statistics and scoring the observed sequence of counts. 
 
-\subsection{Super-resolution of nucleosome-BRD4 interactions in living cells}
+\subsection{Super-resolution of transcriptional condensates in living cells}
 
 \begin{figure}
-\includegraphics[width=\textwidth]{PSF2D.png}
-\caption{\textbf{Deep networks outperform MLE in dense localization}} (A) DeepSTORM3D architecture with 612K trainable parameters used for localization. (B-E) Lateral root mean squared error of MLE and CNN estimators with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$.
-\end{figure}
+\includegraphics[width=15cm]{PSF2D.png}
+\caption{\textbf{Deep networks outperform MLE in dense localization}} (A) DeepSTORM3D architecture with 612K trainable parameters used for localization. (B-E) Lateral root mean squared error of MLE and CNN estimators with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$.\end{figure}
 
 
 Super-resolution imaging with intensity information alone remains a highly valuable technique, and we demonstrate this by live cell super-resolution imaging of nucleusome-BRD4 interactions in transcriptional condensates in the nucleus. The nucleosome is the fundamental unit of chromatin, which forms the basic scaffold for a variety of biomolecular processes in a cell nucleus. Super-resolved nucleosome organization has been studied extensively in various epigenomic states to reveal segregated nanoclusters, dispersed nanodomains, and compact large aggregates. Nucleosomes assemble into heterogeneous clusters of variable sizes, interspersed with nucleosome-depleted regions (Ricci 2015). Histones can be decorated with various post-translational modifications such as acetylation, methylation, phosphorylation, and ubiquination. The recruitment of proteins and complexes with specific enzymatic activities is now a well-accepted dogma of how modifications mediate their function. Histone modifications can influence transcription of genes, and many other DNA processes such as repair, replication and recombination (Bannister and Kouzarides, 2011). 
@@ -105,23 +104,21 @@ Selective bromodomain inhibitors, such as JQ1 are often employed to displace BRD
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=15cm]{QD-Counting.png}
+\includegraphics[width=14cm]{QD-Counting.png}
 \end{center}
-\caption{\textbf{Counting quantum dots with a Hidden Markov Model}}
+\caption{\textbf{Counting quantum dots with a Hidden Markov Model}. (A) Cartoon representing photon counting of an aggregate of quantum dots (B,C) Structure of a single CdSe/ZnS quantum dot and its optical transitions (D) Summed image of a QD aggregate. (E) photon counts over time for the sum in (D) (F) Histogram of counts over time and HMM fit}
 \end{figure}
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=16cm]{BRD4-Results.png}
+\includegraphics[width=13cm]{BRD4-Results.png}
 \end{center}
-\caption{\textbf{BRD4 is involved in the maintenance chromatin structure}. (A) Density representation of nucleosome organization using 30nm x 30nm bins and a pointillist representation of nucleosome organization (B) Ripley's K function, Bayesian information criterion (BIC), and log likelihood for a Gaussian mixture model of pointillist localization data of three randomly selected regions of interest. Dashed line drawn at the diffraction limit (C) Localization accumulation over five seconds of imaging time (500 frames) and clustering with DBSCAN for a randomly selected region of interest}
+\caption{\textbf{BRD4 is involved in the maintenance chromatin structure}. (A) Density and pointillist representation of nucleosome organization in a living cell recovered with MLE (B) Principle of Besag's L-Function for cluster analysis (C) Average L-function for living Hela cells exposed to 5 percent 1,6 Hexanediol or 1uM JQ1 for 8h. Envelope drawn at one standard deviation}
 \end{figure}
 
 \subsection{Deep networks outperform MLE in dense localization}
 
 Two major factors contribute to localization errors in SMLM: (i) the noise characteristics of CMOS cameras and (ii) crowding of molecules within a diffraction limited region. Maxmimum likelihood estimation (MLE) is frequently used for isolated molecules and high signal levels, retaining localization errors from 30-40nm (Figure 3c). However, MLE performance tends to degrade in low SNR and dense regimes where the number of emitters within the diffraction limit is greater than one ($K(\lambda/2\mathrm{NA}) > 1$). We employ a convolutional neural network called DeepSTORM, which successively upsamples a monochrome image and outputs a localization map, which can be post-processed to produce molecular coordinates (Figure 2b).  We demonstrate that this architecture can outperform maximum likelhood estimation for all signal levels and molecular densities tested (Figure 2c).
-
-
 
 
 \subsection{Counting quantum dots with a Hidden Markov Model}
@@ -145,7 +142,6 @@ To generalize our imaging setup to three-dimensions, we could use that the later
 
 
 \subsection{Super-resolution of nucleosome-BRD4 interactions in living cells}
-
 
 Here, we use the HaloTag system, a modified haloalkane dehalogenase designed to covalently bind to synthetic ligands  (Los 2008). The HaloTag protein is fused to H2B and is then bound by a rhodomine-derived fluorescent ligands, JF549 or JF646 (Grimm 2015). Two-color imaging of H2B-JF646 and BRD4-GFP showed that BRD4-GFP is present in nucleosome depleted regions, and that BRD4-GFP makes direct contact with the chromatin scaffold (Figure 5C). Exposure of cells to 1,6 Hexanediol promoted an increase in nucleosome cluster sizes, while JQ1 exposure significantly condensed nucleosome clusters (Figure 5D). 
 
@@ -186,7 +182,7 @@ The chromatin binding modules of BRD4 suggest that phase separated transcription
 
 \subsection{Super-resolution imaging of nucleosome nanodomains}
 
-After transient transfection, H2B-Halotag Hela cells were incubated with JF646 HaloTag ligand overnight. Living Hela cells were imaged in a dSTORM photoswitching buffer containing 100mM MEA, 50 ug/ml Glucose Oxidase, and 3.4 mg/ml Catalase (Sigma). Buffer pH was adjusted to ~8 using HCl. Movies were collected using a customized Olympus IX83 microscope equipped with an Olympus 60X 1.25NA oil-immersion objective. Fluorescence images were projected onto an ORCA-Fusion sCMOS camera (Hamamatsu). The microscope was controlled using Micromanager software. JF646 molecules were illuminated with a 640nm laser held at 20mW, as measured at the back focal plane of the objective.  Frames were captured at 100fps.
+After transient transfection, H2B-Halotag Hela cells were incubated with JF646 HaloTag ligand overnight. Living Hela cells were imaged in a dSTORM photoswitching buffer containing 100mM MEA, 50 ug/ml Glucose Oxidase, and 3.4 mg/ml Catalase (Sigma). Buffer pH was adjusted to ~8 using HCl. Movies were collected using a customized Olympus IX83 microscope equipped with an Olympus 60X 1.25NA oil-immersion objective. Fluorescence images were projected onto an ORCA-Fusion sCMOS camera (Hamamatsu). The microscope was controlled using Micromanager software. JF646 molecules were illuminated with a 640nm laser held at 20mW, as measured at the back focal plane of the objective.  Frames were captured at 100fps. Sparse localizations were localized with maximum likelihood estimation. 
 
 \subsection{Localization with maximum likelihood estimation}
 
@@ -252,6 +248,56 @@ I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{
 We employ a localization CNN architecture based on DeepSTORM3D which consists of three main modules. The first module consists of successive dilated convolutions, followed by an upsampling module to increase the lateral resolution by a factor of 4. The third and last module adds additional convolutional blocks to refine localization estimates. This architecture can also be used for three-dimensional localization and thus the final output has $n_{z}$ channels. The final output is followed by an element-wise HardTanh (Maas 2013). A post-processing function $F_{PP}$ uses a user-defined threshold to produce a matrix of coordinates. We find the performance of this architecture on simulated images surpasses MLE, and approaches the Cramer-Rao lower bound at high signal levels, retaining a RMSE near 20nm for $K(\lambda/2\mathrm{NA}) \leq 5$, at high signal levels (Figure 3c). 
 
 \subsection{Hidden Markov Model for counting fluorescent emitters}
+
+Consider a Poisson hidden Markov model with an unknown state space dimension. Let $s_{n}$ represent the hidden state at time $n$, and $w_{n}$ denote the observed state. The hidden state distribution is parameterized by $\phi$, transition matrices by $\Pi$, and the initial state by $\rho$. We explore various dimensionalities, trying different initial states $\rho_i$ for $i = 1, 2, ..., 10$. The log likelihood of the observed sequence of states is computed for each dimensionality. The model is implemented using the `hmmlearn` library in Python, utilizing the expectation-maximization algorithm for parameter estimation.
+
+\textbf{Forward-Backward Algorithm:}
+
+The forward algorithm computes the probability of observing a sequence up to time \(t\) and being in state \(s_t\):
+
+\[
+\alpha_t(s) = P(w_1, w_2, \ldots, w_t, s_t = s | \phi, \Pi, \rho) = \sum_{s_{t-1}} \alpha_{t-1}(s_{t-1}) \cdot \Pi_{s_{t-1}, s} \cdot P(w_t | \phi_s)
+\]
+
+The backward algorithm computes the probability of observing the sequence from time \(t+1\) to the end, given being in state \(s_t\):
+
+\[
+\beta_t(s) = P(w_{t+1}, w_{t+2}, \ldots, w_T | s_t = s, \phi, \Pi) = \sum_{s_{t+1}} \beta_{t+1}(s_{t+1}) \cdot \Pi_{s, s_{t+1}} \cdot P(w_{t+1} | \phi_{s_{t+1}})
+\]
+
+The probability of the observed sequence is given by the product of forward probabilities at the last time step:
+
+\[
+P(w | \phi, \Pi, \rho) = \sum_{s_T} \alpha_T(s_T)
+\]
+
+\textbf{Baum-Welch (EM) Algorithm:}
+
+In the E-step, compute the expected number of transitions and emissions:
+
+\[
+\gamma_t(s) = P(s_t = s | w, \phi, \Pi, \rho) = \frac{\alpha_t(s) \cdot \beta_t(s)}{P(w | \phi, \Pi, \rho)}
+\]
+
+\[
+\xi_t(s, s') = P(s_t = s, s_{t+1} = s' | w, \phi, \Pi, \rho) = \frac{\alpha_t(s) \cdot \Pi_{s, s'} \cdot P(w_{t+1} | \phi_{s'}) \cdot \beta_{t+1}(s')}{P(w | \phi, \Pi, \rho)}
+\]
+
+In the M-step, update the parameters:
+
+\[
+\rho_s = \frac{\gamma_1(s)}{\sum_{s'} \gamma_1(s')}
+\]
+
+\[
+\Pi_{s, s'} = \frac{\sum_{t=1}^{T-1} \xi_t(s, s')}{\sum_{t=1}^{T-1} \gamma_t(s)}
+\]
+
+\[
+\phi_s = \frac{\sum_{t=1}^{T} \gamma_t(s) \cdot w_t}{\sum_{t=1}^{T} \gamma_t(s)}
+\]
+
+
 
 \subsection{Computation of Ripley's L-function}
 
@@ -332,15 +378,6 @@ Cells were washed and lysis buffer added (RIPA buffer: PMSF: protease inhibitor 
 %\end{figure}
 
 
-
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=16cm]{Noise.png}
-\end{center}
-\caption{\textbf{Classical emission statistics of fluorescent markers}. (A) Offset for zero incident photons (B) Variance for zero incident photons (C) Cumulative mass function for the convolution distribution and its Poisson approximation for rate parameter $\mu_{k} = 500$ counts (D) Komogonov distance measured as a function of rate parameter $\mu_{k}$}
-\end{figure}
-
 \begin{figure}
 \begin{center}
 \includegraphics[width=16cm]{MCMC.png}
@@ -363,9 +400,16 @@ Cells were washed and lysis buffer added (RIPA buffer: PMSF: protease inhibitor 
 %\caption{\textbf{Dependence of axial and lateral precision on SNR and molecular density}. (upper row) Lateral and axial root mean %squared errors (RMSE) at varying signal levels (lower row) Lateral and axial RMSE for varying molecule counts within a diffraction %limit radius for $10^{3}$ photon counts. Error samples = $10^{3}$}
 %\end{figure}
 
-\subsection{Estimator precision sets the resolution limit in localization microscopy}
+\subsection{Noise model for CMOS cameras used for MLE}
 
-Complementary Metal-Oxide-Semiconductor (CMOS) cameras have become a central tool in fluorescence microscopy. The CMOS sensor is revered for its high frame rates, allowing researchers to reach higher temporal resolutions. Nevertheless, CMOS cameras have noise sources intrinsic to their operation, such as shot noise and readout noise. The former phenomenon can describe a superposition of processes; namely, the fluctuations of the number of photons due to the quantum nature of light, and the random conversion of photons into photoelectrons within the semiconductor material with a quantum efficiency below unity. Here we will often refer to the photon count $N_{0}$, which has a determined value, rather than being described by statistically. The \emph{measured} photon count, however, is well-described by a Poisson process (Schottky 1918). A shot-noise limited image with $N$ pixels is then described as a family of Poisson variables, with units of photoelectrons
+\begin{figure}
+\begin{center}
+\includegraphics[width=16cm]{Noise.png}
+\end{center}
+\caption{\textbf{Noise model for CMOS cameras used for MLE}. (A) Offset for zero incident photons (B) Variance for zero incident photons (C) Cumulative mass function for the convolution distribution and its Poisson approximation for rate parameter $\mu_{k} = 500$ counts (D) Komogonov distance measured as a function of rate parameter $\mu_{k}$}
+\end{figure}
+
+CMOS cameras have noise sources intrinsic to their operation, such as shot noise and readout noise. The former phenomenon can describe a superposition of processes; namely, the fluctuations of the number of photons due to the quantum nature of light, and the random conversion of photons into photoelectrons within the semiconductor material with a quantum efficiency below unity. Here we will often refer to the photon count $N_{0}$, which has a determined value, rather than being described by statistically. The \emph{measured} photon count, however, is well-described by a Poisson process (Schottky 1918). A shot-noise limited image with $N$ pixels is then described as a family of Poisson variables, with units of photoelectrons
 
 
 \begin{equation}
@@ -397,59 +441,59 @@ where $i_{0} = g_{k}\eta N_{0}\Delta$. The parameter $\eta$ is the quantum effic
 \newline
 \noindent [2] Speiser, A. et al. Deep learning enables fast and dense single-molecule localization with high accuracy. Nat Methods 18, 1082–1090 (2021).
 \newline
-\noindent [5] Dertinger, T., Colyer, R., Iyer, G., Weiss, S. Enderlein, J. Fast, background-free, 3D super-resolution optical fluctuation imaging (SOFI). PNAS
+\noindent [3] Dertinger, T., Colyer, R., Iyer, G., Weiss, S. Enderlein, J. Fast, background-free, 3D super-resolution optical fluctuation imaging (SOFI). PNAS
 \newline
-\noindent [6] Richards, B. Wolf, E. Electromagnetic Diffraction in Optical Systems. II. Structure of the Image Field in an Aplanatic System. Source: Proceedings of the Royal Society of London. Series A, Mathematical and Physical Sciences vol. 253 (1959). 
+\noindent [4] Richards, B. Wolf, E. Electromagnetic Diffraction in Optical Systems. II. Structure of the Image Field in an Aplanatic System. Source: Proceedings of the Royal Society of London. Series A, Mathematical and Physical Sciences vol. 253 (1959). 
 \newline
-\noindent [8] Ouyang, W., Aristov, A., Lelek, M., Hao, X. Zimmer, C. Deep learning massively accelerates super-resolution localization microscopy. Nat Biotechnol 36, 460–468 (2018). 
+\noindent [5] Ouyang, W., Aristov, A., Lelek, M., Hao, X. Zimmer, C. Deep learning massively accelerates super-resolution localization microscopy. Nat Biotechnol 36, 460–468 (2018). 
 \newline
-\noindent [10] Chao, J., Sally Ward, E. Ober, R. J. Fisher information theory for parameter estimation in single molecule microscopy: tutorial. Journal of the Optical Society of America A 33, B36 (2016). 
+\noindent [6] Chao, J., Sally Ward, E. Ober, R. J. Fisher information theory for parameter estimation in single molecule microscopy: tutorial. Journal of the Optical Society of America A 33, B36 (2016). 
 \newline
-\noindent [12] Nehme, E. et al. DeepSTORM3D: dense 3D localization microscopy and PSF design by deep learning. Nat Methods 17, 734–740 (2020). 
+\noindent [7] Nehme, E. et al. DeepSTORM3D: dense 3D localization microscopy and PSF design by deep learning. Nat Methods 17, 734–740 (2020). 
 \newline
-\noindent [35] Nieuwenhuizen, R et al. Measuring image resolution in optical nanoscopy. Nature Methods 10. 557-562 (2013). 
-\noindent [15] Tokunaga, M., Imamoto, N. Sakata-Sogawa, K. Highly inclined thin illumination enables clear single-molecule imaging in cells. Nat Methods 5, (2007). 
+\noindent [8] Nieuwenhuizen, R et al. Measuring image resolution in optical nanoscopy. Nature Methods 10. 557-562 (2013). 
+\noindent [9] Tokunaga, M., Imamoto, N. Sakata-Sogawa, K. Highly inclined thin illumination enables clear single-molecule imaging in cells. Nat Methods 5, (2007). 
 \newline
-\noindent [16] Kalisvaart, D. et al. Precision in iterative modulation enhanced single-molecule localization microscopy. Biophys J 121, 2279–2289 (2022). 
+\noindent [10] Kalisvaart, D. et al. Precision in iterative modulation enhanced single-molecule localization microscopy. Biophys J 121, 2279–2289 (2022). 
 \newline
-\noindent [17] Zhang, B., Zerubia, J. Olivo-Marin, J.-C. Gaussian approximations of fluorescence microscope point-spread function models. (2007). 
+\noindent [11] Zhang, B., Zerubia, J. Olivo-Marin, J.-C. Gaussian approximations of fluorescence microscope point-spread function models. (2007). 
 \newline
-\noindent [24] Smith, C. S., Joseph, N., Rieger, B. Lidke, K. A. Fast, single-molecule localization that achieves theoretically minimum uncertainty. Nat Methods 7, 373–375 (2010). 
+\noindent [12] Smith, C. S., Joseph, N., Rieger, B. Lidke, K. A. Fast, single-molecule localization that achieves theoretically minimum uncertainty. Nat Methods 7, 373–375 (2010). 
 \newline
-\noindent [25] Sabari, B. R. et al. Coactivator condensation at super-enhancers links phase separation and gene control. Science (1979) 361, (2018). 
+\noindent [13] Sabari, B. R. et al. Coactivator condensation at super-enhancers links phase separation and gene control. Science (1979) 361, (2018). 
 \newline
-\noindent [26] Linde, S. Van De et al. Direct stochastic optical reconstruction microscopy with standard fluorescent probes. Nat Protoc 6, 991–1009 (2011). 
+\noindent [14] Linde, S. Van De et al. Direct stochastic optical reconstruction microscopy with standard fluorescent probes. Nat Protoc 6, 991–1009 (2011). 
 \newline
-\noindent [27] Huang, F. et al. Video-rate nanoscopy using sCMOS camera-specific single-molecule localization algorithms. Nat Methods 10, 653–658 (2013). 
+\noindent [15] Huang, F. et al. Video-rate nanoscopy using sCMOS camera-specific single-molecule localization algorithms. Nat Methods 10, 653–658 (2013). 
 \newline
-\noindent [29] Hnisz, D., Shrinivas, K., Young, R. A., Chakraborty, A. K. Sharp, P. A. A Phase Separation Model for Transcriptional Control. Cell vol. 169 13–23 (2017). 
+\noindent [16] Hnisz, D., Shrinivas, K., Young, R. A., Chakraborty, A. K. Sharp, P. A. A Phase Separation Model for Transcriptional Control. Cell vol. 169 13–23 (2017). 
 \newline
-\noindent [30] Grimm, J. B. et al. A general method to improve fluorophores for live-cell and single-molecule microscopy. Nat Methods 12, 244–250 (2015). 
+\noindent [17] Grimm, J. B. et al. A general method to improve fluorophores for live-cell and single-molecule microscopy. Nat Methods 12, 244–250 (2015). 
 \newline
-\noindent [31] Nozaki, T. et al. Dynamic Organization of Chromatin Domains Revealed by Super-Resolution Live-Cell Imaging. Mol Cell 67, 282-293.e7 (2017). 
+\noindent [18] Nozaki, T. et al. Dynamic Organization of Chromatin Domains Revealed by Super-Resolution Live-Cell Imaging. Mol Cell 67, 282-293.e7 (2017). 
 \newline
-\noindent [32] Xu, J. et al. Super-Resolution Imaging of Higher-Order Chromatin Structures at Different Epigenomic States in Single Mammalian Cells. Cell Rep 24, 873–882 (2018). 
+\noindent [19] Xu, J. et al. Super-Resolution Imaging of Higher-Order Chromatin Structures at Different Epigenomic States in Single Mammalian Cells. Cell Rep 24, 873–882 (2018). 
 \newline
-\noindent [33] Boettiger, A. N. et al. Super-resolution imaging reveals distinct chromatin folding for different epigenetic states. Nature 529, 418–422 (2016). 
+\noindent [20] Boettiger, A. N. et al. Super-resolution imaging reveals distinct chromatin folding for different epigenetic states. Nature 529, 418–422 (2016). 
 \newline
-\noindent [34] Nozaki, T. et al. Dynamic Organization of Chromatin Domains Revealed by Super-Resolution Live-Cell Imaging. Mol Cell 67, 282-293.e7 (2017). 
+\noindent [21] Nozaki, T. et al. Dynamic Organization of Chromatin Domains Revealed by Super-Resolution Live-Cell Imaging. Mol Cell 67, 282-293.e7 (2017). 
 \noindent [3] Barth, R., Bystricky, K. Shaban, H. A. Coupling chromatin structure and dynamics by live super-resolution imaging. Sci. Adv vol. 6 (2020). 
 \newline
-\noindent [7] Devaiah, B. N. et al. BRD4 is a histone acetyltransferase that evicts nucleosomes from chromatin. Nat Struct Mol Biol 23, 540–548 (2016). 
+\noindent [22] Devaiah, B. N. et al. BRD4 is a histone acetyltransferase that evicts nucleosomes from chromatin. Nat Struct Mol Biol 23, 540–548 (2016). 
 \newline
-\noindent [9] Filippakopoulos, P. et al. Selective inhibition of BET bromodomains. Nature 468, 1067–1073 (2010). 
+\noindent [23] Filippakopoulos, P. et al. Selective inhibition of BET bromodomains. Nature 468, 1067–1073 (2010). 
 \newline
-\noindent [10] Grimm, J. B. et al. A General Method to Improve Fluorophores Using Deuterated Auxochromes. JACS Au 1, 690–696 (2021). 
+\noindent [24] Grimm, J. B. et al. A General Method to Improve Fluorophores Using Deuterated Auxochromes. JACS Au 1, 690–696 (2021). 
 \newline
-\noindent [13] Itoh, Y. et al. 1,6-hexanediol rapidly immobilizes and condenses chromatin in living human cells. Life Sci Alliance 4, (2021). 
+\noindent [25] Itoh, Y. et al. 1,6-hexanediol rapidly immobilizes and condenses chromatin in living human cells. Life Sci Alliance 4, (2021). 
 \newline
-\noindent [14] Han, X. et al. Roles of the BRD4 short isoform in phase separation and active gene transcription. Nat Struct Mol Biol 27, 333–341 (2020). 
+\noindent [26] Han, X. et al. Roles of the BRD4 short isoform in phase separation and active gene transcription. Nat Struct Mol Biol 27, 333–341 (2020). 
 \newline
-\noindent [18] Los, G. V. et al. HaloTag: A novel protein labeling technology for cell imaging and protein analysis. ACS Chem Biol 3, 373–382 (2008). 
+\noindent [27] Los, G. V. et al. HaloTag: A novel protein labeling technology for cell imaging and protein analysis. ACS Chem Biol 3, 373–382 (2008). 
 \newline
-\noindent [19] Bannister, A. J. Kouzarides, T. Regulation of chromatin by histone modifications. Cell Research vol. 21 381–395 (2011). 
+\noindent [28] Bannister, A. J. Kouzarides, T. Regulation of chromatin by histone modifications. Cell Research vol. 21 381–395 (2011). 
 \newline
-\noindent [22] Ricci, M. A., Manzo, C., García-Parajo, M. F., Lakadamyali, M. Cosma, M. P. Chromatin fibers are formed by heterogeneous groups of nucleosomes in vivo. Cell 160, 1145–1158 (2015). 
+\noindent [29] Ricci, M. A., Manzo, C., García-Parajo, M. F., Lakadamyali, M. Cosma, M. P. Chromatin fibers are formed by heterogeneous groups of nucleosomes in vivo. Cell 160, 1145–1158 (2015). 
 \newline
 \end{document}
 
