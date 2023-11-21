@@ -156,6 +156,22 @@ What is $P(H_{k}|\theta)$?
 
 \end{frame}
 
+\begin{frame}{Photon statistics of fluorescent markers}
+
+Long integration times $\Delta \rightarrow$ intensity fluctuations are Poisson
+
+\begin{figure}
+\includegraphics[width=13cm]{Noise.png}
+\end{figure}
+
+\begin{equation*}
+P(H_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
+\end{equation*}
+
+$P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\mathrm{SNR}$)
+ 
+\end{frame}
+
 \begin{frame}{Estimator precision determines resolution in localization microscopy}
 \begin{textblock*}{4cm}(1.0cm,1.0cm)
 \includegraphics[width=4cm]{MCMC/Figure_1.png}
@@ -235,37 +251,21 @@ What is $P(H_{k}|\theta)$?
 
 \begin{frame}{DeepSTORM: An early approach to dense SMLM with deep learning}
 
-\begin{textblock*}{10cm}(1cm,1.25cm)
-\includegraphics[width=13cm]{PSF2D.png}
+\begin{textblock*}{12cm}(1cm,1.25cm)
+\includegraphics[width=12cm]{PSF2D.png}
 \end{textblock*}
-\begin{textblock*}{12cm}(1.25cm,8.6cm)
+\begin{textblock*}{12cm}(1.25cm,8.2cm)
 \begin{itemize}
+\item MLE in high dimensional spaces can quickly become intractable
 \item We can model $P_{\Psi}(Z)$ with a convolutional neural network $\Psi$
 \end{itemize}
 \end{textblock*}
 
 \end{frame}
 
-
-\begin{frame}{Classical emission statistics of fluorescent markers}
-
-Long integration times $\Delta \rightarrow$ intensity fluctuations are Poisson
-
-\begin{figure}
-\includegraphics[width=13cm]{Noise.png}
-\end{figure}
-
-\begin{equation*}
-P(H_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
-\end{equation*}
-
-$P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\mathrm{SNR}$)
- 
-\end{frame}
-
 \begin{frame}{Counting fluorescent molecules with a photon counting camera}
 \begin{figure}
-\includegraphics[width=\textwidth]{Counting.png}
+\includegraphics[width=\textwidth]{QD-Counting.png}
 \end{figure}
 \end{frame}
 
