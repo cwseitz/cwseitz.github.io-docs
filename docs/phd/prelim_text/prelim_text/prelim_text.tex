@@ -173,6 +173,8 @@ The guanylate binding protein (GBP) gene cluster codes for a family of interfero
 
 We have demonstrated that deep learning algorithms can outperform standard maximum likelihood estimators in low SNR and high density regimes, indicating this is a suitable first step in our SMLM pipeline. In addition, our HMM appears to accurately model the photon detection process. The application of Bayesian methods to prevent overfitting with HMMs is common, and Hierarchical Dirichlet Prior HMM or HDP-HMM may be an appropriate choice in future work. 
 
+The HMM proves useful because we can actually observe the fluorescence in time, meaning that we have many samples from a Poisson distribution on photon counts. If we just take the sum, we have a single sample from another Poisson distribution (which would have a larger rate parameter), which is insufficient for predicting the underlying mass function, and therefore fitting the number of emitters. We could obtain this with many frames, but this is wasteful, and would take potentially seconds, when we can estimate it in much shorter periods of time
+
 \subsubsection{Computational Approach}
 
 Exploration of the high dimensional parameter space in dense STORM is fundamentally intractable. Therefore, the DeepSTORM architecture will be adopted to a probabilistic setting by modifying the output by adding a softmax layer. The arbitrary threshold for Bernoulli probabilities at each pixel conventionally used in DeepSTORM will be removed, and the maximum a posteriori (MAP) number of localizations will be selected from the probability map. We will then attempt to implement a gradient-based Markov Chain Monte Carlo (MCMC) routine, for computing localization uncertainties. 
@@ -211,7 +213,7 @@ P(H_{k}|\theta) &= P(S_{k})\circledast P(\xi_{k})\\
 &= A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
 \end{align}
 
-where $P(\xi_{k}) = \mathcal{N}(o_{k},\sigma_{k}^{2})$ and $P(S_{k}) = \mathrm{Poisson}(g_{k}\mu_{k})$,  $A$ is some normalization constant and $\circledast$ represents convolution. The rate $\mu_{k}$ is computed by integratino of the point spread function of the microscope (See Supplement). In practice, (3) is difficult to work with, so we look for an approximation. We will use the Poisson-Normal approximation for simplification. Consider,
+where $P(\xi_{k}) = \mathcal{N}(o_{k},\sigma_{k}^{2})$ and $P(S_{k}) = \mathrm{Poisson}(g_{k}\mu_{k})$,  $A$ is some normalization constant and $\circledast$ represents convolution. The rate $\mu_{k}$ is computed by the forward model which is an integration of the point spread function of the microscope (Supp. Eq 8). In practice, (3) is difficult to work with, so we look for an approximation. We will use the Poisson-Normal approximation for simplification. Consider,
 
 \begin{equation*}
 \xi_{k} - o_{k} + \sigma_{k}^{2} \sim \mathcal{N}(\sigma_{k}^{2},\sigma_{k}^{2}) \approx \mathrm{Poisson}(\sigma_{k}^{2})
@@ -239,7 +241,13 @@ where $\theta_{\mathrm{MLE}}$ represents the maximum likelihood coordinates of a
 &= \sum_{k}  \log n_{k}! + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
 \end{align}
 
-A stirling approximation can be made for the above log-factorial. First order derivatives of this sum can often be computed analytically, depending on $\mu$. The Poisson approximation is also convenient for computing the Fisher information matrix for $\theta_{\mathrm{MLE}}$ and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta_{\mathrm{MLE}}$, from below (Chao 2016). THe Fisher information is
+A stirling approximation can be made for the above log-factorial. First order derivatives of this sum can often be computed analytically, depending on $\mu$. 
+
+To summarize, out localization method depends on a likelihood for independent Poisson variables, where the parameter of each Poisson variable is a function of other latent variables (molecular coordinates). It is an analytical likelihood, and we have shown that we can write it down in terms of error functions. However, the full distribution over images cannot be written down explicitly - it can only be written at a single point in parameter space. We compute the likelihood first using the forward model (Supp. Eq 8) and then compute the Poisson data likelihood using calculated rates. This intermediate step is what prevents us from being able to write down a likelihood only in terms of common distributions.
+
+\subsection{The Cramer-Rao lower bound}
+
+The Poisson approximation is also convenient for computing the Fisher information matrix for $\theta_{\mathrm{MLE}}$ and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta_{\mathrm{MLE}}$, from below (Chao 2016). THe Fisher information is
 
 \begin{equation}
 I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) 

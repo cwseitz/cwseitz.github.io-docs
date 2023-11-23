@@ -278,34 +278,27 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \end{comment}
 
 \begin{frame}
-Suppose we have a model $\mathcal{M} = (S,T)$ with a spatial part $S$ and temporal part $T$. We want to compare different models, based on the ratio $P(\mathcal{M}_{1}|D)/P(\mathcal{M}_{2}|D)$.
 
-\begin{equation*}
-\frac{P(\mathcal{M}_{1}|D)}{P(\mathcal{M}_{2}|D)} = \frac{P(D|\mathcal{M}_{1})P(\mathcal{M}_{1})}{P(D|\mathcal{M}_{2})P(\mathcal{M}_{2})}
-\end{equation*}
+Consider a probabilistic model with the following components:
 
-Therefore, we need to find $P(D|\mathcal{M}_{n})$. If we assume the two model components are independent
+\begin{itemize}
+\item Continuous Coordinates: \( \Theta \)
+\item Presence of Molecule: \( B \) (output from a neural network)
+\item Total Number of Molecules: \( M \) (modeled by an HMM)
+\item Binned Coordinates: \( Z \)
+\end{itemize}
 
-\begin{equation*}
-P(D|\mathcal{M}_{n}) = P(D|S_{n})P(D|T_{n})
-\end{equation*}
+We aim to find the most probable configuration of these variables given the measured time series of photon counts \( X \). We maximize the posterior probability $P(\theta|X)$:
 
-We can use the HDP-HMM model to integrate out $\theta$ with MCMC:
+\begin{equation}
+\theta_{\text{MAP}} = \underset{\Psi,\Phi}{\mathrm{argmax}}\; P(\theta|Z)P(Z|B,M)P_{\Psi}(B|X)P_{\Phi}(M|X)
+\end{equation}
 
-\begin{equation*}
-P(D|T_{n}) = \int P(D,\theta | T_{n}) d\theta
-\end{equation*}
 
-Then we use a Langevin Monte Carlo (LMC) sampler for the spatial model
+Optimization of $P(\theta|Z,X) = P(\theta|X)P(\theta|Z)$ can be obtained by sampling and using $P(\theta|Z)$ as a prior distribution.
 
-\begin{equation*}
-P(D|S_{n}) = \int P(D,\phi | S_{n}) d\phi
-\end{equation*}
-
-Both of these sampling methods also provide the MAP estimates of the parameters $\theta,\phi$.
 
 \end{frame}
-
 
 \begin{comment}
 \begin{frame}{Chromatin nanodomains in a living Hela cell nucleus}
