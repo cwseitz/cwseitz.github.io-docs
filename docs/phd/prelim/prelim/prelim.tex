@@ -86,13 +86,10 @@
 \section{Single molecule localization microscopy}
 
 \begin{frame}{Genome organization and super resolution imaging}
-\begin{textblock*}{10cm}(1.0cm,1.5cm)
-\includegraphics[width=\textwidth]{Nucleosome}
+\begin{textblock*}{13cm}(1.0cm,1.5cm)
+\includegraphics[width=\textwidth]{Intro2}
 \end{textblock*}
-\begin{textblock*}{4.71cm}(9.5cm,1.5cm)
-\includegraphics[width=\textwidth]{Sample}
-\end{textblock*}
-\begin{textblock*}{\textwidth}(1.0cm,7.5cm)
+\begin{textblock*}{\textwidth}(1.0cm,7.75cm)
 \begin{itemize}
 \item Genome has a hierarchical structure, fundamental unit is the nucleosome
 \item We study chromatin organization by localizing fluorescently tagged nucleosomes
@@ -103,24 +100,18 @@
 
 \begin{frame}{Single molecule localization microscopy}
 \includegraphics[width=\textwidth]{Apps}
-\begin{itemize}
-\item Chromatin structure is dynamic and undergoes \textbf{phase separation}
-$\rightarrow$ We are pushing the limits of SMLM for time-resolution
-\end{itemize}
+\textit{Wu et al. Quantitative Data Analysis in Single-Molecule Localization Microscopy.}
 \end{frame}
 
 
 \begin{frame}{Single molecule localization microscopy}
-\begin{textblock*}{8cm}(1.0cm,1.5cm)
-\includegraphics[width=\textwidth]{dSTORM}
-\end{textblock*}
-\begin{textblock*}{4.71cm}(9.5cm,1.5cm)
-\includegraphics[width=\textwidth]{Sample}
+\begin{textblock*}{13cm}(1.0cm,1.5cm)
+\includegraphics[width=\textwidth]{Intro.png}
 \end{textblock*}
 \begin{textblock*}{\textwidth}(1.0cm,7.5cm)
 \begin{itemize}
 \item SMLM techniques are diffraction-unlimited
-\item Photoswitching enables resolution of emitters in time rather than space
+\item Photoswitching enables resolution of emitters below the diffraction limit
 \end{itemize}
 \end{textblock*}
 \end{frame}
@@ -172,7 +163,7 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
  
 \end{frame}
 
-\begin{frame}{Estimator precision determines resolution in localization microscopy}
+\begin{frame}{The definition of resolution in SMLM}
 \begin{textblock*}{4cm}(1.0cm,1.0cm)
 \includegraphics[width=4cm]{MCMC/Figure_1.png}
 \end{textblock*}
@@ -249,7 +240,7 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 
 \section{A novel approach to dense localization microscopy}
 
-\begin{frame}{DeepSTORM: An early approach to dense SMLM with deep learning}
+\begin{frame}{An early approach to dense SMLM with deep learning}
 
 \begin{textblock*}{12cm}(1cm,1.25cm)
 \includegraphics[width=12cm]{PSF2D.png}
@@ -257,47 +248,29 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \begin{textblock*}{12cm}(1.25cm,8.2cm)
 \begin{itemize}
 \item MLE in high dimensional spaces can quickly become intractable
-\item We can model $P_{\Psi}(Z)$ with a convolutional neural network $\Psi$
+\item We can model $P_{\Psi}(\theta_{0})$ with a convolutional neural network $\Psi$
 \end{itemize}
 \end{textblock*}
 
 \end{frame}
 
-\begin{frame}{Counting fluorescent molecules with a photon counting camera}
+\begin{frame}{High speed imaging for enhanced SMLM}
 \begin{figure}
-\includegraphics[width=\textwidth]{QD-Counting.png}
+\includegraphics[width=\textwidth]{SPADvCMOS.png}
 \end{figure}
-\end{frame}
-
-\begin{comment}
-\begin{frame}{A hidden markov model for counting fluorescent molecules}
-\begin{figure}
-\includegraphics[width=\textwidth]{HMM.png}
-\end{figure}
-\end{frame}
-\end{comment}
-
-\begin{frame}
-
-Consider a probabilistic model with the following components:
-
 \begin{itemize}
-\item Continuous Coordinates: \( \Theta \)
-\item Presence of Molecule: \( B \) (output from a neural network)
-\item Total Number of Molecules: \( M \) (modeled by an HMM)
-\item Binned Coordinates: \( Z \)
+\item Photon counting has been used in confocal microscopy for counting molecules
+\item This inspires counting molecules in widefield images for enhanced SMLM
 \end{itemize}
+\end{frame}
 
-We aim to find the most probable configuration of these variables given the measured time series of photon counts \( X \). We maximize the posterior probability $P(\theta|X)$:
-
-\begin{equation}
-\theta_{\text{MAP}} = \underset{\Psi,\Phi}{\mathrm{argmax}}\; P(\theta|Z)P(Z|B,M)P_{\Psi}(B|X)P_{\Phi}(M|X)
-\end{equation}
-
-
-Optimization of $P(\theta|Z,X) = P(\theta|X)P(\theta|Z)$ can be obtained by sampling and using $P(\theta|Z)$ as a prior distribution. We can solve $ \underset{Z}{\mathrm{argmax}}\; P(Z|B,M)$ by LoG detection on $B$ and taking $M$ highest peaks in $B$.
-
-
+\begin{frame}{Single photon counting for enhanced SMLM}
+\begin{figure}
+\includegraphics[width=\textwidth]{SPAD.png}
+\end{figure}
+\begin{itemize}
+\item At higher time resolution we can sample from this Poisson PMF 100-1000s of times in a single 10ms exposure
+\end{itemize}
 \end{frame}
 
 \begin{comment}
@@ -452,13 +425,10 @@ Antibunching now becomes apparent. If only a single emitter exists (and we have 
 \section{Phase separation of chromatin}
 
 \begin{frame}{Genome organization and single molecule localization microscopy}
-\begin{textblock*}{10cm}(1.0cm,1.5cm)
-\includegraphics[width=\textwidth]{Nucleosome}
+\begin{textblock*}{13cm}(1.0cm,1.5cm)
+\includegraphics[width=\textwidth]{Intro2}
 \end{textblock*}
-\begin{textblock*}{4.71cm}(9.5cm,1.5cm)
-\includegraphics[width=\textwidth]{Sample}
-\end{textblock*}
-\begin{textblock*}{\textwidth}(1.0cm,7.5cm)
+\begin{textblock*}{\textwidth}(1.0cm,7.75cm)
 \begin{itemize}
 \item Genome has a hierarchical structure, fundamental unit is the nucleosome
 \item We study chromatin organization by localizing fluorescently tagged nucleosomes
@@ -475,7 +445,6 @@ Antibunching now becomes apparent. If only a single emitter exists (and we have 
 \begin{itemize}
 \item Dense labeling of H2B-Halotag w/ fluorescent ligand JF646
 \item Reducing buffer is usually a primary thiol like cysteamine (MEA)
-\item Photoswitching of JF646 allows us to beat the diffraction limit
 \end{itemize}
 \end{textblock*}
 \end{frame}
@@ -561,6 +530,8 @@ Blue - DAPI (binds DNA minor groove)
 \item *:$P \leq 0.1$, **:$P \leq 0.01$
 \end{itemize}
 \end{frame}
+
+\section{Future Aims}
 
 
 \end{document}

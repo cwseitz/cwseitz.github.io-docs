@@ -264,6 +264,25 @@ I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{
 
 We employ a localization CNN architecture based on DeepSTORM which consists of three main modules. A complete mathematical description of the architecture is given in the original paper (Nehme 2020). The first module consists of successive dilated convolutions, followed by an upsampling module to increase the lateral resolution by a factor of 4. The third and last module adds additional convolutional blocks to refine localization estimates. This architecture can also be used for three-dimensional localization and thus the final output has $n_{z}$ channels. The final output is followed by an element-wise HardTanh (Maas 2013). A post-processing function $F_{PP}$ uses a user-defined threshold to produce a matrix of coordinates. We find the performance of this architecture on simulated images surpasses MLE, and approaches the Cramer-Rao lower bound at high signal levels, retaining a RMSE near 20nm for $K(\lambda/2\mathrm{NA}) \leq 5$, at high signal levels (Figure 3). 
 
+\subsection{Single photon counting for enhanced SMLM}
+
+
+\begin{itemize}
+\item Continuous Coordinates: \( \Theta \)
+\item Presence of Molecule: \( B \) (output from a neural network)
+\item Total Number of Molecules: \( M \) (modeled by an HMM)
+\item Binned Coordinates: \( Z \)
+\end{itemize}
+
+We aim to find the most probable configuration of these variables given the measured time series of photon counts \( X \). We maximize the posterior probability $P(\theta|X)$:
+
+\begin{equation}
+\theta_{\text{MAP}} = \underset{\Psi,\Phi}{\mathrm{argmax}}\; P(\theta|Z)P(Z|B,M)P_{\Psi}(B|X)P_{\Phi}(M|X)
+\end{equation}
+
+
+Optimization of $P(\theta|Z,X) = P(\theta|X)P(\theta|Z)$ can be obtained by sampling and using $P(\theta|Z)$ as a prior distribution. We can solve $ \underset{Z}{\mathrm{argmax}}\; P(Z|B,M)$ by LoG detection on $B$ and taking $M$ highest peaks in $B$.
+
 \begin{comment}
 \subsection{Hidden Markov Model for counting fluorescent emitters}
 
