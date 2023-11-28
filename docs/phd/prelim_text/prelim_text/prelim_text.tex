@@ -13,6 +13,7 @@
 \usepackage{bm}
 \usepackage{bbm}
 \usepackage{comment}
+\usepackage{caption}
 
 %% Use these commands to set biographic information for the title page:
 \title{Visualizing nucleosome phase separation with super resolution microscopy}
@@ -94,13 +95,12 @@ While the use of deep models has shown great promise for dense SMLM, there remai
 
 Molecular counting with photon statistics has a fairly simple motivation: a photon emitted by a fluorescent molecule can only be detected once. Coincidence of photons at multiple detector elements provides evidence that two or more molecules are present in the imaged region. Combining the ideas of conventional super-resolution approaches, such as dSTORM, with photon statistics may prove to be a powerful set of methods for bioimaging. Innovations in single photon detection technologies have begun to be integrated into fluorescence microscopes (Forbes 2019). Importantly, single photon detectors such as single photon avalanche photodiodes (SPAD) arrays have three orders of magnitude higher temporal resolutions than standard sCMOS cameras, single photon sensitivity, and theoretically zero readout noise. Such properties make these devices highly desirable for imaging applications; however, application of SPAD arrays in imaging have been limited to small bundles of detector elements combined with laser scanning (Israel 2017; Forbes 2019; Tenne 2019). Recently, SPAD cameras have become commercially available, potentially bringing many of the advantages of single photon detection to widefield fluorescence microscopy. As a proof of principle, we image quantum dots (QDs) at 1 MHz with a 512x512 SPAD array, and devise a fully probabilistic model that blends a Hidden Markov Model (HMM), CNN, and MCMC for dense localization microscopy (See Methods).
 
-
-\subsection{Super-resolution of transcriptional condensates in living cells}
-
 \begin{figure}
 \includegraphics[width=15cm]{PSF2D.png}
-\caption{\textbf{Deep networks outperform MLE in dense localization}} (A) DeepSTORM3D architecture with 612K trainable parameters used for localization. (B-E) Lateral root mean squared error and Jaccard index of MLE and CNN estimators with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$. Cramer-Rao lower bound shown in gray\end{figure}
+\caption{\textbf{Deep networks outperform MLE in dense localization} (A) DeepSTORM3D architecture with 612K trainable parameters used for localization. (B-E) Lateral root mean squared error and Jaccard index of MLE and CNN estimators with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$. Cramer-Rao lower bound shown in gray}
+\end{figure}
 
+\subsection{Super-resolution of transcriptional condensates in living cells}
 
 Super-resolution imaging with intensity information alone remains a highly valuable technique, and we demonstrate this by live cell super-resolution imaging of nucleosome-BRD4 interactions in transcriptional condensates. The nucleosome is an octamer of histone proteins and is the fundamental unit of chromatin - a complex of DNA and protein which forms the basic scaffold for a variety of biomolecular processes in the nucleus. Super-resolved nucleosome organization has been studied extensively in various epigenomic states to reveal segregated nanoclusters, dispersed nanodomains, and compact large aggregates. Indeed, nucleosomes assemble into heterogeneous clusters of variable sizes, interspersed with nucleosome-depleted regions (Ricci 2015). Histones can be decorated with various post-translational modifications such as acetylation, methylation, phosphorylation, and ubiquination. The recruitment of proteins and complexes with specific enzymatic activities is now a well-accepted dogma of how modifications mediate their function. Histone modifications can influence the transcription of genes, and many other DNA processes such as repair, replication and recombination (Bannister and Kouzarides, 2011). 
 
@@ -113,17 +113,18 @@ Selective bromodomain inhibitors, such as JQ1 are often employed to displace BRD
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=14cm]{QD-Counting.png}
+\includegraphics[width=17cm]{SPAD.png}
 \end{center}
-\caption{\textbf{Counting quantum dots with a Hidden Markov Model}. (A) Cartoon representing photon counting of an aggregate of quantum dots (B,C) Structure of a single CdSe/ZnS quantum dot and its optical transitions (D) Summed image of a QD aggregate. (E) photon counts over time for the sum in (D) (F) Histogram of counts over time and HMM fit}
+\caption{\textbf{Blending deep models and single photon counting for enhanced SMLM}. (A) Cartoon representing photon counting of an aggregate of quantum dots (B,C) Structure of a single CdSe/ZnS quantum dot and its optical transitions (D) Summed image of a QD aggregate. (E) photon counts over time for the sum in (D) (F) Histogram of counts over time and HMM fit}
 \end{figure}
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=13cm]{BRD4-Results.png}
+\includegraphics[width=18cm]{BRD4-Results.png}
 \end{center}
-\caption{\textbf{Super resolution of chromatin structure at BRD4-positive loci}. (A) Density and pointillist representation of nucleosome organization in a living cell recovered with MLE (B) Principle of Besag's L-Function for cluster analysis (C) Average L-function for living Hela cells exposed to 5 percent 1,6 Hexanediol or 1uM JQ1 for 8h. Envelope drawn at one standard deviation}
 \end{figure}
+
+\captionof{figure}{\textbf{Super resolution of chromatin structure at BRD4-positive loci}. (A) Density and pointillist representation of nucleosome organization in a living cell recovered with MLE (B) Principle of Besag's L-Function for cluster analysis (C) Average L-function for living Hela cells exposed to 5 percent 1,6 Hexanediol or 1uM JQ1 for 8h. Envelope drawn at one standard deviation}
 
 \subsection{Deep networks outperform MLE in dense localization}
 
@@ -263,6 +264,7 @@ I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{
 
 We employ a localization CNN architecture based on DeepSTORM which consists of three main modules. A complete mathematical description of the architecture is given in the original paper (Nehme 2020). The first module consists of successive dilated convolutions, followed by an upsampling module to increase the lateral resolution by a factor of 4. The third and last module adds additional convolutional blocks to refine localization estimates. This architecture can also be used for three-dimensional localization and thus the final output has $n_{z}$ channels. The final output is followed by an element-wise HardTanh (Maas 2013). A post-processing function $F_{PP}$ uses a user-defined threshold to produce a matrix of coordinates. We find the performance of this architecture on simulated images surpasses MLE, and approaches the Cramer-Rao lower bound at high signal levels, retaining a RMSE near 20nm for $K(\lambda/2\mathrm{NA}) \leq 5$, at high signal levels (Figure 3). 
 
+\begin{comment}
 \subsection{Hidden Markov Model for counting fluorescent emitters}
 
 Consider a Poisson hidden Markov model with an unknown state space dimension. Let $s_{n}$ represent the hidden state at time $n$, and $w_{n}$ denote the observed state. The hidden state distribution is parameterized by $\phi$, transition matrices by $\Pi$, and the initial state by $\rho$. We explore various dimensionalities, trying different initial states $\rho_i$ for $i = 1, 2, ..., 10$. The log likelihood of the observed sequence of states is computed for each dimensionality. The model is implemented using the `hmmlearn` library in Python, utilizing the expectation-maximization algorithm for parameter estimation.
@@ -312,7 +314,7 @@ In the M-step, update the parameters:
 \[
 \phi_s = \frac{\sum_{t=1}^{T} \gamma_t(s) \cdot w_t}{\sum_{t=1}^{T} \gamma_t(s)}
 \]
-
+\end{comment}
 
 
 \subsection{Computation of Besag's L-function}
@@ -411,13 +413,14 @@ Cells were washed and lysis buffer added (RIPA buffer: PMSF: protease inhibitor 
 \caption{\textbf{Computing epistemic uncertanties with Metropolis-Hastings}. (top left) Simulated point spread function for $N_{0}=10^{3}$ photons with a red x at $x_{\mathrm{MLE}}$ and $y_{\mathrm{MLE}}$ (bottom left) Acceptance rate of Markov chain (middle) Markov chains sampling from the posterior distribution on molecule coordinates in 3D, with the maximum likelihood estimation in dashed blue (right) Estimated posterior marginals on the localization parameters with their respective uncertanties}
 \end{figure}
 
+\begin{comment}
 \begin{figure}
 \begin{center}
 \includegraphics[width=14cm]{HMM.png}
 \end{center}
 \caption{\textbf{Graphical representation of Hidden Markov Model (HMM) for counting QDs} See main text for full description}
 \end{figure}
-
+\end{comment}
 
 %\begin{figure}
 %\begin{center}
