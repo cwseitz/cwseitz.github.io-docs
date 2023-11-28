@@ -49,7 +49,7 @@
 
 \abstract
 
-Single-molecule localization microscopy (SMLM) techniques, such as direct stochastic optical reconstruction microscopy (dSTORM), can be used to produce a pointillist representation of fluorescently-labeled biological structures at diffraction-unlimited precision. Direct STORM approaches leverage the deactivation of standard fluorescent tags, followed by spontaneous or photoinduced reactivation, allowing resolution of fluorophores at distances below the diffraction limit. This basic principle remains one of the method's primary limitations - standard SMLM fitting routines require tight control of activation and reactivation to maintain sparse emitters, presenting a tradeoff between imaging speed and labeling density. Here, I present two parallel projects, which aim to push the current state of the art in SMLM and apply SMLM to the study of gene regulation, respectively. The former represents a novel localization technique for dense SMLM based on deep probabilistic modeling and photon statistics. In the latter, conventional dSTORM is adapted for live cell imaging of chromatin nanodomains, demonstrating that BRD4 protein concentrates in nucleosome depleted regions.
+Single-molecule localization microscopy (SMLM) techniques, such as direct stochastic optical reconstruction microscopy (dSTORM), can be used to produce a pointillist representation of fluorescently-labeled biological structures at diffraction-unlimited precision. Direct STORM approaches leverage the deactivation of standard fluorescent tags, followed by spontaneous or photoinduced reactivation, allowing resolution of fluorophores at distances below the diffraction limit. This basic principle remains one of the method's primary limitations - standard SMLM fitting routines require tight control of activation and reactivation to maintain sparse emitters, presenting a tradeoff between imaging speed and labeling density. Here, I present two parallel projects, which aim to push the current state of the art in SMLM and apply SMLM to the study of gene regulation. The former represents a novel localization technique for dense SMLM, based on deep probabilistic modeling and photon statistics. In the latter, conventional dSTORM is adapted for live cell imaging of chromatin nanodomains, demonstrating that BRD4 protein concentrates in nucleosome depleted regions.
 
 \clearpage
 
@@ -65,13 +65,13 @@ Single molecule localization microscopy (SMLM) relies on the temporal resolution
 
 \subsection{The definition of resolution in SMLM}
 
-The distribution of a particular biomolecule in the cell can be described as a probability density over a two-dimensional space, casting super-resolution essentially a density estimation problem. Intuitively, the spatial resolution of SMLM images then increases as we draw more samples from this density - a concept which is made mathematically precise by the so-called Fourier ring correlation or FRC. Using FRC, one can compute image resolution as the spatial frequency at which a correlation function in the frequency domain drops below a threshold, typically taken to be $1/7$ (Figure 2). According to this theory, reducing localization uncertainty while increasing the number of samples, results in an increase in image resolution (Nieuwenhuizen 2013). However, there of course remains a fundamental limit to the the minimal localization uncertainty which can be obtained.
+The distribution of a particular biomolecule in the cell can be described as a probability density over a two-dimensional space, casting super-resolution as a density estimation problem. Intuitively, the spatial resolution of SMLM images then increases as we draw more samples from this density - a concept which is made mathematically precise by the so-called Fourier ring correlation or FRC. Using FRC, one can compute image resolution as the spatial frequency at which a correlation function in the frequency domain drops below a threshold, typically taken to be $1/7$ (Figure 2). According to this theory, reducing localization uncertainty while increasing the number of samples, results in an increase in image resolution (Nieuwenhuizen 2013). However, there of course remains a fundamental limit to the the minimal localization uncertainty which can be obtained.
 
-Localization uncertainty, typically the RMSE of a maximum likelihood or similar statistical estimator, is bounded from below by the inverse of the Fisher information matrix, known as the Cramer-Rao lower bound (Chao 2016). Localization uncertainties in sparse conditions are often tens of nanometers, although recent work on integration of Bayesian priors with modulation enhanced SMLM (meSMLM) or structured illumination with MINFLUX, has reduced spatial resolution below 1 nanometer (Kalisvaart 2022, Gwosh 2020). Nevertheless, managing the increase in localization uncertainty at high labeling density still remains a major bottleneck to SMLM. Static uncertainty due to molecular crowding can be partially amelioriated by using pairwise or higher-order temporal correlations within a pixel neighborhood, known as stochastic optical fluctuation imaging or SOFI (Dertinger 2009). Other approaches such as stimulated emission and depletion (STED) imaging bring control over the photophysical state of a chosen subset of the sample, yet the need for laser scanning prevents widespread application in live-cell studies. The spatial resolution and relative simplicity of SMLM techniques remains unmatched, inciting an effort to increase the resolution of SMLM techniques and explore avenues towards time resolved SMLM.
+Localization uncertainty, typically the RMSE of a maximum likelihood or similar statistical estimator, is bounded from below by the inverse of the Fisher information matrix, known as the Cramer-Rao lower bound (Chao 2016). Localization uncertainties in sparse conditions are often tens of nanometers, although recent work on integration of Bayesian priors with modulation enhanced SMLM (meSMLM) or structured illumination with MINFLUX, has reduced spatial resolution below to a few nanometers (Kalisvaart 2022, Gwosh 2020). Nevertheless, managing the increase in localization uncertainty at high labeling density remains a major bottleneck to SMLM. Static uncertainty due to molecular crowding can be partially amelioriated by using pairwise or higher-order temporal correlations within a pixel neighborhood, known as stochastic optical fluctuation imaging or SOFI (Dertinger 2009). Other approaches such as stimulated emission and depletion (STED) imaging bring control over the photophysical state of a chosen subset of the sample, yet the need for laser scanning prevents widespread application in live-cell studies. The spatial resolution and relative simplicity of SMLM techniques remains unmatched, inciting an effort to increase the resolution of SMLM techniques and explore avenues towards time resolved SMLM.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{Intro.png}
-\caption{\textbf{Stochastic optical reconstruction microscopy (STORM)}. (A) Single molecules are resolved by separating their fluorescent emission in time, using fluorophores with multiple photophysical states (B) Example super-resolution image of H2B protein in a living HeLa cell nucleus at 37C}
+\caption{\textbf{Stochastic optical reconstruction microscopy (STORM)}. (A) Single molecules are resolved by separating their fluorescent emission in time, using fluorophores with multiple photophysical states (B) Example super-resolution image of H2B protein in a living Hela cell nucleus at 37C, 5 percent CO2. Scalebar 5um.}
 \end{figure}
 
 
@@ -79,7 +79,7 @@ Localization uncertainty, typically the RMSE of a maximum likelihood or similar 
 \begin{center}
 \includegraphics[width=13cm]{FRC.png}
 \end{center}
-\caption{\textbf{Dense localization increases image resolution and enables time-resolved STORM}. A pair of subsets is drawn from the full list of localizations for various fractions of the total number of localizations, and isotropic Gaussian kernel density estimation is performed with $\sigma=20\mathrm{nm}$. The Fourier Ring Correlation (Methods) is calculated for the pair and plotted as a function of spatial frequency.}
+\caption{\textbf{Dense localization increases image resolution and enables time-resolved STORM}. A pair of subsets is drawn from the full list of localizations for various fractions of the total number, and isotropic Gaussian kernel density estimation is performed with $\sigma=20\mathrm{nm}$. The Fourier Ring Correlation (Methods) is calculated for the pair and plotted as a function of spatial frequency. $R$ is the spatial frequency where FRC crossed the threshold (dashed line). $q_{R} = 1/R$, errors on $q_{R}$ drawn at one standard deviation ($n=5$). }
 \end{figure}
 
 
@@ -93,44 +93,44 @@ While the use of deep models has shown great promise for dense SMLM, there remai
 
 \subsection{Enhanced SMLM with photon statistics}
 
-Molecular counting with photon statistics has a fairly simple motivation: a photon emitted by a fluorescent molecule can only be detected once. Coincidence of photons at multiple detector elements provides evidence that two or more molecules are present in the imaged region. Combining the ideas of conventional super-resolution approaches, such as dSTORM, with photon statistics may prove to be a powerful set of methods for bioimaging. Innovations in single photon detection technologies have begun to be integrated into fluorescence microscopes (Forbes 2019). Importantly, single photon detectors such as single photon avalanche photodiodes (SPAD) arrays have three orders of magnitude higher temporal resolutions than standard sCMOS cameras, single photon sensitivity, and theoretically zero readout noise. Such properties make these devices highly desirable for imaging applications; however, application of SPAD arrays in imaging have been limited to small bundles of detector elements combined with laser scanning (Israel 2017; Forbes 2019; Tenne 2019). Recently, SPAD cameras have become commercially available, potentially bringing many of the advantages of single photon detection to widefield fluorescence microscopy. As a proof of principle, we image quantum dots (QDs) at 1 MHz with a 512x512 SPAD array, and devise a fully probabilistic model that blends a Hidden Markov Model (HMM), CNN, and MCMC for dense localization microscopy (See Methods).
+Molecular counting with photon statistics has a fairly simple motivation: a photon emitted by a fluorescent molecule can only be detected once. Coincidence of photons at multiple detector elements provides evidence that two or more molecules are present in the imaged region. Combining the ideas of conventional super-resolution approaches, such as dSTORM, with photon statistics may prove to be a powerful set of methods for bioimaging. Innovations in single photon detection technologies have begun to be integrated into fluorescence microscopes (Forbes 2019). Importantly, single photon detectors such as single photon avalanche photodiodes (SPAD) arrays have three orders of magnitude higher temporal resolutions than standard sCMOS cameras, single photon sensitivity, and theoretically zero readout noise. Such properties make these devices highly desirable for imaging applications; however, application of SPAD arrays in imaging have been limited to small bundles of detector elements combined with laser scanning (Israel 2017; Forbes 2019; Tenne 2019). Recently, SPAD cameras have become commercially available, potentially bringing many of the advantages of single photon detection to widefield fluorescence microscopy. As a proof of principle, we image quantum dots (QDs) at 1 MHz with a 512x512 SPAD array, and introduce a fully probabilistic model for dense localization microscopy (See Future Aims).
 
 \begin{figure}
 \includegraphics[width=15cm]{PSF2D.png}
-\caption{\textbf{Deep networks outperform MLE in dense localization} (A) DeepSTORM3D architecture with 612K trainable parameters used for localization. (B-E) Lateral root mean squared error and Jaccard index of MLE and CNN estimators with respect to the incident photon count and the number of molecules within the diffraction limit $\lambda/2\mathrm{NA}$. Cramer-Rao lower bound shown in gray}
+\caption{\textbf{Deep networks outperform MLE in dense localization} (A) DeepSTORM architecture with 612K trainable parameters used for localization. (B-E) Lateral root mean squared error and Jaccard index of MLE and CNN estimators with respect to the incident photon count and the number of molecules within the diffraction limit. $10^3$ images simulated by drawing $K$ coordinate pairs uniformly on a disc of radius $\lambda/2\mathrm{NA}$, assuming $\lambda = 640\mathrm{nm}$. Cramer-Rao lower bound shown in gray}
 \end{figure}
 
 \subsection{Super-resolution of transcriptional condensates in living cells}
 
-Super-resolution imaging with intensity information alone remains a highly valuable technique, and we demonstrate this by live cell super-resolution imaging of nucleosome-BRD4 interactions in transcriptional condensates. The nucleosome is an octamer of histone proteins and is the fundamental unit of chromatin - a complex of DNA and protein which forms the basic scaffold for a variety of biomolecular processes in the nucleus. Super-resolved nucleosome organization has been studied extensively in various epigenomic states to reveal segregated nanoclusters, dispersed nanodomains, and compact large aggregates. Indeed, nucleosomes assemble into heterogeneous clusters of variable sizes, interspersed with nucleosome-depleted regions (Ricci 2015). Histones can be decorated with various post-translational modifications such as acetylation, methylation, phosphorylation, and ubiquination. The recruitment of proteins and complexes with specific enzymatic activities is now a well-accepted dogma of how modifications mediate their function. Histone modifications can influence the transcription of genes, and many other DNA processes such as repair, replication and recombination (Bannister and Kouzarides, 2011). 
+Super-resolution imaging with intensity information alone remains a highly valuable technique, and we demonstrate this by live cell super-resolution of nucleosome-BRD4 interactions in Hela cell nuclei. The nucleosome is the fundamental unit of chromatin - a complex of DNA and protein which forms the basic scaffold for a variety of biomolecular processes in the nucleus. Super-resolved nucleosome organization has been studied extensively in various epigenomic states to reveal segregated nanoclusters, dispersed nanodomains, and compact large aggregates. Indeed, nucleosomes assemble into heterogeneous clusters of variable sizes, interspersed with nucleosome-depleted regions (Ricci 2015). Histones can be decorated with various post-translational modifications such as acetylation, methylation, phosphorylation, and ubiquination. The recruitment of proteins and complexes with specific enzymatic activities is now a well-accepted dogma of how modifications mediate their function. Histone modifications can influence the transcription of genes, and many other DNA processes such as repair, replication and recombination (Bannister and Kouzarides, 2011). 
 
 Here, we use a direct STORM approach to study spatial organization of nucleosomes in living cells, with a particular focus on the structure of phase separated condensates containing bromodomain protein 4 (BRD4) protein. BRD4 plays an important role in diverse cellular functions such as transcription, replication, epigenetic regulation, and DNA repair, and has been implicated in cancer and autoimmune diseases. BRD4 acetylates Lysine 122 on H3 (H3K122), a residue critical for nucleosome stability, resulting in nucleosome eviction and chromatin decompaction (Devaiah 2016). The intrinsically disordered regions (IDRs) of BRD4 are thought to facilitate its phase separation with coactivators such as MED1. The phase separation properties of BRD4 have been well-studied in several cell lines (Han 2020), and in the context of super-enhancers (Sabari 2018).
 
-Selective bromodomain inhibitors, such as JQ1 are often employed to displace BRD4 protein from chromatin (Filippakopoulos 2010). 1,6-hexanediol (1,6-HD), an aliphatic alcohol, can inhibit weak hydrophobic protein-protein interactions required for the droplet formation (droplet melting activity) and is widely used to elucidate the formation of nuclear bodies (Duster 2021). However, the relationship of BRD4, and phase separation at large, with the spatial structure of nucleosome nanodomains remains unclear. As BRD4 is a critical component of phase separated transcriptional condensates, we take a complementary approach, consisting of specific and non-specific inhibition of BRD4-containing condensates using small molecle drugs and BRD4 mutation or knockdown.
+Selective bromodomain inhibitors, such as JQ1 are often used to impair the chromatin-reading function, displacing BRD4 protein from chromatin (Filippakopoulos 2010). Also, 1,6-hexanediol (1,6-HD), an aliphatic alcohol, can inhibit weak hydrophobic protein-protein interactions required for droplet formation and is widely used to elucidate the formation of nuclear bodies (Duster 2021). However, the relationship of BRD4, and phase separation at large, with the spatial structure of nucleosome nanodomains remains unclear. As BRD4 is a critical component of phase separated transcriptional condensates, we take a complementary approach, consisting of specific and non-specific inhibition of BRD4-containing condensates using small molecule drugs and BRD4 mutation or knockdown. Our preliminary results indicate the BRD4 is primarily present in nucleosome depleted regions and the chromatin reading function in necessary for the maintenance for chromatin structure.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=15cm]{SPADvCMOS.png}
+\end{center}
+\caption{\textbf{SPAD cameras have lower sensitivity compared to CMOS}. (left) Quantum dots imaged with a SPAD camera using 100X/1.4NA oil immersion objective with continous-wave 640nm laser excitation. (left inset) Peak photon counts of isolated QDs using SPAD. (right) Quantum dots imaged with a CMOS camera using 60X/1.4NA oil immersion objective with continous-wave 640nm laser excitation. (right inset) Peak photon counts of isolated QDs using CMOS (right)}
+\end{figure}
+
+\captionof{figure}{\textbf{Super-resolution of nucleosome-BRD4 interactions in living cells}. (A) Density and pointillist representation of nucleosome organization in a living cell recovered with MLE (B) Principle of Besag's L-Function for cluster analysis (C) Two color image with super-resolved nucleosomes and diffraction limited BRD4 signal. (D) Average L-function for living Hela cells exposed to 5 percent 1,6 Hexanediol or 1uM JQ1 for 8h. Envelope drawn at one standard deviation}
 
 
 \section{Results}
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=17cm]{SPAD.png}
-\end{center}
-\caption{\textbf{Blending deep models and single photon counting for enhanced SMLM}. (A) Cartoon representing photon counting of an aggregate of quantum dots (B,C) Structure of a single CdSe/ZnS quantum dot and its optical transitions (D) Summed image of a QD aggregate. (E) photon counts over time for the sum in (D) (F) Histogram of counts over time and HMM fit}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=18cm]{BRD4-Results.png}
+\includegraphics[width=17cm]{BRD4-Results.png}
 \end{center}
 \end{figure}
-
-\captionof{figure}{\textbf{Super resolution of chromatin structure at BRD4-positive loci}. (A) Density and pointillist representation of nucleosome organization in a living cell recovered with MLE (B) Principle of Besag's L-Function for cluster analysis (C) Average L-function for living Hela cells exposed to 5 percent 1,6 Hexanediol or 1uM JQ1 for 8h. Envelope drawn at one standard deviation}
 
 \subsection{Deep networks outperform MLE in dense localization}
 
 Two major factors contribute to localization errors in SMLM: (i) the noise characteristics of CMOS cameras and (ii) crowding of molecules within a diffraction limited region. Maxmimum likelihood estimation (MLE) is frequently used for isolated molecules and high signal levels, retaining localization errors ~40nm (Figure 3b). However, MLE performance tends to degrade in low SNR and dense regimes where the number of emitters within the diffraction limit is greater than one ($K(\lambda/2\mathrm{NA}) > 1$). We employ a convolutional neural network called DeepSTORM, which successively upsamples a monochrome image and outputs a localization map, which can be post-processed to produce molecular coordinates in 2D or 3D (Figure 3a).  We demonstrate that this architecture can outperform maximum likelhood estimation for all signal levels and molecular densities tested (Figure 3b-e).
 
-\subsection{Counting quantum dots with a Hidden Markov Model}
+\subsection{Imaging quantum dots with a photon counting camera}
 
 Dense aggregates of proteins and nucleic acids with molecular spacing below the diffraction limit are commonplace in the nucleus, creating the need for accurate counting techniques. The ability to accurately count fluorescent emitters using photon statistics has been so far limited to confocal microscopy setups, which are not typically used when imaging dynamics in living cells. As a proof of principle, we imaged organic quantum dots 15-20nm in size. These nanocrystals are composed of a CdSe semiconductor core, ZnS semiconductor shell, and an amphiphilic polymer coating is applied to confer water solubility and additional functionalization with antibodies, oligonucleotides, etc (Figure 4B). We imaged quantum dots coated on a glass coverslip with a SPAD camera at 1 MHz, and applied our HMM to photon counts from both isolated emitters as well as dense aggregates (Figure 4A,D). Our data indicates that a Poisson HMM models the data well, as measured by the log-likelihood of the sequence of photon counts and distribution of emissions over time (Figure 4E,F). Model selection is carried out purely based on log-likelihood of the sequence.
 
@@ -165,15 +165,39 @@ The guanylate binding protein (GBP) gene cluster codes for a family of interfero
 
 \subsection{Specific Aim 1: Integrate deep models with counting algorithms for enhanced SMLM}
 
+\begin{figure}
+\begin{center}
+\includegraphics[width=17cm]{SPAD.png}
+\end{center}
+\caption{\textbf{Blending deep models and single photon counting for enhanced SMLM}. (left) Simplified schematic of microscopy setup (A) Conceptual figure of the coherent state with Poisson statistics: $g^{(2)}(\tau)=1$ (B) Photon counts in $1\mathrm{us}$ from an aggregate of QDs over $10\mathrm{ms}$. (C) Distribution of photon counts in $1\mathrm{us}$ for an isolated QD and an aggregate. (D) Schematic of inference process - see Future Aims for details}
+\end{figure}
+
 \subsubsection{Rationale and hypothesis}
 
-We have demonstrated that deep learning algorithms can outperform standard maximum likelihood estimators in low SNR and high density regimes, indicating this is a suitable first step in our SMLM pipeline. In addition, our HMM appears to accurately model the photon detection process. The application of Bayesian methods to prevent overfitting with HMMs is common, and Hierarchical Dirichlet Prior HMM or HDP-HMM may be an appropriate choice in future work. 
-
-The HMM proves useful because we can actually observe the fluorescence in time, meaning that we have many samples from a Poisson distribution on photon counts. If we just take the sum, we have a single sample from another Poisson distribution (which would have a larger rate parameter), which is insufficient for predicting the underlying mass function, and therefore fitting the number of emitters. We could obtain this with many frames, but this is wasteful, and would take potentially seconds, when we can estimate it in much shorter periods of time
+We have demonstrated that deep learning algorithms can outperform standard maximum likelihood estimators in low SNR and high density regimes, indicating this is a suitable first step in our SMLM pipeline. In addition, modeling photon statistics using high speed imaging has shown promise as a pathway to rigorously counting fluorescent molecules in the sample. To be clear, at high speeds we can divide a $\Delta=10\mathrm{ms}$ exposure into $\Delta=1-10\mathrm{us}$ frames. Thus we obtain both spatial information needed for localization as well as thousands of samples from the distribution on photon counts. In other words, using long exposures like $\Delta=10\mathrm{ms}$ is wasteful, and it would take potentially seconds to obtain a similar number of samples for estimating a value for $M$.
 
 \subsubsection{Computational Approach}
 
-Exploration of the high dimensional parameter space in dense STORM is fundamentally intractable. Therefore, the DeepSTORM architecture will be adopted to a probabilistic setting by modifying the output by adding a softmax layer. The arbitrary threshold for Bernoulli probabilities at each pixel conventionally used in DeepSTORM will be removed, and the maximum a posteriori (MAP) number of localizations will be selected from the probability map. We will then attempt to implement a gradient-based Markov Chain Monte Carlo (MCMC) routine, for computing localization uncertainties. 
+We maximize the posterior probability $P(\theta|X)$, where $\theta$ are molecular coordinates and $X$ is a time series of photon counts.
+
+\begin{align*}
+\theta_{\text{MAP}} &= \underset{\Psi}{\mathrm{argmax}}\; P(\theta|X)\\
+&= \underset{\Psi}{\mathrm{argmax}}\; P(\theta|\theta_{0})P(\theta_{0}|B,M)P_{\Psi}(B|S)P(M|X)
+\end{align*}
+
+The distribution on photon counts $P(X|M)=P(M|X)$ is Poisson, assuming the bright state of the fluorophore is highly stable, giving a coherent state (Vlasenko 2020). Let $\mu_{0}=\lambda_{0}\Delta$ be the measured rate parameter for an isolated fluorophore. By imaging at high speeds of 1MHz i.e., $\Delta = 1\mathrm{us}$, we obtain samples from $P(X|M)$ and can fit $X$ with a model $\mathrm{Poisson}(\mu_{0}m)$ for some integer $m$ and perform model selection on $m$.
+
+A convolutional neural network $\Psi$ predicts $B$ from $S$ (the time sum of $X$). $B$ represents a Bernoulli probability at each pixel. We then select the initial condition $\theta_{0}$ by rejection sampling of $M$ objects conditioned on $B$. Finally, we can measure the quality of $\theta_{0}$ by using gradient-based MCMC to explore the parameter space surrounding $\theta_{0}$. Specifically, we modifying the likelihood in (5) to account for multiple emitters and zero readout noise
+
+\begin{equation*}
+\mu_{k}' = \mu_{k} = \sum_{m=1}^{M} \mu_{k,m}
+\end{equation*}
+
+Then, by computing gradients of (5) as before, we have the Langevin update rule (Welling and Teh 2011)
+
+\[ \theta_{t+1} = \theta_t + \frac{\epsilon}{2} \nabla \ell(\theta_t) + \sqrt{\epsilon} \cdot \mathcal{N}(0, I) \]
+
+where $\epsilon$ is called the step-size. By obtaining samples of $\theta$ we can compute important statistics such as $\langle \ell \rangle$ as a quality metric for $\theta_{0}$.
 
 \subsection{Specific Aim 2: Determine a role of chromatin architecture in phase separation}
 
@@ -264,24 +288,6 @@ I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{
 
 We employ a localization CNN architecture based on DeepSTORM which consists of three main modules. A complete mathematical description of the architecture is given in the original paper (Nehme 2020). The first module consists of successive dilated convolutions, followed by an upsampling module to increase the lateral resolution by a factor of 4. The third and last module adds additional convolutional blocks to refine localization estimates. This architecture can also be used for three-dimensional localization and thus the final output has $n_{z}$ channels. The final output is followed by an element-wise HardTanh (Maas 2013). A post-processing function $F_{PP}$ uses a user-defined threshold to produce a matrix of coordinates. We find the performance of this architecture on simulated images surpasses MLE, and approaches the Cramer-Rao lower bound at high signal levels, retaining a RMSE near 20nm for $K(\lambda/2\mathrm{NA}) \leq 5$, at high signal levels (Figure 3). 
 
-\subsection{Single photon counting for enhanced SMLM}
-
-
-\begin{itemize}
-\item Continuous Coordinates: \( \Theta \)
-\item Presence of Molecule: \( B \) (output from a neural network)
-\item Total Number of Molecules: \( M \) (modeled by an HMM)
-\item Binned Coordinates: \( Z \)
-\end{itemize}
-
-We aim to find the most probable configuration of these variables given the measured time series of photon counts \( X \). We maximize the posterior probability $P(\theta|X)$:
-
-\begin{equation}
-\theta_{\text{MAP}} = \underset{\Psi,\Phi}{\mathrm{argmax}}\; P(\theta|Z)P(Z|B,M)P_{\Psi}(B|X)P_{\Phi}(M|X)
-\end{equation}
-
-
-Optimization of $P(\theta|Z,X) = P(\theta|X)P(\theta|Z)$ can be obtained by sampling and using $P(\theta|Z)$ as a prior distribution. We can solve $ \underset{Z}{\mathrm{argmax}}\; P(Z|B,M)$ by LoG detection on $B$ and taking $M$ highest peaks in $B$.
 
 \begin{comment}
 \subsection{Hidden Markov Model for counting fluorescent emitters}
@@ -424,31 +430,14 @@ Cells were washed and lysis buffer added (RIPA buffer: PMSF: protease inhibitor 
 %\caption{\textbf{Axial precision for three-dimensional localization at ideal SNR} (A) Simplified lens relay for astigmatic imaging of %a fluorescent emitter using a weak cylindrical lens ($f$=10m). (B) Lateral and axial point spread function of a single quantum dot on %a 1.5 glass coverslip for high ($\sim$1.25) and low ($\sim$0.8) numerical aperture (NA). (C) Polynomial fit of the standard deviation %of the lateral point spread function along orthogonal axes (left) Root mean squared error (RMSE) of lateral coordinates as a function %of the axial coordinate, using simulated images fit with MLE (middle). RMSE of the axial coordinate, using simulated images fit with %MLE (right). Error samples = $10^{3}$}
 %\end{figure}
 
-
+\begin{comment}
 \begin{figure}
 \begin{center}
 \includegraphics[width=16cm]{MCMC.png}
 \end{center}
 \caption{\textbf{Computing epistemic uncertanties with Metropolis-Hastings}. (top left) Simulated point spread function for $N_{0}=10^{3}$ photons with a red x at $x_{\mathrm{MLE}}$ and $y_{\mathrm{MLE}}$ (bottom left) Acceptance rate of Markov chain (middle) Markov chains sampling from the posterior distribution on molecule coordinates in 3D, with the maximum likelihood estimation in dashed blue (right) Estimated posterior marginals on the localization parameters with their respective uncertanties}
 \end{figure}
-
-\begin{comment}
-\begin{figure}
-\begin{center}
-\includegraphics[width=14cm]{HMM.png}
-\end{center}
-\caption{\textbf{Graphical representation of Hidden Markov Model (HMM) for counting QDs} See main text for full description}
-\end{figure}
 \end{comment}
-
-%\begin{figure}
-%\begin{center}
-%\includegraphics[width=16cm]{PSF3D.png}
-%\end{center}
-%\caption{\textbf{Dependence of axial and lateral precision on SNR and molecular density}. (upper row) Lateral and axial root mean %squared errors (RMSE) at varying signal levels (lower row) Lateral and axial RMSE for varying molecule counts within a diffraction %limit radius for $10^{3}$ photon counts. Error samples = $10^{3}$}
-%\end{figure}
-
-\subsection{Noise model for CMOS cameras used for MLE}
 
 \begin{figure}
 \begin{center}
@@ -456,6 +445,10 @@ Cells were washed and lysis buffer added (RIPA buffer: PMSF: protease inhibitor 
 \end{center}
 \caption{\textbf{Noise model for CMOS cameras used for MLE}. (A) Offset for zero incident photons (B) Variance for zero incident photons (C) Cumulative mass function for the convolution distribution and its Poisson approximation for rate parameter $\mu_{k} = 500$ counts (D) Komogonov distance measured as a function of rate parameter $\mu_{k}$}
 \end{figure}
+
+
+\subsection{Noise model for CMOS cameras used for MLE}
+
 
 CMOS cameras have noise sources intrinsic to their operation, such as shot noise and readout noise. The former phenomenon can describe a superposition of processes; namely, the fluctuations of the number of photons due to the quantum nature of light, and the random conversion of photons into photoelectrons within the semiconductor material with a quantum efficiency below unity. Here we will often refer to the photon count $N_{0}$, which has a determined value, rather than being described by statistically. The \emph{measured} photon count, however, is well-described by a Poisson process (Schottky 1918). A shot-noise limited image with $N$ pixels is then described as a family of Poisson variables, with units of photoelectrons
 
@@ -542,6 +535,8 @@ where $i_{0} = g_{k}\eta N_{0}\Delta$. The parameter $\eta$ is the quantum effic
 \noindent [28] Bannister, A. J. Kouzarides, T. Regulation of chromatin by histone modifications. Cell Research vol. 21 381–395 (2011). 
 \newline
 \noindent [29] Ricci, M. A., Manzo, C., García-Parajo, M. F., Lakadamyali, M. Cosma, M. P. Chromatin fibers are formed by heterogeneous groups of nucleosomes in vivo. Cell 160, 1145–1158 (2015). 
+\newline
+\noindent [30] Welling and Teh. Bayesian learning via stochastic gradient langevin dynamics. 2011.
 \newline
 \end{document}
 
