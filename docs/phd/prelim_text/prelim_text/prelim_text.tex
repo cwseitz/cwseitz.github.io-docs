@@ -93,7 +93,7 @@ While the use of deep models has shown great promise for dense SMLM, there remai
 
 \subsection{Enhanced SMLM with photon statistics}
 
-Molecular counting with photon statistics has a fairly simple motivation: a photon emitted by a fluorescent molecule can only be detected once. Coincidence of photons at multiple detector elements provides evidence that two or more molecules are present in the imaged region. Combining the ideas of conventional super-resolution approaches, such as dSTORM, with photon statistics may prove to be a powerful set of methods for bioimaging. Innovations in single photon detection technologies have begun to be integrated into fluorescence microscopes (Forbes 2019). Importantly, single photon detectors such as single photon avalanche photodiodes (SPAD) arrays have three orders of magnitude higher temporal resolutions than standard sCMOS cameras, single photon sensitivity, and theoretically zero readout noise. Such properties make these devices highly desirable for imaging applications; however, application of SPAD arrays in imaging have been limited to small bundles of detector elements combined with laser scanning (Israel 2017; Forbes 2019; Tenne 2019). Recently, SPAD cameras have become commercially available, potentially bringing many of the advantages of single photon detection to widefield fluorescence microscopy. As a proof of principle, we image quantum dots (QDs) at 1 MHz with a 512x512 SPAD array, and introduce a fully probabilistic model for dense localization microscopy (See Future Aims).
+Molecular counting with photon statistics has a fairly simple motivation: a photon emitted by a fluorescent molecule can only be detected once. Coincidence of photons at multiple detector elements provides evidence that two or more molecules are present in the imaged region. Combining the ideas of conventional super-resolution approaches, such as dSTORM, with photon statistics may prove to be a powerful set of methods for bioimaging. Innovations in single photon detection technologies have begun to be integrated into fluorescence microscopes (Forbes 2019). Importantly, single photon detectors such as single photon avalanche photodiodes (SPAD) arrays have three orders of magnitude higher temporal resolutions than standard sCMOS cameras, single photon sensitivity, and theoretically zero readout noise. Such properties make these devices highly desirable for imaging applications; however, application of SPAD arrays in imaging have been limited to small bundles of detector elements combined with laser scanning (Israel 2017; Forbes 2019; Tenne 2019). Recently, SPAD cameras have become commercially available, potentially bringing many of the advantages of single photon detection to widefield fluorescence microscopy. As a proof of principle, we image quantum dots (QDs) at 1 MHz with a 512x512 SPAD array, and introduce a fully probabilistic model for dense localization microscopy (See Future Aims). Our results demonstrate that, after pixel-size correction, the SPAD sensor maintains 50 percent quantum efficiency of CMOS (Figure 4). However, using increased magnification retains the ability to localize single QDs.
 
 \begin{figure}
 \includegraphics[width=15cm]{PSF2D.png}
@@ -112,10 +112,10 @@ Selective bromodomain inhibitors, such as JQ1 are often used to impair the chrom
 \begin{center}
 \includegraphics[width=15cm]{SPADvCMOS.png}
 \end{center}
-\caption{\textbf{SPAD cameras have lower sensitivity compared to CMOS}. (left) Quantum dots imaged with a SPAD camera using 100X/1.4NA oil immersion objective with continous-wave 640nm laser excitation. (left inset) Peak photon counts of isolated QDs using SPAD. (right) Quantum dots imaged with a CMOS camera using 60X/1.4NA oil immersion objective with continous-wave 640nm laser excitation. (right inset) Peak photon counts of isolated QDs using CMOS (right)}
+\caption{\textbf{SPAD cameras have lower sensitivity compared to CMOS}. (left) Quantum dots imaged with a SPAD camera using 100X/1.4NA oil immersion objective with continous-wave 640nm laser excitation. (left inset) Peak photon counts of isolated QDs using SPAD. (right) Quantum dots imaged with a CMOS camera using 60X/1.4NA oil immersion objective with continous-wave 640nm laser excitation. (right inset) Peak photon counts of isolated QDs using CMOS (right). SPAD pixel size is 160nm and CMOS is 108nm.}
 \end{figure}
 
-\captionof{figure}{\textbf{Super-resolution of nucleosome-BRD4 interactions in living cells}. (A) Density and pointillist representation of nucleosome organization in a living cell recovered with MLE (B) Principle of Besag's L-Function for cluster analysis (C) Two color image with super-resolved nucleosomes and diffraction limited BRD4 signal. (D) Average L-function for living Hela cells exposed to 5 percent 1,6 Hexanediol or 1uM JQ1 for 8h. Envelope drawn at one standard deviation}
+\captionof{figure}{\textbf{Super-resolution of nucleosome-BRD4 interactions in living cells}. (A) Density and pointillist representation of nucleosome organization in a living cell recovered with MLE-CMOS (B) Principle of Besag's L-Function for cluster analysis (C) Two color image with super-resolved nucleosomes and diffraction limited BRD4 signal. (D) Average L-function for living Hela cells exposed to 5 percent 1,6 Hexanediol or 1uM JQ1 for 8h. Envelope drawn at one standard deviation}
 
 
 \section{Results}
@@ -218,7 +218,7 @@ The chromatin binding modules of BRD4 suggest that phase separated transcription
 
 After transient transfection, H2B-Halotag Hela cells were incubated with JF646 HaloTag ligand overnight. Living Hela cells were imaged in a dSTORM photoswitching buffer containing 100mM MEA, 50 ug/ml Glucose Oxidase, and 3.4 mg/ml Catalase (Sigma). Buffer pH was adjusted to ~8 using HCl. Movies were collected using a customized Olympus IX83 microscope equipped with an Olympus 60X 1.25NA oil-immersion objective. Fluorescence images were projected onto an ORCA-Fusion sCMOS camera (Hamamatsu). The microscope was controlled using Micromanager software. JF646 molecules were illuminated with a 640nm laser held at 20mW, as measured at the back focal plane of the objective.  Frames were captured at 100fps. Sparse localizations were localized with maximum likelihood estimation. 
 
-\subsection{Localization of isolated emitters with maximum likelihood estimation}
+\subsection{Localization with maximum likelihood estimation (MLE-CMOS)}
 
 For each pixel of a CMOS camera, the number of photoelectrons $S_{k}$ is  multiplied by a gain factor $g_{k} \;[\mathrm{ADU}/e^{-}]$, which generally must be measured during calibration. The readout noise per pixel $\xi_{k}$ is Gaussian with some pixel-specific offset $o_{k}$ (Figure 2a) and variance $\sigma_{k}^{2}$ (Figure 2b). Ultimately, we have a Poisson component of the noise, which scales with the signal level and a Gaussian component, which does not. Therefore, in a single exposure, we measure: 
 
@@ -447,7 +447,7 @@ Cells were washed and lysis buffer added (RIPA buffer: PMSF: protease inhibitor 
 \end{figure}
 
 
-\subsection{Noise model for CMOS cameras used for MLE}
+\subsection{Noise model for MLE-CMOS}
 
 
 CMOS cameras have noise sources intrinsic to their operation, such as shot noise and readout noise. The former phenomenon can describe a superposition of processes; namely, the fluctuations of the number of photons due to the quantum nature of light, and the random conversion of photons into photoelectrons within the semiconductor material with a quantum efficiency below unity. Here we will often refer to the photon count $N_{0}$, which has a determined value, rather than being described by statistically. The \emph{measured} photon count, however, is well-described by a Poisson process (Schottky 1918). A shot-noise limited image with $N$ pixels is then described as a family of Poisson variables, with units of photoelectrons
