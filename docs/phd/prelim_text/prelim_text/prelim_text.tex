@@ -16,7 +16,7 @@
 \usepackage{caption}
 
 %% Use these commands to set biographic information for the title page:
-\title{Visualizing nucleosome phase separation with super resolution microscopy}
+\title{Advancing super resolution microscopy for quantitative in-vivo imaging of chromatin nanodomains}
 \author{Clayton W. Seitz}
 \department{Department of Physics}
 \division{Preliminary Examination}
@@ -95,12 +95,7 @@ While the use of deep models has shown great promise for dense SMLM, there remai
 
 Molecular counting with photon statistics has a fairly simple motivation: a photon emitted by a fluorescent molecule can only be detected once. Coincidence of photons at multiple detector elements provides evidence that two or more molecules are present in the imaged region. Combining the ideas of conventional super-resolution approaches, such as dSTORM, with photon statistics may prove to be a powerful set of methods for bioimaging. Innovations in single photon detection technologies have begun to be integrated into fluorescence microscopes (Forbes 2019). Importantly, single photon detectors such as single photon avalanche photodiodes (SPAD) arrays have three orders of magnitude higher temporal resolutions than standard sCMOS cameras, single photon sensitivity, and theoretically zero readout noise. Such properties make these devices highly desirable for imaging applications; however, application of SPAD arrays in imaging have been limited to small bundles of detector elements combined with laser scanning (Israel 2017; Forbes 2019; Tenne 2019). Recently, SPAD cameras have become commercially available, potentially bringing many of the advantages of single photon detection to widefield fluorescence microscopy. As a proof of principle, we image quantum dots (QDs) at 1 MHz with a 512x512 SPAD array, and introduce a fully probabilistic model for dense localization microscopy (See Future Aims). Our results demonstrate that, after pixel-size correction, the SPAD sensor maintains 50 percent quantum efficiency of CMOS (Figure 4). However, using increased magnification retains the ability to localize single QDs.
 
-\begin{figure}
-\includegraphics[width=15cm]{PSF2D.png}
-\caption{\textbf{Deep networks outperform MLE in dense localization} (A) DeepSTORM architecture with 612K trainable parameters used for localization. (B-E) Lateral root mean squared error and Jaccard index of MLE and CNN estimators with respect to the incident photon count and the number of molecules within the diffraction limit. $10^3$ images simulated by drawing $K$ coordinate pairs uniformly on a disc of radius $\lambda/2\mathrm{NA}$, assuming $\lambda = 640\mathrm{nm}$. Cramer-Rao lower bound shown in gray}
-\end{figure}
-
-\subsection{Super-resolution of transcriptional condensates in living cells}
+\subsection{Super-resolution of chromatin nanodomains in living cells}
 
 Super-resolution imaging with intensity information alone remains a highly valuable technique, and we demonstrate this by live cell super-resolution of nucleosome-BRD4 interactions in Hela cell nuclei. The nucleosome is the fundamental unit of chromatin - a complex of DNA and protein which forms the basic scaffold for a variety of biomolecular processes in the nucleus. Super-resolved nucleosome organization has been studied extensively in various epigenomic states to reveal segregated nanoclusters, dispersed nanodomains, and compact large aggregates. Indeed, nucleosomes assemble into heterogeneous clusters of variable sizes, interspersed with nucleosome-depleted regions (Ricci 2015). Histones can be decorated with various post-translational modifications such as acetylation, methylation, phosphorylation, and ubiquination. The recruitment of proteins and complexes with specific enzymatic activities is now a well-accepted dogma of how modifications mediate their function. Histone modifications can influence the transcription of genes, and many other DNA processes such as repair, replication and recombination (Bannister and Kouzarides, 2011). 
 
@@ -108,31 +103,32 @@ Here, we use a direct STORM approach to study spatial organization of nucleosome
 
 Selective bromodomain inhibitors, such as JQ1 are often used to impair the chromatin-reading function, displacing BRD4 protein from chromatin (Filippakopoulos 2010). Also, 1,6-hexanediol (1,6-HD), an aliphatic alcohol, can inhibit weak hydrophobic protein-protein interactions required for droplet formation and is widely used to elucidate the formation of nuclear bodies (Duster 2021). However, the relationship of BRD4, and phase separation at large, with the spatial structure of nucleosome nanodomains remains unclear. As BRD4 is a critical component of phase separated transcriptional condensates, we take a complementary approach, consisting of specific and non-specific inhibition of BRD4-containing condensates using small molecule drugs and BRD4 mutation or knockdown. Our preliminary results indicate the BRD4 is primarily present in nucleosome depleted regions and the chromatin reading function in necessary for the maintenance for chromatin structure.
 
-\begin{figure}
-\begin{center}
-\includegraphics[width=15cm]{SPADvCMOS.png}
-\end{center}
-\caption{\textbf{SPAD cameras have lower sensitivity compared to CMOS}. (left) Quantum dots imaged with a SPAD camera using 100X/1.4NA oil immersion objective with continous-wave 640nm laser excitation. (left inset) Peak photon counts of isolated QDs using SPAD. (right) Quantum dots imaged with a CMOS camera using 60X/1.4NA oil immersion objective with continous-wave 640nm laser excitation. (right inset) Peak photon counts of isolated QDs using CMOS (right). SPAD pixel size is 160nm and CMOS is 108nm.}
-\end{figure}
 
-\captionof{figure}{\textbf{Super-resolution of nucleosome-BRD4 interactions in living cells}. (A) Density and pointillist representation of nucleosome organization in a living cell recovered with MLE-CMOS (B) Principle of Besag's L-Function for cluster analysis (C) Two color image with super-resolved nucleosomes and diffraction limited BRD4 signal. (D) Average L-function for living Hela cells exposed to 5 percent 1,6 Hexanediol or 1uM JQ1 for 8h. Envelope drawn at one standard deviation}
-
-
+\clearpage
 \section{Results}
 
+\subsection{Deep networks outperform MLE in dense localization}
+
+
 \begin{figure}
-\begin{center}
-\includegraphics[width=17cm]{BRD4-Results.png}
-\end{center}
+\includegraphics[width=15cm]{PSF2D.png}
+\caption{\textbf{Deep networks outperform MLE in dense localization} (A) DeepSTORM architecture with 612K trainable parameters used for localization. (B-E) Lateral root mean squared error and Jaccard index of MLE and CNN estimators with respect to the incident photon count and the number of molecules within the diffraction limit. $10^3$ images simulated by drawing $K$ coordinate pairs uniformly on a disc of radius $\lambda/2\mathrm{NA}$, assuming $\lambda = 640\mathrm{nm}$. Cramer-Rao lower bound shown in gray}
 \end{figure}
 
-\subsection{Deep networks outperform MLE in dense localization}
 
 Two major factors contribute to localization errors in SMLM: (i) the noise characteristics of CMOS cameras and (ii) crowding of molecules within a diffraction limited region. Maxmimum likelihood estimation (MLE) is frequently used for isolated molecules and high signal levels, retaining localization errors ~40nm (Figure 3b). However, MLE performance tends to degrade in low SNR and dense regimes where the number of emitters within the diffraction limit is greater than one ($K(\lambda/2\mathrm{NA}) > 1$). We employ a convolutional neural network called DeepSTORM, which successively upsamples a monochrome image and outputs a localization map, which can be post-processed to produce molecular coordinates in 2D or 3D (Figure 3a).  We demonstrate that this architecture can outperform maximum likelhood estimation for all signal levels and molecular densities tested (Figure 3b-e).
 
 \subsection{Imaging quantum dots with a photon counting camera}
 
-Dense aggregates of proteins and nucleic acids with molecular spacing below the diffraction limit are commonplace in the nucleus, creating the need for accurate counting techniques. The ability to accurately count fluorescent emitters using photon statistics has been so far limited to confocal microscopy setups, which are not typically used when imaging dynamics in living cells. As a proof of principle, we imaged organic quantum dots 15-20nm in size. These nanocrystals are composed of a CdSe semiconductor core, ZnS semiconductor shell, and an amphiphilic polymer coating is applied to confer water solubility and additional functionalization with antibodies, oligonucleotides, etc (Figure 4B). We imaged quantum dots coated on a glass coverslip with a SPAD camera at 1 MHz, and applied our HMM to photon counts from both isolated emitters as well as dense aggregates (Figure 4A,D). Our data indicates that a Poisson HMM models the data well, as measured by the log-likelihood of the sequence of photon counts and distribution of emissions over time (Figure 4E,F). Model selection is carried out purely based on log-likelihood of the sequence.
+\begin{figure}
+\begin{center}
+\includegraphics[width=15cm]{SPADvCMOS.png}
+\end{center}
+\caption{\textbf{SPAD cameras sacrifice sensitivity for speed}. (left) Quantum dots imaged with a SPAD camera using 100X/1.4NA oil immersion objective with continous-wave 640nm laser excitation. Image is a sum of $10^{4}$ 1us exposures. (left inset) Peak photon counts of isolated QDs using SPAD. (right) Quantum dots imaged with 10ms exposure of a CMOS camera using 60X/1.4NA oil immersion objective with continous-wave 640nm laser excitation. (right inset) Peak photon counts of isolated QDs using CMOS (right). SPAD pixel size is 160nm and CMOS is 108nm.}
+\end{figure}
+
+
+Dense aggregates of proteins and nucleic acids with molecular spacing below the diffraction limit are commonplace in the nucleus, creating the need for accurate counting techniques. The ability to accurately count fluorescent emitters using photon statistics has been so far limited to confocal microscopy setups, which are not typically used when imaging dynamics in living cells. As a proof of principle, we imaged quantum dots (QDs): 15-20nm nanocrystals composed of a CdSe semiconductor core and ZnS semiconductor shell, coated on a glass coverslip. QDs were imaged with a SPAD camera at 1 MHz, to compare the sensitivity ratio of SPAD and CMOS, while measuring photon statistics from isolated QDs and aggregates (Figure 4). We found that, after pixel size correction due to relatively large SPAD pixels, the sensitivity of SPAD is reduced by a factor of two. However, the device still brings many of the benefits of high speed imaging.
 
 
 \begin{comment}
@@ -152,25 +148,28 @@ To generalize our imaging setup to three-dimensions, we could use that the later
 
 \subsection{Super-resolution of nucleosome-BRD4 interactions in living cells}
 
-Here, we use the HaloTag system, a modified haloalkane dehalogenase designed to covalently bind to synthetic ligands  (Los 2008). The HaloTag protein is fused to H2B and is then bound by a rhodomine-derived fluorescent ligands, JF549 or JF646 (Grimm 2015). Two-color imaging of H2B-JF646 and BRD4-GFP showed that BRD4-GFP is present in nucleosome depleted regions, and that BRD4-GFP makes direct contact with the chromatin scaffold (Figure 5C). Exposure of cells to 1,6 Hexanediol promoted an increase in nucleosome cluster sizes, while JQ1 exposure significantly condensed nucleosome clusters (Figure 5D). 
 
-\begin{comment}
-\subsection{Inhibition of a super-enhanced gene with JQ1}
+\begin{figure}
+\begin{center}
+\includegraphics[width=17cm]{BRD4-Results.png}
+\end{center}
+\caption{\textbf{Super-resolution of nucleosome-BRD4 interactions in living cells}. (A) Density and pointillist representation of nucleosome organization in a living cell recovered with MLE-CMOS (B) Principle of Besag's L-Function for cluster analysis (C) Two color image with super-resolved nucleosomes and diffraction limited BRD4 signal. (D) Average L-function for living Hela cells exposed to 5 percent 1,6 Hexanediol or 1uM JQ1 for 8h. Envelope drawn at one standard deviation}
+\end{figure}
 
+Here, we use the HaloTag system, a modified haloalkane dehalogenase designed to covalently bind to synthetic ligands  (Los 2008). The HaloTag protein is fused to H2B and is then bound by a rhodomine-derived fluorescent ligands, JF549 or JF646 (Grimm 2015). Two-color imaging of H2B-JF646 and BRD4-GFP showed that BRD4-GFP is present in nucleosome depleted regions, and that BRD4-GFP makes direct contact with the chromatin scaffold (Figure 5c). Exposure of cells to 1,6 Hexanediol promoted an increase in nucleosome cluster sizes, while JQ1 exposure significantly condensed nucleosome clusters (Figure 5d). 
 
-The guanylate binding protein (GBP) gene cluster codes for a family of interferon-gamma inducible GTPases. A recent study has confirmed phase separation in the GBP gene family region by co-staining of BRD4 and MED1 marker protein with the GBP gene family region, after infection of macrophages with \emph{Mycobacterium tuberculosis} (Lin 2022). This result is a strong indication that the GBPs gene region tends to relocate into a phase-separated condensate containing BRD4 to efficiently initiate the immune response program. Leveraging previous work on the GBP gene cluster, we (i) confirm the efficacy of JQ1 treatment on GBP5 knockdown after interferon-gamma induction and (ii) determine the effects of JQ1 exposure on BRD4 immunofluorescence signal in Hela nuclei. Fluorescence in-situ hybridization (FISH) demonstrated the formation of GBP5 positive puncta in Hela nuclei after interferon-gamma exposure (Figure 5A-C,F) and mRNA expression over several hours (Figure 5D.) Relief of GBP5 expression was observed by incubating Hela cells for 8h with both interferon-gamma and JQ1 (Figure 5E). BRD4 puncta are abundant in Hela nuclei and exposure of JQ1 for 9h showed a reduction in puncta counts to approximately 70 percent relative to control.
-\end{comment}
-
-\section{Discussion and Future Aims}
-
-\subsection{Specific Aim 1: Integrate deep models with counting algorithms for enhanced SMLM}
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=17cm]{SPAD.png}
 \end{center}
-\caption{\textbf{Blending deep models and single photon counting for enhanced SMLM}. (left) Simplified schematic of microscopy setup (A) Conceptual figure of the coherent state with Poisson statistics: $g^{(2)}(\tau)=1$ (B) Photon counts in $1\mathrm{us}$ from an aggregate of QDs over $10\mathrm{ms}$. (C) Distribution of photon counts in $1\mathrm{us}$ for an isolated QD and an aggregate. (D) Schematic of inference process - see Future Aims for details}
+\caption{\textbf{Blending deep models and single photon counting for enhanced SMLM}. (left) Simplified schematic of microscopy setup (A) Conceptual figure of the coherent state with Poisson statistics: $g^{(2)}(\tau)=1$ (B) Photon counts in $1\mathrm{us}$ from an aggregate of QDs over $10\mathrm{ms}$. (C) Distribution of photon counts in $1\mathrm{us}$ for an isolated QD (sps) and an aggregate (agg). (D) Schematic of inference process - see Future Aims for details}
 \end{figure}
+
+\clearpage
+\section{Discussion and Future Aims}
+
+\subsection{Specific Aim 1: Integrate deep models with counting algorithms for enhanced SMLM}
 
 \subsubsection{Rationale and hypothesis}
 
@@ -181,8 +180,8 @@ We have demonstrated that deep learning algorithms can outperform standard maxim
 We maximize the posterior probability $P(\theta|X)$, where $\theta$ are molecular coordinates and $X$ is a time series of photon counts.
 
 \begin{align*}
-\theta_{\text{MAP}} &= \underset{\Psi}{\mathrm{argmax}}\; P(\theta|X)\\
-&= \underset{\Psi}{\mathrm{argmax}}\; P(\theta|\theta_{0})P(\theta_{0}|B,M)P_{\Psi}(B|S)P(M|X)
+\theta_{\text{MAP}} &= \underset{\theta,\Psi}{\mathrm{argmax}}\; P(\theta|X)\\
+&= \underset{\theta,\Psi}{\mathrm{argmax}}\; P(\theta|\theta_{0})P(\theta_{0}|B,M)P_{\Psi}(B|S)P(M|X)
 \end{align*}
 
 The distribution on photon counts $P(X|M)=P(M|X)$ is Poisson, assuming the bright state of the fluorophore is highly stable, giving a coherent state (Vlasenko 2020). Let $\mu_{0}=\lambda_{0}\Delta$ be the measured rate parameter for an isolated fluorophore. By imaging at high speeds of 1MHz i.e., $\Delta = 1\mathrm{us}$, we obtain samples from $P(X|M)$ and can fit $X$ with a model $\mathrm{Poisson}(\mu_{0}m)$ for some integer $m$ and perform model selection on $m$.
@@ -199,18 +198,17 @@ Then, by computing gradients of (5) as before, we have the Langevin update rule 
 
 where $\epsilon$ is called the step-size. By obtaining samples of $\theta$ we can compute important statistics such as $\langle \ell \rangle$ as a quality metric for $\theta_{0}$.
 
-\subsection{Specific Aim 2: Determine a role of chromatin architecture in phase separation}
+\subsection{Specific Aim 2: Determine a role of chromatin architecture in BRD4 phase separation}
 
 \subsubsection{Rationale and hypothesis}
 
-We have demonstrated by two-color live cell super resolution imaging of H2B and BRD4-GFP that BRD4-GFP protein is present in nucleosome depleted regions (NDRs) in the nucleus. The increase in cluster sizes upon exposure to 1,6 Hexanediol suggests that nucleosome nanodomains may merge after non-specific inhibition of phase separation, while the average spacing of nucleosomes remains. The significant condensation after exposure to JQ1 suggests that BRD4 may be involved in the maintenance of the degree of chromatin condensation, but does not affect the average sizes of nucleosome clusters. Although BRD4-GFP is clearly present in NDRs, there is a significant overlap of H2B and BRD4 signals, leading us to conclude that BRD4 may permeate some nucleosome-dense regions as well. Ultimately, results of treatment of HeLa cells with non-specific and specific phase separation inhibitors suggest that further study into the mechanism of BRD4-specific inhibition. We believe that BRD4 silencing and mutation of BRD4 residues would provide valuable insights into the role of the chromatin scaffold in the formation of transcriptional condensates.
-
-Previous efforts have demonstrated the acetylated histone reading function of BRD4 is proceeded by recruitment of additional cofactors and chromatin reorganization. Additional perturbations to BRD4 functions may provide a more complete picture of how BRD4-positive nuclear bodies interact with the chromatin scaffold. Our preliminary data suggests that transcriptional condensates in the nucleus may be stabilized by interactions with neighboring nucleosome clusters. Given that transcriptional condensates associate with accessible DNA, we expect that their depletion by specific inhibition of BRD4 functions will lead to chromatin condensation. Moreover, we expect the action of specific antagonists against BRD4 or its expression will have a distinct effect compared to 1,6 Hexanediol, which may act on the chromatin scaffold directly (Itoh 2021). 
+Condensation of nucleosome clusters as well as cluster growth following exposure to JQ1 suggests that BRD4 may play a multiple important roles in the maintenance of chromatin architecture. BRD4-GFP is clearly present in nucleosome depleted regions; however, there remains a significant overlap of H2B and BRD4 signals. Interestingly, the BRD4-GFP signal also appears continuous at the border of nucleosome clusters. This leads us to believe that BRD4 condensates permeate both nucleosome-dense and sparse regions. We hypothesize that BRD4 can phase separate with both chromatin as well as other cofactors in NDRs to simultaneously maintain condensed chromatin clusters and nucleosome-depletion. Corroborating this duality, previous approaches in epigenomics, proteomics and chemical biology have shown that hyperphosphorylated BRD4 binds more strongly to MED1, facilitating a bromodomain-independent chromatin recruitment mechanism (Shu 2016). 
 
 
 \subsubsection{Experimental Approach}
 
-The chromatin binding modules of BRD4 suggest that phase separated transcriptional condensates in the nucleus are, in part, dependent on nucleosome-BRD4 binding interactions. We propose live-cell super-resolution experiments to determine the nature of the interaction between BRD4 and the chromatin architecture in the formation of BRD4-condensates. To do this, we have first designed siRNAs to knockdown expression of BRD4 protein in HeLa cells, which will determine the effect of global BRD4 loss on chromatin architecture. We will then express wild type and BRD4 mutant plasmids which have mutated Bromodomains. Other experiments may involve mutating the intrinsically disordered regions (IDRs) of BRD4 to impair the phase separation abilities of BRD4. Finally, in order to address the possibility that small molecule drugs such as JQ1 impact structure of the chromatin scaffold, independent of BRD4, we will carry out additional live-cell super-resolution experiments combining BRD4 RNA silencing with JQ1 treatment.
+We propose super-resolution experiments to determine if indeed BRD4 possesses this duality. To do this, we have designed siRNAs to knockdown expression of BRD4 protein in Hela cells, which will determine the effect of global BRD4 loss on chromatin architecture. We will first validate our previous experiments with JQ1 by expressing a FLAG-tagged BRD4 mutant with mutated Bromodomains (BDmut) to determine the impact on nucleosome clustering. Next, we will transfect constitutively phosphorylated BRD4 plasmids and expose cells to JQ1. The organization of BRD4 in the nucleus can then be readily compared to global phase separation inhibitors like 1,6 Hexanediol. Finally, in order to address the possibility that small molecule drugs such as JQ1 impact structure of the chromatin scaffold, independent of BRD4, we will carry out additional live-cell super-resolution experiments combining BRD4 RNA silencing with JQ1 exposure.
+
 
 \section{Materials and Methods}
 
@@ -220,7 +218,7 @@ After transient transfection, H2B-Halotag Hela cells were incubated with JF646 H
 
 \subsection{Localization with maximum likelihood estimation (MLE-CMOS)}
 
-For each pixel of a CMOS camera, the number of photoelectrons $S_{k}$ is  multiplied by a gain factor $g_{k} \;[\mathrm{ADU}/e^{-}]$, which generally must be measured during calibration. The readout noise per pixel $\xi_{k}$ is Gaussian with some pixel-specific offset $o_{k}$ (Figure 2a) and variance $\sigma_{k}^{2}$ (Figure 2b). Ultimately, we have a Poisson component of the noise, which scales with the signal level and a Gaussian component, which does not. Therefore, in a single exposure, we measure: 
+For each pixel of a CMOS camera, the number of photoelectrons $S_{k}$ is  multiplied by a gain factor $g_{k} \;[\mathrm{ADU}/e^{-}]$, which we have previously measured to have a tight distribution around unity. The readout noise per pixel $\xi_{k}$ is Gaussian with some pixel-specific offset $o_{k}$ (Figure 7a) and variance $\sigma_{k}^{2}$ (Figure 7b). Ultimately, we have a Poisson component of the noise, which scales with the signal level and a Gaussian component, which does not. Therefore, in a single exposure, we measure: 
 
 \begin{equation}
 \vec{H} = \vec{S} + \vec{\xi}
@@ -263,7 +261,7 @@ where $\theta_{\mathrm{MLE}}$ represents the maximum likelihood coordinates of a
 
 A stirling approximation can be made for the above log-factorial. First order derivatives of this sum can often be computed analytically, depending on $\mu$. 
 
-To summarize, out localization method depends on a likelihood for independent Poisson variables, where the parameter of each Poisson variable is a function of other latent variables (molecular coordinates). It is an analytical likelihood, and we have shown that we can write it down in terms of error functions. However, the full distribution over images cannot be written down explicitly - it can only be written at a single point in parameter space. We compute the likelihood first using the forward model (Supp. Eq 8) and then compute the Poisson data likelihood using calculated rates. This intermediate step is what prevents us from being able to write down a likelihood only in terms of common distributions.
+To summarize, out localization method depends on a likelihood for independent Poisson variables, where the parameter of each Poisson variable is a function of other latent variables (molecular coordinates). The full distribution over images $\vec{H}$ cannot be written down explicitly - it can only be written at a single point in parameter space. We compute the rates $\mu$ first using the forward model (Supp. Eq 8) and then compute the Poisson data likelihood using calculated rates. This intermediate step is what prevents us from being able to write down a likelihood only in terms of common distributions.
 
 \subsection{The Cramer-Rao lower bound}
 
