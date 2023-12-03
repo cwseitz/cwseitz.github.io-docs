@@ -147,22 +147,6 @@ What is $P(H_{k}|\theta)$?
 
 \end{frame}
 
-\begin{frame}{Photon statistics of fluorescent markers}
-
-Long integration times $\Delta \rightarrow$ intensity fluctuations are Poisson
-
-\begin{figure}
-\includegraphics[width=13cm]{Noise.png}
-\end{figure}
-
-\begin{equation*}
-P(H_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
-\end{equation*}
-
-$P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\mathrm{SNR}$)
- 
-\end{frame}
-
 \begin{frame}{The definition of resolution in SMLM}
 \begin{textblock*}{4cm}(1.0cm,1.0cm)
 \includegraphics[width=4cm]{MCMC/Figure_1.png}
@@ -179,6 +163,20 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \end{itemize}
 \end{textblock*}
 
+\end{frame}
+
+\begin{frame}{A general model of a detector in SMLM}
+
+\begin{figure}
+\includegraphics[width=13cm]{Noise.png}
+\end{figure}
+
+\begin{equation*}
+P(H_{k}|\theta) \approx \mathrm{Poisson}(\mu')
+\end{equation*}
+
+$P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\mathrm{SNR}$)
+ 
 \end{frame}
 
 \begin{comment}
@@ -239,6 +237,24 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \end{frame}
 
 \section{A novel approach to dense localization microscopy}
+
+\begin{frame}{A general model of a detector in SMLM}
+
+\begin{figure}
+\includegraphics[width=13cm]{Noise.png}
+\end{figure}
+
+\begin{equation*}
+P(H_{k}|\theta) \approx \mathrm{Poisson}(\mu')
+\end{equation*}
+
+$P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\mathrm{SNR}$)
+ 
+\end{frame}
+
+\begin{frame}{Single photon avalanche diode (SPAD) cameras}
+
+\end{frame}
 
 \begin{frame}{An early approach to dense SMLM with deep learning}
 
@@ -522,6 +538,11 @@ Blue - DAPI (binds DNA minor groove)
 \end{frame}
 \end{comment}
 
+\begin{frame}{Interpretation}
+
+\end{frame}
+
+\begin{comment}
 \begin{frame}{Inhibition of a super-enhanced gene with JQ1}
 \begin{figure}
 \includegraphics[width=12cm]{GBP5-2.png}
@@ -530,8 +551,25 @@ Blue - DAPI (binds DNA minor groove)
 \item *:$P \leq 0.1$, **:$P \leq 0.01$
 \end{itemize}
 \end{frame}
+\end{comment}
 
-\section{Future Aims}
+\begin{frame}{Future Aims}
+
+\end{frame}
+
+\begin{frame}{Recent Publications}
+Maelle Locatelli\textsuperscript{\textdagger}, Josh Lawrimore\textsuperscript{\textdagger}, Hua Lin\textsuperscript{\textdagger}, Sarvath Sanaullah, \textbf{Clayton Seitz}, Dave Segall, Paul Kefer, Salvador Moreno Naike, Benton Lietz, Rebecca Anderson, Julia Holmes, Chongli Yuan, George Holzwarth, Bloom Kerry, Jing Liu, Keith D Bonin, Pierre-Alexandre Vidi. \textit{DNA damage reduces heterogeneity and coherence of chromatin motions}. PNAS. 2022\\
+\vspace{0.1in}
+Mengdi Zhang, \textbf{Clayton Seitz}, Garrick Chang, Fadil Iqbal, Hua Lin, and Jing Liu \textit{A guide for single-particle chromatin tracking in live cell nuclei}. Cell Biology International. January 2022.\\
+\vspace{0.1in}
+Wenting Wu, Farooq Syed, Edward Simpson, Chih-Chun Lee, Jing Liu, Garrick Chang, Chuanpeng Dong, \textbf{Clayton Seitz}, Decio L. Eizirik, Raghavendra G. Mirmira, Yunlong Liu, Carmella Evans-Molina; \textit{Impact of Proinflammatory Cytokines on Alternative Splicing Patterns in Human Islets}. Diabetes 1 January 2022; 71 (1): 116–127
+\end{frame}
+
+\begin{frame}{Acknowledgements}
+
+\end{frame}
+
+
 
 
 \end{document}
