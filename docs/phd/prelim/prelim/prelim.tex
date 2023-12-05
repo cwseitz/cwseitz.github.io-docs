@@ -225,36 +225,30 @@ What is $P(H_{k}|\theta)$?
 
 \section{A novel approach to dense localization microscopy}
 
-\begin{frame}{Single photon avalanche diode (SPAD) cameras}
-
-\end{frame}
-
-\begin{frame}{Noise characterization of CMOS sensor}
+\begin{frame}{CMOS readout noise limits SMLM}
 
 \begin{figure}
 \includegraphics[width=13cm]{Noise.png}
 \end{figure}
 
-\begin{equation*}
-P(H_{k}|\theta) \approx \mathrm{Poisson}(\mu')
-\end{equation*}
+\begin{align}
+P(H_{k}|\theta) &=  A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
+\end{align}
+
 
 $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\mathrm{SNR}$)
  
 \end{frame}
 
+\begin{frame}{Single photon avalanche diode (SPAD) cameras}
 
-\begin{frame}{An early approach to dense SMLM with deep learning}
-
-\begin{textblock*}{12cm}(1cm,1.25cm)
-\includegraphics[width=12cm]{PSF2D.png}
-\end{textblock*}
-\begin{textblock*}{12cm}(1.25cm,8.2cm)
+\includegraphics[width=12cm]{SPAD-Intro.png}\\
+\textit{(A) Courtesy of Pi imaging technologies}
 \begin{itemize}
-\item MLE in high dimensional spaces can quickly become intractable
-\item We can model $P_{\Psi}(\theta_{0})$ with a convolutional neural network $\Psi$
+\item Poisson statistics at any signal level (zero readout noise)
+\item Reduced quantum efficiency ($\eta\approx 0.5$), but frame rates up to 1MHz
 \end{itemize}
-\end{textblock*}
+
 
 \end{frame}
 
@@ -268,6 +262,21 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \end{itemize}
 \end{frame}
 
+
+\begin{frame}{Dense SMLM with deep learning}
+
+\begin{textblock*}{12cm}(1cm,1.25cm)
+\includegraphics[width=12cm]{PSF2D.png}
+\end{textblock*}
+\begin{textblock*}{12cm}(1.25cm,8.2cm)
+\begin{itemize}
+\item MLE in high dimensional spaces can quickly become intractable
+\item We can model $P_{\Psi}(\theta_{0})$ with a convolutional neural network $\Psi$
+\end{itemize}
+\end{textblock*}
+
+\end{frame}
+
 \begin{frame}{Single photon counting for enhanced SMLM}
 \begin{figure}
 \includegraphics[width=\textwidth]{SPAD.png}
@@ -276,6 +285,7 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \item At higher time resolution we can sample from this Poisson PMF 100-1000s of times in a single 10ms exposure
 \end{itemize}
 \end{frame}
+
 
 \begin{comment}
 \begin{frame}{Chromatin nanodomains in a living Hela cell nucleus}
@@ -526,9 +536,6 @@ Blue - DAPI (binds DNA minor groove)
 \end{frame}
 \end{comment}
 
-\begin{frame}{Interpretation}
-
-\end{frame}
 
 \begin{comment}
 \begin{frame}{Inhibition of a super-enhanced gene with JQ1}
@@ -546,14 +553,28 @@ Blue - DAPI (binds DNA minor groove)
 \end{frame}
 
 \begin{frame}{Recent Publications}
-Maelle Locatelli\textsuperscript{\textdagger}, Josh Lawrimore\textsuperscript{\textdagger}, Hua Lin\textsuperscript{\textdagger}, Sarvath Sanaullah, \textbf{Clayton Seitz}, Dave Segall, Paul Kefer, Salvador Moreno Naike, Benton Lietz, Rebecca Anderson, Julia Holmes, Chongli Yuan, George Holzwarth, Bloom Kerry, Jing Liu, Keith D Bonin, Pierre-Alexandre Vidi. \textit{DNA damage reduces heterogeneity and coherence of chromatin motions}. PNAS. 2022\\
+
+\begin{itemize}
+\item Seitz et al. \textit{Super-resolution microscopy in-vivo reveals the bromodomain-dependent role of BRD4 in the maintenance of chromatin structure}. \textit{Unpublished}
+
+\item Seitz et al. \textit{Photon counting for enhanced single molecule localization microscopy}. \textit{Unpublished}
+
+\item Maelle Locatelli\textsuperscript{\textdagger}, Josh Lawrimore\textsuperscript{\textdagger}, Hua Lin\textsuperscript{\textdagger}, Sarvath Sanaullah, \textbf{Clayton Seitz}, ..., Pierre-Alexandre Vidi. \textit{DNA damage reduces heterogeneity and coherence of chromatin motions}. PNAS. July 2022\\
 \vspace{0.1in}
-Mengdi Zhang, \textbf{Clayton Seitz}, Garrick Chang, Fadil Iqbal, Hua Lin, and Jing Liu \textit{A guide for single-particle chromatin tracking in live cell nuclei}. Cell Biology International. January 2022.\\
+\item Mengdi Zhang, \textbf{Clayton Seitz}, Garrick Chang, Fadil Iqbal, Hua Lin, and Jing Liu \textit{A guide for single-particle chromatin tracking in live cell nuclei}. Cell Biology International. January 2022.\\
 \vspace{0.1in}
-Wenting Wu, Farooq Syed, Edward Simpson, Chih-Chun Lee, Jing Liu, Garrick Chang, Chuanpeng Dong, \textbf{Clayton Seitz}, Decio L. Eizirik, Raghavendra G. Mirmira, Yunlong Liu, Carmella Evans-Molina; \textit{Impact of Proinflammatory Cytokines on Alternative Splicing Patterns in Human Islets}. Diabetes 1 January 2022; 71 (1): 116–127
+\item Wenting Wu, Farooq Syed, Edward Simpson, Chih-Chun Lee, Jing Liu, Garrick Chang, Chuanpeng Dong, \textbf{Clayton Seitz}, ..., Carmella Evans-Molina; \textit{Impact of Proinflammatory Cytokines on Alternative Splicing Patterns in Human Islets}. Diabetes. January 2022
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Acknowledgements}
+\begin{textblock*}{14cm}(0.5cm,1.5cm)
+\includegraphics[width=14cm]{Lab.png}
+\end{textblock*}
+
+\begin{textblock*}{14cm}(0.5cm,8.5cm)
+Thank you!
+\end{textblock*}
 
 \end{frame}
 
