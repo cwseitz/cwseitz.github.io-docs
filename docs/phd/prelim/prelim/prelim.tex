@@ -83,26 +83,20 @@
 
 
 
-\section{Single molecule localization microscopy (SMLM)}
+\section{Introduction}
 
 \begin{frame}{Genome organization and super resolution imaging}
-\begin{textblock*}{13cm}(1.0cm,1.5cm)
-\includegraphics[width=\textwidth]{Intro2}
+\begin{textblock*}{12cm}(1.5cm,1.5cm)
+\includegraphics[width=12cm]{Intro2}
 \end{textblock*}
-\begin{textblock*}{\textwidth}(1.0cm,7.75cm)
+\begin{textblock*}{12cm}(1.0cm,7.5cm)
 \begin{itemize}
 \item Genome has a hierarchical structure, fundamental unit is the nucleosome
-\item We study chromatin organization by localizing fluorescently tagged nucleosomes
+\item We study chromatin organization with SMLM
 \end{itemize}
 \end{textblock*}
 
 \end{frame}
-
-\begin{frame}{Single molecule localization microscopy and its applications}
-\includegraphics[width=\textwidth]{Apps}
-\textit{Wu et al. Quantitative Data Analysis in Single-Molecule Localization Microscopy.}
-\end{frame}
-
 
 \begin{frame}{Direct stochastic optical reconstruction microscopy (dSTORM)}
 \begin{textblock*}{13cm}(1.0cm,1.5cm)
@@ -115,6 +109,13 @@
 \end{itemize}
 \end{textblock*}
 \end{frame}
+
+\begin{frame}{Single molecule localization microscopy and its applications}
+\includegraphics[width=\textwidth]{Apps}
+\textit{Wu et al. Quantitative Data Analysis in Single-Molecule Localization Microscopy.}
+\end{frame}
+
+\section{Theory of SMLM} 
 
 \begin{frame}{Single molecule localization microscopy}
 
@@ -130,14 +131,14 @@ Modeling the point spread function permits sub-pixel localization
 i_{0} &= g_{k}\textcolor{red}{\eta} \textcolor{cyan}{N_{0}}\textcolor{blue}{\Delta} 
 \\
 \textcolor{red}{\eta} &- \mathrm{quantum\; efficiency}\\
-\textcolor{cyan}{N_{0}} &- \mathrm{photon\; count}\\
+\textcolor{cyan}{N_{0}} &- \mathrm{photon\; emission\; rate}\\
 \textcolor{blue}{\Delta} &- \mathrm{exposure\; time}
 \end{align*}
 \end{textblock*}
 
 \vspace{2in}
 
-Assume $\mu_{k}$ is constant over $\textcolor{blue}{\Delta}$ (homogeneous Poisson)
+Assume $N_{0}$ is constant over $\textcolor{blue}{\Delta}$ (homogeneous Poisson)
 
 \begin{equation*}
 \theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\theta)= \underset{\theta}{\mathrm{argmin}}-\sum_{k}\log P(H_{k}|\theta)
@@ -145,7 +146,7 @@ Assume $\mu_{k}$ is constant over $\textcolor{blue}{\Delta}$ (homogeneous Poisso
 
 \end{frame}
 
-\begin{frame}{The definition of resolution in SMLM}
+\begin{frame}{Localization uncertainty in SMLM}
 \begin{textblock*}{4cm}(1.0cm,1.0cm)
 \includegraphics[width=4cm]{MCMC/Figure_1.png}
 \end{textblock*}
@@ -157,7 +158,7 @@ Assume $\mu_{k}$ is constant over $\textcolor{blue}{\Delta}$ (homogeneous Poisso
 \end{textblock*}
 \begin{textblock*}{13cm}(0.5cm,8cm)
 \begin{itemize}
-\item One can derive a lower bound on the variance of a statistical estimator of the coordinates $\theta$
+\item Sampling the coordinates $\theta$ gives uncertainty estimates
 \end{itemize}
 \end{textblock*}
 
@@ -194,7 +195,7 @@ Assume $\mu_{k}$ is constant over $\textcolor{blue}{\Delta}$ (homogeneous Poisso
 \end{comment}
 
 
-\begin{frame}{Dense localization increases time resolution}
+\begin{frame}{The definition of resolution in SMLM}
 \begin{textblock*}{13cm}(1cm,1.25cm)
 \begin{itemize}
 \item We can view dSTORM as sampling from a density
@@ -210,9 +211,11 @@ Assume $\mu_{k}$ is constant over $\textcolor{blue}{\Delta}$ (homogeneous Poisso
 \end{textblock*}
 \end{frame}
 
-\begin{frame}{Dense localization increases time resolution}
+\begin{frame}{The definition of resolution in SMLM}
 \includegraphics[width=\textwidth]{Spatial.png}
-\textit{Nieuwenhuizen et al. Measuring image resolution in optical nanoscopy.}\\
+\vspace{0.025in}
+\textit{Nieuwenhuizen et al. Measuring image resolution in optical nanoscopy.}
+\vspace{0.05in}
 \begin{itemize}
 \item Increased localization uncertainty requires higher density for same resolution
 \item Longer acquisitions have higher resolution
@@ -220,7 +223,35 @@ Assume $\mu_{k}$ is constant over $\textcolor{blue}{\Delta}$ (homogeneous Poisso
 
 \end{frame}
 
-\section{A novel approach to dense localization microscopy}
+\section{Dense localization microscopy}
+
+\begin{frame}{DeepSTORM: Dense SMLM with deep learning}
+
+\begin{textblock*}{12cm}(1cm,1.25cm)
+\includegraphics[width=12cm]{PSF2D.png}
+\end{textblock*}
+\begin{textblock*}{12cm}(1.25cm,8.2cm)
+\begin{itemize}
+\item MLE in high dimensional spaces can quickly become intractable
+\item We can model $P_{\Psi}(\theta_{0})$ with a convolutional neural network $\Psi$
+\end{itemize}
+\end{textblock*}
+
+\end{frame}
+
+
+\begin{frame}{Single photon avalanche diode (SPAD) cameras}
+
+\includegraphics[width=12cm]{SPAD-Intro.png}\\
+\textit{(A) Courtesy of Pi imaging technologies}
+\vspace{0.05in}
+\begin{itemize}
+\item Imaging in low light conditions
+\item Reduced quantum efficiency ($\eta\approx 0.5$), but frame rates up to 1MHz
+\end{itemize}
+
+
+\end{frame}
 
 \begin{frame}{CMOS readout noise limits SMLM}
 
@@ -237,21 +268,9 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
  
 \end{frame}
 
-\begin{frame}{Single photon avalanche diode (SPAD) cameras}
-
-\includegraphics[width=12cm]{SPAD-Intro.png}\\
-\textit{(A) Courtesy of Pi imaging technologies}
-\begin{itemize}
-\item Poisson statistics at any signal level (zero readout noise)
-\item Reduced quantum efficiency ($\eta\approx 0.5$), but frame rates up to 1MHz
-\end{itemize}
-
-
-\end{frame}
-
 \begin{frame}{High speed imaging for enhanced SMLM}
 \begin{figure}
-\includegraphics[width=\textwidth]{SPADvCMOS.png}
+\includegraphics[width=12cm]{SPADvCMOS.png}
 \end{figure}
 \begin{itemize}
 \item SPAD frame is sum of $10^{4}$ 1us exposures
@@ -259,22 +278,42 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Counting molecules and enhancing resolution with a SPAD camera}
 
-\begin{frame}{Dense SMLM with deep learning}
-
-\begin{textblock*}{12cm}(1cm,1.25cm)
-\includegraphics[width=12cm]{PSF2D.png}
+\begin{textblock*}{11cm}(2.0cm,1.5cm)
+\includegraphics[width=11cm]{DoubleFigure.png}
 \end{textblock*}
-\begin{textblock*}{12cm}(1.25cm,8.2cm)
+
+\begin{textblock*}{11cm}(1cm,7.5cm)
 \begin{itemize}
-\item MLE in high dimensional spaces can quickly become intractable
-\item We can model $P_{\Psi}(\theta_{0})$ with a convolutional neural network $\Psi$
+\item Molecular counting for constrained multi-emitter localization
+\item Pixel doubling using correlation functions
 \end{itemize}
+
+\end{textblock*}
+
+
+\end{frame}
+
+\begin{frame}{Counting molecules and enhancing resolution with a SPAD camera}
+
+\begin{textblock*}{11cm}(2.0cm,1.5cm)
+\includegraphics[width=11cm]{Doubled-cNN.png}
+Simulated 5 blinking emitters, assigned virtual pixels $\langle X_{i}(t)X_{j}(t) \rangle_{t}$ at or between existing pixels
+\end{textblock*}
+
+\begin{textblock*}{11cm}(1cm,7.5cm)
+\begin{itemize}
+\item On this timescale, relax assumption that $N_{0}$ is constant 
+\item For example, photoswitching \textrm{ON} or \textrm{OFF}
+\item Fluctuations in $N_{0}$ may be \textbf{uncorrelated} between molecules
+\end{itemize}
+
 \end{textblock*}
 
 \end{frame}
 
-\begin{frame}{Single photon counting for enhanced SMLM}
+\begin{frame}{An integrated method for dense SMLM}
 \begin{figure}
 \includegraphics[width=\textwidth]{SPAD.png}
 \end{figure}
@@ -434,14 +473,14 @@ Antibunching now becomes apparent. If only a single emitter exists (and we have 
 
 \section{Probing chromatin structure with SMLM}
 
-\begin{frame}{Genome organization and single molecule localization microscopy}
-\begin{textblock*}{13cm}(1.0cm,1.5cm)
-\includegraphics[width=\textwidth]{Intro2}
+\begin{frame}{Application of dSTORM in living cells}
+\begin{textblock*}{12cm}(1.5cm,1.5cm)
+\includegraphics[width=12cm]{Intro2}
 \end{textblock*}
-\begin{textblock*}{\textwidth}(1.0cm,7.75cm)
+\begin{textblock*}{12cm}(1.0cm,7.5cm)
 \begin{itemize}
 \item Genome has a hierarchical structure, fundamental unit is the nucleosome
-\item We study chromatin organization by localizing fluorescently tagged nucleosomes
+\item We study chromatin organization with SMLM
 \end{itemize}
 \end{textblock*}
 
@@ -512,7 +551,7 @@ Antibunching now becomes apparent. If only a single emitter exists (and we have 
 \end{frame}
 \end{comment}
 
-\begin{frame}{BET inhibitors reduce nucleosome-BRD4 interactions in BRD4 condensates}
+\begin{frame}{Super-resolution of nucleosome-BRD4 interactions in living cells}
 \begin{figure}
 \includegraphics[width=13cm]{BRD4-Results.png}
 \end{figure}
