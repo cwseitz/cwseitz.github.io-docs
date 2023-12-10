@@ -85,13 +85,13 @@
 
 \section{Introduction}
 
-\begin{frame}{Genome organization and super resolution imaging}
+\begin{frame}{Chromatin organization and super resolution imaging}
 \begin{textblock*}{12cm}(1.5cm,1.5cm)
 \includegraphics[width=12cm]{Intro2}
 \end{textblock*}
 \begin{textblock*}{12cm}(1.0cm,7.5cm)
 \begin{itemize}
-\item Genome has a hierarchical structure, fundamental unit is the nucleosome
+\item Chromatin has a hierarchical structure, fundamental unit is the nucleosome
 \item We study chromatin organization with SMLM
 \end{itemize}
 \end{textblock*}
@@ -144,6 +144,21 @@ Assume $N_{0}$ is constant over $\textcolor{blue}{\Delta}$ (homogeneous Poisson)
 \theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\theta)= \underset{\theta}{\mathrm{argmin}}-\sum_{k}\log P(H_{k}|\theta)
 \end{equation*}
 
+\end{frame}
+
+\begin{frame}{CMOS readout noise limits SMLM}
+
+\begin{figure}
+\includegraphics[width=13cm]{Noise.png}
+\end{figure}
+
+\begin{align}
+P(H_{k}|\theta) &=  A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
+\end{align}
+
+
+$P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\mathrm{SNR}$)
+ 
 \end{frame}
 
 \begin{frame}{Localization uncertainty in SMLM}
@@ -223,22 +238,7 @@ Assume $N_{0}$ is constant over $\textcolor{blue}{\Delta}$ (homogeneous Poisson)
 
 \end{frame}
 
-\section{Dense localization microscopy}
-
-\begin{frame}{DeepSTORM: Dense SMLM with deep learning}
-
-\begin{textblock*}{12cm}(1cm,1.25cm)
-\includegraphics[width=12cm]{PSF2D.png}
-\end{textblock*}
-\begin{textblock*}{12cm}(1.25cm,8.2cm)
-\begin{itemize}
-\item MLE in high dimensional spaces can quickly become intractable
-\item We can model $P_{\Psi}(\theta_{0})$ with a convolutional neural network $\Psi$
-\end{itemize}
-\end{textblock*}
-
-\end{frame}
-
+\section{Enhanced SMLM with photon statistics}
 
 \begin{frame}{Single photon avalanche diode (SPAD) cameras}
 
@@ -251,21 +251,6 @@ Assume $N_{0}$ is constant over $\textcolor{blue}{\Delta}$ (homogeneous Poisson)
 \end{itemize}
 
 
-\end{frame}
-
-\begin{frame}{CMOS readout noise limits SMLM}
-
-\begin{figure}
-\includegraphics[width=13cm]{Noise.png}
-\end{figure}
-
-\begin{align}
-P(H_{k}|\theta) &=  A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
-\end{align}
-
-
-$P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\mathrm{SNR}$)
- 
 \end{frame}
 
 \begin{frame}{High speed imaging for enhanced SMLM}
@@ -292,6 +277,20 @@ $P(H_{k}|\theta)$ can be approximated as Poisson at high signal-to-noise ($\math
 
 \end{textblock*}
 
+
+\end{frame}
+
+\begin{frame}{DeepSTORM: Dense SMLM with deep learning}
+
+\begin{textblock*}{12cm}(1cm,1.25cm)
+\includegraphics[width=12cm]{PSF2D.png}
+\end{textblock*}
+\begin{textblock*}{12cm}(1.25cm,8.2cm)
+\begin{itemize}
+\item MLE in high dimensional spaces can quickly become intractable
+\item We can model $P_{\Psi}(\theta_{0})$ with a convolutional neural network $\Psi$
+\end{itemize}
+\end{textblock*}
 
 \end{frame}
 
@@ -471,21 +470,9 @@ Antibunching now becomes apparent. If only a single emitter exists (and we have 
 \end{comment}
 
 
-\section{Probing chromatin structure with SMLM}
+\section{Super resolution of chromatin nanodomains}
 
-\begin{frame}{Application of dSTORM in living cells}
-\begin{textblock*}{12cm}(1.5cm,1.5cm)
-\includegraphics[width=12cm]{Intro2}
-\end{textblock*}
-\begin{textblock*}{12cm}(1.0cm,7.5cm)
-\begin{itemize}
-\item Genome has a hierarchical structure, fundamental unit is the nucleosome
-\item We study chromatin organization with SMLM
-\end{itemize}
-\end{textblock*}
-
-\end{frame}
-
+\begin{comment}
 \begin{frame}{Dense labeling of histone H2B in fixed cells at RT}
 \begin{textblock*}{11cm}(2.0cm,1.3cm)
 \includegraphics[width=11cm]{Laser.png}
@@ -497,6 +484,23 @@ Antibunching now becomes apparent. If only a single emitter exists (and we have 
 \end{itemize}
 \end{textblock*}
 \end{frame}
+\end{comment}
+
+\begin{frame}{Application of dSTORM in living cells}
+\begin{textblock*}{12cm}(1.5cm,1.5cm)
+\includegraphics[width=12cm]{LiveFix}
+\end{textblock*}
+\begin{textblock*}{12cm}(1.0cm,6.5cm)
+\begin{itemize}
+\item Fixation changes the appearance of nucleosome clustering 
+\item Clusters are more dispersed in living cells
+\item Dispersion due to nucleosome diffusion and possibly affects of PFA on chromatin architecture
+\end{itemize}
+\end{textblock*}
+
+\end{frame}
+
+
 
 \begin{comment}
 \begin{frame}{Chromatin has an intrinsic ability to undergo phase separation}
@@ -584,6 +588,18 @@ Blue - DAPI (binds DNA minor groove)
 \end{comment}
 
 \begin{frame}{Future Aims}
+\textbf{Integrate deep models with counting algorithms for enhanced SMLM}
+\begin{itemize}
+\item Resolution enhancement and counting fluorescent emitters
+\end{itemize}
+\textbf{Demonstrate that BRD4 phase separates with chromatin and cofactors}
+\begin{itemize}
+\item BRD4 mutation to inhibit (i) phase separation (ii) chromatin reading function
+\item Measure nucleosome diffusion after JQ1 exposure
+\end{itemize}
+\end{frame}
+
+\begin{frame}
 
 \end{frame}
 
@@ -611,6 +627,18 @@ Blue - DAPI (binds DNA minor groove)
 Thank you!
 \end{textblock*}
 
+\end{frame}
+\begin{frame}{Selected References}
+\noindent [1] Schermelleh, L. et al. \textit{Super-resolution microscopy demystified}. Nature Cell Biology vol. 21 72–84 (2019). 
+\newline
+\noindent [2] Nehme, E. et al. \textit{DeepSTORM3D: dense 3D localization microscopy and PSF design by deep learning}. Nat Methods 17, 734–740 (2020). 
+\newline
+\noindent [3] Dertinger, T. et al. \textit{Fast, background-free, 3D super-resolution optical fluctuation imaging (SOFI)}. PNAS
+\newline
+\noindent [4] Nozaki, T. et al. \textit{Dynamic Organization of Chromatin Domains Revealed by Super-Resolution Live-Cell Imaging}. Mol Cell 67, 282-293.e7 (2017). 
+\newline
+\noindent [5] Han, X. et al.\textit{ Roles of the BRD4 short isoform in phase separation and active gene transcription}. Nat Struct Mol Biol 27, 333–341 (2020). 
+\newline
 \end{frame}
 
 
