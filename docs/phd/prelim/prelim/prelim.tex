@@ -130,6 +130,7 @@ Modeling the point spread function permits sub-pixel localization
 \mu_{k} &= i_{0}\int_{\mathrm{k}}h_{\theta}(x_{0},y_{0})dxdy\\
 i_{0} &= g_{k}\textcolor{red}{\eta} \textcolor{cyan}{N_{0}}\textcolor{blue}{\Delta} 
 \\
+g_{k} &- \mathrm{pixel\; gain}\\
 \textcolor{red}{\eta} &- \mathrm{quantum\; efficiency}\\
 \textcolor{cyan}{N_{0}} &- \mathrm{photon\; emission\; rate}\\
 \textcolor{blue}{\Delta} &- \mathrm{exposure\; time}
@@ -303,7 +304,7 @@ Simulated 5 blinking emitters, assigned virtual pixels $\langle X_{i}(t)X_{j}(t)
 
 \begin{textblock*}{11cm}(1cm,7.5cm)
 \begin{itemize}
-\item On this timescale, relax assumption that $N_{0}$ is constant 
+\item Relax assumption that $N_{0}$ (emission rate) is constant 
 \item For example, photoswitching \textrm{ON} or \textrm{OFF}
 \item Fluctuations in $N_{0}$ may be \textbf{uncorrelated} between molecules
 \end{itemize}
