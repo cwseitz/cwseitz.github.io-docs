@@ -1,0 +1,36 @@
+\ProvidesFile{ch-introduction.tex}[2022-10-05 ch-do-not-use-these-packages chapter]
+
+\chapter{DO NOT USE THESE PACKAGES}
+
+The
+|\usepackage{|\Place{packagename}|}|
+command is used to load a package.
+
+Do not use these packages for the listed purposes.
+Using them for these purposes is not compatible with \PurdueThesisLogo.\\
+
+\noindent
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+  \toprule
+  \bf Name& \bf For\\
+  \midrule
+  babel&
+    Translating ``Table of Contents'', etc\@. to foreign languages.
+    Reported by Danushka Menikkumbura.
+    Send email to {\tt latex@ecn.purdue.edu} if you need to
+    typset multiple languages in your thesis.\\
+  caption&
+    Used to customize captions.
+    Do not load this package, it is not compatible with \PurdueThesisLogo.\\
+  subfig&
+    For subfigures.
+    This package is deprecated.
+    Do not load this package.
+    See page \pageref{pa:subfigures} for how to do subfigures.\\
+  subfigure&
+    For subfigures.
+    This package is deprecated.
+    Do not load this package.
+    See page \pageref{pa:subfigures} for how to do subfigures.\\
+  \bottomrule
+\end{tabularx}

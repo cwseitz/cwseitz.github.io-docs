@@ -1,0 +1,130 @@
+\ProvidesFile{ch-front.tex}[2022-10-05 front matter chapter]
+%
+%  This is the ``front matter'' for the thesis.
+%
+%  REFERENCES
+%
+%    TCMOS17
+%      The Chicago Manual of Style Online, 17th edition.
+%      https://www.chicagomanualofstyle.org/home.html
+%      retrieved on 2020-02-29
+%
+%    TEMPL
+%      Thesis and Disertation Office Templates.
+%      https://www.purdue.edu/gradschool/research/thesis/templates.html
+%      retrieved on 2020-02-29
+%
+%    WNNCD
+%    Webster's Ninth New Collegiate Dictionary.
+%
+
+%
+%   Only Purdue University uses this page
+%
+%   Comment out \begin{statement} through \end{statement}
+%   if you are not at Purdue University.
+%
+% Statement of Thesis/Dissertation Approval Page
+% This page is REQUIRED.  The page should be numbered "2"
+% and should NOT be listed in your TABLE OF CONTENTS.
+\begin{statement}
+  % Delete or add \entry commands as needed for all committe members.
+  \entry{Dr. Gautam Vemuri, Chair}{Department of Physics}
+  \entry{Dr. Jing Liu}{Department of Physics}
+  \entry{Dr. Ruihua Cheng}{Department of Physics}
+  \entry{Dr. Stephen Wassall}{Department of Physics}
+  \entry{Dr. Horia Petrache}{Department of Physics}
+  % There should be one \approvedby command containing the
+  % "FORM 9 THESIS FORM HEAD NAME HERE" (from TEMPL, retrieved on 2020-03-01).
+  \approvedby{Dr. Jing Liu}
+\end{statement}
+
+% Dedication page is optional.
+% A name and often a message in tribute to a person or cause.
+% References: WEB9 332.
+\begin{dedication}
+\end{dedication}
+
+% Acknowledgements page is optional but most theses include
+% a brief statement of appreciation or recognition of special
+% assistance.
+\begin{acknowledgments}
+\end{acknowledgments}
+
+% The preface is optional.
+% References: TCMOS17 1.49, WEB9 927.
+%\begin{preface}
+%  This is the preface.
+%\end{preface}
+
+% The Table of Contents is required.
+% The Table of Contents will be automatically created for you
+% using information you supply in
+%     \chapter
+%     \section
+%     \subsection
+%     \subsubsection
+%     commands.
+\pdfbookmark{TABLE OF CONTENTS}{Contents}
+\tableofcontents
+
+% If your thesis has tables, a list of tables is required.
+% The List of Tables will be automatically created for you using
+% information you supply in
+%     \begin{table} ... \end{table}
+% environments.
+\listoftables
+
+% If your thesis has figures, a list of figures is required.
+% The List of Figures will be automatically created for you using
+% information you supply in
+%     \begin{figure} ... \end{figure}
+% environments.
+\listoffigures
+
+% If your thesis has listings, a list of listings is required.
+% The List of Listings will be automatically created for you using
+% information you supply in
+%     \begin{ZZlisting} ... \end{ZZlisting}
+% environments.
+%\ZZlistoflistings
+
+% If your thesis has protocols, you may want to do a list of protocols.
+% The List of Protocols will be automatically created for you using
+% information you supply in
+%     \begin{protocol} ... \end{protocol}
+% environments.
+%\listofprotocols
+
+% If your thesis has schemes, you may want to do a list of schemes.
+% The List of Schemes will be automatically created for you using
+% information you supply in
+%     \begin{scheme} ... \end{scheme}
+% environments.
+%\listofschemes
+
+% List of Symbols is optional.
+\begin{symbols}
+  $m$& mass\cr
+  $v$& velocity\cr
+\end{symbols}
+
+% List of Abbreviations is optional.
+\begin{abbreviations}
+  abbr& abbreviation\cr
+  bcf& billion cubic feet\cr
+  BMOC& big man on campus\cr
+\end{abbreviations}
+
+
+
+% Abstract is required.
+% Note that the information for the first paragraph of the output
+% doesn't need to be input here...it is put in automatically from
+% information you supplied earlier using \title, \author, \degree,
+% and \majorprof.
+% Reference: PU 17.
+\begin{abstract}%
+Single-molecule localization microscopy (SMLM) techniques, such as direct stochastic optical reconstruction microscopy (dSTORM), can be used to produce a pointillist representation of fluorescently-labeled biological structures at diffraction-unlimited precision. Direct STORM approaches leverage the deactivation of standard fluorescent tags, followed by spontaneous or photoinduced reactivation, allowing resolution of fluorophores at distances below the diffraction limit. This basic principle remains one of the method's primary limitations - standard SMLM fitting routines require tight control of activation and reactivation to maintain sparse emitters, presenting a tradeoff between imaging speed and labeling density. Here, I present two parallel projects, which aim to push the current state of the art in SMLM and apply SMLM to the study of gene regulation. The former represents a novel localization technique for dense SMLM, based on deep probabilistic modeling and photon statistics. In the latter, conventional dSTORM is adapted for live cell imaging of chromatin nanodomains, demonstrating that BRD4 protein concentrates in nucleosome depleted regions.
+
+\end{abstract}

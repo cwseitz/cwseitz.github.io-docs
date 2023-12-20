@@ -1,0 +1,241 @@
+\ProvidesFile{ap-bugs}[2022-10-14 bugs appendix]
+
+\makeatletter
+\newcommand{\bug}[2]
+  {%
+    \vspace{6pt}
+    \noindent
+    {%
+      \bfseries
+      \ifthen{\equal{high}{#2}}{\color{red}}%
+      \ifthen{\equal{low}{#2}}{\color{green}}%
+      \ifthen{\equal{done}{#2}}{\color{black}}%
+      \ifthen{\equal{fixed}{#2}}{\color{black}}%
+      \ifthen{\equal{wait}{#2}}{\color{black}}%
+      \ifthen{\equal{not}{#2}}{\color{gray}}%
+      {\fontsize{9}{10}\reset@font\bf BUG}
+      #1.
+    }%
+    \ignorespaces
+  }
+\makeatother
+
+\chapter{BUGS}
+
+This appendix lists all bugs/comments/issues/etc\@.
+under the generic name `bug'.
+Each bug is assigned a number when I learn of it.
+Bug numbers are 1, 2,~\ldots~.
+I started keeping track of bugs in this fashion on February 26, 2022,
+and some previously known bugs are included in this list.
+A color indicates a bug's priority:
+
+\begin{tabular}{@{}ll@{}}
+  \toprule
+  \bf Description& \bf Color\\
+  \midrule
+  done or waiting on someone else& \color{black}black\\
+  high priority or easy to do& \color{red}red\\
+  low priority& \color{green}green\\
+  not prioritized yet& \color{gray}gray\\
+  \bottomrule\\
+\end{tabular}
+
+See the ap-bugs.tex file for the \LaTeXLogo\ input for this appendix.
+
+
+\section{These bugs need to be looked at}
+
+% I need to fix the following things in \PurdueThesis.
+% They are listed in bug number order.
+
+\bug{1}{high}
+Table of Contents is double-spaced instead of 1\sfrac12 spacing.
+{\small
+  Tighten up section and less significant headings spacing?
+  Reported by Anita Adams Sale on 2021-03-17.%
+}
+
+\bug{2}{high}
+List of Figures indented $\approx$\sfrac14 inch
+more than List of Tables.
+{\small
+  Reported by Anita Adams Sale on 2021-03-17.
+  Still happening on 2021-11-30.
+  Looked ok on 2022-08-26
+  but I think this problem is probably intermittent.
+  Keep Ashlee Messersmith,
+  Anita Adams Sale,
+  and Sherrie Tucker informed.%
+}
+
+\bug{6}{not}
+APA reference style indents references too far on left.
+{\small
+Reported by Mark Senn on 2021-04-08.%
+}
+
+\bug{8}{not}
+Use ``Last Accessed: yyyy-mm-dd.'' urldate in bibliography.
+{\small
+  Reported by Mark Senn on 2021-04-19.%
+}
+
+\bug{9}{low}
+Check that |@{}| is before the left column
+and after the right column in all tables.
+{\small
+  Reported by Mark Senn on 2021-04-19.%
+}
+
+\bug{11}{low}
+Bibliography change:
+Change,
+for example,
+``Acoustical Science and Technology, vol.~23, no.~1''
+to
+``Acoustical Science and Technology {\bfseries 23\/} ({\bfseries 1\/})''.
+{\small
+  Reported by Daniel Joesph Carr on 2021-06-16.%
+}
+
+\bug{12}{low}
+Bibliography change:
+Change,
+for example,
+|M.~Abramowitz and I.A.~Stegun, Eds.,|
+to
+|M.~Abramowitz and I.A.~Stegun, editors,|.
+{\small
+  Reported by Daniel Joesph Carr on 2021-06-16.
+}
+
+\bug{13}{low}
+Headings containing a SmallCaps font do not work.
+{\small
+  Reported by Javad (Nima) Darivandpour on 2021-06-29.
+  See \ref{section-headings-with-smallcaps-font}.%
+}
+
+\bug{14}{low}
+On Overleaf only,
+when using
+|\def\ZZshowtimestamp{true}|,
+the time and sometimes the date
+are wrong at the top of the page.
+{\small
+  Reported by Mark Senn on 2022-02-25.
+  This might be due to using
+  |\ExplSyntaxOn| \ldots |\ExplSyntaxOff|
+  and having |:| and/or other characters having the wrong catcode.
+}
+
+\bug{15}{not}
+Left reference section margin is ok if a person has 10--99 references.
+{\small
+  Figure out how to adjusting margin for 1--9 or over 99 references.
+  Reported by Mark Senn on unknown date.
+}
+
+\bug{19}{high}
+|Bibliography| and |References| missing from navigation panel.
+{\small
+  Reported by Mark Senn on 2022-02-28.
+  REFERENCES was in navigation panel on 2022-08-26.
+}
+
+\bug{20}{high}
+|Bibliography| and |References| should be in all caps.
+{\small
+  Reported by Mark Senn on 2022-02-28.
+  REFERENCES was in all caps on 2022-08-26.%
+}
+
+\bug{21}{low}
+IE students should be able
+to specify IEEE
+or APA bibliography format.
+{\small
+  Reported by Patrick Brunese on 2022-03-04.%
+}
+
+\section{These bugs are waiting on a reply from someone other than Mark Senn}
+
+\bug{10}{wait}
+Using
+|linktoc = section|
+does not work with captions with
+|\frac|.
+{\small
+  Reported by Mark Senn on 2021-05-27.
+  In the short-term,
+  check with Ashlee Messersmith
+  if {\tt linktoc = page} can be used.
+  If that's ok make the change
+  and look into changing captions from my code
+  to \LaTeXLogo's code.
+  Waiting on Ashlee Messersmith.
+}
+
+\section{These bugs have been rejected or fixed}
+
+\bug{3}{done}
+Use ``Last Accessed: dd/mm/yy.'' urldate in bibliography.
+{\small
+  Reported by Priyank Kalgaonkar on 2021-04-06.
+  Answered by Mark Senn on 2022-02-27.
+  The United States uses mm/dd/yy and other countries use dd/mm/yy
+  \cite{cms17-ambiguous-dates}.
+  I recommend using what your bibliography style defines
+  or the unambiguous ISO 8601 standard yyyy-mm-dd
+  \cite{cms17-iso-dates}.%
+}
+
+\bug{4}{done}
+Change citation, e.g., |[6], [71]| to |[6,71]|.
+{\small
+  Reported by Mark Senn on 2021-04-07.
+  Fixed on 2022-04-14.
+  Tested ok on 2022-04-14.%
+}
+
+\bug{5}{done}
+Change citation, e.g., |[6], [7], [8]| to |[6-8]|.
+{\small
+  Reported by Mark Senn on 2021-04-07.
+  Fixed on 2022-04-14.
+  Tested ok on 2022-04-14.%
+}
+
+\bug{7}{fixed}
+Non-nested description environments have bold items.
+Nested description environments have non-bold items.
+How come?
+Are the indentations correct?
+{\small
+  Reported by Mark Senn on 2021-04-09.
+  Tested ok on 2021-05-31.%
+}
+
+\bug{16}{fixed}
+Add DTECH degree.
+{\small
+  Reported by Mark Senn on unknown date.
+  Program ``Technology''
+  and degree ``Doctor of Technology'' worked ok
+  on 2022-08-26.%
+}
+
+\bug{17}{fixed}
+Allow |,| (comma) in |\title|.
+{\small
+  Reported by Mark Senn on unknown date.
+  Tested ok on 2021-11-30.%
+}
+
+\bug{18}{fixed}
+Allow |\\| in |\title|.
+{\small
+  Reported by Mark Senn on unknown date.
+  Tested ok on 2021-11-30.%
+}

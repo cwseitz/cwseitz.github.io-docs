@@ -1,0 +1,539 @@
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  19 DEC 2023 21:35
+ restricted system commands enabled.
+**ap-physics.tex
+(./ap-physics.tex
+LaTeX2e <2022-11-01> patch level 1
+Lua module: luaotfload 2022-10-03 3.23 Lua based OpenType font support
+Lua module: lualibs 2022-10-04 2.75 ConTeXt Lua standard libraries.
+Lua module: lualibs-extended 2022-10-04 2.75 ConTeXt Lua libraries -- extended c
+ollection.
+luaotfload | conf : Root cache directory is "/Users/cwseitz/Library/texlive/2023
+/texmf-var/luatex-cache/generic/names".
+luaotfload | init : Loading fontloader "fontloader-2022-10-03.lua" from kpse-res
+olved path "/usr/local/texlive/2023/texmf-dist/tex/luatex/luaotfload/fontloader-
+2022-10-03.lua".
+Lua-only attribute luaotfload@noligature = 1
+luaotfload | init : Context OpenType loader version 3.120
+Inserting `luaotfload.node_processor' in `pre_linebreak_filter'.
+Inserting `luaotfload.node_processor' in `hpack_filter'.
+Inserting `luaotfload.glyph_stream' in `glyph_stream_provider'.
+Inserting `luaotfload.define_font' in `define_font'.
+Lua-only attribute luaotfload_color_attribute = 2
+luaotfload | conf : Root cache directory is "/Users/cwseitz/Library/texlive/2023
+/texmf-var/luatex-cache/generic/names".
+Inserting `luaotfload.harf.strip_prefix' in `find_opentype_file'.
+Inserting `luaotfload.harf.strip_prefix' in `find_truetype_file'.
+Removing  `luaotfload.glyph_stream' from `glyph_stream_provider'.
+Inserting `luaotfload.harf.glyphstream' in `glyph_stream_provider'.
+Inserting `luaotfload.harf.finalize_vlist' in `post_linebreak_filter'.
+Inserting `luaotfload.harf.finalize_hlist' in `hpack_filter'.
+Inserting `luaotfload.cleanup_files' in `wrapup_run'.
+Inserting `luaotfload.harf.finalize_unicode' in `finish_pdffile'.
+Inserting `luaotfload.glyphinfo' in `glyph_info'.
+Lua-only attribute luaotfload.letterspace_done = 3
+Inserting `luaotfload.aux.set_sscale_dimens' in `luaotfload.patch_font'.
+Inserting `luaotfload.aux.set_font_index' in `luaotfload.patch_font'.
+Inserting `luaotfload.aux.patch_cambria_domh' in `luaotfload.patch_font'.
+Inserting `luaotfload.aux.fixup_fontdata' in `luaotfload.patch_font_unsafe'.
+Inserting `luaotfload.aux.set_capheight' in `luaotfload.patch_font'.
+Inserting `luaotfload.aux.set_xheight' in `luaotfload.patch_font'.
+Inserting `luaotfload.rewrite_fontname' in `luaotfload.patch_font'. L3 programm
+ing layer <2023-02-22>
+Inserting `tracingstacklevels' in `input_level_string'.
+File: ap-physics.tex 2022-10-05 Physics appendix
+
+
+! LaTeX Error: Environment VerbatimOut undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3 \begin{VerbatimOut}
+                     {z.out}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3 \begin{VerbatimOut}{z
+                       .out}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Undefined control sequence.
+l.4 \chapter
+          {PHYSICS}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.5 \ix
+     {physics//Physics appendix}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 3--6
+[]z.out
+ []
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.7 F
+   eynman diagrams\ix{Feynman diagram}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Undefined control sequence.
+l.7 Feynman diagrams\ix
+                     {Feynman diagram}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+\citation{feynman-diagram}
+luaotfload | db : Font names database loaded from /Users/cwseitz/Library/texlive
+/2023/texmf-var/luatex-cache/generic/names/luaotfload-names.luc.gz
+! Undefined control sequence.
+<write> ... Warning: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .
+l.10 \cite{feynman-diagram}
+                         .
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `feynman-diagram' on page  undefined on input line 10.
+
+! Undefined control sequence.
+l.12 \citetitle
+             {ellis2016} documentation \cite{ellis2016}.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+\citation{ellis2016}
+! Undefined control sequence.
+<write> ... Warning: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .
+l.12 ...le{ellis2016} documentation \cite{ellis2016}
+                                                  .
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `ellis2016' on page  undefined on input line 12.
+
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 17.
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 7--18
+[]Feynman
+ []
+
+
+Overfull \hbox (5.43pt too wide) in paragraph at lines 7--18
+[[]].
+ []
+
+
+Overfull \hbox (5.43pt too wide) in paragraph at lines 7--18
+[[]].
+ []
+
+
+Overfull \hbox (19.87pt too wide) in paragraph at lines 7--18
+\TU/lmr/bx/n/10 You
+ []
+
+
+Overfull \hbox (24.65999pt too wide) in paragraph at lines 7--18
+\TU/lmr/bx/n/10 must
+ []
+
+
+Overfull \hbox (16.2pt too wide) in paragraph at lines 7--18
+\TU/lmr/bx/n/10 use
+ []
+
+
+Overfull \hbox (42.0pt too wide) in paragraph at lines 7--18
+\TU/lmtt/bx/n/10 lualatex
+ []
+
+
+Overfull \hbox (13.41pt too wide) in paragraph at lines 7--18
+\TU/lmr/bx/n/10 in-
+ []
+
+
+Overfull \hbox (26.26pt too wide) in paragraph at lines 7--18
+\TU/lmr/bx/n/10 stead
+ []
+
+
+Overfull \hbox (9.26pt too wide) in paragraph at lines 7--18
+\TU/lmr/bx/n/10 of
+ []
+
+
+Overfull \hbox (42.0pt too wide) in paragraph at lines 7--18
+\TU/lmtt/bx/n/10 pdflatex
+ []
+
+
+Overfull \hbox (10.22pt too wide) in paragraph at lines 7--18
+\TU/lmr/bx/n/10 to
+ []
+
+
+Overfull \hbox (20.71pt too wide) in paragraph at lines 7--18
+\TU/lmr/bx/n/10 pro-
+ []
+
+
+Overfull \hbox (19.45999pt too wide) in paragraph at lines 7--18
+\TU/lmr/bx/n/10 cess
+ []
+
+
+Overfull \hbox (21.40001pt too wide) in paragraph at lines 7--18
+\TU/lmr/bx/n/10 doc-
+ []
+
+
+Overfull \hbox (10.22pt too wide) in paragraph at lines 7--18
+\TU/lmr/bx/n/10 u-
+ []
+
+
+Overfull \hbox (29.93pt too wide) in paragraph at lines 7--18
+\TU/lmr/bx/n/10 ments
+ []
+
+
+Overfull \hbox (20.92pt too wide) in paragraph at lines 7--18
+\TU/lmr/bx/n/10 that
+ []
+
+
+Overfull \hbox (16.2pt too wide) in paragraph at lines 7--18
+\TU/lmr/bx/n/10 use
+ []
+
+
+Overfull \hbox (16.13pt too wide) in paragraph at lines 7--18
+\TU/lmr/bx/n/10 the
+ []
+
+
+Overfull \hbox (26.25pt too wide) in paragraph at lines 7--18
+\TU/lmtt/bx/n/10 tikz-
+ []
+
+
+Overfull \hbox (36.75pt too wide) in paragraph at lines 7--18
+\TU/lmtt/bx/n/10 feynman
+ []
+
+
+Overfull \hbox (26.67pt too wide) in paragraph at lines 7--18
+\TU/lmr/bx/n/10 pack-
+ []
+
+
+Overfull \hbox (19.8pt too wide) in paragraph at lines 7--18
+\TU/lmr/bx/n/10 age. 
+ []
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.19 T
+    he input
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+\citation{menke2019}
+! Undefined control sequence.
+<write> ... Warning: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .
+l.22 is used \cite{menke2019}
+                           .
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `menke2019' on page  undefined on input line 22.
+
+\citation{ellis2017}
+! Undefined control sequence.
+<write> ... Warning: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .
+l.27 ...nti} \texttt{fermion} lines \cite{ellis2017}
+                                                  .
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `ellis2017' on page  undefined on input line 27.
+
+
+! LaTeX Error: \begin{document} ended by \end{VerbatimOut}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.28 \end{VerbatimOut}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 19--29
+[]The
+ []
+
+
+Overfull \hbox (5.43pt too wide) in paragraph at lines 19--29
+[[]].
+ []
+
+
+Overfull \hbox (42.0pt too wide) in paragraph at lines 19--29
+\TU/lmtt/m/n/10 vertical
+ []
+
+
+Overfull \hbox (47.25pt too wide) in paragraph at lines 19--29
+\TU/lmtt/m/n/10 vertical'
+ []
+
+
+Overfull \hbox (36.75pt too wide) in paragraph at lines 19--29
+\TU/lmtt/m/n/10 fermion
+ []
+
+
+Overfull \hbox (21.0pt too wide) in paragraph at lines 19--29
+\TU/lmtt/m/n/10 anti
+ []
+
+
+Overfull \hbox (36.75pt too wide) in paragraph at lines 19--29
+\TU/lmtt/m/n/10 fermion
+ []
+
+
+Overfull \hbox (5.43pt too wide) in paragraph at lines 19--29
+[[]].
+ []
+
+! Undefined control sequence.
+l.30 \MyIO
+        
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Environment VerbatimOut undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.33 \begin{VerbatimOut}
+                      {z.out}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.33 \begin{VerbatimOut}{z
+                        .out}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Undefined control sequence.
+l.34 \feynmandiagram
+                   [large, vertical'=e to f] {
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 35.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 35.
+
+! LaTeX Error: \begin{document} ended by \end{VerbatimOut}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.40 \end{VerbatimOut}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 33--41
+[]z.out
+ []
+
+
+Overfull \hbox (5.52084pt too wide) in paragraph at lines 33--41
+momentum=$\OML/cmm/m/it/10 k$\nullfont ]
+ []
+
+
+Overfull \hbox (9.51738pt too wide) in paragraph at lines 33--41
+momentum'=$\OML/cmm/m/it/10 p[]$\nullfont ]
+ []
+
+
+Overfull \hbox (9.51738pt too wide) in paragraph at lines 33--41
+momentum'=$\OML/cmm/m/it/10 p[]$\nullfont ]
+ []
+
+! Undefined control sequence.
+l.42 \MyIO
+        
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Environment VerbatimOut undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45 \begin{VerbatimOut}
+                      {z.out}
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45 \begin{VerbatimOut}{z
+                        .out}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Undefined control sequence.
+l.46 \feynmandiagram
+                   [horizontal=a to b] {
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: \begin{document} ended by \end{VerbatimOut}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.51 \end{VerbatimOut}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 45--52
+[]z.out
+ []
+
+! Undefined control sequence.
+l.53 \MyIO
+        
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+)
+! Emergency stop.
+<*> ap-physics.tex
+               
+*** (job aborted, no legal \end found)
+
+
+
+Here is how much of LuaTeX's memory you used:
+ 30 strings out of 478285
+ 100000,1977958 words of node,token memory allocated 8131 words of node memory still in use:
+   65 hlist, 6 disc, 5 local_par, 1 dir, 6 math, 221 glue, 21 kern, 17 penalty, 
+745 glyph, 56 attribute, 39 glue_spec, 56 attribute_list nodes
+   avail lists: 2:2,4:25,5:4,7:27,8:2,10:24
+ 20354 multiletter control sequences out of 65536+600000
+ 29 fonts using 1855007 bytes
+ 19i,2n,19p,102b,150s stack positions out of 10000i,1000n,20000p,200000b,200000s
+!  ==> Fatal error occurred, no output PDF file produced!
