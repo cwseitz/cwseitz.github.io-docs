@@ -1,7 +1,7 @@
-This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  19 DEC 2023 22:58
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  19 DEC 2023 23:25
  restricted system commands enabled.
-**thesis.tex
-(./thesis.tex
+**dissertation.tex
+(./dissertation.tex
 LaTeX2e <2022-11-01> patch level 1
 Lua module: luaotfload 2022-10-03 3.23 Lua based OpenType font support
 Lua module: lualibs 2022-10-04 2.75 ConTeXt Lua standard libraries.
@@ -1709,9 +1709,9 @@ Package: makeidx 2021/10/04 v1.0m Standard LaTeX package
 )
 \@indexfile=\write7
 
-\openout7 = thesis.idx
+\openout7 = dissertation.idx
 
-Writing index file thesis.idx
+Writing index file dissertation.idx
 (/usr/local/texlive/2023/texmf-dist/tex/latex/media9/media9.sty
 Package: media9 2022/08/04 v1.25 acrobat-9/X compatible media
 \g_mix_pkgresizeflag_int=\count640
@@ -2126,11 +2126,10 @@ Package translations Info: No language package found. I am going to use `englis
 h' as default language. on input line 518.
 \@quotelevel=\count673
 \@quotereset=\count674
- (./thesis.aux (./ch-front.aux) (./ch-introduction.aux) (./ap-citations-referen
-ces.aux)
-(./ap-physics.aux) (./ap-vita.aux) (./ap-publications.aux))
-\openout1 = thesis.aux
 
+No file dissertation.aux.
+
+\openout1 = dissertation.aux
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 518.
 LaTeX Font Info:    ... okay on input line 518.
 LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 518.
@@ -2142,7 +2141,6 @@ LaTeX Font Info:    ... okay on input line 518.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 518.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 5
 18.
-
 (/usr/local/texlive/2023/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
@@ -2181,11 +2179,9 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 Package hyperref Info: Link coloring ON on input line 518.
-
-(./thesis.out) (./thesis.out)
 \@outlinefile=\write9
 
-\openout9 = thesis.out
+\openout9 = dissertation.out
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/translations/translations-basic-d
 ictionary-english.trsl
@@ -2252,19 +2248,19 @@ Package biblatex Info: LuaTeX detected.
 Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'utf8'.
 
-\openout5 = thesis.bcf
+\openout5 = dissertation.bcf
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'thesis.bbl' not found.
+Package biblatex Info: ... file 'dissertation.bbl' not found.
 
-No file thesis.bbl.
+No file dissertation.bbl.
 Package biblatex Info: Reference section=0 on input line 518.
 Package biblatex Info: Reference segment=0 on input line 518.
 \c@lstlisting=\count681
 
 Package chemgreek Info: Activating mapping `default' on line 518.
 
-\Etoc@tf=\read6
-<graphics//gr-pu-seal-vector.pdf, id=121, 527.62581pt x 516.24864pt>
+No file dissertation.toc.
+<graphics//gr-pu-seal-vector.pdf, id=33, 527.62581pt x 516.24864pt>
 File: graphics//gr-pu-seal-vector.pdf Graphic file (type pdf)
 <use graphics//gr-pu-seal-vector.pdf>
 Package luatex.def Info: graphics//gr-pu-seal-vector.pdf  used on input line 52
@@ -2282,84 +2278,33 @@ File: ch-front.tex 2022-10-05 front matter chapter
 ] [3]
 \tf@toc=\write10
 
-\openout10 = thesis.toc
+\openout10 = dissertation.toc
  [4
 
+] [5
+
 ]
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 7
-0.
-
-(/usr/local/texlive/2023/texmf-dist/tex/latex/lm/ot1lmr.fd
-File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 7
-0.
-
-(/usr/local/texlive/2023/texmf-dist/tex/latex/lm/omllmm.fd
-File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-70.
-
-(/usr/local/texlive/2023/texmf-dist/tex/latex/lm/omslmsy.fd
-File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-70.
-
-(/usr/local/texlive/2023/texmf-dist/tex/latex/lm/omxlmex.fd
-File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 70.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 70.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 70.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 70.
-
-
-(/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 70.
-
-
-(/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-LaTeX Font Info:    Trying to load font information for U+esvect on input line 
-70.
-
-(/usr/local/texlive/2023/texmf-dist/tex/latex/esvect/uesvect.fd
-File: uesvect.fd 
-)
-LaTeX Font Info:    Trying to load font information for U+psy on input line 70.
-
-
-(/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/upsy.fd
-File: upsy.fd 2001/06/04 font definitions for U/psy.
-) [5
-
-] (./thesis.lot)
+No file dissertation.lot.
 \tf@lot=\write11
 
-\openout11 = thesis.lot
- [6
+\openout11 = dissertation.lot
+[6
 
-] (./thesis.lof
-Overfull \hbox (18.18472pt too wide) in paragraph at lines 1--1
- [][] []\T1/lmr/bx/n/12 Stochas-tic op-ti-cal re-con-struc-tion mi-croscopy (STO
-RM)\T1/lmr/m/n/12 . (A) Sin-gle molecules 
- []
-
-)
+]
+No file dissertation.lof.
 \tf@lof=\write12
 
-\openout12 = thesis.lof
- [7
+\openout12 = dissertation.lof
+[7
 
-] [8
+] (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/ot1lmr.fd)
+(/usr/local/texlive/2023/texmf-dist/tex/latex/lm/omllmm.fd)
+(/usr/local/texlive/2023/texmf-dist/tex/latex/lm/omslmsy.fd)
+(/usr/local/texlive/2023/texmf-dist/tex/latex/lm/omxlmex.fd)
+(/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(/usr/local/texlive/2023/texmf-dist/tex/latex/esvect/uesvect.fd)
+(/usr/local/texlive/2023/texmf-dist/tex/latex/psnfss/upsy.fd) [8
 
 ] [9
 
@@ -2367,7 +2312,8 @@ RM)\T1/lmr/m/n/12 . (A) Sin-gle molecules
 
 ]
 \openout2 = ch-introduction.aux
- (./ch-introduction.tex
+
+(./ch-introduction.tex
 File: ch-introduction.tex 2022-10-05 introduction chapter
 
 Chapter 1.
@@ -2375,7 +2321,7 @@ Chapter 1.
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 9.
 
-<figures/Intro.png, id=231, 974.13937pt x 370.38374pt>
+<figures/Intro.png, id=112, 974.13937pt x 370.38374pt>
 File: figures/Intro.png Graphic file (type png)
 <use figures/Intro.png>
 Package luatex.def Info: figures/Intro.png  used on input line 14.
@@ -2527,8 +2473,11 @@ LaTeX Warning: Citation 'template3' on page 24 undefined on input line 9.
 
 
 ]) [25]
-No file thesis.ind.
-(./thesis.aux (./ch-front.aux) (./ch-introduction.aux)
+No file dissertation.ind.
+
+Package ocgx2 Warning: Rerun to get OCG references right!
+
+[26] (./dissertation.aux (./ch-front.aux) (./ch-introduction.aux)
 (./ap-citations-references.aux) (./ap-physics.aux) (./ap-vita.aux)
 (./ap-publications.aux))
 
@@ -2746,8 +2695,6 @@ packages//slgloss.sty
 supp-pdf.mkii
 epstopdf-base.sty    2020-01-24 v2.11 Base part for package epstopdf
 epstopdf-sys.cfg    2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
-  thesis.out
-  thesis.out
 translations-basic-dictionary-english.trsl    (english translation file `transl
 ations-basic-dictionary')
 notoccite.sty    2000/07/20
@@ -2782,29 +2729,39 @@ ap-publications.tex    2022-10-05 publications appendix
 
 LaTeX Warning: There were undefined references.
 
-Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: D01EA910321A95456F6CD8C4B2CFDA10;3173.
+
+LaTeX Warning: Temporary extra page added at the end. Rerun to get it removed.
+
+
+Package rerunfilecheck Warning: File `dissertation.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `dissertation.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  D01EA910321A95456F6CD8C4B2CFDA10;3173.
 
 Package biblatex Warning: Please (re)run Biber on the file:
-(biblatex)                thesis
+(biblatex)                dissertation
 (biblatex)                and rerun LaTeX afterwards.
 
-Package logreq Info: Writing requests to 'thesis.run.xml'.
+Package logreq Info: Writing requests to 'dissertation.run.xml'.
 
-\openout1 = thesis.run.xml
+\openout1 = dissertation.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 75718 strings out of 478285
+ 75639 strings out of 478285
  125218,3417909 words of node,token memory allocated
  1332 words of node memory still in use:
    24 hlist, 2 vlist, 10 rule, 2 glue, 4 kern, 1 glyph, 72 attribute, 93 glue_sp
 ec, 72 attribute_list, 6 write, 16 pdf_literal, 2 pdf_dest, 16 pdf_colorstack no
 des
-   avail lists: 1:9,2:761,3:566,4:99,5:484,6:53,7:6938,8:84,9:1923,10:23,11:654
- 93230 multiletter control sequences out of 65536+600000
- 61 fonts using 4015215 bytes
- 109i,16n,103p,1454b,2448s stack positions out of 10000i,1000n,20000p,200000b,200000s
+   avail lists: 1:10,2:761,3:349,4:56,5:484,6:52,7:6938,8:84,9:1923,10:23,11:654
+
+ 93197 multiletter control sequences out of 65536+600000
+ 60 fonts using 3920815 bytes
+ 109i,16n,103p,1460b,2448s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local
 /texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/20
 23/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2023/texmf-dist/f
@@ -2823,12 +2780,11 @@ ist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/ty
 pe1/public/lm/lmtt10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/
 lm/lmtt12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmtt8.pf
 b></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10
-.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/l
-ocal/texlive/2023/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on thesis.pdf (25 pages, 514185 bytes).
+.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/symbol/usyr.pfb>
+Output written on dissertation.pdf (26 pages, 508849 bytes).
 
-PDF statistics: 418 PDF objects out of 1000 (max. 8388607)
- 332 compressed objects within 4 object streams
+PDF statistics: 313 PDF objects out of 1000 (max. 8388607)
+ 246 compressed objects within 3 object streams
  57 named destinations out of 1000 (max. 131072)
- 372 words of extra memory for PDF output out of 10000 (max. 100000000)
+ 196 words of extra memory for PDF output out of 10000 (max. 100000000)
 

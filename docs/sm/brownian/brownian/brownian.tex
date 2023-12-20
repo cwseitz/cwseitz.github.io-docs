@@ -1,0 +1,106 @@
+
+
+\documentclass{article}
+\title{Notes on Brownian Motion}
+\author{C.W. Seitz}
+\date{\today}
+
+\usepackage{graphicx}
+\usepackage{subfigure,epsfig,amsfonts}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{float}
+\usepackage{bm}
+
+\begin{document}
+\maketitle
+
+
+\section{The Fokker-Planck Equation}
+
+The Fokker-Planck equation is a central tool in non-equilibrium statistical mechanics, analagous to the master equation for discrete systems. It allows us to determine the time evolution of probability densities over continuous state spaces. Important examples in biophysics are the phase space of a particle or the membrane potential of a nerve cell.
+
+Suppose we have a random variable $\bm{x}$ and its joint distribution $P(\bm{x},t)$, which is not necessarily stationary. Define a vector field $\vec{J}(\bm{x},t)$ which is the probability current, which we will specify in a moment. The Fokker-Planck equation is by starting with a continuity equation for probability 
+
+\begin{align*}
+\frac{d}{dt}\int_{V_{0}} P(\bm{x},t)dV &= \int_{S}P(\bm{x},t)(\vec{J}\cdot\hat{n})dS\\
+&= -\int_{V_{0}}P(\bm{x},t)(\nabla\cdot \vec{J})dV
+\end{align*}
+
+Clearly this implies that
+
+\begin{equation*}
+\frac{dP(\bm{x},t)}{dt} = -\left(\nabla\cdot \vec{J}\right)P(\bm{x},t)
+\end{equation*}
+
+We often call the divergence term, the Fokker-Planck operator $\mathcal{L}_{FP}=-\nabla\cdot \vec{J}$. A more rigorous derivation is given in the appendix, which tells us that, to second order
+
+\begin{equation*}
+J(x_{i},t)  = \left(M_{i}^{(1)}(t) - \sum_{j}\frac{\partial}{\partial x_{j}}M_{ij}^{(2)}(t) \right)P(\bm{x},t)
+\end{equation*}
+
+where $M_{i}^{n}(t)$ is the $n$th moment of a transition kernel $T(x_{i}',t'|x_{i},t)$ for variable $i$. The first moment is essentially just the deterministic part of the Langevin dynamics. The second and higher moments will depend on these higher moments in the stochastic forcing terms. As proven more completely in the appendix, the full multi-dimensional Fokker-Planck equation reads
+
+\begin{align}
+\frac{\partial P(\vec{x},t)}{\partial t}  &= \vec{\nabla} \cdot J(\vec{x},t)\\
+&= \sum_{i=1}^{N}\left(-\frac{\partial}{\partial x_{i}}M_{i}^{(1)}(t) + \sum_{j=1}^{N} \frac{\partial^{2}}{\partial x_{i}\partial x_{j}}M_{ij}^{(2)}(t)\right)P(\vec{x},t)
+\end{align}
+
+If we make a further constraint that the moments of the transition operator are stationary $M_{i}^{(1)}(t) = \Upsilon_{ij}$ and $M_{ij}^{(2)}(t) = D_{ij}$ 
+
+\begin{align}
+\frac{\partial P(\vec{x},t)}{\partial t}  &= \sum_{ij}\left(\Upsilon_{ij}\frac{\partial}{\partial x_{i}} + D_{ij}\frac{\partial^{2}}{\partial x_{i}\partial x_{j}}\right)P(\vec{x},t)
+\end{align}
+
+\begin{equation*}
+D = \begin{pmatrix}0&0 \\ 0& \gamma k_{B}T/m \end{pmatrix}\;\;\Upsilon = \begin{pmatrix}0 & -1\\ 0 & \gamma\end{pmatrix}
+\end{equation*}
+
+\section{Free Brownian particle}
+
+Consider a familiar Langevin dynamics on phase space $\bm{x} = (x,v)$, where a free particle ($V(x)=0\; \forall x$) experiences a viscous drag force and stochastic forcing $\xi(t)$ where $\xi(t)\sim\mathcal{N}(\mu,\sigma^{2})$ and $\langle \xi(t)\xi(t+\tau)\rangle = \delta(t-\tau)$. 
+
+\begin{align*}
+\dot{x} &= v\\
+\dot{v} &= -\frac{\gamma}{m}v + \frac{1}{m}\xi(t)
+\end{align*}
+
+The moments of the transition kernel must be
+
+\begin{equation*}
+M_{x}^{(1)} = v  \;\; M_{v}^{(1)} = -\frac{\gamma}{m}v + \mu \;\; M_{v}^{(v)} = \sigma^{2}
+\end{equation*}
+
+To simplify the notation let us define $\nabla\cdot \vec{J} = \frac{\partial J_{x}}{\partial x} + \frac{\partial J_{x}}{\partial v}= \mathcal{L}_{x} + \mathcal{L}_{v} = \mathcal{L}_{FP}$. This gives the full Fokker-Planck equation $\frac{dP(\bm{x},t)}{dt} = -\mathcal{L}_{FP}P(\bm{x},t)$. 
+
+\begin{align*}
+\mathcal{L}_{x}P(\bm{x},t) &= \frac{\partial}{\partial x}\left(vP(\bm{x},t)\right)\\
+\mathcal{L}_{v}P(\bm{x},t) &= \frac{\partial}{\partial v}\left(-\frac{\gamma}{m}v + \frac{1}{m}F(x)\right)P(\bm{x},t) + \sigma^{2}\frac{\partial^{2}}{\partial v^{2}}P(\bm{x},t)
+\end{align*}
+
+
+\section{The Brownian Harmonic oscillator}
+
+Consider a familiar Langevin dynamics on phase space $\bm{x} = (x,v)$, where a particle in a potential $V(x)$ experiences a viscous drag force and stochastic forcing $\xi(t)$ where $\xi(t)\sim\mathcal{N}(\mu,\sigma^{2})$ and $\langle \xi(t)\xi(t+\tau)\rangle = \delta(t-\tau)$. 
+
+\begin{align*}
+\dot{x} &= v\\
+\dot{v} &= -\frac{\gamma}{m}v + \frac{1}{m}F(x) + \frac{1}{m}\xi(t)
+\end{align*}
+
+The moments of the transition kernel must be
+
+\begin{equation*}
+M_{x}^{(1)} = v  \;\; M_{v}^{(1)} = -\frac{\gamma}{m}v + \frac{1}{m}F(x) + \mu \;\; M_{v}^{(v)} = \sigma^{2}
+\end{equation*}
+
+To simplify the notation let us define $\nabla\cdot \vec{J} = \frac{\partial J_{x}}{\partial x} + \frac{\partial J_{x}}{\partial v}= \mathcal{L}_{x} + \mathcal{L}_{v} = \mathcal{L}_{FP}$. This gives the full Fokker-Planck equation $\frac{dP(\bm{x},t)}{dt} = -\mathcal{L}_{FP}P(\bm{x},t)$. 
+
+\begin{align*}
+\mathcal{L}_{x}P(\bm{x},t) &= \frac{\partial}{\partial x}\left(vP(\bm{x},t)\right)\\
+\mathcal{L}_{v}P(\bm{x},t) &= \frac{\partial}{\partial v}\left(-\frac{\gamma}{m}v + \frac{1}{m}F(x)\right)P(\bm{x},t) + \sigma^{2}\frac{\partial^{2}}{\partial v^{2}}P(\bm{x},t)
+\end{align*}
+
+
+
+\end{document}
