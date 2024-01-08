@@ -3,54 +3,100 @@
 \chapter{PHYSICS}
 \ix{physics//Physics appendix}
 
-\subsection{Photoswitching induced spatial coherence}
+\subsection{Spatial coherence for an isolated emitter}
 
 Photoswitching fluorescent molecules are described in the density matrix formalism
 
 \begin{equation*}
-\rho = \xi\ket{\alpha}\bra{\alpha} + (1-\xi)\ket{0}\bra{0}
+\rho = \sum_{k}\xi_{k}\ket{\alpha_{k}}\bra{\alpha_{k}}\;\; \sum_{k}\xi_{k} = 1
 \end{equation*}
 
-where $\ket{\alpha}$ is a coherent state with amplitude $\alpha$ i.e., $\langle n\rangle = \bra{\alpha} n\ket{\alpha} = \lvert\alpha^{2}\rvert$. We consider a simplified model consisting of a single mode field 
+
+where $\ket{\alpha_{k}}$ is a coherent state with amplitude $\alpha_{k}$ i.e., $\langle n\rangle = \bra{\alpha_{k}} n\ket{\alpha_{k}} = \lvert\alpha_{k}^{2}\rvert$. Typically $\xi_{k}$ and $\langle n_{k}\rangle$ are heterogeneous. We consider a simplified model consisting of a single mode field 
 
 \begin{equation*}
-E_{0}^{+}\sim \sum_{j=1}^{M}\delta(s-s_{j})a_{j} \;\; E^{+}(r_{i}) = \int d^{2}s E_{0}^{+} h(r-s) = h(r_{i}-s)\hat{a}
+E^{+}(r_{i}) = h(r_{i}-s_{0})\hat{a}_{n}
 \end{equation*}
 
 \begin{equation*}
-g^{(2)}_{ij}(0) = \frac{\langle E^{-}(r_{i})E^{-}(r_{j})E^{+}(r_{i})E^{+}(r_{j}) \rangle}{\langle E^{-}(r_{i})E^{+}(r_{i})\rangle\langle E^{-}(r_{j})E^{+}(r_{j})\rangle} = \frac{\mathrm{Tr}(a^{\dagger}a^{\dagger}aa\rho)}{\mathrm{Tr}(a^{\dagger}a\rho)^{2}}
+g^{(2)}_{ij}(0) = \frac{\langle E^{-}(r_{i})E^{-}(r_{j})E^{+}(r_{i})E^{+}(r_{j}) \rangle}{\langle E^{-}(r_{i})E^{+}(r_{i})\rangle\langle E^{-}(r_{j})E^{+}(r_{j})\rangle} = \frac{\mathrm{Tr}(E^{-}(r_{i})E^{-}(r_{j})E^{+}(r_{i})E^{+}(r_{j})\rho)}{\mathrm{Tr}(E^{-}(r_{i})E^{+}(r_{i})\rho)\mathrm{Tr}(E^{-}(r_{j})E^{+}(r_{j})\rho)}
 \end{equation*}
 
-Notice that terms related to point spread function will cancel. Now,
+Terms related to point spread function will cancel. It is instructive to compute
 
 \begin{align*}
-\mathrm{Tr}(a^{\dagger}a^{\dagger}aa\rho) &= \mathrm{Tr}(a^{\dagger}a^{\dagger}aa \left(\xi\ket{\alpha}\bra{\alpha} + (1-\xi)\ket{0}\bra{0}\right))\\
-&= \mathrm{Tr}\left(\xi e^{-\lvert\alpha\rvert^{2}}\sum_{n,m}^{\infty}\frac{\alpha^{n}}{n!}\ket{n}\bra{m}\right)\\
-&= \mathrm{Tr}\left(\xi e^{-\lvert\alpha\rvert^{2}}\sum_{n}^{\infty}\frac{\lvert\alpha\rvert^{2n}}{n!}n(n-1)\right)\\
-&= \mathrm{Tr}\left(\xi e^{-\lvert\alpha\rvert^{2}}\sum_{n=2}^{\infty}\frac{\lvert\alpha\rvert^{2n}}{(n-2)!}\right)\\
-&= \xi\lvert\alpha\rvert^{4}
+\mathrm{Tr}(a^{\dagger}a^{\dagger}aa \left(\xi_{k}\ket{\alpha_{k}}\bra{\alpha_{k}}\right) &= \mathrm{Tr}\left(\xi_{k} e^{-\lvert\alpha\rvert^{2}}\sum_{n,m}^{\infty}\frac{\alpha^{n}}{n!}\ket{n}\bra{m}\right)\\
+&= \mathrm{Tr}\left(\xi_{k} e^{-\lvert\alpha\rvert^{2}}\sum_{n}^{\infty}\frac{\lvert\alpha\rvert^{2n}}{n!}n(n-1)\right)\\
+&= \mathrm{Tr}\left(\xi_{k} e^{-\lvert\alpha\rvert^{2}}\sum_{n=2}^{\infty}\frac{\lvert\alpha\rvert^{2n}}{(n-2)!}\right)\\
+&= \xi_{k}\lvert\alpha_{k}\rvert^{4}
 \end{align*}
 
-The second trace in the denominator proceeds similarly to the first
+Similarly,
 
 \begin{align*}
-\mathrm{Tr}(a^{\dagger}a\rho) &= \mathrm{Tr}(a^{\dagger}a \left(\xi\ket{\alpha}\bra{\alpha} + (1-\xi)\ket{0}\bra{0}\right))\\
-&= \mathrm{Tr}\left(\xi e^{-\lvert\alpha\rvert^{2}}\sum_{n,m}^{\infty}\frac{\alpha^{n}}{n!}\ket{n}\bra{m} \right)\\
-&= \mathrm{Tr}\left(\xi e^{-\lvert\alpha\rvert^{2}}\sum_{n}^{\infty}\frac{\lvert\alpha\rvert^{2n}}{n!}n\right)\\
-&= \mathrm{Tr}\left(\xi e^{-\lvert\alpha\rvert^{2}}\sum_{n=2}^{\infty}\frac{\lvert\alpha\rvert^{2n}}{(n-1)!}\right)\\
-&= \xi\lvert\alpha\rvert^{2}
+\mathrm{Tr}(a^{\dagger}a \left(\xi \ket{\alpha}\bra{\alpha}\right)) &= \mathrm{Tr}\left(\xi e^{-\lvert\alpha\rvert^{2}}\sum_{n,m}^{\infty}\frac{\alpha^{n}(\alpha^{m})^{*}}{\sqrt{n!}\sqrt{m!}}a^{\dagger}a\ket{n}\bra{m} \right)\\
+&= \xi e^{-\lvert\alpha\rvert^{2}}\sum_{n=0}^{\infty}\frac{(\lvert\alpha\rvert^{2})^{n}}{n!}n\\
+&= \xi e^{-\lvert\alpha\rvert^{2}}\sum_{n=1}^{\infty}\frac{(\lvert\alpha\rvert^{2})^{n}}{(n-1)!}\\
+&= \xi e^{-\lvert\alpha\rvert^{2}}\left(\lvert\alpha\rvert^{2} + \frac{\lvert\alpha\rvert^{4}}{1!} + \frac{\lvert\alpha\rvert^{6}}{2!}+...\right)\\
+&= \xi e^{-\lvert\alpha\rvert^{2}}\lvert\alpha\rvert^{2}\left(1 + \frac{\lvert\alpha\rvert^{2}}{1!} + \frac{\lvert\alpha\rvert^{3}}{2!}+...\right)\\
+&= \xi e^{-\lvert\alpha\rvert^{2}}e^{\lvert\alpha\rvert^{2}}\lvert\alpha\rvert^{2} = \xi\lvert\alpha\rvert^{2}
 \end{align*}
 
-As expected, this gives $\langle n\rangle$. Putting it all together yields a simple expression for the two-point coherence function
+\begin{align*}
+\mathrm{Tr}(a a^{\dagger} \left(\xi \ket{\alpha}\bra{\alpha}\right)) &= \mathrm{Tr}\left(\xi e^{-\lvert\alpha\rvert^{2}}\sum_{n,m}^{\infty}\frac{\alpha^{n}(\alpha^{m})^{*}}{\sqrt{n!}\sqrt{m!}}a a^{\dagger}\ket{n}\bra{m} \right)\\
+&= \xi e^{-\lvert\alpha\rvert^{2}}\sum_{n=0}^{\infty}\frac{(\lvert\alpha\rvert^{2})^{n}}{n!}(n+1)\\
+&= \xi e^{-\lvert\alpha\rvert^{2}}\left(\sum_{n=1}^{\infty}\frac{(\lvert\alpha\rvert^{2})^{n}}{(n-1)!} + e^{\lvert\alpha\rvert^{2}}\right)\\
+&= \xi e^{-\lvert\alpha\rvert^{2}}\left(\lvert\alpha\rvert^{2}e^{\lvert\alpha\rvert^{2}} + e^{\lvert\alpha\rvert^{2}}\right) = \xi(\lvert\alpha\rvert^{2} + 1)
+\end{align*}
+
+Putting it all together yields a simple expression for the two-point coherence function
+
+\begin{equation*}
+g^{(2)}_{ij}(0) = \frac{\sum_{k}\xi_{k}\lvert\alpha_{k}\rvert^{4}}{\left(\sum_{k}\xi_{k}\lvert\alpha_{k}\rvert^{2}\right)\left(\sum_{k}\xi_{k}\lvert\alpha_{k}\rvert^{2}\right)}
+\end{equation*}
+
+For example, if we have a two-level system consisting of a fluorescent state with amplitude $\alpha$ and the vacuum state, this becomes
 
 \begin{equation*}
 g^{(2)}_{ij}(0) = \frac{\xi\lvert\alpha\rvert^{4}}{\xi^{2}\lvert\alpha\rvert^{4}} = \frac{1}{\xi}
 \end{equation*}
 
-Notice that as $\xi\rightarrow 1$ (always on) we recover the coherent state. As $\xi\rightarrow 0$ we observe $g^{(2)}_{ij}(0) > 1$ i.e., bunching. This is a critical result: photoswitching results in non-trivial correlations between pixels $i$ and $j$. Introducing more than one photoswitching emitter gives? In practice, we can estimate of $g^{(2)}_{ij}(0)$ in a finite time interval. I guess that $\langle n_{i}\rangle = \xi \lvert\alpha\rvert^{2}\Delta = 0.5$ is reasonable; however this is best addressed by Monte Carlo simulation. The total interval $T$ constrained by the super-resolution frame rate e.g., $T=10\mathrm{ms}$. 
+As $\xi\rightarrow 1$ (always on) we recover a coherent state. As $\xi\rightarrow 0$ we observe $g^{(2)}_{ij}(0) > 1$ i.e., bunching.
 
+\subsection{Generalization to nonzero background}
 
-\subsection{Details of the Gaussian PSF}
+\begin{equation*}
+E_{0}^{+}\sim \sum_{j=1}^{M}\delta(s-s_{j})a_{j} \;\; E^{+}(r_{i}) = \int d^{2}s E_{0}^{+} = \sum_{n}h(r_{i}-s_{n})a_{n}
+\end{equation*}
+
+\begin{equation*}
+\rho_{S} = \xi\ket{\alpha}\bra{\alpha} + (1-\xi)\ket{0}\bra{0}\;\;\rho_{B} = \ket{\beta}\bra{\beta}\;\;\rho = \rho_{S}\otimes\rho_{B}
+\end{equation*}
+
+\begin{equation*}
+E(r_{i})^{+} = E_{S}(r_{i})^{+} + E_{B}(r_{i})^{+} = h(r_{i}-s_{n})a_{S} + a_{B}
+\end{equation*}
+
+\begin{align*}
+G^{2}_{ij}(0) &= \langle(E_{S}^{\dagger} + E_{B}^{\dagger}) (E_{S}^{\dagger} + E_{B}^{\dagger})( E_{S} + E_{B}) (E_{S} + E_{B})\rangle \\
+&= \xi(h_{i}^{2}h_{j}^{2}\langle a_{S}^{\dagger}a_{S}^{\dagger}a_{S}a_{S}\rangle + h_{i}^{2}\langle a_{S}^{\dagger}a_{B}^{\dagger}a_{S}a_{B}\rangle +  h_{i}h_{j}\langle a_{S}^{\dagger}a_{B}^{\dagger}a_{B}a_{S}\rangle \\
+&+ h_{i}h_{j}\langle a_{B}^{\dagger}a_{S}^{\dagger}a_{S}a_{B} \rangle +  h_{j}^{2}\langle a_{B}^{\dagger}a_{S}^{\dagger}a_{B}a_{S}\rangle  + \langle a_{B}^{\dagger}a_{B}^{\dagger}a_{B}a_{B}\rangle ) \\
+&= \xi(h_{i}^{2}h_{j}^{2}\lvert\alpha\rvert^{4}+ h_{i}^{2}\lvert\alpha\rvert^{2}\lvert\beta\rvert^{2} +  h_{i}h_{j}\lvert\alpha\rvert^{2}\lvert\beta\rvert^{2} \\
+&+ h_{i}h_{j}\lvert\alpha\rvert^{2}\lvert\beta\rvert^{2} +  h_{j}^{2}\lvert\alpha\rvert^{2}\lvert\beta\rvert^{2}\rangle  + \lvert\beta\rvert^{4} ) \\
+&= \xi(h_{i}^{2}h_{j}^{2}\lvert\alpha\rvert^{4}+ \lvert\alpha\rvert^{2}\lvert\beta\rvert^{2}(h_{i}^{2} +  2 h_{i}h_{j} + h_{j}^{2})  + \lvert\beta\rvert^{4}) \\
+\end{align*}
+
+Now we have
+
+\begin{align*}
+g^{2}_{ij}(0) &= \frac{\xi(h_{i}^{2}h_{j}^{2}\lvert\alpha\rvert^{4}+ \lvert\alpha\rvert^{2}\lvert\beta\rvert^{2}(h_{i}^{2} +  2 h_{i}h_{j} + h_{j}^{2})  + \lvert\beta\rvert^{4})}{h_{i}^{2}h_{j}^{2}\lvert\alpha\rvert^{4} + h_{i}^{2}\lvert\alpha\rvert^{2}\lvert\beta\rvert^{2} + h_{j}^{2}\lvert\alpha\rvert^{2}\lvert\beta\rvert^{2} +  \lvert\beta\rvert^{4}}
+\end{align*}
+
+\begin{align*}
+g^{2}_{ij}(0) &= \frac{h_{i}^{2}h_{j}^{2}N_{0}^{2} + N_{0}B_{0}(h_{i}^{2} +  2 h_{i}h_{j} + h_{j}^{2}) + B_{0}^{2}}{\xi\left(h_{i}^{2}h_{j}^{2}N_{0}^{2} + h_{i}^{2}N_{0}B_{0} + h_{j}^{2}N_{0}B_{0} +  B_{0}^{2}\right)}
+\end{align*}
+
+\subsection{Details of the Gaussian PSF}\
 
 We will derive the gradients for the integrated astigmatic Gaussian, since it is the more general case. As before, define $i_{0} = g_{k}\gamma\Delta t N_{0}$ such that $\mu_{k}' = i_{0}\lambda_{k}$
 
