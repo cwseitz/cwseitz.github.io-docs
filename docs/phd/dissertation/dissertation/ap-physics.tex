@@ -79,8 +79,8 @@ E(r_{i})^{+} = E_{S}(r_{i})^{+} + E_{B}(r_{i})^{+} = h(r_{i}-s_{n})a_{S} + a_{B}
 
 \begin{align*}
 G^{2}_{ij}(0) &= \langle(E_{S}^{\dagger} + E_{B}^{\dagger}) (E_{S}^{\dagger} + E_{B}^{\dagger})( E_{S} + E_{B}) (E_{S} + E_{B})\rangle \\
-&= \xi(h_{i}^{2}h_{j}^{2}\langle a_{S}^{\dagger}a_{S}^{\dagger}a_{S}a_{S}\rangle + h_{i}^{2}\langle a_{S}^{\dagger}a_{B}^{\dagger}a_{S}a_{B}\rangle +  h_{i}h_{j}\langle a_{S}^{\dagger}a_{B}^{\dagger}a_{B}a_{S}\rangle \\
-&+ h_{i}h_{j}\langle a_{B}^{\dagger}a_{S}^{\dagger}a_{S}a_{B} \rangle +  h_{j}^{2}\langle a_{B}^{\dagger}a_{S}^{\dagger}a_{B}a_{S}\rangle  + \langle a_{B}^{\dagger}a_{B}^{\dagger}a_{B}a_{B}\rangle ) \\
+&= h_{i}^{2}h_{j}^{2}\langle a_{S}^{\dagger}a_{S}^{\dagger}a_{S}a_{S}\rangle + h_{i}^{2}\langle a_{S}^{\dagger}a_{B}^{\dagger}a_{S}a_{B}\rangle +  h_{i}h_{j}\langle a_{S}^{\dagger}a_{B}^{\dagger}a_{B}a_{S}\rangle \\
+&+ h_{i}h_{j}\langle a_{B}^{\dagger}a_{S}^{\dagger}a_{S}a_{B} \rangle +  h_{j}^{2}\langle a_{B}^{\dagger}a_{S}^{\dagger}a_{B}a_{S}\rangle  + \langle a_{B}^{\dagger}a_{B}^{\dagger}a_{B}a_{B}\rangle  \\
 &= \xi(h_{i}^{2}h_{j}^{2}\lvert\alpha\rvert^{4}+ h_{i}^{2}\lvert\alpha\rvert^{2}\lvert\beta\rvert^{2} +  h_{i}h_{j}\lvert\alpha\rvert^{2}\lvert\beta\rvert^{2} \\
 &+ h_{i}h_{j}\lvert\alpha\rvert^{2}\lvert\beta\rvert^{2} +  h_{j}^{2}\lvert\alpha\rvert^{2}\lvert\beta\rvert^{2}\rangle  + \lvert\beta\rvert^{4} ) \\
 &= \xi(h_{i}^{2}h_{j}^{2}\lvert\alpha\rvert^{4}+ \lvert\alpha\rvert^{2}\lvert\beta\rvert^{2}(h_{i}^{2} +  2 h_{i}h_{j} + h_{j}^{2})  + \lvert\beta\rvert^{4}) \\
@@ -93,7 +93,13 @@ g^{2}_{ij}(0) &= \frac{\xi(h_{i}^{2}h_{j}^{2}\lvert\alpha\rvert^{4}+ \lvert\alph
 \end{align*}
 
 \begin{align*}
-g^{2}_{ij}(0) &= \frac{h_{i}^{2}h_{j}^{2}N_{0}^{2} + N_{0}B_{0}(h_{i}^{2} +  2 h_{i}h_{j} + h_{j}^{2}) + B_{0}^{2}}{\xi\left(h_{i}^{2}h_{j}^{2}N_{0}^{2} + h_{i}^{2}N_{0}B_{0} + h_{j}^{2}N_{0}B_{0} +  B_{0}^{2}\right)}
+g^{2}_{ij}(0) &= \frac{\xi h_{i}^{2}h_{j}^{2}N_{0}^{2} + \xi N_{0}B_{0}(h_{i} + h_{j})^{2} + B_{0}^{2}}{\xi^{2} h_{i}^{2}h_{j}^{2}N_{0}^{2} + \xi N_{0}B_{0}(h_{i}^{2}+h_{j}^{2}) +  B_{0}^{2}}
+\end{align*}
+
+or if we let $\eta = N_{0}/B_{0}$
+
+\begin{align*}
+g^{2}_{ij}(0) = \frac{\xi h_{i}^{2}h_{j}^{2}\eta^{2} + \xi\eta(h_{i}+h_{j})^{2} + 1}{\xi^{2} h_{i}^{2}h_{j}^{2}\eta^{2} + \xi\eta(h_{i}^{2}+h_{j}^{2}) +  1} 
 \end{align*}
 
 \subsection{Details of the Gaussian PSF}\
