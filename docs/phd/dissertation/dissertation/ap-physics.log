@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  9 JAN 2024 14:53
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  9 JAN 2024 22:40
  restricted system commands enabled.
 **ap-physics.tex
 (./ap-physics.tex
@@ -3648,7 +3648,7 @@ Overfull \hbox (9.09087pt too wide) in paragraph at lines 93--94
 
 ! Undefined control sequence.
 l.95 \subsection
-              {Details of the Gaussian PSF}\
+              {Ergodicity of photoswitching}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -3662,14 +3662,14 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.95 \subsection{D
-                etails of the Gaussian PSF}\
+l.95 \subsection{E
+                rgodicity of photoswitching}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
 Overfull \hbox (20.0pt too wide) in paragraph at lines 95--96
-[]Details
+[]Ergodicity
  []
 
 
@@ -3679,34 +3679,24 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.97 W
-    e will derive the gradients for the integrated astigmatic Gaussian, sinc...
+l.97 I
+    n general, Markov jump processes are non-ergodic, meaning that their tim...
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
 Overfull \hbox (20.0pt too wide) in paragraph at lines 97--98
-[]We
+[]In
  []
 
 
-Overfull \hbox (18.48677pt too wide) in paragraph at lines 97--98
-\OML/cmm/m/it/10 i[] \OT1/cmr/m/n/10 =
+Overfull \hbox (4.83508pt too wide) in paragraph at lines 97--98
+\OML/cmm/m/it/10 $
  []
 
 
-Overfull \hbox (39.88802pt too wide) in paragraph at lines 97--98
-\OML/cmm/m/it/10 g[]\OT1/cmr/m/n/10 \OML/cmm/m/it/10 tN[]$
- []
-
-
-Overfull \hbox (21.50116pt too wide) in paragraph at lines 97--98
-\OML/cmm/m/it/10 [] \OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (18.68478pt too wide) in paragraph at lines 97--98
-\OML/cmm/m/it/10 i[][]$ 
+Overfull \hbox (4.83508pt too wide) in paragraph at lines 97--98
+\OML/cmm/m/it/10 $
  []
 
 
@@ -3729,16 +3719,16 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.100 J
-     _{x_{0}} = \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_{...
+l.100 P
+     (t) = e^{Wt}P(0)\rightarrow \dot{P}(t) = We^{Wt}P(0)
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 ! Missing $ inserted.
 <inserted text> 
 $
-l.100 J_
-      {x_{0}} = \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_{...
+l.100 P(t) = e^
+             {Wt}P(0)\rightarrow \dot{P}(t) = We^{Wt}P(0)
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
@@ -3767,643 +3757,23 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 
-Overfull \hbox (39.49307pt too wide) in paragraph at lines 100--102
-[]J$[][] \OT1/cmr/m/n/10 =
+Overfull \hbox (20.0pt too wide) in paragraph at lines 100--102
+[]P(t)
  []
 
 
-Overfull \hbox (67.63347pt too wide) in paragraph at lines 100--102
-\OML/cmm/m/it/10 [][][]  J[] \OT1/cmr/m/n/10 =
+Overfull \hbox (45.48267pt too wide) in paragraph at lines 100--102
+e$[][]\OML/cmm/m/it/10 P\OT1/cmr/m/n/10 (0) \OMS/cmsy/m/n/10 !
  []
 
 
-Overfull \hbox (70.27806pt too wide) in paragraph at lines 100--102
-\OML/cmm/m/it/10 [][][]   J[] \OT1/cmr/m/n/10 =
+Overfull \hbox (29.75346pt too wide) in paragraph at lines 100--102
+[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 t\OT1/cmr/m/n/10 ) =
  []
 
 
-Overfull \hbox (40.30605pt too wide) in paragraph at lines 100--102
-[][] \OT1/cmr/m/n/10 +
- []
-
-
-Overfull \hbox (32.40208pt too wide) in paragraph at lines 100--102
-[][]$ 
- []
-
-
-! LaTeX Error: Environment align* undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.103 \begin{align*}
-                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.104 J
-     _{x_{0}} &= \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_...
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Missing $ inserted.
-<inserted text> 
-$
-l.104 J_
-      {x_{0}} &= \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Misplaced alignment tab character &.
-l.104 J_{x_{0}} &
-               = \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\partial x_...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-<recently read> &
- 
-l.105 &
-     = \frac{\beta_{k}\lambda_{y}}{2}\frac{\partial}{\partial x_{0}}\left(\m...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-<recently read> &
- 
-l.106 &
-     = \frac{\beta_{k}\lambda_{y}}{\sqrt{2\pi}\sigma_{x}}\left(\mathrm{exp}\...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-
-! LaTeX Error: \begin{document} ended by \end{align*}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.107 \end{align*}
-                
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-$
-l.107 \end{align*}
-                
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-Overfull \hbox (39.49307pt too wide) in paragraph at lines 104--108
-[]J$[][] \OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (37.51898pt too wide) in paragraph at lines 104--108
-\OML/cmm/m/it/10 [][][][] 
- []
-
-
-Overfull \hbox (7.7778pt too wide) in paragraph at lines 104--108
-\OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (191.0131pt too wide) in paragraph at lines 104--108
-[][] [] [] 
- []
-
-
-Overfull \hbox (7.7778pt too wide) in paragraph at lines 104--108
-\OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (206.87444pt too wide) in paragraph at lines 104--108
-[] []$ 
- []
-
-
-! LaTeX Error: Environment align* undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.109 \begin{align*}
-                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.110 J
-     _{y_{0}} &= \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial y_...
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Missing $ inserted.
-<inserted text> 
-$
-l.110 J_
-      {y_{0}} &= \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial y_...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Misplaced alignment tab character &.
-l.110 J_{y_{0}} &
-               = \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\partial y_...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-<recently read> &
- 
-l.111 &
-     = \frac{\beta_{k}\lambda_{x}}{2}\frac{\partial}{\partial y_{0}}\left(\m...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-<recently read> &
- 
-l.112 &
-     = \frac{\beta_{k}\lambda_{x}}{\sqrt{2\pi}\sigma_{y}}\left(\mathrm{exp}\...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-
-! LaTeX Error: \begin{document} ended by \end{align*}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.113 \end{align*}
-                
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-$
-l.113 \end{align*}
-                
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-Overfull \hbox (39.01393pt too wide) in paragraph at lines 110--114
-[]J$[][] \OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (37.6208pt too wide) in paragraph at lines 110--114
-\OML/cmm/m/it/10 [][][][] 
- []
-
-
-Overfull \hbox (7.7778pt too wide) in paragraph at lines 110--114
-\OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (188.74356pt too wide) in paragraph at lines 110--114
-[][] [] [] 
- []
-
-
-Overfull \hbox (7.7778pt too wide) in paragraph at lines 110--114
-\OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (204.83171pt too wide) in paragraph at lines 110--114
-[] []$ 
- []
-
-
-! LaTeX Error: Environment align* undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.115 \begin{align*}
-                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.116 J
-     _{\sigma_{x}} &= \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\parti...
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Missing $ inserted.
-<inserted text> 
-$
-l.116 J_
-      {\sigma_{x}} &= \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\parti...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Misplaced alignment tab character &.
-l.116 J_{\sigma_{x}} &
-                    = \beta_{k}\lambda_{y}\frac{\partial \lambda_{x}}{\parti...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-<recently read> &
- 
-l.117 &
-     = \frac{\beta_{k}\lambda_{y}}{2}\frac{\partial}{\partial \sigma_{x}}\le...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-<recently read> &
- 
-l.118 &
-     = \frac{\beta_{k}\lambda_{y}}{\sqrt{2\pi}}\left(\frac{\left(x-x_{0}-\fr...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-
-! LaTeX Error: \begin{document} ended by \end{align*}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.119 \end{align*}
-                
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-$
-l.119 \end{align*}
-                
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-Overfull \hbox (40.14781pt too wide) in paragraph at lines 116--120
-[]J$[][] \OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (37.51898pt too wide) in paragraph at lines 116--120
-\OML/cmm/m/it/10 [][][][] 
- []
-
-
-Overfull \hbox (7.7778pt too wide) in paragraph at lines 116--120
-\OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (191.66785pt too wide) in paragraph at lines 116--120
-[][] [] [] 
- []
-
-
-Overfull \hbox (7.7778pt too wide) in paragraph at lines 116--120
-\OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (244.33736pt too wide) in paragraph at lines 116--120
-[] []$ 
- []
-
-
-! LaTeX Error: Environment align* undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.121 \begin{align*}
-                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.122 J
-     _{\sigma_{y}} &= \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\parti...
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Missing $ inserted.
-<inserted text> 
-$
-l.122 J_
-      {\sigma_{y}} &= \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\parti...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Misplaced alignment tab character &.
-l.122 J_{\sigma_{y}} &
-                    = \beta_{k}\lambda_{x}\frac{\partial \lambda_{y}}{\parti...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-<recently read> &
- 
-l.123 &
-     = \frac{\beta_{k}\lambda_{x}}{2}\frac{\partial}{\partial \sigma_{y}}\le...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-<recently read> &
- 
-l.124 &
-     = \frac{\beta_{k}\lambda_{x}}{\sqrt{2\pi}}\left(\frac{\left(y-y_{0}-\fr...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-
-! LaTeX Error: \begin{document} ended by \end{align*}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.125 \end{align*}
-                
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-$
-l.125 \end{align*}
-                
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-Overfull \hbox (40.02165pt too wide) in paragraph at lines 122--126
-[]J$[][] \OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (37.6208pt too wide) in paragraph at lines 122--126
-\OML/cmm/m/it/10 [][][][] 
- []
-
-
-Overfull \hbox (7.7778pt too wide) in paragraph at lines 122--126
-\OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (189.75128pt too wide) in paragraph at lines 122--126
-[][] [] [] 
- []
-
-
-Overfull \hbox (7.7778pt too wide) in paragraph at lines 122--126
-\OT1/cmr/m/n/10 =
- []
-
-
-Overfull \hbox (242.18587pt too wide) in paragraph at lines 122--126
-[] []$ 
- []
-
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.127 L
-     uckily, computing the Hessian matrix for (2.9) is tractable, and is act...
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Undefined control sequence.
-l.127 ...Lambda$ and $W: \Lambda \rightarrow \mathbb
-                                                  {R}$. The parameter vector...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.127 ...\lambda} \in \Lambda$ and $\ell \in \mathbb
-                                                  {R}$. Note that we choose ...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-Overfull \hbox (20.0pt too wide) in paragraph at lines 127--128
-[]Luckily,
- []
-
-
-Overfull \hbox (7.7778pt too wide) in paragraph at lines 127--128
-\OT1/cmr/m/n/10 $
- []
-
-
-Overfull \hbox (6.94444pt too wide) in paragraph at lines 127--128
-\OT1/cmr/m/n/10 $
- []
-
-
-Overfull \hbox (12.78815pt too wide) in paragraph at lines 127--128
-\OML/cmm/m/it/10 T \OT1/cmr/m/n/10 :
- []
-
-
-Overfull \hbox (20.55553pt too wide) in paragraph at lines 127--128
-\OT1/cmr/m/n/10  \OMS/cmsy/m/n/10 !
- []
-
-
-Overfull \hbox (6.94444pt too wide) in paragraph at lines 127--128
-\OT1/cmr/m/n/10 $
- []
-
-
-Overfull \hbox (16.38884pt too wide) in paragraph at lines 127--128
-\OML/cmm/m/it/10 W \OT1/cmr/m/n/10 :
- []
-
-
-Overfull \hbox (19.72217pt too wide) in paragraph at lines 127--128
-\OT1/cmr/m/n/10  \OMS/cmsy/m/n/10 !
- []
-
-
-Overfull \hbox (7.67015pt too wide) in paragraph at lines 127--128
-\OML/cmm/m/it/10 R$\nullfont .
- []
-
-
-Overfull \hbox (86.44792pt too wide) in paragraph at lines 127--128
-\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x[]; y[]; z[]; []; N[]\OT1/cmr/m/n/10 ) \OMS
-/cmsy/m/n/10 2
- []
-
-
-Overfull \hbox (7.7778pt too wide) in paragraph at lines 127--128
-\OT1/cmr/m/n/10 $\nullfont ,
- []
-
-
-Overfull \hbox (15.27776pt too wide) in paragraph at lines 127--128
-[] \OMS/cmsy/m/n/10 2
- []
-
-
-Overfull \hbox (6.94444pt too wide) in paragraph at lines 127--128
-\OT1/cmr/m/n/10 $
- []
-
-
-Overfull \hbox (13.61108pt too wide) in paragraph at lines 127--128
-\OML/cmm/m/it/10 ` \OMS/cmsy/m/n/10 2
- []
-
-
-Overfull \hbox (7.67015pt too wide) in paragraph at lines 127--128
-\OML/cmm/m/it/10 R$\nullfont .
- []
-
-
-Overfull \hbox (10.74886pt too wide) in paragraph at lines 127--128
-\OML/cmm/m/it/10 []$
- []
-
-
-Overfull \hbox (10.52087pt too wide) in paragraph at lines 127--128
-\OML/cmm/m/it/10 []$
- []
-
-
-Overfull \hbox (9.13663pt too wide) in paragraph at lines 127--128
-\OML/cmm/m/it/10 z[]$
- []
-
-
-Overfull \hbox (7.23265pt too wide) in paragraph at lines 127--128
-\OML/cmm/m/it/10 T$
- []
-
-
-Overfull \hbox (10.83334pt too wide) in paragraph at lines 127--128
-\OML/cmm/m/it/10 W$\nullfont . 
+Overfull \hbox (48.19455pt too wide) in paragraph at lines 100--102
+\OML/cmm/m/it/10 We[]P\OT1/cmr/m/n/10 (0)$ 
  []
 
 
@@ -4413,7 +3783,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.130 \begin{equation*}
+l.103 \begin{equation*}
                      
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -4426,16 +3796,16 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.131 H
-     _{\ell} = J_{\mu}^{T} H_{\ell} J_{\mu} + (J_{\ell}\otimes I_{n})H_{\mu}
+l.104 e
+     ^{Wt} = I + W\frac{1-e^{-2\lambda t}}{2\lambda}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 ! Missing $ inserted.
 <inserted text> 
 $
-l.131 H_
-      {\ell} = J_{\mu}^{T} H_{\ell} J_{\mu} + (J_{\ell}\otimes I_{n})H_{\mu}
+l.104 e^
+      {Wt} = I + W\frac{1-e^{-2\lambda t}}{2\lambda}
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
@@ -4446,7 +3816,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.132 \end{equation*}
+l.105 \end{equation*}
                    
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -4455,7 +3825,7 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
 $
-l.132 \end{equation*}
+l.105 \end{equation*}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -4464,24 +3834,18 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 
-Overfull \hbox (34.40277pt too wide) in paragraph at lines 131--133
-[]H$[][] \OT1/cmr/m/n/10 =
+Overfull \hbox (42.6736pt too wide) in paragraph at lines 104--106
+[]e$[][] \OT1/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (43.65161pt too wide) in paragraph at lines 131--133
-\OML/cmm/m/it/10 J[]H[]J[] \OT1/cmr/m/n/10 +
+Overfull \hbox (12.95834pt too wide) in paragraph at lines 104--106
+\OML/cmm/m/it/10 I \OT1/cmr/m/n/10 +
  []
 
 
-Overfull \hbox (21.0591pt too wide) in paragraph at lines 131--133
-\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 J[] \OMS/cmsy/m/n/10 
-
- []
-
-
-Overfull \hbox (27.4029pt too wide) in paragraph at lines 131--133
-\OML/cmm/m/it/10 I[]\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 H[]$ 
+Overfull \hbox (43.6029pt too wide) in paragraph at lines 104--106
+\OML/cmm/m/it/10 W[]$ 
  []
 
 
@@ -4491,224 +3855,74 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.134 w
-     here we have used $J_{\mu}$ to represent the jacobian of $T$ and $J_{\e...
+l.107 w
+     here $\lambda = (\lambda_1 + \lambda_2)/2$. Now,
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 134--136
+Overfull \hbox (20.0pt too wide) in paragraph at lines 107--108
 []where
  []
 
 
-Overfull \hbox (10.90746pt too wide) in paragraph at lines 134--136
-\OML/cmm/m/it/10 J[]$
+Overfull \hbox (16.38887pt too wide) in paragraph at lines 107--108
+\OML/cmm/m/it/10  \OT1/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (7.23265pt too wide) in paragraph at lines 134--136
-\OML/cmm/m/it/10 T$
+Overfull \hbox (21.98619pt too wide) in paragraph at lines 107--108
+\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 [] \OT1/cmr/m/n/10 +
  []
 
 
-Overfull \hbox (9.3924pt too wide) in paragraph at lines 134--136
-\OML/cmm/m/it/10 J[]$
+Overfull \hbox (24.20842pt too wide) in paragraph at lines 107--108
+\OML/cmm/m/it/10 []\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 =\OT1/cmr/m/n/10 2$\nullf
+ont .
  []
 
 
-Overfull \hbox (10.83334pt too wide) in paragraph at lines 134--136
-\OML/cmm/m/it/10 W$\nullfont .
- []
-
-
-Overfull \hbox (16.581pt too wide) in paragraph at lines 134--136
-\OML/cmm/m/it/10  \OMS/cmsy/m/n/10 /
- []
-
-
-Overfull \hbox (116.10204pt too wide) in paragraph at lines 134--136
-\OML/cmm/m/it/10 []\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x[]; []; []\OT1/cmr/m/n
-/10 )\OML/cmm/m/it/10 []\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 y[]; []; []\OT1/cm
-r/m/n/10 )$\nullfont .
- []
-
-! Undefined control sequence.
-l.138 \subsection
-               {Fisher information for 2D integrated gaussian}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! LaTeX Error: Missing \begin{document}.
+! LaTeX Error: Environment equation* undefined.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.138 \subsection{F
-                 isher information for 2D integrated gaussian}
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Overfull \hbox (20.0pt too wide) in paragraph at lines 138--139
-[]Fisher
- []
-
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.140 F
-     or the 2D integrated gaussian point spread function, the Hessian only c...
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Overfull \hbox (20.0pt too wide) in paragraph at lines 140--141
-[]For
- []
-
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.142 \begin{equation}
-                    
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Overfull \hbox (20.0pt too wide) in paragraph at lines 142--142
-[] 
- []
-
-! Undefined control sequence.
-l.143 I_{ij}(\theta) = \underset
-                              {\theta}{\mathbb{E}}\left(\frac{\partial \ell}...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.143 I_{ij}(\theta) = \underset{\theta}{\mathbb
-                                              {E}}\left(\frac{\partial \ell}...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-Overfull \hbox (100.30228pt too wide) detected at line 144
-\OML/cmm/m/it/10 I[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 \OT1/cmr/m/n/10 ) = \OML
-/cmm/m/it/10 E []
- []
-
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.146 F
-     or an arbitrary parameter then we have
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Overfull \hbox (20.0pt too wide) in paragraph at lines 146--147
-[]For
- []
-
-
-! LaTeX Error: Environment align* undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.148 \begin{align*}
-                  
+l.109 \begin{equation*}
+                     
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.149 \frac{\partial \ell}{\partial \theta_{i}}
-                                              &= \frac{\partial}{\partial \t...
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
 ! Missing $ inserted.
 <inserted text> 
 $
-l.149 \frac{\partial \ell}{\partial \theta_{i}}
-                                              &= \frac{\partial}{\partial \t...
+l.110 \dot
+        {P}(t) = W\left(I + W\frac{1-e^{-2\lambda t}}{2\lambda}\right)P(0)
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-! Extra }, or forgotten $.
-\frac  #1#2->{\begingroup #1\endgroup \over #2}
-                                               
-l.149 \frac{\partial \ell}{\partial \theta_{i}}
-                                              &= \frac{\partial}{\partial \t...
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
 
-! Misplaced alignment tab character &.
-l.149 \frac{\partial \ell}{\partial \theta_{i}} &
-                                               = \frac{\partial}{\partial \t...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-! Misplaced alignment tab character &.
-<recently read> &
- 
-l.150 &
-     = \sum_{k} \frac{\partial \mu_{k}'}{\partial\theta_{i}} \left(\frac{\mu...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-
-! LaTeX Error: \begin{document} ended by \end{align*}.
+! LaTeX Error: Missing \begin{document}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.151 \end{align*}
-                
+l.110 \dot
+        {P}(t) = W\left(I + W\frac{1-e^{-2\lambda t}}{2\lambda}\right)P(0)
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: \begin{document} ended by \end{equation*}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.111 \end{equation*}
+                   
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
@@ -4716,8 +3930,101 @@ or  <return>  to continue without it.
 ! Missing $ inserted.
 <inserted text> 
 $
-l.151 \end{align*}
-                
+l.111 \end{equation*}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Overfull \hbox (49.75346pt too wide) in paragraph at lines 110--112
+[]$[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 t\OT1/cmr/m/n/10 ) =
+ []
+
+
+Overfull \hbox (107.70349pt too wide) in paragraph at lines 110--112
+\OML/cmm/m/it/10 W [] P\OT1/cmr/m/n/10 (0)$ 
+ []
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.113 I
+     t can then be shown that the individual gradients are
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 113--114
+[]It
+ []
+
+
+! LaTeX Error: Environment equation* undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.116 \begin{equation*}
+                     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+$
+l.117 \left
+         (
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.117 \left
+         (
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Undefined control sequence.
+<argument> \text 
+      {$\lambda $1} \text {$\lambda $2} \left (1-e^{-t (\text {$\lambda $1}+\te
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing } inserted.
+<inserted text> 
+}
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \endgroup inserted.
+<inserted text> 
+\endgroup 
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -4727,147 +4034,1065 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text> 
 }
-l.151 \end{align*}
-                
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-
-Overfull \hbox (246.17938pt too wide) in paragraph at lines 149--152
-[]\OML/cmm/m/it/10 @`$[]$ 
- []
-
-
-! LaTeX Error: Environment equation* undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.153 \begin{equation*}
-                     
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-! LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.154 I
-     _{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\parti...
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Missing $ inserted.
-<inserted text> 
-$
-l.154 I_
-      {ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\parti...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
+! Extra }, or forgotten $.
+<argument> \text {$\lambda $1}
+                    \text {$\lambda $2} \left (1-e^{-t (\text {$\lambda $1}+\te
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
 ! Undefined control sequence.
-l.154 I_{ij}(\theta) = \underset
-                              {\theta}{\mathbb{E}}\left(\sum_{k}\frac{\parti...
+<argument> \text {$\lambda $1} \text 
+                          {$\lambda $2} \left (1-e^{-t (\text {$\lambda $1}+\te
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-! Undefined control sequence.
-l.154 I_{ij}(\theta) = \underset{\theta}{\mathbb
-                                              {E}}\left(\sum_{k}\frac{\parti...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! LaTeX Error: \begin{document} ended by \end{equation*}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.155 \end{equation*}
-                   
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
+! Missing } inserted.
 <inserted text> 
-$
-l.155 \end{equation*}
-                   
+}
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
+! Extra }, or forgotten $.
+<argument> \text {$\lambda $1} \text {$\lambda $2}
+                                        \left (1-e^{-t (\text {$\lambda $1}+\te
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
 
-Overfull \hbox (50.34839pt too wide) in paragraph at lines 154--156
-[]I$[][]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 \OT1/cmr/m/n/10 ) =
- []
+! Undefined control sequence.
+<argument> ... $1} \text {$\lambda $2} \left (1-e^{-t (\text 
+                                                  {$\lambda $1}+\text {$\lam...
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
+! Missing } inserted.
+<inserted text> 
+}
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
-Overfull \hbox (134.57458pt too wide) in paragraph at lines 154--156
-\OML/cmm/m/it/10 E [] \OT1/cmr/m/n/10 =
- []
+! Missing } inserted.
+<inserted text> 
+}
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
-Overfull \hbox (61.44609pt too wide) in paragraph at lines 154--156
-[][] [][][]$ 
- []
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
-! LaTeX Error: Missing \begin{document}.
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.157 T
-     o compute the bound, it turns out all we need is the jacobian $\frac{\p...
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 157--158
-[]To
- []
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
-Overfull \hbox (16.33492pt too wide) in paragraph at lines 157--158
-[]$. 
- []
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
-)
-! Emergency stop.
-<*> ap-physics.tex
-               
-*** (job aborted, no legal \end found)
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing \right. inserted.
+<inserted text> 
+\right .
+l.119 ...ht)}{\text{$\lambda $1}+\text{$\lambda $2}}
+                                                  -\text{$\lambda $1} \left(...
+(That makes 100 errors; please try again.)
 
 Here is how much of LuaTeX's memory you used:
  30 strings out of 478285
- 100000,1977958 words of node,token memory allocated 37002 words of node memory still in use:
-   1061 hlist, 139 vlist, 88 rule, 1 disc, 20 local_par, 1 dir, 41 math, 739 glu
-e, 319 kern, 112 penalty, 2238 glyph, 489 attribute, 39 glue_spec, 489 attribute
-_list nodes
-   avail lists: 2:2,3:204,4:39,5:23,6:24,7:1184,8:146,9:171,10:38,11:3
+ 100000,1977958 words of node,token memory allocated
+ 11996 words of node memory still in use:
+   143 hlist, 22 vlist, 5 rule, 1 disc, 11 local_par, 5 dir, 18 math, 258 glue, 
+53 kern, 42 penalty, 8 noad, 89 fence, 7 math_char, 2 sub_mlist, 89 delim, 825 g
+lyph, 2 align_record, 195 attribute, 43 glue_spec, 195 attribute_list, 11 temp, 
+1 align_stack nodes
+   avail lists: 2:456,3:265,5:281,6:32,7:3101,8:49,9:1287,10:27,11:3
  20353 multiletter control sequences out of 65536+600000
  25 fonts using 1345055 bytes
- 24i,7n,25p,861b,124s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 24i,10n,25p,635b,124s stack positions out of 10000i,1000n,20000p,200000b,200000s
 !  ==> Fatal error occurred, no output PDF file produced!

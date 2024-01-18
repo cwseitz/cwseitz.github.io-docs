@@ -92,6 +92,36 @@ g^{2}_{ij}(0) &= \frac{\xi h_{i}^{2}h_{j}^{2}N_{0}^{2} + \xi N_{0}B_{0}(h_{i}^{2
 
 Notice the PSF factor $h_{i}$ appears squared. This squared value can be seen as the probability of photon detection at a point $s_i$, while $h_{i}$ is the amplitude of the electric field. 
 
+\subsection{Ergodicity of photoswitching}
+
+In general, Markov jump processes are non-ergodic, meaning that their time averages and ensemble averages are not equal. The use of $\xi$ as a probability is only valid when the observation duration (exposure time) is much longer than the characteristic switching time. However, the use of $\xi$ above is quite convenient, so we look to determine how long our exposure must be for the emitter to be considered in equilibrium. For a two state process
+
+\begin{equation*}
+P(t) = e^{Wt}P(0)\rightarrow \dot{P}(t) = We^{Wt}P(0)
+\end{equation*}
+
+\begin{equation*}
+e^{Wt} = I + W\frac{1-e^{-2\lambda t}}{2\lambda}
+\end{equation*}
+
+where $\lambda = (\lambda_1 + \lambda_2)/2$. Now,
+
+\begin{equation*}
+\dot{P}(t) = W\left(I + W\frac{1-e^{-2\lambda t}}{2\lambda}\right)P(0)
+\end{equation*}
+
+It can then be shown that the individual gradients are
+
+
+\begin{equation*}
+\begin{pmatrix}
+\frac{\lambda_1 \lambda_2 \left(1-e^{-t (\lambda_1+\lambda_2)}\right)}{\lambda_1+\lambda_2}-\lambda_1 \left(1-\frac{\lambda_1 \left(1-e^{-t (\lambda_1+\lambda_2)}\right)}{\lambda_1+\lambda_2}\right) & \lambda_2 \left(1-\frac{\lambda_2 \left(1-e^{-t (\lambda_1+\lambda_2)}\right)}{\lambda_1+\lambda_2}\right)-\frac{\lambda_1 \lambda_2 \left(1-e^{-t (\lambda_1+\lambda_2)}\right)}{\lambda_1+\lambda_2} \\
+\lambda_1 \left(1-\frac{\lambda_1 \left(1-e^{-t (\lambda_1+\lambda_2)}\right)}{\lambda_1+\lambda_2}\right)-\frac{\lambda_1 \lambda_2 \left(1-e^{-t (\lambda_1+\lambda_2)}\right)}{\lambda_1+\lambda_2} & \frac{\lambda_1 \lambda_2 \left(1-e^{-t (\lambda_1+\lambda_2)}\right)}{\lambda_1+\lambda_2}-\lambda_2 \left(1-\frac{\lambda_2 \left(1-e^{-t (\lambda_1+\lambda_2)}\right)}{\lambda_1+\lambda_2}\right)
+\end{pmatrix}
+\end{equation*}
+
+
+
 \subsection{Details of the Gaussian PSF}\
 
 We will derive the gradients for the integrated astigmatic Gaussian, since it is the more general case. As before, define $i_{0} = g_{k}\gamma\Delta t N_{0}$ such that $\mu_{k}' = i_{0}\lambda_{k}$
