@@ -1,9 +1,56 @@
 \ProvidesFile{ch1.tex}[Chapter1]
 
-\chapter{Super resolution microscopy}
+\chapter{Single molecule localization microscopy}
 \ix{physics//Physics appendix}
 
-\section{Single molecule localization microscopy}
+\section{Introduction}
+
+In the quest to understand cellular function, biologists aim to directly observe the processes enabling cells to maintain homeostasis and respond dynamically to internal and environmental cues at the molecular level. Super-resolution (SR) microscopy techniques have emerged as a pathway to this aim, surpassing the classical diffraction limit of optical resolution—roughly half the wavelength of emitted light. Fluorescence microscopy techniques continually push the resolution boundary towards nanometer scales, facilitating imaging of cellular structures with a level of detail previously achievable only with electron microscopy (EM). Concurrently, SR techniques retain optical microscopy advantages in biological experiments, including sample preservation, imaging flexibility, and target specificity. SR enables extraction of quantitative information on spatial distributions and often absolute numbers of proteins, nucleic acids, or other macromolecules within subcellular compartments.
+
+Many SR methods are based on wide-field (WF), total internal reflection fluorescence (TIRF) or confocal microscope setups and fundamentally differ in how fluorescently labeled samples are excited and how the emitted photons are detected. Here, I focus on single-molecule localization microscopy (SMLM) techniques – a class of SR diffraction-unlimited SR methods which leverage fluorescence intermittency to resolve fluorophores in the sample who’s spatially overlapping point spread functions would otherwise render them unresolvable at the detector. SMLM approaches, such as direct-STORM (dSTORM) have become quite popular because they can be implemented at low cost on conventional, camera-based, wide-field setups, shifting the complexity to biological sample preparation and image post processing. Common strategies for the temporal separation of molecules involve transient intramolecular rearrangements to switch from dark to fluorescent states or the exploitation of non-emitting molecular radicals. For example, in dSTORM, rhodamine derivatives can undergo intersystem crossing to a triplet state, which can be reduced by thiols to form a dark radical species. The dark state can then be quenched by oxidative processes, driving the fluorophore back to its ground state. 
+
+
+
+\subsection{Elementary theory of SMLM}
+
+
+\begin{equation}
+\omega = i_{0}\int O(u)du\int O(v)dv
+\end{equation}
+
+where $i_{0} = \eta N_{0}\Delta$. The optical impulse response $O(u,v)$ is often approximated as a 2D isotropic Gaussian with standard deviation $\sigma$ (Zhang 2007). The parameter $\eta$ is the photon detection probability of the sensor and $\Delta$ is the exposure time. $N_{0}$ represents the number of photons emitted.
+
+Using the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}\int_{0}^{t}e^{-t^{2}}dt$,
+
+\begin{equation}
+\int O(u)du = \frac{1}{2}\left(\mathrm{erf}\left(\frac{u_{k}+\frac{1}{2}-u_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{u_{k}-\frac{1}{2}-u_{0}}{\sqrt{2}\sigma}\right)\right)
+\end{equation}
+
+For the sake of generality, the number of photoelectrons at a pixel $k$, $\bold{s}_k$, is  multiplied by a gain factor $g_k \;[\mathrm{ADU}/e^{-}]$, which is often unity. The readout noise per pixel $\zeta_{k}$ can be Gaussian with some pixel-specific offset $o_{k}$ and variance $\sigma_{k}^{2}$. Ultimately, we have a Poisson component of the signal, which scales with $N_{0}$ and may have Gaussian component, which does not. Therefore, in a single exposure, we measure: 
+
+\begin{equation}
+\bold{x}_t = \bold{s}_t + \bold{\zeta}
+\end{equation}
+
+What we are after is the likelihood $p(\bold{x}_{t}\lvert\theta)$ where $\theta$ are the molecular coordinates. Fundamental probability theory states that the distribution of $\bold{x}_{k}$ is the convolution of the distributions of $\bold{s}_{k}$ and $\zeta_{k}$,
+
+\begin{equation}
+p(\bold{x}_{t}\lvert\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(\bold{x}_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
+\end{equation}
+
+where $P(\zeta_{k}) = \mathcal{N}(o_{k},\sigma_{k}^{2})$ and $P(S_{k}) = \mathrm{Poisson}(g_{k}\omega_{k})$,  $A$ is some normalization constant. In practice, (4) is difficult to work with, so we look for an approximation. We will use a Poisson-Normal approximation for simplification. Consider,
+
+\begin{equation}
+\zeta_{k} - o_{k} + \sigma_{k}^{2} \sim \mathcal{N}(\sigma_{k}^{2},\sigma_{k}^{2}) \approx \mathrm{Poisson}(\sigma_{k}^{2})
+\end{equation}
+
+Since $\bold{x}_{k} = \bold{s}_{k} + \zeta_{k}$, we transform $\bold{x}_{k}' = \bold{x}_{k} - o_{k} + \sigma_{k}^{2}$, which is distributed according to 
+
+\begin{equation}
+\bold{x}_{k}' \sim \mathrm{Poisson}(\omega_{k}')
+\end{equation}
+
+where $\omega_{k}' = g_{k}\omega_{k} + \sigma_{k}^{2}$. This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson. The quality of this approximation will degrade with decreasing signal level, since the Poisson distribution does not retain its Gaussian shape at low expected counts. Nevertheless, the quality of the approximation can be predicted by the Komogonov distance between the convolution distribution (4).
 
 \subsection{The definition of resolution in SMLM}
 
@@ -12,67 +59,7 @@ The distribution of a particular biomolecule in the cell can be described as a p
 
 Localization uncertainty, typically the RMSE of a maximum likelihood or similar statistical estimator, is bounded from below by the inverse of the Fisher information matrix, known as the Cramer-Rao lower bound (Chao 2016). Localization uncertainties in sparse conditions are often tens of nanometers, although recent work on integration of Bayesian priors with modulation enhanced SMLM (meSMLM) or structured illumination with MINFLUX, has reduced spatial resolution below to a few nanometers (Kalisvaart 2022, Gwosh 2020). Nevertheless, managing the increase in localization uncertainty at high labeling density remains a major bottleneck to SMLM. Static uncertainty due to molecular crowding can be partially amelioriated by using pairwise or higher-order temporal correlations within a pixel neighborhood, known as stochastic optical fluctuation imaging or SOFI (Dertinger 2009). Other approaches such as stimulated emission and depletion (STED) imaging bring control over the photophysical state of a chosen subset of the sample, yet the need for laser scanning prevents widespread application in live-cell studies. The spatial resolution and relative simplicity of SMLM techniques remains unmatched, inciting an effort to increase the resolution of SMLM techniques and explore avenues towards time resolved SMLM.
 
-\subsection{Computing the likelihood}
 
-It is common to describe the microscope point spread function (PSF) as a two-dimensional isotropic Gaussian (Zhang 2007). This is an approximation to the more rigorous diffraction models given by Richards and Wolf (1959) or Gibson and Lanni (1989). 
-
-\begin{equation*}
-\mathrm{G}(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^{2}+(y-y_{0})^{2}}{2\sigma^{2}}}
-\end{equation*}
-
-The number of photon arrivals at a pixel follows Poisson statistics, with expected value
-
-\begin{equation}
-\mu_{k} = i_{0}\lambda_{k} = i_{0}\int_{\mathrm{pixel}} G(x,y)dxdy
-\end{equation}
-
-where $i_{0} = \eta N_{0}\Delta$. The above integral can be expressed in terms of error functions, and the full calculation can be found in (Smith 2010). The parameter $\eta$ is the quantum efficiency and $\Delta$ is the exposure time. $N_{0}$ represents the number of photons emitted.
-
-For each pixel of a CMOS camera, the number of photoelectrons $S_{k}$ is  multiplied by a gain factor $g_{k} \;[\mathrm{ADU}/e^{-}]$, which we have previously measured to have a tight distribution around unity. The readout noise per pixel $\xi_{k}$ is Gaussian with some pixel-specific offset $o_{k}$ (Figure 8a) and variance $\sigma_{k}^{2}$ (Figure 8b). For a SPAD array we assume $\xi_{k}=0$ and $g_{k}=1$ and we have shown $\eta_{\mathrm{SPAD}}/\eta_{\mathrm{CMOS}} \approx 0.5$. Ultimately, we have a Poisson component of the signal, which scales with $N_{0}$ and may have Gaussian component, which does not. Therefore, in a single exposure, we measure: 
-
-\begin{equation}
-\vec{H} = \vec{S} + \vec{\xi}
-\end{equation}
-
-What we are after is the likelihood $P(\vec{H}\lvert\theta)$ where $\theta$ are the molecular coordinates. Fundamental probability theory states that the distribution of $H_{k}$ is the convolution of the distributions of $S_{k}$ and $\xi_{k}$,
-
-\begin{equation*}
-P(H_{k}\lvert\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\mu_{k}}\mu_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(H_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
-\end{equation*}
-
-where $P(\xi_{k}) = \mathcal{N}(o_{k},\sigma_{k}^{2})$ and $P(S_{k}) = \mathrm{Poisson}(g_{k}\mu_{k})$,  $A$ is some normalization constant. The rate $\mu_{k}$ is computed by the forward model which is an integration of the point spread function of the microscope (Supp. Eq 8). In practice, (4) is difficult to work with, so we look for an approximation. We will use the Poisson-Normal approximation for simplification. Consider,
-
-\begin{equation*}
-\xi_{k} - o_{k} + \sigma_{k}^{2} \sim \mathcal{N}(\sigma_{k}^{2},\sigma_{k}^{2}) \approx \mathrm{Poisson}(\sigma_{k}^{2})
-\end{equation*}
-
-Since $H_{k} = S_{k} + \xi_{k}$, we transform $H_{k}' = H_{k} - o_{k} + \sigma_{k}^{2}$, which is distributed according to 
-
-\begin{equation*}
-H_{k}' \sim \mathrm{Poisson}(\mu_{k}')
-\end{equation*}
-
-where $\mu_{k}' = g_{k}\mu_{k} + \sigma_{k}^{2}$. This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson. The quality of this approximation will degrade with decreasing signal level, since the Poisson distribution does not retain its Gaussian shape at low expected counts. Nevertheless, the quality of the approximation can be predicted by the Komogonov distance between the convolution distribution (4) and its Poisson approximation (Figure 8).
-
-\subsection{Maximum likelihood localization}
-
-In this work, we suppose that molecules really do have an exact location in space over the integration interval. This is only an approximation due to so-called motion blur. If we suppose that we can collect a sufficient amount of photons in a short enough time, such that a definite position exists, the following optimization problem is defined
-
-\begin{equation*}
-\theta_{\mathrm{MLE}} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}\lvert\theta)= \underset{\theta}{\mathrm{argmin}}-\sum_{k}\log P(H_{k}\lvert\theta)
-\end{equation*}
-
-
-where $\theta_{\mathrm{MLE}}$ represents the maximum likelihood coordinates of a fluorescent molecule. Maximum likelihood estimation (MLE) is a natural choice, since optimization of coordinates under a Poisson likelihood is tractable. Under the Poisson approximation, the model negative log-likelihood is
-
-\begin{align}
-\ell(\vec{H}\lvert\theta) &= -\log \prod_{k} \frac{e^{-\left(\mu_{k}'\right)}\left(\mu_{k}'\right)^{n_{k}}}{n_{k}!}\\
-&= \sum_{k}  \log n_{k}! + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
-\end{align}
-
-A stirling approximation can be made for the above log-factorial. First order derivatives of this sum can often be computed analytically, depending on $\mu$. 
-
-To summarize, our localization method depends on a likelihood for independent Poisson variables, where the parameter of each Poisson variable is a function of other latent variables (molecular coordinates). The full distribution over images $\vec{H}$ cannot be written down explicitly - it can only be written at a single point in parameter space. We compute the rates $\mu$ first using the forward model (Supp. Eq 8) and then compute the Poisson data likelihood using calculated rates. This intermediate step is what prevents us from being able to write down a likelihood only in terms of common distributions.
 
 \subsection{The Cramer-Rao lower bound}
 
