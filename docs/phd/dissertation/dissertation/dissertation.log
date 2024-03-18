@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  18 MAR 2024 13:13
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  18 MAR 2024 17:17
  restricted system commands enabled.
 **dissertation.tex
 (./dissertation.tex
@@ -2443,7 +2443,7 @@ Chapter 2.
 ]
 \openout2 = ch3.aux
  (./ch3.tex
-File: ap-physics.tex 2022-10-05 Physics appendix
+File: ch3.tex 
 
 Chapter 3.
 ) [23
@@ -2451,7 +2451,7 @@ Chapter 3.
 
 
 
-]
+] [24]
 changed \interlinepenalty to 10000
 
 LaTeX Warning: Empty bibliography on input line 606.
@@ -2466,12 +2466,12 @@ Appendices A.
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 6.
 
-[24
+[25
 
 
 
 
-] [25] [26] [27] [28]) [29]
+] [26] [27] [28] [29]) [30]
 \openout2 = ap-citations-references.aux
  (./ap-citations-references.tex
 File: ap-citations-references.tex 2022-10-05 citations and references appendix
@@ -2493,23 +2493,23 @@ File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 \openout6 = z.out
  (./z.out
 
-LaTeX Warning: Citation 'lamport1994' on page 30 undefined on input line 2.
+LaTeX Warning: Citation 'lamport1994' on page 31 undefined on input line 2.
 
 
-LaTeX Warning: Citation 'goossens1994' on page 30 undefined on input line 4.
+LaTeX Warning: Citation 'goossens1994' on page 31 undefined on input line 4.
 
 
-LaTeX Warning: Citation 'kopka1999' on page 30 undefined on input line 6.
+LaTeX Warning: Citation 'kopka1999' on page 31 undefined on input line 6.
 
 
-LaTeX Warning: Citation 'kopka1999' on page 30 undefined on input line 7.
+LaTeX Warning: Citation 'kopka1999' on page 31 undefined on input line 7.
 
 
-LaTeX Warning: Citation 'kopka1995' on page 30 undefined on input line 9.
+LaTeX Warning: Citation 'kopka1995' on page 31 undefined on input line 9.
 
 )
 \openout6 = z.out
- (./z.out) [30
+ (./z.out) [31
 
 
 
@@ -2518,57 +2518,57 @@ LaTeX Warning: Citation 'kopka1995' on page 30 undefined on input line 9.
 \openout6 = z.out
  (./z.out
 
-LaTeX Warning: Citation 'example2020' on page 31 undefined on input line 6.
+LaTeX Warning: Citation 'example2020' on page 32 undefined on input line 6.
 
 
-LaTeX Warning: Citation 'example2020' on page 31 undefined on input line 7.
+LaTeX Warning: Citation 'example2020' on page 32 undefined on input line 7.
 
 
-LaTeX Warning: Citation 'example2020' on page 31 undefined on input line 8.
+LaTeX Warning: Citation 'example2020' on page 32 undefined on input line 8.
 
 
-LaTeX Warning: Citation 'example2020' on page 31 undefined on input line 9.
+LaTeX Warning: Citation 'example2020' on page 32 undefined on input line 9.
 
 
-LaTeX Warning: Citation 'example2020' on page 31 undefined on input line 10.
+LaTeX Warning: Citation 'example2020' on page 32 undefined on input line 10.
 
 
-LaTeX Warning: Citation 'example2020' on page 31 undefined on input line 11.
+LaTeX Warning: Citation 'example2020' on page 32 undefined on input line 11.
 
 
-LaTeX Warning: Citation 'example2020' on page 31 undefined on input line 12.
+LaTeX Warning: Citation 'example2020' on page 32 undefined on input line 12.
 
 
-LaTeX Warning: Citation 'example2020' on page 31 undefined on input line 13.
+LaTeX Warning: Citation 'example2020' on page 32 undefined on input line 13.
 
 
-LaTeX Warning: Citation 'example2020' on page 31 undefined on input line 14.
+LaTeX Warning: Citation 'example2020' on page 32 undefined on input line 14.
 
 
-LaTeX Warning: Citation 'example2020' on page 31 undefined on input line 15.
+LaTeX Warning: Citation 'example2020' on page 32 undefined on input line 15.
 
 
-LaTeX Warning: Citation 'example2020' on page 31 undefined on input line 16.
+LaTeX Warning: Citation 'example2020' on page 32 undefined on input line 16.
 
-) [31]
+) [32]
 \openout6 = z.out
  (./z.out)
 \openout6 = z.out
  (./z.out
 
-LaTeX Warning: Citation 'hambleton' on page 32 undefined on input line 4.
+LaTeX Warning: Citation 'hambleton' on page 33 undefined on input line 4.
 
 
-LaTeX Warning: Citation 'gerstenmaier' on page 32 undefined on input line 4.
+LaTeX Warning: Citation 'gerstenmaier' on page 33 undefined on input line 4.
 
 
-LaTeX Warning: Citation 'gerstenmaier2' on page 32 undefined on input line 4.
+LaTeX Warning: Citation 'gerstenmaier2' on page 33 undefined on input line 4.
 
-) [32]) [33]
+) [33]) [34]
 \openout2 = ap-vita.aux
  (./ap-vita.tex
 File: ap-vita.tex 2022-10-05 vita appendix
-) [34
+) [35
 
 
 
@@ -2814,7 +2814,7 @@ figures/Noise.png
 figures/MCMC.png
 figures/FRC.png
      ch2.tex    Chapter2
-     ch3.tex
+     ch3.tex    
 appendix.tex    Appendix
 ap-citations-references.tex    2022-10-05 citations and references appendix
        z.out
@@ -2845,15 +2845,15 @@ Package logreq Info: Writing requests to 'dissertation.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 75867 strings out of 478285
+ 75870 strings out of 478285
  125218,3417909 words of node,token memory allocated
- 1407 words of node memory still in use:
-   24 hlist, 2 vlist, 10 rule, 2 glue, 4 kern, 1 glyph, 92 attribute, 92 glue_sp
-ec, 92 attribute_list, 6 write, 16 pdf_literal, 2 pdf_dest, 16 pdf_colorstack no
+ 1415 words of node memory still in use:
+   24 hlist, 2 vlist, 10 rule, 2 glue, 4 kern, 1 glyph, 94 attribute, 92 glue_sp
+ec, 94 attribute_list, 6 write, 16 pdf_literal, 2 pdf_dest, 16 pdf_colorstack no
 des
    avail lists: 1:8,2:795,3:725,4:116,5:455,6:69,7:6973,8:120,9:1826,10:27,11:67
 6
- 93318 multiletter control sequences out of 65536+600000
+ 93320 multiletter control sequences out of 65536+600000
  61 fonts using 4025455 bytes
  109i,16n,103p,1783b,2448s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/tex
@@ -2877,10 +2877,10 @@ b></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmtt8.pfb></usr/loca
 l/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/l
 ocal/texlive/2023/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive
 /2023/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on dissertation.pdf (34 pages, 1961486 bytes).
+Output written on dissertation.pdf (35 pages, 1965632 bytes).
 
-PDF statistics: 529 PDF objects out of 1000 (max. 8388607)
- 418 compressed objects within 5 object streams
- 77 named destinations out of 1000 (max. 131072)
+PDF statistics: 535 PDF objects out of 1000 (max. 8388607)
+ 423 compressed objects within 5 object streams
+ 78 named destinations out of 1000 (max. 131072)
  412 words of extra memory for PDF output out of 10000 (max. 100000000)
 

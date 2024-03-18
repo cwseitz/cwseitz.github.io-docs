@@ -1,6 +1,20 @@
-\ProvidesFile{ap-physics.tex}[2022-10-05 Physics appendix]
+\ProvidesFile{ch3.tex}[]
 
 \chapter{Denoising diffusion probabilistic models for blind deconvolution}
 \ix{physics//Physics appendix}
 
+In single molecule localization, uncertainty quantification is a critical aspect of parameter estimation. Uncertainty can be defined in either the frequentist or the Bayesian statistical paradigm. These primarily differ in their fundamental definition of probability. The frequentist defines probability in terms of the frequency of observed events and examines the empirical distribution of these samples to express uncertainties. The Bayesian would express uncertainty \emph{apriori} based on, say, domain knowledge. Frequentist methods typically estimate uncertainties under a \emph{fixed} model $\mathcal{M}$ using techniques such as a Laplace approximation around the maximum likelihood estimate (MLE). For example, a frequentist might compute
 
+\begin{equation*}
+\mathcal{L}(D\lvert\mathcal{M}) = \prod_{i=1}^{N} P(D_{i}\lvert\mathcal{M})
+\end{equation*}
+
+for a dataset of size $N$, where the model $M$ is held fixed. A frequentist might also make use of the Cramér-Rao lower bound (CRLB), which provides theoretical bounds on the uncertainty achievable by any unbiased estimator. 
+
+In contrast, Bayesian approaches to uncertainty quantification in single molecule localization often involve parameter exploration techniques such as Markov Chain Monte Carlo (MCMC). MCMC methods sample from the posterior distribution over the parameters, allowing for comprehensive exploration of parameter space and estimation of uncertainty.
+
+\begin{equation*}
+P(\mathcal{M}\lvert D) \propto P(D\lvert\mathcal{M})P(\mathcal{M})
+\end{equation*}
+
+which can also be optimized by maximum aposteriori estimation (MAP). Additionally, Bayesians may utilize inequalities analagous to the CRLB such as the van Trees inequality, which provides bounds on the expected error in parameter estimation. In the context of single molecule localization, where only a single measurement is often feasible, the treatment of uncertainty demands a Bayesian perspective. We are unable to consider the data that we could have gotten; rather, we must express our uncertainties conditioned on the data that we do have. However, Bayesian approaches are often avoided in this domain, due to limited computational resources. Diffusion models are a promising direction to speed up and simplify Bayesian inference. 
