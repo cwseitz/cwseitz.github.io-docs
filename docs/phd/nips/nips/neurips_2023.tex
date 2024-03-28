@@ -98,7 +98,7 @@ This is followed by coordinate refinement by a gradient-based Markov Chain Monte
 
 \section{Background}
 
-\subsection{Single Molecule Localization Microscopy}
+\subsection{Model of image formation}
 
 In a coherent state, photon arrivals at a pixel follows Poisson statistics, with expected value
 
@@ -151,21 +151,9 @@ The Poisson approximation is also convenient for computing the Fisher informatio
 
 \section{Denoising Diffusion Probabilistic Model}
 
-\subsection{Second order coherence interpolation}
+Model selection techniques for localization microscopy is challenging, due to the unknown number of fluorescent particles when computing the likelihood. The likelihood can be avoided by instead solving an image restoration problem, where a high resolution kernel density estimate is reconstructed from a low resolution image. 
 
-For certain setups, such as one with nonstationary fluorescent emitters and detectors with negligible readout noise, we can use spatial correlation functions in place of raw intensities. This can be useful because such technologies typically have larger pixel pitch, and lower resolution according to Nyquist sampling. We consider the following normalized correlation function, for the intensity at two pixels $\bold{x}_{i}$ and $\bold{x}_{j}$
-
-\begin{equation}
-\bold{g}_{m} = g^{(2)}_{ij}(0) = \frac{\langle \bold{x}_{i,t}\bold{x}_{j,t}\rangle}{\langle \bold{x}_{i,t}\rangle\langle \bold{x}_{j,t}\rangle}
-\end{equation}
-
-where $m=(i,j)$. Fluorescent molecules can exhibit photoswitching behavior, wherein the emitter accesses a discrete set of states with unique fluorescent emission characteristics. We describe this process as a Poisson Hidden Markov Model (HMM), with state probabilities $\xi_{k}$ and expectations $\mu_{k}$ at equilibrium. The zero-lag normalized second order coherence function then reads
-
-\begin{equation}
-\bold{g}_{m} = \frac{\omega_{i}^{2}\omega_{j}^{2}\langle \mu^2 \rangle + \mu_{B}(\omega_{i}^{2}+\omega_{j}^{2})\langle \mu \rangle + \mu_{B}^2}{\langle \mu \rangle^2 \omega_{i}^2 \omega_{j}^2 + \mu_{B}\left(\omega_{i}^2+\omega_{j}^2\right)\langle \mu^2 \rangle + \mu_{B}^2}
-\end{equation}
-
-where $\langle \mu \rangle = \sum_{n}\xi_n\mu_n$ and $\langle \mu^2 \rangle = \sum_{n}\xi_n\mu_n^2$. Let $\bold{y}_{0} = \sum_{i=1}^{n} \bold{\omega}_{n}(\sigma)$ be a density estimate of the molecular distribution. The \emph{forward} process is the joint distribution $p_{\theta}(\bold{y}_{0:T})$, which is Markovian. 
+Let $\bold{y}_{0} = \sum_{i=1}^{n} \bold{\omega}_{n}(\sigma)$ be a density estimate of the molecular distribution. The \emph{forward} process is the joint distribution $p_{\theta}(\bold{y}_{0:T})$, which is Markovian. 
 
 \begin{equation}
 q(\bold{y}_{t}|\bold{y}_{0}) = \prod_{t=1}^{T}q(\bold{y}_{t}|\bold{y}_{t-1}) \;\;\; q(\bold{y}_{t}|\bold{y}_{t-1}) = \mathcal{N}\left(\bold{y}_{t-1},\sqrt{\alpha_{t}}\bold{y}_{t-1},(1-\alpha_{t})I\right)
@@ -182,6 +170,22 @@ where $\gamma_{t}=\prod_{i=1}^{t}\alpha_{t}$. Note that the model $\theta$ is no
 \begin{equation}
 \mu_{\theta}(\bold{x}_{t},\bold{y},\gamma_{t}) = \frac{1}{\sqrt{\alpha_{t}}}\left(\bold{y}_t-\frac{1-\alpha_{t}}{\sqrt{1-\gamma_{t}}}f_{\theta}(\bold{x}_{t},\gamma_{t})\right)
 \end{equation}
+
+\subsection{Second order coherence interpolation}
+
+For certain setups, such as one with nonstationary fluorescent emitters and detectors with negligible readout noise, we can use spatial correlation functions in place of raw intensities. This can be useful because such technologies typically have larger pixel pitch, and lower resolution according to Nyquist sampling. We consider the following normalized correlation function, for the intensity at two pixels $\bold{x}_{i}$ and $\bold{x}_{j}$
+
+\begin{equation}
+\bold{g}_{m} = g^{(2)}_{ij}(0) = \frac{\langle \bold{x}_{i,t}\bold{x}_{j,t}\rangle}{\langle \bold{x}_{i,t}\rangle\langle \bold{x}_{j,t}\rangle}
+\end{equation}
+
+where $m=(i,j)$. Fluorescent molecules can exhibit photoswitching behavior, wherein the emitter accesses a discrete set of states with unique fluorescent emission characteristics. We describe this process as a Poisson Hidden Markov Model (HMM), with state probabilities $\xi_{k}$ and expectations $\mu_{k}$ at equilibrium. The zero-lag normalized second order coherence function then reads
+
+\begin{equation}
+\bold{g}_{m} = \frac{\omega_{i}^{2}\omega_{j}^{2}\langle \mu^2 \rangle + \mu_{B}(\omega_{i}^{2}+\omega_{j}^{2})\langle \mu \rangle + \mu_{B}^2}{\langle \mu \rangle^2 \omega_{i}^2 \omega_{j}^2 + \mu_{B}\left(\omega_{i}^2+\omega_{j}^2\right)\langle \mu^2 \rangle + \mu_{B}^2}
+\end{equation}
+
+where $\langle \mu \rangle = \sum_{n}\xi_n\mu_n$ and $\langle \mu^2 \rangle = \sum_{n}\xi_n\mu_n^2$. 
 
 \section{Experiments}
 
