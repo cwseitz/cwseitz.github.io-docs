@@ -18,10 +18,21 @@ Superresolution optical fluctuation imaging (SOFI) is a simple, versatile micros
 
 \subsection{Basic Scheme}
 
+\begin{figure}
+\includegraphics[width=7cm]{Scheme.png}
+\caption{Caption}
+\end{figure}    
+
 We consider a set of $N$ point sources in the object plane labeled by continuous valued coordinates $r=(x,y)$ and labeled in the image plane $s=(u,v)$.  respectively. The field is then treated by a simplified model consisting of a single mode (Vlasenko 2020). The positive frequency field operator in the object plane reads
 
 \begin{equation}
 E_{0}^{+}(r) \sim \sum_{i=1}^{N}\delta(r-r_{i})a_{j}
+\end{equation}
+
+The transfer function $O$ of the field from object space to image space is assumed to have a Gaussian shape
+
+\begin{equation}
+O(s-r) = \frac{1}{\sigma\sqrt{2\pi}}\exp\left(-\frac{(s-r)^2}{2\sigma^2}\right)
 \end{equation}
 
 The continuous field in image space is then 
@@ -69,10 +80,23 @@ Photoswitching fluorescent emitters are described by the density matrices
 We consider an isolated fluorescent emitter in the presence of a coherent background signal. The emitter can access a discrete set of states $\ket{\alpha_k}$, with occupancy probabilities $\xi_{k}$ and amplitude $\alpha_k$  $\langle n\rangle = \bra{\alpha_{k}} n\ket{\alpha_{k}} = \lvert\alpha_{k}^{2}\rvert$. We consider only zero-lag coherence, therefore neglecting the temporal structure of the jump process. For an isolated emitter, we have
 
 \begin{equation}
-\tilde{E}^{+}(s_{n}) =  \hat{a}\Lambda + \hat{b}
+\tilde{E}^{+}(s_{n}) =  \Lambda_{n}\hat{a} + \hat{b}
 \end{equation}
 
-where $\Lambda = \frac{1}{2}\lambda_{x}(u_n) \lambda_{y}(v_n)$. The non-normalized second order coherence in the image plane reads 
+where $\Lambda_{n} = \frac{1}{2}\lambda_{x}(u_n) \lambda_{y}(v_n)$. The intensity is
+
+\begin{align}
+\langle I_{n} \rangle &= \langle \tilde{E}^{-}(s_n)\tilde{E}^{+}(s_n)\rangle \\
+&= \Lambda_{n}^{2}\sum_{k}\xi_{k}\mu_{k} + \mu_{B}
+\end{align}
+
+Due to integration over finite size detector elements $\int d^{2}s \; O^2(s_n-r) \neq \left(\int d^{2}s \; O(s_n-r)\right)^2$ and we must define 
+
+\begin{equation}
+\Lambda_{n}^{2} := \int d^{2}s \; O^2(s_n-r)
+\end{equation}
+
+The non-normalized second order coherence in the image plane reads 
 
 \begin{align*}
 G^{2}_{nm}(0) &= \langle \tilde{E}^{-}(s_n)\tilde{E}^{-}(s_m)\tilde{E}^{+}(s_n)\tilde{E}^{+}(s_m)  \rangle\\
@@ -82,7 +106,7 @@ G^{2}_{nm}(0) &= \langle \tilde{E}^{-}(s_n)\tilde{E}^{-}(s_m)\tilde{E}^{+}(s_n)\
 which in the normalized form reads
 
 \begin{align*}
-g^{2}_{nm}(0) &= G^{2}_{nm}(0) / \langle I_{n}\rangle \langle I_{m}\rangle
+g^{2}_{nm}(0) &= G^{2}_{nm}(0) / \langle I_{n}\rangle \langle I_{m}\rangle 
 \end{align*}
 
 where the intensity expectation at a detector element is of course $\langle I_{n}\rangle = \Lambda_{n}^{2}\sum_{k}\xi_{k}\mu_{k} + \mu_{B}$. For example, if we have a two-level system consisting of a fluorescent state with amplitude $\alpha$ and the vacuum state, this becomes
