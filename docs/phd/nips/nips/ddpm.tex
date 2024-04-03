@@ -34,7 +34,7 @@
 \usepackage{xcolor}         % colors
 
 
-\title{Bayesian Localization Microscopy with Denoising Diffusion Probabilistic Models}
+\title{Dense Localization Microscopy with Denoising Diffusion Probabilistic Models}
 
 
 % The \author macro works with any number of authors. There are two commands
@@ -100,7 +100,9 @@ This is followed by coordinate refinement by a gradient-based Markov Chain Monte
 
 \subsection{Model of image formation}
 
-In a coherent state, photon arrivals at a pixel follows Poisson statistics, with expected value
+The central objective of single molecule localization microscopy is to infer a set of molecular coordinates $\theta$ from noisy, low resolution images $\bold{x}$. We define an abstract image stochastic degradation function $F$ such that $\bold{x} = F(\theta)$. In the following paragraphs, we define such a function $F$. 
+
+In fluorescence microscopy, each pixel follows Poisson statistics, with expected value
 
 \begin{equation}
 \omega = i_{0}\int O(u)du\int O(v)dv
@@ -108,13 +110,13 @@ In a coherent state, photon arrivals at a pixel follows Poisson statistics, with
 
 where $i_{0} = \eta N_{0}\Delta$. The optical impulse response $O(u,v)$ is often approximated as a 2D isotropic Gaussian with standard deviation $\sigma$ (Zhang 2007). The parameter $\eta$ is the photon detection probability of the sensor and $\Delta$ is the exposure time. $N_{0}$ represents the number of photons emitted.
 
-Using the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}\int_{0}^{t}e^{-t^{2}}dt$,
+For a fluorescent emitter located at $\theta = (u_{0},v_{0})$, we have that
 
 \begin{equation}
 \int O(u)du = \frac{1}{2}\left(\mathrm{erf}\left(\frac{u_{k}+\frac{1}{2}-u_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{u_{k}-\frac{1}{2}-u_{0}}{\sqrt{2}\sigma}\right)\right)
 \end{equation}
 
-For the sake of generality, the number of photoelectrons at a pixel $k$, $\bold{s}_k$, is  multiplied by a gain factor $g_k \;[\mathrm{ADU}/e^{-}]$, which is often unity. The readout noise per pixel $\zeta_{k}$ can be Gaussian with some pixel-specific offset $o_{k}$ and variance $\sigma_{k}^{2}$. Ultimately, we have a Poisson component of the signal, which scales with $N_{0}$ and may have Gaussian component, which does not. Therefore, in a single exposure, we measure: 
+where we have used the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}\int_{0}^{t}e^{-t^{2}}dt$. For the sake of generality, the number of photoelectrons at a pixel $k$, $\bold{s}_k$, is  multiplied by a gain factor $g_k \;[\mathrm{ADU}/e^{-}]$, which is often unity. The readout noise per pixel $\zeta_{k}$ can be Gaussian with some pixel-specific offset $o_{k}$ and variance $\sigma_{k}^{2}$. Ultimately, we have a Poisson component of the signal, which scales with $N_{0}$ and may have Gaussian component, which does not. Therefore, in a single exposure, we measure: 
 
 \begin{equation}
 \bold{x}_t = \bold{s}_t + \bold{\zeta}
@@ -140,18 +142,27 @@ Since $\bold{x}_{k} = \bold{s}_{k} + \zeta_{k}$, we transform $\bold{x}_{k}' = \
 
 where $\omega_{k}' = g_{k}\omega_{k} + \sigma_{k}^{2}$. This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson. The quality of this approximation will degrade with decreasing signal level, since the Poisson distribution does not retain its Gaussian shape at low expected counts. Nevertheless, the quality of the approximation can be predicted by the Komogonov distance between the convolution distribution (4).
 
-\subsection{The Cramer-Rao lower bound}
+\section{The Information Bottleneck for Localization}
 
-The Poisson approximation is also convenient for computing the Fisher information matrix and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below (Chao 2016). Define the log-likelihood as $\ell (\bold{x}_{t}|\theta) = \log p(\bold{x}_{t}|\theta)$. The Fisher information is
+In general, the degradation function $F$ can be difficult to invert, particularly when fluorescent molecules are dense within the field of view. This difficulty arises because the parameter $\bold{\theta}$ is typically of large and unknown dimension, rendering maximum likelihood estimation or Markov Chain Monte Carlo techniques intractable. Previous solutions to this problem leverage convolutional neural networks (CNNs) to infer coordinates directly by learning a deterministic image transformation $F^{-1}$, which we refer to as a "localization map" (Nehme 2021). Such methods faithfully capture the information content in degraded images; however, such methods apply arbitrary thresholding to the CNN localization map, potentially creating erroneous localizations, and do not provide uncertainties in model outputs. 
+
+We seek a generative approach, which casts localization as an image restoration problem, where a high resolution kernel density estimate $\bold{y}$. is reconstructed from a low resolution image $\bold{x}$. We interpret previous approaches in terms of the information bottleneck principle (Tishby 2015). That is, our CNN learns a representation which compresses $\bold{x}$ while preserving the relevant information to the prediction of $\bold{y}$.
+
+\begin{equation}
+\mathcal{L} = \mathcal{I}(\bold{x};\bold{z}) - \beta \mathcal{I}(\bold{z};\bold{y})
+\end{equation}
+
+We use the Fisher information as the information theoretic criteria (Chao 2016). The generative model (6) is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below. The Fisher information is
 
 \begin{equation}
 \mathcal{I}_{ij}(\theta) = \mathbb{E}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) = \sum_{k}\frac{1}{\omega_{k}'}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}}
 \end{equation}
 
+where the log-likelihood is $\ell (\bold{x}_{t}|\theta) $. We presume a strong model $\Theta$ and thus our generative model $P(\bold{y}|\bold{z})\approx P(\bold{y}|\bold{x})$. The CRLB can be used to determine the performance of our model, and thus the quality of the full model $(\Theta,\Phi)$. 
 
 \section{Denoising Diffusion Probabilistic Model}
 
-Model selection techniques for localization microscopy is challenging, due to the unknown number of fluorescent particles when computing the likelihood. The likelihood can be avoided by instead solving an image restoration problem, where a high resolution kernel density estimate is reconstructed from a low resolution image. 
+Denoising diffusion probabilistic models (DDPM) have emerged as powerful generative models, exceeding GANs and VAEs in a variety of generative modeling tasks. Nevertheless, learning diffusion models directly in data space can limit expressivity of the model (Vahdat 2021). Following this line of work, we build on previous approaches by using a CNN to first compute a localization map, or latent representation $\bold{z} = \mathrm{CNN}_{\Theta}(\bold{x})$. A denoising diffusion probabilistic model (DDPM) is then used to model the distribution $P_{\Phi}(\bold{y}|\bold{z})$. 
 
 Let $\bold{y}_{0} = \sum_{i=1}^{n} \bold{\omega}_{n}(\sigma)$ be a density estimate of the molecular distribution. The \emph{forward} process is the joint distribution $p_{\theta}(\bold{y}_{0:T})$, which is Markovian. 
 
@@ -171,21 +182,6 @@ where $\gamma_{t}=\prod_{i=1}^{t}\alpha_{t}$. Note that the model $\theta$ is no
 \mu_{\theta}(\bold{x}_{t},\bold{y},\gamma_{t}) = \frac{1}{\sqrt{\alpha_{t}}}\left(\bold{y}_t-\frac{1-\alpha_{t}}{\sqrt{1-\gamma_{t}}}f_{\theta}(\bold{x}_{t},\gamma_{t})\right)
 \end{equation}
 
-\subsection{Second order coherence interpolation}
-
-For certain setups, such as one with nonstationary fluorescent emitters and detectors with negligible readout noise, we can use spatial correlation functions in place of raw intensities. This can be useful because such technologies typically have larger pixel pitch, and lower resolution according to Nyquist sampling. We consider the following normalized correlation function, for the intensity at two pixels $\bold{x}_{i}$ and $\bold{x}_{j}$
-
-\begin{equation}
-\bold{g}_{m} = g^{(2)}_{ij}(0) = \frac{\langle \bold{x}_{i,t}\bold{x}_{j,t}\rangle}{\langle \bold{x}_{i,t}\rangle\langle \bold{x}_{j,t}\rangle}
-\end{equation}
-
-where $m=(i,j)$. Fluorescent molecules can exhibit photoswitching behavior, wherein the emitter accesses a discrete set of states with unique fluorescent emission characteristics. We describe this process as a Poisson Hidden Markov Model (HMM), with state probabilities $\xi_{k}$ and expectations $\mu_{k}$ at equilibrium. The zero-lag normalized second order coherence function then reads
-
-\begin{equation}
-\bold{g}_{m} = \frac{\omega_{i}^{2}\omega_{j}^{2}\langle \mu^2 \rangle + \mu_{B}(\omega_{i}^{2}+\omega_{j}^{2})\langle \mu \rangle + \mu_{B}^2}{\langle \mu \rangle^2 \omega_{i}^2 \omega_{j}^2 + \mu_{B}\left(\omega_{i}^2+\omega_{j}^2\right)\langle \mu^2 \rangle + \mu_{B}^2}
-\end{equation}
-
-where $\langle \mu \rangle = \sum_{n}\xi_n\mu_n$ and $\langle \mu^2 \rangle = \sum_{n}\xi_n\mu_n^2$. 
 
 \section{Experiments}
 
