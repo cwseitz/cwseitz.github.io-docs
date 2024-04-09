@@ -32,9 +32,9 @@
 \usepackage{nicefrac}       % compact symbols for 1/2, etc.
 \usepackage{microtype}      % microtypography
 \usepackage{xcolor}         % colors
+\usepackage{graphicx}
 
-
-\title{Dense Localization Microscopy with Denoising Diffusion Probabilistic Models}
+\title{Diffusion Probabilistic Models for Super Resolution Microscopy}
 
 
 % The \author macro works with any number of authors. There are two commands
@@ -98,7 +98,11 @@ This is followed by coordinate refinement by a gradient-based Markov Chain Monte
 
 \section{Background}
 
-\subsection{Model of image formation}
+\begin{figure}
+\includegraphics[scale=4.0]{Denoise.png}
+\end{figure}
+
+\subsection{Degradation Model}
 
 The central objective of single molecule localization microscopy is to infer a set of molecular coordinates $\theta$ from noisy, low resolution images $\bold{x}$. We define an abstract image stochastic degradation function $F$ such that $\bold{x} = F(\theta)$. In the following paragraphs, we define such a function $F$. 
 
@@ -144,15 +148,9 @@ where $\omega_{k}' = g_{k}\omega_{k} + \sigma_{k}^{2}$. This result can be seen 
 
 \section{The Information Bottleneck for Localization}
 
-In general, the degradation function $F$ can be difficult to invert, particularly when fluorescent molecules are dense within the field of view. This difficulty arises because the parameter $\bold{\theta}$ is typically of large and unknown dimension, rendering maximum likelihood estimation or Markov Chain Monte Carlo techniques intractable. Previous solutions to this problem leverage convolutional neural networks (CNNs) to infer coordinates directly by learning a deterministic image transformation $F^{-1}$, which we refer to as a "localization map" (Nehme 2021). Such methods faithfully capture the information content in degraded images; however, such methods apply arbitrary thresholding to the CNN localization map, potentially creating erroneous localizations, and do not provide uncertainties in model outputs. 
+Inversion of the degradation function $F$ is generally intractable, particularly when fluorescent molecules are dense within the field of view. This difficulty arises because the parameter $\bold{\theta}$ is typically of large and unknown dimension, rendering maximum likelihood estimation or Markov Chain Monte Carlo sampling computationally difficult. Previous solutions to this problem leverage convolutional neural networks (CNNs) to infer coordinates directly by learning a deterministic image transformation $F^{-1}$, which we refer to as a "localization map" (Nehme 2021). Such methods faithfully capture the information content in degraded images; however, such methods apply arbitrary thresholding to the CNN localization map, potentially creating erroneous localizations, and do not permit sampling. 
 
-We seek a generative approach, which casts localization as an image restoration problem, where a high resolution kernel density estimate $\bold{y}$. is reconstructed from a low resolution image $\bold{x}$. We interpret previous approaches in terms of the information bottleneck principle (Tishby 2015). That is, our CNN learns a representation which compresses $\bold{x}$ while preserving the relevant information to the prediction of $\bold{y}$.
-
-\begin{equation}
-\mathcal{L} = \mathcal{I}(\bold{x};\bold{z}) - \beta \mathcal{I}(\bold{z};\bold{y})
-\end{equation}
-
-We use the Fisher information as the information theoretic criteria (Chao 2016). The generative model (6) is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below. The Fisher information is
+We seek a generative approach, which casts localization as an image restoration problem, where a high resolution kernel density estimate $\bold{y}$ is reconstructed from a low resolution image $\bold{x}$. Building on previous efforts, we utilize a CNN learns a representation which compresses $\bold{x}$ while preserving the relevant information to the prediction of $\bold{y}$. We use the Fisher information as the information theoretic criteria (Chao 2016). The generative model (6) is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below. The Fisher information is
 
 \begin{equation}
 \mathcal{I}_{ij}(\theta) = \mathbb{E}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) = \sum_{k}\frac{1}{\omega_{k}'}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}}
