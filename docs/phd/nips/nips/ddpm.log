@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.20)  11 APR 2024 17:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.20)  11 APR 2024 18:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -654,7 +654,7 @@ Package natbib Warning: Citation `ref6' on page 5 undefined on input line 227.
 
 Package natbib Warning: Citation `ref6' on page 5 undefined on input line 227.
 
-<Samples.png, id=92, 693.34032pt x 360.59718pt>
+<Samples.png, id=93, 693.34032pt x 360.59718pt>
 File: Samples.png Graphic file (type png)
 <use Samples.png>
 Package pdftex.def Info: Samples.png  used on input line 234.
@@ -664,18 +664,28 @@ Overfull \hbox (18.52242pt too wide) in paragraph at lines 234--235
 [][] 
  []
 
+<Errors.png, id=94, 433.62pt x 144.54pt>
+File: Errors.png Graphic file (type png)
+<use Errors.png>
+Package pdftex.def Info: Errors.png  used on input line 238.
+(pdftex.def)             Requested size: 433.61894pt x 144.53963pt.
+
+Overfull \hbox (36.13396pt too wide) in paragraph at lines 238--239
+[][] 
+ []
+
 
 Package natbib Warning: There were undefined citations.
 
-[5 <./Samples.png>] (./ddpm.aux)
+[5 <./Samples.png>] [6 <./Errors.png>] (./ddpm.aux)
 Package rerunfilecheck Info: File `ddpm.out' has not changed.
 (rerunfilecheck)             Checksum: EB99010ABE5DC3CFD57DD769EF31123C;1741.
  ) 
 Here is how much of TeX's memory you used:
- 13653 strings out of 476025
- 215534 string characters out of 5790016
+ 13662 strings out of 476025
+ 215654 string characters out of 5790016
  1868388 words of memory out of 5000000
- 33693 multiletter control sequences out of 15000+600000
+ 33699 multiletter control sequences out of 15000+600000
  546975 words of font info for 167 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,76p,1262b,551s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -698,10 +708,10 @@ e/2023/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/
 xmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2023/texmf-dist/f
 onts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1
 /urw/times/utmri8a.pfb>
-Output written on ddpm.pdf (5 pages, 495895 bytes).
+Output written on ddpm.pdf (6 pages, 509853 bytes).
 PDF statistics:
- 189 PDF objects out of 1000 (max. 8388607)
- 136 compressed objects within 2 object streams
- 28 named destinations out of 1000 (max. 500000)
- 38488 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 196 PDF objects out of 1000 (max. 8388607)
+ 140 compressed objects within 2 object streams
+ 30 named destinations out of 1000 (max. 500000)
+ 38493 words of extra memory for PDF output out of 42996 (max. 10000000)
 

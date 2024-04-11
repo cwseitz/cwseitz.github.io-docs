@@ -150,14 +150,14 @@ Since $\bold{x}_{k} = \bold{s}_{k} + \zeta_{k}$, we transform $\bold{x}_{k}' = \
 
 where $\omega_{k}' = \omega_{k} + \sigma_{k}^{2}$. This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson. We then arrive at the following log likelihood
 
-\begin{equation*}
+\begin{equation}
 \ell(\bold{x}|\theta) = -\log \prod_{k} \frac{e^{-\left(\mu_{k}'\right)}\left(\mu_{k}'\right)^{n_{k}}}{n_{k}!}
 \approx \sum_{k}  n_{k}\log n_{k} + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
-\end{equation*}
+\end{equation}
 
 \subsection{Fisher Information Metric for Quantitative Error Analysis}
 
-We use the Fisher information as an information theoretic criteria to assess the quality of the proposed algorithms, with respect to the root mean squared error (RMSE) of our predictions of $\theta$. The generative model $\ell(\bold{x}|\theta)$ is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below. It is shown in the appendix, that the Fisher information is straightforward to compute under the Poisson likelihood
+We use the Fisher information as an information theoretic criteria to assess the quality of the proposed algorithms, with respect to the root mean squared error (RMSE) of our predictions of $\theta$. The generative model $\ell(\bold{x}|\theta)$ is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below i.e., $\mathrm{var}(\hat{\theta}) \geq I^{-1}(\theta)$. It is shown in the appendix, that the Fisher information is straightforward to compute under the Poisson likelihood (7)
 
 \begin{equation}
 \mathcal{I}_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) = \sum_{k}\frac{1}{\omega_{k}'}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}}
@@ -232,6 +232,10 @@ Prior work of diffusion models \cite{ref17, ref51} require 1-2k diffusion steps 
 
 \begin{figure}
 \includegraphics[scale=0.6]{Samples.png}
+\end{figure}
+
+\begin{figure}
+\includegraphics[scale=1.0]{Errors.png}
 \end{figure}
 
 
