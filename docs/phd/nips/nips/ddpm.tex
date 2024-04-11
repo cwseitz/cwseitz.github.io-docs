@@ -93,7 +93,8 @@ Single molecule localization microscopy (SMLM) relies on the temporal resolution
 
 Previous approaches to this issue has been to predict super-resolution images from a sparse set of localizations with conditional generative adversarial networks (Ouyang 2018) or direct prediction of coordinates using deep neural networks (Nehme 2020; Speiser 2021). However, diffusion models are an appealing alternative because they infer a distribution of deconvolved images that are compatible with an observation. Although conditional VAEs and conditional GANs can provide a distribution of deconvolved images, both are known to suffer from mode collapse and produce insufficient diversity in their outputs. Diffusion models are a recently developed alternative to VAEs and GANs that excel at producing diverse samples and have been successfully applied to solve inverse problems. Here, we present a novel diffusion model for deconvolution in single molecule localization microscopy. The first stage of our algorithm performs interpolation by computing second order coherence of pixel pairs. Subsequent stages cast localization as a conditional image refinement task, realized by a U-Net model trained on denoising at various noise levels. 
 
-This is followed by coordinate refinement by a gradient-based Markov Chain Monte Carlo (MCMC) scheme, known as Langevin dynamics.
+Denoising diffusion probabilistic models (DDPM) have emerged as powerful generative models, exceeding GANs and VAEs in a variety of generative modeling tasks. Nevertheless, learning diffusion models directly in data space can limit expressivity of the model (Vahdat 2021). Therefore, we build on previous approaches by using a CNN to compute a latent representation $\bold{z}_{i}$. A denoising diffusion probabilistic model (DDPM) is then used to model the distribution $P_{\Phi}(\bold{y}|\bold{z})$. 
+
 
 
 \section{Denoising Diffusion Probabilistic Model for SMLM}
@@ -164,11 +165,19 @@ We seek a generative approach, which casts localization as an image restoration 
 
 where the log-likelihood is $\ell (\bold{x}_{t}|\theta)$.
 
-\subsection{Denoising Diffusion Probabilistic Model}
+\section{Image Restoration Model}
 
-Denoising diffusion probabilistic models (DDPM) have emerged as powerful generative models, exceeding GANs and VAEs in a variety of generative modeling tasks. Nevertheless, learning diffusion models directly in data space can limit expressivity of the model (Vahdat 2021). Therefore, we build on previous approaches by using a CNN to compute a latent representation $\bold{z}_{i}$. A denoising diffusion probabilistic model (DDPM) is then used to model the distribution $P_{\Phi}(\bold{y}|\bold{z})$. 
+\subsection{The Encoder Network}
 
-Let $\bold{y}_{0} = \sum_{i=1}^{n} \bold{\omega}_{n}(\sigma)$ be a density estimate of the molecular distribution. The \emph{forward} process is the joint distribution $p_{\theta}(\bold{y}_{0:T})$, which is Markovian. 
+\subsection{Optimization of the Encoder Network}
+
+\subsection{Conditional Denoising Diffusion Model}
+
+Given datasets $(\theta_{i}, \bold{x}_i,\bold{y}_i)_{i=1}^{N}$ which represent samples drawn from an unknown conditional distribution $p(\bold{y}|\bold{x})$. This is a one-to-many mapping in which many target images may be consistent with an input image. The conditional DDPM model generates a target image $y_0$ in $T$ refinement steps. Starting with a pure noise image $y_{T}\sim \mathcal{N}(0,I)$, the model iteratively refines the image through successive iterations according to learned conditional transition distributions $p(y_{t-1}|y_{t},x)$ such that $y_{0} \sim p(\bold{y}|\bold{x})$ 
+
+\subsection{Gaussian Diffusion Model}
+
+The \emph{forward} process is the joint distribution $p_{\theta}(\bold{y}_{0:T})$, which is Markovian. 
 
 \begin{equation}
 q(\bold{y}_{t}|\bold{y}_{0}) = \prod_{t=1}^{T}q(\bold{y}_{t}|\bold{y}_{t-1}) \;\;\; q(\bold{y}_{t}|\bold{y}_{t-1}) = \mathcal{N}\left(\bold{y}_{t-1},\sqrt{\alpha_{t}}\bold{y}_{t-1},(1-\alpha_{t})I\right)
@@ -186,6 +195,7 @@ where $\gamma_{t}=\prod_{i=1}^{t}\alpha_{t}$. Note that the model $\theta$ is no
 \mu_{\theta}(\bold{x}_{t},\bold{y},\gamma_{t}) = \frac{1}{\sqrt{\alpha_{t}}}\left(\bold{y}_t-\frac{1-\alpha_{t}}{\sqrt{1-\gamma_{t}}}f_{\theta}(\bold{x}_{t},\gamma_{t})\right)
 \end{equation}
 
+\subsection{Optimization of the Denoising Model}
 
 \section{Experiments}
 
