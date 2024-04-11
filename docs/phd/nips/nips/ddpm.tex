@@ -151,9 +151,6 @@ where $\omega_{k}' = g_{k}\omega_{k} + \sigma_{k}^{2}$. This result can be seen 
 
 \subsection{Fisher Information Metric for Localization}
 
-\begin{figure}
-\includegraphics[scale=4.0]{Denoise.png}
-\end{figure}
 
 Inversion of the degradation function $F$ is generally intractable, particularly when fluorescent molecules are dense within the field of view. This difficulty arises because the parameter $\bold{\theta}$ is typically of large and unknown dimension, rendering maximum likelihood estimation or Markov Chain Monte Carlo sampling computationally difficult. Previous solutions to this problem leverage convolutional neural networks (CNNs) to infer coordinates directly by learning a deterministic image transformation $F^{-1}$, which we refer to as a "localization map" (Nehme 2021). Such methods faithfully capture the information content in degraded images; however, such methods apply arbitrary thresholding to the CNN localization map, potentially creating erroneous localizations, and do not permit sampling. 
 
@@ -165,50 +162,32 @@ We seek a generative approach, which casts localization as an image restoration 
 
 where the log-likelihood is $\ell (\bold{x}_{t}|\theta)$.
 
-\section{Image Restoration Model}
+\section{Conditional Denoising Diffusion Model}
 
-\subsection{The Encoder Network}
 
-\subsection{Optimization of the Encoder Network}
+\begin{figure}
+\includegraphics[scale=4.0]{Denoise.png}
+\end{figure}
 
-\subsection{Conditional Denoising Diffusion Model}
 
 Given datasets $(\theta_{i}, \bold{x}_i,\bold{y}_i)_{i=1}^{N}$ which represent samples drawn from an unknown conditional distribution $p(\bold{y}|\bold{x})$. This is a one-to-many mapping in which many target images may be consistent with an input image. The conditional DDPM model generates a target image $y_0$ in $T$ refinement steps. Starting with a pure noise image $y_{T}\sim \mathcal{N}(0,I)$, the model iteratively refines the image through successive iterations according to learned conditional transition distributions $p(y_{t-1}|y_{t},x)$ such that $y_{0} \sim p(\bold{y}|\bold{x})$ 
 
-\subsection{Gaussian Diffusion Model}
+\subsection{Gaussian Diffusion}
 
-The \emph{forward} process is the joint distribution $p_{\theta}(\bold{y}_{0:T})$, which is Markovian. 
-
-\begin{equation}
-q(\bold{y}_{t}|\bold{y}_{0}) = \prod_{t=1}^{T}q(\bold{y}_{t}|\bold{y}_{t-1}) \;\;\; q(\bold{y}_{t}|\bold{y}_{t-1}) = \mathcal{N}\left(\bold{y}_{t-1},\sqrt{\alpha_{t}}\bold{y}_{t-1},(1-\alpha_{t})I\right)
-\end{equation}
-
-We optimize a denoising model $f_{\theta}$ which takes as input an interpolated low-resolution input $\bold{y}$ and a noisy input $\bold{y}_{T}$. 
+Conditional diffusion models are a class of generative models which generate samples from noise, according to the \emph{reverse process}: $p_{\theta}(\bold{y}_{0}|\bold{x}_{0}) = \int p_{\theta}(\bold{y}_{0:T}|\bold{x}_{0})d\bold{x}_{1:T}$ where $y_{t}$ is a latent representation with the same dimensionality of the data.  $p_{\theta}(\bold{y}_{0:T}|\bold{x})$ is a Markov process, starting from a noise sample $p_{\theta}(y_{T}) = \mathcal{N}(0,I)$. 
 
 \begin{equation}
 p_{\theta}(\bold{y}_{0:T}) = p_{\theta}(\bold{y}_{T})\prod_{t=1}^{T} p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) \;\;\; p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) = \mathcal{N}\left(\bold{y}_{t-1},\mu_{\theta}(\bold{y}_{t},\gamma_{t}),\sigma^{2}_{t}I\right)
 \end{equation}
 
-where $\gamma_{t}=\prod_{i=1}^{t}\alpha_{t}$. Note that the model $\theta$ is not a function of $t$. The mean of the transition density reads
+We learn a denoising model $\mu_{\theta}$ which computes the mean of the Gaussian transition density. The \emph{forward} process is a predetermined Markov chain that
+gradually adds Gaussian noise to the data according to a variance schedule $\beta_{0:T}$
 
 \begin{equation}
-\mu_{\theta}(\bold{x}_{t},\bold{y},\gamma_{t}) = \frac{1}{\sqrt{\alpha_{t}}}\left(\bold{y}_t-\frac{1-\alpha_{t}}{\sqrt{1-\gamma_{t}}}f_{\theta}(\bold{x}_{t},\gamma_{t})\right)
+q(\bold{y}_{t}|\bold{y}_{0}) = \prod_{t=1}^{T}q(\bold{y}_{t}|\bold{y}_{t-1}) \;\;\; q(\bold{y}_{t}|\bold{y}_{t-1}) = \mathcal{N}\left(\sqrt{\beta_{t}}\bold{y}_{t-1},(1-\beta_{t})I\right)
 \end{equation}
 
-Recall that the denoising model $f_{\theta}$ is trained to estimate $\epsilon$, given any noisy image $y_e$ including $y_t$. Thus, given $y_t$, we approximate $y_0$ by rearranging the terms in (5) as
-\[
-\hat{y}_0 = \frac{1}{\sqrt{\gamma_t}} \left( y_t - \sqrt{1 - \gamma_t} \, f_{\theta}(x, y_t, \gamma_t) \right). 
-\]
-Following the formulation of \cite{ref17}, we substitute our estimate $\hat{y}_0$ into the posterior distribution of $q(y_{t-1}|y_0, y_t)$ in (4) to parameterize the mean of $p_{\theta}(y_{t-1}|y_t, x)$ as
-\[
-\mu_{\theta}(x, y_t, \gamma_t) = \frac{1}{\sqrt{\alpha_t}} \left( y_t - (1 - \alpha_t) \sqrt{1 - \gamma_t} \, f_{\theta}(x, y_t, \gamma_t) \right),
-\]
-and we set the variance of $p_{\theta}(y_{t-1}|y_t, x)$ to $(1 - \alpha_t)$, a default given by the variance of the forward process \cite{ref17}. Following this parameterization, each iteration of iterative refinement under our model takes the form,
-\[
-y_{t-1} \leftarrow \frac{1}{\sqrt{\alpha_t}} \left( y_t - (1 - \alpha_t) \sqrt{1 - \gamma_t} \, f_{\theta}(x, y_t, \gamma_t) \right) + \sqrt{1 - \alpha_t} \epsilon_t,
-\]
-where $\epsilon_t \sim \mathcal{N}(0, I)$. This resembles one step of Langevin dynamics with $f_{\theta}$ providing an estimate of the gradient of the data log-density. We justify the choice of the training objective in (6) for the probabilistic model outlined in (9) from a variational lower bound perspective and a denoising score-matching perspective in Appendix B.
-
+Here, $\beta_{t}$ are treated as hyperparameters, with a linear schedule from $\beta_{0}=10^{-4}$ to $\beta_{T}=10^{-2}$ in $T$ timesteps. Learning diffusion models directly in data space can limit expressivity of the model (Vahdat 2021). Since we are primarily interested in learning a restoration $\bold{y}$, we choose to define an encoder $\phi$ such that $\bold{z} = \phi(\bold{x}_{0})$. The reverse process then becomes $p_{\theta}(\bold{y}_{0}|\bold{z}=\phi(\bold{x}_{0})) = \int p_{\theta}(\bold{y}_{0:T}|\bold{z})d\bold{x}_{1:T}$.  
 
 \subsection{Optimization of the Denoising Model}
 
