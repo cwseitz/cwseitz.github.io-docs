@@ -33,8 +33,9 @@
 \usepackage{microtype}      % microtypography
 \usepackage{xcolor}         % colors
 \usepackage{graphicx}
+\usepackage{amsmath}
 
-\title{Diffusion Probabilistic Models for Super Resolution Microscopy}
+\title{Conditional Diffusion Probabilistic Models for Super Resolution Microscopy}
 
 
 % The \author macro works with any number of authors. There are two commands
@@ -95,13 +96,12 @@ Previous approaches to this issue has been to predict super-resolution images fr
 
 Denoising diffusion probabilistic models (DDPM) have emerged as powerful generative models, exceeding GANs and VAEs in a variety of generative modeling tasks. Nevertheless, learning diffusion models directly in data space can limit expressivity of the model (Vahdat 2021). Therefore, we build on previous approaches by using a CNN to compute a latent representation $\bold{z}_{i}$. A denoising diffusion probabilistic model (DDPM) is then used to model the distribution $P_{\Phi}(\bold{y}|\bold{z})$. 
 
+Inversion of the degradation function $F$ is generally intractable, particularly when fluorescent molecules are dense within the field of view. This difficulty arises because the parameter $\bold{\theta}$ is typically of large and unknown dimension, rendering maximum likelihood estimation or Markov Chain Monte Carlo sampling computationally difficult. Previous solutions to this problem leverage convolutional neural networks (CNNs) to infer coordinates directly by learning a deterministic image transformation $F^{-1}$, which we refer to as a "localization map" (Nehme 2021). Such methods faithfully capture the information content in degraded images; however, such methods apply arbitrary thresholding to the CNN localization map, potentially creating erroneous localizations, and do not permit sampling. 
+
+We seek a generative approach, which casts localization as an image restoration problem, where a high resolution kernel density estimate $\bold{y}$ is reconstructed from a low resolution image $\bold{x}$. Building on previous efforts, we utilize a CNN learns a representation which compresses $\bold{x}$ while preserving the relevant information to the prediction of $\bold{y}$. 
 
 
 \section{Denoising Diffusion Probabilistic Model for SMLM}
-
-\begin{figure}
-\includegraphics[scale=0.5]{Generation.png}
-\end{figure}
 
 We consider datasets $(\theta_{i}, \bold{x}_i,\bold{y}_i)_{i=1}^{N}$ of observed images $\bold{x}_i$ and kernel density estimate (KDE) images $\bold{y}_{i}$, given an underlying set of object coordinates $\theta_{i}$. Observations $\bold{x}_i$ are generated from $\theta_{i}=(r_{1},...,r_{N})$ under an image degradation model $F$. We aim to develop a framework for sampling from $p(\bold{y}_{i}|\bold{x}_{i})$ and inference of $\theta_{i}$, while fulfilling a resolution criterion under the condition $|r_{i}-r_{j}| \geq \epsilon ; \forall (i,j)$. 
 
@@ -129,6 +129,11 @@ where we have used the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}
 \bold{x}_t = \bold{s}_t + \bold{\zeta}
 \end{equation}
 
+
+\begin{figure}
+\includegraphics[scale=0.5]{Generation.png}
+\end{figure}
+
 What we are after is the likelihood $p(\bold{x}_{t}|\theta)$ where $\theta$ are the molecular coordinates. Fundamental probability theory states that the distribution of $\bold{x}_{k}$ is the convolution of the distributions of $\bold{s}_{k}$ and $\zeta_{k}$,
 
 \begin{equation}
@@ -151,10 +156,7 @@ where $\omega_{k}' = g_{k}\omega_{k} + \sigma_{k}^{2}$. This result can be seen 
 
 \subsection{Fisher Information Metric for Localization}
 
-
-Inversion of the degradation function $F$ is generally intractable, particularly when fluorescent molecules are dense within the field of view. This difficulty arises because the parameter $\bold{\theta}$ is typically of large and unknown dimension, rendering maximum likelihood estimation or Markov Chain Monte Carlo sampling computationally difficult. Previous solutions to this problem leverage convolutional neural networks (CNNs) to infer coordinates directly by learning a deterministic image transformation $F^{-1}$, which we refer to as a "localization map" (Nehme 2021). Such methods faithfully capture the information content in degraded images; however, such methods apply arbitrary thresholding to the CNN localization map, potentially creating erroneous localizations, and do not permit sampling. 
-
-We seek a generative approach, which casts localization as an image restoration problem, where a high resolution kernel density estimate $\bold{y}$ is reconstructed from a low resolution image $\bold{x}$. Building on previous efforts, we utilize a CNN learns a representation which compresses $\bold{x}$ while preserving the relevant information to the prediction of $\bold{y}$. We use the Fisher information as the information theoretic criteria (Chao 2016). The generative model (6) is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below. The Fisher information is
+We use the Fisher information as the information theoretic criteria (Chao 2016). The generative model (6) is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below. The Fisher information is
 
 \begin{equation}
 \mathcal{I}_{ij}(\theta) = \mathbb{E}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) = \sum_{k}\frac{1}{\omega_{k}'}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}}
@@ -174,44 +176,57 @@ Given datasets $(\theta_{i}, \bold{x}_i,\bold{y}_i)_{i=1}^{N}$ which represent s
 
 \subsection{Gaussian Diffusion}
 
-Conditional diffusion models are a class of generative models which generate samples from noise, according to the \emph{reverse process}: $p_{\theta}(\bold{y}_{0}|\bold{x}_{0}) = \int p_{\theta}(\bold{y}_{0:T}|\bold{x}_{0})d\bold{x}_{1:T}$ where $y_{t}$ is a latent representation with the same dimensionality of the data.  $p_{\theta}(\bold{y}_{0:T}|\bold{x})$ is a Markov process, starting from a noise sample $p_{\theta}(y_{T}) = \mathcal{N}(0,I)$. 
+Diffusion models (Sohl-Dickstein 2015; Ho 2020) are a class of generative models inspired by nonequilibrium statistical physics, which slowly destroy structure in a data distribution $p(\bold{y}_{0}|\bold{x})$ via a fixed Markov chain referred to as the \emph{forward process}. In essence, the forward process gradually adds Gaussian noise to the data according to a variance schedule $\beta_{0:T}$
 
 \begin{equation}
-p_{\theta}(\bold{y}_{0:T}) = p_{\theta}(\bold{y}_{T})\prod_{t=1}^{T} p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) \;\;\; p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) = \mathcal{N}\left(\bold{y}_{t-1},\mu_{\theta}(\bold{y}_{t},\gamma_{t}),\sigma^{2}_{t}I\right)
+q(\bold{y}_{t}|\bold{y}_{0}) = \prod_{t=1}^{T}q(\bold{y}_{t}|\bold{y}_{t-1}) \;\;\; q(\bold{y}_{t}|\bold{y}_{t-1}) = \mathcal{N}\left(\sqrt{1-\beta_{t}}\bold{y}_{t-1},\beta_t I\right)
 \end{equation}
 
-We learn a denoising model $\mu_{\theta}$ which computes the mean of the Gaussian transition density. The \emph{forward} process is a predetermined Markov chain that
-gradually adds Gaussian noise to the data according to a variance schedule $\beta_{0:T}$
+An important property of the forward process is that it admits sampling $x_t$ at an arbitrary timestep $t$ in closed form (Ho 2020). Using the notation $\alpha_t := 1 - \beta_t$ and $\gamma_t := \prod_{s=1}^{t} \alpha_s$, we have
 
 \begin{equation}
-q(\bold{y}_{t}|\bold{y}_{0}) = \prod_{t=1}^{T}q(\bold{y}_{t}|\bold{y}_{t-1}) \;\;\; q(\bold{y}_{t}|\bold{y}_{t-1}) = \mathcal{N}\left(\sqrt{\beta_{t}}\bold{y}_{t-1},(1-\beta_{t})I\right)
+q(\bold{y}_t|\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 - \gamma_t)I \right)
 \end{equation}
 
-Here, $\beta_{t}$ are treated as hyperparameters, with a linear schedule from $\beta_{0}=10^{-4}$ to $\beta_{T}=10^{-2}$ in $T$ timesteps. Learning diffusion models directly in data space can limit expressivity of the model (Vahdat 2021). Since we are primarily interested in learning a restoration $\bold{y}$, we choose to define an encoder $\phi$ such that $\bold{z} = \phi(\bold{x}_{0})$. The reverse process then becomes $p_{\theta}(\bold{y}_{0}|\bold{z}=\phi(\bold{x}_{0})) = \int p_{\theta}(\bold{y}_{0:T}|\bold{z})d\bold{x}_{1:T}$.  
+
+The usual procedure is then to learn a parametric representation of the \emph{reverse process}, and therefore generate samples from  $p(\bold{y}_{0})$, starting from noise. Here, we are concerned with conditional diffusion models, which  instead sample from a conditional distribution $p(\bold{y}_{0}|\bold{x})$. Formally, $p_{\theta}(\bold{y}_{0}|\bold{x}_{0}) = \int p_{\theta}(\bold{y}_{0:T}|\bold{x}_{0})d\bold{x}_{1:T}$ where $y_{t}$ is a latent representation with the same dimensionality of the data.  $p_{\theta}(\bold{y}_{0:T}|\bold{x})$ is a Markov process, starting from a noise sample $p_{\theta}(y_{T}) = \mathcal{N}(0,I)$. 
+
+\begin{equation}
+p_{\theta}(\bold{y}_{0:T}) = p_{\theta}(\bold{y}_{T})\prod_{t=1}^{T} p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) \;\;\; p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) = \mathcal{N}\left(\mu_{\theta}(\bold{y}_{t}),\beta_{t}I\right)
+\end{equation}
+
+where we reuse the variance schedule of the forward process (Ho 2020). We seek to learn a denoising model $\mu_{\theta}$ which computes the mean of the Gaussian transition density at each time step $t$. However, learning diffusion models directly in data space can limit expressivity of the model (Vahdat 2021). Since we are primarily interested in learning a restoration $\bold{y}$, we choose to define an encoder $\phi$ such that $\bold{z} = \phi(\bold{x}_{0})$. The reverse process then becomes $p_{\theta}(\bold{y}_{0}|\bold{z}=\phi(\bold{x}_{0})) = \int p_{\theta}(\bold{y}_{0:T}|\bold{z})d\bold{x}_{1:T}$. For all $t > 0$, the mean of the transition density is computed as
+
+\begin{equation}
+\mu_{\theta}(\bold{y}_t, \bold{x}, \gamma_t) = \frac{1}{\sqrt{\alpha_t}} \left(\bold{y}_t - \frac{(1 - \alpha_t)}{\sqrt{1 - \gamma_t}} \, f_{\theta}(\bold{y}, \bold{x}, \gamma_t) \right)
+\end{equation}
+
+where $f_{\theta}$ is a neural network. Only at $t=0$ is this mean directly a function of $\bold{x}$. 
 
 \subsection{Optimization of the Denoising Model}
 
-To help reverse the diffusion process, we take advantage of additional side information in the form of a source image $x$ and optimize a neural denoising model $f_{\theta}$ that takes as input this source image $x$ and a noisy target image $y_e$,
-\[
-y_e = \sqrt{\gamma} y_0 + \sqrt{1 - \gamma} \epsilon, \quad \epsilon \sim \mathcal{N}(0, I),
-\]
-and aims to recover the noiseless target image $y_0$. This definition of a noisy target image $y_e$ is compatible with the marginal distribution of noisy images at different steps of the forward diffusion process.
+Here, $\beta_{t}$ are treated as hyperparameters, with a linear schedule from $\beta_{0}=10^{-4}$ to $\beta_{T}=10^{-2}$ in $T$ timesteps. To reverse the diffusion process, we follow (Saharia 2021), using a source encoding $\bold{z} = \phi(\bold{x})$ and optimize a neural denoising model $f_{\theta}$ that takes as input $\bold{z}$ and a noisy target image $\bold{y}_t \sim q(\bold{y}_t|\bold{y}_0)$,
 
-In addition to a source image $x$ and a noisy target image $y_e$, the denoising model $f_{\theta}(x, y_e, \gamma)$ takes as input the sufficient statistics for the variance of the noise $\gamma$, and is trained to predict the noise vector $\epsilon$. We make the denoising model aware of the level of noise through conditioning on a scalar $\gamma$, similar to \cite{ref1, ref2}. The proposed objective function for training $f_{\theta}$ is
-\[
-\mathbb{E}(x,y)\mathbb{E}_{\epsilon,\gamma} \left[ f_{\theta}\left(x, \sqrt{\gamma} y_0 + \sqrt{1 - \gamma} \epsilon \, \middle|\, y_e, \gamma\right) - \epsilon \right],
-\]
-where $\epsilon \sim \mathcal{N}(0, I)$, $(x, y)$ is sampled from the training dataset, $p \in \{1, 2\}$, and $\gamma \sim p(\gamma)$. The distribution of $\gamma$ has a big impact on the quality of the model and the generated outputs. We discuss our choice of $p(\gamma)$ in Section 2.4.
+\begin{equation}
+\bold{y}_t = \sqrt{\gamma} \bold{y}_0 + \sqrt{1 - \gamma} \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)
+\end{equation}
 
-The SR3 architecture is similar to the U-Net found in DDPM \cite{ref17}, with modifications adapted from \cite{ref51}; we replace the original DDPM residual blocks with residual blocks from BigGAN \cite{ref4}, and we re-scale skip connections by $\sqrt{\frac{1}{2}}$. We also increase the number of residual blocks, and the channel multipliers at different resolutions (see Appendix A for details). To condition the model on the input $x$, we up-sample the low-resolution image to the target resolution using bicubic interpolation. The result is concatenated with $y_t$ along the channel dimension. We experimented with more sophisticated methods of conditioning, such as using FiLM \cite{ref34}, but we found that the simple concatenation yielded similar generation quality.
+This definition of a noisy target image $\bold{y}_t$ is drawn from the marginal distribution of noisy images at a time step $t$ of the forward diffusion process. In addition to a source image $\bold{y}_{0}$ and a noisy target image $\bold{y}_t$, the denoising model $f_{\theta}$ takes as input the sufficient statistics for the variance of the noise $\gamma$, and is trained to predict the noise vector $\epsilon$. We make the denoising model aware of the level of noise through conditioning on a scalar $\gamma$. The proposed objective function for training $f_{\theta}$ is
 
-For our training noise schedule, we follow \cite{ref6}, and use a piecewise distribution for $\gamma$, $p(\gamma) = \frac{1}{T}\sum_{t=1}^{T} U(\gamma_{t-1}, \gamma_t)$. Specifically, during training, we first uniformly sample a time step $t \sim \{0, ..., T\}$ followed by sampling $\gamma \sim U(\gamma_{t-1}, \gamma_t)$. We set $T = 2000$ in all our experiments.
+\begin{equation}
+\underset{(\bold{z},\bold{y}_{0})}{\mathbb{E}}\underset{(\epsilon,\gamma)}{\mathbb{E}} \left[ f_{\theta}\left(x, \sqrt{\gamma} \bold{y}_0 + \sqrt{1 - \gamma} \epsilon \, \middle|\, \bold{y}_{t}, \gamma\right) - \epsilon \right],
+\end{equation} 
 
-Prior work of diffusion models \cite{ref17, ref51} require 1-2k diffusion steps during inference, making generation slow for large target resolution tasks. We adapt techniques from \cite{ref6} to enable more efficient inference. Our model conditions on $\gamma$ directly (vs $t$ as in \cite{ref17}), which allows us flexibility in choosing the number of diffusion steps, and the noise schedule during inference. This has been demonstrated to work well for speech synthesis \cite{ref6}, but has not been explored for images. For efficient inference, we set the maximum inference budget to 100 diffusion steps, and hyper-parameter search over the inference noise schedule. This search is inexpensive as we only need to train the model once \cite{ref6}. We use FID on held-out data to choose the best noise schedule, as we found PSNR did not correlate well with image quality.
-
+where $\epsilon \sim \mathcal{N}(0, I)$, $(\bold{z},\bold{y}_{0})$ is sampled from the training dataset and $\gamma \sim p(\gamma)$. The distribution of $\gamma$ has a big impact on the quality of the model and the generated outputs. For our training noise schedule, we use a piecewise distribution for $\gamma$, $p(\gamma) = \frac{1}{T}\sum_{t=1}^{T} U(\gamma_{t-1}, \gamma_t)$ (Nanxin 2021). Specifically, during training, we first uniformly sample a time step $t \sim \{0, ..., T\}$ followed by sampling $\gamma \sim U(\gamma_{t-1}, \gamma_t)$. We set $T = 100$ in all our experiments.
 
 
 \section{Experiments}
+
+The SR3 architecture is similar to the U-Net found in DDPM, with modifications adapted from \cite{ref51}; we replace the original DDPM residual blocks with residual blocks from BigGAN, and we re-scale skip connections by $\sqrt{\frac{1}{2}}$. We also increase the number of residual blocks, and the channel multipliers at different resolutions (see Appendix A for details). To condition the model on the input $x$, we up-sample the low-resolution image to the target resolution using bicubic interpolation. The result is concatenated with $y_t$ along the channel dimension. We experimented with more sophisticated methods of conditioning, such as using, but we found that the simple concatenation yielded similar generation quality.
+
+
+Prior work of diffusion models \cite{ref17, ref51} require 1-2k diffusion steps during inference, making generation slow for large target resolution tasks. We adapt techniques from \cite{ref6} to enable more efficient inference. Our model conditions on $\gamma$ directly (vs $t$ as in \cite{ref17}), which allows us flexibility in choosing the number of diffusion steps, and the noise schedule during inference. This has been demonstrated to work well for speech synthesis \cite{ref6}, but has not been explored for images. For efficient inference, we set the maximum inference budget to 100 diffusion steps, and hyper-parameter search over the inference noise schedule. This search is inexpensive as we only need to train the model once \cite{ref6}. We use FID on held-out data to choose the best noise schedule, as we found PSNR did not correlate well with image quality.
+
 
 \section{Related Work}
 
