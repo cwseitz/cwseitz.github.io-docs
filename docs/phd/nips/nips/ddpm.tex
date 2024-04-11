@@ -107,26 +107,22 @@ We consider datasets $(\theta_{i}, \bold{x}_i,\bold{y}_i)_{i=1}^{N}$ of observed
 
 \subsection{Degradation Model}
 
-The central objective of single molecule localization microscopy is to infer a set of molecular coordinates $\theta$ from noisy, low resolution images $\bold{x}$. We define an abstract image stochastic degradation function $F$ such that $\bold{x} = F(\theta)$. In the following paragraphs, we define such a function $F$. 
-
-In fluorescence microscopy, each pixel follows Poisson statistics, with expected value
+The central objective of single molecule localization microscopy is to infer a set of molecular coordinates $\theta$ from noisy, low resolution images $\bold{x}$. We therefore begin by defining the likelihood on measured low-resolution images $p(\bold{x}|\theta)$. In fluorescence microscopy, each pixel is a Poisson random variable (Smith 2010; Nehme 2020; Chao 2016), with expected value
 
 \begin{equation}
 \omega = i_{0}\int O(u)du\int O(v)dv
 \end{equation}
 
-where $i_{0} = \eta N_{0}\Delta$. The optical impulse response $O(u,v)$ is often approximated as a 2D isotropic Gaussian with standard deviation $\sigma$ (Zhang 2007). The parameter $\eta$ is the photon detection probability of the sensor and $\Delta$ is the exposure time. $N_{0}$ represents the number of photons emitted.
-
-For a fluorescent emitter located at $\theta = (u_{0},v_{0})$, we have that
+where $i_{0} = \eta N_{0}\Delta$. The scalar parameters $\eta,\Delta$ are the photon detection probability of the sensor and the exposure time, respectively. Without loss of generality, we assume $\eta = \Delta = 1$. Most importantly, $N_{0}$ represents the signal amplitude, which we assume maintains a fixed value. The optical impulse response $O(u,v)$ is often approximated as a 2D isotropic Gaussian with standard deviation $\sigma$ (Zhang 2007). This approximation has the convenient property, that the effects of pixelation can be expressed in terms of error functions. For example, given a fluorescent emitter located at $\theta = (u_{0},v_{0})$, we have that
 
 \begin{equation}
 \int O(u)du = \frac{1}{2}\left(\mathrm{erf}\left(\frac{u_{k}+\frac{1}{2}-u_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{u_{k}-\frac{1}{2}-u_{0}}{\sqrt{2}\sigma}\right)\right)
 \end{equation}
 
-where we have used the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}\int_{0}^{t}e^{-t^{2}}dt$. For the sake of generality, the number of photoelectrons at a pixel $k$, $\bold{s}_k$, is  multiplied by a gain factor $g_k \;[\mathrm{ADU}/e^{-}]$, which is often unity. The readout noise per pixel $\zeta_{k}$ can be Gaussian with some pixel-specific offset $o_{k}$ and variance $\sigma_{k}^{2}$. Ultimately, we have a Poisson component of the signal, which scales with $N_{0}$ and may have Gaussian component, which does not. Therefore, in a single exposure, we measure: 
+where we have used the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}\int_{0}^{t}e^{-t^{2}}dt$. Our generative model also incorporates a normally distributed white noise per pixel $\zeta$ with offset $o$ and variance $\sigma^{2}$. Ultimately, we have a Poisson component of the signal, which scales with $N_{0}$ and a Gaussian component, which does not. Therefore, in a single exposure, we measure: 
 
 \begin{equation}
-\bold{x}_t = \bold{s}_t + \bold{\zeta}
+\bold{x} = \bold{s} + \bold{\zeta}
 \end{equation}
 
 
@@ -134,13 +130,13 @@ where we have used the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}
 \includegraphics[scale=0.5]{Generation.png}
 \end{figure}
 
-What we are after is the likelihood $p(\bold{x}_{t}|\theta)$ where $\theta$ are the molecular coordinates. Fundamental probability theory states that the distribution of $\bold{x}_{k}$ is the convolution of the distributions of $\bold{s}_{k}$ and $\zeta_{k}$,
+The distribution of $\bold{x}$ is the convolution of the distributions of $\bold{s}$ and $\zeta$,
 
 \begin{equation}
-p(\bold{x}_{t}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(\bold{x}_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
+p(\bold{x}_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(\bold{x}_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
 \end{equation}
 
-where $P(\zeta_{k}) = \mathcal{N}(o_{k},\sigma_{k}^{2})$ and $P(S_{k}) = \mathrm{Poisson}(g_{k}\omega_{k})$,  $A$ is some normalization constant. In practice, (4) is difficult to work with, so we look for an approximation. We will use a Poisson-Normal approximation for simplification. Consider,
+where $p(\zeta_{k}) = \mathcal{N}(o_{k},\sigma_{k}^{2})$ and $p(s_{k}) = \mathrm{Poisson}(\omega_{k})$,  $A$ is some normalization constant. In practice, (4) is difficult to work with, so we look for an approximation. We will use a Poisson-Normal approximation for simplification. Consider,
 
 \begin{equation}
 \zeta_{k} - o_{k} + \sigma_{k}^{2} \sim \mathcal{N}(\sigma_{k}^{2},\sigma_{k}^{2}) \approx \mathrm{Poisson}(\sigma_{k}^{2})
@@ -152,17 +148,20 @@ Since $\bold{x}_{k} = \bold{s}_{k} + \zeta_{k}$, we transform $\bold{x}_{k}' = \
 \bold{x}_{k}' \sim \mathrm{Poisson}(\omega_{k}')
 \end{equation}
 
-where $\omega_{k}' = g_{k}\omega_{k} + \sigma_{k}^{2}$. This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson. The quality of this approximation will degrade with decreasing signal level, since the Poisson distribution does not retain its Gaussian shape at low expected counts. Nevertheless, the quality of the approximation can be predicted by the Komogonov distance between the convolution distribution (4).
+where $\omega_{k}' = \omega_{k} + \sigma_{k}^{2}$. This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson. We then arrive at the following log likelihood
 
-\subsection{Fisher Information Metric for Localization}
+\begin{equation*}
+\ell(\bold{x}|\theta) = -\log \prod_{k} \frac{e^{-\left(\mu_{k}'\right)}\left(\mu_{k}'\right)^{n_{k}}}{n_{k}!}
+\approx \sum_{k}  n_{k}\log n_{k} + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
+\end{equation*}
 
-We use the Fisher information as the information theoretic criteria (Chao 2016). The generative model (6) is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below. The Fisher information is
+\subsection{Fisher Information Metric for Quantitative Error Analysis}
+
+We use the Fisher information as an information theoretic criteria to assess the quality of the proposed algorithms, with respect to the root mean squared error (RMSE) of our predictions of $\theta$. The generative model $\ell(\bold{x}|\theta)$ is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below. It is shown in the appendix, that the Fisher information is straightforward to compute under the Poisson likelihood
 
 \begin{equation}
-\mathcal{I}_{ij}(\theta) = \mathbb{E}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) = \sum_{k}\frac{1}{\omega_{k}'}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}}
+\mathcal{I}_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) = \sum_{k}\frac{1}{\omega_{k}'}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}}
 \end{equation}
-
-where the log-likelihood is $\ell (\bold{x}_{t}|\theta)$.
 
 \section{Conditional Denoising Diffusion Model}
 
