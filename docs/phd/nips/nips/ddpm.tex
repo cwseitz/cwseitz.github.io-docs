@@ -96,11 +96,13 @@ Previous approaches to this issue has been to predict super-resolution images fr
 This is followed by coordinate refinement by a gradient-based Markov Chain Monte Carlo (MCMC) scheme, known as Langevin dynamics.
 
 
-\section{Background}
+\section{Denoising Diffusion Probabilistic Model for SMLM}
 
 \begin{figure}
-\includegraphics[scale=4.0]{Denoise.png}
+\includegraphics[scale=0.5]{Generation.png}
 \end{figure}
+
+We consider datasets $(\theta_{i}, \bold{x}_i,\bold{y}_i)_{i=1}^{N}$ of observed images $\bold{x}_i$ and kernel density estimate (KDE) images $\bold{y}_{i}$, given an underlying set of object coordinates $\theta_{i}$. Observations $\bold{x}_i$ are generated from $\theta_{i}=(r_{1},...,r_{N})$ under an image degradation model $F$. We aim to develop a framework for sampling from $p(\bold{y}_{i}|\bold{x}_{i})$ and inference of $\theta_{i}$, while fulfilling a resolution criterion under the condition $|r_{i}-r_{j}| \geq \epsilon ; \forall (i,j)$. 
 
 \subsection{Degradation Model}
 
@@ -146,7 +148,11 @@ Since $\bold{x}_{k} = \bold{s}_{k} + \zeta_{k}$, we transform $\bold{x}_{k}' = \
 
 where $\omega_{k}' = g_{k}\omega_{k} + \sigma_{k}^{2}$. This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson. The quality of this approximation will degrade with decreasing signal level, since the Poisson distribution does not retain its Gaussian shape at low expected counts. Nevertheless, the quality of the approximation can be predicted by the Komogonov distance between the convolution distribution (4).
 
-\section{The Information Bottleneck for Localization}
+\subsection{The Information Bottleneck for Localization}
+
+\begin{figure}
+\includegraphics[scale=4.0]{Denoise.png}
+\end{figure}
 
 Inversion of the degradation function $F$ is generally intractable, particularly when fluorescent molecules are dense within the field of view. This difficulty arises because the parameter $\bold{\theta}$ is typically of large and unknown dimension, rendering maximum likelihood estimation or Markov Chain Monte Carlo sampling computationally difficult. Previous solutions to this problem leverage convolutional neural networks (CNNs) to infer coordinates directly by learning a deterministic image transformation $F^{-1}$, which we refer to as a "localization map" (Nehme 2021). Such methods faithfully capture the information content in degraded images; however, such methods apply arbitrary thresholding to the CNN localization map, potentially creating erroneous localizations, and do not permit sampling. 
 
@@ -156,11 +162,11 @@ We seek a generative approach, which casts localization as an image restoration 
 \mathcal{I}_{ij}(\theta) = \mathbb{E}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) = \sum_{k}\frac{1}{\omega_{k}'}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}}
 \end{equation}
 
-where the log-likelihood is $\ell (\bold{x}_{t}|\theta) $. We presume a strong model $\Theta$ and thus our generative model $P(\bold{y}|\bold{z})\approx P(\bold{y}|\bold{x})$. The CRLB can be used to determine the performance of our model, and thus the quality of the full model $(\Theta,\Phi)$. 
+where the log-likelihood is $\ell (\bold{x}_{t}|\theta)$.
 
-\section{Denoising Diffusion Probabilistic Model}
+\subsection{Denoising Diffusion Probabilistic Model}
 
-Denoising diffusion probabilistic models (DDPM) have emerged as powerful generative models, exceeding GANs and VAEs in a variety of generative modeling tasks. Nevertheless, learning diffusion models directly in data space can limit expressivity of the model (Vahdat 2021). Following this line of work, we build on previous approaches by using a CNN to first compute a localization map, or latent representation $\bold{z} = \mathrm{CNN}_{\Theta}(\bold{x})$. A denoising diffusion probabilistic model (DDPM) is then used to model the distribution $P_{\Phi}(\bold{y}|\bold{z})$. 
+Denoising diffusion probabilistic models (DDPM) have emerged as powerful generative models, exceeding GANs and VAEs in a variety of generative modeling tasks. Nevertheless, learning diffusion models directly in data space can limit expressivity of the model (Vahdat 2021). Therefore, we build on previous approaches by using a CNN to compute a latent representation $\bold{z}_{i}$. A denoising diffusion probabilistic model (DDPM) is then used to model the distribution $P_{\Phi}(\bold{y}|\bold{z})$. 
 
 Let $\bold{y}_{0} = \sum_{i=1}^{n} \bold{\omega}_{n}(\sigma)$ be a density estimate of the molecular distribution. The \emph{forward} process is the joint distribution $p_{\theta}(\bold{y}_{0:T})$, which is Markovian. 
 
