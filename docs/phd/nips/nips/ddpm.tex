@@ -91,7 +91,7 @@ Single-molecule localization microscopy (SMLM) techniques are a mainstay of fluo
 \section{Introduction}
 Single molecule localization microscopy (SMLM) relies on the temporal resolution of fluorophores whose spatially overlapping point spread functions would otherwise render them unresolvable at the detector. Common strategies for the temporal separation of molecules involve transient intramolecular rearrangements to switch from dark to fluorescent states or the exploitation of non-emitting molecular radicals. Estimation of molecular coordinates in SMLM is acheived by modeling the optical impulse response of the imaging system. However, dense localization suffers from the curse of dimensionality - the parameter space volume grows exponentially with the number of molecules, which is often unknown a priori. Exploration of this high dimensional parameter space in dense SMLM is often intractable. 
 
-Previous approaches to this issue has been to predict super-resolution images from a sparse set of localizations with conditional generative adversarial networks (Ouyang 2018) or direct prediction of coordinates using deep neural networks (Nehme 2020; Speiser 2021). However, diffusion models are an appealing alternative because they infer a distribution of deconvolved images that are compatible with an observation. Although conditional VAEs and conditional GANs can provide a distribution of deconvolved images, both are known to suffer from mode collapse and produce insufficient diversity in their outputs. Diffusion models are a recently developed alternative to VAEs and GANs that excel at producing diverse samples and have been successfully applied to solve inverse problems. Here, we present a novel diffusion model for deconvolution in single molecule localization microscopy. The first stage of our algorithm performs interpolation by computing second order coherence of pixel pairs. Subsequent stages cast localization as a conditional image refinement task, realized by a U-Net model trained on denoising at various noise levels. 
+Previous approaches to this issue has been to predict super-resolution images from a sparse set of localizations with conditional generative adversarial networks (Ouyang 2018) or direct prediction of coordinates using deep neural networks (Nehme 2020; Speiser 2021). However, diffusion models are an appealing alternative because they infer a distribution of deconvolved images that are compatible with an observation. Although conditional VAEs and conditional GANs can provide a distribution of deconvolved images, both are known to suffer from mode collapse and produce insufficient diversity in their outputs. Diffusion models are a recently developed alternative to VAEs and GANs that excel at producing diverse samples and have been successfully applied to solve inverse problems. Here, we present a novel diffusion model for deconvolution in single molecule localization microscopy.
 
 Denoising diffusion probabilistic models (DDPM) have emerged as powerful generative models, exceeding GANs and VAEs in a variety of generative modeling tasks. Nevertheless, learning diffusion models directly in data space can limit expressivity of the model (Vahdat 2021). Therefore, we build on previous approaches by using a CNN to compute a latent representation $\bold{z}_{i}$. A denoising diffusion probabilistic model (DDPM) is then used to model the distribution $P_{\Phi}(\bold{y}|\bold{z})$. 
 
@@ -149,7 +149,7 @@ Since $\bold{x}_{k} = \bold{s}_{k} + \zeta_{k}$, we transform $\bold{x}_{k}' = \
 
 where $\omega_{k}' = g_{k}\omega_{k} + \sigma_{k}^{2}$. This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson. The quality of this approximation will degrade with decreasing signal level, since the Poisson distribution does not retain its Gaussian shape at low expected counts. Nevertheless, the quality of the approximation can be predicted by the Komogonov distance between the convolution distribution (4).
 
-\subsection{The Information Bottleneck for Localization}
+\subsection{Fisher Information Metric for Localization}
 
 \begin{figure}
 \includegraphics[scale=4.0]{Denoise.png}
@@ -195,9 +195,46 @@ where $\gamma_{t}=\prod_{i=1}^{t}\alpha_{t}$. Note that the model $\theta$ is no
 \mu_{\theta}(\bold{x}_{t},\bold{y},\gamma_{t}) = \frac{1}{\sqrt{\alpha_{t}}}\left(\bold{y}_t-\frac{1-\alpha_{t}}{\sqrt{1-\gamma_{t}}}f_{\theta}(\bold{x}_{t},\gamma_{t})\right)
 \end{equation}
 
+Recall that the denoising model $f_{\theta}$ is trained to estimate $\epsilon$, given any noisy image $y_e$ including $y_t$. Thus, given $y_t$, we approximate $y_0$ by rearranging the terms in (5) as
+\[
+\hat{y}_0 = \frac{1}{\sqrt{\gamma_t}} \left( y_t - \sqrt{1 - \gamma_t} \, f_{\theta}(x, y_t, \gamma_t) \right). 
+\]
+Following the formulation of \cite{ref17}, we substitute our estimate $\hat{y}_0$ into the posterior distribution of $q(y_{t-1}|y_0, y_t)$ in (4) to parameterize the mean of $p_{\theta}(y_{t-1}|y_t, x)$ as
+\[
+\mu_{\theta}(x, y_t, \gamma_t) = \frac{1}{\sqrt{\alpha_t}} \left( y_t - (1 - \alpha_t) \sqrt{1 - \gamma_t} \, f_{\theta}(x, y_t, \gamma_t) \right),
+\]
+and we set the variance of $p_{\theta}(y_{t-1}|y_t, x)$ to $(1 - \alpha_t)$, a default given by the variance of the forward process \cite{ref17}. Following this parameterization, each iteration of iterative refinement under our model takes the form,
+\[
+y_{t-1} \leftarrow \frac{1}{\sqrt{\alpha_t}} \left( y_t - (1 - \alpha_t) \sqrt{1 - \gamma_t} \, f_{\theta}(x, y_t, \gamma_t) \right) + \sqrt{1 - \alpha_t} \epsilon_t,
+\]
+where $\epsilon_t \sim \mathcal{N}(0, I)$. This resembles one step of Langevin dynamics with $f_{\theta}$ providing an estimate of the gradient of the data log-density. We justify the choice of the training objective in (6) for the probabilistic model outlined in (9) from a variational lower bound perspective and a denoising score-matching perspective in Appendix B.
+
+
 \subsection{Optimization of the Denoising Model}
 
+To help reverse the diffusion process, we take advantage of additional side information in the form of a source image $x$ and optimize a neural denoising model $f_{\theta}$ that takes as input this source image $x$ and a noisy target image $y_e$,
+\[
+y_e = \sqrt{\gamma} y_0 + \sqrt{1 - \gamma} \epsilon, \quad \epsilon \sim \mathcal{N}(0, I),
+\]
+and aims to recover the noiseless target image $y_0$. This definition of a noisy target image $y_e$ is compatible with the marginal distribution of noisy images at different steps of the forward diffusion process.
+
+In addition to a source image $x$ and a noisy target image $y_e$, the denoising model $f_{\theta}(x, y_e, \gamma)$ takes as input the sufficient statistics for the variance of the noise $\gamma$, and is trained to predict the noise vector $\epsilon$. We make the denoising model aware of the level of noise through conditioning on a scalar $\gamma$, similar to \cite{ref1, ref2}. The proposed objective function for training $f_{\theta}$ is
+\[
+\mathbb{E}(x,y)\mathbb{E}_{\epsilon,\gamma} \left[ f_{\theta}\left(x, \sqrt{\gamma} y_0 + \sqrt{1 - \gamma} \epsilon \, \middle|\, y_e, \gamma\right) - \epsilon \right],
+\]
+where $\epsilon \sim \mathcal{N}(0, I)$, $(x, y)$ is sampled from the training dataset, $p \in \{1, 2\}$, and $\gamma \sim p(\gamma)$. The distribution of $\gamma$ has a big impact on the quality of the model and the generated outputs. We discuss our choice of $p(\gamma)$ in Section 2.4.
+
+The SR3 architecture is similar to the U-Net found in DDPM \cite{ref17}, with modifications adapted from \cite{ref51}; we replace the original DDPM residual blocks with residual blocks from BigGAN \cite{ref4}, and we re-scale skip connections by $\sqrt{\frac{1}{2}}$. We also increase the number of residual blocks, and the channel multipliers at different resolutions (see Appendix A for details). To condition the model on the input $x$, we up-sample the low-resolution image to the target resolution using bicubic interpolation. The result is concatenated with $y_t$ along the channel dimension. We experimented with more sophisticated methods of conditioning, such as using FiLM \cite{ref34}, but we found that the simple concatenation yielded similar generation quality.
+
+For our training noise schedule, we follow \cite{ref6}, and use a piecewise distribution for $\gamma$, $p(\gamma) = \frac{1}{T}\sum_{t=1}^{T} U(\gamma_{t-1}, \gamma_t)$. Specifically, during training, we first uniformly sample a time step $t \sim \{0, ..., T\}$ followed by sampling $\gamma \sim U(\gamma_{t-1}, \gamma_t)$. We set $T = 2000$ in all our experiments.
+
+Prior work of diffusion models \cite{ref17, ref51} require 1-2k diffusion steps during inference, making generation slow for large target resolution tasks. We adapt techniques from \cite{ref6} to enable more efficient inference. Our model conditions on $\gamma$ directly (vs $t$ as in \cite{ref17}), which allows us flexibility in choosing the number of diffusion steps, and the noise schedule during inference. This has been demonstrated to work well for speech synthesis \cite{ref6}, but has not been explored for images. For efficient inference, we set the maximum inference budget to 100 diffusion steps, and hyper-parameter search over the inference noise schedule. This search is inexpensive as we only need to train the model once \cite{ref6}. We use FID on held-out data to choose the best noise schedule, as we found PSNR did not correlate well with image quality.
+
+
+
 \section{Experiments}
+
+\section{Related Work}
 
 
 \begin{figure}
