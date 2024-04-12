@@ -127,7 +127,7 @@ where we have used the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}
 
 
 \begin{figure}
-\includegraphics[scale=0.5]{Generation.png}
+\includegraphics[scale=0.65]{Generation-Figure.png}
 \end{figure}
 
 The distribution of $\bold{x}$ is the convolution of the distributions of $\bold{s}$ and $\zeta$,
@@ -166,14 +166,13 @@ We use the Fisher information as an information theoretic criteria to assess the
 \section{Conditional Denoising Diffusion Model}
 
 
-\begin{figure}
-\includegraphics[scale=4.0]{Denoise.png}
-\end{figure}
-
-
 Given datasets $(\theta_{i}, \bold{x}_i,\bold{y}_i)_{i=1}^{N}$ which represent samples drawn from an unknown conditional distribution $p(\bold{y}|\bold{x})$. This is a one-to-many mapping in which many target images may be consistent with an input image. The conditional DDPM model generates a target image $y_0$ in $T$ refinement steps. Starting with a pure noise image $y_{T}\sim \mathcal{N}(0,I)$, the model iteratively refines the image through successive iterations according to learned conditional transition distributions $p(y_{t-1}|y_{t},x)$ such that $y_{0} \sim p(\bold{y}|\bold{x})$ 
 
 \subsection{Gaussian Diffusion}
+
+\begin{figure}
+\includegraphics[scale=4.0]{Denoise.png}
+\end{figure}
 
 Diffusion models (Sohl-Dickstein 2015; Ho 2020) are a class of generative models inspired by nonequilibrium statistical physics, which slowly destroy structure in a data distribution $p(\bold{y}_{0}|\bold{x})$ via a fixed Markov chain referred to as the \emph{forward process}. In essence, the forward process gradually adds Gaussian noise to the data according to a variance schedule $\beta_{0:T}$
 
