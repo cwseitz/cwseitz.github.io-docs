@@ -128,6 +128,7 @@ where we have used the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}
 
 \begin{figure}
 \includegraphics[scale=0.65]{Generation-Figure.png}
+\caption{Generative model of single molecule localization microscopy images}
 \end{figure}
 
 The distribution of $\bold{x}$ is the convolution of the distributions of $\bold{s}$ and $\zeta$,
@@ -172,6 +173,7 @@ Given datasets $(\theta_{i}, \bold{x}_i,\bold{y}_i)_{i=1}^{N}$ which represent s
 
 \begin{figure}
 \includegraphics[scale=4.0]{Denoise.png}
+\caption{Conditional diffusion model for sampling kernel density estimates}
 \end{figure}
 
 Diffusion models (Sohl-Dickstein 2015; Ho 2020) are a class of generative models inspired by nonequilibrium statistical physics, which slowly destroy structure in a data distribution $p(\bold{y}_{0}|\bold{x})$ via a fixed Markov chain referred to as the \emph{forward process}. In essence, the forward process gradually adds Gaussian noise to the data according to a variance schedule $\beta_{0:T}$
@@ -222,6 +224,7 @@ where $\epsilon \sim \mathcal{N}(0, I)$, $(\bold{z},\bold{y}_{0})$ is sampled fr
 
 \begin{figure}
 \includegraphics[scale=0.6]{Samples.png}
+\caption{Kernel density estimates for various signal to noise ratios (SNR)}
 \end{figure}
 
 We set $T = 100$ for all experiments and treat forward process variances $\beta_{t}$ as hyperparameters, with a linear schedule from $\beta_{0}=10^{-4}$ to $\beta_{T}=10^{-2}$.
@@ -246,6 +249,7 @@ Prior work of diffusion models \cite{ref17, ref51} require 1-2k diffusion steps 
 
 \begin{figure}
 \includegraphics[scale=1.0]{Errors.png}
+\caption{Localization precision and information retrieval}
 \end{figure}
 
 
