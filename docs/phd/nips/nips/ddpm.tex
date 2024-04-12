@@ -155,7 +155,7 @@ where $\omega_{k}' = \omega_{k} + \sigma_{k}^{2}$. This result can be seen from 
 \approx \sum_{k}  n_{k}\log n_{k} + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
 \end{equation}
 
-\subsection{Fisher Information Metric for Quantitative Error Analysis}
+\subsection{Fisher Information Metric}
 
 We use the Fisher information as an information theoretic criteria to assess the quality of the proposed algorithms, with respect to the root mean squared error (RMSE) of our predictions of $\theta$. The generative model $\ell(\bold{x}|\theta)$ is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below i.e., $\mathrm{var}(\hat{\theta}) \geq I^{-1}(\theta)$. It is shown in the appendix, that the Fisher information is straightforward to compute under the Poisson likelihood (7)
 
@@ -204,7 +204,7 @@ where $f_{\theta}$ is a neural network. Only at $t=0$ is this mean directly a fu
 
 \subsection{Optimization of the Denoising Model}
 
-Here, $\beta_{t}$ are treated as hyperparameters, with a linear schedule from $\beta_{0}=10^{-4}$ to $\beta_{T}=10^{-2}$ in $T$ timesteps. To reverse the diffusion process, we follow (Saharia 2021), using a source encoding $\bold{z} = \phi(\bold{x})$ and optimize a neural denoising model $f_{\theta}$ that takes as input $\bold{z}$ and a noisy target image $\bold{y}_t \sim q(\bold{y}_t|\bold{y}_0)$,
+To reverse the diffusion process, we utilize an encoding $\bold{z} = \phi(\bold{x})$ and optimize a neural denoising model $f_{\theta}$ that takes as input $\bold{z}$ and a noisy target image $\bold{y}_t \sim q(\bold{y}_t|\bold{y}_0)$,
 
 \begin{equation}
 \bold{y}_t = \sqrt{\gamma} \bold{y}_0 + \sqrt{1 - \gamma} \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)
@@ -221,18 +221,29 @@ where $\epsilon \sim \mathcal{N}(0, I)$, $(\bold{z},\bold{y}_{0})$ is sampled fr
 
 \section{Experiments}
 
-The SR3 architecture is similar to the U-Net found in DDPM, with modifications adapted from \cite{ref51}; we replace the original DDPM residual blocks with residual blocks from BigGAN, and we re-scale skip connections by $\sqrt{\frac{1}{2}}$. We also increase the number of residual blocks, and the channel multipliers at different resolutions (see Appendix A for details). To condition the model on the input $x$, we up-sample the low-resolution image to the target resolution using bicubic interpolation. The result is concatenated with $y_t$ along the channel dimension. We experimented with more sophisticated methods of conditioning, such as using, but we found that the simple concatenation yielded similar generation quality.
+\begin{figure}
+\includegraphics[scale=0.6]{Samples.png}
+\end{figure}
 
+We set $T = 100$ for all experiments and treat forward process variances $\beta_{t}$ as hyperparameters, with a linear schedule from $\beta_{0}=10^{-4}$ to $\beta_{T}=10^{-2}$.
+These constants were chosen to be small relative to data scaled to $[-1, 1]$, ensuring that reverse and forward processes have approximately the same functional form while keeping the signal-to-noise ratio at $x_T$ as small as possible ($L_T = D_{KL}(q(x_T | x_0) \| \mathcal{N}(0, I)) \approx 10^{-5}$ bits per dimension in our experiments).
 
-Prior work of diffusion models \cite{ref17, ref51} require 1-2k diffusion steps during inference, making generation slow for large target resolution tasks. We adapt techniques from \cite{ref6} to enable more efficient inference. Our model conditions on $\gamma$ directly (vs $t$ as in \cite{ref17}), which allows us flexibility in choosing the number of diffusion steps, and the noise schedule during inference. This has been demonstrated to work well for speech synthesis \cite{ref6}, but has not been explored for images. For efficient inference, we set the maximum inference budget to 100 diffusion steps, and hyper-parameter search over the inference noise schedule. This search is inexpensive as we only need to train the model once \cite{ref6}. We use FID on held-out data to choose the best noise schedule, as we found PSNR did not correlate well with image quality.
+To represent the reverse process, we used the DDPM architecture based on a U-Net backbone (Ho 2020). Parameters are shared across time, which is specified to the network using the Transformer sinusoidal position embedding \cite{cite60}. We use self-attention at the $16 \times 16$ feature map resolution \cite{cite63,cite60}. Details are in Appendix A.
+
+and the channel multipliers at different resolutions (see Appendix A for details). To condition the model on the input $x$, we up-sample the low-resolution image to the target resolution using bicubic interpolation. The result is concatenated with $y_t$ along the channel dimension. We experimented with more sophisticated methods of conditioning, such as using, but we found that the simple concatenation yielded similar generation quality.
+
+\subsection{Localization Error Analysis}
 
 
 \section{Related Work}
 
+\subsection{Diffusion Models}
 
-\begin{figure}
-\includegraphics[scale=0.6]{Samples.png}
-\end{figure}
+Prior work of diffusion models \cite{ref17, ref51} require 1-2k diffusion steps during inference, making generation slow for large target resolution tasks. We adapt techniques from \cite{ref6} to enable more efficient inference. Our model conditions on $\gamma$ directly (vs $t$ as in \cite{ref17}), which allows us flexibility in choosing the number of diffusion steps, and the noise schedule during inference. This has been demonstrated to work well for speech synthesis \cite{ref6}, but has not been explored for images. For efficient inference, we set the maximum inference budget to 100 diffusion steps, and hyper-parameter search over the inference noise schedule. This search is inexpensive as we only need to train the model once \cite{ref6}. We use FID on held-out data to choose the best noise schedule, as we found PSNR did not correlate well with image quality.
+
+\subsection{Localization Microscopy with Deep Networks}
+
+
 
 \begin{figure}
 \includegraphics[scale=1.0]{Errors.png}
