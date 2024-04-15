@@ -86,22 +86,20 @@
 
 
 \begin{abstract}
-Single-molecule localization microscopy (SMLM) techniques are a mainstay of fluorescence microscopy and can be used to produce a pointillist representation of living cells at diffraction-unlimited precision. Classical SMLM approaches leverage the deactivation of fluorescent tags, followed by spontaneous or photoinduced reactivation, which can be used to estimate of the density of a tagged biomolecule in cellular compartments. Standard SMLM localization algorithms based on maximum likelihood estimators or least squares optimization require tight control of activation and reactivation to maintain sparse emitters, presenting a tradeoff between imaging speed and labeling density. Deep models have generalized SMLM to densely labeled structures, yet uncertainty quantification is still lacking. Recently, denoising diffusion probabilstic models (DDPMs) have been adapted conditional super resolution tasks, demonstrating promising results in detail reconstruction, while directly providing uncertainties in model predictions. Here, we adapt DDPM to the task of single molecule localization, and demonstrate that combining traditional CNNs with a DDPM removes localization bias and improves localization precision over a wide range of experimental conditions.
+Single-molecule localization microscopy (SMLM) techniques are a mainstay of fluorescence microscopy and can be used to produce a pointillist representation of living cells at diffraction-unlimited precision. Classical SMLM approaches leverage the deactivation of fluorescent tags, followed by spontaneous or photoinduced reactivation, which can be used to estimate of the density of a tagged biomolecule in cellular compartments. Standard SMLM localization algorithms based on maximum likelihood estimators or least squares optimization require tight control of activation and reactivation to maintain sparse emitters, presenting a tradeoff between imaging speed and labeling density. Recently, deep models have generalized SMLM to densely labeled structures by predicting high-resolution kernel density estimates (KDEs) from low resolution images with convolutional networks. However, estimated KDEs may contain irregularities due to finite sample sizes and limited model capacity. Denoising diffusion probabilstic models (DDPMs) are well suited conditional super resolution tasks, demonstrating promising results in detail reconstruction, while directly providing uncertainties in model predictions. Here, we adapt DDPM to the task of single molecule localization, and demonstrate that combining traditional CNNs with a DDPM permits uncertainty quantification of KDEs and improves localization precision over a wide range of experimental conditions.
 \end{abstract}
 
 \section{Introduction}
 
-Single molecule localization microscopy (SMLM) relies on the temporal resolution of fluorophores whose spatially overlapping point spread functions would otherwise render them unresolvable at the detector. Common strategies for the temporal separation of molecules involve molecular photoswitching from dark to fluorescent Estimation of molecular coordinates is then carried out via modeling the optical impulse response of the imaging system and fitting model functions to the data. However, such models are only well-suited to isolate molecules, reducing the number of molecules in the field of view and limiting temporal resolution in super resolution microscopy. This issue has incited a series of efforts to increase the density of fluorescent molecules imaged in a single frame while developing appropriate models for dense localization.
+Single molecule localization microscopy (SMLM) relies on the temporal resolution of fluorophores whose spatially overlapping point spread functions would otherwise render them unresolvable at the detector. Common strategies for the temporal separation of molecules involve molecular photoswitching from dark to fluorescent Estimation of molecular coordinates is then carried out via modeling the optical impulse response of the imaging system and fitting model functions to the data. However, such models are only well-suited to isolated molecules, reducing the number of molecules in the field of view and limiting temporal resolution in super resolution microscopy. This issue has incited a series of efforts to increase the density of fluorescent molecules imaged in a single frame while developing appropriate models for dense localization.
 
-A primary bottleneck to dense localization arises because the molecular coordinates $\theta$ is typically of large and unknown dimension, rendering maximum likelihood estimation or Markov Chain Monte Carlo sampling computationally difficult. Previous approaches to this issue has been to predict super-resolution images from a sparse set of localizations with conditional generative adversarial networks (Ouyang 2018) or direct prediction of molecular coordinates using neural networks (Nehme 2020; Speiser 2021). However, diffusion models are an appealing alternative because they model a distribution of high-resolution images that are compatible with a measurement. Although conditional VAEs and conditional GANs can provide a distribution of images with enhanced resolution, both are known to suffer from mode collapse and produce insufficient diversity in their outputs. Diffusion models are a recently developed alternative to VAEs and GANs that excel at producing diverse samples and have been successfully applied to solve inverse problems. 
+Previous approaches to this issue has been to predict super-resolution images from a sparse set of localizations with conditional generative adversarial networks (Ouyang 2018) or direct prediction of molecular coordinates using neural networks (Nehme 2020; Speiser 2021). However, diffusion models are an appealing alternative because they model a distribution of high-resolution images that are compatible with a measurement. Although conditional VAEs and conditional GANs can provide a distribution of images with enhanced resolution, both are known to suffer from mode collapse and produce insufficient diversity in their outputs. Diffusion models are a recently developed alternative to VAEs and GANs that excel at producing diverse samples and have been successfully applied to solve inverse problems. 
 
-Here we focus on a class of models which directly predict molecular coordinates using neural networks. In this approach, one estimates $\theta$ by predicting kernel density estimates (KDEs) $\bold{y}$, which are latent in the raw data $\bold{x}$, using a convolutional neural network (CNN), followed by thresholding (Nehme 2021). Such methods are currently the state of the art for dense localization microscopy, but may exhibit localization bias, and produce KDEs with aberrant structure due to lack of regularization. Building on this work, we apply a denoising diffusion probabilistic model (DDPM) which directly models a distribution of KDEs $\bold{y}$ which are consistent with initial noisy predictions. 
+Here we focus on the class of models which perform single molecule localization using neural networks. In this approach, one estimates molecular coordinates by predicting kernel density estimates (KDEs) $\bold{y}$, which are latent in the raw data $\bold{x}$, using a convolutional neural network DeepSTORM, followed by thresholding (Nehme 2021). Such methods are currently the state of the art for dense localization microscopy, but may exhibit localization bias, and produce KDEs with aberrant structure due to lack of regularization. Building on this work, we propose combining a modified DeepSTORM architecture with a denoising diffusion probabilistic model (DDPM) which models a distribution of KDEs $\bold{y}$, providing a novel mechanism for uncertainty quantification. 
 
-\section{Denoising Diffusion Probabilistic Model for SMLM}
+\section{Background}
 
-We consider datasets $(\theta_{i}, \bold{x}_i,\bold{y}_i)_{i=1}^{N}$ of observed images $\bold{x}_i$ and kernel density estimate (KDE) images $\bold{y}_{i}$, given an underlying set of object coordinates $\theta_{i}$. Observations $\bold{x}_i$ are generated from $\theta_{i}=(r_{1},...,r_{N})$ under the image degradation model. We aim to develop a framework for sampling from $p(\bold{y}_{i}|\bold{x}_{i})$ and inference of $\theta_{i}$, while fulfilling a resolution criterion under the condition $|r_{i}-r_{j}| \geq \epsilon ; \forall (i,j)$. 
-
-\subsection{Degradation Model}
+\subsection{Image Degradation Model}
 
 The central objective of single molecule localization microscopy is to infer a set of molecular coordinates $\theta$ from noisy, low resolution images $\bold{x}$. We therefore begin by defining the likelihood on measured low-resolution images $p(\bold{x}|\theta)$. In fluorescence microscopy, each pixel is a Poisson random variable (Smith 2010; Nehme 2020; Chao 2016), with expected value
 
@@ -160,10 +158,19 @@ We use the Fisher information as an information theoretic criteria to assess the
 \mathcal{I}_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) = \sum_{k}\frac{1}{\omega_{k}'}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}}
 \end{equation}
 
+\section{Denoising Diffusion Probabilistic Model for SMLM}
+
+We consider datasets $(\bold{x}_i,\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$ of observed images $\bold{x}_i$ true kernel density estimate (KDE) images $\bold{y}_{i}$, and KDE estimates $\hat{\bold{y}}_{i}=\phi(\bold{x}_{i})$. Observations $\bold{x}_i$ are generated under the image degradation model. We aim to develop a framework for sampling from $p(\hat{\bold{y}}|\bold{x},\bold{y})$.
+
 \section{Conditional Denoising Diffusion Model}
 
+Point estimates $\hat{\bold{y}}_{i}$ produced by the DeepSTORM architecture lack uncertainty quantification.  To address this, we propose a DDPM to model the conditional distribution $p(\hat{\bold{y}}|\bold{x},\bold{y})$. Consider the factorization $p(\hat{\bold{y}}|\bold{x},\bold{y})p(\bold{x}|\bold{y})p(\bold{y})=p(\bold{x}|\bold{y},\hat{\bold{y}})p(\bold{y}|\hat{\bold{y}})p(\hat{\bold{y}})$. Given that $\bold{x}$ is conditionally independent of $\hat{\bold{y}}$, we find
 
-Given datasets $(\theta_{i}, \bold{x}_i,\bold{y}_i)_{i=1}^{N}$ which represent samples drawn from an unknown conditional distribution $p(\bold{y}|\bold{x})$. This is a one-to-many mapping in which many target images may be consistent with an input image. The conditional DDPM model generates a target image $y_0$ in $T$ refinement steps. Starting with a pure noise image $y_{T}\sim \mathcal{N}(0,I)$, the model iteratively refines the image through successive iterations according to learned conditional transition distributions $p(y_{t-1}|y_{t},x)$ such that $y_{0} \sim p(\bold{y}|\bold{x})$ 
+\begin{equation*}
+p_{\Psi}(\hat{\bold{y}}|\bold{x},\bold{y})=p(\bold{y}|\hat{\bold{y}})
+\end{equation*}
+
+where the DDPM $\Psi$ is trained on pairs $(\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$. The conditional DDPM generates a target image $y_0$ in $T$ refinement steps. Starting with a pure noise image $y_{T}\sim \mathcal{N}(0,I)$, the model iteratively refines the image through successive iterations according to learned conditional transition distributions $p(y_{t-1}|y_{t},x)$ such that $y_{0} \sim p(\bold{y}|\hat{\bold{y}})$ 
 
 \subsection{Gaussian Diffusion}
 
@@ -222,7 +229,7 @@ A first pass at localization treats localization as a binary classification prob
 Localization heatmaps thus form a natural encoding for SMLM images, which can be input to our conditional diffusion model. Therefore, to encode raw data $\bold{x}$ into a more tractable representation, we train the DeepSTORM architecture (Nehme 2020). Raw coordinates $\theta$ are binned into an upsampled image $\bold{z}$. 
 
 \begin{equation}
-\mathcal{L}(\bold{z},\hat{\bold{z}}) = \lvert\lvert\bold{z}* K - \hat{\bold{z}}* K \lvert\lvert^2 + \mathrm{DICE}
+\mathcal{L}(\bold{z},\hat{\bold{z}}) = \lvert\lvert\bold{z}* K - \hat{\bold{z}}* K \lvert\lvert^2
 \end{equation} 
 
 
@@ -254,7 +261,7 @@ Prior work of diffusion models \cite{ref17, ref51} require 1-2k diffusion steps 
 
 
 \begin{figure}
-\includegraphics[scale=1.0]{Errors.png}
+\includegraphics[scale=0.9]{Errors.png}
 \caption{Localization precision relative to CRLB for an isolated emitter and information retrieval}
 \end{figure}
 
