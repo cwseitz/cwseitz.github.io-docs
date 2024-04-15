@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.20)  15 APR 2024 18:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.20)  15 APR 2024 19:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -647,45 +647,51 @@ Package natbib Warning: Citation `cite60' on page 5 undefined on input line 239
 .
 
 
+Package natbib Warning: Citation `ref17' on page 5 undefined on input line 250.
+
+
+
+Package natbib Warning: Citation `ref51' on page 5 undefined on input line 250.
+
+
+
+Package natbib Warning: Citation `ref6' on page 5 undefined on input line 250.
+
+
+Package natbib Warning: Citation `ref17' on page 5 undefined on input line 250.
+
+
+
+Package natbib Warning: Citation `ref6' on page 5 undefined on input line 250.
+
+
+Package natbib Warning: Citation `ref6' on page 5 undefined on input line 250.
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [5 <./Samples.png>]
 
-Package natbib Warning: Citation `ref17' on page 6 undefined on input line 250.
-
-
-
-Package natbib Warning: Citation `ref51' on page 6 undefined on input line 250.
-
-
-
-Package natbib Warning: Citation `ref6' on page 6 undefined on input line 250.
-
-
-Package natbib Warning: Citation `ref17' on page 6 undefined on input line 250.
-
-
-
-Package natbib Warning: Citation `ref6' on page 6 undefined on input line 250.
-
-
-Package natbib Warning: Citation `ref6' on page 6 undefined on input line 250.
-
-
 Package natbib Warning: There were undefined citations.
 
 [6] (./ddpm.aux)
-Package rerunfilecheck Info: File `ddpm.out' has not changed.
-(rerunfilecheck)             Checksum: 2A8DD17CF61B7237B73F199C376EAA06;2571.
+
+Package rerunfilecheck Warning: File `ddpm.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `ddpm.out':
+(rerunfilecheck)             Before: 2A8DD17CF61B7237B73F199C376EAA06;2571
+(rerunfilecheck)             After:  D279440DD66F7E8B986A3BFABE86D9DC;2596.
  ) 
 Here is how much of TeX's memory you used:
- 13680 strings out of 476025
- 215874 string characters out of 5790016
- 1869388 words of memory out of 5000000
+ 13683 strings out of 476025
+ 215895 string characters out of 5790016
+ 1868388 words of memory out of 5000000
  33699 multiletter control sequences out of 15000+600000
- 547428 words of font info for 174 fonts, out of 8000000 for 9000
+ 547558 words of font info for 176 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,8n,76p,1481b,547s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,8n,76p,1481b,481s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx5.pfb><
 /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></u
@@ -705,7 +711,7 @@ e/2023/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/
 xmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2023/texmf-dist/f
 onts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1
 /urw/times/utmri8a.pfb>
-Output written on ddpm.pdf (6 pages, 372933 bytes).
+Output written on ddpm.pdf (6 pages, 372555 bytes).
 PDF statistics:
  222 PDF objects out of 1000 (max. 8388607)
  168 compressed objects within 2 object streams
