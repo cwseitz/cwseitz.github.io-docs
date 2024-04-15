@@ -163,7 +163,7 @@ Point estimates $\hat{\bold{y}}_{i}$ produced by the DeepSTORM architecture lack
 p_{\Psi}(\hat{\bold{y}}|\bold{x},\bold{y})=p(\bold{y}|\hat{\bold{y}})
 \end{equation*}
 
-where the DDPM $\Psi$ is trained on pairs $(\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$. The conditional DDPM generates a target image $y_0$ in $T$ refinement steps. Starting with a pure noise image $y_{T}\sim \mathcal{N}(0,I)$, the model iteratively refines the image through successive iterations according to learned conditional transition distributions $p(y_{t-1}|y_{t},x)$ such that $y_{0} \sim p(\bold{y}|\hat{\bold{y}})$ 
+where the DDPM $\Psi$ is trained on pairs $(\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$. The conditional DDPM generates a target image $\bold{y}_0$ in $T$ refinement steps. Starting with a pure noise image $\bold{y}_{T}\sim \mathcal{N}(0,\bold{I})$, the model iteratively refines the image through successive iterations according to learned conditional transition distributions $p(\bold{y}_{t-1}|\bold{y}_{t},\bold{})$ such that $\bold{y}_{0} \sim p(\bold{y}|\hat{\bold{y}})$ 
 
 \subsection{Gaussian Diffusion}
 
@@ -185,7 +185,7 @@ q(\bold{y}_t|\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 
 \end{equation}
 
 
-The usual procedure is then to learn a parametric representation of the \emph{reverse process}, and therefore generate samples from  $p(\bold{y}_{0})$, starting from noise. Here, we are concerned with conditional diffusion models, which  instead sample from a conditional distribution $p(\bold{y}_{0}|\bold{x})$. Formally, $p_{\theta}(\bold{y}_{0}|\bold{x}_{0}) = \int p_{\theta}(\bold{y}_{0:T}|\bold{x}_{0})d\bold{x}_{1:T}$ where $y_{t}$ is a latent representation with the same dimensionality of the data.  $p_{\theta}(\bold{y}_{0:T}|\bold{x})$ is a Markov process, starting from a noise sample $p_{\theta}(y_{T}) = \mathcal{N}(0,I)$. 
+The usual procedure is then to learn a parametric representation of the \emph{reverse process}, and therefore generate samples from  $p(\bold{y}_{0})$, starting from noise. Here, we are concerned with conditional diffusion models, which sample from a distribution $p(\bold{y}_{0}|\bold{\hat{y}})$. Formally, $p_{\theta}(\bold{y}_{0}|\bold{\hat{y}}_{0}) = \int p_{\theta}(\bold{y}_{0:T}|\bold{x}_{0})d\bold{\hat{y}}_{1:T}$ where $\bold{y}_{t}$ is a latent representation with the same dimensionality of the data.  $p_{\theta}(\bold{y}_{0:T}|\bold{\hat{y}})$ is a Markov process, starting from a noise sample $p_{\theta}(\bold{y}_{T}) = \mathcal{N}(0,\bold{I})$. 
 
 \begin{equation}
 p_{\theta}(\bold{y}_{0:T}) = p_{\theta}(\bold{y}_{T})\prod_{t=1}^{T} p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) \;\;\; p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) = \mathcal{N}\left(\mu_{\theta}(\bold{y}_{t}),\beta_{t}I\right)
@@ -194,26 +194,26 @@ p_{\theta}(\bold{y}_{0:T}) = p_{\theta}(\bold{y}_{T})\prod_{t=1}^{T} p_{\theta}(
 where we reuse the variance schedule of the forward process (Ho 2020). We seek to learn a denoising model $\mu_{\theta}$ which computes the mean of the Gaussian transition density at each time step $t$. However, learning diffusion models directly in data space can limit expressivity of the model (Vahdat 2021). Since we are primarily interested in learning a restoration $\bold{y}$, we choose to define an encoder $\phi$ such that $\bold{z} = \phi(\bold{x}_{0})$. The reverse process then becomes $p_{\theta}(\bold{y}_{0}|\bold{z}=\phi(\bold{x}_{0})) = \int p_{\theta}(\bold{y}_{0:T}|\bold{z})d\bold{x}_{1:T}$. For all $t > 0$, the mean of the transition density is computed as
 
 \begin{equation}
-\mu_{\theta}(\bold{y}_t, \bold{x}, \gamma_t) = \frac{1}{\sqrt{\alpha_t}} \left(\bold{y}_t - \frac{(1 - \alpha_t)}{\sqrt{1 - \gamma_t}} \, f_{\theta}(\bold{y}, \bold{x}, \gamma_t) \right)
+\mu_{\theta}(\bold{y}_t, \bold{\hat{y}}, \gamma_t) = \frac{1}{\sqrt{\alpha_t}} \left(\bold{y}_t - \frac{(1 - \alpha_t)}{\sqrt{1 - \gamma_t}} \, f_{\theta}(\bold{y}, \bold{\hat{y}}, \gamma_t) \right)
 \end{equation}
 
 where $f_{\theta}$ is a neural network. Only at $t=0$ is this mean directly a function of $\bold{x}$. 
 
 \subsection{Optimization of the Denoising Model}
 
-To reverse the diffusion process, we utilize an encoding $\bold{z} = \phi(\bold{x})$ and optimize a neural denoising model $f_{\theta}$ that takes as input $\bold{z}$ and a noisy target image $\bold{y}_t \sim q(\bold{y}_t|\bold{y}_0)$,
+To reverse the diffusion process, we optimize a neural denoising model $f_{\theta}$ that takes as input $\bold{\hat{y}}$ and a noisy target image $\bold{y}_t \sim q(\bold{y}_t|\bold{y}_0)$,
 
 \begin{equation}
-\bold{y}_t = \sqrt{\gamma} \bold{y}_0 + \sqrt{1 - \gamma} \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)
+\bold{y}_t = \sqrt{\gamma} \bold{y}_0 + \sqrt{1 - \gamma} \bold{\epsilon}, \quad \bold{\epsilon} \sim \mathcal{N}(0, \bold{I})
 \end{equation}
 
-This definition of a noisy target image $\bold{y}_t$ is drawn from the marginal distribution of noisy images at a time step $t$ of the forward diffusion process. In addition to a source image $\bold{y}_{0}$ and a noisy target image $\bold{y}_t$, the denoising model $f_{\theta}$ takes as input the sufficient statistics for the variance of the noise $\gamma$, and is trained to predict the noise vector $\epsilon$. We make the denoising model aware of the level of noise through conditioning on a scalar $\gamma$. The proposed objective function for training $f_{\theta}$ is
+This definition of a noisy target image $\bold{y}_t$ is drawn from the marginal distribution of noisy images at a time step $t$ of the forward diffusion process. In addition to a source image $\bold{y}_{0}$ and a noisy target image $\bold{y}_t$, the denoising model $f_{\theta}$ takes as input the sufficient statistics for the variance of the noise $\gamma$, and is trained to predict the noise vector $\bold{\epsilon}$. We make the denoising model aware of the level of noise through conditioning on a scalar $\gamma$. The proposed objective function for training $f_{\theta}$ is
 
 \begin{equation}
-\underset{(\bold{z},\bold{y}_{0})}{\mathbb{E}}\underset{(\epsilon,\gamma)}{\mathbb{E}} \left[ f_{\theta}\left(x, \sqrt{\gamma} \bold{y}_0 + \sqrt{1 - \gamma} \epsilon \, \middle|\, \bold{y}_{t}, \gamma\right) - \epsilon \right],
+\underset{(\bold{\hat{y}},\bold{y}_{0})}{\mathbb{E}}\underset{(\epsilon,\gamma)}{\mathbb{E}} \left[ f_{\theta}\left(x, \sqrt{\gamma} \bold{y}_0 + \sqrt{1 - \gamma} \epsilon \, \middle|\, \bold{y}_{t}, \gamma\right) - \epsilon \right],
 \end{equation} 
 
-where $\epsilon \sim \mathcal{N}(0, I)$, $(\bold{z},\bold{y}_{0})$ is sampled from the training dataset and $\gamma \sim p(\gamma)$. The distribution of $\gamma$ has a big impact on the quality of the model and the generated outputs. For our training noise schedule, we use a piecewise distribution for $\gamma$, $p(\gamma) = \frac{1}{T}\sum_{t=1}^{T} U(\gamma_{t-1}, \gamma_t)$ (Nanxin 2021). Specifically, during training, we first uniformly sample a time step $t \sim \{0, ..., T\}$ followed by sampling $\gamma \sim U(\gamma_{t-1}, \gamma_t)$. We set $T = 100$ in all our experiments.
+where $(\bold{\hat{y}},\bold{y}_{0})$ is sampled from the training dataset and $\gamma \sim p(\gamma)$. The distribution of $\gamma$ has a big impact on the quality of the model and the generated outputs. For our training noise schedule, we use a piecewise distribution for $\gamma$, $p(\gamma) = \frac{1}{T}\sum_{t=1}^{T} U(\gamma_{t-1}, \gamma_t)$ (Nanxin 2021). Specifically, during training, we first uniformly sample a time step $t \sim \{0, ..., T\}$ followed by sampling $\gamma \sim U(\gamma_{t-1}, \gamma_t)$. We set $T = 100$ in all our experiments.
 
 \subsection{Optimization of the DeepSTORM encoder}
 
