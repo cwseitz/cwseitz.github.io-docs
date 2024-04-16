@@ -35,7 +35,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 
-\title{Conditional Diffusion Probabilistic Models for Super Resolution Microscopy}
+\title{Conditional Diffusion Models for Uncertainty Estimation in Super Resolution Microscopy}
 
 
 % The \author macro works with any number of authors. There are two commands
@@ -91,11 +91,9 @@ Single-molecule localization microscopy (SMLM) techniques are a mainstay of fluo
 
 \section{Introduction}
 
-Single molecule localization microscopy (SMLM) relies on the temporal resolution of fluorophores whose spatially overlapping point spread functions would otherwise render them unresolvable at the detector. Common strategies for the temporal separation of molecules involve molecular photoswitching from dark to fluorescent Estimation of molecular coordinates is then carried out via modeling the optical impulse response of the imaging system and fitting model functions to the data. However, such models are only well-suited to isolated molecules, reducing the number of molecules in the field of view and limiting temporal resolution in super resolution microscopy. This issue has incited a series of efforts to increase the density of fluorescent molecules imaged in a single frame while developing appropriate models for dense localization.
+Single molecule localization microscopy (SMLM) relies on the temporal resolution of fluorophores whose spatially overlapping point spread functions would otherwise render them unresolvable at the detector. Common strategies for the temporal separation of molecules involve molecular photoswitching from dark to fluorescent states, permitting resolution of flurophores beyond the diffraction limit. Estimation of molecular coordinates is typically carried out by modeling the optical impulse response of the imaging system and fitting model functions to the data. However, such models are only well-suited to isolated molecules, reducing the number of molecules in the field of view and limiting temporal resolution in super resolution microscopy. This issue has incited a series of efforts to increase the density of fluorescent molecules imaged in a single frame while developing appropriate models for dense localization.
 
-Previous approaches to this issue has been to predict super-resolution images from a sparse set of localizations with conditional generative adversarial networks (Ouyang 2018) or direct prediction of molecular coordinates using neural networks (Nehme 2020; Speiser 2021). However, diffusion models are an appealing alternative because they model a distribution of high-resolution images that are compatible with a measurement. Although conditional VAEs and conditional GANs can provide a distribution of images with enhanced resolution, both are known to suffer from mode collapse and produce insufficient diversity in their outputs. Diffusion models are a recently developed alternative to VAEs and GANs that excel at producing diverse samples and have been successfully applied to solve inverse problems. 
-
-Here we focus on the class of models which perform single molecule localization using neural networks. In this approach, one estimates molecular coordinates by predicting kernel density estimates (KDEs) $\bold{y}$, which are latent in the raw data $\bold{x}$, using a convolutional neural network. Such methods currently perform at the state of the art for localization microscopy, but few models report uncertainty in predictions. Low resolution images provide information regarding fluorescent emitter locations, yet information transfer is limited by fundamental physics and noise in the detection process, resulting in ambiguity in true coordinates. Aleatoric uncertainties in SMLM are well understood, and arise due to the stochastic nature of fluorescent emission from molecules and sensor noise. Previous approaches to uncertainty quantification have thus far relied on additional CNNs to predict uncertainty in coordinates from the data directly (Speiser 2021). However, this approach fails to capture both aleatoric uncertainties in SMLM as well as epistemic uncertainties which can arise due to the model itself. Therefore, we propose an alternative approach, which combines a deep KDE estimator  with a denoising diffusion probabilistic model (DDPM). The DDPM models a distribution on KDEs, providing a novel mechanism for uncertainty quantification. 
+In previous approaches to this issue, predicted super-resolution images can be recovered from a sparse set of localizations with conditional generative adversarial networks (Ouyang 2018) or direct prediction of molecular coordinates using neural networks (Nehme 2020; Speiser 2021). Here, we focus on the latter class of models which perform single molecule localization using neural networks. In this approach, one estimates molecular coordinates by predicting kernel density estimates (KDEs) $\bold{y}$, which are latent in the raw data $\bold{x}$, using a convolutional neural network. Importantly, inferences in SMLM are often necessarily made on a single measurement, thus common measures of model performance are based on localization errors computed over ensembles of simulated images. However, this choice precludes computation of aleatoric uncertainty at test time under a fixed model, and may result in the application of models to out of distribution datasets.  Therefore, we propose a deep generative approach which is complimentary to existing methods, to model the posterior distribution on reconstructions. Our approach could be readily integrated with existing localization performance measures to address both model accuracy on training data and precision on datasets produced by experiments. 
 
 \section{Background}
 
@@ -148,6 +146,14 @@ where $\omega_{k}' = \omega_{k} + \sigma_{k}^{2}$. This result can be seen from 
 \begin{equation}
 \ell(\bold{x}|\theta) = -\log \prod_{k} \frac{e^{-\left(\mu_{k}'\right)}\left(\mu_{k}'\right)^{n_{k}}}{n_{k}!}
 \approx \sum_{k}  n_{k}\log n_{k} + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
+\end{equation}
+
+\subsection{Localization Error}
+
+We use the Fisher information as an information theoretic criteria to assess the quality of the proposed algorithms, with respect to the root mean squared error (RMSE) of our predictions of $\theta$. The generative model $\ell(\bold{x}|\theta)$ is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below i.e., $\mathrm{var}(\hat{\theta}) \geq I^{-1}(\theta)$. It is shown in the appendix, that the Fisher information is straightforward to compute under the Poisson likelihood (7)
+
+\begin{equation}
+\mathcal{I}_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) = \sum_{k}\frac{1}{\omega_{k}'}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}}
 \end{equation}
 
 \subsection{Kernel density estimation with deep networks}
@@ -254,15 +260,6 @@ and the channel multipliers at different resolutions (see Appendix A for details
 Prior work of diffusion models \cite{ref17, ref51} require 1-2k diffusion steps during inference, making generation slow for large target resolution tasks. We adapt techniques from \cite{ref6} to enable more efficient inference. Our model conditions on $\gamma$ directly (vs $t$ as in \cite{ref17}), which allows us flexibility in choosing the number of diffusion steps, and the noise schedule during inference. This has been demonstrated to work well for speech synthesis \cite{ref6}, but has not been explored for images. For efficient inference, we set the maximum inference budget to 100 diffusion steps, and hyper-parameter search over the inference noise schedule. This search is inexpensive as we only need to train the model once \cite{ref6}. We use FID on held-out data to choose the best noise schedule, as we found PSNR did not correlate well with image quality.
 
 \section{Conclusion}
-
-
-\subsection{Fisher Information Metric}
-
-We use the Fisher information as an information theoretic criteria to assess the quality of the proposed algorithms, with respect to the root mean squared error (RMSE) of our predictions of $\theta$. The generative model $\ell(\bold{x}|\theta)$ is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below i.e., $\mathrm{var}(\hat{\theta}) \geq I^{-1}(\theta)$. It is shown in the appendix, that the Fisher information is straightforward to compute under the Poisson likelihood (7)
-
-\begin{equation}
-\mathcal{I}_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) = \sum_{k}\frac{1}{\omega_{k}'}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}}
-\end{equation}
 
 \section*{References}
 
