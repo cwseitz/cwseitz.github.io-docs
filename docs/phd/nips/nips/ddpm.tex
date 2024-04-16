@@ -95,13 +95,13 @@ Single molecule localization microscopy (SMLM) relies on the temporal resolution
 
 Previous approaches to this issue has been to predict super-resolution images from a sparse set of localizations with conditional generative adversarial networks (Ouyang 2018) or direct prediction of molecular coordinates using neural networks (Nehme 2020; Speiser 2021). However, diffusion models are an appealing alternative because they model a distribution of high-resolution images that are compatible with a measurement. Although conditional VAEs and conditional GANs can provide a distribution of images with enhanced resolution, both are known to suffer from mode collapse and produce insufficient diversity in their outputs. Diffusion models are a recently developed alternative to VAEs and GANs that excel at producing diverse samples and have been successfully applied to solve inverse problems. 
 
-Here we focus on the class of models which perform single molecule localization using neural networks. In this approach, one estimates molecular coordinates by predicting kernel density estimates (KDEs) $\bold{y}$, which are latent in the raw data $\bold{x}$, using a convolutional neural network DeepSTORM, followed by thresholding (Nehme 2021). Such methods are currently the state of the art for dense localization microscopy, but may exhibit localization bias, and produce KDEs with aberrant structure due to lack of regularization. Building on this work, we propose combining a modified DeepSTORM architecture with a denoising diffusion probabilistic model (DDPM) which models a distribution of KDEs $\bold{y}$, providing a novel mechanism for uncertainty quantification. 
+Here we focus on the class of models which perform single molecule localization using neural networks. In this approach, one estimates molecular coordinates by predicting kernel density estimates (KDEs) $\bold{y}$, which are latent in the raw data $\bold{x}$, using a convolutional neural network. Such methods currently perform at the state of the art for localization microscopy, but few models report uncertainty in predictions. Low resolution images provide information regarding fluorescent emitter locations, yet information transfer is limited by fundamental physics and noise in the detection process, resulting in ambiguity in true coordinates. Aleatoric uncertainties in SMLM are well understood, and arise due to the stochastic nature of fluorescent emission from molecules and sensor noise. Previous approaches to uncertainty quantification have thus far relied on additional CNNs to predict uncertainty in coordinates from the data directly (Speiser 2021). However, this approach fails to capture both aleatoric uncertainties in SMLM as well as epistemic uncertainties which can arise due to the model itself. Therefore, we propose an alternative approach, which combines a deep KDE estimator  with a denoising diffusion probabilistic model (DDPM). The DDPM models a distribution on KDEs, providing a novel mechanism for uncertainty quantification. 
 
 \section{Background}
 
-\subsection{Image Degradation Model}
+\subsection{Image Formation and Origins of Uncertainty}
 
-The central objective of single molecule localization microscopy is to infer a set of molecular coordinates $\theta$ from noisy, low resolution images $\bold{x}$. We therefore begin by defining the likelihood on measured low-resolution images $p(\bold{x}|\theta)$. In fluorescence microscopy, each pixel is a Poisson random variable (Smith 2010; Nehme 2020; Chao 2016), with expected value
+The central objective of single molecule localization microscopy is to infer a set of molecular coordinates from measured low resolution images $\bold{x}$. We begin by defining the likelihood on measured low-resolution images $p(\bold{x}|\theta)$. In fluorescence microscopy, each pixel is treated as a Poisson random variable (Smith 2010; Nehme 2020; Chao 2016), with expected value
 
 \begin{equation}
 \omega = i_{0}\int O(u)du\int O(v)dv
@@ -150,6 +150,12 @@ where $\omega_{k}' = \omega_{k} + \sigma_{k}^{2}$. This result can be seen from 
 \approx \sum_{k}  n_{k}\log n_{k} + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
 \end{equation}
 
+\subsection{Kernel density estimation with deep networks}
+
+Direct optimization of the log-likelihood in (7) from observations $\bold{x}$ alone is challenging when fluorescent emitters are dense within the field of view and fluorescent signals significantly overlap. Convolutional neural networks (CNN) have recently been used in fluorescence microscopy to extract parameters describing fluorescent emitters such as color, emitter orientation, z coordinate, background signal. For localization tasks, CNNs typically employ upsampling layers to reconstruct Bernoulli probabilities of emitter occupancy or kernel density estimates with higher resolution than experimental measurements. Kernel density estimates are the most common data structure used in SMLM, and can be easlily generated from molecular coordinates using the optical impulse response (2). While ground-truth data from experiments to train the neural network are typically not available, synthetic training data can also be generated by (2) and simulation from the Poisson likelihood (7). 
+
+The DeepSTORM CNN, initially proposed in [1] for 3D localization, can be viewed as a deep kernel density estimator, reconstructing kernel density estimates $\bold{y}$ from low-resolution inputs $\bold{x}$. We utilize a simplified form of the original architecture for 2D localization, which we denote $\phi$ hereafter, which consists of three main modules: a multi-scale context aggregation module, an upsampling module, and a prediction module. For context aggregation, the architecture utilizes dilated convolutions to increase the receptive field of each layer. The upsampling module is then composed of two consecutive 2x resize-convolutions, computed by nearest-neighbor interpolation, to increase the lateral resolution by a factor of 4. For a common sCMOS camera, each pixel has a lateral size of approximately 108 nanometers, giving approximately 27 nanometer pixels in the KDE. The terminal prediction module contains three additional convolutional blocks for refinement of the upsampled image, followed by an element-wise HardTanh. 
+
 
 \section{Denoising Diffusion Probabilistic Model for SMLM}
 
@@ -163,7 +169,7 @@ Point estimates $\hat{\bold{y}}_{i}$ produced by the DeepSTORM architecture lack
 p_{\Psi}(\hat{\bold{y}}|\bold{x},\bold{y})=p(\bold{y}|\hat{\bold{y}})
 \end{equation*}
 
-where the DDPM $\Psi$ is trained on pairs $(\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$. The conditional DDPM generates a target image $\bold{y}_0$ in $T$ refinement steps. Starting with a pure noise image $\bold{y}_{T}\sim \mathcal{N}(0,\bold{I})$, the model iteratively refines the image through successive iterations according to learned conditional transition distributions $p(\bold{y}_{t-1}|\bold{y}_{t},\bold{})$ such that $\bold{y}_{0} \sim p(\bold{y}|\hat{\bold{y}})$ 
+Evidently, the DDPM $\Psi$ can be trained on pairs $(\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$. The conditional DDPM generates a target KDE $\bold{y}_0$ in $T$ refinement steps. Starting with a pure noise image $\bold{y}_{T}\sim \mathcal{N}(0,\bold{I})$, the model iteratively refines the KDE through successive iterations according to learned conditional transition distributions $p(\bold{y}_{t-1}|\bold{y}_{t},\bold{})$ such that $\bold{y}_{0} \sim p(\bold{y}|\hat{\bold{y}})$ 
 
 \subsection{Gaussian Diffusion}
 
@@ -172,7 +178,7 @@ where the DDPM $\Psi$ is trained on pairs $(\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}
 \caption{Conditional diffusion model for sampling kernel density estimates}
 \end{figure}
 
-Diffusion models (Sohl-Dickstein 2015; Ho 2020) are a class of generative models inspired by nonequilibrium statistical physics, which slowly destroy structure in a data distribution $p(\bold{y}_{0}|\bold{x})$ via a fixed Markov chain referred to as the \emph{forward process}. In essence, the forward process gradually adds Gaussian noise to the data according to a variance schedule $\beta_{0:T}$
+Diffusion models (Sohl-Dickstein 2015; Ho 2020) are a class of generative models inspired by nonequilibrium statistical physics, which slowly destroy structure in a data distribution $p(\bold{y}_{0}|\bold{x})$ via a fixed Markov chain referred to as the \emph{forward process}. In the present context, the forward process gradually adds Gaussian noise to the KDE $\bold{y}$ according to a variance schedule $\beta_{0:T}$
 
 \begin{equation}
 q(\bold{y}_{t}|\bold{y}_{0}) = \prod_{t=1}^{T}q(\bold{y}_{t}|\bold{y}_{t-1}) \;\;\; q(\bold{y}_{t}|\bold{y}_{t-1}) = \mathcal{N}\left(\sqrt{1-\beta_{t}}\bold{y}_{t-1},\beta_t I\right)
@@ -185,7 +191,7 @@ q(\bold{y}_t|\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 
 \end{equation}
 
 
-The usual procedure is then to learn a parametric representation of the \emph{reverse process}, and therefore generate samples from  $p(\bold{y}_{0})$, starting from noise. Here, we are concerned with conditional diffusion models, which sample from a distribution $p(\bold{y}_{0}|\bold{\hat{y}})$. Formally, $p_{\theta}(\bold{y}_{0}|\bold{\hat{y}}) = \int p_{\theta}(\bold{y}_{0:T}|\bold{\hat{y}})d\bold{\hat{y}}_{1:T}$ where $\bold{y}_{t}$ is a latent representation with the same dimensionality of the data.  $p_{\theta}(\bold{y}_{0:T}|\bold{\hat{y}})$ is a Markov process, starting from a noise sample $p_{\theta}(\bold{y}_{T}) = \mathcal{N}(0,\bold{I})$. 
+The usual procedure is then to learn a parametric representation of the \emph{reverse process}, and therefore generate samples from  $p(\bold{y}_{0})$, starting from noise. Formally, $p_{\theta}(\bold{y}_{0}|\bold{\hat{y}}) = \int p_{\theta}(\bold{y}_{0:T}|\bold{\hat{y}})d\bold{\hat{y}}_{1:T}$ where $\bold{y}_{t}$ is a latent representation with the same dimensionality of the data.  $p_{\theta}(\bold{y}_{0:T}|\bold{\hat{y}})$ is a Markov process, starting from a noise sample $p_{\theta}(\bold{y}_{T}) = \mathcal{N}(0,\bold{I})$. 
 
 \begin{equation}
 p_{\theta}(\bold{y}_{0:T}) = p_{\theta}(\bold{y}_{T})\prod_{t=1}^{T} p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) \;\;\; p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) = \mathcal{N}\left(\mu_{\theta}(\bold{y}_{t}),\beta_{t}I\right)
@@ -233,7 +239,7 @@ Localization heatmaps thus form a natural encoding for SMLM images, which can be
 \caption{Kernel density estimates for various signal to noise ratios (SNR)}
 \end{figure}
 
-We set $T = 100$ for all experiments and treat forward process variances $\beta_{t}$ as hyperparameters, with a linear schedule from $\beta_{0}=10^{-4}$ to $\beta_{T}=10^{-2}$.
+Training data was simulated under the image degradation model, drawing coordinates uniformly over a disc. We set $T = 100$ for all experiments and treat forward process variances $\beta_{t}$ as hyperparameters, with a linear schedule from $\beta_{0}=10^{-4}$ to $\beta_{T}=10^{-2}$.
 These constants were chosen to be small relative to data scaled to $[-1, 1]$, ensuring that reverse and forward processes have approximately the same functional form while keeping the signal-to-noise ratio at $x_T$ as small as possible ($L_T = D_{KL}(q(x_T | x_0) \| \mathcal{N}(0, I)) \approx 10^{-5}$ bits per dimension in our experiments).
 
 To represent the reverse process, we used the DDPM architecture based on a U-Net backbone (Ho 2020). Parameters are shared across time, which is specified to the network using the Transformer sinusoidal position embedding \cite{cite60}. We use self-attention at the $16 \times 16$ feature map resolution \cite{cite63,cite60}. Details are in Appendix A.
@@ -246,6 +252,8 @@ and the channel multipliers at different resolutions (see Appendix A for details
 \subsection{Diffusion Models}
 
 Prior work of diffusion models \cite{ref17, ref51} require 1-2k diffusion steps during inference, making generation slow for large target resolution tasks. We adapt techniques from \cite{ref6} to enable more efficient inference. Our model conditions on $\gamma$ directly (vs $t$ as in \cite{ref17}), which allows us flexibility in choosing the number of diffusion steps, and the noise schedule during inference. This has been demonstrated to work well for speech synthesis \cite{ref6}, but has not been explored for images. For efficient inference, we set the maximum inference budget to 100 diffusion steps, and hyper-parameter search over the inference noise schedule. This search is inexpensive as we only need to train the model once \cite{ref6}. We use FID on held-out data to choose the best noise schedule, as we found PSNR did not correlate well with image quality.
+
+\section{Conclusion}
 
 
 \subsection{Fisher Information Metric}
