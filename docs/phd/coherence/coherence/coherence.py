@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from BaseSMLM.generators import Disc2D
 
 def g_squared(N0, hi, hj, xi, B0):
     numerator = xi * hi**2 * hj**2 * N0**2 + xi * N0 * B0 * (hi**2 + hj**2) + B0**2
@@ -24,6 +25,9 @@ def plot_g_squared_for_xi_fixed_N0(ax, xi_values, N0, hi, hj, B0):
     ax.set_ylabel(r'$g^2_{ij}(0)$')
     ax.legend()
     ax.grid(True)
+
+generator = Disc2D(10,10)
+generator.forward(0.001,1,plot=True)
 
 # Example usage
 xi_values = np.linspace(0, 1, 100)
