@@ -86,35 +86,26 @@
 
 
 \begin{abstract}
-Single-molecule localization microscopy (SMLM) techniques are a mainstay of fluorescence microscopy and can be used to produce a pointillist representation of living cells at diffraction-unlimited precision. Classical SMLM approaches leverage the deactivation of fluorescent tags, followed by spontaneous or photoinduced reactivation, which can be used to estimate of the density of a tagged biomolecule in cellular compartments. Standard SMLM localization algorithms based on maximum likelihood estimators or least squares optimization require tight control of activation and reactivation to maintain sparse emitters, presenting a tradeoff between imaging speed and labeling density. Recently, deep models have generalized SMLM to densely labeled structures by predicting high-resolution kernel density estimates (KDEs) from low resolution images with convolutional networks. However, estimated KDEs may contain irregularities due to finite sample sizes and limited model capacity. Denoising diffusion probabilstic models (DDPMs) are well suited conditional super resolution tasks, demonstrating promising results in detail reconstruction, while directly providing uncertainties in model predictions. Here, we adapt DDPM to the task of single molecule localization, and demonstrate that combining traditional CNNs with a DDPM permits uncertainty quantification of KDEs and improves localization precision over a wide range of experimental conditions.
+
+The field of deep generative modeling for image translation has experienced a boom in research in the past few years, with various tools developed to estimate different types of uncertainty. Yet, many powerful models in image translation are selected and trained under a simple reconstruction loss and therefore are unable report uncertainty in their outputs. Uncertainty quantification is a necessary modeling component in many high-risk applications and in the sciences. In order to quantify uncertainty in otherwise deterministic models, we propose a hybrid generative modeling framework based denoising diffusion probabilistic models (DDPMs). Specifically, our model learns a distribution on the true image latent in the input conditioned on the network output, in order to represent the posterior on reconstructions. Then, we apply this framework to the task of single molecule localization in fluorescence microscopy, and demonstrate that blending the DeepSTORM architecture with a DDPM permits uncertainty quantification of kernel density estimates (KDEs) regressed by DeepSTORM. Our results suggest the proposed solution is an interesting addition to the modeling toolkit for fluorescence microscopists and the field of deep image translation in general.
 \end{abstract}
 
 \section{Introduction}
 
-Single molecule localization microscopy (SMLM) relies on the temporal resolution of fluorophores whose spatially overlapping point spread functions would otherwise render them unresolvable at the detector. Common strategies for the temporal separation of molecules involve molecular photoswitching from dark to fluorescent states, permitting resolution of flurophores beyond the diffraction limit. Estimation of molecular coordinates is typically carried out by modeling the optical impulse response of the imaging system and fitting model functions to the data. However, such models are only well-suited to isolated molecules, reducing the number of molecules in the field of view and limiting temporal resolution in super resolution microscopy. This issue has incited a series of efforts to increase the density of fluorescent molecules imaged in a single frame while developing appropriate models for dense localization.
+Deep learning has attracted tremendous attention from researchers in fields such as physics, biology, and manufacturing, to name a few (Baldi et al., 2014; Anjos et al., 2015; Bergmann et al., 2014). Tools such as neural networks (NNs), dropout, convolutional neural networks (convnets), and others are used extensively. In particular, the application of deep image translation in single-molecule localization microscopy (SMLM) has received considerable interest (Ouyang 2018; Nehme 2020; Speiser 2021). SMLM techniques are a mainstay of fluorescence microscopy and can be used to produce a pointillist representation of living cells at diffraction-unlimited precision. As this technology enables increasingly precise measurements of the cellular environment, there is an increasing need for machine learning methods to report uncertainty for quality control.  
 
-In previous approaches to this issue, predicted super-resolution images can be recovered from a sparse set of localizations with conditional generative adversarial networks (Ouyang 2018) or direct prediction of molecular coordinates using neural networks (Nehme 2020; Speiser 2021). Here, we focus on the latter class of models which perform single molecule localization using neural networks. In this approach, one estimates molecular coordinates by predicting kernel density estimates (KDEs) $\bold{y}$, which are latent in the raw data $\bold{x}$, using a convolutional neural network. Importantly, inferences in SMLM are often necessarily made on a single measurement, thus common measures of model performance are based on localization errors computed over ensembles of simulated images. However, this choice precludes computation of aleatoric uncertainty at test time under a fixed model, and may result in the application of models to out of distribution datasets.  Therefore, we propose a deep generative approach which is complimentary to existing methods, to model the posterior distribution on reconstructions. Our approach could be readily integrated with existing localization performance measures to address both model accuracy on training data and precision on datasets produced by experiments. 
+In previous applications of deep models to localization microscopy, super-resolution images can be recovered from a sparse set of localizations with conditional generative adversarial networks (Ouyang 2018) or kernel density estimation can be performed using convolutional networks (Nehme 2020; Speiser 2021). Here, we focus on the latter class of models which perform single molecule localization using neural networks. In this approach, one estimates molecular coordinates by predicting kernel density estimates (KDEs) $\bold{y}$, which are latent in the raw data $\bold{x}$, using a convolutional neural network. Importantly, inferences in SMLM are often necessarily made on a single measurement, thus common measures of model performance are based on localization errors computed over ensembles of simulated images. However, this choice precludes computation of aleatoric uncertainty at test time under a fixed model, and may result in the application of models to out of distribution datasets.
+
+Bayesian probability theory offers us mathematically grounded tools to reason about model uncertainty, but these usually come with a prohibitive computational cost. Recent approaches to avoiding this intractiblity have been deterministic uncertainty quantification (Amersfoort 2020), ensembling (Lakshminarayanan et al., 2017) or Monte Carlo sampling (Gal and Ghahramani, 2016). Here, we report a method which models estimates uncertainty in KDE predictions by learning a distribution on the true image latent in the input conditioned on the network output, in order to represent the posterior on reconstructions. Our approach preserves image structure and produces pixel-wise uncertainties, which can be used for out of distribution sample detection or filtering. Our approach could be readily integrated with existing localization performance measures to address both model accuracy on training data and precision on datasets produced by experiments. 
 
 \section{Background}
 
-\subsection{Image Formation and Origins of Uncertainty}
+\subsection{Image Likelihood and Localization Error}
 
-The central objective of single molecule localization microscopy is to infer a set of molecular coordinates from measured low resolution images $\bold{x}$. We begin by defining the likelihood on measured low-resolution images $p(\bold{x}|\theta)$. In fluorescence microscopy, each pixel is treated as a Poisson random variable (Smith 2010; Nehme 2020; Chao 2016), with expected value
-
-\begin{equation}
-\omega = i_{0}\int O(u)du\int O(v)dv
-\end{equation}
-
-where $i_{0} = \eta N_{0}\Delta$. The scalar parameters $\eta,\Delta$ are the photon detection probability of the sensor and the exposure time, respectively. Without loss of generality, we assume $\eta = \Delta = 1$. Most importantly, $N_{0}$ represents the signal amplitude, which we assume maintains a fixed value. The optical impulse response $O(u,v)$ is often approximated as a 2D isotropic Gaussian with standard deviation $\sigma$ (Zhang 2007). This approximation has the convenient property, that the effects of pixelation can be expressed in terms of error functions. For example, given a fluorescent emitter located at $\theta = (u_{0},v_{0})$, we have that
+The central objective of single molecule localization microscopy is to infer a set of molecular coordinates from measured low resolution images $\bold{x}$. The likelihood on measured low-resolution images $p(\bold{x}|\theta)$ is taken to be a convolution of Gaussian and Poisson PDFs
 
 \begin{equation}
-\int O(u)du = \frac{1}{2}\left(\mathrm{erf}\left(\frac{u_{k}+\frac{1}{2}-u_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{u_{k}-\frac{1}{2}-u_{0}}{\sqrt{2}\sigma}\right)\right)
-\end{equation}
-
-where we have used the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}\int_{0}^{t}e^{-t^{2}}dt$. Our generative model also incorporates a normally distributed white noise per pixel $\zeta$ with offset $o$ and variance $\sigma^{2}$. Ultimately, we have a Poisson component of the signal, which scales with $N_{0}$ and a Gaussian component, which does not. Therefore, in a single exposure, we measure: 
-
-\begin{equation}
-\bold{x} = \bold{s} + \bold{\zeta}
+p(\bold{x}_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(\bold{x}_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
 \end{equation}
 
 
@@ -123,32 +114,14 @@ where we have used the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}
 \caption{Generative model of single molecule localization microscopy images}
 \end{figure}
 
-The distribution of $\bold{x}$ is the convolution of the distributions of $\bold{s}$ and $\zeta$,
 
-\begin{equation}
-p(\bold{x}_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(\bold{x}_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
-\end{equation}
-
-where $p(\zeta_{k}) = \mathcal{N}(o_{k},\sigma_{k}^{2})$ and $p(s_{k}) = \mathrm{Poisson}(\omega_{k})$,  $A$ is some normalization constant. In practice, (4) is difficult to work with, so we look for an approximation. We will use a Poisson-Normal approximation for simplification. Consider,
-
-\begin{equation}
-\zeta_{k} - o_{k} + \sigma_{k}^{2} \sim \mathcal{N}(\sigma_{k}^{2},\sigma_{k}^{2}) \approx \mathrm{Poisson}(\sigma_{k}^{2})
-\end{equation}
-
-Since $\bold{x}_{k} = \bold{s}_{k} + \zeta_{k}$, we transform $\bold{x}_{k}' = \bold{x}_{k} - o_{k} + \sigma_{k}^{2}$, which is distributed according to 
+where $p(\zeta_{k}) = \mathcal{N}(o_{k},\sigma_{k}^{2})$ and $p(s_{k}) = \mathrm{Poisson}(\omega_{k})$,  $A$ is some normalization constant. In practice, (4) is difficult to work with, so we look for an approximation. We will use a Poisson-Normal approximation for simplification. 
 
 \begin{equation}
 \bold{x}_{k}' \sim \mathrm{Poisson}(\omega_{k}')
 \end{equation}
 
-where $\omega_{k}' = \omega_{k} + \sigma_{k}^{2}$. This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson. We then arrive at the following log likelihood
-
-\begin{equation}
-\ell(\bold{x}|\theta) = -\log \prod_{k} \frac{e^{-\left(\mu_{k}'\right)}\left(\mu_{k}'\right)^{n_{k}}}{n_{k}!}
-\approx \sum_{k}  n_{k}\log n_{k} + \mu_{k}' - n_{k}\log\left(\mu_{k}'\right)
-\end{equation}
-
-\subsection{Localization Error}
+where $\omega_{k}' = \omega_{k} + \sigma_{k}^{2}$. This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson. 
 
 We use the Fisher information as an information theoretic criteria to assess the quality of the proposed algorithms, with respect to the root mean squared error (RMSE) of our predictions of $\theta$. The generative model $\ell(\bold{x}|\theta)$ is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below i.e., $\mathrm{var}(\hat{\theta}) \geq I^{-1}(\theta)$. It is shown in the appendix, that the Fisher information is straightforward to compute under the Poisson likelihood (7)
 
@@ -320,5 +293,35 @@ Prior work of diffusion models \cite{ref17, ref51} require 1-2k diffusion steps 
 [17] Saharia, C., et al. {\it Image Super-Resolution via Iterative Refinement}. Preprint at arXiv https://doi.org/10.48550/arXiv.2104.07636 (2021)
 
 }
+
+\appendix
+
+\section{Appendix}
+
+Standard SMLM localization algorithms based on maximum likelihood estimators or least squares optimization require tight control of activation and reactivation to maintain sparse emitters, presenting a tradeoff between imaging speed and labeling density. Recently, deep models have generalized SMLM to densely labeled structures by predicting high-resolution kernel density estimates (KDEs) from low resolution images with convolutional networks. However, estimated KDEs may contain irregularities due to finite sample sizes and limited model capacity. Denoising diffusion probabilstic models (DDPMs) are well suited conditional super resolution tasks, demonstrating promising results in detail reconstruction, while directly providing uncertainties in model predictions. 
+
+Single molecule localization microscopy (SMLM) relies on the temporal resolution of fluorophores whose spatially overlapping point spread functions would otherwise render them unresolvable at the detector. Common strategies for the temporal separation of molecules involve molecular photoswitching from dark to fluorescent states, permitting resolution of flurophores beyond the diffraction limit. Estimation of molecular coordinates is typically carried out by modeling the optical impulse response of the imaging system and fitting model functions to the data. However, such models are only well-suited to isolated molecules, reducing the number of molecules in the field of view and limiting temporal resolution in super resolution microscopy. This issue has incited a series of efforts to increase the density of fluorescent molecules imaged in a single frame while developing appropriate models for dense localization.
+
+In fluorescence microscopy, each pixel is treated as a Poisson random variable (Smith 2010; Nehme 2020; Chao 2016), with expected value
+
+\begin{equation}
+\omega = i_{0}\int O(u)du\int O(v)dv
+\end{equation}
+
+where $i_{0} = \eta N_{0}\Delta$. The scalar parameters $\eta,\Delta$ are the photon detection probability of the sensor and the exposure time, respectively. Without loss of generality, we assume $\eta = \Delta = 1$. Most importantly, $N_{0}$ represents the signal amplitude, which we assume maintains a fixed value. The optical impulse response $O(u,v)$ is often approximated as a 2D isotropic Gaussian with standard deviation $\sigma$ (Zhang 2007). This approximation has the convenient property, that the effects of pixelation can be expressed in terms of error functions. For example, given a fluorescent emitter located at $\theta = (u_{0},v_{0})$, we have that
+
+\begin{equation}
+\int O(u)du = \frac{1}{2}\left(\mathrm{erf}\left(\frac{u_{k}+\frac{1}{2}-u_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{u_{k}-\frac{1}{2}-u_{0}}{\sqrt{2}\sigma}\right)\right)
+\end{equation}
+
+where we have used the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}\int_{0}^{t}e^{-t^{2}}dt$. Our generative model also incorporates a normally distributed white noise per pixel $\zeta$ with offset $o$ and variance $\sigma^{2}$. Ultimately, we have a Poisson component of the signal, which scales with $N_{0}$ and a Gaussian component, which does not. 
+
+Consider,
+
+\begin{equation}
+\zeta_{k} - o_{k} + \sigma_{k}^{2} \sim \mathcal{N}(\sigma_{k}^{2},\sigma_{k}^{2}) \approx \mathrm{Poisson}(\sigma_{k}^{2})
+\end{equation}
+
+Since $\bold{x}_{k} = \bold{s}_{k} + \zeta_{k}$, we transform $\bold{x}_{k}' = \bold{x}_{k} - o_{k} + \sigma_{k}^{2}$, which is distributed according to 
 
 \end{document}
