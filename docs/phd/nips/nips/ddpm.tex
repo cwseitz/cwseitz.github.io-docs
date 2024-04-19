@@ -142,7 +142,18 @@ We consider datasets $(\bold{x}_i,\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$ of o
 
 \section{Conditional Diffusion Model}
 
-Point estimates $\hat{\bold{y}}_{i}$ produced by the DeepSTORM architecture lack uncertainty quantification. We imagine a Markov chain $\bold{y}\rightarrow \bold{x}\rightarrow \hat{\bold{y}}$. The input $\bold{x}$ contains information about the latent KDE $\bold{y}$, which under normal conditions, is insufficient for a perfect reconstruction $\hat{\bold{y}}$. Data processing inequality states $I(\bold{y}_k;\bold{x}) \geq I(\bold{y}_k;\bold{\hat{y}})$ or $H(\bold{y}_k|\bold{x}) \leq H(\bold{y}_k|\bold{\hat{y}})$, which tells us the entropy (uncertainty) of $p(\bold{y}_k|\bold{\hat{y}})$ is a upper bound on the entropy in $p(\bold{y}_k|\bold{x})$
+Point estimates $\hat{\bold{y}}_{i}$ produced by the DeepSTORM architecture lack uncertainty quantification. According to the data processing inequality 
+
+\begin{equation*}
+H(\bold{y}|\hat{\bold{y}}) \geq H(\hat{\bold{y}}|\bold{x}) + H(\bold{y}) - H(\hat{\bold{y}})
+\end{equation*}
+
+
+An upper bound on the quantity $H_{0} = H(\bold{y})-H(\hat{\bold{y}})$ can be found empirically by assuming a hypothetical model $\phi$ which perfectly models $\hat{\bold{y}}|\bold{x}$ s.t., $H(\hat{\bold{y}}|\bold{x})=0$. During training, one then proceeds by injecting the correct solution into a DDPM modeling $p(\bold{y}|\hat{\bold{y}})$. We then get that 
+
+\begin{equation*}
+H(\hat{\bold{y}}|\bold{x}) \leq H(\bold{y}|\hat{\bold{y}}) - H_{0}
+\end{equation*}
 
 Evidently, a DDPM $\Psi$ can be trained on pairs $(\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$. The conditional DDPM generates a target KDE $\bold{y}_0$ in $T$ refinement steps. Starting with a pure noise image $\bold{y}_{T}\sim \mathcal{N}(0,\bold{I})$, the model iteratively refines the KDE through successive iterations according to learned conditional transition distributions $p(\bold{y}_{t-1}|\bold{y}_{t},\bold{})$ such that $\bold{y}_{0} \sim p(\bold{y}|\hat{\bold{y}})$ 
 
