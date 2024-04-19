@@ -142,13 +142,9 @@ We consider datasets $(\bold{x}_i,\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$ of o
 
 \section{Conditional Diffusion Model}
 
-Point estimates $\hat{\bold{y}}_{i}$ produced by the DeepSTORM architecture lack uncertainty quantification.  To address this, we propose a DDPM to model the conditional distribution $p(\hat{\bold{y}}|\bold{x},\bold{y})$. Consider the factorization $p(\hat{\bold{y}}|\bold{x},\bold{y})p(\bold{x}|\bold{y})p(\bold{y})=p(\bold{x}|\bold{y},\hat{\bold{y}})p(\bold{y}|\hat{\bold{y}})p(\hat{\bold{y}})$. Given that $\bold{x}$ is conditionally independent of $\hat{\bold{y}}$, we find
+Point estimates $\hat{\bold{y}}_{i}$ produced by the DeepSTORM architecture lack uncertainty quantification. We imagine a Markov chain $\bold{y}\rightarrow \bold{x}\rightarrow \hat{\bold{y}}$. The input $\bold{x}$ contains information about the latent KDE $\bold{y}$, which under normal conditions, is insufficient for a perfect reconstruction $\hat{\bold{y}}$. Data processing inequality states $I(\bold{y}_k;\bold{x}) \geq I(\bold{y}_k;\bold{\hat{y}})$ or $H(\bold{y}_k|\bold{x}) \leq H(\bold{y}_k|\bold{\hat{y}})$, which tells us the entropy (uncertainty) of $p(\bold{y}_k|\bold{\hat{y}})$ is a upper bound on the entropy in $p(\bold{y}_k|\bold{x})$
 
-\begin{equation*}
-p_{\Psi}(\hat{\bold{y}}|\bold{x},\bold{y})=p(\bold{y}|\hat{\bold{y}})
-\end{equation*}
-
-Evidently, the DDPM $\Psi$ can be trained on pairs $(\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$. The conditional DDPM generates a target KDE $\bold{y}_0$ in $T$ refinement steps. Starting with a pure noise image $\bold{y}_{T}\sim \mathcal{N}(0,\bold{I})$, the model iteratively refines the KDE through successive iterations according to learned conditional transition distributions $p(\bold{y}_{t-1}|\bold{y}_{t},\bold{})$ such that $\bold{y}_{0} \sim p(\bold{y}|\hat{\bold{y}})$ 
+Evidently, a DDPM $\Psi$ can be trained on pairs $(\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$. The conditional DDPM generates a target KDE $\bold{y}_0$ in $T$ refinement steps. Starting with a pure noise image $\bold{y}_{T}\sim \mathcal{N}(0,\bold{I})$, the model iteratively refines the KDE through successive iterations according to learned conditional transition distributions $p(\bold{y}_{t-1}|\bold{y}_{t},\bold{})$ such that $\bold{y}_{0} \sim p(\bold{y}|\hat{\bold{y}})$ 
 
 \subsection{Gaussian Diffusion}
 
@@ -219,7 +215,13 @@ Localization heatmaps thus form a natural encoding for SMLM images, which can be
 \caption{Kernel density estimates for various signal to noise ratios (SNR)}
 \end{figure}
 
-Training data was simulated under the image degradation model, drawing coordinates uniformly over a disc. We set $T = 100$ for all experiments and treat forward process variances $\beta_{t}$ as hyperparameters, with a linear schedule from $\beta_{0}=10^{-4}$ to $\beta_{T}=10^{-2}$.
+All training data was simulated under the likelihood and impulse reponse (2,10), drawing coordinates uniformly over a disc with a radius of 7 pixels.
+
+\subsection{Model Precision on Simulated Ensembles}
+
+\subsection{Model Uncertainty}
+
+We set $T = 100$ for all experiments and treat forward process variances $\beta_{t}$ as hyperparameters, with a linear schedule from $\beta_{0}=10^{-4}$ to $\beta_{T}=10^{-2}$.
 These constants were chosen to be small relative to data scaled to $[-1, 1]$, ensuring that reverse and forward processes have approximately the same functional form while keeping the signal-to-noise ratio at $x_T$ as small as possible ($L_T = D_{KL}(q(x_T | x_0) \| \mathcal{N}(0, I)) \approx 10^{-5}$ bits per dimension in our experiments).
 
 To represent the reverse process, we used the DDPM architecture based on a U-Net backbone (Ho 2020). Parameters are shared across time, which is specified to the network using the Transformer sinusoidal position embedding \cite{cite60}. We use self-attention at the $16 \times 16$ feature map resolution \cite{cite63,cite60}. Details are in Appendix A.
@@ -241,6 +243,8 @@ and the channel multipliers at different resolutions (see Appendix A for details
 Prior work of diffusion models \cite{ref17, ref51} require 1-2k diffusion steps during inference, making generation slow for large target resolution tasks. We adapt techniques from \cite{ref6} to enable more efficient inference. Our model conditions on $\gamma$ directly (vs $t$ as in \cite{ref17}), which allows us flexibility in choosing the number of diffusion steps, and the noise schedule during inference. This has been demonstrated to work well for speech synthesis \cite{ref6}, but has not been explored for images. For efficient inference, we set the maximum inference budget to 100 diffusion steps, and hyper-parameter search over the inference noise schedule. This search is inexpensive as we only need to train the model once \cite{ref6}. We use FID on held-out data to choose the best noise schedule, as we found PSNR did not correlate well with image quality.
 
 \section{Conclusion}
+
+
 
 \section*{References}
 
@@ -325,5 +329,11 @@ Consider,
 \end{equation}
 
 Since $\bold{x}_{k} = \bold{s}_{k} + \zeta_{k}$, we transform $\bold{x}_{k}' = \bold{x}_{k} - o_{k} + \sigma_{k}^{2}$, which is distributed according to 
+
+Consider the factorization $p(\hat{\bold{y}}|\bold{x},\bold{y})p(\bold{x}|\bold{y})p(\bold{y})=p(\bold{x}|\bold{y},\hat{\bold{y}})p(\bold{y}|\hat{\bold{y}})p(\hat{\bold{y}})$. Given that $\bold{x}$ is conditionally independent of $\hat{\bold{y}}$, we find
+
+\begin{equation*}
+p_{\Psi}(\hat{\bold{y}}|\bold{x},\bold{y})=p(\bold{y}|\hat{\bold{y}})
+\end{equation*}
 
 \end{document}
