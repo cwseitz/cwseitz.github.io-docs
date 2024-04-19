@@ -138,22 +138,18 @@ The DeepSTORM CNN, initially proposed in (Nehme 2020) for 3D localization, can b
 
 \section{Diffusion Model for SMLM}
 
-We consider datasets $(\bold{x}_i,\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$ of observed images $\bold{x}_i$ true kernel density estimate (KDE) images $\bold{y}_{i}$, and KDE estimates $\hat{\bold{y}}_{i}=\phi(\bold{x}_{i})$. Observations $\bold{x}_i$ are simulated under the likelihood (2). We aim to develop a framework for sampling from $p(\hat{\bold{y}}|\bold{x},\bold{y})$.
+We consider datasets $(\bold{x}_i,\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$ of observed images $\bold{x}_i$ true kernel density estimate (KDE) images $\bold{y}_{i}$, and KDE estimates $\hat{\bold{y}}_{i}=\phi(\bold{x}_{i})$. Observations $\bold{x}_i$ are simulated under the likelihood (2). 
 
 \section{Conditional Diffusion Model}
 
-Point estimates $\hat{\bold{y}}_{i}$ produced by the DeepSTORM architecture lack uncertainty quantification. According to the data processing inequality 
+Point estimates $\hat{\bold{y}}_{i}$ produced by the DeepSTORM architecture lack uncertainty quantification. Consider this ``triangular'' Markov chain $\bold{y} \rightarrow \bold{x} \rightarrow \bold{\hat{y}} \rightarrow \bold{y}$ for which we find $p_{\phi}(\hat{\bold{y}}|\bold{x})p(\bold{y})=p_{\Psi}(\bold{y}|\hat{\bold{y}})p(\hat{\bold{y}})$. Therefore the entropy is
 
 \begin{equation*}
-H(\bold{y}|\hat{\bold{y}}) \geq H(\hat{\bold{y}}|\bold{x}) + H(\bold{y}) - H(\hat{\bold{y}})
+H_{\Psi}(\bold{y}|\hat{\bold{y}}) = H_{\Phi}(\hat{\bold{y}}|\bold{x}) + \Delta H
 \end{equation*}
 
+where $\Delta H=H(\bold{y}) - H(\hat{\bold{y}})$. Evidently the entropy of the model prediction $H_{\Phi}(\hat{\bold{y}}|\bold{x})$, can be modeled by the entropy of our Gaussian diffusion model $H_{\Psi}(\bold{y}|\hat{\bold{y}})$. After training $\Psi$, one can measure $\Delta H$ by injecting the correct solution into the diffusion model modeling $\Psi$ and measure $\Delta H$, and thus compute $H_{\Phi}(\hat{\bold{y}}|\bold{x})$.
 
-An upper bound on the quantity $H_{0} = H(\bold{y})-H(\hat{\bold{y}})$ can be found empirically by assuming a hypothetical model $\phi$ which perfectly models $\hat{\bold{y}}|\bold{x}$ s.t., $H(\hat{\bold{y}}|\bold{x})=0$. During training, one then proceeds by injecting the correct solution into a DDPM modeling $p(\bold{y}|\hat{\bold{y}})$. We then get that 
-
-\begin{equation*}
-H(\hat{\bold{y}}|\bold{x}) \leq H(\bold{y}|\hat{\bold{y}}) - H_{0}
-\end{equation*}
 
 Evidently, a DDPM $\Psi$ can be trained on pairs $(\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$. The conditional DDPM generates a target KDE $\bold{y}_0$ in $T$ refinement steps. Starting with a pure noise image $\bold{y}_{T}\sim \mathcal{N}(0,\bold{I})$, the model iteratively refines the KDE through successive iterations according to learned conditional transition distributions $p(\bold{y}_{t-1}|\bold{y}_{t},\bold{})$ such that $\bold{y}_{0} \sim p(\bold{y}|\hat{\bold{y}})$ 
 
