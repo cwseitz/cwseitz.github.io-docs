@@ -87,7 +87,7 @@
 
 \begin{abstract}
 
-The field of deep generative modeling has experienced a spike in research in recent years, with various tools developed to model previously intractable distributions over high dimensional datasets. Yet, many powerful regressive models continue to be implemented, in spite of the fact that they are unable model distributions over their outputs. In particular, this mode of deep learning has attracted attention from researchers in the natural sciences, particularly microscopists, for fast extraction of physically relevant information from images. As powerful as they may be, simple and interpretable uncertainty quantification is a necessary modeling component in high-risk applications and in the sciences. In order to quantify uncertainty in otherwise deterministic image translation models, we propose a hybrid generative modeling framework based on denoising diffusion probabilistic models (DDPMs). Specifically, our model learns a distribution on a true image latent in the input conditioned on the network output, in order to represent the posterior on reconstructions. We apply this framework to the task of single molecule localization in fluorescence microscopy, and demonstrate that blending the DeepSTORM architecture with a DDPM permits uncertainty quantification of kernel density estimates (KDEs) regressed by DeepSTORM. Our results suggest the proposed solution is an interesting addition to the modeling toolkit for fluorescence microscopists and the field of deep image translation in general.
+The field of deep generative modeling has experienced a spike in research in recent years, with various tools developed to model previously intractable distributions over high dimensional datasets. Yet, many powerful regressive models continue to be implemented, in spite of the fact that they are unable model distributions over their outputs. In particular, this mode of deep learning has attracted attention from researchers in the natural sciences, particularly microscopists, for fast extraction of physically relevant information from images. However, simple and interpretable uncertainty quantification is a necessary modeling component in high-risk applications and in the sciences. In order to quantify uncertainty in otherwise deterministic image translation architectures, we propose a hybrid generative modeling framework based on denoising diffusion probabilistic models (DDPMs). Specifically, our model learns a distribution on a true image latent in the input conditioned on the network output, in order to represent the posterior on reconstructions. We apply this framework to the task of single molecule localization in fluorescence microscopy, and demonstrate that blending the DeepSTORM architecture with a DDPM permits uncertainty quantification of kernel density estimates (KDEs) regressed by DeepSTORM. Our results suggest the proposed solution is an interesting addition to the modeling toolkit for fluorescence microscopists and the field of deep image translation in general.
 \end{abstract}
 
 \section{Introduction}
@@ -96,7 +96,7 @@ Deep learning has attracted tremendous attention from researchers in the natural
 
 In previous applications of deep models to localization microscopy, super-resolution images can be recovered from a sparse set of localizations with conditional generative adversarial networks (Ouyang 2018) or kernel density estimation can be performed using convolutional networks (Nehme 2020; Speiser 2021). Here, we focus on the latter class of models which perform single molecule localization using neural networks. In this approach, one estimates molecular coordinates by predicting kernel density estimates (KDEs) $\bold{y}$, which are latent in the raw data $\bold{x}$, using a convolutional neural network. Importantly, inferences in SMLM are often necessarily made on a single measurement, thus common measures of model performance are based on localization errors computed over ensembles of simulated images. However, this choice precludes computation of aleatoric uncertainty at test time under a fixed model, and may result in the application of models to out of distribution datasets.
 
-Bayesian probability theory offers us mathematically grounded tools to reason about model uncertainty, but these usually come with a prohibitive computational cost (Gal 2022). A few approaches to avoiding this intractiblity in deep models have been deterministic uncertainty quantification (Amersfoort 2020), ensembling (Lakshminarayanan et al., 2017) or Monte Carlo dropout (Gal and Ghahramani, 2016). Here, we report a method which models estimates uncertainty in KDE predictions by learning a distribution on the true image latent in the input conditioned on the network output, in order to represent the posterior on reconstructions. Our approach preserves image structure and produces pixel-wise uncertainties, which can be used for out of distribution sample detection or filtering. We choose to model this distribution using a denoising diffusion probabilstic model (DDPM) (Ho 2020), referred to here as simply ``diffusion model''. Such models are well suited conditional image generation tasks, demonstrating promising results in detail reconstruction, while directly providing uncertainties in model predictions (Saharia 2021). Our approach could be readily integrated with existing localization performance measures to address both model accuracy on training data and precision on datasets produced by experiments. 
+Bayesian probability theory offers us mathematically grounded tools to reason about model uncertainty, but these usually come with a prohibitive computational cost (Gal 2022). A few approaches to avoiding this intractiblity in deep models have been deterministic uncertainty quantification (Amersfoort 2020), ensembling (Lakshminarayanan et al., 2017) or Monte Carlo dropout (Gal and Ghahramani, 2016). Here, we report a method which models estimates uncertainty in KDE predictions by learning a distribution on the true image latent in the input conditioned on the network output, in order to represent the posterior on reconstructions. Our approach produces pixel-wise uncertainties in model predictions with no modification to the existing architecture, and can be used for downstream filtering of erroneous image regions. We choose to model this distribution using a denoising diffusion probabilstic model (DDPM) (Ho 2020), referred to here as simply ``diffusion model''. Such models are well suited conditional image generation tasks, demonstrating promising results in detail reconstruction, while directly providing uncertainties in model predictions (Saharia 2021). Our approach could be readily integrated with existing localization performance measures to address both model accuracy on training data and precision on datasets produced by experiments. 
 
 \section{Background}
 
@@ -142,13 +142,13 @@ We consider datasets $(\bold{x}_i,\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$ of o
 
 \section{Conditional Diffusion Model}
 
-Point estimates $\hat{\bold{y}}_{i}$ produced by the DeepSTORM architecture lack uncertainty quantification. Consider this ``triangular'' Markov chain $\bold{y} \rightarrow \bold{x} \rightarrow \bold{\hat{y}} \rightarrow \bold{y}$ for which we find $p_{\phi}(\hat{\bold{y}}|\bold{x})p(\bold{y})=p_{\Psi}(\bold{y}|\hat{\bold{y}})p(\hat{\bold{y}})$. Therefore the entropy is
+Point estimates $\hat{\bold{y}}_{i}$ produced by the DeepSTORM architecture lack uncertainty quantification. Consider this ``triangular'' Markov chain wherein the value of a KDE pixel $\bold{y}_{k}$ is latent in a low resolution image $\bold{x}$, and is inferred by a deep model: $\bold{y}_{k} \rightarrow \bold{x} \rightarrow \bold{\hat{y}}_{k} \rightarrow \bold{y}_{k}$ for which we find $p_{\phi}(\hat{\bold{y}}_{k}|\bold{x})p(\bold{y}_{k})=p_{\Psi}(\bold{y}_{k}|\hat{\bold{y}}_{k})p(\hat{\bold{y}}_{k})$. Therefore the entropy is
 
 \begin{equation*}
-H_{\Psi}(\bold{y}|\hat{\bold{y}}) = H_{\Phi}(\hat{\bold{y}}|\bold{x}) + \Delta H
+h_{\Psi}(\bold{y}_{k}|\hat{\bold{y}}_{k}) = h_{\Phi}(\hat{\bold{y}}_{k}|\bold{x}) + \Delta h
 \end{equation*}
 
-where $\Delta H=H(\bold{y}) - H(\hat{\bold{y}})$. Evidently the entropy of the model prediction $H_{\Phi}(\hat{\bold{y}}|\bold{x})$, can be modeled by the entropy of our Gaussian diffusion model $H_{\Psi}(\bold{y}|\hat{\bold{y}})$. After training $\Psi$, one can measure $\Delta H$ by injecting the correct solution into the diffusion model modeling $\Psi$ and measure $\Delta H$, and thus compute $H_{\Phi}(\hat{\bold{y}}|\bold{x})$.
+where $\Delta h=h(\bold{y}_{k}) - h(\hat{\bold{y}}_{k})$. Evidently the entropy of the model prediction $h_{\Phi}(\hat{\bold{y}}_{k}|\bold{x})$, can be modeled by the entropy of our Gaussian diffusion model $h_{\Psi}(\bold{y}_{k}|\hat{\bold{y}}_{k})$. After training $\Psi$, one can measure $\Delta h$ by injecting the correct solution into the diffusion model modeling $\Psi$ and measure $\Delta h$, and thus compute $h_{\Phi}(\hat{\bold{y}}_{k}|\bold{x})$.
 
 
 Evidently, a DDPM $\Psi$ can be trained on pairs $(\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$. The conditional DDPM generates a target KDE $\bold{y}_0$ in $T$ refinement steps. Starting with a pure noise image $\bold{y}_{T}\sim \mathcal{N}(0,\bold{I})$, the model iteratively refines the KDE through successive iterations according to learned conditional transition distributions $p(\bold{y}_{t-1}|\bold{y}_{t},\bold{})$ such that $\bold{y}_{0} \sim p(\bold{y}|\hat{\bold{y}})$ 
@@ -234,13 +234,6 @@ These constants were chosen to be small relative to data scaled to $[-1, 1]$, en
 To represent the reverse process, we used the DDPM architecture based on a U-Net backbone (Ho 2020). Parameters are shared across time, which is specified to the network using the Transformer sinusoidal position embedding \cite{cite60}. We use self-attention at the $16 \times 16$ feature map resolution \cite{cite63,cite60}. Details are in Appendix A.
 
 and the channel multipliers at different resolutions (see Appendix A for details). To condition the model on the input $x$, we up-sample the low-resolution image to the target resolution using bicubic interpolation. The result is concatenated with $y_t$ along the channel dimension. We experimented with more sophisticated methods of conditioning, such as using, but we found that the simple concatenation yielded similar generation quality.
-
-\begin{figure}
-\centering
-\includegraphics[scale=0.8]{Errors.png}
-\caption{Localization errors of the trained model}
-\end{figure}
-
 
 
 \section{Related Work}
@@ -342,5 +335,11 @@ Consider the factorization $p(\hat{\bold{y}}|\bold{x},\bold{y})p(\bold{x}|\bold{
 \begin{equation*}
 p_{\Psi}(\hat{\bold{y}}|\bold{x},\bold{y})=p(\bold{y}|\hat{\bold{y}})
 \end{equation*}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.8]{Errors.png}
+\caption{Localization errors of the trained model}
+\end{figure}
 
 \end{document}
