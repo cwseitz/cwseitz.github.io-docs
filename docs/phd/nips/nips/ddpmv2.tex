@@ -164,20 +164,21 @@ Diffusion models (Sohl-Dickstein 2015; Ho 2020) are a class of generative models
 q(\bold{y}_{t}|\bold{y}_{0}) = \prod_{t=1}^{T}q(\bold{y}_{t}|\bold{y}_{t-1}) \;\;\; q(\bold{y}_{t}|\bold{y}_{t-1}) = \mathcal{N}\left(\sqrt{1-\beta_{t}}\bold{y}_{t-1},\beta_t I\right)
 \end{equation}
 
-An important property of the forward process is that it admits sampling $\bold{y}_t$ at an arbitrary timestep $t$ in closed form (Ho 2020). Using the notation $\alpha_t := 1 - \beta_t$ and $\gamma_t := \prod_{s=1}^{t} \alpha_s$, we have
-
-\begin{equation}
-q(\bold{y}_t|\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 - \gamma_t)I \right)
-\end{equation}
-
-
 The usual procedure is then to learn a parametric representation of the \emph{reverse process}, and therefore generate samples from  $p(\bold{y}_{0})$, starting from noise. Formally, $p_{\theta}(\bold{y}_{0}|\bold{\hat{y}}) = \int p_{\theta}(\bold{y}_{0:T}|\bold{\hat{y}})d\bold{\hat{y}}_{1:T}$ where $\bold{y}_{t}$ is a latent representation with the same dimensionality of the data.  $p_{\theta}(\bold{y}_{0:T}|\bold{\hat{y}})$ is a Markov process, starting from a noise sample $p_{\theta}(\bold{y}_{T}) = \mathcal{N}(0,\bold{I})$. 
 
 \begin{equation}
 p_{\theta}(\bold{y}_{0:T}) = p_{\theta}(\bold{y}_{T})\prod_{t=1}^{T} p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) \;\;\; p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) = \mathcal{N}\left(\mu_{\theta}(\bold{y}_{t}),\beta_{t}I\right)
 \end{equation}
 
-where we reuse the variance schedule of the forward process (Ho 2020). We seek to learn a denoising model $\mu_{\theta}$ which computes the mean of the Gaussian transition density at each time step $t$. For all $t > 0$, the mean of the transition density is computed as
+where we reuse the variance schedule of the forward process (Ho 2020). 
+
+An important property of the forward process is that it admits sampling $\bold{y}_t$ at an arbitrary timestep $t$ in closed form (Ho 2020). Using the notation $\alpha_t := 1 - \beta_t$ and $\gamma_t := \prod_{s=1}^{t} \alpha_s$, we have
+
+\begin{equation}
+q(\bold{y}_t|\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 - \gamma_t)I \right)
+\end{equation}
+
+We seek to learn a denoising model $\mu_{\theta}$ which computes the mean of the Gaussian transition density at each time step $t$. For all $t > 0$, the mean of the transition density is computed as
 
 \begin{equation}
 \mu_{\theta}(\bold{y}_t, \bold{\hat{y}}, \gamma_t) = \frac{1}{\sqrt{\alpha_t}} \left(\bold{y}_t - \frac{(1 - \alpha_t)}{\sqrt{1 - \gamma_t}} \, f_{\theta}(\bold{y}, \bold{\hat{y}}, \gamma_t) \right)
