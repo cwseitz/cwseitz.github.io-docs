@@ -130,6 +130,13 @@ Reliable estimation of $\theta$ from $\bold{x}$, for example by maximum likeliho
 
 \subsection{Kernel density estimation with deep networks}
 
+\begin{figure}
+\centering
+\includegraphics[scale=0.7]{Errors.png}
+\caption{Localization errors of the trained model}
+\end{figure}
+
+
 Direct optimization of the likelihood in (1) from observations $\bold{x}$ alone is challenging when fluorescent emitters are dense within the field of view and fluorescent signals significantly overlap. However, convolutional neural networks (CNN) have recently proven to be powerful tools fluorescence microscopy to extract parameters describing fluorescent emitters such as color, emitter orientation, $z$-coordinate, and background signal (Zhang 2018; Kim 2019; Zelger 2018). For localization tasks, CNNs typically employ upsampling layers to reconstruct Bernoulli probabilities of emitter occupancy (Speiser 2021) or kernel density estimates with higher resolution than experimental measurements (Nehme 2020). Kernel density estimates, denoted by $\bold{y}$, are the most common data structure used in SMLM, and can be easily generated from molecular coordinates, alongside observations $\bold{x}$, using well-understood models of the optical impulse response (Zhang 2007). 
 
 \section{Conditional Diffusion for Uncertainty-Aware Super Resolution}
@@ -140,14 +147,14 @@ We consider datasets $(\bold{x}_i,\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$ of o
 
 Point estimates $\hat{\bold{y}}_{i}$ produced by the traditional deep architectures for super resolution microscopy produce strong results, but lack uncertainty quantification. Recent advances in generative modeling, particularly DDPMs, therefore present a unique opportunity to integrate uncertainty awareness into the super-resolution microscopy toolkit. However, sampling from DDPMs is computationally expensive, given that generation amounts to solving a complex stochastic differential equation, effectively mapping a simple base distribution to the complex data distribution. The solution of such equations requires numerical integration with very small step sizes, resulting in thousands of neural network evaluations (Saharia 2021; Vahdat 2021). Furthermore, for conditional generation tasks in high-risk applications, generation complexity is further exacerbated by the need for the highest level of detail in generated samples.
 
-Under these considerations, we propose that DDPM sampling is preceded by a deterministic transformation $\phi$, trained to predict $\bold{y}$ from $\bold{x}$. Reasoning for this choice in the current application is two-fold:
+Since we are primarily interested in the conditional distribution $p(\bold{y}|\bold{x})$, we propose that DDPM sampling is preceded by a deterministic transformation $\phi$, trained to predict $\bold{y}$ from $\bold{x}$. Reasoning for this choice in the current application is two-fold:
 
-\textbf{Synthesis Speed}. By training a preprocessor $\phi$ to obtain an approximate estimate of $\bold{y}$, we can reduce the number of iterations, since the DDPM only needs to model the remaining mismatch, resulting in a less complex model from which sampling becomes easier. This approach is analagous to latent score-based generative models (LSGMs) discussed in (Vahdat 2021). Speed is critical in SMLM applications, which can produce large volumes of image data in a single experiment. \\
+\textbf{Synthesis Speed}. By training a preprocessor $\phi$ to obtain an approximate estimate of $\bold{y}$, we can reduce the number of iterations, since the DDPM only needs to model the remaining mismatch, resulting in a less complex model from which sampling becomes easier. Speed is critical in SMLM applications, which can produce large volumes of image data in a single experiment. Moreover, we note that this approach is analagous to preconditioned stochastic gradient langevin dynamics (Li 2016), wherein $\phi$ identifies the posterior mode followed by Langevin dynamics to sample from the posterior. \\
 
 \textbf{Sample Fidelity}. Since Langevin dynamics will often be initialized in low-density regions of the data distribution, inaccurate score estimation in these regions will negatively affect the sampling
 process (Song 2019). Moreover, mixing can be difficult because of the need of traversing low density regions to transition between modes of the distribution. Preprocessing with a deterministic mapping $\phi$ can ameliorate this issue, by eliminating the need for score estimation in low density regions. 
 
-The preprocessor $\phi$ is realized by a CNN with upsampling layers that transforms $\bold{x}$ from a low dimensional space to a higher one with the same dimension as $\bold{y}$. Consider the Markov chain wherein the KDE $\bold{y}$ is latent in and inferred from a noisy measurement $\bold{x}$, i.e., $\bold{x} \rightarrow \phi(\bold{x})\rightarrow \bold{\hat{y}}$. By the data processing inequality the function $\phi$ can only destroy information in $\bold{x}$ pertaining to $\bold{y}$ i.e., $I(\bold{x};\bold{y}) \geq I(\phi(\bold{x});\bold{y})$ or $h(\bold{y}|\phi(\bold{x})) \geq h(\bold{y}|\bold{x})$ where $I$ is the mutual information and $h$ is the entropy. In other words, the function $\phi$, while deterministic, can introduce additional uncertainty about $\bold{y}$ in downstream stochastic models by destroying information. Here, we are interested in measuring the upper bound $h(\bold{y}|\phi(\bold{x}))$, as this is the relevant quantity when a deterministic transformation $\phi$ is an unavoidable first step. 
+The preprocessor $\phi$ is realized by a CNN with upsampling layers. Consider the Markov chain wherein the KDE $\bold{y}$ is latent in and inferred from a noisy measurement $\bold{x}$, i.e., $\bold{x} \rightarrow \phi(\bold{x})\rightarrow \bold{\hat{y}}$. By the data processing inequality the function $\phi$ can only destroy information in $\bold{x}$ pertaining to $\bold{y}$ i.e., $I(\bold{x};\bold{y}) \geq I(\phi(\bold{x});\bold{y})$ or $h(\bold{y}|\phi(\bold{x})) \geq h(\bold{y}|\bold{x})$ where $I$ is the mutual information and $h$ is the entropy. In other words, the function $\phi$, while deterministic, can introduce additional uncertainty about $\bold{y}$ in downstream stochastic models by destroying information. Here, we are interested in measuring the upper bound $h(\bold{y}|\phi(\bold{x}))$, as this is the relevant quantity when a deterministic transformation $\phi$ is an unavoidable first step. 
 
 In practice, a DDPM $\Psi$ can be trained on pairs $(\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$. The conditional DDPM generates a target KDE $\bold{y}_0$ in $T$ refinement steps. Starting with a pure noise image $\bold{y}_{T}\sim \mathcal{N}(0,\bold{I})$, the model iteratively refines the KDE through successive iterations according to learned conditional transition distributions $p(\bold{y}_{t-1}|\bold{y}_{t},\bold{})$ such that $\bold{y}_{0} \sim p(\bold{y}|\hat{\bold{y}})$ 
 
@@ -158,7 +165,7 @@ In practice, a DDPM $\Psi$ can be trained on pairs $(\bold{y}_i,\hat{\bold{y}}_{
 \caption{Conditional diffusion model for sampling kernel density estimates}
 \end{figure}
 
-Diffusion models (Sohl-Dickstein 2015; Ho 2020) are a class of generative models inspired by nonequilibrium statistical physics, which slowly destroy structure in a data distribution $p(\bold{y}_{0}|\bold{x})$ via a fixed Markov chain referred to as the \emph{forward process}. In the present context, the forward process gradually adds Gaussian noise to the KDE $\bold{y}$ according to a variance schedule $\beta_{0:T}$
+Diffusion models (Sohl-Dickstein 2015; Ho 2020) are a class of generative models inspired by nonequilibrium statistical physics, which slowly destroy structure in a data distribution $p(\bold{y}_{0}|\bold{x})$ via a fixed Markov chain referred to as the \emph{forward process}. In the present context, we apply leverage recent results from (Ho 2020; Song 2021; Saharia 2021) for applying this framework to sampling from $p(\bold{y}|\bold{x},\bold{\hat{y}})$. We note that this approach is analagous to preconditioned stochastic gradient langevin dynamics (Li 2016), wherein $\phi$ identifies the posterior mode followed by sampling with Langevin dynamics. The forward process gradually adds Gaussian noise to the KDE $\bold{y}$ according to a variance schedule $\beta_{0:T}$
 
 \begin{equation}
 q(\bold{y}_{t}|\bold{y}_{0}) = \prod_{t=1}^{T}q(\bold{y}_{t}|\bold{y}_{t-1}) \;\;\; q(\bold{y}_{t}|\bold{y}_{t-1}) = \mathcal{N}\left(\sqrt{1-\beta_{t}}\bold{y}_{t-1},\beta_t I\right)
@@ -167,40 +174,28 @@ q(\bold{y}_{t}|\bold{y}_{0}) = \prod_{t=1}^{T}q(\bold{y}_{t}|\bold{y}_{t-1}) \;\
 The usual procedure is then to learn a parametric representation of the \emph{reverse process}, and therefore generate samples from  $p(\bold{y}_{0})$, starting from noise. Formally, $p_{\theta}(\bold{y}_{0}|\bold{\hat{y}}) = \int p_{\theta}(\bold{y}_{0:T}|\bold{\hat{y}})d\bold{\hat{y}}_{1:T}$ where $\bold{y}_{t}$ is a latent representation with the same dimensionality of the data.  $p_{\theta}(\bold{y}_{0:T}|\bold{\hat{y}})$ is a Markov process, starting from a noise sample $p_{\theta}(\bold{y}_{T}) = \mathcal{N}(0,\bold{I})$. 
 
 \begin{equation}
-p_{\theta}(\bold{y}_{0:T}) = p_{\theta}(\bold{y}_{T})\prod_{t=1}^{T} p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) \;\;\; p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) = \mathcal{N}\left(\mu_{\theta}(\bold{y}_{t}),\beta_{t}I\right)
+p_{\theta}(\bold{y}_{0:T}) = p_{\theta}(\bold{y}_{T})\prod_{t=1}^{T} p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) \;\;\; p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) = \mathcal{N}\left(s_{\theta}(\bold{y}_{t}),\beta_{t}I\right)
 \end{equation}
 
-where we reuse the variance schedule of the forward process (Ho 2020). 
-
-An important property of the forward process is that it admits sampling $\bold{y}_t$ at an arbitrary timestep $t$ in closed form (Ho 2020). Using the notation $\alpha_t := 1 - \beta_t$ and $\gamma_t := \prod_{s=1}^{t} \alpha_s$, we have
+where we reuse the variance schedule of the forward process (Ho 2020). We omit conditioning on $\hat{\bold{y}}$ for each transition density $p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t})$, as this is only considered at $t=0$ i.e., $p_{\theta}(\bold{y}_{1}|\bold{y}_{0},\hat{\bold{y}})$. An important property of the forward process is that it admits sampling $\bold{y}_t$ at an arbitrary timestep $t$ in closed form (Ho 2020). Using the notation $\alpha_t := 1 - \beta_t$ and $\gamma_t := \prod_{s=1}^{t} \alpha_s$, we have $q(\bold{y}_t|\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 - \gamma_t)I \right)$. Training is performed by optimizing the usual variational bound on negative log likelihood:
 
 \begin{equation}
-q(\bold{y}_t|\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 - \gamma_t)I \right)
+\mathcal{L}(\theta) = \mathbb{E}\left[-\log p_{\theta}(\bold{y}_{0}|\bold{x})\right] \leq  \mathbb{E}\left[-\log \frac{p_{\theta}(\bold{y}_{0:T}|\bold{x})}{q(\bold{y}_{1:T}|\bold{y}_{0})}\right]
 \end{equation}
 
-We seek to learn a denoising model $\mu_{\theta}$ which computes the mean of the Gaussian transition density at each time step $t$. For all $t > 0$, the mean of the transition density is computed as
+The objective in (6) can be expanded in terms of $D_{\mathrm{KL}}(p(\bold{y}_{t-1}|\bold{y}_{t})|| q(\bold{y}_{t}|\bold{y}_{t-1})$ as detailed in (Ho 2020). We choose to adopt the simplified from of the variational bound, which emphasizes that the DDPM estimates the score $\nabla_{\bold{y}}\log p(\bold{y}|\bold{x})$ at each noise level (Song 2021)
 
 \begin{equation}
-\mu_{\theta}(\bold{y}_t, \bold{\hat{y}}, \gamma_t) = \frac{1}{\sqrt{\alpha_t}} \left(\bold{y}_t - \frac{(1 - \alpha_t)}{\sqrt{1 - \gamma_t}} \, f_{\theta}(\bold{y}, \bold{\hat{y}}, \gamma_t) \right)
+\theta^{*} = \underset{\theta}{\mathrm{argmin}} \underset{(\bold{\hat{y}},\bold{y}_{0})}{\mathbb{E}}\underset{(\epsilon,\gamma)}{\mathbb{E}} \left[ s_{\theta}\left(x, \sqrt{\gamma} \bold{y}_0 + \sqrt{1 - \gamma} \epsilon \, \middle|\, \bold{y}_{t}, \gamma\right) - \epsilon \right],
 \end{equation}
 
-where $f_{\theta}$ is a neural network. Only at $t=0$ is this mean directly a function of $\bold{x}$. 
-
-\subsection{Optimization of the Denoising Model}
-
-To reverse the diffusion process, we optimize a neural denoising model $f_{\theta}$ that takes as input $\bold{\hat{y}}$ and a noisy target image $\bold{y}_t \sim q(\bold{y}_t|\bold{y}_0)$. That is, this noisy target image $\bold{y}_t$ is drawn from the marginal distribution of noisy images at a time step $t$ of the forward diffusion process. 
+After training, samples can be generated by 
 
 \begin{equation}
-\bold{y}_t = \sqrt{\gamma} \bold{y}_0 + \sqrt{1 - \gamma} \bold{\epsilon}, \quad \bold{\epsilon} \sim \mathcal{N}(0, \bold{I})
+\bold{y}_{t-1} = \frac{1}{\sqrt{1-\beta_{i}}}\left(\bold{y}_{i} + \beta_{i}s_{\theta}(\bold{y}_{t})\right) + \sqrt{\beta_{i}}\bold{\xi}
 \end{equation}
 
-In addition to a source image $\bold{y}_{0}$ and a noisy target image $\bold{y}_t$, the denoising model $f_{\theta}$ takes as input the sufficient statistics for the variance of the noise $\gamma$, and is trained to predict the noise vector $\bold{\epsilon}$. We make the denoising model aware of the level of noise through conditioning on a scalar $\gamma$. The proposed objective function for training $f_{\theta}$ is
-
-\begin{equation}
-\underset{(\bold{\hat{y}},\bold{y}_{0})}{\mathbb{E}}\underset{(\epsilon,\gamma)}{\mathbb{E}} \left[ f_{\theta}\left(x, \sqrt{\gamma} \bold{y}_0 + \sqrt{1 - \gamma} \epsilon \, \middle|\, \bold{y}_{t}, \gamma\right) - \epsilon \right],
-\end{equation} 
-
-where $(\bold{\hat{y}},\bold{y}_{0})$ is sampled from the training dataset and $\gamma \sim p(\gamma)$. The distribution of $\gamma$ has a big impact on the quality of the model and the generated outputs. For our training noise schedule, we use a piecewise distribution for $\gamma$, $p(\gamma) = \frac{1}{T}\sum_{t=1}^{T} U(\gamma_{t-1}, \gamma_t)$ (Nanxin 2021). Specifically, during training, we first uniformly sample a time step $t \sim \{0, ..., T\}$ followed by sampling $\gamma \sim U(\gamma_{t-1}, \gamma_t)$. We set $T = 100$ in all our experiments.
+The distribution of $\gamma$ has a big impact on the quality of the model and the generated outputs. For our training noise schedule, we use a piecewise distribution for $\gamma$, $p(\gamma) = \frac{1}{T}\sum_{t=1}^{T} U(\gamma_{t-1}, \gamma_t)$ (Nanxin 2021). Specifically, during training, we first uniformly sample a time step $t \sim \{0, ..., T\}$ followed by sampling $\gamma \sim U(\gamma_{t-1}, \gamma_t)$. We set $T = 100$ in all our experiments.
 
 \subsection{Optimization of the DeepSTORM architecture}
 
@@ -333,11 +328,5 @@ Consider the factorization $p(\hat{\bold{y}}|\bold{x},\bold{y})p(\bold{x}|\bold{
 \begin{equation*}
 p_{\Psi}(\hat{\bold{y}}|\bold{x},\bold{y})=p(\bold{y}|\hat{\bold{y}})
 \end{equation*}
-
-\begin{figure}
-\centering
-\includegraphics[scale=0.8]{Errors.png}
-\caption{Localization errors of the trained model}
-\end{figure}
 
 \end{document}
