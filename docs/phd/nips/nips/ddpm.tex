@@ -35,7 +35,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 
-\title{Conditional Diffusion Models for Uncertainty Estimation in Super Resolution Microscopy}
+\title{Accelerated Sampling in Image Super-Resolution via Equilibrium Diffusion}
 
 
 % The \author macro works with any number of authors. There are two commands
@@ -92,11 +92,11 @@ Deep learning has recently attracted considerable attention from researchers in 
 
 \section{Introduction}
 
-Deep learning has attracted tremendous attention from researchers in the natural sciences, with several foundational applications arising in microscopy, e.g., (Weigert 2018; Falk 2019). Recently, the application of deep image translation in single-molecule localization microscopy (SMLM) has received considerable interest (Ouyang 2018; Nehme 2020; Speiser 2021). SMLM techniques are a mainstay of fluorescence microscopy and can be used to produce a pointillist representation of biomolecules in the cell at diffraction-unlimited precision (Rust 2006; Betzig 2006). As this technology enables increasingly precise measurements of the cellular environment, there is an increasing need for machine learning methods to report uncertainty for quality control.  
+Deep learning has attracted tremendous attention from researchers in the natural sciences, with several foundational applications arising in microscopy, e.g., (Weigert 2018; Falk 2019). Recently, the application of deep image translation in single-molecule localization microscopy (SMLM) has received considerable interest (Ouyang 2018; Nehme 2020; Speiser 2021). SMLM techniques are a mainstay of fluorescence microscopy and can be used to produce a pointillist representation of biomolecules in the cell at diffraction-unlimited precision (Rust 2006; Betzig 2006). In previous applications of deep models to localization microscopy, super-resolution images can be recovered from a sparse set of localizations with conditional generative adversarial networks (Ouyang 2018) or kernel density estimation can be performed using convolutional networks (Nehme 2020; Speiser 2021). Here, we focus on the latter class of models which perform single molecule localization using neural networks. 
 
-In previous applications of deep models to localization microscopy, super-resolution images can be recovered from a sparse set of localizations with conditional generative adversarial networks (Ouyang 2018) or kernel density estimation can be performed using convolutional networks (Nehme 2020; Speiser 2021). Here, we focus on the latter class of models which perform single molecule localization using neural networks. In this approach, one estimates molecular coordinates by predicting kernel density estimates (KDEs) $\bold{y}$, which are latent in the raw data $\bold{x}$, using a convolutional neural network. Importantly, inferences in SMLM are often necessarily made on a single measurement, thus common measures of model performance are based on localization errors computed over ensembles of simulated images. However, this choice precludes computation of aleatoric uncertainty at test time under a fixed model, and may result in the application of models to out of distribution datasets.
+Inferences in SMLM, and other super-resolution image reconstruction tasks, are often made on a single measurement, and thus common measures of model performance are based on localization errors computed over ensembles of simulated images. Unfortunately, this choice precludes computation of uncertainty at test time under a fixed model. Yet, Bayesian probability theory offers us mathematically grounded tools to reason about model uncertainty, but these usually come with a prohibitive computational cost (Gal 2022). A few approaches to avoiding this intractiblity in deep models have been deterministic uncertainty quantification (Amersfoort 2020), ensembling (Lakshminarayanan et al., 2017) or Monte Carlo dropout (Gal and Ghahramani, 2016). Here, we choose to model a distribution on high-resolution KDE predictions conditioned on a low-resolution input using a denoising diffusion probabilistic model (DDPM) (Ho 2020; Song 2021), Such models are one class of \emph{score based generative models} which implicitly compute the score of the data distribution at each noise scale starting from pure noise (Song 2021) . 
 
-Bayesian probability theory offers us mathematically grounded tools to reason about model uncertainty, but these usually come with a prohibitive computational cost (Gal 2022). A few approaches to avoiding this intractiblity in deep models have been deterministic uncertainty quantification (Amersfoort 2020), ensembling (Lakshminarayanan et al., 2017) or Monte Carlo dropout (Gal and Ghahramani, 2016). Here, we report a method which models estimates uncertainty in KDE predictions by combining deterministic deep learning with deep generative modeling in a hybrid algorithm. Our approach produces pixel-wise uncertainties in model predictions with no modification to the existing architecture, and can be used for downstream filtering of erroneous image regions. We choose to model a distribution on high-resolution KDE predictions conditioned on a low-resolution input using a denoising diffusion probabilistic model (DDPM) (Ho 2020; Song 2021), referred to here as simply ``diffusion model''. Such models are one class of \emph{score based generative models} which implicitly compute the score of the data distribution at each noise scale (Song 2021) and are well suited conditional image generation tasks (Saharia 2021). Most importantly, score-based models provide a natural mechanism for uncertainty quantification. Our approach could be readily integrated with existing localization performance measures to address both model accuracy on training data and precision on datasets produced by experiments. 
+In statistical physics, particularly sampling of complex molecular systems, integrating molecular dynamics does not begin with randomized configurations. Rather, sampling begins at a presumed global optimum, which is typically a configuration with minimal energy. This choice provides a reasonable way of integrating prior information about the configuration before sampling begins. Similarly, super-resolution tasks admit many neighboring reconstructions around the global optimum which are physically reasonable, while most others are not. In a similar vein, we propose sampling is preceded by an analagous procedure to energy-minimization, realized by a CNN, followed by Langevin-based sampling with a DDPM. Our approach admits faster sampling and produces pixel-wise uncertainties in model predictions with no modification to the existing architecture. This technique could be readily integrated with existing localization performance measures to address both model accuracy on training data and precision on datasets produced by experiments. 
 
 \section{Background}
 
@@ -114,10 +114,10 @@ p(\bold{x}_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_
 \caption{Generative model of single molecule localization microscopy images}
 \end{figure}
 
-where $A$ is some normalization constant and $\omega_{k}' = \omega_{k} + \sigma_{k}^{2}$. For the sake of generality, we include a per-pixel gain factor $g_{k}$, which is often unity. In practice, the summation in (1) can be difficult to work with, and it is commond to instead use a Poisson-Normal approximation for simplification, valid under a range of experimental conditions (Huang 2013). This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson. The expectation of the Poisson process at each pixel of the image is computed from the optical transfer function $O(u,v)$, which is often a two-dimensional isotropic Gaussian.
+where $A$ is some normalization constant and $\omega_{k}' = \omega_{k} + \sigma_{k}^{2}$. For the sake of generality, we include a per-pixel gain factor $g_{k}$, which is often unity. In practice, the summation in (1) can be difficult to work with, and it is common to instead use a Poisson-Normal approximation for simplification, valid under a range of experimental conditions (Huang 2013). This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson. The expectation of the Poisson process at each pixel of the image is computed from the optical transfer function $O(u,v)$, which is often a two-dimensional isotropic Gaussian.
 
 \begin{equation}
-\omega = i_{0}\int O(u)du\int O(v)dv
+\omega = i_{0}\iint O(u,v)du dv
 \end{equation}
 
 The above integration can be carried out by computing differences of error functions, as detailed in Appendix A. The complete generative process is depicted in Figure 1. 
@@ -136,10 +136,9 @@ Reliable estimation of $\theta$ from $\bold{x}$, for example by maximum likeliho
 \caption{Localization errors of the trained model}
 \end{figure}
 
+Direct optimization of the likelihood in (1) from observations $\bold{x}$ alone is challenging when fluorescent emitters are dense within the field of view and fluorescent signals significantly overlap. However, convolutional neural networks (CNN) have recently proven to be powerful tools fluorescence microscopy to extract parameters describing fluorescent emitters such as color, emitter orientation, $z$-coordinate, and background signal (Zhang 2018; Kim 2019; Zelger 2018). For localization tasks, CNNs typically employ upsampling layers to reconstruct Bernoulli probabilities of emitter occupancy (Speiser 2021) or kernel density estimates with higher resolution than experimental measurements (Nehme 2020). We choose to use kernel density estimates in our model, denoted by $\bold{y}$. KDEs are the most common data structure used in SMLM, and can be easily generated from molecular coordinates, alongside observations $\bold{x}$, using well-understood models of the optical impulse response (Zhang 2007). 
 
-Direct optimization of the likelihood in (1) from observations $\bold{x}$ alone is challenging when fluorescent emitters are dense within the field of view and fluorescent signals significantly overlap. However, convolutional neural networks (CNN) have recently proven to be powerful tools fluorescence microscopy to extract parameters describing fluorescent emitters such as color, emitter orientation, $z$-coordinate, and background signal (Zhang 2018; Kim 2019; Zelger 2018). For localization tasks, CNNs typically employ upsampling layers to reconstruct Bernoulli probabilities of emitter occupancy (Speiser 2021) or kernel density estimates with higher resolution than experimental measurements (Nehme 2020). Kernel density estimates, denoted by $\bold{y}$, are the most common data structure used in SMLM, and can be easily generated from molecular coordinates, alongside observations $\bold{x}$, using well-understood models of the optical impulse response (Zhang 2007). 
-
-\section{Conditional Diffusion for Uncertainty-Aware Super Resolution}
+\section{Image Super-Resolution via Equilibrium Diffusion}
 
 We consider datasets $(\bold{x}_i,\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$ of observed images $\bold{x}_i$ true kernel density estimate (KDE) images $\bold{y}_{i}$, and KDE estimates $\hat{\bold{y}}_{i}=\phi(\bold{x}_{i})$. Observations $\bold{x}_i$ are simulated under the Poisson likelihood (1) and KDEs are generated using (2) alone, followed by appropriate normalization. 
 
@@ -147,7 +146,7 @@ We consider datasets $(\bold{x}_i,\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$ of o
 
 Point estimates $\hat{\bold{y}}_{i}$ produced by the traditional deep architectures for super resolution microscopy produce strong results, but lack uncertainty quantification. Recent advances in generative modeling, particularly DDPMs, therefore present a unique opportunity to integrate uncertainty awareness into the super-resolution microscopy toolkit. However, sampling from DDPMs is computationally expensive, given that generation amounts to solving a complex stochastic differential equation, effectively mapping a simple base distribution to the complex data distribution. The solution of such equations requires numerical integration with very small step sizes, resulting in thousands of neural network evaluations (Saharia 2021; Vahdat 2021). Furthermore, for conditional generation tasks in high-risk applications, generation complexity is further exacerbated by the need for the highest level of detail in generated samples.
 
-Since we are primarily interested in the conditional distribution $p(\bold{y}|\bold{x})$, we propose that DDPM sampling is preceded by a deterministic transformation $\phi$, trained to predict $\bold{y}$ from $\bold{x}$. Reasoning for this choice in the current application is two-fold:
+Conditional generation tasks, for example sampling from the distribution $p(\bold{y}|\bold{x})$, can benefit significantly from more suitable initial conditions. Therefore, we propose that DDPM sampling is preceded by a deterministic neural network $\phi$, which seeds sampling in a target mode. Reasoning for this choice in the current application is two-fold:
 
 \textbf{Synthesis Speed}. By training a preprocessor $\phi$ to obtain an approximate estimate of $\bold{y}$, we can reduce the number of iterations, since the DDPM only needs to model the remaining mismatch, resulting in a less complex model from which sampling becomes easier. Speed is critical in SMLM applications, which can produce large volumes of image data in a single experiment. Moreover, we note that this approach is analagous to preconditioned stochastic gradient langevin dynamics (Li 2016), wherein $\phi$ identifies the posterior mode followed by Langevin dynamics to sample from the posterior. \\
 
@@ -158,14 +157,14 @@ The preprocessor $\phi$ is realized by a CNN with upsampling layers. Consider th
 
 In practice, a DDPM $\Psi$ can be trained on pairs $(\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$. The conditional DDPM generates a target KDE $\bold{y}_0$ in $T$ refinement steps. Starting with a pure noise image $\bold{y}_{T}\sim \mathcal{N}(0,\bold{I})$, the model iteratively refines the KDE through successive iterations according to learned conditional transition distributions $p(\bold{y}_{t-1}|\bold{y}_{t},\bold{})$ such that $\bold{y}_{0} \sim p(\bold{y}|\hat{\bold{y}})$ 
 
-\subsection{Uncertainty Estimation}
+\subsection{Equilibrium Diffusion}
 
 \begin{figure}
 \includegraphics[scale=4.5]{Denoise.png}
 \caption{Conditional diffusion model for sampling kernel density estimates}
 \end{figure}
 
-Diffusion models (Sohl-Dickstein 2015; Ho 2020) are a class of generative models inspired by nonequilibrium statistical physics, which slowly destroy structure in a data distribution $p(\bold{y}_{0}|\bold{x})$ via a fixed Markov chain referred to as the \emph{forward process}. In the present context, we apply leverage recent results from (Ho 2020; Song 2021; Saharia 2021) for applying this framework to sampling from $p(\bold{y}|\bold{x},\bold{\hat{y}})$. We note that this approach is analagous to preconditioned stochastic gradient langevin dynamics (Li 2016), wherein $\phi$ identifies the posterior mode followed by sampling with Langevin dynamics. The forward process gradually adds Gaussian noise to the KDE $\bold{y}$ according to a variance schedule $\beta_{0:T}$
+Diffusion models (Sohl-Dickstein 2015; Ho 2020; Song 2021) are a class of generative models inspired by nonequilibrium statistical physics, which slowly destroy structure in a data distribution $p(\bold{y}_{0}|\bold{x})$ via a fixed Markov chain referred to as the \emph{forward process}. In the present context, we apply leverage recent results from (Ho 2020; Song 2021; Saharia 2021) for applying this framework to sampling from $p(\bold{y}|\bold{x},\bold{\hat{y}})$. The forward process gradually adds Gaussian noise to the KDE $\bold{y}$ according to a variance schedule $\beta_{0:T}$
 
 \begin{equation}
 q(\bold{y}_{t}|\bold{y}_{0}) = \prod_{t=1}^{T}q(\bold{y}_{t}|\bold{y}_{t-1}) \;\;\; q(\bold{y}_{t}|\bold{y}_{t-1}) = \mathcal{N}\left(\sqrt{1-\beta_{t}}\bold{y}_{t-1},\beta_t I\right)
@@ -177,7 +176,7 @@ The usual procedure is then to learn a parametric representation of the \emph{re
 p_{\theta}(\bold{y}_{0:T}) = p_{\theta}(\bold{y}_{T})\prod_{t=1}^{T} p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) \;\;\; p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) = \mathcal{N}\left(s_{\theta}(\bold{y}_{t}),\beta_{t}I\right)
 \end{equation}
 
-where we reuse the variance schedule of the forward process (Ho 2020). We omit conditioning on $\hat{\bold{y}}$ for each transition density $p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t})$, as this is only considered at $t=0$ i.e., $p_{\theta}(\bold{y}_{1}|\bold{y}_{0},\hat{\bold{y}})$. An important property of the forward process is that it admits sampling $\bold{y}_t$ at an arbitrary timestep $t$ in closed form (Ho 2020). Using the notation $\alpha_t := 1 - \beta_t$ and $\gamma_t := \prod_{s=1}^{t} \alpha_s$, we have $q(\bold{y}_t|\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 - \gamma_t)I \right)$. Training is performed by optimizing the usual variational bound on negative log likelihood:
+where we reuse the variance schedule of the forward process (Ho 2020). We omit conditioning on $\hat{\bold{y}}$ for each transition density $p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t})$, as this is only considered at $t=0$ i.e., $p_{\theta}(\bold{y}_{1}|\bold{y}_{0},\hat{\bold{y}})$. An important property of the forward process is that it admits sampling $\bold{y}_t$ at an arbitrary timestep $t$ in closed form (Ho 2020). Using the notation $\alpha_t := 1 - \beta_t$ and $\gamma_t := \prod_{s=1}^{t} \alpha_s$, we have $q(\bold{y}_t|\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 - \gamma_t)I \right)$.
 
 \begin{equation}
 \mathcal{L}(\theta) = \mathbb{E}\left[-\log p_{\theta}(\bold{y}_{0}|\bold{x})\right] \leq  \mathbb{E}\left[-\log \frac{p_{\theta}(\bold{y}_{0:T}|\bold{x})}{q(\bold{y}_{1:T}|\bold{y}_{0})}\right]
@@ -194,6 +193,13 @@ After training, samples can be generated by
 \begin{equation}
 \bold{y}_{t-1} = \frac{1}{\sqrt{1-\beta_{i}}}\left(\bold{y}_{i} + \beta_{i}s_{\theta}(\bold{y}_{t})\right) + \sqrt{\beta_{i}}\bold{\xi}
 \end{equation}
+
+For many conditional generation tasks, estimation of the gradient $s_{\theta}$ in low-density regions in order to drive (8) toward high-density regions is unecessary and reduces performance of the sampler. Here, we instead propose an ``energy-minimization'' procedure preceding Langevin-based sampling in a DDPM, in order to speed up sampling from the equilibrium distribution
+
+\begin{equation}
+\hat{\bold{y}} = \underset{\bold{y}}{\mathrm{argmin}} ||\bold{y}-\bold{y_0}||^2
+\end{equation} 
+
 
 
 \section{Experiments}
@@ -216,10 +222,6 @@ We set $T = 100$ for all experiments and treat forward process variances $\beta_
 These constants were chosen to be small relative to ground truth KDEs, which are scaled to $[-1,1]$, ensuring that forward process distribution $\bold{y}_{T}\sim q(\bold{y}_{T}|\bold{y}_{0})$ approximately matches the reverse process $\bold{y}_T\sim \mathcal{N}(0, I)$ at $t=T$.
 
 To represent the reverse process, we used a DDPM architecture based on a U-Net backbone proposed in (Saharia 2021). We chose a U-Net backbone with channel multipliers $[1,2,4,8,8]$ in the downsampling and upsampling paths of the architecture. Parameters are shared across time, which is specified to the network using the Transformer sinusoidal position embedding. We use self-attention at the $16 \times 16$ feature map resolution. To condition the model on the input $\bold{\hat{y}}$, we concatenate the $\bold{\hat{y}}$ estimated by DeepSTORM along the channel dimension, which are scaled to $[0,1]$, with $\bold{y}_T\sim \mathcal{N}(0, I)$. Others have experimented with more sophisticated methods of conditioning, but found that the simple concatenation yielded similar generation quality (Saharia 2021). 
-
-
-\section{Related Work}
-
 
 
 \section{Conclusion}
