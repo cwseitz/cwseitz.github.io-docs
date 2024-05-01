@@ -35,7 +35,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 
-\title{Accelerated Sampling in Image Super-Resolution via Equilibrium Diffusion}
+\title{Uncertainty-Aware Image Super-Resolution via Guided Diffusion}
 
 
 % The \author macro works with any number of authors. There are two commands
@@ -87,16 +87,16 @@
 
 \begin{abstract}
 
-Deep learning has recently attracted considerable attention from researchers in the natural sciences, particularly microscopists, for fast extraction of physically relevant information from images. However, simple and interpretable uncertainty quantification is lacking in these applications, and remains a necessary modeling component in high-risk research. In order to quantify uncertainty in otherwise deterministic image translation architectures, we propose a hybrid generative modeling framework based on denoising diffusion probabilistic models (DDPMs). Our model is inspired by statistical physics simulations at equilibrium, which initialize sampling conditioned on a configuration of minimal energy. We realize energy minimization with a deterministic neural network, which can improve conditional synthesis speed and fidelity of the DDPM, while providing a natural mechanism for uncertainty estimation. We apply our model to the task of single molecule localization in fluorescence microscopy, and demonstrate that blending the DeepSTORM architecture with a DDPM permits simultaneous high-fidelity super-resolution with uncertainty estimation of kernel density estimates (KDEs) regressed by DeepSTORM. Our results suggest the proposed solution is an interesting addition to the modeling toolkit for fluorescence microscopists and the field of deep image translation in general.
+Deep learning has recently attracted considerable attention from researchers in the natural sciences, particularly microscopists, for fast extraction of physically relevant information from images. In particular, single molecule localization microscopy has benefited significantly from recently developed deep kernel density estimators (KDE). However, simple and interpretable uncertainty quantification is lacking in these applications, and remains a necessary modeling component in high-risk research. In order to quantify uncertainty in otherwise deterministic image translation architectures, we propose a generative modeling framework based on denoising diffusion probabilistic models (DDPMs). Our model is inspired by guided diffusion, which condition the diffusion process with external cues or their derivatives. We propose uncertainty estimation by using a guided diffusion process to target diffusion toward a space of reasonable solutions through conditioning the score-estimator on a strong initial guess. This approach allows us to probe the structure of the distribution on reconstructions and estimate uncertainties. Our model is tested on KDE estimation in fluorescence microscopy, and we demonstrate that blending the traditional architectures with a DDPM permits simultaneous high-fidelity super-resolution with uncertainty estimation of regressed KDEs. 
 \end{abstract}
 
 \section{Introduction}
 
-Deep learning has attracted tremendous attention from researchers in the natural sciences, with several foundational applications arising in microscopy, e.g., (Weigert 2018; Falk 2019). Recently, the application of deep image translation in single-molecule localization microscopy (SMLM) has received considerable interest (Ouyang 2018; Nehme 2020; Speiser 2021). SMLM techniques are a mainstay of fluorescence microscopy and can be used to produce a pointillist representation of biomolecules in the cell at diffraction-unlimited precision (Rust 2006; Betzig 2006). In previous applications of deep models to localization microscopy, super-resolution images can be recovered from a sparse set of localizations with conditional generative adversarial networks (Ouyang 2018) or kernel density estimation can be performed using convolutional networks (Nehme 2020; Speiser 2021). Here, we focus on the latter class of models which perform single molecule localization using neural networks. 
+Deep learning has attracted tremendous attention from researchers in the natural sciences, with several foundational applications arising in microscopy, e.g., (Weigert 2018; Falk 2019). Recently, the application of deep image translation in single-molecule localization microscopy (SMLM) has received considerable interest (Ouyang 2018; Nehme 2020; Speiser 2021). SMLM techniques are a mainstay of fluorescence microscopy and can be used to produce a pointillist representation of biomolecules in the cell at diffraction-unlimited precision (Rust 2006; Betzig 2006). In previous applications of deep models to localization microscopy, super-resolution images can be recovered from a sparse set of localizations with conditional generative adversarial networks (Ouyang 2018) or kernel density estimation can be performed using traditional convolutional networks (Nehme 2020; Speiser 2021). Here, we focus on the latter class of models which perform KDE estimation using neural networks. 
 
-Inferences in SMLM, and other super-resolution image reconstruction tasks, are often made on a single measurement, and thus common measures of model performance are based on localization errors computed over ensembles of simulated images. Unfortunately, this choice precludes computation of uncertainty at test time under a fixed model. Yet, Bayesian probability theory offers us mathematically grounded tools to reason about model uncertainty, but these usually come with a prohibitive computational cost (Gal 2022). A few approaches to avoiding this intractiblity in deep models have been deterministic uncertainty quantification (Amersfoort 2020), ensembling (Lakshminarayanan et al., 2017) or Monte Carlo dropout (Gal and Ghahramani, 2016). Here, we choose to model a distribution on high-resolution KDE predictions conditioned on a low-resolution input using a denoising diffusion probabilistic model (DDPM) (Ho 2020; Song 2021), Such models are one class of \emph{score based generative models} which implicitly compute the score of the data distribution at each noise scale starting from pure noise (Song 2021) . 
+Inferences in SMLM, and other super-resolution image reconstruction tasks, are often made on a single measurement, and thus common measures of model performance are based on localization errors computed over ensembles of simulated images. Unfortunately, this choice precludes computation of uncertainty at test time under a fixed model. Yet, Bayesian probability theory offers us mathematically grounded tools to reason about model uncertainty, but these usually come with a prohibitive computational cost (Gal 2022). A few approaches to avoiding this intractiblity in deep models have been deterministic uncertainty quantification (Amersfoort 2020), ensembling (Lakshminarayanan et al., 2017) or Monte Carlo dropout (Gal and Ghahramani, 2016). Here, we choose to model a distribution on high-resolution KDE predictions conditioned on a low-resolution input using a denoising diffusion probabilistic model (DDPM) (Ho 2020; Song 2021), Such models are one class of \emph{score based generative models} which implicitly compute the score of the data distribution at each noise scale starting from pure noise (Song 2021). This approach has proven powerful for generative modeling of conditional image distributions; however, conditional diffusion can become trapped in local optima preventing the application of such models to uncertainty estimation.
 
-In statistical physics, particularly simulation of complex molecular systems, integrating molecular dynamics does not begin conditioned on a distant configuration. Rather, sampling begins at a presumed global optimum, which is typically a configuration with minimal energy (Levitt 1983). This choice provides a physically reasonable way of integrating prior information about the configuration before sampling begins. Similarly, super-resolution tasks admit many neighboring reconstructions around the global optimum which are physically reasonable, while most others are not. In a similar vein, we propose conditional diffusion is preceded by an analagous procedure to energy-minimization, realized by a CNN, followed by Langevin-based sampling with a DDPM. Our approach admits faster sampling and produces pixel-wise uncertainties in model predictions with no modification to the existing architecture. This technique could be readily integrated with existing localization performance measures to address both model accuracy on training data and precision on datasets produced by experiments. 
+In statistical physics, particularly simulation of complex molecular systems, sampling is constrained to a limited set of configurations. For this reason, sampling begins at a presumed global optimum, which is typically a configuration with minimal energy (Levitt 1983). Similar notions of constrained diffusion have been used in DDPMs to guide the process based on gradients of a classifier (Nichols 2021). Importantly, in the context of DDPMs, the forward process is ill defined for corruption of a target image to a estimated global optimum. We therefore propose a guided diffusion process which targets diffusion toward a space of reasonable solutions by conditioning the score-estimator on a strong initial guess. This approach allows us to probe the structure of the distribution of reconstructions, with fewer iterations than standard diffusion models. Indeed, the entropy of estimated reconstructions obtained from guided diffusion must upper bound the entropy of reconstructions obtained from low-resolution inputs. This technique could be readily integrated with existing localization performance measures to address both model accuracy on training data and precision on datasets produced by experiments. 
 
 \section{Background}
 
@@ -130,15 +130,10 @@ Reliable estimation of $\theta$ from $\bold{x}$, for example by maximum likeliho
 
 \subsection{Kernel density estimation with deep networks}
 
-\begin{figure}
-\centering
-\includegraphics[scale=0.7]{Errors.png}
-\caption{Localization errors of the trained model}
-\end{figure}
 
 Direct optimization of the likelihood in (1) from observations $\bold{x}$ alone is challenging when fluorescent emitters are dense within the field of view and fluorescent signals significantly overlap. However, convolutional neural networks (CNN) have recently proven to be powerful tools fluorescence microscopy to extract parameters describing fluorescent emitters such as color, emitter orientation, $z$-coordinate, and background signal (Zhang 2018; Kim 2019; Zelger 2018). For localization tasks, CNNs typically employ upsampling layers to reconstruct Bernoulli probabilities of emitter occupancy (Speiser 2021) or kernel density estimates with higher resolution than experimental measurements (Nehme 2020). We choose to use kernel density estimates in our model, denoted by $\bold{y}$. KDEs are the most common data structure used in SMLM, and can be easily generated from molecular coordinates, alongside observations $\bold{x}$, using well-understood models of the optical impulse response (Zhang 2007). 
 
-\section{Image Super-Resolution via Equilibrium Diffusion}
+\section{Image Super-Resolution via Guided Diffusion}
 
 We consider datasets $(\bold{x}_i,\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$ of observed images $\bold{x}_i$ true kernel density estimate (KDE) images $\bold{y}_{i}$, and KDE estimates $\hat{\bold{y}}_{i}=\phi(\bold{x}_{i})$. Observations $\bold{x}_i$ are simulated under the Poisson likelihood (1) and KDEs are generated using (2) alone, followed by appropriate normalization. 
 
@@ -156,7 +151,7 @@ Here, the preprocessor $\phi$ is realized by a CNN with upsampling layers. Consi
 
 In practice, a DDPM $\Psi$ can be trained on pairs $(\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$. The conditional DDPM generates a target KDE $\bold{y}_0$ in $T$ refinement steps. Starting with a pure noise image $\bold{y}_{T}\sim \mathcal{N}(0,\bold{I})$, the model iteratively refines the KDE through successive iterations according to learned conditional transition distributions $p(\bold{y}_{t-1}|\bold{y}_{t},\bold{})$ such that $\bold{y}_{0} \sim p(\bold{y}|\hat{\bold{y}})$ 
 
-\subsection{Equilibrium Diffusion}
+\subsection{Guided Diffusion}
 
 \begin{figure}
 \includegraphics[scale=4.5]{Denoise.png}
@@ -213,9 +208,15 @@ All training data consits of low-resolution $20\times 20$ images, simulated unde
 
 \subsection{Localization RMSE}
 
+\begin{figure}
+\centering
+\includegraphics[scale=0.7]{Errors.png}
+\caption{Localization errors of the trained model}
+\end{figure}
+
 In order to verify the initial predictions made by the model $\phi$, we simulated a dataset $(\bold{x}_i,\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$ with $N=1000$, and  detect objects in the predicted KDE $,\hat{\bold{y}}_{i}$ using the Laplacian of Gaussian (LoG) detection algorithm (Lindeberg 2013). For simplicity, the localization is carried out from scale-space maxima directly in LoG, as opposed to fitting a model function to KDE predictions. A particular LoG localization in the KDE is paired to the nearest ground truth localization and is unpaired if a localization is not within 5 KDE pixels of any ground truth localization. In addition to localization error, we measured a precision $\mathrm{P = TP/(TP + FP)} = 1.0$ and recall $\mathrm{R = TP/(TP + FN)} = 0.85$, where $\mathrm{TP}$ denotes true positive localizations, $\mathrm{FP}$ denotes false positive localizations, and $\mathrm{FN}$ denotes false negative localizations.
 
-\subsection{Model Uncertainty}
+\subsection{Guided Diffusion}
 
 We set $T = 100$ for all experiments and treat forward process variances $\beta_{t}$ as hyperparameters, with a linear schedule from $\beta_{0}=10^{-4}$ to $\beta_{T}=10^{-2}$.
 These constants were chosen to be small relative to ground truth KDEs, which are scaled to $[-1,1]$, ensuring that forward process distribution $\bold{y}_{T}\sim q(\bold{y}_{T}|\bold{y}_{0})$ approximately matches the reverse process $\bold{y}_T\sim \mathcal{N}(0, I)$ at $t=T$.

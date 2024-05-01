@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.20)  30 APR 2024 10:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.20)  1 MAY 2024 12:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -622,49 +622,51 @@ File: Generation-Figure.png Graphic file (type png)
 Package pdftex.def Info: Generation-Figure.png  used on input line 113.
 (pdftex.def)             Requested size: 374.86005pt x 74.53355pt.
 [2 <./Generation-Figure.png>]
-<Errors.png, id=84, 432.11438pt x 226.59656pt>
-File: Errors.png Graphic file (type png)
-<use Errors.png>
-Package pdftex.def Info: Errors.png  used on input line 135.
-(pdftex.def)             Requested size: 302.478pt x 158.6165pt.
- [3 <./Errors.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 151--152
+Underfull \hbox (badness 10000) in paragraph at lines 146--147
 
  []
 
-<Denoise.png, id=93, 83.8332pt x 19.2961pt>
+[3]
+<Denoise.png, id=90, 83.8332pt x 19.2961pt>
 File: Denoise.png Graphic file (type png)
 <use Denoise.png>
-Package pdftex.def Info: Denoise.png  used on input line 162.
+Package pdftex.def Info: Denoise.png  used on input line 157.
 (pdftex.def)             Requested size: 377.2484pt x 86.83215pt.
-
-Underfull \vbox (badness 1163) has occurred while \output is active []
-
  [4 <./Denoise.png>]
 <Samples.png, id=101, 351.56343pt x 385.44pt>
 File: Samples.png Graphic file (type png)
 <use Samples.png>
-Package pdftex.def Info: Samples.png  used on input line 208.
+Package pdftex.def Info: Samples.png  used on input line 203.
 (pdftex.def)             Requested size: 281.25111pt x 308.35242pt.
- [5] [6 <./Samples.png>]
-Underfull \hbox (badness 3068) in paragraph at lines 278--279
+ [5 <./Samples.png>]
+<Errors.png, id=111, 432.11438pt x 226.59656pt>
+File: Errors.png Graphic file (type png)
+<use Errors.png>
+Package pdftex.def Info: Errors.png  used on input line 213.
+(pdftex.def)             Requested size: 302.478pt x 158.6165pt.
+ [6 <./Errors.png>]
+Underfull \hbox (badness 3068) in paragraph at lines 279--280
 []\T1/ptm/m/n/9 (+20) [17] Sa-haria, C., et al. \T1/ptm/m/it/9 (+20) Im-age Sup
 er-Resolution via It-er-a-tive Re-fine-ment\T1/ptm/m/n/9 (+20) . Preprint at ar
 Xiv
  []
 
-[7] [8] (./ddpm.aux)
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7]
+[8] (./ddpm.aux)
 Package rerunfilecheck Info: File `ddpm.out' has not changed.
-(rerunfilecheck)             Checksum: 7C68AE59F9C74C92176C47547CAFCBBA;1925.
+(rerunfilecheck)             Checksum: A221783AC6637241CC48445EB7BDE9D2;1870.
  ) 
 Here is how much of TeX's memory you used:
- 13740 strings out of 476025
- 216453 string characters out of 5790016
+ 13737 strings out of 476025
+ 216429 string characters out of 5790016
  1868388 words of memory out of 5000000
  33705 multiletter control sequences out of 15000+600000
- 553636 words of font info for 212 fonts, out of 8000000 for 9000
+ 553506 words of font info for 210 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,8n,76p,1418b,511s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,8n,76p,1404b,551s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx5.pfb><
 /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></u
@@ -684,7 +686,7 @@ e/2023/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb></usr/local/texlive/
 xmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2023/texmf-dist/f
 onts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1
 /urw/times/utmri8a.pfb>
-Output written on ddpm.pdf (8 pages, 441918 bytes).
+Output written on ddpm.pdf (8 pages, 442039 bytes).
 PDF statistics:
  225 PDF objects out of 1000 (max. 8388607)
  167 compressed objects within 2 object streams
