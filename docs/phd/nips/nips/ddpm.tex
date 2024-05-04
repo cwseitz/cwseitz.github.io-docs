@@ -35,7 +35,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 
-\title{Uncertainty-Aware Image Super-Resolution via Guided Diffusion}
+\title{Uncertainty-Aware Super-Resolution Microscopy via Guided Diffusion}
 
 
 % The \author macro works with any number of authors. There are two commands
@@ -117,23 +117,40 @@ p(\bold{x}_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_
 where $A$ is some normalization constant and $\omega_{k}' = \omega_{k} + \sigma_{k}^{2}$. For the sake of generality, we include a per-pixel gain factor $g_{k}$, which is often unity. In practice, the summation in (1) can be difficult to work with, and it is common to instead use a Poisson-Normal approximation for simplification, valid under a range of experimental conditions (Huang 2013). This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson. The expectation of the Poisson process at each pixel of the image is computed from the optical transfer function $O(u,v)$, which is often a two-dimensional isotropic Gaussian.
 
 \begin{equation}
-\omega = i_{0}\iint O(u,v)du dv
+\omega_{k} \propto \Delta E_{x}(\bold{x}_{k},\theta_{x},\sigma_{\bold{x}}) \Delta E_{y}(\bold{x}_{k},\theta_{y},\sigma_{\bold{x}})
 \end{equation}
 
-The above integration can be carried out by computing differences of error functions, as detailed in Appendix A. The complete generative process is depicted in Figure 1. 
+The above expression is simply a product of differences of error functions, as detailed in Appendix A. For example, in one of the dimensions
 
-Reliable estimation of $\theta$ from $\bold{x}$, for example by maximum likelihood estimation or with a deep model, requires performance metrics for model selection. We use the Fisher information as an information theoretic criteria to assess the quality of the model tested here, with respect to the root mean squared error (RMSE) of our predictions of $\theta$ (Chao 2016). The Poisson log-likelihood $\ell(\bold{x}|\theta)$ is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below i.e., $\mathrm{var}(\hat{\theta}) \geq I^{-1}(\theta)$. The Fisher information is straightforward to compute under the Poisson log-likelihood, which is detailed in the Appendix
+\begin{equation}
+\Delta E_{\theta_{i}}(\theta_{i},\sigma_{\bold{x}}) = \int O(\theta_{i})d\theta_{i} = \frac{1}{2}\left(\mathrm{erf}\left(\frac{\bold{x}_{k}+\frac{1}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right) -\mathrm{erf}\left(\frac{\bold{x}_{k}-\frac{1}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right)\right)
+\end{equation}
+
+The complete generative process is depicted in Figure 1. Reliable estimation of $\theta$ from $\bold{x}$, for example by maximum likelihood estimation or with a deep model, requires performance metrics for model selection. We use the Fisher information as an information theoretic criteria to assess the quality of the model tested here, with respect to the root mean squared error (RMSE) of our predictions of $\theta$ (Chao 2016). The Poisson log-likelihood $\ell(\bold{x}|\theta)$ is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below i.e., $\mathrm{var}(\hat{\theta}) \geq I^{-1}(\theta)$. The Fisher information is straightforward to compute under the Poisson log-likelihood, which is detailed in the Appendix
 
 \begin{equation}
 \mathcal{I}_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) = \sum_{k}\frac{1}{\omega_{k}'}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}}
 \end{equation}
 
-\subsection{Kernel density estimation with deep networks}
-
+\subsection{Gaussian kernel density estimation with deep networks}
 
 Direct optimization of the likelihood in (1) from observations $\bold{x}$ alone is challenging when fluorescent emitters are dense within the field of view and fluorescent signals significantly overlap. However, convolutional neural networks (CNN) have recently proven to be powerful tools fluorescence microscopy to extract parameters describing fluorescent emitters such as color, emitter orientation, $z$-coordinate, and background signal (Zhang 2018; Kim 2019; Zelger 2018). For localization tasks, CNNs typically employ upsampling layers to reconstruct Bernoulli probabilities of emitter occupancy (Speiser 2021) or kernel density estimates with higher resolution than experimental measurements (Nehme 2020). We choose to use kernel density estimates in our model, denoted by $\bold{y}$. KDEs are the most common data structure used in SMLM, and can be easily generated from molecular coordinates, alongside observations $\bold{x}$, using well-understood models of the optical impulse response (Zhang 2007). 
 
-\section{Image Super-Resolution via Guided Diffusion}
+Similar to the generative process on low resolution images $\bold{x}$, we can generate KDEs $\bold{y}$ by repurposing the generative model (1) on an unsampled image without noise. In other words, we cast Gaussian kernel density estimation as a noiseless image generation process on the domain of $\bold{y}$. Under a fixed configuration of $N$ particles $\theta$, the value of a KDE pixel $\bold{y}_{k}$ is given by
+
+\begin{equation}
+\bold{y}_{k}(\theta) = \sum_{n=1}^{N}\Delta E_{x}(\bold{y}_{k},\theta_{n,x},\sigma_{\bold{y}}) \Delta E_{y}(\bold{y}_{k},\theta_{n,y},\sigma_{\bold{y}})
+\end{equation}
+
+where the hyperparameter $\sigma_{\bold{y}}$ is the Gaussian kernel width. The distribution on $\bold{y}_{k}$ is given directly from $p(\theta|\bold{x})$, which can be estimated by Markov Chain Monte Carlo (MCMC) as shown in (Figure 2). For an isolated molecule, the distribution $p(\theta|\bold{x})$ is typically symmetric about zero, and thus the distribution on $\bold{y}_{k}$ is given by transforming $|\theta_{i}|$ using (5)
+
+\begin{equation}
+p(\bold{y}_{k}|\bold{x}) = 2 \; p(\bold{y}_{k}(|\theta_{i}|,\sigma_{\bold{y}})|\bold{x})
+\end{equation}
+
+In practice $p(\theta|\bold{x})$ can be costly to compute with MCMC, and is fundmamentally intractable at high molecular densities. The central goal of this paper is to instead leverage a diffusion model to estimate $p(\bold{y}_{k}|\bold{x})$ up to second order, avoiding the intermediate distribution $p(\theta|\bold{x})$ entirely.
+
+\section{Uncertainty-Aware Super-Resolution Microscopy via Guided Diffusion}
 
 We consider datasets $(\bold{x}_i,\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$ of observed images $\bold{x}_i$ true kernel density estimate (KDE) images $\bold{y}_{i}$, and KDE estimates $\hat{\bold{y}}_{i}=\phi(\bold{x}_{i})$. Observations $\bold{x}_i$ are simulated under the Poisson likelihood (1) and KDEs are generated using (2) alone, followed by appropriate normalization. 
 
@@ -176,7 +193,7 @@ where we reuse the variance schedule of the forward process (Ho 2020). We omit c
 \mathcal{L}(\theta) = \mathbb{E}\left[-\log p_{\theta}(\bold{y}_{0}|\bold{x})\right] \leq  \mathbb{E}\left[-\log \frac{p_{\theta}(\bold{y}_{0:T}|\bold{x})}{q(\bold{y}_{1:T}|\bold{y}_{0})}\right]
 \end{equation}
 
-The objective in (6) can be expanded in terms of $D_{\mathrm{KL}}(p(\bold{y}_{t-1}|\bold{y}_{t})|| q(\bold{y}_{t}|\bold{y}_{t-1})$ as detailed in (Ho 2020). We choose to adopt the simplified from of the variational bound, which emphasizes that the DDPM estimates the score $\nabla_{\bold{y}}\log p(\bold{y}|\bold{x})$ at each noise level (Song 2021)
+The objective in (6) can be expanded in terms of $D_{\mathrm{KL}}(p(\bold{y}_{t-1}|\bold{y}_{t})|| q(\bold{y}_{t}|\bold{y}_{t-1})$ as detailed in (Ho 2020). We choose to adopt the simplified from of the variational bound, which is a reweighted form of the variational lower bound and emphasizes that the DDPM estimates the score $\nabla_{\bold{y}}\log p(\bold{y}|\bold{x})$ at each noise level (Song 2021)
 
 \begin{equation}
 \theta^{*} = \underset{\theta}{\mathrm{argmin}} \underset{(\bold{\hat{y}},\bold{y}_{0})}{\mathbb{E}}\underset{(\epsilon,\gamma)}{\mathbb{E}} \left[ s_{\theta}\left(x, \sqrt{\gamma} \bold{y}_0 + \sqrt{1 - \gamma} \epsilon \, \middle|\, \bold{y}_{t}, \gamma\right) - \epsilon \right],
@@ -305,20 +322,7 @@ where $i_{0} = \eta N_{0}\Delta$. The scalar parameters $\eta,\Delta$ are the ph
 \int O(u)du = \frac{1}{2}\left(\mathrm{erf}\left(\frac{u_{k}+\frac{1}{2}-u_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{u_{k}-\frac{1}{2}-u_{0}}{\sqrt{2}\sigma}\right)\right)
 \end{equation}
 
-where we have used the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}\int_{0}^{t}e^{-t^{2}}dt$. Our generative model also incorporates a normally distributed white noise per pixel $\zeta$ with offset $o$ and variance $\sigma^{2}$. Ultimately, we have a Poisson component of the signal, which scales with $N_{0}$ and a Gaussian component, which does not. 
+where we have used the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}\int_{0}^{t}e^{-t^{2}}dt$. 
 
-Consider,
-
-\begin{equation}
-\zeta_{k} - o_{k} + \sigma_{k}^{2} \sim \mathcal{N}(\sigma_{k}^{2},\sigma_{k}^{2}) \approx \mathrm{Poisson}(\sigma_{k}^{2})
-\end{equation}
-
-Since $\bold{x}_{k} = \bold{s}_{k} + \zeta_{k}$, we transform $\bold{x}_{k}' = \bold{x}_{k} - o_{k} + \sigma_{k}^{2}$, which is distributed according to 
-
-Consider the factorization $p(\hat{\bold{y}}|\bold{x},\bold{y})p(\bold{x}|\bold{y})p(\bold{y})=p(\bold{x}|\bold{y},\hat{\bold{y}})p(\bold{y}|\hat{\bold{y}})p(\hat{\bold{y}})$. Given that $\bold{x}$ is conditionally independent of $\hat{\bold{y}}$, we find
-
-\begin{equation*}
-p_{\Psi}(\hat{\bold{y}}|\bold{x},\bold{y})=p(\bold{y}|\hat{\bold{y}})
-\end{equation*}
 
 \end{document}
