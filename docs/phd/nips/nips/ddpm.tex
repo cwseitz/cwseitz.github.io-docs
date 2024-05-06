@@ -36,7 +36,7 @@
 \usepackage{amsmath}
 \usepackage{mathtools}
 
-\title{Uncertainty-Aware Super-Resolution Microscopy via Guided Diffusion}
+\title{Uncertainty-Aware Super-Resolution Microscopy by Guided Diffusion}
 
 
 % The \author macro works with any number of authors. There are two commands
@@ -103,7 +103,7 @@ In statistical physics, particularly simulation of complex molecular systems, sa
 
 \subsection{Image Likelihood and Localization Error}
 
-The central objective of single molecule localization microscopy is to infer a set of molecular coordinates $\theta=(\theta_{x},\theta_{y})$ from measured low resolution images $\bold{x}$. The likelihood on a particular pixel $k$, i.e., $p(\bold{x}_k|\theta)$ is taken to be a convolution of Poisson and Gaussian distributions, due to shot noise $p(s_{k}) = \mathrm{Poisson}(\omega_{k})$ and sensor readout noise $p(\zeta_{k}) = \mathcal{N}(o_{k},\sigma_{k}^{2})$ 
+The central objective of single molecule localization microscopy is to infer a set of molecular coordinates $\theta=(\theta_{x},\theta_{y})$ from measured low resolution images $\bold{x}$. The likelihood on a particular pixel $k$, i.e., $p(\bold{x}_k|\theta)$ is taken to be a convolution of Poisson and Gaussian distributions, due to shot noise $p(s_{k}) = \mathrm{Poisson}(\omega_{k})$ and sensor readout noise $p(\zeta_{k}) = \mathcal{N}(o_{k},w_{k}^{2})$ 
 
 \begin{equation}
 p(\bold{x}_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(\bold{x}_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}} \approx \mathrm{Poisson}(\omega_{k}')
@@ -115,13 +115,13 @@ p(\bold{x}_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_
 \caption{Generative model of single molecule localization microscopy images. Low resolution images $\bold{x}$ are generated from coordinates $\theta$ by integration of the optical transfer function $O$ and sampling from the likelihood (1): $\bold{x}\sim p(\bold{x}|\theta)$. A kernel density estimate $\bold{y}$ is inferred from $\bold{x}$}
 \end{figure}
 
-where $A$ is some normalization constant and $\omega_{k}' = \omega_{k} + \sigma_{k}^{2}$. For the sake of generality, we include a per-pixel gain factor $g_{k}$, which is often unity. Sampling from $p(\bold{x}_{k})$ is trivial; however, for computation of a lower bound on uncertainty in $\theta$, the summation in (1) can be difficult to work with. Therefore, we choose to use a Poisson approximation for simplification, valid under a range of experimental conditions (Huang 2013). The expectation of the Poisson process at each pixel of the image must then be computed from the optical impulse response $O(u,v)$, which is taken to be an isotropic Gaussian in two-dimensions. For example, in one of the dimensions
+where $A$ is some normalization constant and $\omega_{k}' = \omega_{k} + w_{k}^{2}$. For the sake of generality, we include a per-pixel gain factor $g_{k}$, which is often unity. Sampling from $p(\bold{x}_{k})$ is trivial; however, for computation of a lower bound on uncertainty in $\theta$, the summation in (1) can be difficult to work with. Therefore, we choose to use a Poisson approximation for simplification, valid under a range of experimental conditions (Huang 2013). The expectation of the Poisson process at each pixel of the image must then be computed from the optical impulse response $O(u,v)$, which is taken to be an isotropic Gaussian in two-dimensions. For example, in one of the dimensions
 
 \begin{equation}
 \Delta E_{\theta_{i}}(\theta_{i},\sigma_{\bold{x}}) \vcentcolon = \int O(\theta_{i})d\theta_{i} = \frac{1}{2}\left(\mathrm{erf}\left(\frac{\bold{x}_{k}+\frac{1}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right) -\mathrm{erf}\left(\frac{\bold{x}_{k}-\frac{1}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right)\right)
 \end{equation}
 
-The expected value at each pixel is then $\omega_{k}\propto \prod_{\theta_{i}\in (\theta_{x},\theta_{y})} \Delta E_{\theta_{i}}(\theta_{i},\sigma_{\bold{x}}) $. Sampling from (1) is then straightforward, and images $\bold{x}$ can be constructed by adding Poisson and Gaussian noise components. The complete generative process is depicted in Figure 1. Reliable inference of $\theta$ from $\bold{x}$, for example by maximum likelihood estimation or with a deep model, requires performance metrics for model selection. We use the Fisher information as an information theoretic criteria to assess the quality of the model tested here, with respect to the root mean squared error (RMSE) of our predictions of $\theta$ (Chao 2016). The Poisson log-likelihood $\ell(\bold{x}|\theta)$ is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below i.e., $\mathrm{var}(\hat{\theta}) \geq I^{-1}(\theta)$. The Fisher information is straightforward to compute under the Poisson log-likelihood, which is detailed in the Appendix
+The expected value at each pixel is then $\omega_{k}\propto \prod_{\theta_{i}\in (\theta_{x},\theta_{y})} \Delta E_{\theta_{i}}(\theta_{i},\sigma_{\bold{x}}) $. Using this, sampling from (1) is can be carried out by $\bold{x}_{k} = s_{k} + \zeta_{k}$ for $s_{k}\sim \mathrm{Poisson}(\omega_{k}), \eta_{k}\sim \mathcal{N}(o_{k},w_{k}^{2})$. The complete generative process is depicted in Figure 1. Reliable inference of $\theta$ from $\bold{x}$, for example by maximum likelihood estimation or with a deep model, requires performance metrics for model selection. We use the Fisher information as an information theoretic criteria to assess the quality of the model tested here, with respect to the root mean squared error (RMSE) of our predictions of $\theta$ (Chao 2016). The Poisson log-likelihood $\ell(\bold{x}|\theta)$ is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below i.e., $\mathrm{var}(\hat{\theta}) \geq I^{-1}(\theta)$. The Fisher information is straightforward to compute under the Poisson log-likelihood, which is detailed in the Appendix
 
 \begin{equation}
 \mathcal{I}_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) = \sum_{k}\frac{1}{\omega_{k}'}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}}
@@ -137,29 +137,27 @@ Similar to the generative process on low resolution images $\bold{x}$, we can ge
 \bold{y}_{k}(\theta) = \sum_{n=1}^{N}\Delta E_{x}(\bold{y}_{k},\theta_{n,x},\sigma_{\bold{y}}) \Delta E_{y}(\bold{y}_{k},\theta_{n,y},\sigma_{\bold{y}})
 \end{equation}
 
-where the hyperparameter $\sigma_{\bold{y}}$ is the Gaussian kernel width. The distribution on $\bold{y}_{k}$ is given directly from $p(\theta|\bold{x})$, which can be estimated by Markov Chain Monte Carlo (MCMC) as shown in (Figure 2). For an isolated molecule, the distribution $p(\theta|\bold{x})$ is typically symmetric about zero, and thus the distribution on $\bold{y}_{k}$ is given by transforming $|\theta_{i}|$ using (5)
+where the hyperparameter $\sigma_{\bold{y}}$ is the Gaussian kernel width. In principle, distribution on $\bold{y}_{k}$ is given directly from $p(\theta|\bold{x})$, which can be estimated by Metropolis-Hastings MCMC (Figure 2). For simplicity, in all following analysis, we are interested in the marginal variance $\mathrm{Var} (\bold{y}(\theta))$
 
 \begin{equation}
-p(\bold{y}_{k}|\bold{x}) = 2 \; p(\bold{y}_{k}(|\theta_{i}|,\sigma_{\bold{y}})|\bold{x})
+\bar{\bold{y}}(\theta) = \underset{\theta\sim p(\theta|\bold{x})}{\mathbb{E}}\left[ \bold{y}(\theta)\right] \quad \mathrm{Var} (\bold{y}(\theta)) = \underset{\theta\sim p(\theta|\bold{x})}{\mathbb{E}}\left[ \bold{y}(\theta)-\bar{\bold{y}}(\theta)\right]^2
 \end{equation}
 
-In practice $p(\theta|\bold{x})$ can be costly to compute with MCMC, and is fundmamentally intractable at high molecular densities. The central goal of this paper is to instead leverage a diffusion model to estimate $p(\bold{y}_{k}|\bold{x})$ up to second order, avoiding the intermediate distribution $p(\theta|\bold{x})$ entirely.
+Unfortunately, the posterior $p(\theta|\bold{x})$ can be costly to compute with MCMC, and is intractable at high molecular densities, as molecules cannot be easily resolved at test time. The central goal of this paper is to instead leverage a DDPM to model $p(\bold{y}|\bold{x})$, avoiding $p(\theta|\bold{x})$ entirely.
 
-\section{Uncertainty-Aware Super-Resolution Microscopy via Guided Diffusion}
+\section{Uncertainty-Aware Super-Resolution Microscopy by Guided Diffusion}
 
-We consider datasets $(\bold{x}_i,\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$ of observed images $\bold{x}_i$ true kernel density estimate (KDE) images $\bold{y}_{i}$, and KDE estimates $\hat{\bold{y}}_{i}=\phi(\bold{x}_{i})$. Observations $\bold{x}_i$ are simulated under the Poisson likelihood (1) and KDEs are generated using (2) alone, followed by appropriate normalization. 
+We consider datasets $(\bold{x}_i,\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$ of observed images $\bold{x}_i$ true kernel density estimate (KDE) images $\bold{y}_{i}$, and KDE estimates $\hat{\bold{y}}_{i}=\phi(\bold{x}_{i})$. Observations $\bold{x}_i$ are simulated under the convolution distribution (1) and KDEs are generated by (4).
 
 \subsection{Problem Statement}
 
-Point estimates $\hat{\bold{y}}_{i}$ produced by the traditional deep architectures for super resolution microscopy produce strong results, but lack uncertainty quantification. Recent advances in generative modeling, particularly DDPMs, therefore present a unique opportunity to integrate uncertainty awareness into the super-resolution microscopy toolkit. However, sampling from DDPMs is computationally expensive, given that generation amounts to solving a complex stochastic differential equation, effectively mapping a simple base distribution to the complex data distribution. The solution of such equations requires numerical integration with very small step sizes, resulting in thousands of neural network evaluations (Saharia 2021; Vahdat 2021). Furthermore, for conditional generation tasks in high-risk applications, generation complexity is further exacerbated by the need for the highest level of detail in generated samples.
+Point estimates $\hat{\bold{y}}_{i}$ produced by the traditional deep architectures for super resolution microscopy produce strong results, but lack uncertainty quantification. Recent advances in generative modeling, particularly DDPMs, therefore present a unique opportunity to integrate uncertainty awareness into the super-resolution microscopy toolkit. However, sampling from DDPMs is computationally expensive, given that generation amounts to solving a complex stochastic differential equation, effectively mapping a simple base distribution to the complex data distribution. The solution of such equations requires numerical integration with very small step sizes, resulting in thousands of neural network evaluations (Saharia 2021; Vahdat 2021). For conditional generation tasks in high-risk applications, generation complexity is further exacerbated by the need for the highest level of detail in generated samples. Moreover, in the present application, modeling the posterior is far more important than diversity in generated samples. Therefore, we propose that DDPM sampling is preceded by a deterministic neural network $\phi$, which effectively seeds sampling in a target mode. Reasoning for this choice in our application is two-fold:
 
-Certain conditional generation tasks, like sampling high-resolution images given low-resolution inputs, modeling the posterior is far more important than diversity in generated samples. Therefore, we propose that DDPM sampling is preceded by a deterministic neural network $\phi$, which effectively seeds sampling in a target mode. Reasoning for this choice in our application is two-fold:
+\textbf{Synthesis Speed}. By training a preprocessor $\phi$ to obtain an approximate estimate of $\bold{y}$, we can reduce the number of iterations, since the DDPM only needs to model the remaining mismatch, resulting in a less complex model from which sampling becomes easier. Speed is critical in SMLM applications, which can produce thousands of images in a single experiment.\\
 
-\textbf{Synthesis Speed}. By training a preprocessor $\phi$ to obtain an approximate estimate of $\bold{y}$, we can reduce the number of iterations, since the DDPM only needs to model the remaining mismatch, resulting in a less complex model from which sampling becomes easier. Speed is critical in SMLM applications, which can produce large volumes of image data in a single experiment.\\
+\textbf{Sample Fidelity}. Since Langevin dynamics will often be initialized in low-density regions of the data distribution, inaccurate score estimation in these regions will negatively affect the sampling process (Song 2019). Moreover, mixing can be difficult because of the need of traversing low density regions to transition between modes of the distribution. Preprocessing with a deterministic neural network $\phi$ can ameliorate this issue, by aiding score estimation in low density regions. 
 
-\textbf{Sample Fidelity}. Since Langevin dynamics will often be initialized in low-density regions of the data distribution, inaccurate score estimation in these regions will negatively affect the sampling process (Song 2019). Moreover, mixing can be difficult because of the need of traversing low density regions to transition between modes of the distribution. Preprocessing with a deterministic mapping $\phi$ can ameliorate this issue, by eliminating the need for score estimation in low density regions. 
-
-Here, the preprocessor $\phi$ is realized by a CNN with upsampling layers. Consider the Markov chain wherein the KDE $\bold{y}$ is latent in and inferred from a noisy measurement $\bold{x}$, i.e., $\bold{x} \rightarrow \phi(\bold{x})\rightarrow \bold{\hat{y}}$. By the data processing inequality the function $\phi$ can only destroy information in $\bold{x}$ pertaining to $\bold{y}$ i.e., $I(\bold{x};\bold{y}) \geq I(\phi(\bold{x});\bold{y})$ or $h(\bold{y}|\phi(\bold{x})) \geq h(\bold{y}|\bold{x})$ where $I$ is the mutual information and $h$ is the entropy. This suggests that the uncertainty in $p_{\Psi}(\bold{y}|\phi(\bold{x}))$ is indeed an upper bound on the entropy of $p(\bold{y}|\bold{x})$. 
+Here, the model $\phi$ is realized by a CNN with upsampling layers. Consider the Markov chain wherein the KDE $\bold{y}$ is latent in and inferred from a noisy measurement $\bold{x}$, i.e., $\bold{x} \rightarrow \phi(\bold{x})\rightarrow \bold{\hat{y}}$. By the data processing inequality the function $\phi$ can only destroy information in $\bold{x}$ pertaining to $\bold{y}$ i.e., $I(\bold{x};\bold{y}) \geq I(\phi(\bold{x});\bold{y})$ or $h(\bold{y}|\phi(\bold{x})) \geq h(\bold{y}|\bold{x})$ where $I$ is the mutual information and $h$ is the entropy. This suggests that the uncertainty in $p_{\Psi}(\bold{y}|\phi(\bold{x}))$ is indeed an upper bound on the entropy of $p(\bold{y}|\bold{x})$. 
 
 In practice, a DDPM $\Psi$ can be trained on pairs $(\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$. The conditional DDPM generates a target KDE $\bold{y}_0$ in $T$ refinement steps. Starting with a pure noise image $\bold{y}_{T}\sim \mathcal{N}(0,\bold{I})$, the model iteratively refines the KDE through successive iterations according to learned conditional transition distributions $p(\bold{y}_{t-1}|\bold{y}_{t},\bold{})$ such that $\bold{y}_{0} \sim p(\bold{y}|\hat{\bold{y}})$ 
 
@@ -200,13 +198,6 @@ After training, samples can be generated by
 \bold{y}_{t-1} = \frac{1}{\sqrt{1-\beta_{i}}}\left(\bold{y}_{i} + \beta_{i}s_{\theta}(\bold{y}_{t})\right) + \sqrt{\beta_{i}}\bold{\xi}
 \end{equation}
 
-For many conditional generation tasks, estimation of the gradient $s_{\theta}$ in low-density regions in order to drive (8) toward high-density regions is unecessary and reduces performance of the sampler. Here, we instead propose an ``energy-minimization'' procedure preceding Langevin-based sampling in a DDPM, in order to speed up sampling from the equilibrium distribution
-
-\begin{equation}
-\hat{\bold{y}} = \underset{\bold{y}}{\mathrm{argmin}} ||\bold{y}-\bold{y_0}||^2
-\end{equation} 
-
-
 
 \section{Experiments}
 
@@ -216,11 +207,11 @@ For many conditional generation tasks, estimation of the gradient $s_{\theta}$ i
 \caption{Kernel density estimates for various signal to noise ratios (SNR)}
 \end{figure}
 
-All training data consits of low-resolution $20\times 20$ images, simulated under the likelihood and impulse reponse (2,10), setting $\sigma=0.92$ low-resolution pixels, for consistency with common experimental conditions with a 60X magnification objective lens and numerical aperture (NA) of 1.4. We choose $\omega_{k}=200$ for experiments for consistency with typical bright fluorophore emission rates. All KDEs have dimension $80\times 80$, are scaled between $[0,1]$, and are generated using $\sigma=3.0$ pixels in the upsampled image. For a typical CMOS camera, this results in KDE pixels with lateral dimension of $\approx 27\mathrm{nm}$. Initial coordinates $\theta$ were drawn uniformly over a two-dimensional disc with a radius of 7 low-resolution pixels.
+All training data consits of low-resolution $20\times 20$ images, simulated as described previously, setting $\sigma_{\bold{x}}=0.92$ in units of low-resolution pixels, for consistency with common experimental conditions with a 60X magnification objective lens and numerical aperture (NA) of 1.4. We choose $i_{0}=200$ for experiments for consistency with typical bright fluorophore emission rates. All KDEs have dimension $80\times 80$, are scaled between $[0,1]$, and are generated using $\sigma_{\bold{y}}=3.0$ pixels in the upsampled image. For a typical CMOS camera, this results in KDE pixels with lateral dimension of $\approx 27\mathrm{nm}$. Initial coordinates $\theta$ were drawn uniformly over a two-dimensional disc with a radius of 7 low-resolution pixels.
 
 \subsection{Localization RMSE}
 
-In order to verify the initial predictions made by the model $\phi$, we simulated a dataset $(\bold{x}_i,\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$ with $N=1000$, and  detect objects in the predicted KDE $,\hat{\bold{y}}_{i}$ using the Laplacian of Gaussian (LoG) detection algorithm (Lindeberg 2013). For simplicity, the localization is carried out from scale-space maxima directly in LoG, as opposed to fitting a model function to KDE predictions. A particular LoG localization in the KDE is paired to the nearest ground truth localization and is unpaired if a localization is not within 5 KDE pixels of any ground truth localization. In addition to localization error, we measured a precision $\mathrm{P = TP/(TP + FP)} = 1.0$ and recall $\mathrm{R = TP/(TP + FN)} = 0.85$, where $\mathrm{TP}$ denotes true positive localizations, $\mathrm{FP}$ denotes false positive localizations, and $\mathrm{FN}$ denotes false negative localizations.
+In order to verify the initial predictions made by the model $\phi$, we simulated a dataset $(\bold{x}_i,\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$ with $N=1000$, and  detect objects in the predicted KDE $,\hat{\bold{y}}_{i}$ using the Laplacian of Gaussian (LoG) detection algorithm (Lindeberg 2013). Localization is carried out from scale-space maxima directly in LoG, as opposed to fitting a model function to KDE predictions. A particular LoG localization in the KDE is paired to the nearest ground truth localization and is unpaired if a localization is not within 5 KDE pixels of any ground truth localization. In addition to localization error, we measure a precision $\mathrm{P = TP/(TP + FP)} = 1.0$ and recall $\mathrm{R = TP/(TP + FN)} = 0.85$, where $\mathrm{TP}$ denotes true positive localizations, $\mathrm{FP}$ denotes false positive localizations, and $\mathrm{FN}$ denotes false negative localizations.
 
 \subsection{Guided Diffusion}
 
