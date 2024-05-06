@@ -34,6 +34,7 @@
 \usepackage{xcolor}         % colors
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{mathtools}
 
 \title{Uncertainty-Aware Super-Resolution Microscopy via Guided Diffusion}
 
@@ -102,7 +103,7 @@ In statistical physics, particularly simulation of complex molecular systems, sa
 
 \subsection{Image Likelihood and Localization Error}
 
-The central objective of single molecule localization microscopy is to infer a set of molecular coordinates $\theta$ from measured low resolution images $\bold{x}$. The likelihood on a particular pixel $k$, i.e., $p(\bold{x}_k|\theta)$ is taken to be a convolution of Poisson and Gaussian distributions, due to shot noise $p(s_{k}) = \mathrm{Poisson}(\omega_{k})$ and sensor readout noise $p(\zeta_{k}) = \mathcal{N}(o_{k},\sigma_{k}^{2})$ 
+The central objective of single molecule localization microscopy is to infer a set of molecular coordinates $\theta=(\theta_{x},\theta_{y})$ from measured low resolution images $\bold{x}$. The likelihood on a particular pixel $k$, i.e., $p(\bold{x}_k|\theta)$ is taken to be a convolution of Poisson and Gaussian distributions, due to shot noise $p(s_{k}) = \mathrm{Poisson}(\omega_{k})$ and sensor readout noise $p(\zeta_{k}) = \mathcal{N}(o_{k},\sigma_{k}^{2})$ 
 
 \begin{equation}
 p(\bold{x}_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(\bold{x}_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}} \approx \mathrm{Poisson}(\omega_{k}')
@@ -110,23 +111,17 @@ p(\bold{x}_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_
 
 
 \begin{figure}
-\includegraphics[scale=0.65]{Generation-Figure.png}
-\caption{Generative model of single molecule localization microscopy images}
+\includegraphics[scale=0.225]{Generation.png}
+\caption{Generative model of single molecule localization microscopy images. Low resolution images $\bold{x}$ are generated from coordinates $\theta$ by integration of the optical transfer function $O$ and sampling from the likelihood (1): $\bold{x}\sim p(\bold{x}|\theta)$. A kernel density estimate $\bold{y}$ is inferred from $\bold{x}$}
 \end{figure}
 
-where $A$ is some normalization constant and $\omega_{k}' = \omega_{k} + \sigma_{k}^{2}$. For the sake of generality, we include a per-pixel gain factor $g_{k}$, which is often unity. In practice, the summation in (1) can be difficult to work with, and it is common to instead use a Poisson-Normal approximation for simplification, valid under a range of experimental conditions (Huang 2013). This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson. The expectation of the Poisson process at each pixel of the image is computed from the optical transfer function $O(u,v)$, which is often a two-dimensional isotropic Gaussian.
+where $A$ is some normalization constant and $\omega_{k}' = \omega_{k} + \sigma_{k}^{2}$. For the sake of generality, we include a per-pixel gain factor $g_{k}$, which is often unity. Sampling from $p(\bold{x}_{k})$ is trivial; however, for computation of a lower bound on uncertainty in $\theta$, the summation in (1) can be difficult to work with. Therefore, we choose to use a Poisson approximation for simplification, valid under a range of experimental conditions (Huang 2013). The expectation of the Poisson process at each pixel of the image must then be computed from the optical impulse response $O(u,v)$, which is taken to be an isotropic Gaussian in two-dimensions. For example, in one of the dimensions
 
 \begin{equation}
-\omega_{k} \propto \Delta E_{x}(\bold{x}_{k},\theta_{x},\sigma_{\bold{x}}) \Delta E_{y}(\bold{x}_{k},\theta_{y},\sigma_{\bold{x}})
+\Delta E_{\theta_{i}}(\theta_{i},\sigma_{\bold{x}}) \vcentcolon = \int O(\theta_{i})d\theta_{i} = \frac{1}{2}\left(\mathrm{erf}\left(\frac{\bold{x}_{k}+\frac{1}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right) -\mathrm{erf}\left(\frac{\bold{x}_{k}-\frac{1}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right)\right)
 \end{equation}
 
-The above expression is simply a product of differences of error functions, as detailed in Appendix A. For example, in one of the dimensions
-
-\begin{equation}
-\Delta E_{\theta_{i}}(\theta_{i},\sigma_{\bold{x}}) = \int O(\theta_{i})d\theta_{i} = \frac{1}{2}\left(\mathrm{erf}\left(\frac{\bold{x}_{k}+\frac{1}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right) -\mathrm{erf}\left(\frac{\bold{x}_{k}-\frac{1}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right)\right)
-\end{equation}
-
-The complete generative process is depicted in Figure 1. Reliable estimation of $\theta$ from $\bold{x}$, for example by maximum likelihood estimation or with a deep model, requires performance metrics for model selection. We use the Fisher information as an information theoretic criteria to assess the quality of the model tested here, with respect to the root mean squared error (RMSE) of our predictions of $\theta$ (Chao 2016). The Poisson log-likelihood $\ell(\bold{x}|\theta)$ is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below i.e., $\mathrm{var}(\hat{\theta}) \geq I^{-1}(\theta)$. The Fisher information is straightforward to compute under the Poisson log-likelihood, which is detailed in the Appendix
+The expected value at each pixel is then $\omega_{k}\propto \prod_{\theta_{i}\in (\theta_{x},\theta_{y})} \Delta E_{\theta_{i}}(\theta_{i},\sigma_{\bold{x}}) $. Sampling from (1) is then straightforward, and images $\bold{x}$ can be constructed by adding Poisson and Gaussian noise components. The complete generative process is depicted in Figure 1. Reliable inference of $\theta$ from $\bold{x}$, for example by maximum likelihood estimation or with a deep model, requires performance metrics for model selection. We use the Fisher information as an information theoretic criteria to assess the quality of the model tested here, with respect to the root mean squared error (RMSE) of our predictions of $\theta$ (Chao 2016). The Poisson log-likelihood $\ell(\bold{x}|\theta)$ is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below i.e., $\mathrm{var}(\hat{\theta}) \geq I^{-1}(\theta)$. The Fisher information is straightforward to compute under the Poisson log-likelihood, which is detailed in the Appendix
 
 \begin{equation}
 \mathcal{I}_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) = \sum_{k}\frac{1}{\omega_{k}'}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}}
@@ -225,12 +220,6 @@ All training data consits of low-resolution $20\times 20$ images, simulated unde
 
 \subsection{Localization RMSE}
 
-\begin{figure}
-\centering
-\includegraphics[scale=0.7]{Errors.png}
-\caption{Localization errors of the trained model}
-\end{figure}
-
 In order to verify the initial predictions made by the model $\phi$, we simulated a dataset $(\bold{x}_i,\bold{y}_i,\hat{\bold{y}}_{i})_{i=1}^{N}$ with $N=1000$, and  detect objects in the predicted KDE $,\hat{\bold{y}}_{i}$ using the Laplacian of Gaussian (LoG) detection algorithm (Lindeberg 2013). For simplicity, the localization is carried out from scale-space maxima directly in LoG, as opposed to fitting a model function to KDE predictions. A particular LoG localization in the KDE is paired to the nearest ground truth localization and is unpaired if a localization is not within 5 KDE pixels of any ground truth localization. In addition to localization error, we measured a precision $\mathrm{P = TP/(TP + FP)} = 1.0$ and recall $\mathrm{R = TP/(TP + FN)} = 0.85$, where $\mathrm{TP}$ denotes true positive localizations, $\mathrm{FP}$ denotes false positive localizations, and $\mathrm{FN}$ denotes false negative localizations.
 
 \subsection{Guided Diffusion}
@@ -244,7 +233,7 @@ To represent the reverse process, we used a DDPM architecture based on a U-Net b
 \section{Conclusion}
 
 
-
+\clearpage
 \section*{References}
 
 
@@ -304,6 +293,12 @@ To represent the reverse process, we used a DDPM architecture based on a U-Net b
 \section{Appendix}
 
 Standard SMLM localization algorithms based on maximum likelihood estimators or least squares optimization require tight control of activation and reactivation to maintain sparse emitters, presenting a tradeoff between imaging speed and labeling density. Recently, deep models have generalized SMLM to densely labeled structures by predicting high-resolution kernel density estimates (KDEs) from low resolution images with convolutional networks. However, estimated KDEs may contain irregularities due to finite sample sizes and limited model capacity. 
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.7]{Errors.png}
+\caption{Localization errors of the trained model}
+\end{figure}
 
 The DeepSTORM CNN, initially proposed in (Nehme 2020) for 3D localization, can be viewed as a deep kernel density estimator, reconstructing kernel density estimates $\bold{y}$ from low-resolution inputs $\bold{x}$. We utilize a simplified form of the original architecture for 2D localization, which we denote $\phi$ hereafter, which consists of three main modules: a multi-scale context aggregation module, an upsampling module, and a prediction module. For context aggregation, the architecture utilizes dilated convolutions to increase the receptive field of each layer. The upsampling module is then composed of two consecutive 2x resize-convolutions, computed by nearest-neighbor interpolation, to increase the lateral resolution by a factor of 4. For a common sCMOS camera, each pixel has a lateral size of approximately 108 nanometers, giving approximately 27 nanometer pixels in the KDE. The terminal prediction module contains three additional convolutional blocks for refinement of the upsampled image, followed by an element-wise HardTanh. 
 
