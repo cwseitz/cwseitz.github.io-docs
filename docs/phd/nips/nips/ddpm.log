@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.20)  6 MAY 2024 20:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.20)  6 MAY 2024 21:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -646,30 +646,42 @@ Overfull \hbox (17.6318pt too wide) in paragraph at lines 211--212
  [][] 
  []
 
-[5 <./Denoise.png>] [6 <./Bayes.png>]
-Underfull \hbox (badness 2875) in paragraph at lines 296--297
-[]\T1/ptm/m/n/9 (+20) [17] Sa-haria, C., et al. Im-age Super-Resolution via It-
+[5 <./Denoise.png>] [6 <./Bayes.png>] [7]
+Underfull \hbox (badness 10000) in paragraph at lines 286--288
+[]\T1/ptm/m/n/9 (+20) [22] Kingma, D., et al. Auto en-cod-ing vari-a-tional bay
+es. Preprint at arXiv
+ []
+
+
+Underfull \hbox (badness 2875) in paragraph at lines 308--309
+[]\T1/ptm/m/n/9 (+20) [31] Sa-haria, C., et al. Im-age Super-Resolution via It-
 er-a-tive Re-fine-ment. Preprint at arXiv
  []
 
-[7] [8]
-<Errors.png, id=144, 432.11438pt x 226.59656pt>
+
+Underfull \hbox (badness 2435) in paragraph at lines 312--313
+[]\T1/ptm/m/n/9 (+20) [33] Nichol, A., et al. Im-proved de-nois-ing dif-fu-sion
+ prob-a-bilis-tic mod-els. Preprint at arXiv
+ []
+
+[8]
+<Errors.png, id=142, 432.11438pt x 226.59656pt>
 File: Errors.png Graphic file (type png)
 <use Errors.png>
-Package pdftex.def Info: Errors.png  used on input line 365.
+Package pdftex.def Info: Errors.png  used on input line 379.
 (pdftex.def)             Requested size: 302.478pt x 158.6165pt.
- [9 <./Errors.png>] (./ddpm.aux)
+ [9] [10 <./Errors.png>] (./ddpm.aux)
 Package rerunfilecheck Info: File `ddpm.out' has not changed.
 (rerunfilecheck)             Checksum: E9AFCBDCA21E173984319AF9DA2ECB4F;2510.
  ) 
 Here is how much of TeX's memory you used:
- 14038 strings out of 476025
- 222693 string characters out of 5790016
- 1864388 words of memory out of 5000000
+ 14048 strings out of 476025
+ 222775 string characters out of 5790016
+ 1867388 words of memory out of 5000000
  34022 multiletter control sequences out of 15000+600000
- 550265 words of font info for 202 fonts, out of 8000000 for 9000
+ 550655 words of font info for 208 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,10n,76p,1404b,483s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,10n,76p,1736b,483s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx5.pfb><
 /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></u
@@ -689,10 +701,10 @@ e/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/
 23/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2023/texmf-d
 ist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/
 type1/urw/times/utmri8a.pfb>
-Output written on ddpm.pdf (9 pages, 446677 bytes).
+Output written on ddpm.pdf (10 pages, 448085 bytes).
 PDF statistics:
- 247 PDF objects out of 1000 (max. 8388607)
- 186 compressed objects within 2 object streams
- 45 named destinations out of 1000 (max. 500000)
+ 251 PDF objects out of 1000 (max. 8388607)
+ 189 compressed objects within 2 object streams
+ 46 named destinations out of 1000 (max. 500000)
  37522 words of extra memory for PDF output out of 42996 (max. 10000000)
 

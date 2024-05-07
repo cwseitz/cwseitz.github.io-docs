@@ -229,21 +229,7 @@ We proposed a denoising diffusion probabilistic model (DDPM) for uncertainty-awa
 
 \section{Broader Impact}
 
-Generating high-quality samples while fully covering the data distribution has been a long-standing
-challenge in generative learning. A solution to this problem will likely help reduce biases in generative
-models and lead to improving overall representation of minorities in the data distribution. SGMs
-are perhaps one of the first deep models that excel at both sample quality and distribution coverage.
-However, the high computational cost of sampling limits their widespread use. Our proposed LSGM
-reduces the sampling complexity of SGMs by a large margin and improves their expressivity further.
-Thus, in the long term, it can enable the usage of SGMs in practical applications.
-Here, LSGM is examined on the image generation task which has potential benefits and risks
-discussed in [94, 95]. However, LSGM can be considered a generic framework that extends SGMs to
-non-continuous data types. In principle LSGM could be used to model, for example, language [96,
-97], music [98, 10], or molecules [99, 100]. Furthermore, like other deep generative models, it
-can potentially be used also for non-generative tasks such as semi-supervised and representation
-learning [101, 102, 103]. This makes the long-term social impacts of LSGM dependent on the
-downstream applications.
-
+The development of a method for uncertainty estimation in super-resolution imaging, as proposed here, holds profound implications beyond its immediate application in single-molecule localization microscopy (SMLM). By leveraging denoising diffusion probabilistic models (DDPMs) for uncertainty estimation, this approach not only enhances the reliability of super-resolution image reconstructions but also extends its utility to a diverse array of domains. The incorporation of a guided diffusion process facilitates efficient reconstruction while maintaining intepretation of the underlying uncertainty. Importantly, the principles underlying this method resonate across various fields, suggesting its potential applicability in domains beyond microscopy. For instance, the extension of similar techniques to general image resolution highlights the potential to address uncertainty in a wide range of bioimaging or medical imaging tasks. Moreover, the utilization of diffusion models for uncertainty estimation aligns with a broader trend in leveraging probabilistic frameworks for enhancing deep learning applications, with implications extending to fields such as natural language processing, computer vision, and autonomous systems. By bridging these interdisciplinary boundaries, this method not only addresses a critical need in localization microscopy but also contributes to the advancement of uncertainty-aware deep learning methodologies with far-reaching societal impacts. From improving medical diagnostics to enhancing environmental monitoring, the implications of this work reverberate across diverse applications, underscoring its potential to drive innovation and progress in numerous fields.
 
 \section*{References}
 
@@ -267,35 +253,63 @@ downstream applications.
 [6] Nanxin C., et al. WaveGrad: Estimating Gradients for Waveform Generation
 . ICLR (2021).
 
-[4] Chao, J., et al. Fisher information theory for parameter estimation in single molecule microscopy: tutorial. Journal of the Optical Society of America A 33, B36 (2016). 
+[7] Chao, J., et al. Fisher information theory for parameter estimation in single molecule microscopy: tutorial. Journal of the Optical Society of America A 33, B36 (2016). 
 
-[5] Schermelleh, L. et al. Super-resolution microscopy demystified. Nature Cell Biology vol. 21 72–84 (2019). 
+[8] Schermelleh, L. et al. Super-resolution microscopy demystified. Nature Cell Biology vol. 21 72–84 (2019). 
 
-[6] Zhang, B., et al. Gaussian approximations of fluorescence microscope point-spread function models. (2007). 
+[9] Zhang, B., et al. Gaussian approximations of fluorescence microscope point-spread function models. (2007). 
 
-[7] Smith, C.S.,  Fast, single-molecule localization that achieves theoretically minimum uncertainty. Nature Methods 7, 373–375 (2010). 
+[10] Smith, C.S.,  Fast, single-molecule localization that achieves theoretically minimum uncertainty. Nature Methods 7, 373–375 (2010). 
 
-[8] Nieuwenhuizen, R., et al. Measuring image resolution in optical nanoscopy. Nature Methods 10. 557-562 (2013). 
+[11] Nieuwenhuizen, R., et al. Measuring image resolution in optical nanoscopy. Nature Methods 10. 557-562 (2013). 
 
-[9] Huang, F., et al. Video-rate nanoscopy using sCMOS camera-specific single-molecule localization algorithms. Nat Methods 10, 653–658 (2013). 
+[12] Huang, F., et al. Video-rate nanoscopy using sCMOS camera-specific single-molecule localization algorithms. Nat Methods 10, 653–658 (2013). 
 
-[10] Rust, M., et al. Sub-diffraction-limit imaging by stochastic optical reconstruction microscopy (STORM). Nat Methods 3, 793–796 (2006).
+[13] Rust, M., et al. Sub-diffraction-limit imaging by stochastic optical reconstruction microscopy (STORM). Nat Methods 3, 793–796 (2006).
 
-[11] Betzig, E., et al. Imaging intracellular fluorescent proteins at nanometer resolution. Science 313, 1642–1645 (2006).
+[14] Betzig, E., et al. Imaging intracellular fluorescent proteins at nanometer resolution. Science 313, 1642–1645 (2006).
 
-[12] Weigert, M., et al. Content-aware image restoration: pushing the limits of fluorescence microscopy. Nat. Methods 15, 1090 (2018).
+[15] Weigert, M., et al. Content-aware image restoration: pushing the limits of fluorescence microscopy. Nat. Methods 15, 1090 (2018).
 
-[13] Falk, T., et al. U-net: deep learning for cell counting, detection, and morphometry. Nat. Methods 16, 67–70 (2019).
+[16] Falk, T., et al. U-net: deep learning for cell counting, detection, and morphometry. Nat. Methods 16, 67–70 (2019).
 
-[14] Boyd, N., et al. DeepLoco: fast 3D localization microscopy using neural networks. Preprint at bioRxiv https://doi.org/10.1101/267096 (2018)
+[17] Boyd, N., et al. DeepLoco: fast 3D localization microscopy using neural networks. Preprint at bioRxiv https://doi.org/10.1101/267096 (2018)
 
-[15] Zelger, P., et al. Three-dimensional localization microscopy using deep learning. Opt. Express 26, 33166–33179 (2018)
+[18] Zelger, P., et al. Three-dimensional localization microscopy using deep learning. Opt. Express 26, 33166–33179 (2018)
 
-[16] Zhang, P., et al. Analyzing complex single-molecule emission patterns with deep learning. Nat. Methods 15, 913 (2018)
+[19] Zhang, P., et al. Analyzing complex single-molecule emission patterns with deep learning. Nat. Methods 15, 913 (2018)
 
-[17] Saharia, C., et al. Image Super-Resolution via Iterative Refinement. Preprint at arXiv https://doi.org/10.48550/arXiv.2104.07636 (2021)
+[20] Song, Y., et al. Score-based generative model through stochastic differential equations. ICLR (2021). 
 
-[18] Kim, T., et al. Information-rich localization microscopy through machine learning. Nat Commun 10, 1996 (2019). 
+[21] Vahdat, A., et al. Score-based generative modeling in latent space. NeurIPS (2021). 
+
+[22] Kingma, D., et al. Auto encoding variational bayes. Preprint at arXiv 
+https://doi.org/10.48550/arXiv.1312.6114 (2013). 
+
+[23] Song, Y., et al. Generative modeling by estimating gradients of the data distribution. NeurIPS (2019). 
+
+[24] Kong, X., et al. Information theoretic diffusion. ICLR (2023). 
+
+[25] Kong, L., et al. SDE-Net: Equipping Deep Neural Networks with Uncertainty Estimates. ICML (2020). 
+
+[26] van Amersfoort, J., et al. Uncertainty Estimation Using a Single Deep Deterministic Neural Network. Preprint at arXiv https://doi.org/10.48550/arXiv.2003.02037. 
+
+[27] Zhe Liu, J., et al. Simple and Principled Uncertainty Estimation with
+Deterministic Deep Learning via Distance Awareness. NeurIPS 2021. 
+
+[28] Gal Y., et al. Bayesian uncertainty quantification
+for machine-learned models in physics. Nature Physics 2022. 
+
+[29] Gal Y., et al. Dropout as a Bayesian Approximation:
+Representing Model Uncertainty in Deep Learning. ICML 2016. 
+
+[30] Welling M., et al. Bayesian Learning via Stochastic Gradient Langevin Dynamics. ICML 2011. 
+
+[31] Saharia, C., et al. Image Super-Resolution via Iterative Refinement. Preprint at arXiv https://doi.org/10.48550/arXiv.2104.07636 (2021)
+
+[32] Kim, T., et al. Information-rich localization microscopy through machine learning. Nat Commun 10, 1996 (2019). 
+
+[33] Nichol, A., et al. Improved denoising diffusion probabilistic models. Preprint at arXiv https://doi.org/10.48550/arXiv.2102.09672 (2021). 
 
 }
 
