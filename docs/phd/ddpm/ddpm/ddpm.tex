@@ -103,7 +103,7 @@ In statistical physics, particularly simulation of complex molecular systems, sa
 
 \subsection{Image Likelihood and Localization Error}
 
-The central objective of single molecule localization microscopy is to infer a set of molecular coordinates $\theta=(\theta_{x},\theta_{y})$ from measured low resolution images $\bold{x}$. The likelihood on a particular pixel $k$, i.e., $p(\bold{x}_k|\theta)$ is taken to be a convolution of Poisson and Gaussian distributions, due to shot noise $p(s_{k}) = \mathrm{Poisson}(\omega_{k})$ and sensor readout noise $p(\zeta_{k}) = \mathcal{N}(o_{k},w_{k}^{2})$ 
+The central objective of single molecule localization microscopy is to infer a set of molecular coordinates $\theta$ from measured low resolution images $\bold{x}$. The likelihood on a particular pixel $p(\bold{x}_k|\theta)$ is taken to be a convolution of Poisson and Gaussian distributions, due to shot noise $p(s_{k}) = \mathrm{Poisson}(\omega_{k})$ and sensor readout noise $p(\zeta_{k}) = \mathcal{N}(o_{k},w_{k}^{2})$ 
 
 \begin{equation}
 p(\bold{x}_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(\bold{x}_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}} \approx \mathrm{Poisson}(\omega_{k}')
@@ -115,13 +115,13 @@ p(\bold{x}_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_
 \caption{Generative model of single molecule localization microscopy images. Low resolution images $\bold{x}$ are generated from coordinates $\theta$ by integration of the optical transfer function $O$ and sampling from the likelihood (1): $\bold{x}\sim p(\bold{x}|\theta)$. A kernel density estimate $\bold{y}$ is inferred from $\bold{x}$}
 \end{figure}
 
-where $A$ is some normalization constant and $\omega_{k}' = \omega_{k} + w_{k}^{2}$. For the sake of generality, we include a per-pixel gain factor $g_{k}$, which is often unity. Sampling from $p(\bold{x}_{k})$ is trivial; however, for computation of a lower bound on uncertainty in $\theta$, the summation in (1) can be difficult to work with. Therefore, we choose to use a Poisson approximation for simplification, valid under a range of experimental conditions (Huang 2013). The expectation of the Poisson process at each pixel of the image must then be computed from the optical impulse response $O(u,v)$, which is taken to be an isotropic Gaussian in two-dimensions. For example, for a particular pixel of width $\delta$ located at $(u_k,v_k)$ in the first dimension
+where $A$ is some normalization constant. After subtraction of a known offset $o_{k}$, which can be easily measured, we have $\omega_{k}' = \omega_{k} + w_{k}^{2}$. For the sake of generality, we include a per-pixel gain factor $g_{k}$, which is often unity. Sampling from $p(\bold{x}_{k}|\theta)$ is trivial; however, for computation of a lower bound on uncertainty in $\theta$, the summation in (1) can be difficult to work with. Therefore, we choose to use a Poisson approximation for simplification, valid under a range of experimental conditions (Huang 2013). The expectation of the Poisson process at each pixel of the image must then be computed from the optical impulse response $O(u,v)$, which is taken to be an isotropic Gaussian in two-dimensions. For example, for a particular pixel of width $\delta$ centered at $\xi_{k}=(u_k,v_k)$ in the first dimension, we define
 
 \begin{equation}
-\Delta E_{\theta_{i}}(u_k,\theta_{x},\sigma_{\bold{x}}) \vcentcolon = \int_{u_{k}-\delta /2}^{u_{k}+\delta /2} O(\theta_{x})d\theta_{x} = \frac{1}{2}\left(\mathrm{erf}\left(\frac{u_{k}+\frac{1}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right) -\mathrm{erf}\left(\frac{u_{k}-\frac{1}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right)\right)
+\Delta E_{\theta_{i}}(\xi_{k,i},\theta_{i},\sigma_{\bold{x}}) \vcentcolon = \int_{\xi_{k,i}-\delta /2}^{\xi_{k,i}+\delta /2} O(u;\theta_{i})du = \frac{1}{2}\left(\mathrm{erf}\left(\frac{\xi_{k,i}+\frac{\delta}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right) -\mathrm{erf}\left(\frac{\xi_{k,i}-\frac{\delta}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right)\right)
 \end{equation}
 
-The expected value at each pixel is then $\omega_{k}\propto \prod_{\theta_{i}\in (\theta_{x},\theta_{y})} \Delta E_{\theta_{i}}(\theta_{i},\sigma_{\bold{x}}) $. Using this, sampling from (1) is can be carried out by $\bold{x}_{k} = s_{k} + \zeta_{k}$ for $s_{k}\sim \mathrm{Poisson}(\omega_{k}), \eta_{k}\sim \mathcal{N}(o_{k},w_{k}^{2})$. The complete generative process is depicted in Figure 1. Reliable inference of $\theta$ from $\bold{x}$, for example by maximum likelihood estimation or with a deep model, requires performance metrics for model selection. We use the Fisher information as an information theoretic criteria to assess the quality of the model tested here, with respect to the root mean squared error (RMSE) of our predictions of $\theta$ (Chao 2016). The Poisson log-likelihood $\ell(\bold{x}|\theta)$ is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below i.e., $\mathrm{var}(\hat{\theta}) \geq I^{-1}(\theta)$. The Fisher information is straightforward to compute under the Poisson log-likelihood, which is detailed in the Appendix
+The expected value at each pixel is then $\omega_{k}\propto \prod_{\theta_{i}\in \theta} \Delta E_{\theta_{i}}(\xi_{k,i},\theta_{i},\sigma_{\bold{x}}) $. Using this, sampling from (1) is can be carried out by $\bold{x}_{k} = s_{k} + \zeta_{k}$ for $s_{k}\sim \mathrm{Poisson}(\omega_{k}), \eta_{k}\sim \mathcal{N}(o_{k},w_{k}^{2})$. The complete generative process is depicted in Figure 1. Reliable inference of $\theta$ from $\bold{x}$ in general requires performance metrics for model selection. We use the Fisher information as an information theoretic criteria to assess the quality of the model tested here, with respect to the root mean squared error (RMSE) of our predictions of $\theta$ (Chao 2016). The Poisson log-likelihood $\ell(\bold{x}|\theta)$ is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below i.e., $\mathrm{var}(\hat{\theta}) \geq I^{-1}(\theta)$. The Fisher information is straightforward to compute under the Poisson log-likelihood in (1), which is detailed in the Appendix
 
 \begin{equation}
 \mathcal{I}_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) = \sum_{k}\frac{1}{\omega_{k}'}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}}
@@ -179,28 +179,28 @@ Diffusion models (Sohl-Dickstein 2015; Ho 2020; Song 2021) are a class of genera
 q(\bold{y}_{t}|\bold{y}_{0}) = \prod_{t=1}^{T}q(\bold{y}_{t}|\bold{y}_{t-1}) \;\;\; q(\bold{y}_{t}|\bold{y}_{t-1}) = \mathcal{N}\left(\sqrt{1-\beta_{t}}\bold{y}_{t-1},\beta_t I\right)
 \end{equation}
 
-The usual procedure is then to learn a parametric representation of the \emph{reverse process}, and therefore generate samples from  $p(\bold{y}_{0})$, starting from noise. Formally, $p_{\theta}(\bold{y}_{0}|\bold{\hat{y}}) = \int p_{\theta}(\bold{y}_{0:T}|\bold{\hat{y}})d\bold{\hat{y}}_{1:T}$ where $\bold{y}_{t}$ is a latent representation with the same dimensionality of the data.  $p_{\theta}(\bold{y}_{0:T}|\bold{\hat{y}})$ is a Markov process, starting from a noise sample $p_{\theta}(\bold{y}_{T}) = \mathcal{N}(0,\bold{I})$. 
+The usual procedure is then to learn a parametric representation of the \emph{reverse process}, and therefore generate samples from  $p(\bold{y}_{0})$, starting from noise. Formally, $p_{\Psi}(\bold{y}_{0}|\bold{\hat{y}}) = \int p_{\Psi}(\bold{y}_{0:T}|\bold{\hat{y}})d\bold{\hat{y}}_{1:T}$ where $\bold{y}_{t}$ is a latent representation with the same dimensionality of the data.  $p_{\Psi}(\bold{y}_{0:T}|\bold{\hat{y}})$ is a Markov process, starting from a noise sample $p_{\Psi}(\bold{y}_{T}) = \mathcal{N}(0,\bold{I})$. 
 
 \begin{equation}
-p_{\theta}(\bold{y}_{0:T}) = p_{\theta}(\bold{y}_{T})\prod_{t=1}^{T} p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) \;\;\; p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t}) = \mathcal{N}\left(s_{\theta}(\bold{y}_{t}),\beta_{t}I\right)
+p_{\Psi}(\bold{y}_{0:T}) = p_{\Psi}(\bold{y}_{T})\prod_{t=1}^{T} p_{\Psi}(\bold{y}_{t-1}|\bold{y}_{t}) \;\;\; p_{\Psi}(\bold{y}_{t-1}|\bold{y}_{t}) = \mathcal{N}\left(s_{\Psi}(\bold{y}_{t}),\beta_{t}I\right)
 \end{equation}
 
-where we reuse the variance schedule of the forward process (Ho 2020). We omit conditioning on $\hat{\bold{y}}$ for each transition density $p_{\theta}(\bold{y}_{t-1}|\bold{y}_{t})$, as this is only considered at $t=0$ i.e., $p_{\theta}(\bold{y}_{1}|\bold{y}_{0},\hat{\bold{y}})$. An important property of the forward process is that it admits sampling $\bold{y}_t$ at an arbitrary timestep $t$ in closed form (Ho 2020). Using the notation $\alpha_t := 1 - \beta_t$ and $\gamma_t := \prod_{s=1}^{t} \alpha_s$, we have $q(\bold{y}_t|\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 - \gamma_t)I \right)$.
+where we reuse the variance schedule of the forward process (Ho 2020). We omit conditioning on $\hat{\bold{y}}$ for each transition density $p_{\Psi}(\bold{y}_{t-1}|\bold{y}_{t})$, as this is only considered at $t=0$ i.e., $p_{\Psi}(\bold{y}_{1}|\bold{y}_{0},\hat{\bold{y}})$. An important property of the forward process is that it admits sampling $\bold{y}_t$ at an arbitrary timestep $t$ in closed form (Ho 2020). Using the notation $\alpha_t := 1 - \beta_t$ and $\gamma_t := \prod_{s=1}^{t} \alpha_s$, we have $q(\bold{y}_t|\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 - \gamma_t)I \right)$.
 
 \begin{equation}
-\mathcal{L}(\theta) = \mathbb{E}\left[-\log p_{\theta}(\bold{y}_{0}|\bold{x})\right] \leq  \mathbb{E}\left[-\log \frac{p_{\theta}(\bold{y}_{0:T}|\bold{x})}{q(\bold{y}_{1:T}|\bold{y}_{0})}\right]
+\mathcal{L}_{\Psi} = \mathbb{E}\left[-\log p_{\Psi}(\bold{y}_{0}|\bold{x})\right] \leq  \mathbb{E}\left[-\log \frac{p_{\Psi}(\bold{y}_{0:T}|\bold{x})}{q(\bold{y}_{1:T}|\bold{y}_{0})}\right]
 \end{equation}
 
 The objective in (6) can be expanded in terms of $D_{\mathrm{KL}}(p(\bold{y}_{t-1}|\bold{y}_{t})|| q(\bold{y}_{t}|\bold{y}_{t-1})$ as detailed in (Ho 2020). We choose to adopt the simplified from of the variational bound, which is a reweighted form of the variational lower bound and emphasizes that the DDPM estimates the score $\nabla_{\bold{y}}\log p(\bold{y}|\bold{x})$ at each noise level (Song 2021)
 
 \begin{equation}
-\theta^{*} = \underset{\theta}{\mathrm{argmin}} \underset{(\bold{\hat{y}},\bold{y}_{0})}{\mathbb{E}}\underset{(\epsilon,\gamma)}{\mathbb{E}} \left[ s_{\theta}\left(x, \sqrt{\gamma} \bold{y}_0 + \sqrt{1 - \gamma} \epsilon \, \middle|\, \bold{y}_{t}, \gamma\right) - \epsilon \right],
+\Psi^{*} = \underset{\Psi}{\mathrm{argmin}} \underset{(\bold{\hat{y}},\bold{y}_{0})}{\mathbb{E}}\underset{(\epsilon,\gamma)}{\mathbb{E}} \left[ s_{\Psi}\left(x, \sqrt{\gamma} \bold{y}_0 + \sqrt{1 - \gamma} \epsilon \, \middle|\, \bold{y}_{t}, \gamma\right) - \epsilon \right],
 \end{equation}
 
 After training, samples can be generated by 
 
 \begin{equation}
-\bold{y}_{t-1} = \frac{1}{\sqrt{1-\beta_{i}}}\left(\bold{y}_{i} + \beta_{i}s_{\theta}(\bold{y}_{t})\right) + \sqrt{\beta_{i}}\bold{\xi}
+\bold{y}_{t-1} = \frac{1}{\sqrt{1-\beta_{i}}}\left(\bold{y}_{i} + \beta_{i}s_{\Psi}(\bold{y}_{t})\right) + \sqrt{\beta_{i}}\bold{\xi}
 \end{equation}
 
 
@@ -322,32 +322,43 @@ Representing Model Uncertainty in Deep Learning. ICML 2016.
 It is common to describe the optical impulse response of a microscope as a two-dimensional isotropic Gaussian (Zhang 2007). This is an approximation to the more rigorous diffraction models given by Richards and Wolf (1959) or Gibson and Lanni (1989). Over a continuous domain, the impulse response reads
 
 \begin{equation*}
-\mathrm{G}(u,v) = \frac{1}{2\pi\sigma_{\bold{x}}^{2}}e^{-\frac{(u-\theta_{x})^{2}+(v-\theta_{y})^{2}}{2\sigma_{\bold{x}}^{2}}}
+O(u,v) = \frac{1}{2\pi\sigma_{\bold{x}}^{2}}e^{-\frac{(u-\theta_{u})^{2}+(v-\theta_{v})^{2}}{2\sigma_{\bold{x}}^{2}}}
 \end{equation*}
 
 The above expression can be interpreted as a probability distribution over locations where a photon can be detected. Therefore, for discrete detectors, we discretize this expression by integrating over pixels. The number of photon arrivals will follow Poisson statistics, with expected value
 
-\begin{equation}
-\omega_{k} = i_{0}\left(\int_{u_{k}-\delta /2}^{u_{k}+\delta /2} O(\theta_{x})d\theta_{x} \right)\left(\int_{v_{k}-\delta /2}^{v_{k}+\delta /2} O(\theta_{y})d\theta_{y} \right)
-\end{equation}
+\begin{equation*}
+\omega_{k} = i_{0}\left(\int_{u_{k}-\delta /2}^{u_{k}+\delta /2} O(u; \theta_{u})du \right)\left(\int_{v_{k}-\delta /2}^{v_{k}+\delta /2} O(v;\theta_{v})dv \right)
+\end{equation*}
 
-The scalar quantity $i_{0}$ represents the amplitude of the signal, which is proportional the quantum efficiency of a pixel $\eta$, the duration of exposure, $\Delta$, and the number of photons emitter by a fluorescent molecule $N_{0}$. With no loss of generality, $\Delta = \eta = 1$ and there is a single free parameter $N_{0}$. Furthermore, to simplify the notation, in the main text we define
+The scalar quantity $i_{0}$ represents the amplitude of the signal, which is proportional the quantum efficiency of a pixel $\eta$, the duration of exposure, $\Delta$, and the number of photons emitter by a fluorescent molecule $N_{0}$. With no loss of generality, $\Delta = \eta = 1$ and there is a single free parameter $N_{0}$. A simple change of variables $u' = u - \theta_{u}$ and $v' = v-\theta_{v}$ gives
 
-\begin{equation}
-\Delta E_{\theta_{i}}(u_k,\theta_{x},\sigma_{\bold{x}}) \vcentcolon = \int_{u_{k}-\delta /2}^{u_{k}+\delta /2} O(\theta_{x})d\theta_{x} = \frac{1}{2}\left(\mathrm{erf}\left(\frac{u_{k}+\frac{1}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right) -\mathrm{erf}\left(\frac{u_{k}-\frac{1}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right)\right)
-\end{equation}
+\begin{align*}
+\omega_{k} = i_{0}\left(\int_{u_{k}-\delta /2 - \theta_{u}}^{u_{k}+\delta /2 - \theta_{u}} O(u)du \right)\left(\int_{v_{k}-\delta /2 - \theta_{v}}^{v_{k}+\delta /2 - \theta_{v}} O(v)dv \right)
+\end{align*}
 
-where we have used the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}\int_{0}^{t}e^{-t^{2}}dt$. 
+One of these terms can be written as 
+
+\begin{align*}
+\int_{u_{k}-\delta /2 - \theta_{u}}^{u_{k}+\delta /2 - \theta_{u}} O(u)du &= \int_{0}^{u_{k}+\delta /2 - \theta_{u}} O(u)du - \int_{0}^{u_{k}-\delta /2 - \theta_{u}} O(u)du\\
+&= \frac{1}{2}\left(\mathrm{erf}\left(\frac{u_{k}+\frac{\delta}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right) -\mathrm{erf}\left(\frac{u_{k}-\frac{\delta}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right)\right)
+\end{align*}
+
+where we have used the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}\int_{0}^{z}e^{-t^{2}}dt$. To simplify the notation in the main text, we define a general expression
+
+\begin{equation*}
+\Delta E_{\theta_{i}}(\xi_{k,i},\theta_{x},\sigma_{\bold{x}}) \vcentcolon = \int_{u_{k}-\delta /2}^{u_{k}+\delta /2} O(u;\theta_{i})du = \frac{1}{2}\left(\mathrm{erf}\left(\frac{\xi_{k,i}+\frac{\delta}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right) -\mathrm{erf}\left(\frac{\xi_{k,i}-\frac{\delta}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right)\right)
+\end{equation*}
 
 \subsection{Metropolis-Hastings MCMC}
 
-To obtain numerical estimates of $p(\theta|\bold{x}\propto p(\bold{x}|\theta)p(\theta)$ and therefore $p(\bold{y}|\bold{x})$, for an isolated fluorescent molecule as shown in (Figure 2), we used Metropolis-Hastings Markov Chain Monte Carlo (MCMC) to estimate the posterior marginals on coordinates. Under the Poisson approximation in (1), the model negative log-likelihood is
+To obtain numerical estimates of $p(\theta|\bold{x}\propto p(\bold{x}|\theta)p(\theta)$ and therefore $p(\bold{y}|\bold{x})$, for an isolated fluorescent molecule as shown in (Figure 2), we used Metropolis-Hastings Markov Chain Monte Carlo (MCMC) to estimate the posterior on coordinates. Under the Poisson approximation in (1), the model negative log-likelihood is
 
 \begin{equation}
 \ell(\bold{x}|\theta) = -\log \prod_{k} \frac{e^{-\left(\omega_{k}'\right)}\left(\omega_{k}'\right)^{n_{k}}}{n_{k}!} = \sum_{k}  \log n_{k}! + \omega_{k}' - n_{k}\log\left(\omega_{k}'\right)
 \end{equation}
 
-MCMC is asymptotically exact, which is not guaranteed by variational methods which may rely on a Laplace approximation around the MLE. We choose a uniform prior $p(\theta)$, and Metropolis-Hastings is run for $10^4$ iterations, the first $10^{3}$ iterations is discarded as burn-in. A proposal $\theta' = \theta + \xi$ was generated with $\xi\sim \mathcal{N}(0,\sigma^{2}I)$ where $\sigma^{2}=0.05$. The acceptance probability is
+where $n_{k}$ is the observed number events at a pixel. MCMC is asymptotically exact, which is not guaranteed by variational methods which may rely on a Laplace approximation around the MLE. We choose a uniform prior $p(\theta)$, and Metropolis-Hastings is run for $10^4$ iterations, the first $10^{3}$ iterations are discarded as burn-in. A proposal $\theta' = \theta + \Delta\theta$ was generated with $\Delta\theta \sim \mathcal{N}(0,\sigma^{2}I)$ where $\sigma^{2}=0.05$. The acceptance probability is
 
 \begin{equation*}
 \alpha = e^{\beta(\ell(\theta)-\ell(\theta'))}
@@ -363,28 +374,31 @@ The Poisson approximation is also convenient for computing the Fisher informatio
 I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) 
 \end{equation}
 
-Let $\mu_{k}' = g_{k}\mu_{k} + \sigma_{k}^{2}$. For an arbitrary parameter,
+For an arbitrary parameter,
 
 \begin{align*}
-\frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  x_{k}\log x_{k} + \mu_{k}' - x_{k}\log\left(\mu_{k}'\right)\\
-&= \sum_{k} \frac{\partial \mu_{k}'}{\partial\theta_{i}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)
+\frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  \log n_{k}! + \omega_{k}' - n_{k}\log\left(\omega_{k}'\right)\\
+&= \sum_{k} \frac{\partial \omega_{k}'}{\partial\theta_{i}} \left(\frac{\omega_{k}'-n_{k}}{\omega_{k}'}\right)
 \end{align*}
 
+Using this result, we can compute the Fisher information matrix $I(\theta)$
+
 \begin{equation*}
-I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)^{2}\right) = \sum_{k}\frac{1}{\mu_{k}'}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}}
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}} \left(\frac{\omega_{k}'-n_{k}}{\omega_{k}'}\right)^{2}\right) = \sum_{k}\frac{1}{\omega_{k}'}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}}
 \end{equation*}
+
+A fundamental lower bound on the variance in our estimates of $\theta$ then is found from its inverse: $\mathrm{CRLB} = I^{-1}(\theta)$
 
 \begin{figure}
 \centering
 \includegraphics[scale=0.7]{Errors.png}
-\caption{Localization errors of the trained model}
+\caption{Localization errors of the trained model $\phi$. The Cramer-Rao lower bound is shown in red, computing by taking the diagonal elements of $I^{-1}(\theta)$.}
 \end{figure}
 
 
-\subsection{DeepSTORM CNN}
+\subsection{DeepSTORM CNN $\phi$}
 
-The DeepSTORM CNN, initially proposed in (Nehme 2020) for 3D localization, can be viewed as a deep kernel density estimator, reconstructing kernel density estimates $\bold{y}$ from low-resolution inputs $\bold{x}$. We utilize a simplified form of the original architecture for 2D localization, which we denote $\phi$ hereafter, which consists of three main modules: a multi-scale context aggregation module, an upsampling module, and a prediction module. For context aggregation, the architecture utilizes dilated convolutions to increase the receptive field of each layer. The upsampling module is then composed of two consecutive 2x resize-convolutions, computed by nearest-neighbor interpolation, to increase the lateral resolution by a factor of 4. For a common sCMOS camera, each pixel has a lateral size of approximately 108 nanometers, giving approximately 27 nanometer pixels in the KDE. The terminal prediction module contains three additional convolutional blocks for refinement of the upsampled image, followed by an element-wise HardTanh. 
-
+The DeepSTORM CNN, for 3D localization, can be viewed as a deep kernel density estimator, reconstructing kernel density estimates $\bold{y}$ from low-resolution inputs $\bold{x}$. We utilize a simplified form of the original architecture for 2D localization, which we denote $\phi$ in this paper, which consists of three main modules: a multi-scale context aggregation module, an upsampling module, and a prediction module. For context aggregation, the architecture utilizes dilated convolutions to increase the receptive field of each layer. The upsampling module is then composed of two consecutive 2x resize-convolutions, computed by nearest-neighbor interpolation, to increase the lateral resolution by a factor of 4. Additional details regarding this architecture can be found in the original paper (Nehme 2020). For a common sCMOS camera, each pixel has a lateral size of approximately 108 nanometers, giving approximately 27 nanometer pixels in the KDE. The terminal prediction module contains three additional convolutional blocks for refinement of the upsampled image, followed by an element-wise HardTanh. The architecture is trained using the objective $\mathcal{L}_{\phi} = \frac{1}{N}\sum_{n=1}^{N} (\bold{y}_{0,n}-\bold{\hat{y}}_{n})^{2}$. 
 
 
 \end{document}
