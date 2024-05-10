@@ -166,8 +166,6 @@ Point estimates $\hat{\bold{y}}_{i}$ produced by the traditional deep architectu
 
 Here, the model $\phi$ is realized by a CNN with upsampling layers. Consider the Markov chain wherein the KDE $\bold{y}_{0}$ is latent in and inferred from a noisy measurement $\bold{x}$, i.e., $\bold{y}_{0}\rightarrow \bold{x} \xrightarrow[]{\phi}\bold{\hat{y}}$. By the data processing inequality any function $\phi$ can only destroy information in $\bold{x}$ pertaining to $\bold{y}_{0}$ i.e., $I(\bold{x};\bold{y}_0) \geq I(\bold{\hat{y}};\bold{y}_0)$ or $h(\bold{y}_0|\bold{\hat{y}}) \geq h(\bold{y}_0|\bold{x})$ where $I$ is the mutual information and $h$ is the entropy. This suggests that the uncertainty in $p_{\Psi}(\bold{y}_0|\bold{\hat{y}})$ is indeed an upper bound on the entropy of $p(\bold{y}_0|\bold{x})$. This however does not imply that the distributions should be equivalent, nor does it necessarily apply to the marginal variance of each pixel of the KDE. However, it remains a useful guiding principle for the model development.
 
-In practice, a DDPM $\Psi$ can be trained on pairs $(\bold{y}_{0,i},\hat{\bold{y}}_{i})_{i=1}^{N}$. The conditional DDPM generates a target KDE $\bold{y}_0$ in $T$ refinement steps. Starting with a pure noise image $\bold{y}_{T}\sim \mathcal{N}(0,\bold{I})$, the model iteratively refines the KDE through successive iterations according to learned conditional transition distributions $p(\bold{y}_{t-1}|\bold{y}_{t},\bold{})$ such that $\bold{y}_{0} \sim p(\bold{y}_0|\hat{\bold{y}})$ 
-
 \subsection{Guided Diffusion}
 
 \begin{figure}
@@ -187,31 +185,34 @@ The usual procedure is then to learn a parametric representation of the \emph{re
 p_{\Psi}(\bold{y}_{0:T}) = p_{\Psi}(\bold{y}_{T})\prod_{t=1}^{T} p_{\Psi}(\bold{y}_{t-1}|\bold{y}_{t}) \;\;\; p_{\Psi}(\bold{y}_{t-1}|\bold{y}_{t}) = \mathcal{N}\left(\mu_{\Psi}(\bold{y}_{t}),\beta_{t}I\right)
 \end{equation}
 
-where we reuse the variance schedule of the forward process (Ho 2020). From (7) it can be seen that the learnable parameter in the reverse process is the expectation of the transition $s_{\Psi}(\bold{y}_{t})$ where $\Psi$ is a neural network. We omit conditioning on $\hat{\bold{y}}$ for each transition density $p_{\Psi}(\bold{y}_{t-1}|\bold{y}_{t})$, as this is only considered at $t=0$ i.e., $p_{\Psi}(\bold{y}_{1}|\bold{y}_{0},\hat{\bold{y}})$. An important property of the forward process is that it admits sampling $\bold{y}_t$ at an arbitrary timestep $t$ in closed form (Ho 2020). Using the notation $\alpha_t := 1 - \beta_t$ and $\gamma_t := \prod_{s=1}^{t} \alpha_s$, we have $q(\bold{y}_t|\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 - \gamma_t)I \right)$ or $\bold{y}_{t} = \sqrt{\gamma_{t}}\bold{y}_{0} + \sqrt{1-\gamma_{t}}\bold{\epsilon}$ for $\epsilon \sim \mathcal{N}(0,I)$. Training of the model $\Psi$ is achieved through the usual variational bound
+where we reuse the variance schedule of the forward process (Ho 2020). From (7) it can be seen that the learnable parameter in the reverse process is the expectation of the transition $\mu_{\Psi}$ where $\Psi$ is a neural network. We omit conditioning on $\hat{\bold{y}}$ for each transition density $p_{\Psi}(\bold{y}_{t-1}|\bold{y}_{t})$, as this is only considered at $t=0$ i.e., $p_{\Psi}(\bold{y}_{1}|\bold{y}_{0},\hat{\bold{y}})$. An important property of the forward process is that it admits sampling $\bold{y}_t$ at an arbitrary timestep $t$ in closed form (Ho 2020). Using the notation $\alpha_t := 1 - \beta_t$ and $\gamma_t := \prod_{s=1}^{t} \alpha_s$, we have $q(\bold{y}_t|\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 - \gamma_t)I \right)$ or $\bold{y}_{t} = \sqrt{\gamma_{t}}\bold{y}_{0} + \sqrt{1-\gamma_{t}}\bold{\epsilon}$ for $\epsilon \sim \mathcal{N}(0,I)$. Learning the reverse process can be approached by either regressing the starting noise $\bold{\epsilon}$ or the true KDE $\bold{y}_{0}$ as there is a deterministic relationship between the two given by the forward process. We adopt the former for consistency with other work, and define $s_{\Psi}$ as a neural denoising function which regresses the noise $\bold{\epsilon}$ from $\bold{\hat{y}}$. Importantly, the neural denoising function $s_{\Psi}$ and $\mu_{\Psi}$ are related by (Saharia 2021)
+
+\begin{equation}
+\mu_{\Psi}(\bold{y}_{t},\gamma_{t}) = \frac{1}{\sqrt{1-\beta_{t}}}\left(\bold{y}_{t} - \frac{\beta_{t}}{\sqrt{1-\gamma_{t}}}s_{\Psi}\right)
+\end{equation}
+
+which forms the basic mechanism for transitions in the reverse process: $\bold{y}_{t-1} = \mu_{\Psi}(\bold{y}_{t},\gamma_{t}) + \sqrt{\beta_{t}}\xi_{t}$, for $\xi_{t} = \mathcal{N}(0,I)$.
+
+\textbf{Variational Objective}. Training of the model $\Psi$ is achieved through the usual variational bound
 
 \begin{equation}
 \mathcal{L}_{\Psi} = \underset{(\bold{x},\bold{y}_{0})}{\mathbb{E}}\left[-\log p_{\Psi}(\bold{y}_{0}|\bold{x})\right] \leq  \underset{(\bold{x},\bold{y}_{0})}{\mathbb{E}}\left[-\log \frac{p_{\Psi}(\bold{y}_{0:T}|\bold{x})}{q(\bold{y}_{1:T}|\bold{y}_{0})}\right]
 \end{equation}
 
-This objective can be expanded in terms of $D_{\mathrm{KL}}(p(\bold{y}_{t-1}|\bold{y}_{t})|| q(\bold{y}_{t}|\bold{y}_{t-1})$; however, we choose to adopt the simplified from of this loss, which is a reweighted form of the variational lower bound and emphasizes that the DDPM estimates the score at each noise level (Song 2021). As noted previously (Saharia 2021), we can regress the output of $s_{\Psi}$ to the starting noise $\bold{\epsilon}$ as there is a deterministic relationship between $\bold{\epsilon}$ and $\bold{y}_{0}$.
+This objective can be expanded in terms of $D_{\mathrm{KL}}(p(\bold{y}_{t-1}|\bold{y}_{t})|| q(\bold{y}_{t}|\bold{y}_{t-1})$; however, we choose to adopt the simplified from of this loss, which is a reweighted form of the variational lower bound and emphasizes that the DDPM estimates the score at each noise level (Song 2021). 
 
 \begin{equation}
 \Psi^{*} = \underset{\Psi}{\mathrm{argmin}} \underset{(\bold{\hat{y}},\bold{y}_{0})}{\mathbb{E}}\underset{(\epsilon,\gamma)}{\mathbb{E}} \lvert\lvert s_{\Psi}\left(\bold{\hat{y}}, \sqrt{\gamma} \bold{y}_0 + \sqrt{1 - \gamma} \epsilon, \gamma\right) - \epsilon \lvert\lvert
 \end{equation}
 
-To train $\Psi$ according to (9), we sample $t\sim U(\{0,...,T\})$ which fixes $\gamma_{t}$, and compute the $\ell_{1}$ norm. We use the Adam optimizer and a batch size of 2 for training. After training, samples can be generated by using that $\mu_{\Psi} = \frac{1}{\sqrt{1-\beta_{t}}}\left(\bold{y}_{t} - \frac{\beta_{t}}{\sqrt{1-\gamma_{t}}}s_{\Psi}\right)$ which gives the reverse process
-
-\begin{equation}
-\bold{y}_{t-1} = \mu_{\Psi}(\bold{y}_{t}) + \sqrt{\beta_{t}}\xi
-\end{equation}
-
+To train $\Psi$ according to (9), we sample $t\sim U(\{0,...,T\})$ which fixes $\gamma_{t}$, and compute the $\ell_{1}$ norm.
 
 \section{Experiments}
 
 \begin{figure}
 \centering
 \includegraphics[scale=1.2]{Bayes.png}
-\caption{DDPM estimation of marginal variances.}
+\caption{DDPM estimation of marginal variances. A low-resolution image $\bold{x}$ (left) is transformed by $\phi$ to produce a KDE estimate $\hat{\bold{y}}$ (middle) and a DDPM $\Psi$ computes a map of marginal variances (right)}
 \end{figure}
 
 All training data consits of low-resolution $20\times 20$ images, simulated as described previously, setting $\sigma_{\bold{x}}=0.92$ in units of low-resolution pixels, for consistency with common experimental conditions with a 60X magnification objective lens and numerical aperture (NA) of 1.4. We choose $i_{0}=200$ for experiments for consistency with typical bright fluorophore emission rates. All KDEs have dimension $80\times 80$, are scaled between $[0,1]$, and are generated using $\sigma_{\bold{y}}=3.0$ pixels in the upsampled image. For a typical CMOS camera, this results in KDE pixels with lateral dimension of $\approx 27\mathrm{nm}$. Initial coordinates $\theta$ were drawn uniformly over a two-dimensional disc with a radius of 7 low-resolution pixels.
