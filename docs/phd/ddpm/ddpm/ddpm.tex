@@ -95,7 +95,7 @@ Deep learning has recently attracted considerable attention from researchers in 
 
 Deep learning has attracted tremendous attention from researchers in the natural sciences, with several foundational applications arising in microscopy (Weigert 2018; Falk 2019). Recently, the application of deep image translation in single-molecule localization microscopy (SMLM) has received considerable interest (Ouyang 2018; Nehme 2020; Speiser 2021). SMLM techniques are a mainstay of fluorescence microscopy and can be used to produce a pointillist representation of biomolecules in the cell at diffraction-unlimited precision (Rust 2006; Betzig 2006). In previous applications of deep models to localization microscopy, super-resolution images can be recovered from a sparse set of localizations with conditional generative adversarial networks (Ouyang 2018) or localization itself can be performed using traditional convolutional networks (Nehme 2020; Speiser 2021). Here, we focus on the latter class of models which perform KD estimation using neural networks. 
 
-Inferences in SMLM are often made on a single measurement, and thus common measures of model performance are based on localization errors computed over ensembles of simulated images. Unfortunately, this choice precludes computation of uncertainty at test time under a fixed model. Yet, Bayesian probability theory offers us mathematically grounded tools to reason about model uncertainty, but these usually come with a prohibitive computational cost (Gal 2022). A few approaches to avoiding this intractiblity in deep models have been deterministic uncertainty quantification (Amersfoort 2020), ensembling (Lakshminarayanan et al., 2017) or Monte Carlo dropout (Gal and Ghahramani, 2016). Here, we choose to model a distribution on high-resolution KDE predictions conditioned on a low-resolution input using a denoising diffusion probabilistic model (DDPM) (Ho 2020; Song 2021), Such models are one class of \emph{score based generative models} which implicitly compute the score of the data distribution at each noise scale starting from pure noise (Song 2021). This approach has proven powerful for generative modeling of conditional image distributions; however, conditional diffusion can become trapped in local optima preventing the application of such models to uncertainty estimation.
+Inferences in SMLM are often made on a single measurement, and thus common measures of model performance are based on localization errors computed over ensembles of simulated images. Unfortunately, this choice precludes computation of aleatoric ncertainty at test time under a fixed model. Yet, Bayesian probability theory offers us mathematically grounded tools to reason about model uncertainty, but these usually come with a prohibitive computational cost (Gal 2022). A few approaches to avoiding this intractiblity in deep models have been mostly epistemic uncertainty quantification such as ensembling (Lakshminarayanan et al., 2017) or Monte Carlo dropout (Gal and Ghahramani, 2016). Here, we choose to model a distribution on high-resolution KDE predictions conditioned on a low-resolution input using a denoising diffusion probabilistic model (DDPM) (Ho 2020; Song 2021), which allows us to enforce a known posterior distribution during training. Such models are one class of \emph{score based generative models} which implicitly compute the score of the data distribution at each noise scale starting from pure noise (Song 2021). This approach has proven powerful for generative modeling of conditional image distributions; however, conditional diffusion can become trapped in local optima preventing the application of such models to uncertainty estimation.
 
 In statistical physics, particularly simulation of complex molecular systems, sampling is constrained to a limited set of configurations. Similar notions of constrained diffusion have been used in DDPMs to guide the process based on gradients of a classifier (Nichols 2021). Here, we utilize a guided diffusion process which targets diffusion toward a space of reasonable solutions by conditioning the score-estimator on a strong initial guess. This approach allows us to probe the structure of the distribution of reconstructions, with fewer iterations than standard diffusion models. Our DDPM could be readily integrated with existing localization performance measures to address both model accuracy on training data and precision on datasets produced by experiments. 
 
@@ -144,13 +144,7 @@ Similar to the generative process on low resolution images $\bold{x}$, we can ge
 \bold{y}_{k}(\theta) = \sum_{n=1}^{N}\Delta E_{\theta_x}(u_{k},\theta_{n,x},\sigma_{\bold{y}}) \Delta E_{\theta_y}(v_{k},\theta_{n,y},\sigma_{\bold{y}})
 \end{equation}
 
-where the hyperparameter $\sigma_{\bold{y}}$ is the Gaussian kernel width. In principle, distribution on $\bold{y}_{k}$ is given directly from $p(\theta|\bold{x})$, which can be estimated by Metropolis-Hastings MCMC (Figure 2). For simplicity, in all following analysis, we are interested in the marginal variance $\mathrm{Var} (\bold{y}(\theta))$
-
-\begin{equation}
-\bar{\bold{y}}(\theta) = \underset{\theta\sim p(\theta|\bold{x})}{\mathbb{E}}\left[ \bold{y}(\theta)\right] \quad \mathrm{Var} (\bold{y}(\theta)) = \underset{\theta\sim p(\theta|\bold{x})}{\mathbb{E}}\left[ \bold{y}(\theta)-\bar{\bold{y}}(\theta)\right]^2
-\end{equation}
-
-Unfortunately, the posterior $p(\theta|\bold{x})$ can be costly to compute with MCMC, and is intractable at high molecular densities, as molecules cannot be easily resolved at test time. The central goal of this paper is to instead leverage a DDPM to model $p(\bold{y}|\bold{x})$, avoiding $p(\theta|\bold{x})$ entirely.
+where the hyperparameter $\sigma_{\bold{y}}$ is the Gaussian kernel width. 
 
 \section{Uncertainty-Aware Localization Microscopy by Guided Diffusion}
 
@@ -158,60 +152,82 @@ We consider datasets $(\bold{x}_i,\bold{y}_{0,i},\hat{\bold{y}}_{i})_{i=1}^{N}$ 
 
 \subsection{Problem Statement}
 
-Point estimates $\hat{\bold{y}}_{i}$ produced by the traditional deep architectures for localization microscopy produce strong results, but lack uncertainty quantification. Recent advances in generative modeling, particularly DDPMs, therefore present a unique opportunity to integrate uncertainty awareness into the localization microscopy toolkit. However, sampling from DDPMs is computationally expensive, given that generation amounts to solving a complex stochastic differential equation, effectively mapping a simple base distribution to the complex data distribution. The solution of such equations requires numerical integration with very small step sizes, resulting in thousands of neural network evaluations (Saharia 2021; Vahdat 2021). For conditional generation tasks in high-risk applications, generation complexity is further exacerbated by the need for the highest level of detail in generated samples. Moreover, in the present application, modeling the posterior is far more important than diversity in generated samples. Therefore, we propose that DDPM sampling is preceded by a deterministic neural network $\phi$, which generates an initial estimate to guide the diffusion process. Reasoning for this choice in our application is two-fold:
+Point estimates $\hat{\bold{y}}_{i}$ produced by the traditional deep architectures for localization microscopy produce strong results, but lack uncertainty quantification. In principle, distribution on $\bold{y}_{k}$ is given directly from $p(\theta|\bold{x})$, which can be estimated by Metropolis-Hastings MCMC (Figure 2). Unfortunately, the posterior $p(\theta|\bold{x})$ has no known analytical form and can be difficult to compute at test time, since (i) molecules cannot be easily resolved and therefore $\theta$ is of unknown dimension and (ii) $\theta$ can be high dimensional and efficient exploration of the parameter space is challenging. The central goal of this paper is to instead directly model $p(\bold{y}|\bold{x})$, where $\bold{y}$ is of known dimensionality. Upon inspection of (2,4), we see the distribution $p(\bold{y}|\bold{x})$ remains complex and non-Gaussian. Therefore we choose to model $p(\bold{y}|\bold{x})$ with a DDPM. 
+
+Recent advances in generative modeling, particularly DDPMs, therefore present a unique opportunity to integrate uncertainty awareness into the localization microscopy toolkit. However, sampling from DDPMs is computationally expensive, given that generation amounts to solving a complex stochastic differential equation, effectively mapping a simple base distribution to the complex data distribution. The solution of such equations requires numerical integration with very small step sizes, resulting in thousands of neural network evaluations (Saharia 2021; Vahdat 2021). For conditional generation tasks in high-risk applications, generation complexity is further exacerbated by the need for the highest level of detail in generated samples. Moreover, in the present application, modeling the posterior is far more important than diversity in generated samples. Therefore, we propose that DDPM sampling is preceded by a deterministic neural network $\phi$, which generates an initial estimate to guide the diffusion process. Reasoning for this choice in our application is two-fold:
 
 \textbf{Synthesis Speed}. By training a neural network $\phi$ to obtain an approximate estimate of $\bold{y}_{0}$, we can reduce the number of iterations, since the DDPM only needs to model the remaining mismatch, resulting in a less complex model from which sampling becomes easier. Speed is critical in SMLM applications, which can produce thousands of images in a single experiment.\\
 
 \textbf{Sample Fidelity}. Since Langevin dynamics will often be initialized in low-density regions of the data distribution, inaccurate score estimation in these regions will negatively affect the sampling process (Song 2019). Moreover, mixing can be difficult because of the need of traversing low density regions to transition between modes of the distribution. Preprocessing with a deterministic neural network $\phi$ can ameliorate this issue, by aiding score estimation in low density regions. 
 
-Here, the model $\phi$ is realized by a CNN with upsampling layers. Consider the Markov chain wherein the KDE $\bold{y}_{0}$ is latent in and inferred from a noisy measurement $\bold{x}$, i.e., $\bold{y}_{0}\rightarrow \bold{x} \xrightarrow[]{\phi}\bold{\hat{y}}$. By the data processing inequality any function $\phi$ can only destroy information in $\bold{x}$ pertaining to $\bold{y}_{0}$ i.e., $I(\bold{x};\bold{y}_0) \geq I(\bold{\hat{y}};\bold{y}_0)$ or $h(\bold{y}_0|\bold{\hat{y}}) \geq h(\bold{y}_0|\bold{x})$ where $I$ is the mutual information and $h$ is the entropy. This suggests that the uncertainty in $p_{\Psi}(\bold{y}_0|\bold{\hat{y}})$ is an upper bound on the entropy of $p(\bold{y}_0|\bold{x})$. This however does not imply that the distributions should be equivalent, nor does it necessarily apply to the marginal variance of each pixel of the KDE. 
-\subsection{Guided Diffusion}
+
+
+%Here, the model $\phi$ is realized by a CNN with upsampling layers. Consider the Markov chain wherein the KDE $\bold{y}_{0}$ is latent in and inferred from a noisy measurement $\bold{x}$, i.e., $\bold{y}_{0}\rightarrow \bold{x} \xrightarrow[]{\phi}\bold{\hat{y}}$. By the data processing inequality any function $\phi$ can only destroy information in $\bold{x}$ pertaining to $\bold{y}_{0}$ i.e., $I(\bold{x};\bold{y}_0) \geq I(\bold{\hat{y}};\bold{y}_0)$ or $h(\bold{y}_0|\bold{\hat{y}}) \geq h(\bold{y}_0|\bold{x})$ where $I$ is the mutual information and $h$ is the entropy. This suggests that the uncertainty in $p_{\psi}(\bold{y}_0|\bold{\hat{y}})$ is an upper bound on the entropy of $p(\bold{y}_0|\bold{x})$. This however does not imply that the distributions should be equivalent, nor does it necessarily apply to the marginal variance of each pixel of the KDE. To address this during training, $p(\theta|\bold{x})$ can be estimated, and the and expectation $\bar{\bold{y}}(\theta)$ and marginal variance $\mathrm{Var} (\bold{y}(\theta))$ can be obtained by Monte Carlo estimation
+
+%\begin{equation}
+%\bar{\bold{y}}(\theta) = \underset{\theta\sim p(\theta|\bold{x})}{\mathbb{E}}\left[ \bold{y}(\theta)\right] \quad \mathrm{Var} (\bold{y}(\theta)) = \underset{\theta\sim p(\theta|\bold{x})}{\mathbb{E}}\left[ \bold{y}(\theta)-\bar{\bold{y}}(\theta)\right]^2
+%\end{equation}
+
+%which can be integrated into the loss function.
+
+
+
+
+\subsection{Variational Diffusion}
 
 \begin{figure}
 \includegraphics[scale=4.5]{Denoise.png}
 \caption{Conditional diffusion model for sampling kernel density estimates. An initial KDE estimate $\bold{\hat{y}}$ is found by the CNN $\phi$, which is used as conditional input in the DDPM}
 \end{figure}
 
-Diffusion models (Sohl-Dickstein 2015; Ho 2020; Song 2021) are a class of generative models inspired by nonequilibrium statistical physics, which slowly destroy structure in a data distribution via a fixed Markov chain referred to as the \emph{forward process}. In the present context, we leverage recent results from (Ho 2020; Song 2021; Saharia 2021) for applying this framework to sampling from $p(\bold{y}|\bold{\hat{y}})$. The forward process gradually adds Gaussian noise to the KDE $\bold{y}_0$ according to a variance schedule $\beta_{0:T}$
+Diffusion models (Sohl-Dickstein 2015; Ho 2020; Song 2021) are a class of generative models inspired by nonequilibrium statistical physics, which slowly destroy structure in a data distribution via a fixed Markov chain referred to as the \emph{forward process}. In the present context, we leverage recent variational diffusion models (Kingma 2021; Kingma 2023) to model $p(\bold{y}|\bold{x})$. 
+
+\textbf{Diffusion Model}. The forward process gradually adds Gaussian noise to the KDE $\bold{y}_0$ according to a variance schedule $\beta_{0:T}$
 
 \begin{equation}
 q(\bold{y}_{T}|\bold{y}_{0}) = \prod_{t=1}^{T}q(\bold{y}_{t}|\bold{y}_{t-1}) \;\;\; q(\bold{y}_{t}|\bold{y}_{t-1}) = \mathcal{N}\left(\sqrt{1-\beta_{t}}\bold{y}_{t-1},\beta_t I\right)
 \end{equation}
 
-The usual procedure is then to learn a parametric representation of the \emph{reverse process}, and therefore generate samples from  $p(\bold{y}_{0}|\bold{\hat{y}})$, starting from noise. Formally, $p_{\Psi}(\bold{y}_{0}|\bold{\hat{y}}) = \int p_{\Psi}(\bold{y}_{0:T}|\bold{\hat{y}})d\bold{\hat{y}}_{1:T}$ where $\bold{y}_{t}$ is a latent representation with the same dimensionality of the data and $p_{\Psi}(\bold{y}_{0:T}|\bold{\hat{y}})$ is a Markov process, starting from a noise sample $p_{\Psi}(\bold{y}_{T}) = \mathcal{N}(0,I)$. 
+The usual procedure is then to learn a parametric representation of the \emph{reverse process}, and therefore generate samples from  $p(\bold{y}_{0}|\bold{\hat{y}})$, starting from noise. Formally, $p_{\psi}(\bold{y}_{0}|\bold{\hat{y}}) = \int p_{\psi}(\bold{y}_{0:T}|\bold{\hat{y}})d\bold{\hat{y}}_{1:T}$ where $\bold{y}_{t}$ is a latent representation with the same dimensionality of the data and $p_{\psi}(\bold{y}_{0:T}|\bold{\hat{y}})$ is a Markov process, starting from a noise sample $p_{\psi}(\bold{y}_{T}) = \mathcal{N}(0,I)$. 
 
 \begin{equation}
-p_{\Psi}(\bold{y}_{0:T}) = p_{\Psi}(\bold{y}_{T})\prod_{t=1}^{T} p_{\Psi}(\bold{y}_{t-1}|\bold{y}_{t}) \;\;\; p_{\Psi}(\bold{y}_{t-1}|\bold{y}_{t}) = \mathcal{N}\left(\mu_{\Psi}(\bold{y}_{t}),\beta_{t}I\right)
+p_{\psi}(\bold{y}_{0:T}) = p_{\psi}(\bold{y}_{T})\prod_{t=1}^{T} p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t}) \;\;\; p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t}) = \mathcal{N}\left(\mu_{\psi}(\bold{y}_{t}),\beta_{t}I\right)
 \end{equation}
 
-where we reuse the variance schedule of the forward process (Ho 2020). From (7) it can be seen that the learnable parameter in the reverse process is the expectation of the transition $\mu_{\Psi}$ where $\Psi$ is a neural network. We omit conditioning on $\hat{\bold{y}}$ for each transition density $p_{\Psi}(\bold{y}_{t-1}|\bold{y}_{t})$, as this is only considered at the first step of the reverse process i.e., $p_{\Psi}(\bold{y}_{T-1}|\bold{y}_{T},\hat{\bold{y}})$. An important property of the forward process is that it admits sampling $\bold{y}_t$ at an arbitrary timestep $t$ in closed form (Ho 2020). Using the notation $\alpha_t := 1 - \beta_t$ and $\gamma_t := \prod_{s=1}^{t} \alpha_s$, we have $q(\bold{y}_t|\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 - \gamma_t)I \right)$ or $\bold{y}_{t} = \sqrt{\gamma_{t}}\bold{y}_{0} + \sqrt{1-\gamma_{t}}\bold{\epsilon}$ for $\epsilon \sim \mathcal{N}(0,I)$. Learning the reverse process can be approached by either regressing the starting noise $\bold{\epsilon}$ or the true KDE $\bold{y}_{0}$ as there is a deterministic relationship between the two given by the forward process. We adopt the former for consistency with other work, and define $s_{\Psi}$ as a neural denoising function which regresses the noise $\bold{\epsilon}$ from $\bold{\hat{y}}$. Importantly, the neural denoising function $s_{\Psi}$ and $\mu_{\Psi}$ are related by (Saharia 2021)
+where we reuse the variance schedule of the forward process (Ho 2020). From (7) it can be seen that the learnable parameter in the reverse process is the expectation of the transition $\mu_{\psi}$ where $\psi$ is a neural network. We omit conditioning on $\hat{\bold{y}}$ for each transition density $p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t})$, as this is only considered at the first step of the reverse process i.e., $p_{\psi}(\bold{y}_{T-1}|\bold{y}_{T},\hat{\bold{y}})$. An important property of the forward process is that it admits sampling $\bold{y}_t$ at an arbitrary timestep $t$ in closed form (Ho 2020). Using the notation $\alpha_t := 1 - \beta_t$ and $\gamma_t := \prod_{s=1}^{t} \alpha_s$, we have $q(\bold{y}_t|\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 - \gamma_t)I \right)$ or $\bold{y}_{t} = \sqrt{\gamma_{t}}\bold{y}_{0} + \sqrt{1-\gamma_{t}}\bold{\epsilon}$ for $\epsilon \sim \mathcal{N}(0,I)$. Learning the reverse process can be approached by either regressing the starting noise $\bold{\epsilon}$ or the true KDE $\bold{y}_{0}$ as there is a deterministic relationship between the two given by the forward process. We adopt the former for consistency with other work, and define $s_{\psi}$ as a neural denoising function which regresses the noise $\bold{\epsilon}$ from $\bold{\hat{y}}$. Importantly, the noise estimate $\epsilon_{\psi}$ and $\mu_{\psi}$ are related by (Saharia 2021)
 
 \begin{equation}
-\mu_{\Psi}(\bold{y}_{t},\gamma_{t}) = \frac{1}{\sqrt{1-\beta_{t}}}\left(\bold{y}_{t} - \frac{\beta_{t}}{\sqrt{1-\gamma_{t}}}s_{\Psi}\right)
+\mu_{\psi}(\bold{y}_{t},\gamma_{t}) = \frac{1}{\sqrt{1-\beta_{t}}}\left(\bold{y}_{t} - \frac{\beta_{t}}{\sqrt{1-\gamma_{t}}}\epsilon_{\psi}\right)
 \end{equation}
 
-which forms the basic mechanism for transitions in the reverse process: $\bold{y}_{t-1} = \mu_{\Psi}(\bold{y}_{t},\gamma_{t}) + \sqrt{\beta_{t}}\xi_{t}$, for $\xi_{t} = \mathcal{N}(0,I)$.
+which forms the basic mechanism for transitions in the reverse process: $\bold{y}_{t-1} = \mu_{\psi}(\bold{y}_{t},\gamma_{t}) + \sqrt{\beta_{t}}\xi_{t}$, for $\xi_{t} = \mathcal{N}(0,I)$.
 
-\textbf{Variational Objective}. Training of the model $\Psi$ is achieved through the usual variational bound
+\textbf{Variational Objective}. Following (Kingma 2021), we define our generative model by inverting a diffusion process, yielding a hierarchical generative model that samples a sequence of latents $\bold{y}_{t}$, with time running backward. Training of the model is achieved through the usual variational bound
 
 \begin{equation}
-\mathcal{L}_{\Psi} = \underset{(\bold{x},\bold{y}_{0})}{\mathbb{E}}\left[-\log p_{\Psi}(\bold{y}_{0}|\bold{x})\right] \leq  \underset{(\bold{x},\bold{y}_{0})}{\mathbb{E}}\left[-\log \frac{p_{\Psi}(\bold{y}_{0:T}|\bold{x})}{q(\bold{y}_{1:T}|\bold{y}_{0})}\right]
+-\log p(\bold{x}) \leq -\mathbb{E}_{q(\bold{y}_{0}|\bold{x})} \log p(\bold{x}|\bold{y}_{0}) + D_{KL}(q(\bold{y}_{T}|\bold{x}) || p(\bold{y}_{T})) + \mathcal{L}_{\psi} = \mathrm{VLB}(\bold{x})
 \end{equation}
 
-This objective can be expanded in terms of $D_{\mathrm{KL}}(p(\bold{y}_{t-1}|\bold{y}_{t})|| q(\bold{y}_{t}|\bold{y}_{t-1})$; however, we choose to adopt the simplified from of this loss, which is a reweighted form of the variational lower bound: 
+We focus on the diffusion loss $\mathcal{L}_{\psi}$, which is the only relevant term in the above objective (Rebeira 2024)
 
 \begin{equation}
-\Psi^{*} = \underset{\Psi}{\mathrm{argmin}} \underset{(\bold{\hat{y}},\bold{y}_{0})}{\mathbb{E}}\underset{(\epsilon,\gamma)}{\mathbb{E}} \lvert\lvert s_{\Psi}\left(\bold{\hat{y}}, \sqrt{\gamma} \bold{y}_0 + \sqrt{1 - \gamma} \epsilon, \gamma\right) - \epsilon \lvert\lvert
+\mathcal{L}_{\psi} = \sum_{i=1}^{T} \mathbb{E}_{q_{\psi}(\bold{y}_{t}|\bold{x})} [ D_{KL}(q_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) || p(\bold{y}_{t-1}|\bold{y}_{t},\bold{x})) ]
 \end{equation}
 
-To train $\Psi$ according to (9), we sample $t\sim U(\{0,...,T\})$ which fixes $\gamma_{t}$, and compute the $\ell_{1}$ norm.
+In a diffusion model $p(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) = q(\bold{y}_{t-1}|\bold{y}_{t},\hat{\bold{x}}_{\psi})$ which is modeled by $p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t}) = \mathcal{N}\left(\mu_{\psi}(\bold{y}_{t}),\beta_{t}I\right)$. Importantly, $D_{KL}(q_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) || p(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}))$ and therefore, the variational bound, are closely linked to the common noise estimation loss used in DDPMs (Ho 2020; Kingma 2021). Using the KL-divergence between two Gaussian distributions, one finds that 
+
+\begin{equation}
+D_{KL}(q_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) || p(\bold{y}_{t-1}|\bold{y}_{t},\bold{x})) \propto   \lvert\lvert \epsilon - \epsilon_{\psi}(\bold{y}_{t}) \lvert\lvert_{2}^{2}
+\end{equation}
+
+Full details of this derivation can be found in (Rebeira 2024) and are outlined in Appendix A. 
 
 \section{Experiments}
 
 \begin{figure}
 \centering
 \includegraphics[scale=1.2]{Bayes.png}
-\caption{DDPM estimation of marginal variances. A low-resolution image $\bold{x}$ (left column) is transformed by $\phi$ to produce a KDE estimate $\hat{\bold{y}}$ (middle column) and a DDPM $\Psi$ computes a map of marginal variances (right column)}
+\caption{DDPM estimation of marginal variances. A low-resolution image $\bold{x}$ (left column) is transformed by $\phi$ to produce a KDE estimate $\hat{\bold{y}}$ (middle column) and a DDPM $\psi$ computes a map of marginal variances (right column)}
 \end{figure}
 
 All training data consits of low-resolution $20\times 20$ images, setting $\sigma_{\bold{x}}=0.92$ in units of low-resolution pixels, for consistency with common experimental conditions with a 60X magnification objective lens and numerical aperture (NA) of 1.4. We choose $i_{0}=200$ for experiments for consistency with typical bright fluorophore emission rates. All KDEs have dimension $80\times 80$, are scaled between $[0,1]$, and are generated using $\sigma_{\bold{y}}=3.0$ pixels in the upsampled image. For a typical CMOS camera, this results in KDE pixels with lateral dimension of $\approx 27\mathrm{nm}$. Initial coordinates $\theta$ were drawn uniformly over a two-dimensional disc with a radius of 7 low-resolution pixels.
@@ -311,6 +327,13 @@ Representing Model Uncertainty in Deep Learning. ICML 2016.
 
 [33] Nichol, A., et al. Improved denoising diffusion probabilistic models. Preprint at arXiv https://doi.org/10.48550/arXiv.2102.09672 (2021). 
 
+[34] Kingma, D., et al. Understanding Diffusion Objectives as the ELBO
+with Simple Data Augmentation. NeurIPS (2023). 
+
+[35] Kingma, D., et al. Variational Diffusion Models. NeurIPS (2021). 
+
+[35] Ribeiro, F., et al. Demystifying Variational Diffusion Models.  Preprint at arXiv https://doi.org/10.48550/arXiv.2401.06281 (2024). 
+
 }
 
 \appendix
@@ -396,10 +419,10 @@ A fundamental lower bound on the variance in our estimates of $\theta$ then is f
 \end{figure}
 
 
-\subsection{Neural Networks $\Psi,\phi$}
+\subsection{Neural Networks $\psi,\phi$}
 
 \textbf{DeepSTORM CNN $\phi$}. The DeepSTORM CNN, for 3D localization, can be viewed as a deep kernel density estimator, reconstructing kernel density estimates $\bold{y}$ from low-resolution inputs $\bold{x}$. We utilize a simplified form of the original architecture for 2D localization, which we denote $\phi$ in this paper, which consists of three main modules: a multi-scale context aggregation module, an upsampling module, and a prediction module. For context aggregation, the architecture utilizes dilated convolutions to increase the receptive field of each layer. The upsampling module is then composed of two consecutive 2x resize-convolutions, computed by nearest-neighbor interpolation, to increase the lateral resolution by a factor of 4. Additional details regarding this architecture can be found in the original paper (Nehme 2020). The terminal prediction module contains three additional convolutional blocks for refinement of the upsampled image, followed by an element-wise HardTanh. The architecture is trained using the objective $\mathcal{L}_{\phi} = \frac{1}{N}\sum_{n=1}^{N} (\bold{y}_{0,n}-\bold{\hat{y}}_{n})^{2}$. 
 
-\textbf{DDPM $\Psi$}. To represent the reverse process, we used a DDPM architecture originally proposed in (Saharia 2021) where the full model is described. We chose a U-Net backbone to have channel multipliers $[1,2,4,8,8]$ in the downsampling and upsampling paths of the architecture. Parameters are shared across time, which is specified to the network using the Transformer sinusoidal position embedding. We use self-attention at the $16 \times 16$ feature map resolution. To condition the model on the input $\bold{\hat{y}}$, we concatenate the $\bold{\hat{y}}$ estimated by DeepSTORM along the channel dimension, which are scaled to $[0,1]$, with $\bold{y}_T\sim \mathcal{N}(0, I)$. Others have experimented with more sophisticated methods of conditioning, but found that the simple concatenation yielded similar generation quality (Saharia 2021). 
+\textbf{DDPM $\psi$}. To represent the reverse process, we used a DDPM architecture originally proposed in (Saharia 2021) where the full model is described. We chose a U-Net backbone to have channel multipliers $[1,2,4,8,8]$ in the downsampling and upsampling paths of the architecture. Parameters are shared across time, which is specified to the network using the Transformer sinusoidal position embedding. We use self-attention at the $16 \times 16$ feature map resolution. To condition the model on the input $\bold{\hat{y}}$, we concatenate the $\bold{\hat{y}}$ estimated by DeepSTORM along the channel dimension, which are scaled to $[0,1]$, with $\bold{y}_T\sim \mathcal{N}(0, I)$. Others have experimented with more sophisticated methods of conditioning, but found that the simple concatenation yielded similar generation quality (Saharia 2021). 
 
 \end{document}
