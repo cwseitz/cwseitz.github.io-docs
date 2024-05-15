@@ -36,7 +36,7 @@
 \usepackage{amsmath}
 \usepackage{mathtools}
 
-\title{Uncertainty-Aware Localization Microscopy by Guided Diffusion}
+\title{Uncertainty-Aware Localization Microscopy by Variational Diffusion}
 
 
 % The \author macro works with any number of authors. There are two commands
@@ -88,16 +88,16 @@
 
 \begin{abstract}
 
-Deep learning has recently attracted considerable attention from researchers in the natural sciences, particularly microscopists, for fast extraction of physically relevant information from images. In particular, single molecule localization microscopy (SMLM) has benefited significantly from recent advances in deep image translation. However, simple and interpretable uncertainty quantification is lacking in these applications, and remains a necessary modeling component in high-risk research. In order to quantify uncertainty in deep networks used for SMLM, we propose a generative modeling framework based on denoising diffusion probabilistic models (DDPMs). We propose uncertainty estimation by using a guided diffusion process to target diffusion toward a space of reasonable solutions through conditioning the DDPM on a strong initial guess. This approach allows us to probe the structure of the distribution on reconstructions and estimate uncertainties. Our model is tested on kernel density (KD) estimation in fluorescence microscopy, and we demonstrate that blending the traditional architectures with a DDPM permits simultaneous high-fidelity super-resolution with uncertainty estimation of regressed KDEs. 
+Deep learning has recently attracted considerable attention from researchers in the natural sciences, particularly microscopists, for fast extraction of physically relevant information from images. In particular, single molecule localization microscopy (SMLM) has benefited significantly from recent advances in deep image translation. However, simple and interpretable uncertainty quantification is lacking in these applications, and remains a necessary modeling component in high-risk research. In order to quantify uncertainty in deep networks used for SMLM, we propose a generative modeling framework based on variational diffusion. This approach allows us to probe the structure of the posterior on reconstructiong, creating an additional avenue toward quality control. Our model is tested on kernel density (KD) estimation in fluorescence microscopy, and we demonstrate that data augmentation with traditional SMLM architectures followed by diffusion permits simultaneous high-fidelity super-resolution with uncertainty estimation of regressed KDEs. 
 \end{abstract}
 
 \section{Introduction}
 
 Deep learning has attracted tremendous attention from researchers in the natural sciences, with several foundational applications arising in microscopy (Weigert 2018; Falk 2019). Recently, the application of deep image translation in single-molecule localization microscopy (SMLM) has received considerable interest (Ouyang 2018; Nehme 2020; Speiser 2021). SMLM techniques are a mainstay of fluorescence microscopy and can be used to produce a pointillist representation of biomolecules in the cell at diffraction-unlimited precision (Rust 2006; Betzig 2006). In previous applications of deep models to localization microscopy, super-resolution images can be recovered from a sparse set of localizations with conditional generative adversarial networks (Ouyang 2018) or localization itself can be performed using traditional convolutional networks (Nehme 2020; Speiser 2021). Here, we focus on the latter class of models which perform KD estimation using neural networks. 
 
-Inferences in SMLM are often made on a single measurement, and thus common measures of model performance are based on localization errors computed over ensembles of simulated images. Unfortunately, this choice precludes computation of aleatoric ncertainty at test time under a fixed model. Yet, Bayesian probability theory offers us mathematically grounded tools to reason about model uncertainty, but these usually come with a prohibitive computational cost (Gal 2022). A few approaches to avoiding this intractiblity in deep models have been mostly epistemic uncertainty quantification such as ensembling (Lakshminarayanan et al., 2017) or Monte Carlo dropout (Gal and Ghahramani, 2016). Here, we choose to model a distribution on high-resolution KDE predictions conditioned on a low-resolution input using a denoising diffusion probabilistic model (DDPM) (Ho 2020; Song 2021), which allows us to enforce a known posterior distribution during training. Such models are one class of \emph{score based generative models} which implicitly compute the score of the data distribution at each noise scale starting from pure noise (Song 2021). This approach has proven powerful for generative modeling of conditional image distributions; however, conditional diffusion can become trapped in local optima preventing the application of such models to uncertainty estimation.
+Inferences in SMLM are often made on a single measurement, and thus common measures of model performance are based on localization errors computed over ensembles of simulated images. Unfortunately, this choice precludes computation of aleatoric uncertainty at test time under a fixed model. Yet, Bayesian probability theory offers us mathematically grounded tools to reason about model uncertainty, but these usually come with a prohibitive computational cost (Gal 2022). A few approaches to avoiding this intractiblity in deep models have been mostly epistemic uncertainty quantification such as ensembling (Lakshminarayanan et al., 2017) or Monte Carlo dropout (Gal and Ghahramani, 2016). Here, we choose to model a distribution on high-resolution KDE predictions conditioned on a low-resolution input using a denoising diffusion probabilistic model (DDPM) (Ho 2020; Song 2021). Such models are one class of \emph{score based generative models} which implicitly compute the score of the data distribution at each noise scale starting from pure noise (Song 2021). 
 
-In statistical physics, particularly simulation of complex molecular systems, sampling is constrained to a limited set of configurations. Similar notions of constrained diffusion have been used in DDPMs to guide the process based on gradients of a classifier (Nichols 2021). Here, we utilize a guided diffusion process which targets diffusion toward a space of reasonable solutions by conditioning the score-estimator on a strong initial guess. This approach allows us to probe the structure of the distribution of reconstructions, with fewer iterations than standard diffusion models. Our DDPM could be readily integrated with existing localization performance measures to address both model accuracy on training data and precision on datasets produced by experiments. 
+\textcolor{red}{Paragraph with background on variational diffusion}
 
 In the remainder of this paper, we introduce the central task of localization microscopy and a criterion for assessing the precision of any estimator of molecular coordinates. Then, we introduce kernel density estimation as an alternative to direct localization using low-resolution images, and demonstrate our diffusion model for measuring uncertainty KD estimation. 
 
@@ -123,11 +123,7 @@ where $A$ is some normalization constant. After subtraction of a known offset $o
 \Delta E_{\theta_{i}} \vcentcolon = \int_{\xi_{k,i}-\delta /2}^{\xi_{k,i}+\delta /2} O(u;\theta_{i})du = \frac{1}{2}\left(\mathrm{erf}\left(\frac{\xi_{k,i}+\frac{\delta}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right) -\mathrm{erf}\left(\frac{\xi_{k,i}-\frac{\delta}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right)\right)
 \end{equation}
 
-The expected value at each pixel is then $\omega_{k}\propto \prod_{\theta_{i}\in \theta} \Delta E_{\theta_{i}}(\xi_{k,i},\theta_{i},\sigma_{\bold{x}}) $. Using this, sampling from (1) is can be carried out by $\bold{x}_{k} = s_{k} + \zeta_{k}$ for $s_{k}\sim \mathrm{Poisson}(\omega_{k}), \eta_{k}\sim \mathcal{N}(o_{k},w_{k}^{2})$. The complete generative process is depicted in Figure 1. Reliable inference of $\theta$ from $\bold{x}$ in general requires performance metrics for model selection. We use the Fisher information as an information theoretic criteria to assess the quality of the model tested here, with respect to the root mean squared error (RMSE) of our predictions of $\theta$ (Chao 2016). The Poisson log-likelihood $\ell(\bold{x}|\theta)$ is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below i.e., $\mathrm{var}(\hat{\theta}) \geq I^{-1}(\theta)$. The Fisher information is straightforward to compute under the Poisson log-likelihood in (1), which is detailed in the Appendix
-
-\begin{equation}
-\mathcal{I}_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) = \sum_{k}\frac{1}{\omega_{k}'}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}}
-\end{equation}
+The expected value at each pixel is then $\omega_{k}\propto \prod_{\theta_{i}\in \theta} \Delta E_{\theta_{i}}(\xi_{k,i},\theta_{i},\sigma_{\bold{x}}) $. Using this, sampling from (1) is can be carried out by $\bold{x}_{k} = s_{k} + \zeta_{k}$ for $s_{k}\sim \mathrm{Poisson}(\omega_{k}), \eta_{k}\sim \mathcal{N}(o_{k},w_{k}^{2})$. The complete generative process is depicted in Figure 1. 
 
 \subsection{Gaussian kernel density estimation}
 
@@ -146,17 +142,17 @@ Similar to the generative process on low resolution images $\bold{x}$, we can ge
 
 where the hyperparameter $\sigma_{\bold{y}}$ is the Gaussian kernel width. 
 
-\section{Uncertainty-Aware Localization Microscopy by Guided Diffusion}
+\section{Uncertainty-Aware Localization Microscopy by Variational Diffusion}
 
-We consider datasets $(\bold{x}_i,\bold{y}_{0,i},\hat{\bold{y}}_{i})_{i=1}^{N}$ of observed images $\bold{x}_i$ true kernel density estimate (KDE) images $\bold{y}_{0,i}$, and KDE estimates $\hat{\bold{y}}_{i}=\phi(\bold{x}_{i})$ inferred by a deep network $\phi$. Observations $\bold{x}_i$ are simulated under the convolution distribution (1) and KDEs are generated by (4).
+We consider datasets $(\bold{x}_i,\bold{y}_{0,i},\hat{\bold{y}}_{i})_{i=1}^{N}$ of observed images $\bold{x}_i$ true kernel density estimate (KDE) images $\bold{y}_{0,i}$, and augmented low-resolution inputs $\hat{\bold{y}}_{i}=\phi(\bold{x}_{i})$, where $\phi$ is a separate deep network. Observations $\bold{x}_i$ are simulated under the convolution distribution (1) and KDEs are generated by (4).
 
 \subsection{Problem Statement}
 
-Point estimates $\hat{\bold{y}}_{i}$ produced by the traditional deep architectures for localization microscopy produce strong results, but lack uncertainty quantification. In principle, distribution on $\bold{y}_{k}$ is given directly from $p(\theta|\bold{x})$, which can be estimated by Metropolis-Hastings MCMC (Figure 2). Unfortunately, the posterior $p(\theta|\bold{x})$ has no known analytical form and can be difficult to compute at test time, since (i) molecules cannot be easily resolved and therefore $\theta$ is of unknown dimension and (ii) $\theta$ can be high dimensional and efficient exploration of the parameter space is challenging. The central goal of this paper is to instead directly model $p(\bold{y}|\bold{x})$, where $\bold{y}$ is of known dimensionality. Upon inspection of (2,4), we see the distribution $p(\bold{y}|\bold{x})$ remains complex and non-Gaussian. Therefore we choose to model $p(\bold{y}|\bold{x})$ with a DDPM. 
+Point estimates $\hat{\bold{y}}_{i}$ produced by the traditional deep architectures for localization microscopy produce strong results, but lack uncertainty quantification. In principle, distribution on $\bold{y}_{k}$ is given directly from $p(\theta|\bold{x})$, which can be estimated by Metropolis-Hastings MCMC (Figure 2). Unfortunately, the posterior $p(\theta|\bold{x})$ has no known analytical form and can be difficult to compute at test time, since (i) molecules cannot be easily resolved and therefore $\theta$ is of unknown dimension and (ii) $\theta$ can be high dimensional and efficient exploration of the parameter space is challenging. The central goal of this paper is to instead model a conditional distribution on the latent $\bold{y}$: $p(\bold{y}|\bold{x})$, where $\bold{y}$ is of known dimensionality. We choose to model $p(\bold{y}|\bold{x})$ with a diffusion model, given that the distribution $p(\bold{y}|\bold{x})$ is expensive to compute, even if $p(\theta|\bold{x})$ were known.
 
-Recent advances in generative modeling, particularly DDPMs, therefore present a unique opportunity to integrate uncertainty awareness into the localization microscopy toolkit. However, sampling from DDPMs is computationally expensive, given that generation amounts to solving a complex stochastic differential equation, effectively mapping a simple base distribution to the complex data distribution. The solution of such equations requires numerical integration with very small step sizes, resulting in thousands of neural network evaluations (Saharia 2021; Vahdat 2021). For conditional generation tasks in high-risk applications, generation complexity is further exacerbated by the need for the highest level of detail in generated samples. Moreover, in the present application, modeling the posterior is far more important than diversity in generated samples. Therefore, we propose that DDPM sampling is preceded by a deterministic neural network $\phi$, which generates an initial estimate to guide the diffusion process. Reasoning for this choice in our application is two-fold:
+Recent advances in generative modeling, particularly DDPMs, therefore present a unique opportunity to integrate uncertainty awareness into the localization microscopy toolkit. However, sampling from DDPMs is computationally expensive, given that generation amounts to solving a complex stochastic differential equation, effectively mapping a simple base distribution to the complex data distribution. The solution of such equations requires numerical integration with very small step sizes, resulting in thousands of neural network evaluations (Saharia 2021; Vahdat 2021). For conditional generation tasks in high-risk applications, generation complexity is further exacerbated by the need for the highest level of detail in generated samples. Moreover, in the present application, modeling the posterior is far more important than diversity in generated samples. Therefore, we propose that sampling is preceded by an augementation network $\phi$, which in essence generates an initial estimate to guide the diffusion process. Reasoning for this choice in our application is two-fold:
 
-\textbf{Synthesis Speed}. By training a neural network $\phi$ to obtain an approximate estimate of $\bold{y}_{0}$, we can reduce the number of iterations, since the DDPM only needs to model the remaining mismatch, resulting in a less complex model from which sampling becomes easier. Speed is critical in SMLM applications, which can produce thousands of images in a single experiment.\\
+\textbf{Synthesis Speed}. By training the augmentation network $\phi$ to obtain an approximate estimate of $\bold{y}_{0}$, we can reduce the number of iterations, since the DDPM only needs to model the remaining mismatch, resulting in a less complex model from which sampling becomes easier. Speed is critical in SMLM applications, which can produce thousands of images in a single experiment.\\
 
 \textbf{Sample Fidelity}. Since Langevin dynamics will often be initialized in low-density regions of the data distribution, inaccurate score estimation in these regions will negatively affect the sampling process (Song 2019). Moreover, mixing can be difficult because of the need of traversing low density regions to transition between modes of the distribution. Preprocessing with a deterministic neural network $\phi$ can ameliorate this issue, by aiding score estimation in low density regions. 
 
@@ -214,34 +210,37 @@ We focus on the diffusion loss $\mathcal{L}_{\psi}$, which is the only relevant 
 \mathcal{L}_{\psi} = \sum_{i=1}^{T} \mathbb{E}_{q_{\psi}(\bold{y}_{t}|\bold{x})} [ D_{KL}(q_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) || p(\bold{y}_{t-1}|\bold{y}_{t},\bold{x})) ]
 \end{equation}
 
-In a diffusion model $p(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) = q(\bold{y}_{t-1}|\bold{y}_{t},\hat{\bold{x}}_{\psi})$ which is modeled by $p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t}) = \mathcal{N}\left(\mu_{\psi}(\bold{y}_{t}),\beta_{t}I\right)$. Importantly, $D_{KL}(q_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) || p(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}))$ and therefore, the variational bound, are closely linked to the common noise estimation loss used in DDPMs (Ho 2020; Kingma 2021). Using the KL-divergence between two Gaussian distributions, one finds that 
+In a diffusion model $p(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) = q(\bold{y}_{t-1}|\bold{y}_{t},\hat{\bold{x}}_{\psi})$ which is modeled by $p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t}) = \mathcal{N}\left(\mu_{\psi}(\bold{y}_{t}),\beta_{t}I\right)$. Importantly, $D_{KL}(q_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) || p(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}))$ and therefore, the variational bound, are closely linked to the common noise estimation loss used in DDPMs (Ho 2020; Kingma 2021). 
+
+We use the following Monte Carlo estimate of $\mathcal{L}_{\psi}$, which demonstrates that the variational bound can be written in terms of the common noise-estimation loss
 
 \begin{equation}
-D_{KL}(q_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) || p(\bold{y}_{t-1}|\bold{y}_{t},\bold{x})) \propto   \lvert\lvert \epsilon - \epsilon_{\psi}(\bold{y}_{t}) \lvert\lvert_{2}^{2}
+\mathcal{L}_{\psi} = \frac{T}{2}\mathbb{E}_{\epsilon\sim \mathcal{N}(0,I),t\sim U(1,T)}[\left(\frac{\mathrm{SNR}(t-1)}{\mathrm{SNR}(t)}-1\right)\lvert\lvert \bold{\epsilon}-\bold{\epsilon}_{\psi}(\bold{y}_{t})\lvert\lvert_{2}^{2}]
 \end{equation}
 
-Full details of this derivation can be found in (Rebeira 2024) and are outlined in Appendix A. 
+where $\mathrm{SNR}(t) = \gamma_{t}/\beta_{t}$. Full details of this derivation can be found in (Kingma 2021; Rebeira 2024) and are outlined in Appendix A. 
+
 
 \section{Experiments}
 
-\begin{figure}
-\centering
-\includegraphics[scale=1.2]{Bayes.png}
-\caption{DDPM estimation of marginal variances. A low-resolution image $\bold{x}$ (left column) is transformed by $\phi$ to produce a KDE estimate $\hat{\bold{y}}$ (middle column) and a DDPM $\psi$ computes a map of marginal variances (right column)}
-\end{figure}
-
 All training data consits of low-resolution $20\times 20$ images, setting $\sigma_{\bold{x}}=0.92$ in units of low-resolution pixels, for consistency with common experimental conditions with a 60X magnification objective lens and numerical aperture (NA) of 1.4. We choose $i_{0}=200$ for experiments for consistency with typical bright fluorophore emission rates. All KDEs have dimension $80\times 80$, are scaled between $[0,1]$, and are generated using $\sigma_{\bold{y}}=3.0$ pixels in the upsampled image. For a typical CMOS camera, this results in KDE pixels with lateral dimension of $\approx 27\mathrm{nm}$. Initial coordinates $\theta$ were drawn uniformly over a two-dimensional disc with a radius of 7 low-resolution pixels.
 
-\textbf{Localization RMSE}. In order to verify the initial predictions made by the model $\phi$, we simulated a dataset $(\bold{x}_i,\bold{y}_{0,i},\hat{\bold{y}}_{i})_{i=1}^{N}$ with $N=1000$, and  detect objects in the predicted KDE $,\hat{\bold{y}}_{i}$ using the Laplacian of Gaussian (LoG) detection algorithm (Lindeberg 2013). Localization is carried out from scale-space maxima directly in LoG, as opposed to fitting a model function to KDE predictions. A particular LoG localization in the KDE is paired to the nearest ground truth localization and is unpaired if a localization is not within 5 KDE pixels of any ground truth localization. In addition to localization error, we measure a precision $\mathrm{P = TP/(TP + FP)} = 1.0$ and recall $\mathrm{R = TP/(TP + FN)} = 0.85$, where $\mathrm{TP}$ denotes true positive localizations, $\mathrm{FP}$ denotes false positive localizations, and $\mathrm{FN}$ denotes false negative localizations.
+\begin{figure}
+\centering
+\includegraphics[scale=1.1]{Bayes.png}
+\caption{Non cherry-picked estimation of marginal variances. A low-resolution image $\bold{x}$ (left column) is transformed by $\phi$ to produce a KDE estimate $\hat{\bold{y}}$ (middle column) and a DDPM $\psi$ computes a map of marginal variances (right column)}
+\end{figure}
+
+\textbf{Localization RMSE}. In order to verify the initial predictions made by the augmentation model $\phi$, we simulated a dataset $(\bold{x}_i,\bold{y}_{0,i},\hat{\bold{y}}_{i})_{i=1}^{N}$ with $N=1000$, and  detect objects in the predicted $\hat{\bold{y}}_{i}$ using the Laplacian of Gaussian (LoG) detection algorithm (Lindeberg 2013). Localization is carried out from scale-space maxima directly in LoG, as opposed to fitting a model function to KDE predictions. A particular LoG localization in the KDE is paired to the nearest ground truth localization and is unpaired if a localization is not within 5 KDE pixels of any ground truth localization. In addition to localization error, we measure a precision $\mathrm{P = TP/(TP + FP)} = 1.0$ and recall $\mathrm{R = TP/(TP + FN)} = 0.85$, where $\mathrm{TP}$ denotes true positive localizations, $\mathrm{FP}$ denotes false positive localizations, and $\mathrm{FN}$ denotes false negative localizations.
 
 
-\textbf{Guided Diffusion}. We set $T = 100$ for all experiments and treat forward process variances $\beta_{t}$ as hyperparameters, with a linear schedule from $\beta_{0}=10^{-4}$ to $\beta_{T}=10^{-2}$.
+\textbf{Variational Diffusion}. We set $T = 100$ for all experiments and treat forward process variances $\beta_{t}$ as hyperparameters, with a linear schedule from $\beta_{0}=10^{-4}$ to $\beta_{T}=10^{-2}$.
 These constants were chosen to be small relative to ground truth KDEs, which are scaled to $[-1,1]$, ensuring that forward process distribution $\bold{y}_{T}\sim q(\bold{y}_{T}|\bold{y}_{0})$ approximately matches the reverse process $\bold{y}_T\sim \mathcal{N}(0, I)$ at $t=T$.
 
 
 \section{Conclusion}
 
-We proposed a denoising diffusion probabilistic model (DDPM) for uncertainty-aware localization microscopy. Our approach builds on recent advancements in conditional diffusion models, to model a surrogate posterior distribution on high-resolution kernel density estimates (KDE) from low-resolution inputs. This tractable posterior distribution is constructed by first transforming low resolution inputs to a KDE estimate using a modified form of the DeepSTORM architecture. Conditioning a DDPM on this initial estimate permits sampling with relatively fewer samples than most existing DDPMs in similar applications, thereby making computation of marginal variances possible. Our approach made three core contributions: (i) we derived a relationship between the posterior on kernel density estimates with the posterior on molecular locations, (ii) we applied the data processing inequality to show that a surrogate posterior can be used in place the intractable posterior on KDEs (iii) we demonstrated that a DDPM can model a distribution on KDEs with similar marginal variances expected from predictions made using MCMC. Nevertheless, the use of a surrogate posterior distribution does not guarantee strict equality with the true posterior. Therefore, future work includes investigating methods for directly modeling of the true posterior as diffusion models mature. 
+We proposed a variational diffusion model for uncertainty-aware localization microscopy. Our approach builds on recent advancements in conditional diffusion models, to model the posterior distribution on high-resolution kernel density estimates (KDE) from low-resolution inputs. This tractable posterior distribution is constructed by first augmenting low resolution inputs to a KDE estimate using a modified form of the DeepSTORM architecture (Nehme 2020). Conditioning a DDPM on this initial estimate permits sampling with relatively fewer samples than most existing DDPMs in similar applications, thereby making computation of marginal variances possible. Our approach made three core contributions: (i) we derived a relationship between the posterior on kernel density estimates with the posterior on molecular locations, and (ii) we demonstrated that a diffusion model can model a distribution on KDEs with qualitatively similar marginal variances expected from predictions made using MCMC. By using a recently discovered relationship of the variational lower bound to a traditional noise-estimation objective, we can confidently approximate the true posterior.
 
 \section{Broader Impact}
 
@@ -391,13 +390,13 @@ We choose $\beta=0.2$ to achieve a target acceptance rate of $0.5$.
 
 \subsection{Cramer-Rao Lower Bound}
 
-The Poisson approximation is also convenient for computing the Fisher information matrix for $\theta_{\mathrm{MLE}}$ and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta_{\mathrm{MLE}}$, from below (Chao 2016). The Fisher information is
+Reliable inference of $\theta$ from $\bold{x}$ in general requires performance metrics for model selection. We use the Fisher information as an information theoretic criteria to assess the quality of the data augmentation model $\phi$ tested here, with respect to the root mean squared error (RMSE) of our predictions of $\theta$ (Chao 2016). The Poisson log-likelihood $\ell(\bold{x}|\theta)$ is also convenient for computing the Fisher information matrix (Smith 2010) and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below i.e., $\mathrm{var}(\hat{\theta}) \geq I^{-1}(\theta)$. The Fisher information is straightforward to compute under the Poisson log-likelihood in (1). In general, the Fisher information is given by the expression
 
 \begin{equation}
 I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) 
 \end{equation}
 
-For an arbitrary parameter,
+For an arbitrary parameter, such the $\theta_{x}$ or $\theta_{y}$ coordinate, we find that, for a Poisson log-likelihood $\ell$
 
 \begin{align*}
 \frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  \log n_{k}! + \omega_{k}' - n_{k}\log\left(\omega_{k}'\right)\\
@@ -410,7 +409,7 @@ Using this result, we can compute the Fisher information matrix $I(\theta)$
 I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}} \left(\frac{\omega_{k}'-n_{k}}{\omega_{k}'}\right)^{2}\right) = \sum_{k}\frac{1}{\omega_{k}'}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}}
 \end{equation*}
 
-A fundamental lower bound on the variance in our estimates of $\theta$ then is found from its inverse: $\mathrm{CRLB} = I^{-1}(\theta)$
+A fundamental lower bound on the variance in our estimates of $\theta$ then is found from its inverse: $\mathrm{CRLB} = I^{-1}(\theta)$. This result is used to show in (Figure 5), that the data augmentation model $\phi$ efficiently estimates molecular coordinates under the experimental conditions tested here. 
 
 \begin{figure}
 \centering
