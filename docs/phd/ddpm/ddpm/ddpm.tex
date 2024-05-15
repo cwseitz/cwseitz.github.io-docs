@@ -177,49 +177,40 @@ Recent advances in generative modeling, particularly diffusion models (Sohl-Dick
 \caption{Conditional diffusion model for sampling kernel density estimates. An initial KDE estimate $\bold{\hat{y}}$ is found by the CNN $\phi$, which is used as conditional input in the DDPM}
 \end{figure}
 
-Diffusion models (Sohl-Dickstein 2015; Ho 2020; Song 2021) are a class of generative models originally inspired by nonequilibrium statistical physics, which slowly destroy structure in a data distribution via a fixed Markov chain referred to as the \emph{forward process}. In the present context, we leverage a novel interpretation of this model class as likelihood-based models (Kingma 2021; Kingma 2023) to approximate the posterior $p(\bold{y}|\bold{x})$. 
+Diffusion models (Sohl-Dickstein 2015; Ho 2020; Song 2021) are a class of generative models originally inspired by nonequilibrium statistical physics, which slowly destroy structure in a data distribution via a fixed Markov chain referred to as the \emph{forward process}. In the present context, we leverage the variational interpretation of this model class (Kingma 2021; Kingma 2023) to approximate the posterior $p(\bold{y}|\bold{x})$. 
 
-\textbf{Diffusion Model}. The forward process gradually adds Gaussian noise to the latent KDE $\bold{y}_0$ according to a variance schedule $\beta_{0:T}$
+\textbf{Diffusion Model}. We use a forward process which gradually adds Gaussian noise to the latent $\bold{y}_0$ in discrete time, according to a variance schedule $\beta_{t}$:
 
 \begin{equation}
 q(\bold{y}_{T}|\bold{y}_{0}) = \prod_{t=1}^{T}q(\bold{y}_{t}|\bold{y}_{t-1}) \;\;\; q(\bold{y}_{t}|\bold{y}_{t-1}) = \mathcal{N}\left(\sqrt{1-\beta_{t}}\bold{y}_{t-1},\beta_t I\right)
 \end{equation}
 
-The usual procedure is then to learn a parametric representation of the \emph{reverse process}, and therefore generate samples from  $p(\bold{y}_{0}|\bold{\hat{y}})$, starting from noise. Formally, $p_{\psi}(\bold{y}_{0}|\bold{\hat{y}}) = \int p_{\psi}(\bold{y}_{0:T}|\bold{\hat{y}})d\bold{\hat{y}}_{1:T}$ where $\bold{y}_{t}$ is a latent representation with the same dimensionality of the data and $p_{\psi}(\bold{y}_{0:T}|\bold{\hat{y}})$ is a Markov process, starting from a noise sample $p_{\psi}(\bold{y}_{T}) = \mathcal{N}(0,I)$. 
+An important property of the forward process is that it admits sampling $\bold{y}_t$ at an arbitrary timestep $t$ in closed form (Ho 2020). Using the notation $\alpha_t := 1 - \beta_t$ and $\gamma_t := \prod_{s=1}^{t} \alpha_s$, we have $q(\bold{y}_t|\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 - \gamma_t)I \right)$ or $\bold{y}_{t} = \sqrt{\gamma_{t}}\bold{y}_{0} + \sqrt{1-\gamma_{t}}\bold{\epsilon}$ for $\epsilon \sim \mathcal{N}(0,I)$. The signal to noise ratio (SNR) as defined in (Kingma 2023), at a time step $t$ reads $\mathrm{SNR}_t = \gamma_{t}/(1-\gamma_{t})$.
+
+The usual procedure is then to learn a parametric representation of the \emph{reverse process}, and therefore generate samples of the latent $\bold{y}_{0}$ from  $p(\bold{y}_{0}|\bold{x})$. Formally, $p_{\psi}(\bold{y}_{0}|\bold{x}) = \int p_{\psi}(\bold{y}_{0:T}|\bold{x})d\bold{x}_{1:T}$ where $\bold{y}_{t}$ is a latent representation with the same dimensionality of the data and $p_{\psi}(\bold{y}_{0:T}|\bold{x})$ is a Markov process, starting from a noise sample $p_{\psi}(\bold{y}_{T}) = \mathcal{N}(0,I)$. Writing this Markov process gives
 
 \begin{equation}
-p_{\psi}(\bold{y}_{0:T}) = p_{\psi}(\bold{y}_{T})\prod_{t=1}^{T} p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t}) \;\;\; p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t}) = \mathcal{N}\left(\mu_{\psi}(\bold{y}_{t}),\beta_{t}I\right)
+p_{\psi}(\bold{y}_{0:T}|\bold{x}) = p_{\psi}(\bold{y}_{T})\prod_{t=1}^{T} p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) \;\;\; p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) = \mathcal{N}\left(\mu_{\psi}(\bold{y}_{t},\gamma_{t}),\beta_{t}I\right)
 \end{equation}
 
-where we reuse the variance schedule of the forward process (Ho 2020). From (7) it can be seen that the learnable parameter in the reverse process is the expectation of the transition $\mu_{\psi}$ where $\psi$ is a neural network. We omit conditioning on $\hat{\bold{y}}$ for each transition density $p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t})$, as this is only considered at the first step of the reverse process i.e., $p_{\psi}(\bold{y}_{T-1}|\bold{y}_{T},\hat{\bold{y}})$. An important property of the forward process is that it admits sampling $\bold{y}_t$ at an arbitrary timestep $t$ in closed form (Ho 2020). Using the notation $\alpha_t := 1 - \beta_t$ and $\gamma_t := \prod_{s=1}^{t} \alpha_s$, we have $q(\bold{y}_t|\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 - \gamma_t)I \right)$ or $\bold{y}_{t} = \sqrt{\gamma_{t}}\bold{y}_{0} + \sqrt{1-\gamma_{t}}\bold{\epsilon}$ for $\epsilon \sim \mathcal{N}(0,I)$. Learning the reverse process can be approached by either regressing the starting noise $\bold{\epsilon}$ or the true KDE $\bold{y}_{0}$ as there is a deterministic relationship between the two given by the forward process. We adopt the former for consistency with other work, and define $s_{\psi}$ as a neural denoising function which regresses the noise $\bold{\epsilon}$ from $\bold{\hat{y}}$. Importantly, the noise estimate $\epsilon_{\psi}$ and $\mu_{\psi}$ are related by (Saharia 2021)
+where we reuse the variance schedule of the forward process (Ho 2020). From (5) it can be seen that the learnable parameter in the reverse process is the expectation of the transition $\mu_{\psi}$ where $\psi$ is a neural network. 
+
+Learning the reverse process can be approached by either regressing noise $\bold{\epsilon}$ from the forward process, or the true latent $\bold{y}_{0}$, as there is a deterministic relationship between them. We adopt the former for consistency with other work, and define $\psi$ as a neural denoising function which regresses the noise $\bold{\epsilon}$ from a noisy $\bold{y}_{t}$. A relation between the noise estimate $\epsilon_{\psi}$ and $\mu_{\psi}$ is given in Appendix A, which gives an intuition for sampling.
+
+\textbf{Variational Objective}. Following (Kingma 2021), we interpret the reverse process as a hierarchical generative model that samples a sequence of latents $\bold{y}_{t}$, with time running backward. Training of the model is achieved through the variational bound
+
+\begin{align}
+-\log p(\bold{y}_{0}) &\leq -\mathbb{E}_{q(\bold{y}_{1:T}|\bold{y}_{0})} \log \left(\frac{p_{\psi}(\bold{y}_{1:T},\bold{y}_{0})}{q(\bold{y}_{1:T}|\bold{y}_{0})}\right) \\
+&=  D_{KL}(q(\bold{y}_{T}|\bold{y}_{0}) || p(\bold{y}_{T})) + \mathbb{E}_{q(\bold{y}_{1}|\bold{y}_{0})} \log p(\bold{y}_{0}|\bold{y}_{1}) + \mathcal{L}_{\psi}
+\end{align}
+
+where we have omitted conditioning on the low-resolution $\bold{x}$ to simplify the notation. Note that, this is similar to a hierarchical VAE, but in a diffusion model $q(\bold{y}_{1:T}|\bold{y}_{0})$ is fixed by the forward process rather than learned. The so-called diffusion loss $\mathcal{L}_{\psi}$ is shown in Appendix A, and is the term of interest as the first two terms do not contribute meaningfully to the loss (Ho 2020). Furthermore, it has become standard to use simplified forms of $\mathcal{L}_{\psi}$, such as a noise estimation loss, as this has shown superior performance. Importantly, $\mathcal{L}_{\psi}$ is simply a reweighted variant of a family of diffusion objectives (Kingma 2021; Kingma 2023). We use the following Monte Carlo estimate of $\mathcal{L}_{\psi}$, which demonstrates that the variational bound can be written in terms of the common noise-estimation loss
 
 \begin{equation}
-\mu_{\psi}(\bold{y}_{t},\gamma_{t}) = \frac{1}{\sqrt{1-\beta_{t}}}\left(\bold{y}_{t} - \frac{\beta_{t}}{\sqrt{1-\gamma_{t}}}\epsilon_{\psi}\right)
+\mathcal{L}_{\psi} = \frac{T}{2}\mathbb{E}_{\epsilon\sim \mathcal{N}(0,I),t\sim U(1,T)}[\left(\frac{\mathrm{SNR}_{t-1}}{\mathrm{SNR}_{t}}-1\right)\lvert\lvert \bold{\epsilon}-\bold{\epsilon}_{\psi}(\bold{y}_{t})\lvert\lvert_{2}^{2}]
 \end{equation}
 
-which forms the basic mechanism for transitions in the reverse process: $\bold{y}_{t-1} = \mu_{\psi}(\bold{y}_{t},\gamma_{t}) + \sqrt{\beta_{t}}\xi_{t}$, for $\xi_{t} = \mathcal{N}(0,I)$.
-
-\textbf{Variational Objective}. Following (Kingma 2021), we define our generative model by inverting a diffusion process, yielding a hierarchical generative model that samples a sequence of latents $\bold{y}_{t}$, with time running backward. Training of the model is achieved through the usual variational bound
-
-\begin{equation}
--\log p(\bold{x}) \leq -\mathbb{E}_{q(\bold{y}_{0}|\bold{x})} \log p(\bold{x}|\bold{y}_{0}) + D_{KL}(q(\bold{y}_{T}|\bold{x}) || p(\bold{y}_{T})) + \mathcal{L}_{\psi} = \mathrm{VLB}(\bold{x})
-\end{equation}
-
-We focus on the diffusion loss $\mathcal{L}_{\psi}$, which is the only relevant term in the above objective (Rebeira 2024)
-
-\begin{equation}
-\mathcal{L}_{\psi} = \sum_{i=1}^{T} \mathbb{E}_{q_{\psi}(\bold{y}_{t}|\bold{x})} [ D_{KL}(q_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) || p(\bold{y}_{t-1}|\bold{y}_{t},\bold{x})) ]
-\end{equation}
-
-In a diffusion model $p(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) = q(\bold{y}_{t-1}|\bold{y}_{t},\hat{\bold{x}}_{\psi})$ which is modeled by $p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t}) = \mathcal{N}\left(\mu_{\psi}(\bold{y}_{t}),\beta_{t}I\right)$. Importantly, $D_{KL}(q_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) || p(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}))$ and therefore, the variational bound, are closely linked to the common noise estimation loss used in DDPMs (Ho 2020; Kingma 2021). 
-
-We use the following Monte Carlo estimate of $\mathcal{L}_{\psi}$, which demonstrates that the variational bound can be written in terms of the common noise-estimation loss
-
-\begin{equation}
-\mathcal{L}_{\psi} = \frac{T}{2}\mathbb{E}_{\epsilon\sim \mathcal{N}(0,I),t\sim U(1,T)}[\left(\frac{\mathrm{SNR}(t-1)}{\mathrm{SNR}(t)}-1\right)\lvert\lvert \bold{\epsilon}-\bold{\epsilon}_{\psi}(\bold{y}_{t})\lvert\lvert_{2}^{2}]
-\end{equation}
-
-where $\mathrm{SNR}(t) = \gamma_{t}/\beta_{t}$. Full details of this derivation can be found in (Kingma 2021; Rebeira 2024) and are outlined in Appendix A. 
+where for our fixed noise schedule, $\mathrm{SNR}_t = \frac{\gamma_{t}}{1-\gamma_{t}}$. Full details of this derivation can be found in (Kingma 2021; Rebeira 2024) and are outlined in Appendix A. 
 
 
 \section{Experiments}
@@ -339,6 +330,23 @@ with Simple Data Augmentation. NeurIPS (2023).
 \appendix
 
 \section{Appendix}
+
+\subsection{Diffuion model and variational bound}
+
+It is instructive to note that the noise estimate $\epsilon_{\psi}$ and $\mu_{\psi}$ are related by (Saharia 2021)
+
+\begin{equation}
+\mu_{\psi}(\bold{y}_{t},\gamma_{t}) = \frac{1}{\sqrt{1-\beta_{t}}}\left(\bold{y}_{t} - \frac{\beta_{t}}{\sqrt{1-\gamma_{t}}}\epsilon_{\psi}\right)
+\end{equation}
+
+which forms the basic mechanism for sampling latents in the reverse process: $\bold{y}_{t-1} = \mu_{\psi}(\bold{y}_{t},\gamma_{t}) + \sqrt{\beta_{t}}\xi_{t}$, for $\xi_{t} = \mathcal{N}(0,I)$.
+
+
+We focus on the so-called diffusion loss $\mathcal{L}_{\psi}$, which is the only relevant term in the above objective (Rebeira 2024)
+
+\begin{equation}
+\mathcal{L}_{\psi} = \sum_{i=1}^{T} \mathbb{E}_{q_{\psi}(\bold{y}_{t}|\bold{x})} [ D_{KL}(q_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) || p(\bold{y}_{t-1}|\bold{y}_{t},\bold{x})) ]
+\end{equation}
 
 \subsection{Optical impulse response}
 
