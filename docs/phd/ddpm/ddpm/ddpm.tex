@@ -93,12 +93,11 @@ Deep learning has recently attracted considerable attention from researchers in 
 
 \section{Introduction}
 
-Deep learning has attracted tremendous attention from researchers in the natural sciences, with several foundational applications arising in microscopy \citep{Weigert2018,Falk2019}. Recently, the application of deep image translation in single-molecule localization microscopy (SMLM) has received considerable interest \citep{Ouyang2018,Nehme2020,Speiser2021}. SMLM techniques are a mainstay of fluorescence microscopy and can be used to produce a pointillist representation of biomolecules in the cell at diffraction-unlimited precision \citep{Rust2006,Betzig2006}. In previous applications of deep models to localization microscopy, super-resolution images can be recovered from a sparse set of localizations with conditional generative adversarial networks \citep{Ouyang2018} or localization itself can be performed using traditional convolutional networks \citep{Nehme2020,Speiser2021}. Here, we focus on the latter class of models which perform KD estimation using neural networks. 
+Deep learning has attracted tremendous attention from researchers in the natural sciences, with several foundational applications arising in microscopy \citep{Weigert2018,Falk2019}. Recently, the application of deep image translation in single-molecule localization microscopy (SMLM) has received considerable interest. SMLM techniques are a mainstay of fluorescence microscopy and can be used to produce a pointillist representation of biomolecules in the cell at diffraction-unlimited precision \citep{Rust2006,Betzig2006}. In previous applications of deep models to localization microscopy, super-resolution images can be recovered from a sparse set of localizations with conditional generative adversarial networks \citep{Ouyang2018} or localization itself can be performed using traditional convolutional networks \citep{Nehme2020,Speiser2021}. Here, we focus on the latter class of models which perform kernel density (KD) estimation using neural networks. 
 
-Inferences in SMLM are often made on a single measurement, and thus common measures of model performance are based on localization errors computed over ensembles of simulated images. Unfortunately, this choice precludes computation of aleatoric uncertainty at test time under a fixed model. Yet, Bayesian probability theory offers us mathematically grounded tools to reason about model uncertainty, but these usually come with a prohibitive computational cost \citep{Gal2022}. A few approaches to avoiding this intractiblity in deep models have been mostly epistemic uncertainty quantification such as ensembling \citep{Lakshminarayanan2017} or Monte Carlo dropout \citep{Gal2022}. Here, we choose to model a distribution on high-resolution KDE predictions conditioned on a low-resolution input using a denoising diffusion probabilistic model (DDPM) \citep{Ho2020,Song2021}. Such models are one class of \emph{score based generative models} which implicitly compute the score of the data distribution at each noise scale starting from pure noise \citep{Song2021}. 
+Kernel density estimation in SMLM is necessarily performed using a single low-resolution image, and thus common measures of model performance are based on localization errors computed over ensembles of simulated images. Unfortunately, this choice precludes computation of uncertainty at test time under a fixed model. Yet, Bayesian probability theory offers us mathematically grounded tools to reason about model uncertainty, but these usually come with a prohibitive computational cost \citep{Gal2022}. Here, we address aleatoric uncertainty in KD estimation, by modeling a posterior on high-resolution KD estimates conditioned on a low-resolution image. Our approach is based on a type of score based generative model \citep{Song2021}, referred to as a denoising diffusion probabilistic model (DDPM) in the literature \citep{Ho2020,Song2021}. We find that this technique is complementary to relevant existing approaches to uncertainty estimation, which would primarily address epistemic sources of uncertainty, using techniques such as ensembling \citep{Lakshminarayanan2017} or Monte Carlo dropout \citep{Gal2022}. 
 
-Variational perspectives on diffusion have also been studied \citep{Dirmeier2023,Ribeiro2024,Kingma2021,Kingma2023}.  A
-primary advantage of this approach is that it provides an intuitive expression of the variational lower bound in terms of the signal-to-noise ratio of the diffused data, leading to much simplified expressions of the loss. Moreover, recent efforts have shown that the variational bound can be reparameterized to give a class of conventional diffusion losses with superior performance, for example the widely used noise estimation loss \citep{Ho2020}. 
+Our approach is inspired by recent variational perspectives on diffusion, which have become a topic of recent interest \citep{Dirmeier2023,Ribeiro2024,Kingma2021,Kingma2023}.  A primary advantage of this approach is that it provides a mechanism for scalable variational inference, which can be trained using a variational bound written in terms of the signal-to-noise ratio of the diffused data, and a simple noise estimation loss. Indeed, recent efforts have shown that the variational bound can be reparameterized to give several more conventional diffusion losses \citep{Kingma2021,Kingma2023,Ribeiro2024}. 
 
 In the remainder of this paper, we first introduce the likelihood of low-resolution images in localization microscopy, and show uncertainty quantification in a rudimentary example scenario. Then, we introduce kernel density estimation as an alternative to direct localization using low-resolution images, and conclude by demonstrating our variational diffusion model for measuring uncertainty KD estimation at scale. 
 
@@ -106,7 +105,7 @@ In the remainder of this paper, we first introduce the likelihood of low-resolut
 
 \subsection{Image Likelihood and Localization Error}
 
-The central objective of single molecule localization microscopy is to infer a set of molecular coordinates $\theta$ from measured low resolution images $\bold{x}$. The likelihood on a particular pixel $p(\bold{x}_k|\theta)$ is taken to be a convolution of Poisson and Gaussian distributions, due to shot noise $p(s_{k}) = \mathrm{Poisson}(\omega_{k})$ and sensor readout noise $p(\zeta_{k}) = \mathcal{N}(o_{k},w_{k}^{2})$ 
+The central objective of single molecule localization microscopy is to infer a set of molecular coordinates $\theta=(\theta_{u},\theta_{v})$ from measured low resolution images $\bold{x}$. The likelihood on a particular pixel $p(\bold{x}_k|\theta)$ is taken to be a convolution of Poisson and Gaussian distributions, due to shot noise $p(s_{k}) = \mathrm{Poisson}(\omega_{k})$ and sensor readout noise $p(\zeta_{k}) = \mathcal{N}(o_{k},w_{k}^{2})$ 
 
 \begin{equation}
 p(\bold{x}_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(\bold{x}_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}} \approx \mathrm{Poisson}(\omega_{k}')
@@ -118,13 +117,13 @@ p(\bold{x}_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_
 \caption{Generative model of single molecule localization microscopy images. Low resolution images $\bold{x}$ are generated from coordinates $\theta$ by integration of the optical transfer function $O$ and sampling from the likelihood (1): $\bold{x}\sim p(\bold{x}|\theta) = \prod_{k} p(\bold{x}_k|\theta)$. A kernel density estimate $\bold{y}$ is inferred from $\bold{x}$}
 \end{figure}
 
-where $A$ is some normalization constant. After subtraction of a known offset $o_{k}$ of the pixel array, which can be easily measured, we have $\omega_{k}' = \omega_{k} + w_{k}^{2}$. For the sake of generality, we include a per-pixel gain factor $g_{k}$, which is often unity. Sampling from $p(\bold{x}_{k}|\theta)$ is trivial; however, for computation of a lower bound on uncertainty in $\theta$, the summation in (1) can be difficult to work with. Therefore, we choose to use a Poisson approximation for simplification, valid under a range of experimental conditions \citep{Huang2013}. The expectation of the Poisson process $\omega_{k}$ at each pixel of the image must then be computed from the optical impulse response $O(u,v)$, which is taken to be an isotropic Gaussian in two-dimensions. Consider an idealized scenario where an isolated fluorescent molecule exists in the image plane. For a particular pixel of width $\delta$ centered at $\xi_{k}=(u_k,v_k)$ in the first dimension, we define
+where $A$ is some normalization constant. After subtraction of a known offset $o_{k}$ of the pixel array, which can be easily measured, we have $\omega_{k}' = \omega_{k} + w_{k}^{2}$. For the sake of generality, we include a per-pixel gain factor $g_{k}$, which is often unity. Sampling from $p(\bold{x}_{k}|\theta)$ is trivial; however, for computation of a lower bound on uncertainty in $\theta$, the summation in (1) can be difficult to work with. Therefore, we choose to use a Poisson approximation for simplification, valid under a range of experimental conditions \citep{Huang2013}. The expectation of the Poisson process $\omega_{k}$ at each pixel of the image must then be computed from the optical impulse response $O(u,v)$, which is taken to be an isotropic Gaussian in two-dimensions. Consider an idealized scenario where an isolated fluorescent molecule exists in the image plane. For a particular pixel $k$ of width $\delta$ centered at $\xi_{k}=(u_k,v_k)$, we define, along the first image dimension
 
 \begin{equation}
-\Delta E_{\theta_{i}} \vcentcolon = \int_{\xi_{k,i}-\delta /2}^{\xi_{k,i}+\delta /2} O(u;\theta_{i})du = \frac{1}{2}\left(\mathrm{erf}\left(\frac{\xi_{k,i}+\frac{\delta}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right) -\mathrm{erf}\left(\frac{\xi_{k,i}-\frac{\delta}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right)\right)
+\Delta E_{u} \vcentcolon = \int_{u_{k}-\delta /2}^{u_{k}+\delta /2} O(u;\theta_{u})du = \frac{1}{2}\left(\mathrm{erf}\left(\frac{u_{k}+\frac{\delta}{2}-\theta_{u}}{\sqrt{2}\sigma_{\bold{x}}}\right) -\mathrm{erf}\left(\frac{u_{k}-\frac{\delta}{2}-\theta_{u}}{\sqrt{2}\sigma_{\bold{x}}}\right)\right)
 \end{equation}
 
-The expected value at each pixel is then $\omega_{k}\propto \prod_{\theta_{i}\in \theta} \Delta E_{\theta_{i}}(\xi_{k,i},\theta_{i},\sigma_{\bold{x}}) $. Using this, sampling from (1) is can be carried out by $\bold{x}_{k} = s_{k} + \zeta_{k}$ for $s_{k}\sim \mathrm{Poisson}(\omega_{k}), \eta_{k}\sim \mathcal{N}(o_{k},w_{k}^{2})$. The complete generative process is depicted in Figure 1. 
+The expected value at each pixel is then $\omega_{k}\propto \Delta E_{u}(u_{k},\theta_{u},\sigma_{\bold{x}})\Delta E_{v}(v_{k},\theta_{v},\sigma_{\bold{x}}) $. Using this, sampling from the convolution distribution in (1) is can be carried out by $\bold{x}_{k} = s_{k} + \zeta_{k}$ for $s_{k}\sim \mathrm{Poisson}(\omega_{k}), \eta_{k}\sim \mathcal{N}(o_{k},w_{k}^{2})$. The complete generative process is depicted in Figure 1. 
 
 \subsection{Gaussian kernel density estimation}
 
@@ -138,7 +137,7 @@ Direct optimization of the likelihood in (1) from observations $\bold{x}$ alone 
 Similar to the generative process on low resolution images $\bold{x}$, we can generate KDEs $\bold{y}$ by repurposing the generative model (1) on an unsampled image without noise. In other words, we cast Gaussian kernel density estimation as a noiseless image generation process on the domain of $\bold{y}$. Under a fixed configuration of $N$ particles $\theta$, the value of an non-normalized KDE pixel $\bold{y}_{k}$ is given by
 
 \begin{equation}
-\bold{y}_{k}(\theta) = \sum_{n=1}^{N}\Delta E_{\theta_x}(u_{k},\theta_{n,x},\sigma_{\bold{y}}) \Delta E_{\theta_y}(v_{k},\theta_{n,y},\sigma_{\bold{y}})
+\bold{y}_{k}(\theta) = \sum_{n=1}^{N}\Delta E_{u}(u_{k},\theta_{u},\sigma_{\bold{y}}) \Delta E_{v}(v_{k},\theta_{v},\sigma_{\bold{y}})
 \end{equation}
 
 where the hyperparameter $\sigma_{\bold{y}}$ is the Gaussian kernel width. 
@@ -149,7 +148,7 @@ We consider datasets $(\bold{x}_i,\bold{y}_{0,i},\hat{\bold{y}}_{i})_{i=1}^{N}$ 
 
 \subsection{Problem Statement}
 
-Point estimates $\hat{\bold{y}}_{i}$ produced by the traditional deep architectures for localization microscopy produce strong results, but lack uncertainty quantification. In principle, distribution on $\bold{y}_{k}$ is given directly from $p(\theta|\bold{x})$, which can be estimated by Metropolis-Hastings MCMC (Figure 2). Unfortunately, the posterior $p(\theta|\bold{x})$ has no known analytical form and can be difficult to compute at test time, since (i) molecules cannot be easily resolved and therefore $\theta$ is of unknown dimension and (ii) $\theta$ can be high dimensional and efficient exploration of the parameter space is challenging. The central goal of this paper is to instead model a conditional distribution on the latent $\bold{y}$: $p(\bold{y}|\bold{x})$, where $\bold{y}$ is of known dimensionality. We choose to model $p(\bold{y}|\bold{x})$ with a diffusion model, given that the distribution $p(\bold{y}|\bold{x})$ is expensive to compute, even if $p(\theta|\bold{x})$ were known.
+Kernel density estimates produced by the traditional deep architectures for localization microscopy produce strong results, but lack uncertainty quantification. In principle, distribution on $\bold{y}_{k}$ is given directly from $p(\theta|\bold{x})$, which can be estimated by Metropolis-Hastings MCMC (Figure 2). Unfortunately, the posterior $p(\theta|\bold{x})$ has no known analytical form and can be difficult to compute at test time, since (i) molecules cannot be easily resolved and therefore $\theta$ is of unknown dimension and (ii) $\theta$ can be high dimensional and efficient exploration of the parameter space is challenging. The central goal of this paper is to instead model a conditional distribution on the latent $\bold{y}$: $p(\bold{y}|\bold{x})$, where $\bold{y}$ is of known dimensionality. We choose to model $p(\bold{y}|\bold{x})$ with a diffusion model, given that the distribution $p(\bold{y}|\bold{x})$ is expensive to compute, even if $p(\theta|\bold{x})$ were known.
 
 Recent advances in generative modeling, particularly diffusion models \citep{SohlDickstein2015,Ho2020,Song2021} present a unique opportunity to integrate uncertainty awareness into the localization microscopy toolkit. However, sampling from diffusion models can be computationally expensive, given that generation amounts to solving a complex stochastic differential equation, effectively mapping a simple base distribution to the complex data distribution. The solution of such equations requires numerical integration with very small step sizes, resulting in thousands of neural network evaluations \citep{Saharia2021,Vahdat2021}. For conditional generation tasks in high-risk applications, generation complexity is further exacerbated by the need for the highest level of detail in generated samples. Moreover, in the present application, modeling the posterior is far more important than diversity in generated samples. Therefore, we propose that sampling is preceded by an augmentation network $\phi$, which in essence generates an initial estimate to guide the diffusion process. Reasoning for this choice in our application is two-fold:
 
@@ -197,7 +196,7 @@ where we have omitted conditioning on the low-resolution $\bold{x}$ to simplify 
 \mathcal{L}_{\psi} = \frac{T}{2}\mathbb{E}_{\epsilon\sim \mathcal{N}(0,I),t\sim U(1,T)}[\left(\frac{\mathrm{SNR}_{t-1}}{\mathrm{SNR}_{t}}-1\right)\lvert\lvert \bold{\epsilon}-\bold{\epsilon}_{\psi}(\bold{y}_{t})\lvert\lvert_{2}^{2}]
 \end{equation}
 
-where for our fixed noise schedule, $\mathrm{SNR}_t = \frac{\gamma_{t}}{1-\gamma_{t}}$. Full details of this derivation can be found in \citep{Kingma2021,Ribeiro2024} and are outlined in Appendix A. 
+Full details of this derivation can be found in \citep{Kingma2021,Ribeiro2024} and are outlined in Appendix A. 
 
 
 \section{Experiments}
@@ -278,15 +277,11 @@ One of these terms can be written as
 &= \frac{1}{2}\left(\mathrm{erf}\left(\frac{u_{k}+\frac{\delta}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right) -\mathrm{erf}\left(\frac{u_{k}-\frac{\delta}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right)\right)
 \end{align*}
 
-where we have used the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}\int_{0}^{z}e^{-t^{2}}dt$. To simplify the notation in the main text, we define a general expression
-
-\begin{equation*}
-\Delta E_{\theta_{i}}(\xi_{k,i},\theta_{x},\sigma_{\bold{x}}) \vcentcolon = \int_{u_{k}-\delta /2}^{u_{k}+\delta /2} O(u;\theta_{i})du = \frac{1}{2}\left(\mathrm{erf}\left(\frac{\xi_{k,i}+\frac{\delta}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right) -\mathrm{erf}\left(\frac{\xi_{k,i}-\frac{\delta}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right)\right)
-\end{equation*}
+where we have used the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}\int_{0}^{z}e^{-t^{2}}dt$. 
 
 \subsection{Metropolis-Hastings MCMC}
 
-To obtain numerical estimates of $p(\theta|\bold{x}\propto p(\bold{x}|\theta)p(\theta)$ and therefore $p(\bold{y}|\bold{x})$, for an isolated fluorescent molecule as shown in (Figure 2), we used Metropolis-Hastings Markov Chain Monte Carlo (MCMC) to estimate the posterior on coordinates. Under the Poisson approximation in (1), the model negative log-likelihood is
+To obtain numerical estimates of $p(\theta|\bold{x})\propto p(\bold{x}|\theta)p(\theta)$ and therefore $p(\bold{y}|\bold{x})$, for the isolated fluorescent molecule as shown in (Figure 2), we used Metropolis-Hastings Markov Chain Monte Carlo (MCMC) to estimate the posterior on coordinates. Under the Poisson approximation in (1), the model negative log-likelihood is
 
 \begin{equation}
 \ell(\bold{x}|\theta) = -\log \prod_{k} \frac{e^{-\left(\omega_{k}'\right)}\left(\omega_{k}'\right)^{n_{k}}}{n_{k}!} = \sum_{k}  \log n_{k}! + \omega_{k}' - n_{k}\log\left(\omega_{k}'\right)
@@ -308,7 +303,7 @@ Reliable inference of $\theta$ from $\bold{x}$ in general requires performance m
 I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) 
 \end{equation}
 
-For an arbitrary parameter, such the $\theta_{x}$ or $\theta_{y}$ coordinate, we find that, for a Poisson log-likelihood $\ell$
+For an arbitrary parameter, we find that, for a Poisson log-likelihood $\ell$
 
 \begin{align*}
 \frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  \log n_{k}! + \omega_{k}' - n_{k}\log\left(\omega_{k}'\right)\\
