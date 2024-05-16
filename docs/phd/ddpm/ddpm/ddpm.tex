@@ -114,7 +114,7 @@ p(\bold{x}_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_
 
 
 \begin{figure}
-\includegraphics[scale=0.225]{Generation.png}
+\includegraphics[scale=0.225]{media/Generation.png}
 \caption{Generative model of single molecule localization microscopy images. Low resolution images $\bold{x}$ are generated from coordinates $\theta$ by integration of the optical transfer function $O$ and sampling from the likelihood (1): $\bold{x}\sim p(\bold{x}|\theta) = \prod_{k} p(\bold{x}_k|\theta)$. A kernel density estimate $\bold{y}$ is inferred from $\bold{x}$}
 \end{figure}
 
@@ -131,7 +131,7 @@ The expected value at each pixel is then $\omega_{k}\propto \prod_{\theta_{i}\in
 Direct optimization of the likelihood in (1) from observations $\bold{x}$ alone is challenging when fluorescent emitters are dense within the field of view and fluorescent signals significantly overlap. However, convolutional neural networks (CNN) have recently proven to be powerful tools fluorescence microscopy to extract parameters describing fluorescent emitters such as color, emitter orientation, $z$-coordinate, and background signal \cite{Zhang2018,Kim2019,Zelger2018}. For localization tasks, CNNs typically employ upsampling layers to reconstruct Bernoulli probabilities of emitter occupancy \citep{Speiser2021} or kernel density estimates with higher resolution than experimental measurements \citep{Nehme2020}. We choose to use kernel density estimates in our model, denoted by $\bold{y}$, which are latent in the low-resolution data $\bold{x}$. KDEs are the most common data structure used in SMLM, and can be easily generated from molecular coordinates, alongside observations $\bold{x}$, using well-understood models of the optical impulse response \citep{Zhang2007}. 
 
 \begin{figure}
-\includegraphics[scale=0.7]{MCMC.png}
+\includegraphics[scale=0.7]{media/MCMC.png}
 \caption{Monte Carlo estimation of the marginal variances $\sqrt{\mathrm{Var}(\bold{y}_k)}$ for an isolated fluorescent emitter. MCMC sampling is carried out using the low-resolution image (left) to estimate the posterior (middle) and generate an image of marginal variances (right)}
 \end{figure}
 
@@ -160,7 +160,7 @@ Recent advances in generative modeling, particularly diffusion models \citep{Soh
 \subsection{Variational Diffusion}
 
 \begin{figure}
-\includegraphics[scale=4.5]{Denoise.png}
+\includegraphics[scale=4.5]{media/Denoise.png}
 \caption{Conditional diffusion model for sampling kernel density estimates. An initial KDE estimate $\bold{\hat{y}}$ is found by the CNN $\phi$, which is used as conditional input in the DDPM}
 \end{figure}
 
@@ -206,7 +206,7 @@ All training data consits of low-resolution $20\times 20$ images, setting $\sigm
 
 \begin{figure}
 \centering
-\includegraphics[scale=1.1]{Bayes.png}
+\includegraphics[scale=1.1]{media/Bayes.png}
 \caption{Non cherry-picked estimation of marginal variances. A low-resolution image $\bold{x}$ (left column) is transformed by $\phi$ to produce a KDE estimate $\hat{\bold{y}}$ (middle column) and a DDPM $\psi$ computes a map of marginal variances (right column)}
 \end{figure}
 
@@ -325,7 +325,7 @@ A fundamental lower bound on the variance in our estimates of $\theta$ then is f
 
 \begin{figure}
 \centering
-\includegraphics[scale=0.7]{Errors.png}
+\includegraphics[scale=0.7]{media/Errors.png}
 \caption{Localization errors of the trained model $\phi$. The Cramer-Rao lower bound is shown in red, computing by taking the diagonal elements of $I^{-1}(\theta)$.}
 \end{figure}
 
