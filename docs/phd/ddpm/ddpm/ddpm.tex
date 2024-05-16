@@ -193,7 +193,7 @@ Learning the reverse process can be approached by either regressing noise $\bold
 where we have omitted conditioning on the low-resolution $\bold{x}$ to simplify the notation. Note that, this is similar to a hierarchical VAE, but in a diffusion model $q(\bold{y}_{1:T}|\bold{y}_{0})$ is fixed by the forward process rather than learned. The so-called diffusion loss $\mathcal{L}_{\psi}$ is shown in Appendix A, and is the term of interest as the first two terms do not contribute meaningfully to the loss \citep{Ho2020}. Furthermore, it has become standard to use simplified forms of $\mathcal{L}_{\psi}$, such as a noise estimation loss, as this has shown superior performance. Importantly, $\mathcal{L}_{\psi}$ is simply a reweighted variant of a family of diffusion objectives \citep{Kingma2021,Kingma2023}. We use the following Monte Carlo estimate of $\mathcal{L}_{\psi}$, which demonstrates that the variational bound can be written in terms of the common noise-estimation loss
 
 \begin{equation}
-\mathcal{L}_{\psi} = \frac{T}{2}\mathbb{E}_{\epsilon\sim \mathcal{N}(0,I),t\sim U(1,T)}[\left(\frac{\mathrm{SNR}_{t-1}}{\mathrm{SNR}_{t}}-1\right)\lvert\lvert \bold{\epsilon}-\bold{\epsilon}_{\psi}(\bold{y}_{t})\lvert\lvert_{2}^{2}]
+\mathcal{L}_{\psi} = \frac{T}{2}\mathbb{E}_{\epsilon\sim \mathcal{N}(0,I),t\sim U(1,T)}[\left(\mathrm{SNR}_{t-1}-\mathrm{SNR}_{t}\right)\lvert\lvert \bold{\epsilon}-\bold{\epsilon}_{\psi}(\bold{y}_{t})\lvert\lvert_{2}^{2}]
 \end{equation}
 
 Full details of this derivation can be found in \citep{Kingma2021,Ribeiro2024} and are outlined in Appendix A. 
@@ -233,22 +233,55 @@ The development of a method for uncertainty estimation in super-resolution imagi
 
 \section{Appendix}
 
-\subsection{Diffuion model and variational bound}
+\subsection{Sampling}
 
-It is instructive to note that the noise estimate $\epsilon_{\psi}$ and $\mu_{\psi}$ are related by \citep{Saharia2021}
-
-\begin{equation}
-\mu_{\psi}(\bold{y}_{t},\gamma_{t}) = \frac{1}{\sqrt{1-\beta_{t}}}\left(\bold{y}_{t} - \frac{\beta_{t}}{\sqrt{1-\gamma_{t}}}\epsilon_{\psi}\right)
-\end{equation}
-
-which forms the basic mechanism for sampling latents in the reverse process: $\bold{y}_{t-1} = \mu_{\psi}(\bold{y}_{t},\gamma_{t}) + \sqrt{\beta_{t}}\xi_{t}$, for $\xi_{t} = \mathcal{N}(0,I)$.
-
-
-We focus on the so-called diffusion loss $\mathcal{L}_{\psi}$, which is the only relevant term in the above objective \citep{Ribeiro2024}.
+Sampling from the reverse process $p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x})$ is achieved by estimation of the noise $\epsilon_{\psi}$ from $\bold{y}_{t}$ by the denoising model $\psi$, and therefore estimation of $\bold{y}_{0}$
 
 \begin{equation}
-\mathcal{L}_{\psi} = \sum_{i=1}^{T} \mathbb{E}_{q_{\psi}(\bold{y}_{t}|\bold{x})} [ D_{KL}(q_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) || p(\bold{y}_{t-1}|\bold{y}_{t},\bold{x})) ]
+\hat{\bold{y}}_{0} = \frac{1}{\sqrt{\gamma_{t}}}(\bold{y}_{t} - \sqrt{1-\gamma_{t}}\epsilon_{\psi})
 \end{equation}
+
+followed by sampling from the forward process $\bold{y}_{t-1} \sim q(\bold{y}_{t-1}|\hat{\bold{y}}_{0}) = \mathcal{N}(\sqrt{\gamma_{t-1}},(1-\gamma_{t-1})I)$. 
+
+
+\subsection{Derivation of the variational bound}
+
+We now derive the so-called diffusion loss $\mathcal{L}_{\psi}$, written in (8) in the main text. Similar derivations can be found in \citep{Kingma2021,Ribeiro2024}, and we include it here only for completeness
+
+\begin{align*}
+-\log p(\bold{y}_{0}) &\leq - \mathbb{E}_{q(\bold{y}_{1:T}|\bold{y}_{0})} \log \frac{p(\bold{y}_{0:T})}{q(\bold{y}_{1:T}|\bold{y}_{0})}\\
+&= \mathbb{E}_{q(\bold{y}_{1:T}|\bold{y}_{0})} \log \frac{p(\bold{y}_{T})p(\bold{y}_0|\bold{y}_1) \prod_{t=2}^{T}p(\bold{y}_{t-1}|\bold{y}_t)}{q(\bold{y}_T|\bold{y}_0)\prod_{t=2}^{T}q(\bold{y}_{t-1}|\bold{y}_t,\bold{y}_0)}\\
+&= \mathbb{E}_{q(\bold{y}_{1:T}|\bold{y}_{0})} \left[ p(\bold{y}_0|\bold{y}_1) + \log \frac{p(\bold{y}_{T})}{q(\bold{y}_T|\bold{y}_0)} + \sum_{t=2}^{T} \log \frac{p(\bold{y}_{t-1}|\bold{y}_t)}{q(\bold{y}_{t-1}|\bold{y}_t,\bold{y}_0)}\right]\\
+&= \mathbb{E}_{q(\bold{y}_{1:T}|\bold{y}_{0})} \left[ p(\bold{y}_0|\bold{y}_1)\right] - D_{KL}\left(q(\bold{y}_T|\bold{y}_0) \lvert\lvert p(\bold{y}_{T})\right) \\
+&- \sum_{t=2}^{T} \mathbb{E}_{q(\bold{y}_{t}|\bold{y}_{0})} D_{KL}\left(q(\bold{y}_{t-1}|\bold{y}_t,\bold{y}_0)\lvert\lvert p(\bold{y}_{t-1}|\bold{y}_t) \right)
+\end{align*}
+
+The first term is typically omitted, since $\bold{y}_{1}$ is almost equal to $\bold{y}_{0}$, and does not contribute meaningfully to the loss \citep{Ribeiro2024}. Furthermore, the second term is approximately zero by construction. Therefore we are left with the last term, called the diffusion loss $\mathcal{L}_{\psi}$. The KL-divergence of $q$ and $p$ is between two Gaussians with identical variances $\sigma^{2} = \frac{(1-\gamma_{t-1})(1-\alpha_{t})}{1-\gamma_{t}}$, and expectations
+
+\begin{align*}
+\mu = \frac{\sqrt{\gamma_{t-1}}(1-\alpha_{t})}{1-\gamma_{t}}\bold{y}_{0}+ \frac{\sqrt{\alpha_{t}}(1-\gamma_{t-1})}{{1-\gamma_{t}}}\bold{y}_{t} \quad \mu_{\psi} = \frac{\sqrt{\gamma_{t-1}}(1-\alpha_{t})}{1-\gamma_{t}}\hat{\bold{y}}_{0}+ \frac{\sqrt{\alpha_{t}}(1-\gamma_{t-1})}{{1-\gamma_{t}}}\bold{y}_{t}
+\end{align*}
+
+for a fixed noise schedule \citep{Saharia2021}. This gives,
+
+\begin{align*}
+D_{KL}\left(q(\bold{y}_{t-1}|\bold{y}_t,\bold{y}_0)\lvert\lvert p(\bold{y}_{t-1}|\bold{y}_t) \right) &= \frac{1}{2\sigma^{2}} \lvert\lvert \mu - \mu_{\psi} \lvert\lvert_{2}^{2} \\
+&= \left(\frac{\gamma_{t-1}}{1-\gamma_{t-1}}-\frac{\gamma_{t}}{1-\gamma_{t}}\right)\lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2}\\
+&= \left(\mathrm{SNR}_{t-1}-\mathrm{SNR}_{t}\right)\lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2}
+\end{align*}
+
+Reparameterizing the loss in term of the noise, using $\lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2} = \frac{1-\gamma_{t}}{\gamma_{t}}\lvert\lvert \bold{\epsilon}_{0} - \epsilon_{\psi} \lvert\lvert_{2}^{2}$, and putting it all together we arrive at 
+
+\begin{equation*}
+\mathcal{L}_{\psi} = \sum_{t=2}^{T} \mathbb{E}_{q(\bold{y}_{t}|\bold{y}_{0})}\left(\frac{\mathrm{SNR}_{t-1}}{{\mathrm{SNR}_{t}}}-1\right)\lvert\lvert \bold{\epsilon}-\bold{\epsilon}_{\psi}\lvert\lvert_{2}^{2}
+\end{equation*}
+
+Using a Monte Carlo estimate of $\mathcal{L}_{\psi}$, we arrive at the objective written in the main text (8)
+
+\begin{equation*}
+\mathcal{L}_{\psi} = \frac{T}{2}\mathbb{E}_{\epsilon\sim \mathcal{N}(0,I),t\sim U(1,T)}\left[\left(\frac{\mathrm{SNR}_{t-1}}{{\mathrm{SNR}_{t}}}-1\right)\lvert\lvert \bold{\epsilon}-\bold{\epsilon}_{\psi}\lvert\lvert_{2}^{2}\right]
+\end{equation*}
+
 
 \subsection{Optical impulse response}
 
