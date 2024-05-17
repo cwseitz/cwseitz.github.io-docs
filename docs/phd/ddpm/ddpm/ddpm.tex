@@ -262,12 +262,15 @@ The first term is typically omitted, since $\bold{y}_{1}$ is almost equal to $\b
 \mu = \frac{\sqrt{\gamma_{t-1}}(1-\alpha_{t})}{1-\gamma_{t}}\bold{y}_{0}+ \frac{\sqrt{\alpha_{t}}(1-\gamma_{t-1})}{{1-\gamma_{t}}}\bold{y}_{t} \quad \mu_{\psi} = \frac{\sqrt{\gamma_{t-1}}(1-\alpha_{t})}{1-\gamma_{t}}\hat{\bold{y}}_{0}+ \frac{\sqrt{\alpha_{t}}(1-\gamma_{t-1})}{{1-\gamma_{t}}}\bold{y}_{t}
 \end{align*}
 
-for a fixed noise schedule \citep{Saharia2021}. This gives,
+for a fixed noise schedule \citep{Saharia2021}. Therefore, we have
 
 \begin{align*}
 D_{KL}\left(q(\bold{y}_{t-1}|\bold{y}_t,\bold{y}_0)\lvert\lvert p(\bold{y}_{t-1}|\bold{y}_t) \right) &= \frac{1}{2\sigma^{2}} \lvert\lvert \mu - \mu_{\psi} \lvert\lvert_{2}^{2} \\
-&= \left(\frac{\gamma_{t-1}}{1-\gamma_{t-1}}-\frac{\gamma_{t}}{1-\gamma_{t}}\right)\lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2}\\
-&= \left(\mathrm{SNR}_{t-1}-\mathrm{SNR}_{t}\right)\lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2}
+&= \frac{1}{2}\frac{\gamma_{t-1}(1-\alpha_{t})}{(1-\gamma_{t-1})(1-\gamma_{t})}\lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2}\\
+&= \frac{1}{2}\frac{\gamma_{t-1}((1-\gamma_{t})-\alpha_{t}(1-\gamma_{t-1}))}{(1-\gamma_{t-1})(1-\gamma_{t})}\lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2}\\
+&= \frac{1}{2}\frac{\gamma_{t-1}((1-\gamma_{t})-\frac{\gamma_{t}}{\gamma_{t-1}}(1-\gamma_{t-1}))}{(1-\gamma_{t-1})(1-\gamma_{t})}\lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2}\\
+&= \frac{1}{2}\left(\frac{\gamma_{t-1}}{1-\gamma_{t-1}}-\frac{\gamma_{t}}{1-\gamma_{t}}\right)\lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2}\\
+&= \frac{1}{2}\left(\mathrm{SNR}_{t-1}-\mathrm{SNR}_{t}\right)\lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2}
 \end{align*}
 
 Reparameterizing the loss in term of the noise, using $\lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2} = \frac{1-\gamma_{t}}{\gamma_{t}}\lvert\lvert \bold{\epsilon}_{0} - \epsilon_{\psi} \lvert\lvert_{2}^{2}$, and putting it all together we arrive at 
