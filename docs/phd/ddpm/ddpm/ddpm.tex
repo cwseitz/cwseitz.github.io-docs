@@ -192,9 +192,10 @@ Learning the reverse process can be approached by either regressing noise $\bold
 
 where we have omitted conditioning on the low-resolution $\bold{x}$ to simplify the notation. Note that, this is similar to a hierarchical VAE, but in a diffusion model $q(\bold{y}_{1:T}|\bold{y}_{0})$ is fixed by the forward process rather than learned. The so-called diffusion loss $\mathcal{L}_{\psi}$ is shown in Appendix A, and is the term of interest as the first two terms do not contribute meaningfully to the loss \citep{Ho2020}. Furthermore, it has become standard to use simplified forms of $\mathcal{L}_{\psi}$, such as a noise estimation loss, as this has shown superior performance. Importantly, $\mathcal{L}_{\psi}$ is simply a reweighted variant of a family of diffusion objectives \citep{Kingma2021,Kingma2023}. We use the following Monte Carlo estimate of $\mathcal{L}_{\psi}$, which demonstrates that the variational bound can be written in terms of the common noise-estimation loss
 
-\begin{equation}
-\mathcal{L}_{\psi} = \frac{T}{2}\mathbb{E}_{\epsilon\sim \mathcal{N}(0,I),t\sim U(1,T)}[\left(\mathrm{SNR}_{t-1}-\mathrm{SNR}_{t}\right)\lvert\lvert \bold{\epsilon}-\bold{\epsilon}_{\psi}(\bold{y}_{t})\lvert\lvert_{2}^{2}]
-\end{equation}
+
+\begin{equation*}
+\mathcal{L}_{\psi} = \frac{T}{2}\mathbb{E}_{\epsilon\sim \mathcal{N}(0,I),t\sim U(1,T)}\left[\left(\frac{\mathrm{SNR}_{t-1}}{{\mathrm{SNR}_{t}}}-1\right)\lvert\lvert \bold{\epsilon}-\bold{\epsilon}_{\psi}\lvert\lvert_{2}^{2}\right]
+\end{equation*}
 
 Full details of this derivation can be found in \citep{Kingma2021,Ribeiro2024} and are outlined in Appendix A. 
 
@@ -256,7 +257,7 @@ We now derive the so-called diffusion loss $\mathcal{L}_{\psi}$, written in (8) 
 &- \sum_{t=2}^{T} \mathbb{E}_{q(\bold{y}_{t}|\bold{y}_{0})} D_{KL}\left(q(\bold{y}_{t-1}|\bold{y}_t,\bold{y}_0)\lvert\lvert p(\bold{y}_{t-1}|\bold{y}_t) \right)
 \end{align*}
 
-The first term is typically omitted, since $\bold{y}_{1}$ is almost equal to $\bold{y}_{0}$, and does not contribute meaningfully to the loss \citep{Ribeiro2024}. Furthermore, the second term is approximately zero by construction. Therefore we are left with the last term, called the diffusion loss $\mathcal{L}_{\psi}$. The KL-divergence of $q$ and $p$ is between two Gaussians with identical variances $\sigma^{2} = \frac{(1-\gamma_{t-1})(1-\alpha_{t})}{1-\gamma_{t}}$, and expectations
+As before, we omit conditioning on $\bold{x}$ to simplify the notation. The first term is typically ignored, as it does not contribute meaningfully to the loss \citep{Ribeiro2024}. Furthermore, the second term is approximately zero by construction. Therefore we are left with the last term, called the diffusion loss $\mathcal{L}_{\psi}$. The KL-divergence of $q$ and $p$ is between two Gaussians with identical variances $\sigma^{2} = \frac{(1-\gamma_{t-1})(1-\alpha_{t})}{1-\gamma_{t}}$, and expectations
 
 \begin{align*}
 \mu = \frac{\sqrt{\gamma_{t-1}}(1-\alpha_{t})}{1-\gamma_{t}}\bold{y}_{0}+ \frac{\sqrt{\alpha_{t}}(1-\gamma_{t-1})}{{1-\gamma_{t}}}\bold{y}_{t} \quad \mu_{\psi} = \frac{\sqrt{\gamma_{t-1}}(1-\alpha_{t})}{1-\gamma_{t}}\hat{\bold{y}}_{0}+ \frac{\sqrt{\alpha_{t}}(1-\gamma_{t-1})}{{1-\gamma_{t}}}\bold{y}_{t}
@@ -273,13 +274,13 @@ D_{KL}\left(q(\bold{y}_{t-1}|\bold{y}_t,\bold{y}_0)\lvert\lvert p(\bold{y}_{t-1}
 &= \frac{1}{2}\left(\mathrm{SNR}_{t-1}-\mathrm{SNR}_{t}\right)\lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2}
 \end{align*}
 
-Reparameterizing the loss in term of the noise, using $\lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2} = \frac{1-\gamma_{t}}{\gamma_{t}}\lvert\lvert \bold{\epsilon}_{0} - \epsilon_{\psi} \lvert\lvert_{2}^{2}$, and putting it all together we arrive at 
+Reparameterizing the loss in terms of the noise, using $\lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2} = \frac{1-\gamma_{t}}{\gamma_{t}}\lvert\lvert \bold{\epsilon}_{0} - \epsilon_{\psi} \lvert\lvert_{2}^{2}$, and putting it all together we arrive at 
 
 \begin{equation*}
 \mathcal{L}_{\psi} = \sum_{t=2}^{T} \mathbb{E}_{q(\bold{y}_{t}|\bold{y}_{0})}\left(\frac{\mathrm{SNR}_{t-1}}{{\mathrm{SNR}_{t}}}-1\right)\lvert\lvert \bold{\epsilon}-\bold{\epsilon}_{\psi}\lvert\lvert_{2}^{2}
 \end{equation*}
 
-Using a Monte Carlo estimate of $\mathcal{L}_{\psi}$, we arrive at the objective written in the main text (8)
+Using a Monte Carlo estimate of $\mathcal{L}_{\psi}$ \citep{Kingma2023}, we arrive at the objective written in the main text (8)
 
 \begin{equation*}
 \mathcal{L}_{\psi} = \frac{T}{2}\mathbb{E}_{\epsilon\sim \mathcal{N}(0,I),t\sim U(1,T)}\left[\left(\frac{\mathrm{SNR}_{t-1}}{{\mathrm{SNR}_{t}}}-1\right)\lvert\lvert \bold{\epsilon}-\bold{\epsilon}_{\psi}\lvert\lvert_{2}^{2}\right]
@@ -363,8 +364,8 @@ A fundamental lower bound on the variance in our estimates of $\theta$ then is f
 
 \subsection{Neural Networks $\psi,\phi$}
 
-\textbf{DeepSTORM CNN $\phi$}. The DeepSTORM CNN, for 3D localization, can be viewed as a deep kernel density estimator, reconstructing kernel density estimates $\bold{y}$ from low-resolution inputs $\bold{x}$. We utilize a simplified form of the original architecture for 2D localization, which we denote $\phi$ in this paper, which consists of three main modules: a multi-scale context aggregation module, an upsampling module, and a prediction module. For context aggregation, the architecture utilizes dilated convolutions to increase the receptive field of each layer. The upsampling module is then composed of two consecutive 2x resize-convolutions, computed by nearest-neighbor interpolation, to increase the lateral resolution by a factor of 4. Additional details regarding this architecture can be found in the original paper \cite{Nehme2020}. The terminal prediction module contains three additional convolutional blocks for refinement of the upsampled image, followed by an element-wise HardTanh. The architecture is trained using the objective $\mathcal{L}_{\phi} = \frac{1}{N}\sum_{n=1}^{N} (\bold{y}_{0,n}-\bold{\hat{y}}_{n})^{2}$. 
+\textbf{DeepSTORM CNN $\phi$}. The DeepSTORM CNN, for 3D localization, can be viewed as a deep kernel density estimator, reconstructing kernel density estimates $\bold{y}$ from low-resolution inputs $\bold{x}$. We utilize a simplified form of the original architecture \citep{Nehme2020} for 2D localization, which we denote $\phi$ in this paper, which consists of three main modules: a multi-scale context aggregation module, an upsampling module, and a prediction module. For context aggregation, the architecture utilizes dilated convolutions to increase the receptive field of each layer. The upsampling module is then composed of two consecutive 2x resize-convolutions, computed by nearest-neighbor interpolation, to increase the lateral resolution by a factor of 4. Additional details regarding this architecture can be found in the original paper \cite{Nehme2020}. The terminal prediction module contains three additional convolutional blocks for refinement of the upsampled image, followed by an element-wise HardTanh. The architecture is trained using the objective $\mathcal{L}_{\phi} = \frac{1}{N}\sum_{n=1}^{N} (\bold{y}_{0,n}-\bold{\hat{y}}_{n})^{2}$. 
 
-\textbf{DDPM $\psi$}. To represent the reverse process, we used a DDPM architecture originally proposed in \citep{Saharia2021} where the full model is described. We chose a U-Net backbone to have channel multipliers $[1,2,4,8,8]$ in the downsampling and upsampling paths of the architecture. Parameters are shared across time, which is specified to the network using the Transformer sinusoidal position embedding. We use self-attention at the $16 \times 16$ feature map resolution. To condition the model on the input $\bold{\hat{y}}$, we concatenate the $\bold{\hat{y}}$ estimated by DeepSTORM along the channel dimension, which are scaled to $[0,1]$, with $\bold{y}_T\sim \mathcal{N}(0, I)$. Others have experimented with more sophisticated methods of conditioning, but found that the simple concatenation yielded similar generation quality \citep{Saharia2021}. 
+\textbf{DDPM $\psi$}. To represent the reverse process, we used a DDPM architecture originally proposed in \citep{Saharia2021}. We chose the U-Net backbone to have channel multipliers $[1,2,4,8,8]$ in the downsampling and upsampling paths of the architecture. In this architecture, parameters are shared across time, which is specified to the network using the Transformer sinusoidal position embedding, and uses self-attention at the $16 \times 16$ feature map resolution. To condition the model on the input $\bold{\hat{y}}$, we concatenate the $\bold{\hat{y}}$ estimated by DeepSTORM along the channel dimension, which are scaled to $[0,1]$, with $\bold{y}_T\sim \mathcal{N}(0, I)$. Others have experimented with more sophisticated methods of conditioning, but found that the simple concatenation yielded similar generation quality \citep{Saharia2021}. 
 
 \end{document}
