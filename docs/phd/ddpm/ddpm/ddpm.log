@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.20)  17 MAY 2024 09:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.20)  17 MAY 2024 12:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -609,13 +609,16 @@ al/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/texlive/2023
 Package amsfonts Warning: Obsolete command \bold; \mathbf should be used instea
 d on input line 108.
 
-<media/Generation.png, id=129, 1744.26656pt x 335.75438pt>
+<media/Generation.png, id=135, 1744.26656pt x 335.75438pt>
 File: media/Generation.png Graphic file (type png)
 <use media/Generation.png>
 Package pdftex.def Info: media/Generation.png  used on input line 116.
 (pdftex.def)             Requested size: 392.46967pt x 75.54659pt.
-[2 <./media/Generation.png>]
-<media/MCMC.png, id=173, 578.16pt x 195.129pt>
+
+Underfull \vbox (badness 1132) has occurred while \output is active []
+
+ [2 <./media/Generation.png>]
+<media/MCMC.png, id=179, 578.16pt x 195.129pt>
 File: media/MCMC.png Graphic file (type png)
 <use media/MCMC.png>
 Package pdftex.def Info: media/MCMC.png  used on input line 133.
@@ -630,53 +633,55 @@ Underfull \hbox (badness 10000) in paragraph at lines 155--156
 
  []
 
-<media/Denoise.png, id=196, 83.8332pt x 19.2961pt>
+<media/Denoise.png, id=206, 83.8332pt x 19.2961pt>
 File: media/Denoise.png Graphic file (type png)
 <use media/Denoise.png>
 Package pdftex.def Info: media/Denoise.png  used on input line 162.
 (pdftex.def)             Requested size: 377.2484pt x 86.83215pt.
 [4 <./media/Denoise.png>]
-<media/Bayes.png, id=234, 361.35pt x 361.35pt>
+<media/Bayes.png, id=241, 361.35pt x 361.35pt>
 File: media/Bayes.png Graphic file (type png)
 <use media/Bayes.png>
-Package pdftex.def Info: media/Bayes.png  used on input line 209.
+Package pdftex.def Info: media/Bayes.png  used on input line 208.
 (pdftex.def)             Requested size: 397.48624pt x 397.48624pt.
- [5] [6 <./media/Bayes.png>] (./ddpm.bbl [7]) [8]
-[9] [10]
-<media/Errors.png, id=299, 432.11438pt x 226.59656pt>
+ [5]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [6 <./media/Bayes.png>] (./ddpm.bbl [7]) [8] [9] [10]
+<media/Errors.png, id=306, 432.11438pt x 226.59656pt>
 File: media/Errors.png Graphic file (type png)
 <use media/Errors.png>
-Package pdftex.def Info: media/Errors.png  used on input line 360.
+Package pdftex.def Info: media/Errors.png  used on input line 359.
 (pdftex.def)             Requested size: 302.478pt x 158.6165pt.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 365.
+(hyperref)                removing `math shift' on input line 364.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\psi' on input line 365.
+(hyperref)                removing `\psi' on input line 364.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\phi' on input line 365.
+(hyperref)                removing `\phi' on input line 364.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 365.
+(hyperref)                removing `math shift' on input line 364.
 
-[11 <./media/Errors.png>] [12] (./ddpm.aux)
+[11] [12 <./media/Errors.png>] (./ddpm.aux)
 Package rerunfilecheck Info: File `ddpm.out' has not changed.
 (rerunfilecheck)             Checksum: 73593AA343E7F78408905FED909256A6;2824.
  ) 
 Here is how much of TeX's memory you used:
- 14162 strings out of 476025
- 224923 string characters out of 5790016
+ 14170 strings out of 476025
+ 225027 string characters out of 5790016
  1870388 words of memory out of 5000000
- 34111 multiletter control sequences out of 15000+600000
- 550795 words of font info for 203 fonts, out of 8000000 for 9000
+ 34114 multiletter control sequences out of 15000+600000
+ 551020 words of font info for 205 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,12n,76p,1736b,587s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,12n,76p,1409b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx5.pfb><
 /usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></u
@@ -696,10 +701,10 @@ e/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/
 23/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2023/texmf-d
 ist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2023/texmf-dist/fonts/
 type1/urw/times/utmri8a.pfb>
-Output written on ddpm.pdf (12 pages, 520108 bytes).
+Output written on ddpm.pdf (12 pages, 521165 bytes).
 PDF statistics:
- 421 PDF objects out of 1000 (max. 8388607)
- 355 compressed objects within 4 object streams
- 74 named destinations out of 1000 (max. 500000)
+ 429 PDF objects out of 1000 (max. 8388607)
+ 363 compressed objects within 4 object streams
+ 76 named destinations out of 1000 (max. 500000)
  37538 words of extra memory for PDF output out of 42996 (max. 10000000)
 
