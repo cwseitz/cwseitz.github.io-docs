@@ -133,7 +133,7 @@ Direct optimization of the likelihood in (1) from observations $\bold{x}$ alone 
 
 \begin{figure}
 \includegraphics[scale=0.7]{media/MCMC.png}
-\caption{Estimation of the marginal variances $\sqrt{\mathrm{Var}(\bold{y}_k)}$ for an isolated fluorescent emitter. MCMC sampling is carried out using the low-resolution image (left) to estimate the posterior (middle) and generate an image of marginal variances (right)}
+\caption{Estimation of the marginal variances $\sqrt{\mathrm{Var}(\bold{y}_k)}$ for an isolated fluorescent emitter. MCMC sampling is carried out using the low-resolution image (left) to estimate the posterior $p(\theta|\bold{x})$ (middle) which is sampled $\theta\sim p(\theta|\bold{x})$ and combined with (3) to estimate marginal variances (right)}
 \end{figure}
 
 Similar to the generative process on low resolution images $\bold{x}$, we can generate KDEs $\bold{y}$ by repurposing the generative model (1) on an unsampled image without noise. In other words, we cast Gaussian KD estimation as a noiseless image generation process on the domain of $\bold{y}$. Under a fixed configuration of $N$ particles $\theta$, the value of an non-normalized KDE pixel $\bold{y}_{k}$ is given by
@@ -252,10 +252,10 @@ We now derive the so-called diffusion loss $\mathcal{L}_{\psi}$, written in (8) 
 
 \begin{align*}
 -\log p(\bold{y}_{0}) &\leq - \mathbb{E}_{q(\bold{y}_{1:T}|\bold{y}_{0})} \log \frac{p(\bold{y}_{0:T})}{q(\bold{y}_{1:T}|\bold{y}_{0})}\\
-&= \mathbb{E}_{q(\bold{y}_{1:T}|\bold{y}_{0})} \log \frac{p(\bold{y}_{T})p(\bold{y}_0|\bold{y}_1) \prod_{t=2}^{T}p(\bold{y}_{t-1}|\bold{y}_t)}{q(\bold{y}_T|\bold{y}_0)\prod_{t=2}^{T}q(\bold{y}_{t-1}|\bold{y}_t,\bold{y}_0)}\\
-&= \mathbb{E}_{q(\bold{y}_{1:T}|\bold{y}_{0})} \left[ p(\bold{y}_0|\bold{y}_1) + \log \frac{p(\bold{y}_{T})}{q(\bold{y}_T|\bold{y}_0)} + \sum_{t=2}^{T} \log \frac{p(\bold{y}_{t-1}|\bold{y}_t)}{q(\bold{y}_{t-1}|\bold{y}_t,\bold{y}_0)}\right]\\
-&= \mathbb{E}_{q(\bold{y}_{1:T}|\bold{y}_{0})} \left[ p(\bold{y}_0|\bold{y}_1)\right] - D_{KL}\left(q(\bold{y}_T|\bold{y}_0) \lvert\lvert p(\bold{y}_{T})\right) \\
-&- \sum_{t=2}^{T} \mathbb{E}_{q(\bold{y}_{t}|\bold{y}_{0})} D_{KL}\left(q(\bold{y}_{t-1}|\bold{y}_t,\bold{y}_0)\lvert\lvert p(\bold{y}_{t-1}|\bold{y}_t) \right)
+&= -\mathbb{E}_{q(\bold{y}_{1:T}|\bold{y}_{0})} \log \frac{p(\bold{y}_{T})p(\bold{y}_0|\bold{y}_1) \prod_{t=2}^{T}p(\bold{y}_{t-1}|\bold{y}_t)}{q(\bold{y}_T|\bold{y}_0)\prod_{t=2}^{T}q(\bold{y}_{t-1}|\bold{y}_t,\bold{y}_0)}\\
+&= -\mathbb{E}_{q(\bold{y}_{1:T}|\bold{y}_{0})} \left[ p(\bold{y}_0|\bold{y}_1) + \log \frac{p(\bold{y}_{T})}{q(\bold{y}_T|\bold{y}_0)} + \sum_{t=2}^{T} \log \frac{p(\bold{y}_{t-1}|\bold{y}_t)}{q(\bold{y}_{t-1}|\bold{y}_t,\bold{y}_0)}\right]\\
+&= -\mathbb{E}_{q(\bold{y}_{1:T}|\bold{y}_{0})} \left[ p(\bold{y}_0|\bold{y}_1)\right] + D_{KL}\left(q(\bold{y}_T|\bold{y}_0) \lvert\lvert p(\bold{y}_{T})\right) \\
+&+ \sum_{t=2}^{T} \mathbb{E}_{q(\bold{y}_{t}|\bold{y}_{0})} D_{KL}\left(q(\bold{y}_{t-1}|\bold{y}_t,\bold{y}_0)\lvert\lvert p(\bold{y}_{t-1}|\bold{y}_t) \right)
 \end{align*}
 
 As before, we omit conditioning on $\bold{x}$ to simplify the notation. The first term is typically ignored, as it does not contribute meaningfully to the loss \citep{Ribeiro2024}. Furthermore, the second term is approximately zero by construction. Therefore we are left with the last term, called the diffusion loss $\mathcal{L}_{\psi}$. The KL-divergence of $q$ and $p$ is between two Gaussians with identical variances $\sigma^{2} = \frac{(1-\gamma_{t-1})(1-\alpha_{t})}{1-\gamma_{t}}$, and expectations
