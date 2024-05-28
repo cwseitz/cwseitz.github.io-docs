@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  27 MAY 2024 15:58
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  27 MAY 2024 22:30
  restricted system commands enabled.
 **dissertation.tex
 (./dissertation.tex
@@ -2264,7 +2264,7 @@ Package biblatex Info: Reference segment=0 on input line 518.
 Package chemgreek Info: Activating mapping `default' on line 518.
 
 \Etoc@tf=\read6
-<graphics//gr-pu-seal-vector.pdf, id=141, 527.62581pt x 516.24864pt>
+<graphics//gr-pu-seal-vector.pdf, id=133, 527.62581pt x 516.24864pt>
 File: graphics//gr-pu-seal-vector.pdf Graphic file (type pdf)
 <use graphics//gr-pu-seal-vector.pdf>
 Package luatex.def Info: graphics//gr-pu-seal-vector.pdf  used on input line 52
@@ -2366,11 +2366,6 @@ RM)\T1/lmr/m/n/12 . (A) Sin-gle molecules
 
 ]) [10
 
-
-Missing character: There is no “ (U+201C) in font ec-lmr12!
-Missing character: There is no ” (U+201D) in font ec-lmr12!
-Missing character: There is no “ (U+201C) in font ec-lmr12!
-Missing character: There is no ” (U+201D) in font ec-lmr12!
 ]
 \openout2 = ch1.aux
  (./ch1.tex
@@ -2388,39 +2383,37 @@ Missing character: There is no ’ (U+2019) in font ec-lmr12!
 ]
 
 Package amsfonts Warning: Obsolete command \bold; \mathbf should be used instea
-d on input line 29.
+d on input line 15.
 
 [12
 Missing character: There is no – (U+2013) in font ec-lmr12!
 ]
-<figures/Intro.png, id=292, 974.13937pt x 370.38374pt>
+<figures/Intro.png, id=279, 974.13937pt x 370.38374pt>
 File: figures/Intro.png Graphic file (type png)
 <use figures/Intro.png>
-Package luatex.def Info: figures/Intro.png  used on input line 56.
+Package luatex.def Info: figures/Intro.png  used on input line 32.
 (luatex.def)             Requested size: 469.75502pt x 178.6073pt.
- [13] [14<./figures/Intro.png>]
-<figures/Noise.png, id=313, 674.2791pt x 286.9119pt>
+ [13<./figures/Intro.png>]
+<figures/Noise.png, id=289, 674.2791pt x 286.9119pt>
 File: figures/Noise.png Graphic file (type png)
 <use figures/Noise.png>
-Package luatex.def Info: figures/Noise.png  used on input line 63.
+Package luatex.def Info: figures/Noise.png  used on input line 39.
 (luatex.def)             Requested size: 455.24408pt x 193.71407pt.
- [15
+ [14
 
-<./figures/Noise.png>] [16]
-<figures/FRC.png, id=327, 483.9681pt x 296.7888pt>
+<./figures/Noise.png>]
+<figures/FRC.png, id=297, 483.9681pt x 296.7888pt>
 File: figures/FRC.png Graphic file (type png)
 <use figures/FRC.png>
-Package luatex.def Info: figures/FRC.png  used on input line 84.
-(luatex.def)             Requested size: 455.24408pt x 279.18982pt.
- [17
-
-<./figures/FRC.png>]) [18]
+Package luatex.def Info: figures/FRC.png  used on input line 60.
+(luatex.def)             Requested size: 398.33858pt x 244.28769pt.
+) [15] [16<./figures/FRC.png>]
 \openout2 = ch2.aux
  (./ch2.tex
 File: ch2.tex Chapter2
 
 Chapter 2.
-) [19
+) [17
 
 
 
@@ -2431,15 +2424,26 @@ Chapter 2.
 File: ch3.tex 
 
 Chapter 3.
+) [18
+
+
+
+
+] [19]
+\openout2 = ch4.aux
+ (./ch4.tex
+File: ch4.tex Chapter4
+
+Chapter 4.
 ) [20
 
 
 
 
-] [21]
+]
 changed \interlinepenalty to 10000
 
-LaTeX Warning: Empty bibliography on input line 606.
+LaTeX Warning: Empty bibliography on input line 607.
 
 
 \openout2 = appendix.aux
@@ -2451,12 +2455,12 @@ Appendices A.
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 6.
 
-[22
+[21
 
 
 
 
-] [23] [24] [25] [26]) [27]
+] [22] [23] [24] [25]) [26]
 \openout2 = ap-citations-references.aux
  (./ap-citations-references.tex
 File: ap-citations-references.tex 2022-10-05 citations and references appendix
@@ -2478,23 +2482,23 @@ File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 \openout6 = z.out
  (./z.out
 
-LaTeX Warning: Citation 'lamport1994' on page 28 undefined on input line 2.
+LaTeX Warning: Citation 'lamport1994' on page 27 undefined on input line 2.
 
 
-LaTeX Warning: Citation 'goossens1994' on page 28 undefined on input line 4.
+LaTeX Warning: Citation 'goossens1994' on page 27 undefined on input line 4.
 
 
-LaTeX Warning: Citation 'kopka1999' on page 28 undefined on input line 6.
+LaTeX Warning: Citation 'kopka1999' on page 27 undefined on input line 6.
 
 
-LaTeX Warning: Citation 'kopka1999' on page 28 undefined on input line 7.
+LaTeX Warning: Citation 'kopka1999' on page 27 undefined on input line 7.
 
 
-LaTeX Warning: Citation 'kopka1995' on page 28 undefined on input line 9.
+LaTeX Warning: Citation 'kopka1995' on page 27 undefined on input line 9.
 
 )
 \openout6 = z.out
- (./z.out) [28
+ (./z.out) [27
 
 
 
@@ -2503,65 +2507,72 @@ LaTeX Warning: Citation 'kopka1995' on page 28 undefined on input line 9.
 \openout6 = z.out
  (./z.out
 
-LaTeX Warning: Citation 'example2020' on page 29 undefined on input line 6.
+LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 6.
 
 
-LaTeX Warning: Citation 'example2020' on page 29 undefined on input line 7.
+LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 7.
 
 
-LaTeX Warning: Citation 'example2020' on page 29 undefined on input line 8.
+LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 8.
 
 
-LaTeX Warning: Citation 'example2020' on page 29 undefined on input line 9.
+LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 9.
 
 
-LaTeX Warning: Citation 'example2020' on page 29 undefined on input line 10.
+LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 10.
 
 
-LaTeX Warning: Citation 'example2020' on page 29 undefined on input line 11.
+LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 11.
 
 
-LaTeX Warning: Citation 'example2020' on page 29 undefined on input line 12.
+LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 12.
 
 
-LaTeX Warning: Citation 'example2020' on page 29 undefined on input line 13.
+LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 13.
 
 
-LaTeX Warning: Citation 'example2020' on page 29 undefined on input line 14.
+LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 14.
 
 
-LaTeX Warning: Citation 'example2020' on page 29 undefined on input line 15.
+LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 15.
 
 
-LaTeX Warning: Citation 'example2020' on page 29 undefined on input line 16.
+LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 16.
 
-) [29]
+) [28]
 \openout6 = z.out
  (./z.out)
 \openout6 = z.out
  (./z.out
 
-LaTeX Warning: Citation 'hambleton' on page 30 undefined on input line 4.
+LaTeX Warning: Citation 'hambleton' on page 29 undefined on input line 4.
 
 
-LaTeX Warning: Citation 'gerstenmaier' on page 30 undefined on input line 4.
+LaTeX Warning: Citation 'gerstenmaier' on page 29 undefined on input line 4.
 
 
-LaTeX Warning: Citation 'gerstenmaier2' on page 30 undefined on input line 4.
+LaTeX Warning: Citation 'gerstenmaier2' on page 29 undefined on input line 4.
 
-) [30]) [31]
+) [29]) [30]
 \openout2 = ap-vita.aux
  (./ap-vita.tex
 File: ap-vita.tex 2022-10-05 vita appendix
-) [32
+) [31
 
 
 
 
 ]
 No file dissertation.ind.
-[33] (./dissertation.aux (./ch-front.aux) (./ch1.aux) (./ch2.aux) (./ch3.aux)
-(./appendix.aux) (./ap-citations-references.aux) (./ap-vita.aux))
+
+Package ocgx2 Warning: Rerun to get OCG references right!
+
+
+LaTeX Warning: Hook 'shipout/lastpage' executed on wrong page (30 not 31).
+               Rerun to correct this.
+
+(./dissertation.aux (./ch-front.aux) (./ch1.aux) (./ch2.aux) (./ch3.aux)
+(./ch4.aux) (./appendix.aux) (./ap-citations-references.aux) (./ap-vita.aux))
 
  *File List*
 PurdueThesis.cls    2022-10-05 Purdue University thesis document class
@@ -2799,6 +2810,7 @@ figures/Noise.png
 figures/FRC.png
      ch2.tex    Chapter2
      ch3.tex    
+     ch4.tex    Chapter4
 appendix.tex    Appendix
 ap-citations-references.tex    2022-10-05 citations and references appendix
        z.out
@@ -2817,16 +2829,13 @@ ap-citations-references.tex    2022-10-05 citations and references appendix
 LaTeX Warning: There were undefined references.
 
 
-LaTeX Warning: Temporary extra page added at the end. Rerun to get it removed.
-
-
 Package rerunfilecheck Warning: File `dissertation.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `dissertation.out':
-(rerunfilecheck)             Before: 9D6D3006139C7FCF048DB10054A8C5D4;4745
-(rerunfilecheck)             After:  71D5837F090CA247D5379CC1235E99AB;4745.
+(rerunfilecheck)             Before: 69479E899DDA069BA6663DFD8223E9C2;4288
+(rerunfilecheck)             After:  580B674E12B970B3C0F0BF2DFDB3691F;4596.
 
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                dissertation
@@ -2838,56 +2847,51 @@ Package logreq Info: Writing requests to 'dissertation.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 75849 strings out of 478285
+ 75868 strings out of 478285
  125218,3417909 words of node,token memory allocated
- 1415 words of node memory still in use:
-   24 hlist, 2 vlist, 10 rule, 2 glue, 4 kern, 1 glyph, 94 attribute, 92 glue_sp
-ec, 94 attribute_list, 6 write, 16 pdf_literal, 2 pdf_dest, 16 pdf_colorstack no
+ 1371 words of node memory still in use:
+   24 hlist, 2 vlist, 10 rule, 2 glue, 4 kern, 1 glyph, 83 attribute, 92 glue_sp
+ec, 83 attribute_list, 6 write, 16 pdf_literal, 2 pdf_dest, 16 pdf_colorstack no
 des
-   avail lists: 1:8,2:795,3:725,4:116,5:455,6:69,7:6973,8:120,9:1826,10:23,11:67
+   avail lists: 1:8,2:795,3:661,4:108,5:455,6:63,7:6973,8:120,9:1826,10:23,11:67
 6
- 93302 multiletter control sequences out of 65536+600000
- 61 fonts using 4025455 bytes
+ 93315 multiletter control sequences out of 65536+600000
+ 61 fonts using 4021615 bytes
  109i,16n,103p,1460b,2448s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-warning  (pdf backend): unreferenced destination with name 'figure.caption.22'
+warning  (pdf backend): unreferenced destination with name 'chapter*.29'
 
-warning  (pdf backend): unreferenced destination with name 'chapter*.37'
+warning  (pdf backend): unreferenced destination with name 'section.27'
 
-warning  (pdf backend): unreferenced destination with name 'section.36'
+warning  (pdf backend): unreferenced destination with name 'chapter.26'
 
-warning  (pdf backend): unreferenced destination with name 'chapter.34'
-
-warning  (pdf backend): unreferenced destination with name 'subsection.32'
-
-warning  (pdf backend): unreferenced destination with name 'chapter.27'
-
-warning  (pdf backend): unreferenced destination with name 'subsection.23'
+warning  (pdf backend): unreferenced destination with name 'subsection.20'
 {/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/tex
-live/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2023/t
-exmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2023/texmf-dist/fonts
+live/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2023/texmf
+-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2023/texmf-dist/fonts
 /enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/
 lm/lm-mathex.enc}</usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmbx1
 2.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmbx6.pfb></usr/
-local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texli
-ve/2023/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2023/tex
-mf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2023/texmf-dist/font
-s/type1/public/lm/lmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/publ
-ic/lm/lmr12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr6.p
-fb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/loca
-l/texlive/2023/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/local/texlive/2
-023/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2023/texmf-d
-ist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2023/texmf-dist/fonts/ty
-pe1/public/lm/lmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/l
-m/lmtt10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmtt12.pf
-b></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmtt8.pfb></usr/loca
-l/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/l
-ocal/texlive/2023/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive
-/2023/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on dissertation.pdf (33 pages, 1833176 bytes).
+local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmbx8.pfb></usr/local/texliv
+e/2023/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2023/texm
+f-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2023/texmf-dist/font
+s/type1/public/lm/lmmi6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/publ
+ic/lm/lmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr12.
+pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/loc
+al/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/20
+23/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/local/texlive/2023/texmf-di
+st/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/ty
+pe1/public/lm/lmsy6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/l
+m/lmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmtt10.pfb
+></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/loca
+l/texlive/2023/texmf-dist/fonts/type1/public/lm/lmtt8.pfb></usr/local/texlive/20
+23/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive
+/2023/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive/2023/texmf-
+dist/fonts/type1/urw/zapfding/uzdr.pfb>
+Output written on dissertation.pdf (31 pages, 1831768 bytes).
 
-PDF statistics: 524 PDF objects out of 1000 (max. 8388607)
- 416 compressed objects within 5 object streams
- 81 named destinations out of 1000 (max. 131072)
- 412 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 497 PDF objects out of 1000 (max. 8388607)
+ 394 compressed objects within 4 object streams
+ 71 named destinations out of 1000 (max. 131072)
+ 396 words of extra memory for PDF output out of 10000 (max. 100000000)
 

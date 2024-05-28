@@ -11,46 +11,22 @@ Many SR methods are based on wide-field (WF), total internal reflection fluoresc
 
 In SMLM applications, we seek the position and intensity of isolated fluorophores as well as to estimate the accuracy and precision of these parameters. Accuracy is a measure of the systematic error or bias, and precision is a measure of the statistical error of an estimator. To generate super-resolution images using SMLM, single emitters are located, and using the mosaic of their found positions, we produce a kernel density estimate (KDE). Such KDEs are often Gaussian, and are used to generate the final super-resolution images. The width of one such placed Gaussian function, $\sigma$ is given by the precision of the fluorophore position localization. Therefore, in SMLM, it is necessary to both find the parameters and estimate their precision. Reported values are in the range of 20–70 nanometers. In the following section, we derive a fundamental statistical description of fluorophore detection in SMLM, which is compatible with a coherent state of the quantized electromagnetic field. This description is necessarily simplified - background rates of light detection may vary across the field of view, and the fluorophore emission rate of chemically identical fluorophores can vary owing to effects such as uneven illumination profile, dipole orientation or different optical path lengths.
 
-\subsection{Elementary mathematical theory of SMLM}
 
-
-\begin{equation}
-\omega = i_{0}\int O(u)du\int O(v)dv
-\end{equation}
-
-where $i_{0} = \eta N_{0}\Delta$. The optical impulse response $O(u,v)$ is often approximated as a 2D isotropic Gaussian with standard deviation $\sigma$ (Zhang 2007). The parameter $\eta$ is the photon detection probability of the sensor and $\Delta$ is the exposure time. $N_{0}$ represents the number of photons emitted.
-
-Using the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}\int_{0}^{t}e^{-t^{2}}dt$,
+The central objective of SMLM is to infer a set of molecular coordinates $\theta=(\theta_{u},\theta_{v})$ from measured low resolution images $\bold{x}$. The likelihood on a particular pixel $p(\bold{x}_k\lvert\theta)$ is taken to be a convolution of Poisson and Gaussian distributions, due to shot noise $p(s_{k}) = \mathrm{Poisson}(\omega_{k})$ and sensor readout noise $p(\zeta_{k}) = \mathcal{N}(o_{k},w_{k}^{2})$ 
 
 \begin{equation}
-\int O(u)du = \frac{1}{2}\left(\mathrm{erf}\left(\frac{u_{k}+\frac{1}{2}-u_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{u_{k}-\frac{1}{2}-u_{0}}{\sqrt{2}\sigma}\right)\right)
+p(\bold{x}_{k}\lvert\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_{k}^{q}\frac{1}{\sqrt{2\pi}w_{k}}e^{-\frac{(\bold{x}_{k}-g_{k}q-o_{k})^2}{2 w_{k}^{2}}} \approx \mathrm{Poisson}(\omega_{k}')
 \end{equation}
 
-For the sake of generality, the number of photoelectrons at a pixel $k$, $\bold{s}_k$, is  multiplied by a gain factor $g_k \;[\mathrm{ADU}/e^{-}]$, which is often unity. The readout noise per pixel $\zeta_{k}$ can be Gaussian with some pixel-specific offset $o_{k}$ and variance $\sigma_{k}^{2}$. Ultimately, we have a Poisson component of the signal, which scales with $N_{0}$ and may have Gaussian component, which does not. Therefore, in a single exposure, we measure: 
+
+where $A$ is some normalization constant. For the sake of generality, we include a per-pixel gain factor $g_{k}$, which is often unity. Sampling from $p(\bold{x}_{k}\lvert\theta)$ is trivial; however, for computation of a lower bound on uncertainty in $\theta$, the summation in (1) can be difficult to work with. Therefore, we choose to use a Poisson approximation for simplification, valid under a range of experimental conditions (Huang2013). After subtraction of a known offset $o_{k}$ of the pixel array, which can be easily measured, we have $\omega_{k}' = \omega_{k} + w_{k}^{2}$. The expectation of the Poisson process $\omega_{k}$ at each pixel of the image must then be computed from the optical impulse response $O(u,v)$, which is taken to be an isotropic Gaussian in two-dimensions. Consider an idealized scenario where an isolated fluorescent molecule exists in the image plane. For a particular pixel $k$ of width $\delta$ centered at $\xi_{k}=(u_k,v_k)$, we define, along the first image dimension
 
 \begin{equation}
-\bold{x}_t = \bold{s}_t + \bold{\zeta}
+\Delta E_{u} \vcentcolon = \int_{u_{k}-\delta /2}^{u_{k}+\delta /2} O(u;\theta_{u})du = \frac{1}{2}\left(\mathrm{erf}\left(\frac{u_{k}+\frac{\delta}{2}-\theta_{u}}{\sqrt{2}\sigma_{\bold{x}}}\right) -\mathrm{erf}\left(\frac{u_{k}-\frac{\delta}{2}-\theta_{u}}{\sqrt{2}\sigma_{\bold{x}}}\right)\right)
 \end{equation}
 
-What we are after is the likelihood $p(\bold{x}_{t}\lvert\theta)$ where $\theta$ are the molecular coordinates. Fundamental probability theory states that the distribution of $\bold{x}_{k}$ is the convolution of the distributions of $\bold{s}_{k}$ and $\zeta_{k}$,
+The expected value at each pixel is then $\omega_{k}\propto \Delta E_{u}(u_{k},\theta_{u},\sigma_{\bold{x}})\Delta E_{v}(v_{k},\theta_{v},\sigma_{\bold{x}}) $. Using this, sampling from the convolution distribution in (1) is can be carried out by $\bold{x}_{k} = s_{k} + \zeta_{k}$ for $s_{k}\sim \mathrm{Poisson}(\omega_{k}), \eta_{k}\sim \mathcal{N}(o_{k},w_{k}^{2})$. 
 
-\begin{equation}
-p(\bold{x}_{t}\lvert\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_{k}^{q}\frac{1}{\sqrt{2\pi}\sigma_{k}}e^{-\frac{(\bold{x}_{k}-g_{k}q-o_{k})}{2\sigma_{k}^{2}}}
-\end{equation}
-
-where $P(\zeta_{k}) = \mathcal{N}(o_{k},\sigma_{k}^{2})$ and $P(S_{k}) = \mathrm{Poisson}(g_{k}\omega_{k})$,  $A$ is some normalization constant. In practice, (4) is difficult to work with, so we look for an approximation. We will use a Poisson-Normal approximation for simplification. Consider,
-
-\begin{equation}
-\zeta_{k} - o_{k} + \sigma_{k}^{2} \sim \mathcal{N}(\sigma_{k}^{2},\sigma_{k}^{2}) \approx \mathrm{Poisson}(\sigma_{k}^{2})
-\end{equation}
-
-Since $\bold{x}_{k} = \bold{s}_{k} + \zeta_{k}$, we transform $\bold{x}_{k}' = \bold{x}_{k} - o_{k} + \sigma_{k}^{2}$, which is distributed according to 
-
-\begin{equation}
-\bold{x}_{k}' \sim \mathrm{Poisson}(\omega_{k}')
-\end{equation}
-
-where $\omega_{k}' = g_{k}\omega_{k} + \sigma_{k}^{2}$. This result can be seen from the fact the the convolution of two Poisson distributions is also Poisson. The quality of this approximation will degrade with decreasing signal level, since the Poisson distribution does not retain its Gaussian shape at low expected counts. Nevertheless, the quality of the approximation can be predicted by the Komogonov distance between the convolution distribution (4).
 
 \begin{figure}
 \includegraphics[width=\textwidth]{figures/Intro.png}
@@ -78,34 +54,12 @@ The distribution of a particular biomolecule in the cell can be described as a p
 
 Localization uncertainty, typically the RMSE of a maximum likelihood or similar statistical estimator, is bounded from below by the inverse of the Fisher information matrix, known as the Cramer-Rao lower bound (Chao 2016). Localization uncertainties in sparse conditions are often tens of nanometers, although recent work on integration of Bayesian priors with modulation enhanced SMLM (meSMLM) or structured illumination with MINFLUX, has reduced spatial resolution below to a few nanometers (Kalisvaart 2022, Gwosh 2020). Nevertheless, managing the increase in localization uncertainty at high labeling density remains a major bottleneck to SMLM. Static uncertainty due to molecular crowding can be partially amelioriated by using pairwise or higher-order temporal correlations within a pixel neighborhood, known as stochastic optical fluctuation imaging or SOFI (Dertinger 2009). Other approaches such as stimulated emission and depletion (STED) imaging bring control over the photophysical state of a chosen subset of the sample, yet the need for laser scanning prevents widespread application in live-cell studies. The spatial resolution and relative simplicity of SMLM techniques remains unmatched, inciting an effort to increase the resolution of SMLM techniques and explore avenues towards time resolved SMLM.
 
-\clearpage
+
 \begin{figure}
 \begin{center}
-\includegraphics[width=16cm]{figures/FRC.png}
+\includegraphics[width=14cm]{figures/FRC.png}
 \end{center}
 \caption{\textbf{Noise model for CMOS cameras used for MLE}. (left)) CMOS offset for zero incident photons (middle) CMOS variance for zero incident photons (upper right) Cumulative mass function for the convolution distribution and its Poisson approximation for rate parameter $\mu_{k} = 500$ counts (lower right) Komogonov distance measured as a function of rate parameter $\mu_{k}$}
 \end{figure}
-
-
-
-\subsection{The Cramer-Rao lower bound}
-
-The Poisson approximation is also convenient for computing the Fisher information matrix for $\theta_{\mathrm{MLE}}$ and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta_{\mathrm{MLE}}$, from below (Chao 2016). The Fisher information is
-
-\begin{equation}
-I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) 
-\end{equation}
-
-Let $\mu_{k}' = g_{k}\mu_{k} + \sigma_{k}^{2}$. For an arbitrary parameter,
-
-\begin{align*}
-\frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  x_{k}\log x_{k} + \mu_{k}' - x_{k}\log\left(\mu_{k}'\right)\\
-&= \sum_{k} \frac{\partial \mu_{k}'}{\partial\theta_{i}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)
-\end{align*}
-
-\begin{equation*}
-I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}} \left(\frac{\mu_{k}'-x_{k}}{\mu_{k}'}\right)^{2}\right) = \sum_{k}\frac{1}{\mu_{k}'}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}}
-\end{equation*}
-
 
 
