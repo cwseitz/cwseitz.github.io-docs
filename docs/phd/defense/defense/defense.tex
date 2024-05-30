@@ -81,67 +81,47 @@
 %	<content>
 %\end{frame}
 
+\section{Introduction to fluorescence nanoscopy}
 
-\section{Single molecule localization microscopy}
+\begin{frame}{Fluorescence microscopy and the diffraction limit}
 
-\begin{frame}{Chromatin organization and super resolution imaging}
-\begin{textblock*}{12cm}(1.5cm,1.5cm)
-\includegraphics[width=12cm]{media/Intro2}
-\end{textblock*}
-\begin{textblock*}{12cm}(1.0cm,7.5cm)
-\begin{itemize}
-\item Chromatin has a hierarchical structure, fundamental unit is the nucleosome
-\item We study chromatin organization with SMLM
-\end{itemize}
+\begin{textblock*}{9cm}(2.5cm,1.25cm)
+Minimal resolvable distance $d \sim \lambda$
+\includegraphics[width=10cm]{media/Limit}
+\includegraphics[width=10cm]{media/Scale}
 \end{textblock*}
 
 \end{frame}
 
-\begin{frame}{Direct stochastic optical reconstruction microscopy (dSTORM)}
+\begin{frame}{Stochastic optical reconstruction microscopy (STORM)}
+\begin{textblock*}{9cm}(0.5cm,1.0cm)
+\includegraphics[width=9cm]{media/STORM.png}
+Lakadamyali, M. et al. Nature Methods \textbf{17}, (2020).
+\end{textblock*}
+\begin{textblock*}{3.5cm}(10.0cm,1.1cm)
+\includegraphics[width=3.5cm]{media/ClutchDomains.png}
+\end{textblock*}
+\begin{textblock*}{4.5cm}(10.0cm,5.0cm)
+\includegraphics[width=4.5cm]{media/ClutchCartoon.png}
+\end{textblock*}
+\end{frame}
+
+\begin{frame}{Stochastic optical reconstruction microscopy (STORM)}
 \begin{textblock*}{13cm}(1.0cm,1.5cm)
 \includegraphics[width=\textwidth]{media/Intro.png}
 \end{textblock*}
 \begin{textblock*}{\textwidth}(1.0cm,7.5cm)
 \begin{itemize}
-\item SMLM techniques are diffraction-unlimited
+\item Single molecule localization microscopy (SMLM) techniques are diffraction-unlimited
 \item Photoswitching enables resolution of emitters below the diffraction limit
 \end{itemize}
 \end{textblock*}
 \end{frame}
 
-\begin{frame}{Single molecule localization microscopy and its applications}
+
+\begin{frame}{Applications of single molecule localization microscopy}
 \includegraphics[width=\textwidth]{media/Apps.png}
-\textit{Wu et al. Quantitative Data Analysis in Single-Molecule Localization Microscopy.}
-\end{frame}
-
-\begin{frame}{A first pass at SMLM for super-resolution}
-
-Modeling the point spread function permits sub-pixel localization 
-
-\begin{textblock*}{8cm}(6.5cm,2.0cm)
-\includegraphics[width=\textwidth]{media/Model.png}
-\end{textblock*}
-
-\begin{textblock*}{2cm}(1cm,2.0cm)
-\begin{align*}
-\mu_{k} &= i_{0}\int_{\mathrm{k}}h_{\theta}(x_{0},y_{0})dxdy\\
-i_{0} &= g_{k}\textcolor{red}{\eta} \textcolor{cyan}{N_{0}}\textcolor{blue}{\Delta} 
-\\
-g_{k} &- \mathrm{pixel\; gain}\\
-\textcolor{red}{\eta} &- \mathrm{quantum\; efficiency}\\
-\textcolor{cyan}{N_{0}} &- \mathrm{photon\; emission\; rate}\\
-\textcolor{blue}{\Delta} &- \mathrm{exposure\; time}
-\end{align*}
-\end{textblock*}
-
-\vspace{2in}
-
-Assume $N_{0}$ is constant over $\textcolor{blue}{\Delta}$ (homogeneous Poisson)
-
-\begin{equation*}
-\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(H_{k}|\theta)= \underset{\theta}{\mathrm{argmin}}-\sum_{k}\log P(H_{k}|\theta)
-\end{equation*}
-
+Wu et al. Trends in Cell Biology. \textbf{30} (2020)
 \end{frame}
 
 
@@ -175,53 +155,114 @@ Assume $N_{0}$ is constant over $\textcolor{blue}{\Delta}$ (homogeneous Poisson)
 \end{comment}
 
 
-\begin{frame}{The definition of resolution in SMLM}
-\begin{textblock*}{13cm}(1cm,1.25cm)
-\begin{itemize}
-\item We can view dSTORM as sampling from a density
-\end{itemize}
+\section{Enhanced nanoscopy with deep generative models}
+
+\begin{frame}{Localization of isolated fluorescent emitters}
+
+Modeling the point spread function permits sub-pixel localization 
+
+\begin{textblock*}{8cm}(6.5cm,2.0cm)
+\includegraphics[width=\textwidth]{media/Model.png}
 \end{textblock*}
-\begin{textblock*}{9cm}(3cm,2.0cm)
-\includegraphics[width=9cm]{media/FRC.png}
+
+\begin{textblock*}{2cm}(1cm,2.0cm)
+\begin{align*}
+\mu_{k} &= i_{0}\int\int O(u,v)dudv\\
+i_{0} &= g_{k}\textcolor{red}{\eta} \textcolor{cyan}{N_{0}}\textcolor{blue}{\Delta} 
+\\
+g_{k} &- \mathrm{pixel\; gain}\\
+\textcolor{red}{\eta} &- \mathrm{quantum\; efficiency}\\
+\textcolor{cyan}{N_{0}} &- \mathrm{photon\; emission\; rate}\\
+\textcolor{blue}{\Delta} &- \mathrm{exposure\; time}
+\end{align*}
 \end{textblock*}
-\begin{textblock*}{8cm}(3cm,7.5cm)
+
+\vspace{2in}
+
+Assume $N_{0}$ is constant over $\textcolor{blue}{\Delta}$ (homogeneous Poisson)
+
 \begin{equation*}
-\mathrm{FRC}(q) = \frac{\sum_{\vec{q}\in\mathrm{circle}}\tilde{f_{1}}(\vec{q})\tilde{f_{2}}(\vec{q})^{*}}{\sqrt{\sum_{\vec{q}\in\mathrm{circle}}|f_{1}(\vec{q})|^{2}}\sqrt{\sum_{\vec{q}\in\mathrm{circle}}|f_{2}}(\vec{q})|^{2}}
+\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(\bold{x}_{k}|\theta)= \underset{\theta}{\mathrm{argmin}}-\sum_{k}\log P(\bold{x}_{k}|\theta)
 \end{equation*}
-\end{textblock*}
+
 \end{frame}
 
-\begin{frame}{The definition of resolution in SMLM}
-\includegraphics[width=\textwidth]{media/Spatial.png}
-\vspace{0.025in}
-\textit{Nieuwenhuizen et al. Measuring image resolution in optical nanoscopy.}
-\vspace{0.05in}
+\begin{frame}{How to pack more localizations in a single frame?}
+Cast localization as \emph{image restoration}
+\vspace{1cm}
+\includegraphics[width=\textwidth]{media/Generation.png}\\
+Seitz et al. Under Review. (2024) \\
+\vspace{1cm}
 \begin{itemize}
-\item Uncertainty–limited resolution (blue), Density–limited resolution (yellow)
-\item Labeling density $\rho$ scales with $\sigma$ to maintain constant resolution
+\item Would like to estimate a high-resolution $\bold{y}$ from low-resolution $\bold{x}$, but it is many to one
+\item Must then model a \emph{distribution} over $\bold{y}$ i.e., $p(\bold{y}|\bold{x})$
+\item How to model a distribution over images?
 \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Bayesian image restoration with diffusion models}
+\includegraphics[width=\textwidth]{media/Scores.png}
+\end{frame}
+
+\begin{frame}
+
+\begin{align}
+-\log p(\bold{y}_{0}) &\leq -\mathbb{E}_{q(\bold{y}_{1:T}|\bold{y}_{0})} \log \left(\frac{p_{\psi}(\bold{y}_{1:T},\bold{y}_{0})}{q(\bold{y}_{1:T}|\bold{y}_{0})}\right) \\
+&=  D_{KL}(q(\bold{y}_{T}|\bold{y}_{0}) || p(\bold{y}_{T})) + \mathbb{E}_{q(\bold{y}_{1}|\bold{y}_{0})} \log p(\bold{y}_{0}|\bold{y}_{1}) + \mathcal{L}_{\psi}
+\end{align}
 
 \end{frame}
+
+
 
 \section{Super-resolution of nucleosome nanodomains \textit{in-vivo}}
 
-\section{Enhanced SMLM with deep generative models}
+\begin{frame}{Hierarchical structure of chromatin}
 
-\section{Enhanced SMLM with photon statistics}
-
-\begin{frame}{Single photon avalanche diode (SPAD) cameras}
-
-\includegraphics[width=12cm]{media/SPAD-Intro.png}\\
-\textit{(A) Courtesy of Pi imaging technologies}
-\vspace{0.05in}
-\begin{itemize}
-\item Imaging in low light conditions (near zero readout noise)
-\item Reduced quantum efficiency ($\eta\approx 0.5$), but frame rates up to 1MHz
-\end{itemize}
-
+\begin{textblock*}{10cm}(3.0cm,1.25cm)
+\includegraphics[width=10cm]{media/Chromatin}
+\\
+\vspace{0.4cm}
+Fyodorov, D. et al. Nat Rev Mol Cell Biol \textbf{19}, (2018).
+\end{textblock*}
 
 \end{frame}
 
+\begin{frame}{Bromodomain protein 4 (BRD4) binds acetylated chromatin}
+
+\begin{textblock*}{5cm}(2.0cm,1.75cm)
+\includegraphics[width=5cm]{media/TwoColor}
+\end{textblock*}
+
+\begin{textblock*}{5cm}(7.75cm,1.25cm)
+\includegraphics[width=5cm]{media/BRD4-Structure}
+\end{textblock*}
+
+\begin{textblock*}{10cm}(2.0cm,7.0cm)
+\includegraphics[width=10cm]{media/Mutations}
+\end{textblock*}
+
+\end{frame}
+
+
+\begin{frame}
+\includegraphics[width=12cm]{media/BRD4-STORM}
+\\
+Seitz et al. Under Review. (2020)
+\end{frame}
+
+\begin{frame}
+\includegraphics[width=12cm]{media/MD}
+\\
+Seitz et al. Under Review. (2020)
+\end{frame}
+
+\begin{frame}
+\includegraphics[width=12cm]{media/MSD}
+\\
+Seitz et al. Under Review. (2024)
+\end{frame}
 
 
 \begin{frame}{Recent Publications}
