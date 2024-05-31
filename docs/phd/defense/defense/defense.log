@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.20)  30 MAY 2024 19:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.20)  30 MAY 2024 22:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1546,32 +1546,80 @@ Package caption Info: Hyperref support is turned off
 
 Excluding comment 'comment')
 (/usr/local/texlive/2023/texmf-dist/tex/latex/braket/braket.sty)
+(/usr/local/texlive/2023/texmf-dist/tex/latex/animate/animate.sty
+Package: animate 2022/09/15 PDF & SVG animations from files and inline graphics
+
+
+(/usr/local/texlive/2023/texmf-dist/tex/latex/oberdiek/ifdraft.sty
+Package: ifdraft 2016/05/16 v1.4 Detect class options draft and final (HO)
+)
+(/usr/local/texlive/2023/texmf-dist/tex/latex/media9/pdfbase.sty
+Package: pdfbase 2022/08/04 v0.55 driver independent access to low-level PDF fe
+atures
+
 (/usr/local/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count388
 \l__pdf_internal_box=\box85
 )
+\g_pbs_page_int=\count389
+\g_pbs_oc_int=\count390
+)
+(/usr/local/texlive/2023/texmf-dist/tex/latex/zref/zref-abspage.sty
+Package: zref-abspage 2022-04-07 v2.34 Module abspage for zref (HO)
+
+(/usr/local/texlive/2023/texmf-dist/tex/latex/zref/zref-base.sty
+Package: zref-base 2022-04-07 v2.34 Module base for zref (HO)
+Package zref Info: New property list: main on input line 767.
+Package zref Info: New property: default on input line 768.
+Package zref Info: New property: page on input line 769.
+)
+\c@abspage=\count391
+Package zref Info: New property: abspage on input line 65.
+)
+(/usr/local/texlive/2023/texmf-dist/tex/latex/ocgx2/ocgbase.sty
+Package: ocgbase 2022/08/04 v0.22 support package for ocgx2.sty
+\g_ocgbase_nd_int=\count392
+)
+\@anim@box=\box86
+\@anim@measbox=\box87
+\@anim@tmpdima=\dimen343
+\@anim@tmpdimb=\dimen344
+\@anim@num=\count393
+\@anim@curframe=\count394
+\@anim@curframe@zb=\count395
+\@anim@resizeflags=\count396
+\@anim@skipfram=\count397
+\@anim@mulframecnt=\count398
+\@anim@@tmlnfile=\read5
+\@anim@tmpcnt=\count399
+\c@@anim@ltxcnt=\count400
+\@anim@curlayer=\count401
+\@anim@lineno=\count402
+\@anim@curfield=\count403
+\@anim@@resizeflags=\count404
+)
 (./defense.aux)
 \openout1 = `defense.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1609,16 +1657,16 @@ LaTeX Font Info:    ... okay on input line 63.
 
 (/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count389
-\scratchdimen=\dimen343
-\scratchbox=\box86
-\nofMPsegments=\count390
-\nofMParguments=\count391
+\scratchcounter=\count405
+\scratchdimen=\dimen345
+\scratchbox=\box88
+\nofMPsegments=\count406
+\nofMParguments=\count407
 \everyMPshowfont=\toks73
-\MPscratchCnt=\count392
-\MPscratchDim=\dimen344
-\MPnumerator=\count393
-\makeMPintoPDFobject=\count394
+\MPscratchCnt=\count408
+\MPscratchDim=\dimen346
+\MPnumerator=\count409
+\makeMPintoPDFobject=\count410
 \everyMPtoPDFconversion=\toks74
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -1629,66 +1677,66 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 63.
+Package hyperref Info: Link coloring OFF on input line 64.
 
 (./defense.out) (./defense.out)
 \@outlinefile=\write7
 \openout7 = `defense.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 63.
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 64.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 63.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 64.
 \symnumbers=\mathgroup11
-LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 63.
+LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 64.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `normal'
 (Font)                  OT1/mathkerncmss/m/sl --> OT1/cmss/m/it on input line 6
-3.
+4.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
 (Font)                  OT1/mathkerncmss/bx/sl --> OT1/cmss/m/it on input line 
-63.
+64.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 63.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 63.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 63.
+(Font)                  OT1/cmss/m/n --> OT1/cmr/m/n on input line 64.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 64.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 64.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 63.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 64.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 63.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 63.
+(Font)                  OT1/cmss/bx/n --> OT1/cmss/m/n on input line 64.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 64.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 63.
+(Font)                  OT1/cmr/m/it --> OT1/cmss/m/it on input line 64.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 63.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 63.
+(Font)                  OT1/cmr/bx/it --> OT1/cmss/m/it on input line 64.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 64.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 63.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 64.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 63.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 64.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 63.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 64.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 63.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 64.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/cmr/b/n on input line 63.
+(Font)                  OT1/cmss/b/n --> OT1/cmr/b/n on input line 64.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/cmss/b/n on input line 63.
+(Font)                  OT1/cmss/b/n --> OT1/cmss/b/n on input line 64.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 63.
+(Font)                  OT1/cmss/m/n --> OT1/cmss/b/n on input line 64.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 63.
+(Font)                  OT1/cmss/m/it --> OT1/cmss/b/it on input line 64.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/cmtt/b/n on input line 63.
-LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 63.
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/b/n on input line 64.
+LaTeX Font Info:    Redeclaring symbol font `pureletters' on input line 64.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `normal'
 (Font)                  OT1/cmss/m/it --> OT1/mathkerncmss/m/sl on input line 6
-3.
+4.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
 (Font)                  OT1/cmss/b/it --> OT1/mathkerncmss/m/sl on input line 6
-3.
+4.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
 (Font)                  OT1/mathkerncmss/m/sl --> OT1/mathkerncmss/bx/sl on inp
-ut line 63.
+ut line 64.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/translator/translator-basic-dicti
 onary-English.dict
@@ -1724,194 +1772,1791 @@ nse.toc) [2
 ] [3
 
 ]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 94.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 95.
 
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 94.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 95.
 
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for OT1+mathkerncmss on inp
-ut line 94.
+ut line 95.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
 File: ot1mathkerncmss.fd 2020/01/31 Fontinst v1.933 font definitions for OT1/ma
 thkerncmss.
 )
-<media/Limit.png, id=57, 1085.05376pt x 571.13374pt>
+<media/Limit.png, id=60, 1085.05376pt x 571.13374pt>
 File: media/Limit.png Graphic file (type png)
 <use media/Limit.png>
-Package pdftex.def Info: media/Limit.png  used on input line 94.
+Package pdftex.def Info: media/Limit.png  used on input line 95.
 (pdftex.def)             Requested size: 284.52756pt x 149.76363pt.
-<media/Scale.jpeg, id=58, 683.05188pt x 188.705pt>
+<media/Scale.jpeg, id=61, 683.05188pt x 188.705pt>
 File: media/Scale.jpeg Graphic file (type jpg)
 <use media/Scale.jpeg>
-Package pdftex.def Info: media/Scale.jpeg  used on input line 94.
+Package pdftex.def Info: media/Scale.jpeg  used on input line 95.
 (pdftex.def)             Requested size: 284.52756pt x 78.60768pt.
 
-Overfull \hbox (28.45276pt too wide) in paragraph at lines 94--94
+Overfull \hbox (28.45276pt too wide) in paragraph at lines 95--95
 [] 
  []
 
 
-Overfull \hbox (28.45276pt too wide) in paragraph at lines 94--94
+Overfull \hbox (28.45276pt too wide) in paragraph at lines 95--95
 []  
  []
 
 [4
 
  <./media/Limit.png> <./media/Scale.jpeg>]
-<media/STORM.png, id=69, 631.35875pt x 498.86375pt>
+<media/STORM.png, id=73, 631.35875pt x 498.86375pt>
 File: media/STORM.png Graphic file (type png)
 <use media/STORM.png>
-Package pdftex.def Info: media/STORM.png  used on input line 107.
+Package pdftex.def Info: media/STORM.png  used on input line 108.
 (pdftex.def)             Requested size: 256.0748pt x 202.33559pt.
-<media/ClutchDomains.png, id=71, 493.34312pt x 492.84125pt>
+<media/ClutchDomains.png, id=75, 493.34312pt x 492.84125pt>
 File: media/ClutchDomains.png Graphic file (type png)
 <use media/ClutchDomains.png>
-Package pdftex.def Info: media/ClutchDomains.png  used on input line 107.
+Package pdftex.def Info: media/ClutchDomains.png  used on input line 108.
 (pdftex.def)             Requested size: 99.58464pt x 99.48395pt.
-<media/ClutchCartoon.png, id=72, 438.63875pt x 273.02pt>
+<media/ClutchCartoon.png, id=76, 438.63875pt x 273.02pt>
 File: media/ClutchCartoon.png Graphic file (type png)
 <use media/ClutchCartoon.png>
-Package pdftex.def Info: media/ClutchCartoon.png  used on input line 107.
+Package pdftex.def Info: media/ClutchCartoon.png  used on input line 108.
 (pdftex.def)             Requested size: 128.0374pt x 79.6945pt.
  [5
 
  <./media/STORM.png> <./media/ClutchDomains.png> <./media/ClutchCartoon.png>]
-<media/Intro.png, id=84, 974.13937pt x 370.38374pt>
+<media/Intro.png, id=89, 654.94687pt x 357.58594pt>
 File: media/Intro.png Graphic file (type png)
 <use media/Intro.png>
-Package pdftex.def Info: media/Intro.png  used on input line 119.
-(pdftex.def)             Requested size: 369.88582pt x 140.63425pt.
- [6
+Package pdftex.def Info: media/Intro.png  used on input line 123.
+(pdftex.def)             Requested size: 256.0748pt x 139.80714pt.
+<media/storm-animation/storm-animation-1.png, id=90, 237.88875pt x 237.88875pt>
+
+File: media/storm-animation/storm-animation-1.png Graphic file (type png)
+<use media/storm-animation/storm-animation-1.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-1.png  used on i
+nput line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-1.png (PNG copy)> <a0,fr0>
+<media/storm-animation/storm-animation-2.png, id=93, 237.88875pt x 237.88875pt>
+
+File: media/storm-animation/storm-animation-2.png Graphic file (type png)
+<use media/storm-animation/storm-animation-2.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-2.png  used on i
+nput line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-2.png (PNG copy)> <a0,fr1>
+<media/storm-animation/storm-animation-3.png, id=96, 237.88875pt x 237.88875pt>
+
+File: media/storm-animation/storm-animation-3.png Graphic file (type png)
+<use media/storm-animation/storm-animation-3.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-3.png  used on i
+nput line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-3.png (PNG copy)> <a0,fr2>
+<media/storm-animation/storm-animation-4.png, id=99, 237.88875pt x 237.88875pt>
+
+File: media/storm-animation/storm-animation-4.png Graphic file (type png)
+<use media/storm-animation/storm-animation-4.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-4.png  used on i
+nput line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-4.png (PNG copy)>
+<a0,fr3>
+<media/storm-animation/storm-animation-5.png, id=102, 237.88875pt x 237.88875pt
+>
+File: media/storm-animation/storm-animation-5.png Graphic file (type png)
+<use media/storm-animation/storm-animation-5.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-5.png  used on i
+nput line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-5.png (PNG copy)> <a0,fr4>
+<media/storm-animation/storm-animation-6.png, id=105, 237.88875pt x 237.88875pt
+>
+File: media/storm-animation/storm-animation-6.png Graphic file (type png)
+<use media/storm-animation/storm-animation-6.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-6.png  used on i
+nput line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-6.png (PNG copy)> <a0,fr5>
+<media/storm-animation/storm-animation-7.png, id=108, 237.88875pt x 237.88875pt
+>
+File: media/storm-animation/storm-animation-7.png Graphic file (type png)
+<use media/storm-animation/storm-animation-7.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-7.png  used on i
+nput line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-7.png (PNG copy)> <a0,fr6>
+<media/storm-animation/storm-animation-8.png, id=111, 237.88875pt x 237.88875pt
+>
+File: media/storm-animation/storm-animation-8.png Graphic file (type png)
+<use media/storm-animation/storm-animation-8.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-8.png  used on i
+nput line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-8.png (PNG copy)> <a0,fr7>
+<media/storm-animation/storm-animation-9.png, id=114, 237.88875pt x 237.88875pt
+>
+File: media/storm-animation/storm-animation-9.png Graphic file (type png)
+<use media/storm-animation/storm-animation-9.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-9.png  used on i
+nput line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-9.png (PNG copy)> <a0,fr8>
+<media/storm-animation/storm-animation-10.png, id=117, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-10.png Graphic file (type png)
+<use media/storm-animation/storm-animation-10.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-10.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-10.png (PNG copy)> <a0,fr9>
+<media/storm-animation/storm-animation-11.png, id=120, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-11.png Graphic file (type png)
+<use media/storm-animation/storm-animation-11.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-11.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-11.png (PNG copy)> <a0,fr10>
+<media/storm-animation/storm-animation-12.png, id=123, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-12.png Graphic file (type png)
+<use media/storm-animation/storm-animation-12.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-12.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-12.png (PNG copy)>
+<a0,fr11>
+<media/storm-animation/storm-animation-13.png, id=126, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-13.png Graphic file (type png)
+<use media/storm-animation/storm-animation-13.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-13.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-13.png (PNG copy)>
+<a0,fr12>
+<media/storm-animation/storm-animation-14.png, id=129, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-14.png Graphic file (type png)
+<use media/storm-animation/storm-animation-14.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-14.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-14.png (PNG copy)>
+<a0,fr13>
+<media/storm-animation/storm-animation-15.png, id=132, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-15.png Graphic file (type png)
+<use media/storm-animation/storm-animation-15.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-15.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-15.png (PNG copy)>
+<a0,fr14>
+<media/storm-animation/storm-animation-16.png, id=135, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-16.png Graphic file (type png)
+<use media/storm-animation/storm-animation-16.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-16.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-16.png (PNG copy)>
+<a0,fr15>
+<media/storm-animation/storm-animation-17.png, id=138, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-17.png Graphic file (type png)
+<use media/storm-animation/storm-animation-17.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-17.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-17.png (PNG copy)>
+<a0,fr16>
+<media/storm-animation/storm-animation-18.png, id=141, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-18.png Graphic file (type png)
+<use media/storm-animation/storm-animation-18.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-18.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-18.png (PNG copy)>
+<a0,fr17>
+<media/storm-animation/storm-animation-19.png, id=144, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-19.png Graphic file (type png)
+<use media/storm-animation/storm-animation-19.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-19.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-19.png (PNG copy)>
+<a0,fr18>
+<media/storm-animation/storm-animation-20.png, id=147, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-20.png Graphic file (type png)
+<use media/storm-animation/storm-animation-20.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-20.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-20.png (PNG copy)>
+<a0,fr19>
+<media/storm-animation/storm-animation-21.png, id=150, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-21.png Graphic file (type png)
+<use media/storm-animation/storm-animation-21.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-21.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-21.png (PNG copy)>
+<a0,fr20>
+<media/storm-animation/storm-animation-22.png, id=153, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-22.png Graphic file (type png)
+<use media/storm-animation/storm-animation-22.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-22.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-22.png (PNG copy)>
+<a0,fr21>
+<media/storm-animation/storm-animation-23.png, id=156, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-23.png Graphic file (type png)
+<use media/storm-animation/storm-animation-23.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-23.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-23.png (PNG copy)>
+<a0,fr22>
+<media/storm-animation/storm-animation-24.png, id=159, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-24.png Graphic file (type png)
+<use media/storm-animation/storm-animation-24.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-24.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-24.png (PNG copy)>
+<a0,fr23>
+<media/storm-animation/storm-animation-25.png, id=162, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-25.png Graphic file (type png)
+<use media/storm-animation/storm-animation-25.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-25.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-25.png (PNG copy)>
+<a0,fr24>
+<media/storm-animation/storm-animation-26.png, id=165, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-26.png Graphic file (type png)
+<use media/storm-animation/storm-animation-26.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-26.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-26.png (PNG copy)>
+<a0,fr25>
+<media/storm-animation/storm-animation-27.png, id=168, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-27.png Graphic file (type png)
+<use media/storm-animation/storm-animation-27.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-27.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-27.png (PNG copy)>
+<a0,fr26>
+<media/storm-animation/storm-animation-28.png, id=171, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-28.png Graphic file (type png)
+<use media/storm-animation/storm-animation-28.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-28.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-28.png (PNG copy)>
+<a0,fr27>
+<media/storm-animation/storm-animation-29.png, id=174, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-29.png Graphic file (type png)
+<use media/storm-animation/storm-animation-29.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-29.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-29.png (PNG copy)>
+<a0,fr28>
+<media/storm-animation/storm-animation-30.png, id=177, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-30.png Graphic file (type png)
+<use media/storm-animation/storm-animation-30.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-30.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-30.png (PNG copy)>
+<a0,fr29>
+<media/storm-animation/storm-animation-31.png, id=180, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-31.png Graphic file (type png)
+<use media/storm-animation/storm-animation-31.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-31.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-31.png (PNG copy)>
+<a0,fr30>
+<media/storm-animation/storm-animation-32.png, id=183, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-32.png Graphic file (type png)
+<use media/storm-animation/storm-animation-32.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-32.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-32.png (PNG copy)>
+<a0,fr31>
+<media/storm-animation/storm-animation-33.png, id=186, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-33.png Graphic file (type png)
+<use media/storm-animation/storm-animation-33.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-33.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-33.png (PNG copy)>
+<a0,fr32>
+<media/storm-animation/storm-animation-34.png, id=189, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-34.png Graphic file (type png)
+<use media/storm-animation/storm-animation-34.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-34.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-34.png (PNG copy)>
+<a0,fr33>
+<media/storm-animation/storm-animation-35.png, id=192, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-35.png Graphic file (type png)
+<use media/storm-animation/storm-animation-35.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-35.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-35.png (PNG copy)>
+<a0,fr34>
+<media/storm-animation/storm-animation-36.png, id=195, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-36.png Graphic file (type png)
+<use media/storm-animation/storm-animation-36.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-36.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-36.png (PNG copy)>
+<a0,fr35>
+<media/storm-animation/storm-animation-37.png, id=198, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-37.png Graphic file (type png)
+<use media/storm-animation/storm-animation-37.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-37.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-37.png (PNG copy)>
+<a0,fr36>
+<media/storm-animation/storm-animation-38.png, id=201, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-38.png Graphic file (type png)
+<use media/storm-animation/storm-animation-38.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-38.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-38.png (PNG copy)>
+<a0,fr37>
+<media/storm-animation/storm-animation-39.png, id=204, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-39.png Graphic file (type png)
+<use media/storm-animation/storm-animation-39.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-39.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-39.png (PNG copy)>
+<a0,fr38>
+<media/storm-animation/storm-animation-40.png, id=207, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-40.png Graphic file (type png)
+<use media/storm-animation/storm-animation-40.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-40.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-40.png (PNG copy)>
+<a0,fr39>
+<media/storm-animation/storm-animation-41.png, id=210, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-41.png Graphic file (type png)
+<use media/storm-animation/storm-animation-41.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-41.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-41.png (PNG copy)>
+<a0,fr40>
+<media/storm-animation/storm-animation-42.png, id=213, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-42.png Graphic file (type png)
+<use media/storm-animation/storm-animation-42.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-42.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-42.png (PNG copy)>
+<a0,fr41>
+<media/storm-animation/storm-animation-43.png, id=216, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-43.png Graphic file (type png)
+<use media/storm-animation/storm-animation-43.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-43.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-43.png (PNG copy)>
+<a0,fr42>
+<media/storm-animation/storm-animation-44.png, id=219, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-44.png Graphic file (type png)
+<use media/storm-animation/storm-animation-44.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-44.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-44.png (PNG copy)>
+<a0,fr43>
+<media/storm-animation/storm-animation-45.png, id=222, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-45.png Graphic file (type png)
+<use media/storm-animation/storm-animation-45.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-45.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-45.png (PNG copy)>
+<a0,fr44>
+<media/storm-animation/storm-animation-46.png, id=225, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-46.png Graphic file (type png)
+<use media/storm-animation/storm-animation-46.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-46.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-46.png (PNG copy)>
+<a0,fr45>
+<media/storm-animation/storm-animation-47.png, id=228, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-47.png Graphic file (type png)
+<use media/storm-animation/storm-animation-47.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-47.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-47.png (PNG copy)>
+<a0,fr46>
+<media/storm-animation/storm-animation-48.png, id=231, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-48.png Graphic file (type png)
+<use media/storm-animation/storm-animation-48.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-48.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-48.png (PNG copy)>
+<a0,fr47>
+<media/storm-animation/storm-animation-49.png, id=234, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-49.png Graphic file (type png)
+<use media/storm-animation/storm-animation-49.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-49.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-49.png (PNG copy)>
+<a0,fr48>
+<media/storm-animation/storm-animation-50.png, id=237, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-50.png Graphic file (type png)
+<use media/storm-animation/storm-animation-50.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-50.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-50.png (PNG copy)>
+<a0,fr49>
+<media/storm-animation/storm-animation-51.png, id=240, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-51.png Graphic file (type png)
+<use media/storm-animation/storm-animation-51.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-51.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-51.png (PNG copy)>
+<a0,fr50>
+<media/storm-animation/storm-animation-52.png, id=243, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-52.png Graphic file (type png)
+<use media/storm-animation/storm-animation-52.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-52.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-52.png (PNG copy)>
+<a0,fr51>
+<media/storm-animation/storm-animation-53.png, id=246, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-53.png Graphic file (type png)
+<use media/storm-animation/storm-animation-53.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-53.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-53.png (PNG copy)>
+<a0,fr52>
+<media/storm-animation/storm-animation-54.png, id=249, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-54.png Graphic file (type png)
+<use media/storm-animation/storm-animation-54.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-54.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-54.png (PNG copy)>
+<a0,fr53>
+<media/storm-animation/storm-animation-55.png, id=253, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-55.png Graphic file (type png)
+<use media/storm-animation/storm-animation-55.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-55.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-55.png (PNG copy)>
+<a0,fr54>
+<media/storm-animation/storm-animation-56.png, id=256, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-56.png Graphic file (type png)
+<use media/storm-animation/storm-animation-56.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-56.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-56.png (PNG copy)>
+<a0,fr55>
+<media/storm-animation/storm-animation-57.png, id=259, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-57.png Graphic file (type png)
+<use media/storm-animation/storm-animation-57.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-57.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-57.png (PNG copy)>
+<a0,fr56>
+<media/storm-animation/storm-animation-58.png, id=262, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-58.png Graphic file (type png)
+<use media/storm-animation/storm-animation-58.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-58.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-58.png (PNG copy)>
+<a0,fr57>
+<media/storm-animation/storm-animation-59.png, id=265, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-59.png Graphic file (type png)
+<use media/storm-animation/storm-animation-59.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-59.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-59.png (PNG copy)>
+<a0,fr58>
+<media/storm-animation/storm-animation-60.png, id=268, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-60.png Graphic file (type png)
+<use media/storm-animation/storm-animation-60.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-60.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-60.png (PNG copy)>
+<a0,fr59>
+<media/storm-animation/storm-animation-61.png, id=271, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-61.png Graphic file (type png)
+<use media/storm-animation/storm-animation-61.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-61.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-61.png (PNG copy)>
+<a0,fr60>
+<media/storm-animation/storm-animation-62.png, id=274, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-62.png Graphic file (type png)
+<use media/storm-animation/storm-animation-62.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-62.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-62.png (PNG copy)>
+<a0,fr61>
+<media/storm-animation/storm-animation-63.png, id=277, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-63.png Graphic file (type png)
+<use media/storm-animation/storm-animation-63.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-63.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-63.png (PNG copy)>
+<a0,fr62>
+<media/storm-animation/storm-animation-64.png, id=280, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-64.png Graphic file (type png)
+<use media/storm-animation/storm-animation-64.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-64.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-64.png (PNG copy)>
+<a0,fr63>
+<media/storm-animation/storm-animation-65.png, id=283, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-65.png Graphic file (type png)
+<use media/storm-animation/storm-animation-65.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-65.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-65.png (PNG copy)>
+<a0,fr64>
+<media/storm-animation/storm-animation-66.png, id=286, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-66.png Graphic file (type png)
+<use media/storm-animation/storm-animation-66.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-66.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-66.png (PNG copy)>
+<a0,fr65>
+<media/storm-animation/storm-animation-67.png, id=289, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-67.png Graphic file (type png)
+<use media/storm-animation/storm-animation-67.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-67.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-67.png (PNG copy)>
+<a0,fr66>
+<media/storm-animation/storm-animation-68.png, id=292, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-68.png Graphic file (type png)
+<use media/storm-animation/storm-animation-68.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-68.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-68.png (PNG copy)>
+<a0,fr67>
+<media/storm-animation/storm-animation-69.png, id=295, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-69.png Graphic file (type png)
+<use media/storm-animation/storm-animation-69.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-69.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-69.png (PNG copy)>
+<a0,fr68>
+<media/storm-animation/storm-animation-70.png, id=298, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-70.png Graphic file (type png)
+<use media/storm-animation/storm-animation-70.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-70.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-70.png (PNG copy)>
+<a0,fr69>
+<media/storm-animation/storm-animation-71.png, id=301, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-71.png Graphic file (type png)
+<use media/storm-animation/storm-animation-71.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-71.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-71.png (PNG copy)>
+<a0,fr70>
+<media/storm-animation/storm-animation-72.png, id=304, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-72.png Graphic file (type png)
+<use media/storm-animation/storm-animation-72.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-72.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-72.png (PNG copy)>
+<a0,fr71>
+<media/storm-animation/storm-animation-73.png, id=307, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-73.png Graphic file (type png)
+<use media/storm-animation/storm-animation-73.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-73.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-73.png (PNG copy)>
+<a0,fr72>
+<media/storm-animation/storm-animation-74.png, id=310, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-74.png Graphic file (type png)
+<use media/storm-animation/storm-animation-74.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-74.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-74.png (PNG copy)>
+<a0,fr73>
+<media/storm-animation/storm-animation-75.png, id=313, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-75.png Graphic file (type png)
+<use media/storm-animation/storm-animation-75.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-75.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-75.png (PNG copy)>
+<a0,fr74>
+<media/storm-animation/storm-animation-76.png, id=316, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-76.png Graphic file (type png)
+<use media/storm-animation/storm-animation-76.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-76.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-76.png (PNG copy)>
+<a0,fr75>
+<media/storm-animation/storm-animation-77.png, id=319, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-77.png Graphic file (type png)
+<use media/storm-animation/storm-animation-77.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-77.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-77.png (PNG copy)>
+<a0,fr76>
+<media/storm-animation/storm-animation-78.png, id=322, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-78.png Graphic file (type png)
+<use media/storm-animation/storm-animation-78.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-78.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-78.png (PNG copy)>
+<a0,fr77>
+<media/storm-animation/storm-animation-79.png, id=325, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-79.png Graphic file (type png)
+<use media/storm-animation/storm-animation-79.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-79.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-79.png (PNG copy)>
+<a0,fr78>
+<media/storm-animation/storm-animation-80.png, id=328, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-80.png Graphic file (type png)
+<use media/storm-animation/storm-animation-80.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-80.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-80.png (PNG copy)>
+<a0,fr79>
+<media/storm-animation/storm-animation-81.png, id=331, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-81.png Graphic file (type png)
+<use media/storm-animation/storm-animation-81.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-81.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-81.png (PNG copy)>
+<a0,fr80>
+<media/storm-animation/storm-animation-82.png, id=334, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-82.png Graphic file (type png)
+<use media/storm-animation/storm-animation-82.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-82.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-82.png (PNG copy)>
+<a0,fr81>
+<media/storm-animation/storm-animation-83.png, id=337, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-83.png Graphic file (type png)
+<use media/storm-animation/storm-animation-83.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-83.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-83.png (PNG copy)>
+<a0,fr82>
+<media/storm-animation/storm-animation-84.png, id=340, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-84.png Graphic file (type png)
+<use media/storm-animation/storm-animation-84.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-84.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-84.png (PNG copy)>
+<a0,fr83>
+<media/storm-animation/storm-animation-85.png, id=343, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-85.png Graphic file (type png)
+<use media/storm-animation/storm-animation-85.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-85.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-85.png (PNG copy)>
+<a0,fr84>
+<media/storm-animation/storm-animation-86.png, id=346, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-86.png Graphic file (type png)
+<use media/storm-animation/storm-animation-86.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-86.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-86.png (PNG copy)>
+<a0,fr85>
+<media/storm-animation/storm-animation-87.png, id=349, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-87.png Graphic file (type png)
+<use media/storm-animation/storm-animation-87.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-87.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-87.png (PNG copy)>
+<a0,fr86>
+<media/storm-animation/storm-animation-88.png, id=352, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-88.png Graphic file (type png)
+<use media/storm-animation/storm-animation-88.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-88.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-88.png (PNG copy)>
+<a0,fr87>
+<media/storm-animation/storm-animation-89.png, id=355, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-89.png Graphic file (type png)
+<use media/storm-animation/storm-animation-89.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-89.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-89.png (PNG copy)>
+<a0,fr88>
+<media/storm-animation/storm-animation-90.png, id=358, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-90.png Graphic file (type png)
+<use media/storm-animation/storm-animation-90.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-90.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-90.png (PNG copy)>
+<a0,fr89>
+<media/storm-animation/storm-animation-91.png, id=361, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-91.png Graphic file (type png)
+<use media/storm-animation/storm-animation-91.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-91.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-91.png (PNG copy)>
+<a0,fr90>
+<media/storm-animation/storm-animation-92.png, id=364, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-92.png Graphic file (type png)
+<use media/storm-animation/storm-animation-92.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-92.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-92.png (PNG copy)>
+<a0,fr91>
+<media/storm-animation/storm-animation-93.png, id=367, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-93.png Graphic file (type png)
+<use media/storm-animation/storm-animation-93.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-93.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-93.png (PNG copy)>
+<a0,fr92>
+<media/storm-animation/storm-animation-94.png, id=370, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-94.png Graphic file (type png)
+<use media/storm-animation/storm-animation-94.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-94.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-94.png (PNG copy)>
+<a0,fr93>
+<media/storm-animation/storm-animation-95.png, id=373, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-95.png Graphic file (type png)
+<use media/storm-animation/storm-animation-95.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-95.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-95.png (PNG copy)>
+<a0,fr94>
+<media/storm-animation/storm-animation-96.png, id=376, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-96.png Graphic file (type png)
+<use media/storm-animation/storm-animation-96.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-96.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-96.png (PNG copy)>
+<a0,fr95>
+<media/storm-animation/storm-animation-97.png, id=379, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-97.png Graphic file (type png)
+<use media/storm-animation/storm-animation-97.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-97.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-97.png (PNG copy)>
+<a0,fr96>
+<media/storm-animation/storm-animation-98.png, id=382, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-98.png Graphic file (type png)
+<use media/storm-animation/storm-animation-98.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-98.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-98.png (PNG copy)>
+<a0,fr97>
+<media/storm-animation/storm-animation-99.png, id=385, 237.88875pt x 237.88875p
+t>
+File: media/storm-animation/storm-animation-99.png Graphic file (type png)
+<use media/storm-animation/storm-animation-99.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-99.png  used on 
+input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-99.png (PNG copy)>
+<a0,fr98>
+<media/storm-animation/storm-animation-100.png, id=388, 237.88875pt x 237.88875
+pt>
+File: media/storm-animation/storm-animation-100.png Graphic file (type png)
+<use media/storm-animation/storm-animation-100.png>
+Package pdftex.def Info: media/storm-animation/storm-animation-100.png  used on
+ input line 123.
+(pdftex.def)             Requested size: 237.88815pt x 237.88815pt.
+ <./media/storm-animation/storm-animation-100.png (PNG copy)>
+<a0,fr99> [6
 
  <./media/Intro.png>]
-<media/Apps.png, id=94, 872.25874pt x 466.74374pt>
+<media/Apps.png, id=506, 872.25874pt x 466.74374pt>
 File: media/Apps.png Graphic file (type png)
 <use media/Apps.png>
-Package pdftex.def Info: media/Apps.png  used on input line 125.
+Package pdftex.def Info: media/Apps.png  used on input line 129.
 (pdftex.def)             Requested size: 369.88585pt x 197.92546pt.
  [7
 
- <./media/Apps.png>] Excluding 'comment' comment. Excluding 'comment' comment.
-[8
+ <./media/Apps.png>]
+Excluding 'comment' comment. Excluding 'comment' comment. [8
 
 ]
-<media/Model.png, id=111, 613.29124pt x 299.1175pt>
+<media/Model.png, id=525, 613.29124pt x 299.1175pt>
 File: media/Model.png Graphic file (type png)
 <use media/Model.png>
-Package pdftex.def Info: media/Model.png  used on input line 188.
+Package pdftex.def Info: media/Model.png  used on input line 192.
 (pdftex.def)             Requested size: 227.62204pt x 111.01404pt.
 
-Overfull \hbox (67.68622pt too wide) detected at line 188
+Overfull \hbox (67.68622pt too wide) detected at line 192
 []
  []
 
 
 Package amsfonts Warning: Obsolete command \bold; \mathbf should be used instea
-d on input line 188.
+d on input line 192.
 
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <10.95> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 188.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 192.
 
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <8> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 188.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 192.
 
 LaTeX Font Info:    Font shape `OT1/cmss/b/n' in size <6> not available
-(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 188.
+(Font)              Font shape `OT1/cmss/bx/n' tried instead on input line 192.
 
 [9
 
  <./media/Model.png>]
-<media/Generation.png, id=125, 1744.26656pt x 335.75438pt>
+<media/Generation.png, id=540, 1744.26656pt x 335.75438pt>
 File: media/Generation.png Graphic file (type png)
 <use media/Generation.png>
-Package pdftex.def Info: media/Generation.png  used on input line 201.
+Package pdftex.def Info: media/Generation.png  used on input line 205.
 (pdftex.def)             Requested size: 369.88585pt x 71.197pt.
  [10
 
  <./media/Generation.png>]
-<media/Scores.png, id=134, 703.62875pt x 395.4775pt>
-File: media/Scores.png Graphic file (type png)
-<use media/Scores.png>
-Package pdftex.def Info: media/Scores.png  used on input line 206.
-(pdftex.def)             Requested size: 369.88585pt x 207.89432pt.
- [11
+<media/langevin/langevin-0.png, id=550, 433.62pt x 433.62pt>
+File: media/langevin/langevin-0.png Graphic file (type png)
+<use media/langevin/langevin-0.png>
+Package pdftex.def Info: media/langevin/langevin-0.png  used on input line 211.
 
- <./media/Scores.png>] [12
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-0.png> <a1,fr0>
+<media/langevin/langevin-1.png, id=554, 433.62pt x 433.62pt>
+File: media/langevin/langevin-1.png Graphic file (type png)
+<use media/langevin/langevin-1.png>
+Package pdftex.def Info: media/langevin/langevin-1.png  used on input line 211.
+
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-1.png> <a1,fr1>
+<media/langevin/langevin-2.png, id=558, 433.62pt x 433.62pt>
+File: media/langevin/langevin-2.png Graphic file (type png)
+<use media/langevin/langevin-2.png>
+Package pdftex.def Info: media/langevin/langevin-2.png  used on input line 211.
+
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-2.png> <a1,fr2>
+<media/langevin/langevin-3.png, id=562, 433.62pt x 433.62pt>
+File: media/langevin/langevin-3.png Graphic file (type png)
+<use media/langevin/langevin-3.png>
+Package pdftex.def Info: media/langevin/langevin-3.png  used on input line 211.
+
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-3.png> <a1,fr3>
+<media/langevin/langevin-4.png, id=566, 433.62pt x 433.62pt>
+File: media/langevin/langevin-4.png Graphic file (type png)
+<use media/langevin/langevin-4.png>
+Package pdftex.def Info: media/langevin/langevin-4.png  used on input line 211.
+
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-4.png> <a1,fr4>
+<media/langevin/langevin-5.png, id=570, 433.62pt x 433.62pt>
+File: media/langevin/langevin-5.png Graphic file (type png)
+<use media/langevin/langevin-5.png>
+Package pdftex.def Info: media/langevin/langevin-5.png  used on input line 211.
+
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-5.png> <a1,fr5>
+<media/langevin/langevin-6.png, id=574, 433.62pt x 433.62pt>
+File: media/langevin/langevin-6.png Graphic file (type png)
+<use media/langevin/langevin-6.png>
+Package pdftex.def Info: media/langevin/langevin-6.png  used on input line 211.
+
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-6.png> <a1,fr6>
+<media/langevin/langevin-7.png, id=578, 433.62pt x 433.62pt>
+File: media/langevin/langevin-7.png Graphic file (type png)
+<use media/langevin/langevin-7.png>
+Package pdftex.def Info: media/langevin/langevin-7.png  used on input line 211.
+
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-7.png>
+<a1,fr7>
+<media/langevin/langevin-8.png, id=582, 433.62pt x 433.62pt>
+File: media/langevin/langevin-8.png Graphic file (type png)
+<use media/langevin/langevin-8.png>
+Package pdftex.def Info: media/langevin/langevin-8.png  used on input line 211.
+
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-8.png> <a1,fr8>
+<media/langevin/langevin-9.png, id=586, 433.62pt x 433.62pt>
+File: media/langevin/langevin-9.png Graphic file (type png)
+<use media/langevin/langevin-9.png>
+Package pdftex.def Info: media/langevin/langevin-9.png  used on input line 211.
+
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-9.png> <a1,fr9>
+<media/langevin/langevin-10.png, id=590, 433.62pt x 433.62pt>
+File: media/langevin/langevin-10.png Graphic file (type png)
+<use media/langevin/langevin-10.png>
+Package pdftex.def Info: media/langevin/langevin-10.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-10.png> <a1,fr10>
+<media/langevin/langevin-11.png, id=594, 433.62pt x 433.62pt>
+File: media/langevin/langevin-11.png Graphic file (type png)
+<use media/langevin/langevin-11.png>
+Package pdftex.def Info: media/langevin/langevin-11.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-11.png> <a1,fr11>
+<media/langevin/langevin-12.png, id=598, 433.62pt x 433.62pt>
+File: media/langevin/langevin-12.png Graphic file (type png)
+<use media/langevin/langevin-12.png>
+Package pdftex.def Info: media/langevin/langevin-12.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-12.png> <a1,fr12>
+<media/langevin/langevin-13.png, id=602, 433.62pt x 433.62pt>
+File: media/langevin/langevin-13.png Graphic file (type png)
+<use media/langevin/langevin-13.png>
+Package pdftex.def Info: media/langevin/langevin-13.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-13.png> <a1,fr13>
+<media/langevin/langevin-14.png, id=606, 433.62pt x 433.62pt>
+File: media/langevin/langevin-14.png Graphic file (type png)
+<use media/langevin/langevin-14.png>
+Package pdftex.def Info: media/langevin/langevin-14.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-14.png>
+<a1,fr14>
+<media/langevin/langevin-15.png, id=611, 433.62pt x 433.62pt>
+File: media/langevin/langevin-15.png Graphic file (type png)
+<use media/langevin/langevin-15.png>
+Package pdftex.def Info: media/langevin/langevin-15.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-15.png> <a1,fr15>
+<media/langevin/langevin-16.png, id=615, 433.62pt x 433.62pt>
+File: media/langevin/langevin-16.png Graphic file (type png)
+<use media/langevin/langevin-16.png>
+Package pdftex.def Info: media/langevin/langevin-16.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-16.png> <a1,fr16>
+<media/langevin/langevin-17.png, id=619, 433.62pt x 433.62pt>
+File: media/langevin/langevin-17.png Graphic file (type png)
+<use media/langevin/langevin-17.png>
+Package pdftex.def Info: media/langevin/langevin-17.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-17.png> <a1,fr17>
+<media/langevin/langevin-18.png, id=623, 433.62pt x 433.62pt>
+File: media/langevin/langevin-18.png Graphic file (type png)
+<use media/langevin/langevin-18.png>
+Package pdftex.def Info: media/langevin/langevin-18.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-18.png> <a1,fr18>
+<media/langevin/langevin-19.png, id=627, 433.62pt x 433.62pt>
+File: media/langevin/langevin-19.png Graphic file (type png)
+<use media/langevin/langevin-19.png>
+Package pdftex.def Info: media/langevin/langevin-19.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-19.png> <a1,fr19>
+<media/langevin/langevin-20.png, id=631, 433.62pt x 433.62pt>
+File: media/langevin/langevin-20.png Graphic file (type png)
+<use media/langevin/langevin-20.png>
+Package pdftex.def Info: media/langevin/langevin-20.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-20.png> <a1,fr20>
+<media/langevin/langevin-21.png, id=635, 433.62pt x 433.62pt>
+File: media/langevin/langevin-21.png Graphic file (type png)
+<use media/langevin/langevin-21.png>
+Package pdftex.def Info: media/langevin/langevin-21.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-21.png>
+<a1,fr21>
+<media/langevin/langevin-22.png, id=639, 433.62pt x 433.62pt>
+File: media/langevin/langevin-22.png Graphic file (type png)
+<use media/langevin/langevin-22.png>
+Package pdftex.def Info: media/langevin/langevin-22.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-22.png> <a1,fr22>
+<media/langevin/langevin-23.png, id=643, 433.62pt x 433.62pt>
+File: media/langevin/langevin-23.png Graphic file (type png)
+<use media/langevin/langevin-23.png>
+Package pdftex.def Info: media/langevin/langevin-23.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-23.png> <a1,fr23>
+<media/langevin/langevin-24.png, id=647, 433.62pt x 433.62pt>
+File: media/langevin/langevin-24.png Graphic file (type png)
+<use media/langevin/langevin-24.png>
+Package pdftex.def Info: media/langevin/langevin-24.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-24.png> <a1,fr24>
+<media/langevin/langevin-25.png, id=651, 433.62pt x 433.62pt>
+File: media/langevin/langevin-25.png Graphic file (type png)
+<use media/langevin/langevin-25.png>
+Package pdftex.def Info: media/langevin/langevin-25.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-25.png> <a1,fr25>
+<media/langevin/langevin-26.png, id=655, 433.62pt x 433.62pt>
+File: media/langevin/langevin-26.png Graphic file (type png)
+<use media/langevin/langevin-26.png>
+Package pdftex.def Info: media/langevin/langevin-26.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-26.png> <a1,fr26>
+<media/langevin/langevin-27.png, id=659, 433.62pt x 433.62pt>
+File: media/langevin/langevin-27.png Graphic file (type png)
+<use media/langevin/langevin-27.png>
+Package pdftex.def Info: media/langevin/langevin-27.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-27.png> <a1,fr27>
+<media/langevin/langevin-28.png, id=663, 433.62pt x 433.62pt>
+File: media/langevin/langevin-28.png Graphic file (type png)
+<use media/langevin/langevin-28.png>
+Package pdftex.def Info: media/langevin/langevin-28.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-28.png>
+<a1,fr28>
+<media/langevin/langevin-29.png, id=667, 433.62pt x 433.62pt>
+File: media/langevin/langevin-29.png Graphic file (type png)
+<use media/langevin/langevin-29.png>
+Package pdftex.def Info: media/langevin/langevin-29.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-29.png> <a1,fr29>
+<media/langevin/langevin-30.png, id=671, 433.62pt x 433.62pt>
+File: media/langevin/langevin-30.png Graphic file (type png)
+<use media/langevin/langevin-30.png>
+Package pdftex.def Info: media/langevin/langevin-30.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-30.png> <a1,fr30>
+<media/langevin/langevin-31.png, id=675, 433.62pt x 433.62pt>
+File: media/langevin/langevin-31.png Graphic file (type png)
+<use media/langevin/langevin-31.png>
+Package pdftex.def Info: media/langevin/langevin-31.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-31.png> <a1,fr31>
+<media/langevin/langevin-32.png, id=679, 433.62pt x 433.62pt>
+File: media/langevin/langevin-32.png Graphic file (type png)
+<use media/langevin/langevin-32.png>
+Package pdftex.def Info: media/langevin/langevin-32.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-32.png> <a1,fr32>
+<media/langevin/langevin-33.png, id=683, 433.62pt x 433.62pt>
+File: media/langevin/langevin-33.png Graphic file (type png)
+<use media/langevin/langevin-33.png>
+Package pdftex.def Info: media/langevin/langevin-33.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-33.png> <a1,fr33>
+<media/langevin/langevin-34.png, id=687, 433.62pt x 433.62pt>
+File: media/langevin/langevin-34.png Graphic file (type png)
+<use media/langevin/langevin-34.png>
+Package pdftex.def Info: media/langevin/langevin-34.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-34.png> <a1,fr34>
+<media/langevin/langevin-35.png, id=691, 433.62pt x 433.62pt>
+File: media/langevin/langevin-35.png Graphic file (type png)
+<use media/langevin/langevin-35.png>
+Package pdftex.def Info: media/langevin/langevin-35.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-35.png>
+<a1,fr35>
+<media/langevin/langevin-36.png, id=695, 433.62pt x 433.62pt>
+File: media/langevin/langevin-36.png Graphic file (type png)
+<use media/langevin/langevin-36.png>
+Package pdftex.def Info: media/langevin/langevin-36.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-36.png> <a1,fr36>
+<media/langevin/langevin-37.png, id=699, 433.62pt x 433.62pt>
+File: media/langevin/langevin-37.png Graphic file (type png)
+<use media/langevin/langevin-37.png>
+Package pdftex.def Info: media/langevin/langevin-37.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-37.png> <a1,fr37>
+<media/langevin/langevin-38.png, id=703, 433.62pt x 433.62pt>
+File: media/langevin/langevin-38.png Graphic file (type png)
+<use media/langevin/langevin-38.png>
+Package pdftex.def Info: media/langevin/langevin-38.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-38.png> <a1,fr38>
+<media/langevin/langevin-39.png, id=707, 433.62pt x 433.62pt>
+File: media/langevin/langevin-39.png Graphic file (type png)
+<use media/langevin/langevin-39.png>
+Package pdftex.def Info: media/langevin/langevin-39.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-39.png> <a1,fr39>
+<media/langevin/langevin-40.png, id=711, 433.62pt x 433.62pt>
+File: media/langevin/langevin-40.png Graphic file (type png)
+<use media/langevin/langevin-40.png>
+Package pdftex.def Info: media/langevin/langevin-40.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-40.png> <a1,fr40>
+<media/langevin/langevin-41.png, id=715, 433.62pt x 433.62pt>
+File: media/langevin/langevin-41.png Graphic file (type png)
+<use media/langevin/langevin-41.png>
+Package pdftex.def Info: media/langevin/langevin-41.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-41.png> <a1,fr41>
+<media/langevin/langevin-42.png, id=719, 433.62pt x 433.62pt>
+File: media/langevin/langevin-42.png Graphic file (type png)
+<use media/langevin/langevin-42.png>
+Package pdftex.def Info: media/langevin/langevin-42.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-42.png>
+<a1,fr42>
+<media/langevin/langevin-43.png, id=723, 433.62pt x 433.62pt>
+File: media/langevin/langevin-43.png Graphic file (type png)
+<use media/langevin/langevin-43.png>
+Package pdftex.def Info: media/langevin/langevin-43.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-43.png> <a1,fr43>
+<media/langevin/langevin-44.png, id=727, 433.62pt x 433.62pt>
+File: media/langevin/langevin-44.png Graphic file (type png)
+<use media/langevin/langevin-44.png>
+Package pdftex.def Info: media/langevin/langevin-44.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-44.png> <a1,fr44>
+<media/langevin/langevin-45.png, id=731, 433.62pt x 433.62pt>
+File: media/langevin/langevin-45.png Graphic file (type png)
+<use media/langevin/langevin-45.png>
+Package pdftex.def Info: media/langevin/langevin-45.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-45.png> <a1,fr45>
+<media/langevin/langevin-46.png, id=735, 433.62pt x 433.62pt>
+File: media/langevin/langevin-46.png Graphic file (type png)
+<use media/langevin/langevin-46.png>
+Package pdftex.def Info: media/langevin/langevin-46.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-46.png> <a1,fr46>
+<media/langevin/langevin-47.png, id=739, 433.62pt x 433.62pt>
+File: media/langevin/langevin-47.png Graphic file (type png)
+<use media/langevin/langevin-47.png>
+Package pdftex.def Info: media/langevin/langevin-47.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-47.png> <a1,fr47>
+<media/langevin/langevin-48.png, id=743, 433.62pt x 433.62pt>
+File: media/langevin/langevin-48.png Graphic file (type png)
+<use media/langevin/langevin-48.png>
+Package pdftex.def Info: media/langevin/langevin-48.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-48.png> <a1,fr48>
+<media/langevin/langevin-49.png, id=747, 433.62pt x 433.62pt>
+File: media/langevin/langevin-49.png Graphic file (type png)
+<use media/langevin/langevin-49.png>
+Package pdftex.def Info: media/langevin/langevin-49.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-49.png>
+<a1,fr49>
+<media/langevin/langevin-50.png, id=751, 433.62pt x 433.62pt>
+File: media/langevin/langevin-50.png Graphic file (type png)
+<use media/langevin/langevin-50.png>
+Package pdftex.def Info: media/langevin/langevin-50.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-50.png> <a1,fr50>
+<media/langevin/langevin-51.png, id=755, 433.62pt x 433.62pt>
+File: media/langevin/langevin-51.png Graphic file (type png)
+<use media/langevin/langevin-51.png>
+Package pdftex.def Info: media/langevin/langevin-51.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-51.png> <a1,fr51>
+<media/langevin/langevin-52.png, id=759, 433.62pt x 433.62pt>
+File: media/langevin/langevin-52.png Graphic file (type png)
+<use media/langevin/langevin-52.png>
+Package pdftex.def Info: media/langevin/langevin-52.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-52.png> <a1,fr52>
+<media/langevin/langevin-53.png, id=763, 433.62pt x 433.62pt>
+File: media/langevin/langevin-53.png Graphic file (type png)
+<use media/langevin/langevin-53.png>
+Package pdftex.def Info: media/langevin/langevin-53.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-53.png> <a1,fr53>
+<media/langevin/langevin-54.png, id=767, 433.62pt x 433.62pt>
+File: media/langevin/langevin-54.png Graphic file (type png)
+<use media/langevin/langevin-54.png>
+Package pdftex.def Info: media/langevin/langevin-54.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-54.png> <a1,fr54>
+<media/langevin/langevin-55.png, id=771, 433.62pt x 433.62pt>
+File: media/langevin/langevin-55.png Graphic file (type png)
+<use media/langevin/langevin-55.png>
+Package pdftex.def Info: media/langevin/langevin-55.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-55.png> <a1,fr55>
+<media/langevin/langevin-56.png, id=775, 433.62pt x 433.62pt>
+File: media/langevin/langevin-56.png Graphic file (type png)
+<use media/langevin/langevin-56.png>
+Package pdftex.def Info: media/langevin/langevin-56.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-56.png>
+<a1,fr56>
+<media/langevin/langevin-57.png, id=779, 433.62pt x 433.62pt>
+File: media/langevin/langevin-57.png Graphic file (type png)
+<use media/langevin/langevin-57.png>
+Package pdftex.def Info: media/langevin/langevin-57.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-57.png> <a1,fr57>
+<media/langevin/langevin-58.png, id=783, 433.62pt x 433.62pt>
+File: media/langevin/langevin-58.png Graphic file (type png)
+<use media/langevin/langevin-58.png>
+Package pdftex.def Info: media/langevin/langevin-58.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-58.png> <a1,fr58>
+<media/langevin/langevin-59.png, id=787, 433.62pt x 433.62pt>
+File: media/langevin/langevin-59.png Graphic file (type png)
+<use media/langevin/langevin-59.png>
+Package pdftex.def Info: media/langevin/langevin-59.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-59.png> <a1,fr59>
+<media/langevin/langevin-60.png, id=791, 433.62pt x 433.62pt>
+File: media/langevin/langevin-60.png Graphic file (type png)
+<use media/langevin/langevin-60.png>
+Package pdftex.def Info: media/langevin/langevin-60.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-60.png> <a1,fr60>
+<media/langevin/langevin-61.png, id=795, 433.62pt x 433.62pt>
+File: media/langevin/langevin-61.png Graphic file (type png)
+<use media/langevin/langevin-61.png>
+Package pdftex.def Info: media/langevin/langevin-61.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-61.png> <a1,fr61>
+<media/langevin/langevin-62.png, id=799, 433.62pt x 433.62pt>
+File: media/langevin/langevin-62.png Graphic file (type png)
+<use media/langevin/langevin-62.png>
+Package pdftex.def Info: media/langevin/langevin-62.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-62.png> <a1,fr62>
+<media/langevin/langevin-63.png, id=803, 433.62pt x 433.62pt>
+File: media/langevin/langevin-63.png Graphic file (type png)
+<use media/langevin/langevin-63.png>
+Package pdftex.def Info: media/langevin/langevin-63.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-63.png>
+<a1,fr63>
+<media/langevin/langevin-64.png, id=807, 433.62pt x 433.62pt>
+File: media/langevin/langevin-64.png Graphic file (type png)
+<use media/langevin/langevin-64.png>
+Package pdftex.def Info: media/langevin/langevin-64.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-64.png> <a1,fr64>
+<media/langevin/langevin-65.png, id=811, 433.62pt x 433.62pt>
+File: media/langevin/langevin-65.png Graphic file (type png)
+<use media/langevin/langevin-65.png>
+Package pdftex.def Info: media/langevin/langevin-65.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-65.png> <a1,fr65>
+<media/langevin/langevin-66.png, id=815, 433.62pt x 433.62pt>
+File: media/langevin/langevin-66.png Graphic file (type png)
+<use media/langevin/langevin-66.png>
+Package pdftex.def Info: media/langevin/langevin-66.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-66.png> <a1,fr66>
+<media/langevin/langevin-67.png, id=819, 433.62pt x 433.62pt>
+File: media/langevin/langevin-67.png Graphic file (type png)
+<use media/langevin/langevin-67.png>
+Package pdftex.def Info: media/langevin/langevin-67.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-67.png> <a1,fr67>
+<media/langevin/langevin-68.png, id=823, 433.62pt x 433.62pt>
+File: media/langevin/langevin-68.png Graphic file (type png)
+<use media/langevin/langevin-68.png>
+Package pdftex.def Info: media/langevin/langevin-68.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-68.png> <a1,fr68>
+<media/langevin/langevin-69.png, id=827, 433.62pt x 433.62pt>
+File: media/langevin/langevin-69.png Graphic file (type png)
+<use media/langevin/langevin-69.png>
+Package pdftex.def Info: media/langevin/langevin-69.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-69.png> <a1,fr69>
+<media/langevin/langevin-70.png, id=831, 433.62pt x 433.62pt>
+File: media/langevin/langevin-70.png Graphic file (type png)
+<use media/langevin/langevin-70.png>
+Package pdftex.def Info: media/langevin/langevin-70.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-70.png>
+<a1,fr70>
+<media/langevin/langevin-71.png, id=835, 433.62pt x 433.62pt>
+File: media/langevin/langevin-71.png Graphic file (type png)
+<use media/langevin/langevin-71.png>
+Package pdftex.def Info: media/langevin/langevin-71.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-71.png> <a1,fr71>
+<media/langevin/langevin-72.png, id=839, 433.62pt x 433.62pt>
+File: media/langevin/langevin-72.png Graphic file (type png)
+<use media/langevin/langevin-72.png>
+Package pdftex.def Info: media/langevin/langevin-72.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-72.png> <a1,fr72>
+<media/langevin/langevin-73.png, id=843, 433.62pt x 433.62pt>
+File: media/langevin/langevin-73.png Graphic file (type png)
+<use media/langevin/langevin-73.png>
+Package pdftex.def Info: media/langevin/langevin-73.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-73.png> <a1,fr73>
+<media/langevin/langevin-74.png, id=847, 433.62pt x 433.62pt>
+File: media/langevin/langevin-74.png Graphic file (type png)
+<use media/langevin/langevin-74.png>
+Package pdftex.def Info: media/langevin/langevin-74.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-74.png> <a1,fr74>
+<media/langevin/langevin-75.png, id=851, 433.62pt x 433.62pt>
+File: media/langevin/langevin-75.png Graphic file (type png)
+<use media/langevin/langevin-75.png>
+Package pdftex.def Info: media/langevin/langevin-75.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-75.png> <a1,fr75>
+<media/langevin/langevin-76.png, id=855, 433.62pt x 433.62pt>
+File: media/langevin/langevin-76.png Graphic file (type png)
+<use media/langevin/langevin-76.png>
+Package pdftex.def Info: media/langevin/langevin-76.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-76.png> <a1,fr76>
+<media/langevin/langevin-77.png, id=859, 433.62pt x 433.62pt>
+File: media/langevin/langevin-77.png Graphic file (type png)
+<use media/langevin/langevin-77.png>
+Package pdftex.def Info: media/langevin/langevin-77.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-77.png>
+<a1,fr77>
+<media/langevin/langevin-78.png, id=863, 433.62pt x 433.62pt>
+File: media/langevin/langevin-78.png Graphic file (type png)
+<use media/langevin/langevin-78.png>
+Package pdftex.def Info: media/langevin/langevin-78.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-78.png> <a1,fr78>
+<media/langevin/langevin-79.png, id=867, 433.62pt x 433.62pt>
+File: media/langevin/langevin-79.png Graphic file (type png)
+<use media/langevin/langevin-79.png>
+Package pdftex.def Info: media/langevin/langevin-79.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-79.png> <a1,fr79>
+<media/langevin/langevin-80.png, id=871, 433.62pt x 433.62pt>
+File: media/langevin/langevin-80.png Graphic file (type png)
+<use media/langevin/langevin-80.png>
+Package pdftex.def Info: media/langevin/langevin-80.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-80.png> <a1,fr80>
+<media/langevin/langevin-81.png, id=875, 433.62pt x 433.62pt>
+File: media/langevin/langevin-81.png Graphic file (type png)
+<use media/langevin/langevin-81.png>
+Package pdftex.def Info: media/langevin/langevin-81.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-81.png> <a1,fr81>
+<media/langevin/langevin-82.png, id=879, 433.62pt x 433.62pt>
+File: media/langevin/langevin-82.png Graphic file (type png)
+<use media/langevin/langevin-82.png>
+Package pdftex.def Info: media/langevin/langevin-82.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-82.png> <a1,fr82>
+<media/langevin/langevin-83.png, id=883, 433.62pt x 433.62pt>
+File: media/langevin/langevin-83.png Graphic file (type png)
+<use media/langevin/langevin-83.png>
+Package pdftex.def Info: media/langevin/langevin-83.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-83.png> <a1,fr83>
+<media/langevin/langevin-84.png, id=887, 433.62pt x 433.62pt>
+File: media/langevin/langevin-84.png Graphic file (type png)
+<use media/langevin/langevin-84.png>
+Package pdftex.def Info: media/langevin/langevin-84.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-84.png>
+<a1,fr84>
+<media/langevin/langevin-85.png, id=891, 433.62pt x 433.62pt>
+File: media/langevin/langevin-85.png Graphic file (type png)
+<use media/langevin/langevin-85.png>
+Package pdftex.def Info: media/langevin/langevin-85.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-85.png> <a1,fr85>
+<media/langevin/langevin-86.png, id=895, 433.62pt x 433.62pt>
+File: media/langevin/langevin-86.png Graphic file (type png)
+<use media/langevin/langevin-86.png>
+Package pdftex.def Info: media/langevin/langevin-86.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-86.png> <a1,fr86>
+<media/langevin/langevin-87.png, id=899, 433.62pt x 433.62pt>
+File: media/langevin/langevin-87.png Graphic file (type png)
+<use media/langevin/langevin-87.png>
+Package pdftex.def Info: media/langevin/langevin-87.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-87.png> <a1,fr87>
+<media/langevin/langevin-88.png, id=903, 433.62pt x 433.62pt>
+File: media/langevin/langevin-88.png Graphic file (type png)
+<use media/langevin/langevin-88.png>
+Package pdftex.def Info: media/langevin/langevin-88.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-88.png> <a1,fr88>
+<media/langevin/langevin-89.png, id=907, 433.62pt x 433.62pt>
+File: media/langevin/langevin-89.png Graphic file (type png)
+<use media/langevin/langevin-89.png>
+Package pdftex.def Info: media/langevin/langevin-89.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-89.png> <a1,fr89>
+<media/langevin/langevin-90.png, id=911, 433.62pt x 433.62pt>
+File: media/langevin/langevin-90.png Graphic file (type png)
+<use media/langevin/langevin-90.png>
+Package pdftex.def Info: media/langevin/langevin-90.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-90.png> <a1,fr90>
+<media/langevin/langevin-91.png, id=915, 433.62pt x 433.62pt>
+File: media/langevin/langevin-91.png Graphic file (type png)
+<use media/langevin/langevin-91.png>
+Package pdftex.def Info: media/langevin/langevin-91.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-91.png>
+<a1,fr91>
+<media/langevin/langevin-92.png, id=919, 433.62pt x 433.62pt>
+File: media/langevin/langevin-92.png Graphic file (type png)
+<use media/langevin/langevin-92.png>
+Package pdftex.def Info: media/langevin/langevin-92.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-92.png> <a1,fr92>
+<media/langevin/langevin-93.png, id=923, 433.62pt x 433.62pt>
+File: media/langevin/langevin-93.png Graphic file (type png)
+<use media/langevin/langevin-93.png>
+Package pdftex.def Info: media/langevin/langevin-93.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-93.png> <a1,fr93>
+<media/langevin/langevin-94.png, id=927, 433.62pt x 433.62pt>
+File: media/langevin/langevin-94.png Graphic file (type png)
+<use media/langevin/langevin-94.png>
+Package pdftex.def Info: media/langevin/langevin-94.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-94.png> <a1,fr94>
+<media/langevin/langevin-95.png, id=931, 433.62pt x 433.62pt>
+File: media/langevin/langevin-95.png Graphic file (type png)
+<use media/langevin/langevin-95.png>
+Package pdftex.def Info: media/langevin/langevin-95.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-95.png> <a1,fr95>
+<media/langevin/langevin-96.png, id=935, 433.62pt x 433.62pt>
+File: media/langevin/langevin-96.png Graphic file (type png)
+<use media/langevin/langevin-96.png>
+Package pdftex.def Info: media/langevin/langevin-96.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-96.png> <a1,fr96>
+<media/langevin/langevin-97.png, id=939, 433.62pt x 433.62pt>
+File: media/langevin/langevin-97.png Graphic file (type png)
+<use media/langevin/langevin-97.png>
+Package pdftex.def Info: media/langevin/langevin-97.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-97.png> <a1,fr97>
+<media/langevin/langevin-98.png, id=943, 433.62pt x 433.62pt>
+File: media/langevin/langevin-98.png Graphic file (type png)
+<use media/langevin/langevin-98.png>
+Package pdftex.def Info: media/langevin/langevin-98.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-98.png>
+<a1,fr98>
+<media/langevin/langevin-99.png, id=947, 433.62pt x 433.62pt>
+File: media/langevin/langevin-99.png Graphic file (type png)
+<use media/langevin/langevin-99.png>
+Package pdftex.def Info: media/langevin/langevin-99.png  used on input line 211
+.
+(pdftex.def)             Requested size: 433.61894pt x 433.61894pt.
+ <./media/langevin/langevin-99.png> <a1,fr99> [11
+
+] [12
 
 ] [13
 
 ]
-<media/Chromatin.png, id=161, 970.62625pt x 671.50874pt>
+<media/Chromatin.png, id=1085, 970.62625pt x 671.50874pt>
 File: media/Chromatin.png Graphic file (type png)
 <use media/Chromatin.png>
-Package pdftex.def Info: media/Chromatin.png  used on input line 230.
+Package pdftex.def Info: media/Chromatin.png  used on input line 235.
 (pdftex.def)             Requested size: 284.52756pt x 196.8433pt.
  [14
 
  <./media/Chromatin.png>]
-<media/TwoColor.png, id=170, 481.8pt x 412.54124pt>
+<media/TwoColor.png, id=1095, 481.8pt x 412.54124pt>
 File: media/TwoColor.png Graphic file (type png)
 <use media/TwoColor.png>
-Package pdftex.def Info: media/TwoColor.png  used on input line 246.
+Package pdftex.def Info: media/TwoColor.png  used on input line 251.
 (pdftex.def)             Requested size: 142.26378pt x 121.81192pt.
-<media/BRD4-Structure.png, id=171, 525.965pt x 480.79625pt>
+<media/BRD4-Structure.png, id=1096, 525.965pt x 480.79625pt>
 File: media/BRD4-Structure.png Graphic file (type png)
 <use media/BRD4-Structure.png>
-Package pdftex.def Info: media/BRD4-Structure.png  used on input line 246.
+Package pdftex.def Info: media/BRD4-Structure.png  used on input line 251.
 (pdftex.def)             Requested size: 142.26378pt x 130.04414pt.
-<media/Mutations.png, id=172, 977.90344pt x 153.57375pt>
+<media/Mutations.png, id=1097, 977.90344pt x 153.57375pt>
 File: media/Mutations.png Graphic file (type png)
 <use media/Mutations.png>
-Package pdftex.def Info: media/Mutations.png  used on input line 246.
+Package pdftex.def Info: media/Mutations.png  used on input line 251.
 (pdftex.def)             Requested size: 284.52756pt x 44.68286pt.
  [15
 
  <./media/TwoColor.png> <./media/BRD4-Structure.png> <./media/Mutations.png>]
-<media/BRD4-STORM.png, id=184, 1553.805pt x 958.3303pt>
+<media/BRD4-STORM.png, id=1109, 1553.805pt x 958.3303pt>
 File: media/BRD4-STORM.png Graphic file (type png)
 <use media/BRD4-STORM.png>
-Package pdftex.def Info: media/BRD4-STORM.png  used on input line 253.
+Package pdftex.def Info: media/BRD4-STORM.png  used on input line 258.
 (pdftex.def)             Requested size: 341.43306pt x 210.58473pt.
  [16
 
  <./media/BRD4-STORM.png>]
-<media/MD.png, id=193, 1623.81656pt x 1094.58937pt>
+<media/MD.png, id=1119, 1623.81656pt x 1094.58937pt>
 File: media/MD.png Graphic file (type png)
 <use media/MD.png>
-Package pdftex.def Info: media/MD.png  used on input line 259.
+Package pdftex.def Info: media/MD.png  used on input line 264.
 (pdftex.def)             Requested size: 341.43306pt x 230.15448pt.
-
-[17
+ [17
 
  <./media/MD.png>]
-<media/MSD.png, id=202, 1758.57pt x 715.17188pt>
+<media/MSD.png, id=1129, 1758.57pt x 715.17188pt>
 File: media/MSD.png Graphic file (type png)
 <use media/MSD.png>
-Package pdftex.def Info: media/MSD.png  used on input line 265.
+Package pdftex.def Info: media/MSD.png  used on input line 270.
 (pdftex.def)             Requested size: 341.43306pt x 138.8523pt.
- [18
+
+[18
 
  <./media/MSD.png>]
 LaTeX Font Info:    Trying to load font information for TS1+cmss on input line 
-277.
+282.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/base/ts1cmss.fd
 File: ts1cmss.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 ) [19
 
 {/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-<media/Lab.png, id=220, 978.65625pt x 435.12563pt>
+<media/Lab.png, id=1149, 978.65625pt x 435.12563pt>
 File: media/Lab.png Graphic file (type png)
 <use media/Lab.png>
-Package pdftex.def Info: media/Lab.png  used on input line 288.
+Package pdftex.def Info: media/Lab.png  used on input line 293.
 (pdftex.def)             Requested size: 398.33858pt x 177.10796pt.
  [20
 
@@ -1930,13 +3575,13 @@ Package rerunfilecheck Info: File `defense.out' has not changed.
 (rerunfilecheck)             Checksum: 4B3E8EF72847E8215B338DA2B8ABE8A5;835.
  ) 
 Here is how much of TeX's memory you used:
- 32207 strings out of 476025
- 642389 string characters out of 5790016
+ 36318 strings out of 476025
+ 772940 string characters out of 5790016
  1859388 words of memory out of 5000000
- 51904 multiletter control sequences out of 15000+600000
+ 55790 multiletter control sequences out of 15000+600000
  526858 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,14n,122p,414b,540s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 128i,14n,122p,414b,542s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 ></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></
@@ -1953,10 +3598,10 @@ al/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local
 /texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/l
 ocal/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></u
 sr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb>
-Output written on defense.pdf (20 pages, 9643001 bytes).
+Output written on defense.pdf (20 pages, 17662309 bytes).
 PDF statistics:
- 314 PDF objects out of 1000 (max. 8388607)
- 214 compressed objects within 3 object streams
+ 1245 PDF objects out of 1440 (max. 8388607)
+ 639 compressed objects within 7 object streams
  44 named destinations out of 1000 (max. 500000)
- 157 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2372 words of extra memory for PDF output out of 10000 (max. 10000000)
 

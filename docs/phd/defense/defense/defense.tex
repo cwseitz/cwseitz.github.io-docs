@@ -34,6 +34,7 @@
 \usepackage[font=small,labelfont=bf]{caption}				% For cross-referencing
 \usepackage{comment}
 \usepackage{braket}
+\usepackage{animate}
 
 \title{Advancing super resolution microscopy for quantitative in-vivo imaging of chromatin nanodomains}	% Presentation title
 \author{Clayton W. Seitz}								% Presentation author
@@ -107,8 +108,11 @@ Lakadamyali, M. et al. Nature Methods \textbf{17}, (2020).
 \end{frame}
 
 \begin{frame}{Stochastic optical reconstruction microscopy (STORM)}
-\begin{textblock*}{13cm}(1.0cm,1.5cm)
+\begin{textblock*}{9cm}(0.5cm,1.5cm)
 \includegraphics[width=\textwidth]{media/Intro.png}
+\end{textblock*}
+\begin{textblock*}{5cm}(9.5cm,1.5cm)
+\animategraphics[width=5cm,autoplay,loop]{60}{media/storm-animation/storm-animation-}{1}{100}
 \end{textblock*}
 \begin{textblock*}{\textwidth}(1.0cm,7.5cm)
 \begin{itemize}
@@ -202,7 +206,8 @@ Seitz et al. Under Review. (2024) \\
 
 
 \begin{frame}{Bayesian image restoration with diffusion models}
-\includegraphics[width=\textwidth]{media/Scores.png}
+\animategraphics[width=7cm,autoplay,loop]{60}{media/langevin/langevin-}{0}{99}
+%\includegraphics[width=\textwidth]{media/Scores.png}
 \end{frame}
 
 \begin{frame}
