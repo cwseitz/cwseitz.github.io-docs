@@ -204,21 +204,52 @@ Seitz et al. Under Review. (2024) \\
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Bayesian image restoration with diffusion models}
+\centering
+\animategraphics[width=5cm,autoplay,loop]{60}{media/langevin/langevin-}{0}{99}
+\begin{textblock*}{2cm}(3.0cm, 8.0cm)
+\begin{equation*}
+\bold{y}_{t-1} = \frac{1}{\sqrt{1-\beta_{t}}}\left(\bold{y}_{t} + \beta_{t}s_{\theta}(\bold{y}_{t})\right) + \sqrt{\beta_{t}}\xi \;\; \xi \sim \mathcal{N}(0,I)
+\end{equation*}
+\end{textblock*}
+\end{frame}
+
 
 \begin{frame}{Bayesian image restoration with diffusion models}
-\animategraphics[width=7cm,autoplay,loop]{60}{media/langevin/langevin-}{0}{99}
-%\includegraphics[width=\textwidth]{media/Scores.png}
+
+\begin{textblock*}{2cm}(1.0cm, 2.0cm)
+$\bold{x}$
+\includegraphics[width=2cm]{media/diffusion_example/Diffusion_lr-0.png}
+\end{textblock*}
+\begin{textblock*}{2cm}(4.0cm, 2.0cm)
+$\bold{y}_{100}$
+\includegraphics[width=2cm]{media/diffusion_example/0_1_sr_1.png}
+\end{textblock*}
+\begin{textblock*}{2cm}(6.0cm, 2.0cm)
+$\bold{y}_{80}$
+\includegraphics[width=2cm]{media/diffusion_example/0_1_sr_19.png}
+\end{textblock*}
+\begin{textblock*}{2cm}(8.0cm, 2.0cm)
+$\bold{y}_{40}$
+\includegraphics[width=2cm]{media/diffusion_example/0_1_sr_39.png}
+\end{textblock*}
+\begin{textblock*}{2cm}(10.0cm,2.0cm)
+$\bold{y}_{20}$
+\includegraphics[width=2cm]{media/diffusion_example/0_1_sr_79.png}
+\end{textblock*}
+\begin{textblock*}{2cm}(12.0cm, 2.0cm)
+$\bold{y}_{0}$
+\includegraphics[width=2cm]{media/diffusion_example/0_1_sr_99.png}
+\end{textblock*}
+
+\begin{textblock*}{2cm}(2.0cm, 6.0cm)
+\begin{equation*}
+\bold{y}_{t-1} = \frac{1}{\sqrt{1-\beta_{t}}}\left(\bold{y}_{t} + \beta_{t}s_{\theta}(\bold{y}_{t})\right) + \sqrt{\beta_{t}}\xi \;\; \xi \sim \mathcal{N}(0,I)
+\end{equation*}
+\end{textblock*}
+
+
 \end{frame}
-
-\begin{frame}
-
-\begin{align}
--\log p(\bold{y}_{0}) &\leq -\mathbb{E}_{q(\bold{y}_{1:T}|\bold{y}_{0})} \log \left(\frac{p_{\psi}(\bold{y}_{1:T},\bold{y}_{0})}{q(\bold{y}_{1:T}|\bold{y}_{0})}\right) \\
-&=  D_{KL}(q(\bold{y}_{T}|\bold{y}_{0}) || p(\bold{y}_{T})) + \mathbb{E}_{q(\bold{y}_{1}|\bold{y}_{0})} \log p(\bold{y}_{0}|\bold{y}_{1}) + \mathcal{L}_{\psi}
-\end{align}
-
-\end{frame}
-
 
 
 \section{Super-resolution of nucleosome nanodomains \textit{in-vivo}}
