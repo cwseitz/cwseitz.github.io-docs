@@ -204,12 +204,16 @@ Seitz et al. Under Review. (2024) \\
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Bayesian image restoration with diffusion models}
-\centering
-\animategraphics[width=5cm,autoplay,loop]{60}{media/langevin/langevin-}{0}{99}
-\begin{textblock*}{2cm}(3.0cm, 8.0cm)
+\begin{frame}{Trivial example of sampling from a mixture of Gaussians}
+\begin{textblock*}{13cm}(1.0cm, 1.5cm)
+\animategraphics[width=13cm,autoplay,loop]{30}{media/langevin/langevin-}{1}{152}
+\end{textblock*}
+\begin{textblock*}{13cm}(1.0cm, 6.5cm)
+Consider a two-component Gaussian mixture $p(\bold{x}) = \sum_{k=1}^{2}\pi_{k}\mathcal{N}(\mu_{k},\sigma_{k}^{2})$\\
+\vspace{0.5cm}
+If we know $\nabla\log p(\bold{x})$ we can sample from $p(\bold{x})$ with Langevin dynamics: 
 \begin{equation*}
-\bold{y}_{t-1} = \frac{1}{\sqrt{1-\beta_{t}}}\left(\bold{y}_{t} + \beta_{t}s_{\theta}(\bold{y}_{t})\right) + \sqrt{\beta_{t}}\xi \;\; \xi \sim \mathcal{N}(0,I)
+\bold{x}_{i} = \bold{x}_{i-1} + \epsilon \nabla\log p(\bold{x}) + \sqrt{2\epsilon}\eta \;\; \eta\sim \mathcal{N}(0,I)
 \end{equation*}
 \end{textblock*}
 \end{frame}
