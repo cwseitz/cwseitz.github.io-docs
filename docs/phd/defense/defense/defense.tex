@@ -331,6 +331,34 @@ Fyodorov, D. et al. Nat Rev Mol Cell Biol \textbf{19}, (2018).
 
 \includegraphics[width=12cm]{media/Epigenetic}
 
+\begin{textblock*}{10cm}(1.5cm,4.5cm)
+Zheng, B. et al. Molecular Cell \textbf{16}, (2023).
+\end{textblock*}
+
+\begin{textblock*}{10cm}(1.5cm,8.5cm)
+Fillapakoulos, P. et al. Nature \textbf{468}, (2010).
+\end{textblock*}
+
+\end{frame}
+
+\begin{frame}{BET inhibitor (+)-JQ1 decondenses chromatin and increases mobility}
+
+\begin{textblock*}{4cm}(2.0cm,1.5cm)
+\includegraphics[width=4cm]{media/JQ1-Blot}
+\end{textblock*}
+
+\begin{textblock*}{4cm}(2.0cm,5.0cm)
+\includegraphics[width=4cm]{media/Silence-Blot}
+\end{textblock*}
+
+\begin{textblock*}{7cm}(6.5cm,1.5cm)
+\includegraphics[width=7cm]{media/JQ1}
+\end{textblock*}
+
+\begin{textblock*}{7cm}(1.5cm,8.5cm)
+Blots: top - BRD4, bottom - GAPDH
+\end{textblock*}
+
 \end{frame}
 
 
@@ -342,6 +370,7 @@ Fyodorov, D. et al. Nat Rev Mol Cell Biol \textbf{19}, (2018).
 
 \begin{textblock*}{5cm}(7.75cm,1.25cm)
 \includegraphics[width=5cm]{media/BRD4-Structure}
+\;\; AlphaFold BRD4 1-1362aa 
 \end{textblock*}
 
 \begin{textblock*}{10cm}(2.0cm,7.0cm)
@@ -355,12 +384,7 @@ Fyodorov, D. et al. Nat Rev Mol Cell Biol \textbf{19}, (2018).
 \includegraphics[width=12cm]{media/BRD4-STORM}
 \end{frame}
 
-\begin{frame}{BET inhibitor (+)-JQ1 decondenses chromatin and increases mobility}
-\centering
-\includegraphics[width=7cm]{media/JQ1}
-\end{frame}
-
-\begin{frame}{Coarse grained molecular dynamics of chromatin binders}
+\begin{frame}{Coarse grained molecular dynamics of chromatin binders at 310K}
 \includegraphics[width=12cm]{media/MD-1}
 100kb chromatin chains interact with binders via the potential 
 \begin{equation*}
@@ -374,17 +398,18 @@ U_{ij} = \epsilon \left(1-\left(\frac{|r_{ij}|}{R_{0}}\right)^{2}\right)^{3}
 
 \begin{frame}{Multivalent chromatin binding reduces chromatin mobility}
 \includegraphics[width=12cm]{media/MD-2}
-Integrate Brownian dynamics: $\dot{r} = \gamma^{-1}\nabla U + \sqrt{2 k_{B}T}\gamma^{-1}\xi$\\
+Integrate Brownian dynamics: $\dot{r} = \gamma^{-1}\nabla U + \sqrt{2 k_{B}T}\gamma^{-1/2}\xi \;\; \gamma = 10^{-6}$\\
 \vspace{1cm}
 Stochastic forcing is a delta-correlated white-noise $\xi \sim \mathcal{N}(0,1), \langle \xi(t)\xi(t+\tau)\rangle = \delta(\tau)$
 \end{frame}
 
 \begin{frame}{Multivalent chromatin binding reduces chromatin mobility}
 \includegraphics[width=12cm]{media/MSD}
+Experiment: $D_{WT} - D_{7D} \approx 10^{-3} \mu m^{2}/s, \gamma = 10^{-6}$
 
 \end{frame}
 
-
+\begin{comment}
 \begin{frame}{Recent Publications}
 
 \begin{itemize}
@@ -407,6 +432,6 @@ Thank you!
 
 \end{frame}
 
-
+\end{comment}
 
 \end{document}
