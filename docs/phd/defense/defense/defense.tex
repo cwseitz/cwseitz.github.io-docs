@@ -116,12 +116,57 @@ Lakadamyali, M. et al. Nature Methods \textbf{17}, (2020).
 \end{textblock*}
 \begin{textblock*}{\textwidth}(1.0cm,7.5cm)
 \begin{itemize}
-\item Single molecule localization microscopy (SMLM) techniques are diffraction-unlimited
+\item STORM and similar nanoscopy techniques are diffraction-unlimited
 \item Photoswitching enables resolution of emitters below the diffraction limit
 \end{itemize}
 \end{textblock*}
 \end{frame}
 
+\begin{frame}{Stochastic optical reconstruction microscopy (STORM)}
+\begin{textblock*}{9cm}(0.5cm,1.5cm)
+\includegraphics[width=\textwidth]{media/Intro.png}
+\end{textblock*}
+\begin{textblock*}{5cm}(9.5cm,1.5cm)
+\includegraphics[width=\textwidth]{media/STORM-Example.png}
+\end{textblock*}
+\begin{textblock*}{\textwidth}(1.0cm,7.5cm)
+\begin{itemize}
+\item STORM and similar nanoscopy techniques are diffraction-unlimited
+\item Photoswitching enables resolution of emitters below the diffraction limit
+\end{itemize}
+\end{textblock*}
+\end{frame}
+
+
+\begin{frame}{Vanilla SMLM by localizing isolated fluorescent emitters}
+
+Modeling the point spread function permits sub-pixel localization 
+
+\begin{textblock*}{8cm}(6.5cm,2.0cm)
+\includegraphics[width=\textwidth]{media/Model.png}
+\end{textblock*}
+
+\begin{textblock*}{2cm}(1cm,2.0cm)
+\begin{align*}
+\mu_{k} &= i_{0}\int\int O(u,v)dudv\\
+i_{0} &= g_{k}\textcolor{red}{\eta} \textcolor{cyan}{N_{0}}\textcolor{blue}{\Delta} 
+\\
+g_{k} &- \mathrm{pixel\; gain}\\
+\textcolor{red}{\eta} &- \mathrm{quantum\; efficiency}\\
+\textcolor{cyan}{N_{0}} &- \mathrm{photon\; emission\; rate}\\
+\textcolor{blue}{\Delta} &- \mathrm{exposure\; time}
+\end{align*}
+\end{textblock*}
+
+\vspace{2in}
+
+Assume $N_{0}$ is constant over $\textcolor{blue}{\Delta}$ (homogeneous Poisson)
+
+\begin{equation*}
+\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}p(\bold{x}_{k}|\theta)= \underset{\theta}{\mathrm{argmin}}-\sum_{k}\log p(\bold{x}_{k}|\theta)
+\end{equation*}
+
+\end{frame}
 
 \begin{frame}{Applications of single molecule localization microscopy}
 \includegraphics[width=\textwidth]{media/Apps.png}
@@ -158,49 +203,53 @@ Wu et al. Trends in Cell Biology. \textbf{30} (2020)
 \end{frame}
 \end{comment}
 
+\section{Method 1: Enhanced nanoscopy with single photon avalanche diode (SPAD) cameras}
 
-\section{Enhanced nanoscopy with deep generative models}
-
-\begin{frame}{Localization of isolated fluorescent emitters}
-
-Modeling the point spread function permits sub-pixel localization 
-
-\begin{textblock*}{8cm}(6.5cm,2.0cm)
-\includegraphics[width=\textwidth]{media/Model.png}
+\begin{frame}{Enhanced nanoscopy with single photon avalanche diode (SPAD) cameras}
+\begin{textblock*}{12cm}(1.5cm,2.0cm)
+\includegraphics[width=12cm]{media/SPAD.png}
 \end{textblock*}
-
-\begin{textblock*}{2cm}(1cm,2.0cm)
-\begin{align*}
-\mu_{k} &= i_{0}\int\int O(u,v)dudv\\
-i_{0} &= g_{k}\textcolor{red}{\eta} \textcolor{cyan}{N_{0}}\textcolor{blue}{\Delta} 
-\\
-g_{k} &- \mathrm{pixel\; gain}\\
-\textcolor{red}{\eta} &- \mathrm{quantum\; efficiency}\\
-\textcolor{cyan}{N_{0}} &- \mathrm{photon\; emission\; rate}\\
-\textcolor{blue}{\Delta} &- \mathrm{exposure\; time}
-\end{align*}
+\begin{textblock*}{12cm}(1.5cm,7.0cm)
+\begin{itemize}
+\item Exposures as low as 1 microsecond
+\item Fast gated imaging for widefield fluorescence lifetime imaging
+\item Zero readout noise (imaging weak fluorescent signals)
+\end{itemize}
 \end{textblock*}
-
-\vspace{2in}
-
-Assume $N_{0}$ is constant over $\textcolor{blue}{\Delta}$ (homogeneous Poisson)
-
-\begin{equation*}
-\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}P(\bold{x}_{k}|\theta)= \underset{\theta}{\mathrm{argmin}}-\sum_{k}\log P(\bold{x}_{k}|\theta)
-\end{equation*}
-
 \end{frame}
 
+\begin{frame}{Enhanced nanoscopy with single photon counting}
+\begin{textblock*}{3cm}(0.5cm,1.5cm)
+\animategraphics[width=3cm,autoplay,loop]{60}{media/spad-snip1/spad-snip1-}{1}{100}
+\end{textblock*}
+\begin{textblock*}{3cm}(0.5cm,5.0cm)
+\animategraphics[width=3cm,autoplay,loop]{60}{media/spad-snip2/spad-snip2-}{1}{100}
+\end{textblock*}
+\begin{textblock*}{3cm}(4.0cm,1.5cm)
+\includegraphics[width=3cm]{media/spad-snip1-sum.png}
+\end{textblock*}
+\begin{textblock*}{3cm}(4.0cm,5.0cm)
+\includegraphics[width=3cm]{media/spad-snip2-sum.png}
+\end{textblock*}
+\begin{textblock*}{7cm}(7.5cm,1.5cm)
+\includegraphics[width=7cm]{media/Counting.png}
+\end{textblock*}
+\begin{textblock*}{12cm}(1.0cm,8.5cm)
+$\bold{x} = \bold{x}_{\mathrm{signal}} + \bold{x}_{\mathrm{background}} \;\; p(N,\zeta|\bold{x}) = p(\bold{x}|N,b)p(N)p(\zeta)$ 
+\end{textblock*}
+\end{frame}
+
+
+\section{Method 2: Enhanced nanoscopy with deep generative models}
+
 \begin{frame}{How to pack more localizations in a single frame?}
-Cast localization as \emph{image restoration}
-\vspace{1cm}
 \includegraphics[width=\textwidth]{media/Generation.png}\\
-Seitz et al. Under Review. (2024) \\
-\vspace{1cm}
+\begin{equation*}
+p(\bold{x}_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_{k}^{q}\frac{1}{\sqrt{2\pi}w_{k}}e^{-\frac{(\bold{x}_{k}-g_{k}q-o_{k})^2}{2 w_{k}^{2}}} \approx \mathrm{Poisson}(\omega_{k}')
+\end{equation*}
 \begin{itemize}
 \item Would like to estimate a high-resolution $\bold{y}$ from low-resolution $\bold{x}$, but it is many to one
-\item Must then model a \emph{distribution} over $\bold{y}$ i.e., $p(\bold{y}|\bold{x})$
-\item How to model a distribution over images?
+\item Must then model a \emph{distribution} over $\bold{y}$ i.e., $p_{\theta}(\bold{y}|\bold{x})$
 \end{itemize}
 \end{frame}
 
@@ -221,35 +270,44 @@ If we know $\nabla\log p(\bold{x})$ we can sample from $p(\bold{x})$ with Langev
 
 \begin{frame}{Bayesian image restoration with diffusion models}
 
-\begin{textblock*}{2cm}(1.0cm, 2.0cm)
+\begin{textblock*}{2cm}(1.0cm, 1.0cm)
 $\bold{x}$
 \includegraphics[width=2cm]{media/diffusion_example/Diffusion_lr-0.png}
 \end{textblock*}
-\begin{textblock*}{2cm}(4.0cm, 2.0cm)
+\begin{textblock*}{2cm}(4.0cm, 1.0cm)
 $\bold{y}_{100}$
 \includegraphics[width=2cm]{media/diffusion_example/0_1_sr_1.png}
 \end{textblock*}
-\begin{textblock*}{2cm}(6.0cm, 2.0cm)
+\begin{textblock*}{2cm}(6.0cm, 1.0cm)
 $\bold{y}_{80}$
 \includegraphics[width=2cm]{media/diffusion_example/0_1_sr_19.png}
 \end{textblock*}
-\begin{textblock*}{2cm}(8.0cm, 2.0cm)
+\begin{textblock*}{2cm}(8.0cm, 1.0cm)
 $\bold{y}_{40}$
 \includegraphics[width=2cm]{media/diffusion_example/0_1_sr_39.png}
 \end{textblock*}
-\begin{textblock*}{2cm}(10.0cm,2.0cm)
+\begin{textblock*}{2cm}(10.0cm,1.0cm)
 $\bold{y}_{20}$
 \includegraphics[width=2cm]{media/diffusion_example/0_1_sr_79.png}
 \end{textblock*}
-\begin{textblock*}{2cm}(12.0cm, 2.0cm)
+\begin{textblock*}{2cm}(12.0cm, 1.0cm)
 $\bold{y}_{0}$
 \includegraphics[width=2cm]{media/diffusion_example/0_1_sr_99.png}
 \end{textblock*}
 
-\begin{textblock*}{2cm}(2.0cm, 6.0cm)
+\begin{textblock*}{10cm}(2.0cm, 4.0cm)
+
+\includegraphics[width=10cm]{media/Bayes.png}
+\end{textblock*}
+
+\begin{textblock*}{12cm}(1.0cm, 7.5cm)
+
+Need to approximate the gradient $s_{\theta}(\bold{y}_{t}) \approx \nabla\log p(\bold{x})$ and sample:
+
 \begin{equation*}
 \bold{y}_{t-1} = \frac{1}{\sqrt{1-\beta_{t}}}\left(\bold{y}_{t} + \beta_{t}s_{\theta}(\bold{y}_{t})\right) + \sqrt{\beta_{t}}\xi \;\; \xi \sim \mathcal{N}(0,I)
 \end{equation*}
+
 \end{textblock*}
 
 
@@ -271,6 +329,13 @@ Fyodorov, D. et al. Nat Rev Mol Cell Biol \textbf{19}, (2018).
 
 \begin{frame}{Bromodomain protein 4 (BRD4) binds acetylated chromatin}
 
+\includegraphics[width=12cm]{media/Epigenetic}
+
+\end{frame}
+
+
+\begin{frame}{Bromodomain protein 4 (BRD4) binds acetylated chromatin}
+
 \begin{textblock*}{5cm}(2.0cm,1.75cm)
 \includegraphics[width=5cm]{media/TwoColor}
 \end{textblock*}
@@ -286,22 +351,37 @@ Fyodorov, D. et al. Nat Rev Mol Cell Biol \textbf{19}, (2018).
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}{BRD4 phosphorylation state is necessary for maintenance of chromatin structure}
 \includegraphics[width=12cm]{media/BRD4-STORM}
-\\
-Seitz et al. Under Review. (2020)
 \end{frame}
 
-\begin{frame}
-\includegraphics[width=12cm]{media/MD}
-\\
-Seitz et al. Under Review. (2020)
+\begin{frame}{BET inhibitor (+)-JQ1 decondenses chromatin and increases mobility}
+\centering
+\includegraphics[width=7cm]{media/JQ1}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Coarse grained molecular dynamics of chromatin binders}
+\includegraphics[width=12cm]{media/MD-1}
+100kb chromatin chains interact with binders via the potential 
+\begin{equation*}
+U_{ij} = \epsilon \left(1-\left(\frac{|r_{ij}|}{R_{0}}\right)^{2}\right)^{3}
+\end{equation*}
+\begin{itemize}
+\item $A$ ($B$) type particles represent unacetylated (acetylated) chromatin beads
+\item BRD4-like $C$ particles bind $B$ type particles with variable energies
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Multivalent chromatin binding reduces chromatin mobility}
+\includegraphics[width=12cm]{media/MD-2}
+Integrate Brownian dynamics: $\dot{r} = \gamma^{-1}\nabla U + \sqrt{2 k_{B}T}\gamma^{-1}\xi$\\
+\vspace{1cm}
+Stochastic forcing is a delta-correlated white-noise $\xi \sim \mathcal{N}(0,1), \langle \xi(t)\xi(t+\tau)\rangle = \delta(\tau)$
+\end{frame}
+
+\begin{frame}{Multivalent chromatin binding reduces chromatin mobility}
 \includegraphics[width=12cm]{media/MSD}
-\\
-Seitz et al. Under Review. (2024)
+
 \end{frame}
 
 
