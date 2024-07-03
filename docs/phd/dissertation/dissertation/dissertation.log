@@ -1,6 +1,6 @@
-This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  27 MAY 2024 22:30
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  11 JUN 2024 10:57
  restricted system commands enabled.
-**dissertation.tex
+**dissertation
 (./dissertation.tex
 LaTeX2e <2022-11-01> patch level 1
 Lua module: luaotfload 2022-10-03 3.23 Lua based OpenType font support
@@ -635,7 +635,7 @@ Package: xpatch 2020/03/25 v0.3a Extending etoolbox patching commands
 \c@ZZcountersavedpagenumber=\count324
 \c@ZZprevindex=\count325
 
-Setting \\@@backslashcharZZcam to "wl".
+Setting \\@@backslashcharZZcam to "in".
 Setting \\@@backslashcharZZdeg to "phd".
 Setting \\@@backslashcharZZdoc to "dissertation".
 Setting \\@@backslashcharZZgra to "1".
@@ -665,27 +665,27 @@ OPTIONS
 MANDATORY PARAMETERS
   INPUT
     author          "Clayton Seitz"
-    campus          "West Lafayette"
+    campus          "Indianapolis"
     degree          "Doctor of Philosophy"
     document        "A Dissertation"
     graduation      "December 2024"
     institution     "Purdue University"
     program         "Physics"
   SHORTENED
-    ZZcam           "wl"
+    ZZcam           "in"
     ZZdeg           "phd"
     ZZins           "pu"
     ZZpro           "phys"
   DERIVED
-    ZZinscam        "pu-wl"
-    ZZinscampro     "pu-wl-phys"
-    ZZinscamprodeg  "pu-wl-phys-phd"
+    ZZinscam        "pu-in"
+    ZZinscampro     "pu-in-phys"
+    ZZinscamprodeg  "pu-in-phys-phd"
 
 (
     Debugging...
     This institution/campus/program/degree combination is ok:
         Purdue University
-            West Lafayette
+            Indianapolis
                 Physics
                     Doctor of Philosophy
 )
@@ -2123,40 +2123,39 @@ LaTeX Info: Redefining \fs on input line 19.
 \c@@tempe=\count672
 )
 Package translations Info: No language package found. I am going to use `englis
-h' as default language. on input line 518.
+h' as default language. on input line 519.
 \@quotelevel=\count673
 \@quotereset=\count674
 
 (./dissertation.aux (./ch-front.aux) (./ch1.aux) (./ch2.aux) (./ch3.aux)
-(./appendix.aux) (./ap-citations-references.aux) (./ap-vita.aux))
+(./ap-vita.aux))
 \openout1 = dissertation.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 518.
-LaTeX Font Info:    ... okay on input line 518.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 518.
-LaTeX Font Info:    ... okay on input line 518.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 518.
-LaTeX Font Info:    ... okay on input line 518.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 518.
-LaTeX Font Info:    ... okay on input line 518.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 518.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 519.
+LaTeX Font Info:    ... okay on input line 519.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 519.
+LaTeX Font Info:    ... okay on input line 519.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 519.
+LaTeX Font Info:    ... okay on input line 519.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 519.
+LaTeX Font Info:    ... okay on input line 519.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 519.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 5
-18.
-
-(/usr/local/texlive/2023/texmf-dist/tex/latex/base/ts1cmr.fd
+19.
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 518.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 518.
-LaTeX Font Info:    ... okay on input line 518.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 518.
-LaTeX Font Info:    ... okay on input line 518.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 518.
-LaTeX Font Info:    ... okay on input line 518.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 518.
-LaTeX Font Info:    ... okay on input line 518.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 518.
-LaTeX Font Info:    ... okay on input line 518.
+LaTeX Font Info:    ... okay on input line 519.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 519.
+LaTeX Font Info:    ... okay on input line 519.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 519.
+LaTeX Font Info:    ... okay on input line 519.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 519.
+LaTeX Font Info:    ... okay on input line 519.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 519.
+LaTeX Font Info:    ... okay on input line 519.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 519.
+LaTeX Font Info:    ... okay on input line 519.
 
 (/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -2180,7 +2179,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring ON on input line 518.
+Package hyperref Info: Link coloring ON on input line 519.
 
 (./dissertation.out) (./dissertation.out)
 \@outlinefile=\write9
@@ -2193,7 +2192,7 @@ File: translations-basic-dictionary-english.trsl (english translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `english'. on input line 518.
+or `english'. on input line 519.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
@@ -2236,7 +2235,7 @@ Package caption Info: End \AtBeginDocument code.
 Package todonotes Warning: The length marginparwidth is less than 2cm and will 
 most likely cause issues with the appearance of inserted todonotes. The issue c
 an be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to 
-loading the todonotes package. on input line 518.
+loading the todonotes package. on input line 519.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/notoccite/notoccite.sty
 Package: notoccite 2000/07/20
@@ -2254,23 +2253,23 @@ Package biblatex Info: Automatic encoding selection.
 
 \openout5 = dissertation.bcf
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'dissertation.bbl' not found.
+Package biblatex Info: ... file 'dissertation.bbl' found.
 
-No file dissertation.bbl.
-Package biblatex Info: Reference section=0 on input line 518.
-Package biblatex Info: Reference segment=0 on input line 518.
+(./dissertation.bbl)
+Package biblatex Info: Reference section=0 on input line 519.
+Package biblatex Info: Reference segment=0 on input line 519.
 \c@lstlisting=\count681
 
-Package chemgreek Info: Activating mapping `default' on line 518.
+Package chemgreek Info: Activating mapping `default' on line 519.
 
 \Etoc@tf=\read6
-<graphics//gr-pu-seal-vector.pdf, id=133, 527.62581pt x 516.24864pt>
+<graphics//gr-pu-seal-vector.pdf, id=97, 527.62581pt x 516.24864pt>
 File: graphics//gr-pu-seal-vector.pdf Graphic file (type pdf)
 <use graphics//gr-pu-seal-vector.pdf>
 Package luatex.def Info: graphics//gr-pu-seal-vector.pdf  used on input line 52
-2.
+3.
 (luatex.def)             Requested size: 224.7766pt x 219.93448pt.
-[1
+ [1
 
 {/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}<./graphic
 s//gr-pu-seal-vector.pdf>]
@@ -2283,13 +2282,13 @@ File: ch-front.tex 2022-10-05 front matter chapter
 \tf@toc=\write10
 
 \openout10 = dissertation.toc
- [4
+
+[4
 
 ]
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 8
 2.
-
-(/usr/local/texlive/2023/texmf-dist/tex/latex/lm/ot1lmr.fd
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 8
@@ -2388,13 +2387,13 @@ d on input line 15.
 [12
 Missing character: There is no – (U+2013) in font ec-lmr12!
 ]
-<figures/Intro.png, id=279, 974.13937pt x 370.38374pt>
+<figures/Intro.png, id=227, 974.13937pt x 370.38374pt>
 File: figures/Intro.png Graphic file (type png)
 <use figures/Intro.png>
 Package luatex.def Info: figures/Intro.png  used on input line 32.
 (luatex.def)             Requested size: 469.75502pt x 178.6073pt.
  [13<./figures/Intro.png>]
-<figures/Noise.png, id=289, 674.2791pt x 286.9119pt>
+<figures/Noise.png, id=237, 674.2791pt x 286.9119pt>
 File: figures/Noise.png Graphic file (type png)
 <use figures/Noise.png>
 Package luatex.def Info: figures/Noise.png  used on input line 39.
@@ -2402,7 +2401,7 @@ Package luatex.def Info: figures/Noise.png  used on input line 39.
  [14
 
 <./figures/Noise.png>]
-<figures/FRC.png, id=297, 483.9681pt x 296.7888pt>
+<figures/FRC.png, id=245, 483.9681pt x 296.7888pt>
 File: figures/FRC.png Graphic file (type png)
 <use figures/FRC.png>
 Package luatex.def Info: figures/FRC.png  used on input line 60.
@@ -2430,149 +2429,18 @@ Chapter 3.
 
 
 ] [19]
-\openout2 = ch4.aux
- (./ch4.tex
-File: ch4.tex Chapter4
-
-Chapter 4.
-) [20
-
-
-
-
-]
 changed \interlinepenalty to 10000
-
-LaTeX Warning: Empty bibliography on input line 607.
-
-
-\openout2 = appendix.aux
-(./appendix.tex
-File: appendix.tex Appendix
-
-Appendices A.
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 6.
-
-[21
-
-
-
-
-] [22] [23] [24] [25]) [26]
-\openout2 = ap-citations-references.aux
- (./ap-citations-references.tex
-File: ap-citations-references.tex 2022-10-05 citations and references appendix
-
-\openout6 = z.out
- (./z.out
-Appendices B.
-)
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 7
-.
- (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-\openout6 = z.out
- (./z.out)
-\openout6 = z.out
-
-(./z.out)
-\openout6 = z.out
- (./z.out
-
-LaTeX Warning: Citation 'lamport1994' on page 27 undefined on input line 2.
-
-
-LaTeX Warning: Citation 'goossens1994' on page 27 undefined on input line 4.
-
-
-LaTeX Warning: Citation 'kopka1999' on page 27 undefined on input line 6.
-
-
-LaTeX Warning: Citation 'kopka1999' on page 27 undefined on input line 7.
-
-
-LaTeX Warning: Citation 'kopka1995' on page 27 undefined on input line 9.
-
-)
-\openout6 = z.out
- (./z.out) [27
-
+[20
 
 
 
 ]
-\openout6 = z.out
- (./z.out
-
-LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 6.
-
-
-LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 7.
-
-
-LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 8.
-
-
-LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 9.
-
-
-LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 10.
-
-
-LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 11.
-
-
-LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 12.
-
-
-LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 13.
-
-
-LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 14.
-
-
-LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 15.
-
-
-LaTeX Warning: Citation 'example2020' on page 28 undefined on input line 16.
-
-) [28]
-\openout6 = z.out
- (./z.out)
-\openout6 = z.out
- (./z.out
-
-LaTeX Warning: Citation 'hambleton' on page 29 undefined on input line 4.
-
-
-LaTeX Warning: Citation 'gerstenmaier' on page 29 undefined on input line 4.
-
-
-LaTeX Warning: Citation 'gerstenmaier2' on page 29 undefined on input line 4.
-
-) [29]) [30]
 \openout2 = ap-vita.aux
- (./ap-vita.tex
-File: ap-vita.tex 2022-10-05 vita appendix
-) [31
 
-
-
-
-]
+No file ap-vita.tex.
 No file dissertation.ind.
-
-Package ocgx2 Warning: Rerun to get OCG references right!
-
-
-LaTeX Warning: Hook 'shipout/lastpage' executed on wrong page (30 not 31).
-               Rerun to correct this.
-
 (./dissertation.aux (./ch-front.aux) (./ch1.aux) (./ch2.aux) (./ch3.aux)
-(./ch4.aux) (./appendix.aux) (./ap-citations-references.aux) (./ap-vita.aux))
+(./ap-vita.aux))
 
  *File List*
 PurdueThesis.cls    2022-10-05 Purdue University thesis document class
@@ -2794,6 +2662,7 @@ translations-basic-dictionary-english.trsl    (english translation file `transl
 ations-basic-dictionary')
 notoccite.sty    2000/07/20
  english.lbx    2023/03/05 v3.19 biblatex localization (PK/MW)
+dissertation.bbl
 graphics//gr-pu-seal-vector.pdf
 ch-front.tex    2022-10-05 front matter chapter
   ot1lmr.fd    2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -2810,32 +2679,13 @@ figures/Noise.png
 figures/FRC.png
      ch2.tex    Chapter2
      ch3.tex    
-     ch4.tex    Chapter4
-appendix.tex    Appendix
-ap-citations-references.tex    2022-10-05 citations and references appendix
-       z.out
-  t1lmtt.fd    2015/05/01 v1.6.1 Font defs for Latin Modern
-       z.out
-       z.out
-       z.out
-       z.out
-       z.out
-       z.out
-       z.out
- ap-vita.tex    2022-10-05 vita appendix
  ***********
 
 
 LaTeX Warning: There were undefined references.
 
-
-Package rerunfilecheck Warning: File `dissertation.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `dissertation.out':
-(rerunfilecheck)             Before: 69479E899DDA069BA6663DFD8223E9C2;4288
-(rerunfilecheck)             After:  580B674E12B970B3C0F0BF2DFDB3691F;4596.
+Package rerunfilecheck Info: File `dissertation.out' has not changed.
+(rerunfilecheck)             Checksum: C589B9653ED8876E1D071FDE09AA3A4C;2565.
 
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                dissertation
@@ -2847,25 +2697,16 @@ Package logreq Info: Writing requests to 'dissertation.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 75868 strings out of 478285
+ 75566 strings out of 478285
  125218,3417909 words of node,token memory allocated
- 1371 words of node memory still in use:
-   24 hlist, 2 vlist, 10 rule, 2 glue, 4 kern, 1 glyph, 83 attribute, 92 glue_sp
-ec, 83 attribute_list, 6 write, 16 pdf_literal, 2 pdf_dest, 16 pdf_colorstack no
+ 1338 words of node memory still in use:
+   24 hlist, 2 vlist, 10 rule, 2 glue, 4 kern, 2 glyph, 71 attribute, 93 glue_sp
+ec, 71 attribute_list, 7 write, 16 pdf_literal, 2 pdf_dest, 16 pdf_colorstack no
 des
-   avail lists: 1:8,2:795,3:661,4:108,5:455,6:63,7:6973,8:120,9:1826,10:23,11:67
-6
- 93315 multiletter control sequences out of 65536+600000
- 61 fonts using 4021615 bytes
- 109i,16n,103p,1460b,2448s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-warning  (pdf backend): unreferenced destination with name 'chapter*.29'
-
-warning  (pdf backend): unreferenced destination with name 'section.27'
-
-warning  (pdf backend): unreferenced destination with name 'chapter.26'
-
-warning  (pdf backend): unreferenced destination with name 'subsection.20'
+   avail lists: 1:9,2:382,3:372,4:55,5:366,6:35,7:7000,8:79,9:338,10:23,11:676
+ 93196 multiletter control sequences out of 65536+600000
+ 57 fonts using 3683855 bytes
+ 109i,8n,103p,1456b,2399s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/tex
 live/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2023/texmf
 -dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2023/texmf-dist/fonts
@@ -2882,16 +2723,12 @@ al/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/20
 23/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/local/texlive/2023/texmf-di
 st/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/ty
 pe1/public/lm/lmsy6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/l
-m/lmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmtt10.pfb
-></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/loca
-l/texlive/2023/texmf-dist/fonts/type1/public/lm/lmtt8.pfb></usr/local/texlive/20
-23/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive
-/2023/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive/2023/texmf-
-dist/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on dissertation.pdf (31 pages, 1831768 bytes).
+m/lmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/symbol/usyr.pfb>
+</usr/local/texlive/2023/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
+Output written on dissertation.pdf (20 pages, 1694527 bytes).
 
-PDF statistics: 497 PDF objects out of 1000 (max. 8388607)
- 394 compressed objects within 4 object streams
- 71 named destinations out of 1000 (max. 131072)
- 396 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 351 PDF objects out of 1000 (max. 8388607)
+ 273 compressed objects within 3 object streams
+ 46 named destinations out of 1000 (max. 131072)
+ 324 words of extra memory for PDF output out of 10000 (max. 100000000)
 

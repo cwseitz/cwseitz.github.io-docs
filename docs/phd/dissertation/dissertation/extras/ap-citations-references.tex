@@ -1,0 +1,155 @@
+\ProvidesFile{ap-citations-references.tex}[2022-10-05 citations and references appendix]
+
+\begin{VerbatimOut}{z.out}
+\chapter{CITATIONS AND REFERENCES}
+\end{VerbatimOut}
+
+\MyIO
+
+
+\begin{VerbatimOut}{z.out}
+
+This chapter contains information about citations
+and references---how to cite a reference in the text
+and the fine points of defining a bibliography
+(also called ``References'')
+entry.
+\end{VerbatimOut}
+
+\MyIO
+
+
+\begin{VerbatimOut}{z.out}
+
+
+\section{Citations}
+\end{VerbatimOut}
+
+\MyIO
+
+
+\begin{VerbatimOut}{z.out}
+For \LaTeX\ answers I refer to
+\cite{lamport1994}
+and then to
+\cite{goossens1994}
+or
+\cite{kopka1999}.
+\cite{kopka1999}
+is an update to
+\cite{kopka1995}.
+\end{VerbatimOut}
+
+\MyIO
+
+
+\begin{VerbatimOut}{z.out}
+
+Here is an example .bib file entry:
+
+{\footnotesize
+\begin{verbatim}
+@misc{example2020,
+  address   = {Imaginaryville, Indiana},
+  author    = {Andrew Anteater and Bertha Bear and Charles Cheetah and Davida Deer
+                and Ethan Eagle},
+  date      = {2020-10-27},
+  doi       = {00.0000/000-0-000-00000-0},
+  editor    = {Mark Senn},
+  edition   = {2},
+  isbn      = {{000\FigureDash 0\FigureDash 000\FigureDash 00000\FigureDash 0}},
+  publisher = {Bogus International Publishing Company},
+  title     = {An Imaginary Document Not About {Mark Senn} or {NASA}},
+  url       = {https://bogus.com/bogus.html},
+  urldate   = {2020-10-27},
+  version   = {1.0},
+}
+\end{verbatim}
+}
+\end{VerbatimOut}
+
+\MyIO
+
+
+\begin{VerbatimOut}{z.out}
+\PurdueThesisLogo\ only uses \BibLaTeXLogo.
+Here are some example \BibLaTeXLogo\ citations for your document.
+
+\begin{tabular}{@{}ll@{}}
+  \bf Input&                        \bf Output\\
+  \verb+\cite{example2020}+&        \cite{example2020}\\
+  \verb+\cite*{example2020}+&       \cite*{example2020}\\
+  \verb+\citeauthor{example2020}+&  \citeauthor{example2020}\\
+  \verb+\citeauthor*{example2020}+& \citeauthor*{example2020}\\
+  \verb+\citedate{example2020}+&    \citedate{example2020}\\
+  \verb+\citetitle{example2020}+&   \citetitle{example2020}\\
+  \verb+\citetitle*{example2020}+&  \citetitle*{example2020}\\
+  \verb+\citeurl{example2020}+&     \citeurl{example2020}\\
+  \verb+\citeyear{example2020}+&    \citeyear{example2020}\\
+  \verb+\parencite{example2020}+&   \parencite{example2020}\\
+  \verb+\textcite{example2020}+&    \textcite{example2020}\\
+\end{tabular}
+\end{VerbatimOut}
+
+\MyIO
+
+
+\begin{VerbatimOut}{z.out}
+
+
+\section{References}
+\end{VerbatimOut}
+
+\MyIO
+
+
+\begin{VerbatimOut}{z.out}
+
+Emily Spreen wrote that the following URLs are invisible in the PDF file.
+They worked fine for me on 2021-04-08.
+See \cite{hambleton}, \cite{gerstenmaier}, and \cite{gerstenmaier2} in the REFERENCES.
+
+{\footnotesize
+\begin{verbatim}
+@misc{hambleton,
+  key = {Deep Space Gateway},
+  title = {{Deep Space Gateway to Open Opportunities for Distant Destinations}},
+  note = {Editor: Kathryn Hambleton},
+  year = {2018},
+  month = {August 24,},
+  howpublished = {\url{https://www.nasa.gov/feature/deep-space-gateway-to-open-...}},
+  organization = {NASA},
+}
+\end{verbatim}
+}
+
+{\footnotesize
+\begin{verbatim}
+@misc{gerstenmaier,
+  author = {William H. Gerstenmaier},
+  title = {{Progress in Defining the Deep Space Gateway and Transport Plan}},
+  month = {March},
+  year = {2017},
+  howpublished = {\url{https://www.nasa.gov/sites/default/files/atoms/files/...}},
+  organization = {NASA},
+}
+\end{verbatim}
+}
+
+I suggest using the following
+(added a `2' to the key so they'd have separate entries in the references.).
+{\footnotesize
+\begin{verbatim}
+@misc{gerstenmaier2,
+  author = {William H. Gerstenmaier},
+  date = {2017-03},
+  title = {{Progress in Defining the Deep Space Gateway and Transport Plan}},
+  url = {https://www.nasa.gov/sites/default/files/atoms/files/nss_chart_v23.pdf},
+  organization = {NASA},
+}
+\end{verbatim}
+}
+\end{VerbatimOut}
+
+
+\MyIO
