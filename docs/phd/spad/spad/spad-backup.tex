@@ -60,16 +60,6 @@ p(N,\zeta|x) \propto p(x|N,\zeta)p(N)p(\zeta)
 $p(N)$ is taken to be uniform and $p(\zeta) = \mathcal{N}(\mu_{\zeta},\sigma_{\zeta})$
 
 
-\begin{figure}
-\includegraphics[width=7cm]{Figure-1.png}
-\caption{Caption}
-\end{figure}    
-
-\begin{figure*}
-\includegraphics[width=15cm]{Figure-2.png}
-\caption{Caption}
-\end{figure*}    
-
 \clearpage
 
 
@@ -305,8 +295,140 @@ g^{(2)}(0) = \frac{G^{(2)}(0)-B}{\langle G^{(2)}(m)\rangle -B} = -\frac{B}{N_{\m
 \end{equation*}
 
 
+\subsection{Basic Scheme}
+
+\begin{figure}
+\includegraphics[width=7cm]{Figure-1.png}
+\caption{Caption}
+\end{figure}    
+
+\begin{figure*}
+\includegraphics[width=15cm]{Figure-2.png}
+\caption{Caption}
+\end{figure*}    
+
+We consider a set of $N$ point sources in the object plane labeled by continuous valued coordinates $r=(x,y)$ and labeled in the image plane $s=(u,v)$.  respectively. The field is then treated by a simplified model consisting of a single mode (Vlasenko 2020). The positive frequency field operator in the object plane reads
+
+\begin{equation}
+E_{0}^{+}(r) \sim \sum_{i=1}^{N}\delta(r-r_{i})a_{j}
+\end{equation}
+
+The transfer function $O$ of the field from object space to image space is assumed to have a Gaussian shape
+
+\begin{equation}
+O(s-r) = \frac{1}{\sigma\sqrt{2\pi}}\exp\left(-\frac{(s-r)^2}{2\sigma^2}\right)
+\end{equation}
+
+The continuous field in image space is then 
+
+\begin{equation*}
+E^{+}(s) =  \int d^2 r E_{0}^{+}(r) O(s-r)
+\end{equation*}
+
+We take the point spread function $O$ to be isotropic Gaussian. Since our detectors must be discrete, the total field at a pixel $\tilde{E}^{+}(s_{n})$ in image space is then given by integrating over pixels
+
+\begin{align*}
+\tilde{E}^{+}(s_{n}) &=  \int d^2 s E^{+}(s) \\
+&=  \int d^2 s \int d^2 r E_{0}^{+}(r) O(s_n-r)\\
+&=  \int d^2 r E_{0}^{+}(r) \int d^2 s \; O(s_n-r)
+\end{align*}
+
+where $\int d^2 s \; O(s_n-r) = \frac{1}{2}\lambda_{x} \lambda_{y}$ and, for example,
+
+\begin{align*}
+\lambda_{x} = \mathrm{erf}\left(\frac{u_n+\frac{1}{2}-x_i}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{u_n-\frac{1}{2}-x_i}{\sqrt{2}\sigma}\right)
+\end{align*}
 
 
+Combining this result with (1), we see the above integral is simply a sum of terms of the form
+
+\begin{align*}
+\tilde{E}^{+}(s_{n}) &=  \frac{a_{i}}{2}\lambda_{x}(u_n) \lambda_{y}(v_n)
+\end{align*}
+
+\onecolumngrid
+
+\begin{figure}[h] 
+\includegraphics[width=16cm]{Figure_1.png}
+\end{figure}    
+\twocolumngrid
+
+\subsection{Zero-lag order coherence for an isolated emitter}
+
+Photoswitching fluorescent emitters are described by the density matrices
+
+\begin{equation*}
+\rho_{S} = \sum_{k}\xi_{k}\ket{\alpha_k}\bra{\alpha_k}\;\;\rho_{B} = \ket{\beta}\bra{\beta}
+\end{equation*}
+
+We consider an isolated fluorescent emitter in the presence of a coherent background signal. The emitter can access a discrete set of states $\ket{\alpha_k}$, with occupancy probabilities $\xi_{k}$ and amplitude $\alpha_k$  $\langle n\rangle = \bra{\alpha_{k}} n\ket{\alpha_{k}} = \lvert\alpha_{k}^{2}\rvert$. We consider only zero-lag coherence, therefore neglecting the temporal structure of the jump process. For an isolated emitter, we have
+
+\begin{equation}
+\tilde{E}^{+}(s_{n}) =  \Lambda_{n}\hat{a} + \hat{b}
+\end{equation}
+
+where $\Lambda_{n} = \frac{1}{2}\lambda_{x}(u_n) \lambda_{y}(v_n)$. The intensity is
+
+\begin{align}
+\langle I_{n} \rangle &= \langle \tilde{E}^{-}(s_n)\tilde{E}^{+}(s_n)\rangle \\
+&= \Lambda_{n}^{2}\sum_{k}\xi_{k}\mu_{k} + \mu_{B}
+\end{align}
+
+Due to integration over finite size detector elements $\int d^{2}s \; O^2(s_n-r) \neq \left(\int d^{2}s \; O(s_n-r)\right)^2$ and we must define 
+
+\begin{equation}
+\Lambda_{n}^{2} := \int d^{2}s \; O^2(s_n-r)
+\end{equation}
+
+The non-normalized second order coherence in the image plane reads 
+
+\begin{align*}
+G^{2}_{nm}(0) &= \langle \tilde{E}^{-}(s_n)\tilde{E}^{-}(s_m)\tilde{E}^{+}(s_n)\tilde{E}^{+}(s_m)  \rangle\\
+&= \Lambda_{n}^{2}\Lambda_{m}^{2}\sum_{k}\xi_{k}\mu_{k}^2 + \mu_{B}(\Lambda_{n}^{2} + \Lambda_{m}^{2})\sum_{k}\xi_{k}\mu_{k} + \mu_{B}^2
+\end{align*}
+
+which in the normalized form reads
+
+\begin{align*}
+g^{2}_{nm}(0) &= G^{2}_{nm}(0) / \langle I_{n}\rangle \langle I_{m}\rangle 
+\end{align*}
+
+where the intensity expectation at a detector element is of course $\langle I_{n}\rangle = \Lambda_{n}^{2}\sum_{k}\xi_{k}\mu_{k} + \mu_{B}$. For example, if we have a two-level system consisting of a fluorescent state with amplitude $\alpha$ and the vacuum state, this becomes
+
+\begin{equation*}
+g^{(2)}_{ij}(0) = \frac{\xi\lvert\alpha\rvert^{4}}{\xi^{2}\lvert\alpha\rvert^{4}} = \frac{1}{\xi}
+\end{equation*}
+
+As $\xi\rightarrow 1$ (always on) we recover a coherent state. As $\xi\rightarrow 0$ we observe $g^{(2)}_{ij}(0) > 1$ i.e., bunching.
+
+
+\subsection{Expectations in a coherent state}
+
+
+\begin{align*}
+\mathrm{Tr}(a^{\dagger}a^{\dagger}aa \left(\xi_{k}\ket{\alpha_{k}}\bra{\alpha_{k}}\right) &= \mathrm{Tr}\left(\xi_{k} e^{-\lvert\alpha\rvert^{2}}\sum_{n,m}^{\infty}\frac{\alpha^{n}}{n!}\ket{n}\bra{m}\right)\\
+&= \mathrm{Tr}\left(\xi_{k} e^{-\lvert\alpha\rvert^{2}}\sum_{n}^{\infty}\frac{\lvert\alpha\rvert^{2n}}{n!}n(n-1)\right)\\
+&= \mathrm{Tr}\left(\xi_{k} e^{-\lvert\alpha\rvert^{2}}\sum_{n=2}^{\infty}\frac{\lvert\alpha\rvert^{2n}}{(n-2)!}\right)\\
+&= \xi_{k}\lvert\alpha_{k}\rvert^{4}
+\end{align*}
+
+Similarly,
+
+\begin{align*}
+\mathrm{Tr}(a^{\dagger}a \left(\xi \ket{\alpha}\bra{\alpha}\right)) &= \mathrm{Tr}\left(\xi e^{-\lvert\alpha\rvert^{2}}\sum_{n,m}^{\infty}\frac{\alpha^{n}(\alpha^{m})^{*}}{\sqrt{n!}\sqrt{m!}}a^{\dagger}a\ket{n}\bra{m} \right)\\
+&= \xi e^{-\lvert\alpha\rvert^{2}}\sum_{n=0}^{\infty}\frac{(\lvert\alpha\rvert^{2})^{n}}{n!}n\\
+&= \xi e^{-\lvert\alpha\rvert^{2}}\sum_{n=1}^{\infty}\frac{(\lvert\alpha\rvert^{2})^{n}}{(n-1)!}\\
+&= \xi e^{-\lvert\alpha\rvert^{2}}\left(\lvert\alpha\rvert^{2} + \frac{\lvert\alpha\rvert^{4}}{1!} + \frac{\lvert\alpha\rvert^{6}}{2!}+...\right)\\
+&= \xi e^{-\lvert\alpha\rvert^{2}}\lvert\alpha\rvert^{2}\left(1 + \frac{\lvert\alpha\rvert^{2}}{1!} + \frac{\lvert\alpha\rvert^{3}}{2!}+...\right)\\
+&= \xi e^{-\lvert\alpha\rvert^{2}}e^{\lvert\alpha\rvert^{2}}\lvert\alpha\rvert^{2} = \xi\lvert\alpha\rvert^{2}
+\end{align*}
+
+\begin{align*}
+\mathrm{Tr}(a a^{\dagger} \left(\xi \ket{\alpha}\bra{\alpha}\right)) &= \mathrm{Tr}\left(\xi e^{-\lvert\alpha\rvert^{2}}\sum_{n,m}^{\infty}\frac{\alpha^{n}(\alpha^{m})^{*}}{\sqrt{n!}\sqrt{m!}}a a^{\dagger}\ket{n}\bra{m} \right)\\
+&= \xi e^{-\lvert\alpha\rvert^{2}}\sum_{n=0}^{\infty}\frac{(\lvert\alpha\rvert^{2})^{n}}{n!}(n+1)\\
+&= \xi e^{-\lvert\alpha\rvert^{2}}\left(\sum_{n=1}^{\infty}\frac{(\lvert\alpha\rvert^{2})^{n}}{(n-1)!} + e^{\lvert\alpha\rvert^{2}}\right)\\
+&= \xi e^{-\lvert\alpha\rvert^{2}}\left(\lvert\alpha\rvert^{2}e^{\lvert\alpha\rvert^{2}} + e^{\lvert\alpha\rvert^{2}}\right) = \xi(\lvert\alpha\rvert^{2} + 1)
+\end{align*}
 
 
 \end{document}
