@@ -21,28 +21,34 @@ Molecular counting with photon statistics has a fairly simple motivation: coinci
 
 \subsection{Results}
 
+
+We consider the case of pulsed excitation where the interval between pulses much longer than the fluorescence lifetime. Upon excitation, a single fluorophore emits at most one photon with a probability $\zeta$. 
+
+\begin{equation}
+\zeta = \epsilon\eta\sigma_{\mathrm{abs}}j_{\mathrm{exc}}
+\end{equation}
+
+where $\epsilon$ is a detection efficiency, $\eta$ the quantum efficiency of the fluorophore, $\sigma_{\mathrm{abs}}$ the absorption cross-section and the excitation photon flux $j_{\mathrm{exc}}$. Fluorophores were excited using a picosecond $532\mathrm{nm}$ pulsed laser triggered at $500\mathrm{kHz}$. Emission light was collected using an oil-immersion 100$\times$ objective with numerical aperture (NA) 1.4 (Nikon). The emission signal was then filtered to exclude the laser line (Semrock) and projected onto the SPAD512 sensor (Pi Imaging Technologies) using a tube lens. A simplified diagram of the complete system is depicted in (Figure 1a). Each acquisition consists of $N=5\times 10^{5}$ frames, synchronized with each laser pulse, using a $1\mathrm{us}$ exposure per frame (Figure 1b). 
+
+For $N$ fluorophores within the region of interest, the number of photons emitted following a single excitation pulse follows a Binomial distribution: $x_{\mathrm{signal}} \sim \mathrm{Binom}(N,\zeta)$. Such behavior is profoundly different from the Poissonian statistics of classical light (Schwartz 2012). Background signal within the region of interest is modeled as shot noise: $x_{\mathrm{background}} \sim \mathrm{Poisson}(\lambda)$, where background photons arrive at single pixel with a rate $\lambda$. The total signal is then distributed by the likelihood
+
+\begin{equation}
+p(x_{j}=k \mid N, \zeta) = \sum_{i=0}^{\infty} \binom{N}{i} \zeta^i (1-\zeta)^{N-i} \frac{\lambda^{k-i}}{(k-i)!} e^{-\lambda}
+\end{equation}
+
+The likelihood in (2) can be used to model photon arrivals measured by a SPAD array, as well as investigate properties of the second order coherence function $g^{(2)}(\tau)$ over a region of interest. For simplicity, we use the zero-lag second order coherence $g^{(2)}(0)$, which provides information on the number of active fluorescent emitters (Israel 2017). 
+
 \begin{figure}
 \includegraphics[width=7cm]{Figure-0.png}
 \caption{(a) Conventional widefield microscopy with integrated SPAD array (b) Single photon imaging scheme using 1us exposures containing a picosecond laser pulse (c) Sum of photon counts over a 5x5 region of interest (ROI), taken with $N_{\mathrm{frames}}=5\times 10^{5}$}
 \end{figure}    
 
 
-We consider the case of pulsed excitation where the interval between pulses much longer than the fluorescence lifetime. Upon excitation, a single fluorophore emits at most one photon with a probability $\zeta$. Therefore, the for $N$ fluorophores within the region of interest, the number of photons emitted following a single excitation pulse follows a Binomial distribution: $x_{\mathrm{signal}} \sim \mathrm{Binom}(N,\zeta)$. Such behavior is profoundly different from the Poissonian statistics of classical light (Schwartz 2012). Background signal within the region of interest is modeled as shot noise: $x_{\mathrm{background}} \sim \mathrm{Poisson}(\lambda)$, where background photons arrive at single pixel with a rate $\lambda$. The total signal then will be a sum of Binomial and Poisson random variables i.e., $x = x_{\mathrm{signal}} + x_{\mathrm{background}}$, which is distributed by the likelihood
-
-\begin{equation}
-p(x_{j}=k \mid N, \zeta) = \sum_{i=0}^{\infty} \binom{N}{i} \zeta^i (1-\zeta)^{N-i} \frac{\lambda^{k-i}}{(k-i)!} e^{-\lambda}
-\end{equation}
-
-\subsubsection{Zero-lag second order coherence}
-
-
-Following (Israel 2017), we define
-
 \begin{equation}
 g^{(2)}(0) = \frac{G^{(2)}(0)-B}{\langle G^{(2)}(m)\rangle -B}
 \end{equation}
 
-where $B = \langle x_{\mathrm{background}}\rangle = N_{\mathrm{frames}}\lambda\zeta$ is the expected number of background-signal coincidences in the region of interest. The quantities $G^{(2)}(0)$ represents the number of zero-lag signal-signal coincidences in the region of interest, over $N_{\mathrm{frames}}$
+where $B = N_{\mathrm{frames}}\lambda\zeta$ is the expected number of background-signal coincidences in the region of interest. The quantities $G^{(2)}(0)$ represents the number of zero-lag signal-signal coincidences in the region of interest, over $N_{\mathrm{frames}}$
 
 \begin{align*}
 G^{(2)}(0) &\sim \mathrm{Binomial}(N_{\mathrm{frames}}, \mathbb{P}(\bold{x}_{t} \geq 2))\\
@@ -56,9 +62,7 @@ G^{(2)}(m) &\sim \mathrm{Binomial}(N_{\mathrm{frames}}, \mathbb{P}(\bold{x}_{t} 
 \mathbb{P}(&\bold{x}_{t} \geq 1 \text{ and } \bold{x}_{t+m} \geq 1)) = (1 - (1-\zeta)^n)^2
 \end{align*}
 
-\subsubsection{Inference of the number of fluorescent emitters}
-
-We can write a posterior distribution on the Binomial parameters used in the likelihood (1) using Bayes rule
+Sampling from (2), we find a lack of sensitivity in $g^{(2)}(0)$, making inference of the fluorophore number $N$ intractable. We therefore choose to write a posterior distribution on the Binomial parameters used in the likelihood (2) using Bayes rule
 
 \begin{equation*}
 p(N,\zeta|x) \propto p(x|N,\zeta)p(N)p(\zeta)
@@ -68,7 +72,7 @@ $p(N)$ is taken to be uniform and $p(\zeta) = \mathcal{N}(\mu_{\zeta},\sigma_{\z
 
 \begin{figure}
 \includegraphics[width=7cm]{Figure-1.png}
-\caption{Caption}
+\caption{Zero-lag second order coherence}
 \end{figure}   
 
 
