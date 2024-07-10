@@ -3,11 +3,12 @@
 \usepackage{amsmath,amssymb,braket}
 
 \begin{document}
-\title{Quantum enhanced fluorescence microscopy with a SPAD array}
+\title{Quantum enhanced fluorescence microscopy with a single photon avalanche diode array}
 \author{Clayton Seitz}
 \affiliation{Department of Physics, Indiana University, Indianapolis}
 
 \begin{abstract}
+Localization microscopy uses precise localization of isolated fluorescent emitters to produce super-resolved images. The number of fluorescent emitters is a critical piece of information during localization, which cannot be reliably estimated with conventional microscopies. Photon statistics can enable localization in non-sparse scenes by providing information on the number of active fluorescent emitters. This work introduces a model for accurately counting active fluorescent emitters, demonstrated using a single photon avalanche diode (SPAD) array. SPAD cameras, with their high temporal resolution and single photon sensitivity, offer significant advantages for widefield imaging. Integrating photon statistics with conventional super-resolution techniques may enhance bioimaging capabilities, building on previous methods utilizing small detector bundles and laser scanning.
 \end{abstract}
 
 \maketitle 
@@ -19,6 +20,12 @@ Far-field optical microscopy is fundamentally limited by diffraction, with the m
 Molecular counting with photon statistics has a fairly simple motivation: coincidence of photons at multiple detector elements during high speed imaging provides evidence for the number of emitters present in the imaged region. Combining the ideas of conventional super-resolution approaches, with photon statistics may prove to be a powerful set of methods for bioimaging. Innovations in single photon detection technologies have begun to be integrated into fluorescence microscopes (Forbes 2019). Importantly, single photon detectors such as SPAD cameras have orders of magnitude higher temporal resolutions than standard CMOS cameras, single photon sensitivity, and theoretically zero readout noise. Such properties make these devices highly desirable for widefield imaging applications; however, application of SPAD arrays in imaging have been limited to small bundles of detector elements combined with laser scanning (Israel 2017; Forbes 2019; Tenne 2019).
 
 \subsection{Results}
+
+\begin{figure}
+\includegraphics[width=7cm]{Figure-0.png}
+\caption{(a) Conventional widefield microscopy with integrated SPAD array (b) Single photon imaging scheme using 1us exposures containing a picosecond laser pulse (c) Sum of photon counts over a 5x5 region of interest (ROI), taken with $N_{\mathrm{frames}}=5\times 10^{5}$}
+\end{figure}    
+
 
 We consider the case of pulsed excitation where the interval between pulses much longer than the fluorescence lifetime. Upon excitation, a single fluorophore emits at most one photon with a probability $\zeta$. Therefore, the for $N$ fluorophores within the region of interest, the number of photons emitted following a single excitation pulse follows a Binomial distribution: $x_{\mathrm{signal}} \sim \mathrm{Binom}(N,\zeta)$. Such behavior is profoundly different from the Poissonian statistics of classical light (Schwartz 2012). Background signal within the region of interest is modeled as shot noise: $x_{\mathrm{background}} \sim \mathrm{Poisson}(\lambda)$, where background photons arrive at single pixel with a rate $\lambda$. The total signal then will be a sum of Binomial and Poisson random variables i.e., $x = x_{\mathrm{signal}} + x_{\mathrm{background}}$, which is distributed by the likelihood
 
@@ -59,16 +66,11 @@ p(N,\zeta|x) \propto p(x|N,\zeta)p(N)p(\zeta)
 
 $p(N)$ is taken to be uniform and $p(\zeta) = \mathcal{N}(\mu_{\zeta},\sigma_{\zeta})$
 
-
 \begin{figure}
 \includegraphics[width=7cm]{Figure-1.png}
 \caption{Caption}
-\end{figure}    
+\end{figure}   
 
-\begin{figure*}
-\includegraphics[width=15cm]{Figure-2.png}
-\caption{Caption}
-\end{figure*}    
 
 \clearpage
 
