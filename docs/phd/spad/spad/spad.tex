@@ -41,6 +41,11 @@ where $\int d^2 s \; O(s-r) = \frac{1}{2}\lambda_{x}(x) \lambda_{y}(y)$ where, f
 
 We consider the case of pulsed excitation where the interval between pulses much longer than the fluorescence lifetime. Upon excitation of an isolated fluorescent emitter, a photon is detected at a particular detector element $n$ with probability $\zeta\propto \langle \hat{E}^{\dagger}(s_i)\hat{E}(s_i)\rangle = \frac{1}{4}\lambda_{x}^2 \lambda_{y}^2\mathrm{Tr}(\rho a^{\dagger}a)$ where $\rho$ is the density matrix for a two-level system. Similarly, the probability of detection in a region of interest collecting all photons emitted is $\zeta\propto \mathrm{Tr}(\rho a^{\dagger}a)$. Here, we are primarily concerned with the latter quantity, and its application in counting fluorescent emitters.
 
+\begin{figure*}
+\includegraphics[width=14cm]{Figure-0.png}
+\caption{Single photon counting with a SPAD array (a) Conventional widefield microscopy with integrated SPAD array (b) Single photon imaging scheme using 1us exposures containing a picosecond laser pulse (c) Sum of photon counts over a 5x5 region of interest (ROI), taken with $N_{\mathrm{frames}}=5\times 10^{5}$}
+\end{figure*}    
+
 For $N$ fluorophores emitting photons which can be detected within a region of interest of the SPAD array, the number of photons emitted $n$ following a single excitation pulse will have Binomial statistics $n_{\mathrm{signal}} \sim \mathrm{Binom}(N,\zeta)$. The probability of photon pile-up at a single detector element is neglected. We model the background signal at each detector element within the region of interest as a coherent state, which must follow Poissonian statistics $n_{\mathrm{background}} \sim \mathrm{Poisson}(\lambda)$. The total number of counts $n$ is then distributed by the likelihood
 
 \begin{equation}
@@ -49,10 +54,6 @@ p(n=k \mid N, \zeta) = \sum_{i=0}^{\infty} \binom{N}{i} \zeta^i (1-\zeta)^{N-i} 
 
 The likelihood in (2) can be used to model photon arrivals measured by a SPAD array.
 
-\begin{figure}
-\includegraphics[width=7cm]{Figure-0.png}
-\caption{Single photon counting with a SPAD array (a) Conventional widefield microscopy with integrated SPAD array (b) Single photon imaging scheme using 1us exposures containing a picosecond laser pulse (c) Sum of photon counts over a 5x5 region of interest (ROI), taken with $N_{\mathrm{frames}}=5\times 10^{5}$}
-\end{figure}    
 
 
 \subsection{Results}
@@ -75,11 +76,6 @@ p(N,\zeta|x) \propto p(x|N,\zeta)p(N)p(\zeta)
 
 $p(N)$ is taken to be uniform and $p(\zeta) = \mathcal{N}(\mu_{\zeta},\sigma_{\zeta})$
 
-
-\begin{figure*}
-\includegraphics[width=16cm]{Figure-2.png}
-\caption{Zero-lag second order coherence}
-\end{figure*}  
 
 \begin{figure*}
 \includegraphics[width=12cm]{Figure-4.png}
