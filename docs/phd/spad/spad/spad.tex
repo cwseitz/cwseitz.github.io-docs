@@ -19,7 +19,16 @@ Far-field optical microscopy is fundamentally limited by diffraction, with the m
 
 Molecular counting with photon statistics has a fairly simple motivation: coincidence of photons at multiple detector elements during high speed imaging provides evidence for the number of emitters present in the imaged region. Combining the ideas of conventional super-resolution approaches, with photon statistics may prove to be a powerful set of methods for bioimaging. Innovations in single photon detection technologies have begun to be integrated into fluorescence microscopes (Forbes 2019). Importantly, single photon detectors such as SPAD cameras have orders of magnitude higher temporal resolutions than standard CMOS cameras, single photon sensitivity, and theoretically zero readout noise. Such properties make these devices highly desirable for widefield imaging applications; however, application of SPAD arrays in imaging have been limited to small bundles of detector elements combined with laser scanning (Israel 2017; Forbes 2019; Tenne 2019).
 
+The reduced readout noise and large fill-factor of the SPAD array suggests its use for single molecule localization with reduced localization uncertainty. Localization uncertainty, typically the RMSE of a maximum likelihood or similar statistical estimator, is bounded from below by the inverse of the Fisher information matrix, known as the Cramer-Rao lower bound (Chao 2016). Managing the increase in localization uncertainty at high labeling density remains a major bottleneck to SMLM. For example, static uncertainty due to molecular crowding can be partially amelioriated by using pairwise or higher-order temporal correlations within a pixel neighborhood (Dertinger 2009) or structured illumination (Kalisvaart 2022, Gwosh 2020). However, the number of fluorescent active emitters in a region of interest remains critical prerequisite information in their application.
+
+In this study, we present a method for widefield single photon counting for rigorously counting fluorophores in the sample in order to constrain single molecule localization. We investigate the theoretical properties of the zero-lag second-order coherence function $g^{(2)}(0)$ for widefield photon counting and its spatial properties. Using Bayesian analysis, we derive a posterior distribution on the number of active fluorescent emitters in a region of interest. We then combined this with single molecule localization algorithms and demonstrate resolution of multiple emitters using a multi-emitter fitting algorithm and report localization errors with respect to the Cramer-rao lower bound.
+
 \subsection{Basic Scheme}
+
+\begin{figure*}
+\includegraphics[width=14cm]{Figure-0.png}
+\caption{Single photon counting with a SPAD array (a) Conventional widefield microscopy with integrated SPAD array (b) Single photon imaging scheme using 1us exposures containing a picosecond laser pulse (c) Sum of photon counts over a 5x5 region of interest (ROI), taken with $N_{\mathrm{frames}}=5\times 10^{5}$}
+\end{figure*}    
 
 We consider a simplified description of widefield photon counting for a a single photon source in the object plane labeled by a continuous-valued coordinate $r=(x,y)$. The point-spread function $O$ of the field in object space to image space is presumed to have a Gaussian shape (Zhang 2007)
 
@@ -42,9 +51,9 @@ where $\int d^2 s \; O(s-r) = \frac{1}{2}\lambda_{x}(x) \lambda_{y}(y)$ where, f
 We consider the case of pulsed excitation where the interval between pulses much longer than the fluorescence lifetime. Upon excitation of an isolated fluorescent emitter, a photon is detected at a particular detector element $n$ with probability $\zeta\propto \langle \hat{E}^{\dagger}(s_i)\hat{E}(s_i)\rangle = \frac{1}{4}\lambda_{x}^2 \lambda_{y}^2\mathrm{Tr}(\rho a^{\dagger}a)$ where $\rho$ is the density matrix for a two-level system. Similarly, the probability of detection in a region of interest collecting all photons emitted is $\zeta\propto \mathrm{Tr}(\rho a^{\dagger}a)$. Here, we are primarily concerned with the latter quantity, and its application in counting fluorescent emitters.
 
 \begin{figure*}
-\includegraphics[width=14cm]{Figure-0.png}
-\caption{Single photon counting with a SPAD array (a) Conventional widefield microscopy with integrated SPAD array (b) Single photon imaging scheme using 1us exposures containing a picosecond laser pulse (c) Sum of photon counts over a 5x5 region of interest (ROI), taken with $N_{\mathrm{frames}}=5\times 10^{5}$}
-\end{figure*}    
+\includegraphics[width=15cm]{Figure-4.png}
+\caption{}
+\end{figure*}   
 
 For $N$ fluorophores emitting photons which can be detected within a region of interest of the SPAD array, the number of photons emitted $n$ following a single excitation pulse will have Binomial statistics $n_{\mathrm{signal}} \sim \mathrm{Binom}(N,\zeta)$. The probability of photon pile-up at a single detector element is neglected. We model the background signal at each detector element within the region of interest as a coherent state, which must follow Poissonian statistics $n_{\mathrm{background}} \sim \mathrm{Poisson}(\lambda)$. The total number of counts $n$ is then distributed by the likelihood
 
@@ -55,10 +64,10 @@ p(n=k \mid N, \zeta) = \sum_{i=0}^{\infty} \binom{N}{i} \zeta^i (1-\zeta)^{N-i} 
 The likelihood in (2) can be used to model photon arrivals measured by a SPAD array.
 
 
-
 \subsection{Results}
 
-Fluorophores were excited using a picosecond $532\mathrm{nm}$ pulsed laser triggered at $500\mathrm{kHz}$. Emission light was collected using an oil-immersion 100$\times$ objective with numerical aperture (NA) 1.4 (Nikon). The emission signal was then filtered to exclude the laser line (Semrock) and projected onto the SPAD512 sensor (Pi Imaging Technologies) using a tube lens. A simplified diagram of the complete system is depicted in (Figure 1a). Each acquisition consists of $N=5\times 10^{5}$ frames, synchronized with each laser pulse, using a $1\mathrm{us}$ exposure per frame (Figure 1b). 
+ 
+Fluorophores were excited using a picosecond $532\mathrm{nm}$ pulsed laser triggered at $500\mathrm{kHz}$. Emission light was collected using an oil-immersion 100$\times$ objective with numerical aperture (NA) 1.4 (Nikon). The emission signal was then filtered to exclude the laser line (Semrock) and projected onto the SPAD512 sensor (Pi Imaging Technologies) using a tube lens. A simplified diagram of the complete system is depicted in (Figure 1a). Each acquisition consists of $N=5\times 10^{5}$ frames (500ms), synchronized with each laser pulse, using a $1\mathrm{us}$ exposure per frame (Figure 1b). 
 
 We then investigated properties of the zero-lag second order coherence function $g^{(2)}(0)$ over a region of interest, which represents one mechanism for obtaining information on the number of active fluorescent emitters (Israel 2017). 
 
@@ -68,20 +77,28 @@ g^{(2)}(0) = \frac{G^{(2)}(0)-B}{\langle G^{(2)}(m)\rangle -B}
 
 where $B = N_{\mathrm{frames}}\lambda\zeta$ is the expected number of background-signal coincidences in the region of interest. The quantity $G^{(2)}(m)$ represents the number of signal-signal coincidences in the region of interest at a lag time $m$, and is also binomially distributed $G^{(2)}(m)\sim \mathrm{Binom}(N_{\mathrm{frames}},\zeta_{m})$.
 
-Sampling from (2), we find a lack of sensitivity in $g^{(2)}(0)$, making inference of the fluorophore number $N$ intractable. We therefore choose to write a posterior distribution on the Binomial parameters used in the likelihood (2) using Bayes rule
+In order to perform localization for fluorophores which are not necessarily isolated, we write a posterior distribution on the Binomial parameters used in the likelihood (2) using Bayes rule
 
 \begin{equation*}
-p(N,\zeta|x) \propto p(x|N,\zeta)p(N)p(\zeta)
+\log p(N,\zeta|x) = \log p(x|N,\zeta) + \log p(\zeta) + C
 \end{equation*}
 
-$p(N)$ is taken to be uniform and $p(\zeta) = \mathcal{N}(\mu_{\zeta},\sigma_{\zeta})$
+where $C$ is an arbitrary constant. We use a Gaussian prior on $\zeta$ i.e., $p(\zeta) = \mathcal{N}(\mu_{\zeta},\sigma_{\zeta})$. This posterior can be integrated over $\zeta$ to produce a posterior distribution on the fluorophore number $N$ i.e., $p(N=n|x) \propto \int_{0}^{1} \prod_{j} p(x_{j}|n,\zeta)p(\zeta) d\zeta$ which is estimated via Monte Carlo integration. The final posterior is then estimated by minibatching the data into batches of $10^3$ frames and averaging the posterior $p(N|x)$ over minibatches.
 
+It is instructive to now combine (1,3) to form a likelihood on the sum of counts at each pixel in a region of interest. Such a likelihood is Poisson, as the background is modeled as shot noise, and the signal is well approximated by a Poisson distribution for a large frame number. Denoting the fluorophore coordinates by $\theta$ and vector of total counts in the region of interest $\vec{n}$, we have the following log-likelihood
 
-\begin{figure*}
-\includegraphics[width=12cm]{Figure-4.png}
-\caption{Zero-lag second order coherence}
-\end{figure*}  
+\begin{align}
+\ell(\vec{n}|\theta) &= -\log \prod_{k} \frac{e^{-\left(\mu_{k}\right)}\left(\mu_{k}\right)^{n_{k}}}{n_{k}!}\\
+&= \sum_{k}  \log n_{k}! + \mu_{k} - n_{k}\log\left(\mu_{k}\right)
+\end{align}
 
+where, in the multi-emitter regime $\mu_{k} = \sum_{m=1}^{N^{*}} \mu_{k,m}$ given the maximum aposteriori (MAP) estimate of the fluorophore number $N^{*}$. We then use Goodman and Weare's Markov Chain Monte Carlo (MCMC) algorithm to sample from the posterior on fluorophore locations. Fluorophore locations and their uncertainty can then be identified by taking clustering the posterior samples into modes (Figure 2). 
+
+We now claim that the mean of each identified of posterior cluster is a efficient and unbiased estimator of fluorophore locations. The Poisson log-likelihood (5) is convenient for computing the Fisher information matrix for $\theta$ and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below (Chao 2016). The Fisher information is (Smith 2010)
+
+\begin{equation}
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) = \sum_{k}\frac{1}{\mu_{k}'}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}}
+\end{equation}
 
 \clearpage
 
@@ -303,38 +320,5 @@ $p(N)$ is taken to be uniform and $p(\zeta) = \mathcal{N}(\mu_{\zeta},\sigma_{\z
   (\bibinfo{year}{2008}).
 
 \end{thebibliography}
-
-
-\section{Appendix}
-
-\begin{equation*}
-p(N=n|x) \propto \int_{0}^{1} \prod_{j} p(x_{j}|n,\zeta)p(\zeta) d\zeta
-\end{equation*}
-
-which is estimated via MC integration. Minibatch the data and average the posterior $p(N|x)$ over minibatches of size $M$
-
-
-When $N=1$, we see some unique behavior of this function 
-
-\begin{equation*}
-g^{(2)}(0) = \frac{G^{(2)}(0)-B}{\langle G^{(2)}(m)\rangle -B} = -\frac{B}{N_{\mathrm{frames}}\zeta(\zeta - \lambda)}
-\end{equation*}
-
-\begin{align*}
-G^{(2)}(0) &\sim \mathrm{Binomial}(N_{\mathrm{frames}}, \zeta_{0})\\
-\zeta_{0} &= 1 - (1-\zeta)^n - n\zeta (1-\zeta)^{n-1}
-\end{align*}
-
-The quantity $G^{(2)}(m)$ represents the number of signal-signal coincidences at lag $m$ in the region of interest
-
-\begin{align*}
-G^{(2)}(m) &\sim \mathrm{Binomial}(N_{\mathrm{frames}}, \zeta_{m})\\
-\zeta_{m} &= (1 - (1-\zeta)^n)^2
-\end{align*}
-
-
-
-
-
 
 \end{document}
