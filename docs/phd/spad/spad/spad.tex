@@ -88,17 +88,23 @@ It is instructive to now combine (1,3) to form a likelihood on the sum of counts
 &= \sum_{k}  \log n_{k}! + \mu_{k} - n_{k}\log\left(\mu_{k}\right)
 \end{align}
 
-where, in the multi-emitter regime $\mu_{k} = \sum_{m=1}^{N^{*}} \mu_{k,m}$ given the maximum aposteriori (MAP) estimate of the fluorophore number $N^{*}$. We then use Goodman and Weare's Markov Chain Monte Carlo (MCMC) algorithm to sample from the posterior on fluorophore locations. Fluorophore locations and their uncertainty can then be identified by taking clustering the posterior samples into modes (Figure 2). 
+where, in the multi-emitter regime the expected photon count at each pixel is $\mu_{k} = \sum_{m=1}^{N^{*}} \mu_{k,m}$ given the maximum aposteriori (MAP) estimate of the fluorophore number $N^{*}$. We then use Goodman and Weare's Markov Chain Monte Carlo (MCMC) algorithm to sample from the posterior on fluorophore locations. Fluorophore locations and their uncertainty can then be identified by taking clustering the posterior samples into modes (Figure 2). 
 
 We now claim that the mean of each identified of posterior cluster is a efficient and unbiased estimator of fluorophore locations. The Poisson log-likelihood (5) is convenient for computing the Fisher information matrix for $\theta$ and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below (Chao 2016). The Fisher information is (Smith 2010)
 
 \begin{equation}
-I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) = \sum_{k}\frac{1}{\mu_{k}'}\frac{\partial \mu_{k}'}{\partial\theta_{i}}\frac{\partial \mu_{k}'}{\partial\theta_{j}}
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) = \sum_{k}\frac{1}{\mu_{k}}\frac{\partial \mu_{k}}{\partial\theta_{i}}\frac{\partial \mu_{k}}{\partial\theta_{j}}
 \end{equation}
 
-\clearpage
+The Cramer-Rao bound is then found by $\mathrm{var}(\theta) \geq I^{-1}(\theta)$
 
- 
+\subsection{Discussion}
+
+Many fluorescent emitters exhibit random variations of brightness known as blinking. Blinking increases the observed photon-number fluctuations and could be expected to affect the value of $g^{(2)}(0)$ or the posterior on the number of active fluorescent emitters. However, the photon number will follow a Binomial statistics even in the presence of blinking, the only consequence of which is an effective reduction of the emission probability. If the effect of censoring photons by blinking and lowering the quantum yield can be accounted for, the technique used here may be compatible with common super-resolution techniques such as stochastic optical reconstruction microscopy (STORM). 
+
+The acquisition times necessary to obtain sufficient photon counts for computing the necessary statistics can potentially be very short. Most fluorophores have relaxation times in the nanosecond range and thus photons can be collected at a rate of at tens of millions of excitation pulses per second. These rates are currently difficult to obtain, however, due to limitations in detector throughput. Current state of the art and commercially available SPAD cameras have a minimum exposure time in the microsecond range. Furthermore, the data volume can quickly become intractable due to the need for several thousands of frames for a millisecond-scale exposure time. This is currently a complication for techniques like STORM and advancements in the automation for data acquisitions are necessary. 
+
+In conclusion, we propose a single molecule imaging technique that allows for simultaneous counting of localization of fluorescent molecules by modeling the quantum properties of fluorescence emission. The technique does not require a nonclassical light source and is designed to supplement standard single molecule localization microscopy techniques. The proposed method can be implemented with a standard widefield fluorescence microscope.
 
 
 
