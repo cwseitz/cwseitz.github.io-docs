@@ -3,47 +3,48 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: spad.aux
 The style file: plainnat.bst
 Database file #1: references.bib
-Warning--I didn't find a database entry for "Smith2010"
+Warning--empty title in Betzig2006
 Warning--empty title in Dertinger2009
-You've used 3 entries,
+Warning--empty title in Rust2006
+You've used 10 entries,
             2773 wiz_defined-function locations,
-            623 strings with 5443 characters,
-and the built_in function-call counts, 1430 in all, are:
-= -- 129
-> -- 80
-< -- 1
-+ -- 27
-- -- 24
-* -- 126
-:= -- 231
-add.period$ -- 12
-call.type$ -- 3
-change.case$ -- 15
-chr.to.int$ -- 3
-cite$ -- 7
-duplicate$ -- 61
-empty$ -- 112
-format.name$ -- 28
-if$ -- 290
+            670 strings with 6353 characters,
+and the built_in function-call counts, 4357 in all, are:
+= -- 397
+> -- 223
+< -- 8
++ -- 76
+- -- 66
+* -- 340
+:= -- 687
+add.period$ -- 32
+call.type$ -- 10
+change.case$ -- 44
+chr.to.int$ -- 10
+cite$ -- 23
+duplicate$ -- 200
+empty$ -- 372
+format.name$ -- 87
+if$ -- 911
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 3
-newline$ -- 26
-num.names$ -- 12
-pop$ -- 26
+missing$ -- 10
+newline$ -- 60
+num.names$ -- 40
+pop$ -- 81
 preamble$ -- 1
-purify$ -- 13
+purify$ -- 37
 quote$ -- 0
-skip$ -- 45
+skip$ -- 153
 stack$ -- 0
-substring$ -- 52
-swap$ -- 4
+substring$ -- 184
+swap$ -- 11
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 33
-warning$ -- 1
-while$ -- 12
+type$ -- 110
+warning$ -- 3
+while$ -- 40
 width$ -- 0
-write$ -- 51
-(There were 2 warnings)
+write$ -- 139
+(There were 3 warnings)
