@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  21 JUL 2024 18:08
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  22 JUL 2024 00:33
  restricted system commands enabled.
 **spad.tex
 (./spad.tex
@@ -282,79 +282,49 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 14.
 (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-
-LaTeX Warning: File `Figure-0.png' not found on input line 27.
-
-
-! Package luatex.def Error: File `Figure-0.png' not found: using draft setting.
-
-
-See the luatex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.27 \includegraphics[width=14cm]{Figure-0.png}
-                                             
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[1{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-
-LaTeX Warning: File `Figure-5.png' not found on input line 46.
-
-
-! Package luatex.def Error: File `Figure-5.png' not found: using draft setting.
-
-
-See the luatex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.46 \includegraphics[width=12cm]{Figure-5.png}
-                                             
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+<media/Figure-0.png, id=1, 673.01437pt x 524.71031pt>
+File: media/Figure-0.png Graphic file (type png)
+<use media/Figure-0.png>
+Package luatex.def Info: media/Figure-0.png  used on input line 27.
+(luatex.def)             Requested size: 398.33858pt x 310.56117pt.
+ [1{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+<media/Figure-5.png, id=22, 782.925pt x 378.41376pt>
+File: media/Figure-5.png Graphic file (type png)
+<use media/Figure-5.png>
+Package luatex.def Info: media/Figure-5.png  used on input line 46.
+(luatex.def)             Requested size: 341.43306pt x 165.02438pt.
 
 
 Package amsfonts Warning: Obsolete command \bold; \mathbf should be used instea
 d on input line 47.
 
-[2]
-
-LaTeX Warning: File `Figure-4.png' not found on input line 75.
-
-
-! Package luatex.def Error: File `Figure-4.png' not found: using draft setting.
-
-
-See the luatex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.75 \includegraphics[width=9cm]{Figure-4.png}
-                                            
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
+[2<./media/Figure-0.png>]
+<media/Figure-4.png, id=32, 608.77437pt x 285.065pt>
+File: media/Figure-4.png Graphic file (type png)
+<use media/Figure-4.png>
+Package luatex.def Info: media/Figure-4.png  used on input line 75.
+(luatex.def)             Requested size: 256.0748pt x 119.91351pt.
 
 Overfull \hbox (10.0748pt too wide) in paragraph at lines 75--76
  [][] 
  []
 
-[3] [4] (./spad.bbl) [5] (./spad.aux))
+[3<./media/Figure-5.png><./media/Figure-4.png>] (./spad.bbl [4]) [5]
+(./spad.aux))
 
 Here is how much of LuaTeX's memory you used:
- 4598 strings out of 478285
- 156265,1977958 words of node,token memory allocated
+ 4450 strings out of 478285
+ 156271,1977958 words of node,token memory allocated
  570 words of node memory still in use:
    6 hlist, 2 vlist, 2 rule, 1 glue, 4 kern, 1 glyph, 25 attribute, 56 glue_spec
 , 25 attribute_list nodes
-   avail lists: 2:366,3:518,4:39,5:819,6:52,7:15395,8:56,9:588,10:30,11:1307
- 24573 multiletter control sequences out of 65536+600000
+   avail lists: 1:1,2:454,3:372,4:38,5:820,6:46,7:16089,8:56,9:669,10:30,11:1306
+
+ 24503 multiletter control sequences out of 65536+600000
  58 fonts using 3942655 bytes
  55i,13n,59p,1505b,361s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2023/texmf-dist/fonts/opentype/public/lm/lmroman10-italic.ot
-f></usr/local/texlive/2023/texmf-dist/fonts/opentype/public/lm/lmmono9-regular.o
+</usr/local/texlive/2023/texmf-dist/fonts/opentype/public/lm/lmmono9-regular.otf
+></usr/local/texlive/2023/texmf-dist/fonts/opentype/public/lm/lmroman10-italic.o
 tf></usr/local/texlive/2023/texmf-dist/fonts/opentype/public/lm/lmroman10-regula
 r.otf></usr/local/texlive/2023/texmf-dist/fonts/opentype/public/lm/lmroman9-bold
 .otf></usr/local/texlive/2023/texmf-dist/fonts/opentype/public/lm/lmroman9-regul
@@ -379,9 +349,9 @@ st/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2023/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2023/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2023/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmsy9.pfb>
-Output written on spad.pdf (5 pages, 227589 bytes).
+Output written on spad.pdf (5 pages, 762703 bytes).
 
-PDF statistics: 148 PDF objects out of 1000 (max. 8388607)
+PDF statistics: 154 PDF objects out of 1000 (max. 8388607)
  98 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 100000000)

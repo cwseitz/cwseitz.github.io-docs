@@ -24,26 +24,26 @@ In this study, we present a method for widefield single photon counting in order
 \subsection{Basic Scheme}
 
 \begin{figure*}
-\includegraphics[width=14cm]{Figure-0.png}
+\includegraphics[width=14cm]{media/Figure-0.png}
 \caption{Single photon counting with a SPAD array (a) Conventional widefield microscopy with integrated SPAD array (b) Single photon imaging scheme using 1us exposures containing a picosecond laser pulse (c) Sum of photon counts over a 5x5 region of interest (ROI), taken with $N_{\mathrm{frames}}=5\times 10^{5}$}
 \end{figure*}    
 
-We consider a simplified description of widefield photon counting for a a single photon source in the object plane labeled by a continuous-valued coordinate $\theta=(x_0,y_0)$. The spatial profile $O$ of the field in image space is presumed to have a Gaussian shape \citep{Zhang2007,Richards1959,Gibson1989}.
+We consider a simplified description of widefield photon counting for a a single photon source in the object plane labeled by a continuous-valued coordinate $\theta=(\theta_{u},\theta_{v})$. The spatial profile $O$ of the field in image space is presumed to have a Gaussian shape \citep{Zhang2007,Richards1959,Gibson1989}.
 
 \begin{equation}
-O(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^2+(y-y_{0})^2}{2\sigma^2}}
+O(u,v) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-\theta_{u})^2+(y-\theta_{v})^2}{2\sigma^2}}
 \end{equation}
 
-Therefore the field operator in object space is $\hat{E} \propto \hat{a}$ and in image space $\hat{E} \propto O(x,y)\hat{a}$. Since our SPAD detectors at the image plane must be discrete, the total field at a detector element $k$ centered in image space at $s_k=(u_k,v_k)$ is then given by integrating over pixels of width $\delta$. Moreover, the Gaussian $O$ is presumed to be isotropic and therefore we have $\hat{E}(s_k) \propto \Gamma_{x}(u_k,x_{0})\Gamma_{y}(v_k,y_0)$. For example,
+Therefore the field operator in object space is $\hat{E} \propto \hat{a}$ and in image space $\hat{E} \propto O(x,y)\hat{a}$. Since our SPAD detectors at the image plane must be discrete, the total field at a detector element $k$ centered in image space at $s_k=(u_k,v_k)$ is then given by integrating over pixels of width $\delta$. Moreover, the Gaussian $O$ is presumed to be isotropic and therefore we have $\hat{E}(s_k) \propto \Gamma_{u}(u_k,\theta_{u})\Gamma_{v}(v_k,\theta_{v})$. For example,
 
 \begin{align*}
-\Gamma_{x}(u_k,x_{0}) &= \\ \frac{1}{\sqrt{2}}\left(\mathrm{erf}\left(\frac{u_k+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{u_k-\frac{1}{2}-x_0}{\sqrt{2}\sigma}\right)\right)
+\Gamma_{u}(u_k,\theta_{u}) &= \\ \frac{1}{\sqrt{2}}\left(\mathrm{erf}\left(\frac{u_k+\frac{1}{2}-\theta_{u}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{u_k-\frac{1}{2}-\theta_{u}}{\sqrt{2}\sigma}\right)\right)
 \end{align*}
 
-We now consider the case of pulsed excitation where the interval between pulses much longer than the fluorescence lifetime. Upon excitation of an isolated fluorescent emitter, a photon is detected at a particular detector element $k$ with probability $\zeta_k \propto \langle \hat{E}^{\dagger}(s_k)\hat{E}(s_k)\rangle = \frac{1}{2}\Gamma_{x}^2 \Gamma_{y}^2\mathrm{Tr}(\rho a^{\dagger}a)$ where $\rho$ is the density matrix for a two-level system. Similarly, the probability of detection in a region of interest collecting all photons emitted is $\zeta\propto \mathrm{Tr}(\rho a^{\dagger}a)$. Here, we are primarily concerned with the latter quantity, and its application in counting fluorescent emitters.
+We now consider the case of pulsed excitation where the interval between pulses much longer than the fluorescence lifetime. Upon excitation of an isolated fluorescent emitter, a photon is detected at a particular detector element $k$ with probability $\zeta_k \propto \langle \hat{E}^{\dagger}(s_k)\hat{E}(s_k)\rangle = \frac{1}{2}\Gamma_{u}^2 \Gamma_{v}^2\mathrm{Tr}(\rho a^{\dagger}a)$ where $\rho$ is the density matrix for a two-level system. Similarly, the probability of detection in a region of interest collecting all photons emitted is $\zeta\propto \mathrm{Tr}(\rho a^{\dagger}a)$. Here, we are primarily concerned with the latter quantity, and its application in counting fluorescent emitters.
 
 \begin{figure*}
-\includegraphics[width=12cm]{Figure-5.png}
+\includegraphics[width=12cm]{media/Figure-5.png}
 \caption{Single and multi-emitter localization error on sums of photon counts. (left) Localization uncertainty for simulated data for different values of $N$, plotted with respect to the Cramer-Rao lower bound, shown in dashed gray. (right) Multi-emitter localization by MCMC sampling for $N=3$, colors indicate a cluster of samples i.e., a single localization. All data was generated with a background rate $\langle \bold{n}_{\mathrm{background}} \rangle = \lambda N_{\mathrm{frames}}/d^{2}$ per pixel. Scalebar 360nm}
 \end{figure*}   
 
@@ -63,7 +63,7 @@ p(N,\zeta|x) \propto p(x|N,\zeta)p(\zeta)
 
 We use a Gaussian prior on $\zeta$ i.e., $p(\zeta) = \mathcal{N}(\mu_{\zeta},\sigma_{\zeta})$ with $\mu_{\zeta}=0.01$ and $\sigma_{\zeta}=0.005$. Prior uncertainty in the value of $\zeta$ stems from fluorophores with potentially heterogeneous photophysical properties as well as varying laser power throughout the excited region. This posterior can be integrated over $\zeta$ to produce a posterior distribution on the fluorophore number $N$ i.e., $p(N=N'|n) \propto \int_{0}^{1} \prod_{j} p(n_{j}|N',\zeta)p(\zeta) d\zeta$ which can be estimated using Monte Carlo methods. The final posterior is then estimated by minibatching the data into batches of $10^3$ frames and averaging the posterior $p(N|n)$ over minibatches. The fluorophore number $N$ within each ROI is then estimated by the maximum aposteriori (MAP) estimate $N^{*}$ given by this distribution.
 
-For localization, we notice that (2) is well approximated by a Poisson distribution for a large frame number, making the localization procedure similar to conventional intensity-based methods \citep{Smith2010}. Denoting the fluorophore coordinates by $\theta$ and vector of total counts in the region of interest $\bold{n}$, we have the following log-likelihood
+For localization, we note that the period between excitation pulses is orders of magnitude longer than the fluorescence lifetime, and excitation events are then independent. Total photon counts over $N_{\mathrm{frames}}$ will therefore follow Poisson statistics, making the localization procedure similar to conventional methods \citep{Smith2010}. Denoting the fluorophore coordinates by $\theta$ and vector of total counts in the region of interest $\bold{n}$, we have the following log-likelihood
 
 
 \begin{align}
@@ -72,11 +72,11 @@ For localization, we notice that (2) is well approximated by a Poisson distribut
 \end{align}
 
 \begin{figure}
-\includegraphics[width=9cm]{Figure-4.png}
+\includegraphics[width=9cm]{media/Figure-4.png}
 \caption{Posteriors on the number of fluorescent emitters $N$ and localization for $N^{*}=1$ (left) and $N^{*}=2$ (right) quantum dots. Scalebars 360nm}
 \end{figure}   
 
-where, in the multi-emitter regime the expected photon count at a pixel is $\mu_{k} = \langle \bold{n}_k\rangle =\sum_{m=1}^{N^{*}} \mu_{k,m}$ given $\mu_{k,m}=\zeta N_{\mathrm{frames}}\Gamma_{x}(u_k,x_{0,m})\Gamma_{y}(v_k,y_{0,m}) + \lambda N_{\mathrm{frames}}/d^{2}$. In the multi-emitter regime, optimization of (4) by sampling is a suitable choice (see Results). 
+where, in the multi-emitter regime the expected photon count at a pixel is $\mu_{k} = \langle \bold{n}_k\rangle =\sum_{m=1}^{N^{*}} \mu_{k,m}$ given $\mu_{k,m}=\zeta N_{\mathrm{frames}}\Gamma_{u}(u_k,x_{0,m})\Gamma_{v}(v_k,y_{0,m}) + \lambda N_{\mathrm{frames}}/d^{2}$. In the multi-emitter regime, optimization of (4) by sampling is a suitable choice (see Results). 
 
 
 \subsection{Results}
