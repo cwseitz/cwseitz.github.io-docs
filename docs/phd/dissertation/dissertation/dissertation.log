@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  21 JUL 2024 19:58
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  21 JUL 2024 21:10
  restricted system commands enabled.
 **dissertation.tex
 (./dissertation.tex
@@ -2264,7 +2264,7 @@ Package biblatex Info: Reference segment=0 on input line 519.
 Package chemgreek Info: Activating mapping `default' on line 519.
 
 \Etoc@tf=\read6
-<graphics//gr-pu-seal-vector.pdf, id=181, 527.62581pt x 516.24864pt>
+<graphics//gr-pu-seal-vector.pdf, id=177, 527.62581pt x 516.24864pt>
 File: graphics//gr-pu-seal-vector.pdf Graphic file (type pdf)
 <use graphics//gr-pu-seal-vector.pdf>
 Package luatex.def Info: graphics//gr-pu-seal-vector.pdf  used on input line 52
@@ -2360,9 +2360,9 @@ RM)\T1/lmr/m/n/12 . (A) Sin-gle molecules
 \openout12 = dissertation.lof
  [8
 
-] [9] [10
+] [9
 
-] [11]) [12
+] [10]) [11
 
 ]
 \openout2 = ch1.aux
@@ -2371,9 +2371,9 @@ File: ch1.tex Chapter1
 
 Chapter 1.
 
-LaTeX Warning: Citation 'Kong2013' on page 13 undefined on input line 8.
+LaTeX Warning: Citation 'Kong2013' on page 12 undefined on input line 8.
 
-[13
+[12
 
 
 
@@ -2381,29 +2381,44 @@ LaTeX Warning: Citation 'Kong2013' on page 13 undefined on input line 8.
 
 Missing character: There is no – (U+2013) in font ec-lmr12!
 Missing character: There is no ’ (U+2019) in font ec-lmr12!
-] [14
-Missing character: There is no – (U+2013) in font ec-lmr12!
 ]
-<figures/Intro.png, id=387, 974.13937pt x 370.38374pt>
+<figures/Intro.png, id=359, 974.13937pt x 370.38374pt>
 File: figures/Intro.png Graphic file (type png)
 <use figures/Intro.png>
-Package luatex.def Info: figures/Intro.png  used on input line 32.
+Package luatex.def Info: figures/Intro.png  used on input line 15.
 (luatex.def)             Requested size: 469.75502pt x 178.6073pt.
-<figures/Noise.png, id=388, 674.2791pt x 286.9119pt>
+
+
+LaTeX Warning: Citation 'Zhang2007' on page 13 undefined on input line 21.
+
+
+LaTeX Warning: Citation 'Richards1959' on page 13 undefined on input line 21.
+
+
+LaTeX Warning: Citation 'Gibson1989' on page 13 undefined on input line 21.
+
+
+Overfull \hbox (1.46458pt too wide) in paragraph at lines 21--22
+[]\T1/lmr/m/n/12 It is com-mon to de-scribe the op-ti-cal im-pulse re-sponse of a mi-cro-scope as a two-dimensional
+ []
+
+[13
+Missing character: There is no – (U+2013) in font ec-lmr12!
+<./figures/Intro.png>] [14]
+<figures/Noise.png, id=380, 674.2791pt x 286.9119pt>
 File: figures/Noise.png Graphic file (type png)
 <use figures/Noise.png>
-Package luatex.def Info: figures/Noise.png  used on input line 38.
+Package luatex.def Info: figures/Noise.png  used on input line 52.
 (luatex.def)             Requested size: 455.24408pt x 193.71407pt.
- [15<./figures/Intro.png>] [16<./figures/Noise.png>]
-<figures/FRC.png, id=404, 483.9681pt x 296.7888pt>
+ [15<./figures/Noise.png>] [16]
+<figures/FRC.png, id=397, 483.9681pt x 296.7888pt>
 File: figures/FRC.png Graphic file (type png)
 <use figures/FRC.png>
-Package luatex.def Info: figures/FRC.png  used on input line 59.
+Package luatex.def Info: figures/FRC.png  used on input line 88.
 (luatex.def)             Requested size: 398.33858pt x 244.28769pt.
 ) [17<./figures/FRC.png>]
 \openout2 = ch2.aux
-
-(./ch2.tex
+ (./ch2.tex
 File: ch2.tex Chapter2
 
 Chapter 2.
@@ -2488,203 +2503,175 @@ LaTeX Warning: Citation 'Kingma2023' on page 20 undefined on input line 14.
 
 LaTeX Warning: Citation 'Ribeiro2024' on page 20 undefined on input line 14.
 
+
+LaTeX Warning: Citation 'Zhang2018' on page 20 undefined on input line 22.
+
+
+LaTeX Warning: Citation 'Kim2019' on page 20 undefined on input line 22.
+
+
+LaTeX Warning: Citation 'Zelger2018' on page 20 undefined on input line 22.
+
+
+LaTeX Warning: Citation 'Speiser2021' on page 20 undefined on input line 22.
+
+
+LaTeX Warning: Citation 'Nehme2020' on page 20 undefined on input line 22.
+
 [20]
-</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Generation.png, 
-id=430, 1744.26656pt x 335.75438pt>
-File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Generation.
-png Graphic file (type png)
-<use /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Generation.p
-ng>
-Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddp
-m/media/Generation.png  used on input line 30.
-(luatex.def)             Requested size: 392.46967pt x 75.54659pt.
-
-
-LaTeX Warning: Citation 'Huang2013' on page 21 undefined on input line 34.
-
-[21</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Generation.png
->]
-
-LaTeX Warning: Citation 'Zhang2018' on page 22 undefined on input line 44.
-
-
-LaTeX Warning: Citation 'Kim2019' on page 22 undefined on input line 44.
-
-
-LaTeX Warning: Citation 'Zelger2018' on page 22 undefined on input line 44.
-
-
-LaTeX Warning: Citation 'Speiser2021' on page 22 undefined on input line 44.
-
-
-LaTeX Warning: Citation 'Nehme2020' on page 22 undefined on input line 44.
-
-</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/MCMC.png, id=440
+</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/MCMC.png, id=423
 , 578.16pt x 187.902pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/MCMC.png Gr
 aphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/MCMC.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddp
-m/media/MCMC.png  used on input line 48.
+m/media/MCMC.png  used on input line 26.
 (luatex.def)             Requested size: 404.70924pt x 131.53049pt.
+ [21</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/MCMC.png>]
+
+LaTeX Warning: Citation 'SohlDickstein2015' on page 22 undefined on input line 
+46.
+
+
+LaTeX Warning: Citation 'Ho2020' on page 22 undefined on input line 46.
+
+
+LaTeX Warning: Citation 'Song2021' on page 22 undefined on input line 46.
+
+
+LaTeX Warning: Citation 'Saharia2021' on page 22 undefined on input line 46.
+
+
+LaTeX Warning: Citation 'Vahdat2021' on page 22 undefined on input line 46.
+
+
+Overfull \hbox (14.57072pt too wide) in paragraph at lines 46--47
+[]\T1/lmr/m/n/12 Re-cent ad-vances in gen-er-a-tive mod-el-ing, par-tic-u-larly dif-fu-sion mod-els [[],
+ []
+
 [22]
+Underfull \hbox (badness 10000) in paragraph at lines 48--49
+
+ []
+
+
+LaTeX Warning: Citation 'Song2019' on page 23 undefined on input line 50.
+
 
 LaTeX Warning: Citation 'SohlDickstein2015' on page 23 undefined on input line 
-68.
+60.
+
+
+LaTeX Warning: Citation 'Ho2020' on page 23 undefined on input line 60.
+
+
+LaTeX Warning: Citation 'Song2021' on page 23 undefined on input line 60.
+
+
+LaTeX Warning: Citation 'Kingma2021' on page 23 undefined on input line 60.
+
+
+LaTeX Warning: Citation 'Kingma2023' on page 23 undefined on input line 60.
 
 
 LaTeX Warning: Citation 'Ho2020' on page 23 undefined on input line 68.
 
 
-LaTeX Warning: Citation 'Song2021' on page 23 undefined on input line 68.
+LaTeX Warning: Citation 'Kingma2023' on page 23 undefined on input line 68.
+
+[23]
+
+LaTeX Warning: Citation 'Ho2020' on page 24 undefined on input line 76.
 
 
-LaTeX Warning: Citation 'Saharia2021' on page 23 undefined on input line 68.
+LaTeX Warning: Citation 'Kingma2021' on page 24 undefined on input line 80.
 
 
-LaTeX Warning: Citation 'Vahdat2021' on page 23 undefined on input line 68.
+LaTeX Warning: Citation 'Ho2020' on page 24 undefined on input line 87.
 
 
-Overfull \hbox (14.57072pt too wide) in paragraph at lines 68--69
-[]\T1/lmr/m/n/12 Re-cent ad-vances in gen-er-a-tive mod-el-ing, par-tic-u-larly dif-fu-sion mod-els [[],
- []
-
-[23</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/MCMC.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 70--71
-
- []
+LaTeX Warning: Citation 'Kingma2021' on page 24 undefined on input line 87.
 
 
-LaTeX Warning: Citation 'Song2019' on page 24 undefined on input line 72.
-
-
-LaTeX Warning: Citation 'SohlDickstein2015' on page 24 undefined on input line 
-82.
-
-
-LaTeX Warning: Citation 'Ho2020' on page 24 undefined on input line 82.
-
-
-LaTeX Warning: Citation 'Song2021' on page 24 undefined on input line 82.
-
-
-LaTeX Warning: Citation 'Kingma2021' on page 24 undefined on input line 82.
-
-
-LaTeX Warning: Citation 'Kingma2023' on page 24 undefined on input line 82.
+LaTeX Warning: Citation 'Kingma2023' on page 24 undefined on input line 87.
 
 [24]
-
-LaTeX Warning: Citation 'Ho2020' on page 25 undefined on input line 90.
-
-
-LaTeX Warning: Citation 'Kingma2023' on page 25 undefined on input line 90.
-
-
-LaTeX Warning: Citation 'Ho2020' on page 25 undefined on input line 98.
-
-
-LaTeX Warning: Citation 'Kingma2021' on page 25 undefined on input line 102.
-
-[25]
-
-LaTeX Warning: Citation 'Ho2020' on page 26 undefined on input line 109.
-
-
-LaTeX Warning: Citation 'Kingma2021' on page 26 undefined on input line 109.
-
-
-LaTeX Warning: Citation 'Kingma2023' on page 26 undefined on input line 109.
-
-</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.png, id=47
-1, 361.35pt x 361.35pt>
+</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.png, id=45
+5, 361.35pt x 361.35pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.png G
 raphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddp
-m/media/Bayes.png  used on input line 125.
+m/media/Bayes.png  used on input line 103.
 (luatex.def)             Requested size: 397.48624pt x 397.48624pt.
-[26]
-
-LaTeX Warning: Citation 'Kong2013' on page 27 undefined on input line 129.
 
 
-LaTeX Warning: Citation 'Nehme2020' on page 27 undefined on input line 138.
+LaTeX Warning: Citation 'Kong2013' on page 25 undefined on input line 107.
 
-[27] [28</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.png
->] [29]
+[25] [26</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.png
+>]
 
-LaTeX Warning: Citation 'Kingma2021' on page 30 undefined on input line 160.
+LaTeX Warning: Citation 'Nehme2020' on page 27 undefined on input line 116.
+
+[27]
+
+LaTeX Warning: Citation 'Kingma2021' on page 28 undefined on input line 138.
 
 
-LaTeX Warning: Citation 'Ribeiro2024' on page 30 undefined on input line 160.
+LaTeX Warning: Citation 'Ribeiro2024' on page 28 undefined on input line 138.
+
+[28]
+
+LaTeX Warning: Citation 'Ribeiro2024' on page 29 undefined on input line 148.
 
 
-LaTeX Warning: Citation 'Ribeiro2024' on page 30 undefined on input line 170.
+LaTeX Warning: Citation 'Saharia2021' on page 29 undefined on input line 154.
+
+
+LaTeX Warning: Citation 'Ribeiro2024' on page 29 undefined on input line 165.
+
+[29]
+
+LaTeX Warning: Citation 'Kingma2023' on page 30 undefined on input line 171.
+
+
+LaTeX Warning: Citation 'Chao2016' on page 30 undefined on input line 195.
+
+
+LaTeX Warning: Citation 'Smith2010' on page 30 undefined on input line 195.
 
 [30]
-
-LaTeX Warning: Citation 'Saharia2021' on page 31 undefined on input line 176.
-
-
-LaTeX Warning: Citation 'Ribeiro2024' on page 31 undefined on input line 187.
-
-
-LaTeX Warning: Citation 'Kingma2023' on page 31 undefined on input line 193.
-
-
-LaTeX Warning: Citation 'Zhang2007' on page 31 undefined on input line 202.
-
-
-LaTeX Warning: Citation 'Richards1959' on page 31 undefined on input line 202.
-
-
-LaTeX Warning: Citation 'Gibson1989' on page 31 undefined on input line 202.
-
-
-Overfull \hbox (1.46458pt too wide) in paragraph at lines 202--203
-[]\T1/lmr/m/n/12 It is com-mon to de-scribe the op-ti-cal im-pulse re-sponse of a mi-cro-scope as a two-dimensional
- []
-
-[31] [32]
-
-LaTeX Warning: Citation 'Chao2016' on page 33 undefined on input line 247.
-
-
-LaTeX Warning: Citation 'Smith2010' on page 33 undefined on input line 247.
-
-[33]
-</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png, id=5
-29, 432.11438pt x 226.59656pt>
+</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png, id=4
+97, 432.11438pt x 226.59656pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png 
 Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddp
-m/media/Errors.png  used on input line 271.
+m/media/Errors.png  used on input line 219.
 (luatex.def)             Requested size: 302.478pt x 158.6165pt.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 276.
+(hyperref)                removing `math shift' on input line 224.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 276.
+(hyperref)                removing `math shift' on input line 224.
 
 
-LaTeX Warning: Citation 'Nehme2020' on page 34 undefined on input line 278.
+LaTeX Warning: Citation 'Nehme2020' on page 31 undefined on input line 226.
 
 
-LaTeX Warning: Citation 'Nehme2020' on page 34 undefined on input line 278.
+LaTeX Warning: Citation 'Nehme2020' on page 31 undefined on input line 226.
 
-[34</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png>]
+[31]
 
-LaTeX Warning: Citation 'Saharia2021' on page 35 undefined on input line 280.
+LaTeX Warning: Citation 'Saharia2021' on page 32 undefined on input line 228.
 
 
-LaTeX Warning: Citation 'Saharia2021' on page 35 undefined on input line 280.
+LaTeX Warning: Citation 'Saharia2021' on page 32 undefined on input line 228.
 
-) [35]
+) [32</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png>] [33]
 \openout2 = ch4.aux
  (./ch4.tex
 File: ch4.tex Chapter4
@@ -2695,31 +2682,31 @@ Package hyperref Warning: Difference (2) between bookmark levels is greater
 (hyperref)                than one, level fixed on input line 10.
 
 
-LaTeX Warning: Citation 'Rust2006' on page 36 undefined on input line 12.
+LaTeX Warning: Citation 'Rust2006' on page 34 undefined on input line 12.
 
 
-LaTeX Warning: Citation 'Betzig2006' on page 36 undefined on input line 12.
+LaTeX Warning: Citation 'Betzig2006' on page 34 undefined on input line 12.
 
 
-LaTeX Warning: Citation 'Ta2010' on page 36 undefined on input line 12.
+LaTeX Warning: Citation 'Ta2010' on page 34 undefined on input line 12.
 
 
-LaTeX Warning: Citation 'Israel2017' on page 36 undefined on input line 12.
+LaTeX Warning: Citation 'Israel2017' on page 34 undefined on input line 12.
 
 
-LaTeX Warning: Citation 'Chao2016' on page 36 undefined on input line 14.
+LaTeX Warning: Citation 'Chao2016' on page 34 undefined on input line 14.
 
 
-LaTeX Warning: Citation 'Dertinger2009' on page 36 undefined on input line 14.
+LaTeX Warning: Citation 'Dertinger2009' on page 34 undefined on input line 14.
 
-[36
+[34
 
 
 
 
 ]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.png, id
-=549, 673.01437pt x 524.71031pt>
+=525, 673.01437pt x 524.71031pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.png
@@ -2729,18 +2716,18 @@ d/media/Figure-0.png  used on input line 21.
 (luatex.def)             Requested size: 398.33858pt x 310.56117pt.
 
 
-LaTeX Warning: Citation 'Zhang2007' on page 37 undefined on input line 25.
+LaTeX Warning: Citation 'Zhang2007' on page 35 undefined on input line 25.
 
 
-LaTeX Warning: Citation 'Richards1959' on page 37 undefined on input line 25.
+LaTeX Warning: Citation 'Richards1959' on page 35 undefined on input line 25.
 
 
-LaTeX Warning: Citation 'Gibson1989' on page 37 undefined on input line 25.
+LaTeX Warning: Citation 'Gibson1989' on page 35 undefined on input line 25.
 
-[37] [38</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.
+[35] [36</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.
 png>]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png, id
-=564, 782.925pt x 378.41376pt>
+=540, 782.925pt x 378.41376pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png
@@ -2748,14 +2735,14 @@ g Graphic file (type png)
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spa
 d/media/Figure-5.png  used on input line 40.
 (luatex.def)             Requested size: 341.43306pt x 165.02438pt.
- [39</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png>
+ [37</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png>
 ]
 
-LaTeX Warning: Citation 'Smith2010' on page 40 undefined on input line 60.
+LaTeX Warning: Citation 'Smith2010' on page 38 undefined on input line 60.
 
-[40]
+[38]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-4.png, id
-=580, 608.77437pt x 285.065pt>
+=556, 608.77437pt x 285.065pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-4.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-4.png
@@ -2765,16 +2752,16 @@ d/media/Figure-4.png  used on input line 69.
 (luatex.def)             Requested size: 256.0748pt x 119.91351pt.
 
 
-LaTeX Warning: Citation 'Israel2017' on page 41 undefined on input line 78.
+LaTeX Warning: Citation 'Israel2017' on page 39 undefined on input line 78.
 
-[41</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-4.png>]
+[39</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-4.png>]
 
-LaTeX Warning: Citation 'Goodman2010' on page 42 undefined on input line 86.
+LaTeX Warning: Citation 'Goodman2010' on page 40 undefined on input line 86.
 
 
-LaTeX Warning: Citation 'Smith2010' on page 42 undefined on input line 86.
+LaTeX Warning: Citation 'Smith2010' on page 40 undefined on input line 86.
 
-[42]) [43]
+[40]) [41]
 changed \interlinepenalty to 10000
 
 LaTeX Warning: Empty bibliography on input line 608.
@@ -3022,7 +3009,6 @@ figures/Noise.png
 figures/FRC.png
      ch2.tex    Chapter2
      ch3.tex    
-/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Generation.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/MCMC.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png
@@ -3036,7 +3022,7 @@ figures/FRC.png
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `dissertation.out' has not changed.
-(rerunfilecheck)             Checksum: D5D42631B68EB24ABFB8D759394E4D0E;6148.
+(rerunfilecheck)             Checksum: A0FB8C70BE575FB671AAE9DDA1ECC025;5860.
 
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                dissertation
@@ -3048,20 +3034,22 @@ Package logreq Info: Writing requests to 'dissertation.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 75851 strings out of 478285
+ 75822 strings out of 478285
  125218,3417909 words of node,token memory allocated
- 1521 words of node memory still in use:
-   24 hlist, 2 vlist, 10 rule, 2 glue, 4 kern, 3 sub_mlist, 1 glyph, 116 attribu
-te, 92 glue_spec, 116 attribute_list, 9 write, 16 pdf_literal, 2 pdf_dest, 16 pd
+ 1505 words of node memory still in use:
+   24 hlist, 2 vlist, 10 rule, 2 glue, 4 kern, 3 sub_mlist, 1 glyph, 112 attribu
+te, 92 glue_spec, 112 attribute_list, 9 write, 16 pdf_literal, 2 pdf_dest, 16 pd
 f_colorstack nodes
-   avail lists: 1:8,2:1822,3:850,4:161,5:448,6:169,7:7962,8:79,9:1571,10:28,11:7
+   avail lists: 1:9,2:1830,3:850,4:160,5:453,6:169,7:7962,8:71,9:1571,10:28,11:7
 06
- 93349 multiletter control sequences out of 65536+600000
- 57 fonts using 3719055 bytes
+ 93331 multiletter control sequences out of 65536+600000
+ 57 fonts using 3716495 bytes
  109i,13n,103p,1567b,2475s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+warning  (pdf backend): unreferenced destination with name 'figure.caption.14'
 {/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/tex
-live/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2023/t
-exmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2023/texmf-dist/fonts
+live/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2023/texmf
+-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2023/texmf-dist/fonts
 /enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/
 lm/lm-mathex.enc}</usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmbx1
 2.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmbx6.pfb></usr/
@@ -3078,10 +3066,10 @@ pe1/public/lm/lmsy6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/l
 m/lmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symb
 ols/msbm10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/symbol/usyr.p
 fb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on dissertation.pdf (43 pages, 2575310 bytes).
+Output written on dissertation.pdf (41 pages, 2528537 bytes).
 
-PDF statistics: 678 PDF objects out of 1000 (max. 8388607)
- 531 compressed objects within 6 object streams
- 114 named destinations out of 1000 (max. 131072)
- 492 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 654 PDF objects out of 1000 (max. 8388607)
+ 513 compressed objects within 6 object streams
+ 109 named destinations out of 1000 (max. 131072)
+ 484 words of extra memory for PDF output out of 10000 (max. 100000000)
 

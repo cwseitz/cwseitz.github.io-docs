@@ -17,28 +17,6 @@ In the remainder of this paper, we first introduce the likelihood of low-resolut
 
 \section{Background}
 
-\subsection{Image Likelihood and Localization Error}
-
-The central objective of SMLM is to infer a set of molecular coordinates $\theta=(\theta_{u},\theta_{v})$ from measured low resolution images $\bold{x}$. The likelihood on a particular pixel $p(\bold{x}_k\lvert\theta)$ is taken to be a convolution of Poisson and Gaussian distributions, due to shot noise $p(s_{k}) = \mathrm{Poisson}(\omega_{k})$ and sensor readout noise $p(\zeta_{k}) = \mathcal{N}(o_{k},w_{k}^{2})$ 
-
-\begin{equation}
-p(\bold{x}_{k}\lvert\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_{k}^{q}\frac{1}{\sqrt{2\pi}w_{k}}e^{-\frac{(\bold{x}_{k}-g_{k}q-o_{k})^2}{2 w_{k}^{2}}} \approx \mathrm{Poisson}(\omega_{k}')
-\end{equation}
-
-
-\begin{figure}[t][t]
-\includegraphics[scale=0.225]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Generation.png}
-\caption{Generative model of single molecule localization microscopy images. Low resolution images $\bold{x}$ are generated from coordinates $\theta$ by integration of the optical transfer function $O$ and sampling from the likelihood (1): $\bold{x}\sim p(\bold{x}\lvert\theta) = \prod_{k} p(\bold{x}_k\lvert\theta)$. A kernel density estimate $\bold{y}$ is inferred from $\bold{x}$}
-\end{figure}
-
-where $A$ is some normalization constant. For the sake of generality, we include a per-pixel gain factor $g_{k}$, which is often unity. Sampling from $p(\bold{x}_{k}\lvert\theta)$ is trivial; however, for computation of a lower bound on uncertainty in $\theta$, the summation in (1) can be difficult to work with. Therefore, we choose to use a Poisson approximation for simplification, valid under a range of experimental conditions \parencite{Huang2013}. After subtraction of a known offset $o_{k}$ of the pixel array, which can be easily measured, we have $\omega_{k}' = \omega_{k} + w_{k}^{2}$. The expectation of the Poisson process $\omega_{k}$ at each pixel of the image must then be computed from the optical impulse response $O(u,v)$, which is taken to be an isotropic Gaussian in two-dimensions. Consider an idealized scenario where an isolated fluorescent molecule exists in the image plane. For a particular pixel $k$ of width $\delta$ centered at $\xi_{k}=(u_k,v_k)$, we define, along the first image dimension
-
-\begin{equation}
-\Delta E_{u} \vcentcolon = \int_{u_{k}-\delta /2}^{u_{k}+\delta /2} O(u;\theta_{u})du = \frac{1}{2}\left(\mathrm{erf}\left(\frac{u_{k}+\frac{\delta}{2}-\theta_{u}}{\sqrt{2}\sigma_{\bold{x}}}\right) -\mathrm{erf}\left(\frac{u_{k}-\frac{\delta}{2}-\theta_{u}}{\sqrt{2}\sigma_{\bold{x}}}\right)\right)
-\end{equation}
-
-The expected value at each pixel is then $\omega_{k}\propto \Delta E_{u}(u_{k},\theta_{u},\sigma_{\bold{x}})\Delta E_{v}(v_{k},\theta_{v},\sigma_{\bold{x}}) $. Using this, sampling from the convolution distribution in (1) is can be carried out by $\bold{x}_{k} = s_{k} + \zeta_{k}$ for $s_{k}\sim \mathrm{Poisson}(\omega_{k}), \eta_{k}\sim \mathcal{N}(o_{k},w_{k}^{2})$. The complete generative process is depicted in (Figure 1). In this simple case, an estimate of the posterior $p(\theta\lvert\bold{x})$ can be found by Markov Chain Monte Carlo (MCMC) sampling as shown in (Figure 2). Details of the MCMC algorithm used here are outlined in the Appendix.
-
 \subsection{Gaussian kernel density estimation}
 
 Direct optimization of the likelihood in (1) from observations $\bold{x}$ alone is challenging when fluorescent emitters are dense within the field of view and fluorescent signals significantly overlap. However, convolutional neural networks (CNNs) have recently proven to be powerful tools fluorescence microscopy to extract parameters describing fluorescent emitters such as color, emitter orientation, $z$-coordinate, and background signal \cite{Zhang2018,Kim2019,Zelger2018}. For localization tasks, CNNs typically employ upsampling layers to reconstruct Bernoulli probabilities of emitter occupancy \parencite{Speiser2021} or KD estimates with higher resolution than experimental measurements \parencite{Nehme2020}. We choose to use KD estimates in our model, denoted by $\bold{y}$, which are latent in the low-resolution data $\bold{x}$. KDEs are the most common data structure used in SMLM, and can be easily generated from molecular coordinates, alongside observations $\bold{x}$.
@@ -195,36 +173,6 @@ Using a Monte Carlo estimate of $\mathcal{L}_{\psi}$ \parencite{Kingma2023} whic
 \begin{equation*}
 \mathcal{L}_{\psi} = \mathbb{E}_{\epsilon\sim \mathcal{N}(0,I),t\sim U(1,T)}\left[\left(\frac{\mathrm{SNR}_{t-1}}{{\mathrm{SNR}_{t}}}-1\right)\lvert\lvert \bold{\epsilon}-\bold{\epsilon}_{\psi}\lvert\lvert_{2}^{2}\right]
 \end{equation*}
-
-
-\subsection{Optical impulse response}
-
-It is common to describe the optical impulse response of a microscope as a two-dimensional isotropic Gaussian \parencite{Zhang2007}. This is an approximation to the more rigorous diffraction models given by \parencite{Richards1959,Gibson1989}. Over a continuous domain, the impulse response reads
-
-\begin{equation*}
-O(u,v) = \frac{1}{2\pi\sigma_{\bold{x}}^{2}}e^{-\frac{(u-\theta_{u})^{2}+(v-\theta_{v})^{2}}{2\sigma_{\bold{x}}^{2}}}
-\end{equation*}
-
-The above expression can be interpreted as a probability distribution over locations where a photon can be detected. Therefore, for discrete detectors, we discretize this expression by integrating over pixels. The number of photon arrivals will follow Poisson statistics, with expected value
-
-\begin{equation*}
-\omega_{k} = i_{0}\left(\int_{u_{k}-\delta /2}^{u_{k}+\delta /2} O(u; \theta_{u})du \right)\left(\int_{v_{k}-\delta /2}^{v_{k}+\delta /2} O(v;\theta_{v})dv \right)
-\end{equation*}
-
-The scalar quantity $i_{0}$ represents the amplitude of the signal, which is proportional the quantum efficiency of a pixel $\eta$, the duration of exposure, $\Delta$, and the number of photons emitter by a fluorescent molecule $N_{0}$. With no loss of generality, $\Delta = \eta = 1$ and there is a single free parameter $N_{0}$. A simple change of variables $u' = u - \theta_{u}$ and $v' = v-\theta_{v}$ gives
-
-\begin{align*}
-\omega_{k} = i_{0}\left(\int_{u_{k}-\delta /2 - \theta_{u}}^{u_{k}+\delta /2 - \theta_{u}} O(u)du \right)\left(\int_{v_{k}-\delta /2 - \theta_{v}}^{v_{k}+\delta /2 - \theta_{v}} O(v)dv \right)
-\end{align*}
-
-One of these terms can be written as 
-
-\begin{align*}
-\int_{u_{k}-\delta /2 - \theta_{u}}^{u_{k}+\delta /2 - \theta_{u}} O(u)du &= \int_{0}^{u_{k}+\delta /2 - \theta_{u}} O(u)du - \int_{0}^{u_{k}-\delta /2 - \theta_{u}} O(u)du\\
-&= \frac{1}{2}\left(\mathrm{erf}\left(\frac{u_{k}+\frac{\delta}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right) -\mathrm{erf}\left(\frac{u_{k}-\frac{\delta}{2}-\theta_{i}}{\sqrt{2}\sigma_{\bold{x}}}\right)\right)
-\end{align*}
-
-where we have used the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}\int_{0}^{z}e^{-t^{2}}dt$. 
 
 \subsection{Metropolis-Hastings MCMC}
 
