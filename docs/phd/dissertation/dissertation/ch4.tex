@@ -11,13 +11,27 @@ Conventional single molecule localization microscopy infers the locations of put
 
 Far-field optical microscopy is fundamentally limited by diffraction, with the maximum attainable resolution being limited to approximately half the wavelength of light. Several schemes to beat the diffraction limit have been developed in recent years. Many of these schemes utilize the concept of precise localization of isolated fluorescent emitters which blink over a time series of frames \parencite{Rust2006,Betzig2006}. An inherent problem with such methods is the requirement that fluorescent emitters be isolated, slowing down the acquisition of super-resolved images. To address this, we leverage the fact that many fluorophores are intrinsically single photon sources and exhibit fluorescence antibunching. This property can constrain the number of active fluorescent emitters in a region of interest (ROI) and can potentially enable localization in non-sparse scenes \parencite{Ta2010,Israel2017}. 
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=12cm]{figures/SPADvCMOS.png}
+\caption{}
+\end{figure*}    
+
 Molecular counting with fluorescence antibunching has a fairly simple motivation: coincidence of photons at multiple detector elements during high speed imaging provides evidence for the number of single photon sources present in the imaged region. Combining the ideas of conventional super-resolution approaches with photon statistics may prove to be a powerful set of methods for bioimaging. SPAD cameras achieve orders of magnitude higher temporal resolutions than standard CMOS cameras, single photon sensitivity, and dark count rates less than 25cps. Furthermore, the reduced readout noise and large fill-factor of recently commercialized SPAD arrays suggests their use for single molecule localization with reduced localization uncertainty. Localization uncertainty, typically the root mean square error (RMSE) of a maximum likelihood or similar statistical estimator, is bounded from below by the inverse of the Fisher information matrix, known as the Cramer-Rao lower bound \parencite{Chao2016}. Managing the increase in localization uncertainty at high labeling density remains a major bottleneck to localization microscopy. For example, static uncertainty due to molecular crowding can be partially amelioriated by using pairwise or higher-order temporal correlations within a pixel neighborhood \parencite{Dertinger2009}. However, the number of fluorescent active emitters in a region of interest remains critical prerequisite information in single molecule localization.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=12cm]{figures/SPAD512.png}
+\caption{}
+\end{figure*}    
+
 
 In this study, we present a method for widefield single photon counting in order to rigorously count fluorophores in the sample and subsequently constrain single molecule localization. We investigate the theoretical properties of the zero-lag second-order coherence function $g^{(2)}(0)$ for widefield photon counting and its spatial properties. Using Bayesian analysis, we derive a posterior distribution on the number of active fluorescent emitters in a region of interest. We then combined this with single molecule localization algorithms and demonstrate resolution of multiple emitters using a multi-emitter fitting algorithm and report localization errors with respect to the Cramer-Rao bound.
 
 \subsection{Basic Scheme}
 
 \begin{figure*}[t]
+\centering
 \includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.png}
 \caption{Single photon counting with a SPAD array (a) Conventional widefield microscopy with integrated SPAD array (b) Single photon imaging scheme using 1us exposures containing a picosecond laser pulse (c) Sum of photon counts over a 5x5 region of interest (ROI), taken with $N_{\mathrm{frames}}=5\times 10^{5}$}
 \end{figure*}    
@@ -37,6 +51,14 @@ Therefore the field operator in object space is $\hat{E} \propto \hat{a}$ and in
 We now consider the case of pulsed excitation where the interval between pulses much longer than the fluorescence lifetime. Upon excitation of an isolated fluorescent emitter, a photon is detected at a particular detector element $k$ with probability $\zeta_k \propto \langle \hat{E}^{\dagger}(s_k)\hat{E}(s_k)\rangle = \frac{1}{2}\Gamma_{x}^2 \Gamma_{y}^2\mathrm{Tr}(\rho a^{\dagger}a)$ where $\rho$ is the density matrix for a two-level system. Similarly, the probability of detection in a region of interest collecting all photons emitted is $\zeta\propto \mathrm{Tr}(\rho a^{\dagger}a)$. Here, we are primarily concerned with the latter quantity, and its application in counting fluorescent emitters.
 
 \begin{figure*}[t]
+\centering
+\includegraphics[width=12cm]{figures/PoissonBinomialSims.png}
+\caption{}
+\end{figure*}    
+
+
+\begin{figure*}[t]
+\centering
 \includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png}
 \caption{Single and multi-emitter localization error on sums of photon counts. (left) Localization uncertainty for simulated data for different values of $N$, plotted with respect to the Cramer-Rao lower bound, shown in dashed gray. (right) Multi-emitter localization by MCMC sampling for $N=3$, colors indicate a cluster of samples i.e., a single localization. All data was generated with a background rate $\langle \bold{n}_{\mathrm{background}} \rangle = \lambda N_{\mathrm{frames}}/d^{2}$ per pixel. Scalebar 360nm}
 \end{figure*}   
@@ -66,6 +88,7 @@ For localization, we notice that (2) is well approximated by a Poisson distribut
 \end{align}
 
 \begin{figure}[t]
+\centering
 \includegraphics[width=9cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-4.png}
 \caption{Posteriors on the number of fluorescent emitters $N$ and localization for $N^{*}=1$ (left) and $N^{*}=2$ (right) quantum dots. Scalebars 360nm}
 \end{figure}   

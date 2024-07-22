@@ -1,32 +1,44 @@
 \@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
 \contentsline {chapter}{LIST OF TABLES}{7}{chapter*.4}%
 \contentsline {chapter}{LIST OF FIGURES}{8}{chapter*.5}%
-\contentsline {chapter}{LIST OF SYMBOLS}{9}{chapter*.6}%
-\contentsline {chapter}{ABSTRACT}{11}{chapter*.7}%
-\contentsline {chapter}{\numberline {1}{Single molecule localization microscopy}}{12}{chapter.8}%
-\contentsline {section}{\numberline {1.1}Introduction}{12}{section.9}%
-\contentsline {section}{\numberline {1.2}The Image Likelihood}{14}{section.11}%
-\contentsline {subsection}{\numberline {1.2.1}The definition of resolution in SMLM}{16}{subsection.15}%
-\contentsline {chapter}{\numberline {2}{Bromodomain protein 4 and chromatin organization}}{18}{chapter.17}%
-\contentsline {section}{\numberline {2.1}Introduction}{18}{section.18}%
-\contentsline {chapter}{\numberline {3}{Uncertainty-aware localization microscopy by variational diffusion}}{19}{chapter.19}%
-\contentsline {section}{\numberline {3.1}Introduction}{19}{section.20}%
-\contentsline {section}{\numberline {3.2}Background}{21}{section.21}%
-\contentsline {subsection}{\numberline {3.2.1}Gaussian kernel density estimation}{21}{subsection.22}%
-\contentsline {section}{\numberline {3.3}Uncertainty-Aware Localization Microscopy by Variational Diffusion}{22}{section.25}%
-\contentsline {subsection}{\numberline {3.3.1}Problem Statement}{22}{subsection.26}%
-\contentsline {subsection}{\numberline {3.3.2}Variational Diffusion}{23}{subsection.27}%
-\contentsline {section}{\numberline {3.4}Experiments}{25}{section.33}%
-\contentsline {section}{\numberline {3.5}Conclusion}{27}{section.35}%
-\contentsline {section}{\numberline {3.6}Broader Impact}{27}{section.36}%
-\contentsline {section}{\numberline {3.7}Appendix}{28}{section.37}%
-\contentsline {subsection}{\numberline {3.7.1}Sampling}{28}{subsection.38}%
-\contentsline {subsection}{\numberline {3.7.2}Derivation of the variational bound}{28}{subsection.40}%
-\contentsline {subsection}{\numberline {3.7.3}Metropolis-Hastings MCMC}{30}{subsection.41}%
-\contentsline {subsection}{\numberline {3.7.4}Cramer-Rao Lower Bound}{31}{subsection.43}%
-\contentsline {subsection}{\numberline {3.7.5}Neural Networks $\psi ,\phi $}{31}{subsection.46}%
-\contentsline {chapter}{\numberline {4}{Enhanced SMLM with single photon counting cameras}}{34}{chapter.47}%
-\contentsline {subsection}{\numberline {4.0.1}Introduction}{34}{subsection.48}%
-\contentsline {subsection}{\numberline {4.0.2}Basic Scheme}{35}{subsection.49}%
-\contentsline {subsection}{\numberline {4.0.3}Results}{39}{subsection.58}%
-\contentsline {subsection}{\numberline {4.0.4}Discussion}{41}{subsection.61}%
+\contentsline {chapter}{LIST OF SYMBOLS}{10}{chapter*.6}%
+\contentsline {chapter}{ABSTRACT}{12}{chapter*.7}%
+\contentsline {chapter}{\numberline {1}{Single molecule localization microscopy}}{13}{chapter.8}%
+\contentsline {section}{\numberline {1.1}Introduction}{13}{section.9}%
+\contentsline {section}{\numberline {1.2}The Image Likelihood}{15}{section.12}%
+\contentsline {subsection}{\numberline {1.2.1}Maximization of density, minimization of error}{17}{subsection.16}%
+\contentsline {chapter}{\numberline {2}{Bromodomain protein 4 and chromatin organization}}{20}{chapter.18}%
+\contentsline {section}{\numberline {2.1}Introduction}{20}{section.19}%
+\contentsline {section}{\numberline {2.2}Results}{21}{section.20}%
+\contentsline {subsection}{\numberline {2.2.1}Colocalization of BRD4 mutants with nucleosome nanodomains}{21}{subsection.21}%
+\contentsline {subsection}{\numberline {2.2.2}Chromatin structure and dynamics}{22}{subsection.23}%
+\contentsline {subsection}{\numberline {2.2.3}Heteropolymer model}{23}{subsection.26}%
+\contentsline {section}{\numberline {2.3}Discussion}{25}{section.28}%
+\contentsline {section}{\numberline {2.4}Materials and Methods}{26}{section.29}%
+\contentsline {subsection}{\numberline {2.4.1}Cell lines, cell culture conditions, and transfection}{26}{subsection.30}%
+\contentsline {subsection}{\numberline {2.4.2}Super-resolution imaging of nucleosome nanodomains in living cells}{27}{subsection.31}%
+\contentsline {subsection}{\numberline {2.4.3}Colocalization of BRD4 mutants with nucleosome nanodomains}{28}{subsection.32}%
+\contentsline {subsection}{\numberline {2.4.4}Single molecule tracking}{28}{subsection.33}%
+\contentsline {subsection}{\numberline {2.4.5}Immunofluorescence}{29}{subsection.34}%
+\contentsline {subsection}{\numberline {2.4.6}Immunoblotting}{29}{subsection.35}%
+\contentsline {chapter}{\numberline {3}{Uncertainty-aware localization microscopy by variational diffusion}}{30}{chapter.36}%
+\contentsline {section}{\numberline {3.1}Introduction}{30}{section.37}%
+\contentsline {section}{\numberline {3.2}Background}{32}{section.38}%
+\contentsline {subsection}{\numberline {3.2.1}Gaussian kernel density estimation}{32}{subsection.39}%
+\contentsline {section}{\numberline {3.3}Uncertainty-Aware Localization Microscopy by Variational Diffusion}{33}{section.42}%
+\contentsline {subsection}{\numberline {3.3.1}Problem Statement}{33}{subsection.43}%
+\contentsline {subsection}{\numberline {3.3.2}Variational Diffusion}{34}{subsection.44}%
+\contentsline {section}{\numberline {3.4}Experiments}{36}{section.50}%
+\contentsline {section}{\numberline {3.5}Conclusion}{38}{section.52}%
+\contentsline {section}{\numberline {3.6}Broader Impact}{38}{section.53}%
+\contentsline {section}{\numberline {3.7}Appendix}{39}{section.54}%
+\contentsline {subsection}{\numberline {3.7.1}Sampling}{39}{subsection.55}%
+\contentsline {subsection}{\numberline {3.7.2}Derivation of the variational bound}{39}{subsection.57}%
+\contentsline {subsection}{\numberline {3.7.3}Metropolis-Hastings MCMC}{41}{subsection.58}%
+\contentsline {subsection}{\numberline {3.7.4}Cramer-Rao Lower Bound}{42}{subsection.60}%
+\contentsline {subsection}{\numberline {3.7.5}Neural Networks $\psi ,\phi $}{42}{subsection.63}%
+\contentsline {chapter}{\numberline {4}{Enhanced SMLM with single photon counting cameras}}{45}{chapter.64}%
+\contentsline {subsection}{\numberline {4.0.1}Introduction}{45}{subsection.65}%
+\contentsline {subsection}{\numberline {4.0.2}Basic Scheme}{47}{subsection.68}%
+\contentsline {subsection}{\numberline {4.0.3}Results}{51}{subsection.78}%
+\contentsline {subsection}{\numberline {4.0.4}Discussion}{53}{subsection.81}%
