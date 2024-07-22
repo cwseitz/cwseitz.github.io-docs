@@ -28,13 +28,12 @@ where $A$ is some normalization constant. For the sake of generality, we include
 The expected value at each pixel is then $\omega_{k}\propto \Delta E_{u}(u_{k},\theta_{u},\sigma_{\bold{x}})\Delta E_{v}(v_{k},\theta_{v},\sigma_{\bold{x}}) $. Using this, sampling from the convolution distribution in (1) is can be carried out by $\bold{x}_{k} = s_{k} + \zeta_{k}$ for $s_{k}\sim \mathrm{Poisson}(\omega_{k}), \eta_{k}\sim \mathcal{N}(o_{k},w_{k}^{2})$. 
 
 
-\begin{figure}
+\begin{figure}[t]
 \includegraphics[width=\textwidth]{figures/Intro.png}
 \caption{\textbf{Stochastic optical reconstruction microscopy (STORM)}. (A) Single molecules are resolved by separating their fluorescent emission in time, using fluorophores with multiple photophysical states (B) Example super-resolution image of H2B protein in a living Hela cell nucleus at 37C, 5 percent CO2. Image reconstructed from $10^{3}$ 10ms frames. Scalebar 5um.}
 \end{figure}
 
-\clearpage
-\begin{figure}
+\begin{figure}[t]
 \begin{center}
 \includegraphics[width=16cm]{figures/Noise.png}
 \end{center}
@@ -55,7 +54,7 @@ The distribution of a particular biomolecule in the cell can be described as a p
 Localization uncertainty, typically the RMSE of a maximum likelihood or similar statistical estimator, is bounded from below by the inverse of the Fisher information matrix, known as the Cramer-Rao lower bound (Chao 2016). Localization uncertainties in sparse conditions are often tens of nanometers, although recent work on integration of Bayesian priors with modulation enhanced SMLM (meSMLM) or structured illumination with MINFLUX, has reduced spatial resolution below to a few nanometers (Kalisvaart 2022, Gwosh 2020). Nevertheless, managing the increase in localization uncertainty at high labeling density remains a major bottleneck to SMLM. Static uncertainty due to molecular crowding can be partially amelioriated by using pairwise or higher-order temporal correlations within a pixel neighborhood, known as stochastic optical fluctuation imaging or SOFI (Dertinger 2009). Other approaches such as stimulated emission and depletion (STED) imaging bring control over the photophysical state of a chosen subset of the sample, yet the need for laser scanning prevents widespread application in live-cell studies. The spatial resolution and relative simplicity of SMLM techniques remains unmatched, inciting an effort to increase the resolution of SMLM techniques and explore avenues towards time resolved SMLM.
 
 
-\begin{figure}
+\begin{figure}[t]
 \begin{center}
 \includegraphics[width=14cm]{figures/FRC.png}
 \end{center}
