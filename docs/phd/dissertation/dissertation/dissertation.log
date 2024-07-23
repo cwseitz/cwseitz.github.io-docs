@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  22 JUL 2024 19:28
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  23 JUL 2024 13:30
  restricted system commands enabled.
 **dissertation.tex
 (./dissertation.tex
@@ -2382,16 +2382,16 @@ LaTeX Warning: Citation 'Kong2013' on page 13 undefined on input line 8.
 Missing character: There is no – (U+2013) in font ec-lmr12!
 Missing character: There is no ’ (U+2019) in font ec-lmr12!
 ]
-<figures/Intro.png, id=462, 974.13937pt x 370.38374pt>
-File: figures/Intro.png Graphic file (type png)
-<use figures/Intro.png>
-Package luatex.def Info: figures/Intro.png  used on input line 15.
+<media/Intro.png, id=462, 974.13937pt x 370.38374pt>
+File: media/Intro.png Graphic file (type png)
+<use media/Intro.png>
+Package luatex.def Info: media/Intro.png  used on input line 15.
 (luatex.def)             Requested size: 469.75502pt x 178.6073pt.
-<figures/Lifetime.png, id=463, 536.0025pt x 274.02374pt>
-File: figures/Lifetime.png Graphic file (type png)
-<use figures/Lifetime.png>
-Package luatex.def Info: figures/Lifetime.png  used on input line 21.
-(luatex.def)             Requested size: 369.88582pt x 189.09749pt.
+<media/Lifetime.png, id=463, 755.82375pt x 339.2675pt>
+File: media/Lifetime.png Graphic file (type png)
+<use media/Lifetime.png>
+Package luatex.def Info: media/Lifetime.png  used on input line 21.
+(luatex.def)             Requested size: 369.88582pt x 166.03027pt.
 
 
 LaTeX Warning: Citation 'Zhang2007' on page 14 undefined on input line 27.
@@ -2409,19 +2409,20 @@ Overfull \hbox (1.46458pt too wide) in paragraph at lines 27--28
 
 [14
 Missing character: There is no – (U+2013) in font ec-lmr12!
-<./figures/Intro.png>] [15<./figures/Lifetime.png>]
-<figures/Noise.png, id=483, 674.2791pt x 286.9119pt>
-File: figures/Noise.png Graphic file (type png)
-<use figures/Noise.png>
-Package luatex.def Info: figures/Noise.png  used on input line 58.
+<./media/Intro.png>] [15<./media/Lifetime.png>]
+<media/Noise.png, id=483, 674.2791pt x 286.9119pt>
+File: media/Noise.png Graphic file (type png)
+<use media/Noise.png>
+Package luatex.def Info: media/Noise.png  used on input line 51.
 (luatex.def)             Requested size: 455.24408pt x 193.71407pt.
- [16] [17<./figures/Noise.png>]
-<figures/FRC.png, id=500, 483.9681pt x 296.7888pt>
-File: figures/FRC.png Graphic file (type png)
-<use figures/FRC.png>
-Package luatex.def Info: figures/FRC.png  used on input line 94.
-(luatex.def)             Requested size: 398.33858pt x 244.28769pt.
-) [18] [19<./figures/FRC.png>]
+ [16] [17<./media/Noise.png>]
+<media/FRC.png, id=500, 578.16pt x 289.08pt>
+File: media/FRC.png Graphic file (type png)
+<use media/FRC.png>
+Package luatex.def Info: media/FRC.png  used on input line 84.
+(luatex.def)             Requested size: 398.33858pt x 199.16986pt.
+
+[18<./media/FRC.png>]) [19]
 \openout2 = ch2.aux
  (./ch2.tex
 File: ch2.tex Chapter2
@@ -2758,10 +2759,10 @@ LaTeX Warning: Citation 'Ta2010' on page 45 undefined on input line 12.
 
 LaTeX Warning: Citation 'Israel2017' on page 45 undefined on input line 12.
 
-<figures/SPADvCMOS.png, id=692, 926.46124pt x 458.71375pt>
-File: figures/SPADvCMOS.png Graphic file (type png)
-<use figures/SPADvCMOS.png>
-Package luatex.def Info: figures/SPADvCMOS.png  used on input line 16.
+<media/SPADvCMOS.png, id=692, 926.46124pt x 458.71375pt>
+File: media/SPADvCMOS.png Graphic file (type png)
+<use media/SPADvCMOS.png>
+Package luatex.def Info: media/SPADvCMOS.png  used on input line 16.
 (luatex.def)             Requested size: 341.43306pt x 169.04948pt.
 
 LaTeX Warning: Citation 'Chao2016' on page 45 undefined on input line 20.
@@ -2775,12 +2776,12 @@ LaTeX Warning: Citation 'Dertinger2009' on page 45 undefined on input line 20.
 
 
 ]
-<figures/SPAD512.png, id=699, 4566.05875pt x 4260.91875pt>
-File: figures/SPAD512.png Graphic file (type png)
-<use figures/SPAD512.png>
-Package luatex.def Info: figures/SPAD512.png  used on input line 24.
+<media/SPAD512.png, id=699, 4566.05875pt x 4260.91875pt>
+File: media/SPAD512.png Graphic file (type png)
+<use media/SPAD512.png>
+Package luatex.def Info: media/SPAD512.png  used on input line 24.
 (luatex.def)             Requested size: 341.43306pt x 318.57988pt.
- [46<./figures/SPADvCMOS.png>]
+ [46<./media/SPADvCMOS.png>]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.png, id
 =707, 673.01437pt x 524.71031pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.pn
@@ -2800,13 +2801,12 @@ LaTeX Warning: Citation 'Richards1959' on page 47 undefined on input line 39.
 
 LaTeX Warning: Citation 'Gibson1989' on page 47 undefined on input line 39.
 
-[47<./figures/SPAD512.png>] [48</Users/cwseitz/git/cwseitz.github.io/docs/phd/sp
-ad/spad/media/Figure-0.png>]
-<figures/PoissonBinomialSims.png, id=723, 742.775pt x 576.1525pt>
-File: figures/PoissonBinomialSims.png Graphic file (type png)
-<use figures/PoissonBinomialSims.png>
-Package luatex.def Info: figures/PoissonBinomialSims.png  used on input line 55
-.
+[47<./media/SPAD512.png>] [48</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad
+/spad/media/Figure-0.png>]
+<media/PoissonBinomialSims.png, id=723, 742.775pt x 576.1525pt>
+File: media/PoissonBinomialSims.png Graphic file (type png)
+<use media/PoissonBinomialSims.png>
+Package luatex.def Info: media/PoissonBinomialSims.png  used on input line 55.
 (luatex.def)             Requested size: 341.43306pt x 264.84874pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png, id
 =724, 782.925pt x 378.41376pt>
@@ -2817,8 +2817,8 @@ g Graphic file (type png)
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spa
 d/media/Figure-5.png  used on input line 62.
 (luatex.def)             Requested size: 341.43306pt x 165.02438pt.
- [49<./figures/PoissonBinomialSims.png>] [50</Users/cwseitz/git/cwseitz.github.i
-o/docs/phd/spad/spad/media/Figure-5.png>]
+ [49<./media/PoissonBinomialSims.png>] [50</Users/cwseitz/git/cwseitz.github.io/
+docs/phd/spad/spad/media/Figure-5.png>]
 
 LaTeX Warning: Citation 'Smith2010' on page 51 undefined on input line 82.
 
@@ -2850,7 +2850,7 @@ LaTeX Warning: Empty bibliography on input line 608.
 \openout2 = ap-vita.aux
 No file ap-vita.tex.
 No file dissertation.ind.
-(./dissertation.aux (./ch-front.aux) (./ch1.aux) (./ch2.aux) (./ch3.aux)
+[55] (./dissertation.aux (./ch-front.aux) (./ch1.aux) (./ch2.aux) (./ch3.aux)
 (./ch4.aux) (./ap-vita.aux))
 
  *File List*
@@ -3084,10 +3084,10 @@ ch-front.tex    2022-10-05 front matter chapter
  uesvect.fd    
     upsy.fd    2001/06/04 font definitions for U/psy.
      ch1.tex    Chapter1
-figures/Intro.png
-figures/Lifetime.png
-figures/Noise.png
-figures/FRC.png
+media/Intro.png
+media/Lifetime.png
+media/Noise.png
+media/FRC.png
      ch2.tex    Chapter2
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-0.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-1.png
@@ -3098,16 +3098,19 @@ figures/FRC.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png
      ch4.tex    Chapter4
-figures/SPADvCMOS.png
-figures/SPAD512.png
+media/SPADvCMOS.png
+media/SPAD512.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.png
-figures/PoissonBinomialSims.png
+media/PoissonBinomialSims.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-4.png
  ***********
 
 
 LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Temporary extra page added at the end. Rerun to get it removed.
 
 Package rerunfilecheck Info: File `dissertation.out' has not changed.
 (rerunfilecheck)             Checksum: 6C28265C09F18C658929D40D4AF465A4;8596.
@@ -3122,15 +3125,15 @@ Package logreq Info: Writing requests to 'dissertation.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 76029 strings out of 478285
+ 76031 strings out of 478285
  125218,3417909 words of node,token memory allocated
  1525 words of node memory still in use:
    24 hlist, 2 vlist, 10 rule, 2 glue, 4 kern, 3 sub_mlist, 1 glyph, 117 attribu
 te, 92 glue_spec, 117 attribute_list, 9 write, 16 pdf_literal, 2 pdf_dest, 16 pd
 f_colorstack nodes
-   avail lists: 1:8,2:1820,3:850,4:160,5:453,6:169,7:7962,8:71,9:1571,10:29,11:7
+   avail lists: 1:8,2:1820,3:850,4:160,5:492,6:169,7:7962,8:71,9:1571,10:29,11:7
 63
- 93458 multiletter control sequences out of 65536+600000
+ 93460 multiletter control sequences out of 65536+600000
  57 fonts using 3742095 bytes
  109i,13n,103p,1569b,2475s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/tex
@@ -3152,10 +3155,10 @@ pe1/public/lm/lmsy6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/l
 m/lmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symb
 ols/msbm10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/symbol/usyr.p
 fb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on dissertation.pdf (54 pages, 55402870 bytes).
+Output written on dissertation.pdf (55 pages, 55138747 bytes).
 
-PDF statistics: 846 PDF objects out of 1000 (max. 8388607)
- 655 compressed objects within 7 object streams
+PDF statistics: 849 PDF objects out of 1000 (max. 8388607)
+ 657 compressed objects within 7 object streams
  141 named destinations out of 1000 (max. 131072)
  580 words of extra memory for PDF output out of 10000 (max. 100000000)
 

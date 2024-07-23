@@ -88,31 +88,30 @@
 
 \begin{textblock*}{9cm}(2.5cm,1.25cm)
 Minimal resolvable distance $d \sim \lambda$
-\includegraphics[width=10cm]{media/Limit}
-\includegraphics[width=10cm]{media/Scale}
+\includegraphics[width=10cm]{../../dissertation/dissertation/media/Limit}
+\includegraphics[width=10cm]{../../dissertation/dissertation/media/Scale}
 \end{textblock*}
 
 \end{frame}
 
 \begin{frame}{Stochastic optical reconstruction microscopy (STORM)}
 \begin{textblock*}{9cm}(0.5cm,1.0cm)
-\includegraphics[width=9cm]{media/STORM.png}
+\includegraphics[width=9cm]{../../dissertation/dissertation/media/STORM.png}
 Lakadamyali, M. et al. Nature Methods \textbf{17}, (2020).
 \end{textblock*}
 \begin{textblock*}{3.5cm}(10.0cm,1.1cm)
-\includegraphics[width=3.5cm]{media/ClutchDomains.png}
+\includegraphics[width=3.5cm]{../../dissertation/dissertation/media/ClutchDomains.png}
 \end{textblock*}
 \begin{textblock*}{4.5cm}(10.0cm,5.0cm)
-\includegraphics[width=4.5cm]{media/ClutchCartoon.png}
-\end{textblock*}
-\end{frame}
+\includegraphics[width=4.5cm]{../../dissertation/dissertation/media/ClutchCartoon.png}
+\end{textblock*}\end{frame}
 
 \begin{frame}{Stochastic optical reconstruction microscopy (STORM)}
 \begin{textblock*}{9cm}(0.5cm,1.5cm)
-\includegraphics[width=\textwidth]{media/Intro.png}
+\includegraphics[width=\textwidth]{../../dissertation/dissertation/media/Intro.png}
 \end{textblock*}
 \begin{textblock*}{5cm}(9.5cm,1.5cm)
-\animategraphics[width=5cm,autoplay,loop]{60}{media/storm-animation/storm-animation-}{1}{100}
+\animategraphics[width=5cm,autoplay,loop]{60}{../../dissertation/dissertation/media/storm-animation/storm-animation-}{1}{100}
 \end{textblock*}
 \begin{textblock*}{\textwidth}(1.0cm,7.5cm)
 \begin{itemize}
@@ -124,10 +123,10 @@ Lakadamyali, M. et al. Nature Methods \textbf{17}, (2020).
 
 \begin{frame}{Stochastic optical reconstruction microscopy (STORM)}
 \begin{textblock*}{9cm}(0.5cm,1.5cm)
-\includegraphics[width=\textwidth]{media/Intro.png}
+\includegraphics[width=\textwidth]{../../dissertation/dissertation/media/Intro.png}
 \end{textblock*}
 \begin{textblock*}{5cm}(9.5cm,1.5cm)
-\includegraphics[width=\textwidth]{media/STORM-Example.png}
+\includegraphics[width=\textwidth]{../../dissertation/dissertation/media/STORM-Example.png}
 \end{textblock*}
 \begin{textblock*}{\textwidth}(1.0cm,7.5cm)
 \begin{itemize}
@@ -143,7 +142,7 @@ Lakadamyali, M. et al. Nature Methods \textbf{17}, (2020).
 Modeling the point spread function permits sub-pixel localization 
 
 \begin{textblock*}{8cm}(6.5cm,2.0cm)
-\includegraphics[width=\textwidth]{media/Model.png}
+\includegraphics[width=\textwidth]{../../dissertation/dissertation/media/Model.png}
 \end{textblock*}
 
 \begin{textblock*}{2cm}(1cm,2.0cm)
@@ -169,7 +168,7 @@ Assume $N_{0}$ is constant over $\textcolor{blue}{\Delta}$ (homogeneous Poisson)
 \end{frame}
 
 \begin{frame}{Applications of single molecule localization microscopy}
-\includegraphics[width=\textwidth]{media/Apps.png}
+\includegraphics[width=\textwidth]{../../dissertation/dissertation/media/Apps.png}
 Wu et al. Trends in Cell Biology. \textbf{30} (2020)
 \end{frame}
 
@@ -179,7 +178,7 @@ Wu et al. Trends in Cell Biology. \textbf{30} (2020)
 \frametitle{Super resolution with photoswitching of rhodamines}
 
 \begin{figure}
-\includegraphics[width=10cm]{media/Rhodamines.png}
+\includegraphics[width=10cm]{../../dissertation/dissertation/media/Rhodamines.png}
 \end{figure}
 \begin{itemize}
 \item  Reduction of the T1 state yields a dark, long-lived, and stable radical state
@@ -192,7 +191,7 @@ Wu et al. Trends in Cell Biology. \textbf{30} (2020)
 \frametitle{Direct stochastic optical reconstruction microscopy}
 
 \begin{figure}
-\includegraphics[width=13cm]{media/Concept.png}
+\includegraphics[width=13cm]{../../dissertation/dissertation/media/Concept.png}
 \end{figure}
 
 \begin{itemize}
@@ -207,7 +206,7 @@ Wu et al. Trends in Cell Biology. \textbf{30} (2020)
 
 \begin{frame}{Enhanced nanoscopy with single photon avalanche diode (SPAD) cameras}
 \begin{textblock*}{12cm}(1.5cm,2.0cm)
-\includegraphics[width=12cm]{media/SPAD.png}
+\includegraphics[width=12cm]{../../dissertation/dissertation/media/SPAD.png}
 \end{textblock*}
 \begin{textblock*}{12cm}(1.5cm,7.0cm)
 \begin{itemize}
@@ -222,7 +221,7 @@ Wu et al. Trends in Cell Biology. \textbf{30} (2020)
 \section{Method 2: Enhanced nanoscopy with deep generative models}
 
 \begin{frame}{How to pack more localizations in a single frame?}
-\includegraphics[width=\textwidth]{media/Generation.png}\\
+\includegraphics[width=\textwidth]{../../dissertation/dissertation/media/Generation.png}\\
 \begin{equation*}
 p(\bold{x}_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_{k}^{q}\frac{1}{\sqrt{2\pi}w_{k}}e^{-\frac{(\bold{x}_{k}-g_{k}q-o_{k})^2}{2 w_{k}^{2}}} \approx \mathrm{Poisson}(\omega_{k}')
 \end{equation*}
@@ -234,7 +233,7 @@ p(\bold{x}_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_
 
 \begin{frame}{Trivial example of sampling from a mixture of Gaussians}
 \begin{textblock*}{13cm}(1.0cm, 1.5cm)
-\animategraphics[width=13cm,autoplay,loop]{30}{media/langevin/langevin-}{1}{152}
+\animategraphics[width=13cm,autoplay,loop]{30}{../../dissertation/dissertation/media/langevin/langevin-}{1}{152}
 \end{textblock*}
 \begin{textblock*}{13cm}(1.0cm, 6.5cm)
 Consider a two-component Gaussian mixture $p(\bold{x}) = \sum_{k=1}^{2}\pi_{k}\mathcal{N}(\mu_{k},\sigma_{k}^{2})$\\
@@ -251,32 +250,32 @@ If we know $\nabla\log p(\bold{x})$ we can sample from $p(\bold{x})$ with Langev
 
 \begin{textblock*}{2cm}(1.0cm, 1.0cm)
 $\bold{x}$
-\includegraphics[width=2cm]{media/diffusion_example/Diffusion_lr-0.png}
+\includegraphics[width=2cm]{../../dissertation/dissertation/media/diffusion_example/Diffusion_lr-0.png}
 \end{textblock*}
 \begin{textblock*}{2cm}(4.0cm, 1.0cm)
 $\bold{y}_{100}$
-\includegraphics[width=2cm]{media/diffusion_example/0_1_sr_1.png}
+\includegraphics[width=2cm]{../../dissertation/dissertation/media/diffusion_example/0_1_sr_1.png}
 \end{textblock*}
 \begin{textblock*}{2cm}(6.0cm, 1.0cm)
 $\bold{y}_{80}$
-\includegraphics[width=2cm]{media/diffusion_example/0_1_sr_19.png}
+\includegraphics[width=2cm]{../../dissertation/dissertation/media/diffusion_example/0_1_sr_19.png}
 \end{textblock*}
 \begin{textblock*}{2cm}(8.0cm, 1.0cm)
 $\bold{y}_{40}$
-\includegraphics[width=2cm]{media/diffusion_example/0_1_sr_39.png}
+\includegraphics[width=2cm]{../../dissertation/dissertation/media/diffusion_example/0_1_sr_39.png}
 \end{textblock*}
 \begin{textblock*}{2cm}(10.0cm,1.0cm)
 $\bold{y}_{20}$
-\includegraphics[width=2cm]{media/diffusion_example/0_1_sr_79.png}
+\includegraphics[width=2cm]{../../dissertation/dissertation/media/diffusion_example/0_1_sr_79.png}
 \end{textblock*}
 \begin{textblock*}{2cm}(12.0cm, 1.0cm)
 $\bold{y}_{0}$
-\includegraphics[width=2cm]{media/diffusion_example/0_1_sr_99.png}
+\includegraphics[width=2cm]{../../dissertation/dissertation/media/diffusion_example/0_1_sr_99.png}
 \end{textblock*}
 
 \begin{textblock*}{10cm}(2.0cm, 4.0cm)
 
-\includegraphics[width=10cm]{media/Bayes.png}
+\includegraphics[width=10cm]{../../dissertation/dissertation/media/Bayes.png}
 \end{textblock*}
 
 \begin{textblock*}{12cm}(1.0cm, 7.5cm)
@@ -298,7 +297,7 @@ Need to approximate the gradient $s_{\theta}(\bold{y}_{t}) \approx \nabla\log p(
 \begin{frame}{Hierarchical structure of chromatin}
 
 \begin{textblock*}{10cm}(3.0cm,1.25cm)
-\includegraphics[width=10cm]{media/Chromatin}
+\includegraphics[width=10cm]{../../dissertation/dissertation/media/Chromatin}
 \\
 \vspace{0.4cm}
 Fyodorov, D. et al. Nat Rev Mol Cell Biol \textbf{19}, (2018).
@@ -308,7 +307,7 @@ Fyodorov, D. et al. Nat Rev Mol Cell Biol \textbf{19}, (2018).
 
 \begin{frame}{Bromodomain protein 4 (BRD4) binds acetylated chromatin}
 
-\includegraphics[width=12cm]{media/Epigenetic}
+\includegraphics[width=12cm]{../../dissertation/dissertation/media/Epigenetic}
 
 \begin{textblock*}{10cm}(1.5cm,4.5cm)
 Zheng, B. et al. Molecular Cell \textbf{16}, (2023).
@@ -320,51 +319,31 @@ Fillapakoulos, P. et al. Nature \textbf{468}, (2010).
 
 \end{frame}
 
-\begin{frame}{BET inhibitor (+)-JQ1 decondenses chromatin and increases mobility}
-
-\begin{textblock*}{4cm}(2.0cm,1.5cm)
-\includegraphics[width=4cm]{media/JQ1-Blot}
-\end{textblock*}
-
-\begin{textblock*}{4cm}(2.0cm,5.0cm)
-\includegraphics[width=4cm]{media/Silence-Blot}
-\end{textblock*}
-
-\begin{textblock*}{7cm}(6.5cm,1.5cm)
-\includegraphics[width=7cm]{media/JQ1}
-\end{textblock*}
-
-\begin{textblock*}{7cm}(1.5cm,8.5cm)
-Blots: top - BRD4, bottom - GAPDH
-\end{textblock*}
-
-\end{frame}
-
 
 \begin{frame}{Bromodomain protein 4 (BRD4) binds acetylated chromatin}
 
 \begin{textblock*}{5cm}(2.0cm,1.75cm)
-\includegraphics[width=5cm]{media/TwoColor}
+\includegraphics[width=5cm]{../../dissertation/dissertation/media/TwoColor}
 \end{textblock*}
 
 \begin{textblock*}{5cm}(7.75cm,1.25cm)
-\includegraphics[width=5cm]{media/BRD4-Structure}
+\includegraphics[width=5cm]{../../dissertation/dissertation/media/BRD4-Structure}
 \;\; AlphaFold BRD4 1-1362aa 
 \end{textblock*}
 
 \begin{textblock*}{10cm}(2.0cm,7.0cm)
-\includegraphics[width=10cm]{media/Mutations}
+\includegraphics[width=10cm]{../../brd4/brd4/media/Mutations}
 \end{textblock*}
 
 \end{frame}
 
 
 \begin{frame}{BRD4 phosphorylation state is necessary for maintenance of chromatin structure}
-\includegraphics[width=12cm]{media/BRD4-STORM}
+\includegraphics[width=12cm]{../../brd4/brd4/media/Figure-2.png}
 \end{frame}
 
 \begin{frame}{Coarse grained molecular dynamics of chromatin binders at 310K}
-\includegraphics[width=12cm]{media/MD-1}
+\includegraphics[width=12cm]{../../brd4/brd4/media/MD-1}
 100kb chromatin chains interact with binders via the potential 
 \begin{equation*}
 U_{ij} = \epsilon \left(1-\left(\frac{|r_{ij}|}{R_{0}}\right)^{2}\right)^{3}
@@ -376,14 +355,14 @@ U_{ij} = \epsilon \left(1-\left(\frac{|r_{ij}|}{R_{0}}\right)^{2}\right)^{3}
 \end{frame}
 
 \begin{frame}{Multivalent chromatin binding reduces chromatin mobility}
-\includegraphics[width=12cm]{media/MD-2}
+\includegraphics[width=12cm]{../../brd4/brd4/media/MD-2}
 Integrate Brownian dynamics: $\dot{r} = \gamma^{-1}\nabla U + \sqrt{2 k_{B}T}\gamma^{-1/2}\xi \;\; \gamma = 10^{-6}$\\
 \vspace{1cm}
 Stochastic forcing is a delta-correlated white-noise $\xi \sim \mathcal{N}(0,1), \langle \xi(t)\xi(t+\tau)\rangle = \delta(\tau)$
 \end{frame}
 
 \begin{frame}{Multivalent chromatin binding reduces chromatin mobility}
-\includegraphics[width=12cm]{media/MSD}
+\includegraphics[width=12cm]{../../brd4/brd4/media/Figure-3}
 Experiment: $D_{WT} - D_{7D} \approx 10^{-3} \mu m^{2}/s, \gamma = 10^{-6}$
 
 \end{frame}
