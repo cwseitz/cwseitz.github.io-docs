@@ -202,6 +202,28 @@ Wu et al. Trends in Cell Biology. \textbf{30} (2020)
 \end{frame}
 \end{comment}
 
+\begin{frame}
+\frametitle{How do we define resolution in localization microscopy?}
+
+\begin{figure}
+\includegraphics[width=13cm]{../../dissertation/dissertation/media/FRC.png}
+\end{figure}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Fourier Image Resolution (FIRE)}
+
+\begin{figure}
+\includegraphics[width=8cm]{../../dissertation/dissertation/media/FIRE.png}
+\end{figure}
+Nieuwenhuizen et al. Nature Methods. \textbf{10} (2013)\\
+\vspace{0.2in}
+Nutshell: \emph{How to relax the density limit in localization microscopy}?
+\end{frame}
+
+
 \section{Method 1: Enhanced nanoscopy with single photon avalanche diode (SPAD) cameras}
 
 \begin{frame}{Enhanced nanoscopy with single photon avalanche diode (SPAD) cameras}
@@ -220,11 +242,9 @@ Wu et al. Trends in Cell Biology. \textbf{30} (2020)
 
 \section{Method 2: Enhanced nanoscopy with deep generative models}
 
-\begin{frame}{How to pack more localizations in a single frame?}
+\begin{frame}{Inference of a high-resolution image from a low-resolution one}
 \includegraphics[width=\textwidth]{../../dissertation/dissertation/media/Generation.png}\\
-\begin{equation*}
-p(\bold{x}_{k}|\theta) = A\sum_{q=0}^{\infty} \frac{1}{q!}e^{-\omega_{k}}\omega_{k}^{q}\frac{1}{\sqrt{2\pi}w_{k}}e^{-\frac{(\bold{x}_{k}-g_{k}q-o_{k})^2}{2 w_{k}^{2}}} \approx \mathrm{Poisson}(\omega_{k}')
-\end{equation*}
+
 \begin{itemize}
 \item Would like to estimate a high-resolution $\bold{y}$ from low-resolution $\bold{x}$, but it is many to one
 \item Must then model a \emph{distribution} over $\bold{y}$ i.e., $p_{\theta}(\bold{y}|\bold{x})$
