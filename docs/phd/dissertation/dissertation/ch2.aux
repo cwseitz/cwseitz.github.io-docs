@@ -1,26 +1,31 @@
 \relax 
 \providecommand\hyper@newdestlabel[2]{}
-\@writefile{toc}{\contentsline {chapter}{\numberline {2}{Uncertainty-aware localization microscopy by variational diffusion}}{22}{chapter.22}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.1}Introduction}{22}{section.23}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Estimation of the marginal variances $\sqrt  {\mathrm  {Var}(\mathbf  {y}_k)}$ for an isolated fluorescent emitter. MCMC sampling is carried out using the low-resolution image (left) to estimate the posterior $p(\theta \lvert \mathbf  {x})$ (middle) which is sampled $\theta \sim p(\theta \lvert \mathbf  {x})$ and combined with (3) to estimate marginal variances (right)\relax }}{24}{figure.caption.26}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}Background}{24}{section.24}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Gaussian kernel density estimation}{24}{subsection.25}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.3}Uncertainty-Aware Localization Microscopy by Variational Diffusion}{25}{section.28}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Problem Statement}{25}{subsection.29}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Variational Diffusion}{26}{subsection.30}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.4}Experiments}{28}{section.37}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.5}Conclusion}{29}{section.39}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Non cherry-picked estimation of marginal variances. A low-resolution image $\mathbf  {x}$ (left column) is transformed by $\phi $ to produce a KDE estimate $\hat  {\mathbf  {y}}$ (middle column) and a DDPM $\psi $ computes a map of marginal variances (right column)\relax }}{30}{figure.caption.38}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.6}Broader Impact}{31}{section.40}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2.7}Appendix}{32}{section.41}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.7.1}Sampling}{32}{subsection.42}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.7.2}Derivation of the variational bound}{32}{subsection.44}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.7.3}Metropolis-Hastings MCMC}{33}{subsection.45}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.7.4}Cramer-Rao Lower Bound}{34}{subsection.47}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Localization errors of the trained model $\phi $. The Cramer-Rao lower bound is shown in red, computing by taking the diagonal elements of $I^{-1}(\theta )$.\relax }}{35}{figure.caption.49}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.7.5}Neural Networks $\psi ,\phi $}{35}{subsection.50}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}{Variational Bayesian Fluorescence Nanoscopy}}{24}{chapter.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Background}{24}{section.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}The Bayesian calculation}{24}{subsection.25}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}The curse of dimensionality}{27}{subsection.26}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.3}The Hierarchical Variational Autoencoder}{27}{subsection.27}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Abstract}{28}{section.28}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Introduction}{28}{section.29}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Estimation of the marginal variances $\sqrt  {\mathrm  {Var}(\mathbf  {y}_k)}$ for an isolated fluorescent emitter. MCMC sampling is carried out using the low-resolution image (left) to estimate the posterior $p(\theta \lvert \mathbf  {x})$ (middle) which is sampled $\theta \sim p(\theta \lvert \mathbf  {x})$ and combined with (3) to estimate marginal variances (right)\relax }}{30}{figure.caption.32}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}Background}{30}{section.30}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}Gaussian kernel density estimation}{30}{subsection.31}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.5}Uncertainty-Aware Localization Microscopy by Variational Diffusion}{31}{section.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.1}Problem Statement}{31}{subsection.35}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.2}Variational Diffusion}{32}{subsection.36}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.6}Experiments}{34}{section.43}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.7}Conclusion}{35}{section.45}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Non cherry-picked estimation of marginal variances. A low-resolution image $\mathbf  {x}$ (left column) is transformed by $\phi $ to produce a KDE estimate $\hat  {\mathbf  {y}}$ (middle column) and a DDPM $\psi $ computes a map of marginal variances (right column)\relax }}{36}{figure.caption.44}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.8}Broader Impact}{37}{section.46}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.9}Appendix}{38}{section.47}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.9.1}Sampling}{38}{subsection.50}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.9.2}Derivation of the variational bound}{39}{subsection.52}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.9.3}Metropolis-Hastings MCMC}{40}{subsection.53}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.9.4}Cramer-Rao Lower Bound}{41}{subsection.55}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Localization errors of the trained model $\phi $. The Cramer-Rao lower bound is shown in red, computing by taking the diagonal elements of $I^{-1}(\theta )$.\relax }}{42}{figure.caption.57}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.9.5}Neural Networks $\psi ,\phi $}{42}{subsection.58}\protected@file@percent }
 \@setckpt{ch2}{
-\setcounter{page}{37}
+\setcounter{page}{44}
 \setcounter{equation}{9}
 \setcounter{enumi}{0}
 \setcounter{enumii}{0}
@@ -30,7 +35,7 @@
 \setcounter{mpfootnote}{0}
 \setcounter{part}{0}
 \setcounter{chapter}{2}
-\setcounter{section}{7}
+\setcounter{section}{9}
 \setcounter{subsection}{5}
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
@@ -40,7 +45,7 @@
 \setcounter{section@level}{0}
 \setcounter{Item}{0}
 \setcounter{Hfootnote}{0}
-\setcounter{bookmark@seq@number}{32}
+\setcounter{bookmark@seq@number}{38}
 \setcounter{BackrefHyperFootnoteCounter}{0}
 \setcounter{LT@tables}{1}
 \setcounter{LT@chunks}{1}

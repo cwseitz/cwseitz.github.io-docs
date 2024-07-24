@@ -1,9 +1,50 @@
 \ProvidesFile{ch3.tex}[Chapter4]
 
-\chapter{Enhanced SMLM with single photon counting cameras}
+\chapter{Quantum enhanced localization with a single photon avalanche diode array}
 \ix{physics//Physics appendix}
 
+\section{Background}
 
+\subsection{A brief introduction to quantum optics}
+
+Experimental techniques have surfaced which take advantage of the quantum nature of light to enhance imaging methods. The advent of very fast and sensitive detectors allows us to measure EM fields at a timescale where quantum effects can be seen. We often speak of concepts such as photon counting or photon statistics, and it is prudent to define what a photon really is and how it be measured with this technology. Therefore, it is necessary to define a very basic formulation of the quantization of the electromagnetic field. 
+
+We start by stating the major results of quantizing the EM field at a single point in space, which could be a point detector element, for example. Quantizing the field at a single point in space simplifies the problem to focusing only on time dependence where spatial heterogeneity of the field can be ignored. We express the time-dependent field as a sum of harmonic oscillators using a Fourier series expansion. We consider an oscillation $E(t)$ that can only exist in one dimension, or a single polarization, making the field effectively a scalar one. This decomposition represents the field in terms of an infinite number of modes indexed by $k$ with frequency $\omega_{k}$ i.e., $E(t) = \sum_{k=1}^\infty c_{k}e^{-i\omega_{n} t}$. In order to quantize the field, each mode is treated as a quantum harmonic oscillator. As such, the Hamiltonian for one particular mode is that of a quantum harmonic oscillator which has energy eigenvalues $E_{k} = \hbar\omega_{k}(\hat{n} + \frac{1}{2})$. The operator $\hat{n}=\hat{a}^{\dagger}\hat{a}$ is the number operator such that $\hat{n}\ket{\psi} = n\ket{\psi}$ where $n$ is the number of energy quanta in that particular mode. The value of $n$ represents the number of energy quanta present in the field, each quanta being called a photon. Since there are potentially infinitely many modes, the wavefunction at this point is then $\ket{\psi} = \ket{n_{1},n_{2},...}$ where $n_1$ is the number of photons in the first mode, $n_2$ is the number of photons in the second mode, and so on. The number operator for the $n$-th mode is $\hat{n}_k\ket{\psi} = n_{k}\ket{\psi}$. 
+
+We also define $\hat{a}_n$ and $\hat{a}_n^\dagger$ as the respective annihilation and creation operators for the $n$-th mode. These operators satisfy the commutation relations $[\hat{a}_k, \hat{a}_k'^\dagger] = \delta_{kk'}$ and $[\hat{a}_k, \hat{a}_k'] = [\hat{a}_k^\dagger, \hat{a}_k^\dagger] = 0$. The action of the annihilation and creation operators on the joint number states is:
+
+\begin{equation*}
+\hat{a}_k \ket{n_1, n_2, ...} = n_k \ket{n_1, n_2, ...} \;\;
+\hat{a}_k^\dagger \ket{n_1, n_2, ...} = (n+1) \ket{n_1, n_2, ...}
+\end{equation*}
+
+\subsection{Photon statistics}
+
+At this point in space, we can define any $\ket{\psi}$ that we like in this framework. However, there are certain interesting states which have special properties, such as the coherent state. Coherent states are a special class of states that resemble classical states of the EM field. Qualitatively, at a point, they would give rise to a coherent sinusoidal behavior of the field. Suppose we have a single mode field in a state $\ket{m}$. A coherent state $\ket{\alpha}$ is defined as the eigenstate of the annihilation operator $\hat{a}$:
+
+\begin{equation*}
+\hat{a} \ket{\alpha} = \alpha \ket{\alpha}
+\end{equation*}
+
+where $\alpha$ is a complex number. The coherent states are given by:
+
+\begin{equation*}
+\ket{\alpha} = e^{-\frac{\lvert\alpha\lvert^2}{2}} \sum_{m=0}^\infty \frac{\alpha^m}{m!} \ket{m}
+\end{equation*}
+
+It turns out that if we measure a number of photons (intensity) in this state, we would find that the number of photons has Poisson statistics. To see this, we calculate the probability $P(m)$ of finding $m$ photons in a coherent state $\ket{\alpha}$:
+
+\begin{equation*}
+P(m) = \lvert \bra{m} \ket{\alpha} \lvert^2 = \lvert e^{-\frac{\lvert\alpha\lvert^2}{2}} \frac{\alpha^m}{m!} \lvert^2 = e^{-\lvert\alpha\lvert^2} \frac{\lvert\alpha\lvert^{2m}}{m!}
+\end{equation*}
+
+This is simply the Poisson distribution with mean $\langle \hat{n}_n \rangle = \lvert\alpha\lvert^2$. The variance of the photon number distribution in a coherent state is also $\lvert\alpha\lvert^2$, characteristic of Poisson statistics, where the mean and variance are equal. 
+
+In contrast, single photon states e..g, $\ket{1}$ do not necessarily follow Poisson statistics. This state could be prepared by an isolated single photon source such as a fluorescent dye molecule which can produce only a single photon at at time. This phenomenon is referred to as \emph{fluorescence antibunching} where photons tend to be detected as isolated events rather than in bursts or bunches. Note that for such a single photon source the single-mode field can be in state $\ket{1}$ but not state $\ket{2}$ at any given time. If more single photon sources are present states beyond $\ket{1}$ are achievable. This has led to the introduction of binomial states of the quantized field.
+
+
+
+\section{Abstract}
 
 Conventional single molecule localization microscopy infers the locations of putatively isolated fluorescent emitters to produce super-resolved images. The number of active fluorescent emitters is therefore a critical piece of information during localization; however, this quantity is generally underdetermined in widefield fluorescent microscopy. Nevertheless, many fluorophores used in bioimaging are intrinsically single photon sources which exhibit fluorescence antibunching and can emit only one photon following a very short excitation pulse. This general property may provide the necessary physical information for constrained localization in non-sparse scenes by yielding estimates of the number active fluorescent emitters. Here, we leverage recent advancements in single photon avalanche diode (SPAD) arrays to accurately count the number active emitters in a fluorescent sample, while concurrently performing intensity-based multi-emitter localization. We find that SPAD cameras, with their high temporal resolution and single photon sensitivity are capable of precise single molecule localization microscopy, while maintaining the relative simplicity of widefield imaging. 
 

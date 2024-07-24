@@ -98,14 +98,6 @@ Localization then proceeds by minimization of $\ell(\bold{x}\lvert\theta)$.
 
 \subsection{Maximization of density, minimization of error}
 
-The distribution of a particular biomolecule in the cell can be described as a probability density over a two-dimensional space, casting super-resolution as a density estimation problem. Intuitively, the spatial resolution of SMLM images then increases as we draw more samples from this density - a concept which is made mathematically precise by the so-called Fourier ring correlation or FRC. Using FRC, one can compute image resolution as the spatial frequency at which a correlation function in the frequency domain drops below a threshold, typically taken to be $1/7$ (See Supplement). According to this theory, reducing localization uncertainty while increasing the number of samples, results in an increase in image resolution (Nieuwenhuizen 2013). However, there remains a fundamental limit to the the minimal localization uncertainty which can be obtained.
-
-
-\begin{equation*}
-\mathrm{FRC}(q) = \frac{\sum_{\vec{q}\in\mathrm{circle}}\tilde{f_{1}}(\vec{q})\tilde{f_{2}}(\vec{q})^{*}}{\sqrt{\sum_{\vec{q}\in\mathrm{circle}}\lvert f_{1}(\vec{q})\lvert^{2}}\sqrt{\sum_{\vec{q}\in\mathrm{circle}}\lvert f_{2}}(\vec{q})\lvert^{2}}
-\end{equation*}
-
-
 \begin{figure}[t]
 \begin{center}
 \includegraphics[width=14cm]{media/FRC.png}
@@ -114,6 +106,23 @@ The distribution of a particular biomolecule in the cell can be described as a p
 \end{figure}
 
 
+The distribution of a particular biomolecule in the cell can be described as a probability density over a two-dimensional space, casting super-resolution as a density estimation problem. Intuitively, the spatial resolution of SMLM images then increases as we draw more samples from this density - a concept which is made mathematically precise by the so-called Fourier ring correlation or FRC. Using FRC, one can compute image resolution as the spatial frequency at which a correlation function in the frequency domain drops below a threshold, typically taken to be $1/7$ (See Supplement). According to this theory, reducing localization uncertainty while increasing the number of samples, results in an increase in image resolution (Nieuwenhuizen 2013). However, there remains a fundamental limit to the the minimal localization uncertainty which can be obtained.
+
+
+\begin{equation*}
+\mathrm{FRC}(q) = \frac{\sum_{\vec{q}\in\mathrm{circle}}\tilde{f_{1}}(\vec{q})\tilde{f_{2}}(\vec{q})^{*}}{\sqrt{\sum_{\vec{q}\in\mathrm{circle}}\lvert f_{1}(\vec{q})\lvert^{2}}\sqrt{\sum_{\vec{q}\in\mathrm{circle}}\lvert f_{2}}(\vec{q})\lvert^{2}}
+\end{equation*}
+
+
 Localization uncertainty, typically the RMSE of a maximum likelihood or similar statistical estimator, is bounded from below by the inverse of the Fisher information matrix, known as the Cramer-Rao lower bound (Chao 2016). Localization uncertainties in sparse conditions are often tens of nanometers, although recent work on integration of Bayesian priors with modulation enhanced SMLM (meSMLM) or structured illumination with MINFLUX, has reduced spatial resolution below to a few nanometers (Kalisvaart 2022, Gwosh 2020). Nevertheless, managing the increase in localization uncertainty at high labeling density remains a major bottleneck to SMLM. Static uncertainty due to molecular crowding can be partially amelioriated by using pairwise or higher-order temporal correlations within a pixel neighborhood, known as stochastic optical fluctuation imaging or SOFI (Dertinger 2009). Other approaches such as stimulated emission and depletion (STED) imaging bring control over the photophysical state of a chosen subset of the sample, yet the need for laser scanning prevents widespread application in live-cell studies. The spatial resolution and relative simplicity of SMLM techniques remains unmatched, inciting an effort to increase the resolution of SMLM techniques and explore avenues towards time resolved SMLM.
 
+\subsection{Thesis}
+
+To address the challenges posed by high-dimensional data in fluorescence nanoscopy, I propose two different methods:
+
+The first method is model-heavy and leverages deep learning techniques. Specifically, it involves a generative modeling framework for kernel density estimation in single molecule localization microscopy, using variational diffusion. This approach not only accelerates super-resolution imaging but also provides a way to estimate uncertainty in the results.
+
+The second method is model-light but relies on advanced hardware. This approach uses single photon avalanche diode (SPAD) arrays to accurately count active fluorescent emitters while performing intensity-based multi-emitter localization. SPAD cameras, with their high temporal resolution and single photon sensitivity, enable precise localization in non-sparse scenes.
+
+These two methods, one focusing on sophisticated computational models and the other on cutting-edge hardware, offer complementary solutions to the high-dimensional inference problem in super-resolution microscopy. By combining these approaches, we can achieve more accurate and reliable imaging of biological structures at the nanoscale.
 

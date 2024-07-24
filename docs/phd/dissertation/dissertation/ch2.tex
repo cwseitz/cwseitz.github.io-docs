@@ -1,7 +1,84 @@
 \ProvidesFile{ch2.tex}[]
 
-\chapter{Uncertainty-aware localization microscopy by variational diffusion}
+\chapter{Variational Bayesian Fluorescence Nanoscopy}
 \ix{physics//Physics appendix}
+
+\section{Background}
+
+\subsection{The Bayesian calculation}
+Bayesian inference provides a rigorous framework for updating beliefs about the world in light of new data. It leverages the principles of probability theory to combine prior knowledge with empirical evidence, resulting in updated, posterior beliefs. In parametric modeling, we assume that the data $x$ are generated from a distribution with a set of parameters $y$. Parametric models simplify the problem by assuming a specific form for the underlying distribution of the data, characterized by a finite set of parameters. This approach allows us to use mathematical functions to describe complex systems and make inferences about the parameters based on observed data.
+
+At the heart of Bayesian inference is Bayes' rule, which allows us to update our beliefs based on new evidence. Bayes' rule is derived from the definition of conditional probability. For events $A$ and $B$, the conditional probability of $A$ given $B$ is defined as
+\begin{equation*}
+P(A \lvert B) = \frac{P(A \cap B)}{P(B)},
+\end{equation*}
+provided that $P(B) > 0$. Similarly, the conditional probability of $B$ given $A$ is
+\begin{equation*}
+P(B \lvert A) = \frac{P(A \cap B)}{P(A)}.
+\end{equation*}
+Rearranging these equations and solving for $P(A \cap B)$ gives us Bayes' rule:
+\begin{equation*}
+P(A \lvert B) = \frac{P(B \lvert A) P(A)}{P(B)}.
+\end{equation*}
+
+In Bayesian inference, we reinterpret these events in terms of data and parameters. Let $x$ denote the observed data and $y$ denote the parameters or latent variables of the model. Bayes' rule then becomes
+\begin{equation*}
+p(y \lvert x) = \frac{p(x \lvert y) p(y)}{p(x)}.
+\end{equation*}
+Here, $p(y \lvert x)$ is the posterior distribution, representing our updated beliefs about the parameters after observing the data. $p(x \lvert y)$ is the likelihood, the probability of the observed data given the parameters. $p(y)$ is the prior distribution, representing our beliefs about the parameters before observing the data. $p(x)$ is the marginal likelihood or evidence, which normalizes the posterior distribution and ensures it sums to one.
+
+One of the main challenges in Bayesian inference is the computation of the posterior distribution. The denominator in Bayes' rule, $p(x)$, involves an integral over all possible values of the parameters:
+\begin{equation*}
+p(x) = \int p(x \lvert y) p(y) \, dy.
+\end{equation*}
+In many practical applications, this integral is intractable due to the high dimensionality of the parameter space. This intractability is often referred to as the curse of dimensionality, where the complexity of computations increases exponentially with the number of dimensions.
+
+To address this challenge, various approximation methods have been developed. One such method is Markov Chain Monte Carlo (MCMC), which generates samples from the posterior distribution by constructing a Markov chain that has the desired distribution as its equilibrium distribution. MCMC methods, such as the Metropolis-Hastings algorithm and the Gibbs sampler, allow us to approximate the posterior distribution even when the exact integral is computationally infeasible.
+
+MCMC algorithms were originally developed in the 1940s by physicists at Los Alamos. These physicists, including Ulam (inspired by playing solitaire!) and Von Neumann (who developed the acceptance-rejection algorithm), were interested in modeling the probabilistic behavior of atomic particles. They could not do this analytically, but they wondered if they could use simulation. Simulation was difficult as the normalization constant $Z_p$ was not known. Moreover, simulation as a computational tool hadn't been widely adopted yet, although ideas around simulation had been around for some time – e.g., Buffon's needle (1700s), Lord Kelvin (1901), and Fermi (1930s). In fact, the term “Monte Carlo” was coined at Los Alamos.
+
+Ulam and Metropolis overcame this problem by constructing a Markov chain for which the desired distribution was the stationary distribution of the Markov chain. They then only needed to simulate the Markov chain until stationarity was achieved. Towards this end, they introduced the Metropolis algorithm, and its impact was enormous. Afterwards, MCMC was introduced to statistics and generalized with the Metropolis-Hastings algorithm (1970) and the Gibbs sampler of Geman and Geman (1984).
+
+Another approach to approximating the posterior distribution is variational inference. This method involves approximating the true posterior distribution $p(y \lvert x)$ with a simpler, parameterized distribution $q(y)$ by minimizing the Kullback-Leibler (KL) divergence between them. The KL divergence,
+\begin{equation*}
+D_{KL}(q(y) \lvert p(y \lvert x)),
+\end{equation*}
+measures how one probability distribution diverges from a second, expected probability distribution.
+
+To minimize the KL divergence, we first express it as
+\begin{equation*}
+D_{KL}(q(y) \lvert p(y \lvert x)) = \int q(y) \log \frac{q(y)}{p(y \lvert x)} \, dy.
+\end{equation*}
+This can be rewritten using Bayes' rule as
+\begin{equation*}
+D_{KL}(q(y) \lvert p(y \lvert x)) = \int q(y) \log \frac{q(y) p(x)}{p(x \lvert y) p(y)} \, dy = \log p(x) + \int q(y) \log \frac{q(y)}{p(x \lvert y) p(y)} \, dy.
+\end{equation*}
+Since $\log p(x)$ is constant with respect to $q(y)$, minimizing $D_{KL}(q(y) \lvert p(y \lvert x))$ is equivalent to maximizing the Evidence Lower Bound (ELBO), defined as
+\begin{equation*}
+ELBO = \int q(y) \log \frac{p(x \lvert y) p(y)}{q(y)} \, dy.
+\end{equation*}
+Maximizing the ELBO ensures that $q(y)$ is as close as possible to the true posterior $p(y \lvert x)$. This approach provides a practical way to perform Bayesian inference, especially in high-dimensional settings where traditional methods may be computationally prohibitive.
+
+In variational inference, model parameters and latent variables can be treated interchangeably. This flexibility allows us to use powerful optimization techniques to approximate complex posterior distributions and make Bayesian inference feasible for a wide range of applications.
+
+\subsection{The curse of dimensionality}
+
+Dimensionality refers to the number of variables or features in a dataset. In fluorescence nanoscopy, each spatial coordinate (e.g., x, y, and potentially z in three-dimensional imaging) and additional attributes such as time points or different fluorophore states contribute to the dimensionality of the data. As the number of these features increases, the dataset becomes high-dimensional. The curse of dimensionality is a term coined to describe various phenomena that arise when working with high-dimensional data, making statistical analysis and machine learning more challenging. Mathematically, the curse of dimensionality can be described through the following issues:
+
+As dimensionality increases, the volume of the space grows exponentially. For instance, the volume of a hypercube with side length $l$ in $d$-dimensional space is given by $l^d$. This rapid increase in volume means that data points become sparser, making it difficult to estimate densities and find meaningful patterns. Furthermore, in high-dimensional spaces, the concept of distance becomes less informative. For example, the difference between the minimum and maximum distance between data points tends to shrink as dimensionality increases, which can make clustering and nearest-neighbor algorithms less effective. With a large number of dimensions, models can easily become overly complex, capturing noise instead of the underlying signal. This leads to overfitting, where the model performs well on training data but poorly on unseen data. High-dimensional data requires more computational resources for processing and storage. Algorithms that are efficient in low dimensions may become impractical in high dimensions due to increased time and space complexity.
+
+\subsection{The Hierarchical Variational Autoencoder}
+
+Variational Autoencoders (VAEs), introduced by Kingma and Welling in 2013, are a sophisticated class of generative models that combine principles of variational inference with deep learning. They provide a powerful framework for learning complex, high-dimensional data distributions by mapping data to a lower-dimensional latent space and then reconstructing the data from these latent representations.
+
+To understand VAEs, it's essential to first appreciate their roots in Bayesian inference. Bayesian inference aims to update the probability estimate for a hypothesis as more evidence or information becomes available. The fundamental tool for this process is Bayes' theorem, which is expressed as:
+\begin{equation*}
+p(y \lvert x) = \frac{p(x \lvert y) p(y)}{p(x)}.
+\end{equation*}
+Here, $p(y \lvert x)$ is the posterior distribution of the latent variables $y$ given the data $x$, $p(x \lvert y)$ is the likelihood of the data given the latent variables, $p(y)$ is the prior distribution of the
+
+
+\section{Abstract}
 
 Fast extraction of physically relevant information from images using deep neural networks has led to significant advances in fluorescence microscopy and its application to the study of biological systems. For example, the application of deep networks for kernel density (KD) estimation in single molecule localization microscopy (SMLM) has accelerated super-resolution imaging of densely-labeled structures in the cell. However, simple and interpretable uncertainty quantification is lacking in these applications, and remains a necessary modeling component in high-risk research. We propose a generative modeling framework for KD estimation in SMLM based on variational diffusion. This approach allows us to probe the structure of the posterior on KD estimates, creating an additional avenue toward quality control. We demonstrate that data augmentation with traditional SMLM architectures followed by a diffusion process permits simultaneous high-fidelity super-resolution with uncertainty estimation of regressed KDEs. 
 
@@ -120,6 +197,15 @@ The development of a method for uncertainty estimation in super-resolution imagi
 
 
 \section{Appendix}
+
+\begin{figure}[t]
+\centering
+\includegraphics[scale=0.4]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/media/DeepSTORM.png}
+\end{figure}
+\begin{figure}[t]
+\centering
+\includegraphics[scale=0.4]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/media/DiffusionArch.png}
+\end{figure}
 
 \subsection{Sampling}
 
