@@ -1,126 +1,109 @@
-\ProvidesFile{ch4.tex}[Chapter4]
+\ProvidesFile{ch4.tex}[Chapter2]
 
-\chapter{Enhanced SMLM with single photon counting cameras}
+\chapter{Bromodomain protein 4 and chromatin organization}
 \ix{physics//Physics appendix}
 
+The interplay between chromatin structure and phase-separating proteins is an emerging topic in cell biology with implications for understanding disease states. Here, we investigate the functional relationship between bromodomain protein 4 (BRD4) and chromatin architecture. By combining molecular dynamics simulations with live-cell imaging, we demonstrate that BRD4, when phosphorylated at specific N-terminus sites, significantly impacts nucleosome nanodomain (NN) organization and dynamics. Our findings reveal that enhanced chromatin binding activity of BRD4 condenses NNs, while both loss or gain of BRD4 chromatin binding reduced diffusion of single nucleosomes, suggesting a role for BRD4 in the regulation of nanoscale chromatin architecture and the chromatin microenvironment. These observations shed light on the nuanced regulation of chromatin structure by BRD4, offering insights into its role in maintaining the nuclear architecture and transcriptional activity.
 
+\section{Introduction}
 
-Conventional single molecule localization microscopy infers the locations of putatively isolated fluorescent emitters to produce super-resolved images. The number of active fluorescent emitters is therefore a critical piece of information during localization; however, this quantity is generally underdetermined in widefield fluorescent microscopy. Nevertheless, many fluorophores used in bioimaging are intrinsically single photon sources which exhibit fluorescence antibunching and can emit only one photon following a very short excitation pulse. This general property may provide the necessary physical information for constrained localization in non-sparse scenes by yielding estimates of the number active fluorescent emitters. Here, we leverage recent advancements in single photon avalanche diode (SPAD) arrays to accurately count the number active emitters in a fluorescent sample, while concurrently performing intensity-based multi-emitter localization. We find that SPAD cameras, with their high temporal resolution and single photon sensitivity are capable of precise single molecule localization microscopy, while maintaining the relative simplicity of widefield imaging. 
+The cell nucleus is a densely packed environment with chromatin comprising a dominant component. The compartmentalization of chromatin with other intranuclear components by phase separation is therefore an efficient strategy to ensure precise spatial and temporal coordination of complex dynamics. A growing number of phase separated nuclear bodies have been identified, including transcriptional condensates1,2, nuclear speckles3, and DNA damage repair foci4; however, the interplay of phase separated condensates with the underlying chromatin structure remains poorly understood. Transcriptional condensates have been identified as an ideal model to study the kinetic and thermodynamic contributions of chromatin substrate binding, as the ability of transcriptional activators to both condense and bind chromatin is well established1,5–8. Here, we extend this effort by investigating the regulation of chromatin structure by phase separated transcriptional condensates. We focus on the BRD4 protein - a well-studied transcriptional activator that localizes to acetylated chromatin sites9, recruits pTEF-b10, and initiates transcription of key genes involved in signal response, immunity, and oncogenesis10.
+	The BRD4 long isoform is characterized by structured N-terminal tandem acetyl-lysine binding bromodomains and an extra-terminal domain, connected by intrinsically disordered regions11. Perhaps the most fundamental of BRD4 functions is the ability to bind to acetylated chromatin through bromodomain 1 (BD1) and bromodomain 2 (BD2) that are in tandem within the N-terminal part of the protein. BRD4 inhibitors such as (+)-JQ1 competitively bind to the acetyl-binding pocket of BRD4, displacing BRD4 from chromatin12. It is also well known that BRD4 association with acetylated chromatin is enhanced by casein kinase II (CK2)-mediated phosphorylation of seven N-terminus phosphorylation sites (NPS), followed by intramolecular rearrangement13 of BRD4 protein and/or BRD4 dimerization13,14.
+	Recent studies have demonstrated that BRD4 is present in discrete nuclear bodies that occur at super-enhancers, which exhibit properties of other well-studied biomolecular condensates, including rapid recovery of fluorescence after photobleaching and sensitivity to 1,6-hexanediol, which disrupts liquid-like condensates (Sabari 2018). Both BRD4 long and short isoform are found in phase separated condensates in the nucleus and are associated with active gene transcription1. Importantly, CK2-mediated NPS phosphorylation state regulates chromatin binding activity of BRD413 as well as BRD4 phase separation11. This has led to the conclusion that phosphorylation of BRD4 inhibits interaction with chromatin and reduces phase separation, while remaining necessary for active gene transcription. Moreover, phosphorylated and unphosphorylated BRD4 form different molecular associations – transient polyvalent associations of unphosphorylated BRD4 contrast with the stable dimeric interaction and chromatin binding of phosphorylated BRD414. We therefore speculated that BRD4 chromatin binding may be necessary for maintaining NN structure and single nucleosome dynamics. 
 
-\subsection{Introduction}
+\section{Results}
 
-Far-field optical microscopy is fundamentally limited by diffraction, with the maximum attainable resolution being limited to approximately half the wavelength of light. Several schemes to beat the diffraction limit have been developed in recent years. Many of these schemes utilize the concept of precise localization of isolated fluorescent emitters which blink over a time series of frames \parencite{Rust2006,Betzig2006}. An inherent problem with such methods is the requirement that fluorescent emitters be isolated, slowing down the acquisition of super-resolved images. To address this, we leverage the fact that many fluorophores are intrinsically single photon sources and exhibit fluorescence antibunching. This property can constrain the number of active fluorescent emitters in a region of interest (ROI) and can potentially enable localization in non-sparse scenes \parencite{Ta2010,Israel2017}. 
+\subsection{Colocalization of BRD4 mutants with nucleosome nanodomains}
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=12cm]{media/SPADvCMOS.png}
-\caption{}
-\end{figure*}    
-
-Molecular counting with fluorescence antibunching has a fairly simple motivation: coincidence of photons at multiple detector elements during high speed imaging provides evidence for the number of single photon sources present in the imaged region. Combining the ideas of conventional super-resolution approaches with photon statistics may prove to be a powerful set of methods for bioimaging. SPAD cameras achieve orders of magnitude higher temporal resolutions than standard CMOS cameras, single photon sensitivity, and dark count rates less than 25cps. Furthermore, the reduced readout noise and large fill-factor of recently commercialized SPAD arrays suggests their use for single molecule localization with reduced localization uncertainty. Localization uncertainty, typically the root mean square error (RMSE) of a maximum likelihood or similar statistical estimator, is bounded from below by the inverse of the Fisher information matrix, known as the Cramer-Rao lower bound \parencite{Chao2016}. Managing the increase in localization uncertainty at high labeling density remains a major bottleneck to localization microscopy. For example, static uncertainty due to molecular crowding can be partially amelioriated by using pairwise or higher-order temporal correlations within a pixel neighborhood \parencite{Dertinger2009}. However, the number of fluorescent active emitters in a region of interest remains critical prerequisite information in single molecule localization.
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=12cm]{media/SPAD512.png}
-\caption{}
-\end{figure*}    
-
-
-In this study, we present a method for widefield single photon counting in order to rigorously count fluorophores in the sample and subsequently constrain single molecule localization. We investigate the theoretical properties of the zero-lag second-order coherence function $g^{(2)}(0)$ for widefield photon counting and its spatial properties. Using Bayesian analysis, we derive a posterior distribution on the number of active fluorescent emitters in a region of interest. We then combined this with single molecule localization algorithms and demonstrate resolution of multiple emitters using a multi-emitter fitting algorithm and report localization errors with respect to the Cramer-Rao bound.
-
-\subsection{Basic Scheme}
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.png}
-\caption{Single photon counting with a SPAD array (a) Conventional widefield microscopy with integrated SPAD array (b) Single photon imaging scheme using 1us exposures containing a picosecond laser pulse (c) Sum of photon counts over a 5x5 region of interest (ROI), taken with $N_{\mathrm{frames}}=5\times 10^{5}$}
-\end{figure*}    
-
-We consider a simplified description of widefield photon counting for a a single photon source in the object plane labeled by a continuous-valued coordinate $\theta=(x_0,y_0)$. The spatial profile $O$ of the field in image space is presumed to have a Gaussian shape \parencite{Zhang2007,Richards1959,Gibson1989}.
-
-\begin{equation}
-O(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^2+(y-y_{0})^2}{2\sigma^2}}
-\end{equation}
-
-Therefore the field operator in object space is $\hat{E} \propto \hat{a}$ and in image space $\hat{E} \propto O(x,y)\hat{a}$. Since our SPAD detectors at the image plane must be discrete, the total field at a detector element $k$ centered in image space at $s_k=(u_k,v_k)$ is then given by integrating over pixels of width $\delta$. Moreover, the Gaussian $O$ is presumed to be isotropic and therefore we have $\hat{E}(s_k) \propto \Gamma_{x}(u_k,x_{0})\Gamma_{y}(v_k,y_0)$. For example,
-
-\begin{align*}
-\Gamma_{x}(u_k,x_{0}) &= \\ \frac{1}{\sqrt{2}}\left(\mathrm{erf}\left(\frac{u_k+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{u_k-\frac{1}{2}-x_0}{\sqrt{2}\sigma}\right)\right)
-\end{align*}
-
-We now consider the case of pulsed excitation where the interval between pulses much longer than the fluorescence lifetime. Upon excitation of an isolated fluorescent emitter, a photon is detected at a particular detector element $k$ with probability $\zeta_k \propto \langle \hat{E}^{\dagger}(s_k)\hat{E}(s_k)\rangle = \frac{1}{2}\Gamma_{x}^2 \Gamma_{y}^2\mathrm{Tr}(\rho a^{\dagger}a)$ where $\rho$ is the density matrix for a two-level system. Similarly, the probability of detection in a region of interest collecting all photons emitted is $\zeta\propto \mathrm{Tr}(\rho a^{\dagger}a)$. Here, we are primarily concerned with the latter quantity, and its application in counting fluorescent emitters.
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=12cm]{media/PoissonBinomialSims.png}
-\caption{}
-\end{figure*}    
-
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png}
-\caption{Single and multi-emitter localization error on sums of photon counts. (left) Localization uncertainty for simulated data for different values of $N$, plotted with respect to the Cramer-Rao lower bound, shown in dashed gray. (right) Multi-emitter localization by MCMC sampling for $N=3$, colors indicate a cluster of samples i.e., a single localization. All data was generated with a background rate $\langle \bold{n}_{\mathrm{background}} \rangle = \lambda N_{\mathrm{frames}}/d^{2}$ per pixel. Scalebar 360nm}
-\end{figure*}   
-
-By temporarily ignoring the spatial profile described by (1), we derive a likelihood on the number of fluorophores in a small ROI with a lateral dimension $d = 5$ pixels. For $N$ fluorophores emitting photons which can be detected within a ROI of the SPAD array, the number of signal photons measured $n_{\mathrm{signal}}$ following a single excitation pulse will have Binomial statistics $n_{\mathrm{signal}} \sim \mathrm{Binom}(N,\zeta)$. Photon pile-up at a single detector element can be safely neglected in this model due to its relatively low likelihood. We then model the background signal within the region of interest as a coherent state, which must follow Poissonian statistics $n_{\mathrm{background}} \sim \mathrm{Poisson}(\lambda)$ for an expected number $\lambda$ of background counts in the ROI per frame. The total number of counts $n=n_{\mathrm{signal}}+n_{\mathrm{background}}$ detected in the region of interest following a single pulse is then distributed by the likelihood
-
-\begin{equation}
-p(n=n' \mid N, \zeta) = \sum_{i=0}^{\infty} \binom{N}{i} \zeta^i (1-\zeta)^{N-i} \frac{\lambda^{n'-i}}{(n'-i)!} e^{-\lambda}
-\end{equation}
-
-The expression in (2) represents a convolution of Poisson and Binomial probability mass functions. This result is the primary means of inference of the number of active emitters $N$ in a ROI.
-
-In order to begin to perform localization in non-sparse ROIs, we write a posterior distribution on the Binomial parameters used in the likelihood (2) using Bayes rule
-
-\begin{equation}
-p(N,\zeta\lvert x) \propto p(x\lvert N,\zeta)p(\zeta)
-\end{equation}
-
-We use a Gaussian prior on $\zeta$ i.e., $p(\zeta) = \mathcal{N}(\mu_{\zeta},\sigma_{\zeta})$ with $\mu_{\zeta}=0.01$ and $\sigma_{\zeta}=0.005$. Prior uncertainty in the value of $\zeta$ stems from fluorophores with potentially heterogeneous photophysical properties as well as varying laser power throughout the excited region. This posterior can be integrated over $\zeta$ to produce a posterior distribution on the fluorophore number $N$ i.e., $p(N=N'\lvert n) \propto \int_{0}^{1} \prod_{j} p(n_{j}\lvert N',\zeta)p(\zeta) d\zeta$ which can be estimated using Monte Carlo methods. The final posterior is then estimated by minibatching the data into batches of $10^3$ frames and averaging the posterior $p(N\lvert n)$ over minibatches. The fluorophore number $N$ within each ROI is then estimated by the maximum aposteriori (MAP) estimate $N^{*}$ given by this distribution.
-
-For localization, we notice that (2) is well approximated by a Poisson distribution for a large frame number, making the localization procedure similar to conventional intensity-based methods \parencite{Smith2010}. Denoting the fluorophore coordinates by $\theta$ and vector of total counts in the region of interest $\bold{n}$, we have the following log-likelihood
-
-
-\begin{align}
-\ell(\bold{n}\lvert \theta) &= -\log \prod_{k} \frac{e^{-\left(\mu_{k}\right)}\left(\mu_{k}\right)^{\bold{n}_k}}{\bold{n}_k!}\\
-&= \sum_{k}  \log \bold{n}_k! + \mu_{k} - \bold{n}_k\log\left(\mu_{k}\right)
-\end{align}
+	To address the role of BRD4 binding and phase separation on chromatin structure, we express FLAG-tagged BRD4 mutants with NPS or bromodomain mutations in HeLa cells and measure their effects on chromatin organization. In particular, we express a constitutively phosphorylated (7D mutant), constitutively unphosphorylated (7A mutant), and bromodomain-deactivated (BD mutant) protein (Figure 1a,b). Colocalization analysis of FLAG-tagged 7A/7D BRD4 mutants with NNs using nearest neighbor distance distribution function G(r) showed an obvious colocalization of these mutants with NNs with respect to complete spatial randomness. 
 
 \begin{figure}[t]
-\centering
-\includegraphics[width=9cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-4.png}
-\caption{Posteriors on the number of fluorescent emitters $N$ and localization for $N^{*}=1$ (left) and $N^{*}=2$ (right) quantum dots. Scalebars 360nm}
-\end{figure}   
+\includegraphics[width=\textwidth]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-0.png}
+\caption{}
+\end{figure}
+	
+\subsection{Chromatin structure and dynamics}
 
-where, in the multi-emitter regime the expected photon count at a pixel is $\mu_{k} = \langle \bold{n}_k\rangle =\sum_{m=1}^{N^{*}} \mu_{k,m}$ given $\mu_{k,m}=\zeta N_{\mathrm{frames}}\Gamma_{x}(u_k,x_{0,m})\Gamma_{y}(v_k,y_{0,m}) + \lambda N_{\mathrm{frames}}/d^{2}$. In the multi-emitter regime, optimization of (4) by sampling is a suitable choice (see Results). 
+To assess the functional role of BRD4 in maintaining the NN environment, we interrogated the dynamics of NNs, as well as their structure, in the presence of BRD4 mutants. Histone H2B was tagged with HaloTag15 (H2B-Halo), to which a fluorescent ligand JaneliaFluor646 (JF646) can bind speciﬁcally in a living cell. Low concentrations of JF646 were used to obtain sparse labeling of nucleosomes for single-nucleosome imaging (Figure 2a,b). JF646-labeled nucleosomes in Hela cells were recorded at 10fps (∼200 frames, 20 s total) and a reduced diffusion coefficient was measured in cells expressing 7A, 7D, and BD mutants, with respect to cells expressing the wild-type BRD4 protein (Figure 2c,d). We then conducted super resolution imaging of nucleosome nanodomains using direct stochastic optical reconstruction microscopy (dSTORM) by promoting JF646 fluorescence intermittency with a cysteamine buffer (Figure 3a,c). JF646 is known to exhibit a transient fluorescent state lasting tens to hundreds of milliseconds and stable dark state lasting hundreds of milliseconds to seconds16. Two color imaging of H2B-Halo-JF646 and GFP-tagged BRD4 shows that BRD4 and NNs form complementary biomolecular condensates in the nucleus, consistent with current models of BRD4 chromatin reading mechanism (Figure 3b). Ensemble averages of Besag’s L-function showed an increase in NN compaction in cells expressing the 7D BRD4 mutants, while all other groups were consistently indistinguishable from WT cells (Figure 3d).  
+
+\begin{figure}[t]
+\includegraphics[width=\textwidth]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-1.png}
+\caption{}
+\end{figure}
+
+\begin{figure}[t]
+\includegraphics[width=\textwidth]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-2.png}
+\caption{}
+\end{figure}
+
+\subsection{Heteropolymer model}
+
+To interpret our experimental findings, we adopt a heteropolymer chromatin model to capture the interaction of chromatin with multivalent BRD4-like binders (Figure 4a). The heteropolymer consists of a coarse-grained bead-and-spring chain composed of $N_b=200$ beads, connected by harmonic bonds with equilibrium length $r_0$ whose energy is deﬁned as
+
+\begin{equation*}
+U_{AB}(r_{ij})=\frac{\kappa}{2}(\lvert r_{ij}\lvert-r_0)^2
+\end{equation*}
+
+where $r_{ij}$ is a vector connecting the center of a bead of type $i$ to a bead of type $j$ and $i,j \in (A,B)$. In all simulations, we assume $\kappa=90k_{B}T{r_0}^2$ where $k_{B}$ is Boltzmann’s constant and $r_0=200$nm. Random beads in the chain are selected to represent locally unacetylated (A-type particles) and acetylated chromatin (B-type particles).  B-type particles undergo multivalent interactions with a third group of C-type particles, which can promote cross-linking of the polymer. We presume a Bernoulli probably of $p=0.3$ for any given bead to be in an acetylated-like state. Interaction of multivalent chromatin binders with chromatin beads are then mediated by the following potential:
+
+\begin{equation*}
+U_{BC}\left(r_{ij}\right)=\epsilon\left(1-\left(\frac{\lvert r_{ij}\lvert}{R_0}\right)^2\right)^3
+\end{equation*}
+
+where $R_0=200$nm. The potential $U_{BC}$ is considered over a domain $0\leq\lvert r_{ij}\lvert\leq 2 R_0$ In all simulations, ten replicates were run for each condition tested. A and B type particles within the chromatin polymer have repulsive interactions with $\epsilon = +10k_{B}T$. Binding energy of the acetylated beads with binders was varied with $\epsilon_{I} = 0 k_{B}T,\epsilon_{II} = -20k_{B}T,\epsilon{III}=-40k_{B}T$ (Figure 4b). The dynamics of chromatin chains are approximated by Brownian dynamics within a cubic box with side length of 10um and periodic boundary conditions. Brownian dynamics follows the stochastic differential equation.
+
+\begin{figure}[t]
+\includegraphics[width=\textwidth]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-3.png}
+\caption{}
+\end{figure}
+
+\begin{equation*}
+\dot{\bold{r}} = \gamma^{-1}\nabla U(\bold{r}) +\sqrt{2 k_{B}T}\gamma^{-1/2}\xi(t)
+\end{equation*}
+
+where $\gamma$ is a diagonal friction tensor and $\xi(t)$ is a three-dimensional delta-correlated white noise $\langle \xi(t)\xi(t+\tau)  = \delta(t,t+\tau)$. Integrating the Brownian dynamics showed an overall reduction of the variance of the diffusion coefficient $D$ of single beads, and linear scaling of the diffusion coefficient with respect to temperature (Figure 4e).
+
+\section{Discussion}
+
+Our data support the model that phosphorylated and unphosphorylated BRD4 form different molecular associations in the nucleus. BRD4 nuclear localization is only weakly affected by bromodomain inhibition with monovalent BET inhibitors, while exposure to phase separation inhibitors such as 1,6 Hexanediol have a significant effect on BRD4 localization in the nucleus11. Therefore, nascent BRD4 condensates are likely seeded by unphosphorylated BRD4, followed by CK2-mediated phosphorylation, promoting chromatin interactions mediated by phosphorylated form. The stable dimeric interaction and binding of phosphorylated BRD4 to acetylated chromatin would then mediate control of the chromatin architecture by promoting cross-linking of the chromatin fiber and acting a molecular ‘bridge’ between transcriptional condensates with chromatin. Concurrently, reduced diffusivity of single nucleosomes with no overall change in NN compaction (cross-linking) in the unphosphorylated mutant is a natural result of molecular crowding resulting from overexpression of a constitutively phase separating protein, capable of multivalent interactions. 
+
+\section{Materials and Methods}
+
+\subsection{Cell lines, cell culture conditions, and transfection}
+
+Hela cells were cultured in DMEM supplemented with 10 percent fetal bovine serum (Gibco) at 37C 5 percent CO2 in a humidified incubator. Cultures were tested routinely for mycoplasma contamination; all tests were negative. For super-resolution experiments, cells were seeded in a 35mm FluoroDish (WPI), and transiently transfected using Lipofectamine 3000 with pBREBACK-H2BHalo plasmid (Addgene plasmid 91564) (ThermoFisher), pcDNA5-Flag-BRD4-7A (Addgene Plasmid 90006), pcDNA5-Flag-BRD4-7D (Addgene Plasmid 90007), pCDNA5-Flag-BRD4-BD (Addgene Plasmid 90005), pcDNA5-Flag-BRD4-WT (Addgene Plasmid 90331)
+
+\subsection{Super-resolution imaging of nucleosome nanodomains in living cells}
+
+After transient transfection, H2B-Halotag Hela cells were incubated with 3pM JF646 HaloTag ligand overnight. Cells were imaged in a dSTORM photoswitching buffer containing 100mM MEA, 50 ug/ml Glucose Oxidase, and 3.4 mg/ml Catalase (Sigma). Buffer pH was adjusted to ~8 using HCl. Movies were collected using a custom Olympus IX83 microscope body equipped with an Olympus 60X 1.25NA oil-immersion objective. During imaging cells were maintained at 37C and 5 percent CO2 in a stage top incubator (Tokai Hit). Images were projected onto an ORCA-Fusion sCMOS camera (Hamamatsu) and 2000 frames were captured at 100fps. The microscope was controlled using Micromanager software. HaloTag-JF646 molecules were imaged using oblique illumination with a 640nm laser (Excelitas) held at 20mW, as measured at the back focal plane of the objective. Super resolution reconstructions were obtained using the ThunderSTORM ImageJ plugin. Background signal was subtracted using a rolling ball filter with radius of 10 pixels. Spots were fit using an integrated Gaussian point spread function model with maximum likelihood estimation17,18. Experimental conditions for single molecule tracking are nearly identical. However, H2B-Halotag Hela cells were incubated with 3pM JF646 HaloTag ligand. HaloTag-JF646 molecules were illuminated at 10mW, 100 frames were captured at 10fps. 
+
+\begin{equation*}
+K(r) =\frac{a}{n(n-1)}\sum_{ij}{I(d_{ij}\ \le r)}\;\;\; L(r)\ \sqrt{\frac{K(r)}{\pi}}
+\end{equation*}
+
+Precise x,y positions of the fluorophores are obtained, Besag’s L-function L(r) is used to analyze the clustering. The L-function is the following transformation of Ripley’s K-function K(r) 
 
 
-\subsection{Results}
+where $a$ is the area of the window, $r$ is the distance between, $n$ is the number of data points and the sum is taken over all pairs of fit coordinates as shown in equation XXX. The indicator function is given by $I(d_{ij}\le r)$ and equals 1 if the distance is less than or equal to $r$. To measure degree of clustering, we use $L(r)-r$, which measures the deviation of a point pattern from complete spatial randomness (CSR). 
 
-Quantum dots coated on a glass coverslip were excited using a picosecond $532\mathrm{nm}$ pulsed laser triggered at $500\mathrm{kHz}$. Emission light was collected using an oil-immersion 100$\times$ objective with numerical aperture (NA) 1.4 (Nikon). The emission signal was then filtered to exclude the laser line (Semrock) and projected onto the SPAD512 sensor (Pi Imaging Technologies) using a tube lens. A simplified diagram of the complete system is depicted in (Figure 1a). Each acquisition consists of $N=5\times 10^{5}$ frames (500ms), synchronized with each laser pulse, using a $1\mathrm{us}$ exposure per frame (Figure 1b,d). To confirm the presence of single photon sources in the sample, we investigated properties of the zero-lag second order coherence function $g^{(2)}(0)$. The following empirical estimate of $g^{(2)}(0)$ is used \parencite{Israel2017}
+\subsection{Colocalization of BRD4 mutants with nucleosome nanodomains}
 
-\begin{equation}
-g^{(2)}(0) = \frac{G^{(2)}(0)-B}{\langle G^{(2)}(m\neq 0)\rangle -B}
-\end{equation}
+We colocalize FLAG-tagged 7A/7D BRD4 mutants with nucleosome nanodomains by simultaneous FLAG immunofluorescence with imaging of sparsely labeled of H2B-JF646. Puncta were detected in both channels using the Laplacian of Gaussian (LoG) detection algorithm to generate a multi-type point pattern. We then computed the nearest neighbor distance distribution function $G(r)$, which is the cumulative distribution function of the distance from a random H2B-JF646 puncta to the nearest BRD4-FLAG puncta. This function was computed for each cell, and then averaged over $N=20$ cells for each mutant to obtain $G(r)$. The averaged value is reported alongside the theoretical $G(r)$ under complete spatial randomness
 
-where $B = N_{\mathrm{frames}}\lambda\zeta$ is the expected number of background-signal coincidences in the region of interest. The quantity $G^{(2)}(m)$ represents the number of signal-signal coincidences in the region of interest at a lag time $m$. The quantity $\langle G^{(2)}(m\neq 0)\rangle$ is the average number of coincidences in pairs of frames at nonzero lag $m \in [1,100]$, in units of frames. As expected, simulation from the likelihood (2) shows saturation of $g^{(2)}(0)$  with increasing values of $N$ (Figure 1c). Moreover, bright clusters of quantum dots exhibit elevated $g^{(2)}(0)$ values as can be seen in maps of the $g^{(2)}(0)$ computing using sliding window over the array (Figure 1e).
+\begin{equation*}
+G(r)=\ 1-e^{-\lambda\pi r^2}
+\end{equation*}
 
-For localization by optimization of (4), we use Goodman and Weare's Markov Chain Monte Carlo (MCMC) algorithm \parencite{Goodman2010} to sample from the posterior on fluorophore locations. In all simulations we assume a uniform prior on coordinates over the ROI and $\zeta$ is known and identical over fluorophores. Fluorophore locations can then be estimated from the posterior samples by K-means clustering of the $(x,y)$ coordinates of the first particle and identification of cluster centers (Figure 2a). To validate our estimator, we compare its RMSE to the single emitter Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below (Chao 2016). For an isolated emitter, the Poisson log-likelihood (5) is convenient for computing the Fisher information matrix for $\theta$ and thus the The Fisher information is \parencite{Smith2010}
+Where $\lambda$ is the expected number of points per unit area. 
 
-\begin{equation}
-I_{ij}(\theta) = \sum_{k}\frac{1}{\mu_{k}}\frac{\partial \mu_{k}}{\partial\theta_{i}}\frac{\partial \mu_{k}}{\partial\theta_{j}}
-\end{equation}
+\subsection{Single molecule tracking}
 
-The Cramer-Rao bound is then found by $\mathrm{var}(\theta) \geq I^{-1}(\theta)$. We find that for thousands of expected signal photon counts, localization uncertainty lies in an acceptable range for localization microscopy (Figure 2b). Example posteriors and multi-emitter fitting on experimental quantum dot data are found in (Figure 3). The $\zeta$ value is treated as unknown but homogeneous across fluorophores in the ROI. \textit{A major criticism is likely that we have not measured $\zeta$ precisely and that we can only provide self-consistency for its simultaenous value with $N$}.
+Nucleosomes were localized using an integrated Gaussian point spread function model with maximum likelihood estimation17,18 and tracked using TrackPy Python software.  Trajectories lasting less than 80 frames were removed from further analysis. The individual mean squared displacement (MSD) is computed as $\langle \Delta r^{2}\rangle = \frac{1}{\lvert S_{\tau}\lvert}\sum_{\Delta r \in S_{\tau}}(\Delta r)^{2}$
+where $S_\tau$ is the set of all displacements in a time interval $\tau$. The diffusion coefficient for both simulations as well as experimental data was computed by linear regression of the formula $\log\langle \Delta r^{2}\rangle  = \log 4D + \alpha \log \tau$
 
+\subsection{Immunofluorescence}
+Cells grown in 35mm dishes were fixed with Formaldehyde in 1xPBS at 37C incubator for 20 minutes, and then permeabilized with 0.3 percent (v/v) Triton-X100 (Sigma-Aldrich) in PBS and blocked for 1h in 5 percent (w/v) nonfat dry milk at 4C. Cells were incubated overnight at 4C using primary antibodies anti-FLAG (Cell Signaling, clone XXX; 1:1000), and anti-BRD4 (Cell Signaling, clone E2A7X; 1:1000)  in blocker. Secondary antibodies for BRD4 (Cell Signaling Anti-Mouse IgG-Alexa488, 1:1000) were used. 
 
-\subsection{Discussion}
-
-Many fluorescent emitters exhibit random variations of brightness known as blinking. Blinking increases the observed photon-number fluctuations and could be expected to affect the value of $g^{(2)}(0)$ or the posterior on the number of active fluorescent emitters. However, the signal photon number per frame will follow Binomial statistics even in the presence of blinking, the only consequence of which is an effective reduction of the detection probability $\zeta$. If the effect of censoring photons by blinking and lowering the quantum yield can be accounted for, the technique used here may be compatible with common super-resolution techniques such as stochastic optical reconstruction microscopy (STORM). 
-
-The acquisition times necessary to obtain sufficient photon counts for computing the necessary statistics can potentially be very short. Most fluorophores have relaxation times in the nanosecond range and thus photons can be collected at a rate of at tens of millions of excitation pulses per second. These rates are currently difficult to obtain, however, due to limitations in detector throughput. The SPAD camera used in this study has a minimum exposure time in the microsecond range. Furthermore, the data volume can quickly become intractable due to the need for several thousands of frames for a millisecond-scale exposure time. This is currently a complication for techniques like STORM and advancements in the automation for data acquisitions are necessary. The speed of MCMC based localization remains a limitation for post-processing, and optimization of the processing time for localization is left for future work. 
-
-In conclusion, we propose a single molecule imaging technique that allows for simultaneous counting of localization of fluorescent molecules by modeling the quantum properties of fluorescence emission. The technique does not require a nonclassical light source and is designed to supplement standard single molecule localization microscopy techniques. The proposed method can be implemented with a standard widefield fluorescence microscope.
-
+\subsection{Immunoblotting}
+Cells were washed and lysis buffer added (RIPA buffer: PMSF: protease inhibitor cocktail: orthovanadate=100:1:2:1). Cells were then scraped and sonicated for 15 seconds using an ultrasonic homogenizer. Lysate was centrifuged at high speed (13200r/min) for 15 minutes at 4C to pellet the cellular debris. Total protein concentration was determined by a BCA Protein Assay Kit (Pierce). For electrophoresis, protein samples were prepared according to a protein-4x loading buffer (containing DTT) ratio of 3:1, 4x loading buffer containing DTT was diluted with 3 aliquots of protein sample. The sample was mixed and heated at 95C for 5 min, followed by vortex and centrifuge. After running the gel, it was removed from the cassette and assembled inside the Trans-Blot Turbo Transfer System cassette. Transfer was run at 2.5A and 25V for 7mins. The sample was then blocked for at least 1 hour using 5 percent skim milk blocking solution prepared with PBS in RT. Primary FLAG antibody was diluted in PBST with 3 percent skim milk (1:500) and incubated at 4C overnight. The secondary antibody (Licor Anti-Mouse IgG- IRDye 800CW) was diluted in PBST with 3 percent skim milk (1:5000) and placed on a rocker and incubated at RT for 45min. Western blots on Nitrocellulose membranes were scanned using the Odyssey fluorescence scanning system software.
 

@@ -106,6 +106,19 @@ The acquisition times necessary to obtain sufficient photon counts for computing
 
 In conclusion, we propose a single molecule imaging technique that allows for simultaneous counting of localization of fluorescent molecules by modeling the quantum properties of fluorescence emission. The technique does not require a nonclassical light source and is designed to supplement standard single molecule localization microscopy techniques. The proposed method can be implemented with a standard widefield fluorescence microscope.
 
+Averaging $G^{(2)}(0)$ over many realizations (sequences of $N_{\mathrm{frames}}$), gives the expected value $\langle G^{(2)}(0)\rangle $
+
+\begin{equation}
+\langle G^{(2)}(0)\rangle = N_{\mathrm{frames}}(1 - (1-\zeta)^n - n\zeta (1-\zeta)^{n-1})
+\end{equation}
+
+Since $G^{(2)}(m)$ is already averaged over $m$, $\langle G^{(2)}(m) $ is effectively a constant over realizations, and must be
+
+\begin{equation}
+\langle G^{(2)}(m)\rangle =  N_{\mathrm{frames}} \left(1 - \left((1-\zeta)^n\right)\right)^2
+\end{equation}
+
+Ignoring the effect of background signal $\langle g^{(2)}(0)\rangle =\langle G^{(2)}(0)\rangle/\langle G^{(2)}(m)\rangle$, which rapidly approaches $1/2$ as a function of $N$, and then saturates and very slowly approaches its maximum value of 1. This is consistent with the idea that for very large number of active fluorescent emitters, the statistics should become Poisson.
 
 \bibliographystyle{plainnat}
 \bibliography{references} 
