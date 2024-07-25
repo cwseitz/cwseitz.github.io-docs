@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  23 JUL 2024 21:11
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  24 JUL 2024 18:27
  restricted system commands enabled.
 **ch1.tex
 (./ch1.tex
@@ -1468,187 +1468,25 @@ Overfull \hbox (20.0pt too wide) in paragraph at lines 99--100
  []
 
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 101--102
-[]The
- []
-
-
-Overfull \hbox (15.00005pt too wide) in paragraph at lines 101--102
-\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 =\OT1/cmr/m/n/10 7$
- []
-
-
-! LaTeX Error: Environment equation* undefined.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.104 \begin{equation*}
-                     
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-! LaTeX Error: \mathrm allowed only in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.105 \mathrm
-           {FRC}(q) = \frac{\sum_{\vec{q}\in\mathrm{circle}}\tilde{f_{1}}(\v...
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Missing $ inserted.
-<inserted text> 
-$
-l.105 ...m{circle}}\lvert f_{2}}(\vec{q})\lvert^{2}}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-$
-l.105 ...m{circle}}\lvert f_{2}}(\vec{q})\lvert^{2}}
-                                                  
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing $ inserted.
-<inserted text> 
-$
-l.105 ...m{circle}}\lvert f_{2}}(\vec{q})\lvert^{2}}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Undefined control sequence.
-<argument> qsqrt {\sum _{\vec {q}\in \mathrm {circle}}\lvert 
-                                                  f_{1}(\vec {q})\lvert ^{2}...
-l.105 ...m{circle}}\lvert f_{2}}(\vec{q})\lvert^{2}}
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument> ... \mathrm {circle}}\lvert f_{1}(\vec {q})\lvert 
-                                                  ^{2}}\sqrt {\sum _{\vec {q...
-l.105 ...m{circle}}\lvert f_{2}}(\vec{q})\lvert^{2}}
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument> ...rt {\sum _{\vec {q}\in \mathrm {circle}}\lvert 
-                                                  f_{2}}(\vec {q})\lvert ^{2}
-l.105 ...m{circle}}\lvert f_{2}}(\vec{q})\lvert^{2}}
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-<argument> ...\mathrm {circle}}\lvert f_{2}}(\vec {q})\lvert 
-                                                  ^{2}
-l.105 ...m{circle}}\lvert f_{2}}(\vec{q})\lvert^{2}}
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Extra }, or forgotten $.
-\frac  #1#2->{\begingroup #1\endgroup \over #2}
-                                               
-l.105 ...m{circle}}\lvert f_{2}}(\vec{q})\lvert^{2}}
-                                                  
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-
-! LaTeX Error: \begin{document} ended by \end{equation*}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.106 \end{equation*}
-                   
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-$
-l.106 \end{equation*}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing } inserted.
-<inserted text> 
-}
-l.106 \end{equation*}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-Overfull \hbox (20.0pt too wide) in paragraph at lines 105--107
-[]FRC(q)
- []
-
-
-Overfull \hbox (226.42685pt too wide) in paragraph at lines 105--107
-\OMX/cmex/m/n/10 P$[][][]\OT1/cmr/m/n/10 ([])[]([])[]$$[]$ 
- []
-
-
 ! LaTeX Error: Environment figure undefined.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.109 \begin{figure}
+l.101 \begin{figure}
                   [t]
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 
-Overfull \hbox (20.0pt too wide) in paragraph at lines 109--110
+Overfull \hbox (20.0pt too wide) in paragraph at lines 101--102
 [][t] 
  []
 
 ! Undefined control sequence.
-l.111 \includegraphics
+l.103 \includegraphics
                     [width=14cm]{media/FRC.png}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1663,7 +1501,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.113 \caption
+l.105 \caption
             {\textbf{Noise model for CMOS cameras used for MLE}. (left)) CMO...
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1675,75 +1513,271 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.114 \end{figure}
+l.106 \end{figure}
                 
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 
-Overfull \hbox (27.75pt too wide) in paragraph at lines 113--115
+Overfull \hbox (27.75pt too wide) in paragraph at lines 105--107
 \TU/lmr/bx/n/10 Noise
  []
 
 
-Overfull \hbox (30.50002pt too wide) in paragraph at lines 113--115
+Overfull \hbox (30.50002pt too wide) in paragraph at lines 105--107
 \TU/lmr/bx/n/10 model
  []
 
 
-Overfull \hbox (14.0pt too wide) in paragraph at lines 113--115
+Overfull \hbox (14.0pt too wide) in paragraph at lines 105--107
 \TU/lmr/bx/n/10 for
  []
 
 
-Overfull \hbox (34.26pt too wide) in paragraph at lines 113--115
+Overfull \hbox (34.26pt too wide) in paragraph at lines 105--107
 \TU/lmr/bx/n/10 CMOS
  []
 
 
-Overfull \hbox (24.11pt too wide) in paragraph at lines 113--115
+Overfull \hbox (24.11pt too wide) in paragraph at lines 105--107
 \TU/lmr/bx/n/10 cam-
  []
 
 
-Overfull \hbox (20.14pt too wide) in paragraph at lines 113--115
+Overfull \hbox (20.14pt too wide) in paragraph at lines 105--107
 \TU/lmr/bx/n/10 eras
  []
 
 
-Overfull \hbox (22.59pt too wide) in paragraph at lines 113--115
+Overfull \hbox (22.59pt too wide) in paragraph at lines 105--107
 \TU/lmr/bx/n/10 used
  []
 
 
-Overfull \hbox (14.0pt too wide) in paragraph at lines 113--115
+Overfull \hbox (14.0pt too wide) in paragraph at lines 105--107
 \TU/lmr/bx/n/10 for
  []
 
 
-Overfull \hbox (25.4pt too wide) in paragraph at lines 113--115
+Overfull \hbox (25.4pt too wide) in paragraph at lines 105--107
 \TU/lmr/bx/n/10 MLE\nullfont .
  []
 
 
-Overfull \hbox (21.50116pt too wide) in paragraph at lines 113--115
+Overfull \hbox (21.50116pt too wide) in paragraph at lines 105--107
 \OML/cmm/m/it/10 [] \OT1/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (15.00005pt too wide) in paragraph at lines 113--115
+Overfull \hbox (15.00005pt too wide) in paragraph at lines 105--107
 \OT1/cmr/m/n/10 500$
  []
 
 
-Overfull \hbox (10.94565pt too wide) in paragraph at lines 113--115
+Overfull \hbox (10.94565pt too wide) in paragraph at lines 105--107
 \OML/cmm/m/it/10 []$
+ []
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 109--110
+[]The
+ []
+
+
+Overfull \hbox (15.00005pt too wide) in paragraph at lines 109--110
+\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 =\OT1/cmr/m/n/10 7$
+ []
+
+
+! LaTeX Error: Environment equation* undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.112 \begin{equation*}
+                     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \mathrm allowed only in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.113 \mathrm
+           {FRC}(q) = \frac{\sum_{\vec{q}\in\mathrm{circle}}\tilde{f_{1}}(\v...
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Missing $ inserted.
+<inserted text> 
+$
+l.113 ...m{circle}}\lvert f_{2}}(\vec{q})\lvert^{2}}
+                                                  
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+$
+l.113 ...m{circle}}\lvert f_{2}}(\vec{q})\lvert^{2}}
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing $ inserted.
+<inserted text> 
+$
+l.113 ...m{circle}}\lvert f_{2}}(\vec{q})\lvert^{2}}
+                                                  
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Undefined control sequence.
+<argument> qsqrt {\sum _{\vec {q}\in \mathrm {circle}}\lvert 
+                                                  f_{1}(\vec {q})\lvert ^{2}...
+l.113 ...m{circle}}\lvert f_{2}}(\vec{q})\lvert^{2}}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ... \mathrm {circle}}\lvert f_{1}(\vec {q})\lvert 
+                                                  ^{2}}\sqrt {\sum _{\vec {q...
+l.113 ...m{circle}}\lvert f_{2}}(\vec{q})\lvert^{2}}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...rt {\sum _{\vec {q}\in \mathrm {circle}}\lvert 
+                                                  f_{2}}(\vec {q})\lvert ^{2}
+l.113 ...m{circle}}\lvert f_{2}}(\vec{q})\lvert^{2}}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...\mathrm {circle}}\lvert f_{2}}(\vec {q})\lvert 
+                                                  ^{2}
+l.113 ...m{circle}}\lvert f_{2}}(\vec{q})\lvert^{2}}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Extra }, or forgotten $.
+\frac  #1#2->{\begingroup #1\endgroup \over #2}
+                                               
+l.113 ...m{circle}}\lvert f_{2}}(\vec{q})\lvert^{2}}
+                                                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+! LaTeX Error: \begin{document} ended by \end{equation*}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.114 \end{equation*}
+                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+$
+l.114 \end{equation*}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+}
+l.114 \end{equation*}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 113--115
+[]FRC(q)
+ []
+
+
+Overfull \hbox (226.42685pt too wide) in paragraph at lines 113--115
+\OMX/cmex/m/n/10 P$[][][]\OT1/cmr/m/n/10 ([])[]([])[]$$[]$ 
  []
 
 
 Overfull \hbox (20.0pt too wide) in paragraph at lines 117--118
 []Localization
+ []
+
+! Undefined control sequence.
+l.119 \subsection
+               {Thesis}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 119--120
+[]Thesis 
+ []
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 121--122
+[]To
+ []
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 123--124
+[]The
+ []
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 125--126
+[]The
+ []
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 127--128
+[]These
  []
 
 )
@@ -1756,11 +1790,11 @@ Overfull \hbox (20.0pt too wide) in paragraph at lines 117--118
 
 Here is how much of LuaTeX's memory you used:
  30 strings out of 478285
- 125007,1977958 words of node,token memory allocated 113507 words of node memory still in use:
-   496 hlist, 48 vlist, 19 rule, 36 disc, 41 local_par, 1 dir, 40 math, 2460 glu
-e, 120 kern, 123 penalty, 12533 glyph, 333 attribute, 39 glue_spec, 333 attribut
+ 156265,1977958 words of node,token memory allocated 122398 words of node memory still in use:
+   510 hlist, 48 vlist, 19 rule, 46 disc, 46 local_par, 1 dir, 40 math, 2639 glu
+e, 120 kern, 132 penalty, 13576 glyph, 344 attribute, 39 glue_spec, 344 attribut
 e_list nodes
-   avail lists: 2:2,3:38,4:187,5:10,7:189,8:77,10:186
+   avail lists: 2:2,3:29,4:187,5:3,7:48,8:77,10:186
  20354 multiletter control sequences out of 65536+600000
  26 fonts using 1476743 bytes
  18i,6n,12p,1346b,101s stack positions out of 10000i,1000n,20000p,200000b,200000s
