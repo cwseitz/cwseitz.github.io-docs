@@ -1,18 +1,18 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
 [0] Config.pm:310> INFO - Logfile is 'dissertation.blg'
-[30] biber-darwin:340> INFO - === Wed Jul 24, 2024, 20:29:18
-[38] Biber.pm:419> INFO - Reading 'dissertation.bcf'
-[74] Biber.pm:979> INFO - Found 51 citekeys in bib section 0
+[31] biber-darwin:340> INFO - === Wed Jul 24, 2024, 23:20:16
+[40] Biber.pm:419> INFO - Reading 'dissertation.bcf'
+[75] Biber.pm:979> INFO - Found 51 citekeys in bib section 0
 [81] Biber.pm:4419> INFO - Processing section 0
 [86] Biber.pm:4610> INFO - Looking for bibtex file 'all-biblatex.bib' for section 0
-[105] bibtex.pm:1713> INFO - LaTeX decoding ...
+[104] bibtex.pm:1713> INFO - LaTeX decoding ...
 [256] bibtex.pm:1519> INFO - Found BibTeX data source 'all-biblatex.bib'
-[447] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[447] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[447] Biber.pm:4239> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
-[447] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
-[464] bbl.pm:660> INFO - Writing 'dissertation.bbl' with encoding 'UTF-8'
-[480] bbl.pm:763> INFO - Output to dissertation.bbl
-[480] Biber.pm:131> WARN - Duplicate entry key: 'Shin2022' in file 'all-biblatex.bib', skipping ...
-[480] Biber.pm:131> WARN - I didn't find a database entry for 'SohlDickstein2015' (section 0)
-[480] Biber.pm:133> INFO - WARNINGS: 2
+[453] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[453] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[453] Biber.pm:4239> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
+[453] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
+[470] bbl.pm:660> INFO - Writing 'dissertation.bbl' with encoding 'UTF-8'
+[487] bbl.pm:763> INFO - Output to dissertation.bbl
+[487] Biber.pm:131> WARN - Duplicate entry key: 'Shin2022' in file 'all-biblatex.bib', skipping ...
+[487] Biber.pm:131> WARN - I didn't find a database entry for 'SohlDickstein2015' (section 0)
+[487] Biber.pm:133> INFO - WARNINGS: 2
