@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  25 JUL 2024 13:41
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  25 JUL 2024 16:51
  restricted system commands enabled.
 **dissertation.tex
 (./dissertation.tex
@@ -2313,7 +2313,15 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'dissertation.bbl' found.
 
-(./dissertation.bbl)
+(./dissertation.bbl
+
+Package biblatex Warning: The following entry could not be found
+(biblatex)                in the database:
+(biblatex)                Shukron2017a
+(biblatex)                Please verify the spelling and rerun
+(biblatex)                LaTeX afterwards.
+
+)
 Package biblatex Info: Reference section=0 on input line 522.
 Package biblatex Info: Reference segment=0 on input line 522.
 \c@lstlisting=\count681
@@ -2340,13 +2348,13 @@ File: ch-front.tex 2022-10-05 front matter chapter
 \tf@toc=\write10
 
 \openout10 = dissertation.toc
-
-[4
+ [4
 
 ]
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 8
 2.
- (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/ot1lmr.fd
+
+(/usr/local/texlive/2023/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 8
@@ -2674,7 +2682,7 @@ d/media/g20g2m.png  used on input line 147.
  [53]) [54]
 \openout2 = ch4.aux
  (./ch4.tex
-File: ch4.tex Chapter2
+File: ch4.tex Chapter4
 
 Chapter 4.
 [55
@@ -2682,98 +2690,129 @@ Chapter 4.
 
 
 
-] [56]
+]
+Overfull \hbox (1.3362pt too wide) in paragraph at lines 26--27
+\T1/lmr/m/n/12 resolution imag-ing [[][][][]59[][][][][][][][][][][][][][]][[]
+[][][]61[][][][][][][][][][][][][][]]. For in-stance, the Zhuang lab en-gi-neere
+d mMaple2 and mMaple3,
+ []
+
+[56]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
-(hyperref)                be the same. Added a new anchor on input line 30.
+(hyperref)                be the same. Added a new anchor on input line 32.
 
 
-Overfull \hbox (9.02528pt too wide) in paragraph at lines 36--37
+Overfull \hbox (9.02528pt too wide) in paragraph at lines 38--39
 []\T1/lmr/m/n/12 Flu-o-res-cence in situ hy-bridiza-tion (FISH) has been de-vel-
 oped to de-tect and lo-cate sequence-
  []
 
 [57
 Missing character: There is no ′ (U+2032) in font ec-lmr12!
-] [58
 Missing character: There is no – (U+2013) in font ec-lmr12!
-] [59
+] [58] [59
 Missing character: There is no μ (U+03BC) in font ec-lmr12!
 ] [60
 Missing character: There is no μ (U+03BC) in font ec-lmr12!
-] [61
 Missing character: There is no μ (U+03BC) in font ec-lmr12!
-] [62
-Missing character: There is no δ (U+03B4) in font ec-lmr12!
-] [63] [64] [65] [66
-Missing character: There is no – (U+2013) in font ec-lmr12!
-]
+] [61]
+
+LaTeX Warning: Citation 'Shukron2017a' on page 62 undefined on input line 75.
+
+[62] [63] [64] [65]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-0.png, id
-=1115, 1704.8493pt x 1145.4795pt>
+=1275, 1704.8493pt x 1145.4795pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-0.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-0.png
 >
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
-4/media/Figure-0.png  used on input line 130.
+4/media/Figure-0.png  used on input line 114.
 (luatex.def)             Requested size: 469.75502pt x 315.61086pt.
- [67
+ [66
+Missing character: There is no – (U+2013) in font ec-lmr12!
 Missing character: There is no ﬁ (U+FB01) in font ec-lmr12!
 Missing character: There is no ∼ (U+223C) in font ec-lmr12!
 ]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-1.png, id
-=1126, 1583.6766pt x 1085.2545pt>
+=1285, 1583.6766pt x 1085.2545pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-1.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-1.png
 >
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
-4/media/Figure-1.png  used on input line 139.
+4/media/Figure-1.png  used on input line 123.
 (luatex.def)             Requested size: 469.75502pt x 321.90262pt.
+ [67
+Missing character: There is no ’ (U+2019) in font ec-lmr12!
+</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-0.png>]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-2.png, id
-=1127, 1340.6085pt x 968.418pt>
+=1294, 1340.6085pt x 968.418pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-2.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-2.png
 >
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
-4/media/Figure-2.png  used on input line 144.
+4/media/Figure-2.png  used on input line 128.
 (luatex.def)             Requested size: 469.75502pt x 339.33557pt.
- [68
-Missing character: There is no ’ (U+2019) in font ec-lmr12!
+
+[68
 Missing character: There is no ﬁ (U+FB01) in font ec-lmr12!
-</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-0.png>]
+</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-1.png>]
 [69
 Missing character: There is no ’ (U+2019) in font ec-lmr12!
-</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-1.png>]
+</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-2.png>]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-3.png, id
-=1142, 1800.9684pt x 714.5094pt>
+=1309, 1800.9684pt x 714.5094pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-3.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-3.png
 >
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
-4/media/Figure-3.png  used on input line 165.
+4/media/Figure-3.png  used on input line 149.
 (luatex.def)             Requested size: 469.75502pt x 186.36769pt.
 
-[70</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-2.png>] [71
+[70</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-3.png>] [71
 Missing character: There is no ‘ (U+2018) in font ec-lmr12!
 Missing character: There is no ’ (U+2019) in font ec-lmr12!
-</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-3.png>]
-[72] [73
+] [72
 Missing character: There is no ’ (U+2019) in font ec-lmr12!
 Missing character: There is no ’ (U+2019) in font ec-lmr12!
-] [74]) [75]
+] [73]) [74]
 changed \interlinepenalty to 10000
-[76
+[75
 
 
 
-] [77] [78
+] [76] [77] [78]
+Overfull \hbox (0.23045pt too wide) in paragraph at lines 611--611
+[]\T1/lmr/m/n/12 A. S. Bel-mont, ``Vi-su-al-iz-ing chro-mo-some dy-nam-ics with gfp,'' \T1/lmr/m/it/12 Trends Cell Biol\T1/lmr/m/n/12 , vol. 11,
+ []
+
+[79]
+Overfull \hbox (0.6572pt too wide) in paragraph at lines 611--611
+\T1/lmr/m/n/12 ``Live-cell imag-ing re-veals the dy-nam-ics and func-tion of sin
+gle-telomere terra molecules
+ []
+
+[80]
+Overfull \hbox (0.31354pt too wide) in paragraph at lines 611--611
+\T1/lmr/m/n/12 resolution imag-ing of chro-mo-somes and in situ hap-lo-type vi-s
+u-al-iza-tion us-ing oligopaint
+ []
+
+[81] [82] [83]
+Overfull \hbox (12.18463pt too wide) in paragraph at lines 611--611
+[]\T1/lmr/m/n/12 M. Badieirostami, M. D. Lew, M. A. Thomp-son, and W. E. Mo-erne
+r, ``Three-dimensional
+ []
+
+[84] [85] [86
 Missing character: There is no ’ (U+2019) in font ec-lmr12!
-] [79
+] [87
 Missing character: There is no ’ (U+2019) in font ec-lmr12!
-] [80]
+]
 \openout2 = ap-vita.aux
 
 No file ap-vita.tex.
@@ -3035,7 +3074,7 @@ st-1.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-4.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/g20g2m.png
-     ch4.tex    Chapter2
+     ch4.tex    Chapter4
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-0.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-1.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-2.png
@@ -3050,17 +3089,17 @@ Package logreq Info: Writing requests to 'dissertation.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 78310 strings out of 478285
+ 78752 strings out of 478285
  125218,3417909 words of node,token memory allocated
- 1783 words of node memory still in use:
-   24 hlist, 2 vlist, 10 rule, 2 glue, 4 kern, 3 sub_mlist, 1 glyph, 161 attribu
-te, 94 glue_spec, 161 attribute_list, 7 write, 16 pdf_literal, 2 pdf_dest, 13 pd
+ 1813 words of node memory still in use:
+   24 hlist, 2 vlist, 10 rule, 2 glue, 4 kern, 3 sub_mlist, 1 glyph, 164 attribu
+te, 94 glue_spec, 164 attribute_list, 7 write, 16 pdf_literal, 2 pdf_dest, 16 pd
 f_action, 16 pdf_colorstack nodes
-   avail lists: 1:10,2:2748,3:1604,4:192,5:442,6:187,7:8037,8:89,9:1571,10:29,11
-:628
- 95533 multiletter control sequences out of 65536+600000
- 92 fonts using 6231351 bytes
- 109i,13n,103p,2501b,3428s stack positions out of 10000i,1000n,20000p,200000b,200000s
+   avail lists: 1:10,2:2839,3:1645,4:266,5:404,6:276,7:8228,8:95,9:1573,10:30,11
+:712
+ 95876 multiletter control sequences out of 65536+600000
+ 92 fonts using 6294711 bytes
+ 109i,13n,103p,2517b,3433s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/tex
 live/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2023/t
 exmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2023/texmf-dist/fonts
@@ -3085,10 +3124,10 @@ t/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type
 1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2023/texmf-dist/fonts/t
 ype1/urw/symbol/usyr.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/zap
 fding/uzdr.pfb>
-Output written on dissertation.pdf (80 pages, 56132510 bytes).
+Output written on dissertation.pdf (87 pages, 56167098 bytes).
 
-PDF statistics: 1352 PDF objects out of 1440 (max. 8388607)
- 1096 compressed objects within 11 object streams
- 244 named destinations out of 1000 (max. 131072)
+PDF statistics: 1595 PDF objects out of 1728 (max. 8388607)
+ 1329 compressed objects within 14 object streams
+ 343 named destinations out of 1000 (max. 131072)
  740 words of extra memory for PDF output out of 10000 (max. 100000000)
 
