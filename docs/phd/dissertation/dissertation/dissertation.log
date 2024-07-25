@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  24 JUL 2024 23:20
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  25 JUL 2024 02:12
  restricted system commands enabled.
 **dissertation.tex
 (./dissertation.tex
@@ -2313,15 +2313,7 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'dissertation.bbl' found.
 
-(./dissertation.bbl
-
-Package biblatex Warning: The following entry could not be found
-(biblatex)                in the database:
-(biblatex)                SohlDickstein2015
-(biblatex)                Please verify the spelling and rerun
-(biblatex)                LaTeX afterwards.
-
-)
+(./dissertation.bbl)
 Package biblatex Info: Reference section=0 on input line 522.
 Package biblatex Info: Reference segment=0 on input line 522.
 \c@lstlisting=\count681
@@ -2348,13 +2340,13 @@ File: ch-front.tex 2022-10-05 front matter chapter
 \tf@toc=\write10
 
 \openout10 = dissertation.toc
- [4
+
+[4
 
 ]
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 8
 2.
-
-(/usr/local/texlive/2023/texmf-dist/tex/latex/lm/ot1lmr.fd
+ (/usr/local/texlive/2023/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 8
@@ -2494,17 +2486,17 @@ Missing character: There is no “ (U+201C) in font ec-lmr12!
 Missing character: There is no ” (U+201D) in font ec-lmr12!
 ] [26]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 77.
+(Font)              <10> on input line 66.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 77.
+(Font)              <7> on input line 66.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 77.
+(Font)              <5> on input line 66.
 
-Overfull \hbox (13.6884pt too wide) in paragraph at lines 150--151
+Overfull \hbox (13.6884pt too wide) in paragraph at lines 139--140
  [][] 
  []
 
-[27] [28
+[27
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
@@ -2539,95 +2531,82 @@ Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
 Missing character: There is no ; (U+003B) in font nullfont!
-] [29]
-</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/MCMC.png, id=788
+] [28] [29]
+</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/MCMC.png, id=793
 , 578.16pt x 187.902pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/MCMC.png Gr
 aphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/MCMC.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddp
-m/media/MCMC.png  used on input line 190.
+m/media/MCMC.png  used on input line 173.
 (luatex.def)             Requested size: 404.70924pt x 131.53049pt.
- [30] [31</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/MCMC.png
->]
-
-LaTeX Warning: Citation 'SohlDickstein2015' on page 32 undefined on input line 
-210.
-
-
-Overfull \hbox (14.57072pt too wide) in paragraph at lines 210--211
-[]\T1/lmr/m/n/12 Re-cent ad-vances in gen-er-a-tive mod-el-ing, par-tic-u-larly dif-fu-sion mod-els [[],
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 212--213
+ [30</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/MCMC.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 195--196
 
  []
 
+[31]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Diffusion.png, i
-d=816, 932.48375pt x 182.6825pt>
+d=818, 932.48375pt x 182.6825pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Diffusion.p
 ng Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Diffusion.pn
 g>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddp
-m/media/Diffusion.png  used on input line 220.
+m/media/Diffusion.png  used on input line 203.
 (luatex.def)             Requested size: 466.24074pt x 91.34102pt.
-
-LaTeX Warning: Citation 'SohlDickstein2015' on page 32 undefined on input line 
-223.
-
-[32] [33</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Diffusion
-.png>] [34]
+ [32</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Diffusion.png
+>] [33]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.png, id=85
-8, 361.35pt x 361.35pt>
+0, 361.35pt x 361.35pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.png G
 raphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddp
-m/media/Bayes.png  used on input line 266.
+m/media/Bayes.png  used on input line 249.
 (luatex.def)             Requested size: 397.48624pt x 397.48624pt.
- [35] [36</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.pn
-g>] [37]
+ [34] [35</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.pn
+g>] [36]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/media/
-DeepSTORM.png, id=880, 819.06pt x 538.26094pt>
+DeepSTORM.png, id=874, 819.06pt x 538.26094pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/m
 edia/DeepSTORM.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/me
 dia/DeepSTORM.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/disserta
-tion/dissertation/media/DeepSTORM.png  used on input line 290.
+tion/dissertation/media/DeepSTORM.png  used on input line 273.
 (luatex.def)             Requested size: 327.6182pt x 215.30055pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/media/
-DiffusionArch.png, id=881, 822.07124pt x 420.57124pt>
+DiffusionArch.png, id=875, 822.07124pt x 420.57124pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/m
 edia/DiffusionArch.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/me
 dia/DiffusionArch.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/disserta
-tion/dissertation/media/DiffusionArch.png  used on input line 294.
+tion/dissertation/media/DiffusionArch.png  used on input line 277.
 (luatex.def)             Requested size: 328.82266pt x 168.22551pt.
- [38</Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/med
-ia/DeepSTORM.png></Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dis
-sertation/media/DiffusionArch.png>] [39] [40] [41]
+ [37] [38</Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertatio
+n/media/DeepSTORM.png></Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertatio
+n/dissertation/media/DiffusionArch.png>] [39] [40]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png, id=9
-23, 432.11438pt x 226.59656pt>
+14, 432.11438pt x 226.59656pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png 
 Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddp
-m/media/Errors.png  used on input line 391.
+m/media/Errors.png  used on input line 374.
 (luatex.def)             Requested size: 302.478pt x 158.6165pt.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 396.
+(hyperref)                removing `math shift' on input line 379.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 396.
+(hyperref)                removing `math shift' on input line 379.
 
-[42</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png>]) [43]
+[41]) [42</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.p
+ng>] [43]
 \openout2 = ch3.aux
  (./ch3.tex
 File: ch3.tex Chapter4
@@ -3077,15 +3056,15 @@ Package logreq Info: Writing requests to 'dissertation.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 78349 strings out of 478285
+ 78350 strings out of 478285
  125218,3417909 words of node,token memory allocated
- 1811 words of node memory still in use:
-   24 hlist, 2 vlist, 10 rule, 2 glue, 4 kern, 3 sub_mlist, 1 glyph, 168 attribu
-te, 94 glue_spec, 168 attribute_list, 7 write, 16 pdf_literal, 2 pdf_dest, 13 pd
+ 1791 words of node memory still in use:
+   24 hlist, 2 vlist, 10 rule, 2 glue, 4 kern, 3 sub_mlist, 1 glyph, 163 attribu
+te, 94 glue_spec, 163 attribute_list, 7 write, 16 pdf_literal, 2 pdf_dest, 13 pd
 f_action, 16 pdf_colorstack nodes
-   avail lists: 1:10,2:2758,3:1612,4:192,5:442,6:189,7:8037,8:89,9:1571,10:29,11
+   avail lists: 1:10,2:2744,3:1604,4:192,5:460,6:187,7:8037,8:89,9:1571,10:29,11
 :628
- 95557 multiletter control sequences out of 65536+600000
+ 95558 multiletter control sequences out of 65536+600000
  92 fonts using 6239031 bytes
  109i,13n,103p,2501b,3428s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/tex
@@ -3112,7 +3091,7 @@ t/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type
 1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2023/texmf-dist/fonts/t
 ype1/urw/symbol/usyr.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/zap
 fding/uzdr.pfb>
-Output written on dissertation.pdf (82 pages, 56920320 bytes).
+Output written on dissertation.pdf (82 pages, 56541589 bytes).
 
 PDF statistics: 1402 PDF objects out of 1440 (max. 8388607)
  1135 compressed objects within 12 object streams

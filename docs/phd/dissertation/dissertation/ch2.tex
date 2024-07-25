@@ -8,55 +8,44 @@
 \subsection{The Bayesian calculation}
 Bayesian inference provides a rigorous framework for updating beliefs about the world in light of new data. It leverages the principles of probability theory to combine prior knowledge with empirical evidence, resulting in updated, posterior beliefs. In parametric modeling, we assume that the data $x$ are generated from a distribution with a set of parameters $y$. Parametric models simplify the problem by assuming a specific form for the underlying distribution of the data, characterized by a finite set of parameters. This approach allows us to use mathematical functions to describe complex systems and make inferences about the parameters based on observed data.
 
-At the heart of Bayesian inference is Bayes' rule, which allows us to update our beliefs based on new evidence. Bayes' rule is derived from the definition of conditional probability. For events $A$ and $B$, the conditional probability of $A$ given $B$ is defined as
-\begin{equation*}
-P(A \lvert B) = \frac{P(A \cap B)}{P(B)},
-\end{equation*}
-provided that $P(B) > 0$. Similarly, the conditional probability of $B$ given $A$ is
-\begin{equation*}
-P(B \lvert A) = \frac{P(A \cap B)}{P(A)}.
-\end{equation*}
-Rearranging these equations and solving for $P(A \cap B)$ gives us Bayes' rule:
-\begin{equation*}
-P(A \lvert B) = \frac{P(B \lvert A) P(A)}{P(B)}.
-\end{equation*}
+At the heart of Bayesian inference is Bayes' rule, which allows us to update our beliefs based on new evidence. Bayes' rule is derived from the definition of conditional probability.The conditional probability of $y$ given $x$ is defined as $P(y \lvert x) = \frac{P(x,y)}{P(y)}$ provided that $P(y) > 0$. Similarly, the conditional probability of $x$ given $y$ is $P(x \lvert y) = \frac{P(x,y)}{P(x)}$. Rearranging these equations and solving for $P(y\lvert x)$ gives us Bayes' rule:
 
-In Bayesian inference, we reinterpret these events in terms of data and parameters. Let $x$ denote the observed data and $y$ denote the parameters or latent variables of the model. Bayes' rule then becomes
 \begin{equation*}
 p(y \lvert x) = \frac{p(x \lvert y) p(y)}{p(x)}.
 \end{equation*}
-Here, $p(y \lvert x)$ is the posterior distribution, representing our updated beliefs about the parameters after observing the data. $p(x \lvert y)$ is the likelihood, the probability of the observed data given the parameters. $p(y)$ is the prior distribution, representing our beliefs about the parameters before observing the data. $p(x)$ is the marginal likelihood or evidence, which normalizes the posterior distribution and ensures it sums to one.
+
+Here, $p(y \lvert x)$ is the called the posterior distribution, representing our updated beliefs about the parameters after observing the data. $p(x \lvert y)$ is the likelihood, the probability of the observed data given the parameters. $p(y)$ is the prior distribution, representing our beliefs about the parameters before observing the data. $p(x)$ is the marginal likelihood or evidence, which normalizes the posterior distribution and ensures it sums to one.
 
 One of the main challenges in Bayesian inference is the computation of the posterior distribution. The denominator in Bayes' rule, $p(x)$, involves an integral over all possible values of the parameters:
+
 \begin{equation*}
 p(x) = \int p(x \lvert y) p(y) \, dy.
 \end{equation*}
-In many practical applications, this integral is intractable due to the high dimensionality of the parameter space. This intractability is often referred to as the curse of dimensionality, where the complexity of computations increases exponentially with the number of dimensions.
 
-To address this challenge, various approximation methods have been developed. One such method is Markov Chain Monte Carlo (MCMC), which generates samples from the posterior distribution by constructing a Markov chain that has the desired distribution as its equilibrium distribution. MCMC methods, such as the Metropolis-Hastings algorithm and the Gibbs sampler, allow us to approximate the posterior distribution even when the exact integral is computationally infeasible.
+In many practical applications, this integral is intractable due to the high dimensionality of the parameter space. This intractability is often referred to as the curse of dimensionality, where the complexity of computations increases exponentially with the number of dimensions. To address this challenge, various approximation methods have been developed. One such method is Markov Chain Monte Carlo (MCMC), which generates samples from the posterior distribution by constructing a Markov chain that has the desired distribution as its equilibrium distribution. MCMC methods, such as the Metropolis-Hastings algorithm and the Gibbs sampler, allow us to approximate the posterior distribution even when the exact integral is computationally infeasible.
 
-MCMC algorithms were originally developed in the 1940s by physicists at Los Alamos. These physicists, including Ulam (inspired by playing solitaire!) and Von Neumann (who developed the acceptance-rejection algorithm), were interested in modeling the probabilistic behavior of atomic particles. They could not do this analytically, but they wondered if they could use simulation. Simulation was difficult as the normalization constant was not known. Moreover, simulation as a computational tool hadn't been widely adopted yet, although ideas around simulation had been around for some time – e.g., Buffon's needle (1700s), Lord Kelvin (1901), and Fermi (1930s). In fact, the term “Monte Carlo” was coined at Los Alamos.
+MCMC algorithms were originally developed in the 1940s by physicists at Los Alamos. These physicists, including Ulam and Von Neumann, who were interested in modeling the probabilistic behavior of atomic particles. They could not do this analytically, but they wondered if they could use simulation. Simulation was difficult as the normalization constant was not known. Moreover, simulation as a computational tool hadn't been widely adopted yet, although ideas around simulation had been around for some time – e.g., Buffon's needle (1700s), Lord Kelvin (1901), and Fermi (1930s). In fact, the term “Monte Carlo” was coined at Los Alamos.
 
 Ulam and Metropolis overcame this problem by constructing a Markov chain for which the desired distribution was the stationary distribution of the Markov chain. They then only needed to simulate the Markov chain until stationarity was achieved. Towards this end, they introduced the Metropolis algorithm, and its impact was enormous. Afterwards, MCMC was introduced to statistics and generalized with the Metropolis algorithm and its variants as well as the Gibbs sampler \parencite{Geman1984}
 
-Another approach to approximating the posterior distribution is variational inference. This method involves approximating the true posterior distribution $p(y \lvert x)$ with a simpler, parameterized distribution $q(y)$ by minimizing the Kullback-Leibler (KL) divergence between them. The KL divergence,
-\begin{equation*}
-D_{KL}(q(y) \lvert p(y \lvert x)),
-\end{equation*}
-measures how one probability distribution diverges from a second, expected probability distribution.
+Another approach to approximating the posterior distribution is variational inference. This method involves approximating the true posterior distribution $p(y \lvert x)$ with a simpler, parameterized distribution $q(y)$ by minimizing the Kullback-Leibler (KL) divergence between them. The KL divergence $D_{KL}(q(y) \lvert p(y \lvert x))$ measures how one probability distribution diverges from a second, expected probability distribution. To minimize the KL divergence, we first express it as
 
-To minimize the KL divergence, we first express it as
 \begin{equation*}
 D_{KL}(q(y) \lvert p(y \lvert x)) = \int q(y) \log \frac{q(y)}{p(y \lvert x)} \, dy.
 \end{equation*}
+
 This can be rewritten using Bayes' rule as
+
 \begin{equation*}
 D_{KL}(q(y) \lvert p(y \lvert x)) = \int q(y) \log \frac{q(y) p(x)}{p(x \lvert y) p(y)} \, dy = \log p(x) + \int q(y) \log \frac{q(y)}{p(x \lvert y) p(y)} \, dy.
 \end{equation*}
+
 Since $\log p(x)$ is constant with respect to $q(y)$, minimizing $D_{KL}(q(y) \lvert p(y \lvert x))$ is equivalent to maximizing the Evidence Lower Bound (ELBO), defined as
+
 \begin{equation*}
 ELBO = \int q(y) \log \frac{p(x \lvert y) p(y)}{q(y)} \, dy.
 \end{equation*}
+
 Maximizing the ELBO ensures that $q(y)$ is as close as possible to the true posterior $p(y \lvert x)$. This approach provides a practical way to perform Bayesian inference, especially in high-dimensional settings where traditional methods may be computationally prohibitive.
 
 In variational inference, model parameters and latent variables can be treated interchangeably. This flexibility allows us to use powerful optimization techniques to approximate complex posterior distributions and make Bayesian inference feasible for a wide range of applications.
@@ -156,13 +145,7 @@ As dimensionality increases, the volume of the space grows exponentially. For in
     \hfill
 \end{figure}
 
-Variational Autoencoders (VAEs), introduced by Kingma and Welling in 2013, are a sophisticated class of generative models that combine principles of variational inference with deep learning. They provide a powerful framework for learning complex, high-dimensional data distributions by mapping data to a lower-dimensional latent space and then reconstructing the data from these latent representations.
-
-To understand VAEs, it's essential to first appreciate their roots in Bayesian inference. Bayesian inference aims to update the probability estimate for a hypothesis as more evidence or information becomes available. The fundamental tool for this process is Bayes' theorem, which is expressed as:
-\begin{equation*}
-p(y \lvert x) = \frac{p(x \lvert y) p(y)}{p(x)}.
-\end{equation*}
-Here, $p(y \lvert x)$ is the posterior distribution of the latent variables $y$ given the data $x$, $p(x \lvert y)$ is the likelihood of the data given the latent variables, $p(y)$ is the prior distribution of the
+Variational Autoencoders (VAEs), introduced by Kingma and Welling in 2013, are a sophisticated class of generative models that combine principles of variational inference with deep learning. They provide a powerful framework for learning complex, high-dimensional data distributions by mapping data to a lower-dimensional latent space and then reconstructing the data from these latent representations. To understand VAEs, it's essential to first appreciate their roots in Bayesian inference. Bayesian inference aims to update the probability estimate for a hypothesis as more evidence or information becomes available.
 
 
 \section{Abstract}
@@ -207,7 +190,7 @@ We now consider more realistic datasets $(\bold{x}_i,\bold{y}_{0,i},\hat{\bold{y
 
 Kernel density estimates produced by the traditional deep architectures for localization microscopy produce strong results, but lack uncertainty quantification. Unfortunately, the posterior $p(\theta\lvert\bold{x})$ has no known analytical form and can be difficult to compute at test time, since (i) molecules cannot be easily resolved and therefore $\theta$ is of unknown dimension and (ii) $\theta$ can be high dimensional and efficient exploration of the parameter space is challenging. The central goal of this paper is to instead model a conditional distribution on the latent $\bold{y}$: $p(\bold{y}\lvert\bold{x})$, where $\bold{y}$ is of known dimensionality. We choose to model $p(\bold{y}\lvert\bold{x})$ with a diffusion model, given that the distribution $p(\bold{y}\lvert\bold{x})$ is expensive to compute, even if $p(\theta\lvert\bold{x})$ were known.
 
-Recent advances in generative modeling, particularly diffusion models \parencite{SohlDickstein2015,Ho2020,Song2021} present a unique opportunity to integrate uncertainty awareness into the localization microscopy toolkit. However, sampling from diffusion models can be computationally expensive, given that generation amounts to solving a complex stochastic differential equation, effectively mapping a simple base distribution to the complex data distribution. The solution of such equations requires numerical integration with very small step sizes, resulting in thousands of neural network evaluations \parencite{Saharia2021,Vahdat2021}. For conditional generation tasks in high-risk applications, generation complexity is further exacerbated by the need for the highest level of detail in generated samples. Therefore, we propose that sampling is preceded by an augmentation network $\phi$, which in essence generates an initial estimate to guide the diffusion process. Reasoning for this choice in our application is two-fold:
+Recent advances in generative modeling, particularly diffusion models \parencite{Ho2020,Song2021} present a unique opportunity to integrate uncertainty awareness into the localization microscopy toolkit. However, sampling from diffusion models can be computationally expensive, given that generation amounts to solving a complex stochastic differential equation, effectively mapping a simple base distribution to the complex data distribution. The solution of such equations requires numerical integration with very small step sizes, resulting in thousands of neural network evaluations \parencite{Saharia2021,Vahdat2021}. For conditional generation tasks in high-risk applications, generation complexity is further exacerbated by the need for the highest level of detail in generated samples. Therefore, we propose that sampling is preceded by an augmentation network $\phi$, which in essence generates an initial estimate to guide the diffusion process. Reasoning for this choice in our application is two-fold:
 
 \textbf{Synthesis Speed}. By training the augmentation network $\phi$ to obtain an approximate estimate of $\bold{y}_{0}$, we can reduce the number of iterations, since the diffusion model only needs to model the remaining mismatch, resulting in a less complex model from which sampling becomes easier. Speed is critical in SMLM applications, which can produce thousands of images in a single experiment.\\
 
@@ -220,7 +203,7 @@ Recent advances in generative modeling, particularly diffusion models \parencite
 \includegraphics[scale=0.5]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Diffusion.png}
 \end{figure}
 
-Diffusion models \parencite{SohlDickstein2015,Ho2020,Song2021} are a class of generative models originally inspired by nonequilibrium statistical physics, which slowly destroy structure in a data distribution via a fixed Markov chain referred to as the \emph{forward process}. In the present context, we leverage the variational interpretation of this model class \parencite{Kingma2021,Kingma2023} to approximate the posterior $p(\bold{y}\lvert\bold{x})$. 
+Diffusion models \parencite{Ho2020,Song2021} are a class of generative models originally inspired by nonequilibrium statistical physics, which slowly destroy structure in a data distribution via a fixed Markov chain referred to as the \emph{forward process}. In the present context, we leverage the variational interpretation of this model class \parencite{Kingma2021,Kingma2023} to approximate the posterior $p(\bold{y}\lvert\bold{x})$. 
 
 \textbf{Diffusion Model}. We use a forward process which gradually adds Gaussian noise to the latent $\bold{y}_0$ in discrete time, according to a variance schedule $\beta_{t}$:
 
