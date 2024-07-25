@@ -12,58 +12,53 @@
 \contentsline {subsection}{\numberline {1.2.1}Maximization of density, minimization of error}{21}{subsection.20}%
 \contentsline {subsection}{\numberline {1.2.2}Thesis}{22}{subsection.22}%
 \contentsline {chapter}{\numberline {2}{Variational Bayesian Fluorescence Nanoscopy}}{24}{chapter.23}%
-\contentsline {section}{\numberline {2.1}Background}{24}{section.24}%
+\contentsline {section}{\numberline {2.1}Introduction}{24}{section.24}%
 \contentsline {subsection}{\numberline {2.1.1}The Bayesian calculation}{24}{subsection.25}%
 \contentsline {subsection}{\numberline {2.1.2}The curse of dimensionality}{26}{subsection.26}%
-\contentsline {subsection}{\numberline {2.1.3}The Hierarchical Variational Autoencoder}{27}{subsection.27}%
-\contentsline {section}{\numberline {2.2}Abstract}{28}{section.29}%
-\contentsline {section}{\numberline {2.3}Introduction}{28}{section.30}%
-\contentsline {section}{\numberline {2.4}Background}{30}{section.31}%
-\contentsline {subsection}{\numberline {2.4.1}Gaussian kernel density estimation}{30}{subsection.32}%
-\contentsline {section}{\numberline {2.5}Uncertainty-Aware Localization Microscopy by Variational Diffusion}{31}{section.35}%
-\contentsline {subsection}{\numberline {2.5.1}Problem Statement}{31}{subsection.36}%
-\contentsline {subsection}{\numberline {2.5.2}Variational Diffusion}{32}{subsection.37}%
-\contentsline {section}{\numberline {2.6}Experiments}{34}{section.44}%
-\contentsline {section}{\numberline {2.7}Conclusion}{36}{section.46}%
-\contentsline {section}{\numberline {2.8}Broader Impact}{37}{section.47}%
-\contentsline {section}{\numberline {2.9}Appendix}{37}{section.48}%
-\contentsline {subsection}{\numberline {2.9.1}Sampling}{37}{subsection.51}%
-\contentsline {subsection}{\numberline {2.9.2}Derivation of the variational bound}{38}{subsection.53}%
-\contentsline {subsection}{\numberline {2.9.3}Metropolis-Hastings MCMC}{40}{subsection.54}%
-\contentsline {subsection}{\numberline {2.9.4}Cramer-Rao Lower Bound}{41}{subsection.56}%
-\contentsline {subsection}{\numberline {2.9.5}Neural Networks $\psi ,\phi $}{41}{subsection.59}%
-\contentsline {chapter}{\numberline {3}{Quantum enhanced localization with a single photon avalanche diode array}}{44}{chapter.60}%
-\contentsline {section}{\numberline {3.1}Background}{44}{section.61}%
-\contentsline {subsection}{\numberline {3.1.1}A brief introduction to quantum optics}{44}{subsection.62}%
-\contentsline {subsection}{\numberline {3.1.2}Photon statistics}{45}{subsection.63}%
-\contentsline {section}{\numberline {3.2}Abstract}{46}{section.64}%
-\contentsline {subsection}{\numberline {3.2.1}Introduction}{46}{subsection.65}%
-\contentsline {subsection}{\numberline {3.2.2}Basic Scheme}{49}{subsection.68}%
-\contentsline {subsection}{\numberline {3.2.3}Results}{53}{subsection.78}%
-\contentsline {subsection}{\numberline {3.2.4}Discussion}{55}{subsection.84}%
-\contentsline {chapter}{\numberline {4}{Fluorescence nanoscopy in the study of chromatin organization}}{57}{chapter.85}%
-\contentsline {section}{\numberline {4.1}Background}{57}{section.86}%
-\contentsline {subsection}{\numberline {4.1.1}Labeling strategies of chromatin}{58}{subsection.87}%
-\contentsline {subsection}{\numberline {4.1.2}Chromatin-Associated Protein-Based Labeling Strategies}{58}{subsection.88}%
-\contentsline {subsection}{\numberline {4.1.3}DNA-Based Labeling Strategies}{59}{subsection.89}%
-\contentsline {subsubsection}{Non-sequence Specific}{59}{section*.90}%
-\contentsline {subsubsection}{Sequence Specific}{59}{section*.90}%
-\contentsline {subsection}{\numberline {4.1.4}Instrumentation for Intranucleus Imaging}{61}{subsection.91}%
-\contentsline {subsection}{\numberline {4.1.5}Trajectory linking}{64}{subsection.92}%
-\contentsline {subsection}{\numberline {4.1.6}Quantitative Analysis of Particle Motion}{65}{subsection.93}%
-\contentsline {subsection}{\numberline {4.1.7}Polymer Models for Chromatin Dynamics}{66}{subsection.96}%
-\contentsline {subsection}{\numberline {4.1.8}Super resolution of chromatin nanodomains}{67}{subsection.97}%
-\contentsline {section}{\numberline {4.2}Introduction}{67}{section.98}%
-\contentsline {section}{\numberline {4.3}Results}{69}{section.99}%
-\contentsline {subsection}{\numberline {4.3.1}Colocalization of BRD4 mutants with nucleosome nanodomains}{69}{subsection.100}%
-\contentsline {subsection}{\numberline {4.3.2}Chromatin structure and dynamics}{69}{subsection.102}%
-\contentsline {subsection}{\numberline {4.3.3}Heteropolymer model}{70}{subsection.105}%
-\contentsline {section}{\numberline {4.4}Discussion}{73}{section.107}%
-\contentsline {section}{\numberline {4.5}Materials and Methods}{74}{section.108}%
-\contentsline {subsection}{\numberline {4.5.1}Cell lines, cell culture conditions, and transfection}{74}{subsection.109}%
-\contentsline {subsection}{\numberline {4.5.2}Super-resolution imaging of nucleosome nanodomains in living cells}{74}{subsection.110}%
-\contentsline {subsection}{\numberline {4.5.3}Colocalization of BRD4 mutants with nucleosome nanodomains}{75}{subsection.111}%
-\contentsline {subsection}{\numberline {4.5.4}Single molecule tracking}{76}{subsection.112}%
-\contentsline {subsection}{\numberline {4.5.5}Immunofluorescence}{76}{subsection.113}%
-\contentsline {subsection}{\numberline {4.5.6}Immunoblotting}{76}{subsection.114}%
-\contentsline {chapter}{REFERENCES}{78}{chapter*.115}%
+\contentsline {subsection}{\numberline {2.1.3}Diffusion models}{27}{subsection.27}%
+\contentsline {subsection}{\numberline {2.1.4}Application of deep models in microscopy}{28}{subsection.29}%
+\contentsline {section}{\numberline {2.2}Results}{29}{section.30}%
+\contentsline {subsection}{\numberline {2.2.1}Approach}{29}{subsection.31}%
+\contentsline {subsection}{\numberline {2.2.2}Variational Diffusion}{31}{subsection.32}%
+\contentsline {subsection}{\numberline {2.2.3}Experiments}{33}{subsection.39}%
+\contentsline {section}{\numberline {2.3}Conclusion}{35}{section.41}%
+\contentsline {section}{\numberline {2.4}Broader Impact}{35}{section.42}%
+\contentsline {section}{\numberline {2.5}Appendix}{37}{section.43}%
+\contentsline {subsection}{\numberline {2.5.1}Sampling}{37}{subsection.46}%
+\contentsline {subsection}{\numberline {2.5.2}Derivation of the variational bound}{37}{subsection.48}%
+\contentsline {subsection}{\numberline {2.5.3}Metropolis-Hastings MCMC}{38}{subsection.49}%
+\contentsline {subsection}{\numberline {2.5.4}Cramer-Rao Lower Bound}{39}{subsection.51}%
+\contentsline {subsection}{\numberline {2.5.5}Neural Networks $\psi ,\phi $}{40}{subsection.54}%
+\contentsline {chapter}{\numberline {3}{Quantum enhanced localization with a single photon avalanche diode array}}{42}{chapter.55}%
+\contentsline {section}{\numberline {3.1}Introduction}{42}{section.56}%
+\contentsline {subsection}{\numberline {3.1.1}A brief introduction to quantum optics}{42}{subsection.57}%
+\contentsline {subsection}{\numberline {3.1.2}Photon statistics}{43}{subsection.58}%
+\contentsline {section}{\numberline {3.2}Basic Scheme}{45}{section.61}%
+\contentsline {section}{\numberline {3.3}Results}{51}{section.71}%
+\contentsline {section}{\numberline {3.4}Discussion}{53}{section.77}%
+\contentsline {chapter}{\numberline {4}{Fluorescence nanoscopy in the study of chromatin organization}}{55}{chapter.78}%
+\contentsline {section}{\numberline {4.1}Introduction}{55}{section.79}%
+\contentsline {subsection}{\numberline {4.1.1}Labeling strategies of chromatin}{56}{subsection.80}%
+\contentsline {subsection}{\numberline {4.1.2}Chromatin-Associated Protein-Based Labeling Strategies}{56}{subsection.81}%
+\contentsline {subsection}{\numberline {4.1.3}DNA-Based Labeling Strategies}{57}{subsection.82}%
+\contentsline {subsubsection}{Non-sequence Specific}{57}{section*.83}%
+\contentsline {subsubsection}{Sequence Specific}{57}{section*.83}%
+\contentsline {subsection}{\numberline {4.1.4}Instrumentation for Intranucleus Imaging}{59}{subsection.84}%
+\contentsline {subsection}{\numberline {4.1.5}Trajectory linking}{62}{subsection.85}%
+\contentsline {subsection}{\numberline {4.1.6}Quantitative Analysis of Particle Motion}{63}{subsection.86}%
+\contentsline {subsection}{\numberline {4.1.7}Polymer Models for Chromatin Dynamics}{64}{subsection.89}%
+\contentsline {subsection}{\numberline {4.1.8}Super resolution of chromatin nanodomains}{65}{subsection.90}%
+\contentsline {section}{\numberline {4.2}BRD4 regulates the structure of chromatin nanodomains}{65}{section.91}%
+\contentsline {section}{\numberline {4.3}Results}{67}{section.92}%
+\contentsline {subsection}{\numberline {4.3.1}Colocalization of BRD4 mutants with nucleosome nanodomains}{67}{subsection.93}%
+\contentsline {subsection}{\numberline {4.3.2}Chromatin structure and dynamics}{67}{subsection.95}%
+\contentsline {subsection}{\numberline {4.3.3}Heteropolymer model}{68}{subsection.98}%
+\contentsline {section}{\numberline {4.4}Discussion}{71}{section.100}%
+\contentsline {section}{\numberline {4.5}Materials and Methods}{72}{section.101}%
+\contentsline {subsection}{\numberline {4.5.1}Cell lines, cell culture conditions, and transfection}{72}{subsection.102}%
+\contentsline {subsection}{\numberline {4.5.2}Super-resolution imaging of nucleosome nanodomains in living cells}{72}{subsection.103}%
+\contentsline {subsection}{\numberline {4.5.3}Colocalization of BRD4 mutants with nucleosome nanodomains}{73}{subsection.104}%
+\contentsline {subsection}{\numberline {4.5.4}Single molecule tracking}{74}{subsection.105}%
+\contentsline {subsection}{\numberline {4.5.5}Immunofluorescence}{74}{subsection.106}%
+\contentsline {subsection}{\numberline {4.5.6}Immunoblotting}{74}{subsection.107}%
+\contentsline {chapter}{REFERENCES}{76}{chapter*.108}%

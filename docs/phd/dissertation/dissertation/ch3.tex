@@ -3,7 +3,7 @@
 \chapter{Quantum enhanced localization with a single photon avalanche diode array}
 \ix{physics//Physics appendix}
 
-\section{Background}
+\section{Introduction}
 
 \subsection{A brief introduction to quantum optics}
 
@@ -43,18 +43,11 @@ This is simply the Poisson distribution with mean $\langle \hat{n}_n \rangle = \
 In contrast, single photon states e..g, $\ket{1}$ do not necessarily follow Poisson statistics. This state could be prepared by an isolated single photon source such as a fluorescent dye molecule which can produce only a single photon at at time. This phenomenon is referred to as \emph{fluorescence antibunching} where photons tend to be detected as isolated events rather than in bursts or bunches. Note that for such a single photon source the single-mode field can be in state $\ket{1}$ but not state $\ket{2}$ at any given time. If more single photon sources are present states beyond $\ket{1}$ are achievable. This has led to the introduction of binomial states of the quantized field.
 
 
-
-\section{Abstract}
-
-Conventional single molecule localization microscopy infers the locations of putatively isolated fluorescent emitters to produce super-resolved images. The number of active fluorescent emitters is therefore a critical piece of information during localization; however, this quantity is generally underdetermined in widefield fluorescent microscopy. Nevertheless, many fluorophores used in bioimaging are intrinsically single photon sources which exhibit fluorescence antibunching and can emit only one photon following a very short excitation pulse. This general property may provide the necessary physical information for constrained localization in non-sparse scenes by yielding estimates of the number active fluorescent emitters. Here, we leverage recent advancements in single photon avalanche diode (SPAD) arrays to accurately count the number active emitters in a fluorescent sample, while concurrently performing intensity-based multi-emitter localization. We find that SPAD cameras, with their high temporal resolution and single photon sensitivity are capable of precise single molecule localization microscopy, while maintaining the relative simplicity of widefield imaging. 
-
-\subsection{Introduction}
-
 Far-field optical microscopy is fundamentally limited by diffraction, with the maximum attainable resolution being limited to approximately half the wavelength of light. Several schemes to beat the diffraction limit have been developed in recent years. Many of these schemes utilize the concept of precise localization of isolated fluorescent emitters which blink over a time series of frames \parencite{Rust2006,Betzig2006}. An inherent problem with such methods is the requirement that fluorescent emitters be isolated, slowing down the acquisition of super-resolved images. To address this, we leverage the fact that many fluorophores are intrinsically single photon sources and exhibit fluorescence antibunching. This property can constrain the number of active fluorescent emitters in a region of interest (ROI) and can potentially enable localization in non-sparse scenes \parencite{Ta2010,Israel2017}. 
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=12cm]{media/SPADvCMOS.png}
+\includegraphics[width=14cm]{media/SPADvCMOS.png}
 \caption{}
 \end{figure*}    
 
@@ -69,7 +62,7 @@ Molecular counting with fluorescence antibunching has a fairly simple motivation
 
 In this study, we present a method for widefield single photon counting in order to rigorously count fluorophores in the sample and subsequently constrain single molecule localization. We investigate the theoretical properties of the zero-lag second-order coherence function $g^{(2)}(0)$ for widefield photon counting and its spatial properties. Using Bayesian analysis, we derive a posterior distribution on the number of active fluorescent emitters in a region of interest. We then combined this with single molecule localization algorithms and demonstrate resolution of multiple emitters using a multi-emitter fitting algorithm and report localization errors with respect to the Cramer-Rao bound.
 
-\subsection{Basic Scheme}
+\section{Basic Scheme}
 
 \begin{figure*}[t]
 \centering
@@ -93,7 +86,7 @@ We now consider the case of pulsed excitation where the interval between pulses 
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=14cm]{media/PoissonBinomialSims.png}
+\includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/PoissonBinomialPost-1.png}
 \caption{}
 \end{figure*}    
 
@@ -137,7 +130,7 @@ For localization, we notice that (2) is well approximated by a Poisson distribut
 where, in the multi-emitter regime the expected photon count at a pixel is $\mu_{k} = \langle \bold{n}_k\rangle =\sum_{m=1}^{N^{*}} \mu_{k,m}$ given $\mu_{k,m}=\zeta N_{\mathrm{frames}}\Gamma_{x}(u_k,x_{0,m})\Gamma_{y}(v_k,y_{0,m}) + \lambda N_{\mathrm{frames}}/d^{2}$. In the multi-emitter regime, optimization of (4) by sampling is a suitable choice (see Results). 
 
 
-\subsection{Results}
+\section{Results}
 
 Quantum dots coated on a glass coverslip were excited using a picosecond $532\mathrm{nm}$ pulsed laser triggered at $500\mathrm{kHz}$. Emission light was collected using an oil-immersion 100$\times$ objective with numerical aperture (NA) 1.4 (Nikon). The emission signal was then filtered to exclude the laser line (Semrock) and projected onto the SPAD512 sensor (Pi Imaging Technologies) using a tube lens. A simplified diagram of the complete system is depicted in (Figure 1a). Each acquisition consists of $N=5\times 10^{5}$ frames (500ms), synchronized with each laser pulse, using a $1\mathrm{us}$ exposure per frame (Figure 1b,d). To confirm the presence of single photon sources in the sample, we investigated properties of the zero-lag second order coherence function $g^{(2)}(0)$. The following empirical estimate of $g^{(2)}(0)$ is used \parencite{Israel2017}
 
@@ -177,7 +170,7 @@ Ignoring the effect of background signal $\langle g^{(2)}(0)\rangle =\langle G^{
 
 
 
-\subsection{Discussion}
+\section{Discussion}
 
 Many fluorescent emitters exhibit random variations of brightness known as blinking. Blinking increases the observed photon-number fluctuations and could be expected to affect the value of $g^{(2)}(0)$ or the posterior on the number of active fluorescent emitters. However, the signal photon number per frame will follow Binomial statistics even in the presence of blinking, the only consequence of which is an effective reduction of the detection probability $\zeta$. If the effect of censoring photons by blinking and lowering the quantum yield can be accounted for, the technique used here may be compatible with common super-resolution techniques such as stochastic optical reconstruction microscopy (STORM). 
 

@@ -3,7 +3,7 @@
 \chapter{Variational Bayesian Fluorescence Nanoscopy}
 \ix{physics//Physics appendix}
 
-\section{Background}
+\section{Introduction}
 
 \subsection{The Bayesian calculation}
 Bayesian inference provides a rigorous framework for updating beliefs about the world in light of new data. It leverages the principles of probability theory to combine prior knowledge with empirical evidence, resulting in updated, posterior beliefs. In parametric modeling, we assume that the data $x$ are generated from a distribution with a set of parameters $y$. Parametric models simplify the problem by assuming a specific form for the underlying distribution of the data, characterized by a finite set of parameters. This approach allows us to use mathematical functions to describe complex systems and make inferences about the parameters based on observed data.
@@ -56,7 +56,7 @@ Dimensionality refers to the number of variables or features in a dataset. In fl
 
 As dimensionality increases, the volume of the space grows exponentially. For instance, the volume of a hypercube with side length $l$ in $d$-dimensional space is given by $l^d$. This rapid increase in volume means that data points become sparser, making it difficult to estimate densities and find meaningful patterns. Furthermore, in high-dimensional spaces, the concept of distance becomes less informative. For example, the difference between the minimum and maximum distance between data points tends to shrink as dimensionality increases, which can make clustering and nearest-neighbor algorithms less effective. With a large number of dimensions, models can easily become overly complex, capturing noise instead of the underlying signal. This leads to overfitting, where the model performs well on training data but poorly on unseen data. High-dimensional data requires more computational resources for processing and storage. Algorithms that are efficient in low dimensions may become impractical in high dimensions due to increased time and space complexity.
 
-\subsection{The Hierarchical Variational Autoencoder}
+\subsection{Diffusion models}
 
 \begin{figure}[!t]
     \hfill
@@ -148,11 +148,7 @@ As dimensionality increases, the volume of the space grows exponentially. For in
 Variational Autoencoders (VAEs), introduced by Kingma and Welling in 2013, are a sophisticated class of generative models that combine principles of variational inference with deep learning. They provide a powerful framework for learning complex, high-dimensional data distributions by mapping data to a lower-dimensional latent space and then reconstructing the data from these latent representations. To understand VAEs, it's essential to first appreciate their roots in Bayesian inference. Bayesian inference aims to update the probability estimate for a hypothesis as more evidence or information becomes available.
 
 
-\section{Abstract}
-
-Fast extraction of physically relevant information from images using deep neural networks has led to significant advances in fluorescence microscopy and its application to the study of biological systems. For example, the application of deep networks for kernel density (KD) estimation in single molecule localization microscopy (SMLM) has accelerated super-resolution imaging of densely-labeled structures in the cell. However, simple and interpretable uncertainty quantification is lacking in these applications, and remains a necessary modeling component in high-risk research. We propose a generative modeling framework for KD estimation in SMLM based on variational diffusion. This approach allows us to probe the structure of the posterior on KD estimates, creating an additional avenue toward quality control. We demonstrate that data augmentation with traditional SMLM architectures followed by a diffusion process permits simultaneous high-fidelity super-resolution with uncertainty estimation of regressed KDEs. 
-
-\section{Introduction}
+\subsection{Application of deep models in microscopy}
 
 Deep models have attracted tremendous attention from researchers in the natural sciences, with several foundational applications arising in microscopy \parencite{Weigert2018,Falk2019}. Recently, the application of deep image translation in single-molecule localization microscopy (SMLM) has received considerable interest. SMLM techniques are a mainstay of fluorescence microscopy, which localize ``blinking'' fluorescent molecules to produce a pointillist representation of biomolecules in the cell at diffraction-unlimited precision \parencite{Rust2006,Betzig2006}. Recently, the use of deep models to perform localization has been proposed as an alternative to traditional localization algorithms, in order to increase imaging speed and labeling density. In previous applications of deep models to localization microscopy, super-resolution images have been recovered from a sparse set of localizations with conditional generative adversarial networks \parencite{Ouyang2018} or localization itself can be performed using traditional convolutional networks \parencite{Nehme2020,Speiser2021}. In this paper, we perform localization indirectly by predicting kernel density (KD) estimates of a population of fluorescent molecules using a deep model. 
 
@@ -160,33 +156,15 @@ Kernel density estimation in SMLM is necessarily performed using a single low-re
 
 We model a posterior on high-resolution KD estimates conditioned on a low-resolution image. Our approach is based on a type of score based generative model \parencite{Song2021}, referred to as a denoising diffusion probabilistic model (DDPM) in the literature \parencite{Ho2020,Song2021}. We find that this technique is complementary to relevant existing approaches to uncertainty estimation, which would primarily address epistemic sources of uncertainty, using techniques such as ensembling \parencite{Lakshminarayanan2017} or Monte Carlo dropout \parencite{Gal2022}. The approach is inspired by recent variational perspectives on diffusion \parencite{Dirmeier2023,Ribeiro2024,Kingma2021,Kingma2023}.  Such techniques provide a mechanism for scalable variational inference, which can be trained using a variational bound written in terms of the signal-to-noise ratio of the diffused data, and a simple noise estimation loss. Indeed, recent efforts have shown that the variational bound can be reparameterized to give several more conventional diffusion losses \parencite{Kingma2021,Kingma2023,Ribeiro2024}. 
 
-In the remainder of this paper, we first introduce the likelihood of low-resolution images in localization microscopy, and show uncertainty quantification in a rudimentary example scenario. Then, we introduce KD estimation as an alternative to direct localization using low-resolution images, followed by demonstration of our variational diffusion model for measuring uncertainty KD estimation at scale. 
+In the remainder of this paper, we introduce KD estimation as an alternative to direct localization using low-resolution images, followed by demonstration of our variational diffusion model for measuring uncertainty KD estimation at scale. 
 
-\section{Background}
-
-\subsection{Gaussian kernel density estimation}
-
-Direct optimization of the likelihood in (1) from observations $\bold{x}$ alone is challenging when fluorescent emitters are dense within the field of view and fluorescent signals significantly overlap. However, convolutional neural networks (CNNs) have recently proven to be powerful tools fluorescence microscopy to extract parameters describing fluorescent emitters such as color, emitter orientation, $z$-coordinate, and background signal \cite{Zhang2018,Kim2019,Zelger2018}. For localization tasks, CNNs typically employ upsampling layers to reconstruct Bernoulli probabilities of emitter occupancy \parencite{Speiser2021} or KD estimates with higher resolution than experimental measurements \parencite{Nehme2020}. We choose to use KD estimates in our model, denoted by $\bold{y}$, which are latent in the low-resolution data $\bold{x}$. KDEs are the most common data structure used in SMLM, and can be easily generated from molecular coordinates, alongside observations $\bold{x}$.
-
-
-\begin{figure}[t]
-\includegraphics[scale=0.7]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/MCMC.png}
-\caption{Estimation of the marginal variances $\sqrt{\mathrm{Var}(\bold{y}_k)}$ for an isolated fluorescent emitter. MCMC sampling is carried out using the low-resolution image (left) to estimate the posterior $p(\theta\lvert\bold{x})$ (middle) which is sampled $\theta\sim p(\theta\lvert\bold{x})$ and combined with (3) to estimate marginal variances (right)}
-\end{figure}
-
-Similar to the generative process on low resolution images $\bold{x}$, we generate KDEs $\bold{y}$ by repurposing the generative model (1) on an unsampled image without noise. In other words, we cast Gaussian KD estimation as a noiseless image generation process on the domain of $\bold{y}$. Under a fixed configuration of $N$ particles $\theta$, the value of an non-normalized KDE pixel $\bold{y}_{k}$ is given by
-
-\begin{equation}
-\bold{y}_{k}(\theta) = \sum_{n=1}^{N}\Delta E_{u}(u_{k},\theta_{u},\sigma_{\bold{y}}) \Delta E_{v}(v_{k},\theta_{v},\sigma_{\bold{y}})
-\end{equation}
-
-where the hyperparameter $\sigma_{\bold{y}}$ is a Gaussian kernel width. 
-
-\section{Uncertainty-Aware Localization Microscopy by Variational Diffusion}
+\section{Results}
 
 We now consider more realistic datasets $(\bold{x}_i,\bold{y}_{0,i},\hat{\bold{y}}_{i})_{i=1}^{N}$ of observed images $\bold{x}_i$ true KD images $\bold{y}_{0,i}$, and augmented low-resolution inputs $\hat{\bold{y}}_{i}=\phi(\bold{x}_{i})$, where $\phi$ is a CNN. Observations $\bold{x}_i$ are simulated under the convolution distribution (1) and KDEs are generated by (4).
 
-\subsection{Problem Statement}
+\subsection{Approach}
+
+Direct optimization of the image likelihood from observations $\bold{x}$ alone is challenging when fluorescent emitters are dense within the field of view and fluorescent signals significantly overlap. However, convolutional neural networks (CNNs) have recently proven to be powerful tools fluorescence microscopy to extract parameters describing fluorescent emitters such as color, emitter orientation, $z$-coordinate, and background signal \cite{Zhang2018,Kim2019,Zelger2018}. For localization tasks, CNNs typically employ upsampling layers to reconstruct Bernoulli probabilities of emitter occupancy \parencite{Speiser2021} or KD estimates with higher resolution than experimental measurements \parencite{Nehme2020}. We choose to use KD estimates in our model, denoted by $\bold{y}$, which are latent in the low-resolution data $\bold{x}$. KDEs are the most common data structure used in SMLM, and can be easily generated from molecular coordinates, alongside observations $\bold{x}$.
 
 Kernel density estimates produced by the traditional deep architectures for localization microscopy produce strong results, but lack uncertainty quantification. Unfortunately, the posterior $p(\theta\lvert\bold{x})$ has no known analytical form and can be difficult to compute at test time, since (i) molecules cannot be easily resolved and therefore $\theta$ is of unknown dimension and (ii) $\theta$ can be high dimensional and efficient exploration of the parameter space is challenging. The central goal of this paper is to instead model a conditional distribution on the latent $\bold{y}$: $p(\bold{y}\lvert\bold{x})$, where $\bold{y}$ is of known dimensionality. We choose to model $p(\bold{y}\lvert\bold{x})$ with a diffusion model, given that the distribution $p(\bold{y}\lvert\bold{x})$ is expensive to compute, even if $p(\theta\lvert\bold{x})$ were known.
 
@@ -239,7 +217,7 @@ where we have omitted conditioning on the low-resolution $\bold{x}$ to simplify 
 
 A full derivation of this objective is outlined in the Appendix. Note that $\mathrm{SNR}_{t}$ is monotonically decreasing with $t$, and thus $\frac{\mathrm{SNR}_{t-1}}{{\mathrm{SNR}_{t}}} = \frac{\gamma_{t-1}}{\gamma_{t}}\frac{1-\gamma_{t}}{1-\gamma_{t-1}} \geq 1$, ensuring $\mathcal{L}_{\psi}\geq 0$. In this paper, we choose to use a uniformly weighted loss and leave the exploration of the weighted loss to future work.
 
-\section{Experiments}
+\subsection{Experiments}
 
 All training data consits of low-resolution $20\times 20$ images, setting $\sigma_{\bold{x}}=0.92$ in units of low-resolution pixels, for consistency with common experimental conditions with a 60x magnification objective lens and numerical aperture (NA) of 1.4. We multiply $\omega_{k}$ by a constant $i_{0}=200$ for experiments for consistency with typical fluorophore emission rates. All KDEs have dimension $80\times 80$, are scaled between $[0,1]$, and are generated using $\sigma_{\bold{y}}=3.0$ pixels in the upsampled image. For a typical CMOS camera, this results in KDE pixels with lateral dimension of $\approx 27\mathrm{nm}$. Initial coordinates $\theta$ were drawn uniformly over a two-dimensional disc with a radius of 7 low-resolution pixels.
 
