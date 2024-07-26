@@ -47,16 +47,16 @@ Far-field optical microscopy is fundamentally limited by diffraction, with the m
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=14cm]{media/SPADvCMOS.png}
-\caption{}
+\includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPADvCMOS.png}
+\caption{Comparison of quantum dot images between CMOS and SPAD cameras. (left) SPAD image of Qdot655 images using a 100X/1.4NA oil-immersion objective (Nikon) and a 10ms exposure time. (right) CMOS image of Qdot655 using a 60X/1.4NA oil-immersion objective (Olympus) and a 10ms exposure time.}
 \end{figure*}    
 
 Molecular counting with fluorescence antibunching has a fairly simple motivation: coincidence of photons at multiple detector elements during high speed imaging provides evidence for the number of single photon sources present in the imaged region. Combining the ideas of conventional super-resolution approaches with photon statistics may prove to be a powerful set of methods for bioimaging. SPAD cameras achieve orders of magnitude higher temporal resolutions than standard CMOS cameras, single photon sensitivity, and dark count rates less than 25cps. Furthermore, the reduced readout noise and large fill-factor of recently commercialized SPAD arrays suggests their use for single molecule localization with reduced localization uncertainty. Localization uncertainty, typically the root mean square error (RMSE) of a maximum likelihood or similar statistical estimator, is bounded from below by the inverse of the Fisher information matrix, known as the Cramer-Rao lower bound \parencite{Chao2016}. Managing the increase in localization uncertainty at high labeling density remains a major bottleneck to localization microscopy. For example, static uncertainty due to molecular crowding can be partially amelioriated by using pairwise or higher-order temporal correlations within a pixel neighborhood \parencite{Dertinger2009}. However, the number of fluorescent active emitters in a region of interest remains critical prerequisite information in single molecule localization.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=14cm]{media/SPAD512.png}
-\caption{}
+\includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPAD512.png}
+\caption{Experimental setup for widefield photon counting. A 532nm pulsed laser is directed through a spatial filter, galvo mirror, and passed through filtering and focusing optics to a 100X oil-immersion objective. Emission light of a 50um grid is projected onto the SPAD512 camera (inset)}
 \end{figure*}    
 
 
@@ -86,13 +86,6 @@ We now consider the case of pulsed excitation where the interval between pulses 
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/PoissonBinomialPost-1.png}
-\caption{}
-\end{figure*}    
-
-
-\begin{figure*}[t]
-\centering
 \includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png}
 \caption{Single and multi-emitter localization error on sums of photon counts. (left) Localization uncertainty for simulated data for different values of $N$, plotted with respect to the Cramer-Rao lower bound, shown in dashed gray. (right) Multi-emitter localization by MCMC sampling for $N=3$, colors indicate a cluster of samples i.e., a single localization. All data was generated with a background rate $\langle \bold{n}_{\mathrm{background}} \rangle = \lambda N_{\mathrm{frames}}/d^{2}$ per pixel. Scalebar 360nm}
 \end{figure*}   
@@ -111,7 +104,16 @@ In order to begin to perform localization in non-sparse ROIs, we write a posteri
 p(N,\zeta\lvert x) \propto p(x\lvert N,\zeta)p(\zeta)
 \end{equation}
 
-We use a Gaussian prior on $\zeta$ i.e., $p(\zeta) = \mathcal{N}(\mu_{\zeta},\sigma_{\zeta})$ with $\mu_{\zeta}=0.01$ and $\sigma_{\zeta}=0.005$. Prior uncertainty in the value of $\zeta$ stems from fluorophores with potentially heterogeneous photophysical properties as well as varying laser power throughout the excited region. This posterior can be integrated over $\zeta$ to produce a posterior distribution on the fluorophore number $N$ i.e., $p(N=N'\lvert n) \propto \int_{0}^{1} \prod_{j} p(n_{j}\lvert N',\zeta)p(\zeta) d\zeta$ which can be estimated using Monte Carlo methods. The final posterior is then estimated by minibatching the data into batches of $10^3$ frames and averaging the posterior $p(N\lvert n)$ over minibatches. The fluorophore number $N$ within each ROI is then estimated by the maximum aposteriori (MAP) estimate $N^{*}$ given by this distribution.
+We use a Gaussian prior on $\zeta$ i.e., $p(\zeta) = \mathcal{N}(\mu_{\zeta},\sigma_{\zeta})$ with $\mu_{\zeta}=0.01$ and $\sigma_{\zeta}=0.005$. Prior uncertainty in the value of $\zeta$ stems from fluorophores with potentially heterogeneous photophysical properties as well as varying laser power throughout the excited region. This posterior can be integrated over $\zeta$ to produce a posterior distribution on the fluorophore number $N$ i.e., $p(N=N'\lvert n) \propto \int_{0}^{1} \prod_{j} p(n_{j}\lvert N',\zeta)p(\zeta) d\zeta$ which can be estimated using Monte Carlo methods. Monte Carlo integration is employed to integrate out $\zeta$. This involves sampling many $\zeta$ values from the Gaussian prior. For each sampled $\zeta$, the likelihood $(P(x\lvert\zeta_i)$ is computed, which, in this case, involves calculating the convolution of binomial and Poisson probability mass functions. These likelihood values are then weighted by the prior probabilities $P(\zeta)$. The final result is obtained by averaging these weighted likelihoods over all sampled $\zeta$, which approximates the integral:
+
+\begin{equation*}
+\int P(x\lvert\zeta) P(\zeta) \, d\zeta \approx \frac{1}{M} \sum_{i=1}^N P(x\lvert\zeta_i) P(\zeta_i)
+\end{equation*}
+
+where $M$ is the number of samples, $(P(x\lvert\zeta_i)$ is the likelihood of observing the data. This method provides a powerful way to handle the integration of complex or high-dimensional functions, especially when analytical solutions are intractable.
+
+
+ The final posterior is then estimated by minibatching the data into batches of $10^3$ frames and averaging the posterior $p(N\lvert n)$ over minibatches. The fluorophore number $N$ within each ROI is then estimated by the maximum aposteriori (MAP) estimate $N^{*}$ given by this distribution.
 
 For localization, we notice that (2) is well approximated by a Poisson distribution for a large frame number, making the localization procedure similar to conventional intensity-based methods \parencite{Smith2010}. Denoting the fluorophore coordinates by $\theta$ and vector of total counts in the region of interest $\bold{n}$, we have the following log-likelihood
 
@@ -145,7 +147,7 @@ For localization by optimization of (4), we use Goodman and Weare's Markov Chain
 \begin{figure}[t]
 \centering
 \includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/g20g2m.png}
-\caption{}
+\caption{Scaling of $g^{(2)}(0)$ under zero background conditions. (left) Scaling of $g^{(2)}(0)$ for small $N$. (right) Scaling of $g^{(2)}(0)$ for large $N$}
 \end{figure}   
 
 \begin{equation}
@@ -167,6 +169,19 @@ Since $G^{(2)}(m)$ is already averaged over $m$, $\langle G^{(2)}(m) $ is effect
 \end{equation}
 
 Ignoring the effect of background signal $\langle g^{(2)}(0)\rangle =\langle G^{(2)}(0)\rangle/\langle G^{(2)}(m)\rangle$, which rapidly approaches $1/2$ as a function of $N$, and then saturates and very slowly approaches its maximum value of 1. This is consistent with the idea that for very large number of active fluorescent emitters, the statistics should become Poisson.
+
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/PoissonBinomialPost-1.png}
+\caption{Posterior distributions of the fluorophore number. Samples from the Poisson-Binomial convolution distribution using $\zeta=0.01$ for various values of $\lambda$ and $N=1,3,5$ were simulated. The variable $\zeta$ was integrated out by Monte Carlo integration, sampling 1000 $\zeta$ values from the posterior distribution (see main text for details)}
+\end{figure*}    
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/PoissonBinomialPost-2.png}
+\caption{Posterior distributions of the fluorophore number. Samples from the Poisson-Binomial convolution distribution using $\zeta=0.01$ for various values of $\lambda$ and $N=7,9,11$ were simulated. The variable $\zeta$ was integrated out by Monte Carlo integration, sampling 1000 $\zeta$ values from the posterior distribution (see main text for details)}
+\end{figure*}    
 
 
 
