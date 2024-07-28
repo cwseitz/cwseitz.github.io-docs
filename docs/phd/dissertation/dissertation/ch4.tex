@@ -15,7 +15,7 @@ Most of what we know about local chromatin motion in chromatin remodeling has be
 
 To successfully illuminate chromatin structure and dynamics, advanced microscopy systems and single-molecule tracking algorithms must be combined with effective labeling techniques. Visualization of chromatin generally involves tagging fluorescent reporters to the central components of the eukaryotic central dogma: DNA, RNA, and proteins. Below, we review various classical and emerging chromatin labeling strategies based on proteins and DNA (summarized in Table 1).
 
-\subsection{Chromatin-Associated Protein-Based Labeling Strategies}
+\subsection{Chromatin-associated-protein based labeling strategies}
 
 Core histones (H2A, H2B, H3, and H4), the fundamental units of chromatin tightly wrapped by DNA molecules, are common targets for imaging. In fixed cells, chromatin-associated proteins can be visualized through immunostaining with antibodies \parencite{Conic2018,Ricci2015,Xu2018}. In live cells, histones can be directly fused with fluorescent proteins (FPs) \parencite{Belmont2001,Das2003,Kanda1998}. However, this method faces limitations in controlling labeling density, making it less quantitative for highly expressed proteins.
 
@@ -23,13 +23,13 @@ Photo-active fluorescent proteins (PAFPs) have been developed to address this li
 
 Other genomic elements can also be fluorescently labeled to assess structure and dynamics, including telomeres \parencite{Avogaro2018}, centromeres \parencite{Avogaro2018,Gasser2002}, H-NS or HU in E. coli \parencite{Wang2011}, heterochromatin proteins \parencite{Hu2013}, and transcription factors (TFs) \parencite{Elf2007,Gebhardt2013}. Despite their stability and efficacy, protein-based labeling methods have drawbacks, such as being suitable only for global or non-specific investigations and the potential for labeling artifacts due to overexpressed FPs.
 
-\subsection{DNA-Based Labeling Strategies}
+\subsection{DNA-based labeling strategies}
 
-\subsubsection{Non-sequence Specific}
+\subsubsection{Non-sequence specific}
 
 Several cell-permeable DNA dyes, including Hoechst \parencite{Green2017}, 4′,6-diamidino-2-phenylindole (DAPI), YOYO-1, and DRAQ5, strongly bind to DNA, offering simple labeling methods with excellent photostability in fixed cells. Fluorescently labeled dNTPs, which form the DNA backbone, can also demonstrate chromatin structure \parencite{Bu2019}. However, these fluorescent DNA dyes generally lack specificity, which is crucial for elucidating how DNA structure affects its functional outcomes.
 
-\subsubsection{Sequence Specific}
+\subsubsection{Sequence specific}
 
 Fluorescence in situ hybridization (FISH) has been developed to detect and locate sequence-specific DNA/RNA in fixed cells using probes complementary to the target sequence \parencite{Bayani2004,Beliveau2015}. Despite its advancements, FISH does not elucidate dynamics in living environments.
 
@@ -38,7 +38,7 @@ Locus-specific labeling in live cells remains in high demand. This has been achi
 Point accumulation for imaging in nanoscale topography (PAINT) techniques are attractive for single-molecule localization microscopy due to their lack of restriction by photon budget. First demonstrated by Jungmann et al. in 2010 \parencite{Jungmann2016}, DNA-based PAINT has been explored and improved over the past decade. Quantitative PAINT (qPAINT), Forster resonance energy transfer PAINT (FRET-PAINT) \parencite{Jungmann2016}, and Exchange PAINT have been developed to generalize the use of DNA origami to reveal cellular interactions, although off-target challenges remain \parencite{Nieves2018}. Additionally, the ParB-INT system can similarly insert a ~1 kb INT element, providing a strong signal without interfering with chromatin dynamics and transcription \parencite{Saad2014}. Nonetheless, any intrusive DNA insertion can potentially perturb function and alter chromatin locus position and mobility. Non-intrusive methods such as ZFPs, TALEs, and CRISPR-dCas9 avoid these constraints, operating without artificial DNA insertion \parencite{Chen2016,Lindhout2007,Ma2013}. These systems rely on modular proteins with specific DNA recognition, where endonuclease-deficient proteins are usually fused with FPs as detectable signals. Among these strategies, CRISPR imaging systems are gaining attention. Chen et al. re-engineered the type II system to visualize both repetitive elements in telomeres and non-repetitive MUC4 \parencite{Chen2013}. For multicolor imaging within the CRISPR system, one strategy is to use fluorescent Cas9 orthologs from different bacterial species simultaneously, such as Streptococcus pyogenes (SpCas9), Neisseria meningitidis (NmCas9), and Streptococcus thermophilus (St1Cas9) \parencite{Ma2015}. Another alternative strategy involves engineering sgRNA into a scaffold RNA (scRNA) to encode information about the gene of interest and multiple fluorescent reporters \parencite{Zalatan2015}. Recent modifications to CRISPR imaging systems, such as CRISPR-display \parencite{Shechner2015} and CRISPR-rainbow \parencite{Ma2016}, suggest promising applications for investigating chromatin organization and visualizing genome instability and rearrangement \parencite{Chen2016}.
 
 
-\subsection{Instrumentation for Intranucleus Imaging}
+\subsection{Instrumentation for chromatin imaging}
 
 Among many factors that determine the accuracy of chromatin loci movement, spatial resolution is the parameter that dominates the reliability of downstream biophysical analysis \parencite{Burov2013}. Therefore, for most reported work in intranucleus chromatin imaging, objectives with high numerical aperture (N.A. > 1.2) are employed. As indicated in the previous section, multiple fluorophores are used in chromosome labeling strategies to ensure adequate fluorescent signal; consequently, there are few limitations on imaging modalities, and various microscopes can be used for chromatin imaging.
 
@@ -58,7 +58,7 @@ Recent progress in quantitative super-resolution imaging, such as qPAINT \parenc
 
  A diverse set of particle tracking algorithms utilize probabilistic models of particle motion in order to add detected particles to existing tracks. Perhaps the most fundamental particle tracking method in this category is the nearest neighbor (NN) linking algorithm first introduced by Crocker and Grier. The algorithm constructs particle trajectories by assuming that the ensemble consists of non-interacting indistinguishable particles undergoing Brownian motion. As a result, the displacement of each particle follows a Gaussian distribution, parameterized by the diffusion coefficient and the time-resolution of the sequence. The most probable assignment of detected particles to existing tracks can then be found by maximizing the product of several Gaussian distributions \parencite{Crocker1996}. An attractive feature of this algorithm is that it is relatively simple to implement; however, assumptions that underlie the method impose limitations. In particular, if a typical displacement $\delta$ in one time step is comparable to the typical inter-particle spacing, tracking becomes highly error-prone \parencite{Crocker1996}. In other words, when particles are simultaneously densely distributed and undergoing fast diffusion, the algorithm can fail to build accurate trajectories due to the ambiguity introduced by overlapping trajectories. This also applies to the limit of low frame rates when small displacements are not recorded by the sensor. Importantly, the method alone cannot handle cases where particles disappear permanently, temporarily disappear due to blinking, photo-bleaching, or missed localization \parencite{Sbalzarini2005}.
 
-\subsection{Quantitative Analysis of Particle Motion}
+\subsection{Quantitative analysis of particle motion}
 
 Based on trajectory data, quantitative information regarding the motion of the particle can be extracted (Figure 2D). It is important to note that the chromatin structure is highly complex and cannot be exactly represented by the diffusion of individual particles. However, by treating each fluorescent foci as a point mapped in space and time, we can determine whether the motion is constrained (sub-diffusion), super diffusion, or follows normal diffusion. Thus, by using only position data (via particle tracking algorithms) and frame rate, we can uncover the following parameters.
 
@@ -80,7 +80,7 @@ By comparing the $D$ values of all particles within the nucleus, spatial heterog
 
 While the calculation of $D$ and $\alpha$ is particularly reliant on the length of the trajectory and the number of data points, recent investigations have built diffusion color maps of fluorescently labeled histones by computing vast amounts of super-resolution trajectories. This approach aims to reveal mechanisms or interactions in cell biology \parencite{Amitai2017,Barth2020,Nozaki2017}.
 
-\subsection{Polymer Models for Chromatin Dynamics}
+\subsection{Polymer models for chromatin dynamics}
 
 \begin{figure}[t]
 \includegraphics[width=\textwidth]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse.png}
@@ -97,7 +97,7 @@ Bond Length ($\sigma$) & $200 \times 10^{-9}$ m \\ \hline
 Cutoff Distance & $500 \times 10^{-9}$ m \\ \hline
 Spring Constant ($\kappa$) & 90.0 $k_{B}T/\sigma^2$ \\ \hline
 Neighbor Distance & $500 \times 10^{-9}$ m \\ \hline
-Damping Coefficient ($\gamma$) & $1 \times 10^{-4}$ \\ \hline
+Damping Coefficient ($\gamma$) & $10^{-4}$ \\ \hline
 Time Step & 1s\\ \hline
 Number of Time Steps & $10^4$ \\ \hline
 Number of Atoms & 2000 \\ \hline
@@ -190,7 +190,7 @@ Bond Length ($\sigma$) & $200 \times 10^{-9}$ m \\ \hline
 Cutoff Distance & $500 \times 10^{-9}$ m \\ \hline
 Spring Constant ($\kappa$) & 90.0 $k_{B}T/\sigma^2$ \\ \hline
 Neighbor Distance & $500 \times 10^{-9}$ m \\ \hline
-Damping Coefficient ($\gamma$) & $1 \times 10^{-4}$ \\ \hline
+Damping Coefficient ($\gamma$) & $10^{-7}$ \\ \hline
 Time Step & $10^{-4}$s\\ \hline
 Number of Time Steps & $10^4$ \\ \hline
 Number of Atoms & 200 \\ \hline

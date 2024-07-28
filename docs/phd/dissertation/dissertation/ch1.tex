@@ -68,14 +68,6 @@ where we have used the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}
 
 \begin{figure}[t]
 \begin{center}
-\includegraphics[width=14cm]{media/Astigmatism-Crop.png}
-\end{center}
-\caption{}
-\end{figure}
-
-
-\begin{figure}[t]
-\begin{center}
 \includegraphics[width=16cm]{media/Noise.png}
 \end{center}
 \caption{\textbf{Noise model for CMOS cameras used for MLE}. (left)) CMOS offset for zero incident photons (middle) CMOS variance for zero incident photons (upper right) Cumulative mass function for the convolution distribution and its Poisson approximation for rate parameter $\mu_{k} = 500$ counts (lower right) Komogonov distance measured as a function of rate parameter $\mu_{k}$}
@@ -96,6 +88,30 @@ Under the Poisson approximation in the likelihood, the model negative log-likeli
 
 Localization then proceeds by minimization of $\ell(\bold{x}\lvert\theta)$. 
 
+\subsection{Cramer-Rao lower bound}
+
+Reliable inference of $\theta$ from $\bold{x}$ in general requires performance metrics for model selection. We use the Fisher information as an information theoretic criteria to assess the quality of the data augmentation model $\phi$ tested here, with respect to the root mean squared error (RMSE) of our predictions of $\theta$ \parencite{Chao2016}. The Poisson log-likelihood $\ell(\bold{x}\lvert\theta)$ is also convenient for computing the Fisher information matrix \parencite{Smith2010} and thus the Cramer-Rao lower bound, which bounds the variance of a statistical estimator of $\theta$, from below i.e., $\mathrm{var}(\hat{\theta}) \geq I^{-1}(\theta)$. The Fisher information is straightforward to compute under the Poisson log-likelihood in (1). In general, the Fisher information is given by the expression
+
+\begin{equation}
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\frac{\partial \ell}{\partial\theta_{i}}\frac{\partial\ell}{\partial\theta_{j}}\right) 
+\end{equation}
+
+For an arbitrary parameter, we find that, for a Poisson log-likelihood $\ell$
+
+\begin{align*}
+\frac{\partial \ell}{\partial \theta_{i}} &= \frac{\partial}{\partial \theta_{i}} \sum_{k}  \log n_{k}! + \omega_{k}' - n_{k}\log\left(\omega_{k}'\right)\\
+&= \sum_{k} \frac{\partial \omega_{k}'}{\partial\theta_{i}} \left(\frac{\omega_{k}'-n_{k}}{\omega_{k}'}\right)
+\end{align*}
+
+Using this result, we can compute the Fisher information matrix $I(\theta)$
+
+\begin{equation*}
+I_{ij}(\theta) = \underset{\theta}{\mathbb{E}}\left(\sum_{k}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}} \left(\frac{\omega_{k}'-n_{k}}{\omega_{k}'}\right)^{2}\right) = \sum_{k}\frac{1}{\omega_{k}'}\frac{\partial \omega_{k}'}{\partial\theta_{i}}\frac{\partial \omega_{k}'}{\partial\theta_{j}}
+\end{equation*}
+
+A fundamental lower bound on the variance in our estimates of $\theta$ then is found from its inverse: $\mathrm{CRLB} = I^{-1}(\theta)$. This result is used to show in (Figure 5), that the data augmentation model $\phi$ efficiently estimates molecular coordinates under the experimental conditions tested here. 
+
+
 
 \subsection{Maximization of density, minimization of error}
 
@@ -103,7 +119,7 @@ Localization then proceeds by minimization of $\ell(\bold{x}\lvert\theta)$.
 \begin{center}
 \includegraphics[width=14cm]{media/FRC.png}
 \end{center}
-\caption{\textbf{Noise model for CMOS cameras used for MLE}. (left)) CMOS offset for zero incident photons (middle) CMOS variance for zero incident photons (upper right) Cumulative mass function for the convolution distribution and its Poisson approximation for rate parameter $\mu_{k} = 500$ counts (lower right) Komogonov distance measured as a function of rate parameter $\mu_{k}$}
+\caption{\textbf{Resolution in nanoscopy depends on sampling}. (left)) Example kernel density estimate of H2B-HaloTag in a living HeLa cell nucleus (right) Fourier ring correlation (FRC) for different sampling ratios relative to the total of ~400k localizations}
 \end{figure}
 
 
