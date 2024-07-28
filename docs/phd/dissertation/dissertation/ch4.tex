@@ -82,9 +82,37 @@ While the calculation of $D$ and $\alpha$ is particularly reliant on the length 
 
 \subsection{Polymer Models for Chromatin Dynamics}
 
+\begin{figure}[t]
+\includegraphics[width=\textwidth]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse.png}
+\caption{A snapshot of the Rouse polymer. Four perspectives of the Rouse polymer generated with $N=2000$ beads connected with harmonic bonds with equilibrium length $200\mathrm{nm}$. Polymer is initialized with all harmonic bonds at equilibrium}
+\end{figure}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Parameter} & \textbf{Value} \\ \hline
+Temperature ($T$) & 310 K \\ \hline
+Bond Length ($\sigma$) & $200 \times 10^{-9}$ m \\ \hline
+Cutoff Distance & $500 \times 10^{-9}$ m \\ \hline
+Spring Constant ($\kappa$) & 90.0 $k_{B}T/\sigma^2$ \\ \hline
+Neighbor Distance & $500 \times 10^{-9}$ m \\ \hline
+Damping Coefficient ($\gamma$) & $1 \times 10^{-4}$ \\ \hline
+Time Step & 1s\\ \hline
+Number of Time Steps & $10^4$ \\ \hline
+Number of Atoms & 2000 \\ \hline
+\end{tabular}
+\caption{Rouse Polymer Parameters}
+\end{table}
+
 It is well-known that the DNA double helix structure consists of millions of base pairs chained together by the sugar-phosphate backbone. DNA, being a molecule built from many similar monomers bonded together, is naturally analyzed using a polymer model. The simplest polymer model for chromatin is the Rouse polymer model, which discretizes it into monomers connected by springs, resembling the string-of-beads structure observed under the electron microscope. Various forces acting on chromatin result in constrained dynamics, leading to significant variability in the anomalous exponent $\alpha$ for the dynamics of a chromatin locus.
 
 To refine the modeling of chromatin properties according to the exponent $\alpha$, the $\beta$-polymer model was introduced. This model accounts for mid-range and long-range interactions between monomers, not just those between the nearest neighbors as in the Rouse polymer model. In this model, $\alpha$ shows a decay curve with distance along the chain. While $\alpha = 0.5$ in the traditional Rouse polymer model, the $\beta$-polymer model can be selected to address cases where $\alpha$ is in the range of 0 to 0.5 \parencite{Amitai2013,Amitai2017,Hajjoul2013}. Thus, local interactions between monomers can be inferred from the anomalous diffusion exponent using this construction.
+
+\begin{figure}[t]
+\includegraphics[width=\textwidth]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse-Dynamics.png}
+\caption{Subdiffusive dynamics of the Rouse polymer. (left) Mean squared displacement (MSD) of individual beads shown in gray, average MSD shown in red. (middle) Histogram of the diffusion coefficient of individual beads. (right) Histogram of the anamalous exponent. Fitting of individual bead MSDs performed by linear regression in log-space using the first 5000 time points}
+\end{figure}
 
 Furthermore, as the polymer model usually folds at different spatial scales and generates various sizes of loops, a simulation model adding connectors between randomly chosen non-nearest neighbor monomer pairs, known as the randomly cross-linked (RCL) polymer model, was presented. In this model, $\alpha$ is reduced to below 0.5 by adding connectors. Recent evidence suggests that the number and distribution of connectors impact physical parameters in various ways, but this domain remains underexplored. Notably, the RCL polymer model may be crucial for studying dynamics in processes such as CTCF and cohesion regulating chromatin loop stability \parencite{Hansen2017}. Additionally, sub-diffusion with an exponent $\alpha > 0.5$ can occur in some polymer models, potentially involving different types of forces such as deterministic forces, directed motion, or other monomer interactions (self-avoiding and bending interactions).
 
@@ -94,17 +122,18 @@ The interplay between chromatin structure and phase-separating proteins is an em
 
 \section{BRD4 regulates the structure of chromatin nanodomains}
 
+The cell nucleus is a densely packed environment with chromatin comprising a dominant component. The compartmentalization of chromatin with other intranuclear components by phase separation is therefore an efficient strategy to ensure precise spatial and temporal coordination of complex dynamics. A growing number of phase separated nuclear bodies have been identified, including transcriptional condensates \parencite{Sabari2018,Hnisz2017}, nuclear speckles \parencite{Brown2008}, and DNA damage repair foci \parencite{Wang2023}; however, the interplay of phase separated condensates with the underlying chromatin structure remains poorly understood. Transcriptional condensates have been identified as an ideal model to study the kinetic and thermodynamic contributions of chromatin substrate binding, as the ability of transcriptional activators to both condense and bind chromatin is well established \parencite{Sabari2018,Wagh2021,Plys2018,Strom2024,Ma2021}. Here, we extend this effort by investigating the regulation of chromatin structure by phase separated transcriptional condensates. We focus on the BRD4 protein - a well-studied transcriptional activator that localizes to acetylated chromatin sites \parencite{Wu2018}, recruits pTEF-b, and initiates transcription of key genes involved in signal response, immunity, and oncogenesis \parencite{Itzen2014}.
+
+The BRD4 long isoform is characterized by structured N-terminal tandem acetyl-lysine binding bromodomains and an extra-terminal domain, connected by intrinsically disordered regions \parencite{Han2020}. Perhaps the most fundamental of BRD4 functions is the ability to bind to acetylated chromatin through bromodomain 1 (BD1) and bromodomain 2 (BD2) that are in tandem within the N-terminal part of the protein. BRD4 inhibitors such as (+)-JQ1 competitively bind to the acetyl-binding pocket of BRD4, displacing BRD4 from chromatin \parencite{Filippakopoulos2010}. It is also well known that BRD4 association with acetylated chromatin is enhanced by casein kinase II (CK2)-mediated phosphorylation of seven N-terminus phosphorylation sites (NPS), followed by intramolecular rearrangement of BRD4 protein and/or BRD4 dimerization \parencite{Wu2013,Malvezzi2021}.
+
 \begin{figure}[t]
 \centering
 \includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Structure.png}
 \caption{Bromodomain protein 4 (BRD4) structure prediction. (a) AlphaFold predicted structure of BRD4 long isoform (blue) with bromodomain 1 (BD1) aa58-163, bromodomain 2 (BD2) aa349-456, and N-terminus phosphorylation sites (NPS) aa462-506 highlighted in green. (b) Heat map of expected position error in AlphaFold prediction}
 \end{figure}
 
-The cell nucleus is a densely packed environment with chromatin comprising a dominant component. The compartmentalization of chromatin with other intranuclear components by phase separation is therefore an efficient strategy to ensure precise spatial and temporal coordination of complex dynamics. A growing number of phase separated nuclear bodies have been identified, including transcriptional condensates \parencite{Sabari2018,Hnisz2017}, nuclear speckles \parencite{Brown2008}, and DNA damage repair foci \parencite{Wang2023}; however, the interplay of phase separated condensates with the underlying chromatin structure remains poorly understood. Transcriptional condensates have been identified as an ideal model to study the kinetic and thermodynamic contributions of chromatin substrate binding, as the ability of transcriptional activators to both condense and bind chromatin is well established \parencite{Sabari2018,Wagh2021,Plys2018,Strom2024,Ma2021}. Here, we extend this effort by investigating the regulation of chromatin structure by phase separated transcriptional condensates. We focus on the BRD4 protein - a well-studied transcriptional activator that localizes to acetylated chromatin sites \parencite{Wu2018}, recruits pTEF-b, and initiates transcription of key genes involved in signal response, immunity, and oncogenesis \parencite{Itzen2014}.
-
-The BRD4 long isoform is characterized by structured N-terminal tandem acetyl-lysine binding bromodomains and an extra-terminal domain, connected by intrinsically disordered regions \parencite{Han2020}. Perhaps the most fundamental of BRD4 functions is the ability to bind to acetylated chromatin through bromodomain 1 (BD1) and bromodomain 2 (BD2) that are in tandem within the N-terminal part of the protein. BRD4 inhibitors such as (+)-JQ1 competitively bind to the acetyl-binding pocket of BRD4, displacing BRD4 from chromatin \parencite{Filippakopoulos2010}. It is also well known that BRD4 association with acetylated chromatin is enhanced by casein kinase II (CK2)-mediated phosphorylation of seven N-terminus phosphorylation sites (NPS), followed by intramolecular rearrangement of BRD4 protein and/or BRD4 dimerization \parencite{Wu2013,Malvezzi2021}.
-
 Recent studies have demonstrated that BRD4 is present in discrete nuclear bodies that occur at super-enhancers, which exhibit properties of other well-studied biomolecular condensates, including rapid recovery of fluorescence after photobleaching and sensitivity to 1,6-hexanediol, which disrupts liquid-like condensates \parencite{Sabari2018}. Both BRD4 long and short isoform are found in phase separated condensates in the nucleus and are associated with active gene transcription1. Importantly, CK2-mediated NPS phosphorylation state regulates chromatin binding activity of BRD413 as well as BRD4 phase separation \parencite{Han2020}. This has led to the conclusion that phosphorylation of BRD4 inhibits interaction with chromatin and reduces phase separation, while remaining necessary for active gene transcription. Moreover, phosphorylated and unphosphorylated BRD4 form different molecular associations – transient polyvalent associations of unphosphorylated BRD4 contrast with the stable dimeric interaction and chromatin binding of phosphorylated BRD4 \parencite{Malvezzi2021}. We therefore speculated that BRD4 chromatin binding may be necessary for maintaining NN structure and single nucleosome dynamics. 
+
 
 \section{Results}
 
@@ -151,6 +180,23 @@ where $R_0=200$nm. The potential $U_{BC}$ is considered over a domain $0\leq\lve
 \includegraphics[width=\textwidth]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-3.png}
 \caption{}
 \end{figure}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Parameter} & \textbf{Value} \\ \hline
+Bond Length ($\sigma$) & $200 \times 10^{-9}$ m \\ \hline
+Cutoff Distance & $500 \times 10^{-9}$ m \\ \hline
+Spring Constant ($\kappa$) & 90.0 $k_{B}T/\sigma^2$ \\ \hline
+Neighbor Distance & $500 \times 10^{-9}$ m \\ \hline
+Damping Coefficient ($\gamma$) & $1 \times 10^{-4}$ \\ \hline
+Time Step & $10^{-4}$s\\ \hline
+Number of Time Steps & $10^4$ \\ \hline
+Number of Atoms & 200 \\ \hline
+\end{tabular}
+\caption{Multivalent binder model parameters}
+\end{table}
 
 \begin{equation*}
 \dot{\bold{r}} = \gamma^{-1}\nabla U(\bold{r}) +\sqrt{2 k_{B}T}\gamma^{-1/2}\xi(t)
