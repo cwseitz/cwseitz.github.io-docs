@@ -5,10 +5,16 @@
 
 \section{Introduction}
 
+\subsection{The curse of dimensionality}
+
+Dimensionality refers to the number of variables or features in a dataset. In fluorescence nanoscopy, each spatial coordinate (e.g., x, y, and potentially z in three-dimensional imaging) and additional attributes such as time points or different fluorophore states contribute to the dimensionality of the data. As the number of these features increases, the dataset becomes high-dimensional. The curse of dimensionality is a term coined to describe various phenomena that arise when working with high-dimensional data, making statistical analysis and machine learning more challenging. Mathematically, the curse of dimensionality can be described through the following issues:
+
+As dimensionality increases, the volume of the space grows exponentially. For instance, the volume of a hypercube with side length $l$ in $d$-dimensional space is given by $l^d$. This rapid increase in volume means that data points become sparser, making it difficult to estimate densities and find meaningful patterns. Furthermore, in high-dimensional spaces, the concept of distance becomes less informative. For example, the difference between the minimum and maximum distance between data points tends to shrink as dimensionality increases, which can make clustering and nearest-neighbor algorithms less effective. With a large number of dimensions, models can easily become overly complex, capturing noise instead of the underlying signal. This leads to overfitting, where the model performs well on training data but poorly on unseen data. High-dimensional data requires more computational resources for processing and storage. Algorithms that are efficient in low dimensions may become impractical in high dimensions due to increased time and space complexity.
+
 \subsection{The Bayesian calculation}
 Bayesian inference provides a rigorous framework for updating beliefs about the world in light of new data. It leverages the principles of probability theory to combine prior knowledge with empirical evidence, resulting in updated, posterior beliefs. In parametric modeling, we assume that the data $x$ are generated from a distribution with a set of parameters $y$. Parametric models simplify the problem by assuming a specific form for the underlying distribution of the data, characterized by a finite set of parameters. This approach allows us to use mathematical functions to describe complex systems and make inferences about the parameters based on observed data.
 
-At the heart of Bayesian inference is Bayes' rule, which allows us to update our beliefs based on new evidence. Bayes' rule is derived from the definition of conditional probability.The conditional probability of $y$ given $x$ is defined as $P(y \lvert x) = \frac{P(x,y)}{P(y)}$ provided that $P(y) > 0$. Similarly, the conditional probability of $x$ given $y$ is $P(x \lvert y) = \frac{P(x,y)}{P(x)}$. Rearranging these equations and solving for $P(y\lvert x)$ gives us Bayes' rule:
+At the heart of Bayesian inference is Bayes' rule, which allows us to update our beliefs based on new evidence. Bayes' rule is derived from the definition of conditional probability.The conditional probability of $y$ given $x$ is defined as $p(y \lvert x) = \frac{p(x,y)}{p(y)}$ provided that $p(y) > 0$. Similarly, the conditional probability of $x$ given $y$ is $p(x \lvert y) = \frac{p(x,y)}{p(x)}$. Rearranging these equations and solving for $p(y\lvert x)$ gives us Bayes' rule:
 
 \begin{equation*}
 p(y \lvert x) = \frac{p(x \lvert y) p(y)}{p(x)}.
@@ -50,100 +56,6 @@ Maximizing the ELBO ensures that $q(y)$ is as close as possible to the true post
 
 In variational inference, model parameters and latent variables can be treated interchangeably. This flexibility allows us to use powerful optimization techniques to approximate complex posterior distributions and make Bayesian inference feasible for a wide range of applications.
 
-\subsection{The curse of dimensionality}
-
-Dimensionality refers to the number of variables or features in a dataset. In fluorescence nanoscopy, each spatial coordinate (e.g., x, y, and potentially z in three-dimensional imaging) and additional attributes such as time points or different fluorophore states contribute to the dimensionality of the data. As the number of these features increases, the dataset becomes high-dimensional. The curse of dimensionality is a term coined to describe various phenomena that arise when working with high-dimensional data, making statistical analysis and machine learning more challenging. Mathematically, the curse of dimensionality can be described through the following issues:
-
-As dimensionality increases, the volume of the space grows exponentially. For instance, the volume of a hypercube with side length $l$ in $d$-dimensional space is given by $l^d$. This rapid increase in volume means that data points become sparser, making it difficult to estimate densities and find meaningful patterns. Furthermore, in high-dimensional spaces, the concept of distance becomes less informative. For example, the difference between the minimum and maximum distance between data points tends to shrink as dimensionality increases, which can make clustering and nearest-neighbor algorithms less effective. With a large number of dimensions, models can easily become overly complex, capturing noise instead of the underlying signal. This leads to overfitting, where the model performs well on training data but poorly on unseen data. High-dimensional data requires more computational resources for processing and storage. Algorithms that are efficient in low dimensions may become impractical in high dimensions due to increased time and space complexity.
-
-
-\begin{figure}[!t]
-    \hfill
-    \begin{subfigure}{.32\columnwidth}
-        \centering
-        \begin{tikzpicture}[thick,scale=1, every node/.style={scale=1}]
-            \node[obs] (x) {$\mathbf{x}$};
-            \node[latent, above=20pt of x] (z1) {$\mathbf{z}_1$};
-            \node[latent, above=20pt of z1] (z2) {$\mathbf{z}_{2}$};
-            \draw node[draw=none, scale=0.8, above=9pt of z2] (z3) {\hspace{0.5pt}\rotatebox{90}{$\mathbf{\cdots}$}};
-            \draw [-{Latex[scale=1.0]}] (x) to [out=45,in=-45] (z2);
-            \node[latent, above=9pt of z3] (zt) {$\mathbf{z}_T$};
-            \edge[-{Latex[scale=1.0]}]{x}{z1}
-            \node[rectangle, draw=none, fill=white, scale=1, above=2pt of x, xshift=-12pt] (eq1) {$\alpha_1$};
-            \draw [-{Latex[scale=1.0]}] (x) to [out=45,in=-45] (zt);
-            \node[rectangle, draw=none, fill=white, scale=1, right=22pt of z2, yshift=-13pt] (eq2) {$\alpha_T$};
-            \node[rectangle, draw=none, scale=1, left=15pt of zt] (nt) {$\mathcal{N}\big(0, \sigma^2_T\mathbf{I}\big)$};
-            \node[rectangle, draw=none, scale=1, left=15pt of z2] (n2) {$\mathcal{N}\big(0, \sigma^2_2\mathbf{I}\big)$};
-            \node[rectangle, draw=none, scale=1, left=15pt of z1] (n1) {$\mathcal{N}\big(0, \sigma^2_1\mathbf{I}\big)$};
-            \edge[-{Latex[scale=1.0]}]{nt}{zt}
-            \edge[-{Latex[scale=1.0]}]{n2}{z2}
-            \edge[-{Latex[scale=1.0]}]{n1}{z1}
-            \node[rectangle, draw=none, fill=white, scale=1, right=11pt of z1, yshift=-1pt] (eq2) {$\alpha_2$};
-        \end{tikzpicture}
-        \caption{Gaussian Diffusion}
-        \label{fig: gd}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{.32\columnwidth}
-        \centering
-        \begin{tikzpicture}[thick,scale=1, every node/.style={scale=1}]
-            \node[obs] (x) {$\mathbf{x}$};
-            \node[latent, above=20pt of x] (z1) {$\mathbf{z}_1$};
-            \node[latent, above=20pt of z1] (z2) {$\mathbf{z}_{2}$};
-            \draw node[draw=none, scale=0.8, above=6pt of z2] (z3) {\hspace{0.5pt}\rotatebox{90}{$\mathbf{\cdots}$}};
-            \node[latent, above=12pt of z3] (zt) {$\mathbf{z}_T$};
-            \edge[-{Latex[scale=1.0]}]{x}{z1}
-            \node[rectangle, draw=none, fill=white, scale=1, above=1.5pt of x, xshift=18pt] (eq1) {$\alpha_{1\lvert 0}$};
-            \node[rectangle, draw=none, fill=white, scale=1, above=1.5pt of z1, xshift=18pt] (eq2) {$\alpha_{2\lvert 1}$};
-            \node[rectangle, draw=none, fill=white, scale=1, right=-0.4pt of z3] (eq3) {$\alpha_{t\lvert t-1}$};
-            
-            \edge[-{Latex[scale=1.0]}]{z1}{z2}
-            \node[rectangle, draw=none, scale=1, left=15pt of zt] (nt) {$\mathcal{N}\big(0, \sigma^2_{T\lvert T-1}\mathbf{I}\big)$};
-            \node[rectangle, draw=none, scale=1, left=15pt of z2] (n2) {$\mathcal{N}\big(0, \sigma^2_{2\lvert 1}\mathbf{I}\big)$};
-            \node[rectangle, draw=none, scale=1, left=15pt of z1] (n1) {$\mathcal{N}\big(0, \sigma^2_{1\lvert 0}\mathbf{I}\big)$};
-            \edge[-{Latex[scale=1.0]}]{nt}{zt}
-            \edge[-{Latex[scale=1.0]}]{n2}{z2}
-            \edge[-{Latex[scale=1.0]}]{n1}{z1}
-
-            \edge[-]{z2}{z3}
-            \edge[-{Latex[scale=1.0]}]{z3}{zt}
-        \end{tikzpicture}
-        \caption{Markovian Transitions}
-        \label{fig: mt}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}{.34\columnwidth}
-        \centering
-        \begin{tikzpicture}[thick,scale=1, every node/.style={scale=1}]
-            \node[obs] (x) {$\mathbf{x}$};
-            \node[latent, below=20pt of x] (zt) {$\mathbf{z}_T$};
-            \draw node[draw=none, scale=0.8, below=6pt of zt] (z3) {\hspace{0.5pt}\rotatebox{90}{$\mathbf{\cdots}$}};
-            \node[latent, below=12pt of z3] (z2) {$\mathbf{z}_2$};
-            \node[latent, below=20pt of z2] (z1) {$\mathbf{z}_1$};
-            \edge[-]{zt}{z3}
-            \edge[-{Latex[scale=1.0]}]{z3}{z2}
-            \edge[-{Latex[scale=1.0]}]{z2}{z1}
-            \node[rectangle, draw=none, fill=white, scale=0.9, right=21pt of z2, yshift=30pt] (eq5) {$\alpha_{1}\sigma^2_{2\lvert 1}/\sigma^{2}_{2}$};
-            \draw [-{Latex[scale=1.0]}] (x) to [out=-45,in=45] (z1);
-            \node[rectangle, draw=none, fill=white, scale=0.9, right=12pt of zt] (eq6) {$\alpha_{2}\sigma^2_{3\lvert 2}/\sigma^{2}_{3}$};
-            \draw [-{Latex[scale=1.0]}] (x) to [out=-45,in=45] (z2);
-            \node[rectangle, draw=none, scale=1, left=15pt of zt] (nt) {$\mathcal{N}\big(0, \mathbf{I}\big)$};
-            \node[rectangle, draw=none, scale=1, left=15pt of z2] (n2) {$\mathcal{N}\big(0, \sigma^2_{2\lvert 3}\mathbf{I}\big)$};
-            \node[rectangle, draw=none, scale=1, left=15pt of z1] (n1) {$\mathcal{N}\big(0, \sigma^2_{1\lvert 2}\mathbf{I}\big)$};
-            \edge[-{Latex[scale=1.0]}]{nt}{zt}
-            \edge[-{Latex[scale=1.0]}]{n2}{z2}
-            \edge[-{Latex[scale=1.0]}]{n1}{z1}
-            \node[rectangle, draw=none, fill=white, scale=0.9, left=-6pt of z1, yshift=22pt] (eq3) {$\alpha_{2\lvert 1}\sigma^2_{1}/\sigma^{2}_{2}$};
-            \node[rectangle, draw=none, fill=white, scale=0.9, left=-6pt of z2, yshift=31pt] (eq4) {$\alpha_{t\lvert t-1}\sigma^2_{t-1}/\sigma^{2}_{t}$};
-        \end{tikzpicture}
-        \caption{Top-down Posterior}
-        \label{fig: tdp}
-    \end{subfigure}
-    \caption{}
-    \label{fig: diffusion_process}
-    \hfill
-\end{figure}
-
 
 \subsection{Application of deep models in microscopy}
 
@@ -172,6 +84,35 @@ Recent advances in generative modeling, particularly diffusion models \parencite
 \textbf{Sample Fidelity}. Since Langevin dynamics will often be initialized in low-density regions of the data distribution, inaccurate score estimation in these regions will negatively affect the sampling process. Moreover, mixing can be difficult because of the need of traversing low density regions to transition between modes of the distribution \parencite{Song2019}.
 
 \subsection{Variational Diffusion}
+
+\begin{figure}[!t]
+    \centering
+    \begin{tikzpicture}[thick,scale=1.5, every node/.style={scale=1.5}]
+        \node[obs] (x) {$\mathbf{x}$};
+        \node[latent, right=45pt of x] (z1) {$\mathbf{y}_1$};
+        \node[latent, right=45pt of z1] (z2) {$\mathbf{y}_{2}$};
+        \draw node[draw=none, scale=0.8, right=9pt of z2] (z3) {\rotatebox{0}{$\mathbf{\cdots}$}};
+        \node[latent, right=22.5pt of z3] (zt) {$\mathbf{y}_T$};
+        \edge[-{Latex[scale=1.0]}]{x}{z1}
+        \node[rectangle, draw=none, fill=white, scale=0.66, right=2.25pt of x, yshift=9pt] (eq1) {$\mu_{1}$};
+        \node[rectangle, draw=none, fill=white, scale=0.66, right=2.25pt of z1, yshift=9pt] (eq2) {$\mu_{2}$};
+        \node[rectangle, draw=none, fill=white, scale=0.66, below=-0.27pt of z3] (eq3) {$\mu_{t}$};
+        
+        \edge[-{Latex[scale=1.0]}]{z1}{z2}
+        \node[rectangle, draw=none, scale=0.66, above=22.5pt of zt] (nt) {$\mathcal{N}\big(0, \beta_{T}\mathbf{I}\big)$};
+        \node[rectangle, draw=none, scale=0.66, above=22.5pt of z2] (n2) {$\mathcal{N}\big(0, \beta_{2}\mathbf{I}\big)$};
+        \node[rectangle, draw=none, scale=0.66, above=22.5pt of z1] (n1) {$\mathcal{N}\big(0, \beta_{1}\mathbf{I}\big)$};
+        \edge[-{Latex[scale=1.0]}]{nt}{zt}
+        \edge[-{Latex[scale=1.0]}]{n2}{z2}
+        \edge[-{Latex[scale=1.0]}]{n1}{z1}
+
+        \edge[-]{z2}{z3}
+        \edge[-{Latex[scale=1.0]}]{z3}{zt}
+    \end{tikzpicture}
+    \caption{\textbf{Diffusion model with Markovian transitions}}
+    \label{fig: mt}
+    \label{fig: diffusion_process}
+\end{figure}
 
 
 \begin{figure}[t]
@@ -313,7 +254,7 @@ Using a Monte Carlo estimate of $\mathcal{L}_{\psi}$ \parencite{Kingma2023} whic
 \begin{figure}[t]
 \centering
 \includegraphics[scale=0.7]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png}
-\caption{Localization errors of the trained model $\phi$. The Cramer-Rao lower bound is shown in red, computing by taking the diagonal elements of $I^{-1}(\theta)$.}
+\caption{\textbf{Localization errors of the trained model $\phi$}. The Cramer-Rao lower bound is shown in red, computing by taking the diagonal elements of $I^{-1}(\theta)$.}
 \end{figure}
 
 
