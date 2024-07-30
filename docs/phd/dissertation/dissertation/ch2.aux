@@ -3,29 +3,31 @@
 \@writefile{toc}{\contentsline {chapter}{\numberline {3}{Bayesian fluorescence nanoscopy}}{38}{chapter.45}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3.1}Introduction}{38}{section.46}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}The curse of dimensionality}{38}{subsection.47}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}The Bayesian calculation}{38}{subsection.48}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Application of deep models in microscopy}{41}{subsection.49}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Results}{42}{section.50}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Approach}{42}{subsection.51}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces \textbf  {Diffusion model with Markovian transitions}\relax }}{44}{figure.caption.53}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}The Bayesian calculation}{39}{subsection.48}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Variational inference}{40}{subsection.49}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}A note on variational inference for functions}{41}{subsection.50}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.5}Application of deep models in microscopy}{42}{subsection.51}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Results}{43}{section.52}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Approach}{43}{subsection.53}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces \textbf  {Diffusion model with Markovian transitions}\relax }}{45}{figure.caption.55}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig: mt}{{3.1}{44}{\textbf {Diffusion model with Markovian transitions}\relax }{figure.caption.53}{}}
-\newlabel{fig: diffusion_process}{{3.1}{44}{\textbf {Diffusion model with Markovian transitions}\relax }{figure.caption.53}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces \textbf  {Super resolution by variational diffusion}. Example diffusion process of the latent high resolution image $\mathbf  {y}$ conditioned on the low resolution image $\mathbf  {x}$. The terminal $\mathbf  {y}_{0}$ represents a sample from $p(\mathbf  {y}\lvert \mathbf  {x})$.\relax }}{44}{figure.caption.54}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Variational Diffusion}{44}{subsection.52}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Experiments}{46}{subsection.60}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces \textbf  {Non cherry-picked estimation of marginal variances}. A low-resolution image $\mathbf  {x}$ (left column) is transformed by $\phi $ to produce a KDE estimate $\hat  {\mathbf  {y}}$ (middle column) and a DDPM $\psi $ computes a map of marginal variances (right column)\relax }}{47}{figure.caption.61}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Conclusion}{48}{section.62}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Broader Impact}{49}{section.63}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.5}Appendix}{49}{section.64}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Sampling}{49}{subsection.67}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces \textbf  {Architecture of the augmenation model $\phi $}. A $20\times 20$ single-channel movie is processed by eight convolutional blocks followed by a 4x upsampling module utilizing linear interpolation and a refinement module with six convolutional blocks.\relax }}{50}{figure.caption.65}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.2}Derivation of the variational bound}{50}{subsection.69}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces \textbf  {Architecture of the denoising diffusion model}. A U-Net style architecture with channel multipliers of [1,2,4,8,16] downsamples and then upsamples the input image $\mathbf  {y}_{t}$ to estimate $\mathbf  {y}_{t-1}$\relax }}{51}{figure.caption.66}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.3}Neural Networks $\psi ,\phi $}{52}{subsection.71}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces \textbf  {Localization errors of the trained model $\phi $}. The Cramer-Rao lower bound is shown in red, computing by taking the diagonal elements of $I^{-1}(\theta )$.\relax }}{53}{figure.caption.70}\protected@file@percent }
+\newlabel{fig: mt}{{3.1}{45}{\textbf {Diffusion model with Markovian transitions}\relax }{figure.caption.55}{}}
+\newlabel{fig: diffusion_process}{{3.1}{45}{\textbf {Diffusion model with Markovian transitions}\relax }{figure.caption.55}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces \textbf  {Super resolution by variational diffusion}. Example diffusion process of the latent high resolution image $\mathbf  {y}$ conditioned on the low resolution image $\mathbf  {x}$. The terminal $\mathbf  {y}_{0}$ represents a sample from $p(\mathbf  {y}\lvert \mathbf  {x})$.\relax }}{45}{figure.caption.56}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Variational Diffusion}{45}{subsection.54}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Experiments}{47}{subsection.62}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces \textbf  {Non cherry-picked estimation of marginal variances}. A low-resolution image $\mathbf  {x}$ (left column) is transformed by $\phi $ to produce a KDE estimate $\hat  {\mathbf  {y}}$ (middle column) and a DDPM $\psi $ computes a map of marginal variances (right column)\relax }}{48}{figure.caption.63}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Conclusion}{49}{section.64}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Broader Impact}{49}{section.65}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Appendix}{50}{section.66}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Sampling}{50}{subsection.69}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.2}Derivation of the variational bound}{50}{subsection.71}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces \textbf  {Architecture of the augmenation model $\phi $}. A $20\times 20$ single-channel movie is processed by eight convolutional blocks followed by a 4x upsampling module utilizing linear interpolation and a refinement module with six convolutional blocks.\relax }}{51}{figure.caption.67}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces \textbf  {Architecture of the denoising diffusion model}. A U-Net style architecture with channel multipliers of [1,2,4,8,16] downsamples and then upsamples the input image $\mathbf  {y}_{t}$ to estimate $\mathbf  {y}_{t-1}$\relax }}{52}{figure.caption.68}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces \textbf  {Localization errors of the trained model $\phi $}. The Cramer-Rao lower bound is shown in red, computing by taking the diagonal elements of $I^{-1}(\theta )$.\relax }}{53}{figure.caption.72}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.3}Neural Networks $\psi ,\phi $}{53}{subsection.73}\protected@file@percent }
 \@setckpt{ch2}{
-\setcounter{page}{54}
+\setcounter{page}{55}
 \setcounter{equation}{6}
 \setcounter{enumi}{0}
 \setcounter{enumii}{0}
@@ -45,7 +47,7 @@
 \setcounter{section@level}{0}
 \setcounter{Item}{0}
 \setcounter{Hfootnote}{0}
-\setcounter{bookmark@seq@number}{38}
+\setcounter{bookmark@seq@number}{40}
 \setcounter{BackrefHyperFootnoteCounter}{0}
 \setcounter{LT@tables}{1}
 \setcounter{LT@chunks}{1}
@@ -123,7 +125,7 @@
 \setcounter{citetotal}{0}
 \setcounter{multicitecount}{0}
 \setcounter{multicitetotal}{0}
-\setcounter{instcount}{83}
+\setcounter{instcount}{81}
 \setcounter{maxnames}{3}
 \setcounter{minnames}{3}
 \setcounter{maxitems}{3}
