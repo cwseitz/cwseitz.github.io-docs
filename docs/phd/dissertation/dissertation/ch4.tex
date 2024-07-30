@@ -38,6 +38,35 @@ It is worth noting that a significant portion of studies address chromatin struc
 
 Advances in super-resolution imaging will also benefit intranuclear chromatin imaging. For example, aspherical optics were initially utilized in super-resolution imaging to convert the z-axis position of a single molecule into a distorted point spread function (PSF) on the x-y plane using a cylindrical lens \parencite{Huang2008}. This method was further developed in single-molecule imaging/tracking to register the 3D position of a moving molecule through a rotational PSF \parencite{Greengard2006,Pavani2009,Badieirostami2010,Thompson2010}. Additionally, applying super-resolution imaging to live-cell single-molecule imaging produces high-density trajectories of molecules, enabling the integration of biophysical analysis such as stochastic models of nonequilibrium motions to recover forces, subcellular organizations, diffusion kinetics, and other biophysical features at unprecedented spatiotemporal resolution \parencite{Hoze2012,Holcman2015,Hoze2015}.
 
+
+\section{The structure of chromatin nanodomains}
+
+Here I will discuss what is known about the structure of chromatin nanodomains and introduce the Ripley functions in more detail
+
+\begin{figure}
+\centering
+\includegraphics[width=10cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e4-0.png}
+\includegraphics[width=10cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e5-0.png}
+\includegraphics[width=10cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-5e6-0.png}
+\caption{\textbf{Besag's L-function under complete spatial randomness}. Point pattern simulations for complete spatial randomness ($\sigma=0$) for various intensities of the point process}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=10cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-1e4-50.png}
+\includegraphics[width=10cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-1e5-50.png}
+\includegraphics[width=10cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-5e6-50.png}
+\caption{\textbf{Besag's L-function for a Thomas process}. Point pattern simulations for the Thomas process ($\sigma=50\mathrm{nm}$) for various intensities of the point process}
+\end{figure}
+\clearpage
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=13cm]{media/Lifetime.png}
+\caption{\textbf{Photoswitching of JF646 bound to H2B-HaloTag}. (a) Peak intensity fluctuations of a putatively isolated JF646 molecule exicted at 640nm and imaged with 10ms exposure time in the presence of 100mM MEA buffer. Fit of a Poisson HMM is shown in cyan (b) ON and OFF state lifetime distributions found by pooling data from 16 JF646 spots in a single HeLa cell nucleus. Single component exponential fits shown as solid lines.}
+\end{figure}
+
+
 \section{Polymer models and chromatin dynamics}
 
 By accumulating single molecule localizations over a time series of frames, quantitative information regarding the motion of the particle can be extracted and related to experimental conditions. It is important to note that the chromatin structure is highly complex and cannot be exactly represented by the diffusion of individual particles. However, by treating each fluorescent spot as a point mapped in space and time, we can extract parameters of the diffusion and classify tracks as sub-diffusive, Brownian, or super diffusive. 
@@ -106,7 +135,7 @@ To refine the modeling of chromatin properties according to the exponent $\alpha
 \begin{figure}[t]
 \centering
 \includegraphics[width=13cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse-Dynamics-1.png}
-\caption{\textbf{Mean-squared displacement of the Rouse polymer}.  Mean squared displacement (MSD) of individual beads shown in gray, average MSD shown in red. (middle)}
+\caption{\textbf{Subdiffusive dynamics of a Rouse polymer}.  Mean squared displacement (MSD) of 2k beads shown in black, average MSD shown in red.}
 \end{figure}
 
 \begin{figure}[t]
@@ -144,12 +173,6 @@ To address the role of BRD4 binding and phase separation on chromatin structure,
 \end{figure}
 	
 \subsection{Chromatin structure and dynamics}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=13cm]{media/Lifetime.png}
-\caption{\textbf{Photoswitching of JF646 bound to H2B-HaloTag}. (a) Peak intensity fluctuations of a putatively isolated JF646 molecule exicted at 640nm and imaged with 10ms exposure time in the presence of 100mM MEA buffer. Fit of a Poisson HMM is shown in cyan (b) ON and OFF state lifetime distributions found by pooling data from 16 JF646 spots in a single HeLa cell nucleus. Single component exponential fits shown as solid lines.}
-\end{figure}
 
 To assess the functional role of BRD4 in maintaining the NN environment, we interrogated the dynamics of NNs, as well as their structure, in the presence of BRD4 mutants. Histone H2B was tagged with HaloTag \parencite{Los2008} (H2B-Halo), to which a fluorescent ligand JaneliaFluor646 (JF646) can bind speciﬁcally in a living cell. Low concentrations of JF646 were used to obtain sparse labeling of nucleosomes for single-nucleosome imaging (Figure 2a,b). JF646-labeled nucleosomes in Hela cells were recorded at 10fps (∼200 frames, 20 s total) and a reduced diffusion coefficient was measured in cells expressing 7A, 7D, and BD mutants, with respect to cells expressing the wild-type BRD4 protein (Figure 2c,d). We then conducted super resolution imaging of nucleosome nanodomains using direct stochastic optical reconstruction microscopy (dSTORM) by promoting JF646 fluorescence intermittency with a cysteamine buffer (Figure 3a,c). JF646 is known to exhibit a transient fluorescent state lasting tens to hundreds of milliseconds and stable dark state lasting hundreds of milliseconds to seconds \parencite{Grimm2015}. Two color imaging of H2B-Halo-JF646 and GFP-tagged BRD4 shows that BRD4 and NNs form complementary biomolecular condensates in the nucleus, consistent with current models of BRD4 chromatin reading mechanism (Figure 3b). Ensemble averages of Besag’s L-function showed an increase in NN compaction in cells expressing the 7D BRD4 mutants, while all other groups were consistently indistinguishable from WT cells (Figure 3d).  
 
