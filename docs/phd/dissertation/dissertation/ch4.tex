@@ -41,14 +41,25 @@ Advances in super-resolution imaging will also benefit intranuclear chromatin im
 
 \section{The structure of chromatin nanodomains}
 
-Here I will discuss what is known about the structure of chromatin nanodomains and introduce the Ripley functions in more detail
+Super-resolved nucleosome organization has been studied extensively in fixed cells to reveal segregated
+nanodomains hundreds of nanometers in size, including dispersed nanodomains and compact large aggregates. Nucleosomes are now known to assemble into heterogeneous clusters of variable sizes, interspersed with nucleosome-depleted regions \parencite{Ricci2015}. However, our current understanding of nucleosome patterning in the nucleus is limited by the need for fixation. Chemical fixation with paraformaldehyde, glutaraldeyde, methanol, or other chemical fixatives may alter the structure of chromatin, introducing error in our measurements \parencite{Maeshima2020}. Live cell imaging carries its own issues, particularly due to local and long-range chromatin motions in the nucleus. At the nanoscale, local chromatin motion appears to be isotropic and driven by thermal fluctuation \parencite{Maeshima2020}. Therefore, we presume that for sufficiently brief imaging duration (tens of seconds) nanodomain structure is approximately static. As a consequence, vibrations of single nucleosomes are, in effect, an addition of low amplitude noise to the localization dataset. 
+
+To perform live cell super-resolution imaging of chromatin nanodomains, we adopt the HaloTag system, a modified haloalkane dehalogenase designed to covalently bind to synthetic ligands (Los 2008). The HaloTag protein is fused to nucleosome H2B and is then bound by a rhodomine-derived fluorescent ligand, JF646 (Grimm 2015). JF646 undergoes fluorescence intermittency (blinking) in the presence of a cysteamine (MEA) containing buffer (Figure 4.3). Once precise positions of the fluorophores are obtained, Besag’s L-function $L(r)$ is used to analyze the clustering. The L-function $L(r)= \sqrt{\frac{K(r)}{\pi}}$ is a transformation of Ripley’s K-function $K(r)$. The function $K(r)$ is designed such that $K(r)$ is the number of localizations within a radius $r$ of a randomly chosen localization. Importantly, in the case of complete spatial randomness, $L(r)=r$. Thus, in general, to quantify the degree of clustering, one uses $L(r)-r$, which measures the deviation of a point pattern from CSR. To demonstrate this, example point patterns have been generated under CSR (Figure 4.1) and a Thomas point process (Figure 4.2).
+
+\begin{figure}[b]
+\centering
+\includegraphics[width=13cm]{media/Lifetime.png}
+\caption{\textbf{Photoswitching of JF646 bound to H2B-HaloTag}. (a) Peak intensity fluctuations of a putatively isolated JF646 molecule exicted at 640nm and imaged with 10ms exposure time in the presence of 100mM MEA buffer. Fit of a Poisson HMM is shown in cyan (b) ON and OFF state lifetime distributions found by pooling data from 16 JF646 spots in a single HeLa cell nucleus. Single component exponential fits shown as solid lines.}
+\end{figure}
+
+
 
 \begin{figure}
 \centering
 \includegraphics[width=10cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e4-0.png}
 \includegraphics[width=10cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e5-0.png}
 \includegraphics[width=10cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-5e6-0.png}
-\caption{\textbf{Besag's L-function under complete spatial randomness}. Point pattern simulations for complete spatial randomness ($\sigma=0$) for various intensities of the point process}
+\caption{\textbf{Besag's L-function under complete spatial randomness}. Point pattern simulations for complete spatial randomness ($\sigma=0$) for various intensities of the point process. Simulation envelopes are shown in pink, which represent the significance band of the estimated $L(r)-r$}
 \end{figure}
 
 \begin{figure}
@@ -56,15 +67,9 @@ Here I will discuss what is known about the structure of chromatin nanodomains a
 \includegraphics[width=10cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-1e4-50.png}
 \includegraphics[width=10cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-1e5-50.png}
 \includegraphics[width=10cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-5e6-50.png}
-\caption{\textbf{Besag's L-function for a Thomas process}. Point pattern simulations for the Thomas process ($\sigma=50\mathrm{nm}$) for various intensities of the point process}
+\caption{\textbf{Besag's L-function for a Thomas process}. Point pattern simulations for the Thomas process ($\sigma=50\mathrm{nm}$) for various intensities of the point process. Simulation envelopes are shown in pink, which represent the significance band of the estimated $L(r)-r$}
 \end{figure}
 \clearpage
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=13cm]{media/Lifetime.png}
-\caption{\textbf{Photoswitching of JF646 bound to H2B-HaloTag}. (a) Peak intensity fluctuations of a putatively isolated JF646 molecule exicted at 640nm and imaged with 10ms exposure time in the presence of 100mM MEA buffer. Fit of a Poisson HMM is shown in cyan (b) ON and OFF state lifetime distributions found by pooling data from 16 JF646 spots in a single HeLa cell nucleus. Single component exponential fits shown as solid lines.}
-\end{figure}
 
 
 \section{Polymer models and chromatin dynamics}
@@ -110,6 +115,11 @@ A diverse set of particle tracking algorithms utilize probabilistic models of pa
 \caption{\textbf{Snapshots of the Rouse polymer}. Four perspectives of the Rouse polymer generated with $N=2000$ beads connected with harmonic bonds with equilibrium length $200\mathrm{nm}$. Polymer is initialized with all harmonic bonds at equilibrium}
 \end{figure}
 
+
+It is well-known that the DNA double helix structure consists of millions of base pairs chained together by the sugar-phosphate backbone. DNA, being a molecule built from many similar monomers bonded together, is naturally analyzed using a polymer model. The simplest polymer model for chromatin is the Rouse polymer model, which discretizes it into monomers connected by springs, resembling the string-of-beads structure observed under the electron microscope. Various forces acting on chromatin result in constrained dynamics, leading to significant variability in the anomalous exponent $\alpha$ for the dynamics of a chromatin locus.
+
+To refine the modeling of chromatin properties according to the exponent $\alpha$, the $\beta$-polymer model was introduced. This model accounts for mid-range and long-range interactions between monomers, not just those between the nearest neighbors as in the Rouse polymer model. In this model, $\alpha$ shows a decay curve with distance along the chain. While $\alpha = 0.5$ in the traditional Rouse polymer model, the $\beta$-polymer model can be selected to address cases where $\alpha$ is in the range of 0 to 0.5 \parencite{Amitai2013,Amitai2017,Hajjoul2013}. Thus, local interactions between monomers can be inferred from the anomalous diffusion exponent using this construction.
+
 \begin{table}[h!]
 \centering
 \begin{tabular}{|c|c|}
@@ -128,17 +138,13 @@ Number of Atoms & 2000 \\ \hline
 \caption{\textbf{Rouse polymer parameters}}
 \end{table}
 
-It is well-known that the DNA double helix structure consists of millions of base pairs chained together by the sugar-phosphate backbone. DNA, being a molecule built from many similar monomers bonded together, is naturally analyzed using a polymer model. The simplest polymer model for chromatin is the Rouse polymer model, which discretizes it into monomers connected by springs, resembling the string-of-beads structure observed under the electron microscope. Various forces acting on chromatin result in constrained dynamics, leading to significant variability in the anomalous exponent $\alpha$ for the dynamics of a chromatin locus.
-
-To refine the modeling of chromatin properties according to the exponent $\alpha$, the $\beta$-polymer model was introduced. This model accounts for mid-range and long-range interactions between monomers, not just those between the nearest neighbors as in the Rouse polymer model. In this model, $\alpha$ shows a decay curve with distance along the chain. While $\alpha = 0.5$ in the traditional Rouse polymer model, the $\beta$-polymer model can be selected to address cases where $\alpha$ is in the range of 0 to 0.5 \parencite{Amitai2013,Amitai2017,Hajjoul2013}. Thus, local interactions between monomers can be inferred from the anomalous diffusion exponent using this construction.
-
 \begin{figure}[t]
 \centering
 \includegraphics[width=13cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse-Dynamics-1.png}
 \caption{\textbf{Subdiffusive dynamics of a Rouse polymer}.  Mean squared displacement (MSD) of 2k beads shown in black, average MSD shown in red.}
 \end{figure}
 
-\begin{figure}[t]
+\begin{figure}[th]
 \centering
 \includegraphics[width=\textwidth]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse-Dynamics-2.png}
 \caption{\textbf{Subdiffusive dynamics of the Rouse polymer}. (left) Histogram of the diffusion coefficient of individual beads. (right) Histogram of the anamalous exponent. Fitting of individual bead MSDs performed by linear regression in log-space using the first 5000 time points}
@@ -146,6 +152,7 @@ To refine the modeling of chromatin properties according to the exponent $\alpha
 
 Furthermore, as the polymer model usually folds at different spatial scales and generates various sizes of loops, a simulation model adding connectors between randomly chosen non-nearest neighbor monomer pairs, known as the randomly cross-linked (RCL) polymer model, was presented. In this model, $\alpha$ is reduced to below 0.5 by adding connectors. Recent evidence suggests that the number and distribution of connectors impact physical parameters in various ways, but this domain remains underexplored. Notably, the RCL polymer model may be crucial for studying dynamics in processes such as CTCF and cohesion regulating chromatin loop stability \parencite{Hansen2017}. Additionally, sub-diffusion with an exponent $\alpha > 0.5$ can occur in some polymer models, potentially involving different types of forces such as deterministic forces, directed motion, or other monomer interactions (self-avoiding and bending interactions).
 
+\clearpage
 \section{BRD4 regulates the structure of chromatin nanodomains}
 
 The cell nucleus is a densely packed environment with chromatin comprising a dominant component. The compartmentalization of chromatin with other intranuclear components by phase separation is therefore an efficient strategy to ensure precise spatial and temporal coordination of complex dynamics. A growing number of phase separated nuclear bodies have been identified, including transcriptional condensates \parencite{Sabari2018,Hnisz2017}, nuclear speckles \parencite{Brown2008}, and DNA damage repair foci \parencite{Wang2023}; however, the interplay of phase separated condensates with the underlying chromatin structure remains poorly understood. Transcriptional condensates have been identified as an ideal model to study the kinetic and thermodynamic contributions of chromatin substrate binding, as the ability of transcriptional activators to both condense and bind chromatin is well established \parencite{Sabari2018,Wagh2021,Plys2018,Strom2024,Ma2021}. Here, we extend this effort by investigating the regulation of chromatin structure by phase separated transcriptional condensates. We focus on the BRD4 protein - a well-studied transcriptional activator that localizes to acetylated chromatin sites \parencite{Wu2018}, recruits pTEF-b, and initiates transcription of key genes involved in signal response, immunity, and oncogenesis \parencite{Itzen2014}.
@@ -244,14 +251,6 @@ Hela cells were cultured in DMEM supplemented with 10 percent fetal bovine serum
 
 After transient transfection, H2B-Halotag Hela cells were incubated with 3pM JF646 HaloTag ligand overnight. Cells were imaged in a dSTORM photoswitching buffer containing 100mM MEA, 50 ug/ml Glucose Oxidase, and 3.4 mg/ml Catalase (Sigma). Buffer pH was adjusted to ~8 using HCl. Movies were collected using a custom Olympus IX83 microscope body equipped with an Olympus 60X 1.25NA oil-immersion objective. During imaging cells were maintained at 37C and 5 percent CO2 in a stage top incubator (Tokai Hit). Images were projected onto an ORCA-Fusion sCMOS camera (Hamamatsu) and 2000 frames were captured at 100fps. The microscope was controlled using Micromanager software. HaloTag-JF646 molecules were imaged using oblique illumination with a 640nm laser (Excelitas) held at 20mW, as measured at the back focal plane of the objective. Super resolution reconstructions were obtained using the ThunderSTORM ImageJ plugin. Background signal was subtracted using a rolling ball filter with radius of 10 pixels. Spots were fit using an integrated Gaussian point spread function model with maximum likelihood estimation \parencite{Smith2010,Huang2013}. Experimental conditions for single molecule tracking are nearly identical. However, H2B-Halotag Hela cells were incubated with 3pM JF646 HaloTag ligand. HaloTag-JF646 molecules were illuminated at 10mW, 100 frames were captured at 10fps. 
 
-\begin{equation*}
-K(r) =\frac{a}{n(n-1)}\sum_{ij}{I(d_{ij}\ \le r)}\;\;\; L(r)\ \sqrt{\frac{K(r)}{\pi}}
-\end{equation*}
-
-Precise x,y positions of the fluorophores are obtained, Besag’s L-function L(r) is used to analyze the clustering. The L-function is the following transformation of Ripley’s K-function K(r) 
-
-
-where $a$ is the area of the window, $r$ is the distance between, $n$ is the number of data points and the sum is taken over all pairs of fit coordinates as shown in equation XXX. The indicator function is given by $I(d_{ij}\le r)$ and equals 1 if the distance is less than or equal to $r$. To measure degree of clustering, we use $L(r)-r$, which measures the deviation of a point pattern from complete spatial randomness (CSR). 
 
 \subsection{Colocalization of BRD4 mutants with nucleosome nanodomains}
 
