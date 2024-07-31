@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  30 JUL 2024 21:41
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  31 JUL 2024 00:45
  restricted system commands enabled.
 **dissertation.tex
 (./dissertation.tex
@@ -2184,8 +2184,25 @@ h' as default language. on input line 522.
 \@quotelevel=\count673
 \@quotereset=\count674
 
-(./dissertation.aux (./ch-front.aux) (./ch1.aux) (./ch3.aux) (./ch2.aux)
-(./ch4.aux) (./ap-vita.aux))
+(./dissertation.aux (./ch-front.aux) (./ch1.aux
+
+LaTeX Warning: Label `fig:fig2' multiply defined.
+
+
+LaTeX Warning: Label `fig:fig2' multiply defined.
+
+
+LaTeX Warning: Label `fig:fig3' multiply defined.
+
+) (./ch3.aux
+
+LaTeX Warning: Label `fig:fig5' multiply defined.
+
+) (./ch2.aux
+
+LaTeX Warning: Label `fig:fig10' multiply defined.
+
+) (./ch4.aux) (./ap-vita.aux))
 \openout1 = dissertation.aux
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 522.
@@ -2336,7 +2353,7 @@ Package biblatex Info: Reference segment=0 on input line 522.
 Package chemgreek Info: Activating mapping `default' on line 522.
 
 \Etoc@tf=\read6
-<graphics//gr-pu-seal-vector.pdf, id=286, 527.62581pt x 516.24864pt>
+<graphics//gr-pu-seal-vector.pdf, id=290, 527.62581pt x 516.24864pt>
 File: graphics//gr-pu-seal-vector.pdf Graphic file (type pdf)
 <use graphics//gr-pu-seal-vector.pdf>
 Package luatex.def Info: graphics//gr-pu-seal-vector.pdf  used on input line 52
@@ -2456,7 +2473,7 @@ Chapter 1.
 
 
 ]
-<media/Intro.png, id=606, 653.44125pt x 360.59718pt>
+<media/Intro.png, id=613, 653.44125pt x 360.59718pt>
 File: media/Intro.png Graphic file (type png)
 <use media/Intro.png>
 Package luatex.def Info: media/Intro.png  used on input line 18.
@@ -2464,21 +2481,21 @@ Package luatex.def Info: media/Intro.png  used on input line 18.
  [16<./media/Intro.png>] [17
 Missing character: There is no – (U+2013) in font ec-lmr12!
 ]
-Overfull \hbox (1.46458pt too wide) in paragraph at lines 37--38
+Overfull \hbox (1.46458pt too wide) in paragraph at lines 38--39
 []\T1/lmr/m/n/12 It is com-mon to de-scribe the op-ti-cal im-pulse re-sponse of a mi-cro-scope as a two-dimensional
  []
 
 [18]
-<media/Noise.png, id=650, 674.2791pt x 286.9119pt>
+<media/Noise.png, id=657, 674.2791pt x 286.9119pt>
 File: media/Noise.png Graphic file (type png)
 <use media/Noise.png>
-Package luatex.def Info: media/Noise.png  used on input line 60.
+Package luatex.def Info: media/Noise.png  used on input line 61.
 (luatex.def)             Requested size: 455.24408pt x 193.71407pt.
  [19] [20<./media/Noise.png>]
-<media/FRC.png, id=674, 578.16pt x 289.08pt>
+<media/FRC.png, id=681, 578.16pt x 289.08pt>
 File: media/FRC.png Graphic file (type png)
 <use media/FRC.png>
-Package luatex.def Info: media/FRC.png  used on input line 106.
+Package luatex.def Info: media/FRC.png  used on input line 108.
 (luatex.def)             Requested size: 398.33858pt x 199.16986pt.
  [21<./media/FRC.png>] [22]) [23]
 \openout2 = ch3.aux
@@ -2493,7 +2510,7 @@ Chapter 2.
 
 ] [25]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPADvCMOS.png, i
-d=716, 967.615pt x 473.77pt>
+d=723, 967.615pt x 473.77pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPADvCMOS.p
 ng Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPADvCMOS.pn
@@ -2503,75 +2520,75 @@ d/media/SPADvCMOS.png  used on input line 51.
 (luatex.def)             Requested size: 398.33858pt x 195.03493pt.
  [26]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPAD512.png, id=
-732, 676.5275pt x 513.92pt>
+739, 676.5275pt x 513.92pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPAD512.png
  Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPAD512.png>
 
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spa
-d/media/SPAD512.png  used on input line 59.
+d/media/SPAD512.png  used on input line 60.
 (luatex.def)             Requested size: 398.33858pt x 302.60634pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.png, id
-=733, 673.01437pt x 524.71031pt>
+=741, 673.01437pt x 524.71031pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.png
 >
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spa
-d/media/Figure-0.png  used on input line 70.
+d/media/Figure-0.png  used on input line 72.
 (luatex.def)             Requested size: 398.33858pt x 310.56117pt.
  [27</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPADvCMOS.png
 >] [28</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPAD512.png
 >] [29</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.pn
 g>]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png, id
-=762, 867.24pt x 424.58624pt>
+=767, 867.24pt x 424.58624pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png
 >
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spa
-d/media/Figure-5.png  used on input line 90.
+d/media/Figure-5.png  used on input line 93.
 (luatex.def)             Requested size: 341.43306pt x 167.16228pt.
  [30</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png>
 ] [31]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-4.png, id
-=781, 608.77437pt x 285.065pt>
+=785, 608.77437pt x 285.065pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-4.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-4.png
 >
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spa
-d/media/Figure-4.png  used on input line 129.
+d/media/Figure-4.png  used on input line 132.
 (luatex.def)             Requested size: 341.43306pt x 159.88324pt.
  [32</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-4.png>
 ]
-</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/g20g2m.png, id=7
-95, 433.62pt x 216.81pt>
+</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/g20g2m.png, id=8
+02, 433.62pt x 216.81pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/g20g2m.png 
 Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/g20g2m.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spa
-d/media/g20g2m.png  used on input line 150.
+d/media/g20g2m.png  used on input line 154.
 (luatex.def)             Requested size: 341.43306pt x 170.72554pt.
  [33]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/PoissonBinomialP
-ost-1.png, id=804, 505.89pt x 505.89pt>
+ost-1.png, id=814, 505.89pt x 505.89pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/PoissonBino
 mialPost-1.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/PoissonBinom
 ialPost-1.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spa
-d/media/PoissonBinomialPost-1.png  used on input line 173.
+d/media/PoissonBinomialPost-1.png  used on input line 178.
 (luatex.def)             Requested size: 398.33858pt x 398.34415pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/PoissonBinomialP
-ost-2.png, id=805, 505.89pt x 505.89pt>
+ost-2.png, id=815, 505.89pt x 505.89pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/PoissonBino
 mialPost-2.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/PoissonBinom
 ialPost-2.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spa
-d/media/PoissonBinomialPost-2.png  used on input line 179.
+d/media/PoissonBinomialPost-2.png  used on input line 185.
 (luatex.def)             Requested size: 398.33858pt x 398.34415pt.
  [34</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/g20g2m.png>]
 ) [35] [36</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Poisson
@@ -2609,13 +2626,13 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 110.
 [44]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Diffusion.png, i
-d=928, 932.48375pt x 182.6825pt>
+d=931, 932.48375pt x 182.6825pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Diffusion.p
 ng Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Diffusion.pn
 g>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddp
-m/media/Diffusion.png  used on input line 138.
+m/media/Diffusion.png  used on input line 137.
 (luatex.def)             Requested size: 466.24074pt x 91.34102pt.
  [45
 Missing character: There is no ; (U+003B) in font nullfont!
@@ -2635,7 +2652,7 @@ Missing character: There is no ; (U+003B) in font nullfont!
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Diffusion.png>]
 [46]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.png, id=96
-3, 361.35pt x 361.35pt>
+6, 361.35pt x 361.35pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.png G
 raphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.png>
@@ -2643,46 +2660,43 @@ Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddp
 m/media/Bayes.png  used on input line 185.
 (luatex.def)             Requested size: 397.48624pt x 397.48624pt.
  [47] [48</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.pn
-g>] [49]
+g>] [49] [50] [51]
+</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png, id=1
+011, 432.11438pt x 226.59656pt>
+File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png 
+Graphic file (type png)
+<use /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png>
+Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddp
+m/media/Errors.png  used on input line 263.
+(luatex.def)             Requested size: 302.478pt x 158.6165pt.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 269.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 269.
+
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/media/
-DeepSTORM.png, id=989, 819.06pt x 538.26094pt>
+DeepSTORM.png, id=1012, 819.06pt x 538.26094pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/m
 edia/DeepSTORM.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/me
 dia/DeepSTORM.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/disserta
-tion/dissertation/media/DeepSTORM.png  used on input line 209.
+tion/dissertation/media/DeepSTORM.png  used on input line 273.
 (luatex.def)             Requested size: 327.6182pt x 215.30055pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/media/
-DiffusionArch.png, id=990, 822.07124pt x 420.57124pt>
+DiffusionArch.png, id=1013, 822.07124pt x 420.57124pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/m
 edia/DiffusionArch.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/me
 dia/DiffusionArch.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/disserta
-tion/dissertation/media/DiffusionArch.png  used on input line 216.
+tion/dissertation/media/DiffusionArch.png  used on input line 281.
 (luatex.def)             Requested size: 328.82266pt x 168.22551pt.
- [50] [51</Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertatio
-n/media/DeepSTORM.png>] [52</Users/cwseitz/git/cwseitz.github.io/docs/phd/disser
-tation/dissertation/media/DiffusionArch.png>]
-</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png, id=1
-023, 432.11438pt x 226.59656pt>
-File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png 
-Graphic file (type png)
-<use /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png>
-Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddp
-m/media/Errors.png  used on input line 275.
-(luatex.def)             Requested size: 302.478pt x 158.6165pt.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 280.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 280.
-
-[53</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png>]) [54]
+[52</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png>]) [53</Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/media/DeepSTORM.png>] [54</Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/media/DiffusionArch.png>]
 \openout2 = ch4.aux
  (./ch4.tex
 File: ch4.tex Chapter4
@@ -2700,64 +2714,64 @@ Missing character: There is no – (U+2013) in font ec-lmr12!
 LaTeX Warning: Citation 'Sopoznik2020' on page 58 undefined on input line 34.
 
 [58] [59]
-<media/Lifetime.png, id=1201, 755.82375pt x 339.2675pt>
+<media/Lifetime.png, id=1198, 755.82375pt x 339.2675pt>
 File: media/Lifetime.png Graphic file (type png)
 <use media/Lifetime.png>
 Package luatex.def Info: media/Lifetime.png  used on input line 51.
 (luatex.def)             Requested size: 369.88582pt x 166.03027pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e4-0.pn
-g, id=1202, 542.025pt x 347.2975pt>
+g, id=1199, 542.025pt x 347.2975pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e4
 -0.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e4-
 0.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
-4/media/ppp/csr-1e4-0.png  used on input line 59.
+4/media/ppp/csr-1e4-0.png  used on input line 60.
 (luatex.def)             Requested size: 284.52756pt x 182.31271pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e5-0.pn
-g, id=1203, 541.52313pt x 348.30125pt>
+g, id=1200, 541.52313pt x 348.30125pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e5
 -0.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e5-
 0.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
-4/media/ppp/csr-1e5-0.png  used on input line 60.
+4/media/ppp/csr-1e5-0.png  used on input line 61.
 (luatex.def)             Requested size: 284.52756pt x 183.0097pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-5e6-0.pn
-g, id=1204, 537.00626pt x 347.79938pt>
+g, id=1201, 537.00626pt x 347.79938pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-5e6
 -0.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-5e6-
 0.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
-4/media/ppp/csr-5e6-0.png  used on input line 61.
+4/media/ppp/csr-5e6-0.png  used on input line 62.
 (luatex.def)             Requested size: 284.52756pt x 184.27971pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-1e4-50.p
-ng, id=1205, 536.0025pt x 346.79562pt>
+ng, id=1202, 536.0025pt x 346.79562pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-1e4
 -50.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-1e4-
 50.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
-4/media/ppp/tom-1e4-50.png  used on input line 67.
+4/media/ppp/tom-1e4-50.png  used on input line 69.
 (luatex.def)             Requested size: 284.52756pt x 184.08655pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-1e5-50.p
-ng, id=1206, 541.52313pt x 349.305pt>
+ng, id=1203, 541.52313pt x 349.305pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-1e5
 -50.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-1e5-
 50.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
-4/media/ppp/tom-1e5-50.png  used on input line 68.
+4/media/ppp/tom-1e5-50.png  used on input line 70.
 (luatex.def)             Requested size: 284.52756pt x 183.5371pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-5e6-50.p
-ng, id=1207, 537.00626pt x 348.80313pt>
+ng, id=1204, 537.00626pt x 348.80313pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-5e6
 -50.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-5e6-
 50.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
-4/media/ppp/tom-5e6-50.png  used on input line 69.
+4/media/ppp/tom-5e6-50.png  used on input line 71.
 (luatex.def)             Requested size: 284.52756pt x 184.81155pt.
  [60
 Missing character: There is no ’ (U+2019) in font ec-lmr12!
@@ -2770,40 +2784,40 @@ d/brd4/brd4/media/ppp/tom-1e4-50.png></Users/cwseitz/git/cwseitz.github.io/docs/
 phd/brd4/brd4/media/ppp/tom-1e5-50.png></Users/cwseitz/git/cwseitz.github.io/doc
 s/phd/brd4/brd4/media/ppp/tom-5e6-50.png>]
 
-LaTeX Warning: Citation 'Shukron2017a' on page 63 undefined on input line 97.
+LaTeX Warning: Citation 'Shukron2017a' on page 63 undefined on input line 100.
 
 [63
 
 ] [64]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse.png, id=12
-65, 914.41624pt x 639.38875pt>
+61, 914.41624pt x 639.38875pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse.png G
 raphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
-4/media/Rouse.png  used on input line 114.
+4/media/Rouse.png  used on input line 117.
 (luatex.def)             Requested size: 469.75502pt x 328.46448pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse-Dynamics-1
-.png, id=1269, 505.89pt x 361.35pt>
+.png, id=1268, 505.89pt x 361.35pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse-Dynam
 ics-1.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse-Dynami
 cs-1.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
-4/media/Rouse-Dynamics-1.png  used on input line 143.
+4/media/Rouse-Dynamics-1.png  used on input line 147.
 (luatex.def)             Requested size: 369.88582pt x 264.20787pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse-Dynamics-2
-.png, id=1270, 433.62pt x 216.81pt>
+.png, id=1269, 433.62pt x 216.81pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse-Dynam
 ics-2.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse-Dynami
 cs-2.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
-4/media/Rouse-Dynamics-2.png  used on input line 149.
+4/media/Rouse-Dynamics-2.png  used on input line 154.
 (luatex.def)             Requested size: 469.75502pt x 234.88904pt.
 [65]
 
@@ -2818,13 +2832,13 @@ Overfull \vbox (4.1216pt too high) has occurred while \output is active []
 -1.png>] [68</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse
 -Dynamics-2.png>]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Structure.png, i
-d=1321, 894.34125pt x 494.84875pt>
+d=1316, 894.34125pt x 494.84875pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Structure.p
 ng Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Structure.pn
 g>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
-4/media/Structure.png  used on input line 164.
+4/media/Structure.png  used on input line 170.
 (luatex.def)             Requested size: 398.33858pt x 220.40709pt.
  [69
 
@@ -2832,13 +2846,13 @@ Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
 Missing character: There is no – (U+2013) in font ec-lmr12!
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Structure.png>]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-0.png, id
-=1351, 1704.8493pt x 1145.4795pt>
+=1346, 1704.8493pt x 1145.4795pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-0.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-0.png
 >
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
-4/media/Figure-0.png  used on input line 178.
+4/media/Figure-0.png  used on input line 185.
 (luatex.def)             Requested size: 469.75502pt x 315.61086pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-1.png, id
 =1354, 1583.6766pt x 1085.2545pt>
@@ -2847,7 +2861,7 @@ g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-1.png
 >
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
-4/media/Figure-1.png  used on input line 187.
+4/media/Figure-1.png  used on input line 195.
 (luatex.def)             Requested size: 469.75502pt x 321.90262pt.
 
 [71
@@ -2856,13 +2870,13 @@ Missing character: There is no ∼ (U+223C) in font ec-lmr12!
 Missing character: There is no ’ (U+2019) in font ec-lmr12!
 ]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-2.png, id
-=1367, 1340.6085pt x 968.418pt>
+=1364, 1340.6085pt x 968.418pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-2.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-2.png
 >
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
-4/media/Figure-2.png  used on input line 192.
+4/media/Figure-2.png  used on input line 201.
 (luatex.def)             Requested size: 469.75502pt x 339.33557pt.
  [72</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-0.png>
 ] [73
@@ -2873,13 +2887,13 @@ Missing character: There is no ’ (U+2019) in font ec-lmr12!
 Missing character: There is no ’ (U+2019) in font ec-lmr12!
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-2.png>]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-3.png, id
-=1392, 1800.9684pt x 714.5094pt>
+=1389, 1800.9684pt x 714.5094pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-3.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-3.png
 >
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
-4/media/Figure-3.png  used on input line 213.
+4/media/Figure-3.png  used on input line 223.
 (luatex.def)             Requested size: 469.75502pt x 186.36769pt.
 
 
@@ -3178,11 +3192,11 @@ st-2.png
      ch2.tex    
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Diffusion.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.png
+/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/media/D
 eepSTORM.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/media/D
 iffusionArch.png
-/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png
      ch4.tex    Chapter4
 media/Lifetime.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e4-0.png
@@ -3213,16 +3227,10 @@ png
 LaTeX Warning: There were undefined references.
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
-
-Package rerunfilecheck Warning: File `dissertation.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `dissertation.out':
-(rerunfilecheck)             Before: 2C71995EB8BC07BE1A8DC8C10D379BB0;11964
-(rerunfilecheck)             After:  50AAE9FC857FFE3EAD77FC14F9CB7DE2;12228.
+Package rerunfilecheck Info: File `dissertation.out' has not changed.
+(rerunfilecheck)             Checksum: 4C9F6A0B261C11066E84D2123E5B4744;12228.
 
 Package biblatex Warning: Please (re)run Biber on the file:
 (biblatex)                dissertation
@@ -3234,109 +3242,17 @@ Package logreq Info: Writing requests to 'dissertation.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 78873 strings out of 478285
+ 78857 strings out of 478285
  125218,3417909 words of node,token memory allocated
  1763 words of node memory still in use:
    24 hlist, 2 vlist, 10 rule, 2 glue, 4 kern, 3 sub_mlist, 1 glyph, 150 attribu
 te, 94 glue_spec, 150 attribute_list, 7 write, 16 pdf_literal, 2 pdf_dest, 17 pd
 f_action, 16 pdf_colorstack nodes
-   avail lists: 1:9,2:1896,3:1019,4:266,5:496,6:270,7:8204,8:79,9:1573,10:29,11:
-654
- 95889 multiletter control sequences out of 65536+600000
- 91 fonts using 6219071 bytes
+   avail lists: 1:9,2:1896,3:1019,4:266,5:496,6:270,7:8204,8:79,9:1573,10:27,11:
+656
+ 95919 multiletter control sequences out of 65536+600000
+ 91 fonts using 6241471 bytes
  109i,13n,103p,2309b,3430s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-warning  (pdf backend): unreferenced destination with name 'figure.caption.102'
-
-warning  (pdf backend): unreferenced destination with name 'figure.caption.99'
-
-warning  (pdf backend): unreferenced destination with name 'figure.caption.97'
-
-warning  (pdf backend): unreferenced destination with name 'figure.caption.94'
-
-warning  (pdf backend): unreferenced destination with name 'figure.caption.91'
-
-warning  (pdf backend): unreferenced destination with name 'figure.caption.89'
-
-warning  (pdf backend): unreferenced destination with name 'figure.caption.80'
-
-warning  (pdf backend): unreferenced destination with name 'figure.caption.72'
-
-warning  (pdf backend): unreferenced destination with name 'figure.caption.67'
-
-warning  (pdf backend): unreferenced destination with name 'figure.caption.63'
-
-warning  (pdf backend): unreferenced destination with name 'figure.caption.55'
-
-warning  (pdf backend): unreferenced destination with name 'figure.caption.42'
-
-warning  (pdf backend): unreferenced destination with name 'figure.caption.39'
-
-warning  (pdf backend): unreferenced destination with name 'figure.caption.36'
-
-warning  (pdf backend): unreferenced destination with name 'figure.caption.31'
-
-warning  (pdf backend): unreferenced destination with name 'figure.caption.28'
-
-warning  (pdf backend): unreferenced destination with name 'figure.caption.25'
-
-warning  (pdf backend): unreferenced destination with name 'table.caption.103'
-
-warning  (pdf backend): unreferenced destination with name 'table.caption.90'
-
-warning  (pdf backend): unreferenced destination with name 'chapter*.112'
-
-warning  (pdf backend): unreferenced destination with name 'subsection.106'
-
-warning  (pdf backend): unreferenced destination with name 'section.104'
-
-warning  (pdf backend): unreferenced destination with name 'subsection.101'
-
-warning  (pdf backend): unreferenced destination with name 'subsection.98'
-
-warning  (pdf backend): unreferenced destination with name 'subsection.96'
-
-warning  (pdf backend): unreferenced destination with name 'section.95'
-
-warning  (pdf backend): unreferenced destination with name 'section.93'
-
-warning  (pdf backend): unreferenced destination with name 'subsection.87'
-
-warning  (pdf backend): unreferenced destination with name 'section.83'
-
-warning  (pdf backend): unreferenced destination with name 'section.79'
-
-warning  (pdf backend): unreferenced destination with name 'subsection.76'
-
-warning  (pdf backend): unreferenced destination with name 'section.75'
-
-warning  (pdf backend): unreferenced destination with name 'chapter.74'
-
-warning  (pdf backend): unreferenced destination with name 'subsection.73'
-
-warning  (pdf backend): unreferenced destination with name 'subsection.71'
-
-warning  (pdf backend): unreferenced destination with name 'subsection.69'
-
-warning  (pdf backend): unreferenced destination with name 'section.64'
-
-warning  (pdf backend): unreferenced destination with name 'subsection.62'
-
-warning  (pdf backend): unreferenced destination with name 'subsection.53'
-
-warning  (pdf backend): unreferenced destination with name 'section.52'
-
-warning  (pdf backend): unreferenced destination with name 'subsection.47'
-
-warning  (pdf backend): unreferenced destination with name 'section.46'
-
-warning  (pdf backend): unreferenced destination with name 'chapter.45'
-
-warning  (pdf backend): unreferenced destination with name 'section.44'
-
-warning  (pdf backend): unreferenced destination with name 'section.37'
-
-warning  (pdf backend): unreferenced destination with name 'section.27'
 {/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/tex
 live/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2023/t
 exmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2023/texmf-dist/fonts
@@ -3360,10 +3276,10 @@ l/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/20
 t/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2023/texmf-
 dist/fonts/type1/urw/symbol/usyr.pfb></usr/local/texlive/2023/texmf-dist/fonts/t
 ype1/urw/zapfding/uzdr.pfb>
-Output written on dissertation.pdf (92 pages, 37248193 bytes).
+Output written on dissertation.pdf (92 pages, 37251225 bytes).
 
-PDF statistics: 1684 PDF objects out of 1728 (max. 8388607)
- 1388 compressed objects within 14 object streams
- 391 named destinations out of 1000 (max. 131072)
- 700 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 1674 PDF objects out of 1728 (max. 8388607)
+ 1377 compressed objects within 14 object streams
+ 345 named destinations out of 1000 (max. 131072)
+ 708 words of extra memory for PDF output out of 10000 (max. 100000000)
 
