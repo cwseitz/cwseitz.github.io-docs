@@ -9,7 +9,7 @@
 
 Experimental techniques have surfaced which take advantage of the quantum nature of light to enhance imaging methods. The advent of very fast and sensitive detectors allows us to measure electromagnetic fields at a timescale where quantum effects can be seen. We often speak of methods such as photon counting or photon statistics, and it is prudent to briefly define the photon and how it be measured with this technology.
 
-Field quantization generally begins by writing Fourier expansion of solutions to Maxwell's equations and quantizing these \emph{modes} as uncoupled harmonic oscillators. This procedure is out of the scope of this thesis. Instead, I start by stating the major result of quantizing the field at a point in space, which could be a point detector element, for example. We express the time-dependent field as a sum of harmonic oscillators using a Fourier series expansion. Consider an oscillation $E(t)$ that can only exist in one dimension, or a single polarization, making the field effectively a scalar one. This decomposition represents the field in terms of an infinite number of modes indexed by $k$ with frequency $\omega_{k}$ i.e., $E(t) = \sum_{k=1}^\infty c_{k}e^{-i\omega_{n} t}$. In order to quantize the field, each mode is treated as a quantum harmonic oscillator. As such, the Hamiltonian for one particular mode has energy eigenvalues $E_{k} = \hbar\omega_{k}(\hat{n} + \frac{1}{2})$. The operator $\hat{n}=\hat{a}^{\dagger}\hat{a}$ is the number operator such that $\hat{n}\ket{\psi} = n\ket{\psi}$ where $n$ is the number of energy quanta in that particular mode. The value of $n$ represents the number of energy quanta present in the field, each quanta being called a photon. Since there are potentially infinitely many modes, the wavefunction at this point is then $\ket{\psi} = \ket{n_{1},n_{2},...}$ where $n_1$ is the number of photons in the first mode, $n_2$ is the number of photons in the second mode, and so on. The number operator for the $n$-th mode gives $\hat{n}_k\ket{\psi} = n_{k}\ket{\psi}$. 
+Field quantization generally begins by writing a Fourier expansion of solutions to Maxwell's equations and identifying the canonical position and momentum variables. This procedure is out of the scope of this thesis. Instead, I start by stating the major result of quantization, in which each \emph{mode} of the field is quantized as a quantum harmonic oscillator. As such, the Hamiltonian for one particular mode has energy eigenvalues $E_{k} = \hbar\omega_{k}(\hat{n} + \frac{1}{2})$. The operator $\hat{n}=\hat{a}^{\dagger}\hat{a}$ is the number operator such that $\hat{n}\ket{\psi} = n\ket{\psi}$ where $n$ is the number of energy quanta in that particular mode. The value of the eigenvalue $n$ represents the number of energy quanta present in the field, each quanta being called a photon. Since there are potentially infinitely many modes, the wavefunction at this point is then $\ket{\psi} = \ket{n_{1},n_{2},...}$ where $n_1$ is the number of photons in the first mode, $n_2$ is the number of photons in the second mode, and so on. The number operator for the $n$-th mode gives $\hat{n}_k\ket{\psi} = n_{k}\ket{\psi}$. 
 
 We also define $\hat{a}_n$ and $\hat{a}_n^\dagger$ as the respective annihilation and creation operators for the $n$-th mode. These operators satisfy the commutation relations $[\hat{a}_k, \hat{a}_k'^\dagger] = \delta_{kk'}$ and $[\hat{a}_k, \hat{a}_k'] = [\hat{a}_k^\dagger, \hat{a}_k^\dagger] = 0$. The action of the annihilation and creation operators on the joint number states is:
 
@@ -80,20 +80,20 @@ We consider a simplified description of widefield photon counting for a a single
 O(x,y) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(x-x_{0})^2+(y-y_{0})^2}{2\sigma^2}}
 \end{equation}
 
-A similar theoretical exposition to follows to Section 1.2; however, slight modifications are made to the theory to relate it to the quantum theory. Therefore the field operator in object space is $\hat{E} \propto \hat{a}$ and in image space $\hat{E} \propto O(x,y)\hat{a}$. Since our SPAD detectors at the image plane must be discrete, the total field at a detector element $k$ centered in image space at $s_k=(u_k,v_k)$ is then given by integrating over pixels of width $\delta$. Moreover, the Gaussian $O$ is presumed to be isotropic and therefore we have $\hat{E}(s_k) \propto \Gamma_{x}(u_k,x_{0})\Gamma_{y}(v_k,y_0)$. For example,
+A similar theoretical exposition to follows to Section 1.2; however, slight modifications are made to the theory to relate it to the quantum theory. Since our SPAD detectors at the image plane must also be discrete, the total field at a detector element $k$ centered in image space at $s_k=(u_k,v_k)$ is then given by integrating over pixels of width $\delta=1$. Using the definitions of $\Gamma_x,\Gamma_y$ from Section 1.2, we define
 
 \begin{equation}
-\Gamma_{x}(u_k,x_{0}) = \frac{1}{\sqrt{2}}\left(\mathrm{erf}\left(\frac{u_k+\frac{1}{2}-x_{0}}{\sqrt{2}\sigma}\right) -\mathrm{erf}\left(\frac{u_k-\frac{1}{2}-x_0}{\sqrt{2}\sigma}\right)\right)
+\zeta_{k}\vcentcolon = \langle n_{k} \rangle = \Gamma_{x}(u_k,x_{0})\Gamma_{y}(v_k,y_0)\zeta
 \end{equation}
 
-We now consider the case of pulsed excitation where the interval between pulses much longer than the fluorescence lifetime. Upon excitation of an isolated fluorescent emitter, a photon is detected at a particular detector element $k$ with probability $\zeta_k \propto \langle \hat{E}^{\dagger}(s_k)\hat{E}(s_k)\rangle = \frac{1}{2}\Gamma_{x}^2 \Gamma_{y}^2\mathrm{Tr}(\rho a^{\dagger}a)$ where $\rho$ is the density matrix for a two-level system. Similarly, the probability of detection in a region of interest collecting all photons emitted is $\zeta\propto \mathrm{Tr}(\rho a^{\dagger}a)$. Here, we are primarily concerned with the latter quantity, and its application in counting fluorescent emitters.
+where $\langle n_{k} \rangle$ is the expected number of photons detected at pixel $k$. We now consider the case of pulsed excitation where the interval between pulses much longer than the fluorescence lifetime. Upon excitation of an isolated fluorescent emitter, a photon is detected at a particular detector element $k$ with probability $\zeta_{k}$. Similarly, the probability of detection in a region of interest collecting all photons emitted is $\zeta$. Here, we are primarily concerned with the latter quantity, and its application in counting fluorescent emitters.
 
-\begin{figure*}[t]
+\begin{figure}[t]
 \centering
-\includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png}
-\caption{\textbf{Single and multi-emitter localization error on sums of photon counts}. (left) Localization uncertainty for simulated data for different values of $N$, plotted with respect to the Cramer-Rao lower bound, shown in dashed gray. (right) Multi-emitter localization by MCMC sampling for $N=3$, colors indicate a cluster of samples i.e., a single localization. All data was generated with a background rate $\langle n_{\mathrm{background}} \rangle = \lambda N_{\mathrm{frames}}/d^{2}$ per pixel. Scalebar 360nm}
-\label{fig:fig6}
-\end{figure*}   
+\includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-4.png}
+\caption{\textbf{Posteriors on the number of fluorescent emitters $N$ and localization for $N^{*}=1$} (left) and $N^{*}=2$ (right) quantum dots. Scalebars 360nm}
+\label{fig:fig7}
+\end{figure}   
 
 By temporarily ignoring the spatial profile described by (1), we derive a likelihood on the number of fluorophores in a small ROI with a lateral dimension $d = 5$ pixels. For $N$ fluorophores emitting photons which can be detected within a ROI of the SPAD array, the number of signal photons measured $n_{\mathrm{signal}}$ following a single excitation pulse will have Binomial statistics $n_{\mathrm{signal}} \sim \mathrm{Binom}(N,\zeta)$. Photon pile-up at a single detector element can be safely neglected in this model due to its relatively low likelihood. We then model the background signal within the region of interest as a coherent state, which must follow Poissonian statistics $n_{\mathrm{background}} \sim \mathrm{Poisson}(\lambda)$ for an expected number $\lambda$ of background counts in the ROI per frame. The total number of counts $n=n_{\mathrm{signal}}+n_{\mathrm{background}}$ detected in the region of interest following a single pulse is then distributed by the likelihood
 
@@ -109,7 +109,7 @@ In order to begin to perform localization in non-sparse ROIs, we write a posteri
 p(N,\zeta\lvert x) \propto p(x\lvert N,\zeta)p(\zeta)
 \end{equation}
 
-We use a Gaussian prior on $\zeta$ i.e., $p(\zeta) = \mathcal{N}(\mu_{\zeta},\sigma_{\zeta})$ with $\mu_{\zeta}=0.01$ and $\sigma_{\zeta}=0.005$. Prior uncertainty in the value of $\zeta$ stems from fluorophores with potentially heterogeneous photophysical properties as well as varying laser power throughout the excited region. This posterior can be integrated over $\zeta$ to produce a posterior distribution on the fluorophore number $N$ i.e., $p(N=N'\lvert n) \propto \int_{0}^{1} \prod_{j} p(n_{j}\lvert N',\zeta)p(\zeta) d\zeta$ which can be estimated using Monte Carlo methods. Monte Carlo integration is employed to integrate out $\zeta$. This involves sampling many $\zeta$ values from the Gaussian prior. For each sampled $\zeta$, the likelihood $(P(x\lvert\zeta_i)$ is computed, which, in this case, involves calculating the convolution of binomial and Poisson probability mass functions. These likelihood values are then weighted by the prior probabilities $P(\zeta)$. The final result is obtained by averaging these weighted likelihoods over all sampled $\zeta$, which approximates the integral:
+We use a Gaussian prior on $\zeta$ i.e., $p(\zeta) = \mathcal{N}(\mu_{\zeta},\sigma_{\zeta})$ with $\mu_{\zeta}=0.01$ and $\sigma_{\zeta}=0.005$. Prior uncertainty in the value of $\zeta$ stems from fluorophores with potentially heterogeneous photophysical properties as well as varying laser power throughout the excited region. This posterior can be integrated over $\zeta$ to produce a posterior distribution on the fluorophore number $N$ i.e., $p(N=N'\lvert n) \propto \int_{0}^{1} \prod_{j} p(n_{j}\lvert N',\zeta)p(\zeta) d\zeta$ which can be estimated using Monte Carlo methods. Monte Carlo integration is employed to integrate out $\zeta$. This involves sampling many $\zeta$ values from the Gaussian prior. For each sampled $\zeta$, the likelihood $P(x\lvert\zeta_i)$ is computed, which, in this case, involves calculating the convolution of binomial and Poisson probability mass functions. These likelihood values are then weighted by the prior probabilities $P(\zeta)$. The final result is obtained by averaging these weighted likelihoods over all sampled $\zeta$, which approximates the integral:
 
 \begin{equation*}
 \int P(x\lvert\zeta) P(\zeta) \, d\zeta \approx \frac{1}{M} \sum_{i=1}^N P(x\lvert\zeta_i) P(\zeta_i)
@@ -127,14 +127,14 @@ For localization, we notice that (2) is well approximated by a Poisson distribut
 &= \sum_{k}  \log n_k! + \mu_{k} - n_k\log\left(\mu_{k}\right)
 \end{align}
 
-\begin{figure}[t]
+\begin{figure*}[t]
 \centering
-\includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-4.png}
-\caption{\textbf{Posteriors on the number of fluorescent emitters $N$ and localization for $N^{*}=1$} (left) and $N^{*}=2$ (right) quantum dots. Scalebars 360nm}
-\label{fig:fig7}
-\end{figure}   
+\includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png}
+\caption{\textbf{Single and multi-emitter localization error on sums of photon counts}. (left) Localization uncertainty for simulated data for different values of $N$, plotted with respect to the Cramer-Rao lower bound, shown in dashed gray. (right) Multi-emitter localization by MCMC sampling for $N=3$, colors indicate a cluster of samples i.e., a single localization. All data was generated with a background rate $\langle n_{\mathrm{background}} \rangle = \lambda N_{\mathrm{frames}}/d^{2}$ per pixel. Scalebar 360nm}
+\label{fig:fig6}
+\end{figure*}   
 
-where, in the multi-emitter regime the expected photon count at a pixel is $\mu_{k} = \langle n_k\rangle =\sum_{m=1}^{N^{*}} \mu_{k,m}$ given $\mu_{k,m}=\zeta N_{\mathrm{frames}}\Gamma_{x}(u_k,x_{0,m})\Gamma_{y}(v_k,y_{0,m}) + \lambda N_{\mathrm{frames}}/d^{2}$. In the multi-emitter regime, optimization of (4) by sampling is a suitable choice (see Results). 
+where, in the multi-emitter regime the expected photon count at a pixel is $\mu_{k} = \sum_{m=1}^{N^{*}} \mu_{k,m}$ given $\mu_{k,m}=\zeta N_{\mathrm{frames}}\Gamma_{x}(u_k,x_{0,m})\Gamma_{y}(v_k,y_{0,m}) + \lambda N_{\mathrm{frames}}/d^{2}$. In the multi-emitter regime, optimization of (4) by sampling is a suitable choice (see Results). 
 
 
 \section{Results}
