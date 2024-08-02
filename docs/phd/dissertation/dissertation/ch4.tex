@@ -179,7 +179,7 @@ Recent studies have demonstrated that BRD4 is present in discrete nuclear bodies
 
 \subsubsection{Colocalization of BRD4 mutants with nucleosome nanodomains}
 
-To address the role of BRD4 binding and phase separation on chromatin structure, we express FLAG-tagged BRD4 mutants with NPS or bromodomain mutations in HeLa cells and measure their effects on chromatin organization. In particular, we express a constitutively phosphorylated (7D mutant), constitutively unphosphorylated (7A mutant), and bromodomain-deactivated (BD mutant) protein (Figure \ref{fig:fig23} a,b,c). Colocalization analysis of FLAG-tagged 7A/7D BRD4 mutants with NNs using nearest neighbor distance distribution function G(r) showed an obvious colocalization of these mutants with NNs with respect to complete spatial randomness (Figure \ref{fig:fig23} d). 
+To address the role of BRD4 binding and phase separation on chromatin structure, we express FLAG-tagged BRD4 mutants with NPS or bromodomain mutations in HeLa cells and measure their effects on chromatin organization. In particular, we express a constitutively phosphorylated (7D mutant), constitutively unphosphorylated (7A mutant), and bromodomain-deactivated (BD mutant) protein (Figure \ref{fig:fig23} a,b,c). Colocalization analysis of BRD4 mutants with NNs using nearest neighbor distance distribution showed an obvious colocalization of these mutants with NNs. The 7D mutant showed the closest proximity to NNs relative to wild type, followed by BD and 7A mutants (Figure \ref{fig:fig23} d).  This result is consistent with known dependence of BRD4 chromatin binding on phosphorylation state. 
 
 \begin{figure}[t]
 \includegraphics[width=\textwidth]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-0.png}
@@ -250,7 +250,12 @@ where $\gamma$ is a diagonal friction tensor and $\xi(t)$ is a three-dimensional
 
 \subsection{Discussion}
 
-Our data support the model that phosphorylated and unphosphorylated BRD4 form different molecular associations in the nucleus. BRD4 nuclear localization is only weakly affected by bromodomain inhibition with monovalent BET inhibitors, while exposure to phase separation inhibitors such as 1,6 Hexanediol have a significant effect on BRD4 localization in the nucleus11. Therefore, nascent BRD4 condensates are likely seeded by unphosphorylated BRD4, followed by CK2-mediated phosphorylation, promoting chromatin interactions mediated by phosphorylated form. The stable dimeric interaction and binding of phosphorylated BRD4 to acetylated chromatin would then mediate control of the chromatin architecture by promoting cross-linking of the chromatin fiber and acting a molecular ‘bridge’ between transcriptional condensates with chromatin. Concurrently, reduced diffusivity of single nucleosomes with no overall change in NN compaction (cross-linking) in the unphosphorylated mutant is a natural result of molecular crowding resulting from overexpression of a constitutively phase separating protein, capable of multivalent interactions. 
+Our data support the model that phosphorylated and unphosphorylated BRD4 form different molecular associations in the nucleus. BRD4 nuclear localization is only weakly affected by bromodomain inhibition with monovalent BET inhibitors, while exposure to phase separation inhibitors such as 1,6 Hexanediol have a significant effect on BRD4 localization in the nucleus \parencite{Han2020}. Colocalization activity of 7A/7D mutants relative to wild type measured here is consistent with this model of BRD4 localization to nucleosome nanodomains. Strong colocalization of the BD mutant relative to the wild type suggests a possible link between bromodomain structure with localization of BRD4. 
+
+Concurrently, reduced diffusivity of single nucleosomes with all mutants tested suggests a relationship between elevated colocalization and the degree of confinement of nanodomain diffusion. We further hypothesize effects of BRD4 localization on the viscosity of the nanodomain environment and potentially increased cross-linking of nanodomains. Indeed, we find this to be a natural result of molecular crowding resulting from overexpression of a constitutively phase separating protein, capable of multivalent interactions. Substantial colocalization of the 7D mutant with nanodomains along with increased chromatin compaction points towards a BRD4-mediated cross-linking mechanism of nucleosomes within the nanodomain. This result of increased affinity can also be seen in coarse grained simulations of chromatin interactions with multivalent binders. 
+
+We conclude that nascent BRD4 condensates are likely seeded by promiscuous interactions of BRD4 with cofactors, followed by phosphorylation followed by chromatin interactions mediated by the phosphorylated form. The stable dimeric interaction and binding of phosphorylated BRD4 to acetylated chromatin would then mediate control of the chromatin architecture by promoting cross-linking of the chromatin fiber and acting a molecular ‘bridge’ between transcriptional condensates with chromatin. 
+
 
 \subsection{Materials and Methods}
 
@@ -265,13 +270,7 @@ After transient transfection, H2B-Halotag Hela cells were incubated with 3pM JF6
 
 \subsubsection{Colocalization of BRD4 mutants with nucleosome nanodomains}
 
-We colocalize FLAG-tagged 7A/7D BRD4 mutants with nucleosome nanodomains by simultaneous FLAG immunofluorescence with imaging of sparsely labeled of H2B-JF646. Puncta were detected in both channels using the Laplacian of Gaussian (LoG) detection algorithm to generate a multi-type point pattern. We then computed the nearest neighbor distance distribution function $G(r)$, which is the cumulative distribution function of the distance from a random H2B-JF646 puncta to the nearest BRD4-FLAG puncta. This function was computed for each cell, and then averaged over $N=20$ cells for each mutant to obtain $G(r)$. The averaged value is reported alongside the theoretical $G(r)$ under complete spatial randomness
-
-\begin{equation*}
-G(r)=\ 1-e^{-\lambda\pi r^2}
-\end{equation*}
-
-Where $\lambda$ is the expected number of points per unit area. 
+We colocalize FLAG-tagged BRD4 mutants with nucleosome nanodomains by simultaneous FLAG immunofluorescence with imaging of sparsely labeled of H2B-JF646. Puncta were detected in both channels using the Laplacian of Gaussian (LoG) detection algorithm to generate a multi-type point pattern. We then computed the nearest neighbor distance distribution as the distance from a random H2B-JF646 puncta to the nearest BRD4-FLAG puncta. Nearest distances values were pooled over N=10 cells for each mutant. 
 
 \subsubsection{Single molecule tracking}
 
