@@ -20,6 +20,13 @@ We also define $\hat{a}_k$ and $\hat{a}_k^\dagger$ as the respective annihilatio
 
 \subsection{Photon statistics}
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=16cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Laser-Stats.png}
+\caption{\textbf{Poissonian photon statistics of a Gaussian laser spot}. (left) Fano factor plot of pixel-wise variance in photon counts with respect the average photon counts, for 100us exposures of a Gaussian beam pulsed at 10MHz. Equal mean and variance (Poisson statistics) showed as a dashed red line. (right) Example images taken in sequence with the SPAD array.}
+\label{fig:fig30}
+\end{figure*}    
+
 Using this formalism, we can define any $\ket{\psi}$ that we like in this framework. However, there are certain interesting states which have special properties, such as the coherent state. Coherent states are a special class of states that resemble classical oscillations of the EM field. A coherent state $\ket{\alpha}$ is defined as the eigenstate of the annihilation operator $\hat{a}$:
 
 \begin{equation*}
@@ -45,6 +52,14 @@ In contrast, single photon states e..g, $\ket{1}$ do not necessarily follow Pois
 \section{Quantum enhanced localization microscopy}
 
 Far-field optical microscopy is fundamentally limited by diffraction, with the maximum attainable resolution being limited to approximately half the wavelength of light. Several schemes to beat the diffraction limit have been developed in recent years. Many of these schemes utilize the concept of precise localization of isolated fluorescent emitters which blink over a time series of frames \parencite{Rust2006,Betzig2006}. An inherent problem with such methods is the requirement that fluorescent emitters be isolated, slowing down the acquisition of super-resolved images. To address this, we leverage the fact that many fluorophores are intrinsically single photon sources and exhibit fluorescence antibunching. This property can constrain the number of active fluorescent emitters in a region of interest (ROI) and can potentially enable localization in non-sparse scenes \parencite{Ta2010,Israel2017}. 
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Dark.png}
+\caption{\textbf{Dark noise of the SPAD array}. (left) Average pixel-wise counts for a 100ms exposure of capped sensor (right) Variance of counts for 100ms exposure of capped sensor}
+\label{fig:fig30}
+\end{figure*}    
+
 
 \begin{figure*}[t]
 \centering
