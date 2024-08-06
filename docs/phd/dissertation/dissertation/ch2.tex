@@ -286,15 +286,15 @@ Using a Monte Carlo estimate of $\mathcal{L}_{\psi}$ \parencite{Kingma2023} whic
 
 \begin{figure}[t]
 \centering
-\includegraphics[scale=0.4]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/media/DeepSTORM.png}
-\caption{\textbf{Architecture of the augmenation model $\phi$}. A $20\times 20$ single-channel movie is processed by eight convolutional blocks followed by a 4x upsampling module utilizing linear interpolation and a refinement module with six convolutional blocks.}
+\includegraphics[scale=0.4]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/DeepSTORM.png}
+\caption{\textbf{Architecture of the augmenation model $\phi$}. A $20\times 20$ single-channel image is processed by eight convolutional blocks followed by a 4x upsampling module utilizing linear interpolation and a refinement module with six convolutional blocks. The number of output channels $n$ is set to one, but can be set to values greater than one to obtain axial resolution in three-dimensional localization microscopy}
 \label{fig:fig13}
 \end{figure}
 
 
 \begin{figure}[t]
 \centering
-\includegraphics[scale=0.4]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/media/DiffusionArch.png}
+\includegraphics[scale=1.5]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/DiffusionArch.png}
 \caption{\textbf{Architecture of the denoising diffusion model}. A U-Net style architecture with channel multipliers of [1,2,4,8,16] downsamples and then upsamples the input image $\bold{y}_{t}$ to estimate $\bold{y}_{t-1}$}
 \label{fig:fig14}
 \end{figure}
