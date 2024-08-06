@@ -98,7 +98,7 @@ Kernel density estimates produced by the traditional deep architectures for loca
 
 Sampling from diffusion models can be computationally expensive, given that generation amounts to solving a complex stochastic differential equation, effectively mapping a simple base distribution to the complex data distribution. The solution of such equations requires numerical integration with very small step sizes, resulting in thousands of neural network evaluations \parencite{Saharia2021,Vahdat2021}. For conditional generation tasks in high-risk applications, generation complexity is further exacerbated by the need for the highest level of detail in generated samples. Therefore, we propose that sampling is preceded by an augmentation network $\phi$, which in essence generates an initial estimate to guide the diffusion process. Reasoning for this choice in our application is two-fold:
 
-\textbf{Synthesis Speed}. By training the augmentation network $\phi$ to obtain an approximate estimate of the KDE, we can reduce the number of iterations, since the diffusion model only needs to model the remaining mismatch, resulting in a less complex model from which sampling becomes easier. Speed is critical in SMLM applications, which can produce thousands of images in a single experiment.\\
+\textbf{Synthesis Speed}. By training the augmentation network $\phi$ to obtain an approximate estimate of the KDE, we can reduce the number of iterations, since the diffusion model only needs to model the remaining mismatch, resulting in a less complex model from which sampling becomes easier. Speed is critical in SMLM applications, which can produce thousands of images in a single experiment.
 
 \textbf{Sample Fidelity}. Since diffusion will often be initialized in low-density regions of the data distribution, inaccurate score estimation in these regions will negatively affect the sampling process. Moreover, mixing can be difficult because of the need of traversing low density regions to transition between modes of the distribution \parencite{Song2019}.
 
@@ -114,9 +114,9 @@ Sampling from diffusion models can be computationally expensive, given that gene
         \draw node[draw=none, scale=0.8, right=9pt of z2] (z3) {\rotatebox{0}{$\mathbf{\cdots}$}};
         \node[latent, right=22.5pt of z3] (zt) {$\mathbf{y}_T$};
         \edge[-{Latex[scale=1.0]}]{x}{z1}
-        \node[rectangle, draw=none, fill=white, scale=0.66, right=2.25pt of x, yshift=9pt] (eq1) {$\mu_{1}$};
-        \node[rectangle, draw=none, fill=white, scale=0.66, right=2.25pt of z1, yshift=9pt] (eq2) {$\mu_{2}$};
-        \node[rectangle, draw=none, fill=white, scale=0.66, below=-0.27pt of z3] (eq3) {$\mu_{t}$};
+        \node[rectangle, draw=none, fill=white, scale=0.66, right=2.25pt of x, yshift=9pt] (eq1) {};
+        \node[rectangle, draw=none, fill=white, scale=0.66, right=2.25pt of z1, yshift=9pt] (eq2) {};
+        \node[rectangle, draw=none, fill=white, scale=0.66, below=-0.27pt of z3] (eq3) {};
         
         \edge[-{Latex[scale=1.0]}]{z1}{z2}
         \node[rectangle, draw=none, scale=0.66, above=22.5pt of zt] (nt) {$\mathcal{N}\big(0, \beta_{T}\mathbf{I}\big)$};
@@ -136,22 +136,22 @@ Sampling from diffusion models can be computationally expensive, given that gene
         \node[latent, right=22.5pt of z3_2] (zt_2) {$\mathbf{y}_T$};
 
         \edge[-{Latex[scale=1.0]}]{z1_2}{x2}
-        \node[rectangle, draw=none, fill=white, scale=0.66, right=2.25pt of x2, yshift=9pt] (eq1_2) {$\mu_{1}$};
-        \node[rectangle, draw=none, fill=white, scale=0.66, right=2.25pt of z1_2, yshift=9pt] (eq2_2) {$\mu_{2}$};
-        \node[rectangle, draw=none, fill=white, scale=0.66, below=-0.27pt of z3_2] (eq3_2) {$\mu_{t}$};
+        \node[rectangle, draw=none, fill=white, scale=0.66, right=2.25pt of x2, yshift=9pt] (eq1_2) {};
+        \node[rectangle, draw=none, fill=white, scale=0.66, right=2.25pt of z1_2, yshift=9pt] (eq2_2) {};
+        \node[rectangle, draw=none, fill=white, scale=0.66, below=-0.27pt of z3_2] (eq3_2) {};
 
         \edge[-{Latex[scale=1.0]}]{z2_2}{z1_2}
         \edge[-]{zt_2}{z3_2}
         \edge[-{Latex[scale=1.0]}]{z3_2}{z2_2}
     \end{tikzpicture}
-    \caption{\textbf{Diffusion model with Markovian transitions and reversed arrows}}
+    \caption{\textbf{Diffusion model with Markovian transitions}. The forward process (top) is a Markovian Gaussian diffusion process of $\bold{y}$ with variance schedule $\beta_{t}$. The reverse process (bottom) conditionally generates $\bold{y}$ from noise}
     \label{fig:fig10}
 \end{figure}
 
 
 \begin{figure}[t]
 \includegraphics[scale=0.5]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Diffusion.png}
-\caption{\textbf{Super resolution by variational diffusion}. Example diffusion process of the latent high resolution image $\bold{y}$ conditioned on the low resolution image $\bold{x}$. The terminal $\bold{y}_{0}$ represents a sample from $p(\bold{y}\lvert\bold{x})$.}
+\caption{\textbf{Uncertainty estimation by variational diffusion}. Example diffusion process of the latent high resolution image $\bold{y}$ conditioned on the low resolution image $\bold{x}$. The terminal $\bold{y}_{0}$ represents a sample from $p(\bold{y}\lvert\bold{x})$.}
 \label{fig:fig11}
 \end{figure}
 
