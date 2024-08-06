@@ -1,5 +1,4 @@
 \ProvidesFile{ch3.tex}[Chapter3]
-
 \chapter{Quantum enhanced localization with a single photon avalanche diode array}
 \ix{physics//Physics appendix}
 
@@ -7,11 +6,11 @@
 
 \subsection{A brief introduction to quantum optics}
 
-Experimental techniques have surfaced which take advantage of the quantum nature of light to enhance imaging methods. The advent of very fast and sensitive detectors allows us to measure electromagnetic fields at a timescale where quantum effects can be seen. We often speak of methods such as photon counting or photon statistics, and it is prudent to briefly define the photon and how it be measured with this technology.
+Experimental techniques have surfaced which take advantage of the quantum nature of light to enhance imaging methods. The advent of very fast and sensitive detectors allows us to measure electromagnetic fields at a timescale where quantum effects can be seen. We often speak of methods such as photon counting or photon statistics, and it is prudent to briefly define the photon and how it can be measured with this technology.
 
-Field quantization generally begins by writing a Fourier expansion of solutions to Maxwell's equations and identifying the canonical position and momentum variables. This procedure is out of the scope of this thesis. Instead, I start by stating the major result of quantization, in which each \emph{mode} of the field is quantized as a quantum harmonic oscillator. As such, the Hamiltonian for one particular mode has energy eigenvalues $E_{k} = \hbar\omega_{k}(\hat{n} + \frac{1}{2})$ for mode $k$ with frequency $\omega_{k}$. The operator $\hat{n}=\hat{a}^{\dagger}\hat{a}$ is the number operator such that $\hat{n}\ket{\psi} = n\ket{\psi}$ where $n$ is the number of energy quanta. The value of the eigenvalue $n$ represents the number of energy quanta present in the field, each quanta being called a photon. Since there are potentially infinitely many modes, the wavefunction is $\ket{\psi} = \ket{n_{1},n_{2},...}$ where $n_1$ is the number of photons in the first mode, $n_2$ is the number of photons in the second mode, and so on. The number operator for the $k$-th mode gives $\hat{n}_k\ket{\psi} = n_{k}\ket{\psi}$. 
+Quantization of the electromagnetic field generally begins by writing a Fourier expansion of solutions to Maxwell's equations called \emph{modes} and identifying the canonical position and momentum variables. This procedure is out of the scope of this thesis. Instead, I start by stating the major result of quantization, in which each mode of the field is quantized as a quantum harmonic oscillator. As such, the Hamiltonian for one particular mode has energy eigenvalues $E_{k} = \hbar\omega_{k}(\hat{n} + \frac{1}{2})$ for mode $k$ with frequency $\omega_{k}$. Since there are potentially infinitely many modes, the wavefunction is $\ket{\psi} = \ket{n_{1},n_{2},...}$ where $n_1$ is the number of photons in the first mode, $n_2$ is the number of photons in the second mode, and so on. The number operator for the $k$-th mode gives $\hat{n}_k\ket{\psi} = n_{k}\ket{\psi}$. 
 
-We also define $\hat{a}_k$ and $\hat{a}_k^\dagger$ as the respective annihilation and creation operators for the $k$-th mode. These operators satisfy the commutation relations $[\hat{a}_k, \hat{a}_{k'}^\dagger] = \delta_{kk'}$ and $[\hat{a}_k, \hat{a}_{k'}] = [\hat{a}_k^\dagger, \hat{a}_k^\dagger] = 0$. The action of the annihilation and creation operators on the joint number states is:
+The number operator $\hat{n}_k = \hat{a}_k^\dagger\hat{a}_k$ is defined in terms of operators $\hat{a}_k$ and $\hat{a}_k^\dagger$ which are photon annihilation and creation operators for the $k$-th mode, respectively. These operators satisfy the commutation relations $[\hat{a}_k, \hat{a}_{k'}^\dagger] = \delta_{kk'}$ and $[\hat{a}_k, \hat{a}_{k'}] = [\hat{a}_k^\dagger, \hat{a}_k^\dagger] = 0$. The action of the annihilation and creation operators on the joint number states is:
 
 \begin{equation*}
 \hat{a}_k \ket{n_1, n_2, ...} = n_k \ket{n_1, n_2, ...} \;\;
@@ -24,7 +23,7 @@ We also define $\hat{a}_k$ and $\hat{a}_k^\dagger$ as the respective annihilatio
 \centering
 \includegraphics[width=16cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Laser-Stats.png}
 \caption{\textbf{Poissonian photon statistics of a Gaussian laser spot}. (left) Fano factor plot of pixel-wise variance in photon counts with respect the average photon counts, for 100us exposures of a Gaussian beam pulsed at 10MHz. Equal mean and variance (Poisson statistics) showed as a dashed red line. (right) Example images taken in sequence with the SPAD array.}
-\label{fig:fig30}
+\label{fig:fig29}
 \end{figure*}    
 
 Using this formalism, we can define any $\ket{\psi}$ that we like in this framework. However, there are certain interesting states which have special properties, such as the coherent state. Coherent states are a special class of states that resemble classical oscillations of the EM field. A coherent state $\ket{\alpha}$ is defined as the eigenstate of the annihilation operator $\hat{a}$:
@@ -45,9 +44,24 @@ It turns out that if we measure a number of photons in this state, we would find
 P(m) = \lvert \bra{m} \ket{\alpha} \lvert^2 = \lvert e^{-\frac{\lvert\alpha\lvert^2}{2}} \frac{\alpha^m}{m!} \lvert^2 = e^{-\lvert\alpha\lvert^2} \frac{\lvert\alpha\lvert^{2m}}{m!}
 \end{equation*}
 
-This is simply the Poisson distribution with mean $\langle \hat{n} \rangle = \lvert\alpha\lvert^2$. The variance of the photon number distribution in a coherent state is also $\lvert\alpha\lvert^2$, characteristic of Poisson statistics, where the mean and variance are equal. 
+This is simply the Poisson distribution with mean $\langle \hat{n} \rangle = \lvert\alpha\lvert^2$. The variance of the photon number distribution in a coherent state is also $\lvert\alpha\lvert^2$, characteristic of Poisson statistics, where the mean and variance are equal. Poissonian fluctuations of a Gaussian beam can be spatially resolved using a single photon avalanche diode (SPAD) array (Figure \ref{fig:fig29}).
 
-In contrast, single photon states e..g, $\ket{1}$ do not necessarily follow Poisson statistics. This state could be prepared by an isolated single photon source such as a fluorescent dye molecule, quantum dot, or nitrogen vacancy, which can produce only a single photon at at time. This phenomenon is referred to as \emph{fluorescence antibunching} where photons tend to be detected as isolated events rather than in bursts or bunches. Note that for such a single photon source the single-mode field can be in state $\ket{1}$ but not state $\ket{2}$ at any given time. If more single photon sources are present or multi-level relaxations occur, states beyond $\ket{1}$ are possible. This has led to the introduction of binomial states of the quantized field \parencite{Stoler1985}. This fact is leveraged in the following sections, to count the number of single photon sources in a region of interest using a widefield photon counting camera.
+In contrast, single photon states e.g, $\ket{1}$ do not necessarily follow Poisson statistics. This state could be prepared by an isolated single photon source such as a fluorescent dye molecule, quantum dot, or nitrogen vacancy, which can produce only a single photon at at time. This phenomenon is referred to as \emph{fluorescence antibunching} where photons tend to be detected as isolated events rather than in bursts or bunches. Single photon sources have a fluorescence lifetime, typically on the order of nanoseconds, which results in a sequence of photon arrivals with a more regular structure than would be expected under Poisson statistics. Note that for such a single photon source the single-mode field can be in state $\ket{1}$ but not state $\ket{2}$ at any given time. If more single photon sources are present or multi-level relaxations occur, states beyond $\ket{1}$ are possible. This has led to the introduction of binomial states of the quantized field \parencite{Stoler1985}. This fact is leveraged in the following sections, to count the number of single photon sources in a region of interest using a widefield photon counting camera.
+
+\section{Second order coherence}
+
+The second-order coherence function, $ g^{(2)}(\tau) $, is a fundamental tool in quantum optics, providing insight into photon statistics without the detailed structure of the field. It can be expressed in terms of the photon count rate $ n(t) $ as:
+
+\begin{equation}
+g^{(2)}(\tau) = \frac{\langle n(t) n(t+\tau) \rangle}{\langle n(t) \rangle^2}
+\end{equation}
+
+This formulation highlights how the intensity correlations between photons detected at times $ t $ and $ t+\tau $ are normalized by the square of the mean photon count rate, providing a dimensionless measure of the correlation.
+
+The value of $ g^{(2)}(\tau) $ and its dependence on $ \tau $ reveal essential characteristics of the light source. For sub-Poissonian statistics, $ g^{(2)}(0) < g^{(2)}(\tau) $, indicating photon antibunching, where the likelihood of detecting two photons in quick succession is reduced. This behavior is closely related to the fluorescence lifetime of the emitters; after emitting a photon, a fluorophore requires a characteristic time to re-enter the excited state, leading to a dip in $ g^{(2)}(\tau) $ at short $ \tau $. Specifically, at delays much shorter than the fluorescence lifetime, coincidences are unlikely, causing $ g^{(2)}(\tau) $ to approach zero in sub-Poissonian statistics. Poissonian statistics, typical of coherent light, show no correlation between photon arrival times, resulting in $ g^{(2)}(\tau) = 1 $ for all $ \tau $. Super-Poissonian statistics, seen in thermal light, exhibit photon bunching, where $ g^{(2)}(\tau) $ starts high at $ \tau = 0 $ and decays to 1 as $ \tau $ increases, indicating a higher probability of photons arriving close together in time.
+
+The different regimes of $ g^{(2)}(\tau) $ reflect the underlying quantum properties of the light. Thermal light, which follows Bose-Einstein statistics, demonstrates photon bunching due to the collective behavior of photons, leading to a high $ g^{(2)}(0) $. Coherent light, such as that from a laser, exhibits Poisson statistics, where photon arrival times are completely random. Non-classical light sources, particularly single-photon emitters, show sub-Poissonian statistics with photon antibunching, directly related to the fluorescence lifetime. Techniques like Time-Correlated Single Photon Counting (TCSPC) and Hanbury Brown and Twiss (HBT) interferometry are employed to measure $ g^{(2)}(\tau) $, offering profound insights into the quantum nature of light. By analyzing $ g^{(2)}(\tau) $, one can infer properties such as the number of fluorescent emitters in a sample and the temporal dynamics of photon emission processes. In the following section, we will build upon this notion in the context of widefield photon counting. 
+
 
 \section{Quantum enhanced localization microscopy}
 
@@ -56,7 +70,7 @@ Far-field optical microscopy is fundamentally limited by diffraction, with the m
 \begin{figure*}[t]
 \centering
 \includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Dark.png}
-\caption{\textbf{Dark noise of the SPAD array}. (left) Average pixel-wise counts for a 100ms exposure of capped sensor (right) Variance of counts for 100ms exposure of capped sensor}
+\caption{\textbf{Dark counts of the SPAD array}. (left) Average pixel-wise dark counts for a 100x100 pixel region exposed for 100ms (right) Variance of dark counts for 100ms exposure.}
 \label{fig:fig30}
 \end{figure*}    
 
@@ -68,7 +82,7 @@ Far-field optical microscopy is fundamentally limited by diffraction, with the m
 \label{fig:fig4}
 \end{figure*}    
 
-Molecular counting with fluorescence antibunching has a fairly simple motivation: coincidence of photons at multiple detector elements during high speed imaging provides evidence for the number of single photon sources present in the imaged region. Combining the ideas of conventional super-resolution approaches with photon statistics may prove to be a powerful set of methods for bioimaging. SPAD cameras achieve orders of magnitude higher temporal resolutions than standard CMOS cameras, single photon sensitivity, and dark count rates less than 25cps (Figure \ref{fig:fig4}). Furthermore, the reduced readout noise and large fill-factor of recently commercialized SPAD arrays suggests their use for single molecule localization with reduced localization uncertainty.
+Molecular counting with fluorescence antibunching has a fairly simple motivation: coincidence of photons at multiple detector elements during high speed imaging provides evidence for the number of single photon sources present in the imaged region. Combining the ideas of conventional super-resolution approaches with photon statistics may prove to be a powerful set of methods for bioimaging. SPAD cameras achieve orders of magnitude higher temporal resolutions than standard CMOS cameras, single photon sensitivity, and dark count rates less than 25cps (Figure \ref{fig:fig30}). Furthermore, the reduced readout noise and large fill-factor of recently commercialized SPAD arrays suggests their use for single molecule localization with reduced localization uncertainty.
 
 \begin{figure*}[t]
 \centering
@@ -206,5 +220,13 @@ Fluorescence intermittency can affect the observed photon-number fluctuations an
 The acquisition times necessary to obtain sufficient photon counts for computing the necessary statistics can potentially be very short. Most fluorophores have relaxation times in the nanosecond range and thus photons can be collected at a rate of at tens of millions of excitation pulses per second. These rates are currently difficult to obtain, however, due to limitations in detector throughput. The SPAD camera used in this study has a minimum exposure time in the microsecond range. Furthermore, the data volume can quickly become intractable due to the need for several thousands of frames for a millisecond-scale exposure time. This is currently a complication for techniques like STORM and advancements in the automation for data acquisitions are necessary. The speed of MCMC based localization remains a limitation for post-processing, and optimization of the processing time for localization is left for future work. 
 
 In conclusion, we propose a single molecule imaging technique that allows for simultaneous counting of localization of fluorescent molecules by modeling the quantum properties of fluorescence emission. The technique does not require a nonclassical light source and is designed to supplement standard single molecule localization microscopy techniques. The proposed method can be implemented with a standard widefield fluorescence microscope.
+
+\section{Future directions: quantum illumination strategies}
+
+Recent work has leveraged spatial correlations between downconverted photon pairs to demonstrate the first quantum illumination full-field imaging protocol \parencite{Gregory2020}. These spatial quantum correlations are evident in the entangled photon pairs produced via spontaneous parametric downconversion (SPDC). SPDC is typically realized using a nonlinear crystal such as Beta Barium Borate (BBO), chemically denoted as $\beta$-BaB$_2$O$_4$. BBO crystals exhibit nonlinear optical properties, which is essential for the SPDC process, where a pump photon is downconverted into a pair of lower-energy photons. These photons are known as signal and idler photons, which are spatially entangled.
+
+The twin beams produced through the SPDC process are directed to different regions of a single-photon avalanche diode (SPAD) array detector. By performing a pixel-by-pixel AND-operation between two regions of the array detector containing the SPDC beams, we can preferentially select correlated photon-pair events and reject uncorrelated background light and sensor noise events. Heralding photons using the signal and idler beams involves detecting one photon (either the signal or idler) and using this detection to infer the presence of its entangled counterpart. This method enhances the precision of photon detection and significantly improves the signal-to-noise ratio in quantum illumination imaging.
+
+Incorporating this technique into fluorescence imaging can further enhance the imaging quality. By utilizing the known fluorescence lifetime, one can herald a fluorescence photon using the idler beam. When a fluorescence photon is detected in the signal beam, the presence of its entangled idler counterpart can be used to confirm the event, thereby reducing the impact of background light and dark counts in the SPAD array. This approach enables precise background rejection and improves the overall sensitivity and accuracy of fluorescence imaging, making it a powerful tool for applications requiring high-resolution and high-contrast imaging. 
 
 
