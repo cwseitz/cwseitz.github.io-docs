@@ -98,7 +98,7 @@ In this study, we present a method for widefield single photon counting in order
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.png}
+\includegraphics[width=16cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.png}
 \caption{\textbf{Single photon counting with a SPAD array} (a) Conventional widefield microscopy with integrated SPAD array (b) Single photon imaging scheme using 1us exposures containing a picosecond laser pulse (c) Sum of photon counts over a 5x5 region of interest (ROI), taken with $N_{\mathrm{frames}}=5\times 10^{5}$}
 \label{fig:fig5}
 \end{figure*}    
@@ -193,11 +193,27 @@ Since $G^{(2)}(m)$ is already averaged over $m$, $\langle G^{(2)}(m) $ is effect
 \langle G^{(2)}(m)\rangle =  N_{\mathrm{frames}} \left(1 - \left((1-\zeta)^n\right)\right)^2
 \end{equation}
 
-Ignoring the effect of background signal $\langle g^{(2)}(0)\rangle =\langle G^{(2)}(0)\rangle/\langle G^{(2)}(m)\rangle$, which rapidly approaches $1/2$ as a function of $N$, and then saturates and very slowly approaches its maximum value of 1 (Figure \ref{fig:fig8}). This is consistent with the idea that for very large number of active fluorescent emitters, the statistics should become Poisson. Moreover, bright clusters of quantum dots exhibit elevated $g^{(2)}(0)$ values as can be seen in maps of the $g^{(2)}(0)$ computing using a sliding window over the array (Figure \ref{fig:fig5} e).
+Ignoring the effect of background signal $\langle g^{(2)}(0)\rangle =\langle G^{(2)}(0)\rangle/\langle G^{(2)}(m)\rangle$, which rapidly approaches $1/2$ as a function of $N$, and then saturates and very slowly approaches its maximum value of 1 (Figure \ref{fig:fig8}). This is consistent with the idea that for very large number of active fluorescent emitters, the statistics should become Poisson. Moreover, bright clusters of quantum dots exhibit elevated $g^{(2)}(0)$ values as can be seen in maps of the $g^{(2)}(0)$ computing using a sliding window over the array (Figure \ref{fig:fig5} e). Lastly, $G^{(2)}(0),G^{(2)}(m),B$ all will have Binomial statistics, which can approximated as Poisson for large N, small p. Error estimation $\delta G^2(0) = \sqrt{G^2(0)}, \delta E(G^2(m)) = \sqrt{\frac{E(G^2(m))}{M}}, \delta B = \sqrt{B}$.
+
+\begin{equation}
+\sigma = \text{RMSE}[g^{(2)}(0)] = \sqrt{
+    \left[
+    \frac{\partial g^{(2)}(0)}{\partial B} \delta B
+    \right]^2 +
+    \left[
+    \frac{\partial g^{(2)}(0)}{\partial \langle G^{(2)} \rangle} \delta \langle G^{(2)} \rangle
+    \right]^2 +
+    \left[
+    \frac{\partial g^{(2)}(0)}{\partial G^{(2)}(0)} \delta G^{(2)}(0)
+    \right]^2
+}
+\end{equation}
+
+We then integrate a Gaussian with this $\sigma$ below the threshold $g^{(2)}(0)=0.5$ as shown in (Figure \ref{fig:fig5} e).
 
 For localization by optimization of (4), we use Goodman and Weare's Markov Chain Monte Carlo (MCMC) algorithm \parencite{Goodman2010} to sample from the posterior on fluorophore locations. In all simulations we assume a uniform prior on coordinates over the ROI and $\zeta$ is known and identical over fluorophores. Fluorophore locations can then be estimated from the posterior samples by K-means clustering of the $(\theta_u,\theta_v)$ coordinates of the first particle and identification of cluster centers. To validate our estimator, we compare its RMSE to the single emitter Cramer-Rao lower bound  (Figure \ref{fig:fig6}).
 
-We find that for thousands of expected signal photon counts, localization uncertainty lies in an acceptable range for localization microscopy (Figure \ref{fig:fig6}). The $\zeta$ value is treated as unknown but homogeneous across fluorophores in the ROI.
+We find that for thousands of expected signal photon counts, localization uncertainty lies in an acceptable range for localization microscopy (Figure \ref{fig:fig6}). The $\zeta$ value is treated as unknown but homogeneous across fluorophores in the ROI. 
 
 \begin{figure*}[t]
 \centering
