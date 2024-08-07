@@ -108,7 +108,7 @@ Lakadamyali, M. et al. Nature Methods \textbf{17}, (2020).
 
 \begin{frame}{Stochastic optical reconstruction microscopy (STORM)}
 \begin{textblock*}{9cm}(0.5cm,1.5cm)
-\includegraphics[width=\textwidth]{../../dissertation/dissertation/media/Intro.png}
+\includegraphics[width=\textwidth]{../../dissertation/dissertation/media/Intro-Cropped.png}
 \end{textblock*}
 \begin{textblock*}{5cm}(9.5cm,1.5cm)
 \animategraphics[width=5cm,autoplay,loop]{60}{../../dissertation/dissertation/media/storm-animation/storm-animation-}{1}{100}
@@ -123,7 +123,7 @@ Lakadamyali, M. et al. Nature Methods \textbf{17}, (2020).
 
 \begin{frame}{Stochastic optical reconstruction microscopy (STORM)}
 \begin{textblock*}{9cm}(0.5cm,1.5cm)
-\includegraphics[width=\textwidth]{../../dissertation/dissertation/media/Intro.png}
+\includegraphics[width=\textwidth]{../../dissertation/dissertation/media/Intro-Cropped.png}
 \end{textblock*}
 \begin{textblock*}{5cm}(9.5cm,1.5cm)
 \includegraphics[width=\textwidth]{../../dissertation/dissertation/media/STORM-Example.png}
@@ -224,47 +224,136 @@ Nutshell: \emph{How to relax the density limit in localization microscopy}?
 \end{frame}
 
 
-\section{Method 1: Enhanced nanoscopy with single photon avalanche diode (SPAD) cameras}
+\section{Enhanced nanoscopy with single photon avalanche diode (SPAD) cameras}
 
-\begin{frame}{Enhanced nanoscopy with single photon avalanche diode (SPAD) cameras}
+%\begin{frame}{Hanbury-Brown and Twiss interferometry}
+%\begin{textblock*}{12cm}(1.5cm,2.0cm)
+%\includegraphics[width=12cm]{../../spad/spad/media/HBT.png}
+%\end{textblock*}
+
+%\begin{textblock*}{12cm}(1.5cm,7.0cm)
+%\begin{equation}
+%g^{(2)}(\tau) = \frac{\langle n(t) n(t+\tau) \rangle}{\langle n(t) \rangle^2}
+%\end{equation}
+%\end{textblock*}
+
+%\end{frame}
+
+\begin{frame}{Conventional CMOS cameras are noisy}
+\includegraphics[width=14cm]{../../dissertation/dissertation/media/Noise.png}
+\vspace{0.5in}
+Noise characteristics for air-cooled Hamamatsu ORCA-Flash4.0
+\end{frame}
+
+
+\begin{frame}{Widefield photon counting}
+\begin{textblock*}{13cm}(1.0cm,1.0cm)
+\includegraphics[width=13cm]{../../spad/spad/media/Widefield.png}
+\end{textblock*}
+\end{frame}
+
+\begin{frame}{Imaging Qdot655 photon by photon}
 \begin{textblock*}{12cm}(1.5cm,2.0cm)
-\includegraphics[width=12cm]{../../dissertation/dissertation/media/SPAD.png}
+\includegraphics[width=12cm]{../../spad/spad/media/Figure-0-Crop-1.png}
 \end{textblock*}
-\begin{textblock*}{12cm}(1.5cm,7.0cm)
-\begin{itemize}
-\item Exposures as low as 1 microsecond
-\item Fast gated imaging for widefield fluorescence lifetime imaging
-\item Zero readout noise (imaging weak fluorescent signals)
-\end{itemize}
+\end{frame}
+
+\begin{frame}{Constrained multi-emitter localization with photon counting}
+
+\begin{textblock*}{7cm}(1.0cm,1.5cm)
+\includegraphics[width=7cm]{../../spad/spad/media/Figure-4.png}
+\end{textblock*}
+
+\begin{textblock*}{7cm}(1.0cm,5.0cm)
+\includegraphics[width=7cm]{../../spad/spad/media/Figure-5.png}
+\end{textblock*}
+
+%\begin{textblock*}{10cm}(1.5cm,7.0cm)
+%Define $\zeta = \langle n\rangle$ where $x$ is the number of photons counts per frame
+%\begin{equation*}
+%p(N,\zeta\lvert n) \propto p(n\lvert N,\zeta)p(\zeta)\rightarrow p(N\lvert n) = \int p(N,\zeta\lvert n) %d\zeta
+%\end{equation*}
+%\end{textblock*}
+
+\end{frame}
+
+\begin{frame}{Quantum illumination with spontaneous parametric downconversion}
+\begin{textblock*}{5cm}(1.5cm,1.3cm)
+\includegraphics[width=5cm]{../../spad/spad/media/SPDC-Setup.png}
+\end{textblock*}
+\begin{textblock*}{6cm}(7.5cm,2.0cm)
+\includegraphics[width=6cm]{../../spad/spad/media/SPDC.png}
+\end{textblock*}
+\begin{textblock*}{6cm}(8cm,5.5cm)
+\includegraphics[width=3cm]{../../spad/spad/media/SPDC-2.png}
 \end{textblock*}
 \end{frame}
 
 
-\section{Method 2: Enhanced nanoscopy with deep generative models}
+\section{Enhanced nanoscopy with deep generative models}
 
-\begin{frame}{Inference of a high-resolution image from a low-resolution one}
-\includegraphics[width=\textwidth]{../../dissertation/dissertation/media/Generation.png}\\
+%\begin{frame}{Inference of a high-resolution image from a low-resolution one}
+%\includegraphics[width=\textwidth]{../../dissertation/dissertation/media/Generation.png}\\
 
-\begin{itemize}
-\item Would like to estimate a high-resolution $\bold{y}$ from low-resolution $\bold{x}$, but it is many to one
-\item Must then model a \emph{distribution} over $\bold{y}$ i.e., $p_{\theta}(\bold{y}|\bold{x})$
-\end{itemize}
-\end{frame}
+%\begin{itemize}
+%\item Would like to estimate a high-resolution $\bold{y}$ from low-resolution $\bold{x}$, but it is many to one
+%\item Must then model a \emph{distribution} over $\bold{y}$ i.e., $p_{\theta}(\bold{y}|\bold{x})$
+%\end{itemize}
+%\end{frame}
 
-\begin{frame}{Trivial example of sampling from a mixture of Gaussians}
-\begin{textblock*}{13cm}(1.0cm, 1.5cm)
-\animategraphics[width=13cm,autoplay,loop]{30}{../../dissertation/dissertation/media/langevin/langevin-}{1}{152}
-\end{textblock*}
-\begin{textblock*}{13cm}(1.0cm, 6.5cm)
-Consider a two-component Gaussian mixture $p(\bold{x}) = \sum_{k=1}^{2}\pi_{k}\mathcal{N}(\mu_{k},\sigma_{k}^{2})$\\
-\vspace{0.5cm}
-If we know $\nabla\log p(\bold{x})$ we can sample from $p(\bold{x})$ with Langevin dynamics: 
+%\begin{frame}{Trivial example of sampling from a mixture of Gaussians}
+%\begin{textblock*}{13cm}(1.0cm, 1.5cm)
+%\animategraphics[width=13cm,autoplay,loop]{30}{../../dissertation/dissertation/media/langevin/langevin-}{1}{152}
+%\end{textblock*}
+%\begin{textblock*}{13cm}(1.0cm, 6.5cm)
+%Consider a two-component Gaussian mixture $p(\bold{x}) = \sum_{k=1}^{2}\pi_{k}\mathcal{N}(\mu_{k},\sigma_{k}^{2})$\\
+%\vspace{0.5cm}
+%If we know $\nabla\log p(\bold{x})$ we can sample from $p(\bold{x})$ with Langevin dynamics: 
+%\begin{equation*}
+%\bold{x}_{i} = \bold{x}_{i-1} + \epsilon \nabla\log p(\bold{x}) + \sqrt{2\epsilon}\eta \;\; \eta\sim %\mathcal{N}(0,I)
+%\end{equation*}
+%\end{textblock*}
+%\end{frame}
+
+\begin{frame}{Bayesian image restoration with diffusion models}
+
+\begin{textblock*}{2cm}(6.0cm, 1.5cm)
 \begin{equation*}
-\bold{x}_{i} = \bold{x}_{i-1} + \epsilon \nabla\log p(\bold{x}) + \sqrt{2\epsilon}\eta \;\; \eta\sim \mathcal{N}(0,I)
+q(\bold{y}_{t}|\bold{y}_{t-1}) = \mathcal{N}\left(\sqrt{1-\beta_{t}}\bold{y}_{t-1},\beta_t I\right)
+\end{equation*}
+\end{textblock*}
+
+\begin{textblock*}{12cm}(2.0cm, 3.0cm)
+\includegraphics[width=12cm]{../../ddpm/ddpm/media/ForwardBackward.png}
+\end{textblock*}
+
+\begin{textblock*}{2cm}(6.0cm, 6.5cm)
+\begin{equation*}
+p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) = \mathcal{N}\left(\mu_{\psi}(\bold{y}_{t},\gamma_{t}),\beta_{t}I\right)
+\end{equation*}
+
+\end{textblock*}
+
+\end{frame}
+
+\begin{frame}{Bayesian image restoration with diffusion models}
+\begin{textblock*}{9cm}(3.0cm, 1.5cm)
+\includegraphics[width=9cm]{../../ddpm/ddpm/media/DiffusionArch.png}
+\end{textblock*}
+\begin{textblock*}{2cm}(0.5cm, 2.5cm)
+\includegraphics[width=2cm]{../../dissertation/dissertation/media/diffusion_example/0_1_sr_79.png}
+\end{textblock*}
+\begin{textblock*}{2cm}(12.5cm, 2.5cm)
+\includegraphics[width=2cm]{../../dissertation/dissertation/media/diffusion_example/0_1_sr_99.png}
+\end{textblock*}
+
+\begin{textblock*}{13cm}(1.0cm, 6cm)
+A deep neural network estimates the gradient of the reverse process
+\begin{equation*}
+\bold{y}_{t-1} = \frac{1}{\sqrt{1-\beta_{t}}}\left(\bold{y}_{t} + \beta_{t}s_{\psi}(\bold{y}_{t})\right) + \sqrt{\beta_{t}}\xi \;\; \xi \sim \mathcal{N}(0,I)
 \end{equation*}
 \end{textblock*}
 \end{frame}
-
 
 \begin{frame}{Bayesian image restoration with diffusion models}
 
@@ -303,7 +392,7 @@ $\bold{y}_{0}$
 Need to approximate the gradient $s_{\theta}(\bold{y}_{t}) \approx \nabla\log p(\bold{x})$ and sample:
 
 \begin{equation*}
-\bold{y}_{t-1} = \frac{1}{\sqrt{1-\beta_{t}}}\left(\bold{y}_{t} + \beta_{t}s_{\theta}(\bold{y}_{t})\right) + \sqrt{\beta_{t}}\xi \;\; \xi \sim \mathcal{N}(0,I)
+\bold{y}_{t-1} = \frac{1}{\sqrt{1-\beta_{t}}}\left(\bold{y}_{t} + \beta_{t}s_{\psi}(\bold{y}_{t})\right) + \sqrt{\beta_{t}}\xi \;\; \xi \sim \mathcal{N}(0,I)
 \end{equation*}
 
 \end{textblock*}
@@ -347,7 +436,7 @@ Fillapakoulos, P. et al. Nature \textbf{468}, (2010).
 \end{textblock*}
 
 \begin{textblock*}{5cm}(7.75cm,1.25cm)
-\includegraphics[width=5cm]{../../dissertation/dissertation/media/BRD4-Structure}
+\includegraphics[width=5cm]{../../brd4/brd4/media/AlphaFoldStructure}
 \;\; AlphaFold BRD4 1-1362aa 
 \end{textblock*}
 
@@ -357,9 +446,16 @@ Fillapakoulos, P. et al. Nature \textbf{468}, (2010).
 
 \end{frame}
 
+\begin{frame}{BRD4 phosphorylation state is necessary for maintenance of chromatin structure}
+\includegraphics[width=12cm]{../../brd4/brd4/media/Figure-0.png}
+\end{frame}
 
 \begin{frame}{BRD4 phosphorylation state is necessary for maintenance of chromatin structure}
 \includegraphics[width=12cm]{../../brd4/brd4/media/Figure-2.png}
+\end{frame}
+
+\begin{frame}{Coarse grained molecular dynamics of chromatin at 310K}
+\includegraphics[width=12cm]{../../brd4/brd4/media/Rouse}
 \end{frame}
 
 \begin{frame}{Coarse grained molecular dynamics of chromatin binders at 310K}
