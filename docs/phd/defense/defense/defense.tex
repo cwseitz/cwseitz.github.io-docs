@@ -317,17 +317,21 @@ Noise characteristics for air-cooled Hamamatsu ORCA-Flash4.0
 
 \begin{frame}{Bayesian image restoration with diffusion models}
 
-\begin{textblock*}{2cm}(6.0cm, 1.5cm)
+\begin{textblock*}{13cm}(1.0cm, 1.5cm)
+Inference of a high resolution image $\bold{y}$ from low resolution $\bold{x}$ is approached by modeling a distribution $p_{\psi}(\bold{y}\lvert \bold{x})$ with a diffusion model
+\end{textblock*}
+
+\begin{textblock*}{2cm}(5.5cm, 2.75cm)
 \begin{equation*}
 q(\bold{y}_{t}|\bold{y}_{t-1}) = \mathcal{N}\left(\sqrt{1-\beta_{t}}\bold{y}_{t-1},\beta_t I\right)
 \end{equation*}
 \end{textblock*}
 
-\begin{textblock*}{12cm}(2.0cm, 3.0cm)
+\begin{textblock*}{12cm}(1.5cm, 4.25cm)
 \includegraphics[width=12cm]{../../ddpm/ddpm/media/ForwardBackward.png}
 \end{textblock*}
 
-\begin{textblock*}{2cm}(6.0cm, 6.5cm)
+\begin{textblock*}{2cm}(5.5cm, 7.75cm)
 \begin{equation*}
 p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) = \mathcal{N}\left(\mu_{\psi}(\bold{y}_{t},\gamma_{t}),\beta_{t}I\right)
 \end{equation*}
