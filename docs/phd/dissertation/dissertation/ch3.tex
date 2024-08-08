@@ -8,7 +8,7 @@
 
 Experimental techniques have surfaced which take advantage of the quantum nature of light to enhance imaging methods. The advent of very fast and sensitive detectors allows us to measure electromagnetic fields at a timescale where quantum effects can be seen. We often speak of methods such as photon counting or photon statistics, and it is prudent to briefly define the photon and how it can be measured with this technology.
 
-Quantization of the electromagnetic field generally begins by writing a Fourier expansion of solutions to Maxwell's equations called \emph{modes} and identifying the canonical position and momentum variables. This procedure is out of the scope of this thesis. Instead, I start by stating the major result of quantization, in which each mode of the field is quantized as a quantum harmonic oscillator. As such, the Hamiltonian for one particular mode has energy eigenvalues $E_{k} = \hbar\omega_{k}(\hat{n} + \frac{1}{2})$ for mode $k$ with frequency $\omega_{k}$. Since there are potentially infinitely many modes, the wavefunction is $\ket{\psi} = \ket{n_{1},n_{2},...}$ where $n_1$ is the number of photons in the first mode, $n_2$ is the number of photons in the second mode, and so on. The number operator for the $k$-th mode gives $\hat{n}_k\ket{\psi} = n_{k}\ket{\psi}$. 
+Quantization of the electromagnetic field generally begins by writing a Fourier expansion of solutions to Maxwell's equations called \emph{modes} and identifying the canonical position and momentum variables. This procedure is out of the scope of this thesis. Instead, I start by stating the major result of quantization, in which each mode of the field is quantized as a quantum harmonic oscillator. As such, the Hamiltonian for one particular mode has energy eigenvalues $E_{k} = \hbar\omega_{k}(\hat{n} + \frac{1}{2})$ for mode $k$ with frequency $\omega_{k}$. Since there are potentially infinitely many modes, the wavefunction is $\ket{\psi} = \ket{n_{1},n_{2},...}$ where $n_1$ is the number of photons in the first mode, $n_2$ is the number of photons in the second mode, and so on. The number operator for the $k$-th mode gives $\hat{n}_k\ket{\psi} = n_{k}\ket{\psi}$.
 
 The number operator $\hat{n}_k = \hat{a}_k^\dagger\hat{a}_k$ is defined in terms of operators $\hat{a}_k$ and $\hat{a}_k^\dagger$ which are photon annihilation and creation operators for the $k$-th mode, respectively. These operators satisfy the commutation relations $[\hat{a}_k, \hat{a}_{k'}^\dagger] = \delta_{kk'}$ and $[\hat{a}_k, \hat{a}_{k'}] = [\hat{a}_k^\dagger, \hat{a}_k^\dagger] = 0$. The action of the annihilation and creation operators on the joint number states is:
 
@@ -177,7 +177,7 @@ g^{(2)}(0) = \frac{G^{(2)}(0)-B}{\langle G^{(2)}(m\neq 0)\rangle -B}
 \begin{figure}[t]
 \centering
 \includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/g20g2m.png}
-\caption{\textbf{Scaling of $g^{(2)}(0)$ under zero background conditions}. (left) Scaling of $g^{(2)}(0)$ for small $N$. (right) Scaling of $g^{(2)}(0)$ for large $N$}
+\caption{\textbf{Theoretical scaling of $g^{(2)}(0)$ under zero background conditions}. (left) Scaling of $g^{(2)}(0)$ for small $N$. (right) Scaling of $g^{(2)}(0)$ for large $N$}
 \label{fig:fig8}
 \end{figure}   
 
@@ -227,6 +227,13 @@ We find that for thousands of expected signal photon counts, localization uncert
 \includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/PoissonBinomialPost-2.png}
 \caption{\textbf{Posterior distributions of the fluorophore number}. Samples from the Poisson-Binomial convolution distribution using $\zeta=0.01$ for various values of $\lambda$ and $N=7,9,11$ were simulated. The variable $\zeta$ was integrated out by Monte Carlo integration, sampling 1000 $\zeta$ values from the posterior distribution (see main text for details)}
 \label{fig:fig10}
+\end{figure*}    
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/G2.png}
+\caption{\textbf{Example $G^{(2)}(m)$ functions}. Example quantum dot images and respective $G^{(2)}(m)$ functions, taken with 1us frames 500kHz laser repetition rate.}
+\label{fig:fig32}
 \end{figure*}    
 
 \subsection{Discussion}
