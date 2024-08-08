@@ -136,8 +136,15 @@ Lakadamyali, M. et al. Nature Methods \textbf{17}, (2020).
 \end{textblock*}
 \end{frame}
 
+\begin{frame}{Experimental facts of life}
+\includegraphics[width=14cm]{../../dissertation/dissertation/media/Noise.png}
+\vspace{0.5in}
+Noise characteristics for air-cooled Hamamatsu ORCA-Flash4.0
+\end{frame}
 
-\begin{frame}{Vanilla SMLM by localizing isolated fluorescent emitters}
+
+
+\begin{frame}{Nanoscopy by localizing isolated fluorescent emitters}
 
 Modeling the point spread function permits sub-pixel localization 
 
@@ -223,97 +230,10 @@ Nieuwenhuizen et al. Nature Methods. \textbf{10} (2013)\\
 Nutshell: \emph{How to relax the density limit in localization microscopy}?
 \end{frame}
 
-
-\section{Enhanced nanoscopy with single photon avalanche diode (SPAD) cameras}
-
-%\begin{frame}{Hanbury-Brown and Twiss interferometry}
-%\begin{textblock*}{12cm}(1.5cm,2.0cm)
-%\includegraphics[width=12cm]{../../spad/spad/media/HBT.png}
-%\end{textblock*}
-
-%\begin{textblock*}{12cm}(1.5cm,7.0cm)
-%\begin{equation}
-%g^{(2)}(\tau) = \frac{\langle n(t) n(t+\tau) \rangle}{\langle n(t) \rangle^2}
-%\end{equation}
-%\end{textblock*}
-
-%\end{frame}
-
-\begin{frame}{Conventional CMOS cameras are noisy}
-\includegraphics[width=14cm]{../../dissertation/dissertation/media/Noise.png}
-\vspace{0.5in}
-Noise characteristics for air-cooled Hamamatsu ORCA-Flash4.0
-\end{frame}
+\section{Toward noiseless fluorescence nanoscopy}
 
 
-\begin{frame}{Widefield photon counting}
-\begin{textblock*}{13cm}(1.0cm,1.0cm)
-\includegraphics[width=13cm]{../../spad/spad/media/Widefield.png}
-\end{textblock*}
-\end{frame}
-
-\begin{frame}{Imaging Qdot655 photon by photon}
-\begin{textblock*}{12cm}(1.5cm,2.0cm)
-\includegraphics[width=12cm]{../../spad/spad/media/Figure-0-Crop-1.png}
-\end{textblock*}
-\end{frame}
-
-\begin{frame}{Constrained multi-emitter localization with photon counting}
-
-\begin{textblock*}{7cm}(1.0cm,1.5cm)
-\includegraphics[width=7cm]{../../spad/spad/media/Figure-4.png}
-\end{textblock*}
-
-\begin{textblock*}{7cm}(1.0cm,5.0cm)
-\includegraphics[width=7cm]{../../spad/spad/media/Figure-5.png}
-\end{textblock*}
-
-%\begin{textblock*}{10cm}(1.5cm,7.0cm)
-%Define $\zeta = \langle n\rangle$ where $x$ is the number of photons counts per frame
-%\begin{equation*}
-%p(N,\zeta\lvert n) \propto p(n\lvert N,\zeta)p(\zeta)\rightarrow p(N\lvert n) = \int p(N,\zeta\lvert n) %d\zeta
-%\end{equation*}
-%\end{textblock*}
-
-\end{frame}
-
-\begin{frame}{Quantum illumination with spontaneous parametric downconversion}
-\begin{textblock*}{5cm}(1.5cm,1.3cm)
-\includegraphics[width=5cm]{../../spad/spad/media/SPDC-Setup.png}
-\end{textblock*}
-\begin{textblock*}{6cm}(7.5cm,2.0cm)
-\includegraphics[width=6cm]{../../spad/spad/media/SPDC.png}
-\end{textblock*}
-\begin{textblock*}{6cm}(8cm,5.5cm)
-\includegraphics[width=3cm]{../../spad/spad/media/SPDC-2.png}
-\end{textblock*}
-\end{frame}
-
-
-\section{Enhanced nanoscopy with deep generative models}
-
-%\begin{frame}{Inference of a high-resolution image from a low-resolution one}
-%\includegraphics[width=\textwidth]{../../dissertation/dissertation/media/Generation.png}\\
-
-%\begin{itemize}
-%\item Would like to estimate a high-resolution $\bold{y}$ from low-resolution $\bold{x}$, but it is many to one
-%\item Must then model a \emph{distribution} over $\bold{y}$ i.e., $p_{\theta}(\bold{y}|\bold{x})$
-%\end{itemize}
-%\end{frame}
-
-%\begin{frame}{Trivial example of sampling from a mixture of Gaussians}
-%\begin{textblock*}{13cm}(1.0cm, 1.5cm)
-%\animategraphics[width=13cm,autoplay,loop]{30}{../../dissertation/dissertation/media/langevin/langevin-}{1}{152}
-%\end{textblock*}
-%\begin{textblock*}{13cm}(1.0cm, 6.5cm)
-%Consider a two-component Gaussian mixture $p(\bold{x}) = \sum_{k=1}^{2}\pi_{k}\mathcal{N}(\mu_{k},\sigma_{k}^{2})$\\
-%\vspace{0.5cm}
-%If we know $\nabla\log p(\bold{x})$ we can sample from $p(\bold{x})$ with Langevin dynamics: 
-%\begin{equation*}
-%\bold{x}_{i} = \bold{x}_{i-1} + \epsilon \nabla\log p(\bold{x}) + \sqrt{2\epsilon}\eta \;\; \eta\sim %\mathcal{N}(0,I)
-%\end{equation*}
-%\end{textblock*}
-%\end{frame}
+\subsection{Enhanced nanoscopy with deep generative models}
 
 \begin{frame}{Bayesian image restoration with diffusion models}
 
@@ -392,18 +312,125 @@ $\bold{y}_{0}$
 \end{textblock*}
 
 \begin{textblock*}{12cm}(1.0cm, 7.5cm)
-
-Need to approximate the gradient $s_{\theta}(\bold{y}_{t}) \approx \nabla\log p(\bold{x})$ and sample:
-
-\begin{equation*}
-\bold{y}_{t-1} = \frac{1}{\sqrt{1-\beta_{t}}}\left(\bold{y}_{t} + \beta_{t}s_{\psi}(\bold{y}_{t})\right) + \sqrt{\beta_{t}}\xi \;\; \xi \sim \mathcal{N}(0,I)
-\end{equation*}
-
+A powerful class of methods but generally lacks a physically constrained number of fluorescent emitters...
 \end{textblock*}
 
 
 \end{frame}
 
+\subsection{Enhanced nanoscopy with a single photon avalanche diode array}
+
+
+\begin{frame}{The Hanbury Brown and Twiss Effect}
+\begin{textblock*}{13cm}(1.0cm,1.0cm)
+\includegraphics[width=13cm]{../../spad/spad/media/HBT.png}
+\end{textblock*}
+\begin{textblock*}{13cm}(1.0cm,6.0cm)
+\begin{equation*}
+g^{(2)}(\tau) = \frac{\langle n(t) n(t+\tau) \rangle}{\langle n(t) \rangle^2}
+\end{equation*}
+
+\begin{itemize}
+\item Single photon sources (such as a fluorescent dye) exhibit antibunching
+\item Magnitude of $g^{(2)}(0)$ "dip" depends on the number of fluorescent emitters
+\item Provides a means of counting fluorescent emitters
+\end{itemize}
+\end{textblock*}
+
+\end{frame}
+
+\begin{frame}{Widefield photon counting with a SPAD array}
+\begin{textblock*}{13cm}(1.0cm,1.0cm)
+\includegraphics[width=13cm]{../../spad/spad/media/Widefield.png}
+\end{textblock*}
+\begin{textblock*}{13cm}(1.0cm,7.0cm)
+
+\begin{itemize}
+\item Spatial resolution of photon counts
+\item Fast exposures as low as 20 nanoseconds
+\end{itemize}
+\end{textblock*}
+\end{frame}
+
+\begin{frame}{Imaging Qdot655 photon by photon}
+\begin{textblock*}{12cm}(1.0cm,2.0cm)
+\includegraphics[width=12cm]{../../spad/spad/media/Figure-0-Crop-1.png}
+\end{textblock*}
+\begin{itemize}
+\item $g^{(2)}(0) \rightarrow 1$ as number of emitters approaches $\infty$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Constrained multi-emitter localization with photon counting}
+
+\begin{textblock*}{7cm}(1.0cm,1.5cm)
+\includegraphics[width=7cm]{../../spad/spad/media/Figure-4.png}
+\end{textblock*}
+
+\begin{textblock*}{7cm}(1.0cm,5.0cm)
+\includegraphics[width=7cm]{../../spad/spad/media/Figure-5.png}
+\end{textblock*}
+
+
+\begin{textblock*}{6cm}(8.5cm,1.5cm)
+Posterior distribution on $(N,\zeta)$:
+\begin{equation*}
+p(N,\zeta\lvert n) \propto p(n\lvert N,\zeta)p(\zeta)
+\end{equation*}
+\begin{itemize}
+\item MAP estimation on $N$
+\item Parameterization of multi-emitter fitting
+\item Approaches $\sigma_{\mathrm{CRLB}}$ for $N=1$
+\end{itemize}
+\end{textblock*}
+
+\end{frame}
+
+\begin{frame}{Heralding single photons with parametric downconversion}
+\begin{textblock*}{4.5cm}(1.5cm,1.3cm)
+\includegraphics[width=4.5cm]{../../spad/spad/media/SPDC-Setup.png}
+\end{textblock*}
+\begin{textblock*}{6cm}(7.5cm,2.0cm)
+\includegraphics[width=6cm]{../../spad/spad/media/SPDC.png}
+\end{textblock*}
+\begin{textblock*}{6cm}(8cm,5.5cm)
+\includegraphics[width=3cm]{../../spad/spad/media/SPDC-2.png}
+\end{textblock*}
+\end{frame}
+
+\begin{frame}{Heralding single photons with parametric downconversion}
+\includegraphics[width=10cm]{../../spad/spad/media/AND.png}
+
+\begin{itemize}
+\item Detection of dark counts or background counts
+\item Noise free nanoscopy
+\end{itemize}
+
+\end{frame}
+
+
+%\begin{frame}{Inference of a high-resolution image from a low-resolution one}
+%\includegraphics[width=\textwidth]{../../dissertation/dissertation/media/Generation.png}\\
+
+%\begin{itemize}
+%\item Would like to estimate a high-resolution $\bold{y}$ from low-resolution $\bold{x}$, but it is many to one
+%\item Must then model a \emph{distribution} over $\bold{y}$ i.e., $p_{\theta}(\bold{y}|\bold{x})$
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}{Trivial example of sampling from a mixture of Gaussians}
+%\begin{textblock*}{13cm}(1.0cm, 1.5cm)
+%\animategraphics[width=13cm,autoplay,loop]{30}{../../dissertation/dissertation/media/langevin/langevin-}{1}{152}
+%\end{textblock*}
+%\begin{textblock*}{13cm}(1.0cm, 6.5cm)
+%Consider a two-component Gaussian mixture $p(\bold{x}) = \sum_{k=1}^{2}\pi_{k}\mathcal{N}(\mu_{k},\sigma_{k}^{2})$\\
+%\vspace{0.5cm}
+%If we know $\nabla\log p(\bold{x})$ we can sample from $p(\bold{x})$ with Langevin dynamics: 
+%\begin{equation*}
+%\bold{x}_{i} = \bold{x}_{i-1} + \epsilon \nabla\log p(\bold{x}) + \sqrt{2\epsilon}\eta \;\; \eta\sim %\mathcal{N}(0,I)
+%\end{equation*}
+%\end{textblock*}
+%\end{frame}
 
 \section{Super-resolution of nucleosome nanodomains \textit{in-vivo}}
 
