@@ -20,7 +20,7 @@ A host of SR methods have been developed in recent years, which fundamentally di
 \label{fig:fig1}
 \end{figure}
 
-In nanoscopy applications, we seek the position and intensity of isolated fluorophores as well as to estimate the accuracy and precision of these parameters. Accuracy is a measure of the systematic error or bias, and precision is a measure of the statistical error of an estimator. Both of these metrics are crucial in nanoscopy, as they determine the maximum achievable resolution of the method. Importantly, a super resolution image in nanoscopy is simply a kernel density estimate (KDE) of the located fluorescent emitters, using an isotropic Gaussian kernel. The width of one such placed Gaussian kernel, $\sigma$ is given by the precision of the fluorophore position localization. The value of $\sigma$ will depend on the various experimental factors such as signal to noise ratio (SNR) or the on and off state lifetimes of the blinking fluorophore. 
+In nanoscopy applications, we seek the position and intensity of isolated fluorophores as well as to estimate the accuracy and precision of these parameters. Accuracy is a measure of the systematic error or bias, and precision is a measure of the statistical error of an estimator. Both of these metrics are crucial in nanoscopy, as they determine the quality of SR reconstructions and maximum achievable resolution of the method, respectively. Importantly, a super resolution image in nanoscopy is simply a kernel density estimate (KDE) of the located fluorescent emitters, using an isotropic Gaussian kernel. The width of one such placed Gaussian kernel, $\sigma$ is given by the precision of the fluorophore position localization. The value of $\sigma$ will depend on the various experimental factors such as signal to noise ratio (SNR). A fundamental lower bound on $\sigma$ is discussed in (Section 1.2.1).
 
 \subsection{Biological discovery with fluorescence nanoscopy}
 
@@ -39,13 +39,13 @@ It is common to describe the optical impulse response of a microscope as a two-d
 O(u,v) = \frac{1}{2\pi\sigma^{2}}e^{-\frac{(u-\theta_{u})^{2}+(v-\theta_{v})^{2}}{2\sigma^{2}}}
 \end{equation*}
 
-The above expression can be loosely interpreted as a probability distribution over locations where a photon can be detected. For discrete detectors, such as a camera, we bin this expression by integrating over pixels. The number of photon arrivals will follow Poisson statistics \parencite{Smith2010,Huang2013}, with expected value
+for a fluorescent emitter located at $\theta = (\theta_u,\theta_v)$. The above expression can be loosely interpreted as a probability distribution over locations where a photon can be detected. For discrete detectors, such as a camera, we bin this expression by integrating over pixels. The number of photon arrivals at a particular pixel $k$ will follow Poisson statistics \parencite{Smith2010,Huang2013}, with expected value
 
 \begin{equation*}
 \mu_{k} = i_{0}\left(\int_{u_{k}-\delta /2}^{u_{k}+\delta /2} O(u; \theta_{u})du \right)\left(\int_{v_{k}-\delta /2}^{v_{k}+\delta /2} O(v;\theta_{v})dv \right)
 \end{equation*}
 
-The scalar quantity $i_{0}$ represents the amplitude of the signal, which is proportional the quantum efficiency of a pixel $\eta$, the duration of exposure, $\Delta$, and the number of photons emitter by a fluorescent molecule $N_{0}$. With no loss of generality, $\Delta = \eta = 1$ and there is a single free parameter $N_{0}$. Terms above in parentheses are simply integrals of Gaussian functions and can be evaluated analytically. I define them as $\Gamma_{u},\Gamma_{v}$, respectively. For example,
+The scalar quantity $i_{0}$ represents the amplitude of the signal, which is proportional the quantum efficiency of a pixel $\eta$, the duration of exposure, $\Delta$, and the expected number of photons emitted by a fluorescent molecule per unit time $\zeta$. With no loss of generality, $\Delta = \eta = 1$ and there is a single free parameter $\zeta$. Terms above in parentheses are simply integrals of Gaussian functions and can be evaluated analytically. I define them as $\Gamma_{u},\Gamma_{v}$, respectively. For example,
 
 \begin{align*}
 \Gamma_{u} &\vcentcolon =  \int_{0}^{u_{k}+\delta /2 - \theta_{u}} O(u)du - \int_{0}^{u_{k}-\delta /2 - \theta_{u}} O(u)du\\
