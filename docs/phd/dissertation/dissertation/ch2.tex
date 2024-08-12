@@ -31,11 +31,11 @@ One of the main challenges in Bayesian inference is the computation of the poste
 p(x) = \int p(x \lvert y) p(y) \, dy.
 \end{equation*}
 
-In many practical applications, this integral is intractable due to the high dimensionality of the parameter space. To address this challenge, various approximation methods have been developed. One such method is Markov Chain Monte Carlo (MCMC), which generates samples from the posterior distribution by constructing a Markov chain that has the desired distribution as its equilibrium distribution. MCMC methods, such as the Metropolis-Hastings algorithm and the Gibbs sampler, allow us to approximate the posterior distribution even when the exact integral is computationally infeasible. MCMC algorithms were originally developed in the 1940s by physicists at Los Alamos. These physicists, including Ulam and Von Neumann, who were interested in modeling the probabilistic behavior of physical systems. They could not do this analytically, but they wondered if they could use simulation. Ulam and Metropolis overcame this problem by constructing a Markov chain for which the desired distribution was the stationary distribution of the Markov chain. They then only needed to simulate the Markov chain until equlibrium was achieved. This became the famous Metropolis algorithm, and its impact was enormous. Afterwards, MCMC was introduced to statistics and generalized with the Metropolis algorithm and its variants as well as the Gibbs sampler \parencite{Geman1984}
+In many practical applications, this integral is intractable due to the high dimensionality of the parameter space. To address this challenge, various approximation methods have been developed. One such method is Markov Chain Monte Carlo (MCMC), which generates samples from the posterior distribution by constructing a Markov chain that has the desired distribution as its equilibrium distribution. MCMC algorithms were originally developed for applications in statistical physics but were eventually adapted to a broader range of statistical problems. Well known MCMC algorithms include the Metropolis-Hastings algoritm, Gibbs sampler \parencite{Geman1984}, and gradient-based algorithms inspired by Langevin dynamics. In general, MCMC is asymptotically exact but can be computationally expensive for large datasets and high dimensional parameter spaces. Variational inference is an alternative approach, which is not exact, but reduces the computational burden in these scenarios.
 
 \subsection{Variational inference}
 
-Another approach to approximating the posterior distribution is variational inference. This method involves approximating the true posterior distribution \( q(y \lvert x) \) with a simpler, parameterized distribution \( p_{\psi}(y) \) by minimizing the Kullback-Leibler (KL) divergence between them. The KL divergence \( D_{KL}(q(y \lvert x) \lvert\lvert p_{\psi}(y)) \) measures how one probability distribution diverges from a second probability distribution. To minimize the KL divergence, we first express it as
+Variational inference involves approximating the true posterior distribution \( q(y \lvert x) \) with a simpler, parameterized distribution \( p_{\psi}(y) \) by minimizing the Kullback-Leibler (KL) divergence between them. The KL divergence \( D_{KL}(q(y \lvert x) \lvert\lvert p_{\psi}(y)) \) measures how one probability distribution diverges from a second probability distribution. To minimize the KL divergence, we first express it as
 
 \begin{equation*}
 D_{KL}(q(y \lvert x) \lvert\lvert p_{\psi}(y)) = \mathbb{E}_{q(y \lvert x)}\left[\log \frac{q(y \lvert x)}{p_{\psi}(y)}\right]
@@ -88,13 +88,13 @@ In the remainder of this chapter, we introduce KD estimation as an alternative t
 
 \section{Results}
 
-We now consider datasets $(\bold{x}_i,\bold{y}_{0,i},\hat{\bold{y}}_{i})_{i=1}^{N}$ of observed images $\bold{x}_i$ true KD images $\bold{y}_{0,i}$, and augmented low-resolution inputs $\hat{\bold{y}}_{i}=\phi(\bold{x}_{i})$, where $\phi$ is a CNN.
+We now consider datasets $(\bold{x}_i,\bold{y}_{0,i},\hat{\bold{y}}_{i})_{i=1}^{N}$ of observed images $\bold{x}_i$ true KD images $\bold{y}_{0,i}$, and augmented low-resolution inputs $\hat{\bold{y}}_{i}=\phi(\bold{x}_{i})$, where $\phi$ is a convolutional neural network (CNN).
 
 \subsection{Approach}
 
-Direct optimization of the image likelihood from observations $\bold{x}$ alone is challenging when fluorescent emitters are dense within the field of view and fluorescent signals significantly overlap. However, convolutional neural networks (CNNs) have recently proven to be powerful tools fluorescence microscopy to extract parameters describing fluorescent emitters such as color, emitter orientation, $z$-coordinate, and background signal \cite{Zhang2018,Kim2019,Zelger2018}. For localization tasks, CNNs typically employ upsampling layers to reconstruct Bernoulli probabilities of emitter occupancy \parencite{Speiser2021} or KD estimates with higher resolution than experimental measurements \parencite{Nehme2020}. We choose to use KD estimates in our model, denoted by $\bold{y}$, which are latent in the low-resolution data $\bold{x}$. KDEs are the most common data structure used in SMLM, and can be easily generated from molecular coordinates, alongside observations $\bold{x}$.
+Direct optimization of the image likelihood from observations $\bold{x}$ alone is challenging when fluorescent emitters are dense within the field of view and fluorescent signals significantly overlap. However, CNNs have recently proven to be powerful tools fluorescence microscopy to extract parameters describing fluorescent emitters such as color, emitter orientation, $z$-coordinate, and background signal \cite{Zhang2018,Kim2019,Zelger2018}. For localization tasks, CNNs typically employ upsampling layers to reconstruct Bernoulli probabilities of emitter occupancy \parencite{Speiser2021,Nehme2020}. We choose to instead infer KDEs, denoted by $\bold{y}$, which are latent in the low-resolution data $\bold{x}$. KDEs are a common data structure used in nanoscopy, and can be easily generated from molecular coordinates, alongside observations $\bold{x}$.
 
-Kernel density estimates produced by the traditional deep architectures for localization microscopy produce strong results, but lack uncertainty quantification. Unfortunately, the posterior can be difficult to compute at test time, since molecules cannot be easily resolved and therefore its dimensionality is ill-defined. The central goal of this paper is to instead model a conditional distribution on the latent $\bold{y}$: $p(\bold{y}\lvert\bold{x})$, where $\bold{y}$ is of known dimensionality. We choose to model $p(\bold{y}\lvert\bold{x})$ with a diffusion model, given that the distribution $p(\bold{y}\lvert\bold{x})$ is expensive to compute.
+To go beyond point estimation of the KDE given the low-resolution data, we seek a generative model for the posterior. Unfortunately, the posterior can be intractable, since molecules cannot be easily resolved and therefore its dimensionality is not well-defined. To address this issue, we instead model a conditional distribution on the latent $\bold{y}$: $p(\bold{y}\lvert\bold{x})$, where $\bold{y}$ is of known dimensionality. We choose to model $p(\bold{y}\lvert\bold{x})$ with a diffusion model, given that the distribution $p(\bold{y}\lvert\bold{x})$ is expensive to compute.
 
 Sampling from diffusion models can be computationally expensive, given that generation amounts to solving a complex stochastic differential equation, effectively mapping a simple base distribution to the complex data distribution. The solution of such equations requires numerical integration with very small step sizes, resulting in thousands of neural network evaluations \parencite{Saharia2021,Vahdat2021}. For conditional generation tasks in high-risk applications, generation complexity is further exacerbated by the need for the highest level of detail in generated samples. Therefore, we propose that sampling is preceded by an augmentation network $\phi$, which in essence generates an initial estimate to guide the diffusion process. Reasoning for this choice in our application is two-fold:
 
@@ -104,7 +104,17 @@ Sampling from diffusion models can be computationally expensive, given that gene
 
 \subsection{Variational diffusion}
 
-\begin{figure}[!t]
+Diffusion models \parencite{Ho2020,Song2021} are a class of generative models originally inspired by nonequilibrium statistical physics, which slowly destroy structure in a data distribution via a fixed Markov chain referred to as the \emph{forward process}. In the present context, we leverage the variational interpretation of this model class \parencite{Kingma2021,Kingma2023} to approximate the posterior $p(\bold{y}\lvert\bold{x})$. 
+
+\textbf{Diffusion Model}. We use a forward process which gradually adds Gaussian noise to the latent $\bold{y}_0$ in discrete time, according to a variance schedule $\beta_{t}$:
+
+\begin{equation}
+q(\bold{y}_{T}\lvert\bold{y}_{0}) = \prod_{t=1}^{T}q(\bold{y}_{t}\lvert\bold{y}_{t-1}) \;\;\; q(\bold{y}_{t}\lvert\bold{y}_{t-1}) = \mathcal{N}\left(\sqrt{1-\beta_{t}}\bold{y}_{t-1},\beta_t I\right)
+\end{equation}
+
+
+\clearpage
+\begin{figure}
     \centering
     \begin{tikzpicture}[thick,scale=1.5, every node/.style={scale=1.5}]
         % Original Graphical Model
@@ -149,19 +159,11 @@ Sampling from diffusion models can be computationally expensive, given that gene
 \end{figure}
 
 
-\begin{figure}[t]
+\begin{figure}
 \includegraphics[scale=0.5]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Diffusion.png}
 \caption{\textbf{Uncertainty estimation by variational diffusion}. Example diffusion process of the latent high resolution image $\bold{y}$ conditioned on the low resolution image $\bold{x}$. The terminal $\bold{y}_{0}$ represents a sample from $p(\bold{y}\lvert\bold{x})$.}
 \label{fig:fig11}
 \end{figure}
-
-Diffusion models \parencite{Ho2020,Song2021} are a class of generative models originally inspired by nonequilibrium statistical physics, which slowly destroy structure in a data distribution via a fixed Markov chain referred to as the \emph{forward process}. In the present context, we leverage the variational interpretation of this model class \parencite{Kingma2021,Kingma2023} to approximate the posterior $p(\bold{y}\lvert\bold{x})$. 
-
-\textbf{Diffusion Model}. We use a forward process which gradually adds Gaussian noise to the latent $\bold{y}_0$ in discrete time, according to a variance schedule $\beta_{t}$:
-
-\begin{equation}
-q(\bold{y}_{T}\lvert\bold{y}_{0}) = \prod_{t=1}^{T}q(\bold{y}_{t}\lvert\bold{y}_{t-1}) \;\;\; q(\bold{y}_{t}\lvert\bold{y}_{t-1}) = \mathcal{N}\left(\sqrt{1-\beta_{t}}\bold{y}_{t-1},\beta_t I\right)
-\end{equation}
 
 An important property of the forward process is that it admits sampling $\bold{y}_t$ at an arbitrary timestep $t$ in closed form \parencite{Ho2020}. Using the notation $\alpha_t := 1 - \beta_t$ and $\gamma_t := \prod_{s=1}^{t} \alpha_s$, we have $q(\bold{y}_t\lvert\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 - \gamma_t)I \right)$ or $\bold{y}_{t} = \sqrt{\gamma_{t}}\bold{y}_{0} + \sqrt{1-\gamma_{t}}\bold{\epsilon}$ for $\epsilon \sim \mathcal{N}(0,I)$. The signal to noise ratio (SNR) as defined in \parencite{Kingma2023}, at a time step $t$ reads $\mathrm{SNR}_t = \gamma_{t}/(1-\gamma_{t})$.
 
