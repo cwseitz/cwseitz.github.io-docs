@@ -136,11 +136,11 @@ Lakadamyali, M. et al. Nature Methods \textbf{17}, (2020).
 \end{textblock*}
 \end{frame}
 
-\begin{frame}{Experimental facts of life}
-\includegraphics[width=14cm]{../../dissertation/dissertation/media/Noise.png}
-\vspace{0.5in}
-Noise characteristics for air-cooled Hamamatsu ORCA-Flash4.0
-\end{frame}
+%\begin{frame}{Experimental facts of life}
+%\includegraphics[width=14cm]{../../dissertation/dissertation/media/Noise.png}
+%\vspace{0.5in}
+%Noise characteristics for air-cooled Hamamatsu ORCA-Flash4.0
+%\end{frame}
 
 
 
@@ -154,19 +154,20 @@ Modeling the point spread function permits sub-pixel localization
 
 \begin{textblock*}{2cm}(1cm,2.0cm)
 \begin{align*}
-\mu_{k} &= i_{0}\int\int O(u,v)dudv\\
-i_{0} &= g_{k}\textcolor{red}{\eta} \textcolor{cyan}{N_{0}}\textcolor{blue}{\Delta} 
+\mu_{k} &= i_{0}\int\int O(u,v)dudv + \textcolor{pink}{\lambda}\\
+i_{0} &= g_{k}\textcolor{red}{\eta} \textcolor{cyan}{\zeta}\textcolor{blue}{\Delta} 
 \\
 g_{k} &- \mathrm{pixel\; gain}\\
 \textcolor{red}{\eta} &- \mathrm{quantum\; efficiency}\\
-\textcolor{cyan}{N_{0}} &- \mathrm{photon\; emission\; rate}\\
-\textcolor{blue}{\Delta} &- \mathrm{exposure\; time}
+\textcolor{cyan}{\zeta} &- \mathrm{photon\; emission\; rate}\\
+\textcolor{blue}{\Delta} &- \mathrm{exposure\; time}\\
+\textcolor{pink}{\lambda} &- \mathrm{background \; rate}
 \end{align*}
 \end{textblock*}
 
 \vspace{2in}
 
-Assume $N_{0}$ is constant over $\textcolor{blue}{\Delta}$ (homogeneous Poisson)
+Maximum likelihood localization:
 
 \begin{equation*}
 \theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}p(\bold{x}_{k}|\theta)= \underset{\theta}{\mathrm{argmin}}-\sum_{k}\log p(\bold{x}_{k}|\theta)
@@ -216,7 +217,8 @@ Wu et al. Trends in Cell Biology. \textbf{30} (2020)
 \includegraphics[width=13cm]{../../dissertation/dissertation/media/FRC.png}
 \end{figure}
 
-
+(left) Kernel density estimate of H2B-HaloTag in a living HeLa cell nucleus \\
+(right) Fourier ring correlation for different sampling ratios (200k loc)
 \end{frame}
 
 \begin{frame}
@@ -230,7 +232,7 @@ Nieuwenhuizen et al. Nature Methods. \textbf{10} (2013)\\
 Nutshell: \emph{How to relax the density limit in localization microscopy}?
 \end{frame}
 
-\section{Toward noiseless fluorescence nanoscopy}
+\section{Contemporary approaches to fluorescence nanoscopy}
 
 
 \subsection{Enhanced nanoscopy with deep generative models}
