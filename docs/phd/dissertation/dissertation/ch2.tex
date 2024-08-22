@@ -305,4 +305,8 @@ Using a Monte Carlo estimate of $\mathcal{L}_{\psi}$ \parencite{Kingma2023} whic
 
 \textbf{DDPM $\psi$}. To represent the reverse process, we used a DDPM architecture (Figure \ref{fig:fig14}) originally proposed in \parencite{Saharia2021}. We chose the U-Net backbone to have channel multipliers $[1,2,4,8,8]$ in the downsampling and upsampling paths of the architecture. In this architecture, parameters are shared across time, which is specified to the network using the Transformer sinusoidal position embedding, and uses self-attention at the $16 \times 16$ feature map resolution. To condition the model on the input $\bold{\hat{y}}$, we concatenate the $\bold{\hat{y}}$ estimated by DeepSTORM along the channel dimension, which are scaled to $[0,1]$, with $\bold{y}_T\sim \mathcal{N}(0, I)$. Others have experimented with more sophisticated methods of conditioning, but found that the simple concatenation yielded similar generation quality \parencite{Saharia2021}. 
 
-
+\begin{figure}[t]
+\centering
+\includegraphics[scale=0.6]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Cell.png}
+\caption{\textbf{Super-resolution of BRD4 in a HeLa cell}. (a) Immunofluorescence image of BRD4 labeled with Alexa488 secondary antibody. (b) Zoomed widefield image of the inset highlighted in red and the super-resolved image (SR) after application of an encoder $\phi$. (c) Multi-step photobleaching profile of the inset highlighted in blue.}
+\end{figure}
