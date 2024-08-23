@@ -322,21 +322,21 @@ One of these terms can be written as
 
 where we have used the common definition $\mathrm{erf}(z) = \frac{2}{\sqrt{\pi}}\int_{0}^{z}e^{-t^{2}}dt$. 
 
-\subsection{Metropolis-Hastings MCMC}
+%\subsection{Metropolis-Hastings MCMC}
 
-To obtain numerical estimates of $p(\theta|\bold{x})\propto p(\bold{x}|\theta)p(\theta)$ and therefore $p(\bold{y}|\bold{x})$, for the isolated fluorescent molecule as shown in (Figure 2), we used Metropolis-Hastings Markov Chain Monte Carlo (MCMC) to estimate the posterior on coordinates. Under the Poisson approximation in (1), the model negative log-likelihood is
+%To obtain numerical estimates of $p(\theta|\bold{x})\propto p(\bold{x}|\theta)p(\theta)$ and therefore $p(\bold{y}|\bold{x})$, for the isolated fluorescent molecule as shown in (Figure 2), we used Metropolis-Hastings Markov Chain Monte Carlo (MCMC) to estimate the posterior on coordinates. Under the Poisson approximation in (1), the model negative log-likelihood is
 
-\begin{equation}
-\ell(\bold{x}|\theta) = -\log \prod_{k} \frac{e^{-\left(\omega_{k}'\right)}\left(\omega_{k}'\right)^{n_{k}}}{n_{k}!} = \sum_{k}  \log n_{k}! + \omega_{k}' - n_{k}\log\left(\omega_{k}'\right)
-\end{equation}
+%\begin{equation}
+%\ell(\bold{x}|\theta) = -\log \prod_{k} \frac{e^{-\left(\omega_{k}'\right)}%\left(\omega_{k}'\right)^{n_{k}}}{n_{k}!} = \sum_{k}  \log n_{k}! + \omega_{k}' - n_{k}\log\left(\omega_{k}'\right)
+%\end{equation}
 
-where $n_{k}$ is the observed number events at a pixel. MCMC is asymptotically exact, which is not guaranteed by variational methods which may rely on a Laplace approximation around the MLE. We choose a uniform prior $p(\theta)$, and Metropolis-Hastings is run for $10^4$ iterations, the first $10^{3}$ iterations are discarded as burn-in. A proposal $\theta' = \theta + \Delta\theta$ was generated with $\Delta\theta \sim \mathcal{N}(0,\sigma^{2}I)$ where $\sigma^{2}=0.05$. The acceptance probability is
+%where $n_{k}$ is the observed number events at a pixel. MCMC is asymptotically exact, which is not guaranteed by variational methods which may rely on a Laplace approximation around the MLE. We choose a uniform prior $p(\theta)$, and Metropolis-Hastings is run for $10^4$ iterations, the first $10^{3}$ iterations are discarded as burn-in. A proposal $\theta' = \theta + \Delta\theta$ was generated with $\Delta\theta \sim \mathcal{N}(0,\sigma^{2}I)$ where $\sigma^{2}=0.05$. The acceptance probability is
 
-\begin{equation*}
-\alpha = e^{\beta(\ell(\theta)-\ell(\theta'))}
-\end{equation*}
+%\begin{equation*}
+%\alpha = e^{\beta(\ell(\theta)-\ell(\theta'))}
+%\end{equation*}
 
-We choose $\beta=0.2$ to achieve a target acceptance rate of $0.5$.
+%We choose $\beta=0.2$ to achieve a target acceptance rate of $0.5$.
 
 \subsection{Cramer-Rao Lower Bound}
 
