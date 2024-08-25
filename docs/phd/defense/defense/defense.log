@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.20)  25 AUG 2024 02:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.20)  25 AUG 2024 02:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1599,6 +1599,10 @@ Package: ocgbase 2022/08/04 v0.22 support package for ocgx2.sty
 \@anim@curfield=\count403
 \@anim@@resizeflags=\count404
 )
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\\' on input line 40.
+
 (./defense.aux)
 \openout1 = `defense.aux'.
 
@@ -3288,7 +3292,7 @@ File: ../../dissertation/dissertation/media/Lab.png Graphic file (type png)
 <use ../../dissertation/dissertation/media/Lab.png>
 Package pdftex.def Info: ../../dissertation/dissertation/media/Lab.png  used on
  input line 565.
-(pdftex.def)             Requested size: 398.33858pt x 177.10796pt.
+(pdftex.def)             Requested size: 455.24408pt x 202.411pt.
  [30
 
  <../../dissertation/dissertation/media/Lab.png>]
@@ -3307,10 +3311,10 @@ Package rerunfilecheck Info: File `defense.out' has not changed.
 (rerunfilecheck)             Checksum: EF6F5B40C8612C23DEA242745C143AED;1537.
  ) 
 Here is how much of TeX's memory you used:
- 35098 strings out of 476025
- 771069 string characters out of 5790016
+ 35099 strings out of 476025
+ 771074 string characters out of 5790016
  1860388 words of memory out of 5000000
- 54633 multiletter control sequences out of 15000+600000
+ 54634 multiletter control sequences out of 15000+600000
  526167 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,14n,122p,435b,489s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -3329,7 +3333,7 @@ l/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/local
 /texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/
 texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/te
 xlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on defense.pdf (30 pages, 44754198 bytes).
+Output written on defense.pdf (30 pages, 44573891 bytes).
 PDF statistics:
  828 PDF objects out of 1000 (max. 8388607)
  487 compressed objects within 5 object streams
