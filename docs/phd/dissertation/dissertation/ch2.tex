@@ -92,6 +92,14 @@ We now consider datasets $(\bold{x}_i,\bold{y}_{0,i},\hat{\bold{y}}_{i})_{i=1}^{
 
 \subsection{Approach}
 
+\begin{figure}[t]
+\centering
+\includegraphics[scale=0.25]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Generation.png}
+\caption{Generative model of single molecule localization microscopy images. Low resolution images $\bold{x}$ are generated from coordinates $\theta$ by integration of the optical transfer function $O$ and sampling from the likelihood (1): $\bold{x}\sim p(\bold{x}\lvert\theta) = \prod_{k} p(\bold{x}_k\lvert\theta)$. A kernel density estimate $\bold{y}$ is inferred from $\bold{x}$}
+\label{fig:fig60}
+\end{figure}
+
+
 Direct optimization of the image likelihood from observations $\bold{x}$ alone is challenging when fluorescent emitters are dense within the field of view and fluorescent signals significantly overlap. However, CNNs have recently proven to be powerful tools fluorescence microscopy to extract parameters describing fluorescent emitters such as color, emitter orientation, $z$-coordinate, and background signal \cite{Zhang2018,Kim2019,Zelger2018}. For localization tasks, CNNs typically employ upsampling layers to reconstruct Bernoulli probabilities of emitter occupancy \parencite{Speiser2021,Nehme2020}. We choose to instead infer KDEs, denoted by $\bold{y}$, which are latent in the low-resolution data $\bold{x}$. KDEs are a common data structure used in nanoscopy, and can be easily generated from molecular coordinates, alongside observations $\bold{x}$.
 
 To go beyond point estimation of the KDE given the low-resolution data, we seek a generative model for the posterior. Unfortunately, the posterior can be intractable, since molecules cannot be easily resolved and therefore its dimensionality is not well-defined. To address this issue, we instead model a conditional distribution on the latent $\bold{y}$: $p(\bold{y}\lvert\bold{x})$, where $\bold{y}$ is of known dimensionality. We choose to model $p(\bold{y}\lvert\bold{x})$ with a diffusion model, given that the distribution $p(\bold{y}\lvert\bold{x})$ is expensive to compute.
@@ -113,56 +121,64 @@ q(\bold{y}_{T}\lvert\bold{y}_{0}) = \prod_{t=1}^{T}q(\bold{y}_{t}\lvert\bold{y}_
 \end{equation}
 
 
-\clearpage
-\begin{figure}
-    \centering
-    \begin{tikzpicture}[thick,scale=1.5, every node/.style={scale=1.5}]
-        % Original Graphical Model
-        \node[obs] (x) {$\mathbf{y}_0$};
-        \node[latent, right=45pt of x] (z1) {$\mathbf{y}_1$};
-        \node[latent, right=45pt of z1] (z2) {$\mathbf{y}_{2}$};
-        \draw node[draw=none, scale=0.8, right=9pt of z2] (z3) {\rotatebox{0}{$\mathbf{\cdots}$}};
-        \node[latent, right=22.5pt of z3] (zt) {$\mathbf{y}_T$};
-        \edge[-{Latex[scale=1.0]}]{x}{z1}
-        \node[rectangle, draw=none, fill=white, scale=0.66, right=2.25pt of x, yshift=9pt] (eq1) {};
-        \node[rectangle, draw=none, fill=white, scale=0.66, right=2.25pt of z1, yshift=9pt] (eq2) {};
-        \node[rectangle, draw=none, fill=white, scale=0.66, below=-0.27pt of z3] (eq3) {};
-        
-        \edge[-{Latex[scale=1.0]}]{z1}{z2}
-        \node[rectangle, draw=none, scale=0.66, above=22.5pt of zt] (nt) {$\mathcal{N}\big(0, \beta_{T}\mathbf{I}\big)$};
-        \node[rectangle, draw=none, scale=0.66, above=22.5pt of z2] (n2) {$\mathcal{N}\big(0, \beta_{2}\mathbf{I}\big)$};
-        \node[rectangle, draw=none, scale=0.66, above=22.5pt of z1] (n1) {$\mathcal{N}\big(0, \beta_{1}\mathbf{I}\big)$};
-        \edge[-{Latex[scale=1.0]}]{nt}{zt}
-        \edge[-{Latex[scale=1.0]}]{n2}{z2}
-        \edge[-{Latex[scale=1.0]}]{n1}{z1}
+%\clearpage
+%\begin{figure}
+%    \centering
+%    \begin{tikzpicture}[thick,scale=1.5, every node/.style={scale=1.5}]
+%        % Original Graphical Model
+%        \node[obs] (x) {$\mathbf{y}_0$};
+%        \node[latent, right=45pt of x] (z1) {$\mathbf{y}_1$};
+%        \node[latent, right=45pt of z1] (z2) {$\mathbf{y}_{2}$};
+%        \draw node[draw=none, scale=0.8, right=9pt of z2] (z3) {\rotatebox{0}{$\mathbf{\cdots}$}};
+%        \node[latent, right=22.5pt of z3] (zt) {$\mathbf{y}_T$};
+%        \edge[-{Latex[scale=1.0]}]{x}{z1}
+%        \node[rectangle, draw=none, fill=white, scale=0.66, right=2.25pt of x, yshift=9pt] (eq1) %{};
+%        \node[rectangle, draw=none, fill=white, scale=0.66, right=2.25pt of z1, yshift=9pt] (eq2) {};
+%        \node[rectangle, draw=none, fill=white, scale=0.66, below=-0.27pt of z3] (eq3) {};
+%        
+%        \edge[-{Latex[scale=1.0]}]{z1}{z2}
+ %       \node[rectangle, draw=none, scale=0.66, above=22.5pt of zt] (nt) {$\mathcal{N}\big(0, \beta_{T}\mathbf{I}\big)$};
+ %       \node[rectangle, draw=none, scale=0.66, above=22.5pt of z2] (n2) {$\mathcal{N}\big(0, \beta_{2}\mathbf{I}\big)$};
+  %      \node[rectangle, draw=none, scale=0.66, above=22.5pt of z1] (n1) {$\mathcal{N}\big(0, \beta_{1}\mathbf{I}\big)$};
+   %     \edge[-{Latex[scale=1.0]}]{nt}{zt}
+    %    \edge[-{Latex[scale=1.0]}]{n2}{z2}
+     %   \edge[-{Latex[scale=1.0]}]{n1}{z1}
 
-        \edge[-]{z2}{z3}
-        \edge[-{Latex[scale=1.0]}]{z3}{zt}
+%        \edge[-]{z2}{z3}
+%        \edge[-{Latex[scale=1.0]}]{z3}{zt}
 
-        \node[obs, below=40pt of x] (x2) {$\mathbf{y}_0$};
-        \node[latent, right=45pt of x2] (z1_2) {$\mathbf{y}_1$};
-        \node[latent, right=45pt of z1_2] (z2_2) {$\mathbf{y}_{2}$};
-        \draw node[draw=none, scale=0.8, right=9pt of z2_2] (z3_2) {\rotatebox{0}{$\mathbf{\cdots}$}};
-        \node[latent, right=22.5pt of z3_2] (zt_2) {$\mathbf{y}_T$};
+%        \node[obs, below=40pt of x] (x2) {$\mathbf{y}_0$};
+%        \node[latent, right=45pt of x2] (z1_2) {$\mathbf{y}_1$};
+%        \node[latent, right=45pt of z1_2] (z2_2) {$\mathbf{y}_{2}$};
+%        \draw node[draw=none, scale=0.8, right=9pt of z2_2] (z3_2) {\rotatebox{0}{$\mathbf{\cdots}$}};
+%        \node[latent, right=22.5pt of z3_2] (zt_2) {$\mathbf{y}_T$};
 
-        \edge[-{Latex[scale=1.0]}]{z1_2}{x2}
-        \node[rectangle, draw=none, fill=white, scale=0.66, right=2.25pt of x2, yshift=9pt] (eq1_2) {};
-        \node[rectangle, draw=none, fill=white, scale=0.66, right=2.25pt of z1_2, yshift=9pt] (eq2_2) {};
-        \node[rectangle, draw=none, fill=white, scale=0.66, below=-0.27pt of z3_2] (eq3_2) {};
+%        \edge[-{Latex[scale=1.0]}]{z1_2}{x2}
+%        \node[rectangle, draw=none, fill=white, scale=0.66, right=2.25pt of x2, yshift=9pt] (eq1_2) {};
+%        \node[rectangle, draw=none, fill=white, scale=0.66, right=2.25pt of z1_2, yshift=9pt] (eq2_2) {};
+%        \node[rectangle, draw=none, fill=white, scale=0.66, below=-0.27pt of z3_2] (eq3_2) {};
 
-        \edge[-{Latex[scale=1.0]}]{z2_2}{z1_2}
-        \edge[-]{zt_2}{z3_2}
-        \edge[-{Latex[scale=1.0]}]{z3_2}{z2_2}
-    \end{tikzpicture}
-    \caption{\textbf{Diffusion model with Markovian transitions}. The forward process (top) is a Markovian Gaussian diffusion process of $\bold{y}$ with variance schedule $\beta_{t}$. The reverse process (bottom) conditionally generates $\bold{y}$ from noise}
-    \label{fig:fig10}
-\end{figure}
+%        \edge[-{Latex[scale=1.0]}]{z2_2}{z1_2}
+%        \edge[-]{zt_2}{z3_2}
+%        \edge[-{Latex[scale=1.0]}]{z3_2}{z2_2}
+%    \end{tikzpicture}
+%    \caption{\textbf{Diffusion model with Markovian transitions}. The forward process (top) is a Markovian Gaussian diffusion process of $\bold{y}$ with variance schedule $\beta_{t}$. The reverse process (bottom) conditionally generates $\bold{y}$ from noise}
+%    \label{fig:fig10}
+%\end{figure}
 
 
-\begin{figure}
-\includegraphics[scale=0.5]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Diffusion.png}
-\caption{\textbf{Uncertainty estimation by variational diffusion}. Example diffusion process of the latent high resolution image $\bold{y}$ conditioned on the low resolution image $\bold{x}$. The terminal $\bold{y}_{0}$ represents a sample from $p(\bold{y}\lvert\bold{x})$.}
-\label{fig:fig11}
+%\begin{figure}
+%\includegraphics[scale=0.5]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/%Diffusion.png}
+%\caption{\textbf{Uncertainty estimation by variational diffusion}. Example diffusion process of the %latent high resolution image $\bold{y}$ conditioned on the low resolution image $\bold{x}$. The %terminal $\bold{y}_{0}$ represents a sample from $p(\bold{y}\lvert\bold{x})$.}
+%\label{fig:fig11}
+%\end{figure}
+
+
+\begin{figure}[t]
+\centering
+\includegraphics[scale=5.0]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Denoise.png}
+\caption{Conditional diffusion model for sampling kernel density estimates. An initial KDE estimate $\bold{\hat{y}}$ is found by the CNN $\phi$, which is used as conditional input in the DDPM}
+\label{fig:fig70}
 \end{figure}
 
 An important property of the forward process is that it admits sampling $\bold{y}_t$ at an arbitrary timestep $t$ in closed form \parencite{Ho2020}. Using the notation $\alpha_t := 1 - \beta_t$ and $\gamma_t := \prod_{s=1}^{t} \alpha_s$, we have $q(\bold{y}_t\lvert\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 - \gamma_t)I \right)$ or $\bold{y}_{t} = \sqrt{\gamma_{t}}\bold{y}_{0} + \sqrt{1-\gamma_{t}}\bold{\epsilon}$ for $\epsilon \sim \mathcal{N}(0,I)$. The signal to noise ratio (SNR) as defined in \parencite{Kingma2023}, at a time step $t$ reads $\mathrm{SNR}_t = \gamma_{t}/(1-\gamma_{t})$.
