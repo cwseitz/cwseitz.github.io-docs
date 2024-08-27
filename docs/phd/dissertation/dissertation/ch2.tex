@@ -61,20 +61,20 @@ which is often called a variational objective. Given that \( \log p_{\psi}(x) \)
 \mathbb{E}_{q(y \lvert x)}\left[-\log p_{\psi}(x) \right] \leq -\mathcal{L} = \mathbb{E}_{q(y \lvert x)}\left[-\log \frac{p_{\psi}(x,y)}{q(y\lvert x)} \right]
 \end{equation*}
 
-This approach provides a practical way to perform Bayesian inference, especially in high-dimensional settings. It is worth noting that this derivation often begins with $D_{KL}(p_{\psi}(y\lvert x) \lvert\lvert q(y \lvert x) ) $ such that the expectation is taken with respect to the model distribution, since the true distribution is unknown. However, for the following application, the target distribution is known and thus the objective is prudently formulated in this way. 
+This approach provides a practical way to perform Bayesian inference, especially in high-dimensional settings. It is worth noting that this derivation often begins with $D_{KL}(p_{\psi}(y\lvert x) \lvert\lvert q(y \lvert x) ) $ such that the expectation is taken with respect to the model distribution, since the true distribution is unknown. However, for the following application, the target distribution is known and thus the objective is formulated in this way. 
 
 
-\subsection{A note on variational inference for functions}
+%\subsection{A note on variational inference for functions}
 
-For some applications, we would like to perform inference when the mapping between latents and observed data is deterministic. For example, there might be a determinisitic mapping $f$ between high resolution images and low-resolution ones, and we want to infer the high resolution image from the low resolution image. In that case, we find
+%For some applications, we would like to perform inference when the mapping between latents and observed data is deterministic. For example, there might be a determinisitic mapping $f$ between high resolution images and low-resolution ones, and we want to infer the high resolution image from the low resolution image. In that case, we find
 
-\begin{align*}
-\mathbb{E}_{q(y \lvert x)}\left[-\log p_{\psi}(x) \right] &\leq \mathbb{E}_{q(y \lvert x)}\left[-\log \frac{p_{\psi}(x,y)}{q(y\lvert x)} \right]\\
-&= \mathbb{E}_{q(y \lvert x)}\left[-\log \frac{p_{\psi}(y)}{q(y\lvert x)} \right] + \mathbb{E}_{q(y \lvert x)}\left[-\log p_{\psi}(x\lvert y) \right] \\
-&= \mathbb{E}_{q(y \lvert x)}\left[-\log \frac{p_{\psi}(y)}{q(y\lvert x)} \right] + \mathbb{E}_{q(y \lvert x)}\left[-\log \delta(x-f(y)) \right] 
-\end{align*}
+%\begin{align*}
+%\mathbb{E}_{q(y \lvert x)}\left[-\log p_{\psi}(x) \right] &\leq \mathbb{E}_{q(y \lvert x)}\left[-%\log \frac{p_{\psi}(x,y)}{q(y\lvert x)} \right]\\
+%&= \mathbb{E}_{q(y \lvert x)}\left[-\log \frac{p_{\psi}(y)}{q(y\lvert x)} \right] + \mathbb{E}_{q(y \lvert x)}\left[-\log p_{\psi}(x\lvert y) \right] \\
+%&= \mathbb{E}_{q(y \lvert x)}\left[-\log \frac{p_{\psi}(y)}{q(y\lvert x)} \right] + \mathbb{E}_{q(y \lvert x)}\left[-\log \delta(x-f(y)) \right] 
+%\end{align*}
 
-The second term is to be safely neglected, as it is undefined and provides no meaningful information during optimization. 
+%The second term is to be safely neglected, as it is undefined and provides no meaningful information during optimization. 
 
 \subsection{Blending Bayesian inference with deep models for microscopy}
 
