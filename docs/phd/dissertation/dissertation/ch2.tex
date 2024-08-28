@@ -37,9 +37,9 @@ In many practical applications, this integral is intractable due to the high dim
 
 Variational inference involves approximating the true posterior distribution \( q(y \lvert x) \) with a simpler, parameterized distribution \( p_{\psi}(y) \) by minimizing the Kullback-Leibler (KL) divergence between them. The KL divergence \( D_{KL}(q(y \lvert x) \lvert\lvert p_{\psi}(y)) \) measures how one probability distribution diverges from a second probability distribution. To minimize the KL divergence, we first express it as
 
-\begin{equation*}
+\begin{equation}
 D_{KL}(q(y \lvert x) \lvert\lvert p_{\psi}(y)) = \mathbb{E}_{q(y \lvert x)}\left[\log \frac{q(y \lvert x)}{p_{\psi}(y)}\right]
-\end{equation*}
+\end{equation}
 
 This can be rewritten using Bayes' rule as
 
@@ -51,15 +51,15 @@ D_{KL}(q(y \lvert x) \lvert\lvert p_{\psi}(y\lvert x)) &= \mathbb{E}_{q(y \lvert
 
 Defining $\mathcal{L} = -\mathbb{E}_{q(y \lvert x)}\left[\log \frac{q(y\lvert x)}{p_{\psi}(x,y)} \right]  = \mathbb{E}_{q(y \lvert x)}\left[\log \frac{p_{\psi}(x,y)}{q(y\lvert x)} \right] $, we can write,
 
-\begin{equation*}
+\begin{equation}
 \mathbb{E}_{q(y \lvert x)}\left[\log p_{\psi}(x) \right] = D_{KL}(q(y \lvert x) \lvert\lvert p_{\psi}(y\lvert x)) + \mathcal{L} \geq \mathcal{L}
-\end{equation*}
+\end{equation}
 
 which is often called a variational objective. Given that \( \log p_{\psi}(x) \) is constant, minimizing $D_{KL}(q(y \lvert x) \lvert\lvert p_{\psi}(y\lvert x))$ is equivalent to maximizing $\mathcal{L}$. For practical reasons, we often instead solve a minimization problem with respect to $\psi$
 
-\begin{equation*}
+\begin{equation}
 \mathbb{E}_{q(y \lvert x)}\left[-\log p_{\psi}(x) \right] \leq -\mathcal{L} = \mathbb{E}_{q(y \lvert x)}\left[-\log \frac{p_{\psi}(x,y)}{q(y\lvert x)} \right]
-\end{equation*}
+\end{equation}
 
 This approach provides a practical way to perform Bayesian inference, especially in high-dimensional settings. It is worth noting that this derivation often begins with $D_{KL}(p_{\psi}(y\lvert x) \lvert\lvert q(y \lvert x) ) $ such that the expectation is taken with respect to the model distribution, since the true distribution is unknown. However, for the following application, the target distribution is known and thus the objective is formulated in this way. 
 
@@ -291,15 +291,15 @@ D_{KL}\left(q(\bold{y}_{t-1}\lvert\bold{y}_t,\bold{y}_0)\lvert\lvert p(\bold{y}_
 
 Reparameterizing the loss in terms of the noise, using $\lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2} = \frac{1-\gamma_{t}}{\gamma_{t}}\lvert\lvert \bold{\epsilon}_{0} - \epsilon_{\psi} \lvert\lvert_{2}^{2}$ \parencite{Ribeiro2024}, we arrive at 
 
-\begin{equation*}
+\begin{equation}
 \mathcal{L}_{\psi} = \frac{1}{2}\sum_{t=2}^{T} \mathbb{E}_{q(\bold{y}_{t}\lvert\bold{y}_{0})}\left(\frac{\mathrm{SNR}_{t-1}}{{\mathrm{SNR}_{t}}}-1\right)\lvert\lvert \bold{\epsilon}-\bold{\epsilon}_{\psi}\lvert\lvert_{2}^{2}
-\end{equation*}
+\end{equation}
 
 Using a Monte Carlo estimate of $\mathcal{L}_{\psi}$ \parencite{Kingma2023} which optimizes random terms of the summation to avoid calculating all terms simultaneously, we arrive at the objective written in the main text (8)
 
-\begin{equation*}
+\begin{equation}
 \mathcal{L}_{\psi} = \mathbb{E}_{\epsilon\sim \mathcal{N}(0,I),t\sim U(1,T)}\left[\left(\frac{\mathrm{SNR}_{t-1}}{{\mathrm{SNR}_{t}}}-1\right)\lvert\lvert \bold{\epsilon}-\bold{\epsilon}_{\psi}\lvert\lvert_{2}^{2}\right]
-\end{equation*}
+\end{equation}
 
 
 \begin{figure}[t]

@@ -137,19 +137,19 @@ p(N,\zeta\lvert n) \propto p(n\lvert N,\zeta)p(\zeta)
 
 We use a Gaussian prior on $\zeta$, i.e. $p(\zeta) = \mathcal{N}(\mu_{\zeta},\sigma_{\zeta}^2)$. Prior uncertainty in the value of $\zeta$ stems from fluorophores with potentially heterogeneous photophysical properties as well as varying laser power throughout the excited region. This posterior can be integrated over $\zeta$ to produce a posterior distribution on the fluorophore number $N$. That is, $p(N=N'\lvert n) \propto \int_{0}^{1} \mathcal{L}(n\lvert N',\zeta)p(\zeta) d\zeta$ for $\mathcal{L}(n\lvert N',\zeta)=\prod_{j=1}^{N\mathrm{frames}} p(n_{j}\lvert N',\zeta)$. The likelihood is made tractable by a log-sum-exponential trick: $\mathcal{L}(n\lvert N',\zeta) = e^{\left(\sum_{j}\ell (n_{j}\lvert N',\zeta) + C\right)}$, where $C$ is an arbitrary constant determined empirically. This same constant $C$ is used for all $N'$. Monte Carlo integration is then employed to integrate out $\zeta$. This involves sampling many $\zeta$ values from the Gaussian prior and, for each sampled $\zeta$, the Poisson-Binomial likelihood $\mathcal{L}(n\lvert N',\zeta)$ is computed. These likelihood values are then weighted by the prior probabilities $p(\zeta_i)$. The final result is obtained by averaging these weighted likelihoods over all sampled $\zeta$, which approximates the integral:
 
-\begin{equation*}
+\begin{equation}
 p(N=N'\lvert n) = \int_{0}^{1} \mathcal{L}(n\lvert N',\zeta) p(\zeta) \, d\zeta \approx \frac{1}{M} \sum_{i=1}^M \mathcal{L}(n\lvert N',\zeta_i) p(\zeta_i)
-\end{equation*}
+\end{equation}
 
 where $M$ is the number of samples from the prior. This method provides a powerful way to handle the integration of complex or high-dimensional functions, especially when analytical solutions are intractable. The final posterior can then be estimated by minibatching the data and averaging the posterior $p(N\lvert n)$ over minibatches. An estimate of the fluorophore number $N$ within each ROI is found by the maximum aposteriori (MAP) estimate $N^{*}$ given by this distribution.
 
 For localization, we notice that the Poisson-Binomial likeliood is well approximated by a Poisson distribution for $\zeta << 1$, making the localization procedure similar to conventional maximum likelihood methods discussed in Chapter 1. Therefore, we have the following log-likelihood on the image $\bold{x}$:
 
 
-\begin{align}
-\ell(\bold{x}\lvert \theta) &= -\log \prod_{k} \frac{e^{-\left(\mu_{k}\right)}\left(\mu_{k}\right)^{n_k}}{n_k!}\\
-&= \sum_{k}  \log n_k! + \mu_{k} - n_k\log\left(\mu_{k}\right)
-\end{align}
+\begin{equation}
+\ell(\bold{x}\lvert \theta) = -\log \prod_{k} \frac{e^{-\left(\mu_{k}\right)}\left(\mu_{k}\right)^{n_k}}{n_k!}\\
+= \sum_{k}  \log n_k! + \mu_{k} - n_k\log\left(\mu_{k}\right)
+\end{equation}
 
 \begin{figure*}[t]
 \centering
