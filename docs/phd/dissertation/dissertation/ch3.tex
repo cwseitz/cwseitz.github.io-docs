@@ -66,6 +66,14 @@ Far-field optical microscopy is fundamentally limited by diffraction, with the m
 
 \begin{figure*}[t]
 \centering
+\includegraphics[width=15cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPADD.png}
+\caption{\textbf{Experimental setup for widefield photon counting}. (left) A 532nm pulsed laser is directed through filtering and focusing optics to a 100X oil-immersion objective. Emisson light is collected by a CMOS or SPAD sensor. (right) Diagram of the diode at each pixel of the SPAD array. Sensor micrograph courtesy of Pi Imaging Technologies}
+\label{fig:fig00}
+\end{figure*}    
+
+
+\begin{figure*}[t]
+\centering
 \includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Dark.png}
 \caption{\textbf{Dark counts of the SPAD array}. (left) Average pixel-wise dark counts for a 100x100 pixel region exposed for 100ms (right) Variance of dark counts for 100ms exposure.}
 \label{fig:fig30}
@@ -81,14 +89,6 @@ Far-field optical microscopy is fundamentally limited by diffraction, with the m
 
 Molecular counting with fluorescence antibunching has a fairly simple motivation: coincidence of photons at multiple detector elements during high speed imaging provides evidence for the number of single photon sources present in the imaged region. Combining the ideas of conventional super-resolution approaches with photon statistics may prove to be a powerful set of methods for bioimaging. SPAD cameras achieve orders of magnitude higher temporal resolutions than standard CMOS cameras, single photon sensitivity, and dark count rates less than 25 counts per second (Figure \ref{fig:fig30}). Furthermore, the reduced readout noise and large fill-factor of recently commercialized SPAD arrays suggests their use for single molecule localization with reduced uncertainty.
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPAD512.png}
-\caption{\textbf{Experimental setup for widefield photon counting}. A 532nm pulsed laser is directed through a spatial filter, galvo mirror, and passed through filtering and focusing optics to a 100X oil-immersion objective. Emission light of a 50$\mu$m grid is projected onto the SPAD512 camera (inset)}
-\label{fig:fig5}
-\end{figure*}    
-
-
 Here, we present a method for widefield single photon counting in order to count fluorophores in the sample and subsequently constrain single molecule localization. We investigate the theoretical properties of the zero-lag, second-order coherence function $g^{(2)}(0)$ for widefield photon counting and its spatial properties (Figure \ref{fig:fig5}). Using Bayesian analysis, we derive a posterior distribution on the number of active fluorescent emitters in a region of interest. This result is then combined with single molecule localization algorithms.  We demonstrate resolution of multiple emitters using a multi-emitter fitting algorithm and report localization errors with respect to the CRLB.
 
 \subsection{Basic Scheme}
@@ -96,7 +96,7 @@ Here, we present a method for widefield single photon counting in order to count
 \begin{figure*}[t]
 \centering
 \includegraphics[width=16cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.png}
-\caption{\textbf{Single photon counting with a SPAD array} (a) Conventional widefield microscopy with integrated SPAD array (b) Single photon imaging scheme using 1$\mu$s exposures containing a picosecond laser pulse (c) Sum of photon counts over a 5x5 region of interest (ROI), taken with $N_{\mathrm{frames}}=5\times 10^{5}$}
+\caption{\textbf{Single photon counting with a SPAD array} (a) Simplified diagram of the widefield photon counting setup (b) Single photon imaging scheme using 1$\mu$s exposures containing a picosecond laser pulse (c) Sum of photon counts over a 5x5 region of interest (ROI), taken with $N_{\mathrm{frames}}=5\times 10^{5}$}
 \label{fig:fig5}
 \end{figure*}    
 
