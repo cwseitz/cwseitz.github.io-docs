@@ -69,7 +69,7 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{Outline}
+\begin{frame}{Outline of the talk}
     \tableofcontents
 \end{frame}
 
@@ -221,7 +221,7 @@ Wu et al. Trends in Cell Biology. \textbf{30} (2020)
 \end{figure}
 
 More samples $\rightarrow$ higher spatial/temporal resolution\\
-How to relax the density limit in localization microscopy?
+Can we extract more information to enhance localization microscopy?
 
 %(left) Kernel density estimate of H2B-HaloTag in a living HeLa cell nucleus \\
 %(right) Fourier ring correlation for different sampling ratios (200k loc)
@@ -238,15 +238,29 @@ How to relax the density limit in localization microscopy?
 %Nutshell: \emph{How to relax the density limit in localization microscopy}?
 %\end{frame}
 
-\section{Contemporary approaches to fluorescence nanoscopy}
+\section{Probabilistic modeling approaches to fluorescence nanoscopy}
 
 
-\subsection{Enhanced nanoscopy with deep generative models}
+\subsection{Specific Aim 1: Enhance nanoscopy with deep generative models}
+
+\begin{frame}{The Bayesian calculation and variational inference}
+
+Let $\theta$ be a latent variable (e.g. high resolution image) to be inferred from a measurement $\bold{x}$ (e.g. low resolution image)\\
+
+\begin{alertblock}{Bayes Rule}
+$p(\theta\lvert \boldsymbol{x}) = \frac{p(\boldsymbol{x}\lvert \theta)p(\theta)}{\int p(\bold{x},\theta)d\theta} \propto p(\boldsymbol{x}\lvert \theta)p(\theta)$
+\end{alertblock}
+
+\includegraphics[width=12cm]{../../dissertation/dissertation/media/BayesRule.png}
+
+$p(\theta\lvert \boldsymbol{x})$ is can be hard to obtain. One solution is to fit a model distribution $p_{\psi}(\theta\lvert \boldsymbol{x})$ that has parameters $\psi$
+
+\end{frame}
 
 \begin{frame}{Bayesian image restoration with diffusion models}
 
 \begin{textblock*}{13cm}(1.0cm, 1.5cm)
-Inference of a high resolution image $\bold{y}$ from low resolution $\bold{x}$ is approached by modeling a distribution $p_{\psi}(\bold{y}\lvert \bold{x})$ with a diffusion model
+Inference of a high resolution image $\bold{y}_0$ from low resolution $\bold{x}$ is approached by modeling a distribution $p_{\psi}(\bold{y}_0\lvert \bold{x})$ with a diffusion model
 \end{textblock*}
 
 \begin{textblock*}{2cm}(5.5cm, 2.75cm)
@@ -336,12 +350,21 @@ Estimation of pixel-wise uncertainty in the high resolution $\bold{y}$
 
 \end{frame}
 
-\subsection{Enhanced nanoscopy with a single photon avalanche diode array}
+\subsection{Specific Aim 2: Integrate single photon counting and widefield single molecule imaging}
+
+\begin{frame}{An integrated single photon avalanche diode (SPAD) array}
+SPAD arrays open several doors in microscopy, including new modeling approaches
+%\begin{textblock*}{13cm}(1.0cm,1.0cm)
+\includegraphics[width=13cm]{../../spad/spad/media/SPADD.png}
+%\end{textblock*}
+\end{frame}
+
 
 \begin{frame}{The Hanbury Brown and Twiss Effect}
 \begin{textblock*}{13cm}(1.0cm,1.0cm)
 \includegraphics[width=13cm]{../../spad/spad/media/HBT.png}
 \end{textblock*}
+
 \begin{textblock*}{13cm}(1.0cm,6.0cm)
 \begin{equation*}
 g^{(2)}(\tau) = \frac{\langle n(t) n(t+\tau) \rangle}{\langle n(t) \rangle^2}
@@ -350,33 +373,49 @@ g^{(2)}(\tau) = \frac{\langle n(t) n(t+\tau) \rangle}{\langle n(t) \rangle^2}
 \begin{itemize}
 \item Single photon sources (such as a fluorescent dye) exhibit antibunching
 \item Magnitude of $g^{(2)}(0)$ "dip" depends on the number of fluorescent emitters
-\item Provides a means of counting fluorescent emitters
 \end{itemize}
 \end{textblock*}
 
 \end{frame}
 
-\begin{frame}{Widefield photon counting with a SPAD array}
-\begin{textblock*}{13cm}(1.0cm,1.0cm)
-\includegraphics[width=13cm]{../../spad/spad/media/Widefield.png}
-\end{textblock*}
-\begin{textblock*}{13cm}(1.0cm,7.0cm)
+%\begin{frame}{Widefield photon counting with a SPAD array}
+%\begin{textblock*}{13cm}(1.0cm,1.0cm)
+%\includegraphics[width=13cm]{../../spad/spad/media/Widefield.png}
+%\end{textblock*}
+%\begin{textblock*}{13cm}(1.0cm,7.0cm)
 
-\begin{itemize}
-\item Spatial resolution of photon counts
-\item Fast exposures as low as 20 nanoseconds
-\end{itemize}
-\end{textblock*}
-\end{frame}
+%\begin{itemize}
+%\item Spatial resolution of photon counts
+%\item Fast exposures as low as 20 nanoseconds
+%\end{itemize}
+%\end{textblock*}
+%\end{frame}
 
 \begin{frame}{Imaging Qdot655 photon by photon}
-\begin{textblock*}{12cm}(1.0cm,2.0cm)
+\begin{textblock*}{12cm}(1.0cm,1.5cm)
 \includegraphics[width=12cm]{../../spad/spad/media/Figure-0.png}
 \end{textblock*}
+\begin{textblock*}{13cm}(1.0cm,8.5cm)
 \begin{itemize}
-\item $g^{(2)}(0) \rightarrow 1$ as number of emitters approaches $\infty$
+\item 532nm picosecond pulsed laser pulsed at 500kHz to excite fluorescent quantum dots
 \end{itemize}
+\end{textblock*}
+
 \end{frame}
+
+\begin{frame}{Poisson-Binomial photon count data at a single pixel (simulation)}
+\begin{textblock*}{10cm}(2.0cm,1.0cm)
+\includegraphics[width=10cm]{../../spad/spad/media/Counts.png}
+\end{textblock*}
+\begin{textblock*}{13cm}(1.0cm,7.75cm)
+\begin{itemize}
+\item Likelihood is a mixture of counts from $N$ single photon sources, and background noise
+\item Can obtain posterior $p(N,\zeta\lvert n) \propto p(n\lvert N,\zeta)p(\zeta)$
+\end{itemize}
+\end{textblock*}
+
+\end{frame}
+
 
 \begin{frame}{Constrained multi-emitter localization with photon counting}
 
@@ -390,10 +429,6 @@ g^{(2)}(\tau) = \frac{\langle n(t) n(t+\tau) \rangle}{\langle n(t) \rangle^2}
 
 
 \begin{textblock*}{6cm}(8.5cm,1.5cm)
-Posterior distribution on $(N,\zeta)$:
-\begin{equation*}
-p(N,\zeta\lvert n) \propto p(n\lvert N,\zeta)p(\zeta)
-\end{equation*}
 \begin{itemize}
 \item MAP estimation on $N$
 \item Parameterization of multi-emitter fitting
@@ -403,10 +438,6 @@ p(N,\zeta\lvert n) \propto p(n\lvert N,\zeta)p(\zeta)
 
 \end{frame}
 
-\begin{frame}{Constrained multi-emitter localization with photon counting}
-
-
-\end{frame}
 
 \begin{frame}{Counting ATTO532 dye bound to DNA origamis}
 \begin{textblock*}{7cm}(1.0cm,1.3cm)
@@ -477,6 +508,8 @@ p(N,\zeta\lvert n) \propto p(n\lvert N,\zeta)p(\zeta)
 %\end{frame}
 
 \section{Super-resolution of nucleosome nanodomains \textit{in-vivo}}
+
+\subsection{Specific Aim 3: Interaction of transcriptional condensates with nucleosome nanodomains}
 
 \begin{frame}{Hierarchical structure of chromatin}
 
@@ -581,12 +614,18 @@ Integrate Brownian dynamics: $\dot{r} = \gamma^{-1}\nabla U + \sqrt{2 k_{B}T}\ga
 Stochastic forcing is a delta-correlated white-noise $\xi \sim \mathcal{N}(0,1), \langle \xi(t)\xi(t+\tau)\rangle = \delta(\tau)$
 \end{frame}
 
-\begin{frame}{Summary}
+\begin{frame}{Summary of contributions}
+\textbf{First generative model of super-resolution microscopy images from low-resolution inputs}
 \begin{itemize}
-\item Developed novel algorithms for computational super-resolution microscopy
-\item Developed single photon counting methods for fluorophore quantification
-\item Provided evidence for BRD4 regulation of nucleosome nanodomain architecture
+\item Modeled a distribution rather than a point estimate
+\item Quantified uncertainty
 \end{itemize}
+\textbf{Applied SPAD array for counting fluorescent molecules in widefield microscopy}
+\begin{itemize}
+\item Novel Bayesian inference paradigm from single photon counts
+\end{itemize}
+\textbf{First data supporting control of chromatin architecture by transcriptional condensates}
+
 \end{frame}
 
 
