@@ -86,11 +86,19 @@
 
 \begin{frame}{Fluorescence microscopy and the diffraction limit}
 
-\begin{textblock*}{9cm}(2.5cm,1.25cm)
+\begin{textblock*}{10cm}(1.5cm,1.5cm)
 Minimal resolvable distance $d \sim \lambda$
-\includegraphics[width=10cm]{../../dissertation/dissertation/media/Limit}
-\includegraphics[width=10cm]{../../dissertation/dissertation/media/Scale}
 \end{textblock*}
+
+\begin{textblock*}{4cm}(1.5cm,2.65cm)
+\includegraphics[width=4cm]{../../dissertation/dissertation/media/Objective}
+\end{textblock*}
+
+\begin{textblock*}{8cm}(6.0cm,2.0cm)
+\includegraphics[width=8cm]{../../dissertation/dissertation/media/PSF}
+Herbert et al. Microscopy and Microanalysis. (2012)
+\end{textblock*}
+
 
 \end{frame}
 
@@ -214,17 +222,30 @@ Wu et al. Trends in Cell Biology. \textbf{30} (2020)
 \end{comment}
 
 \begin{frame}
-\frametitle{How do we define resolution in localization microscopy?}
+\frametitle{Maximization of density, minimization of error}
 
-\begin{figure}
-\includegraphics[width=13cm]{../../dissertation/dissertation/media/FRC.png}
-\end{figure}
+\begin{textblock*}{8cm}(0.5cm, 1.5cm)
+\includegraphics[width=8cm]{../../dissertation/dissertation/media/FRC.png}
+\end{textblock*}
 
-More samples $\rightarrow$ higher spatial/temporal resolution\\
-Can we extract more information to enhance localization microscopy?
+\begin{textblock*}{5cm}(8.5cm, 3.5cm)
+\begin{itemize}
+\item \textbf{Maximize} density and in turn spatial/temporal resolution
+\item \textbf{Minimize} localization errors 
+\end{itemize}
+\end{textblock*}
 
-%(left) Kernel density estimate of H2B-HaloTag in a living HeLa cell nucleus \\
-%(right) Fourier ring correlation for different sampling ratios (200k loc)
+\end{frame}
+
+\begin{frame}
+\frametitle{Maximization of density, minimization of error}
+
+Approach these objectives using two probabilistic modeling approaches:
+\begin{itemize}
+\item \textbf{Specific Aim 1}: Utilize deep generative modeling for \emph{dense} widefield nanoscopy
+\item \textbf{Specific Aim 2}: Introduce single photon counting in widefield nanoscopy
+\end{itemize}
+
 \end{frame}
 
 %\begin{frame}
@@ -342,7 +363,7 @@ Estimation of pixel-wise uncertainty in the high resolution $\bold{y}$
 \end{frame}
 \end{comment}
 
-\begin{frame}{Super resolution of BRD4 in a HeLa cell}
+\begin{frame}{Super resolution of BRD4 protein in a HeLa cell}
 \begin{textblock*}{12cm}(2.0cm,1.5cm)
 \includegraphics[width=12cm]{../../ddpm/ddpm/media/BRD4/Deep2.png}
 \end{textblock*}
