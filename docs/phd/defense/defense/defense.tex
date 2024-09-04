@@ -4,8 +4,8 @@
 \documentclass{beamer}					% Document class
 \geometry{papersize={15cm,10cm}}
 
-\setbeamertemplate{footline}[text line]{%
-  \parbox{\linewidth}{\vspace*{-8pt}\hfill\hfill\insertpagenumber}}
+%\setbeamertemplate{footline}[text line]{%
+%  \parbox{\linewidth}{\vspace*{-8pt}\hfill\hfill\insertpagenumber}}
 \setbeamertemplate{navigation symbols}{}
 
 \usepackage[english]{babel}				% Set language
@@ -37,18 +37,8 @@
 \usepackage{animate}
 
 \title{Advancing super resolution microscopy for quantitative in-vivo imaging of chromatin nanodomains}	% Presentation title
-\author{Clayton W. Seitz\\ PhD Candidate (IUI), MS (UChicago)}								% Presentation author
+\author{Clayton W. Seitz}								% Presentation author
 \date{\today}									% Today's date	
-
-\setbeamertemplate{footline}{
-    \hbox{%
-    \begin{beamercolorbox}[wd=\paperwidth,ht=3ex,dp=1.5ex,leftskip=2ex,rightskip=2ex]{page footer}%
-        \usebeamerfont{title in head/foot}%
-        \insertshorttitle \hfill
-            %\insertsection \hfill
-        \insertframenumber{} / \inserttotalframenumber
-    \end{beamercolorbox}}%
-}
 
 \AtBeginSection[]{
   \begin{frame}
@@ -82,21 +72,42 @@
 %	<content>
 %\end{frame}
 
+\setbeamertemplate{footline}{
+    \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=1.0ex,dp=1.5ex,leftskip=2ex,rightskip=2ex]{page ooter}%
+        \footnotesize
+        \usebeamerfont{title in head/foot}%
+        Introduction to fluorescence nanoscopy \hfill
+            %\insertsection \hfill
+        \insertframenumber{} / \inserttotalframenumber
+    \end{beamercolorbox}}%
+}
+
 \section{Introduction to fluorescence nanoscopy}
 
 \begin{frame}{Fluorescence microscopy and the diffraction limit}
 
-\begin{textblock*}{10cm}(1.5cm,1.5cm)
-Minimal resolvable distance $d \sim \lambda$
+\begin{textblock*}{10cm}(1.5cm,1.25cm)
+\begin{itemize}
+\item Minimal resolvable distance $d \sim$ wavelength
+\end{itemize}
 \end{textblock*}
 
-\begin{textblock*}{4cm}(1.5cm,2.65cm)
-\includegraphics[width=4cm]{../../dissertation/dissertation/media/Objective}
+\begin{textblock*}{4cm}(1.0cm,2.25cm)
+\includegraphics[width=4cm]{../../dissertation/dissertation/media/HILO}
 \end{textblock*}
 
-\begin{textblock*}{8cm}(6.0cm,2.0cm)
+\begin{textblock*}{3cm}(1.5cm,5.75cm)
+\includegraphics[width=3cm]{../../dissertation/dissertation/media/Widefield}
+\end{textblock*}
+
+
+\begin{textblock*}{8cm}(6.0cm,2.3cm)
 \includegraphics[width=8cm]{../../dissertation/dissertation/media/PSF}
-Herbert et al. Microscopy and Microanalysis. (2012)
+\end{textblock*}
+
+\begin{textblock*}{8cm}(6.3cm,8.3cm)
+Herbert et al. Microscopy and Microanalysis.
 \end{textblock*}
 
 
@@ -156,10 +167,10 @@ Lakadamyali, M. et al. Nature Methods \textbf{17}, (2020).
 
 
 \begin{frame}{Nanoscopy by localizing isolated fluorescent emitters}
-
-Modeling the point spread function permits sub-pixel localization 
-
-\begin{textblock*}{8cm}(6.5cm,2.0cm)
+\begin{itemize}
+\item Modeling the point spread function permits sub-pixel localization 
+\end{itemize}
+\begin{textblock*}{8cm}(6.5cm,3.0cm)
 \includegraphics[width=\textwidth]{../../dissertation/dissertation/media/Model.png}
 \end{textblock*}
 
@@ -237,16 +248,18 @@ Wu et al. Trends in Cell Biology. \textbf{30} (2020)
 
 \end{frame}
 
+\begin{comment}
 \begin{frame}
 \frametitle{Maximization of density, minimization of error}
 
 Approach these objectives using two probabilistic modeling approaches:
 \begin{itemize}
-\item \textbf{Specific Aim 1}: Utilize deep generative modeling for \emph{dense} widefield nanoscopy
-\item \textbf{Specific Aim 2}: Introduce single photon counting in widefield nanoscopy
+\item \textbf{Approach I}: Utilize deep generative modeling for \emph{dense} widefield nanoscopy
+\item \textbf{Approach II}: Introduce single photon counting in widefield nanoscopy
 \end{itemize}
 
 \end{frame}
+\end{comment}
 
 %\begin{frame}
 %\frametitle{Fourier Image Resolution (FIRE)}
@@ -259,29 +272,47 @@ Approach these objectives using two probabilistic modeling approaches:
 %Nutshell: \emph{How to relax the density limit in localization microscopy}?
 %\end{frame}
 
+\setbeamertemplate{footline}{
+    \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=1.0ex,dp=1.5ex,leftskip=2ex,rightskip=2ex]{page ooter}%
+        \footnotesize
+        \usebeamerfont{title in head/foot}%
+        Probabilistic modeling approaches to fluorescence nanoscopy \hfill
+            %\insertsection \hfill
+        \insertframenumber{} / \inserttotalframenumber
+    \end{beamercolorbox}}%
+}
+
 \section{Probabilistic modeling approaches to fluorescence nanoscopy}
 
 
-\subsection{Specific Aim 1: Enhance nanoscopy with deep generative models}
+\subsection{Approach I: Enhance nanoscopy with deep generative models}
 
 \begin{frame}{The Bayesian calculation and variational inference}
 
-Let $\theta$ be a latent variable (e.g. high resolution image) to be inferred from a measurement $\bold{x}$ (e.g. low resolution image)\\
+%Let $\theta$ be a latent variable (e.g. high resolution image) to be inferred from a measurement $\bold{x}$ (e.g. low resolution image)\\
 
-\begin{alertblock}{Bayes Rule}
-$p(\theta\lvert \boldsymbol{x}) = \frac{p(\boldsymbol{x}\lvert \theta)p(\theta)}{\int p(\bold{x},\theta)d\theta} \propto p(\boldsymbol{x}\lvert \theta)p(\theta)$
-\end{alertblock}
+\textbf{Bayes Rule:}\;\;$p(\theta\lvert \boldsymbol{x}) = \frac{p(\boldsymbol{x}\lvert \theta)p(\theta)}{\int p(\bold{x},\theta)d\theta} \propto p(\boldsymbol{x}\lvert \theta)p(\theta)$
+\vspace{0.75cm}
 
 \includegraphics[width=12cm]{../../dissertation/dissertation/media/BayesRule.png}
+\vspace{0.5cm}
 
-$p(\theta\lvert \boldsymbol{x})$ is can be hard to obtain. One solution is to fit a model distribution $p_{\psi}(\theta\lvert \boldsymbol{x})$ that has parameters $\psi$
+\begin{itemize}
+\item $p(\theta\lvert \boldsymbol{x})$ is can be hard to obtain
+\item Variational inference: fit a model distribution $p_{\psi}(\theta\lvert \boldsymbol{x})$
+\item $\psi$ can be a multivariate Gaussian, neural network, etc.
+\end{itemize}
 
 \end{frame}
 
-\begin{frame}{Bayesian image restoration with diffusion models}
+\begin{frame}{Resolution enhancement with a diffusion model}
 
 \begin{textblock*}{13cm}(1.0cm, 1.5cm)
-Inference of a high resolution image $\bold{y}_0$ from low resolution $\bold{x}$ is approached by modeling a distribution $p_{\psi}(\bold{y}_0\lvert \bold{x})$ with a diffusion model
+\textbf{Objective}: Infer of a high resolution image $\bold{y}_0$ from low resolution $\bold{x}$
+\begin{itemize}
+\item A diffusion model can approximate the posterior distribution  $p_{\psi}(\bold{y}_0\lvert \bold{x})$
+\end{itemize}
 \end{textblock*}
 
 \begin{textblock*}{2cm}(5.5cm, 2.75cm)
@@ -303,7 +334,7 @@ p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) = \mathcal{N}\left(\mu_{\psi}(\bo
 
 \end{frame}
 
-\begin{frame}{Bayesian image restoration with diffusion models}
+\begin{frame}{Resolution enhancement with a diffusion model}
 \begin{textblock*}{9cm}(3.0cm, 1.5cm)
 \includegraphics[width=9cm]{../../ddpm/ddpm/media/DiffusionArch.png}
 \end{textblock*}
@@ -371,16 +402,18 @@ Estimation of pixel-wise uncertainty in the high resolution $\bold{y}$
 
 \end{frame}
 
-\subsection{Specific Aim 2: Integrate single photon counting and widefield single molecule imaging}
+\subsection{Approach 2: Integrate single photon counting and widefield single molecule imaging}
 
 \begin{frame}{An integrated single photon avalanche diode (SPAD) array}
-SPAD arrays open several doors in microscopy, including new modeling approaches
+\begin{itemize}
+\item SPAD arrays open several doors in microscopy, including new modeling approaches
+\end{itemize}
 %\begin{textblock*}{13cm}(1.0cm,1.0cm)
 \includegraphics[width=13cm]{../../spad/spad/media/SPADD.png}
 %\end{textblock*}
 \end{frame}
 
-
+\begin{comment}
 \begin{frame}{The Hanbury Brown and Twiss Effect}
 \begin{textblock*}{13cm}(1.0cm,1.0cm)
 \includegraphics[width=13cm]{../../spad/spad/media/HBT.png}
@@ -398,6 +431,7 @@ g^{(2)}(\tau) = \frac{\langle n(t) n(t+\tau) \rangle}{\langle n(t) \rangle^2}
 \end{textblock*}
 
 \end{frame}
+\end{comment}
 
 %\begin{frame}{Widefield photon counting with a SPAD array}
 %\begin{textblock*}{13cm}(1.0cm,1.0cm)
@@ -428,10 +462,10 @@ g^{(2)}(\tau) = \frac{\langle n(t) n(t+\tau) \rangle}{\langle n(t) \rangle^2}
 \begin{textblock*}{10cm}(2.0cm,1.0cm)
 \includegraphics[width=10cm]{../../spad/spad/media/Counts.png}
 \end{textblock*}
-\begin{textblock*}{13cm}(1.0cm,7.75cm)
+\begin{textblock*}{13cm}(1.0cm,7.5cm)
 \begin{itemize}
-\item Likelihood is a mixture of counts from $N$ single photon sources, and background noise
-\item Can obtain posterior $p(N,\zeta\lvert n) \propto p(n\lvert N,\zeta)p(\zeta)$
+\item Likelihood $\mathcal{L}$ is a mixture of counts from $N$ single photon sources, and background noise
+\item Can be thought of as a type of Hidden Markov Model (HMM) 
 \end{itemize}
 \end{textblock*}
 
@@ -450,10 +484,17 @@ g^{(2)}(\tau) = \frac{\langle n(t) n(t+\tau) \rangle}{\langle n(t) \rangle^2}
 
 
 \begin{textblock*}{6cm}(8.5cm,1.5cm)
+Can obtain a posterior on $N$:
+\begin{equation*}
+\mathcal{L} = \mathrm{Poisson}(\lambda)* \mathrm{Binomial}(N,\zeta)
+\end{equation*}
+\begin{equation*}
+p(N\lvert n) \propto \int_{0}^{1} \mathcal{L}(n\lvert N,\zeta)p(\zeta)d\zeta
+\end{equation*}
+\vspace{1cm}
 \begin{itemize}
-\item MAP estimation on $N$
-\item Parameterization of multi-emitter fitting
-\item Approaches $\sigma_{\mathrm{CRLB}}$ for $N=1$
+\item Posterior $\rightarrow$ parameterization of multi-emitter fitting
+\item Approaches lower bound on localization error at high counts
 \end{itemize}
 \end{textblock*}
 
@@ -528,9 +569,21 @@ g^{(2)}(\tau) = \frac{\langle n(t) n(t+\tau) \rangle}{\langle n(t) \rangle^2}
 %\end{textblock*}
 %\end{frame}
 
+\setbeamertemplate{footline}{
+    \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=1.0ex,dp=1.5ex,leftskip=2ex,rightskip=2ex]{page ooter}%
+        \footnotesize
+        \usebeamerfont{title in head/foot}%
+        Super-resolution of nucleosome nanodomains \textit{in-vivo} \hfill
+            %\insertsection \hfill
+        \insertframenumber{} / \inserttotalframenumber
+    \end{beamercolorbox}}%
+}
+
+
 \section{Super-resolution of nucleosome nanodomains \textit{in-vivo}}
 
-\subsection{Specific Aim 3: Interaction of transcriptional condensates with nucleosome nanodomains}
+\subsection{Interaction of transcriptional condensates with nucleosome nanodomains}
 
 \begin{frame}{Hierarchical structure of chromatin}
 
@@ -557,6 +610,16 @@ Fillapakoulos, P. et al. Nature \textbf{468}, (2010).
 
 \end{frame}
 
+\setbeamertemplate{footline}{
+    \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=1.0ex,dp=2ex,leftskip=2ex,rightskip=2ex]{page footer}%
+        \footnotesize
+        \usebeamerfont{title in head/foot}%
+        \textbf{Seitz C.} et al. 2024 (Submitted)\hfill
+        \insertframenumber{} / \inserttotalframenumber
+    \end{beamercolorbox}}%
+}
+
 
 \begin{frame}{BRD4 mutations to probe effects on chromatin structure}
 
@@ -566,14 +629,19 @@ Fillapakoulos, P. et al. Nature \textbf{468}, (2010).
 
 \begin{textblock*}{5cm}(7.75cm,1.25cm)
 \includegraphics[width=5cm]{../../brd4/brd4/media/AlphaFoldStructure}
-\;\; AlphaFold BRD4 1-1362aa 
 \end{textblock*}
+
+\begin{textblock*}{5cm}(8.25cm,5.0cm)
+AlphaFold BRD4 1-1362aa 
+\end{textblock*}
+
 
 \begin{textblock*}{10cm}(2.0cm,7.0cm)
 \includegraphics[width=10cm]{../../brd4/brd4/media/Mutations}
 \end{textblock*}
 
 \end{frame}
+
 
 \begin{frame}{BRD4 binding efficacy controls colocalization with nuclesome nanodomains}
 \includegraphics[width=12cm]{../../brd4/brd4/media/Figure-0.png}
@@ -635,18 +703,43 @@ Integrate Brownian dynamics: $\dot{r} = \gamma^{-1}\nabla U + \sqrt{2 k_{B}T}\ga
 Stochastic forcing is a delta-correlated white-noise $\xi \sim \mathcal{N}(0,1), \langle \xi(t)\xi(t+\tau)\rangle = \delta(\tau)$
 \end{frame}
 
-\begin{frame}{Summary of contributions}
-\textbf{First generative model of super-resolution microscopy images from low-resolution inputs}
-\begin{itemize}
-\item Modeled a distribution rather than a point estimate
-\item Quantified uncertainty
-\end{itemize}
-\textbf{Applied SPAD array for counting fluorescent molecules in widefield microscopy}
-\begin{itemize}
-\item Novel Bayesian inference paradigm from single photon counts
-\end{itemize}
-\textbf{First data supporting control of chromatin architecture by transcriptional condensates}
+\setbeamertemplate{footline}{
+    \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=1.0ex,dp=1.5ex,leftskip=2ex,rightskip=2ex]{page ooter}%
+        \footnotesize
+        \usebeamerfont{title in head/foot}%
+        \insertshorttitle \hfill
+            %\insertsection \hfill
+        \insertframenumber{} / \inserttotalframenumber
+    \end{beamercolorbox}}%
+}
 
+\begin{frame}{Summary of contributions}
+\begin{itemize}
+\item First generative model of super-resolution microscopy images from low-resolution inputs
+\item Applied SPAD array for counting fluorescent molecules in widefield microscopy
+\item First data supporting control of chromatin architecture by transcriptional condensates
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Selected Publications}
+
+\begin{itemize}
+
+\item \textbf{Clayton Seitz}, Donghong Fu, Mengyuan Liu, Hailan Ma, and Jing Liu. \textit{BRD4 phosphorylation regulates the structure of chromatin nanodomains}. Submitted. 2024
+
+
+\item \textbf{Clayton Seitz} and Jing Liu. \textit{Uncertainty-aware localization microscopy by variational diffusion}. In Review. 2024
+
+\item \textbf{Clayton Seitz} and Jing Liu. \textit{Quantum enhanced localization microscopy with a single photon avalanche diode array}. In Progress. 2024
+
+\item Maelle Locatelli\textsuperscript{\textdagger}, Josh Lawrimore\textsuperscript{\textdagger}, Hua Lin\textsuperscript{\textdagger}, Sarvath Sanaullah, \textbf{Clayton Seitz}, Dave Segall, Paul Kefer, Salvador Moreno Naike, Benton Lietz, Rebecca Anderson, Julia Holmes, Chongli Yuan, George Holzwarth, Bloom Kerry, Jing Liu, Keith D Bonin, Pierre-Alexandre Vidi. \textit{DNA damage reduces heterogeneity and coherence of chromatin motions}. PNAS 12 July 2022; 119 (29): 1-11
+
+\item Mengdi Zhang, \textbf{Clayton Seitz}, Garrick Chang, Fadil Iqbal, Hua Lin, and Jing Liu \textit{A guide for single-particle chromatin tracking in live cell nuclei}. Cell Biology International 15 January 2022; 46 (5): 683-700
+
+%\item Wenting Wu, Farooq Syed, Edward Simpson, Chih-Chun Lee, Jing Liu, Garrick Chang, Chuanpeng Dong, \textbf{Clayton Seitz}, Decio L. Eizirik, Raghavendra G. Mirmira, Yunlong Liu, Carmella Evans-Molina; \textit{Impact of Proinflammatory Cytokines on Alternative Splicing Patterns in Human Islets}. Diabetes 25 October 2021; 71 (1): 116–127
+
+\end{itemize}
 \end{frame}
 
 
@@ -662,19 +755,5 @@ Thank you!
 \end{frame}
 
 
-\begin{comment}
-\begin{frame}{Recent Publications}
-
-\begin{itemize}
-\item Maelle Locatelli\textsuperscript{\textdagger}, Josh Lawrimore\textsuperscript{\textdagger}, Hua Lin\textsuperscript{\textdagger}, Sarvath Sanaullah, \textbf{Clayton Seitz}, ..., Pierre-Alexandre Vidi. \textit{DNA damage reduces heterogeneity and coherence of chromatin motions}. PNAS. July 2022\\
-\vspace{0.1in}
-\item Mengdi Zhang, \textbf{Clayton Seitz}, Garrick Chang, Fadil Iqbal, Hua Lin, and Jing Liu \textit{A guide for single-particle chromatin tracking in live cell nuclei}. Cell Biology International. January 2022.\\
-\vspace{0.1in}
-\item Wenting Wu, Farooq Syed, Edward Simpson, Chih-Chun Lee, Jing Liu, Garrick Chang, Chuanpeng Dong, \textbf{Clayton Seitz}, ..., Carmella Evans-Molina; \textit{Impact of Proinflammatory Cytokines on Alternative Splicing Patterns in Human Islets}. Diabetes. January 2022
-\end{itemize}
-\end{frame}
-
-
-\end{comment}
 
 \end{document}
