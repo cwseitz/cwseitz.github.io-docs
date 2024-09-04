@@ -692,14 +692,14 @@ AlphaFold BRD4 1-1362aa
 \end{textblock*}
 \begin{textblock*}{13cm}(1.0cm,9.0cm)
 \begin{itemize}
-\item 100kb chromatin chains connected by harmonic bonds (Rouse model)
+\item 100kb chromatin beads connected by harmonic bonds (Rouse model)
 \end{itemize}
 \end{textblock*}
 \end{frame}
 
 \begin{frame}{Coarse grained molecular dynamics of chromatin binders at 310K}
 \includegraphics[width=12cm]{../../brd4/brd4/media/MD-1}
-100kb chromatin chains interact with binders via the potential 
+Chromatin chains interact with binders via the potential 
 \begin{equation*}
 U_{ij} = \epsilon \left(1-\left(\frac{|r_{ij}|}{R_{0}}\right)^{2}\right)^{3}
 \end{equation*}
@@ -713,7 +713,7 @@ U_{ij} = \epsilon \left(1-\left(\frac{|r_{ij}|}{R_{0}}\right)^{2}\right)^{3}
 \includegraphics[width=12cm]{../../brd4/brd4/media/MD-2}
 Integrate Brownian dynamics: $\dot{r} = \gamma^{-1}\nabla U + \sqrt{2 k_{B}T}\gamma^{-1/2}\xi \;\; \gamma = 10^{-6}$\\
 \vspace{1cm}
-Stochastic forcing is a delta-correlated white-noise $\xi \sim \mathcal{N}(0,1), \langle \xi(t)\xi(t+\tau)\rangle = \delta(\tau)$
+Stochastic forcing is a delta-correlated noise $\xi \sim \mathcal{N}(0,1), \langle \xi(t)\xi(t+\tau)\rangle = \delta(\tau)$
 \end{frame}
 
 \setbeamertemplate{footline}{
