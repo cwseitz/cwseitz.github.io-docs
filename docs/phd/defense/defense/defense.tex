@@ -89,7 +89,7 @@
 
 \begin{textblock*}{10cm}(1.5cm,1.25cm)
 \begin{itemize}
-\item Minimal resolvable distance $d \sim$ wavelength
+\item Minimal resolvable distance $d \sim \lambda/2$
 \end{itemize}
 \end{textblock*}
 
@@ -464,7 +464,7 @@ g^{(2)}(\tau) = \frac{\langle n(t) n(t+\tau) \rangle}{\langle n(t) \rangle^2}
 \end{textblock*}
 \begin{textblock*}{13cm}(1.0cm,7.5cm)
 \begin{itemize}
-\item Likelihood $\mathcal{L}$ is a mixture of counts from $N$ single photon sources, and background noise
+\item SPAD arrays permit modeling of single photon counts, not just total intensity
 \item A simple form of a Hidden Markov Model (HMM) 
 \end{itemize}
 \end{textblock*}
@@ -477,8 +477,7 @@ g^{(2)}(\tau) = \frac{\langle n(t) n(t+\tau) \rangle}{\langle n(t) \rangle^2}
 \end{textblock*}
 \begin{textblock*}{13cm}(1.0cm,8.0cm)
 \begin{itemize}
-\item Likelihood $\mathcal{L} = \mathrm{Poisson}(\lambda)* \mathrm{Binomial}(N,\zeta)$
-\item A simple form of a Hidden Markov Model (HMM) 
+\item Likelihood $\mathcal{L}$ is a mixture of counts from $N$ single photon sources, and background noise
 \end{itemize}
 \end{textblock*}
 
@@ -504,7 +503,7 @@ Can obtain a posterior on $N$:
 \begin{equation*}
 p(N\lvert n) \propto \int_{0}^{1} \mathcal{L}(n\lvert N,\zeta)p(\zeta)d\zeta
 \end{equation*}
-\vspace{1cm}
+\vspace{0.75cm}
 \begin{itemize}
 \item Posterior $\rightarrow$ parameterization of multi-emitter fitting
 \item Approaches lower bound on localization error at high counts
@@ -628,7 +627,7 @@ Fillapakoulos, P. et al. Nature \textbf{468}, (2010).
     \begin{beamercolorbox}[wd=\paperwidth,ht=1.0ex,dp=2ex,leftskip=2ex,rightskip=2ex]{page footer}%
         \footnotesize
         \usebeamerfont{title in head/foot}%
-        \textbf{Seitz C.} et al. 2024 (Submitted)\hfill
+        \textbf{Seitz C.} et al. 2024 (Submitted) https://doi.org/10.1101/2024.09.03.611057\hfill
         \insertframenumber{} / \inserttotalframenumber
     \end{beamercolorbox}}%
 }
@@ -650,14 +649,25 @@ AlphaFold BRD4 1-1362aa
 
 
 \begin{textblock*}{10cm}(2.0cm,7.0cm)
-\includegraphics[width=10cm]{../../brd4/brd4/media/Mutations}
+%\includegraphics[width=10cm]{../../brd4/brd4/media/Mutations}
+\begin{itemize}
+\item 7A mutant - Constitutively unphosphorylated
+\item 7D mutant - Constitutively phosphorylated
+\item BD mutant - Bromodomain deactivated
+\end{itemize}
 \end{textblock*}
 
 \end{frame}
 
 
-\begin{frame}{BRD4 binding efficacy controls colocalization with nuclesome nanodomains}
-\includegraphics[width=12cm]{../../brd4/brd4/media/Figure-0.png}
+\begin{frame}{BRD4 recruitment to nuclesome nanodomains}
+\begin{center}
+\includegraphics[width=10cm]{../../brd4/brd4/media/Figure-0.png}
+\end{center}
+\begin{itemize}
+\item Phosphorylation enhances BRD4 binding to acetylated chromatin
+\item Hyperphosphorylation - resistance mechanism to BD loss (Shu 2016)
+\end{itemize}
 \end{frame}
 
 \begin{frame}{BRD4 chromatin binding controls chromatin mobility}
@@ -739,7 +749,7 @@ Stochastic forcing is a delta-correlated noise $\xi \sim \mathcal{N}(0,1), \lang
 
 \begin{itemize}
 
-\item \textbf{Clayton Seitz}, Donghong Fu, Mengyuan Liu, Hailan Ma, and Jing Liu. \textit{BRD4 phosphorylation regulates the structure of chromatin nanodomains}. Submitted. 2024
+\item \textbf{Clayton Seitz}, Donghong Fu, Mengyuan Liu, Hailan Ma, and Jing Liu. \textit{BRD4 phosphorylation regulates the structure of chromatin nanodomains}. https://doi.org/10.1101/2024.09.03.611057. 2024
 
 
 \item \textbf{Clayton Seitz} and Jing Liu. \textit{Uncertainty-aware localization microscopy by variational diffusion}. In Review. 2024
