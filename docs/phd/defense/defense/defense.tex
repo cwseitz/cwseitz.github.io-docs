@@ -406,7 +406,7 @@ Estimation of pixel-wise uncertainty in the high resolution $\bold{y}$
 
 \begin{frame}{Approach II: Integrated single photon counting and widefield single molecule imaging}
 \begin{itemize}
-\item Singloe photon avalanche diode (SPAD) arrays open several doors in microscopy, including new modeling approaches
+\item Single photon avalanche diode (SPAD) arrays give us new modeling approaches
 \end{itemize}
 %\begin{textblock*}{13cm}(1.0cm,1.0cm)
 \includegraphics[width=13cm]{../../spad/spad/media/SPADD.png}
@@ -458,14 +458,27 @@ g^{(2)}(\tau) = \frac{\langle n(t) n(t+\tau) \rangle}{\langle n(t) \rangle^2}
 
 \end{frame}
 
-\begin{frame}{Poisson-Binomial photon count data at a single pixel (simulation)}
+\begin{frame}{Poisson-Binomial photon count data (simulation)}
 \begin{textblock*}{10cm}(2.0cm,1.0cm)
 \includegraphics[width=10cm]{../../spad/spad/media/Counts.png}
 \end{textblock*}
 \begin{textblock*}{13cm}(1.0cm,7.5cm)
 \begin{itemize}
 \item Likelihood $\mathcal{L}$ is a mixture of counts from $N$ single photon sources, and background noise
-\item Can be thought of as a type of Hidden Markov Model (HMM) 
+\item A simple form of a Hidden Markov Model (HMM) 
+\end{itemize}
+\end{textblock*}
+
+\end{frame}
+
+\begin{frame}{Discrimination of single and multiple quantum dots}
+\begin{textblock*}{10cm}(2.0cm,1.0cm)
+\includegraphics[width=10cm]{../../spad/spad/media/CountQD.png}
+\end{textblock*}
+\begin{textblock*}{13cm}(1.0cm,8.0cm)
+\begin{itemize}
+\item Likelihood $\mathcal{L} = \mathrm{Poisson}(\lambda)* \mathrm{Binomial}(N,\zeta)$
+\item A simple form of a Hidden Markov Model (HMM) 
 \end{itemize}
 \end{textblock*}
 
