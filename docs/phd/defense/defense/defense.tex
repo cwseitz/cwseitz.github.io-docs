@@ -135,10 +135,11 @@ Lakadamyali, M. et al. Nature Methods \textbf{17}, (2020).
 \begin{textblock*}{5cm}(9.5cm,1.5cm)
 \animategraphics[width=5cm,autoplay,loop]{60}{../../dissertation/dissertation/media/storm-animation/storm-animation-}{1}{100}
 \end{textblock*}
-\begin{textblock*}{\textwidth}(1.0cm,7.5cm)
+\begin{textblock*}{15cm}(0.5cm,7.5cm)
 \begin{itemize}
-\item STORM and similar nanoscopy techniques are diffraction-unlimited
-\item Photoswitching enables resolution of emitters below the diffraction limit
+\item STORM and similar nanoscopy techniques are limited by localization precision
+\item Higher lateral/axial resolution than other methods (e.g., SIM,STED,Confocal)
+\item Poor time resolution
 \end{itemize}
 \end{textblock*}
 \end{frame}
@@ -150,10 +151,11 @@ Lakadamyali, M. et al. Nature Methods \textbf{17}, (2020).
 \begin{textblock*}{5cm}(9.5cm,1.5cm)
 \includegraphics[width=\textwidth]{../../dissertation/dissertation/media/STORM-Example.png}
 \end{textblock*}
-\begin{textblock*}{\textwidth}(1.0cm,7.5cm)
+\begin{textblock*}{15cm}(0.5cm,7.5cm)
 \begin{itemize}
-\item STORM and similar nanoscopy techniques are diffraction-unlimited
-\item Photoswitching enables resolution of emitters below the diffraction limit
+\item STORM and similar nanoscopy techniques are limited by localization precision
+\item Higher lateral/axial resolution than other methods (e.g., SIM,STED,Confocal)
+\item Poor time resolution
 \end{itemize}
 \end{textblock*}
 \end{frame}
@@ -239,7 +241,33 @@ Wu et al. Trends in Cell Biology. \textbf{30} (2020)
 \includegraphics[width=8cm]{../../dissertation/dissertation/media/FRC.png}
 \end{textblock*}
 
-\begin{textblock*}{5cm}(8.5cm, 3.5cm)
+\begin{textblock*}{5cm}(9.35cm, 1.75cm)
+\includegraphics[width=5cm]{../../dissertation/dissertation/media/Tradeoff.png}
+\end{textblock*}
+
+
+\begin{textblock*}{5cm}(8.5cm, 5.5cm)
+\begin{itemize}
+\item \textbf{Maximize} density and in turn spatial/temporal resolution
+\item \textbf{Minimize} localization errors 
+\end{itemize}
+\end{textblock*}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Maximization of density, minimization of error}
+
+\begin{textblock*}{8cm}(0.5cm, 1.5cm)
+\includegraphics[width=8cm]{../../dissertation/dissertation/media/FRC.png}
+\end{textblock*}
+
+\begin{textblock*}{5cm}(9.35cm, 1.75cm)
+\includegraphics[width=5cm]{../../dissertation/dissertation/media/Tradeoff2.png}
+\end{textblock*}
+
+
+\begin{textblock*}{5cm}(8.5cm, 5.5cm)
 \begin{itemize}
 \item \textbf{Maximize} density and in turn spatial/temporal resolution
 \item \textbf{Minimize} localization errors 
@@ -464,8 +492,8 @@ g^{(2)}(\tau) = \frac{\langle n(t) n(t+\tau) \rangle}{\langle n(t) \rangle^2}
 \end{textblock*}
 \begin{textblock*}{13cm}(1.0cm,7.5cm)
 \begin{itemize}
-\item SPAD arrays permit modeling of single photon counts, not just total intensity
-\item A simple form of a Hidden Markov Model (HMM) 
+\item SPAD arrays permit modeling of time-series of photon counts $n_{t}$
+\item Likelihood on counts: $\mathcal{L}(n_t\lvert N,\zeta) = \mathrm{Poisson}(\lambda)* \mathrm{Binomial}(N,\zeta)$
 \end{itemize}
 \end{textblock*}
 
@@ -475,10 +503,9 @@ g^{(2)}(\tau) = \frac{\langle n(t) n(t+\tau) \rangle}{\langle n(t) \rangle^2}
 \begin{textblock*}{10cm}(2.0cm,1.0cm)
 \includegraphics[width=10cm]{../../spad/spad/media/CountQD.png}
 \end{textblock*}
-\begin{textblock*}{13cm}(1.0cm,8.0cm)
-\begin{itemize}
-\item Likelihood $\mathcal{L}$ is a mixture of counts from $N$ single photon sources, and background noise
-\end{itemize}
+\begin{textblock*}{14cm}(1.0cm,8.0cm)
+%Posterior on $N$: $p(N\lvert n_t) \propto \int_{0}^{1} \mathcal{L}(n_t\lvert N,\zeta)p(\zeta)d\zeta$
+Blinking in quantum dots occurs due to non-radiative relaxation pathways
 \end{textblock*}
 
 \end{frame}
@@ -495,17 +522,15 @@ g^{(2)}(\tau) = \frac{\langle n(t) n(t+\tau) \rangle}{\langle n(t) \rangle^2}
 \end{textblock*}
 
 
-\begin{textblock*}{6cm}(8.5cm,1.5cm)
-Can obtain a posterior on $N$:
-\begin{equation*}
-\mathcal{L} = \mathrm{Poisson}(\lambda)* \mathrm{Binomial}(N,\zeta)
-\end{equation*}
-\begin{equation*}
-p(N\lvert n) \propto \int_{0}^{1} \mathcal{L}(n\lvert N,\zeta)p(\zeta)d\zeta
-\end{equation*}
-\vspace{0.75cm}
+\begin{textblock*}{6cm}(8.5cm,2.5cm)
 \begin{itemize}
-\item Posterior $\rightarrow$ parameterization of multi-emitter fitting
+\item $p(N|n)\rightarrow$ parameterization of multi-emitter fitting
+\end{itemize}
+\end{textblock*}
+
+\begin{textblock*}{6cm}(8.5cm,5.5cm)
+\begin{itemize}
+\item Sampling based multi-emitter fitting
 \item Approaches lower bound on localization error at high counts
 \end{itemize}
 \end{textblock*}
@@ -524,7 +549,7 @@ p(N\lvert n) \propto \int_{0}^{1} \mathcal{L}(n\lvert N,\zeta)p(\zeta)d\zeta
 \begin{itemize}
 \item DNA origami 2um grid
 \item Each binds $N$ ATTO532 dyes
-\item Verification of method
+\item Verification of counting method
 \end{itemize}
 \end{textblock*}
 \begin{textblock*}{4.5cm}(9.0cm,1.0cm)
@@ -749,7 +774,7 @@ Stochastic forcing is a delta-correlated noise $\xi \sim \mathcal{N}(0,1), \lang
 
 \begin{itemize}
 
-\item \textbf{Clayton Seitz}, Donghong Fu, Mengyuan Liu, Hailan Ma, and Jing Liu. \textit{BRD4 phosphorylation regulates the structure of chromatin nanodomains}. https://doi.org/10.1101/2024.09.03.611057. 2024
+\item \textbf{Clayton Seitz}, Donghong Fu, Mengyuan Liu, Hailan Ma, and Jing Liu. \textit{BRD4 phosphorylation regulates the structure of chromatin nanodomains}. Submitted. https://doi.org/10.1101/2024.09.03.611057. 2024
 
 
 \item \textbf{Clayton Seitz} and Jing Liu. \textit{Uncertainty-aware localization microscopy by variational diffusion}. In Review. 2024
