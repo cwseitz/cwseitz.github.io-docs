@@ -305,13 +305,13 @@ Approach these objectives using two probabilistic modeling approaches:
     \begin{beamercolorbox}[wd=\paperwidth,ht=1.0ex,dp=1.5ex,leftskip=2ex,rightskip=2ex]{page ooter}%
         \footnotesize
         \usebeamerfont{title in head/foot}%
-        Probabilistic modeling approaches to fluorescence nanoscopy \hfill
+        Novel methods: probabilistic modeling approaches to fluorescence nanoscopy \hfill
             %\insertsection \hfill
         \insertframenumber{} / \inserttotalframenumber
     \end{beamercolorbox}}%
 }
 
-\section{Probabilistic modeling approaches to fluorescence nanoscopy}
+\section{Novel methods: Probabilistic modeling approaches to fluorescence nanoscopy}
 
 
 \subsection{Approach I: Enhance nanoscopy with deep generative models}
@@ -500,10 +500,12 @@ g^{(2)}(\tau) = \frac{\langle n(t) n(t+\tau) \rangle}{\langle n(t) \rangle^2}
 \end{frame}
 
 \begin{frame}{Discrimination of single and multiple quantum dots}
-\begin{textblock*}{10cm}(2.0cm,1.0cm)
-\includegraphics[width=10cm]{../../spad/spad/media/CountQD.png}
-\end{textblock*}
-\begin{textblock*}{14cm}(1.0cm,8.0cm)
+%\begin{textblock*}{13cm}(2.0cm,1.0cm)
+\begin{center}
+\includegraphics[width=13cm]{../../spad/spad/media/CountQD.png}
+\end{center}
+%\end{textblock*}
+\begin{textblock*}{14cm}(1.0cm,9.0cm)
 %Posterior on $N$: $p(N\lvert n_t) \propto \int_{0}^{1} \mathcal{L}(n_t\lvert N,\zeta)p(\zeta)d\zeta$
 Blinking in quantum dots occurs due to non-radiative relaxation pathways
 \end{textblock*}
@@ -537,8 +539,34 @@ Blinking in quantum dots occurs due to non-radiative relaxation pathways
 
 \end{frame}
 
+\begin{frame}{Constrained multi-emitter localization with photon counting}
 
-\begin{frame}{Counting ATTO532 dye bound to DNA origamis}
+\begin{textblock*}{7cm}(1.0cm,1.5cm)
+\includegraphics[width=7cm]{../../spad/spad/media/Figure-4.png}
+\end{textblock*}
+
+\begin{textblock*}{7cm}(1.0cm,5.0cm)
+\includegraphics[width=7cm]{../../spad/spad/media/Figure-5-2.png}
+\end{textblock*}
+
+
+\begin{textblock*}{6cm}(8.5cm,2.5cm)
+\begin{itemize}
+\item $p(N|n)\rightarrow$ parameterization of multi-emitter fitting
+\end{itemize}
+\end{textblock*}
+
+\begin{textblock*}{6cm}(8.5cm,5.5cm)
+\begin{itemize}
+\item Sampling based multi-emitter fitting
+\item Approaches lower bound on localization error at high counts
+\end{itemize}
+\end{textblock*}
+
+\end{frame}
+
+
+\begin{frame}{Upcoming work: counting ATTO532 dye bound to DNA origamis}
 \begin{textblock*}{7cm}(1.0cm,1.3cm)
 \includegraphics[width=7cm]{../../spad/spad/media/GATTA2.png}
 \end{textblock*}
@@ -774,21 +802,21 @@ Stochastic forcing is a delta-correlated noise $\xi \sim \mathcal{N}(0,1), \lang
 
 \begin{itemize}
 
-\item \textbf{Clayton Seitz}, Donghong Fu, Mengyuan Liu, Hailan Ma, and Jing Liu. \textit{BRD4 phosphorylation regulates the structure of chromatin nanodomains}. Submitted. https://doi.org/10.1101/2024.09.03.611057. 2024
+\item \textbf{C. Seitz}, D. Fu, M. Liu, H. Ma, and J. Liu. \textit{BRD4 phosphorylation regulates the structure of chromatin nanodomains}. In Review. Phys Rev Lett. 2024
 
+\item \textbf{C. Seitz} and J. Liu. \textit{Uncertainty-aware localization microscopy by variational diffusion}. In Progress. 2024
 
-\item \textbf{Clayton Seitz} and Jing Liu. \textit{Uncertainty-aware localization microscopy by variational diffusion}. In Review. 2024
+\item \textbf{C. Seitz} and J. Liu. \textit{Quantum enhanced localization microscopy with a single photon avalanche diode array}. In Progress. 2024
 
-\item \textbf{Clayton Seitz} and Jing Liu. \textit{Quantum enhanced localization microscopy with a single photon avalanche diode array}. In Progress. 2024
+\item M. Locatelli\textsuperscript{\textdagger}, J. Lawrimore\textsuperscript{\textdagger}, H. Lin\textsuperscript{\textdagger}, S. Sanaullah, \textbf{C. Seitz}, D. Segall, P. Kefer, S. Moreno Naike, B. Lietz, R. Anderson, J. Holmes, C. Yuan, G. Holzwarth, B. Kerry, J. Liu, K. Bonin, P. Vidi. \textit{DNA damage reduces heterogeneity and coherence of chromatin motions}. PNAS 12 July 2022; 119 (29): 1-11
 
-\item Maelle Locatelli\textsuperscript{\textdagger}, Josh Lawrimore\textsuperscript{\textdagger}, Hua Lin\textsuperscript{\textdagger}, Sarvath Sanaullah, \textbf{Clayton Seitz}, Dave Segall, Paul Kefer, Salvador Moreno Naike, Benton Lietz, Rebecca Anderson, Julia Holmes, Chongli Yuan, George Holzwarth, Bloom Kerry, Jing Liu, Keith D Bonin, Pierre-Alexandre Vidi. \textit{DNA damage reduces heterogeneity and coherence of chromatin motions}. PNAS 12 July 2022; 119 (29): 1-11
+\item M. Zhang, \textbf{C. Seitz}, G. Chang, F. Iqbal, H. Lin, and J. Liu \textit{A guide for single-particle chromatin tracking in live cell nuclei}. Cell Biology International 15 January 2022; 46 (5): 683-700
 
-\item Mengdi Zhang, \textbf{Clayton Seitz}, Garrick Chang, Fadil Iqbal, Hua Lin, and Jing Liu \textit{A guide for single-particle chromatin tracking in live cell nuclei}. Cell Biology International 15 January 2022; 46 (5): 683-700
-
-%\item Wenting Wu, Farooq Syed, Edward Simpson, Chih-Chun Lee, Jing Liu, Garrick Chang, Chuanpeng Dong, \textbf{Clayton Seitz}, Decio L. Eizirik, Raghavendra G. Mirmira, Yunlong Liu, Carmella Evans-Molina; \textit{Impact of Proinflammatory Cytokines on Alternative Splicing Patterns in Human Islets}. Diabetes 25 October 2021; 71 (1): 116–127
+\item S. Roy, \textbf{C. Seitz}, M. Samaddar, J. Liu \textit{Bayesian Inference of Transcriptional Kinetics of GBP5 by Single-Molecule Imaging}. In Progress. 2024
 
 \end{itemize}
 \end{frame}
+
 
 
 \begin{frame}{Acknowledgements}
