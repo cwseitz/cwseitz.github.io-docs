@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.20)  10 SEP 2024 10:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.20)  10 SEP 2024 19:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1599,6 +1599,10 @@ Package: ocgbase 2022/08/04 v0.22 support package for ocgx2.sty
 \@anim@curfield=\count403
 \@anim@@resizeflags=\count404
 )
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\\' on input line 40.
+
 (./defense.aux)
 \openout1 = `defense.aux'.
 
@@ -4017,10 +4021,10 @@ Package rerunfilecheck Info: File `defense.out' has not changed.
 (rerunfilecheck)             Checksum: 0A8CCAF2180C9F64B09C15281A51AC2D;2279.
  ) 
 Here is how much of TeX's memory you used:
- 36536 strings out of 476025
- 828055 string characters out of 5790016
+ 36537 strings out of 476025
+ 828060 string characters out of 5790016
  1860388 words of memory out of 5000000
- 55952 multiletter control sequences out of 15000+600000
+ 55953 multiletter control sequences out of 15000+600000
  529107 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,15n,122p,556b,534s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -4044,7 +4048,7 @@ al/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local
 ocal/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfso0800.pfb></usr/loc
 al/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfso1000.pfb></usr/local
 /texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb>
-Output written on defense.pdf (35 pages, 59735574 bytes).
+Output written on defense.pdf (35 pages, 59735685 bytes).
 PDF statistics:
  1377 PDF objects out of 1440 (max. 8388607)
  715 compressed objects within 8 object streams
