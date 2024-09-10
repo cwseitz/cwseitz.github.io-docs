@@ -347,17 +347,21 @@ Approach these objectives using two probabilistic modeling approaches:
 }
 
 
-\begin{frame}{Example: sampling based inference using Langevin dynamics}
+\begin{frame}{Approach I: Resolution enhancement with a diffusion model}
 \begin{textblock*}{13cm}(0.5cm,1.5cm)
 \begin{itemize}
 \item Can sample from $p(\theta\lvert \boldsymbol{x})$ using a stochastic process called Langevin dynamics
 \end{itemize}
 \end{textblock*}
-\begin{textblock*}{8cm}(3.5cm,2.25cm)
+\begin{textblock*}{8cm}(3.5cm,2.0cm)
 \animategraphics[width=8cm,autoplay,loop]{20}{../../ddpm/ddpm/media/sampling/image-}{1}{100}
 \end{textblock*}
-\begin{textblock*}{14cm}(1.0cm,8.5cm)
-\textcolor{red}{Drift} and \textcolor{blue}{diffusion}: $\theta_{t} = \textcolor{red}{\theta_{t-1} - \frac{\beta}{2}\nabla f(\theta)} + \textcolor{blue}{\sqrt{\beta}\xi} \;\;\; \xi\sim \mathcal{N}(0,I)$
+\begin{textblock*}{14cm}(2.25cm,8.0cm)
+\textcolor{red}{Drift} and \textcolor{blue}{diffusion}: 
+$\theta_{t} = 
+\overset{\mu}{\overbrace{\textcolor{red}{\theta_{t-1} - \frac{\beta}{2}\nabla f(\theta)}}} 
++ \textcolor{blue}{\sqrt{\beta}\xi} 
+\;\;\; \xi \sim \mathcal{N}(0,I)$
 \end{textblock*}
 \end{frame}
 
@@ -375,9 +379,10 @@ Approach these objectives using two probabilistic modeling approaches:
 \begin{frame}{Approach I: Resolution enhancement with a diffusion model}
 
 \begin{textblock*}{13cm}(1.0cm, 1.5cm)
-\textbf{Objective}: Infer of a high resolution image $\bold{y}_0$ from low resolution $\bold{x}$
+
 \begin{itemize}
-\item A diffusion model can approximate the posterior distribution  $p_{\psi}(\bold{y}_0\lvert \bold{x})$
+\item Task: infer a high resolution image $\bold{y}_0$ from low resolution $\bold{x}$
+\item The drift is not available for image data, but can be learned
 \end{itemize}
 \end{textblock*}
 
@@ -401,19 +406,19 @@ p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) = \mathcal{N}\left(\mu_{\psi},\be
 \end{frame}
 
 \begin{frame}{Approach I: Resolution enhancement with a diffusion model}
-\begin{textblock*}{9cm}(3.0cm, 1.5cm)
+\begin{textblock*}{9cm}(3.0cm, 2.0cm)
 \includegraphics[width=9cm]{../../ddpm/ddpm/media/DiffusionArch.png}
 \end{textblock*}
-\begin{textblock*}{2cm}(0.5cm, 2.5cm)
+\begin{textblock*}{2cm}(0.5cm, 3.0cm)
 \includegraphics[width=2cm]{../../dissertation/dissertation/media/diffusion_example/0_1_sr_79.png}
 \end{textblock*}
-\begin{textblock*}{2cm}(12.5cm, 2.5cm)
+\begin{textblock*}{2cm}(12.5cm, 3.0cm)
 \includegraphics[width=2cm]{../../dissertation/dissertation/media/diffusion_example/0_1_sr_99.png}
 \end{textblock*}
 
-\begin{textblock*}{13cm}(1.0cm, 6cm)
+\begin{textblock*}{13cm}(1.0cm, 6.5cm)
 \begin{itemize}
-\item A deep neural network $\psi$ estimates the drift $\mu_{\psi}$
+\item A convolutional neural network $\psi$ estimates the drift $\mu_{\psi}$
 \item Denoising step: $y_{t-1}\sim p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) = \mathcal{N}\left(\mu_{\psi},\beta_{t}I\right)$
 \end{itemize}
 \end{textblock*}
