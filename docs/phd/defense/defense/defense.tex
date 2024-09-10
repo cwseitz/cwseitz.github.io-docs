@@ -382,11 +382,11 @@ $\theta_{t} =
 
 \begin{itemize}
 \item Task: infer a high resolution image $\bold{y}_0$ from low resolution $\bold{x}$
-\item The drift is not available for image data, but can be learned
+\item Drift is not available for image data, but can be learned from pairs $(\bold{x},\bold{y}_{0})$
 \end{itemize}
 \end{textblock*}
 
-\begin{textblock*}{2cm}(5.5cm, 2.75cm)
+\begin{textblock*}{2cm}(6.0cm, 7.25cm)
 \begin{equation*}
 q(\bold{y}_{t}|\bold{y}_{t-1}) = \mathcal{N}\left(\sqrt{1-\beta_{t}}\bold{y}_{t-1},\beta_t I\right)
 \end{equation*}
@@ -396,7 +396,7 @@ q(\bold{y}_{t}|\bold{y}_{t-1}) = \mathcal{N}\left(\sqrt{1-\beta_{t}}\bold{y}_{t-
 \includegraphics[width=12cm]{../../ddpm/ddpm/media/ForwardBackward.png}
 \end{textblock*}
 
-\begin{textblock*}{2cm}(6.5cm, 7.75cm)
+\begin{textblock*}{2cm}(6.0cm, 3.0cm)
 \begin{equation*}
 p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) = \mathcal{N}\left(\mu_{\psi},\beta_{t}I\right)
 \end{equation*}
