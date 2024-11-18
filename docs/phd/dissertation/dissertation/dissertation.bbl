@@ -945,61 +945,437 @@
       \field{pages}{345\bibrangedash 355}
       \range{pages}{11}
     \endentry
-    \entry{Rust2006}{article}{}
-      \true{moreauthor}
-      \true{morelabelname}
-      \name{author}{1}{}{%
-        {{hash=9acd10adc231d67c1d58b676c9f928d0}{%
-           family={Rust},
-           familyi={R\bibinitperiod},
-           given={Michael},
-           giveni={M\bibinitperiod}}}%
-      }
-      \strng{namehash}{79146d5b33419046e4494600b60e1b9f}
-      \strng{fullhash}{79146d5b33419046e4494600b60e1b9f}
-      \strng{bibnamehash}{79146d5b33419046e4494600b60e1b9f}
-      \strng{authorbibnamehash}{79146d5b33419046e4494600b60e1b9f}
-      \strng{authornamehash}{79146d5b33419046e4494600b60e1b9f}
-      \strng{authorfullhash}{79146d5b33419046e4494600b60e1b9f}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Nature Methods}
-      \field{sortyear}{2006}
-      \field{title}{Sub-diffraction-limit imaging by stochastic optical reconstruction microscopy (STORM)}
-      \field{volume}{3}
-      \field{year}{2006}
-      \field{pages}{793\bibrangedash 796}
-      \range{pages}{4}
-    \endentry
-    \entry{Betzig2006}{article}{}
-      \true{moreauthor}
-      \true{morelabelname}
-      \name{author}{1}{}{%
-        {{hash=b25fd03e7cbcc48fed70f50f7fbffe4e}{%
-           family={Betzig},
+    \entry{Bruschini2019}{misc}{}
+      \name{author}{5}{}{%
+        {{hash=80cf6ec24788738c82ec88093abe7eb5}{%
+           family={Bruschini},
            familyi={B\bibinitperiod},
-           given={Eric},
+           given={Claudio},
+           giveni={C\bibinitperiod}}}%
+        {{hash=67a1cd9a61815316ba8c2b4248c292d9}{%
+           family={Homulle},
+           familyi={H\bibinitperiod},
+           given={Harald},
+           giveni={H\bibinitperiod}}}%
+        {{hash=cb0cbb306d7ecdd3831a369d185c5b7f}{%
+           family={Antolovic},
+           familyi={A\bibinitperiod},
+           given={Ivan\bibnamedelima Michel},
+           giveni={I\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=83487a3eeb3de62b87d00f060474a74f}{%
+           family={Burri},
+           familyi={B\bibinitperiod},
+           given={Samuel},
+           giveni={S\bibinitperiod}}}%
+        {{hash=d6dd49eea525bedc29f7505ead40f2c8}{%
+           family={Charbon},
+           familyi={C\bibinitperiod},
+           given={Edoardo},
            giveni={E\bibinitperiod}}}%
       }
-      \strng{namehash}{bc8391f268e0d3941739497dc8f9e75a}
-      \strng{fullhash}{bc8391f268e0d3941739497dc8f9e75a}
-      \strng{bibnamehash}{bc8391f268e0d3941739497dc8f9e75a}
-      \strng{authorbibnamehash}{bc8391f268e0d3941739497dc8f9e75a}
-      \strng{authornamehash}{bc8391f268e0d3941739497dc8f9e75a}
-      \strng{authorfullhash}{bc8391f268e0d3941739497dc8f9e75a}
+      \list{publisher}{1}{%
+        {Nature Publishing Group}%
+      }
+      \strng{namehash}{a7d03c66043b571bfe8418a08e61d28e}
+      \strng{fullhash}{b373affd2e6b8e2f0251096075639bca}
+      \strng{bibnamehash}{b373affd2e6b8e2f0251096075639bca}
+      \strng{authorbibnamehash}{b373affd2e6b8e2f0251096075639bca}
+      \strng{authornamehash}{a7d03c66043b571bfe8418a08e61d28e}
+      \strng{authorfullhash}{b373affd2e6b8e2f0251096075639bca}
       \field{sortinit}{2}
       \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{Science}
-      \field{sortyear}{2006}
-      \field{title}{Imaging intracellular fluorescent proteins at nanometer resolution}
-      \field{volume}{313}
-      \field{year}{2006}
-      \field{pages}{1642\bibrangedash 1645}
-      \range{pages}{4}
+      \field{abstract}{Single-photon avalanche diode (SPAD) arrays are solid-state detectors that offer imaging capabilities at the level of individual photons, with unparalleled photon counting and time-resolved performance. This fascinating technology has progressed at a very fast pace in the past 15 years, since its inception in standard CMOS technology in 2003. A host of architectures have been investigated, ranging from simpler implementations, based solely on off-chip data processing, to progressively “smarter” sensors including on-chip, or even pixel level, time-stamping and processing capabilities. As the technology has matured, a range of biophotonics applications have been explored, including (endoscopic) FLIM, (multibeam multiphoton) FLIM-FRET, SPIM-FCS, super-resolution microscopy, time-resolved Raman spectroscopy, NIROT and PET. We will review some representative sensors and their corresponding applications, including the most relevant challenges faced by chip designers and end-users. Finally, we will provide an outlook on the future of this fascinating technology.}
+      \field{issn}{20477538}
+      \field{issue}{1}
+      \field{journaltitle}{Light: Science and Applications}
+      \field{month}{12}
+      \field{sortyear}{2019}
+      \field{title}{Single-photon avalanche diode imagers in biophotonics: review and outlook}
+      \field{volume}{8}
+      \field{year}{2019}
+      \verb{doi}
+      \verb 10.1038/s41377-019-0191-5
+      \endverb
+    \endentry
+    \entry{Nedbal2024}{article}{}
+      \name{author}{8}{}{%
+        {{hash=053c5ef640abf473bde19842be3c6dbe}{%
+           family={Nedbal},
+           familyi={N\bibinitperiod},
+           given={Jakub},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ff83dabd82fbde557c59861579919901}{%
+           family={Rocca},
+           familyi={R\bibinitperiod},
+           given={Francesco\bibnamedelimb Mattioli\bibnamedelima Della},
+           giveni={F\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=f2c8dc833830e7d69043c22193ead69c}{%
+           family={Ivanova},
+           familyi={I\bibinitperiod},
+           given={Iveta\bibnamedelima T.},
+           giveni={I\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+        {{hash=fc3f8ed4678b335b18a5895824fefda3}{%
+           family={Allan},
+           familyi={A\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+        {{hash=e038327c6e584b4944367cc0a28d4440}{%
+           family={Graham},
+           familyi={G\bibinitperiod},
+           given={Jeremy},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e91b4c886f818bf849eb9b2d123321e8}{%
+           family={Walker},
+           familyi={W\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
+        {{hash=0505bd71f08f3c3879a650711e2003fc}{%
+           family={Henderson},
+           familyi={H\bibinitperiod},
+           given={Robert\bibnamedelima K.},
+           giveni={R\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{hash=18f03307405a3dc20a299114fdab1353}{%
+           family={Suhling},
+           familyi={S\bibinitperiod},
+           given={Klaus},
+           giveni={K\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Nature Research}%
+      }
+      \strng{namehash}{3e9c9f426689a071162e48a3562d1a65}
+      \strng{fullhash}{43cc43ed23824c7213d13db3f1b72dde}
+      \strng{bibnamehash}{3e9c9f426689a071162e48a3562d1a65}
+      \strng{authorbibnamehash}{3e9c9f426689a071162e48a3562d1a65}
+      \strng{authornamehash}{3e9c9f426689a071162e48a3562d1a65}
+      \strng{authorfullhash}{43cc43ed23824c7213d13db3f1b72dde}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A wide-field microscope with epi-fluorescence and selective plane illumination was combined with a single-photon avalanche diode (SPAD) array camera to enable live-cell fluorescence lifetime imaging (FLIM) using time-correlated single-photon counting (TCSPC). The camera sensor comprised of 192×128 pixels, each integrating a single SPAD and a time-to-digital converter. Jointly, they produced a stream of single-photon images of photon arrival times with ≈38 ps accuracy. The photon arrival times were subject to systematic delays and nonlinearities, which were corrected by a Monte-Carlo algorithm. The SPAD camera was then applied to FLIM where histogramming the resulting photon arrival times in each pixel resulted in decays compatible with common data processing pipelines for fluorescence lifetime analysis. The capabilities of the TCSPC camera-based FLIM microscope were demonstrated by imaging living unicellular photosynthetic algae and artificial lipid vesicles. Epi-fluorescence illumination enabled rapid fluorescence lifetime imaging of living cells and selective-plane illumination enabled 3-dimensional FLIM of stationary samples.}
+      \field{issn}{20452322}
+      \field{issue}{1}
+      \field{journaltitle}{Scientific Reports}
+      \field{month}{12}
+      \field{sortyear}{2024}
+      \field{title}{A time-correlated single photon counting SPAD array camera with a bespoke data-processing algorithm for lightsheet fluorescence lifetime imaging (FLIM) and FLIM videos}
+      \field{volume}{14}
+      \field{year}{2024}
+      \verb{doi}
+      \verb 10.1038/s41598-024-56122-1
+      \endverb
+      \keyw{Algae,FLIM video,Fluorescence lifetime imaging (FLIM),Giant unilamellar vesicle (GUV),Nonlinearity correction,Selective-plane illumination microscopy,Single photon avalanche diode (SPAD)}
+    \endentry
+    \entry{Ulku2019}{article}{}
+      \name{author}{8}{}{%
+        {{hash=56a680874710e364b059ae18e913b920}{%
+           family={Ulku},
+           familyi={U\bibinitperiod},
+           given={Arin\bibnamedelima Can},
+           giveni={A\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=80cf6ec24788738c82ec88093abe7eb5}{%
+           family={Bruschini},
+           familyi={B\bibinitperiod},
+           given={Claudio},
+           giveni={C\bibinitperiod}}}%
+        {{hash=cb0cbb306d7ecdd3831a369d185c5b7f}{%
+           family={Antolovic},
+           familyi={A\bibinitperiod},
+           given={Ivan\bibnamedelima Michel},
+           giveni={I\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=60eda1733b3dd3be2581eb32a0674854}{%
+           family={Kuo},
+           familyi={K\bibinitperiod},
+           given={Yung},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=c0116d7f05862c86ac2ad23c36ae757b}{%
+           family={Ankri},
+           familyi={A\bibinitperiod},
+           given={Rinat},
+           giveni={R\bibinitperiod}}}%
+        {{hash=089d7683e97875da4e41d7d22e390c36}{%
+           family={Weiss},
+           familyi={W\bibinitperiod},
+           given={Shimon},
+           giveni={S\bibinitperiod}}}%
+        {{hash=1d89db133e7f45e494979c476114f8e0}{%
+           family={Michalet},
+           familyi={M\bibinitperiod},
+           given={Xavier},
+           giveni={X\bibinitperiod}}}%
+        {{hash=d6dd49eea525bedc29f7505ead40f2c8}{%
+           family={Charbon},
+           familyi={C\bibinitperiod},
+           given={Edoardo},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {Institute of Electrical}%
+        {Electronics Engineers Inc.}%
+      }
+      \strng{namehash}{4327a4f10eba30561bdb07311ddedebd}
+      \strng{fullhash}{b499b918da0c967fd35d9b4fc1a6de0b}
+      \strng{bibnamehash}{4327a4f10eba30561bdb07311ddedebd}
+      \strng{authorbibnamehash}{4327a4f10eba30561bdb07311ddedebd}
+      \strng{authornamehash}{4327a4f10eba30561bdb07311ddedebd}
+      \strng{authorfullhash}{b499b918da0c967fd35d9b4fc1a6de0b}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In this paper, we report on SwissSPAD2, an image sensor with 512 × 512 photon-counting pixels, each comprising a single-photon avalanche diode (SPAD), a 1-b memory, and a gating mechanism capable of turning the SPAD on and off, with a skew of 250 and 344 ps, respectively, for a minimum duration of 5.75 ns. The sensor is designed to achieve a frame rate of up to 97 700 binary frames per second and sub-40 ps gate shifts. By synchronizing it with a pulsed laser and using multiple successive overlapping gates, one can reconstruct a molecule's fluorescent response with picosecond temporal resolution. Thanks to the sensor's number of pixels (the largest to date) and the fully integrated gated operation, SwissSPAD2 enables widefield fluorescence lifetime imaging microscopy with an all-solid-state solution and at relatively high frame rates. This was demonstrated with preliminary results on organic dyes and semiconductor quantum dots using both decay fitting and phasor analysis. Furthermore, pixels with an exceptionally low dark count rate and high photon detection probability enable uniform and high-quality imaging of biologically relevant fluorescent samples stained with multiple dyes. While future versions will feature the addition of microlenses and optimize firmware speed, our results open the way for low-cost alternatives to commercially available scientific time-resolved imagers.}
+      \field{issn}{21910359}
+      \field{issue}{1}
+      \field{journaltitle}{IEEE Journal of Selected Topics in Quantum Electronics}
+      \field{month}{1}
+      \field{sortyear}{2019}
+      \field{title}{A 512 × 512 SPAD image sensor with integrated gating for widefield FLIM}
+      \field{volume}{25}
+      \field{year}{2019}
+      \verb{doi}
+      \verb 10.1109/JSTQE.2018.2867439
+      \endverb
+      \keyw{CMOS,FLIM,SPAD,fluorescence lifetime imaging microscopy,image sensor,phasor analysis,single-photon avalanche diodes,time gating,time-resolved,widefield}
+    \endentry
+    \entry{Zickus2020}{article}{}
+      \name{author}{12}{}{%
+        {{hash=6604fbc1048a78f5da0f19945a6d9b3c}{%
+           family={Zickus},
+           familyi={Z\bibinitperiod},
+           given={Vytautas},
+           giveni={V\bibinitperiod}}}%
+        {{hash=f240ca6d16d1f752b325fe8aafb8d645}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Ming\bibnamedelima Lo},
+           giveni={M\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=90650da8c92957fdb11b798c9a0d9f80}{%
+           family={Morimoto},
+           familyi={M\bibinitperiod},
+           given={Kazuhiro},
+           giveni={K\bibinitperiod}}}%
+        {{hash=80427a5a58ca4be7b43159a8464c9e09}{%
+           family={Kapitany},
+           familyi={K\bibinitperiod},
+           given={Valentin},
+           giveni={V\bibinitperiod}}}%
+        {{hash=9bec61073f142005c3e4e91e27feaf50}{%
+           family={Fatima},
+           familyi={F\bibinitperiod},
+           given={Areeba},
+           giveni={A\bibinitperiod}}}%
+        {{hash=ab4798f7c4538ca437ff16003ec97b88}{%
+           family={Turpin},
+           familyi={T\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod}}}%
+        {{hash=7b31f085d8f49226f2915d3e67b28e22}{%
+           family={Insall},
+           familyi={I\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod}}}%
+        {{hash=2902e54e1e96e330d727fbc1dc109fe4}{%
+           family={Whitelaw},
+           familyi={W\bibinitperiod},
+           given={Jamie},
+           giveni={J\bibinitperiod}}}%
+        {{hash=397cd8eddc7ba67a57bf2e38232707c0}{%
+           family={Machesky},
+           familyi={M\bibinitperiod},
+           given={Laura},
+           giveni={L\bibinitperiod}}}%
+        {{hash=80cf6ec24788738c82ec88093abe7eb5}{%
+           family={Bruschini},
+           familyi={B\bibinitperiod},
+           given={Claudio},
+           giveni={C\bibinitperiod}}}%
+        {{hash=6c7d1da9bce7dc7502e2ac4ba55b82a3}{%
+           family={Faccio},
+           familyi={F\bibinitperiod},
+           given={Daniele},
+           giveni={D\bibinitperiod}}}%
+        {{hash=d6dd49eea525bedc29f7505ead40f2c8}{%
+           family={Charbon},
+           familyi={C\bibinitperiod},
+           given={Edoardo},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Nature Research}%
+      }
+      \strng{namehash}{d07cbe550f8bb1c8b0635b623f634c05}
+      \strng{fullhash}{a4d06b69409e342aa5fb9a3ec5436559}
+      \strng{bibnamehash}{d07cbe550f8bb1c8b0635b623f634c05}
+      \strng{authorbibnamehash}{d07cbe550f8bb1c8b0635b623f634c05}
+      \strng{authornamehash}{d07cbe550f8bb1c8b0635b623f634c05}
+      \strng{authorfullhash}{a4d06b69409e342aa5fb9a3ec5436559}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Fluorescence lifetime imaging microscopy (FLIM) is a key technology that provides direct insight into cell metabolism, cell dynamics and protein activity. However, determining the lifetimes of different fluorescent proteins requires the detection of a relatively large number of photons, hence slowing down total acquisition times. Moreover, there are many cases, for example in studies of cell collectives, where wide-field imaging is desired. We report scan-less wide-field FLIM based on a 0.5 MP resolution, time-gated Single Photon Avalanche Diode (SPAD) camera, with acquisition rates up to 1 Hz. Fluorescence lifetime estimation is performed via a pre-trained artificial neural network with 1000-fold improvement in processing times compared to standard least squares fitting techniques. We utilised our system to image HT1080—human fibrosarcoma cell line as well as Convallaria. The results show promise for real-time FLIM and a viable route towards multi-megapixel fluorescence lifetime images, with a proof-of-principle mosaic image shown with 3.6 MP.}
+      \field{issn}{20452322}
+      \field{issue}{1}
+      \field{journaltitle}{Scientific Reports}
+      \field{month}{12}
+      \field{sortyear}{2020}
+      \field{title}{Fluorescence lifetime imaging with a megapixel SPAD camera and neural network lifetime estimation}
+      \field{volume}{10}
+      \field{year}{2020}
+      \verb{doi}
+      \verb 10.1038/s41598-020-77737-0
+      \endverb
+    \endentry
+    \entry{Tenne2019}{article}{}
+      \name{author}{8}{}{%
+        {{hash=27e33bc8d82a743439ce35a9004e7822}{%
+           family={Tenne},
+           familyi={T\bibinitperiod},
+           given={Ron},
+           giveni={R\bibinitperiod}}}%
+        {{hash=d8f7cbda8be143e7d224007207248367}{%
+           family={Rossman},
+           familyi={R\bibinitperiod},
+           given={Uri},
+           giveni={U\bibinitperiod}}}%
+        {{hash=397d055c3c72d27b186c57c5e334c162}{%
+           family={Rephael},
+           familyi={R\bibinitperiod},
+           given={Batel},
+           giveni={B\bibinitperiod}}}%
+        {{hash=e3b1840d17d520a36f6a6674be436ee3}{%
+           family={Israel},
+           familyi={I\bibinitperiod},
+           given={Yonatan},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=8951d176fc2d11596fe0d90e22410554}{%
+           family={Krupinski-Ptaszek},
+           familyi={K\bibinithyphendelim P\bibinitperiod},
+           given={Alexander},
+           giveni={A\bibinitperiod}}}%
+        {{hash=7cec48a311758e61bc3eb1c45aa829f3}{%
+           family={Lapkiewicz},
+           familyi={L\bibinitperiod},
+           given={Radek},
+           giveni={R\bibinitperiod}}}%
+        {{hash=08c375136205841ca33748f2b8283239}{%
+           family={Silberberg},
+           familyi={S\bibinitperiod},
+           given={Yaron},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=b663543fecd97b4aa43d71f9c413b396}{%
+           family={Oron},
+           familyi={O\bibinitperiod},
+           given={Dan},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Nature Publishing Group}%
+      }
+      \strng{namehash}{013a537f77b6e77b581a774b6598b8c3}
+      \strng{fullhash}{806f72baf0571578891cd49348a680c9}
+      \strng{bibnamehash}{013a537f77b6e77b581a774b6598b8c3}
+      \strng{authorbibnamehash}{013a537f77b6e77b581a774b6598b8c3}
+      \strng{authornamehash}{013a537f77b6e77b581a774b6598b8c3}
+      \strng{authorfullhash}{806f72baf0571578891cd49348a680c9}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The principles of quantum optics have yielded a plethora of ideas to surpass the classical limitations of sensitivity and resolution in optical microscopy. While some ideas have been applied in proof-of-principle experiments, imaging a biological sample has remained challenging, mainly due to the inherently weak signal measured and the fragility of quantum states of light. In principle, however, these quantum protocols can add new information without sacrificing the classical information and can therefore enhance the capabilities of existing super-resolution techniques. Image scanning microscopy, a recent addition to the family of super-resolution methods, generates a robust resolution enhancement without reducing the signal level. Here, we introduce quantum image scanning microscopy: combining image scanning microscopy with the measurement of quantum photon correlation allows increasing the resolution of image scanning microscopy up to twofold, four times beyond the diffraction limit. We introduce the Q-ISM principle and obtain super-resolved optical images of a biological sample stained with fluorescent quantum dots using photon antibunching, a quantum effect, as a resolution-enhancing contrast mechanism.}
+      \field{issn}{17494893}
+      \field{issue}{2}
+      \field{journaltitle}{Nature Photonics}
+      \field{month}{2}
+      \field{sortyear}{2019}
+      \field{title}{Super-resolution enhancement by quantum image scanning microscopy}
+      \field{volume}{13}
+      \field{year}{2019}
+      \field{pages}{116\bibrangedash 122}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1038/s41566-018-0324-z
+      \endverb
+    \endentry
+    \entry{Treussart2001}{misc}{}
+      \name{author}{4}{}{%
+        {{hash=f51fcea5cba9a3a76ee7fa5a1a74b0be}{%
+           family={Treussart},
+           familyi={T\bibinitperiod},
+           given={François},
+           giveni={F\bibinitperiod}}}%
+        {{hash=5c473d70edcf02f9474bed835eeff390}{%
+           family={Clouqueur},
+           familyi={C\bibinitperiod},
+           given={André},
+           giveni={A\bibinitperiod}}}%
+        {{hash=dbcf47ef7b6463529bb10981de343aa7}{%
+           family={Grossman},
+           familyi={G\bibinitperiod},
+           given={Carl},
+           giveni={C\bibinitperiod}}}%
+        {{hash=5c595b1f5b8eed6a59a6767290894115}{%
+           family={Roch},
+           familyi={R\bibinitperiod},
+           given={Jean-François},
+           giveni={J\bibinithyphendelim F\bibinitperiod}}}%
+      }
+      \strng{namehash}{1751242f36513990b0cc5fe5a2aad984}
+      \strng{fullhash}{e5ba0517ca437f2fec3aa93c73a6529d}
+      \strng{bibnamehash}{e5ba0517ca437f2fec3aa93c73a6529d}
+      \strng{authorbibnamehash}{e5ba0517ca437f2fec3aa93c73a6529d}
+      \strng{authornamehash}{1751242f36513990b0cc5fe5a2aad984}
+      \strng{authorfullhash}{e5ba0517ca437f2fec3aa93c73a6529d}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We used scanning confocal microscopy to study the f luorescence from a single terrylene molecule embedded in a thin polymer film of polymethyl methacrylate, at room temperature, with a high signal-to-background ratio. The photon-pair correlation function g 2 t exhibits perfect photon antibunching at t 0 and a limit of 1.3, compatible with bunching associated with the molecular triplet state. Application of this molecular system to a triggered single-photon source based on single-molecule f luorescence is investigated.}
+      \field{issue}{19}
+      \field{journaltitle}{OPTICS LETTERS}
+      \field{sortyear}{2001}
+      \field{title}{Photon antibunching in the f luorescence of a single dye molecule embedded in a thin polymer film}
+      \field{volume}{26}
+      \field{year}{2001}
+    \endentry
+    \entry{Schwartz2012}{article}{}
+      \name{author}{2}{}{%
+        {{hash=2a8fec46ef43ab72aefab6d1e9ad962f}{%
+           family={Schwartz},
+           familyi={S\bibinitperiod},
+           given={O.},
+           giveni={O\bibinitperiod}}}%
+        {{hash=3e9dc6d6433940aa674bfebdcc421846}{%
+           family={Oron},
+           familyi={O\bibinitperiod},
+           given={D.},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{22388df650f77b20971b407ec9924ebc}
+      \strng{fullhash}{22388df650f77b20971b407ec9924ebc}
+      \strng{bibnamehash}{22388df650f77b20971b407ec9924ebc}
+      \strng{authorbibnamehash}{22388df650f77b20971b407ec9924ebc}
+      \strng{authornamehash}{22388df650f77b20971b407ec9924ebc}
+      \strng{authorfullhash}{22388df650f77b20971b407ec9924ebc}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Breaking the diffraction limit in microscopy by utilizing the quantum properties of light has been the goal of intense research in recent years. We propose a super-resolution technique based on nonclassical emission statistics of fluorescent markers, routinely used as contrast labels for bioimaging. The technique can be readily implemented with current technology. © 2012 American Physical Society.}
+      \field{issn}{10502947}
+      \field{issue}{3}
+      \field{journaltitle}{Physical Review A - Atomic, Molecular, and Optical Physics}
+      \field{month}{3}
+      \field{sortyear}{2012}
+      \field{title}{Improved resolution in fluorescence microscopy using quantum correlations}
+      \field{volume}{85}
+      \field{year}{2012}
+      \verb{doi}
+      \verb 10.1103/PhysRevA.85.033812
+      \endverb
     \endentry
     \entry{Ta2010}{article}{}
       \name{author}{3}{}{%
@@ -1071,6 +1447,91 @@
       \verb{doi}
       \verb 10.1038/ncomms14786
       \endverb
+    \endentry
+    \entry{Chen1999}{misc}{}
+      \name{author}{4}{}{%
+        {{hash=b6f25c2ea695f4385f6acab832194dfc}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Yan},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=8abaf04b38c51219b9a4f9f4e92fa769}{%
+           family={Mü},
+           familyi={M\bibinitperiod},
+           given={Joachim\bibnamedelima D},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=e0562e556f34f87b340650f5aea2e717}{%
+           family={So},
+           familyi={S\bibinitperiod},
+           given={Peter\bibnamedelimb T\bibnamedelima C},
+           giveni={P\bibinitperiod\bibinitdelim T\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=aed32bc9542b0814aa555a05c11274ac}{%
+           family={Gratton},
+           familyi={G\bibinitperiod},
+           given={Enrico},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{a7c2c20dbb94cfff5ff2d64ce2e58494}
+      \strng{fullhash}{f12cf54f0a636cff653d12a443f2664c}
+      \strng{bibnamehash}{f12cf54f0a636cff653d12a443f2664c}
+      \strng{authorbibnamehash}{f12cf54f0a636cff653d12a443f2664c}
+      \strng{authornamehash}{a7c2c20dbb94cfff5ff2d64ce2e58494}
+      \strng{authorfullhash}{f12cf54f0a636cff653d12a443f2664c}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Fluorescence correlation spectroscopy (FCS) is generally used to obtain information about the number of fluorescent particles in a small volume and the diffusion coefficient from the autocorrelation function of the fluorescence signal. Here we demonstrate that photon counting histogram (PCH) analysis constitutes a novel tool for extracting quantities from fluorescence fluctuation data, i.e., the measured photon counts per molecule and the average number of molecules within the observation volume. The photon counting histogram of fluorescence fluctuation experiments, in which few molecules are present in the excitation volume, exhibits a super-Poissonian behavior. The additional broadening of the PCH compared to a Poisson distribution is due to fluorescence intensity fluctuations. For diffusing particles these intensity fluctuations are caused by an inhomogeneous excitation profile and the fluctuations in the number of particles in the observation volume N. The quantitative relationship between the detected photon counts and the fluorescence intensity reaching the detector is given by Mandel's formula. Based on this equation and considering the fluorescence intensity distribution in the two-photon excitation volume, a theoretical expression for the PCH as a function of the number of molecules in the excitation volume is derived. For a single molecular species two parameters are sufficient to characterize the histogram completely, namely the average number of molecules within the observation volume and the detected photon counts per molecule per sampling time. The PCH for multiple molecular species, on the other hand, is generated by successively convoluting the photon counting distribution of each species with the others. The influence of the excitation profile upon the photon counting statistics for two relevant point spread functions (PSFs), the three-dimensional Gaussian PSF conventionally employed in confocal detection and the square of the Gaussian-Lorentzian PSF for two photon excitation, is explicitly treated. Measured photon counting distributions obtained with a two-photon excitation source agree, within experimental error with the theoretical PCHs calculated for the square of a Gaussian-Lorentzian beam profile. We demonstrate and discuss the influence of the average number of particles within the observation volume and the detected photon counts per molecule per sampling interval upon the super-Poissonian character of the photon counting distribution.}
+      \field{sortyear}{1999}
+      \field{title}{The Photon Counting Histogram in Fluorescence Fluctuation Spectroscopy}
+      \field{year}{1999}
+    \endentry
+    \entry{Huang2004}{article}{}
+      \name{author}{3}{}{%
+        {{hash=11a71515dc9e04ba5c1266f7ef5e357a}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Bo},
+           giveni={B\bibinitperiod}}}%
+        {{hash=793222e5db5069db5917d5217d327e6d}{%
+           family={Perroud},
+           familyi={P\bibinitperiod},
+           given={Thomas\bibnamedelima D.},
+           giveni={T\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=2c357911065c9b265175f1b14117ada1}{%
+           family={Zare},
+           familyi={Z\bibinitperiod},
+           given={Richard\bibnamedelima N.},
+           giveni={R\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Wiley-VCH Verlag}%
+      }
+      \strng{namehash}{9ae84ea6d9d01fe9cb2fe5746038a983}
+      \strng{fullhash}{9ae84ea6d9d01fe9cb2fe5746038a983}
+      \strng{bibnamehash}{9ae84ea6d9d01fe9cb2fe5746038a983}
+      \strng{authorbibnamehash}{9ae84ea6d9d01fe9cb2fe5746038a983}
+      \strng{authornamehash}{9ae84ea6d9d01fe9cb2fe5746038a983}
+      \strng{authorfullhash}{9ae84ea6d9d01fe9cb2fe5746038a983}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The photon counting histogram (PCH) analysis is a fluorescence fluctuation method that is able to characterize the brightness and concentration of different fluorescent species present in a liquid sample. We find that the PCH model using a three-dimensional Gaussian observation volume profile is inadequate for fitting experimental data obtained from a confocal setup with one-photon excitation. We propose an improved model, which is based on the correction to the observation volume profile for the out-of-focus emission. We demonstrate that this model is able to resolve different species present under a wide range of conditions. Attention is given to how this model allows the examination of the effects of different instrumental setups on the resolvability.}
+      \field{issn}{14394235}
+      \field{issue}{10}
+      \field{journaltitle}{ChemPhysChem}
+      \field{month}{10}
+      \field{sortyear}{2004}
+      \field{title}{Photon counting histogram: One-photon excitation}
+      \field{volume}{5}
+      \field{year}{2004}
+      \field{pages}{1523\bibrangedash 1531}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1002/cphc.200400176
+      \endverb
+      \keyw{Confocal microscopy,Fluorescence spectroscopy,One-photon excitation,Photon counting histogram}
     \endentry
     \entry{Goodman2010}{article}{}
       \name{author}{2}{}{%
@@ -1168,8 +1629,8 @@
       \strng{authorbibnamehash}{4e23767b2e9ceab4382e3cf79dd02b62}
       \strng{authornamehash}{4e23767b2e9ceab4382e3cf79dd02b62}
       \strng{authorfullhash}{4e23767b2e9ceab4382e3cf79dd02b62}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{The properties of quantum states have led to the development of new technologies, ranging from quantum information to quantum metrology 1-12. A recent field of research to emerge is quantum imaging, which aims to overcome the limits of classical imaging by making use of the spatial properties of quantum states of light13-18. In particular, quantum correlations between twin beams represent a fundamental resource for these studies19-32. One of the most interesting proposed schemes takes advantage of the spatial quantum correlations between parametric down-conversion light beams to realize sub-shot-noise imaging of weak absorbing objects 14, leading ideally to noise-free imaging. Here, we present the first experimental realization of this scheme, showing its potential to achieve a larger signal-to-noise ratio than classical imaging methods. This work represents the starting point for this quantum technology, which we anticipate will have applications when there is a requirement for low-photon-flux illumination (for example for use with biological samples). © 2010 Macmillan Publishers Limited. All rights reserved.}
@@ -1216,8 +1677,8 @@
       \strng{authorbibnamehash}{63061801c814bfba62b45e39bff0bf81}
       \strng{authornamehash}{16e8093e0203d144cbcf0998e1c48338}
       \strng{authorfullhash}{63061801c814bfba62b45e39bff0bf81}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{The contrast of an image can be degraded by the presence of background light and sensor noise. To overcome this degradation, quantum illumination protocols have been theorized that exploit the spatial correlations between photon pairs. Here, we demonstrate the first full-field imaging system using quantum illumination by an enhanced detection protocol. With our current technology, we achieve a rejection of background and stray light of up to 5.8 and also report an image contrast improvement up to a factor of 11, which is resilient to both environmental noise and transmission losses. The quantum illumination protocol differs from usual quantum schemes in that the advantage is maintained even in the presence of noise and loss. Our approach may enable laboratory-based quantum imaging to be applied to real-world applications where the suppression of background light and noise is important, such as imaging under low photon flux and quantum LIDAR.}
@@ -1270,8 +1731,8 @@
       \strng{authorbibnamehash}{dd0ef771eb4268c859713e788ca054a0}
       \strng{authornamehash}{52a8635aa6d39a07c071ada909c677a6}
       \strng{authorfullhash}{dd0ef771eb4268c859713e788ca054a0}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Classical light sources emit a randomly-timed stream of individual photons, the spatial distribution of which can be detected with a camera to form an image. Quantum light sources, based on parametric down conversion, emit photons as correlated photon-pairs. The spatial correlations between the photons enables imaging systems where the preferential selection of photon-pairs allows for enhancements in the noise performance over what is possible using classical light sources. However, until now the technical challenge of measuring, and correlating both photons has led to system complexity. Here we show that a camera capable of resolving the number of individual photons in each pixel of the detector array can be used to record an image formed from these photon-pair events and hence achieve a greater contrast than possible using a classical light source. We achieve an enhancement in the ratio of two-photon events compared to one-photon events using spatially correlated SPDC light compared to uncorrelated illumination by a LED. These results indicate the potential advantages of using photon counting cameras in quantum imaging schemes and these advantages will further increase as the technology is developed. Operating in photon sparse regimes such systems have potential applications in low-light microscopy and covert imaging.}
@@ -1304,8 +1765,8 @@
       \strng{authornamehash}{c8e0e936a1407a44c7a537f7a54f140b}
       \strng{authorfullhash}{c8e0e936a1407a44c7a537f7a54f140b}
       \field{extraname}{1}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{sortyear}{2013}
@@ -1582,8 +2043,8 @@
       \strng{authorbibnamehash}{fa3a9871124c54d4f9933b5318cf7bb0}
       \strng{authornamehash}{fa3a9871124c54d4f9933b5318cf7bb0}
       \strng{authorfullhash}{fa3a9871124c54d4f9933b5318cf7bb0}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Nature Physics}
@@ -1607,8 +2068,8 @@
       \strng{authorbibnamehash}{0c94962a475431015ec349f1aa2e9cfd}
       \strng{authornamehash}{0c94962a475431015ec349f1aa2e9cfd}
       \strng{authorfullhash}{0c94962a475431015ec349f1aa2e9cfd}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Advances in Neural Information Processing Systems}
@@ -1632,8 +2093,8 @@
       \strng{authorbibnamehash}{fd029094e7d5440d4deb2d8e275af9b9}
       \strng{authornamehash}{fd029094e7d5440d4deb2d8e275af9b9}
       \strng{authorfullhash}{fd029094e7d5440d4deb2d8e275af9b9}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{sortyear}{2024}
@@ -1657,8 +2118,8 @@
       \strng{authornamehash}{c8e0e936a1407a44c7a537f7a54f140b}
       \strng{authorfullhash}{c8e0e936a1407a44c7a537f7a54f140b}
       \field{extraname}{2}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Advances in Neural Information Processing Systems}
@@ -1683,8 +2144,8 @@
       \strng{authornamehash}{c8e0e936a1407a44c7a537f7a54f140b}
       \strng{authorfullhash}{c8e0e936a1407a44c7a537f7a54f140b}
       \field{extraname}{3}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Advances in Neural Information Processing Systems}
@@ -2457,8 +2918,8 @@
       \strng{authorbibnamehash}{bd3744be88a1ebf9bf8c84d37d83925c}
       \strng{authornamehash}{bd3744be88a1ebf9bf8c84d37d83925c}
       \strng{authorfullhash}{bd3744be88a1ebf9bf8c84d37d83925c}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Annual Review of Biophysics}
@@ -2501,8 +2962,8 @@
       \strng{authorbibnamehash}{8c2b4a97a7dccf1ad662df695dd6042f}
       \strng{authornamehash}{a5458e6aa2267c4d8bd1ee847fd340ea}
       \strng{authorfullhash}{8c2b4a97a7dccf1ad662df695dd6042f}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Chromatin organization remains complex and far from understood. In this article, we review recent statistical methods of extracting biophysical parameters from in vivo single-particle trajectories of loci to reconstruct chromatin reorganization in response to cellular stress such as DNA damage. We look at methods for analyzing both single locus and multiple loci tracked simultaneously and explain how to quantify and describe chromatin motion using a combination of extractable parameters. These parameters can be converted into information about chromatin dynamics and function. Furthermore, we discuss how the timescale of recurrent encounter between loci can be extracted and interpreted. We also discuss the effect of sampling rate on the estimated parameters. Finally, we review a polymer method to reconstruct chromatin structure using crosslinkers between chromatin sites. We list and refer to some software packages that are now publicly available to simulate polymer motion. To conclude, chromatin organization and dynamics can be reconstructed from locus trajectories and predicted based on polymer models.}
@@ -3221,8 +3682,8 @@
       \strng{authorbibnamehash}{5784dd6febb852d76cf16a555ded2355}
       \strng{authornamehash}{5784dd6febb852d76cf16a555ded2355}
       \strng{authorfullhash}{5784dd6febb852d76cf16a555ded2355}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Science}
@@ -3274,8 +3735,8 @@
       \strng{authorbibnamehash}{b3cc945e035a4f8b136572afa7304616}
       \strng{authornamehash}{d7d3ea4a9d68f5f6b3ac6c3879de127a}
       \strng{authorfullhash}{b3cc945e035a4f8b136572afa7304616}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Nature Methods}
@@ -4011,8 +4472,8 @@
       \strng{authorbibnamehash}{907c89f5edfb4fdbf4018d80e84cb797}
       \strng{authornamehash}{08f53edd2d572950bf5061efb9093551}
       \strng{authorfullhash}{907c89f5edfb4fdbf4018d80e84cb797}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Nat Methods}
@@ -4638,8 +5099,8 @@
       \strng{authorbibnamehash}{8dcd1bfe518759e75348d2bc13bccdc2}
       \strng{authornamehash}{2201bc9e5bd374f3b102ba68ec308ab2}
       \strng{authorfullhash}{8dcd1bfe518759e75348d2bc13bccdc2}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Nature Methods}

@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  18 NOV 2024 12:51
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.10.20)  18 NOV 2024 17:15
  restricted system commands enabled.
 **dissertation.tex
 (./dissertation.tex
@@ -1415,6 +1415,14 @@ LaTeX Info: Redefining \Relbar on input line 971.
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
 )
+(/usr/local/texlive/2023/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count570
+\float@exts=\toks53
+\float@box=\box88
+\@float@everytoks=\toks54
+\@floatcapt=\box89
+)
 (/usr/local/texlive/2023/texmf-dist/tex/latex/cryptocode/cryptocode.sty
 Package: cryptocode 2021/08/15 v0.44 Cryptocode LaTeX package for typesetting p
 seudocode, algorithms and protocols as well as cryptographic proofs.
@@ -1425,7 +1433,7 @@ Package: mathtools 2022/06/29 v1.29 mathematical typesetting tools
 (/usr/local/texlive/2023/texmf-dist/tex/latex/mathtools/mhsetup.sty
 Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 )
-\g_MT_multlinerow_int=\count570
+\g_MT_multlinerow_int=\count571
 \l_MT_multwidth_dim=\dimen324
 \origjot=\skip96
 \l_MT_shortvdotswithinadjustabove_dim=\dimen325
@@ -1434,7 +1442,7 @@ Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 \l_MT_below_intertext_sep=\dimen328
 \l_MT_above_shortintertext_sep=\dimen329
 \l_MT_below_shortintertext_sep=\dimen330
-\xmathstrut@box=\box88
+\xmathstrut@box=\box90
 \xmathstrut@dim=\dimen331
 )
 (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/amsfonts.sty
@@ -1454,9 +1462,9 @@ File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
 )
 (/usr/local/texlive/2023/texmf-dist/tex/latex/xargs/xargs.sty
 Package: xargs 2008/03/22 v1.1  extended macro definitions  (mpg)
-\xargs@max=\count571
-\xargs@toksa=\toks53
-\xargs@toksb=\toks54
+\xargs@max=\count572
+\xargs@toksa=\toks55
+\xargs@toksb=\toks56
 )
 (/usr/local/texlive/2023/texmf-dist/tex/latex/forloop/forloop.sty
 Package: forloop 2006/09/18 v3.0 For Loops for LaTeX
@@ -1467,8 +1475,8 @@ Package: pbox 2011/12/07 v1.2 Dynamic parboxes
 )
 (/usr/local/texlive/2023/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
-\@vwid@box=\box89
-\sift@deathcycles=\count572
+\@vwid@box=\box91
+\sift@deathcycles=\count573
 \@vwid@loff=\dimen332
 \@vwid@roff=\dimen333
 )
@@ -1485,67 +1493,67 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 \pcbelowskip=\skip99
 \pcbeforeskip=\skip100
 \pcafterskip=\skip101
-\c@@pc@global@pc@cnt=\count573
-\c@@pc@global@pc@nestcnt=\count574
-\c@@pc@stackdepth=\count575
+\c@@pc@global@pc@cnt=\count574
+\c@@pc@global@pc@nestcnt=\count575
+\c@@pc@stackdepth=\count576
 \@pc@stackspace@len=\skip102
 \pcbeforehstackskip=\skip103
 \pcafterhstackskip=\skip104
-\@pc@stackcontentbox=\box90
+\@pc@stackcontentbox=\box92
 \@pc@minipage@length=\skip105
 \@pc@alt@minipage@length=\skip106
 \@pc@length@tmp@width@vstack=\skip107
 \@pseudocodecodeminlineheight@len=\skip108
 \@pcindentwidth=\skip109
-\c@pclinenumber=\count576
-\c@Hpclinenumber=\count577
-\c@@pclinenumber=\count578
-\c@H@pclinenumber=\count579
-\c@@pclinenumbertmp=\count580
-\c@pcgamecounter=\count581
-\c@Hpcgamecounter=\count582
-\c@pcrlinenumber=\count583
-\c@Hpcrlinenumber=\count584
-\c@@pcrlinenumbertmp=\count585
+\c@pclinenumber=\count577
+\c@Hpclinenumber=\count578
+\c@@pclinenumber=\count579
+\c@H@pclinenumber=\count580
+\c@@pclinenumbertmp=\count581
+\c@pcgamecounter=\count582
+\c@Hpcgamecounter=\count583
+\c@pcrlinenumber=\count584
+\c@Hpcrlinenumber=\count585
+\c@@pcrlinenumbertmp=\count586
 \pcheadlinesep=\skip110
 \pcbodylinesep=\skip111
 \@pseudocodeheadheight@len=\skip112
 \pcheadheight=\skip113
-\c@@pc@indentationlevel=\count586
-\c@pccolumncounter=\count587
-\c@@pcsubprogcnt1=\count588
-\c@@pcrsubprogcnt1=\count589
-\c@@pcsubprogcnt2=\count590
-\c@@pcrsubprogcnt2=\count591
-\c@@pcsubprogcnt3=\count592
-\c@@pcrsubprogcnt3=\count593
-\c@@pcsubprogcnt4=\count594
-\c@@pcrsubprogcnt4=\count595
-\c@@pcsubprogcnt5=\count596
-\c@@pcrsubprogcnt5=\count597
-\c@@pcsubprogcnt6=\count598
-\c@@pcrsubprogcnt6=\count599
-\c@@pcsubprogcnt7=\count600
-\c@@pcrsubprogcnt7=\count601
-\c@@pcsubprogcnt8=\count602
-\c@@pcrsubprogcnt8=\count603
-\c@@pcsubprogcnt9=\count604
-\c@@pcrsubprogcnt9=\count605
-\c@@pcsubprogstep=\count606
+\c@@pc@indentationlevel=\count587
+\c@pccolumncounter=\count588
+\c@@pcsubprogcnt1=\count589
+\c@@pcrsubprogcnt1=\count590
+\c@@pcsubprogcnt2=\count591
+\c@@pcrsubprogcnt2=\count592
+\c@@pcsubprogcnt3=\count593
+\c@@pcrsubprogcnt3=\count594
+\c@@pcsubprogcnt4=\count595
+\c@@pcrsubprogcnt4=\count596
+\c@@pcsubprogcnt5=\count597
+\c@@pcrsubprogcnt5=\count598
+\c@@pcsubprogcnt6=\count599
+\c@@pcrsubprogcnt6=\count600
+\c@@pcsubprogcnt7=\count601
+\c@@pcrsubprogcnt7=\count602
+\c@@pcsubprogcnt8=\count603
+\c@@pcrsubprogcnt8=\count604
+\c@@pcsubprogcnt9=\count605
+\c@@pcrsubprogcnt9=\count606
+\c@@pcsubprogstep=\count607
 \pcmessagearrow=\skip114
-\c@@pc@remember=\count607
+\c@@pc@remember=\count608
 \@bb@message@voffset=\skip115
 \@bb@query@voffset=\skip116
 \@bb@oraclequery@voffset=\skip117
 \@bb@challengerquery@voffset=\skip118
-\c@@bb@oracle@cnt=\count608
-\c@@bb@oracle@nestcnt=\count609
-\c@@bb@challenger@cnt=\count610
-\c@@bb@challenger@nestcnt=\count611
-\c@@bb@env@nestcnt=\count612
+\c@@bb@oracle@cnt=\count609
+\c@@bb@oracle@nestcnt=\count610
+\c@@bb@challenger@cnt=\count611
+\c@@bb@challenger@nestcnt=\count612
+\c@@bb@env@nestcnt=\count613
 \@bb@com@tmpoffset=\skip119
 \@bb@tmplength@b=\skip120
-\c@pcstartgamecounter=\count613
+\c@pcstartgamecounter=\count614
 )
 (/usr/local/texlive/2023/texmf-dist/tex/latex/tikz-bayesnet/tikzlibrarybayesnet
 .code.tex
@@ -1596,26 +1604,26 @@ File: tikzlibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
 (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibrary
 shapes.multipart.code.tex
 File: pgflibraryshapes.multipart.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfnodepartlowerbox=\box91
-\pgfnodeparttwobox=\box92
-\pgfnodepartthreebox=\box93
-\pgfnodepartfourbox=\box94
-\pgfnodeparttwentybox=\box95
-\pgfnodepartnineteenbox=\box96
-\pgfnodeparteighteenbox=\box97
-\pgfnodepartseventeenbox=\box98
-\pgfnodepartsixteenbox=\box99
-\pgfnodepartfifteenbox=\box100
-\pgfnodepartfourteenbox=\box101
-\pgfnodepartthirteenbox=\box102
-\pgfnodeparttwelvebox=\box103
-\pgfnodepartelevenbox=\box104
-\pgfnodeparttenbox=\box105
-\pgfnodepartninebox=\box106
-\pgfnodeparteightbox=\box107
-\pgfnodepartsevenbox=\box108
-\pgfnodepartsixbox=\box109
-\pgfnodepartfivebox=\box110
+\pgfnodepartlowerbox=\box93
+\pgfnodeparttwobox=\box94
+\pgfnodepartthreebox=\box95
+\pgfnodepartfourbox=\box96
+\pgfnodeparttwentybox=\box97
+\pgfnodepartnineteenbox=\box98
+\pgfnodeparteighteenbox=\box99
+\pgfnodepartseventeenbox=\box100
+\pgfnodepartsixteenbox=\box101
+\pgfnodepartfifteenbox=\box102
+\pgfnodepartfourteenbox=\box103
+\pgfnodepartthirteenbox=\box104
+\pgfnodeparttwelvebox=\box105
+\pgfnodepartelevenbox=\box106
+\pgfnodeparttenbox=\box107
+\pgfnodepartninebox=\box108
+\pgfnodeparteightbox=\box109
+\pgfnodepartsevenbox=\box110
+\pgfnodepartsixbox=\box111
+\pgfnodepartfivebox=\box112
 )))
 (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
 s/tikzlibraryfit.code.tex
@@ -1635,11 +1643,11 @@ File: pgflibraryarrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \arrowsize=\dimen334
 ))) (/usr/local/texlive/2023/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
 Package: fancyvrb 2023/01/19 4.5a verbatim text (tvz,hv)
-\FV@CodeLineNo=\count614
+\FV@CodeLineNo=\count615
 \FV@InFile=\read5
-\FV@TabBox=\box111
-\c@FancyVerbLine=\count615
-\FV@StepNumber=\count616
+\FV@TabBox=\box113
+\c@FancyVerbLine=\count616
+\FV@StepNumber=\count617
 \FV@OutFile=\write6
 LaTeX Info: Redefining \UseVerb on input line 1229.
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/filehook/filehook.sty
@@ -1657,24 +1665,24 @@ LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ))
 (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count617
-\lst@gtempboxa=\box112
-\lst@token=\toks55
-\lst@length=\count618
+\lst@mode=\count618
+\lst@gtempboxa=\box114
+\lst@token=\toks57
+\lst@length=\count619
 \lst@currlwidth=\dimen335
-\lst@column=\count619
-\lst@pos=\count620
+\lst@column=\count620
+\lst@pos=\count621
 \lst@lostspace=\dimen336
 \lst@width=\dimen337
-\lst@newlines=\count621
-\lst@lineno=\count622
+\lst@newlines=\count622
+\lst@lineno=\count623
 \lst@maxwidth=\dimen338
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-\c@lstnumber=\count623
-\lst@skipnumbers=\count624
-\lst@framebox=\box113
+\c@lstnumber=\count624
+\lst@skipnumbers=\count625
+\lst@framebox=\box115
 )
 (/usr/local/texlive/2023/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2023/02/27 1.9 listings configuration
@@ -1689,10 +1697,10 @@ Package: l3keys2e 2023-02-02 LaTeX2e option processing using LaTeX3 keys
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/chemgreek/chemgreek.sty
 Package: chemgreek 2020/01/16 v1.1a interface for upright Greek letters for use
  in chemistry (CN)
-\l__chemgreek_tmpa_int=\count625
-\g__chemgreek_tmpa_int=\count626
+\l__chemgreek_tmpa_int=\count626
+\g__chemgreek_tmpa_int=\count627
 )
-\l__mhchem_ce_distanceFromLastComma_int=\count627
+\l__mhchem_ce_distanceFromLastComma_int=\count628
 \__mhchem_arrow_extPgfLength_skip=\skip121
 \mhchem@minispace@tmp=\skip122
 \mhchem@minibackspace@tmp=\skip123
@@ -1703,7 +1711,7 @@ Package: chemgreek 2020/01/16 v1.1a interface for upright Greek letters for use
 \mhchem@smallbondwidth=\skip128
 \mhchem@bondtmp@minussidebearingleft=\skip129
 \mhchem@bondtmp@minussidebearingright=\skip130
-\l__mhchem_option_version_int=\count628
+\l__mhchem_option_version_int=\count629
 \mhchem@option@minusmathsidebearingleft=\dimen339
 \mhchem@option@minusmathsidebearingright=\dimen340
 \mhchem@option@minustextsidebearingleft=\dimen341
@@ -1717,29 +1725,27 @@ Package: etoc 2023/03/01 v1.2 Completely customisable TOCs (JFB)
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/tools/multicol.sty
 Package: multicol 2021/11/30 v1.9d multicolumn formatting (FMi)
-\c@tracingmulticols=\count629
-\mult@box=\box114
+\c@tracingmulticols=\count630
+\mult@box=\box116
 \multicol@leftmargin=\dimen343
-\c@unbalance=\count630
-\c@collectmore=\count631
-\doublecol@number=\count632
-\multicoltolerance=\count633
-\multicolpretolerance=\count634
+\c@unbalance=\count631
+\c@collectmore=\count632
+\doublecol@number=\count633
+\multicoltolerance=\count634
+\multicolpretolerance=\count635
 \full@width=\dimen344
 \page@free=\dimen345
 \premulticols=\dimen346
 \postmulticols=\dimen347
 \multicolsep=\skip131
 \multicolbaselineskip=\skip132
-\partial@page=\box115
-\last@line=\box116
+\partial@page=\box117
+\last@line=\box118
 \maxbalancingoverflow=\dimen348
-\mult@rightbox=\box117
-\mult@grightbox=\box118
-\mult@firstbox=\box119
-\mult@gfirstbox=\box120
-\@tempa=\box121
-\@tempa=\box122
+\mult@rightbox=\box119
+\mult@grightbox=\box120
+\mult@firstbox=\box121
+\mult@gfirstbox=\box122
 \@tempa=\box123
 \@tempa=\box124
 \@tempa=\box125
@@ -1774,20 +1780,22 @@ Package: multicol 2021/11/30 v1.9d multicolumn formatting (FMi)
 \@tempa=\box154
 \@tempa=\box155
 \@tempa=\box156
-\c@minrows=\count635
-\c@columnbadness=\count636
-\c@finalcolumnbadness=\count637
+\@tempa=\box157
+\@tempa=\box158
+\c@minrows=\count636
+\c@columnbadness=\count637
+\c@finalcolumnbadness=\count638
 \last@try=\dimen349
 \multicolovershoot=\dimen350
 \multicolundershoot=\dimen351
-\mult@nat@firstbox=\box157
-\colbreak@box=\box158
-\mc@col@check@num=\count638
+\mult@nat@firstbox=\box159
+\colbreak@box=\box160
+\mc@col@check@num=\count639
 )
-\Etoc@toctoks=\toks56
-\c@etoc@tocid=\count639
-\etoc@framed@titlebox=\box159
-\etoc@framed@contentsbox=\box160
+\Etoc@toctoks=\toks58
+\c@etoc@tocid=\count640
+\etoc@framed@titlebox=\box161
+\etoc@framed@contentsbox=\box162
 )
 (/usr/local/texlive/2023/texmf-dist/tex/latex/base/makeidx.sty
 Package: makeidx 2021/10/04 v1.0m Standard LaTeX package
@@ -1799,25 +1807,25 @@ Package: makeidx 2021/10/04 v1.0m Standard LaTeX package
 Writing index file dissertation.idx
 (/usr/local/texlive/2023/texmf-dist/tex/latex/media9/media9.sty
 Package: media9 2022/08/04 v1.25 acrobat-9/X compatible media
-\g_mix_pkgresizeflag_int=\count640
-\l_mix_poster_box=\box161
+\g_mix_pkgresizeflag_int=\count641
+\l_mix_poster_box=\box163
 \g_mix_wd_dim=\dimen352
 \g_mix_ht_dim=\dimen353
 \g_mix_dp_dim=\dimen354
-\g_mix_rmcnt_int=\count641
-\l_mix_viewcnt_int=\count642
-\g@mix@page@int=\count643
-\g_mix_resizeflag_int=\count644
-\l_mix_lineno_int=\count645
-\l_mix_pbtn_box=\box162
-\g_mix_mbtncnt_int=\count646
+\g_mix_rmcnt_int=\count642
+\l_mix_viewcnt_int=\count643
+\g@mix@page@int=\count644
+\g_mix_resizeflag_int=\count645
+\l_mix_lineno_int=\count646
+\l_mix_pbtn_box=\box164
+\g_mix_mbtncnt_int=\count647
 \mix@btn@dim=\dimen355
 )
 (./packages//pa-ditto.sty
 File: pa-ditto.sty 2021-01-04 ditto package
 ) (./packages//pa-figure-dash.sty
 File: pa-figure-dash.sty 2021-01-04 figure dash package
-\figurebox=\box163
+\figurebox=\box165
 \lenfigurerulethickness=\skip133
 \lenfigureraiseheight=\skip134
 \lenfigurerulewidth=\skip135
@@ -1859,8 +1867,8 @@ LaTeX Warning: You have requested package `packages//pa-repeat',
                but the package provides `pa-repeat'.
 
 Package: pa-repeat 2021-06-09 pa-repeat
-\MyRepeatCount=\count647
-\MyRepeatMaxCount=\count648
+\MyRepeatCount=\count648
+\MyRepeatMaxCount=\count649
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/placeins/placeins.sty
 Package: placeins 2005/04/18  v 2.2
 )
@@ -1869,22 +1877,22 @@ Package: soul 2023-02-18 v3.0 Permit use of UTF-8 characters in soul (HO)
 
 (/usr/local/texlive/2023/texmf-dist/tex/generic/soul/soul-ori.sty
 Package: soul-ori 2023-02-18 v3.0 letterspacing/underlining (mf)
-\SOUL@word=\toks57
-\SOUL@lasttoken=\toks58
-\SOUL@syllable=\toks59
-\SOUL@cmds=\toks60
-\SOUL@buffer=\toks61
-\SOUL@token=\toks62
+\SOUL@word=\toks59
+\SOUL@lasttoken=\toks60
+\SOUL@syllable=\toks61
+\SOUL@cmds=\toks62
+\SOUL@buffer=\toks63
+\SOUL@token=\toks64
 \SOUL@syllgoal=\dimen356
 \SOUL@syllwidth=\dimen357
 \SOUL@charkern=\dimen358
 \SOUL@hyphkern=\dimen359
 \SOUL@dimen=\dimen360
 \SOUL@dimeni=\dimen361
-\SOUL@minus=\count649
-\SOUL@comma=\count650
-\SOUL@apo=\count651
-\SOUL@grave=\count652
+\SOUL@minus=\count650
+\SOUL@comma=\count651
+\SOUL@apo=\count652
+\SOUL@grave=\count653
 \SOUL@spaceskip=\skip136
 \SOUL@ttwidth=\dimen362
 \SOUL@uldp=\dimen363
@@ -1926,9 +1934,9 @@ s/tikzlibraryfpu.code.tex
 (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.cod
 e.tex))
 (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcirc.defines.tex
-\pgf@circ@count@a=\count653
-\pgf@circ@count@b=\count654
-\pgf@circ@count@c=\count655
+\pgf@circ@count@a=\count654
+\pgf@circ@count@b=\count655
+\pgf@circ@count@c=\count656
 \pgf@circ@res@up=\dimen372
 \pgf@circ@res@down=\dimen373
 \pgf@circ@res@zero=\dimen374
@@ -1941,7 +1949,7 @@ e.tex))
 \pgf@circ@scaled@Rlen=\dimen381
 \pgfstartlinewidth=\dimen382
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcircutils.tex
-\ctikz@scratchbox=\box164
+\ctikz@scratchbox=\box166
 )
 (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcircpath.tex)
 (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcircshapes.tex)
@@ -1949,7 +1957,7 @@ e.tex))
 ) (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcircbipoles.tex
 )
 (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcirctripoles.tex
-\pgf@circ@res@count=\count656
+\pgf@circ@res@count=\count657
 )
 (/usr/local/texlive/2023/texmf-dist/tex/generic/circuitikz/pgfcircquadpoles.tex
 )
@@ -1964,8 +1972,8 @@ rtcuts
 
 (/usr/local/texlive/2023/texmf-dist/tex/generic/xstring/xstring.sty
 (/usr/local/texlive/2023/texmf-dist/tex/generic/xstring/xstring.tex
-\integerpart=\count657
-\decimalpart=\count658
+\integerpart=\count658
+\decimalpart=\count659
 )
 Package: xstring 2023/01/14 v1.85 String manipulations (CT)
 )
@@ -1993,7 +2001,7 @@ Package: trimclip 2020/08/19 v1.2 Trim and clip general TeX material
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/collectbox/collectbox.sty
 Package: collectbox 2022/10/17 v0.4c Collect macro arguments as boxes
-\collectedbox=\box165
+\collectedbox=\box167
 )
 \tc@llx=\dimen384
 \tc@lly=\dimen385
@@ -2017,13 +2025,13 @@ Package trimclip Info: No clipping driver 'tc-luatex.def' available.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2022/10/18 v1.2 Conditionals for odd/even page detection
-\c@checkoddpage=\count659
+\c@checkoddpage=\count660
 ))
 (/usr/local/texlive/2023/texmf-dist/tex/latex/relsize/relsize.sty
 Package: relsize 2013/03/29 ver 4.1
 )
-\l__twmk_indris_int=\count660
-\c@tw@hyphen@char@num=\count661
+\l__twmk_indris_int=\count661
+\c@tw@hyphen@char@num=\count662
 )
 (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
 s/tikzlibrary3d.code.tex
@@ -2040,17 +2048,17 @@ s.code.tex
 \pgfdecoratedinputsegmentcompleteddistance=\dimen398
 \pgfdecoratedinputsegmentremainingdistance=\dimen399
 \pgf@decorate@distancetomove=\dimen400
-\pgf@decorate@repeatstate=\count662
+\pgf@decorate@repeatstate=\count663
 \pgfdecorationsegmentamplitude=\dimen401
 \pgfdecorationsegmentlength=\dimen402
 )
-\tikz@lib@dec@box=\box166
+\tikz@lib@dec@box=\box168
 )
 (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/libraries/decorations/pgfli
 brarydecorations.text.code.tex
-\pgf@lib@dec@text@box=\box167
+\pgf@lib@dec@text@box=\box169
 )
-\tikz@lib@dec@te@box=\box168
+\tikz@lib@dec@te@box=\box170
 )
 (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
 s/tikzlibrarydecorations.pathmorphing.code.tex
@@ -2059,8 +2067,8 @@ brarydecorations.pathmorphing.code.tex))
 (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
 s/tikzlibrarybackgrounds.code.tex
 File: tikzlibrarybackgrounds.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@layerbox@background=\box169
-\pgf@layerboxsaved@background=\box170
+\pgf@layerbox@background=\box171
+\pgf@layerboxsaved@background=\box172
 )
 (/usr/local/texlive/2023/texmf-dist/tex/latex/tikz-feynman/tikz-feynman.sty
 Package: tikz-feynman 2016/02/05v1.1.0Feynman diagrams with TikZ
@@ -2070,8 +2078,8 @@ Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
 )
 (/usr/local/texlive/2023/texmf-dist/tex/latex/pgfopts/pgfopts.sty
 Package: pgfopts 2014/07/10 v2.1a LaTeX package options with pgfkeys
-\pgfopts@list@add@a@toks=\toks63
-\pgfopts@list@add@b@toks=\toks64
+\pgfopts@list@add@a@toks=\toks65
+\pgfopts@list@add@b@toks=\toks66
 )
 (/usr/local/texlive/2023/texmf-dist/tex/latex/tikz-feynman/tikzlibraryfeynman.c
 ode.tex
@@ -2086,8 +2094,8 @@ brarydecorations.pathreplacing.code.tex))
 (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
 s/graphs/tikzlibrarygraphs.code.tex
 File: tikzlibrarygraphs.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\tikz@lib@auto@number=\count663
-\tikz@qnode@count=\count664
+\tikz@lib@auto@number=\count664
+\tikz@qnode@count=\count665
 )
 (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
 s/tikzlibrarypatterns.code.tex
@@ -2104,11 +2112,11 @@ File: tikzlibrarygraphdrawing.code.tex 2023-01-15 v3.1.10 (3.1.10)
 (/usr/local/texlive/2023/texmf-dist/tex/generic/pgf/graphdrawing/tex/pgflibrary
 graphdrawing.code.tex
 File: pgflibrarygraphdrawing.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@gd@parameter@stack@height=\count665
-\pgf@gd@node@box=\box171
-\pgf@gd@edge@box=\box172
-\pgf@gd@prekind@box=\box173
-\pgf@gd@postkind@box=\box174
+\pgf@gd@parameter@stack@height=\count666
+\pgf@gd@node@box=\box173
+\pgf@gd@edge@box=\box174
+\pgf@gd@prekind@box=\box175
+\pgf@gd@postkind@box=\box176
 ))
 (/usr/local/texlive/2023/texmf-dist/tex/latex/tikz-feynman/tikzfeynman.keys.cod
 e.tex)))
@@ -2117,13 +2125,13 @@ e.tex)))
 y
 Package: xtemplate 2023-02-02 L3 Experimental prototype document functions
 \l__xtemplate_tmp_dim=\dimen403
-\l__xtemplate_tmp_int=\count666
+\l__xtemplate_tmp_int=\count667
 \l__xtemplate_tmp_muskip=\muskip22
 \l__xtemplate_tmp_skip=\skip137
 )
 Package: xfrac 2023-02-02 L3 Experimental split-level fractions
-\l__xfrac_slash_box=\box175
-\l__xfrac_tmp_box=\box176
+\l__xfrac_slash_box=\box177
+\l__xfrac_tmp_box=\box178
 \l__xfrac_denominator_bot_sep_dim=\dimen404
 \l__xfrac_numerator_bot_sep_dim=\dimen405
 \l__xfrac_numerator_top_sep_dim=\dimen406
@@ -2142,26 +2150,26 @@ File: pa-typographic-conventions.sty 2022-03-29 typographic conventions package
 (/usr/local/texlive/2023/texmf-dist/tex/latex/cprotect/cprotect.sty
 Package: cprotect 2011/01/27 v1.0e (Bruno Le Floch)
 \CPT@WriteOut=\write8
-\c@CPT@WriteCount=\count667
-\c@CPT@numB=\count668
-\CPT@commandatend@toks=\toks65
+\c@CPT@WriteCount=\count668
+\c@CPT@numB=\count669
+\CPT@commandatend@toks=\toks67
 ))
 (/usr/local/texlive/2023/texmf-dist/tex/latex/covington/covington.sty
 Package: covington 2022/08/30 v2.8 Covington's linguistic macros
 \twoaccsep=\skip138
-\c@covexsave=\count669
+\c@covexsave=\count670
 \examplenumbersep=\skip139
 \exampleind=\skip140
 \subexamplenumbersep=\skip141
-\lineone=\box177
-\linetwo=\box178
-\linethree=\box179
-\wordone=\box180
-\wordtwo=\box181
-\wordthree=\box182
-\gline=\box183
+\lineone=\box179
+\linetwo=\box180
+\linethree=\box181
+\wordone=\box182
+\wordtwo=\box183
+\wordthree=\box184
+\gline=\box185
 \glossglue=\skip142
-\c@covexercise=\count670
+\c@covexercise=\count671
 \reflistindent=\skip143
 \reflistitemsep=\skip144
 \reflistparsep=\skip145
@@ -2174,20 +2182,17 @@ LaTeX Warning: You have requested package `packages//slgloss',
 Package: slgloss 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/substr/substr.sty
 Package: substr 2009/10/20 v1.2 Handle substrings
-\c@su@anzahl=\count671
+\c@su@anzahl=\count672
 )
 LaTeX Info: Redefining \fs on input line 19.
-\c@@tempe=\count672
+\c@@tempe=\count673
 )
 Package translations Info: No language package found. I am going to use `englis
-h' as default language. on input line 522.
-\@quotelevel=\count673
-\@quotereset=\count674
+h' as default language. on input line 523.
+\@quotelevel=\count674
+\@quotereset=\count675
 
 (./dissertation.aux (./ch-front.aux) (./ch1.aux) (./ch3.aux
-
-LaTeX Warning: Label `fig:atto' multiply defined.
-
 
 LaTeX Warning: Label `fig:atto' multiply defined.
 
@@ -2198,44 +2203,44 @@ LaTeX Warning: Label `fig:fig16' multiply defined.
 ) (./ap-vita.aux))
 \openout1 = dissertation.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 522.
-LaTeX Font Info:    ... okay on input line 522.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 522.
-LaTeX Font Info:    ... okay on input line 522.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 522.
-LaTeX Font Info:    ... okay on input line 522.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 522.
-LaTeX Font Info:    ... okay on input line 522.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 522.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 523.
+LaTeX Font Info:    ... okay on input line 523.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 523.
+LaTeX Font Info:    ... okay on input line 523.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 523.
+LaTeX Font Info:    ... okay on input line 523.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 523.
+LaTeX Font Info:    ... okay on input line 523.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 523.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 5
-22.
+23.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 522.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 522.
-LaTeX Font Info:    ... okay on input line 522.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 522.
-LaTeX Font Info:    ... okay on input line 522.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 522.
-LaTeX Font Info:    ... okay on input line 522.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 522.
-LaTeX Font Info:    ... okay on input line 522.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 522.
-LaTeX Font Info:    ... okay on input line 522.
+LaTeX Font Info:    ... okay on input line 523.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 523.
+LaTeX Font Info:    ... okay on input line 523.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 523.
+LaTeX Font Info:    ... okay on input line 523.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 523.
+LaTeX Font Info:    ... okay on input line 523.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 523.
+LaTeX Font Info:    ... okay on input line 523.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 523.
+LaTeX Font Info:    ... okay on input line 523.
  (/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count675
+\scratchcounter=\count676
 \scratchdimen=\dimen409
-\scratchbox=\box184
-\nofMPsegments=\count676
-\nofMParguments=\count677
-\everyMPshowfont=\toks66
-\MPscratchCnt=\count678
+\scratchbox=\box186
+\nofMPsegments=\count677
+\nofMParguments=\count678
+\everyMPshowfont=\toks68
+\MPscratchCnt=\count679
 \MPscratchDim=\dimen410
-\MPnumerator=\count679
-\makeMPintoPDFobject=\count680
-\everyMPtoPDFconversion=\toks67
+\MPnumerator=\count680
+\makeMPintoPDFobject=\count681
+\everyMPtoPDFconversion=\toks69
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -2245,7 +2250,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring ON on input line 522.
+Package hyperref Info: Link coloring ON on input line 523.
 
 (./dissertation.out) (./dissertation.out)
 \@outlinefile=\write9
@@ -2258,8 +2263,9 @@ File: translations-basic-dictionary-english.trsl (english translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `english'. on input line 522.
+or `english'. on input line 523.
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 
@@ -2301,7 +2307,7 @@ Package caption Info: End \AtBeginDocument code.
 Package todonotes Warning: The length marginparwidth is less than 2cm and will 
 most likely cause issues with the appearance of inserted todonotes. The issue c
 an be solved by adding a line like \setlength {\marginparwidth }{2cm} prior to 
-loading the todonotes package. on input line 522.
+loading the todonotes package. on input line 523.
 
 (/usr/local/texlive/2023/texmf-dist/tex/latex/notoccite/notoccite.sty
 Package: notoccite 2000/07/20
@@ -2322,18 +2328,18 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'dissertation.bbl' found.
 
 (./dissertation.bbl)
-Package biblatex Info: Reference section=0 on input line 522.
-Package biblatex Info: Reference segment=0 on input line 522.
-\c@lstlisting=\count681
+Package biblatex Info: Reference section=0 on input line 523.
+Package biblatex Info: Reference segment=0 on input line 523.
+\c@lstlisting=\count682
 
-Package chemgreek Info: Activating mapping `default' on line 522.
+Package chemgreek Info: Activating mapping `default' on line 523.
 
 \Etoc@tf=\read6
-<graphics//gr-pu-seal-vector.pdf, id=290, 527.62581pt x 516.24864pt>
+<graphics//gr-pu-seal-vector.pdf, id=318, 527.62581pt x 516.24864pt>
 File: graphics//gr-pu-seal-vector.pdf Graphic file (type pdf)
 <use graphics//gr-pu-seal-vector.pdf>
 Package luatex.def Info: graphics//gr-pu-seal-vector.pdf  used on input line 52
-6.
+7.
 (luatex.def)             Requested size: 224.7766pt x 219.93448pt.
  [1
 
@@ -2424,13 +2430,13 @@ Overfull \hbox (8.13734pt too wide) in paragraph at lines 5--5
 [8
 
 ] [9] [10]
-Overfull \hbox (8.16907pt too wide) in paragraph at lines 26--26
+Overfull \hbox (8.16907pt too wide) in paragraph at lines 25--25
  \T1/lmr/m/n/12 (dSTORM) imag-ing strat-egy of sin-gle nu-cle-o-somes and an ex-
 am-ple super-resolution 
  []
 
 
-Overfull \hbox (0.20308pt too wide) in paragraph at lines 26--26
+Overfull \hbox (0.20308pt too wide) in paragraph at lines 25--25
  \T1/lmr/m/n/12 GFP-tagged BRD4. (d) Quan-tifi-ca-tion of de-gree of clus-ter-in
 g us-ing the L-function 
  []
@@ -2455,7 +2461,7 @@ Chapter 1.
 
 
 ]
-<media/Intro.png, id=621, 908.9157pt x 322.806pt>
+<media/Intro.png, id=658, 908.9157pt x 322.806pt>
 File: media/Intro.png Graphic file (type png)
 <use media/Intro.png>
 Package luatex.def Info: media/Intro.png  used on input line 18.
@@ -2466,17 +2472,17 @@ Overfull \hbox (1.46458pt too wide) in paragraph at lines 36--37
  []
 
 [18]
-<media/Noise.png, id=671, 674.2791pt x 286.9119pt>
+<media/Noise.png, id=708, 674.2791pt x 286.9119pt>
 File: media/Noise.png Graphic file (type png)
 <use media/Noise.png>
 Package luatex.def Info: media/Noise.png  used on input line 59.
 (luatex.def)             Requested size: 455.24408pt x 193.71407pt.
  [19<./media/Noise.png>] [20]
-<media/FRC.png, id=696, 983.1129pt x 841.2228pt>
+<media/FRC.png, id=733, 983.1129pt x 841.2228pt>
 File: media/FRC.png Graphic file (type png)
 <use media/FRC.png>
 Package luatex.def Info: media/FRC.png  used on input line 107.
-(luatex.def)             Requested size: 398.33858pt x 340.8474pt.
+(luatex.def)             Requested size: 341.43306pt x 292.14758pt.
  [21] [22<./media/FRC.png>]) [23]
 \openout2 = ch3.aux
  (./ch3.tex
@@ -2484,7 +2490,7 @@ File: ch3.tex Chapter3
 
 Chapter 2.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Laser-Stats.png,
- id=724, 918.5517pt x 463.0098pt>
+ id=761, 918.5517pt x 463.0098pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Laser-Stats
 .png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Laser-Stats.
@@ -2498,138 +2504,158 @@ d/media/Laser-Stats.png  used on input line 24.
 
 
 ] [25</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Laser-Stats.
-png>] [26]
+png>] [26] [27
+Missing character: There is no ‘ (U+2018) in font ec-lmr12!
+]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPADvCMOS.png, i
-d=752, 967.615pt x 473.77pt>
+d=802, 967.615pt x 473.77pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPADvCMOS.p
 ng Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPADvCMOS.pn
 g>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spa
-d/media/SPADvCMOS.png  used on input line 84.
+d/media/SPADvCMOS.png  used on input line 92.
 (luatex.def)             Requested size: 398.33858pt x 195.03493pt.
 
 
-LaTeX Warning: Reference `fig:fig30' on page 27 undefined on input line 89.
+Package hyperref Warning: The anchor of a bookmark and its parent's must not
+(hyperref)                be the same. Added a new anchor on input line 104.
 
-[27]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.png, id
-=764, 531.9072pt x 321.6015pt>
+=803, 531.9072pt x 321.6015pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.png
 >
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spa
-d/media/Figure-0.png  used on input line 97.
+d/media/Figure-0.png  used on input line 108.
 (luatex.def)             Requested size: 455.24408pt x 275.26166pt.
- [28</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPADvCMOS.png
->] [29</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.pn
-g>] [30] [31]
-
-LaTeX Warning: Reference `fig:fig7' on page 32 undefined on input line 167.
-
-</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-2.png, id
-=804, 4081.8096pt x 2629.9053pt>
-File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-2.pn
-g Graphic file (type png)
-<use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-2.png
->
-Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spa
-d/media/Figure-2.png  used on input line 175.
-(luatex.def)             Requested size: 455.24408pt x 293.30339pt.
+[28] [29</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPADvCMOS
+.png>] [30</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-
+0.png>] [31]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-6.png, id
-=805, 2812.38705pt x 2251.9332pt>
+=846, 2812.38705pt x 2251.9332pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-6.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-6.png
 >
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spa
-d/media/Figure-6.png  used on input line 182.
+d/media/Figure-6.png  used on input line 199.
 (luatex.def)             Requested size: 455.24408pt x 364.5088pt.
+
+
+LaTeX Warning: Citation 'Furuta2022' on page 32 undefined on input line 208.
+
+
+LaTeX Warning: Citation 'Furuta2022' on page 32 undefined on input line 208.
+
+
+LaTeX Warning: Citation 'Efros2016' on page 32 undefined on input line 208.
+
+[32] [33</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-6.
+png>]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-1.png, id
-=806, 7335.405pt x 4258.66031pt>
+=862, 7335.405pt x 4258.66031pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-1.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-1.png
 >
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spa
-d/media/Figure-1.png  used on input line 189.
+d/media/Figure-1.png  used on input line 212.
 (luatex.def)             Requested size: 455.24408pt x 264.28114pt.
+ [34</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-1.png>
+]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-3.png, id
-=807, 2649.14719pt x 2034.09938pt>
+=870, 2649.14719pt x 2034.09938pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-3.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-3.png
 >
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spa
-d/media/Figure-3.png  used on input line 196.
+d/media/Figure-3.png  used on input line 220.
 (luatex.def)             Requested size: 455.24408pt x 349.5479pt.
+ [35
 
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 201.
-
+] [36</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-3.png
+>]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png, id
-=808, 455.45157pt x 225.84375pt>
+=885, 455.45157pt x 225.84375pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png
 >
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spa
-d/media/Figure-5.png  used on input line 213.
+d/media/Figure-5.png  used on input line 242.
 (luatex.def)             Requested size: 341.43306pt x 169.31001pt.
-</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/g20g2m_3.png, id
-=809, 216.81pt x 216.81pt>
-File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/g20g2m_3.pn
+ [37
+
+</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png>] [
+38]
+Overfull \hbox (13.64099pt too wide) in paragraph at lines 335--336
+\T1/lmr/m/n/12 ap-prox-i-mate as Pois-son for sim-plic-ity. Er-ror es-ti-mates 
+are then $\OML/lmm/m/it/12 G[]\OT1/lmr/m/n/12 (0) = []\OML/lmm/m/it/12 ; E\OT
+1/lmr/m/n/12 (\OML/lmm/m/it/12 G[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 m\OT1/lmr/m
+/n/12 )) =
+ []
+
+[39]
+
+LaTeX Warning: Citation 'Rust2006' on page 40 undefined on input line 381.
+
+
+LaTeX Warning: Citation 'Betzig2006' on page 40 undefined on input line 381.
+
+
+LaTeX Warning: Citation 'Li2019' on page 40 undefined on input line 381.
+
+
+LaTeX Warning: Citation 'Fazel2019' on page 40 undefined on input line 381.
+
+[40]
+</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-2.png, id
+=916, 4081.8096pt x 2629.9053pt>
+File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-2.pn
 g Graphic file (type png)
-<use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/g20g2m_3.png
+<use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-2.png
 >
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spa
-d/media/g20g2m_3.png  used on input line 222.
-(luatex.def)             Requested size: 227.62204pt x 227.63405pt.
-[32]
-
-LaTeX Warning: Reference `fig:fig8' on page 33 undefined on input line 254.
-
-[33</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-2.png>]
-
-LaTeX Warning: Reference `fig:fig6' on page 34 undefined on input line 272.
-
+d/media/Figure-2.png  used on input line 388.
+(luatex.def)             Requested size: 455.24408pt x 293.30339pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/PoissonBinomialP
-ost-1.png, id=828, 505.89pt x 505.89pt>
+ost-1.png, id=917, 505.89pt x 505.89pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/PoissonBino
 mialPost-1.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/PoissonBinom
 ialPost-1.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spa
-d/media/PoissonBinomialPost-1.png  used on input line 276.
+d/media/PoissonBinomialPost-1.png  used on input line 396.
 (luatex.def)             Requested size: 398.33858pt x 398.34415pt.
-[34] [35]) [36
+ [41</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-2.png>
+] [42</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/PoissonBinom
+ialPost-1.png>] [43
+
+
+
 Missing character: There is no – (U+2013) in font ec-lmr12!
-] [37</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-6.png
->] [38</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-1.pn
-g>] [39</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-3.p
-ng>] [40</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.
-png></Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/g20g2m_3.png>
-] [41</Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/PoissonBinom
-ialPost-1.png>]
+]) [44]
 \openout2 = ch2.aux
  (./ch2.tex
 File: ch2.tex 
 
 Chapter 3.
-[42
+[45
 
 
 
 
-] [43] [44]
+] [46] [47]
 Overfull \hbox (27.00006pt too wide) in paragraph at lines 64--65
 \T1/lmr/m/n/12 dimensional set-tings. It is worth not-ing that this deriva-tion of-ten be-gins with $\OML/lmm/m/it/12 D[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 p[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 y\OMS/lmsy/m/n/12 j\OML/lmm/m/it/12 x\OT1/lmr/m/n/12 )\OMS/lmsy/m/n/12 jj\OML/lmm/m/it/12 q\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 y\OMS/lmsy/m/n/12 j\OML/lmm/m/it/12 x\OT1/lmr/m/n/12 ))$
  []
 
-[45]
+[48]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure-0.png, id
-=946, 725.5908pt x 381.22424pt>
+=1003, 725.5908pt x 381.22424pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure-0.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure-0.png
@@ -2637,10 +2663,10 @@ g Graphic file (type png)
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddp
 m/media/Figure-0.png  used on input line 97.
 (luatex.def)             Requested size: 435.35785pt x 228.73631pt.
- [46] [47</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure-0
+ [49] [50</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure-0
 .png>]
-</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure.png, id=9
-81, 2495.57344pt x 1251.92719pt>
+</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure.png, id=1
+037, 2495.57344pt x 1251.92719pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure.png 
 Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure.png>
@@ -2652,14 +2678,14 @@ Overfull \hbox (29.35083pt too wide) in paragraph at lines 179--180
  [][] 
  []
 
-[48]
+[51]
 
-LaTeX Warning: Reference `fig:fig11' on page 49 undefined on input line 194.
+LaTeX Warning: Reference `fig:fig11' on page 52 undefined on input line 194.
 
-[49</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure.png>]
-[50]
+[52</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure.png>]
+[53]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure-2-1.png, 
-id=1018, 2096.91405pt x 2134.1331pt>
+id=1075, 2096.91405pt x 2134.1331pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure-2-1.
 png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure-2-1.p
@@ -2669,36 +2695,36 @@ m/media/Figure-2-1.png  used on input line 226.
 (luatex.def)             Requested size: 419.37538pt x 426.81906pt.
 
 
-LaTeX Warning: Reference `fig:fig15' on page 51 undefined on input line 232.
+LaTeX Warning: Reference `fig:fig15' on page 54 undefined on input line 232.
 
-[51] [52] [53]) [54] [55</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm
+[54] [55] [56]) [57] [58</Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm
 /media/Figure-2-1.png>]
 \openout2 = ch4.aux
  (./ch4.tex
 File: ch4.tex Chapter4
 
 Chapter 4.
-<media/Chromatin.png, id=1066, 970.62625pt x 671.50874pt>
+<media/Chromatin.png, id=1123, 970.62625pt x 671.50874pt>
 File: media/Chromatin.png Graphic file (type png)
 <use media/Chromatin.png>
 Package luatex.def Info: media/Chromatin.png  used on input line 12.
 (luatex.def)             Requested size: 369.88582pt x 255.90347pt.
-[56
+[59
 
 
 
 
-] [57<./media/Chromatin.png>] [58
+] [60<./media/Chromatin.png>] [61
 Missing character: There is no – (U+2013) in font ec-lmr12!
-] [59] [60]
-<media/Lifetime.png, id=1218, 755.82375pt x 339.2675pt>
+] [62] [63]
+<media/Lifetime.png, id=1276, 755.82375pt x 339.2675pt>
 File: media/Lifetime.png Graphic file (type png)
 <use media/Lifetime.png>
 Package luatex.def Info: media/Lifetime.png  used on input line 52.
 (luatex.def)             Requested size: 369.88582pt x 166.03027pt.
- [61<./media/Lifetime.png>]
+ [64<./media/Lifetime.png>]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e4-0.pn
-g, id=1236, 542.025pt x 347.2975pt>
+g, id=1293, 542.025pt x 347.2975pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e4
 -0.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e4-
@@ -2707,7 +2733,7 @@ Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
 4/media/ppp/csr-1e4-0.png  used on input line 66.
 (luatex.def)             Requested size: 284.52756pt x 182.31271pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e5-0.pn
-g, id=1237, 541.52313pt x 348.30125pt>
+g, id=1294, 541.52313pt x 348.30125pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e5
 -0.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e5-
@@ -2716,7 +2742,7 @@ Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
 4/media/ppp/csr-1e5-0.png  used on input line 67.
 (luatex.def)             Requested size: 284.52756pt x 183.0097pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-5e6-0.pn
-g, id=1238, 537.00626pt x 347.79938pt>
+g, id=1295, 537.00626pt x 347.79938pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-5e6
 -0.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-5e6-
@@ -2725,7 +2751,7 @@ Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
 4/media/ppp/csr-5e6-0.png  used on input line 68.
 (luatex.def)             Requested size: 284.52756pt x 184.27971pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-1e4-50.p
-ng, id=1239, 536.0025pt x 346.79562pt>
+ng, id=1296, 536.0025pt x 346.79562pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-1e4
 -50.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-1e4-
@@ -2734,7 +2760,7 @@ Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
 4/media/ppp/tom-1e4-50.png  used on input line 75.
 (luatex.def)             Requested size: 284.52756pt x 184.08655pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-1e5-50.p
-ng, id=1240, 541.52313pt x 349.305pt>
+ng, id=1297, 541.52313pt x 349.305pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-1e5
 -50.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-1e5-
@@ -2743,7 +2769,7 @@ Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
 4/media/ppp/tom-1e5-50.png  used on input line 76.
 (luatex.def)             Requested size: 284.52756pt x 183.5371pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-5e6-50.p
-ng, id=1241, 537.00626pt x 348.80313pt>
+ng, id=1298, 537.00626pt x 348.80313pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-5e6
 -50.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-5e6-
@@ -2751,29 +2777,29 @@ File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-5e6
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
 4/media/ppp/tom-5e6-50.png  used on input line 77.
 (luatex.def)             Requested size: 284.52756pt x 184.81155pt.
- [62
+ [65
 Missing character: There is no ’ (U+2019) in font ec-lmr12!
 Missing character: There is no ’ (U+2019) in font ec-lmr12!
-] [63</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e4-
+] [66</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e4-
 0.png></Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e5
 -0.png></Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-5e
-6-0.png>] [64</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/
+6-0.png>] [67</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/
 tom-1e4-50.png></Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/pp
 p/tom-1e5-50.png></Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/
-ppp/tom-5e6-50.png>] [65
+ppp/tom-5e6-50.png>] [68
 
-] [66]
+] [69]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse.png, id=13
-02, 914.41624pt x 639.38875pt>
+58, 914.41624pt x 639.38875pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse.png G
 raphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
 4/media/Rouse.png  used on input line 123.
 (luatex.def)             Requested size: 469.75502pt x 328.46448pt.
- [67</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse.png>]
+ [70</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse.png>]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse-Dynamics-1
-.png, id=1316, 505.89pt x 361.35pt>
+.png, id=1372, 505.89pt x 361.35pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse-Dynam
 ics-1.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse-Dynami
@@ -2785,10 +2811,10 @@ Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[68</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse-Dynamics
--1.png>] [69]
+[71</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse-Dynamics
+-1.png>] [72]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Structure.png, i
-d=1348, 894.34125pt x 494.84875pt>
+d=1406, 894.34125pt x 494.84875pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Structure.p
 ng Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Structure.pn
@@ -2796,18 +2822,18 @@ g>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
 4/media/Structure.png  used on input line 176.
 (luatex.def)             Requested size: 398.33858pt x 220.40709pt.
- [70
+ [73
 
 ]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 186.
 
-[71
+[74
 Missing character: There is no – (U+2013) in font ec-lmr12!
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Structure.png>]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-0.png, id
-=1379, 1710.1491pt x 1079.7138pt>
+=1436, 1710.1491pt x 1079.7138pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-0.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-0.png
@@ -2816,12 +2842,12 @@ Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
 4/media/Figure-0.png  used on input line 191.
 (luatex.def)             Requested size: 469.75502pt x 296.58447pt.
 
-[72
+[75
 Missing character: There is no ﬁ (U+FB01) in font ec-lmr12!
 Missing character: There is no ∼ (U+223C) in font ec-lmr12!
 ]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-1.png, id
-=1398, 1583.6766pt x 1085.2545pt>
+=1454, 1583.6766pt x 1085.2545pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-1.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-1.png
@@ -2830,7 +2856,7 @@ Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
 4/media/Figure-1.png  used on input line 201.
 (luatex.def)             Requested size: 469.75502pt x 321.90262pt.
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-2.png, id
-=1399, 1608.2484pt x 990.5808pt>
+=1455, 1608.2484pt x 990.5808pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-2.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-2.png
@@ -2838,15 +2864,15 @@ g Graphic file (type png)
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
 4/media/Figure-2.png  used on input line 207.
 (luatex.def)             Requested size: 469.75502pt x 289.33183pt.
- [73
+ [76
 Missing character: There is no ’ (U+2019) in font ec-lmr12!
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-0.png>]
-[74
+[77
 Missing character: There is no ﬁ (U+FB01) in font ec-lmr12!
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-1.png>]
-[75</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-2.png>]
+[78</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-2.png>]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-3.png, id
-=1424, 2077.0398pt x 695.2374pt>
+=1480, 2077.0398pt x 695.2374pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-3.pn
 g Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-3.png
@@ -2858,12 +2884,12 @@ Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[76</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-3.png>] [77]
+[79</Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-3.png>] [80]
 
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 269.
 
-[78
+[81
 Missing character: There is no ‘ (U+2018) in font ec-lmr12!
 Missing character: There is no ’ (U+2019) in font ec-lmr12!
 ]
@@ -2871,9 +2897,9 @@ Missing character: There is no ’ (U+2019) in font ec-lmr12!
 Package hyperref Warning: The anchor of a bookmark and its parent's must not
 (hyperref)                be the same. Added a new anchor on input line 277.
 
-[79] [80] [81]
+[82] [83] [84]
 </Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/media/
-GBP5.png, id=1478, 1498.6389pt x 1172.9421pt>
+GBP5.png, id=1535, 1498.6389pt x 1172.9421pt>
 File: /Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/m
 edia/GBP5.png Graphic file (type png)
 <use /Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/me
@@ -2881,41 +2907,41 @@ dia/GBP5.png>
 Package luatex.def Info: /Users/cwseitz/git/cwseitz.github.io/docs/phd/disserta
 tion/dissertation/media/GBP5.png  used on input line 304.
 (luatex.def)             Requested size: 469.75502pt x 367.65315pt.
- [82] [83</Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertatio
-n/media/GBP5.png>]) [84]
+ [85] [86</Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertatio
+n/media/GBP5.png>]) [87]
 changed \interlinepenalty to 10000
-[85
+[88
 
 
 
-] [86] [87] [88] [89]
-Overfull \hbox (0.23045pt too wide) in paragraph at lines 611--611
+] [89] [90] [91] [92] [93]
+Overfull \hbox (0.23045pt too wide) in paragraph at lines 612--612
 []\T1/lmr/m/n/12 A. S. Bel-mont, ``Vi-su-al-iz-ing chro-mo-some dy-nam-ics with gfp,'' \T1/lmr/m/it/12 Trends Cell Biol\T1/lmr/m/n/12 , vol. 11,
  []
 
-[90]
-Overfull \hbox (0.6572pt too wide) in paragraph at lines 611--611
+[94]
+Overfull \hbox (0.6572pt too wide) in paragraph at lines 612--612
 \T1/lmr/m/n/12 ``Live-cell imag-ing re-veals the dy-nam-ics and func-tion of sin
 gle-telomere terra molecules
  []
 
-[91]
-Overfull \hbox (0.31354pt too wide) in paragraph at lines 611--611
+
+Overfull \hbox (0.31354pt too wide) in paragraph at lines 612--612
 \T1/lmr/m/n/12 resolution imag-ing of chro-mo-somes and in situ hap-lo-type vi-s
 u-al-iza-tion us-ing oligopaint
  []
 
-[92] [93] [94]
-Overfull \hbox (12.18463pt too wide) in paragraph at lines 611--611
+[95] [96] [97]
+Overfull \hbox (12.18463pt too wide) in paragraph at lines 612--612
 []\T1/lmr/m/n/12 M. Badieirostami, M. D. Lew, M. A. Thomp-son, and W. E. Mo-erne
 r, ``Three-dimensional
  []
 
-[95] [96
+[98] [99] [100
 Missing character: There is no ’ (U+2019) in font ec-lmr12!
-] [97
+] [101
 Missing character: There is no ’ (U+2019) in font ec-lmr12!
-] [98
+] [102
 Missing character: There is no γ (U+03B3) in font ec-lmr12!
 Missing character: There is no γ (U+03B3) in font ec-lmr12!
 ]
@@ -2923,7 +2949,7 @@ Missing character: There is no γ (U+03B3) in font ec-lmr12!
 
 No file ap-vita.tex.
 No file dissertation.ind.
-[99] (./dissertation.aux (./ch-front.aux) (./ch1.aux) (./ch3.aux) (./ch2.aux)
+(./dissertation.aux (./ch-front.aux) (./ch1.aux) (./ch3.aux) (./ch2.aux)
 (./ch4.aux) (./ap-vita.aux))
 
  *File List*
@@ -3070,6 +3096,7 @@ bold-extra.sty    2001/11/13 v0.1 Use fonts from cm/mf-extra/bold
  amsmath.sty    2022/04/08 v2.17n AMS math features
   amsbsy.sty    1999/11/29 v1.2d Bold Symbols
   amsopn.sty    2022/04/08 v2.04 operator names
+   float.sty    2001/11/08 v1.3d Float enhancements (AL)
 cryptocode.sty    2021/08/15 v0.44 Cryptocode LaTeX package for typesetting pse
 udocode, algorithms and protocols as well as cryptographic proofs.
 mathtools.sty    2022/06/29 v1.29 mathematical typesetting tools
@@ -3165,12 +3192,11 @@ media/FRC.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Laser-Stats.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPADvCMOS.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-0.png
-/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-2.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-6.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-1.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-3.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png
-/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/g20g2m_3.png
+/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-2.png
 /Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/PoissonBinomialPo
 st-1.png
      ch2.tex    
@@ -3210,28 +3236,30 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-
-LaTeX Warning: Temporary extra page added at the end. Rerun to get it removed.
-
 Package rerunfilecheck Info: File `dissertation.out' has not changed.
-(rerunfilecheck)             Checksum: 49998EC239367CB1E17C93E21862167B;13790.
+(rerunfilecheck)             Checksum: 764FE654DC8AF243A638691EDE7E9902;15513.
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                dissertation
+(biblatex)                and rerun LaTeX afterwards.
+
 Package logreq Info: Writing requests to 'dissertation.run.xml'.
 
 \openout1 = dissertation.run.xml
 )
 
 Here is how much of LuaTeX's memory you used:
- 78842 strings out of 478285
+ 78947 strings out of 478285
  125218,4101490 words of node,token memory allocated
- 1826 words of node memory still in use:
-   24 hlist, 2 vlist, 10 rule, 2 glue, 4 kern, 1 glyph, 165 attribute, 94 glue_s
-pec, 165 attribute_list, 7 write, 16 pdf_literal, 2 pdf_dest, 19 pdf_action, 16 
+ 1828 words of node memory still in use:
+   24 hlist, 2 vlist, 10 rule, 2 glue, 4 kern, 1 glyph, 164 attribute, 94 glue_s
+pec, 164 attribute_list, 7 write, 16 pdf_literal, 2 pdf_dest, 20 pdf_action, 16 
 pdf_colorstack nodes
-   avail lists: 1:8,2:1751,3:937,4:263,5:540,6:271,7:9837,8:113,9:1456,10:25,11:
-817
- 95862 multiletter control sequences out of 65536+600000
- 58 fonts using 4040935 bytes
- 109i,13n,103p,2309b,3427s stack positions out of 10000i,1000n,20000p,200000b,200000s
+   avail lists: 1:8,2:1760,3:973,4:277,5:502,6:270,7:8318,8:113,9:1456,10:25,11:
+778
+ 95953 multiletter control sequences out of 65536+600000
+ 58 fonts using 4055655 bytes
+ 109i,13n,103p,2580b,3431s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/tex
 live/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2023/texmf
 -dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2023/texmf-dist/fonts
@@ -3252,10 +3280,10 @@ ype1/public/lm/lmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public
 b></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10
 .pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/l
 ocal/texlive/2023/texmf-dist/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on dissertation.pdf (99 pages, 79182776 bytes).
+Output written on dissertation.pdf (102 pages, 79155435 bytes).
 
-PDF statistics: 1773 PDF objects out of 2073 (max. 8388607)
- 1466 compressed objects within 15 object streams
- 381 named destinations out of 1000 (max. 131072)
- 716 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 1849 PDF objects out of 2073 (max. 8388607)
+ 1534 compressed objects within 16 object streams
+ 392 named destinations out of 1000 (max. 131072)
+ 772 words of extra memory for PDF output out of 10000 (max. 100000000)
 
