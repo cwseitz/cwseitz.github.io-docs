@@ -1,5 +1,5 @@
 \ProvidesFile{ch3.tex}[Chapter3]
-\chapter{Quantum enhanced localization with a single photon avalanche diode array}
+\chapter{QUANTUM ENHANCED LOCALIZATION MICROSCOPY WITH A SINGLE PHOTON AVALANCHE DIODE ARRAY}
 \ix{physics//Physics appendix}
 
 \section{Introduction}
@@ -64,20 +64,19 @@ Techniques such as Hanbury Brown and Twiss (HBT) interferometry are commonly emp
 
 Far-field optical microscopy is fundamentally limited by diffraction, with the maximum attainable resolution being limited to approximately half the wavelength of light. Several schemes to beat the diffraction limit have been developed in recent years. Many of these schemes utilize the concept of precise localization of isolated fluorescent emitters which blink over a time series of frames \parencite{Rust2006,Betzig2006}. An inherent problem with such methods is the requirement that fluorescent emitters be isolated, slowing down the acquisition of super-resolved images. To begin to address this issue, we leverage the fact that many fluorophores are intrinsically single photon sources and exhibit fluorescence antibunching. This property can constrain the number of active fluorescent emitters in a region of interest (ROI) and can potentially enable localization in non-sparse scenes \parencite{Ta2010,Israel2017}. 
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=15cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPADD.png}
-\caption{\textbf{Experimental setup for widefield photon counting}. (left) A 532nm pulsed laser is directed through filtering and focusing optics to a 100X oil-immersion objective. Emisson light is collected by a CMOS or SPAD sensor. (right) Diagram of the diode at each pixel of the SPAD array. Sensor micrograph courtesy of Pi Imaging Technologies}
-\label{fig:fig00}
-\end{figure*}    
+%\begin{figure*}[t]
+%\centering
+%\includegraphics[width=15cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/SPADD.png}
+%\caption{\textbf{Experimental setup for widefield photon counting}. (left) A 532nm pulsed laser is directed through filtering and focusing optics to a 100X oil-immersion objective. Emisson light is collected by a CMOS or SPAD sensor. (right) Diagram of the diode at each pixel of the SPAD array. Sensor micrograph courtesy of Pi Imaging Technologies}
+%\label{fig:fig00}
+%\end{figure*}    
 
-
-\begin{figure*}[t]
-\centering
-\includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Dark.png}
-\caption{\textbf{Dark counts of the SPAD array}. (left) Average pixel-wise dark counts for a 100x100 pixel region exposed for 100ms (right) Variance of dark counts for 100ms exposure.}
-\label{fig:fig30}
-\end{figure*}    
+%\begin{figure*}[t]
+%\centering
+%\includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Dark.png}
+%\caption{\textbf{Dark counts of the SPAD array}. (left) Average pixel-wise dark counts for a 100x100 pixel region exposed for 100ms (right) Variance of dark counts for 100ms exposure.}
+%\label{fig:fig30}
+%\end{figure*}
 
 
 \begin{figure*}[t]
@@ -114,12 +113,14 @@ A similar theoretical exposition to follows to Section 1.2; however, slight modi
 
 where $\langle n_{k} \rangle$ is the expected number of photons detected at pixel $k$. We now consider the case of pulsed excitation where the interval between pulses is much longer than the fluorescence lifetime. Upon excitation of an isolated fluorescent emitter, a photon is detected at a particular detector element $k$ with probability $\zeta_{k}$. Similarly, the probability of detection in a region of interest collecting all photons is $\zeta$. Here, we are primarily concerned with the latter quantity, and its application in counting fluorescent emitters.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-4.png}
-\caption{\textbf{Posteriors on the number of fluorescent emitters $N$ and localization for $N^{*}=1$} (left) and $N^{*}=2$ (right) quantum dots. Scalebars 360nm}
-\label{fig:fig7}
-\end{figure}   
+
+%\begin{figure}[t]
+%\centering
+%\includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-4.png}
+%\caption{\textbf{Posteriors on the number of fluorescent emitters $N$ and localization for $N^{*}=1$} (left) and $N^{*}=2$ (right) quantum dots. Scalebars 360nm}
+%\label{fig:fig7}
+%\end{figure}
+
 
 By temporarily ignoring the spatial profile described by (2.3), we derive a likelihood on the number of fluorophores in a small ROI with a lateral dimension $d = 5$ pixels. For $N$ fluorophores emitting photons which can be detected within a ROI of the SPAD array, the number of signal photons measured $n_{\mathrm{signal}}$ following a single excitation pulse will have Binomial statistics $n_{\mathrm{signal}} \sim \mathrm{Binom}(N,\zeta)$. Photon pile-up at a single detector element can be safely neglected in this model due to its relatively low likelihood. We then model the background signal within the ROI as a coherent state, which we have shown follows Poissonian statistics $n_{\mathrm{background}} \sim \mathrm{Poisson}(\lambda)$ for an expected number $\lambda$ of background counts in the ROI, per frame. The total number of counts $n=n_{\mathrm{signal}}+n_{\mathrm{background}}$ detected in the ROI following a single pulse is then distributed by the likelihood
 
@@ -151,12 +152,12 @@ For localization, we notice that the Poisson-Binomial likeliood is well approxim
 = \sum_{k}  \log n_k! + \mu_{k} - n_k\log\left(\mu_{k}\right)
 \end{equation}
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png}
-\caption{\textbf{Single and multi-emitter localization error on sums of photon counts}. (left) Localization uncertainty for simulated data for different values of $N$, plotted with respect to the Cramer-Rao lower bound, shown in dashed gray. (right) Multi-emitter localization by MCMC sampling for $N=3$, colors indicate a cluster of samples i.e., a single localization. All data was generated with a background rate $\langle n_{\mathrm{background}} \rangle = \lambda N_{\mathrm{frames}}/d^{2}$ per pixel. Scalebar 360nm}
-\label{fig:fig6}
-\end{figure*}   
+%\begin{figure*}[t]
+%\centering
+%\includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png}
+%\caption{\textbf{Single and multi-emitter localization error on sums of photon counts}. (left) Localization uncertainty for simulated data for different values of $N$, plotted with respect to the Cramer-Rao lower bound, shown in dashed gray. (right) Multi-emitter localization by MCMC sampling for $N=3$, colors indicate a cluster of samples i.e., a single localization. All data was generated with a background rate $\langle n_{\mathrm{background}} \rangle = \lambda N_{\mathrm{frames}}/d^{2}$ per pixel. Scalebar 360nm}
+%\label{fig:fig6}
+%\end{figure*}   
 
 where, in the multi-emitter regime the expected photon count at a pixel is $\mu_{k} = \sum_{m=1}^{N^{*}} \mu_{k,m}$ and $\mu_{k,m}=\zeta N_{\mathrm{frames}}\Gamma_{x}(u_k,\theta_{u,m})\Gamma_{y}(v_k,\theta_{v,m}) + \lambda N_{\mathrm{frames}}/d^{2}$. In the multi-emitter regime, optimization of the likelihood can be more challenging, and sampling is a more suitable choice compared to gradient-based methods (see Results). 
 
@@ -171,18 +172,72 @@ g^{(2)}(0) = \frac{G^{(2)}(0)-B}{\langle G^{(2)}(m\neq 0)\rangle -B}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/binomvpoiss.png}
-\caption{\textbf{Discrepancy of $g^{(2)}(0)$ for pure Binomial or Poissonianian data}. Binomial and Poisson distributions are similar for small $\zeta$ and large $N$. However, for small $N$, the Binomial $g^{(2)}(0)$ deviates from the Poisson $g^{(2)}(0)$ due to a small reduction in $\langle G^{(2})(0)\rangle$ (probability of zero-lag coincidence) in the Binomial case.}
+\includegraphics[width=16cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-2.png}
+\caption{\textbf{Theoretical scaling of the second-order coherence with the fluorophore number}. (a) Expected number of coincidences at zero-lag (black) and the $g^{(2)}(0)$ ratio (red) in the case of pure binomial or pure Poisson photon statistics, as a function of the fluorophore number. Poisson and Binomial data are assumed to have an identical mean of 0.01 (b) $g^{(2)}(0)$ as a function of the fluorophore number for zero background conditions (pure binomial statistics) and various $\zeta$ values. (c) $g^{(2)}(0)$ as a function of the fluorophore number for nonzero background conditions (Poisson-Binomial statistics, $\lambda=0.0075$) and various $\zeta$ values.}
 \label{fig:binomvpoiss}
-\end{figure}   
+\end{figure}  
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=16cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-6.png}
+\caption{\textbf{Photon counting histogram and analysis on zero-background simulations} (a) Simulated photon counts in 1us exposure for N=1 and $\zeta=0.01$ (b) Photon counting histogram for counts in (a) (c) Second-order coherence function for data in (a) (d) Posterior distribution for data in (a). (e) Simulated photon counts in 1us exposure for N=1 and $\zeta=0.01$ (f) Photon counting histogram for counts in (e) (g) Second-order coherence function for data in (e) (h) Posterior distribution for data in (e). (i) Simulated photon counts in 1us exposure for N=1 and $\zeta=0.01$ (j) Photon counting histogram for counts in (i) (k) Second-order coherence function for data in (i) (l) Posterior distribution for data in (i). Inference in (d,h,l) use $\mu_\zeta=0.01,\sigma_\zeta=0.001$}
+\label{fig:pch}
+\end{figure}  
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=16cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-1.png}
+\caption{\textbf{Distinguishing single and multiple quantum dots} (a) Photon counts in 1us exposure using 532nm pulsed excitation of a putatively isolated QD (b) Photon counts in 10ms exposure using 488nm continuous-wave excitation (c) Second-order coherence function for data in (a) (d) Posterior distribution for data in (a) (e) Photon counts in 1us exposure using 532nm pulsed excitation of a QD aggregate (f) Photon counts in 10ms exposure using 488nm continuous-wave excitation (g) Second-order coherence function for data in (e) (h) Posterior distribution for data in (e). Inference parameters can be found in Table 1.}
+\label{fig:qdagg}
+\end{figure}  
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=16cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-3.png}
+\caption{\textbf{Counting ATTO532 dye bound to DNA origamis}. (a) Example DNA origami with three ATTO532 binding sites. (b) Photon counts in 1us exposure using 532nm pulsed excitation of G3 sample and sum of counts (inset). (c) Second order coherence for the spot in (b). (d) Posterior distribution for the spot in (b). (e) Example DNA origami with three ATTO532 binding sites. (f) Photon counts in 1us exposure using 532nm pulsed excitation of G3 sample and sum of counts (inset). (g) Second order coherence for the spot in (f). (h) Posterior distribution for the spot in (f). (i) Example DNA origami with six ATTO532 binding sites (G6 sample). (j) Photon counts in 1us exposure using 532nm pulsed excitation of G6 sample and sum of counts (inset). (k) Second order coherence for the spot in (j). (l) Posterior distribution for the spot in (j).}
+\label{fig:atto}
+\end{figure}  
+
+\begin{table}[]
+\centering
+\begin{tabular}{lccccc}
+\multicolumn{6}{c}{\textbf{Table 1 - Posterior Parameters}} \\ \hline
+\multicolumn{1}{c}{\textbf{Sample}}  & $\mu_{\zeta}$ & $\sigma_{\zeta}$ & $\lambda$ & Samples & Batches \\
+Qdot655 & 0.01 & 0.005 & 0.008 & 100 & 50 \\
+ATTO532 & 0.002 & 0.001 & 0.006 & 100 & 50 \\
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png}
+\caption{\textbf{Distributions of the maximum aposteriori estimate of N} (left) Distribution of estimate of N for DNA origamis with three ATTO532 binding sites (G3 sample) (right) Distribution of estimate of N for DNA origamis with six ATTO532 binding sites (G3 sample). Prior mean set to $\mu_\zeta=0.002$ for both G3 and G6 samples.}
+\label{fig:atto}
+\end{figure}  
+
 
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/g20g2m_full.png}
-\caption{\textbf{Theoretical scaling of $g^{(2)}(0)$ under zero and non-zero background conditions without correction}. (left) Scaling of $g^{(2)}(0)$ for small $N$. (right) Scaling of $g^{(2)}(0)$ for large $N$. For non-zero background conditions, $\lambda = 0.0075$. For small $\zeta$, $g^{(2)}(0)\approx 0.5$, which is the value for Poisson statistics}
-\label{fig:fig8}
-\end{figure}   
+\includegraphics[width=8cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/g20g2m_3.png}
+\caption{\textbf{Error in the second-order coherence dip}. Precision of the $g^{(2)}(0)$ estimate depends on the number of total frames (total photons) collected in the sequence. }
+\label{fig:atto}
+\end{figure}  
+
+
+%\begin{figure}[t]
+%\centering
+%\includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/binomvpoiss.png}
+%\caption{\textbf{Discrepancy of $g^{(2)}(0)$ for pure Binomial or Poissonianian data}. Binomial and Poisson distributions are similar for small $\zeta$ and large $N$. However, for small $N$, the Binomial $g^{(2)}(0)$ deviates from the Poisson $g^{(2)}(0)$ due to a small reduction in $\langle G^{(2})(0)\rangle$ (probability of zero-lag coincidence) in the Binomial case.}
+%\label{fig:binomvpoiss}
+%\end{figure}   
+
+%\begin{figure}[t]
+%\centering
+%\includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/g20g2m_full.png}
+%\caption{\textbf{Theoretical scaling of $g^{(2)}(0)$ under zero and non-zero background conditions without correction}. (left) Scaling of $g^{(2)}(0)$ for small $N$. (right) Scaling of $g^{(2)}(0)$ for large $N$. For non-zero background conditions, $\lambda = 0.0075$. For small $\zeta$, $g^{(2)}(0)\approx 0.5$, which is the value for Poisson statistics}
+%\label{fig:fig8}
+%\end{figure}   
 
 where $B = N_{\mathrm{frames}}\lambda\zeta$ is the expected number of background-signal coincidences in the region of interest. The quantity $G^{(2)}(m)$ represents the number of signal-signal coincidences in the region of interest at a lag time $m$. The quantity $\langle G^{(2)}(m\neq 0)\rangle$ is the average number of coincidences in pairs of frames at nonzero lag $m \in [1,100]$, in units of frames. Averaging $G^{(2)}(0)$ over many realizations (sequences of $N_{\mathrm{frames}}$), gives the expected value $\langle G^{(2)}(0)\rangle $
 
@@ -223,19 +278,19 @@ For localization, we use Goodman and Weare's Markov Chain Monte Carlo (MCMC) alg
 \label{fig:fig9}
 \end{figure*}    
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/PoissonBinomialPost-2.png}
-\caption{\textbf{Posterior distributions of the fluorophore number}. Samples from the Poisson-Binomial convolution distribution using $\zeta=0.01$ for various values of $\lambda$ and $N=7,9,11$ were simulated. The variable $\zeta$ was integrated out by Monte Carlo integration, sampling 1000 $\zeta$ values from the posterior distribution (see main text for details)}
-\label{fig:fig10}
-\end{figure*}    
+%\begin{figure*}[t]
+%\centering
+%\includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/PoissonBinomialPost-2.png}
+%\caption{\textbf{Posterior distributions of the fluorophore number}. Samples from the Poisson-Binomial convolution distribution using $\zeta=0.01$ for various values of $\lambda$ and $N=7,9,11$ were simulated. The variable $\zeta$ was integrated out by Monte Carlo integration, sampling 1000 $\zeta$ values from the posterior distribution (see main text for details)}
+%\label{fig:fig10}
+%\end{figure*}    
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/G2.png}
-\caption{\textbf{Example $G^{(2)}(m)$ functions}. Example quantum dot images and respective $G^{(2)}(m)$ functions, taken with 1us frames 500kHz laser repetition rate.}
-\label{fig:fig32}
-\end{figure*}    
+%\begin{figure*}[t]
+%\centering
+%\includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/G2.png}
+%\caption{\textbf{Example $G^{(2)}(m)$ functions}. Example quantum dot images and respective $G^{(2)}(m)$ functions, taken with 1us frames 500kHz laser repetition rate.}
+%\label{fig:fig32}
+%\end{figure*}    
 
 \subsection{Discussion}
 

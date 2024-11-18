@@ -129,11 +129,6 @@ The expected value at each pixel is then $\omega_{k}\propto \Delta E_{u}(u_{k},\
 
 Direct optimization of the likelihood in (1) from observations $\bold{x}$ alone is challenging when fluorescent emitters are dense within the field of view and fluorescent signals significantly overlap. However, convolutional neural networks (CNNs) have recently proven to be powerful tools fluorescence microscopy to extract parameters describing fluorescent emitters such as color, emitter orientation, $z$-coordinate, and background signal \cite{Zhang2018,Kim2019,Zelger2018}. For localization tasks, CNNs typically employ upsampling layers to reconstruct Bernoulli probabilities of emitter occupancy \citep{Speiser2021} or KD estimates with higher resolution than experimental measurements \citep{Nehme2020}. We choose to use KD estimates in our model, denoted by $\bold{y}$, which are latent in the low-resolution data $\bold{x}$. KDEs are the most common data structure used in SMLM, and can be easily generated from molecular coordinates, alongside observations $\bold{x}$.
 
-%\begin{figure}
-%\includegraphics[scale=0.7]{media/MCMC.png}
-%\caption{Estimation of the marginal variances $\sqrt{\mathrm{Var}(\bold{y}_k)}$ for an isolated %fluorescent emitter. MCMC sampling is carried out using the low-resolution image (left) to estimate the %posterior $p(\theta|\bold{x})$ (middle) which is sampled $\theta\sim p(\theta|\bold{x})$ and combined %with (3) to estimate marginal variances (right)}
-%\end{figure}
-
 Similar to the generative process on low resolution images $\bold{x}$, we generate KDEs $\bold{y}$ by repurposing the generative model (1) on an unsampled image without noise. In other words, we cast Gaussian KD estimation as a noiseless image generation process on the domain of $\bold{y}$. Under a fixed configuration of $N$ particles $\theta$, the value of an non-normalized KDE pixel $\bold{y}_{k}$ is given by
 
 \begin{equation}

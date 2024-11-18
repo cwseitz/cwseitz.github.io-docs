@@ -1,6 +1,6 @@
 \ProvidesFile{ch2.tex}[]
 
-\chapter{Uncertainty-aware localization microscopy by variational diffusion}
+\chapter{UNCERTAINTY AWARE LOCALIZATION MICROSCOPY BY VARIATIONAL DIFFUSION}
 \ix{physics//Physics appendix}
 
 \section{Introduction}
@@ -94,7 +94,7 @@ We now consider datasets $(\bold{x}_i,\bold{y}_{0,i},\hat{\bold{y}}_{i})_{i=1}^{
 
 \begin{figure}[t]
 \centering
-\includegraphics[scale=0.25]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Generation.png}
+\includegraphics[scale=0.6]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure-0.png}
 \caption{Generative model of single molecule localization microscopy images. Low resolution images $\bold{x}$ are generated from coordinates $\theta$ by integration of the optical transfer function $O$ and sampling from the likelihood (1): $\bold{x}\sim p(\bold{x}\lvert\theta) = \prod_{k} p(\bold{x}_k\lvert\theta)$. A kernel density estimate $\bold{y}$ is inferred from $\bold{x}$}
 \label{fig:fig60}
 \end{figure}
@@ -176,8 +176,8 @@ q(\bold{y}_{T}\lvert\bold{y}_{0}) = \prod_{t=1}^{T}q(\bold{y}_{t}\lvert\bold{y}_
 
 \begin{figure}[t]
 \centering
-\includegraphics[scale=5.0]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Denoise.png}
-\caption{Conditional diffusion model for sampling kernel density estimates. An initial KDE estimate $\bold{\hat{y}}$ is found by the CNN $\phi$, which is used as conditional input in the DDPM}
+\includegraphics[scale=0.2]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure.png}
+\caption{\textbf{Performance of conditional variational diffusion on simulated data}. (a) Example low resolution (left), high resolution (middle), and estimated high resolution (right) localization microscopy images at various densities (b,c) Localization uncertainty in the u and v directions as a function of incident photon count, for various densities. (d,c) Precision and recall of localized spots as a function of density.}
 \label{fig:fig70}
 \end{figure}
 
@@ -214,12 +214,20 @@ A full derivation of this objective is outlined in the Appendix. Note that $\mat
 All training data consits of low-resolution $20\times 20$ images, setting $\sigma_{\bold{x}}=0.92$ in units of low-resolution pixels, for consistency with common experimental conditions with a 60x magnification objective lens and numerical aperture (NA) of 1.4. We multiply $\omega_{k}$ by a constant $i_{0}=200$ for experiments for consistency with typical fluorophore emission rates. All KDEs have dimension $80\times 80$, are scaled between $[0,1]$, and are generated using $\sigma_{\bold{y}}=3.0$ pixels in the upsampled image (Figure \ref{fig:fig12}). For a typical CMOS camera, this results in KDE pixels with lateral dimension of $\approx 27\mathrm{nm}$. Initial coordinates $\theta$ were drawn uniformly over a two-dimensional disc with a radius of 7 low-resolution pixels.
 
 
-\begin{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=1.1]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.png}
+%\caption{\textbf{Non cherry-picked estimation of marginal variances}. A low-resolution image $\bold{x}$ (left column) is transformed by $\phi$ to produce a KDE estimate $\hat{\bold{y}}$ (middle column) and a DDPM $\psi$ computes a map of marginal variances (right column)}
+%\label{fig:fig12}
+%\end{figure}
+
+\begin{figure}[t]
 \centering
-\includegraphics[scale=1.1]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Bayes.png}
-\caption{\textbf{Non cherry-picked estimation of marginal variances}. A low-resolution image $\bold{x}$ (left column) is transformed by $\phi$ to produce a KDE estimate $\hat{\bold{y}}$ (middle column) and a DDPM $\psi$ computes a map of marginal variances (right column)}
+\includegraphics[scale=0.2]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure-2-1.png}
+\caption{\textbf{Sample variation for simulated localization microscopy data} (a) Low-resolution, high resolution target, pixel-wise averaged prediction, and pixel-wise standard deviation (b) Samples from the diffusion model on high resolution images (c) Distribution of the standard deviation in emitter locations for various densities}
 \label{fig:fig12}
 \end{figure}
+
 
 \textbf{Localization RMSE}. In order to verify the initial predictions made by the augmentation model $\phi$, we simulated a dataset $(\bold{x}_i,\bold{y}_{0,i},\hat{\bold{y}}_{i})_{i=1}^{N}$ with $N=1000$. Objects in the KDE $\hat{\bold{y}}_{i}$  are detected using the Laplacian of Gaussian (LoG) detection algorithm \parencite{Kong2013}, which permits more direct comparison of model predictions to the Cramer-Rao lower bound on localization error, compared to other image similarity measures (Figure \ref{fig:fig15}). Localization is carried out from scale-space maxima directly in LoG, as opposed to fitting a model function to KDEs. A particular LoG localization in the KDE is paired to the nearest ground truth localization and is unpaired if a localization is not within 5 KDE pixels of any ground truth localization. In addition to localization error, we measure a precision $\mathrm{P = TP/(TP + FP)} = 1.0$ and recall $\mathrm{R = TP/(TP + FN)} = 0.85$, where $\mathrm{TP}$ denotes true positive localizations, $\mathrm{FP}$ denotes false positive localizations, and $\mathrm{FN}$ denotes false negative localizations.
 
@@ -228,14 +236,14 @@ All training data consits of low-resolution $20\times 20$ images, setting $\sigm
 These constants were chosen to be small relative to ground truth KDEs, which are scaled to $[-1,1]$, ensuring that forward process distribution $\bold{y}_{T}\sim q(\bold{y}_{T}\lvert\bold{y}_{0})$ approximately matches the reverse process $\bold{y}_T\sim \mathcal{N}(0, I)$ at $t=T$. Example KD estimates from low-resolution images and the marginal variances obtained from sampling $N=100$ samples from $p_{\psi}(\bold{y}_{0}\lvert\bold{x})$ are shown in (Figure \ref{fig:fig12}). 
 
 
-\begin{figure}[t]
-\centering
-\includegraphics[scale=0.6]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/BRD4/Deep2.png}
-\caption{\textbf{Super-resolution of BRD4 in a HeLa cell}. (a) Immunofluorescence image of BRD4 labeled with Alexa488 secondary antibody. (b) Zoomed widefield image of the inset highlighted in red and the super-resolved image (SR) after application of an encoder $\phi$. (c) Multi-step photobleaching profile of the inset highlighted in blue.}
-\label{fig:fig50}
-\end{figure}
+%\begin{figure}[t]
+%\centering
+%\includegraphics[scale=0.6]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/BRD4/Deep2.png}
+%\caption{\textbf{Super-resolution of BRD4 in a HeLa cell}. (a) Immunofluorescence image of BRD4 labeled with Alexa488 secondary antibody. (b) Zoomed widefield image of the inset highlighted in red and the super-resolved image (SR) after application of an encoder $\phi$. (c) Multi-step photobleaching profile of the inset highlighted in blue.}
+%\label{fig:fig50}
+%\end{figure}
 
-\textbf{Super Resolved Immunofluorescence}. To test our model in an experimental context, we performed immunofluorescence staining of endogeneous BRD4 protein in HeLa cells. Cells were grown in a 35mm dish and fixed with Formaldehyde in 1X PBS at room temperature incubator for 10 minutes, and then permeabilized in 70 percent ethanol. Cells were blocked for 1h with 0.3 percent (v/v) Triton-X100 (Sigma-Aldrich) and 5 percent (w/v) nonfat dry milk at 4C. Cells were incubated overnight at 4C using anti-BRD4 primary antibody (Cell Signaling, clone E2A7X; 1:1000) in blocker. Cells were then washed and stained with secondary antibodies for BRD4 (Cell Signaling Anti-Mouse IgG-Alexa488, 1:1000). For imaging, cells were imaged using a 60X 1.4NA oil immersion objective. Images were projected onto a CMOS Fusion camera (Hamamatsu) with a 40ms exposure time, using a 488nm continuous-wave laser aligned for oblique illumination. After background subtraction, the encoding network and diffusion model were used to estimate the super-resolved immunofluorescence image and its corresponding uncertainty (Figure \ref{fig:fig50}). 
+%\textbf{Super Resolved Immunofluorescence}. To test our model in an experimental context, we performed immunofluorescence staining of endogeneous BRD4 protein in HeLa cells. Cells were grown in a 35mm dish and fixed with Formaldehyde in 1X PBS at room temperature incubator for 10 minutes, and then permeabilized in 70 percent ethanol. Cells were blocked for 1h with 0.3 percent (v/v) Triton-X100 (Sigma-Aldrich) and 5 percent (w/v) nonfat dry milk at 4C. Cells were incubated overnight at 4C using anti-BRD4 primary antibody (Cell Signaling, clone E2A7X; 1:1000) in blocker. Cells were then washed and stained with secondary antibodies for BRD4 (Cell Signaling Anti-Mouse IgG-Alexa488, 1:1000). For imaging, cells were imaged using a 60X 1.4NA oil immersion objective. Images were projected onto a CMOS Fusion camera (Hamamatsu) with a 40ms exposure time, using a 488nm continuous-wave laser aligned for oblique illumination. After background subtraction, the encoding network and diffusion model were used to estimate the super-resolved immunofluorescence image and its corresponding uncertainty (Figure \ref{fig:fig50}). 
 
 
 \section{Conclusion}
@@ -302,31 +310,31 @@ Using a Monte Carlo estimate of $\mathcal{L}_{\psi}$ \parencite{Kingma2023} whic
 \end{equation}
 
 
-\begin{figure}[t]
-\centering
-\includegraphics[scale=0.7]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png}
-\caption{\textbf{Localization errors of the trained model $\phi$}. The Cramer-Rao lower bound is shown in red, computing by taking the diagonal elements of $I^{-1}(\theta)$.}
-\label{fig:fig15}
-\end{figure}
+%\begin{figure}[t]
+%\centering
+%\includegraphics[scale=0.7]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Errors.png}
+%\caption{\textbf{Localization errors of the trained model $\phi$}. The Cramer-Rao lower bound is shown in red, computing by taking the diagonal elements of $I^{-1}(\theta)$.}
+%\label{fig:fig15}
+%\end{figure}
 
 
-\subsection{Neural network architectures}
+%\subsection{Neural network architectures}
 
-\begin{figure}[t]
-\centering
-\includegraphics[scale=0.4]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/DeepSTORM.png}
-\caption{\textbf{Architecture of the augmenation model $\phi$}. A $20\times 20$ single-channel image is processed by eight convolutional blocks followed by a 4x upsampling module utilizing linear interpolation and a refinement module with six convolutional blocks. The number of output channels $n$ is set to one, but can be set to values greater than one to obtain axial resolution in three-dimensional localization microscopy}
-\label{fig:fig13}
-\end{figure}
+%\begin{figure}[t]
+%\centering
+%\includegraphics[scale=0.4]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/DeepSTORM.png}
+%\caption{\textbf{Architecture of the augmenation model $\phi$}. A $20\times 20$ single-channel image is processed by eight convolutional blocks followed by a 4x upsampling module utilizing linear interpolation and a refinement module with six convolutional blocks. The number of output channels $n$ is set to one, but can be set to values greater than one to obtain axial resolution in three-dimensional localization microscopy}
+%\label{fig:fig13}
+%\end{figure}
 
 
-\begin{figure}[t]
-\centering
-\includegraphics[scale=1.5]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/DiffusionArch.png}
-\caption{\textbf{Architecture of the denoising diffusion model}. A U-Net style architecture with channel multipliers of [1,2,4,8,16] downsamples and then upsamples the input image $\bold{y}_{t}$ to estimate $\bold{y}_{t-1}$}
-\label{fig:fig14}
-\end{figure}
+%\begin{figure}[t]
+%\centering
+%\includegraphics[scale=1.5]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/DiffusionArch.png}
+%\caption{\textbf{Architecture of the denoising diffusion model}. A U-Net style architecture with channel multipliers of [1,2,4,8,16] downsamples and then upsamples the input image $\bold{y}_{t}$ to estimate $\bold{y}_{t-1}$}
+%\label{fig:fig14}
+%\end{figure}
 
-\textbf{DeepSTORM CNN $\phi$}. The DeepSTORM CNN (Figure \ref{fig:fig13}), for 3D localization, can be viewed as a deep kernel density estimator, reconstructing kernel density estimates $\bold{y}$ from low-resolution inputs $\bold{x}$. We utilize a simplified form of the original architecture \parencite{Nehme2020} for 2D localization, which we denote $\phi$ in this paper, which consists of three main modules: a multi-scale context aggregation module, an upsampling module, and a prediction module. For context aggregation, the architecture utilizes dilated convolutions to increase the receptive field of each layer. The upsampling module is then composed of two consecutive 2x resize-convolutions, computed by nearest-neighbor interpolation, to increase the lateral resolution by a factor of 4. Additional details regarding this architecture can be found in the original paper \cite{Nehme2020}. The terminal prediction module contains three additional convolutional blocks for refinement of the upsampled image, followed by an element-wise HardTanh. The architecture is trained using the objective $\mathcal{L}_{\phi} = \frac{1}{N}\sum_{n=1}^{N} (\bold{y}_{0,n}-\bold{\hat{y}}_{n})^{2}$. 
+%\textbf{DeepSTORM CNN $\phi$}. The DeepSTORM CNN (Figure \ref{fig:fig13}), for 3D localization, can be viewed as a deep kernel density estimator, reconstructing kernel density estimates $\bold{y}$ from low-resolution inputs $\bold{x}$. We utilize a simplified form of the original architecture \parencite{Nehme2020} for 2D localization, which we denote $\phi$ in this paper, which consists of three main modules: a multi-scale context aggregation module, an upsampling module, and a prediction module. For context aggregation, the architecture utilizes dilated convolutions to increase the receptive field of each layer. The upsampling module is then composed of two consecutive 2x resize-convolutions, computed by nearest-neighbor interpolation, to increase the lateral resolution by a factor of 4. Additional details regarding this architecture can be found in the original paper \cite{Nehme2020}. The terminal prediction module contains three additional convolutional blocks for refinement of the upsampled image, followed by an element-wise HardTanh. The architecture is trained using the objective $\mathcal{L}_{\phi} = \frac{1}{N}\sum_{n=1}^{N} (\bold{y}_{0,n}-\bold{\hat{y}}_{n})^{2}$. 
 
-\textbf{DDPM $\psi$}. To represent the reverse process, we used a DDPM architecture (Figure \ref{fig:fig14}) originally proposed in \parencite{Saharia2021}. We chose the U-Net backbone to have channel multipliers $[1,2,4,8,8]$ in the downsampling and upsampling paths of the architecture. In this architecture, parameters are shared across time, which is specified to the network using the Transformer sinusoidal position embedding, and uses self-attention at the $16 \times 16$ feature map resolution. To condition the model on the input $\bold{\hat{y}}$, we concatenate the $\bold{\hat{y}}$ estimated by DeepSTORM along the channel dimension, which are scaled to $[0,1]$, with $\bold{y}_T\sim \mathcal{N}(0, I)$. Others have experimented with more sophisticated methods of conditioning, but found that the simple concatenation yielded similar generation quality \parencite{Saharia2021}. 
+%\textbf{DDPM $\psi$}. To represent the reverse process, we used a DDPM architecture (Figure \ref{fig:fig14}) originally proposed in \parencite{Saharia2021}. We chose the U-Net backbone to have channel multipliers $[1,2,4,8,8]$ in the downsampling and upsampling paths of the architecture. In this architecture, parameters are shared across time, which is specified to the network using the Transformer sinusoidal position embedding, and uses self-attention at the $16 \times 16$ feature map resolution. To condition the model on the input $\bold{\hat{y}}$, we concatenate the $\bold{\hat{y}}$ estimated by DeepSTORM along the channel dimension, which are scaled to $[0,1]$, with $\bold{y}_T\sim \mathcal{N}(0, I)$. Others have experimented with more sophisticated methods of conditioning, but found that the simple concatenation yielded similar generation quality \parencite{Saharia2021}. 

@@ -1,0 +1,183 @@
+% Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
+% For more details: https://www.sharelatex.com/learn/Beamer
+
+\documentclass{beamer}					% Document class
+
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}SPAD Theory\hfill\insertshortauthor\hfill\insertpagenumber}}
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage[english]{babel}				% Set language
+\usepackage[utf8x]{inputenc}			% Set encoding
+
+\mode<presentation>						% Set options
+{
+  \usetheme{default}					% Set theme
+  \usecolortheme{default} 				% Set colors
+  \usefonttheme{default}  				% Set font theme
+  \setbeamertemplate{caption}[numbered]	% Set caption to be numbered
+}
+
+% Uncomment this to have the outline at the beginning of each section highlighted.
+%\AtBeginSection[]
+%{
+%  \begin{frame}{Outline}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+%}
+
+\usepackage{graphicx}					% For including figures
+\usepackage{booktabs}					% For table rules
+\usepackage{hyperref}					% For cross-referencing
+\usepackage{bm}
+\usepackage{algorithm,algorithmic}
+
+\title{SPAD Theory}	% Presentation title
+\author{Clayton W. Seitz}								% Presentation author
+\date{\today}									% Today's date	
+
+\begin{document}
+
+% Title page
+% This page includes the informations defined earlier including title, author/s, affiliation/s and the date
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Basic formalism}
+
+The fundamental object is the likelihood $\mathcal{L}(n\lvert N,\zeta)$ of  a number of counts in a single frame.
+
+\vspace{0.2in}
+
+\begin{itemize}
+\item $\zeta$ is the probability of a count from a single fluorophore
+\item $N$ is a number of fluorophores in the ROI
+\end{itemize}
+
+\vspace{0.2in}
+From the likelihood, we measure a time series $n_{t}$ of counts and an empirical histogram of counts $X(n)$. All analyses are then derived directly from $n_{t}$ or $X(n)$
+
+
+\end{frame}
+
+\begin{frame}{Second order coherence}
+
+In practice we calculate the second order coherence as 
+
+\begin{equation*}
+G^{(2)}(m) = \sum_{t} \mathbb{I}(n_{t}n_{t+m}\geq 1)
+\end{equation*}
+
+for $-m_{min} \leq m \leq +m_{max}$ using periodic boundary conditions (rolling the sequence). This function is generally normalized with respect to its average over $m$: $g^{(2)}(m) = G^{(2)}(m)/\langle G^{(2)}(m)\rangle_{m}$
+
+\end{frame}
+
+\begin{frame}{Second order coherence}
+
+We can estimate $G^{(2)}(m)$ theoretically for different $m$
+
+\begin{equation*}
+G^{(2)}(m=0) \sim \mathrm{Binomial}(N_{\mathrm{frames}},\sum_{n\geq 2}\mathcal{L}(n\lvert \theta))
+\end{equation*}
+
+Note that we have $G^{(2)}(0) = \sum_{n=2}^{\infty} X(n)$. For all other lags $m$
+
+\begin{equation*}
+G^{(2)}(m\neq 0) \sim \mathrm{Binomial}(N_{\mathrm{frames}},(\sum_{n\geq 1}\mathcal{L}(n\lvert \theta))^{2})
+\end{equation*}
+
+\end{frame}
+
+\begin{frame}{Uncertainty in the zero-lag second order coherence}
+
+$G^{(2)}(0)$ is binomially distributed, so estimates of $g^{(2)}(0)$ are stochastic.
+
+\begin{equation*}
+g^{(2)}(0) = G^{(2)}(0)/\langle G^{(2)}(m)\rangle_{m}
+\end{equation*}
+
+Let $p = \sum_{n\geq 2}\mathcal{L}(n\lvert \theta)$ and $q = (\sum_{n\geq 1}\mathcal{L}(n\lvert \theta))^{2}$. 
+
+\begin{equation*}
+\langle G^{(2)}(m)\rangle_{m} = N_{\mathrm{frames}}q
+\end{equation*}
+
+The variance of $g^{(2)}(0)$ is then
+
+\begin{align*}
+\mathrm{Var}(g^{(2)}(0)) &= \frac{\mathrm{Var}(G^{(2)}(0))}{(\langle G^{(2)}(m)\rangle_{m})^{2}}\\
+&= \frac{1}{N_{\mathrm{frames}}}\frac{p(1-p)}{q^2}
+\end{align*}
+
+
+\end{frame}
+
+\begin{frame}{Uncertainty in the zero-lag second order coherence}
+
+I want to plot $\sqrt{\mathrm{Var}(g^{(2)}(0))}$ as a function of $N_{\mathrm{frames}}$ for different values of $\zeta$. 
+
+\end{frame}
+
+
+\begin{frame}{Total Detected Counts}
+The total number of counts $n$ detected in the ROI following a single pulse is the sum of signal and background counts:
+\begin{equation*}
+n = n_{\mathrm{signal}} + n_{\mathrm{background}}
+\end{equation*}
+The likelihood for the total counts is given by a convolution of Poisson and Binomial distributions:
+\begin{equation*}
+\mathcal{L}(n \mid N, \zeta) = \sum_{i=0}^{\infty} \binom{N}{i} \zeta^i (1-\zeta)^{N-i} \frac{\lambda^{n-i}}{(n-i)!} e^{-\lambda}
+\end{equation*}
+
+$\lambda$ is treated as a hyperparameter
+\end{frame}
+
+
+\begin{frame}{Posterior Estimation via Monte Carlo Integration}
+We aim to estimate the posterior $p(N = N' \mid n)$ by marginalizing over $\zeta$:
+\begin{equation*}
+p(N = N' \mid n) \propto \int_{0}^{1} \mathcal{L}(n \mid N', \zeta) p(\zeta) \, d\zeta
+\end{equation*}
+where the likelihood is given by:
+\begin{equation*}
+\mathcal{L}(n \mid N', \zeta) = \prod_{j=1}^{N_{\mathrm{frames}}} p(n_j \mid N', \zeta)
+\end{equation*}
+
+To make the likelihood tractable, we employ a log-sum-exponential trick:
+\begin{equation*}
+\mathcal{L}(n \mid N', \zeta) = e^{\left(\sum_j \ell(n_j \mid N', \zeta) + C \right)}
+\end{equation*}
+where $C$ is an empirically determined constant used for all $N'$.
+
+\end{frame}
+
+\begin{frame}{Posterior Estimation via Monte Carlo Integration}
+
+Monte Carlo integration is then applied to integrate out $\zeta$. We sample $\zeta$ values from the Gaussian prior:
+\begin{equation*}
+p(\zeta) = \mathcal{N}(\mu_\zeta, \sigma_\zeta^2)
+\end{equation*}
+
+For each sampled $\zeta_i$, we compute the Poisson-Binomial likelihood $\mathcal{L}(n \mid N', \zeta_i)$. These likelihoods are weighted by their prior probabilities $p(\zeta_i)$. Finally, we approximate the integral:
+\begin{equation*}
+p(N = N' \mid n) \approx \frac{1}{M} \sum_{i=1}^{M} \mathcal{L}(n \mid N', \zeta_i) p(\zeta_i)
+\end{equation*}
+where $M$ is the number of samples drawn from the prior.
+\end{frame}
+
+\begin{frame}
+\begin{table}[]
+\begin{tabular}{lccccc}
+\multicolumn{6}{c}{\textbf{Table 1 - Posterior Parameters}} \\ \hline
+\multicolumn{1}{c}{\textbf{Sample}}  & $\mu_{\zeta}$ & $\sigma_{\zeta}$ & $\lambda$ & Samples & Batches \\
+Qdot655 & 0.01 & 0.005 & 0.008 & 100 & 50 \\
+ATTO532 & 0.002 & 0.001 & 0.006 & 100 & 50 \\
+\end{tabular}
+\end{table}
+To determine $\lambda$, we estimate the total background count per pixel and multiply by $d^{2}/N_{\mathrm{frames}}$\\
+To determine $\mu_{\zeta}$, we estimate the total counts in the ROI, subtract $\lambda N_{\mathrm{frames}}$ and multiply by $1/N_{\mathrm{frames}}$
+\end{frame}
+
+
+\end{document}
