@@ -1533,50 +1533,336 @@
       \endverb
       \keyw{Confocal microscopy,Fluorescence spectroscopy,One-photon excitation,Photon counting histogram}
     \endentry
-    \entry{Goodman2010}{article}{}
-      \name{author}{2}{}{%
-        {{hash=eb78632300dc5db908421b31e1bb6f0c}{%
-           family={Goodman},
-           familyi={G\bibinitperiod},
-           given={Jonathan},
-           giveni={J\bibinitperiod}}}%
-        {{hash=dd7fe189d9b214275c0bc06c84bdc543}{%
-           family={Weare},
-           familyi={W\bibinitperiod},
-           given={Jonathan},
-           giveni={J\bibinitperiod}}}%
+    \entry{Furuta2022}{article}{}
+      \name{author}{4}{}{%
+        {{hash=1f19b0b1d60765be1d5c2f42cb6b1348}{%
+           family={Furuta},
+           familyi={F\bibinitperiod},
+           given={Tatsuhiro},
+           giveni={T\bibinitperiod}}}%
+        {{hash=0d98db1d97709f27f5ac630722098092}{%
+           family={Hamada},
+           familyi={H\bibinitperiod},
+           given={Keisuke},
+           giveni={K\bibinitperiod}}}%
+        {{hash=0e3644a14a059c3822d82bb3c9631fb5}{%
+           family={Oda},
+           familyi={O\bibinitperiod},
+           given={Masaru},
+           giveni={M\bibinitperiod}}}%
+        {{hash=d8bdf9a63385f170b7aa8ce8e72634d6}{%
+           family={Nakamura},
+           familyi={N\bibinitperiod},
+           given={Kazuma},
+           giveni={K\bibinitperiod}}}%
       }
-      \list{publisher}{1}{%
-        {MSP}%
-      }
-      \strng{namehash}{67cb8795215d14a2d5d20faf940e9f54}
-      \strng{fullhash}{67cb8795215d14a2d5d20faf940e9f54}
-      \strng{bibnamehash}{67cb8795215d14a2d5d20faf940e9f54}
-      \strng{authorbibnamehash}{67cb8795215d14a2d5d20faf940e9f54}
-      \strng{authornamehash}{67cb8795215d14a2d5d20faf940e9f54}
-      \strng{authorfullhash}{67cb8795215d14a2d5d20faf940e9f54}
+      \strng{namehash}{aaceb93556ffcbfc4ca1443ff05cfd88}
+      \strng{fullhash}{906f8663a4986c1bb436cadf25510278}
+      \strng{bibnamehash}{906f8663a4986c1bb436cadf25510278}
+      \strng{authorbibnamehash}{906f8663a4986c1bb436cadf25510278}
+      \strng{authornamehash}{aaceb93556ffcbfc4ca1443ff05cfd88}
+      \strng{authorfullhash}{906f8663a4986c1bb436cadf25510278}
       \field{sortinit}{2}
       \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issue}{1}
-      \field{journaltitle}{Communications in Applied Mathematics and Computational Science}
-      \field{sortyear}{2010}
-      \field{title}{Ensemble samplers with affine invariance}
-      \field{volume}{5}
-      \field{year}{2010}
-      \field{pages}{65\bibrangedash 80}
-      \range{pages}{16}
+      \field{abstract}{We present a hidden Markov model analysis for fluorescent time series of quantum dots. A fundamental quantity to measure optical performance of the quantum dots is a distribution function for the light-emission duration. So far, to estimate it, a threshold value for the fluorescent intensity was introduced, and the light-emission state was evaluated as a state above the threshold. With this definition, the light-emission duration was estimated, and its distribution function was derived as a blinking plot. Due to the noise in the fluorescent data, however, this treatment generates a large number of artificially short-lived emission states, thus leading to an erroneous blinking plot. In the present paper, we propose a hidden Markov model to eliminate these artifacts. The hidden Markov model introduces a hidden variable specifying the light-emission and quenching states behind the observed fluorescence. We found that it is possible to avoid the above artifacts by identifying the state from the hidden-variable time series. We found that, from the analysis of experimental and theoretical benchmark data, the accuracy of our hidden Markov model is beyond human cognitive ability.}
+      \field{month}{7}
+      \field{sortyear}{2022}
+      \field{title}{Hidden Markov model analysis for fluorescent time series of quantum dots}
+      \field{year}{2022}
       \verb{doi}
-      \verb 10.2140/camcos.2010.5.65
+      \verb 10.1103/PhysRevB.106.104305
       \endverb
       \verb{urlraw}
-      \verb https://doi.org/10.2140/camcos.2010.5.65
+      \verb http://arxiv.org/abs/2207.02386 http://dx.doi.org/10.1103/PhysRevB.106.104305
       \endverb
       \verb{url}
-      \verb https://doi.org/10.2140/camcos.2010.5.65
+      \verb http://arxiv.org/abs/2207.02386%20http://dx.doi.org/10.1103/PhysRevB.106.104305
       \endverb
-      \keyw{Markov chain Monte Carlo,affine invariance,ensemble samplers}
+    \endentry
+    \entry{Efros2016}{misc}{}
+      \name{author}{2}{}{%
+        {{hash=1af44e2a8b7dd03cd40bd69021fafb88}{%
+           family={Efros},
+           familyi={E\bibinitperiod},
+           given={Alexander\bibnamedelima L.},
+           giveni={A\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=6429218453c7057cbb5f6aaf4096067d}{%
+           family={Nesbitt},
+           familyi={N\bibinitperiod},
+           given={David\bibnamedelima J.},
+           giveni={D\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Nature Publishing Group}%
+      }
+      \strng{namehash}{ce8b1b2f45f56011502b8e78363289d7}
+      \strng{fullhash}{ce8b1b2f45f56011502b8e78363289d7}
+      \strng{bibnamehash}{ce8b1b2f45f56011502b8e78363289d7}
+      \strng{authorbibnamehash}{ce8b1b2f45f56011502b8e78363289d7}
+      \strng{authornamehash}{ce8b1b2f45f56011502b8e78363289d7}
+      \strng{authorfullhash}{ce8b1b2f45f56011502b8e78363289d7}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Semiconductor nanocrystals offer an enormous diversity of potential device applications, based on their size-tunable photoluminescence, high optical stability and 'bottom-up' chemical approaches to self-assembly. However, the promise of such applications can be seriously limited by photoluminescence intermittency in nanocrystal emission, that is, 'blinking', arising from the escape of either one or both of the photoexcited carriers to the nanocrystal surface. In the first scenario, the remaining nanocrystal charge quenches photoluminescence via non-radiative Auger recombination, whereas for the other, the exciton is thought to be intercepted before thermalization and does not contribute to the photoluminescence. This Review summarizes the current understanding of the mechanisms responsible for nanocrystal blinking kinetics as well as core-shell engineering efforts to control such phenomena. In particular, 'softening' of the core-shell confinement potential strongly suppresses non-radiative Auger processes in charged nanocrystals, with successful non-blinking implementations demonstrated in CdSe-CdS core-thick-shell nanocrystals and their modifications.}
+      \field{issn}{17483395}
+      \field{issue}{8}
+      \field{journaltitle}{Nature Nanotechnology}
+      \field{month}{8}
+      \field{sortyear}{2016}
+      \field{title}{Origin and control of blinking in quantum dots}
+      \field{volume}{11}
+      \field{year}{2016}
+      \field{pages}{661\bibrangedash 671}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1038/nnano.2016.140
+      \endverb
+    \endentry
+    \entry{Rust2006}{article}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{hash=9acd10adc231d67c1d58b676c9f928d0}{%
+           family={Rust},
+           familyi={R\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{79146d5b33419046e4494600b60e1b9f}
+      \strng{fullhash}{79146d5b33419046e4494600b60e1b9f}
+      \strng{bibnamehash}{79146d5b33419046e4494600b60e1b9f}
+      \strng{authorbibnamehash}{79146d5b33419046e4494600b60e1b9f}
+      \strng{authornamehash}{79146d5b33419046e4494600b60e1b9f}
+      \strng{authorfullhash}{79146d5b33419046e4494600b60e1b9f}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature Methods}
+      \field{sortyear}{2006}
+      \field{title}{Sub-diffraction-limit imaging by stochastic optical reconstruction microscopy (STORM)}
+      \field{volume}{3}
+      \field{year}{2006}
+      \field{pages}{793\bibrangedash 796}
+      \range{pages}{4}
+    \endentry
+    \entry{Betzig2006}{article}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{hash=b25fd03e7cbcc48fed70f50f7fbffe4e}{%
+           family={Betzig},
+           familyi={B\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{bc8391f268e0d3941739497dc8f9e75a}
+      \strng{fullhash}{bc8391f268e0d3941739497dc8f9e75a}
+      \strng{bibnamehash}{bc8391f268e0d3941739497dc8f9e75a}
+      \strng{authorbibnamehash}{bc8391f268e0d3941739497dc8f9e75a}
+      \strng{authornamehash}{bc8391f268e0d3941739497dc8f9e75a}
+      \strng{authorfullhash}{bc8391f268e0d3941739497dc8f9e75a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Science}
+      \field{sortyear}{2006}
+      \field{title}{Imaging intracellular fluorescent proteins at nanometer resolution}
+      \field{volume}{313}
+      \field{year}{2006}
+      \field{pages}{1642\bibrangedash 1645}
+      \range{pages}{4}
+    \endentry
+    \entry{Nehme2020}{article}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{hash=50b0ed80f62568deb3c65b6b2b9cd822}{%
+           family={Nehme},
+           familyi={N\bibinitperiod},
+           given={Elias},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{2ce1ca7db92b56fc4399bbb716424950}
+      \strng{fullhash}{2ce1ca7db92b56fc4399bbb716424950}
+      \strng{bibnamehash}{2ce1ca7db92b56fc4399bbb716424950}
+      \strng{authorbibnamehash}{2ce1ca7db92b56fc4399bbb716424950}
+      \strng{authornamehash}{2ce1ca7db92b56fc4399bbb716424950}
+      \strng{authorfullhash}{2ce1ca7db92b56fc4399bbb716424950}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature Methods}
+      \field{sortyear}{2020}
+      \field{title}{DeepSTORM3D: Dense 3D localization microscopy and PSF design by deep learning}
+      \field{volume}{17}
+      \field{year}{2020}
+      \field{pages}{734\bibrangedash 740}
+      \range{pages}{7}
+    \endentry
+    \entry{Speiser2021}{article}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{hash=8d8501522ddeee9bb84fee6fd543860d}{%
+           family={Speiser},
+           familyi={S\bibinitperiod},
+           given={Adam},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{a4b8f972c2f0af757fa787b5ff309746}
+      \strng{fullhash}{a4b8f972c2f0af757fa787b5ff309746}
+      \strng{bibnamehash}{a4b8f972c2f0af757fa787b5ff309746}
+      \strng{authorbibnamehash}{a4b8f972c2f0af757fa787b5ff309746}
+      \strng{authornamehash}{a4b8f972c2f0af757fa787b5ff309746}
+      \strng{authorfullhash}{a4b8f972c2f0af757fa787b5ff309746}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature Methods}
+      \field{sortyear}{2021}
+      \field{title}{Deep learning enables fast and dense single-molecule localization with high accuracy}
+      \field{volume}{18}
+      \field{year}{2021}
+      \field{pages}{1082\bibrangedash 1090}
+      \range{pages}{9}
+    \endentry
+    \entry{Li2019}{article}{}
+      \name{author}{5}{}{%
+        {{hash=146968a0777a4871ebea8f5b33ccd88e}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Luchang},
+           giveni={L\bibinitperiod}}}%
+        {{hash=699ab9ff59b0ed62c667e6313f613c19}{%
+           family={Xin},
+           familyi={X\bibinitperiod},
+           given={Bo},
+           giveni={B\bibinitperiod}}}%
+        {{hash=c850e101059bc3790b689e68e77d5883}{%
+           family={Kuang},
+           familyi={K\bibinitperiod},
+           given={Weibing},
+           giveni={W\bibinitperiod}}}%
+        {{hash=b69a62378b7d225a3a6b836e86fcda7f}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Zhiwei},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=30eda5f289fe2e844b4c8912683d50a1}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Zhen-Li},
+           giveni={Z\bibinithyphendelim L\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {The Optical Society}%
+      }
+      \strng{namehash}{f44a3903f2d18e9fcda3eb8dfdcd9222}
+      \strng{fullhash}{6899af137f6b0ee50ac073f74fefa05f}
+      \strng{bibnamehash}{6899af137f6b0ee50ac073f74fefa05f}
+      \strng{authorbibnamehash}{6899af137f6b0ee50ac073f74fefa05f}
+      \strng{authornamehash}{f44a3903f2d18e9fcda3eb8dfdcd9222}
+      \strng{authorfullhash}{6899af137f6b0ee50ac073f74fefa05f}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Multi-emitter localization has great potential for maximizing the imaging speed of super-resolution localization microscopy. However, the slow image analysis speed of reported multi-emitter localization algorithms limits their usage in mostly off-line image processing with small image size. Here we adopt the well-known divide and conquer strategy in computer science and present a fitting-based method called QC-STORM for fast multi-emitter localization. Using simulated and experimental data, we verify that QC-STORM is capable of providing real-time full image processing on raw images with 100 µm × 100 µm field of view and 10 ms exposure time, with comparable spatial resolution as the popular fitting-based ThunderSTORM and the up-to-date non-iterative WindSTORM. This study pushes the development and practical use of super-resolution localization microscopy in high-throughput or high-content imaging of cell-to-cell differences or discovering rare events in a large cell population.}
+      \field{issn}{10944087}
+      \field{issue}{15}
+      \field{journaltitle}{Optics Express}
+      \field{month}{7}
+      \field{sortyear}{2019}
+      \field{title}{Divide and conquer: real-time maximum likelihood fitting of multiple emitters for super-resolution localization microscopy}
+      \field{volume}{27}
+      \field{year}{2019}
+      \field{pages}{21029}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1364/oe.27.021029
+      \endverb
+    \endentry
+    \entry{Fazel2019}{article}{}
+      \name{author}{9}{}{%
+        {{hash=f915b4edf658c01fc53b33d08033610c}{%
+           family={Fazel},
+           familyi={F\bibinitperiod},
+           given={Mohamadreza},
+           giveni={M\bibinitperiod}}}%
+        {{hash=47e3c9e9f2a44f01ad315575c98a257f}{%
+           family={Wester},
+           familyi={W\bibinitperiod},
+           given={Michael\bibnamedelima J.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=7b3b350fd706982a507aab4dc33eba55}{%
+           family={Mazloom-Farsibaf},
+           familyi={M\bibinithyphendelim F\bibinitperiod},
+           given={Hanieh},
+           giveni={H\bibinitperiod}}}%
+        {{hash=f539d8421f8293c10f2534d37b083a41}{%
+           family={Meddens},
+           familyi={M\bibinitperiod},
+           given={Marjolein\bibnamedelima B.M.},
+           giveni={M\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=94f0db6a94685b125c4c60c72b82b999}{%
+           family={Eklund},
+           familyi={E\bibinitperiod},
+           given={Alexandra\bibnamedelima S.},
+           giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=de972f0e202487812731f190bcce3298}{%
+           family={Schlichthaerle},
+           familyi={S\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=80c6f38a50f6fbcf2175bdc75dd477f7}{%
+           family={Schueder},
+           familyi={S\bibinitperiod},
+           given={Florian},
+           giveni={F\bibinitperiod}}}%
+        {{hash=2ae117d3dbe054bce862edf2c9b1e050}{%
+           family={Jungmann},
+           familyi={J\bibinitperiod},
+           given={Ralf},
+           giveni={R\bibinitperiod}}}%
+        {{hash=da5fd0000bbf92a154c66b55c48876d1}{%
+           family={Lidke},
+           familyi={L\bibinitperiod},
+           given={Keith\bibnamedelima A.},
+           giveni={K\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Nature Publishing Group}%
+      }
+      \strng{namehash}{c781120b35e4dae53a6fcb31a4bb3cf2}
+      \strng{fullhash}{7b02bfccc9726ce179ba18ed8b6849b7}
+      \strng{bibnamehash}{c781120b35e4dae53a6fcb31a4bb3cf2}
+      \strng{authorbibnamehash}{c781120b35e4dae53a6fcb31a4bb3cf2}
+      \strng{authornamehash}{c781120b35e4dae53a6fcb31a4bb3cf2}
+      \strng{authorfullhash}{7b02bfccc9726ce179ba18ed8b6849b7}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In single molecule localization-based super-resolution imaging, high labeling density or the desire for greater data collection speed can lead to clusters of overlapping emitter images in the raw super-resolution image data. We describe a Bayesian inference approach to multiple-emitter fitting that uses Reversible Jump Markov Chain Monte Carlo to identify and localize the emitters in dense regions of data. This formalism can take advantage of any prior information, such as emitter intensity and density. The output is both a posterior probability distribution of emitter locations that includes uncertainty in the number of emitters and the background structure, and a set of coordinates and uncertainties from the most probable model.}
+      \field{issn}{20452322}
+      \field{issue}{1}
+      \field{journaltitle}{Scientific Reports}
+      \field{month}{12}
+      \field{sortyear}{2019}
+      \field{title}{Bayesian Multiple Emitter Fitting using Reversible Jump Markov Chain Monte Carlo}
+      \field{volume}{9}
+      \field{year}{2019}
+      \verb{doi}
+      \verb 10.1038/s41598-019-50232-x
+      \endverb
     \endentry
     \entry{Boyd2020}{book}{}
       \name{author}{1}{}{%
@@ -1595,8 +1881,8 @@
       \strng{authorbibnamehash}{5deda664a6cf03ea0cb9cb40c827addd}
       \strng{authornamehash}{5deda664a6cf03ea0cb9cb40c827addd}
       \strng{authorfullhash}{5deda664a6cf03ea0cb9cb40c827addd}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{4th ed. Includes index.}
@@ -1895,62 +2181,6 @@
       \field{pages}{460\bibrangedash 468}
       \range{pages}{9}
     \endentry
-    \entry{Nehme2020}{article}{}
-      \true{moreauthor}
-      \true{morelabelname}
-      \name{author}{1}{}{%
-        {{hash=50b0ed80f62568deb3c65b6b2b9cd822}{%
-           family={Nehme},
-           familyi={N\bibinitperiod},
-           given={Elias},
-           giveni={E\bibinitperiod}}}%
-      }
-      \strng{namehash}{2ce1ca7db92b56fc4399bbb716424950}
-      \strng{fullhash}{2ce1ca7db92b56fc4399bbb716424950}
-      \strng{bibnamehash}{2ce1ca7db92b56fc4399bbb716424950}
-      \strng{authorbibnamehash}{2ce1ca7db92b56fc4399bbb716424950}
-      \strng{authornamehash}{2ce1ca7db92b56fc4399bbb716424950}
-      \strng{authorfullhash}{2ce1ca7db92b56fc4399bbb716424950}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Nature Methods}
-      \field{sortyear}{2020}
-      \field{title}{DeepSTORM3D: Dense 3D localization microscopy and PSF design by deep learning}
-      \field{volume}{17}
-      \field{year}{2020}
-      \field{pages}{734\bibrangedash 740}
-      \range{pages}{7}
-    \endentry
-    \entry{Speiser2021}{article}{}
-      \true{moreauthor}
-      \true{morelabelname}
-      \name{author}{1}{}{%
-        {{hash=8d8501522ddeee9bb84fee6fd543860d}{%
-           family={Speiser},
-           familyi={S\bibinitperiod},
-           given={Adam},
-           giveni={A\bibinitperiod}}}%
-      }
-      \strng{namehash}{a4b8f972c2f0af757fa787b5ff309746}
-      \strng{fullhash}{a4b8f972c2f0af757fa787b5ff309746}
-      \strng{bibnamehash}{a4b8f972c2f0af757fa787b5ff309746}
-      \strng{authorbibnamehash}{a4b8f972c2f0af757fa787b5ff309746}
-      \strng{authornamehash}{a4b8f972c2f0af757fa787b5ff309746}
-      \strng{authorfullhash}{a4b8f972c2f0af757fa787b5ff309746}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Nature Methods}
-      \field{sortyear}{2021}
-      \field{title}{Deep learning enables fast and dense single-molecule localization with high accuracy}
-      \field{volume}{18}
-      \field{year}{2021}
-      \field{pages}{1082\bibrangedash 1090}
-      \range{pages}{9}
-    \endentry
     \entry{Song2021}{inproceedings}{}
       \true{moreauthor}
       \true{morelabelname}
@@ -1968,8 +2198,8 @@
       \strng{authornamehash}{dfc4900ef888ac3ae86366a8ea1b1c63}
       \strng{authorfullhash}{dfc4900ef888ac3ae86366a8ea1b1c63}
       \field{extraname}{1}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{International Conference on Learning Representations}
@@ -1993,8 +2223,8 @@
       \strng{authorbibnamehash}{d9c72e0919aac578c7e983d804becd3d}
       \strng{authornamehash}{d9c72e0919aac578c7e983d804becd3d}
       \strng{authorfullhash}{d9c72e0919aac578c7e983d804becd3d}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Advances in Neural Information Processing Systems}
@@ -2018,8 +2248,8 @@
       \strng{authorbibnamehash}{179fd03a43b51033575d15b9627fabc1}
       \strng{authornamehash}{179fd03a43b51033575d15b9627fabc1}
       \strng{authorfullhash}{179fd03a43b51033575d15b9627fabc1}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Advances in Neural Information Processing Systems}
@@ -2303,8 +2533,8 @@
       \strng{authornamehash}{dfc4900ef888ac3ae86366a8ea1b1c63}
       \strng{authorfullhash}{dfc4900ef888ac3ae86366a8ea1b1c63}
       \field{extraname}{2}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Advances in Neural Information Processing Systems}
@@ -2668,8 +2898,8 @@
       \strng{authorbibnamehash}{dd7e2cf8e7277fc897a2f17af5ab7f5d}
       \strng{authornamehash}{dd7e2cf8e7277fc897a2f17af5ab7f5d}
       \strng{authorfullhash}{dd7e2cf8e7277fc897a2f17af5ab7f5d}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Trends Biochem Sci}
@@ -2721,8 +2951,8 @@
       \strng{authorbibnamehash}{abd2905e9e13dc037c9cbf87ccd0791a}
       \strng{authornamehash}{87f0717a53e65fbcd824b3a318c5336c}
       \strng{authorfullhash}{abd2905e9e13dc037c9cbf87ccd0791a}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Mol Cell}
@@ -2774,8 +3004,8 @@
       \strng{authorbibnamehash}{3e38cc6bb646ae5afd6c70a74fab229e}
       \strng{authornamehash}{027df343c839cc6f32c9cd4907eb6ff0}
       \strng{authorfullhash}{3e38cc6bb646ae5afd6c70a74fab229e}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Science}
@@ -2820,8 +3050,8 @@
       \strng{authorbibnamehash}{6846759e6cb737938ebe45bea9cfadab}
       \strng{authornamehash}{e30a5dfb0ace99c892838c5b90aa199f}
       \strng{authorfullhash}{6846759e6cb737938ebe45bea9cfadab}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Proceedings of the National Academy of Sciences of the United States of America}
@@ -2879,8 +3109,8 @@
       \strng{authorbibnamehash}{125b314f0498b7f57aca314660d3c1fa}
       \strng{authornamehash}{125b314f0498b7f57aca314660d3c1fa}
       \strng{authorfullhash}{b9b98f7f1738478c2205fe79a6b347c4}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Histone modifications influence higher-order chromatin structures at individual epigenomic states and chromatin environments to regulate gene expression. However, genome-wide higher-order chromatin structures shaped by different histone modifications remain poorly characterized. With stochastic optical reconstruction microscopy (STORM), we characterized the higher-order chromatin structures at their epigenomic states, categorized into three major types in interphase: histone acetylation marks form spatially segregated nanoclusters, active histone methylation marks form spatially dispersed larger nanodomains, and repressive histone methylation marks form condensed large aggregates. These distinct structural characteristics are also observed in mitotic chromosomes. Furthermore, active histone marks coincide with less compact chromatin and exhibit a higher degree of co-localization with other active marks and RNA polymerase II (RNAP II), while repressive marks coincide with densely packed chromatin and spatially distant from repressive marks and active RNAP II. Taken together, super-resolution imaging reveals three distinct chromatin structures at various epigenomic states, which may be spatially coordinated to impact transcription.}
@@ -2918,8 +3148,8 @@
       \strng{authorbibnamehash}{bd3744be88a1ebf9bf8c84d37d83925c}
       \strng{authornamehash}{bd3744be88a1ebf9bf8c84d37d83925c}
       \strng{authorfullhash}{bd3744be88a1ebf9bf8c84d37d83925c}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Annual Review of Biophysics}
@@ -2962,8 +3192,8 @@
       \strng{authorbibnamehash}{8c2b4a97a7dccf1ad662df695dd6042f}
       \strng{authornamehash}{a5458e6aa2267c4d8bd1ee847fd340ea}
       \strng{authorfullhash}{8c2b4a97a7dccf1ad662df695dd6042f}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Chromatin organization remains complex and far from understood. In this article, we review recent statistical methods of extracting biophysical parameters from in vivo single-particle trajectories of loci to reconstruct chromatin reorganization in response to cellular stress such as DNA damage. We look at methods for analyzing both single locus and multiple loci tracked simultaneously and explain how to quantify and describe chromatin motion using a combination of extractable parameters. These parameters can be converted into information about chromatin dynamics and function. Furthermore, we discuss how the timescale of recurrent encounter between loci can be extracted and interpreted. We also discuss the effect of sampling rate on the estimated parameters. Finally, we review a polymer method to reconstruct chromatin structure using crosslinkers between chromatin sites. We list and refer to some software packages that are now publicly available to simulate polymer motion. To conclude, chromatin organization and dynamics can be reconstructed from locus trajectories and predicted based on polymer models.}
@@ -3549,8 +3779,8 @@
       \strng{authorbibnamehash}{bc2cbc29d7df303ccb9e8e85f6ba05ac}
       \strng{authornamehash}{bc2cbc29d7df303ccb9e8e85f6ba05ac}
       \strng{authorfullhash}{bc2cbc29d7df303ccb9e8e85f6ba05ac}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Science}
@@ -3595,8 +3825,8 @@
       \strng{authorbibnamehash}{2ecb3763a9f550d7f4ae3dc161166660}
       \strng{authornamehash}{c6d76344d8a245096ecd57af43370e1c}
       \strng{authorfullhash}{2ecb3763a9f550d7f4ae3dc161166660}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Science}
@@ -3648,8 +3878,8 @@
       \strng{authorbibnamehash}{d6cad1ff02d06cfc1bf4f57b014c3b7b}
       \strng{authornamehash}{9b0b164c1b1548e83c8c0f130f957e4b}
       \strng{authorfullhash}{d6cad1ff02d06cfc1bf4f57b014c3b7b}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Opt Nanoscopy}
@@ -3682,8 +3912,8 @@
       \strng{authorbibnamehash}{5784dd6febb852d76cf16a555ded2355}
       \strng{authornamehash}{5784dd6febb852d76cf16a555ded2355}
       \strng{authorfullhash}{5784dd6febb852d76cf16a555ded2355}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Science}
@@ -3735,8 +3965,8 @@
       \strng{authorbibnamehash}{b3cc945e035a4f8b136572afa7304616}
       \strng{authornamehash}{d7d3ea4a9d68f5f6b3ac6c3879de127a}
       \strng{authorfullhash}{b3cc945e035a4f8b136572afa7304616}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Nature Methods}
@@ -4327,8 +4557,8 @@
       \strng{authorbibnamehash}{e4ff1f093a84259e6722761695c641a6}
       \strng{authornamehash}{10324ebaea84cf0b3790766eab9f0079}
       \strng{authorfullhash}{e4ff1f093a84259e6722761695c641a6}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Cell}
@@ -4378,8 +4608,8 @@
       \strng{authorbibnamehash}{61f40e420261264483811337ea4014de}
       \strng{authornamehash}{285419997a71c19a8d99889d4228996e}
       \strng{authorfullhash}{61f40e420261264483811337ea4014de}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Proc Natl Acad Sci U S A}
@@ -4431,8 +4661,8 @@
       \strng{authorbibnamehash}{645414fd9a11d309856760216ab6dba1}
       \strng{authornamehash}{8424cc0226d0a867c48c4d42c6f3bc8a}
       \strng{authorfullhash}{645414fd9a11d309856760216ab6dba1}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Cell}
@@ -4472,8 +4702,8 @@
       \strng{authorbibnamehash}{907c89f5edfb4fdbf4018d80e84cb797}
       \strng{authornamehash}{08f53edd2d572950bf5061efb9093551}
       \strng{authorfullhash}{907c89f5edfb4fdbf4018d80e84cb797}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Nat Methods}
@@ -5006,8 +5236,8 @@
       \strng{authorbibnamehash}{6b459dd7fae90d98f5f579c124f5a725}
       \strng{authornamehash}{6b459dd7fae90d98f5f579c124f5a725}
       \strng{authorfullhash}{21a4c3f7987d8301c043782078dd6775}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{We present an oblique plane microscope (OPM) that uses a bespoke glass-tipped tertiary objective to improve the resolution, field of view, and usability over previous variants. Owing to its high numerical aperture optics, this microscope achieves lateral and axial resolutions that are comparable to the square illumination mode of lattice light-sheet microscopy, but in a user friendly and versatile format. Given this performance, we demonstrate high-resolution imaging of clathrin-mediated endocytosis, vimentin, the endoplasmic reticulum, membrane dynamics, and Natural Killer-mediated cytotoxicity. Furthermore, we image biological phenomena that would be otherwise challenging or impossible to perform in a traditional light-sheet microscope geometry, including cell migration through confined spaces within a microfluidic device, subcellular photoactivation of Rac1, diffusion of cytoplasmic rheological tracers at a volumetric rate of 14 Hz, and large field of view imaging of neurons, developing embryos, and centimeter-scale tissue sections.}
@@ -5048,8 +5278,8 @@
       \strng{authorbibnamehash}{c08c0b7a1ff38610c914767d0d8771cf}
       \strng{authornamehash}{c08c0b7a1ff38610c914767d0d8771cf}
       \strng{authorfullhash}{c08c0b7a1ff38610c914767d0d8771cf}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Nat Methods}
@@ -5099,8 +5329,8 @@
       \strng{authorbibnamehash}{8dcd1bfe518759e75348d2bc13bccdc2}
       \strng{authornamehash}{2201bc9e5bd374f3b102ba68ec308ab2}
       \strng{authorfullhash}{8dcd1bfe518759e75348d2bc13bccdc2}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Nature Methods}

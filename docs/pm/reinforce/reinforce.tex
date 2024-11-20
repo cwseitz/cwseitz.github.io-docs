@@ -1,0 +1,153 @@
+% Latex template: mahmoud.s.fahmy@students.kasralainy.edu.eg
+% For more details: https://www.sharelatex.com/learn/Beamer
+
+\documentclass{beamer}					% Document class
+
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}SPAD Theory\hfill\insertshortauthor\hfill\insertpagenumber}}
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage[english]{babel}				% Set language
+\usepackage[utf8x]{inputenc}			% Set encoding
+
+\mode<presentation>						% Set options
+{
+  \usetheme{default}					% Set theme
+  \usecolortheme{default} 				% Set colors
+  \usefonttheme{default}  				% Set font theme
+  \setbeamertemplate{caption}[numbered]	% Set caption to be numbered
+}
+
+% Uncomment this to have the outline at the beginning of each section highlighted.
+%\AtBeginSection[]
+%{
+%  \begin{frame}{Outline}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+%}
+
+\usepackage{graphicx}					% For including figures
+\usepackage{booktabs}					% For table rules
+\usepackage{hyperref}					% For cross-referencing
+\usepackage{bm}
+\usepackage{algorithm,algorithmic}
+
+\title{Reinforcement Learning}	% Presentation title
+\author{Clayton W. Seitz}								% Presentation author
+\date{\today}									% Today's date	
+
+\begin{document}
+
+% Title page
+% This page includes the informations defined earlier including title, author/s, affiliation/s and the date
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Markov Decision Processes}
+
+\begin{itemize}
+\item A \textbf{decision process} that takes place in discrete time
+
+\item The \emph{agent} is embedded in an environment and can make \emph{actions} $A_{t}\in \mathcal{A}$
+
+\item The agent has a state $S_{t}\in \mathcal{S}$
+
+\item The process is called finite if the sets $\mathcal{A},\mathcal{S}$ are finite
+
+\item The agent received a \emph{reward} at each time step $R_{t}$
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Markov Decision Processes}
+
+There is a joint distribution on the reward and next state, given the current state and the taken action
+
+\begin{equation*}
+p(s',r\lvert s,a) = \mathrm{Pr}\left(S_{t}=s',R_{t}=r \lvert S_{t-1}=s,A_{t}=a\right)
+\end{equation*}
+
+Note that this distribution models the reward given state action pairs. It is due to the stochastic nature of the environment
+
+\end{frame}
+
+\begin{frame}{Returns}
+
+The cumulative reward received in the future:
+
+\begin{equation*}
+G_{t} = R_{t+1} + R_{t+2} + ...
+\end{equation*}
+
+It can be discounted to change the timescale of reward focused on
+
+\begin{equation*}
+G_{t} = R_{t+1} + \gamma G_{t+2} + \gamma^{2} G_{t+3} ... = R_{t+1} + \gamma G_{t+1}
+\end{equation*}
+
+for $0 \leq \gamma \leq 1$
+
+\end{frame}
+
+\begin{frame}{The Policy}
+
+The \emph{policy} is a prescription for actions to take given the state. Formally it is a conditional distribution on actions given the state $\pi(a\lvert s)$. It is often something to be learned
+
+\vspace{0.2in}
+
+The \emph{value} of a state given by the policy is the expected return when following that policy from a state $s$
+
+\begin{equation*}
+v_{\pi}(s) = \mathbb{E}_{\pi} \left[ G_{t}\lvert S_{t}=s\right]
+\end{equation*}
+
+\vspace{0.2in}
+
+Note we need $p(s',r\lvert s,a)$ to compute this
+
+\end{frame}
+
+
+\begin{frame}{The Policy}
+
+The value function is explicitly computed by the Bellman equation
+
+\begin{equation*}
+v_{\pi}(s) = \sum_{a}\pi(a\lvert s) \sum_{s',r}p(s',r\lvert s,a)\left[r+\gamma v_{\pi}(s')\right]
+\end{equation*}
+
+\vspace{0.2in}
+
+It states that the value of the start state must equal the
+(discounted) value of the expected next state, plus the reward expected along the way.
+
+\end{frame}
+
+\begin{frame}{Policy estimation}
+
+The objective is to maximize the total reward, given some initial starting state. We therefore need to find an optimal policy $\pi(a\lvert s)$ to learn how to act under stochastic dynamics of the environment i.e., $p(s',r\lvert s,a)$
+
+\vspace{0.2in}
+
+To actually \emph{evaluate} $v_{\pi}(s)$ (under a fixed policy), we can use, for example iterative policy evaluation
+
+\vspace{0.2in}
+
+This can then be used to find better policies. 
+
+\end{frame}
+
+
+\begin{frame}{Policy improvement theorem}
+
+A policy $\pi$ is better if it has a higher value (expected return) for all states
+
+Note that this would be intractable for large state spaces
+
+\end{frame}
+
+
+
+\end{document}

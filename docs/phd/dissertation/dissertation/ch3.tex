@@ -14,7 +14,7 @@ The number operator $\hat{n}_k = \hat{a}_k^\dagger\hat{a}_k$ is defined in terms
 
 \begin{equation*}
 \hat{a}_k \ket{n_1, n_2, ...} = n_k \ket{n_1, n_2, ...} \;\;
-\hat{a}_k^\dagger \ket{n_1, n_2, ...} = (n+1) \ket{n_1, n_2, ...}
+\hat{a}_k^\dagger \ket{n_1, n_2, ...} = (n_k +1) \ket{n_1, n_2, ...}
 \end{equation*}
 
 \subsection{Photon statistics}
@@ -46,7 +46,7 @@ p(n) = \lvert \bra{n} \ket{\alpha} \lvert^2 = \lvert e^{-\frac{\lvert\alpha\lver
 
 This is simply the Poisson distribution with mean $\langle \hat{n} \rangle = \lvert\alpha\lvert^2$. The variance of the photon number distribution in a coherent state is also $\lvert\alpha\lvert^2$, characteristic of Poisson statistics, where the mean and variance are equal. Poissonian fluctuations of a Gaussian beam can be spatially resolved using a single photon avalanche diode (SPAD) array (Figure \ref{fig:fig29}).
 
-In contrast, single photon states, e.g. $\ket{1}$ do not necessarily follow Poisson statistics. This state could be prepared by an isolated single photon source such as a fluorescent dye molecule, quantum dot, or nitrogen vacancy, which can produce only a single photon at at time. This phenomenon is referred to as \emph{fluorescence antibunching} where photons tend to be detected as isolated events rather than in bursts or bunches. Single photon sources have a fluorescence lifetime, typically on the order of nanoseconds, which results in a sequence of photon arrivals with a more regular structure than would be expected under Poisson statistics. Note that for such a single photon source the single-mode field can be in state $\ket{1}$ but not state $\ket{2}$ at any given time. If more single photon sources are present or multi-level relaxations occur, states beyond $\ket{1}$ are possible. This has led to the introduction of binomial states of the quantized field \parencite{Stoler1985}. This fact is leveraged in the following sections, to count the number of single photon sources in a region of interest using a SPAD array.
+In contrast, single photon states, such as $\ket{1}$, do not necessarily follow Poisson statistics. This state could be prepared by an isolated single photon source such as a fluorescent dye molecule, quantum dot, or nitrogen vacancy, which can produce only a single photon at at time. This phenomenon is referred to as \emph{fluorescence antibunching} where photons tend to be detected as isolated events rather than in bursts or bunches. Single photon sources have a fluorescence lifetime, typically on the order of nanoseconds, which results in a sequence of photon arrivals with a more regular structure than would be expected under Poisson statistics. Note that for such a single photon source the single-mode field can be in state $\ket{1}$ but not state $\ket{2}$ at any given time. If more single photon sources are present or multi-level relaxations occur, states beyond $\ket{1}$ are possible. This has led to the introduction of binomial states of the quantized field \parencite{Stoler1985}. This fact is leveraged in the following sections, to count the number of single photon sources in a region of interest using a SPAD array.
 
 \section{Second-order coherence}
 
@@ -56,9 +56,9 @@ The second-order coherence function, $ g^{(2)}(\tau) $, is a fundamental tool in
 g^{(2)}(\tau) = \frac{\langle n(t) n(t+\tau) \rangle}{\langle n(t) \rangle^2}
 \end{equation}
 
-This formulation highlights how the intensity correlations between photons detected at times $ t $ and $ t+\tau $ are normalized by the square of the mean photon count rate, providing a dimensionless measure of the correlation. The value of $ g^{(2)}(\tau) $ and its dependence on $ \tau $ reveal essential characteristics of the light source. For sub-Poissonian statistics, $ g^{(2)}(0) < 1$, indicating photon antibunching, where the likelihood of detecting two photons in quick succession is reduced. This behavior is closely related to the fluorescence lifetime of the emitters; after emitting a photon, a fluorophore requires a characteristic time to re-enter the excited state, leading to a dip in $ g^{(2)}(\tau) $ at short $ \tau $. Coherent light, discussed in the previous section, shows no correlation between photon arrival times, resulting in $ g^{(2)}(\tau) = 1 $ for all $ \tau $. Super-Poissonian statistics, seen in thermal light, exhibit photon bunching, where $ g^{(2)}(\tau) $ starts high at $ \tau = 0 $ and decays to 1 as $ \tau $ increases, indicating a higher probability of photons arriving close together in time.
+This formulation highlights how the intensity correlations between photons detected at times $ t $ and $ t+\tau $ are normalized by the square of the mean photon count rate, providing a dimensionless measure of the correlation. The value of $ g^{(2)}(\tau) $ and its dependence on $ \tau $ reveal essential characteristics of the light source. For sub-Poissonian statistics, which is synonymous with photon antibunching, $ g^{(2)}(0) < 1$ and the likelihood of detecting two photons in quick succession is reduced. This behavior is closely related to the fluorescence lifetime of the emitters; after emitting a photon, a fluorophore requires a characteristic time to re-enter the excited state, leading to a dip in $ g^{(2)}(\tau) $ at short $ \tau $. Coherent light, discussed in the previous section, shows no correlation between photon arrival times, resulting in $ g^{(2)}(\tau) = 1 $ for all $ \tau $. Super-Poissonian statistics, seen in thermal light, exhibit photon bunching, where $ g^{(2)}(\tau) $ starts high at $ \tau = 0 $ and decays to 1 as $ \tau $ increases, indicating a higher probability of photons arriving close together in time.
 
-Techniques such as Hanbury Brown and Twiss (HBT) interferometry are commonly employed to measure $ g^{(2)}(\tau) $, using two single photon sensitive detectors and a beam splitter to measure the correlation function. In the following sections, we will incorporate an empirical estimate of $g^{(2)}(\tau)$ into a framework for inference of the number of fluorescent emitters in a diffraction limited region. 
+Techniques such as Hanbury Brown and Twiss (HBT) interferometry are commonly employed to measure $ g^{(2)}(\tau) $, using two single photon sensitive detectors and a beam splitter. In the following sections, we will incorporate an empirical estimate of $g^{(2)}(\tau)$ into a framework for inference of the number of fluorescent emitters in a diffraction limited region. 
 
 \section{Quantum-enhanced localization microscopy}
 
@@ -116,7 +116,7 @@ Consider a simplified description of widefield photon counting for a a single ph
 I(t)=\frac{W(t)}{2\pi\sigma^2}e^{-\frac{\left(u-\theta_u\right)^2+\left(v-\theta_v\right)^2}{2\sigma^2}}  
 \end{equation}
 
-In general, fluorescent emission is a doubly stochastic process \parencite{Chen1999}, due to temporal fluctuations in the intensity $W(t)$ as well as the quantum nature of light. We therefore define the molecular brightness $\zeta(t)\propto W(t)$ as the probability a photon is detected from a fluorescent emitter at a time t . All factors that affect the photon count rate, such as laser power, absorption cross section, fluorescence quantum yield, detector efficiency, etc., are absorbed into $\zeta(t)$. For an isolated single photon source, the PCH will follow a Bernoulli distribution: 
+In general, fluorescent emission is a doubly stochastic process \parencite{Chen1999}, due to temporal fluctuations in the intensity $W(t)$ as well as the quantum nature of light. We therefore define the molecular brightness $\zeta(t)\propto W(t)$ as the probability a photon is detected from a fluorescent emitter at a time $t$ . All factors that affect the photon count rate, such as laser power, absorption cross section, fluorescence quantum yield, detector efficiency, etc., are absorbed into $\zeta(t)$. Under stationary conditions in which $W(t)$ and $\zeta(t)$ are constants, we write $\zeta(t)=\zeta$. In this case, for an isolated single photon source, the PCH will follow a Bernoulli distribution: 
 
 %A similar theoretical exposition to follows to Section 1.2; however, slight modifications are made to the notation to relate it to the quantum theory. Since our SPAD detectors at the image plane must also be discrete, the intensity at a detector element $k$ centered in image space at $s_k=(u_k,v_k)$ is given by integrating over pixels of width $\delta=1$. Using the definitions of $\Gamma_u,\Gamma_v$ from Section 1.2, we define
 
@@ -127,22 +127,22 @@ In general, fluorescent emission is a doubly stochastic process \parencite{Chen1
 %where $\langle n_{k} \rangle$ is the expected number of photons detected at pixel $k$. We now consider the case of pulsed excitation where the interval between pulses is much longer than the fluorescence lifetime. Upon excitation of an isolated fluorescent emitter, a photon is detected at a particular detector element $k$ with probability $\zeta_{k}$. Similarly, the probability of detection in a region of interest collecting all photons is $\zeta$. Here, we are primarily concerned with the latter quantity, and its application in counting fluorescent emitters.
 
 \begin{equation}
-\mathcal{L}_{signal}^{(1)}(n_{\mathrm{signal}}\lvert\zeta)\ =\ \mathrm{Bernoulli}(\zeta)
+\mathcal{L}_{\mathrm{signal}}^{(1)}(n_{\mathrm{signal}}\lvert\zeta)\ =\ \mathrm{Bernoulli}(\zeta)
 \end{equation}
 
-If N fluorescent emitters are present in the ROI, the PCH will be the Nth convolution of the single emitter PCH with itself \parencite{Chen1999}
+If N fluorescent emitters are present in the ROI, the PCH will be the $N$-th convolution of the single emitter PCH with itself \parencite{Chen1999}
 
 \begin{equation}
-\mathcal{L}_{signal}(n_{\mathrm{signal}})=\mathcal{L}_{signal}^{(1)}(\zeta_1)\otimes\mathcal{L}_{signal}^{(2)}(\zeta_2)\otimes\ \cdots\otimes\mathcal{L}_{signal}^{(N)}(\zeta_N)
+\mathcal{L}_{\mathrm{signal}}(n_{\mathrm{signal}})=\mathcal{L}_{signal}^{(1)}(\zeta_1)\otimes\mathcal{L}_{\mathrm{signal}}^{(2)}(\zeta_2)\otimes\ \cdots\otimes\mathcal{L}_{\mathrm{signal}}^{(N)}(\zeta_N)
 \end{equation}
 
-Therefore, for N identical fluorophores emitting photons which can be detected within a ROI of the array, the number of signal photons measured $n_{\mathrm{signal}}$ following a single excitation pulse will have Binomial statistics $n_{\mathrm{signal}}~\mathrm{Binom}\left(N,\zeta\right)$. Photon pile-up at a single detector element can be safely neglected in this model due to its relatively low likelihood. Coherent background signal will follow Poissonian statistics $n_{bg}\sim\mathrm{Poisson}\left(\lambda\right)$ for an expected number \lambda of background counts in the ROI per frame. The total number of counts $n=n_{\mathrm{signal}}+n_{bg}$ detected in the region of interest following a single pulse is then distributed by the PCH:
+Therefore, for $N$ identical fluorophores emitting photons which can be detected within a ROI of the array, the number of signal photons measured $n_{\mathrm{signal}}$ following a single excitation pulse will have Binomial statistics $n_{\mathrm{signal}}\sim \mathrm{Binom}\left(N,\zeta\right)$. Photon pile-up at a single detector element can be safely neglected in this model due to its relatively low likelihood. Coherent background signal will follow Poissonian statistics $n_{bg}\sim\mathrm{Poisson}\left(\lambda\right)$ for an expected number $\lambda$ of background counts in the ROI per frame. The total number of counts $n=n_{\mathrm{signal}}+n_{\mathrm{b}}$ detected in the region of interest following a single pulse is then distributed by the PCH:
 
 \begin{equation}
-\mathcal{L}\left(n\mid N,\zeta,\lambda\right)=\mathcal{L}_{signal}(n_{\mathrm{signal}}\lvert N,\zeta)\otimes\mathcal{L}_{bg}(n_{\mathrm{bg}}\lvert \lambda)=\sum_{i=0}^{\infty}\binom{N}{i}\zeta^i\left(1-\zeta\right)^{N-i}\frac{\lambda^{n-i}}{\left(n-i\right)!}e^{-\lambda} 
+\mathcal{L}\left(n\mid N,\zeta,\lambda\right)=\mathcal{L}_{\mathrm{signal}}(n_{\mathrm{signal}}\lvert N,\zeta)\otimes\mathcal{L}_{\mathrm{bg}}(n_{\mathrm{bg}}\lvert \lambda)=\sum_{i=0}^{\infty}\binom{N}{i}\zeta^i\left(1-\zeta\right)^{N-i}\frac{\lambda^{n-i}}{\left(n-i\right)!}e^{-\lambda} 
 \end{equation}
 
-The expression above represents a convolution of Poisson and Binomial probability mass functions. This result is the primary means of inference of the number of active emitters N in a ROI as well as theoretical analysis of the second-order coherence. 
+The expression above represents a convolution of Poisson and Binomial probability mass functions. This result is the primary means of inference of the number of active emitters $N$ in a ROI as well as theoretical analysis of the second-order coherence. 
 
 
 %\begin{figure}[t]
@@ -153,7 +153,7 @@ The expression above represents a convolution of Poisson and Binomial probabilit
 %\end{figure}
 
 
-B%y temporarily ignoring the spatial profile described by (2.3), we derive a likelihood on the number of fluorophores in a small ROI with a lateral dimension $d = 5$ pixels. For $N$ fluorophores emitting photons which can be detected within a ROI of the SPAD array, the number of signal photons measured $n_{\mathrm{signal}}$ following a single excitation pulse will have Binomial statistics $n_{\mathrm{signal}} \sim \mathrm{Binom}(N,\zeta)$. Photon pile-up at a single detector element can be safely neglected in this model due to its relatively low likelihood. We then model the background signal within the ROI as a coherent state, which we have shown follows Poissonian statistics $n_{\mathrm{background}} \sim \mathrm{Poisson}(\lambda)$ for an expected number $\lambda$ of background counts in the ROI, per frame. The total number of counts $n=n_{\mathrm{signal}}+n_{\mathrm{background}}$ detected in the ROI following a single pulse is then distributed by the likelihood
+%By temporarily ignoring the spatial profile described by (2.3), we derive a likelihood on the number of fluorophores in a small ROI with a lateral dimension $d = 5$ pixels. For $N$ fluorophores emitting photons which can be detected within a ROI of the SPAD array, the number of signal photons measured $n_{\mathrm{signal}}$ following a single excitation pulse will have Binomial statistics $n_{\mathrm{signal}} \sim \mathrm{Binom}(N,\zeta)$. Photon pile-up at a single detector element can be safely neglected in this model due to its relatively low likelihood. We then model the background signal within the ROI as a coherent state, which we have shown follows Poissonian statistics $n_{\mathrm{background}} \sim \mathrm{Poisson}(\lambda)$ for an expected number $\lambda$ of background counts in the ROI, per frame. The total number of counts $n=n_{\mathrm{signal}}+n_{\mathrm{background}}$ detected in the ROI following a single pulse is then distributed by the likelihood
 
 %\begin{equation}
 %p(n \mid N,\zeta,\lambda) = \sum_{i=0}^{\infty} \binom{N}{i} \zeta^i (1-\zeta)^{N-i} \frac{\lambda^{n-i}}{(n-i)!} e^{-\lambda}
@@ -162,6 +162,22 @@ B%y temporarily ignoring the spatial profile described by (2.3), we derive a lik
 %The expression above represents a convolution of Poisson and Binomial probability mass functions. This result is the primary means of inference of the number of active emitters $N$ in a ROI.
 
 %In order to begin to perform localization in non-sparse ROIs, we write a posterior distribution on the Binomial parameters used in the likelihood, using Bayes rule. Presuming $\lambda$ can be reliably estimated, we have
+
+\subsubsection{Empirical estimation of second-order coherence}
+
+To measure fluorescence antibunching in experiments, the second order coherence function $g^{(2)}(m)$ is used \parencite{Israel2017}. An empirical estimate of $g^{(2)}(m)$ is made, based on the number of coincidences $G^{(2)}(m)$ at a lag time $m$
+
+\begin{equation}
+g^{(2)}(m)=\frac{G(2)(m)}{\langle G(2)(m)\rangle }
+\end{equation}
+
+
+The function $G^{(2)}(m)$ counts the number of coincidences at a lag time $m$ and is normalized by its expectation $\langle G(2)(m)\rangle$. It is well known that, for coherent (Poissonian) light, the second order coherence function $g^{(2)}(m)$ is approximately unity for all lags $m$. This is not necessarily the case, however, for binomial states \parencite{Stoler1985} of the quantized radiation field. To investigate the properties of the $g^{(2)}(0)$ dip for binomial photon statistics, we compared the expected number of coincidences at zero-lag $G^{(2)}(0)$ as well as the $g^{(2)}(0)$ value for purely binomial or Poissonian photon statistics, with the same mean. As expected, we found that binomial statistics gave a dip below $g^{(2)}(0) =0.5$ for small fluorophore numbers while Poissonian statistics gave a value of $g^{(2)}(0) =0.5$ (Figure \ref{fig:binomvpoiss}a). This result was also seen for pure binomial statistics (zero background signal) over a range of $\zeta$ values (Figure \ref{fig:binomvpoiss}b). For nonzero background signal, we find that the signal to background ratio becomes relevant, with decreasing $\zeta$ values raising the expected dip to $g^{(2)}(0) =0.5$ (Figure \ref{fig:binomvpoiss}c).
+
+
+\subsubsection{Bayesian inference of the number of active emitters}
+
+When the number of fluorescent emitters $N$ is unknown, the PCH (likelihood function) can be used in a Bayesian inference scheme to construct a posterior distribution on the binomial parameters:
 
 \begin{equation}
 p(N,\zeta\lvert n) \propto p(n\lvert N,\zeta)p(\zeta)
@@ -201,11 +217,11 @@ where $M$ is the number of samples from the prior. This method provides a powerf
 \label{fig:pch}
 \end{figure}  
 
-To validate our model, we apply it on the simulated photon emissions from single and multiple quantum emitters. Simulated photon count time-series were generating by sampling from the Poisson-Binomial PCH described using variable values for N and $\zeta=0.01$ (Figure 2a,e,i). As expected, we found that $g^{(2)}(0)<0.5$  while for increasing values of N, $g^{(2)}(0)$ approached $g^{(2)}(0)=0.5$ (Figure 2c,g,k). Analysis of the posterior distribution on N successfully recovered the value of N used to parameterize simulations (Figure 2d,h,l). 
+To validate our model, we apply it on the simulated photon emissions from single and multiple quantum emitters. Simulated photon count time-series were generating by sampling from the Poisson-Binomial PCH described using variable values for $N$ and $\zeta=0.01$ (Figure \ref{fig:pch}a,e,i). As expected, we found that $g^{(2)}(0)<0.5$  while for increasing values of $N$, $g^{(2)}(0)$ approached $g^{(2)}(0)=0.5$ (Figure \ref{fig:pch}c,g,k). Analysis of the posterior distribution on N successfully recovered the value of $N$ used to parameterize simulations (Figure \ref{fig:pch}d,h,l). 
 
 \subsubsection{Distinguishing single quantum dots from assemblies}
 
-A custom widefield fluorescence microscope was built for widefield photon counting by synchronization of laser pulses with 1-bit exposures of a SPAD array. This excitation scheme permits the computation of the second order coherence function  $g^{(2)}(m)$ and visualization of the spatial intensity distribution by summing photon counts over time. The acquisition scheme and analytical methods were then applied in two experimental contexts. First, we examined the posterior distribution and $g^{(2)}(m)$ function for putatively isolated quantum dots as well as quantum dot aggregates. Quantum dots exhibit temporally heterogeneous photoluminescence (PL) due to nonradiative transitions of electrons in the conduction band giving rise to a phenomenon known as blinking \parencite{Stoler1985,Furuta2022}. Quantum dots showing clear two-state PL fluctuations exhibited $g^{(2)}(0)<0.5$ and a posterior distribution maximized at N=1 (Figure 3a-d). Aggregates of quantum dots with more complex PL fluctuations showed $g^{(2)}(0)=0.5$ and a posterior distributed around larger values of N (Figure 3e-h). The acquisition scheme and analytical methods were then applied in two experimental contexts. First, we examined the posterior distribution and $g^{(2)}(m)$ function for putatively isolated quantum dots as well as quantum dot aggregates. Quantum dots exhibit temporally heterogeneous photoluminescence (PL) due to nonradiative transitions of electrons in the conduction band giving rise to a phenomenon known as blinking \parencite{Furuta2022,Efros2016}. Quantum dots showing clear two-state PL fluctuations exhibited $g^{(2)}(0)<0.5$ and a posterior distribution maximized at N=1 (Figure 3a-d). Aggregates of quantum dots with more complex PL fluctuations showed $g^{(2)}(0)=0.5$ and a posterior distributed around larger values of N (Figure 3e-h).
+A custom widefield fluorescence microscope was built for widefield photon counting by synchronization of laser pulses with 1-bit exposures of a SPAD array. This excitation scheme permits the computation of the second order coherence function  $g^{(2)}(m)$ and visualization of the spatial intensity distribution by summing photon counts over time. The acquisition scheme and analytical methods were then applied in two experimental contexts. First, we examined the posterior distribution and $g^{(2)}(m)$ function for putatively isolated quantum dots as well as quantum dot aggregates. Quantum dots exhibit temporally heterogeneous photoluminescence (PL) due to nonradiative transitions of electrons in the conduction band giving rise to a phenomenon known as blinking \parencite{Stoler1985,Furuta2022}. Quantum dots showing clear two-state PL fluctuations exhibited $g^{(2)}(0)<0.5$ and a posterior distribution maximized at $N=1$ (Figure \ref{fig:qdagg}a-d). Aggregates of quantum dots with more complex PL fluctuations showed $g^{(2)}(0)=0.5$ and a posterior distributed around larger values of $N$ (Figure \ref{fig:qdagg}e-h) 
 
 \begin{figure}
 \centering
@@ -222,10 +238,20 @@ A custom widefield fluorescence microscope was built for widefield photon counti
 \label{fig:atto}
 \end{figure}  
 
+\clearpage
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png}
+\caption{\textbf{Distributions of the maximum aposteriori estimate of N} (left) Distribution of estimate of N for DNA origamis with three ATTO532 binding sites (G3 sample) (right) Distribution of estimate of N for DNA origamis with six ATTO532 binding sites (G3 sample). Prior mean set to $\mu_\zeta=0.002$ for both G3 and G6 samples.}
+\label{fig:atto2}
+\end{figure}  
+
 \subsubsection{Counting fluorophores bound to DNA origamis}
 
-In a second series of experiments, we examined the posterior distribution and $g^{(2)}(m)$ function for DNA origamis which can bind up to N=3 or N=6 ATTO532 fluorescent dye molecules, referred to as G3 and G6, respectively (Figure 4a,f,j) For origamis which can bind up to N=3 ATTO532 dyes, no clear $g^{(2)}(0)$ dip was observed, due to the low signal to background ratio at this signal level (Figure 4 c,g). For origamis which can bind up to N=6 ATTO532 dyes, no clear $g^{(2)}(0)$ dip was observed, due to the large N character of the $g^{(2)}(0)$ dip predicted by the theory (Figure 4k). We conclude that the $g^{(2)}(0)$ dip may lead to ambiguous interpretations at low signal levels. However, the posterior distribution can recover the known N value from the photon count distribution for G3 (Figure 4 d,h) and G6 (Figure 4l). Maximum aposteriori (MAP) estimates of the fluorophore number showed consistency with the known value of N for G3 and G6 (Figure 5). 
 
+In a second series of experiments, we examined the posterior distribution and $g^{(2)}(m)$ function for DNA origamis which can bind up to $N=3$ or $N=6$ ATTO532 fluorescent dye molecules, referred to as G3 and G6, respectively (Figure \ref{fig:atto}a,f,j) For origamis which can bind up to $N=3$ ATTO532 dyes, no clear $g^{(2)}(0)$ dip was observed, due to the low signal to background ratio at this signal level (Figure \ref{fig:atto}c,g). For origamis which can bind up to $N=6$ ATTO532 dyes, no clear $g^{(2)}(0)$ dip was observed, due to the large $N$ character of the $g^{(2)}(0)$ dip predicted by the theory (Figure \ref{fig:atto}k). We conclude that the $g^{(2)}(0)$ dip may lead to ambiguous interpretations at low signal levels. However, the posterior distribution can recover the known $N$ value from the photon count distribution for G3 (Figure \ref{fig:atto}d,h) and G6 (Figure \ref{fig:atto}l). Maximum aposteriori (MAP) estimates of the fluorophore number showed consistency with the known value of $N$ for G3 and G6 (Figure \ref{fig:atto2}). 
+
+\clearpage
 \begin{table}
 \centering
 \begin{tabular}{lccccc}
@@ -236,25 +262,15 @@ ATTO532 & 0.002 & 0.001 & 0.006 & 100 & 50 \\
 \end{tabular}
 \end{table}
 
-\clearpage
-\begin{figure}
-\centering
-\includegraphics[width=12cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/spad/spad/media/Figure-5.png}
-\caption{\textbf{Distributions of the maximum aposteriori estimate of N} (left) Distribution of estimate of N for DNA origamis with three ATTO532 binding sites (G3 sample) (right) Distribution of estimate of N for DNA origamis with six ATTO532 binding sites (G3 sample). Prior mean set to $\mu_\zeta=0.002$ for both G3 and G6 samples.}
-\label{fig:atto}
-\end{figure}  
-
 \section{Materials and Methods}
 
-\subsection{Quantum dots and DNA origamis preparation }
+\subsection{Quantum dots and DNA origamis preparation}
 
 Fluorescent samples used here were either Quantum dots (Qdot655, ThermoFisher) coated on a glass coverslip, or ATTO532 tagged DNA origamis (GATTAquant). Fluorophores in a region with quasi-uniform laser power were selected for analysis to simplify the prior distribution on the molecular brightness. DNA origami samples contained origamis with either three or six ATTO532 binding sites for testing the Bayesian inference scheme and second-order coherence analysis. 
 
 \subsection{Single molecule imaging with the SPAD array}
 
-A 512X512 Fluorescent SPAD512 array (Pi Imaging Technologies) was connected to the customize-built single molecule imaging system (ASI). A picosecond 532nm pulsed laser (Picoquant) was triggered at 500 KHz as the excitation source. Laser power was set at 300uW at the back focal plane of the microscope objective for all experiments. Emission light was collected using an oil-immersion 100X/1.4NA objective (Nikon). The emission signal was filtered to exclude the laser line (Semrock) and projected onto the SPAD512 sensor using a tube lens. The acquisition of the SPAD assay is synchronized with the pulsed laser frequency. Each acquisition consists of a series of 1-bit frames, using a 1us exposure per frame. For quantum dot imaging, 30ms total exposure was used (30k frames). For DNA origami imaging, 100ms total exposure was used (100k frames). To obtain time-course data of photon counts, we (i) summed binary images over the entire acquisition (ii) estimated spot centroids using the Laplacian of Gaussian (LoG) detection algorithm, and (iii) extracted total counts in a 5x5 pixel region of interest around each detected spot. 
-
-
+A 512x512 Fluorescent SPAD512 array (Pi Imaging Technologies) was connected to the customize-built single molecule imaging system (ASI). A picosecond 532nm pulsed laser (Picoquant) was triggered at 500 KHz as the excitation source. Laser power was set at 300uW at the back focal plane of the microscope objective for all experiments. Emission light was collected using an oil-immersion 100X/1.4NA objective (Nikon). The emission signal was filtered to exclude the laser line (Semrock) and projected onto the SPAD512 sensor using a tube lens. The acquisition of the SPAD assay is synchronized with the pulsed laser frequency. Each acquisition consists of a series of 1-bit frames, using a 1us exposure per frame. For quantum dot imaging, 30ms total exposure was used (30k frames). For DNA origami imaging, 100ms total exposure was used (100k frames). To obtain time-course data of photon counts, we (i) summed binary images over the entire acquisition (ii) estimated spot centroids using the Laplacian of Gaussian (LoG) detection algorithm, and (iii) extracted total counts in a 5x5 pixel region of interest around each detected spot. 
 
 
 %Quantum dots coated on a glass coverslip were excited using a picosecond $532\mathrm{nm}$ pulsed laser triggered at $500\mathrm{kHz}$. Emission light was collected using an oil-immersion 100$\times$ objective with numerical aperture (NA) 1.4 (Nikon). The emission signal was then filtered to exclude the laser line (Semrock) and projected onto the SPAD512 sensor (Pi Imaging Technologies) using a tube lens. A simplified diagram of the complete system is depicted in (Figure \ref{fig:fig5} a). Each acquisition consists of $N=5\times 10^{5}$ frames, synchronized with each laser pulse, using a $1\mathrm{us}$ exposure per frame (Figure \ref{fig:fig5} b,d). Example posteriors and multi-emitter fitting on experimental quantum dot data are found in (Figure \ref{fig:fig7}). To measure fluorescence antibunching in the sample, we investigated properties of the zero-lag second order coherence function $g^{(2)}(0)$. The following empirical estimate of $g^{(2)}(0)$ is used \parencite{Israel2017}
@@ -296,13 +312,13 @@ A 512X512 Fluorescent SPAD512 array (Pi Imaging Technologies) was connected to t
 In practice, we compute the second order coherence at zero lag using
 
 \begin{equation*}
-G^{(2)}(0)\ =\ \sum_{t}{\mathbb{I}(n_t>1)}
+G^{(2)}(0) =\ \sum_{t}{\mathbb{I}(n_t>1)}
 \end{equation*}
 
-where $\mathbb{I}$ is an indicator function. The value of this function at nonzero lag is given by
+where $\mathbb{I}$ is an indicator function. The value of this function at nonzero lag $m$ is given by
 
 \begin{equation*}
-G^{(2)}(m)\ =\ \sum_{t}{\mathbb{I}(n_tn_{t+m}\geq1)}
+G^{(2)}(m) =\ \sum_{t}{\mathbb{I}(n_t n_{t+m}\geq1)}
 \end{equation*}
 
 The second order coherence $g^{(2)}(m)$ is then computed over a range $-m_{min}\le m\le m_{max}$. Theoretical estimates of $g^{(2)}(0)$ can be obtained by determining the generating model of $G^{(2)}(m)$. We find that for a sequence of $M$ frames,
@@ -321,10 +337,7 @@ Fluorescence antibunching is conventionally characterized by a dip in the $g^{(2
 \begin{equation}
 \sigma = \text{RMSE}[g^{(2)}(0)] = \sqrt{
     \left[
-    \frac{\partial g^{(2)}(0)}{\partial B} \delta B
-    \right]^2 +
-    \left[
-    \frac{\partial g^{(2)}(0)}{\partial \langle G^{(2)} \rangle} \delta \langle G^{(2)} \rangle
+    \frac{\partial g^{(2)}(0)}{\partial \langle G^{(2)}(m) \rangle} \delta \langle G^{(2)}(m) \rangle
     \right]^2 +
     \left[
     \frac{\partial g^{(2)}(0)}{\partial G^{(2)}(0)} \delta G^{(2)}(0)
@@ -332,7 +345,14 @@ Fluorescence antibunching is conventionally characterized by a dip in the $g^{(2
 }
 \end{equation}
 
-One can then integrate a Gaussian with this $\sigma$ below a threshold e.g, $g^{(2)}(0)=0.5$ to obtain the confidence interval.L astly, $G^{(2)}(0),G^{(2)}(m)$ will have Binomial statistics, which we approximate as Poisson for simplicity. Error estimates are then $\delta G^2(0) = \sqrt{G^2(0)}, \delta E(G^2(m)) = \sqrt{\frac{\mathbb{E}(G^2(m))}{M}}$.
+One can then integrate a Gaussian with this $\sigma$ below a threshold e.g, $g^{(2)}(0)=0.5$ to obtain the confidence interval. Lastly, $G^{(2)}(0),G^{(2)}(m)$ will have Binomial statistics, which we approximate as Poisson for simplicity. Error estimates are then $\delta G^2(0) = \sqrt{G^2(0)}, \delta \langle G^2(m)\rangle = \sqrt{\frac{\langle G^2(m)\rangle}{M}}$.This expression simplifies considerably in the case that $\delta \langle G^{(2)}(m)\rangle$ i.e., certainty in $G^{(2)}(m)$. 
+
+\begin{equation}
+\sigma_{g^{(2)}(0)}=\sqrt{\frac{p(1-p)}{N_{\mathrm{frames}}q^{2}}}
+\end{equation}
+
+The value of $\sigma_{g^{(2)}(0)}$ is therefore a function of $\zeta$ as well as the number of frames in the acquisition $N_{\mathrm{frames}}$. 
+
 
 
 %For localization, we use Goodman and Weare's Markov Chain Monte Carlo (MCMC) algorithm \parencite{Goodman2010} to sample from the posterior on fluorophore locations. In all simulations we assume a uniform prior on coordinates over the ROI and $\zeta$ is known and identical over fluorophores. Fluorophore locations can then be estimated from the posterior samples by K-means clustering of the $(\theta_u,\theta_v)$ coordinates of the first particle and identification of cluster centers. To validate our estimator, we compare its RMSE to the single emitter CRLB. We find that for thousands of expected signal photon counts, localization uncertainty lies in an acceptable range for localization microscopy (Figure \ref{fig:fig6}).
@@ -372,11 +392,11 @@ One can then integrate a Gaussian with this $\sigma$ below a threshold e.g, $g^{
 
 Here, we leveraged the recently developed SPAD array to spatially resolve the photon counting histogram with a widefield microscope. The PCH was integrated into a Bayesian inference scheme to extract the number of fluorescent emitters throughout the field of view and measure the second order coherence function. We demonstrated accurate counting of fluorescent quantum dots and fluorescent dyes bound to DNA origami, suggesting that this is a capable method for quantitative widefield fluorescent microscopy. Future work may assess more complex fluorescent imaging scenarios. 
 
-For example, fluorescence intermittency and photobleaching can affect the observed photon-number fluctuations and could be expected to affect the posterior on the number of active fluorescent emitters. For the former, signal photon number per frame will follow Binomial statistics even in the presence of blinking. However, as an example, challenges may arise in distinguishing one homogeneously emitting fluorophore and several blinking fluorophores. If the effect of censoring photons by blinking can be accounted for the technique used here may be compatible with common nanoscopy methods which rely on fluorescence intermittency. In the case of photobleaching, loss of a fluorophore during the sequence can give a mixture of photon count histograms and more ambiguous $g^{(2)}(0)$ values. We leave both innovations to the proposed methods to future work.
+For example, fluorescence intermittency or photobleaching leads to a $\zeta(t)$ which is not constant and can be fluorophore specific. This may affect the observed photon-number fluctuations and the PCH function $\mathcal{L}_{signal}(n_{\mathrm{signal}})$ used here may no longer be stationary. Therefore, due to the unique dynamics of $\zeta(t)$ for each fluorophore, the use of (2) is no longer appropriate and one can expect more complex behavior of $g^{(2)}(0)$. As an example, challenges may arise in distinguishing one homogeneously emitting fluorophore and several blinking fluorophores. If the effect of censoring photons by blinking can be accounted for, the technique used here may be compatible with common nanoscopy methods which rely on fluorescence intermittency. However, neither of these effects need be considered here. The tested quantum dots are photostable and photobleaching of ATTO532 could be mitigated under the experimental conditions used. Moreover, the on and off state lifetime of tested quantum dots and are significantly longer than the acquisition sequence, making fluorescence intermittency negligible. 
  
 The acquisition times necessary to obtain sufficient photon counts for computing the necessary statistics can potentially be very short. Most fluorophores have relaxation times in the nanosecond range and thus photons can be collected at a rate of tens of millions of excitation pulses per second. These rates are currently difficult to obtain, however, due to limitations in detector throughput. Moreover, the data volume can quickly become intractable due to the need for several thousands of frames for a millisecond-scale exposure time. 
 
-Theoretical and experimental estimation of $g^{(2)}(0)$ demonstrate that the suitability of this measure can depend on experimental conditions. Collection of thousands of photons is necessary to reduce the error in the $g^{(2)}(0)$ value to its minimal value (Supp. Figure 2). Furthermore, we showed experimentally that low signal to background ratios results in loss of the binomial character of the data. This suggests the compatibility of bright fluorophores (such as quantum dots) for antibunching-based measurements. On the other hand, the Bayesian inference scheme of the fluorophore number will not be as sensitive to the fluorophore brightness in this way, as the PCH can effectively model various $\zeta$ values. 
+Theoretical and experimental estimation of $g^{(2)}(0)$ demonstrate that the suitability of this measure can depend on experimental conditions. Collection of thousands of photons is necessary to reduce the error in the $g^{(2)}(0)$ value to its minimal value. Furthermore, we showed experimentally that low signal to background ratios results in loss of the binomial character of the data. This suggests the compatibility of bright fluorophores (such as quantum dots) for antibunching-based measurements. On the other hand, the Bayesian inference scheme of the fluorophore number will not be as sensitive to the fluorophore brightness in this way, as the PCH can effectively model various $\zeta$ values. 
 
 Lastly, the method proposed here may lead to significant advances in localization microscopy. Many of these schemes utilize the concept of precise localization of fluorescent emitters to produce super-resolved images \parencite{Rust2006,Betzig2006}. However, an inherent problem with such methods is the assumption that fluorescent emitters are isolated, which can lead to undercounting and localization errors. Various models for multi-emitter localization have been developed to approach this issue statistically \parencite{Nehme2020,Speiser2021,Li2019,Fazel2019}, which necessarily treat the number of fluorescent emitters as an unknown. The approach proposed here provides a physical means to quantifying active fluorescent emitters based on widefield photon counting.
 
