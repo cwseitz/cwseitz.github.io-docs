@@ -324,11 +324,11 @@ G^{(2)}(m) =\ \sum_{t}{\mathbb{I}(n_t n_{t+m}\geq1)}
 The second order coherence $g^{(2)}(m)$ is then computed over a range $-m_{min}\le m\le m_{max}$. Theoretical estimates of $g^{(2)}(0)$ can be obtained by determining the generating model of $G^{(2)}(m)$. We find that for a sequence of $M$ frames,
 
 \begin{equation*}
-G^{(2)}(0)~\mathrm{Binomial}(M,p)\ \ \ \ p=\sum_{n\geq2}{\mathcal{L}(n\lvert N,\zeta)}
+G^{(2)}(0)\sim \mathrm{Binomial}(M,p)\ \ \ \ p=\sum_{n\geq2}{\mathcal{L}(n\lvert N,\zeta)}
 \end{equation*}
 
 \begin{equation*}
-G^{(2)}(m)~\mathrm{Binomial}\left(M,q\right)\ \ \ \ \ q=\left(\sum_{n\geq1}{\mathcal{L}(n\lvert N,\zeta)}\right)^2
+G^{(2)}(m)\sim \mathrm{Binomial}\left(M,q\right)\ \ \ \ \ q=\left(\sum_{n\geq1}{\mathcal{L}(n\lvert N,\zeta)}\right)^2
 \end{equation*}
 
 Fluorescence antibunching is conventionally characterized by a dip in the $g^{(2)}(m)$ function for $m=0$, indicating a reduced coincidence probability. Error in the estimate of $g^{(2)}(0)$ are found by the expression
@@ -348,10 +348,10 @@ Fluorescence antibunching is conventionally characterized by a dip in the $g^{(2
 One can then integrate a Gaussian with this $\sigma$ below a threshold e.g, $g^{(2)}(0)=0.5$ to obtain the confidence interval. Lastly, $G^{(2)}(0),G^{(2)}(m)$ will have Binomial statistics, which we approximate as Poisson for simplicity. Error estimates are then $\delta G^2(0) = \sqrt{G^2(0)}, \delta \langle G^2(m)\rangle = \sqrt{\frac{\langle G^2(m)\rangle}{M}}$.This expression simplifies considerably in the case that $\delta \langle G^{(2)}(m)\rangle$ i.e., certainty in $G^{(2)}(m)$. 
 
 \begin{equation}
-\sigma_{g^{(2)}(0)}=\sqrt{\frac{p(1-p)}{N_{\mathrm{frames}}q^{2}}}
+\sigma_{g^{(2)}(0)}=\sqrt{\frac{p(1-p)}{M q^{2}}}
 \end{equation}
 
-The value of $\sigma_{g^{(2)}(0)}$ is therefore a function of $\zeta$ as well as the number of frames in the acquisition $N_{\mathrm{frames}}$. 
+The value of $\sigma_{g^{(2)}(0)}$ is therefore a function of $\zeta$ as well as the number of frames in the acquisition $M$. 
 
 
 
