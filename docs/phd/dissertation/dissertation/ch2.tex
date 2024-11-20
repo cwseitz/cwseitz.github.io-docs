@@ -228,6 +228,14 @@ All training data consits of low-resolution $20\times 20$ images, setting $\sigm
 \label{fig:fig12}
 \end{figure}
 
+\begin{figure}[t]
+\centering
+\includegraphics[scale=0.6]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Nup96.png}
+\caption{\textbf{Super resolution of Nup96-mMaple} (a) Low-resolution frame of Nup96-mMaple obtained by summing five consecutive images (SUM 5) (b) Scattered coordinates found by maximum likelihood estimation on individual frames and the CVDM model on SUM 5 data. (c) Zoomed in regions from the data shown in (a) and corresponding samples from the model on high-resolution images}
+\label{fig:fig12}
+\end{figure}
+
+
 
 \textbf{Localization RMSE}. In order to verify the initial predictions made by the augmentation model $\phi$, we simulated a dataset $(\bold{x}_i,\bold{y}_{0,i},\hat{\bold{y}}_{i})_{i=1}^{N}$ with $N=1000$. Objects in the KDE $\hat{\bold{y}}_{i}$  are detected using the Laplacian of Gaussian (LoG) detection algorithm \parencite{Kong2013}, which permits more direct comparison of model predictions to the Cramer-Rao lower bound on localization error, compared to other image similarity measures (Figure \ref{fig:fig15}). Localization is carried out from scale-space maxima directly in LoG, as opposed to fitting a model function to KDEs. A particular LoG localization in the KDE is paired to the nearest ground truth localization and is unpaired if a localization is not within 5 KDE pixels of any ground truth localization. In addition to localization error, we measure a precision $\mathrm{P = TP/(TP + FP)} = 1.0$ and recall $\mathrm{R = TP/(TP + FN)} = 0.85$, where $\mathrm{TP}$ denotes true positive localizations, $\mathrm{FP}$ denotes false positive localizations, and $\mathrm{FN}$ denotes false negative localizations.
 
