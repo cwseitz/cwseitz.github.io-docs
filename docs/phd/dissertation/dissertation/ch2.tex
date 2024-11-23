@@ -82,9 +82,7 @@ Deep models have attracted tremendous attention from researchers in the natural 
 
 Kernel density estimation in nanoscopy is necessarily performed using a single low-resolution image, and thus common measures of model performance are based on localization errors computed over ensembles of simulated images. Unfortunately, this choice precludes computation of uncertainty at test time under a fixed model. Bayesian probability theory is therefore an attractive alternative, which offers us mathematically grounded tools to reason about uncertainty. 
 
-We model a posterior on high-resolution KD estimates conditioned on a low-resolution image. Our approach is based on a type of score based generative model \parencite{Song2021}, referred to as a denoising diffusion probabilistic model (DDPM) in the literature \parencite{Ho2020,Song2021}. We find that this technique is complementary to relevant existing approaches to uncertainty estimation, which would primarily address epistemic sources of uncertainty, using techniques such as ensembling \parencite{Lakshminarayanan2017} or Monte Carlo dropout \parencite{Gal2022}. The approach is inspired by recent variational perspectives on diffusion \parencite{Dirmeier2023,Ribeiro2024,Kingma2021,Kingma2023}.  Such techniques provide a mechanism for scalable variational inference, which can be trained using a variational bound written in terms of the signal-to-noise ratio of the diffused data, and a simple noise estimation loss. Indeed, recent efforts have shown that the variational bound can be reparameterized to give several more conventional diffusion losses \parencite{Kingma2021,Kingma2023,Ribeiro2024}. 
-
-In the remainder of this chapter, we introduce KD estimation as an alternative to direct localization using low-resolution images, followed by demonstration of our variational diffusion model for measuring uncertainty estimation at scale. 
+We model a posterior on high-resolution KD estimates conditioned on a low-resolution image. This technique is complementary to relevant existing approaches to uncertainty estimation, which would primarily address epistemic sources of uncertainty, using techniques such as ensembling \parencite{Lakshminarayanan2017} or Monte Carlo dropout \parencite{Gal2022}. The approach is inspired by recent variational perspectives on diffusion \parencite{Dirmeier2023,Ribeiro2024,Kingma2021,Kingma2023}.  Such techniques provide a mechanism for scalable variational inference, which can be trained using a variational bound written in terms of the signal-to-noise ratio of the diffused data, and a simple noise estimation loss. In the remainder of this chapter, we introduce KD estimation as an alternative to direct localization using low-resolution images, followed by demonstration of our variational diffusion model for measuring uncertainty estimation at scale. 
 
 \subsection{Approach}
 
@@ -147,7 +145,7 @@ where $\hat{\mu}$ is the estimated expected value of the transition distribution
 \centering
 \includegraphics[scale=0.18]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure.png}
 \caption{\textbf{Performance of conditional variational diffusion on simulated data}. (a) Example low resolution (left), high resolution (middle), and estimated high resolution (right) localization microscopy images at various densities (b,c) Localization uncertainty in the u and v directions as a function of incident photon count, for various densities. (d,c) Precision and recall of localized spots as a function of density.}
-\label{fig:fig70}
+\label{fig:cvdmsim}
 \end{figure}
 
 %An important property of the forward process is that it admits sampling $\bold{y}_t$ at an arbitrary timestep $t$ in closed form \parencite{Ho2020}. Using the notation $\alpha_t := 1 - \beta_t$ and $\gamma_t := \prod_{s=1}^{t} \alpha_s$, we have $q(\bold{y}_t\lvert\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 - \gamma_t)I \right)$ or $\bold{y}_{t} = \sqrt{\gamma_{t}}\bold{y}_{0} + \sqrt{1-\gamma_{t}}\bold{\epsilon}$ for $\epsilon \sim \mathcal{N}(0,I)$. The signal to noise ratio (SNR) as defined in \parencite{Kingma2023}, at a time step $t$ reads $\mathrm{SNR}_t = \gamma_{t}/(1-\gamma_{t})$.
@@ -162,7 +160,7 @@ where $\hat{\mu}$ is the estimated expected value of the transition distribution
 
 %Learning the reverse process can be approached by either regressing noise $\bold{\epsilon}$ from the forward process, or the true latent $\bold{y}_{0}$, as there is a deterministic relationship between them. We adopt the former for consistency with other work, and define $\psi$ as a neural denoising function which regresses the noise $\bold{\epsilon}$ from a noisy $\bold{y}_{t}$. A relation between the noise estimate $\epsilon_{\psi}$ and $\mu_{\psi}$ is given in the Appendix, which gives an intuition for sampling. The proposed sampling scheme is depicted in (Figure \ref{fig:fig60}). 
 
-By the definition of the forward process $q(\mathbf{y}_t \lvert \mathbf{y}_{0})$, a variable $\mathbf{y}(t) \sim q(\mathbf{y}(t) \lvert \mathbf{y}_{0})$ can be reparametrized as 
+By the definition of the forward process $q(\mathbf{y}(t) \lvert \mathbf{y}_{0})$, a variable $\mathbf{y}(t) \sim q(\mathbf{y}(t) \lvert \mathbf{y}_{0})$ can be reparametrized as 
 
 \begin{equation*}
 \mathbf{y}(t) = \sqrt{\gamma(t, \mathbf{x})}\mathbf{y}_{0} + \sqrt{1-\gamma(t, \mathbf{x})} \, \boldsymbol{\epsilon}
@@ -174,7 +172,7 @@ with $\boldsymbol{\epsilon} \sim \mathcal{N}(0, \mathbf{I})$. Rearranging the te
 \mathbf{y}_{0} = \frac{1}{\sqrt{\gamma(t, \mathbf{x})}} \left( \mathbf{y}(t) - \sqrt{1-\gamma(t, \mathbf{x})} \, \boldsymbol{\epsilon} \right)\rightarrow \hat{\mathbf{y}}_{0} = \frac{1}{\sqrt{\gamma(t, \mathbf{x})}} \left( \mathbf{y}(t) - \sqrt{1-\gamma(t, \mathbf{x})} \, \hat{\boldsymbol{\epsilon}} \right)
 \end{equation*}
 
-
+Therefore, for a particular $\mathbf{y}(t) $, estimation of $\hat{\mathbf{y}}_{0}$ can be obtained using the model prediction $\hat{\boldsymbol{\epsilon}}$. 
 
 %\textbf{Variational Objective}. Following \parencite{Kingma2021}, we interpret the reverse process as a hierarchical generative model that samples a sequence of latents $\bold{y}_{t}$, with time running backward. Training of the model is achieved through the variational bound
 
@@ -194,6 +192,30 @@ with $\boldsymbol{\epsilon} \sim \mathcal{N}(0, \mathbf{I})$. Rearranging the te
 
 \subsection{Results}
 
+\subsubsection{Localization error}
+
+\begin{figure}[t]
+\centering
+\includegraphics[scale=0.2]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure-2-1.png}
+\caption{\textbf{Sample variation for simulated localization microscopy data} (a) Low-resolution, high resolution target, pixel-wise averaged prediction, and pixel-wise standard deviation (b) Samples from the diffusion model on high resolution images (c) Distribution of the standard deviation in emitter locations for various densities}
+\label{fig:locobayes}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[scale=0.6]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Nup96.png}
+\caption{\textbf{Super resolution of Nup96-mMaple} (a) Low-resolution frame of Nup96-mMaple obtained by summing five consecutive images (SUM 5) (b) Scattered coordinates found by maximum likelihood estimation on individual frames and the CVDM model on SUM 5 data. (c) Zoomed in regions from the data shown in (a) and corresponding samples from the model on high-resolution images}
+\label{fig:nup96}
+\end{figure}
+
+
+To verify the localizations made by the diffusion model, we simulated localization microscopy datasets with various densities (Figure \ref{fig:cvdmsim}a). For a KDE predicted by the diffusion model, objects are detected using the Laplacian of Gaussian (LoG) detection algorithm, which permits more direct computation of localization error, compared to image similarity measures. Moreover, localization with sub-pixel precision can be easily implemented by identification of local maxima in the predicted KDE \parencite{Nehme2020}. A particular LoG localization in the KDE is paired to the nearest ground truth localization and is unpaired if a localization is not within 5 KDE pixels (125nm) of any ground truth localization. As expected, we find a density dependence to localization error in the $u$ and $v$ directions, and a weak relationship to signal to noise ratio, over the tested signal range (Figure \ref{fig:cvdmsim}b,c). In addition to localization error, we measure a density-dependent precision P = TP/(TP+FP) and precision P= TP/(TP+FN) where TP denotes true positive localizations, FP denotes false positive localizations, and FN denotes false negative localizations (Figure \ref{fig:cvdmsim}d,e). 
+
+\subsubsection{Sample variation for simulated localization microscopy data}
+
+Leveraging the ability of a diffusion process to model a distribution on high-resolution KDEs $p\left(\bold{y}_0\lvert \bold{x}\right)$ as opposed to a deterministic point estimate of $\bold{y}_0$, we assess the sample variation on simulated localization microscopy data. Upon inspection of samples from the diffusion model, we find that computing a pixel-wise average and standard deviation can summarize model predictions (Figure \ref{fig:locobayes}a). However, careful inspection of the individual samples can reveal the appearance/disappearance of predicted spots in the KDE across samples, expressing uncertainty in the number of spots in the KDE due to the many to one nature of image restoration tasks (Figure \ref{fig:locobayes}b). Furthermore, variation in the predicted locations of spots in the KDE is apparent, with more variation in higher density samples (Figure \ref{fig:locobayes}c). 
+
+
 %All training data consits of low-resolution $20\times 20$ images, setting $\sigma_{\bold{x}}=0.92$ in units of low-resolution pixels, for consistency with common experimental conditions with a 60x magnification objective lens and numerical aperture (NA) of 1.4. We multiply $\omega_{k}$ by a constant $i_{0}=200$ for experiments for consistency with typical fluorophore emission rates. All KDEs have dimension $80\times 80$, are scaled between $[0,1]$, and are generated using $\sigma_{\bold{y}}=3.0$ pixels in the upsampled image (Figure \ref{fig:fig12}). For a typical CMOS camera, this results in KDE pixels with lateral dimension of $\approx 27\mathrm{nm}$. Initial coordinates $\theta$ were drawn uniformly over a two-dimensional disc with a radius of 7 low-resolution pixels.
 
 
@@ -203,21 +225,6 @@ with $\boldsymbol{\epsilon} \sim \mathcal{N}(0, \mathbf{I})$. Rearranging the te
 %\caption{\textbf{Non cherry-picked estimation of marginal variances}. A low-resolution image $\bold{x}$ (left column) is transformed by $\phi$ to produce a KDE estimate $\hat{\bold{y}}$ (middle column) and a DDPM $\psi$ computes a map of marginal variances (right column)}
 %\label{fig:fig12}
 %\end{figure}
-
-\begin{figure}[t]
-\centering
-\includegraphics[scale=0.2]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure-2-1.png}
-\caption{\textbf{Sample variation for simulated localization microscopy data} (a) Low-resolution, high resolution target, pixel-wise averaged prediction, and pixel-wise standard deviation (b) Samples from the diffusion model on high resolution images (c) Distribution of the standard deviation in emitter locations for various densities}
-\label{fig:fig12}
-\end{figure}
-
-\begin{figure}[t]
-\centering
-\includegraphics[scale=0.6]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Nup96.png}
-\caption{\textbf{Super resolution of Nup96-mMaple} (a) Low-resolution frame of Nup96-mMaple obtained by summing five consecutive images (SUM 5) (b) Scattered coordinates found by maximum likelihood estimation on individual frames and the CVDM model on SUM 5 data. (c) Zoomed in regions from the data shown in (a) and corresponding samples from the model on high-resolution images}
-\label{fig:fig12}
-\end{figure}
-
 
 
 %\textbf{Localization RMSE}. In order to verify the initial predictions made by the augmentation model $\phi$, we simulated a dataset $(\bold{x}_i,\bold{y}_{0,i},\hat{\bold{y}}_{i})_{i=1}^{N}$ with $N=1000$. Objects in the KDE $\hat{\bold{y}}_{i}$  are detected using the Laplacian of Gaussian (LoG) detection algorithm \parencite{Kong2013}, which permits more direct comparison of model predictions to the Cramer-Rao lower bound on localization error, compared to other image similarity measures (Figure \ref{fig:fig15}). Localization is carried out from scale-space maxima directly in LoG, as opposed to fitting a model function to KDEs. A particular LoG localization in the KDE is paired to the nearest ground truth localization and is unpaired if a localization is not within 5 KDE pixels of any ground truth localization. In addition to localization error, we measure a precision $\mathrm{P = TP/(TP + FP)} = 1.0$ and recall $\mathrm{R = TP/(TP + FN)} = 0.85$, where $\mathrm{TP}$ denotes true positive localizations, $\mathrm{FP}$ denotes false positive localizations, and $\mathrm{FN}$ denotes false negative localizations.
@@ -266,7 +273,7 @@ where $\alpha$ is a constant controlling the contribution of $\mathcal{L}_{\gamm
 &+ \sum_{t=2}^{T} \mathbb{E}_{q(\bold{y}_{t}\lvert\bold{y}_{0})} D_{KL}\left(q(\bold{y}_{t-1}\lvert\bold{y}_t,\bold{y}_0)\lvert\lvert p(\bold{y}_{t-1}\lvert\bold{y}_t) \right)
 \end{align*}
 
-As before, we omit conditioning on $\bold{x}$ to simplify the notation. The first term is typically ignored, as it does not contribute meaningfully to the loss \parencite{Ribeiro2024}. Therefore we are last two terms, called the prior loss $\mathcal{L}_{\mathrm{prior}}$ and diffusion loss $\mathcal{L}_{T}$. The former is straightforward to optimize using analytical expressions \parencite{Maggiora2023}. The latter KL-divergence of $q$ and $p$ is between two Gaussians with identical variances $\sigma^{2} = \frac{(1-\gamma_{t-1})(1-\alpha_{t})}{1-\gamma_{t}}$, and expectations
+As before, we omit conditioning on $\bold{x}$ to simplify the notation. The first term is typically ignored, as it does not contribute meaningfully to the loss \parencite{Ribeiro2024}. Therefore we are last two terms, called the prior loss $\mathcal{L}_{\mathrm{prior}}$ and diffusion loss $\mathcal{L}_{T}$. The former is straightforward to optimize using analytical expressions \parencite{Maggiora2023}. Furthermore, define $\beta_{t}$ as the variance at time step $t$, $\alpha_{t}=1-\beta_{t}$ and $\gamma_{t}=\prod_{t}\alpha_{t}$. The latter KL-divergence of $q$ and $p$ is between two Gaussians with identical variances $\sigma^{2} = \frac{(1-\gamma_{t-1})(1-\alpha_{t})}{1-\gamma_{t}}$, and expectations
 
 \begin{align*}
 \mu = \frac{\sqrt{\gamma_{t-1}}(1-\alpha_{t})}{1-\gamma_{t}}\bold{y}_{0}+ \frac{\sqrt{\alpha_{t}}(1-\gamma_{t-1})}{{1-\gamma_{t}}}\bold{y}_{t} \quad \hat{\mu} = \frac{\sqrt{\gamma_{t-1}}(1-\alpha_{t})}{1-\gamma_{t}}\hat{\bold{y}}_{0}+ \frac{\sqrt{\alpha_{t}}(1-\gamma_{t-1})}{{1-\gamma_{t}}}\bold{y}_{t}
@@ -289,7 +296,7 @@ D_{KL}\left(q(\bold{y}_{t-1}\lvert\bold{y}_t,\bold{y}_0)\lvert\lvert p(\bold{y}_
 %\mathcal{L}_{T} = \frac{1}{2}\sum_{t=2}^{T} \mathbb{E}_{q(\bold{y}_{t}\lvert\bold{y}_{0})}\left(\frac{\mathrm{SNR}_{t-1}}{{\mathrm{SNR}_{t}}}-1\right)\lvert\lvert \bold{\epsilon}-\bold{\epsilon}_{\psi}\lvert\lvert_{2}^{2}
 %\end{equation}
 
-Putting it all together gives that 
+where we have defined $\mathrm{SNR}_{t} = \frac{\gamma_{t}}{1-\gamma_{t}}$. Putting it all together gives that 
 
 \begin{equation}
 \mathcal{L}_{T} = \frac{1}{2}\sum_{t=2}^{T} \mathbb{E}_{q(\bold{y}_{t}\lvert\bold{y}_{0})}\left(\mathrm{SNR}_{t-1}-\mathrm{SNR}_{t}\right)\lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2}
@@ -302,20 +309,20 @@ Using a Monte Carlo estimate of $\mathcal{L}_{T}$ \parencite{Kingma2023} which o
 %\end{equation}
 
 \begin{equation}
-\mathcal{L}_{T} = \frac{T-1}{2} \mathbb{E}_{\epsilon\sim \mathcal{N}(0,I),t\sim U(1,T)}\left(\mathrm{SNR}_{t-1}-\mathrm{SNR}_{t}\right)\lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2}
+\mathcal{L}_{T} = \frac{T-1}{2} \mathbb{E}_{\boldsymbol{\epsilon}\sim \mathcal{N}(0,I),t\sim U(1,T)}\left(\mathrm{SNR}_{t-1}-\mathrm{SNR}_{t}\right)\lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2}
 \end{equation}
 
-For the case of infinite depth, this becomes:
+Taking the limit $T\rightarrow\infty$, this becomes:
 
 \begin{align*}
-\mathcal{L}_\infty &= -\frac{1}{2} \mathbb{E}_{\epsilon \sim \mathcal{N}(0,I)} \int_{0}^{1} \mathrm{SNR}'(t) \lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2} dt \\
-&= -\frac{1}{2} \mathbb{E}_{\epsilon \sim \mathcal{N}(0,I),t \sim U([0,1])} \left[\mathrm{SNR}'(t) \lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2}\right]
+\mathcal{L}_\infty &= -\frac{1}{2} \mathbb{E}_{\boldsymbol{\epsilon} \sim \mathcal{N}(0,I)} \int_{0}^{1} \mathrm{SNR}'(t) \lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2} dt \\
+&= -\frac{1}{2} \mathbb{E}_{\boldsymbol{\epsilon} \sim \mathcal{N}(0,I),t \sim U([0,1])} \left[\mathrm{SNR}'(t) \lvert\lvert \bold{y}_{0} - \hat{\bold{y}}_{0} \lvert\lvert_{2}^{2}\right]
 \end{align*}
 
-Moving to continuous time is a critical step, as it has been shown that increasing the number of time steps $T$ should reduce to diffusion loss \parencite{Kingma2023}. This diffusion loss is often recast as a noise estimation loss by making use of the relationship given in (3.9). Indeed, it is straightforward to prove that 
+Moving to continuous time is a critical step, as it has been shown that increasing the number of time steps $T$ should reduce to diffusion loss \parencite{Kingma2023}. This diffusion loss is often recast as a noise estimation loss by making use of the relationship given in (3.9). Indeed, after some algebra we find that
 
 \begin{equation*}
-\mathcal{L}_\infty = \frac{1}{2} \mathbb{E}_{\epsilon \sim \mathcal{N}(0,I),t \sim U([0,1])} \lvert\lvert \epsilon - \hat{\epsilon} \lvert\lvert_{2}^{2}
+\mathcal{L}_\infty = \frac{1}{2} \mathbb{E}_{\boldsymbol{\epsilon} \sim \mathcal{N}(0,I),t \sim U([0,1])} \lvert\lvert \boldsymbol{\epsilon} - \hat{\boldsymbol{\epsilon}} \lvert\lvert_{2}^{2}
 \end{equation*}
 
 which gives us the continuous-time diffusion loss used in the complete objective $\mathcal{L}$. Note that in the continuous-time framework, time is instead uniformly sampled over an interval $[0,1]$. 
@@ -339,19 +346,19 @@ where $\beta(t,\bold{x})$ is a separable function of time and space: $\beta(t,\b
 \begin{equation*}
 \mathcal{L}_\beta = \mathbb{E}_{t \sim U([0,1])} \left[
 \lVert \frac{\partial \gamma(t,\bold{x})}{\partial t} + \beta(t,\bold{x})\gamma(t,\bold{x}) \rVert_2^2
-+ \lVert \gamma(0, x) - 1 \rVert_2^2 
-+ \lVert \gamma(1, x) - 0 \rVert_2^2
++ \lVert \gamma(0,\bold{x}) - 1 \rVert_2^2 
++ \lVert \gamma(1,\bold{x}) - 0 \rVert_2^2
 \right]
 \end{equation*}
 
-The last two terms codify the soft constraints $\gamma(0,\bold{x})= 1$ and $\gamma(1,\bold{x}) = 0$, which help to ensure that the forward process starts at $y_{0}$ and ends in a standard Gaussian variable \parencite{Maggiora2023}. 
+The last two terms codify the soft constraints $\gamma(0,\bold{x})= 1$ and $\gamma(1,\bold{x}) = 0$, which help to ensure that the forward process starts at $\bold{y}_{0}$ and ends in a standard Gaussian variable \parencite{Maggiora2023}. 
 
 \subsection{Sampling}
 
 Sampling from the reverse process $p(\bold{y}(t)\lvert\bold{y}(t+\Delta t)$ is achieved by estimation of the noise $\hat{\boldsymbol{\epsilon}}$ from $\bold{y}_{t}$ by the denoising model, and therefore estimation of $\bold{y}_{0}$
 
 \begin{equation}
-\hat{\mathbf{y}}_{0} = \frac{1}{\sqrt{\gamma(t, \mathbf{x})}} \left( \mathbf{y}_t - \sqrt{1-\gamma(t, \mathbf{x})} \, \hat{\boldsymbol{\epsilon}} \right)
+\hat{\mathbf{y}}_{0} = \frac{1}{\sqrt{\gamma(t, \mathbf{x})}} \left( \mathbf{y}(t) - \sqrt{1-\gamma(t, \mathbf{x})} \, \hat{\boldsymbol{\epsilon}} \right)
 \end{equation}
 
 followed by sampling from the forward process $\bold{y}(t) \sim q(\bold{y}(t)\lvert\hat{\bold{y}}_{0}) = \mathcal{N}(\sqrt{\gamma(t,\bold{x})},(1-\gamma(t,\bold{x}))I)$. 
