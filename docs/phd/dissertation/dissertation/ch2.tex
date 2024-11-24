@@ -115,16 +115,32 @@ q(\bold{y}(t)\lvert\bold{y}_{0}) = \mathcal{N}(\sqrt{\gamma(t,\bold{x})}\bold{y}
 which uses the variance-preserving conditions defined in previous models. Note that the continuous-time variance schedule $\gamma(t,\bold{x})$ is analogous to the discrete-time product of variances used in discrete models \parencite{Ho2020}. However, the relationship between the variance schedule $\gamma(t,\bold{x})$ and the variance between fixed time points is more complex in the continuous-time formalism. Following \parencite{Maggiora2023}, we define
 
 \begin{equation*}
-q(\bold{y}(t+\Delta t)\lvert\bold{y}(t)) = \mathcal{N}(\sqrt{1-\hat{\beta}_{T}(t,\bold{x})}\bold{y}_{0},\hat{\beta}_{T}(t,\bold{x})I)
+q(\bold{y}(t+\Delta t)\lvert\bold{y}(t)) = \mathcal{N}(\sqrt{1-\beta(t,\bold{x})}\bold{y}_{0},\beta(t,\bold{x})I)
 \end{equation*}
 
-where $\hat{\beta}_{T}(t,\bold{x}) = 1 - \frac{\gamma(t+\Delta t,\bold{x})}{\gamma(t,\bold{x})}$. The value of $\hat{\beta}_{T}(t,\bold{x})$ controls the variance of the transition of $\bold{y}(t)$ over a period of time $\Delta t$. The reverse process reads
+where $\beta(t,\bold{x}) = 1 - \frac{\gamma(t+\Delta t,\bold{x})}{\gamma(t,\bold{x})}$. The value of $\beta(t,\bold{x})$ controls the variance of the transition of $\bold{y}(t)$ over a period of time $\Delta t$. The reverse process reads:
 
 \begin{equation*}
-p(\bold{y}(t)\lvert\bold{y}(t+\Delta t)) = \mathcal{N}(\hat{\mu},\gamma(t,\bold{x})I)
+p\left(\mathbf{y}\left(t\right)\lvert\mathbf{y}\left(t+\Delta t\right)\right)=\mathcal{N}\left(\mathbf{\mu}_\psi\left(\mathbf{y}\left(t+\Delta t\right)\right),\gamma\left(t,\mathbf{x}\right)I\right),
 \end{equation*}
 
-where $\hat{\mu}$ is the estimated expected value of the transition distribution $p(\bold{y}(t)\lvert\bold{y}(t+\Delta t))$. 
+where $\mathbf{\mu}_\psi\left(\mathbf{y}\left(t+\Delta t\right)\right)$ is the estimated expected value of the transition distribution by a neural network $\psi$. Notice that, by the definition of the forward process, $\mathbf{y}\left(t+\Delta t\right)\sim q\left(\mathbf{y}(t+\Delta t)\lvert\mathbf{y}_0\right)$ can be reparametrized as 
+
+\begin{equation*}
+\mathbf{y}\left(t+\Delta t\right)=\sqrt{\gamma\left(t+\Delta t,\mathbf{x}\right)}\mathbf{y}_\mathbf{0}+\sqrt{1-\gamma\left(t+\Delta t,\mathbf{x}\right)}\boldsymbol{\epsilon},
+\end{equation*}
+
+where $\boldsymbol{\epsilon}\sim\mathcal{N}\left(0,\mathbf{I}\right)$. We can estimate $\mathbf{y}_\mathbf{0}$ by rearranging this expression and estimating the noise $\hat{\boldsymbol{\epsilon}}$:
+
+\begin{equation*}
+{\hat{\mathbf{y}}}_\mathbf{0}=\frac{1}{\sqrt{\gamma\left(t+\Delta t,\mathbf{x}\right)}}\left(\mathbf{y}\left(t+\Delta t\right)-\sqrt{1-\gamma\left(t+\Delta t,\mathbf{x}\right)}\hat{\boldsymbol{\epsilon}}\right).
+\end{equation*}
+
+To sample from the reverse process, we can sample from the forward process starting at ${\hat{\mathbf{y}}}_\mathbf{0}$. We find that $\mathbf{\mu}_\psi\left(\mathbf{y}\left(t+\Delta t\right)\right)$ can be computed from the noise estimate:
+
+\begin{equation*}
+\mathbf{\mu}_\psi\left(\mathbf{y}\left(t+\Delta t\right)\right)=\frac{1}{\sqrt{\gamma\left(t+\Delta t,\mathbf{x}\right)}}\left(\mathbf{y}\left(t+\Delta t\right)-\sqrt{1-\gamma\left(t+\Delta t,\mathbf{x}\right)}\hat{\boldsymbol{\epsilon}}\right).
+\end{equation*}
 
 
 %\begin{equation}
@@ -158,19 +174,6 @@ where $\hat{\mu}$ is the estimated expected value of the transition distribution
 
 %Learning the reverse process can be approached by either regressing noise $\bold{\epsilon}$ from the forward process, or the true latent $\bold{y}_{0}$, as there is a deterministic relationship between them. We adopt the former for consistency with other work, and define $\psi$ as a neural denoising function which regresses the noise $\bold{\epsilon}$ from a noisy $\bold{y}_{t}$. A relation between the noise estimate $\epsilon_{\psi}$ and $\mu_{\psi}$ is given in the Appendix, which gives an intuition for sampling. The proposed sampling scheme is depicted in (Figure \ref{fig:fig60}). 
 
-By the definition of the forward process $q(\mathbf{y}(t) \lvert \mathbf{y}_{0})$, a variable $\mathbf{y}(t) \sim q(\mathbf{y}(t) \lvert \mathbf{y}_{0})$ can be reparametrized as 
-
-\begin{equation*}
-\mathbf{y}(t) = \sqrt{\gamma(t, \mathbf{x})}\mathbf{y}_{0} + \sqrt{1-\gamma(t, \mathbf{x})} \, \boldsymbol{\epsilon}
-\end{equation*}
-
-with $\boldsymbol{\epsilon} \sim \mathcal{N}(0, \mathbf{I})$. Rearranging the terms, we see that estimation of the noise $\boldsymbol{\epsilon}$ is can be used to recover an estimate of $\mathbf{y}_{0}$:
-
-\begin{equation*}
-\mathbf{y}_{0} = \frac{1}{\sqrt{\gamma(t, \mathbf{x})}} \left( \mathbf{y}(t) - \sqrt{1-\gamma(t, \mathbf{x})} \, \boldsymbol{\epsilon} \right)\rightarrow \hat{\mathbf{y}}_{0} = \frac{1}{\sqrt{\gamma(t, \mathbf{x})}} \left( \mathbf{y}(t) - \sqrt{1-\gamma(t, \mathbf{x})} \, \hat{\boldsymbol{\epsilon}} \right)
-\end{equation*}
-
-Therefore, for a particular $\mathbf{y}(t) $, estimation of $\hat{\mathbf{y}}_{0}$ can be obtained using the model prediction $\hat{\boldsymbol{\epsilon}}$. 
 
 %\textbf{Variational Objective}. Following \parencite{Kingma2021}, we interpret the reverse process as a hierarchical generative model that samples a sequence of latents $\bold{y}_{t}$, with time running backward. Training of the model is achieved through the variational bound
 
