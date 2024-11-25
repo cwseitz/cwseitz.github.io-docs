@@ -61,7 +61,7 @@ which is often called a variational objective. Given that \( \log p_{\psi}(x) \)
 \mathbb{E}_{q(y \lvert x)}\left[-\log p_{\psi}(x) \right] \leq -\mathcal{L} = \mathbb{E}_{q(y \lvert x)}\left[-\log \frac{p_{\psi}(x,y)}{q(y\lvert x)} \right]
 \end{equation}
 
-This approach provides a practical way to perform Bayesian inference, especially in high-dimensional settings. It is worth noting that this derivation often begins with $D_{KL}(p_{\psi}(y\lvert x) \lvert\lvert q(y \lvert x) ) $ such that the expectation is taken with respect to the model distribution, since the true distribution is unknown. However, for the following application, the target distribution is known and thus the objective is formulated in this way. 
+This approach provides a practical way to perform Bayesian inference, especially in high-dimensional settings. It is worth noting that this derivation often begins by taking the expectation with respect to the model distribution, since the true distribution is unknown. However, for the following application, the target distribution is known and thus the objective is formulated in this way. 
 
 
 %\subsection{A note on variational inference for functions}
