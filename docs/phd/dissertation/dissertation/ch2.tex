@@ -148,9 +148,16 @@ Repeated application of this process permits sampling from the reverse process o
 
 \begin{figure}[t]
 \centering
-\includegraphics[scale=0.18]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure.png}
-\caption{\textbf{Performance of conditional variational diffusion on simulated data}. (a) Example low resolution (left), high resolution (middle), and estimated high resolution (right) localization microscopy images at fluorophore numbers $\rho$ in the image. (b,c) Localization uncertainty in the u and v directions as a function of incident photon count, for various densities. (d,e) Precision and recall of localized spots as a function of $\rho$. Error bars represent standard deviations over nine batches of data. }
-\label{fig:cvdmsim}
+\includegraphics[scale=0.3]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure-Crop1.png}
+\caption{\textbf{Performance of conditional variational diffusion on simulated data}. (left) Example low resolution, (middle) high resolution, and (right) estimated high resolution localization microscopy images at fluorophore numbers $\rho$ in the image.}
+\label{fig:cvdmsim1}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[scale=0.3]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure-NoLett.png}
+\caption{\textbf{Performance of conditional variational diffusion on simulated data}. (top) Localization uncertainty in the u and v directions as a function of incident photon count, for various densities. (bottom) Precision and recall of localized spots as a function of $\rho$. Error bars represent standard deviations over nine batches of data. }
+\label{fig:cvdmsim2}
 \end{figure}
 
 %An important property of the forward process is that it admits sampling $\bold{y}_t$ at an arbitrary timestep $t$ in closed form \parencite{Ho2020}. Using the notation $\alpha_t := 1 - \beta_t$ and $\gamma_t := \prod_{s=1}^{t} \alpha_s$, we have $q(\bold{y}_t\lvert\bold{y}_0) = \mathcal{N} \left(\sqrt{\gamma_{t}} \bold{y}_{0}, (1 - \gamma_t)I \right)$ or $\bold{y}_{t} = \sqrt{\gamma_{t}}\bold{y}_{0} + \sqrt{1-\gamma_{t}}\bold{\epsilon}$ for $\epsilon \sim \mathcal{N}(0,I)$. The signal to noise ratio (SNR) as defined in \parencite{Kingma2023}, at a time step $t$ reads $\mathrm{SNR}_t = \gamma_{t}/(1-\gamma_{t})$.
@@ -201,7 +208,7 @@ Repeated application of this process permits sampling from the reverse process o
 \end{figure}
 
 
-To verify the localizations made by the diffusion model, we simulated localization microscopy datasets with various densities (Figure \ref{fig:cvdmsim}a). For a KDE predicted by the diffusion model, objects are detected using the Laplacian of Gaussian (LoG) detection algorithm, which permits more direct computation of localization error, compared to image similarity measures. Moreover, localization with sub-pixel precision can be easily implemented by identification of local maxima in the predicted KDE \parencite{Nehme2020}. A particular LoG localization in the KDE is paired to the nearest ground truth localization and is unpaired if a localization is not within 5 KDE pixels (125nm) of any ground truth localization. As expected, we find a density dependence to localization error in the $u$ and $v$ directions, over the tested signal range (Figure \ref{fig:cvdmsim}b,c). In addition to localization error, we measure a density-dependent precision P = TP/(TP+FP) and precision P= TP/(TP+FN) where TP denotes true positive localizations, FP denotes false positive localizations, and FN denotes false negative localizations (Figure \ref{fig:cvdmsim}d,e). 
+To verify the localizations made by the diffusion model, we simulated localization microscopy datasets with various densities (Figure \ref{fig:cvdmsim1}). For a KDE predicted by the diffusion model, objects are detected using the Laplacian of Gaussian (LoG) detection algorithm, which permits more direct computation of localization error, compared to image similarity measures. Moreover, localization with sub-pixel precision can be easily implemented by identification of local maxima in the predicted KDE \parencite{Nehme2020}. A particular LoG localization in the KDE is paired to the nearest ground truth localization and is unpaired if a localization is not within 5 KDE pixels (125nm) of any ground truth localization. As expected, we find a density dependence to localization error in the $u$ and $v$ directions, over the tested signal range (Figure \ref{fig:cvdmsim2}). In addition to localization error, we measure a density-dependent precision P = TP/(TP+FP) and precision P= TP/(TP+FN) where TP denotes true positive localizations, FP denotes false positive localizations, and FN denotes false negative localizations (Figure \ref{fig:cvdmsim2}). 
 
 \subsubsection{Sample variation for simulated localization microscopy data}
 
