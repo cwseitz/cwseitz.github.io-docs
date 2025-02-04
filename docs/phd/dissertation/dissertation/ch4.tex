@@ -3,14 +3,14 @@
 \chapter{FLUORESCENCE NANOSCOPY IN THE STUDY OF CHROMATIN ORGANIZATION}
 \ix{physics//Physics appendix}
 
-\section{Background on chromatin imaging}
+\section{Background}
 
 Chromatin is a complex and dynamic structure that packages eukaryotic DNA with histones. The higher-order structure of chromatin is highly non-random and plays an important role in regulation of genomic functions such as gene expression, DNA synthesis, and DNA repair. Chromatin structure is strictly controlled and constantly remodeled as cells differentiate, divide, and respond to genomic insults \parencite{Auerbach2009,Chien2009,Clapier2009,Misteli2007,Vidi2014}.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=13cm]{media/Chromatin.png}
-\caption{\textbf{The hierarchical structure of chromatin}. DNA compaction within the interphase nucleus occurs through multiple levels of histone-dependent interactions. This includes the formation of the nucleosome core particle, strings of nucleosomes, the chromatosome core particle, the debated 30nm fibers, and the association of individual fibers, which eventually produces tertiary structures. Retrieved from Reference \parencite{Fyodorov2018}.}
+\caption{\textbf{The hierarchical structure of chromatin} DNA compaction within the interphase nucleus occurs through multiple levels of histone-dependent interactions. This includes the formation of the nucleosome core particle, strings of nucleosomes, the chromatosome core particle, the debated 30nm fibers, and the association of individual fibers, which eventually produces tertiary structures. Retrieved from \parencite{Fyodorov2018}.}
 \label{fig:fig16}
 \end{figure}
 
@@ -50,7 +50,7 @@ Advances in super-resolution imaging will also benefit intranuclear chromatin im
 \begin{figure}[t]
 \centering
 \includegraphics[width=13cm]{media/Lifetime.png}
-\caption{\textbf{Photoswitching of JF646 bound to H2B-HaloTag}. (a) Peak intensity fluctuations of a putatively isolated JF646 molecule exicted at 640nm and imaged with 10ms exposure time in the presence of 100mM MEA buffer. Fit of a Poisson HMM is shown in cyan (b) ON and OFF state lifetime distributions found by pooling data from 16 JF646 spots in a single HeLa cell nucleus. Single component exponential fits shown as solid lines.}
+\caption{\textbf{Photoswitching of JF646 bound to H2B-HaloTag} (a) Peak intensity fluctuations of a putatively isolated JF646 molecule exicted at 640nm and imaged with 10ms exposure time in the presence of 100mM MEA buffer. Fit of a Hidden Markov Model is shown in cyan (b) ON and OFF state lifetime distributions found by pooling data from 16 JF646 spots in a single HeLa cell nucleus. Single component exponential fits shown as dashed lines.}
 \label{fig:fig16}
 \end{figure}
 
@@ -58,7 +58,7 @@ Advances in super-resolution imaging will also benefit intranuclear chromatin im
 Super-resolved nucleosome organization has been studied extensively in fixed cells to reveal segregated
 nanodomains hundreds of nanometers in size, including dispersed nanodomains and compact large aggregates. Nucleosomes are now known to assemble into heterogeneous clusters of variable sizes, interspersed with nucleosome-depleted regions \parencite{Ricci2015}. However, our current understanding of nucleosome patterning in the nucleus is limited by the need for fixation. Chemical fixation with paraformaldehyde, glutaraldehyde, methanol, or other chemical fixatives may alter the structure of chromatin, introducing error in our measurements \parencite{Maeshima2020}. Live cell imaging carries its own issues, particularly due to local and long-range chromatin motions in the nucleus. At the nanoscale, local chromatin motion appears to be isotropic and driven by thermal fluctuation \parencite{Maeshima2020}. Therefore, we presume that for sufficiently brief imaging duration (tens of seconds) nanodomain structure is approximately static. As a consequence, vibrations of single nucleosomes are, in effect, an addition of low amplitude noise to the localization dataset. 
 
-To perform live cell super-resolution imaging of chromatin nanodomains, we adopt the HaloTag system, a modified haloalkane dehalogenase designed to covalently bind to synthetic ligands (Los 2008). The HaloTag protein is fused to nucleosome H2B and is then bound by a rhodomine-derived fluorescent ligand, JF646 (Grimm 2015). JF646 undergoes fluorescence intermittency (blinking) in the presence of a cysteamine (MEA) containing buffer (Figure \ref{fig:fig16}). Once precise positions of the fluorophores are obtained, Besag’s L-function $L(r)$ is used to analyze the clustering. The L-function $L(r)= \sqrt{\frac{K(r)}{\pi}}$ is a transformation of Ripley’s K-function $K(r)$. The function $K(r)$ is designed such that $K(r)$ is the number of localizations within a radius $r$ of a randomly chosen localization. Importantly, in the case of complete spatial randomness, $L(r)=r$. Thus, in general, to quantify the degree of clustering, one uses $L(r)-r$, which measures the deviation of a point pattern from CSR. To demonstrate this, example point patterns have been generated using complete spatial randomness (Figure \ref{fig:fig17}) or a Thomas point process (Figure \ref{fig:fig18}). Note that $sigma=0$ is used to denote CSR. The Thomas process is parameterized by the standard deviation of a point from its cluster center $\sigma$. under CSR  and a Thomas point process. 
+To perform live cell super-resolution imaging of chromatin nanodomains, we adopt the HaloTag system, a modified haloalkane dehalogenase designed to covalently bind to synthetic ligands (Los 2008). The HaloTag protein is fused to nucleosome H2B and is then bound by a rhodomine-derived fluorescent ligand, JF646. JF646 undergoes fluorescence intermittency (blinking) in the presence of a cysteamine (MEA) containing buffer (Figure \ref{fig:fig16}). Once precise positions of the fluorophores are obtained, Besag’s L-function $L(r)$ is used to analyze the clustering. The L-function $L(r)= \sqrt{\frac{K(r)}{\pi}}$ is a transformation of Ripley’s K-function $K(r)$. The function $K(r)$ is designed such that $K(r)$ is the number of localizations within a radius $r$ of a randomly chosen localization. Importantly, in the case of complete spatial randomness, $L(r)=r$. Thus, in general, to quantify the degree of clustering, one uses $L(r)-r$, which measures the deviation of a point pattern from CSR. To demonstrate this, example point patterns have been generated using complete spatial randomness (Figure \ref{fig:fig17}) or a Thomas point process (Figure \ref{fig:fig18}). Note that $\sigma=0$ is used to denote CSR. The Thomas process is parameterized by the standard deviation of a point from its cluster center $\sigma$. under CSR  and a Thomas point process. 
 
 
 \begin{figure}
@@ -66,7 +66,7 @@ To perform live cell super-resolution imaging of chromatin nanodomains, we adopt
 \includegraphics[width=10cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e4-0.png}
 \includegraphics[width=10cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-1e5-0.png}
 \includegraphics[width=10cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/csr-5e6-0.png}
-\caption{\textbf{Besag's L-function under complete spatial randomness (CSR)}. Point pattern simulations for CSR for various intensities of the point process. Simulation envelopes are shown in pink, which represent the significance band of the estimated $L(r)-r$}
+\caption{\textbf{Besag's L-function under complete spatial randomness (CSR)} Point pattern simulations for CSR for various intensities of the point process. Simulation envelopes are shown in pink, which represent the significance band of the estimated $L(r)-r$}
 \label{fig:fig17}
 \end{figure}
 
@@ -75,7 +75,7 @@ To perform live cell super-resolution imaging of chromatin nanodomains, we adopt
 \includegraphics[width=10cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-1e4-50.png}
 \includegraphics[width=10cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-1e5-50.png}
 \includegraphics[width=10cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/ppp/tom-5e6-50.png}
-\caption{\textbf{Besag's L-function for a Thomas process}. Point pattern simulations for the Thomas process ($\sigma=50\mathrm{nm}$) for various intensities of the point process. Simulation envelopes are shown in pink, which represent the significance band of the estimated $L(r)-r$}
+\caption{\textbf{Besag's L-function for a Thomas process} Point pattern simulations for the Thomas process ($\sigma=50\mathrm{nm}$) for various intensities of the point process. Simulation envelopes are shown in pink, which represent the significance band of the estimated $L(r)-r$}
 \label{fig:fig18}
 \end{figure}
 \clearpage
@@ -121,7 +121,7 @@ A diverse set of particle tracking algorithms utilize probabilistic models of pa
 
 \begin{figure}[t]
 \includegraphics[width=\textwidth]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse.png}
-\caption{\textbf{Snapshots of the Rouse polymer}. Four perspectives of the Rouse polymer generated with $N=2000$ beads connected with harmonic bonds with equilibrium length $200\mathrm{nm}$. Polymer is initialized with all harmonic bonds at equilibrium}
+\caption{\textbf{Snapshots of the Rouse polymer} Four perspectives of the Rouse polymer generated with $N=2000$ beads connected with harmonic bonds with equilibrium length $200\mathrm{nm}$. Polymer is initialized with all harmonic bonds at equilibrium}
 \label{fig:fig19}
 \end{figure}
 
@@ -132,7 +132,7 @@ It is well-known that the DNA double helix structure consists of millions of bas
 \begin{figure}[t]
 \centering
 \includegraphics[width=13cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Rouse-Dynamics-1.png}
-\caption{\textbf{Subdiffusive dynamics of a Rouse polymer}.  Mean squared displacement (MSD) of 2k beads shown in black, average MSD shown in red.}
+\caption{\textbf{Subdiffusive dynamics of a Rouse polymer} Mean squared displacement (MSD) of 2k beads shown in black, average MSD shown in red.}
 \label{fig:fig20}
 \end{figure}
 
@@ -174,7 +174,7 @@ The BRD4 long isoform is characterized by structured N-terminal tandem acetyl-ly
 \begin{figure}[t]
 \centering
 \includegraphics[width=14cm]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Structure.png}
-\caption{\textbf{Bromodomain protein 4 (BRD4) structure prediction}. (a) AlphaFold predicted structure of BRD4 long isoform (blue) with bromodomain 1 (BD1) aa58-163, bromodomain 2 (BD2) aa349-456, and N-terminus phosphorylation sites (NPS) aa462-506 highlighted in green. (b) Heat map of expected position error in AlphaFold prediction}
+\caption{\textbf{Bromodomain protein 4 (BRD4) structure prediction} (a) AlphaFold predicted structure of BRD4 long isoform (blue) with bromodomain 1 (BD1) aa58-163, bromodomain 2 (BD2) aa349-456, and N-terminus phosphorylation sites (NPS) aa462-506 highlighted in green (b) Heat map of expected position error in AlphaFold prediction}
 \label{fig:fig22}
 \end{figure}
 
@@ -189,27 +189,27 @@ To address the role of BRD4 binding and phase separation on chromatin structure,
 
 \begin{figure}[t]
 \includegraphics[width=\textwidth]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-0.png}
-\caption{\textbf{BRD4 mutants colocalize with nucleosome nanodomains}. (a) Schematic of the BRD4 protein sequence and mutations shown in red. (b) Anti-FLAG western blot of bulk expression of BRD4 mutants. (c) Combined immunofluorescence of FLAG-tagged BRD4 mutants with JF646-tagged H2B-Halo. (d) Histograms of nearest neighbor distances of H2B puncta to FLAG puncta over N=10 cells for each mutant. Red dashed lines are drawn at the mean, statistical significance determined by Welch t-test for each mutant relative to wild-type (WT) * p<0.05, *** p<0.001}
+\caption{\textbf{BRD4 mutants colocalize with nucleosome nanodomains} (a) Schematic of the BRD4 protein sequence and mutations shown in red. (b) Anti-FLAG western blot of bulk expression of BRD4 mutants (c) Combined immunofluorescence of FLAG-tagged BRD4 mutants with JF646-tagged H2B-Halo (d) Histograms of nearest neighbor distances of H2B puncta to FLAG puncta over 10 cells for each mutant. Red dashed lines are drawn at the mean, statistical significance determined by Welch t-test for each mutant relative to wild-type (WT) * p<0.05, *** p<0.001}
 \label{fig:fig23}
 \end{figure}
 	
-\subsubsection{Phase-separated BRD4 condensates regulate chromatin structure and dynamics}
+\subsubsection{BRD4 condensates regulate chromatin structure and dynamics}
 
 To assess the functional role of BRD4 in maintaining the NN environment, we interrogated the dynamics of NNs, as well as their structure, in the presence of BRD4 mutants. Histone H2B was tagged with HaloTag \parencite{Los2008} (H2B-Halo), to which a fluorescent ligand JaneliaFluor646 (JF646) can bind speciﬁcally in a living cell. Low concentrations of JF646 were used to obtain sparse labeling of nucleosomes for single-nucleosome imaging (Figure \ref{fig:fig26} a,b). JF646-labeled nucleosomes in HeLa cells were recorded at 10fps (∼200 frames, 20 s total) and a reduced diffusion coefficient was measured in cells expressing 7A, 7D, and BD mutants, with respect to cells expressing the wild-type BRD4 protein (Figure \ref{fig:fig26} c). HeLa cells exposed to (+)-JQ1 in DMSO for 8h showed an increase in nucleosome dynamics with respect to DMSO alone (Figure \ref{fig:fig26} d). We then conducted super resolution imaging of NN using direct stochastic optical reconstruction microscopy (dSTORM) by promoting JF646 fluorescence intermittency with a cysteamine buffer (Figure \ref{fig:fig25} a,b). JF646 is known to exhibit a transient fluorescent state lasting tens to hundreds of milliseconds and stable dark state lasting hundreds of milliseconds to seconds \parencite{Grimm2015}. Two color imaging of H2B-Halo-JF646 and GFP-tagged BRD4 shows that BRD4 and NNs form complementary biomolecular condensates in the nucleus, consistent with current models of BRD4 chromatin reading mechanism (Figure \ref{fig:fig25} c). Ensemble averages of Besag’s L-function showed an increase in nucleosome clustering in cells expressing the 7D BRD4 mutants, while all other groups were consistently indistinguishable from WT cells (Figure \ref{fig:fig25} e). HeLa cells exposed to (+)-JQ1 in DMSO for 8h showed a reduction in nucleosome clustering with respect to DMSO alone (Figure \ref{fig:fig25} f).  
 
 \begin{figure}[t]
 \includegraphics[width=\textwidth]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-1.png}
-\caption{\textbf{Strong multivalent chromatin binders reduce diffusion of nucleosome nanodomains}. (a) Heteropolymer model of chromatin consisting of A-type, B-type, and C-type particles. (b) Interaction potentials $U_{BC}(r_{ij})$ of multivalent chromatin binders with B-type chromatin beads. (c,d) Example free heteropolymer and heteropolymer with a number density of C-type particles of $\rho=500/\mu m^3$ in a 10um periodic box. (e) Scaled diffusion coefficient $D$ for various chromatin binding energies of C-type particles, averaged over ten independent simulations, with burn-in discarded.}
+\caption{\textbf{Strong multivalent chromatin binders reduce diffusion of nucleosome nanodomains} (a) Heteropolymer model of chromatin consisting of A-type, B-type, and C-type particles (b) Interaction potentials $U_{BC}(r_{ij})$ of multivalent chromatin binders with B-type chromatin beads (c,d) Example free heteropolymer and heteropolymer with a number density of C-type particles of $\rho=500/\mu m^3$ in a 10um periodic box (e) Scaled diffusion coefficient $D$ for various chromatin binding energies of C-type particles, averaged over ten independent simulations, with burn-in discarded.}
 \label{fig:fig24}
 \end{figure}
 
 \begin{figure}[t]
 \includegraphics[width=\textwidth]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-2.png}
-\caption{\textbf{Expression of constitutively phosphorylated BRD4 compacts nucleosome nanodomains}. (a,b) Direct stochastic optical reconstruction microscopy (dSTORM) imaging strategy of single nucleosomes and an example super-resolution image. (c) Two-color image of super-resolved H2B-JF646 with diffraction-limited GFP-tagged BRD4. (d) Quantification of degree of clustering using the L-function (e) L-function for BRD4 mutants. (f) L-function after 8h exposure to 1uM (+)-JQ1 in DMSO and DMSO only. All scalebars 3um. ** p<0.01, *** p<0.001}
+\caption{\textbf{Expression of constitutively phosphorylated BRD4 compacts nucleosome nanodomains} (a,b) Direct stochastic optical reconstruction microscopy (dSTORM) imaging strategy of single nucleosomes and an example super-resolution image (c) Two-color image of super-resolved H2B-JF646 with diffraction-limited GFP-tagged BRD4 (d) Quantification of degree of clustering using the L-function (e) L-function for BRD4 mutants (f) L-function after 8h exposure to 1uM (+)-JQ1 in DMSO and DMSO only. All scalebars 3um. ** p<0.01, *** p<0.001}
 \label{fig:fig25}
 \end{figure}
 
-\subsubsection{Heteropolymer model to simulate the interplay between condensates and chromatin}
+\subsubsection{Heteropolymer model}
 
 To interpret our experimental findings, we adopt a heteropolymer chromatin model to capture the interaction of chromatin with multivalent BRD4-like binders (Figure \ref{fig:fig24} a). The heteropolymer consists of a coarse-grained bead-and-spring chain composed of $N_b=200$ beads, connected by harmonic bonds with equilibrium length $r_0$ whose energy is deﬁned as
 
@@ -223,11 +223,11 @@ where $r_{ij}$ is a vector connecting the center of a bead of type $i$ to a bead
 U_{BC}\left(r_{ij}\right)=\epsilon\left(1-\left(\frac{\lvert r_{ij}\lvert}{R_0}\right)^2\right)^3
 \end{equation}
 
-where $R_0=200$nm. The potential $U_{BC}$ is considered over a domain $0\leq\lvert r_{ij}\lvert\leq 2 R_0$ In all simulations, ten replicates were run for each condition tested. A and B type particles within the chromatin polymer have repulsive interactions with $\epsilon = +10k_{B}T$. Binding energy of the acetylated beads with binders was varied with $\epsilon_{I} = 0 k_{B}T,\epsilon_{II} = -20k_{B}T,\epsilon{III}=-40k_{B}T$ (Figure \ref{fig:fig24} a). The dynamics of chromatin chains are approximated by Brownian dynamics within a cubic box with side length of 10um and periodic boundary conditions. Brownian dynamics follows the stochastic differential equation.
+where $R_0=200$nm. The potential $U_{BC}$ is considered over a domain $0\leq\lvert r_{ij}\lvert\leq 2 R_0$ In all simulations, ten replicates were run for each condition tested. A and B type particles within the chromatin polymer have repulsive interactions with $\epsilon = +10k_{B}T$. Binding energy of the acetylated beads with binders was varied with $\epsilon_{I} = 0 k_{B}T,\epsilon_{II} = -20k_{B}T,\epsilon_{III}=-40k_{B}T$ (Figure \ref{fig:fig24} a). The dynamics of chromatin chains are approximated by Brownian dynamics within a cubic box with side length of 10um and periodic boundary conditions. Brownian dynamics follows the stochastic differential equation.
 
 \begin{figure}[t]
 \includegraphics[width=\textwidth]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/brd4/brd4/media/Figure-3.png}
-\caption{\textbf{BRD4 mutants reduce single nucleosome dynamics in living cells}.(a,b) Sparse labeling of single nucleosomes in a living HeLa cell (scalebar 5um). (c) Average mean squared displacement (MSD) of single nucleosomes for wild-type and mutated BRD4, error bars represent the standard error of the mean. (d) Average MSD of single nucleosomes after 8h exposure to 1uM (+)-JQ1 in DMSO and DMSO only, error bars represent the standard error of the mean}
+\caption{\textbf{BRD4 mutants reduce single nucleosome dynamics in living cells} (a,b) Sparse labeling of single nucleosomes in a living HeLa cell (scalebar 5um) (c) Average mean squared displacement (MSD) of single nucleosomes for wild-type and mutated BRD4, error bars represent the standard error of the mean (d) Average MSD of single nucleosomes after 8h exposure to 1uM (+)-JQ1 in DMSO and DMSO only, error bars represent the standard error of the mean}
 \label{fig:fig26}
 \end{figure}
 
@@ -256,7 +256,7 @@ where $\gamma$ is a diagonal friction tensor and $\xi(t)$ is a three-dimensional
 
 \subsection{Discussion}
 
-Our data support the model that phosphorylated and unphosphorylated BRD4 form different molecular associations in the nucleus. BRD4 nuclear localization is only weakly affected by bromodomain inhibition with monovalent BET inhibitors, while exposure to phase separation inhibitors such as 1,6 Hexanediol have a significant effect on BRD4 localization in the nucleus11. Colocalization activity of 7A/7D mutants relative to wild type measured here is consistent with this model of BRD4 localization to NNs. Strong colocalization of the BD mutant relative to the wild type suggests a possible link between bromodomain structure with localization of BRD4. 
+Our data support the model that phosphorylated and unphosphorylated BRD4 form different molecular associations in the nucleus. BRD4 nuclear localization is only weakly affected by bromodomain inhibition with monovalent BET inhibitors, while exposure to phase separation inhibitors such as 1,6 Hexanediol have a significant effect on BRD4 localization in the nucleus. Colocalization activity of 7A/7D mutants relative to wild type measured here is consistent with this model of BRD4 localization to NNs. Strong colocalization of the BD mutant relative to the wild type suggests a possible link between bromodomain structure with localization of BRD4. 
 
 Concurrently, reduced diffusivity of single nucleosomes with all mutants tested suggests a relationship between elevated colocalization and the degree of confinement of nanodomain diffusion. At the same time, increased nucleosome diffusivity and reduced nucleosome clustering after (+)-JQ1 exposure indicate BRD4 condensate formation is necessary in maintaining the nanodomain architecture. We further hypothesize effects of BRD4 localization on the viscosity of the nanodomain environment and potentially increased cross-linking of nanodomains. Indeed, we find this to be a natural result of molecular crowding resulting from overexpression of a constitutively phase separating protein, capable of multivalent interactions. Substantial colocalization of the 7D mutant with nanodomains along with increased chromatin compaction points towards a BRD4-mediated cross-linking mechanism of nucleosomes within the nanodomain. This result of increased affinity can also be seen in coarse grained simulations of chromatin interactions with multivalent binders.
  
@@ -281,7 +281,7 @@ After transient transfection, H2B-Halotag HeLa cells were incubated with 3pM JF6
 
 \subsubsection{Colocalization of BRD4 mutants with nucleosome nanodomains}
 
-We colocalize FLAG-tagged BRD4 mutants with NNs by simultaneous FLAG immunofluorescence with imaging of sparsely labeled of H2B-JF646. Puncta were detected in both channels using the Laplacian of Gaussian (LoG) detection algorithm to generate a multi-type point pattern. We then computed the nearest neighbor distance distribution as the distance from a random H2B-JF646 puncta to the nearest BRD4-FLAG puncta. Nearest distances values were pooled over N=10 cells for each mutant. 
+We colocalize FLAG-tagged BRD4 mutants with NNs by simultaneous FLAG immunofluorescence with imaging of sparsely labeled of H2B-JF646. Puncta were detected in both channels using the Laplacian of Gaussian (LoG) detection algorithm to generate a multi-type point pattern. We then computed the nearest neighbor distance distribution as the distance from a random H2B-JF646 puncta to the nearest BRD4-FLAG puncta. Nearest distances values were pooled over 10 cells for each mutant. 
 
 \subsubsection{Single molecule tracking}
 
@@ -302,7 +302,7 @@ Immune evasion involves numerous mechanisms at molecular and cellular levels, in
 
 \begin{figure}[t]
 \includegraphics[width=\textwidth]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/dissertation/dissertation/media/GBP5.png}
-\caption{\textbf{Example knockdown of a BRD4 regulated gene with (+)-JQ1}. (a) Transcriptional site identification by in-situ hybridization. (b,c) Example image of GBP5 induced gene expression by IFN-$\gamma$. (d-e) qPCR time-series of IFN-$\gamma$ induced GBP5 expression and its knockdown 8h after IFN-$\gamma$ exposure with 1uM (+)-JQ1}
+\caption{\textbf{Example knockdown of a BRD4 regulated gene with (+)-JQ1} (a) Transcriptional site identification by in-situ hybridization (b,c) Example image of GBP5 induced gene expression by IFN-$\gamma$ (d-e) qPCR time-series of IFN-$\gamma$ induced GBP5 expression and its knockdown 8h after IFN-$\gamma$ exposure with 1uM (+)-JQ1}
 \label{fig:fig31}
 \end{figure}
 

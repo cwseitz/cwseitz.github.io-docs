@@ -89,7 +89,7 @@ Our implementation is based on the conditional variational diffusion model (CVDM
 \begin{figure}[t]
 \centering
 \includegraphics[scale=0.6]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure-0.png}
-\caption{\textbf{Generation of localization microscopy images and diffusion-based inference to enhance resolution}. (a) Pipeline of generation of low-resolution localization microscopy image $\mathbf{x}$ using the point spread function model $O\left(u,v\right)$ and noise model. (b) Concatenation of 4x interpolated low-resolution images with Gaussian noise and application of the conditional variational diffusion model for inference of a high-resolution image $\mathbf{y}_0$ via the reverse process.}
+\caption{\textbf{Generation of localization microscopy images and diffusion-based inference to enhance resolution} (a) Pipeline of generation of low-resolution localization microscopy image $\mathbf{x}$ using the point spread function model $O\left(u,v\right)$ and noise model (b) Concatenation of 4x interpolated low-resolution images with Gaussian noise and application of the conditional variational diffusion model for inference of a high-resolution image $\mathbf{y}_0$ via the reverse process.}
 \label{fig:fig60}
 \end{figure}
 
@@ -149,14 +149,14 @@ Repeated application of this process permits sampling from the reverse process o
 \begin{figure}[t]
 \centering
 \includegraphics[scale=0.3]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure-Crop1.png}
-\caption{\textbf{Performance of conditional variational diffusion on simulated data}. (left) Example low resolution, (middle) high resolution, and (right) estimated high resolution localization microscopy images at fluorophore numbers $\rho$ in the image.}
+\caption{\textbf{Performance of conditional variational diffusion on simulated data} (left) Example low resolution, (middle) high resolution, and (right) estimated high resolution localization microscopy images at fluorophore numbers $\rho$ in the image.}
 \label{fig:cvdmsim1}
 \end{figure}
 
 \begin{figure}[t]
 \centering
 \includegraphics[scale=0.3]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Figure-NoLett.png}
-\caption{\textbf{Performance of conditional variational diffusion on simulated data}. (top) Localization uncertainty in the u and v directions as a function of incident photon count, for various densities. (bottom) Precision and recall of localized spots as a function of $\rho$. Error bars represent standard deviations over nine batches of data. }
+\caption{\textbf{Performance of conditional variational diffusion on simulated data} (top) Localization uncertainty in the $u$ and $v$ directions as a function of incident photon count, for various densities (bottom) Precision and recall of localized spots as a function of $\rho$. Error bars represent standard deviations over nine batches of data. }
 \label{fig:cvdmsim2}
 \end{figure}
 
@@ -203,12 +203,12 @@ Repeated application of this process permits sampling from the reverse process o
 \begin{figure}[t]
 \centering
 \includegraphics[scale=0.6]{/Users/cwseitz/git/cwseitz.github.io/docs/phd/ddpm/ddpm/media/Nup96.png}
-\caption{\textbf{Super resolution of Nup96-mMaple} (a) Low-resolution frame of Nup96-mMaple obtained by summing five consecutive images (SUM 5) (b) Scattered coordinates found by maximum likelihood estimation on individual frames and the CVDM model on SUM 5 data. (c) Zoomed in regions from the data shown in (a) and corresponding samples from the model on high-resolution images}
+\caption{\textbf{Super resolution of Nup96-mMaple} (a) Low-resolution frame of Nup96-mMaple obtained by summing five consecutive images (SUM 5) (b) Scattered coordinates found by maximum likelihood estimation on individual frames and the CVDM model on SUM 5 data (c) Zoomed in regions from the data shown in (a) and corresponding samples from the model on high-resolution images}
 \label{fig:nup96}
 \end{figure}
 
 
-To verify the localizations made by the diffusion model, we simulated localization microscopy datasets with various densities (Figure \ref{fig:cvdmsim1}). For a KDE predicted by the diffusion model, objects are detected using the Laplacian of Gaussian (LoG) detection algorithm, which permits more direct computation of localization error, compared to image similarity measures. Moreover, localization with sub-pixel precision can be easily implemented by identification of local maxima in the predicted KDE \parencite{Nehme2020}. A particular LoG localization in the KDE is paired to the nearest ground truth localization and is unpaired if a localization is not within 5 KDE pixels (125nm) of any ground truth localization. As expected, we find a density dependence to localization error in the $u$ and $v$ directions, over the tested signal range (Figure \ref{fig:cvdmsim2}). In addition to localization error, we measure a density-dependent precision P = TP/(TP+FP) and precision P= TP/(TP+FN) where TP denotes true positive localizations, FP denotes false positive localizations, and FN denotes false negative localizations (Figure \ref{fig:cvdmsim2}). 
+To verify the localizations made by the diffusion model, we simulated localization microscopy datasets with various densities (Figure \ref{fig:cvdmsim1}). For a KDE predicted by the diffusion model, objects are detected using the Laplacian of Gaussian (LoG) detection algorithm, which permits more direct computation of localization error, compared to image similarity measures. Moreover, localization with sub-pixel precision can be easily implemented by identification of local maxima in the predicted KDE \parencite{Nehme2020}. A particular LoG localization in the KDE is paired to the nearest ground truth localization and is unpaired if a localization is not within 5 KDE pixels (125nm) of any ground truth localization. As expected, we find a density dependence to localization error in the $u$ and $v$ directions, over the tested signal range (Figure \ref{fig:cvdmsim2}). In addition to localization error, we measure a density-dependent precision P = TP/(TP+FP) and recall R= TP/(TP+FN) where TP denotes true positive localizations, FP denotes false positive localizations, and FN denotes false negative localizations (Figure \ref{fig:cvdmsim2}). 
 
 \subsubsection{Sample variation for simulated localization microscopy data}
 
@@ -247,14 +247,14 @@ To validate the model on experimental localization microscopy data, we create de
 %\textbf{Super Resolved Immunofluorescence}. To test our model in an experimental context, we performed immunofluorescence staining of endogeneous BRD4 protein in HeLa cells. Cells were grown in a 35mm dish and fixed with Formaldehyde in 1X PBS at room temperature incubator for 10 minutes, and then permeabilized in 70 percent ethanol. Cells were blocked for 1h with 0.3 percent (v/v) Triton-X100 (Sigma-Aldrich) and 5 percent (w/v) nonfat dry milk at 4C. Cells were incubated overnight at 4C using anti-BRD4 primary antibody (Cell Signaling, clone E2A7X; 1:1000) in blocker. Cells were then washed and stained with secondary antibodies for BRD4 (Cell Signaling Anti-Mouse IgG-Alexa488, 1:1000). For imaging, cells were imaged using a 60X 1.4NA oil immersion objective. Images were projected onto a CMOS Fusion camera (Hamamatsu) with a 40ms exposure time, using a 488nm continuous-wave laser aligned for oblique illumination. After background subtraction, the encoding network and diffusion model were used to estimate the super-resolved immunofluorescence image and its corresponding uncertainty (Figure \ref{fig:fig50}). 
 
 
-\section{Discussion}
+\subsection{Discussion}
 
 Application of the CVDM model to localization microscopy showed that the model is capable of not only enhancing the resolution of fluorescence images but also performing localization tasks. Indeed the model can maintain approximately 30nm localization error and high precision/recall on dense images. This result suggests that this model could be used to speed up localization microscopy acquisitions and enhance their resolution, while expressing uncertainty in the predicted outputs. 
 
 Importantly, the principles underlying this method resonate across various fields, suggesting its potential applicability in domains beyond localization. For instance, the extension of similar techniques to general image processing tasks highlights the potential to address uncertainty in a wide range of applications in bioimaging or medical imaging. Moreover, the utilization of diffusion models for uncertainty estimation aligns with a broader trend in leveraging probabilistic frameworks for enhancing deep learning applications. By bridging these interdisciplinary boundaries, this method not only addresses a critical need in localization microscopy but also contributes to the advancement of uncertainty-aware deep learning methodologies.
 
 
-\section{Appendix}
+\subsubsection{Appendix}
 
 \subsection{Loss derivation}
 
@@ -328,7 +328,7 @@ Moving to continuous time is a critical step, as it has been shown that increasi
 
 which gives us the continuous-time diffusion loss used in the complete objective $\mathcal{L}$. Note that in the continuous-time framework, time is instead uniformly sampled over an interval $[0,1]$. 
 
-\subsection{Regularization of the noise schedule}
+\subsubsection{Regularization of the noise schedule}
 
 The second two terms of $\mathcal{L}$, namely $\mathcal{L}_{\gamma}$ and $\mathcal{L}_{\beta}$, act to constrain the learned noise schedule. Their full mathematical justification is out of the scope of this thesis and the following is a brief introduction to the full argument given in \parencite{Maggiora2023}. In the continuous-time framework the noise schedule is given now by a continuous function $\gamma(t,\bold{x})$. A first constraint is placed on $\gamma(t,\bold{x})$ in order to preserve the similarity between discrete and continuous time implementations 
 
