@@ -218,22 +218,28 @@ Maximum likelihood localization:
 \end{frame}
 
 
-\begin{frame}{Tracking chromatin loci photoactivated localization microscopy}
-\begin{textblock*}{12cm}(2.0cm,1.5cm)
+\begin{frame}{Tracking chromatin loci with photoactivated localization microscopy}
+\begin{textblock*}{12cm}(1.0cm,1.5cm)
 \includegraphics[width=12cm]{../../postdoc/sartorius/media/DOE.png}
 Locatelli, Seitz et al. PNAS \textbf{29} (2022)
 \end{textblock*}
+\begin{textblock*}{14cm}(1.0cm,7.5cm)
+\begin{itemize}
+\item A diffractive optical element (DOE) is used to photoactivate chromatin microdomains
+\item Used for understanding the spatial correlations of chromatin diffusion
+\end{itemize}
+\end{textblock*}
 \end{frame}
 
-\begin{frame}{Tracking chromatin loci photoactivated localization microscopy}
-\begin{textblock*}{12cm}(2.0cm,1.5cm)
+\begin{frame}{Tracking chromatin loci with photoactivated localization microscopy}
+\begin{textblock*}{12cm}(1.0cm,1.5cm)
 \includegraphics[width=12cm]{../../postdoc/sartorius/media/Bleo.png}
 Locatelli, Seitz et al. PNAS \textbf{29} (2022)
 \end{textblock*}
 \end{frame}
 
 
-\begin{frame}{Analyzing the structure nucleosome nanodomains with SMLM}
+\begin{frame}{Analyzing the structure of nucleosome nanodomains with SMLM}
 \begin{textblock*}{10cm}(2.0cm,1.5cm)
 \includegraphics[width=10cm]{../../phd/brd4/brd4/media/Figure-2.png}
 Seitz et al. bioRxiv, Cells, In Review (2025)
@@ -308,6 +314,12 @@ Seitz et al. bioRxiv, Cells, In Review (2025)
 \includegraphics[width=12cm]{../../postdoc/sartorius/media/UNET-1.png}
 Falk et al. Nat Methods \textbf{16} 2019
 \end{textblock*}
+\begin{textblock*}{12cm}(1.0cm,6.0cm)
+\begin{itemize}
+\item A deep neural network UNet is trained to predict cell volumes
+\item Can predict more axial slices than measured
+\end{itemize}
+\end{textblock*}
 \end{frame}
 
 
@@ -321,6 +333,12 @@ Nehme et al. Nat Methods \textbf{17} 2020
 \textbf{Content-aware image restoration}
 \includegraphics[width=6cm]{../../postdoc/sartorius/media/CARE.png}
 Weiger et al. Nat Methods \textbf{15} 2018
+\end{textblock*}
+\begin{textblock*}{12cm}(1.5cm,8.0cm)
+\begin{itemize}
+\item DeepSTORM3D localizes fluorescent molecules in 3D
+\item Content aware image restoration - image denoising for rapid imaging
+\end{itemize}
 \end{textblock*}
 \end{frame}
 
@@ -459,14 +477,25 @@ Estimation of pixel-wise uncertainty in the high resolution $\bold{y}$
 \end{comment}
 
 \begin{frame}{Super resolution with a diffusion model}
-\begin{textblock*}{12cm}(2.0cm,1.5cm)
+\begin{textblock*}{12cm}(1.35cm,1.25cm)
 \includegraphics[width=12cm]{../../phd/ddpm/ddpm/media/Figure-2-1-crop.png}
+\end{textblock*}
+\begin{textblock*}{12cm}(1.35cm,8.0cm)
+\begin{itemize}
+\item We can draw several samples $\hat{\bold{y}}_{0} \sim p(\bold{y}_{0}\lvert \bold{x})$
+\item This allows computation of posterior statistics e.g., $\langle \hat{\bold{y}}_{0}, \sqrt{\mathrm{Var}}(\hat{\bold{y}}_{0})$
+\end{itemize}
 \end{textblock*}
 \end{frame}
 
-\begin{frame}{Super resolution with a diffusion model}
-\begin{textblock*}{12cm}(2.0cm,1.5cm)
+\begin{frame}{Super resolution of microtubulues with a conditional diffusion model}
+\begin{textblock*}{12cm}(1.25cm,1.5cm)
 \includegraphics[width=12cm]{../../postdoc/sartorius/media/Tubes-Crop.png}
+\end{textblock*}
+\begin{textblock*}{12cm}(1.35cm,8.0cm)
+\begin{itemize}
+\item Strong agreement of diffusion model with existing algorithms, while modeling uncertainty
+\end{itemize}
 \end{textblock*}
 \end{frame}
 
