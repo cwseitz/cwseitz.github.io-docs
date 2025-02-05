@@ -83,36 +83,71 @@
     \end{beamercolorbox}}%
 }
 
-\section{Part I: The tradeoffs of live-cell microscopy}
+\begin{frame}{Research Interests}
+\begin{textblock*}{6cm}(3.0cm,1.5cm)
+\includegraphics[width=6cm]{../../postdoc/sartorius/media/Me.png}
+\end{textblock*}
 
-\begin{frame}{Fluorescence microscopy of living cells}
-Example videos for live cell microscopy in different contexts
+
+\begin{textblock*}{10cm}(1.0cm,7cm)
+\begin{itemize}
+\item Machine learning methods for enhanced light microscopy
+\item Quantitative single molecule localization microscopy 
+\item Generative models, theory of deep learning
+\end{itemize}
+\end{textblock*}
+
 \end{frame}
 
-\begin{frame}{The tradeoffs of live-cell microscopy}
-\begin{textblock*}{10cm}(2.0cm,1.5cm)
-\includegraphics[width=10cm]{../../postdoc/sartorius/media/Tradeoff.png}
+\section{Live cell super resolution microscopy}
+
+\begin{frame}{A live cell fluorescence imaging zoo}
+
+\end{frame}
+
+\begin{frame}{The inherent tradeoffs of fluorescence microscopy}
+\begin{textblock*}{12cm}(1.0cm,1.5cm)
+\includegraphics[width=12cm]{../../postdoc/sartorius/media/Tradeoff.png}
+\emph{Courtesy of Chowdhury lab at UT Austin}
+\end{textblock*}
+\begin{textblock*}{12cm}(1.0cm,6.0cm)
+\begin{itemize}
+\item Ex. increase in resolution is often accompanied by loss of imaging speed
+\item Computational methods such as AI/ML algorithms can help find a superior balance
+\end{itemize}
 \end{textblock*}
 \end{frame}
 
-\begin{frame}{Single molecule localization microscopy}
-\begin{textblock*}{10cm}(2.0cm,1.5cm)
-\includegraphics[width=10cm]{../../postdoc/sartorius/media/SMLM.png}
+
+\begin{frame}{Single molecule localization microscopy (SMLM)}
+
+\begin{textblock*}{10cm}(2.0cm,2.0cm)
+\animategraphics[width=10cm,autoplay,loop]{60}{../../postdoc/sartorius/media/Tower/storm-animation-}{1}{40}
 \end{textblock*}
+
+\begin{textblock*}{10cm}(2.0cm, 7.0cm)
+SMLM is all about \emph{control} of the fluorescence 
+\end{textblock*}
+
 \end{frame}
 
-\begin{frame}{Single molecule localization microscopy}
-\begin{textblock*}{10cm}(2.0cm,1.5cm)
-\includegraphics[width=10cm]{../../postdoc/sartorius/media/DOE.png}
-\end{textblock*}
-\end{frame}
+\begin{frame}{Single molecule localization microscopy (SMLM)}
 
-\begin{frame}{Single molecule localization microscopy}
-\begin{textblock*}{10cm}(2.0cm,1.5cm)
-\includegraphics[width=10cm]{../../postdoc/sartorius/media/Bleo.png}
+\begin{textblock*}{5cm}(2.0cm,3.0cm)
+\includegraphics[width=5cm]{../../postdoc/sartorius/media/STORM.png}
 \end{textblock*}
-\end{frame}
 
+\begin{textblock*}{4cm}(9.0cm, 3.0cm)
+\includegraphics[width=4cm]{../../postdoc/sartorius/media/Tradeoff-SMLM.png}
+\end{textblock*}
+
+\begin{textblock*}{10cm}(1.5cm,8.0cm)
+\begin{itemize}
+\item SMLM techniques can achieve 10nm resolutions (20x higher than diffraction limit) 
+\end{itemize}
+\end{textblock*}
+
+\end{frame}
 
 \begin{frame}{Single molecule localization microscopy}
 \begin{textblock*}{9cm}(0.5cm,1.5cm)
@@ -130,10 +165,74 @@ Example videos for live cell microscopy in different contexts
 \end{textblock*}
 \end{frame}
 
+\begin{frame}{Stochastic optical reconstruction microscopy (STORM)}
+\begin{textblock*}{9cm}(0.5cm,1.5cm)
+\includegraphics[width=\textwidth]{../../phd/dissertation/dissertation/media/Intro-Cropped.png}
+\end{textblock*}
+\begin{textblock*}{5cm}(9.5cm,1.5cm)
+\includegraphics[width=\textwidth]{../../phd/dissertation/dissertation/media/STORM-Example.png}
+\end{textblock*}
+\begin{textblock*}{15cm}(0.5cm,7.5cm)
+\begin{itemize}
+\item STORM and similar nanoscopy techniques are limited by localization precision
+\item Higher lateral/axial resolution than other methods (e.g., SIM,STED,Confocal)
+\item Poor time resolution
+\end{itemize}
+\end{textblock*}
+\end{frame}
 
-\begin{frame}{BRD4 binding is necessary for maintenance of nucleosome nanodomains}
+
+\begin{frame}{Nanoscopy by localizing isolated fluorescent emitters}
+\begin{itemize}
+\item Modeling the point spread function permits sub-pixel localization 
+\end{itemize}
+\begin{textblock*}{8cm}(6.5cm,3.0cm)
+\includegraphics[width=\textwidth]{../../phd/dissertation/dissertation/media/Model.png}
+\end{textblock*}
+
+\begin{textblock*}{2cm}(1cm,2.0cm)
+\begin{align*}
+\mu_{k} &= i_{0}\int\int O(u,v)dudv + \textcolor{pink}{\lambda}\\
+i_{0} &= g_{k}\textcolor{red}{\eta} \textcolor{cyan}{\zeta}\textcolor{blue}{\Delta} 
+\\
+g_{k} &- \mathrm{pixel\; gain}\\
+\textcolor{red}{\eta} &- \mathrm{quantum\; efficiency}\\
+\textcolor{cyan}{\zeta} &- \mathrm{photon\; emission\; rate}\\
+\textcolor{blue}{\Delta} &- \mathrm{exposure\; time}\\
+\textcolor{pink}{\lambda} &- \mathrm{background \; rate}
+\end{align*}
+\end{textblock*}
+
+\vspace{2in}
+
+Maximum likelihood localization:
+
+\begin{equation*}
+\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}p(\bold{x}_{k}|\theta)= \underset{\theta}{\mathrm{argmin}}-\sum_{k}\log p(\bold{x}_{k}|\theta)
+\end{equation*}
+
+\end{frame}
+
+
+\begin{frame}{Tracking chromatin loci photoactivated localization microscopy}
+\begin{textblock*}{12cm}(2.0cm,1.5cm)
+\includegraphics[width=12cm]{../../postdoc/sartorius/media/DOE.png}
+Locatelli, Seitz et al. PNAS \textbf{29} (2022)
+\end{textblock*}
+\end{frame}
+
+\begin{frame}{Tracking chromatin loci photoactivated localization microscopy}
+\begin{textblock*}{12cm}(2.0cm,1.5cm)
+\includegraphics[width=12cm]{../../postdoc/sartorius/media/Bleo.png}
+Locatelli, Seitz et al. PNAS \textbf{29} (2022)
+\end{textblock*}
+\end{frame}
+
+
+\begin{frame}{Analyzing the structure nucleosome nanodomains with SMLM}
 \begin{textblock*}{10cm}(2.0cm,1.5cm)
 \includegraphics[width=10cm]{../../phd/brd4/brd4/media/Figure-2.png}
+Seitz et al. bioRxiv, Cells, In Review (2025)
 \end{textblock*}
 
 \begin{textblock*}{13cm}(1.0cm,8.0cm)
@@ -143,6 +242,21 @@ Example videos for live cell microscopy in different contexts
 \end{itemize}
 \end{textblock*}
 \end{frame}
+
+
+\begin{frame}{Quantitative SMLM by measuring the photon counting histogram}
+%\begin{textblock*}{13cm}(1.0cm,1.0cm)
+\includegraphics[width=10cm]{../../postdoc/sartorius/media/SPAD512.png}
+%\end{textblock*}
+\end{frame}
+
+\begin{frame}{Quantitative SMLM by measuring the photon counting histogram}
+%\begin{textblock*}{13cm}(1.0cm,1.0cm)
+\includegraphics[width=12cm]{../../phd/spad/spad/media/Figure-0.png}
+\\Seitz et al. Communications Physics, In Review (2025)
+%\end{textblock*}
+\end{frame}
+
 
 
 \setbeamertemplate{footline}{
@@ -156,18 +270,33 @@ Example videos for live cell microscopy in different contexts
     \end{beamercolorbox}}%
 }
 
-\section{Part II: Deep learning models for modern microscopy}
+\section{Deep learning models for modern microscopy}
+
+
+\begin{frame}{The inherent tradeoffs of fluorescence microscopy}
+\begin{textblock*}{12cm}(1.0cm,1.5cm)
+\includegraphics[width=12cm]{../../postdoc/sartorius/media/Tradeoff.png}
+\emph{Courtesy of Chowdhury lab at UT Austin}
+\end{textblock*}
+\begin{textblock*}{12cm}(1.0cm,6.0cm)
+\begin{itemize}
+\item Ex. increase in resolution is often accompanied by loss of imaging speed
+\item Computational methods such as AI/ML algorithms can help find a superior balance
+\item Fluorescence microscopy is often not very quantitative (more on this later)
+\end{itemize}
+\end{textblock*}
+\end{frame}
 
 \begin{frame}{Deep learning based 3D reconstruction}
-\begin{textblock*}{10cm}(2.0cm,1.5cm)
-\includegraphics[width=10cm]{../../postdoc/sartorius/media/Arch.png}
+\begin{textblock*}{12cm}(2.0cm,1.5cm)
+\includegraphics[width=12cm]{../../postdoc/sartorius/media/Arch.png}
 \end{textblock*}
 \end{frame}
 
 
 \begin{frame}{Deep learning based 3D reconstruction}
-\begin{textblock*}{10cm}(2.0cm,1.5cm)
-\includegraphics[width=10cm]{../../postdoc/sartorius/media/UNET-1.png}
+\begin{textblock*}{12cm}(2.0cm,1.5cm)
+\includegraphics[width=12cm]{../../postdoc/sartorius/media/UNET-1.png}
 \end{textblock*}
 \end{frame}
 
@@ -197,7 +326,19 @@ Example videos for live cell microscopy in different contexts
 \end{center}
 \end{frame}
 
-\begin{frame}{Approach I: Resolution enhancement with a diffusion model}
+\begin{frame}{Inverse problems in microscopy are ill-posed}
+
+\begin{itemize}
+\item Inverse problems deal with the task of finding parameters of interest from observations
+\item Inverse problems are usually \emph{ill-posed}
+\item ``Ill-posed'' means that observations underdetermine the system
+\end{itemize}
+
+
+
+\end{frame}
+
+\begin{frame}{Resolution enhancement with a diffusion model}
 \begin{textblock*}{13cm}(0.5cm,1.5cm)
 \begin{itemize}
 \item Can sample from $p(\theta\lvert \boldsymbol{x})$ using a stochastic process called Langevin dynamics
@@ -226,7 +367,7 @@ $\theta_{t} =
     \end{beamercolorbox}}%
 }
 
-\begin{frame}{Approach I: Resolution enhancement with a diffusion model}
+\begin{frame}{Resolution enhancement with a diffusion model}
 
 \begin{textblock*}{13cm}(1.0cm, 1.5cm)
 
@@ -255,7 +396,7 @@ p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) = \mathcal{N}\left(\mu_{\psi},\be
 
 \end{frame}
 
-\begin{frame}{Approach I: Resolution enhancement with a diffusion model}
+\begin{frame}{Resolution enhancement with a diffusion model}
 \begin{textblock*}{9cm}(3.0cm, 2.0cm)
 \includegraphics[width=9cm]{../../phd/ddpm/ddpm/media/DiffusionArch.png}
 \end{textblock*}
@@ -327,7 +468,9 @@ Estimation of pixel-wise uncertainty in the high resolution $\bold{y}$
 \end{textblock*}
 \end{frame}
 
+\begin{frame}{Summary}
 
+\end{frame}
 
 \begin{frame}{Selected Publications}
 
