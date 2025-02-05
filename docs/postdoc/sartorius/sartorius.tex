@@ -298,15 +298,7 @@ Seitz et al. bioRxiv, Cells, In Review (2025)
 \begin{textblock*}{12cm}(1.0cm,6.0cm)
 \begin{itemize}
 \item Ex. increase in resolution is often accompanied by loss of imaging speed
-\item Computational methods such as AI/ML algorithms can help find a superior balance
-\item Fluorescence microscopy is often not very quantitative (more on this later)
 \end{itemize}
-\end{textblock*}
-\end{frame}
-
-\begin{frame}{Deep learning based 3D reconstruction}
-\begin{textblock*}{12cm}(2.0cm,1.5cm)
-\includegraphics[width=12cm]{../../postdoc/sartorius/media/Arch.png}
 \end{textblock*}
 \end{frame}
 
@@ -314,36 +306,25 @@ Seitz et al. bioRxiv, Cells, In Review (2025)
 \begin{frame}{Deep learning based 3D reconstruction}
 \begin{textblock*}{12cm}(2.0cm,1.5cm)
 \includegraphics[width=12cm]{../../postdoc/sartorius/media/UNET-1.png}
+Falk et al. Nat Methods \textbf{16} 2019
 \end{textblock*}
 \end{frame}
 
-\begin{frame}{Deep learning based 3D reconstruction}
-\begin{textblock*}{10cm}(2.0cm,1.5cm)
-\includegraphics[width=10cm]{../../postdoc/sartorius/media/UNET-2.png}
+
+\begin{frame}{Robust 3D localization microscopy using deep learning}
+\begin{textblock*}{7cm}(0.5cm,2.0cm)
+\textbf{DeepSTORM3D}
+\includegraphics[width=7cm]{../../postdoc/sartorius/media/DS3D.png}
+Nehme et al. Nat Methods \textbf{17} 2020
+\end{textblock*}
+\begin{textblock*}{6cm}(8.0cm,2.0cm)
+\textbf{Content-aware image restoration}
+\includegraphics[width=6cm]{../../postdoc/sartorius/media/CARE.png}
+Weiger et al. Nat Methods \textbf{15} 2018
 \end{textblock*}
 \end{frame}
 
-\begin{frame}{Three-dimensional localization microscopy using deep learning}
-
-\end{frame}
-
-\begin{frame}{Deep learning based quantitative phase imaging}
-
-\end{frame}
-
-\begin{frame}{Resolution enhancement by deep learning}
-\begin{center}
-\includegraphics[width=10cm]{../../postdoc/sartorius/media/Deep-STORM.jpeg}
-\\Nehme E. et al. Optica \textbf{5}, 458-464 (2018)
-\vspace{0.5cm}
-\begin{itemize}
-\item Prediction of high resolution images from low resolution ones
-\item Cannot report uncertainty, leading to overconfident results
-\end{itemize}
-\end{center}
-\end{frame}
-
-\begin{frame}{Inverse problems in microscopy are ill-posed}
+\begin{frame}{Inverse problems in microscopy are often ill-posed}
 
 \begin{itemize}
 \item Inverse problems deal with the task of finding parameters of interest from observations
@@ -351,7 +332,11 @@ Seitz et al. bioRxiv, Cells, In Review (2025)
 \item ``Ill-posed'' means that observations underdetermine the system
 \end{itemize}
 
+\vspace{0.2in}
+Suppose $\theta$ is some latent of interest and we make a measurement $\bold{x}$
 
+\vspace{0.2in}
+Many $\theta$ may be consistent with the measurement $\bold{x}$
 
 \end{frame}
 
