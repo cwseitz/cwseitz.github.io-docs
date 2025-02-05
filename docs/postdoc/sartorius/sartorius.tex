@@ -59,11 +59,6 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{Outline of the talk}
-    \tableofcontents
-\end{frame}
-
-
 
 % The following is the most frequently used slide types in beamer
 % The slide structure is as follows:
@@ -77,27 +72,36 @@
     \begin{beamercolorbox}[wd=\paperwidth,ht=1.0ex,dp=1.5ex,leftskip=2ex,rightskip=2ex]{page ooter}%
         \footnotesize
         \usebeamerfont{title in head/foot}%
-        Introduction to fluorescence nanoscopy \hfill
+        Introduction \hfill
             %\insertsection \hfill
         \insertframenumber{} / \inserttotalframenumber
     \end{beamercolorbox}}%
 }
 
-\begin{frame}{Research Interests}
-\begin{textblock*}{6cm}(3.0cm,1.5cm)
-\includegraphics[width=6cm]{../../postdoc/sartorius/media/Me.png}
+\begin{frame}{About Me}
+
+\begin{textblock*}{10cm}(1.0cm,3cm)
+\textbf{Education}
+\begin{itemize}
+\item PhD @ Purdue University, MS @ University of Chicago
+\end{itemize}
 \end{textblock*}
 
-
-\begin{textblock*}{10cm}(1.0cm,7cm)
+\begin{textblock*}{10cm}(1.0cm,5cm)
+\textbf{Research interests}
 \begin{itemize}
-\item Machine learning methods for enhanced light microscopy
+\item Bioimaging, Machine learning methods for live cell imaging
 \item Quantitative single molecule localization microscopy 
-\item Generative models, theory of deep learning
+\item Generative models, statistical physics, theory of deep learning
 \end{itemize}
 \end{textblock*}
 
 \end{frame}
+
+\begin{frame}{Outline of the talk}
+    \tableofcontents
+\end{frame}
+
 
 \section{Live cell super resolution microscopy}
 
@@ -235,19 +239,27 @@ Locatelli, Seitz et al. PNAS \textbf{29} (2022)
 Seitz et al. bioRxiv, Cells, In Review (2025)
 \end{textblock*}
 
-\begin{textblock*}{13cm}(1.0cm,8.0cm)
+\begin{textblock*}{13cm}(1.0cm,8.5cm)
 \begin{itemize}
 \item H2B is densely labeled for super-resolution imaging
-\item BRD4 chromatin binding activity controls nanodomain density
 \end{itemize}
 \end{textblock*}
 \end{frame}
 
 
-\begin{frame}{Quantitative SMLM by measuring the photon counting histogram}
-%\begin{textblock*}{13cm}(1.0cm,1.0cm)
-\includegraphics[width=10cm]{../../postdoc/sartorius/media/SPAD512.png}
-%\end{textblock*}
+\begin{frame}{Fast single photon sensitive cameras for localization microscopy}
+\begin{textblock*}{7cm}(2.0cm,2.5cm)
+\includegraphics[width=7cm]{../../postdoc/sartorius/media/SPAD512.png}
+\end{textblock*}
+\begin{textblock*}{3cm}(10.0cm,2.0cm)
+\includegraphics[width=3cm]{../../phd/spad/spad//media/Setup-Simple.png}
+\end{textblock*}
+\begin{textblock*}{10cm}(2.0cm,7.0cm)
+\begin{itemize}
+\item Single photon avalanche diode (SPAD) array
+\item Frame rates up to 100kHz enable generating images photon by photon
+\end{itemize}
+\end{textblock*}
 \end{frame}
 
 \begin{frame}{Quantitative SMLM by measuring the photon counting histogram}
@@ -257,7 +269,12 @@ Seitz et al. bioRxiv, Cells, In Review (2025)
 %\end{textblock*}
 \end{frame}
 
-
+\begin{frame}{Quantitative SMLM by measuring the photon counting histogram}
+%\begin{textblock*}{13cm}(1.0cm,1.0cm)
+\includegraphics[width=12cm]{../../phd/spad/spad/media/Figure-1.png}
+\\Seitz et al. Communications Physics, In Review (2025)
+%\end{textblock*}
+\end{frame}
 
 \setbeamertemplate{footline}{
     \hbox{%
