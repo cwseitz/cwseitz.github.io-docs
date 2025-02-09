@@ -36,7 +36,7 @@
 \usepackage{braket}
 \usepackage{animate}
 
-\title{Diffusion based generative models for modern fluorescence microscopy}	% Presentation title
+\title{Modern approaches to live cell fluorescence microscopy}	% Presentation title
 \author{Clayton W. Seitz, Ph.D.}								% Presentation author
 \date{\today}									% Today's date	
 
@@ -125,18 +125,6 @@
 
 \begin{frame}{Single molecule localization microscopy (SMLM)}
 
-\begin{textblock*}{10cm}(2.0cm,2.0cm)
-\animategraphics[width=10cm,autoplay,loop]{60}{../../postdoc/sartorius/media/Tower/storm-animation-}{1}{40}
-\end{textblock*}
-
-\begin{textblock*}{10cm}(2.0cm, 7.0cm)
-SMLM is all about \emph{control} of the fluorescence 
-\end{textblock*}
-
-\end{frame}
-
-\begin{frame}{Single molecule localization microscopy (SMLM)}
-
 \begin{textblock*}{5cm}(2.0cm,3.0cm)
 \includegraphics[width=5cm]{../../postdoc/sartorius/media/STORM.png}
 \end{textblock*}
@@ -152,6 +140,19 @@ SMLM is all about \emph{control} of the fluorescence
 \end{textblock*}
 
 \end{frame}
+
+\begin{frame}{Single molecule localization microscopy (SMLM)}
+
+\begin{textblock*}{10cm}(2.0cm,2.0cm)
+\animategraphics[width=10cm,autoplay,loop]{60}{../../postdoc/sartorius/media/Tower/storm-animation-}{1}{40}
+\end{textblock*}
+
+\begin{textblock*}{10cm}(2.0cm, 7.0cm)
+SMLM is all about \emph{control} of the fluorescence 
+\end{textblock*}
+
+\end{frame}
+
 
 \begin{frame}{Single molecule localization microscopy}
 \begin{textblock*}{9cm}(0.5cm,1.5cm)
@@ -196,7 +197,7 @@ SMLM is all about \emph{control} of the fluorescence
 
 \begin{textblock*}{2cm}(1cm,2.0cm)
 \begin{align*}
-\mu_{k} &= i_{0}\int\int O(u,v)dudv + \textcolor{pink}{\lambda}\\
+\mu_{k} &= i_{0}\int\int O(x,y)dxdy + \textcolor{pink}{\lambda}\\
 i_{0} &= g_{k}\textcolor{red}{\eta} \textcolor{cyan}{\zeta}\textcolor{blue}{\Delta} 
 \\
 g_{k} &- \mathrm{pixel\; gain}\\
@@ -358,34 +359,6 @@ Many $\theta$ may be consistent with the measurement $\bold{x}$
 
 \end{frame}
 
-\begin{frame}{Resolution enhancement with a diffusion model}
-\begin{textblock*}{13cm}(0.5cm,1.5cm)
-\begin{itemize}
-\item Can sample from $p(\theta\lvert \boldsymbol{x})$ using a stochastic process called Langevin dynamics
-\end{itemize}
-\end{textblock*}
-\begin{textblock*}{8cm}(3.5cm,2.0cm)
-\animategraphics[width=8cm,autoplay,loop]{20}{../../phd/ddpm/ddpm/media/sampling/image-}{1}{100}
-\end{textblock*}
-\begin{textblock*}{14cm}(2.25cm,8.0cm)
-\textcolor{red}{Drift} and \textcolor{blue}{diffusion}: 
-$\theta_{t} = 
-\overset{\mu}{\overbrace{\textcolor{red}{\theta_{t-1} - \frac{\beta}{2}\nabla f(\theta)}}} 
-+ \textcolor{blue}{\sqrt{\beta}\xi} 
-\;\;\; \xi \sim \mathcal{N}(0,I)$
-\end{textblock*}
-\end{frame}
-
-\setbeamertemplate{footline}{
-    \hbox{%
-    \begin{beamercolorbox}[wd=\paperwidth,ht=1.0ex,dp=1.5ex,leftskip=2ex,rightskip=2ex]{page ooter}%
-        \footnotesize
-        \usebeamerfont{title in head/foot}%
-        Novel methods: probabilistic modeling approaches to fluorescence nanoscopy \hfill
-            %\insertsection \hfill
-        \insertframenumber{} / \inserttotalframenumber
-    \end{beamercolorbox}}%
-}
 
 \begin{frame}{Resolution enhancement with a diffusion model}
 

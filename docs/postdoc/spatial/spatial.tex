@@ -59,6 +59,26 @@
   \titlepage
 \end{frame}
 
+\begin{frame}{About Me}
+
+\begin{textblock*}{10cm}(1.0cm,3cm)
+\textbf{Education}
+\begin{itemize}
+\item PhD @ Purdue University, MS @ University of Chicago
+\end{itemize}
+\end{textblock*}
+
+\begin{textblock*}{10cm}(1.0cm,5cm)
+\textbf{Research interests}
+\begin{itemize}
+\item Bioimaging, Machine learning methods for live cell imaging
+\item Quantitative single molecule localization microscopy 
+\item Generative models, statistical physics, theory of deep learning
+\end{itemize}
+\end{textblock*}
+
+\end{frame}
+
 \begin{frame}{Outline of the talk}
     \tableofcontents
 \end{frame}
@@ -83,7 +103,11 @@
     \end{beamercolorbox}}%
 }
 
-\section{Part I: Localization microscopy for spatial biology}
+
+\section{Motivation for spatial biology}
+
+\section{Localization microscopy for spatial biology}
+
 
 \begin{frame}{Single molecule localization microscopy}
 \begin{textblock*}{9cm}(0.5cm,1.5cm)
@@ -101,41 +125,123 @@
 \end{textblock*}
 \end{frame}
 
-\begin{frame}{Quantitative single molecule localization microscopy}
-\begin{textblock*}{10cm}(2.0cm,1.5cm)
-\includegraphics[width=10cm]{../../phd/spad/spad/media/Figure-1.png}
+\begin{frame}{Stochastic optical reconstruction microscopy (STORM)}
+\begin{textblock*}{9cm}(0.5cm,1.5cm)
+\includegraphics[width=\textwidth]{../../phd/dissertation/dissertation/media/Intro-Cropped.png}
 \end{textblock*}
-
-\end{frame}
-
-
-\begin{frame}{Applications of single molecule localization microscopy}
-\includegraphics[width=\textwidth]{../../phd/dissertation/dissertation/media/Apps.png}
-Wu et al. Trends in Cell Biology. \textbf{30} (2020)
-\end{frame}
-
-\begin{frame}{BRD4 binding is necessary for maintenance of nucleosome nanodomains}
-\begin{textblock*}{10cm}(2.0cm,1.5cm)
-\includegraphics[width=10cm]{../../phd/brd4/brd4/media/Figure-2.png}
+\begin{textblock*}{5cm}(9.5cm,1.5cm)
+\includegraphics[width=\textwidth]{../../phd/dissertation/dissertation/media/STORM-Example.png}
 \end{textblock*}
-
-\begin{textblock*}{13cm}(1.0cm,8.0cm)
+\begin{textblock*}{15cm}(0.5cm,7.5cm)
 \begin{itemize}
-\item H2B is densely labeled for super-resolution imaging
-\item BRD4 chromatin binding activity controls nanodomain density
+\item STORM and similar nanoscopy techniques are limited by localization precision
+\item Higher lateral/axial resolution than other methods (e.g., SIM,STED,Confocal)
+\item Poor time resolution
 \end{itemize}
 \end{textblock*}
+\end{frame}
 
+\begin{frame}{Nanoscopy by localizing isolated fluorescent emitters}
+\begin{itemize}
+\item Modeling the point spread function permits sub-pixel localization 
+\end{itemize}
+\begin{textblock*}{8cm}(6.5cm,3.0cm)
+\includegraphics[width=\textwidth]{../../phd/dissertation/dissertation/media/Model.png}
+\end{textblock*}
+
+\begin{textblock*}{2cm}(1cm,2.0cm)
+\begin{align*}
+\mu_{k} &= i_{0}\int\int O(u,v)dudv + \textcolor{pink}{\lambda}\\
+i_{0} &= g_{k}\textcolor{red}{\eta} \textcolor{cyan}{\zeta}\textcolor{blue}{\Delta} 
+\\
+g_{k} &- \mathrm{pixel\; gain}\\
+\textcolor{red}{\eta} &- \mathrm{quantum\; efficiency}\\
+\textcolor{cyan}{\zeta} &- \mathrm{photon\; emission\; rate}\\
+\textcolor{blue}{\Delta} &- \mathrm{exposure\; time}\\
+\textcolor{pink}{\lambda} &- \mathrm{background \; rate}
+\end{align*}
+\end{textblock*}
+
+\vspace{2in}
+
+Maximum likelihood localization:
+
+\begin{equation*}
+\theta^{*} = \underset{\theta}{\mathrm{argmax}}\prod_{k}p(\bold{x}_{k}|\theta)= \underset{\theta}{\mathrm{argmin}}-\sum_{k}\log p(\bold{x}_{k}|\theta)
+\end{equation*}
+
+\end{frame}
+
+
+
+\begin{frame}{Tracking chromatin loci with photoactivated localization microscopy}
+\begin{textblock*}{12cm}(1.0cm,1.5cm)
+\includegraphics[width=12cm]{../../postdoc/sartorius/media/DOE.png}
+Locatelli, Seitz et al. PNAS \textbf{29} (2022)
+\end{textblock*}
+\begin{textblock*}{14cm}(1.0cm,7.5cm)
+\begin{itemize}
+\item A diffractive optical element (DOE) is used to photoactivate chromatin microdomains
+\item Used for understanding the spatial correlations of chromatin diffusion
+\end{itemize}
+\end{textblock*}
+\end{frame}
+
+\begin{frame}{Tracking chromatin loci with photoactivated localization microscopy}
+\begin{textblock*}{12cm}(1.0cm,1.5cm)
+\includegraphics[width=12cm]{../../postdoc/sartorius/media/Bleo.png}
+Locatelli, Seitz et al. PNAS \textbf{29} (2022)
+\end{textblock*}
+\end{frame}
+
+
+\begin{frame}{Analyzing the structure of nucleosome nanodomains with SMLM}
+\begin{textblock*}{10cm}(2.0cm,1.5cm)
+\includegraphics[width=10cm]{../../phd/brd4/brd4/media/Figure-2.png}
+Seitz et al. bioRxiv, Cells, In Review (2025)
+\end{textblock*}
+
+\begin{textblock*}{13cm}(1.0cm,8.5cm)
+\begin{itemize}
+\item H2B is densely labeled for super-resolution imaging
+\end{itemize}
+\end{textblock*}
+\end{frame}
+
+\begin{frame}{Spatial organization of HLA-DMB mRNA in T1D}
+\begin{textblock*}{10cm}(2.0cm,1.5cm)
+\includegraphics[width=10cm]{../../postdoc/spatial/media/HLA-DMB-2.png}
+Seitz et al. bioRxiv, Cells, In Review (2025)
+\end{textblock*}
+
+\begin{textblock*}{13cm}(1.0cm,8.5cm)
+\begin{itemize}
+\item H2B is densely labeled for super-resolution imaging
+\end{itemize}
+\end{textblock*}
+\end{frame}
+
+\begin{frame}{Spatial organization of HLA-DMB mRNA in T1D}
+\begin{textblock*}{10cm}(2.0cm,1.5cm)
+\includegraphics[width=10cm]{../../postdoc/spatial/media/HLA-DMB.png}
+Seitz et al. bioRxiv, Cells, In Review (2025)
+\end{textblock*}
+
+\begin{textblock*}{13cm}(1.0cm,8.5cm)
+\begin{itemize}
+\item H2B is densely labeled for super-resolution imaging
+\end{itemize}
+\end{textblock*}
 \end{frame}
 
 \begin{frame}{Multiplexed single molecule localization microscopy}
 \includegraphics[width=10cm]{media/Multiplex.png}
-Wu et al. Trends in Cell Biology. \textbf{30} (2020)
+\\Chen et al. Science. \textbf{348} (2015)
 \end{frame}
 
 \begin{frame}{Multiplexed single molecule localization microscopy}
 \includegraphics[width=10cm]{media/MerFISH.png}
-Wu et al. Trends in Cell Biology. \textbf{30} (2020)
+\\Chen et al. Science. \textbf{348} (2015)
 \end{frame}
 
 \begin{frame}{Multiplexed single molecule localization microscopy}
@@ -144,7 +250,7 @@ Wu et al. Trends in Cell Biology. \textbf{30} (2020)
 \end{frame}
 
 \begin{frame}{Multiplexed single molecule localization microscopy}
-Xenium data example and postprocessing
+Xenium data example and postprocessing example
 \end{frame}
 
 
@@ -159,133 +265,7 @@ Xenium data example and postprocessing
     \end{beamercolorbox}}%
 }
 
-\section{Part II: Generative models for spatial biology}
-
-
-\begin{frame}{Approach I: Resolution enhancement with a diffusion model}
-\begin{textblock*}{13cm}(0.5cm,1.5cm)
-\begin{itemize}
-\item Can sample from $p(\theta\lvert \boldsymbol{x})$ using a stochastic process called Langevin dynamics
-\end{itemize}
-\end{textblock*}
-\begin{textblock*}{8cm}(3.5cm,2.0cm)
-\animategraphics[width=8cm,autoplay,loop]{20}{../../phd/ddpm/ddpm/media/sampling/image-}{1}{100}
-\end{textblock*}
-\begin{textblock*}{14cm}(2.25cm,8.0cm)
-\textcolor{red}{Drift} and \textcolor{blue}{diffusion}: 
-$\theta_{t} = 
-\overset{\mu}{\overbrace{\textcolor{red}{\theta_{t-1} - \frac{\beta}{2}\nabla f(\theta)}}} 
-+ \textcolor{blue}{\sqrt{\beta}\xi} 
-\;\;\; \xi \sim \mathcal{N}(0,I)$
-\end{textblock*}
-\end{frame}
-
-\setbeamertemplate{footline}{
-    \hbox{%
-    \begin{beamercolorbox}[wd=\paperwidth,ht=1.0ex,dp=1.5ex,leftskip=2ex,rightskip=2ex]{page ooter}%
-        \footnotesize
-        \usebeamerfont{title in head/foot}%
-        Novel methods: probabilistic modeling approaches to fluorescence nanoscopy \hfill
-            %\insertsection \hfill
-        \insertframenumber{} / \inserttotalframenumber
-    \end{beamercolorbox}}%
-}
-
-\begin{frame}{Approach I: Resolution enhancement with a diffusion model}
-
-\begin{textblock*}{13cm}(1.0cm, 1.5cm)
-
-\begin{itemize}
-\item Task: infer a high resolution image $\bold{y}_0$ from low resolution $\bold{x}$
-\item Drift is not available for image data, but can be learned from pairs $(\bold{x},\bold{y}_{0})$
-\end{itemize}
-\end{textblock*}
-
-\begin{textblock*}{2cm}(6.0cm, 7.25cm)
-\begin{equation*}
-q(\bold{y}_{t}|\bold{y}_{t-1}) = \mathcal{N}\left(\sqrt{1-\beta_{t}}\bold{y}_{t-1},\beta_t I\right)
-\end{equation*}
-\end{textblock*}
-
-\begin{textblock*}{12cm}(1.5cm, 4.25cm)
-\includegraphics[width=12cm]{../../phd/ddpm/ddpm/media/ForwardBackward.png}
-\end{textblock*}
-
-\begin{textblock*}{2cm}(6.0cm, 3.0cm)
-\begin{equation*}
-p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) = \mathcal{N}\left(\mu_{\psi},\beta_{t}I\right)
-\end{equation*}
-
-\end{textblock*}
-
-\end{frame}
-
-\begin{frame}{Approach I: Resolution enhancement with a diffusion model}
-\begin{textblock*}{9cm}(3.0cm, 2.0cm)
-\includegraphics[width=9cm]{../../phd/ddpm/ddpm/media/DiffusionArch.png}
-\end{textblock*}
-\begin{textblock*}{2cm}(0.5cm, 3.0cm)
-\includegraphics[width=2cm]{../../phd/dissertation/dissertation/media/diffusion_example/0_1_sr_79.png}
-\end{textblock*}
-\begin{textblock*}{2cm}(12.5cm, 3.0cm)
-\includegraphics[width=2cm]{../../phd/dissertation/dissertation/media/diffusion_example/0_1_sr_99.png}
-\end{textblock*}
-
-\begin{textblock*}{13cm}(1.0cm, 6.5cm)
-\begin{itemize}
-\item A convolutional neural network $\psi$ estimates the drift $\mu_{\psi}$
-\item Denoising step: $y_{t-1}\sim p_{\psi}(\bold{y}_{t-1}|\bold{y}_{t},\bold{x}) = \mathcal{N}\left(\mu_{\psi},\beta_{t}I\right)$
-\end{itemize}
-\end{textblock*}
-\end{frame}
-
-\begin{comment}
-\begin{frame}{Bayesian image restoration with diffusion models}
-
-\begin{textblock*}{2cm}(1.0cm, 1.0cm)
-$\bold{x}$
-\includegraphics[width=2cm]{../../phd/dissertation/dissertation/media/diffusion_example/Diffusion_lr-0.png}
-\end{textblock*}
-\begin{textblock*}{2cm}(4.0cm, 1.0cm)
-$\bold{y}_{100}$
-\includegraphics[width=2cm]{../../phd/dissertation/dissertation/media/diffusion_example/0_1_sr_1.png}
-\end{textblock*}
-\begin{textblock*}{2cm}(6.0cm, 1.0cm)
-$\bold{y}_{80}$
-\includegraphics[width=2cm]{../../phd/dissertation/dissertation/media/diffusion_example/0_1_sr_19.png}
-\end{textblock*}
-\begin{textblock*}{2cm}(8.0cm, 1.0cm)
-$\bold{y}_{40}$
-\includegraphics[width=2cm]{../../phd/dissertation/dissertation/media/diffusion_example/0_1_sr_39.png}
-\end{textblock*}
-\begin{textblock*}{2cm}(10.0cm,1.0cm)
-$\bold{y}_{20}$
-\includegraphics[width=2cm]{../../phd/dissertation/dissertation/media/diffusion_example/0_1_sr_79.png}
-\end{textblock*}
-\begin{textblock*}{2cm}(12.0cm, 1.0cm)
-$\bold{y}_{0}$
-\includegraphics[width=2cm]{../../phd/dissertation/dissertation/media/diffusion_example/0_1_sr_99.png}
-\end{textblock*}
-
-\begin{textblock*}{10cm}(2.0cm, 4.0cm)
-
-\includegraphics[width=10cm]{../../phd/dissertation/dissertation/media/Bayes.png}
-\end{textblock*}
-
-\begin{textblock*}{12cm}(1.0cm, 7.5cm)
-Estimation of pixel-wise uncertainty in the high resolution $\bold{y}$
-\end{textblock*}
-
-
-\end{frame}
-\end{comment}
-
-\begin{frame}{Super resolution with a diffusion model}
-\begin{textblock*}{12cm}(2.0cm,1.5cm)
-\includegraphics[width=12cm]{../../phd/ddpm/ddpm/media/Figure-2-1-crop.png}
-\end{textblock*}
-
-\end{frame}
+\section{Modeling and analysis approaches in spatial transcriptomics}
 
 
 \begin{frame}{Selected Publications}
